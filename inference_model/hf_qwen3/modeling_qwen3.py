@@ -47,6 +47,7 @@ from einops import rearrange
 from opt_einsum import contract
 
 from .configuration_qwen3 import Qwen3Config
+from cbf_ttt.runtime import cbf_forward_mlp
 
 
 # TTT: cache that persists partial chunk states and adapted weights across generation steps
@@ -349,6 +350,9 @@ class Qwen3DecoderLayer(GradientCheckpointingLayer):
         # TTT: branch on whether this layer has TTT target states
         if target_states is None:
             hidden_states = self.mlp(hidden_states)
+        elif past_key_values is not None and getattr(past_key_values, "cbf_enabled", False):
+            # CBF stages this layer's candidate; the session commits every layer together.
+            hidden_states = cbf_forward_mlp(self.mlp, hidden_states, target_states, past_key_values, self.layer_idx)
         else:
             # Retrieve previous TTT states
             past_h, past_t, past_w = (

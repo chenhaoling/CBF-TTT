@@ -1,0 +1,56 @@
+# Qwen3-4B In-Place TTT 1B-Qwen-token run on two 32 GiB GPUs.
+# 81,381 records per source x 2 sources x 6,144 tokens = 1,000,009,728 tokens.
+# Build the balanced JSONL before starting; this config does not download data.
+model:
+  model_path: /home/ctj/models/Qwen3-4B
+  attn_implementation: sdpa
+  foundation:
+    ttt_layers: [0, 6, 12, 18, 24, 30, 35]
+    ttt_mode: true
+    ttt_proj: true
+    ttt_target: hidden_states
+    ttt_lr: 0.3
+    ttt_chunk: 4096
+
+data:
+  train_path: /home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl
+  train_size: 1000009728
+  dataloader_type: native
+  datasets_type: iterable
+  data_type: plaintext
+  max_seq_len: 6144
+  text_keys: content_split
+  drop_last: true
+
+train:
+  output_dir: /home/ctj/cbf_ttt_pretrain_qwen3_4b_1b
+  data_parallel_mode: fsdp2
+  ulysses_parallel_size: 1
+  global_batch_size: 2
+  micro_batch_size: 1
+  rmpad: false
+  use_wandb: false
+  max_steps: 81381
+  num_train_epochs: 1
+  rmpad_with_pos_ids: false
+  dyn_bsz_margin: 0
+  dyn_bsz: false
+  # BF16 optimizer moments reduce peak memory on two 32 GiB cards.
+  optimizer: anyprecision_adamw
+  lr: 1.0e-6
+  lr_warmup_ratio: 0.02
+  lr_decay_style: cosine
+  lr_decay_ratio: 0.90
+  weight_decay: 0.1
+  max_grad_norm: 1.0
+  # Keep sharded parameters and gradients in BF16 to fit 4B training on 2x32 GiB.
+  enable_mixed_precision: false
+  enable_gradient_checkpointing: true
+  enable_full_shard: true
+  enable_fsdp_offload: false
+  init_device: meta
+  ckpt_manager: dcp
+  # Save intermediate resume points and force a final save at step 81,381.
+  save_steps: 10000
+  save_epochs: 1
+  save_hf_weights: true

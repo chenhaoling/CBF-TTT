@@ -19,6 +19,9 @@ _model_configs = [
     ("your_model", "/path/to/your_hf_model"),
     # (model_name,path)
 ]
+if __import__("os").environ.get("CBF_EVAL_MODEL"):
+    _model_configs = [(__import__("os").environ.get("CBF_EVAL_NAME", "qwen3_4b_ttt"),
+                       __import__("os").environ["CBF_EVAL_MODEL"])]
 
 models = [
     dict(

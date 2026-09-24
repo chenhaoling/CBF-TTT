@@ -128,7 +128,7 @@ PY
 
 ### Data Preparation
 
-This repository no longer ships data-processing scripts. Provide your own processed dataset through `data.train_path`.
+The baseline expects a processed dataset through `data.train_path`. For the optional CBF-TTT Qwen3-4B FineWeb-Edu/LongCrawl64 preparation and public evaluation downloads, see [DATA_DOWNLOAD_GUIDE.md](DATA_DOWNLOAD_GUIDE.md).
 
 The recommended configs assume:
 

@@ -51,6 +51,7 @@ from transformers.utils.generic import check_model_inputs
 from einops import rearrange
 from opt_einsum import contract
 from .configuration_llama import LlamaConfig
+from cbf_ttt.runtime import cbf_forward_mlp
 
 
 class TTTDynamicCache(DynamicCache):
@@ -396,6 +397,9 @@ class LlamaDecoderLayer(GradientCheckpointingLayer):
             target_states = hidden_states
         if target_states is None:
             hidden_states = self.mlp(hidden_states)
+        elif past_key_values is not None and getattr(past_key_values, "cbf_enabled", False):
+            # CBF stages this layer's candidate; the session commits every layer together.
+            hidden_states = cbf_forward_mlp(self.mlp, hidden_states, target_states, past_key_values, self.layer_idx)
         else:
             # Retrieve previous TTT states
             past_h, past_t, past_w = (
