@@ -66,7 +66,7 @@ python -m scripts.merge_pretrain_pilot \
   --output /data/cbf_ttt/train/mixed_1b.jsonl
 ```
 
-每个来源应得到 81,381 行；合并文件 162,762 行，共 `162762 × 6144 = 1,000,009,728` 个名义 Qwen token。检查两个 `*.jsonl.meta.json` 的 `records`、`total_token_count_with_eos`、`min_token_count_with_eos`、`max_token_count_with_eos`，以及 `wc -l /data/cbf_ttt/train/*.jsonl`。构建脚本会重新编码验证记录长度；元数据中的计数比源站以其他 tokenizer 标注的“10B”更适合本实验。脚本目前不能从中断处精确续写，建议在 `tmux` 中运行并保留源分片。
+每个来源应得到 81,381 行；合并文件 162,762 行，按最大序列长度计算为 `162762 × 6144 = 1,000,009,728` 个**名义** token。实际应以两个 `*.jsonl.meta.json` 的 `total_token_count_with_eos` 之和为准，并检查 `records`、最短/最长记录以及 `wc -l /data/cbf_ttt/train/*.jsonl`。在 hku-gpu2 的一次真实构建中，少量记录经 decode/re-encode 后为 6143 token，实测总数为 1,000,009,680，仍高于 1B。构建脚本会重新编码验证记录长度；元数据中的计数比源站以其他 tokenizer 标注的“10B”更适合本实验。脚本目前不能从中断处精确续写，建议在 `tmux` 中运行并保留源分片。
 
 两卡 5090 已试跑的 [`configs/pretrain/qwen3_4b_1b.yaml`](configs/pretrain/qwen3_4b_1b.yaml) 使用固定路径 `/home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl`。若在其他目录训练，覆盖 `--data.train_path /data/cbf_ttt/train/mixed_1b.jsonl` 和 `--model.model_path /data/cbf_ttt/models/Qwen3-4B`。**8 卡 NPU 不应直接沿用这份两卡配置的 `global_batch_size=2`、`max_steps=81381` 和 CUDA 环境**；先完成 NPU 移植和小规模测试，再按实际全局 batch 重新计算步数及数据边界。
 
