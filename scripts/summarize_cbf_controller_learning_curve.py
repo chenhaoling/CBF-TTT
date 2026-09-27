@@ -24,11 +24,17 @@ def summarize(study_dir: Path, dev_paths: list[Path], sizes: list[int], seeds: l
     dev = _rows(dev_paths)
     if not dev or any(row["split"] != "dev" for row in dev):
         raise ValueError("nonempty dev-only label files are required")
+    update_rule = dev[0].get("update_rule", "forget")
+    label_key = "write_gate_star" if update_rule == "write" else "alpha_star"
+    if update_rule not in ("forget", "write") or any(row.get("update_rule", "forget") != update_rule for row in dev):
+        raise ValueError("dev labels mix update rules")
     semantic = torch.tensor([row["semantic"] for row in dev], dtype=torch.float32)
     scalars = torch.tensor([row["scalars"] for row in dev], dtype=torch.float32)
-    labels = torch.tensor([row["alpha_star"] for row in dev], dtype=torch.float32)
+    labels = torch.tensor([row[label_key] for row in dev], dtype=torch.float32)
     train_full = _rows([study_dir / "train_groups_1000.jsonl"])
-    train_mean = sum(row["alpha_star"] for row in train_full) / len(train_full)
+    if any(row.get("update_rule", "forget") != update_rule for row in train_full):
+        raise ValueError("train and dev labels use different update rules")
+    train_mean = sum(row[label_key] for row in train_full) / len(train_full)
     constants = {str(value): F.mse_loss(torch.full_like(labels, value), labels).item()
                  for value in (0.0, 0.5, 1.0, train_mean)}
 
@@ -38,6 +44,8 @@ def summarize(study_dir: Path, dev_paths: list[Path], sizes: list[int], seeds: l
             for seed in seeds:
                 path = study_dir / f"controller_g{size}_s{seed}.pt"
                 checkpoint = torch.load(path, map_location="cpu", weights_only=True)
+                if checkpoint.get("update_rule", "forget") != update_rule:
+                    raise ValueError(f"checkpoint {path} uses a different update rule")
                 controller = ForgettingController(
                     checkpoint["hidden_size"], checkpoint["scalar_size"],
                     checkpoint["width"], checkpoint["semantic_size"],
@@ -51,17 +59,22 @@ def summarize(study_dir: Path, dev_paths: list[Path], sizes: list[int], seeds: l
                     "best_epoch": checkpoint["best_epoch"],
                     "dev_raw_mse": F.mse_loss(raw, labels).item(),
                     "dev_clipped_mse": F.mse_loss(predicted, labels).item(),
-                    "mean_alpha": predicted.mean().item(),
-                    "alpha_std": predicted.std(unbiased=False).item(),
+                    "mean_coefficient": predicted.mean().item(),
+                    "coefficient_std": predicted.std(unbiased=False).item(),
                     "fraction_below_0_1": (predicted < 0.1).float().mean().item(),
                     "fraction_above_0_9": (predicted > 0.9).float().mean().item(),
                 })
+                if update_rule == "forget":
+                    models[-1]["mean_alpha"] = models[-1]["mean_coefficient"]
+                    models[-1]["alpha_std"] = models[-1]["coefficient_std"]
     selected = {str(size): min((item for item in models if item["groups"] == size),
                                key=lambda item: item["dev_raw_mse"])["checkpoint"]
                 for size in sizes}
     result = {
         "dev_labels": len(dev), "dev_groups": len({row["group_id"] for row in dev}),
-        "train_mean_alpha": train_mean, "constant_dev_mse": constants,
+        "update_rule": update_rule,
+        "train_mean_alpha": train_mean if update_rule == "forget" else None,
+        "train_mean_coefficient": train_mean, "constant_dev_mse": constants,
         "models": models, "selected_by_dev_raw_mse": selected,
     }
     (study_dir / "learning_curve_summary.json").write_text(json.dumps(result, indent=2), encoding="utf-8")

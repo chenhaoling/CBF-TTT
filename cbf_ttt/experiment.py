@@ -69,6 +69,9 @@ def parse_grid(raw: str) -> list[float]:
 
 def load_controller(path: str, model, device) -> ForgettingController:
     checkpoint = torch.load(path, map_location="cpu", weights_only=True)
+    update_rule = checkpoint.get("update_rule", "forget")
+    if update_rule not in ("forget", "write"):
+        raise ValueError("unknown controller update rule")
     if tuple(checkpoint["layers"]) != tuple(sorted(model.config.ttt_layers)):
         raise ValueError("controller TTT layers do not match the model")
     if checkpoint["hidden_size"] != model.config.hidden_size:
@@ -79,12 +82,13 @@ def load_controller(path: str, model, device) -> ForgettingController:
         checkpoint["hidden_size"], checkpoint["scalar_size"], checkpoint["width"], checkpoint["semantic_size"]
     )
     controller.load_state_dict(checkpoint["state_dict"])
+    controller.update_rule = update_rule
     return controller.to(device).eval()
 
 
-def _choose_alpha(session, policy, semantic, scalars):
+def _choose_coefficient(session, policy, semantic, scalars):
     if policy == "baseline":
-        return 0.0
+        return 1.0 if session.update_rule == "write" else 0.0
     if policy == "controller":
         if session.controller is None:
             raise ValueError("controller state policy requires --controller")
@@ -95,13 +99,15 @@ def _choose_alpha(session, policy, semantic, scalars):
 
 def collect_labels(model, scenarios: list[dict], output: str, grid: list[float],
                    state_policy: str = "baseline", controller=None, every: int = 1,
-                   tie_tolerance: float = 1e-6) -> int:
+                   tie_tolerance: float = 1e-6, update_rule: str = "forget") -> int:
     if every < 1 or tie_tolerance < 0:
         raise ValueError("every must be positive and tie_tolerance nonnegative")
     count = 0
     with open(output, "w", encoding="utf-8") as sink:
         for scenario in scenarios:
-            session = CBFSession(model, controller)
+            if scenario.get("objective", "forget") != update_rule:
+                raise ValueError(f"scenario {scenario['id']} objective does not match {update_rule} update rule")
+            session = CBFSession(model, controller, update_rule=update_rule)
             context = scenario["context_ids"]
             full_length = len(context) - len(context) % session.chunk_size
             for start in range(0, full_length, session.chunk_size):
@@ -144,13 +150,15 @@ def collect_labels(model, scenarios: list[dict], output: str, grid: list[float],
                     peak_reserved = torch.cuda.max_memory_reserved(device) if on_cuda else None
                     minimum = min(losses)
                     best_index = next(i for i, loss in enumerate(losses) if loss <= minimum + tie_tolerance)
+                    baseline_index = len(grid) - 1 if update_rule == "write" else 0
                     row = {
                         "id": scenario["id"], "group_id": scenario["group_id"], "split": scenario["split"],
-                        "boundary": boundary, "state_policy": state_policy,
+                        "boundary": boundary, "state_policy": state_policy, "update_rule": update_rule,
                         "semantic": semantic.squeeze(0).cpu().tolist(),
                         "scalars": scalars.squeeze(0).cpu().tolist(),
-                        "alpha_star": grid[best_index], "grid": grid, "losses": losses,
-                        "benefits": [losses[0] - loss for loss in losses],
+                        ("write_gate_star" if update_rule == "write" else "alpha_star"): grid[best_index],
+                        "grid": grid, "losses": losses,
+                        "benefits": [losses[baseline_index] - loss for loss in losses],
                         "label_time_s": elapsed,
                         "start_allocated_gib": start_allocated / gib if on_cuda else None,
                         "peak_allocated_gib": peak_allocated / gib if on_cuda else None,
@@ -159,7 +167,7 @@ def collect_labels(model, scenarios: list[dict], output: str, grid: list[float],
                     }
                     sink.write(json.dumps(row, ensure_ascii=False) + "\n")
                     count += 1
-                session.commit(_choose_alpha(session, state_policy, semantic, scalars))
+                session.commit(_choose_coefficient(session, state_policy, semantic, scalars))
     return count
 
 
@@ -208,6 +216,11 @@ def train_controller(train_paths: list[str], dev_paths: list[str], output: str, 
         raise ValueError("layers must be sorted, unique, nonnegative TTT layer IDs")
     train_rows = _read_label_files(train_paths)
     dev_rows = _read_label_files(dev_paths)
+    update_rules = {row.get("update_rule", "forget") for row in train_rows + dev_rows}
+    if len(update_rules) != 1 or not update_rules <= {"forget", "write"}:
+        raise ValueError("train and dev labels must use the same known update rule")
+    update_rule = update_rules.pop()
+    label_key = "write_gate_star" if update_rule == "write" else "alpha_star"
     if any(row["split"] != "train" for row in train_rows) or any(row["split"] != "dev" for row in dev_rows):
         raise ValueError("train and dev label files must have their respective split markers")
     if {row["group_id"] for row in train_rows} & {row["group_id"] for row in dev_rows}:
@@ -221,14 +234,14 @@ def train_controller(train_paths: list[str], dev_paths: list[str], output: str, 
     for row in train_rows + dev_rows:
         if len(row["semantic"]) != hidden_size or len(row["scalars"]) != scalar_size:
             raise ValueError("controller label features have inconsistent dimensions")
-        if not 0.0 <= row["alpha_star"] <= 1.0:
-            raise ValueError("alpha_star is outside [0,1]")
+        if label_key not in row or not 0.0 <= row[label_key] <= 1.0:
+            raise ValueError(f"{label_key} is missing or outside [0,1]")
     train_semantic = torch.tensor([row["semantic"] for row in train_rows], dtype=torch.float32)
     train_scalars = torch.tensor([row["scalars"] for row in train_rows], dtype=torch.float32)
-    train_labels = torch.tensor([row["alpha_star"] for row in train_rows], dtype=torch.float32)
+    train_labels = torch.tensor([row[label_key] for row in train_rows], dtype=torch.float32)
     dev_semantic = torch.tensor([row["semantic"] for row in dev_rows], dtype=torch.float32)
     dev_scalars = torch.tensor([row["scalars"] for row in dev_rows], dtype=torch.float32)
-    dev_labels = torch.tensor([row["alpha_star"] for row in dev_rows], dtype=torch.float32)
+    dev_labels = torch.tensor([row[label_key] for row in dev_rows], dtype=torch.float32)
     controller = ForgettingController(hidden_size, scalar_size, width, semantic_size)
     controller.set_statistics(train_scalars)
     optimizer = torch.optim.AdamW(controller.parameters(), lr=lr)
@@ -259,7 +272,7 @@ def train_controller(train_paths: list[str], dev_paths: list[str], output: str, 
     checkpoint = {
         "state_dict": best_state, "layers": list(layers), "hidden_size": hidden_size,
         "scalar_size": scalar_size, "width": width, "semantic_size": semantic_size,
-        "best_epoch": best_epoch, "dev_mse": best_loss,
+        "best_epoch": best_epoch, "dev_mse": best_loss, "update_rule": update_rule,
     }
     torch.save(checkpoint, output)
     Path(output + ".metrics.json").write_text(
@@ -267,33 +280,42 @@ def train_controller(train_paths: list[str], dev_paths: list[str], output: str, 
     )
     return {
         "train_states": len(train_rows), "dev_states": len(dev_rows),
-        "best_epoch": best_epoch, "dev_mse": best_loss,
+        "best_epoch": best_epoch, "dev_mse": best_loss, "update_rule": update_rule,
     }
 
 
-def evaluate(model, scenarios: list[dict], output: str, policies: list[str], controller=None) -> dict:
+def evaluate(model, scenarios: list[dict], output: str, policies: list[str], controller=None,
+             update_rule: str = "forget") -> dict:
     summary = {policy: [] for policy in policies}
     with open(output, "w", encoding="utf-8") as sink:
         for scenario in scenarios:
+            if scenario.get("objective", "forget") != update_rule:
+                raise ValueError(f"scenario {scenario['id']} objective does not match {update_rule} update rule")
             for future_index, future in enumerate(scenario["futures"]):
                 for policy in policies:
-                    session = CBFSession(model, controller)
-                    alphas = session.consume(scenario["context_ids"] + future.get("continuation_ids", []), policy)
+                    session = CBFSession(model, controller, update_rule=update_rule)
+                    coefficients = session.consume(scenario["context_ids"] + future.get("continuation_ids", []), policy)
                     losses = [session.score_answer(q["query_ids"], q["answer_ids"]) for q in future["queries"]]
                     mean_loss = sum(losses) / len(losses)
                     summary[policy].append(mean_loss)
-                    sink.write(json.dumps({
+                    row = {
                         "id": scenario["id"], "group_id": scenario["group_id"], "split": scenario["split"],
-                        "future_index": future_index, "policy": policy, "query_losses": losses,
-                        "mean_loss": mean_loss, "alphas": alphas,
-                    }, ensure_ascii=False) + "\n")
+                        "future_index": future_index, "policy": policy, "update_rule": update_rule,
+                        "query_losses": losses,
+                        "mean_loss": mean_loss, "coefficients": coefficients,
+                    }
+                    if update_rule == "forget":
+                        row["alphas"] = coefficients
+                    sink.write(json.dumps(row, ensure_ascii=False) + "\n")
     result = {}
     for policy, losses in summary.items():
         item = {"scenarios": len(losses), "mean_nll": sum(losses) / len(losses)}
         if policy != "baseline" and "baseline" in summary:
             gains = [base - current for base, current in zip(summary["baseline"], losses)]
             item["mean_gain_vs_baseline"] = sum(gains) / len(gains)
-            item["harmful_forgetting_fraction"] = sum(gain < 0 for gain in gains) / len(gains)
+            item["harmful_fraction"] = sum(gain < 0 for gain in gains) / len(gains)
+            if update_rule == "forget":
+                item["harmful_forgetting_fraction"] = item["harmful_fraction"]
         result[policy] = item
     Path(output + ".summary.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"

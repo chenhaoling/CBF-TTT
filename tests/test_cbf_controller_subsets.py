@@ -9,6 +9,22 @@ from scripts.prepare_cbf_controller_subsets import prepare_subsets
 
 
 class ControllerSubsetTests(unittest.TestCase):
+    def test_write_labels_are_counted_without_mixing_forget_labels(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            train, dev = root / "train.jsonl", root / "dev.jsonl"
+            train.write_text(json.dumps({"id": "a", "group_id": "a", "split": "train",
+                                         "update_rule": "write", "write_gate_star": 0.0}) + "\n")
+            dev.write_text(json.dumps({"id": "b", "group_id": "b", "split": "dev",
+                                       "update_rule": "write", "write_gate_star": 1.0}) + "\n")
+            result = prepare_subsets([train], [dev], root / "out", [1])
+            self.assertEqual(result["update_rule"], "write")
+            self.assertEqual(result["subsets"]["1"]["gate_counts"], {"0.0": 1})
+            dev.write_text(json.dumps({"id": "b", "group_id": "b", "split": "dev",
+                                       "alpha_star": 0.0}) + "\n")
+            with self.assertRaisesRegex(ValueError, "share one known update rule"):
+                prepare_subsets([train], [dev], root / "out", [1])
+
     def test_nested_groups_and_dev_isolation(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

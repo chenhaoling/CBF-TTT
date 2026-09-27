@@ -17,6 +17,7 @@ def prepare_subsets(train_paths: list[Path], dev_paths: list[Path], output_dir: 
         raise ValueError("group counts must be positive")
 
     train_groups, dev_groups = set(), set()
+    update_rules = set()
     for split, paths, groups in (("train", train_paths, train_groups), ("dev", dev_paths, dev_groups)):
         for path in paths:
             with path.open(encoding="utf-8") as stream:
@@ -26,7 +27,12 @@ def prepare_subsets(train_paths: list[Path], dev_paths: list[Path], output_dir: 
                     row = json.loads(line)
                     if row["split"] != split:
                         raise ValueError(f"unexpected split in {path}: {row['split']}")
+                    update_rules.add(row.get("update_rule", "forget"))
                     groups.add(row["group_id"])
+    if len(update_rules) != 1 or not update_rules <= {"forget", "write"}:
+        raise ValueError("train and dev labels must share one known update rule")
+    update_rule = update_rules.pop()
+    label_key = "write_gate_star" if update_rule == "write" else "alpha_star"
     if train_groups & dev_groups:
         raise ValueError("train and dev share source groups")
     if counts[-1] > len(train_groups):
@@ -37,7 +43,7 @@ def prepare_subsets(train_paths: list[Path], dev_paths: list[Path], output_dir: 
     selected = {size: set(ordered[:size]) for size in counts}
     output_dir.mkdir(parents=True, exist_ok=True)
     label_counts = Counter()
-    alpha_counts = {size: Counter() for size in counts}
+    coefficient_counts = {size: Counter() for size in counts}
     with ExitStack() as stack:
         sinks = {
             size: stack.enter_context((output_dir / f"train_groups_{size}.jsonl").open("w", encoding="utf-8"))
@@ -54,15 +60,17 @@ def prepare_subsets(train_paths: list[Path], dev_paths: list[Path], output_dir: 
                         if group in selected[size]:
                             sinks[size].write(line if line.endswith("\n") else line + "\n")
                             label_counts[size] += 1
-                            alpha_counts[size][str(row["alpha_star"])] += 1
+                            coefficient_counts[size][str(row[label_key])] += 1
 
     result = {
         "seed": seed, "train_source_groups": len(train_groups), "dev_source_groups": len(dev_groups),
+        "update_rule": update_rule,
         "subsets": {
             str(size): {
                 "source_groups": size,
                 "labels": label_counts[size],
-                "alpha_counts": dict(alpha_counts[size]),
+                ("gate_counts" if update_rule == "write" else "alpha_counts"):
+                    dict(coefficient_counts[size]),
                 "file": str(output_dir / f"train_groups_{size}.jsonl"),
             }
             for size in counts

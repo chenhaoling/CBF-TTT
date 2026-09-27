@@ -39,6 +39,8 @@ def main():
     collect.add_argument("--controller", help="Required for controller state resampling")
     collect.add_argument("--every", type=int, default=1, help="Collect every Nth complete chunk boundary")
     collect.add_argument("--tie-tolerance", type=float, default=1e-6)
+    collect.add_argument("--update-rule", choices=("forget", "write"), default="forget",
+                         help="forget decays old memory; write gates the current candidate delta W")
 
     train = sub.add_parser("train", help="Fit controller on train labels, select epoch on dev labels")
     train.add_argument("--train-samples", nargs="+", required=True)
@@ -59,6 +61,7 @@ def main():
     evaluate.add_argument("--controller")
     evaluate.add_argument("--policies", nargs="+", default=("baseline", "controller"))
     evaluate.add_argument("--output", required=True)
+    evaluate.add_argument("--update-rule", choices=("forget", "write"), default="forget")
 
     generate = sub.add_parser("generate", help="Greedy answer generation after CBF context adaptation")
     _model_args(generate)
@@ -67,6 +70,7 @@ def main():
     generate.add_argument("--controller", required=True)
     generate.add_argument("--max-new-tokens", type=int, default=64)
     generate.add_argument("--tokenizer", help="Optional tokenizer path for decoding")
+    generate.add_argument("--update-rule", choices=("forget", "write"), default="forget")
 
     args = parser.parse_args()
     from cbf_ttt.experiment import (
@@ -93,10 +97,11 @@ def main():
             Path(args.output).parent.mkdir(parents=True, exist_ok=True)
             count = collect_labels(
                 model, scenarios, args.output, parse_grid(args.grid),
-                args.state_policy, controller, args.every, args.tie_tolerance,
+                args.state_policy, controller, args.every, args.tie_tolerance, args.update_rule,
             )
             profile = summarize_label_profile(args.output)
-            profile.update({"scenarios": len(scenarios), "grid": parse_grid(args.grid), "every": args.every})
+            profile.update({"scenarios": len(scenarios), "grid": parse_grid(args.grid),
+                            "every": args.every, "update_rule": args.update_rule})
             Path(args.output + ".summary.json").write_text(
                 json.dumps(profile, ensure_ascii=False, indent=2), encoding="utf-8"
             )
@@ -106,12 +111,15 @@ def main():
                 parser.error("--controller is required for controller evaluation")
             scenarios = load_scenarios(args.data, args.split)
             Path(args.output).parent.mkdir(parents=True, exist_ok=True)
-            result = run_evaluation(model, scenarios, args.output, args.policies, controller)
+            result = run_evaluation(model, scenarios, args.output, args.policies, controller, args.update_rule)
         else:
-            session = CBFSession(model, controller)
-            alphas = session.consume(json.loads(args.context_ids))
+            session = CBFSession(model, controller, update_rule=args.update_rule)
+            coefficients = session.consume(json.loads(args.context_ids))
             output_ids = session.generate(json.loads(args.query_ids), args.max_new_tokens)
-            result = {"alphas": alphas, "generated_ids": output_ids}
+            result = {"update_rule": args.update_rule, "coefficients": coefficients,
+                      "generated_ids": output_ids}
+            if args.update_rule == "forget":
+                result["alphas"] = coefficients
             if args.tokenizer:
                 from transformers import AutoTokenizer
                 tokenizer = AutoTokenizer.from_pretrained(args.tokenizer)

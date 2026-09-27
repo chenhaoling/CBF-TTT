@@ -35,15 +35,20 @@ def analyze(rollouts: dict[str, Path], scenarios: Path, output: Path,
                 scenario_info[row["id"]] = (row["group_id"], row["regime"])
 
     by_policy = defaultdict(dict)
-    alpha_by_policy = defaultdict(list)
+    coefficient_by_policy = defaultdict(list)
     group_by_key = {}
     regime_by_key = {}
+    update_rules = set()
     for controller_name, path in rollouts.items():
         with path.open(encoding="utf-8") as stream:
             for line in stream:
                 if not line.strip():
                     continue
                 row = json.loads(line)
+                update_rules.add(row.get("update_rule", "forget"))
+                coefficients = row.get("coefficients")
+                if coefficients is None:
+                    coefficients = row["alphas"]
                 policy = controller_name if row["policy"] == "controller" else row["policy"]
                 key = (row["id"], row["future_index"])
                 if key in by_policy[policy]:
@@ -51,15 +56,19 @@ def analyze(rollouts: dict[str, Path], scenarios: Path, output: Path,
                 info = scenario_info.get(row["id"])
                 if info is None or info[0] != row["group_id"]:
                     raise ValueError(f"rollout has unknown or mismatched scenario {row['id']}")
-                if not math.isfinite(row["mean_loss"]) or any(not math.isfinite(x) for x in row["alphas"]):
-                    raise ValueError(f"nonfinite loss or alpha for {row['id']}")
+                if not math.isfinite(row["mean_loss"]) or any(not math.isfinite(x) for x in coefficients):
+                    raise ValueError(f"nonfinite loss or coefficient for {row['id']}")
                 by_policy[policy][key] = row["mean_loss"]
                 group_by_key[key], regime_by_key[key] = info
-                if row["alphas"]:
-                    alpha_by_policy[policy].append(row["alphas"][-1])
+                if coefficients:
+                    coefficient_by_policy[policy].append(coefficients[-1])
 
-    if "baseline" not in by_policy or "1" not in by_policy:
-        raise ValueError("baseline and fixed alpha=1 rollouts are required")
+    if len(update_rules) != 1 or not update_rules <= {"forget", "write"}:
+        raise ValueError("rollouts must share one known update rule")
+    update_rule = update_rules.pop()
+    required_fixed = "0" if update_rule == "write" else "1"
+    if "baseline" not in by_policy or required_fixed not in by_policy:
+        raise ValueError(f"baseline and fixed {required_fixed} rollouts are required")
     keys = set(by_policy["baseline"])
     if any(set(values) != keys for values in by_policy.values()):
         raise ValueError("policies do not cover the same scenario/future keys")
@@ -68,16 +77,20 @@ def analyze(rollouts: dict[str, Path], scenarios: Path, output: Path,
         raise ValueError("no comparable rollouts")
 
     metrics = {}
-    references = [("baseline", "vs_alpha0"), ("1", "vs_alpha1")]
+    references = [("baseline", "vs_gate1"), ("0", "vs_gate0")] if update_rule == "write" else [
+        ("baseline", "vs_alpha0"), ("1", "vs_alpha1")]
     references.extend((name, f"vs_{name}") for name in sorted(by_policy)
-                      if name not in ("baseline", "1") and not name.startswith("controller"))
+                      if name not in ("baseline", required_fixed) and not name.startswith("controller"))
     for policy, losses in by_policy.items():
         item = {
             "scenarios": len(losses), "source_groups": len(groups),
             "mean_nll": statistics.mean(losses.values()),
-            "mean_last_alpha": statistics.mean(alpha_by_policy[policy]),
-            "std_last_alpha": statistics.pstdev(alpha_by_policy[policy]),
+            "mean_last_coefficient": statistics.mean(coefficient_by_policy[policy]),
+            "std_last_coefficient": statistics.pstdev(coefficient_by_policy[policy]),
         }
+        if update_rule == "forget":
+            item["mean_last_alpha"] = item["mean_last_coefficient"]
+            item["std_last_alpha"] = item["std_last_coefficient"]
         for reference, label in references:
             paired_gain = {key: by_policy[reference][key] - losses[key] for key in keys}
             by_group = defaultdict(list)
@@ -95,7 +108,7 @@ def analyze(rollouts: dict[str, Path], scenarios: Path, output: Path,
         }
         metrics[policy] = item
 
-    result = {"scenarios": len(keys), "source_groups": len(groups),
+    result = {"scenarios": len(keys), "source_groups": len(groups), "update_rule": update_rule,
               "bootstrap_draws": draws, "policies": metrics}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2), encoding="utf-8")

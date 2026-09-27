@@ -71,12 +71,33 @@ class CBFCoreTests(unittest.TestCase):
                 cbf_candidates={0: candidate, 2: candidate * 2},
                 cbf_collect=True,
             )
-            fake_session = SimpleNamespace(cache=cache, layers=(0, 2))
+            fake_session = SimpleNamespace(cache=cache, layers=(0, 2), update_rule="forget")
             CBFSession.commit(fake_session, alpha)
             self.assertEqual(cache.cbf_memory[0].item(), (1.0 - alpha) * 2.0 + 3.0)
             self.assertEqual(cache.cbf_memory[2].item(), (1.0 - alpha) * 4.0 + 6.0)
             self.assertEqual(cache.cbf_candidates, {})
             self.assertFalse(cache.cbf_collect)
+
+    def test_write_gate_only_scales_current_candidate(self):
+        for gate in (0.0, 0.5, 1.0):
+            cache = SimpleNamespace(
+                cbf_memory={0: torch.tensor([[2.0]]), 2: torch.tensor([[4.0]])},
+                cbf_candidates={0: torch.tensor([[3.0]]), 2: torch.tensor([[6.0]])},
+                cbf_collect=True,
+            )
+            fake_session = SimpleNamespace(cache=cache, layers=(0, 2), update_rule="write")
+            CBFSession.commit(fake_session, gate)
+            self.assertEqual(cache.cbf_memory[0].item(), 2.0 + gate * 3.0)
+            self.assertEqual(cache.cbf_memory[2].item(), 4.0 + gate * 6.0)
+            self.assertEqual(cache.cbf_candidates, {})
+            self.assertFalse(cache.cbf_collect)
+
+    def test_independent_decay_and_write_controls(self):
+        cache = SimpleNamespace(cbf_memory={0: torch.tensor([[2.0]])},
+                                cbf_candidates={0: torch.tensor([[3.0]])}, cbf_collect=True)
+        fake_session = SimpleNamespace(cache=cache, layers=(0,))
+        CBFSession.commit_both(fake_session, alpha=0.75, write_gate=0.5)
+        self.assertEqual(cache.cbf_memory[0].item(), 3.0)
 
     def test_lexical_statistics(self):
         stats = token_statistics(torch.tensor([1, 2, 1, 2]))
@@ -132,6 +153,15 @@ class CBFCoreTests(unittest.TestCase):
                 self.assertGreater(row["label_time_s"], 0)
                 self.assertIsNone(row["peak_allocated_gib"])
                 self.assertEqual(summarize_label_profile(path)["labels"], 1)
+                write_path = str(Path(directory) / "write_labels.jsonl")
+                write_scenario = {**scenario, "objective": "write"}
+                self.assertEqual(collect_labels(model, [write_scenario], write_path, [0.0, 0.5, 1.0],
+                                                every=2, update_rule="write"), 1)
+                write_row = json.loads(Path(write_path).read_text())
+                self.assertEqual(write_row["update_rule"], "write")
+                self.assertIn("write_gate_star", write_row)
+                self.assertNotIn("alpha_star", write_row)
+                self.assertAlmostEqual(write_row["benefits"][-1], 0.0)
 
     def test_alpha_zero_matches_qwen_baseline_at_same_chunk_boundaries(self):
         from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config

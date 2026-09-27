@@ -136,6 +136,24 @@ class ScenarioTests(unittest.TestCase):
         self.assertTrue(all(0 < len(row["futures"][0]["continuation_ids"]) < 64
                             for row in scenarios))
 
+    def test_write_candidates_target_second_chunk_and_keep_groups_split(self):
+        tokenizer = WordTokenizer()
+        sources = synthetic_sources(3, 8)
+        scenarios, metadata = build_scenarios(
+            tokenizer, sources, {"train": 1, "dev": 1, "test": 1},
+            3, 64, 2, 1, 1, 8, future_mode="short_tail", objective="write",
+        )
+        self.assertEqual(metadata["objective"], "write")
+        self.assertEqual({row["candidate_kind"] for row in scenarios}, {"novel", "duplicate", "noise"})
+        for row in scenarios:
+            self.assertEqual(row["candidate_boundary"], 2)
+            self.assertEqual(len(row["context_ids"]), 128)
+            kinds = {query["kind"] for query in row["futures"][0]["queries"]}
+            self.assertEqual(kinds, {"historical", "novel"} if row["candidate_kind"] == "novel"
+                             else {"historical"})
+        self.assertTrue(all(len({row["split"] for row in scenarios if row["group_id"] == group}) == 1
+                            for group in {row["group_id"] for row in scenarios}))
+
     def test_formal_summary_rejects_incomplete_labels(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -160,6 +178,28 @@ class ScenarioTests(unittest.TestCase):
             (root / "test_shard0_labels.jsonl.summary.json").unlink()
             with self.assertRaisesRegex(ValueError, "collector did not finish"):
                 summarize(root, shards=1)
+
+    def test_write_label_summary_uses_always_write_reference(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "shards").mkdir()
+            for split in ("train", "dev", "test"):
+                scenario = {"id": split, "group_id": split, "split": split, "regime": "noise"}
+                (root / "shards" / f"{split}_shard0.jsonl").write_text(json.dumps(scenario) + "\n")
+                label = {
+                    "id": split, "group_id": split, "split": split, "boundary": 2,
+                    "update_rule": "write", "grid": [0.0, 0.5, 1.0],
+                    "losses": [0.8, 0.9, 1.0], "benefits": [0.2, 0.1, 0.0],
+                    "write_gate_star": 0.0, "label_time_s": 1.0,
+                    "peak_allocated_gib": 1.0, "peak_reserved_gib": 1.0,
+                }
+                output = root / f"{split}_shard0_labels.jsonl"
+                output.write_text(json.dumps(label) + "\n")
+                Path(str(output) + ".summary.json").write_text("{}")
+            result = summarize(root, shards=1)
+            self.assertEqual(result["update_rule"], "write")
+            self.assertEqual(result["gate_counts_by_split"]["train"], {"0.0": 1})
+            self.assertAlmostEqual(result["mean_best_vs_always_write_gain"], 0.2)
 
 
 if __name__ == "__main__":

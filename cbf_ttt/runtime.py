@@ -72,7 +72,7 @@ def _memory_statistics(base: torch.Tensor, memory: torch.Tensor | None, delta: t
 class CBFSession:
     """Session-local KV, fast memory, and candidate buffers. The backbone remains frozen."""
 
-    def __init__(self, model, controller=None, cache=None):
+    def __init__(self, model, controller=None, cache=None, update_rule=None):
         from inference_model.hf_llama3.modeling_llama import TTTDynamicCache as LlamaCache
         from inference_model.hf_qwen3.modeling_qwen3 import TTTDynamicCache as QwenCache
 
@@ -82,6 +82,11 @@ class CBFSession:
             raise ValueError("CBF-TTT inference and counterfactual branches require model.eval()")
         self.model = model
         self.controller = controller
+        self.update_rule = update_rule or getattr(controller, "update_rule", "forget")
+        if self.update_rule not in ("forget", "write"):
+            raise ValueError("update_rule must be 'forget' or 'write'")
+        if controller is not None and self.update_rule != getattr(controller, "update_rule", "forget"):
+            raise ValueError("controller checkpoint and session update rules differ")
         self.layers = tuple(sorted(model.config.ttt_layers))
         if not self.layers:
             raise ValueError("the checkpoint has no TTT layers")
@@ -111,7 +116,7 @@ class CBFSession:
 
     def clone(self):
         """Deep-copy all KV and fast-memory state for an independent counterfactual branch."""
-        return CBFSession(self.model, self.controller, copy.deepcopy(self.cache))
+        return CBFSession(self.model, self.controller, copy.deepcopy(self.cache), self.update_rule)
 
     def _forward(self, ids: list[int], collect: bool = False) -> torch.Tensor:
         if not ids:
@@ -141,32 +146,43 @@ class CBFSession:
         semantic = hidden.float().mean(dim=1).detach()
         return semantic, torch.cat(scalars).unsqueeze(0).detach()
 
-    def commit(self, alpha: float) -> None:
-        if not 0.0 <= alpha <= 1.0:
-            raise ValueError("alpha must be in [0, 1]")
+    def commit(self, coefficient: float) -> None:
+        if not 0.0 <= coefficient <= 1.0:
+            raise ValueError("update coefficient must be in [0, 1]")
+        # Legacy forget-mode coefficients are decay rates; the joint alpha is retention.
+        alpha, write_gate = (1.0 - coefficient, 1.0) if self.update_rule == "forget" else (1.0, coefficient)
+        CBFSession.commit_both(self, alpha, write_gate)
+
+    def commit_both(self, alpha: float, write_gate: float) -> None:
+        """alpha retains old fast memory; write_gate admits the current candidate."""
+        if not 0.0 <= alpha <= 1.0 or not 0.0 <= write_gate <= 1.0:
+            raise ValueError("alpha and write_gate must be in [0, 1]")
         if set(self.cache.cbf_candidates) != set(self.layers):
             raise RuntimeError("a complete pending chunk is required before commit")
         with torch.inference_mode():
             for layer_idx in self.layers:
                 delta = self.cache.cbf_candidates[layer_idx]
                 old = self.cache.cbf_memory.get(layer_idx)
-                self.cache.cbf_memory[layer_idx] = delta if old is None else (1.0 - alpha) * old + delta
+                # Both terms can be controlled independently without changing the fixed backbone.
+                self.cache.cbf_memory[layer_idx] = write_gate * delta if old is None else (
+                    alpha * old + write_gate * delta
+                )
         self.cache.cbf_candidates = {}
         self.cache.cbf_collect = False
 
     def step(self, ids: list[int], policy: str = "controller") -> float:
         semantic, scalars = self.observe(ids)
         if policy == "baseline":
-            alpha = 0.0
+            coefficient = 1.0 if self.update_rule == "write" else 0.0
         elif policy == "controller":
             if self.controller is None:
                 raise ValueError("controller policy requires a trained controller")
             with torch.inference_mode():
-                alpha = self.controller.predict(semantic, scalars).item()
+                coefficient = self.controller.predict(semantic, scalars).item()
         else:
-            alpha = float(policy)
-        self.commit(alpha)
-        return alpha
+            coefficient = float(policy)
+        self.commit(coefficient)
+        return coefficient
 
     def consume(self, ids: list[int], policy: str = "controller") -> list[float]:
         alphas = []

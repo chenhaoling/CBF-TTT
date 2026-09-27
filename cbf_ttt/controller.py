@@ -1,10 +1,11 @@
-"""A small regressor for one shared, continuous chunk forgetting coefficient."""
+"""A small regressor for one shared chunk coefficient: decay or candidate admission."""
 
 import torch
 from torch import nn
 
 
 class ForgettingController(nn.Module):
+    """Legacy class name retained for old checkpoints; update_rule defines its output semantics."""
     def __init__(self, hidden_size: int, scalar_size: int, width: int = 128, semantic_size: int = 64):
         super().__init__()
         self.hidden_size = hidden_size

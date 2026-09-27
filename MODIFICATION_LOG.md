@@ -445,6 +445,20 @@ dev 的其余两种控制器各以 `--policies controller` 单独运行，训练
 
 ### 与 Titans 的关系和创新性风险
 
-[Titans 原论文（NeurIPS 2025）](https://proceedings.neurips.cc/paper_files/paper/2025/file/a4ca07aa108036f80cbb5b82285fd4b1-Paper-Conference.pdf) 第 2.1 节式 (3) 已提出 `M_t=(1-α_t)M_{t-1}+S_t` 的自适应遗忘；附录 F 还明确将 TTT 层缺少遗忘机制列为 Titans 相对 TTT 的差异。因此，本项目不能把“在 TTT 快权重更新中加入可学习遗忘门”或该递推式本身作为独立创新点。Titans 的 `α_t` 是按通道的门，其 `S_t` 含梯度惊讶度及动量；本实现是在既有 In-Place TTT 更新 `ΔW` 上乘共享系数，并以未来问答损失的反事实候选比较构造离线监督标签，再训练轻量控制器。这里可研究的区别是**怎样用反事实任务收益监督遗忘决策**，不是门控记忆这个想法本身。
+[Titans 原论文（NeurIPS 2025）](https://proceedings.neurips.cc/paper_files/paper/2025/file/a4ca07aa108036f80cbb5b82285fd4b1-Paper-Conference.pdf) 第 2.1 节式 (3) 已提出 `M_t=(1-α_t)M_{t-1}+S_t` 的自适应遗忘；附录 F 还明确将 TTT 层缺少遗忘机制列为 Titans 相对 TTT 的差异。因此，本项目不能把“在 TTT 快权重更新中加入可学习遗忘门”或该递推式本身作为独立创新点。Titans 的 `α_t` 是按通道的门，其 `S_t` 含梯度惊讶度及动量；此前遗忘实验是在既有 In-Place TTT 更新 `ΔW` 正常写入时，用共享系数衰减旧增量，并以未来问答损失的反事实候选比较构造离线监督标签。这里可研究的区别是**怎样用反事实任务收益监督决策**，不是门控记忆这个想法本身。下节记录用户进一步澄清的独立写入门控思路。
 
 目前只有合成短尾场景的完整对照，且固定 `α=1` 在 dev/test 均优于控制器；所以这一训练方法尚未证明能带来超过简单遗忘策略的实际收益，也不能据此主张强方法创新。后续若要论证独立贡献，应先预注册损失敏感的控制目标，在自然且未见的长时距任务上比较固定系数、同结构无反事实监督的门控控制器、Titans 式数据依赖遗忘基线及本方法，并报告性能与额外标注计算成本。上述判断是基于论文公式与本次实验的研究定位，不代表已经复现或实测 Titans 模型。
+
+## 双控制量语义修正（2026-09-27）
+
+用户进一步澄清，原始动机还包括判定当前样本生成的 `ΔW_t` 是否值得写入：噪声或重复信息可能产生无用甚至有害的候选更新。它与“遗忘已有历史增量”是两个独立问题。旧附件描述的是遗忘版本，前述 3600 条标签和控制器也只验证了该版本；不能将旧 test 数字解释为写入门控的实验结果。按用户最新举例，联合式中的 `α_t` 定义为**旧记忆保留率**，新的方法定义见 [`WRITE_GATE_METHOD.md`](WRITE_GATE_METHOD.md)：`M_t=α_t M_(t-1)+g_tΔW_t`。旧 `forget` 标签和 CLI 的同名数值实际上是遗忘率 `f_t=1-α_t`，为保持历史 checkpoint 可复现，旧字段语义不变；`write` 模式固定 `α=1` 学习 `g`。`commit_both` 实现联合更新的数学操作，但**二维联合标签和双输出控制器未实现**。用户要求先讨论四种情形，本轮未启动任何新实验。
+
+| 文件 | 本次修改 | 对应修正 | baseline 影响 |
+|---|---|---|---|
+| `cbf_ttt/runtime.py` | 将快记忆提交统一为独立的旧记忆衰减和当前候选写入两项；`write` 的 0/1 分别为跳过/完整写入 | 区分历史遗忘与当前样本采纳 | 旧 `forget` 默认路径不变 |
+| `cbf_ttt/experiment.py`、`tasks/cbf_ttt.py` | 标签、训练 checkpoint、评测均保存或校验 `update_rule`；写入标签使用 `write_gate_star`，收益相对 `g=1` | 防止旧标签错用；形成写入反事实闭环 | 缺少字段的旧标签和 checkpoint 解释为 `forget` |
+| `tasks/build_cbf_scenarios.py` | 新增 `--objective write`，第二块构造新事实/重复事实/无关噪声候选 | 让候选 `ΔW` 质量差异可观测 | 默认 `forget` 模板保持 |
+| `tasks/eval_public_benchmarks.py`、`scripts/run_cbf_formal_labels.sh`、`scripts/summarize_cbf_formal_labels.py`、`scripts/prepare_cbf_controller_subsets.py`、`scripts/summarize_cbf_controller_learning_curve.py`、`scripts/analyze_cbf_controller_rollouts.py` | 传播模式、按正确参考系数汇总、拒绝混用 | 写入模式从采集到评测的实验入口 | 旧默认、旧结果文件兼容 |
+| `tests/test_cbf_ttt.py`、`tests/test_cbf_scenarios.py`、`WRITE_GATE_METHOD.md` | 新增独立控制量、写入场景与收益参考测试；记录修正后的方法、假设和运行方式 | 正确公式及实验边界 | 仅测试和文档 |
+
+写入实验应先按用户要求用少量源组、`0/0.5/1` 和稀疏边界做试点，检查每条标签耗时、峰值显存、平坦损失比例与门控标签分布后再决定正式规模。目前**尚未产生新的写入标签、训练写入控制器或完成其公开基准评测**。现有结果只能作为遗忘机制的历史对照。写入模板的主要风险是候选信息还保留在 attention KV 中，即使跳过快权重写入，近期问答仍可能直接读取它；需要更长时距或自然噪声任务来检验真实写入收益。双机制联合优化需要 3×3 等二维候选网格及相应双输出模型，不能由两套一维最优标签直接拼接得到。

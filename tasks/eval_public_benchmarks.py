@@ -101,6 +101,8 @@ def main():
     parser.add_argument("--output", help="JSONL predictions, required for scoring")
     parser.add_argument("--policy", default="baseline", help="baseline or controller")
     parser.add_argument("--controller", help="Controller .pt if policy=controller")
+    parser.add_argument("--update-rule", choices=("forget", "write"), default="forget",
+                        help="Use write for checkpoints trained to gate the current delta W")
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--dtype", choices=("auto", "float32", "bfloat16"), default="auto")
     parser.add_argument("--max-examples", type=int, default=0, help="0 means all")
@@ -145,9 +147,12 @@ def main():
                 record["skipped"] = "context_over_limit"
                 skipped += 1
             else:
-                session = CBFSession(model, controller)
+                session = CBFSession(model, controller, update_rule=args.update_rule)
                 if context_ids:
-                    record["alphas"] = session.consume(context_ids, policy=args.policy)
+                    coefficients = session.consume(context_ids, policy=args.policy)
+                    record["coefficients"] = coefficients
+                    if args.update_rule == "forget":
+                        record["alphas"] = coefficients
                 if args.dataset == "mmlu":
                     losses = [session.score_answer(query_ids, tokenizer.encode(choice,
                               add_special_tokens=False)) for choice in example["choices"]]
@@ -164,7 +169,7 @@ def main():
                 correct += int(record["correct"])
                 count += 1
             sink.write(json.dumps(record, ensure_ascii=False) + "\n")
-    summary = {"dataset": args.dataset, "policy": args.policy, "scored": count,
+    summary = {"dataset": args.dataset, "policy": args.policy, "update_rule": args.update_rule, "scored": count,
                "skipped": skipped, "accuracy_or_exact_match": correct / count if count else None,
                "metric": "choice_accuracy" if args.dataset == "mmlu" else "normalized_exact_match_proxy",
                "full_context_only": True, "max_context_tokens": context_limit,

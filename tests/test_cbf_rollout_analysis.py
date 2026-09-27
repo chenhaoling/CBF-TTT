@@ -9,6 +9,23 @@ from scripts.analyze_cbf_controller_rollouts import analyze
 
 
 class RolloutAnalysisTests(unittest.TestCase):
+    def test_write_mode_compares_skip_and_always_write(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            scenarios = root / "scenarios.jsonl"
+            rollouts = root / "rollouts.jsonl"
+            scenarios.write_text(json.dumps({"id": "s", "group_id": "g", "regime": "noise"}) + "\n")
+            rows = [{"id": "s", "group_id": "g", "future_index": 0,
+                     "policy": policy, "update_rule": "write", "mean_loss": loss,
+                     "coefficients": [gate], "alphas": None}
+                    for policy, loss, gate in (("baseline", 1.0, 1.0), ("0", 0.8, 0.0),
+                                               ("controller", 0.9, 0.2))]
+            rollouts.write_text("".join(json.dumps(row) + "\n" for row in rows))
+            result = analyze({"controller": rollouts}, scenarios, root / "result.json", draws=100)
+            self.assertEqual(result["update_rule"], "write")
+            self.assertAlmostEqual(result["policies"]["controller"]["vs_gate1"]["mean_gain"], 0.1)
+            self.assertAlmostEqual(result["policies"]["controller"]["vs_gate0"]["mean_gain"], -0.1)
+
     def test_grouped_pairing_and_fixed_baselines(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

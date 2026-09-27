@@ -10,6 +10,7 @@ from pathlib import Path
 
 TEMPLATE_VERSION = 1
 REGIMES = ("stable", "correction", "topic_shift")
+WRITE_CASES = ("novel", "duplicate", "noise")
 NOISE_LEVELS = ("low", "high")
 COLORS = ("amber", "blue", "coral", "green", "indigo", "silver", "violet")
 
@@ -136,7 +137,8 @@ def _facts(source: dict, regime: str) -> tuple[str, str, str, str]:
 def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int], variants_per_group: int,
                     chunk_size: int, context_chunks: int, future_chunks: int, futures_per_scenario: int,
                     seed: int, backgrounds: list[str] | None = None,
-                    fact_placement: str = "repeated", future_mode: str = "full_chunk") -> tuple[list[dict], dict]:
+                    fact_placement: str = "repeated", future_mode: str = "full_chunk",
+                    objective: str = "forget") -> tuple[list[dict], dict]:
     if min(variants_per_group, chunk_size, context_chunks, future_chunks, futures_per_scenario) < 1:
         raise ValueError("chunk sizes and scenario counts must be positive")
     if sum(split_counts.values()) != len(sources) or any(count < 1 for count in split_counts.values()):
@@ -145,6 +147,8 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
         raise ValueError("fact_placement must be repeated or first_only")
     if future_mode not in ("full_chunk", "short_tail"):
         raise ValueError("future_mode must be full_chunk or short_tail")
+    if objective not in ("forget", "write") or (objective == "write" and context_chunks < 2):
+        raise ValueError("objective must be forget or write; write needs at least two context chunks")
     needed_backgrounds = len(sources) * variants_per_group * (
         context_chunks + (future_chunks * futures_per_scenario if future_mode == "full_chunk" else 0)
     )
@@ -174,12 +178,25 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
     for source_index, source in enumerate(ordered):
         for variant in range(variants_per_group):
             regime = REGIMES[(source_index + variant) % len(REGIMES)]
+            candidate_kind = WRITE_CASES[(source_index + variant) % len(WRITE_CASES)] if objective == "write" else None
             noise_level = NOISE_LEVELS[(source_index + variant) % len(NOISE_LEVELS)]
             hint, future_fact, current_query, current_answer = _facts(source, regime)
             entity, original = source["entity"], source["original_value"]
             context = []
             for chunk_index in range(context_chunks):
-                if fact_placement == "first_only" and chunk_index > 0:
+                if objective == "write" and chunk_index == 1:
+                    if candidate_kind == "novel":
+                        core = (f"New independent case {source['new_entity']} has access code "
+                                f"{source['new_value']}. This is an authoritative new record.")
+                    elif candidate_kind == "duplicate":
+                        core = (f"Duplicate record: the access code for {entity} is {original}. "
+                                "This repeats the earlier record without changing it.")
+                    else:
+                        core = (f"Unrelated noise: item {source['new_entity']} displays random marker "
+                                f"{source['new_value']}. It is not an access-code record.")
+                elif objective == "write" and chunk_index > 1:
+                    core = f"Background section {chunk_index + 1} for {entity}; no new access-code record."
+                elif fact_placement == "first_only" and chunk_index > 0:
                     core = (
                         f"Ledger case {entity} continues with unrelated background. "
                         f"No access-code update appears in section {chunk_index + 1} of {context_chunks}."
@@ -196,6 +213,8 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
             futures = []
             for future_index in range(futures_per_scenario):
                 future_noise = NOISE_LEVELS[(future_index + variant) % len(NOISE_LEVELS)]
+                if objective == "write":
+                    future_fact = f"The archive review for {entity} continues without an access-code change."
                 if future_mode == "short_tail":
                     # Introduce the future fact in the KV cache without another TTT write.
                     continuation = _encode(tokenizer, future_fact)
@@ -206,31 +225,43 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
                         continuation.extend(_fit_chunk(
                             tokenizer, core, filler(future_noise, source["group_id"]), chunk_size
                         ))
+                queries = [
+                    {
+                        "kind": "historical",
+                        "query_ids": _encode(tokenizer, f"\nQuestion: What was the original access code for {entity}? Answer:"),
+                        "answer_ids": _encode(tokenizer, " " + original),
+                    },
+                ]
+                if objective == "write":
+                    if candidate_kind == "novel":
+                        queries.append({
+                            "kind": "novel",
+                            "query_ids": _encode(tokenizer, f"\nQuestion: What is the access code for {source['new_entity']}? Answer:"),
+                            "answer_ids": _encode(tokenizer, " " + source["new_value"]),
+                        })
+                else:
+                    queries.append({
+                        "kind": "current_or_new",
+                        "query_ids": _encode(tokenizer, "\nQuestion: " + current_query),
+                        "answer_ids": _encode(tokenizer, " " + current_answer),
+                    })
                 futures.append({
                     "continuation_ids": continuation,
                     "noise_level": future_noise,
-                    "queries": [
-                        {
-                            "kind": "historical",
-                            "query_ids": _encode(
-                                tokenizer, f"\nQuestion: What was the original access code for {entity}? Answer:"
-                            ),
-                            "answer_ids": _encode(tokenizer, " " + original),
-                        },
-                        {
-                            "kind": "current_or_new",
-                            "query_ids": _encode(tokenizer, "\nQuestion: " + current_query),
-                            "answer_ids": _encode(tokenizer, " " + current_answer),
-                        },
-                    ],
+                    "queries": queries,
                 })
             scenarios.append({
                 "id": f"{source['group_id']}-v{variant}", "group_id": source["group_id"],
-                "split": splits[source["group_id"]], "regime": regime, "context_noise": noise_level,
+                "split": splits[source["group_id"]],
+                "regime": candidate_kind if objective == "write" else regime,
+                "context_noise": noise_level,
+                "candidate_kind": candidate_kind, "objective": objective,
+                "candidate_boundary": 2 if objective == "write" else None,
                 "context_ids": context, "futures": futures,
             })
     metadata = {
         "template_version": TEMPLATE_VERSION, "seed": seed, "chunk_size": chunk_size,
+        "objective": objective,
         "context_chunks": context_chunks, "future_chunks": future_chunks,
         "futures_per_scenario": futures_per_scenario, "variants_per_group": variants_per_group,
         "fact_placement": fact_placement,
@@ -252,6 +283,7 @@ def main():
     parser.add_argument("--background-data", help="Optional packed JSONL with content_split for distinct natural-text fillers")
     parser.add_argument("--fact-placement", choices=("repeated", "first_only"), default="repeated")
     parser.add_argument("--future-mode", choices=("full_chunk", "short_tail"), default="full_chunk")
+    parser.add_argument("--objective", choices=("forget", "write"), default="forget")
     parser.add_argument("--train-groups", type=int, default=100)
     parser.add_argument("--dev-groups", type=int, default=20)
     parser.add_argument("--test-groups", type=int, default=20)
@@ -276,7 +308,7 @@ def main():
     scenarios, metadata = build_scenarios(
         tokenizer, sources, split_counts, args.variants_per_group, args.chunk_size,
         args.context_chunks, args.future_chunks, args.futures_per_scenario, args.seed, backgrounds,
-        args.fact_placement, args.future_mode,
+        args.fact_placement, args.future_mode, args.objective,
     )
     metadata["tokenizer"] = args.tokenizer
     metadata["source_type"] = "provided" if args.sources else "synthetic"

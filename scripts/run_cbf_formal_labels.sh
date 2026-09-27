@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ $# -ne 4 ]]; then
-  echo "Usage: bash scripts/run_cbf_formal_labels.sh MODEL SCENARIO_DIR SHARD GPU" >&2
+if [[ $# -lt 4 || $# -gt 5 ]]; then
+  echo "Usage: bash scripts/run_cbf_formal_labels.sh MODEL SCENARIO_DIR SHARD GPU [forget|write]" >&2
   exit 2
 fi
 
@@ -10,6 +10,11 @@ model=$1
 scenario_dir=$2
 shard=$3
 gpu=$4
+update_rule=${5:-forget}
+if [[ $update_rule != forget && $update_rule != write ]]; then
+  echo "Update rule must be forget or write" >&2
+  exit 2
+fi
 if [[ ! $shard =~ ^[0-9]+$ || ! $gpu =~ ^[0-9]+$ ]]; then
   echo "SHARD and GPU must be nonnegative integers" >&2
   exit 2
@@ -31,6 +36,6 @@ for split in train dev test; do
   echo "Collecting split=$split shard=$shard gpu=$gpu at $(date -Is)"
   python -m tasks.cbf_ttt collect \
     --model "$model" --dtype bfloat16 --data "$data" --split "$split" \
-    --output "$output" --grid 0,0.5,1 --every 2
+    --output "$output" --grid 0,0.5,1 --every 2 --update-rule "$update_rule"
 done
 echo "Finished shard=$shard gpu=$gpu at $(date -Is)"
