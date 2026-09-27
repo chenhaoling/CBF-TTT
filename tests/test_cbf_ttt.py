@@ -189,6 +189,25 @@ class CBFCoreTests(unittest.TestCase):
                 self.assertEqual([future["gap_chunks"] for future in v2_row["future_meta"]], [0, 1])
                 self.assertEqual(len(v2_row["losses_by_future"]), 9)
                 self.assertTrue(all(len(action) == 2 for action in v2_row["query_losses_by_future"]))
+                from scripts.diagnose_cbf_gap import diagnose
+                trace_path = Path(directory) / "gap_trace.jsonl"
+                self.assertEqual(diagnose(model, [v2_scenario], trace_path), 1)
+                trace = json.loads(trace_path.read_text())
+                self.assertEqual(set(trace["trajectories"]),
+                                 {f"{a}{g}/{policy}" for a in (0, 1) for g in (0, 1)
+                                  for policy in ("normal_11", "freeze_10")})
+                self.assertAlmostEqual(trace["trajectories"]["11/normal_11"][0]["mean_nll"],
+                                       trace["trajectories"]["11/freeze_10"][0]["mean_nll"])
+                natural_path = str(Path(directory) / "natural_labels.jsonl")
+                natural_scenario = {**scenario, "objective": "joint_natural_v1",
+                                    "regime": "old_only",
+                                    "futures": [{"gap_chunks": 0, "continuation_ids": [],
+                                                 "queries": [{"kind": "old_continuation",
+                                                              "query_ids": [9], "answer_ids": [10, 11]}]}]}
+                self.assertEqual(collect_joint_labels(model, [natural_scenario], natural_path,
+                                                      [0.0, 0.5, 1.0], every=2), 1)
+                self.assertEqual(json.loads(Path(natural_path).read_text())["protocol"],
+                                 "joint_natural_v1")
 
     def test_alpha_zero_matches_qwen_baseline_at_same_chunk_boundaries(self):
         from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config
