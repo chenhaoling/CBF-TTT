@@ -1,0 +1,126 @@
+{
+  "dev_labels": 300,
+  "dev_groups": 100,
+  "train_mean_alpha": 0.7321666666666666,
+  "constant_dev_mse": {
+    "0.0": 0.7808333039283752,
+    "0.5": 0.2291666716337204,
+    "1.0": 0.17749999463558197,
+    "0.7321666666666666": 0.14299413561820984
+  },
+  "models": [
+    {
+      "groups": 250,
+      "seed": 42,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g250_s42.pt",
+      "best_epoch": 3,
+      "dev_raw_mse": 0.14414247870445251,
+      "dev_clipped_mse": 0.14414247870445251,
+      "mean_alpha": 0.7548671960830688,
+      "alpha_std": 0.09351835399866104,
+      "fraction_below_0_1": 0.0,
+      "fraction_above_0_9": 0.02666666731238365
+    },
+    {
+      "groups": 250,
+      "seed": 43,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g250_s43.pt",
+      "best_epoch": 1,
+      "dev_raw_mse": 0.13627327978610992,
+      "dev_clipped_mse": 0.13627327978610992,
+      "mean_alpha": 0.7932770252227783,
+      "alpha_std": 0.07090210914611816,
+      "fraction_below_0_1": 0.0,
+      "fraction_above_0_9": 0.03999999910593033
+    },
+    {
+      "groups": 250,
+      "seed": 44,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g250_s44.pt",
+      "best_epoch": 12,
+      "dev_raw_mse": 0.14452502131462097,
+      "dev_clipped_mse": 0.1433401107788086,
+      "mean_alpha": 0.7729228138923645,
+      "alpha_std": 0.18507100641727448,
+      "fraction_below_0_1": 0.0,
+      "fraction_above_0_9": 0.2800000011920929
+    },
+    {
+      "groups": 500,
+      "seed": 42,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g500_s42.pt",
+      "best_epoch": 9,
+      "dev_raw_mse": 0.12698842585086823,
+      "dev_clipped_mse": 0.1266048401594162,
+      "mean_alpha": 0.7907437682151794,
+      "alpha_std": 0.1365494728088379,
+      "fraction_below_0_1": 0.0,
+      "fraction_above_0_9": 0.21666666865348816
+    },
+    {
+      "groups": 500,
+      "seed": 43,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g500_s43.pt",
+      "best_epoch": 10,
+      "dev_raw_mse": 0.12887080013751984,
+      "dev_clipped_mse": 0.12878084182739258,
+      "mean_alpha": 0.7887043356895447,
+      "alpha_std": 0.13412176072597504,
+      "fraction_below_0_1": 0.0,
+      "fraction_above_0_9": 0.21666666865348816
+    },
+    {
+      "groups": 500,
+      "seed": 44,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g500_s44.pt",
+      "best_epoch": 8,
+      "dev_raw_mse": 0.13145597279071808,
+      "dev_clipped_mse": 0.13138680160045624,
+      "mean_alpha": 0.7666149735450745,
+      "alpha_std": 0.16924184560775757,
+      "fraction_below_0_1": 0.0033333334140479565,
+      "fraction_above_0_9": 0.23333333432674408
+    },
+    {
+      "groups": 1000,
+      "seed": 42,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g1000_s42.pt",
+      "best_epoch": 11,
+      "dev_raw_mse": 0.1263115257024765,
+      "dev_clipped_mse": 0.12623809278011322,
+      "mean_alpha": 0.7748059034347534,
+      "alpha_std": 0.16508854925632477,
+      "fraction_below_0_1": 0.0033333334140479565,
+      "fraction_above_0_9": 0.25
+    },
+    {
+      "groups": 1000,
+      "seed": 43,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g1000_s43.pt",
+      "best_epoch": 4,
+      "dev_raw_mse": 0.1288011521100998,
+      "dev_clipped_mse": 0.1288011521100998,
+      "mean_alpha": 0.7547277808189392,
+      "alpha_std": 0.10354140400886536,
+      "fraction_below_0_1": 0.0,
+      "fraction_above_0_9": 0.04333333298563957
+    },
+    {
+      "groups": 1000,
+      "seed": 44,
+      "checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g1000_s44.pt",
+      "best_epoch": 6,
+      "dev_raw_mse": 0.12946054339408875,
+      "dev_clipped_mse": 0.12945133447647095,
+      "mean_alpha": 0.790444016456604,
+      "alpha_std": 0.13414448499679565,
+      "fraction_below_0_1": 0.0,
+      "fraction_above_0_9": 0.21666666865348816
+    }
+  ],
+  "selected_by_dev_raw_mse": {
+    "250": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g250_s43.pt",
+    "500": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g500_s42.pt",
+    "1000": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_g1000_s42.pt"
+  }
+}

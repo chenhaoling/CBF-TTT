@@ -1,0 +1,12 @@
+{
+  "selection_split": "dev",
+  "selection_metric": "mean_answer_nll_on_300_dev_scenarios",
+  "training_groups": 500,
+  "training_seed": 42,
+  "best_epoch_by_dev_label_mse": 9,
+  "selected_checkpoint": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_selected.pt",
+  "selected_checkpoint_sha256": "5e26d0a53efed5c11e861c8aedbc4f3186e7b7a9a01a8f0928435e9578662d5a",
+  "dev_controller_nll": 0.3301297048562103,
+  "dev_fixed_alpha1_nll": 0.32601714141785154,
+  "test_was_used_for_selection": false
+}

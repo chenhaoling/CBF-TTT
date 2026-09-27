@@ -371,5 +371,80 @@ python -m scripts.summarize_cbf_formal_labels --directory "$OUT" --shards 2 --bo
 ### 已完成、待完成与风险
 
 - 已完成：最终 HF 模型上的四种场景/时距诊断、正式场景生成与均衡分片、两卡全部 3600 条标签及六份逐文件 `.summary.json`、一次性完成性校验和版本化汇总；本地与远程 `python3 -m unittest tests.test_cbf_scenarios -q` 均 8 项通过，`bash -n scripts/run_cbf_formal_labels.sh` 与 `git diff --check` 通过。
-- 待完成：用 train/dev 标签训练并选择控制器，在 test 和目标公开基准上独立评测；本次请求仅完成标签构造，未启动控制器训练或六项正式评测。
+- 当时待完成：用 train/dev 标签训练并选择控制器，在 test 和目标公开基准上独立评测；控制器及合成场景 test 已于下节完成，六项公开基准仍未完成。
 - 风险：短尾协议强调当前边界的近期问答，不能替代 4 个 context chunk 加完整 future chunk 的长时距效果；后者在试点全部偏向 `alpha=1`，说明当前 checkpoint 可能缺少多次连续更新的训练覆盖。正式 context 为 8192 token，也比预训练单样本 6144 token 长，仍需检测长度外推。自然背景来自同一 1B 预训练语料，事实虽新但背景不独立；未来应以未见语料和目标评测的实际任务情景复核。标签分布可能偏向 1；正式完成后应报告分布、最优与 `alpha=0` 的损失差和开发集控制器性能，不应仅以样本量称其有效。
+
+## 控制器训练与固定系数对照（2026-09-27）
+
+### 设计与文件
+
+以正式 train 的 1000 个独立源组为母集，固定随机种子 42 打乱**源组**，取嵌套的前 `250/500/1000` 组，得到 `750/1500/3000` 条标签；同一个源组的三种场景不会跨子集或 train/dev。三种规模各训练种子 `42/43/44`，共九个控制器。每次沿用原 `tasks.cbf_ttt train` 入口与默认架构：语义投影 64、MLP 宽度 128、20 epoch、batch 64、AdamW 学习率 `1e-3`。固定的 100 个 dev 源组（300 条标签）用于选 epoch、比较规模和种子；test 的 100 个源组在模型确定之前不参与选型。训练在 hku-gpu2 的 `cbf_ttt_train_py311` 环境进行，控制器仅使用保存的特征与标签，在 CPU 上优化；评测另用最终 Qwen3-4B 和两张 5090 完整 rollout。
+
+| 文件 | 本次改动 | 附件对应需求 | baseline 影响 |
+|---|---|---|---|
+| `scripts/prepare_cbf_controller_subsets.py` | 对正式标签按源组嵌套抽样、核对 train/dev 组隔离、保存每规模标签与系数分布 | 3.6.3 训练/开发分组隔离 | 新独立脚本 |
+| `scripts/run_cbf_controller_learning_curve.sh` | 对三种组规模和三种随机种子运行九次控制器训练，保存权重与逐 epoch MSE | 3.6 控制器监督训练 | 新独立脚本 |
+| `scripts/summarize_cbf_controller_learning_curve.py` | 比较九个模型的 dev 原始/裁剪 MSE、输出系数均值与离散程度，以及固定系数回归基线 | 3.6 训练和选择 | 新独立脚本 |
+| `scripts/analyze_cbf_controller_rollouts.py` | 对相同场景的固定 `alpha=0/0.5/1` 和控制器做配对 NLL 比较、各类型汇总及源组 bootstrap 95% 区间 | 3.7–3.8 在线对照评测 | 新独立脚本 |
+| `tests/test_cbf_controller_subsets.py`、`tests/test_cbf_rollout_analysis.py` | 检验组安全嵌套抽样、配对收益与源组计数 | 数据和统计闭环 | 仅测试 |
+| `MODIFICATION_LOG.md` 与 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/` | 记录命令、参数、结果和小型汇总；大模型、全量标签、rollout JSONL 继续留在远程 | 用户要求的实验保存与说明 | 文档及独立结果 |
+
+远程训练目录 `/home/ctj/cbf_ttt_1b_labels/controller_study_20260927`，其中 `subset_manifest.json` 记录三组源组数与标签数。训练子集 `alpha=0/0.5/1` 分布依次为 `179/60/511`、`341/128/1031`、`674/259/2067`。固定 dev 的 300 条标签中，常数 `alpha=1` 的回归 MSE 为 `0.1775`，固定训练集均值 `0.73217` 的 MSE 为 `0.14299`。每规模按 dev 原始输出 MSE 选出的模型分别为 `g250_s43`：`0.13627`、`g500_s42`：`0.12699`、`g1000_s42`：`0.12631`；1000 组最佳模型的裁剪输出在 dev 上均值 `0.77481`、标准差 `0.16509`，说明没有严格塌缩为常数，但是否有任务收益仍以完整 rollout 为准。
+
+dev rollout 使用同一份 300 场景，比较原协议 `alpha=0`、固定 `0.5`、固定 `1`、仅由训练标签均值确定的固定 `alpha=0.73217`，以及每规模选出的控制器。每个场景独立开始会话；差值使用相同场景配对，再按 100 个源组做 2000 次重采样区间。仅在 dev 上确定最终控制器后，再对 300 场景的 test 执行一次相同策略比较。固定 `alpha=1` 是必要的强对照，因为正式标签约 70% 选择 1；训练均值常数检验语义/记忆特征是否真的有额外价值。这里的 dev MSE 不是方法成功标准；需同时报告独立 test 的问答 NLL、相对固定 1 的配对收益与区间、退化场景比例和输出系数分布。
+
+**dev 完成结果（300 场景、100 源组）：**下表的“相对固定 1 收益”为同场景 `NLL(alpha=1)-NLL(策略)`；负数说明比固定 1 更差。区间按源组重采样，属于用于模型选择的 dev 描述，不当作最终独立检验。
+
+| 策略 | 平均答案 NLL | 相对固定 1 收益 | 源组 bootstrap 95% 区间 |
+|---|---:|---:|---:|
+| 原始累积更新 `alpha=0` | 0.353898 | -0.027880 | [-0.033686, -0.022896] |
+| 固定 `alpha=0.5` | 0.341351 | -0.015334 | [-0.018366, -0.012831] |
+| 训练标签均值常数 `alpha=0.73217` | 0.334309 | -0.008292 | [-0.010154, -0.006715] |
+| 固定 `alpha=1` | **0.326017** | 0 | [0, 0] |
+| 250 组控制器 `g250_s43` | 0.331784 | -0.005767 | [-0.006921, -0.004707] |
+| 500 组控制器 `g500_s42` | **0.330130** | **-0.004113** | [-0.005110, -0.003108] |
+| 1000 组控制器 `g1000_s42` | 0.330489 | -0.004472 | [-0.005550, -0.003401] |
+
+虽然 1000 组控制器的 dev 标签 MSE 最低，实际 dev rollout 中 500 组模型在控制器之间最好；三个控制器均明显弱于固定 `alpha=1`。因此**按预先声明的 dev rollout 目标固定 `g500_s42` 作为本次 test 控制器**，不再根据 test 调整模型。这个结果显示仅凭 `alpha_star` 的均方误差改善不能证明反事实收益目标改善；当前短尾场景的系数偏向 1，后续可能需要损失敏感训练目标、场景再平衡或更长序列适配训练，但这些都不混入本次已冻结的 test 对照。
+
+**独立 test 完成结果（300 场景、100 源组）：**两卡各处理 150 场景，每场景五个策略，共 1500 条 rollout。完成脚本核对每卡 750 行和两份摘要后合并；分析器要求每个策略覆盖同一批场景/future、每条损失和系数有限，并按源组生成配对区间。正值收益表示策略的答案 NLL 低于比较对象。
+
+| 策略 | 平均答案 NLL | 相对 `alpha=0` 收益 | 相对固定 `alpha=1` 收益 |
+|---|---:|---:|---:|
+| 原始累积更新 `alpha=0` | 0.373329 | 0 | -0.026111 |
+| 固定 `alpha=0.5` | 0.363151 | +0.010178 | -0.015933 |
+| 训练均值常数 `alpha=0.73217` | 0.356382 | +0.016946 | -0.009164 |
+| 固定 `alpha=1` | **0.347218** | **+0.026111** | 0 |
+| 已选控制器 `g500_s42` | 0.351107 | +0.022222 | **-0.003888** |
+
+控制器相对 `alpha=0` 的源组 bootstrap 95% 区间为 `[+0.017455,+0.027687]`，相对训练均值常数的收益为 `+0.005276`、区间 `[+0.003783,+0.006921]`，说明学到的状态变化优于简单训练均值；但相对固定 `alpha=1` 的收益为 **`-0.003888`**、区间 **`[-0.004974,-0.002742]`**，在 `60.67%` 的测试场景上更差。控制器第二块输出均值 `0.7681`、标准差 `0.1923`。correction/stable/topic_shift 的控制器 NLL 分别为 `0.288706/0.372434/0.392179`，固定 1 为 `0.285376/0.368163/0.388116`：三类均未超过固定 1。源组 bootstrap 区间描述本次固定样本的不确定性，不能修正合成数据与预训练背景重用的外推限制。
+
+**结论：**这轮控制器相对原始累积 TTT 有收益，但在当前受控短尾协议中不优于“每次完全遗忘历史快记忆”的固定策略，因而不能宣称 CBF 的自适应控制优于最强常数基线。500 与 1000 源组之间的 dev NLL 也未单调改善，单纯增加同分布标签未必解决问题。下一轮应先预注册新的训练目标（例如依据候选损失差而非只拟合最优网格点）、增加真实未见场景，并针对 4-chunk/完整 future 的更新漂移检查或训练，再重新构造标签；这一轮 test 不用于调节现有模型。
+
+最终控制器在远程 `/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/controller_selected.pt`，大小约 776 KB，SHA-256 为 `5e26d0a53efed5c11e861c8aedbc4f3186e7b7a9a01a8f0928435e9578662d5a`。九次 CPU 拟合从 `11:37:09` 到 `11:37:41`，约 32 秒；两卡完整 dev/test rollout 另计。权重没有提交到公开 Git 仓库；小型 `subset_manifest.json`、`learning_curve_summary.json`、`dev_comparison_with_trainmean.json`、`test_comparison.json` 和 `controller_selection.json` 保存在 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/controller_study/`，远程同名目录保留全量 rollout 与训练日志。
+
+复现命令（远程仓库目录、conda 环境与上一节相同；`ROOT`、`STUDY` 为绝对路径）：
+
+```bash
+ROOT=/home/ctj/cbf_ttt_1b_labels/formal_short_tail_v1
+STUDY=/home/ctj/cbf_ttt_1b_labels/controller_study_20260927
+MODEL=/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt
+python -m scripts.prepare_cbf_controller_subsets --train-labels "$ROOT/train_shard0_labels.jsonl" "$ROOT/train_shard1_labels.jsonl" --dev-labels "$ROOT/dev_shard0_labels.jsonl" "$ROOT/dev_shard1_labels.jsonl" --output-dir "$STUDY" --group-counts 250 500 1000 --seed 42
+bash scripts/run_cbf_controller_learning_curve.sh "$ROOT" "$STUDY"
+python -m scripts.summarize_cbf_controller_learning_curve --study-dir "$STUDY" --dev-labels "$ROOT/dev_shard0_labels.jsonl" "$ROOT/dev_shard1_labels.jsonl"
+CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_ttt eval --model "$MODEL" --dtype bfloat16 --data "$STUDY/dev_scenarios.jsonl" --split dev --controller "$STUDY/controller_g1000_s42.pt" --policies baseline 0.5 1 controller --output "$STUDY/dev_g1000_rollouts.jsonl"
+# dev 选出 g500_s42 后冻结模型；以下两条在两张卡上并行
+CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_ttt eval --model "$MODEL" --dtype bfloat16 --data "$ROOT/shards/test_shard0.jsonl" --split test --controller "$STUDY/controller_selected.pt" --policies baseline 0.5 1 0.7321666666666666 controller --output "$STUDY/test_shard0_rollouts.jsonl"
+CUDA_VISIBLE_DEVICES=1 python -m tasks.cbf_ttt eval --model "$MODEL" --dtype bfloat16 --data "$ROOT/shards/test_shard1.jsonl" --split test --controller "$STUDY/controller_selected.pt" --policies baseline 0.5 1 0.7321666666666666 controller --output "$STUDY/test_shard1_rollouts.jsonl"
+cat "$STUDY/test_shard0_rollouts.jsonl" "$STUDY/test_shard1_rollouts.jsonl" > "$STUDY/test_all_rollouts.jsonl"
+cat "$ROOT/shards/test_shard0.jsonl" "$ROOT/shards/test_shard1.jsonl" > "$STUDY/test_scenarios.jsonl"
+python -m scripts.analyze_cbf_controller_rollouts --rollout "controller_g500=$STUDY/test_all_rollouts.jsonl" --scenarios "$STUDY/test_scenarios.jsonl" --output "$STUDY/test_comparison.json"
+```
+
+dev 的其余两种控制器各以 `--policies controller` 单独运行，训练均值常数也单独运行，再由 `scripts/analyze_cbf_controller_rollouts.py` 合并比较。脚本不修改任何 baseline 模型、预训练或原始评测路径。最终本地 10 项相关测试通过，远程 9 项子集测试及 1 项配对分析测试通过；训练、dev/test 完整 rollout、结果文件与 GPU 空闲状态均已核对。
+
+### 与 Titans 的关系和创新性风险
+
+[Titans 原论文（NeurIPS 2025）](https://proceedings.neurips.cc/paper_files/paper/2025/file/a4ca07aa108036f80cbb5b82285fd4b1-Paper-Conference.pdf) 第 2.1 节式 (3) 已提出 `M_t=(1-α_t)M_{t-1}+S_t` 的自适应遗忘；附录 F 还明确将 TTT 层缺少遗忘机制列为 Titans 相对 TTT 的差异。因此，本项目不能把“在 TTT 快权重更新中加入可学习遗忘门”或该递推式本身作为独立创新点。Titans 的 `α_t` 是按通道的门，其 `S_t` 含梯度惊讶度及动量；本实现是在既有 In-Place TTT 更新 `ΔW` 上乘共享系数，并以未来问答损失的反事实候选比较构造离线监督标签，再训练轻量控制器。这里可研究的区别是**怎样用反事实任务收益监督遗忘决策**，不是门控记忆这个想法本身。
+
+目前只有合成短尾场景的完整对照，且固定 `α=1` 在 dev/test 均优于控制器；所以这一训练方法尚未证明能带来超过简单遗忘策略的实际收益，也不能据此主张强方法创新。后续若要论证独立贡献，应先预注册损失敏感的控制目标，在自然且未见的长时距任务上比较固定系数、同结构无反事实监督的门控控制器、Titans 式数据依赖遗忘基线及本方法，并报告性能与额外标注计算成本。上述判断是基于论文公式与本次实验的研究定位，不代表已经复现或实测 Titans 模型。
