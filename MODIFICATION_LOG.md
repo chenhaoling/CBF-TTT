@@ -515,3 +515,5 @@ python -m scripts.summarize_cbf_joint_pilot --labels "$ROOT"/*_joint_labels.json
 按用户要求继续此前报告提出的顺序。新增独立协议，保持原 `joint_v1` 和 baseline 不变。`tasks/build_cbf_scenarios.py` 新增 `--objective joint_v2`、`--joint-gap-chunks` 与未见票号的规则迁移场景；构造器检查目标规则答案未出现在 context/gap，候选保持同主题和同完整 chunk 长度。`cbf_ttt/experiment.py` 对同一决策分别记录短间隔与自然背景 gap 之后的每查询损失、每 future 损失、原 3×3 聚合损失以及时间和显存。`tasks/cbf_ttt.py` 区分 `joint_v1`/`joint_v2` 协议；`scripts/summarize_cbf_joint_pilot.py` 增加按 gap 和查询类型的四角点统计。`tests/test_cbf_scenarios.py`、`tests/test_cbf_ttt.py`、`tests/test_cbf_joint_pilot_summary.py` 覆盖新数据和输出形状。具体假设、阶段门及命令见 [`DUAL_GATE_V2_EXPERIMENT.md`](DUAL_GATE_V2_EXPERIMENT.md)。若仍由 `00` 垄断，不扩量也不训练控制器。
 
 远程 PyTorch 测试最初发现旧 tiny fixture 的 query 没有 `kind` 字段；扩展标签记录时直接读取它导致 `KeyError`。`collect_joint_labels` 现为旧数据使用 `unspecified` 占位，新 `joint_v2` 仍保存明确的查询类型。此修复保证历史 `joint_v1` 标签入口兼容。
+
+新增 `scripts/evaluate_cbf_joint_v2_gate.py` 和 `tests/test_cbf_joint_v2_gate.py`，将执行前写定的 0.005 NLL 阈值、按源组比较、四角点获胜多样性、内部系数比例及显存余量转换为可复算的 `gate.json`；脚本拒绝缺失或跨场景不匹配的源组。它只使用逐条标签计算聚合指标，不把原始标签上传到 GitHub。
