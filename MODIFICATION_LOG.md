@@ -537,3 +537,18 @@ v2 长间隔标签出现写入动作 NLL 急升后，将 `tests/test_cbf_ttt.py`
 hku-gpu2 的最终 Qwen3-4B checkpoint 上，`joint_v2` 同一源组的四类诊断表明 `11` 在正常后续写入下 gap0/1/2 平均 NLL 为 **0.669/2.238/8.848**，冻结后续写入则为 **0.669/1.105/1.776**。自然试点用 1B 混合语料的 48 条不同记录构造 12 源组 × 4 条场景，两张 5090 并行完成 48 条 3×3 标签，平均每条 **1.079 秒**，最大显存 reserved **13.854 GiB**。四角点最优 `00/01/10/11=33/7/7/1`，但有用新信息条件下 `11` 对 `00` 超过 0.005 NLL 的独立源组只有 **2/12**，未达到预设 3/12；阶段门未通过。完整过程、命令、算法含义及限制见 [`自然试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_natural_pilot/REPORT.md)，机器可读结果为同目录 `summary.json`、`gate.json` 与 `joint_v2_pilot/gap_diagnostic_summary.json`。
 
 因此本轮**未**扩量正式反事实标签、训练双输出控制器或运行公开基准。自然文档来自当前 checkpoint 用过的预训练语料，目标只在本次 session 中未见，不能推断对全新文档的泛化。四类 gap 诊断来自同一源组，不能推断群体效应。原始逐样本标签和轨迹在本机忽略目录与远程输出目录保留，GitHub 只记录代码、场景元数据及聚合报告。后续 TODO：构造真正未参与预训练的任务相关文档，核查候选 `ΔW` 与任务增益的关系，并在新源组上预注册且复核阶段门；已有探索性 dev/test 不再用于正式结论。原始 baseline 路径未修改。
+
+### 发布后文档与独立写入效应试点（2026-09-27，进行中）
+
+为执行上述 TODO，先固定 [`DUAL_GATE_POSTCUTOFF_PILOT.md`](DUAL_GATE_POSTCUTOFF_PILOT.md)：从 Qwen3 发布之后首投的 arXiv `cs.CL` 论文 PDF 构造 12 个四文档源组，继续用 4096+32+128 token、第二边界和 3×3 网格。发布日期是来源代理；仅能保证公开的已发布基础权重不可能学到未来提交版本，不能保证没有此前公开的相似片段。正式控制器仍受预设阶段门约束。
+
+| 文件 | 改动 | 对应需求及 baseline 影响 |
+|---|---|---|
+| `scripts/download_postcutoff_arxiv.py` | 按首投时间和类别查询官方 API，缓存 PDF，提取文本并筛选 Qwen token 长度；记录 ID、日期、URL 和哈希，不把全文写入仓库 | 构造可核验来源的新文档；opt-in 脚本 |
+| `scripts/audit_postcutoff_corpus.py` | 一次性扫描 1B 续训语料中的入选论文标题，报告精确匹配数 | 辅助排查数据重合；只读 |
+| `tasks/build_cbf_natural_scenarios.py` | 新增独立 `joint_postcutoff_v1` 协议及可配源组前缀，复用原四条件构造 | 避免与已见自然场景标签混用；默认旧协议不变 |
+| `cbf_ttt/experiment.py`、`tasks/cbf_ttt.py`、`scripts/summarize_cbf_joint_pilot.py` | 传播新协议至采集、CLI 和汇总 | 复用既有联合分支；baseline 不变 |
+| `scripts/evaluate_cbf_postcutoff_gate.py` | 固定 `α=1` 比较 `g=0/1` 的写入效应，固定 `g=0` 比较 `α=0/1` 的保留效应，按独立源组执行预设阶段门 | 防止 `11` 对 `00` 同时改变两轴的混杂 |
+| `tests/test_cbf_postcutoff.py`、`tests/test_cbf_natural_scenarios.py`、`tests/test_cbf_ttt.py` | 检查 PDF 清理、标题审计、源组判据、新协议场景与采集闭环 | 只新增验证 |
+
+数据构造、单场景显存/耗时、两卡正式小试点和阶段门结果待远程执行后补记。原始 PDF、提取文本、场景及逐样本标签由实验目录 `.gitignore` 排除；GitHub 仅保存代码、来源元数据和聚合结果。

@@ -37,7 +37,12 @@ def load_records(path: Path, tokenizer, count: int, minimum_tokens: int) -> tupl
 
 def build_scenarios(records: list[list[int]], split_counts: dict[str, int],
                     context_tokens: int, query_tokens: int, answer_tokens: int,
-                    seed: int) -> tuple[list[dict], dict]:
+                    seed: int, protocol: str = "joint_natural_v1",
+                    group_prefix: str = "natural-pack") -> tuple[list[dict], dict]:
+    if protocol not in ("joint_natural_v1", "joint_postcutoff_v1"):
+        raise ValueError("unknown natural scenario protocol")
+    if not group_prefix or not all(char.isalnum() or char == "-" for char in group_prefix):
+        raise ValueError("group_prefix must contain only letters, digits, or hyphens")
     groups = sum(split_counts.values())
     if groups < 3 or any(split_counts.get(name, 0) < 1 for name in ("train", "dev", "test")):
         raise ValueError("positive train/dev/test group counts are required")
@@ -65,7 +70,7 @@ def build_scenarios(records: list[list[int]], split_counts: dict[str, int],
     scenarios = []
     for index in range(groups):
         old, new, distractor, neutral = records[4 * index:4 * index + 4]
-        group_id = f"natural-pack-{index:05d}"
+        group_id = f"{group_prefix}-{index:05d}"
         for variant, regime in enumerate(REGIMES):
             candidate = new if regime in ("both_relevant", "new_only") else distractor
             if regime == "both_relevant":
@@ -83,12 +88,12 @@ def build_scenarios(records: list[list[int]], split_counts: dict[str, int],
             scenarios.append({
                 "id": f"{group_id}-v{variant}", "group_id": group_id,
                 "split": split_for_group[index], "regime": regime,
-                "objective": "joint_natural_v1", "candidate_boundary": 2,
+                "objective": protocol, "candidate_boundary": 2,
                 "context_ids": context,
                 "futures": [{"gap_chunks": 0, "continuation_ids": [], "queries": queries}],
             })
     metadata = {
-        "protocol": "joint_natural_v1", "seed": seed,
+        "protocol": protocol, "seed": seed,
         "context_tokens": context_tokens, "query_tokens": query_tokens,
         "answer_tokens": answer_tokens, "record_count": len(records),
         "source_groups": groups, "scenarios": len(scenarios),
@@ -112,6 +117,9 @@ def main() -> None:
     parser.add_argument("--query-tokens", type=int, default=32)
     parser.add_argument("--answer-tokens", type=int, default=128)
     parser.add_argument("--seed", type=int, default=118)
+    parser.add_argument("--protocol", choices=("joint_natural_v1", "joint_postcutoff_v1"),
+                        default="joint_natural_v1")
+    parser.add_argument("--group-prefix", default="natural-pack")
     args = parser.parse_args()
     from transformers import AutoTokenizer
 
@@ -120,7 +128,8 @@ def main() -> None:
     records, source_hash = load_records(args.data, tokenizer, 4 * sum(split_counts.values()),
                                         args.context_tokens + args.query_tokens + args.answer_tokens)
     scenarios, metadata = build_scenarios(records, split_counts, args.context_tokens,
-                                          args.query_tokens, args.answer_tokens, args.seed)
+                                          args.query_tokens, args.answer_tokens, args.seed,
+                                          args.protocol, args.group_prefix)
     metadata.update({"source_sha256": source_hash, "source_path": str(args.data),
                      "tokenizer": args.tokenizer})
     args.output.parent.mkdir(parents=True, exist_ok=True)

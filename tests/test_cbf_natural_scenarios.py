@@ -29,6 +29,15 @@ class NaturalScenarioTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "four distinct records"):
             build_scenarios(records[:-1], {"train": 1, "dev": 1, "test": 1}, 4, 2, 3, 7)
 
+        postcutoff, metadata = build_scenarios(
+            records, {"train": 1, "dev": 1, "test": 1}, 4, 2, 3, 7,
+            protocol="joint_postcutoff_v1", group_prefix="postcutoff-paper"
+        )
+        self.assertEqual(metadata["protocol"], "joint_postcutoff_v1")
+        self.assertTrue(all(row["objective"] == "joint_postcutoff_v1" and
+                            row["group_id"].startswith("postcutoff-paper-")
+                            for row in postcutoff))
+
 
 if __name__ == "__main__":
     unittest.main()

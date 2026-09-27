@@ -38,7 +38,9 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
                     continue
                 row = json.loads(line)
                 key = (row["id"], row["boundary"])
-                if key in seen or row["protocol"] not in ("joint_v1", "joint_v2", "joint_natural_v1"):
+                if key in seen or row["protocol"] not in (
+                    "joint_v1", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1"
+                ):
                     raise ValueError(f"duplicate or incompatible joint label {key}")
                 seen.add(key)
                 protocols.add(row["protocol"])
@@ -54,7 +56,7 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
                     raise ValueError(f"missing a corner action for {key}")
                 grids.add(tuple(row["grid"]))
                 corner_losses = [losses[actions.index(corner)] for corner in CORNERS]
-                if row["protocol"] in ("joint_v2", "joint_natural_v1"):
+                if row["protocol"] in ("joint_v2", "joint_natural_v1", "joint_postcutoff_v1"):
                     expected_futures = 2 if row["protocol"] == "joint_v2" else 1
                     if len(row["future_meta"]) != expected_futures or any(
                         len(action_futures) != expected_futures for action_futures in row["losses_by_future"]

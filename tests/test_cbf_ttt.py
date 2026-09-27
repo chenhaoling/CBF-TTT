@@ -208,6 +208,12 @@ class CBFCoreTests(unittest.TestCase):
                                                       [0.0, 0.5, 1.0], every=2), 1)
                 self.assertEqual(json.loads(Path(natural_path).read_text())["protocol"],
                                  "joint_natural_v1")
+                postcutoff_path = str(Path(directory) / "postcutoff_labels.jsonl")
+                postcutoff_scenario = {**natural_scenario, "objective": "joint_postcutoff_v1"}
+                self.assertEqual(collect_joint_labels(model, [postcutoff_scenario], postcutoff_path,
+                                                      [0.0, 0.5, 1.0], every=2), 1)
+                self.assertEqual(json.loads(Path(postcutoff_path).read_text())["protocol"],
+                                 "joint_postcutoff_v1")
 
     def test_alpha_zero_matches_qwen_baseline_at_same_chunk_boundaries(self):
         from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config

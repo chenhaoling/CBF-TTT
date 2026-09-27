@@ -103,7 +103,9 @@ def main():
         if args.command == "collect-joint":
             scenarios = load_scenarios(args.data, args.split)
             objectives = {scenario.get("objective") for scenario in scenarios}
-            if len(objectives) != 1 or not objectives <= {"joint", "joint_v2", "joint_natural_v1"}:
+            if len(objectives) != 1 or not objectives <= {
+                "joint", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1"
+            }:
                 raise ValueError("collect-joint requires one joint scenario protocol per input")
             Path(args.output).parent.mkdir(parents=True, exist_ok=True)
             count = collect_joint_labels(model, scenarios, args.output, parse_grid(args.grid),
@@ -111,8 +113,7 @@ def main():
             profile = summarize_label_profile(args.output)
             profile.update({"scenarios": len(scenarios), "grid": parse_grid(args.grid),
                             "every": args.every,
-                            "protocol": ("joint_v2" if "joint_v2" in objectives else
-                                         "joint_natural_v1" if "joint_natural_v1" in objectives else "joint_v1")})
+                            "protocol": ("joint_v1" if "joint" in objectives else next(iter(objectives)))})
             Path(args.output + ".summary.json").write_text(
                 json.dumps(profile, ensure_ascii=False, indent=2), encoding="utf-8"
             )

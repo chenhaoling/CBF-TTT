@@ -201,7 +201,7 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
     with open(output, "w", encoding="utf-8") as sink:
         for scenario in scenarios:
             objective = scenario.get("objective")
-            if objective not in ("joint", "joint_v2", "joint_natural_v1"):
+            if objective not in ("joint", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1"):
                 raise ValueError(f"scenario {scenario['id']} is not a joint-control scenario")
             if objective == "joint_v2":
                 gaps = [future.get("gap_chunks") for future in scenario["futures"]]
@@ -263,8 +263,7 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
                     row = {
                         "id": scenario["id"], "group_id": scenario["group_id"], "split": scenario["split"],
                         "regime": scenario["regime"], "boundary": boundary,
-                        "protocol": ("joint_v2" if objective == "joint_v2" else
-                                     "joint_natural_v1" if objective == "joint_natural_v1" else "joint_v1"),
+                        "protocol": ("joint_v1" if objective == "joint" else objective),
                         "state_policy": "baseline_11",
                         "semantic": semantic.squeeze(0).cpu().tolist(),
                         "scalars": scalars.squeeze(0).cpu().tolist(), "energy_terms": energy,
