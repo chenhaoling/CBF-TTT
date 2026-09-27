@@ -34,6 +34,35 @@ class JointPilotSummaryTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "duplicate"):
                 summarize([path, path])
 
+    def test_v2_short_and_long_gap_are_reported_separately(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "labels.jsonl"
+            actions = [[a, g] for a in (0.0, 0.5, 1.0) for g in (0.0, 0.5, 1.0)]
+            short = [0.8, 0.7, 0.6, 0.9, 0.8, 0.7, 1.0, 0.9, 0.8]
+            long = [1.0, 0.9, 0.8, 1.1, 1.0, 0.9, 1.2, 1.1, 1.0]
+            losses = [(a + b) / 2 for a, b in zip(short, long)]
+            row = {
+                "id": "s", "group_id": "g", "regime": "old_relevant_new_informative", "boundary": 2,
+                "protocol": "joint_v2", "grid": [0.0, 0.5, 1.0],
+                "actions": actions, "losses": losses,
+                "corner_losses": {"00": losses[0], "01": losses[2],
+                                  "10": losses[6], "11": losses[8]},
+                "interaction": losses[8] - losses[6] - losses[2] + losses[0],
+                "future_meta": [{"gap_chunks": 0, "query_kinds": ["old_heldout"]},
+                                {"gap_chunks": 2, "query_kinds": ["old_heldout"]}],
+                "losses_by_future": [[a, b] for a, b in zip(short, long)],
+                "query_losses_by_future": [[[a], [b]] for a, b in zip(short, long)],
+                "energy_terms": {"A": 0.1, "B": 0.0, "C": 0.2},
+                "label_time_s": 2.0, "peak_allocated_gib": 12.0, "peak_reserved_gib": 14.0,
+            }
+            path.write_text(json.dumps(row) + "\n")
+            result = summarize([path])
+            self.assertEqual(result["protocol"], "joint_v2")
+            self.assertEqual(set(result["mean_corner_losses_by_gap"]), {"0", "2"})
+            self.assertAlmostEqual(result["mean_corner_losses_by_gap"]["0"]["01"], 0.6)
+            self.assertAlmostEqual(result["mean_corner_losses_by_gap"]["2"]["01"], 0.8)
+            self.assertAlmostEqual(result["mean_corner_losses_by_query_kind"]["gap_2/old_heldout"]["01"], 0.8)
+
 
 if __name__ == "__main__":
     unittest.main()

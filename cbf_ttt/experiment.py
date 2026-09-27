@@ -200,8 +200,13 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
     count = 0
     with open(output, "w", encoding="utf-8") as sink:
         for scenario in scenarios:
-            if scenario.get("objective") != "joint":
+            objective = scenario.get("objective")
+            if objective not in ("joint", "joint_v2"):
                 raise ValueError(f"scenario {scenario['id']} is not a joint-control scenario")
+            if objective == "joint_v2":
+                gaps = [future.get("gap_chunks") for future in scenario["futures"]]
+                if len(gaps) != 2 or gaps[0] != 0 or not isinstance(gaps[1], int) or gaps[1] < 1:
+                    raise ValueError("joint_v2 needs zero-gap and positive-gap futures")
             session = CBFSession(model)
             context = scenario["context_ids"]
             full_length = len(context) - len(context) % session.chunk_size
@@ -222,19 +227,26 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
                 if selected:
                     energy = _joint_energy_terms(session)
                     losses = []
+                    losses_by_future = []
+                    query_losses_by_future = []
                     for alpha, gate in actions:
                         future_losses = []
+                        action_future_losses = []
+                        action_query_losses = []
                         for future in scenario["futures"]:
                             branch = session.clone()
                             branch.commit_both(alpha, gate)
                             remaining = context[start + session.chunk_size:] + future.get("continuation_ids", [])
                             if remaining:
                                 branch.consume(remaining, "baseline")
-                            future_losses.extend(
-                                branch.score_answer(query["query_ids"], query["answer_ids"])
-                                for query in future["queries"]
-                            )
+                            query_losses = [branch.score_answer(query["query_ids"], query["answer_ids"])
+                                            for query in future["queries"]]
+                            future_losses.extend(query_losses)
+                            action_query_losses.append(query_losses)
+                            action_future_losses.append(sum(query_losses) / len(query_losses))
                         losses.append(sum(future_losses) / len(future_losses))
+                        losses_by_future.append(action_future_losses)
+                        query_losses_by_future.append(action_query_losses)
                     if any(not math.isfinite(loss) for loss in losses):
                         raise ValueError(f"nonfinite joint loss for {scenario['id']} boundary {boundary}")
                     if on_cuda:
@@ -251,10 +263,16 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
                     row = {
                         "id": scenario["id"], "group_id": scenario["group_id"], "split": scenario["split"],
                         "regime": scenario["regime"], "boundary": boundary,
-                        "protocol": "joint_v1", "state_policy": "baseline_11",
+                        "protocol": "joint_v2" if objective == "joint_v2" else "joint_v1",
+                        "state_policy": "baseline_11",
                         "semantic": semantic.squeeze(0).cpu().tolist(),
                         "scalars": scalars.squeeze(0).cpu().tolist(), "energy_terms": energy,
                         "grid": grid, "actions": [[a, g] for a, g in actions], "losses": losses,
+                        "future_meta": [{"gap_chunks": future.get("gap_chunks"),
+                                         "query_kinds": [query["kind"] for query in future["queries"]]}
+                                        for future in scenario["futures"]],
+                        "losses_by_future": losses_by_future,
+                        "query_losses_by_future": query_losses_by_future,
                         "corner_losses": corner, "best_action": list(actions[best]),
                         "benefits_vs_11": [baseline - loss for loss in losses],
                         "interaction": corner["11"] - corner["10"] - corner["01"] + corner["00"],

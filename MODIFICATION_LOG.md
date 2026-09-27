@@ -509,3 +509,7 @@ python -m scripts.summarize_cbf_joint_pilot --labels "$ROOT"/*_joint_labels.json
 完整结果见 [`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_pilot/REPORT.md`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_pilot/REPORT.md) 与同目录 `summary.json`、原始标签。四角点最优分布 `00/01/10/11=37/2/7/2`，内部点有可辨优势 10/48，12/12 个源组的固定 `00` 平均损失低于 `11`；因此预设阶段门**未通过**，暂停正式标签、联合控制器和公开基准。它是场景协议不适合训练目标的证据，并非模型在真实任务中应一律关闭快记忆的证明。下一步优先修订 held-out 后续任务、长间隔与 KV 混杂控制，再做同规模试点。
 
 原始标签 JSONL 含预训练背景派生的完整逐样本 payload，自动审批拒绝将其上传到 GitHub。它们保留在本机实验目录和 hku-gpu2 输出目录，由该目录 `.gitignore` 排除；GitHub 仅提交代码、构造元数据、聚合 `summary.json` 与本报告。若需对外发布完整标签，需单独确认数据授权与分享范围。
+
+### 修订试点 `joint_v2`（2026-09-27，进行中）
+
+按用户要求继续此前报告提出的顺序。新增独立协议，保持原 `joint_v1` 和 baseline 不变。`tasks/build_cbf_scenarios.py` 新增 `--objective joint_v2`、`--joint-gap-chunks` 与未见票号的规则迁移场景；构造器检查目标规则答案未出现在 context/gap，候选保持同主题和同完整 chunk 长度。`cbf_ttt/experiment.py` 对同一决策分别记录短间隔与自然背景 gap 之后的每查询损失、每 future 损失、原 3×3 聚合损失以及时间和显存。`tasks/cbf_ttt.py` 区分 `joint_v1`/`joint_v2` 协议；`scripts/summarize_cbf_joint_pilot.py` 增加按 gap 和查询类型的四角点统计。`tests/test_cbf_scenarios.py`、`tests/test_cbf_ttt.py`、`tests/test_cbf_joint_pilot_summary.py` 覆盖新数据和输出形状。具体假设、阶段门及命令见 [`DUAL_GATE_V2_EXPERIMENT.md`](DUAL_GATE_V2_EXPERIMENT.md)。若仍由 `00` 垄断，不扩量也不训练控制器。

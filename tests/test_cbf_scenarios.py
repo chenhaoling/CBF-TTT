@@ -5,7 +5,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from tasks.build_cbf_scenarios import _fit_chunk, build_scenarios, load_backgrounds, load_sources, synthetic_sources
+from tasks.build_cbf_scenarios import (
+    _fit_chunk, _has_subsequence, build_scenarios, load_backgrounds, load_sources, synthetic_sources,
+)
 from scripts.shard_cbf_scenarios import shard_scenarios
 from scripts.summarize_cbf_formal_labels import summarize
 
@@ -171,6 +173,34 @@ class ScenarioTests(unittest.TestCase):
             self.assertNotIn("best_action", row)
             self.assertTrue(all(query["query_ids"] and query["answer_ids"]
                                 for query in row["futures"][0]["queries"]))
+
+    def test_joint_v2_heldout_queries_and_short_long_intervals(self):
+        tokenizer = WordTokenizer()
+        rows, metadata = build_scenarios(
+            tokenizer, synthetic_sources(3, 29),
+            {"train": 1, "dev": 1, "test": 1}, 4, 64, 2, 1, 2, 29,
+            objective="joint_v2", future_mode="short_tail", joint_gap_chunks=1,
+        )
+        self.assertEqual(metadata["template_version"], 3)
+        self.assertEqual(metadata["joint_gap_chunks"], 1)
+        self.assertEqual(len(rows), 12)
+        self.assertEqual({row["candidate_kind"] for row in rows},
+                         {"novel", "correction", "duplicate", "noise"})
+        for row in rows:
+            self.assertEqual(len(row["context_ids"]), 128)
+            self.assertEqual(row["candidate_boundary"], 2)
+            self.assertEqual([future["gap_chunks"] for future in row["futures"]], [0, 1])
+            self.assertEqual([len(future["continuation_ids"]) for future in row["futures"]], [0, 64])
+            for future in row["futures"]:
+                for query in future["queries"]:
+                    if query["kind"] != "neutral_heldout":
+                        self.assertFalse(_has_subsequence(
+                            row["context_ids"] + future["continuation_ids"], query["answer_ids"]
+                        ))
+        with self.assertRaisesRegex(ValueError, "joint_v2 needs"):
+            build_scenarios(tokenizer, synthetic_sources(3, 29),
+                            {"train": 1, "dev": 1, "test": 1}, 4, 64, 2, 1, 1, 29,
+                            objective="joint_v2", future_mode="short_tail")
 
     def test_formal_summary_rejects_incomplete_labels(self):
         with tempfile.TemporaryDirectory() as directory:

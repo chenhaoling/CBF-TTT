@@ -138,11 +138,89 @@ def _facts(source: dict, regime: str) -> tuple[str, str, str, str]:
     return hint, future, query, answer
 
 
+def _has_subsequence(haystack: list[int], needle: list[int]) -> bool:
+    return any(haystack[index:index + len(needle)] == needle
+               for index in range(len(haystack) - len(needle) + 1))
+
+
+def _build_joint_v2(tokenizer, source: dict, source_index: int, variant: int,
+                    chunk_size: int, gap_chunks: int, filler, bos: int | None) -> dict:
+    """Held-out rule transfer with matched candidate topics and no future answer statement."""
+    case = JOINT_CASES[variant]
+    entity = source["entity"]
+    other = source["new_entity"]
+    old_offset = 3 + source_index % 7
+    new_offset = old_offset + 5
+    seen_inputs = (11, 23, 35)
+
+    def rule(subject: str, offset: int, status: str) -> str:
+        examples = "; ".join(f"ticket {value} -> SKU-{value + offset}" for value in seen_inputs)
+        return (f"{status} for {subject}: for any ticket number n, its output is SKU-(n+{offset}). "
+                f"Worked examples: {examples}. Apply the same rule to unseen ticket numbers.")
+
+    old_status = "Archived provisional rule" if case.startswith("old_conflict") else "Verified continuing rule"
+    old_core = rule(entity, old_offset, old_status)
+    if case == "old_relevant_new_informative":
+        candidate_kind = "novel"
+        candidate_core = rule(other, new_offset, "Verified independent rule")
+    elif case == "old_conflict_new_correction":
+        candidate_kind = "correction"
+        candidate_core = rule(entity, new_offset, "Verified replacement of the provisional rule")
+    elif case == "old_relevant_new_noise" and source_index % 2 == 0:
+        candidate_kind = "duplicate"
+        candidate_core = rule(entity, old_offset, "Duplicate of the already verified rule")
+    else:
+        candidate_kind = "noise"
+        candidate_core = (f"Unverified ticket notes for {entity}: ticket 11 -> SKU-{11 + new_offset}; "
+                          f"ticket 23 -> SKU-{23 + old_offset}; ticket 35 -> SKU-{35 + new_offset + 2}. "
+                          "The notes conflict and provide no verified rule.")
+
+    context = []
+    for index, core in enumerate((old_core, candidate_core)):
+        prefix = [bos] if index == 0 and bos is not None else []
+        context.extend(_fit_chunk(tokenizer, core, filler("low", source["group_id"]), chunk_size, prefix))
+
+    def query(subject: str, ticket: int, offset: int, kind: str) -> dict:
+        return {"kind": kind,
+                "query_ids": _encode(tokenizer, f"\nFor {subject}, what is the rule output for unseen ticket {ticket}? Answer:"),
+                "answer_ids": _encode(tokenizer, f" SKU-{ticket + offset}")}
+
+    if case == "old_relevant_new_informative":
+        queries = [query(entity, 47, old_offset, "old_heldout"),
+                   query(other, 53, new_offset, "new_heldout")]
+    elif case == "old_relevant_new_noise":
+        queries = [query(entity, 47, old_offset, "old_heldout")]
+    elif case == "old_conflict_new_correction":
+        queries = [query(entity, 47, new_offset, "new_heldout")]
+    else:
+        # A neutral held-out task measures interference when neither memory is useful.
+        queries = [{"kind": "neutral_heldout",
+                    "query_ids": _encode(tokenizer, "\nBasic arithmetic, independent of the ticket notes: 7 plus 8 equals"),
+                    "answer_ids": _encode(tokenizer, " 15")}]
+
+    futures = []
+    for interval in (0, gap_chunks):
+        continuation = []
+        for gap_index in range(interval):
+            neutral = f"Unrelated reading section {gap_index + 1}; no ticket rule is stated here."
+            continuation.extend(_fit_chunk(tokenizer, neutral,
+                                           filler("low", source["group_id"]), chunk_size))
+        for item in queries:
+            if item["kind"] == "neutral_heldout":
+                continue
+            if _has_subsequence(context + continuation, item["answer_ids"]):
+                raise ValueError(f"held-out answer leaked into scenario {source['group_id']}-{case}")
+        futures.append({"continuation_ids": continuation, "gap_chunks": interval,
+                        "queries": queries})
+    return {"regime": case, "candidate_kind": candidate_kind,
+            "candidate_boundary": 2, "context_ids": context, "futures": futures}
+
+
 def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int], variants_per_group: int,
                     chunk_size: int, context_chunks: int, future_chunks: int, futures_per_scenario: int,
                     seed: int, backgrounds: list[str] | None = None,
                     fact_placement: str = "repeated", future_mode: str = "full_chunk",
-                    objective: str = "forget") -> tuple[list[dict], dict]:
+                    objective: str = "forget", joint_gap_chunks: int = 2) -> tuple[list[dict], dict]:
     if min(variants_per_group, chunk_size, context_chunks, future_chunks, futures_per_scenario) < 1:
         raise ValueError("chunk sizes and scenario counts must be positive")
     if sum(split_counts.values()) != len(sources) or any(count < 1 for count in split_counts.values()):
@@ -151,10 +229,18 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
         raise ValueError("fact_placement must be repeated or first_only")
     if future_mode not in ("full_chunk", "short_tail"):
         raise ValueError("future_mode must be full_chunk or short_tail")
-    if objective not in ("forget", "write", "joint") or (objective in ("write", "joint") and context_chunks < 2):
-        raise ValueError("objective must be forget, write, or joint; write/joint need two context chunks")
+    if objective not in ("forget", "write", "joint", "joint_v2") or (
+        objective in ("write", "joint", "joint_v2") and context_chunks < 2
+    ):
+        raise ValueError("objective must be forget, write, joint, or joint_v2; write/joint need two chunks")
+    if objective == "joint_v2" and (context_chunks != 2 or variants_per_group != 4 or
+                                    futures_per_scenario != 2 or joint_gap_chunks < 1 or
+                                    future_mode != "short_tail"):
+        raise ValueError("joint_v2 needs two context chunks, four variants, two futures, "
+                         "positive gap chunks, and short_tail mode")
     needed_backgrounds = len(sources) * variants_per_group * (
-        context_chunks + (future_chunks * futures_per_scenario if future_mode == "full_chunk" else 0)
+        context_chunks + (joint_gap_chunks if objective == "joint_v2" else
+                          future_chunks * futures_per_scenario if future_mode == "full_chunk" else 0)
     )
     if backgrounds is not None and len(backgrounds) < needed_backgrounds:
         raise ValueError(f"expected at least {needed_backgrounds} background records")
@@ -181,6 +267,13 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
     bos = getattr(tokenizer, "bos_token_id", None)
     for source_index, source in enumerate(ordered):
         for variant in range(variants_per_group):
+            if objective == "joint_v2":
+                case = _build_joint_v2(tokenizer, source, source_index, variant,
+                                       chunk_size, joint_gap_chunks, filler, bos)
+                scenarios.append({"id": f"{source['group_id']}-v{variant}",
+                                  "group_id": source["group_id"], "split": splits[source["group_id"]],
+                                  "objective": objective, **case})
+                continue
             regime = REGIMES[(source_index + variant) % len(REGIMES)]
             candidate_kind = WRITE_CASES[(source_index + variant) % len(WRITE_CASES)] if objective == "write" else None
             joint_case = JOINT_CASES[variant % len(JOINT_CASES)] if objective == "joint" else None
@@ -305,11 +398,12 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
                 "context_ids": context, "futures": futures,
             })
     metadata = {
-        "template_version": 2 if objective == "joint" else TEMPLATE_VERSION,
+        "template_version": 3 if objective == "joint_v2" else 2 if objective == "joint" else TEMPLATE_VERSION,
         "seed": seed, "chunk_size": chunk_size,
         "objective": objective,
         "context_chunks": context_chunks, "future_chunks": future_chunks,
         "futures_per_scenario": futures_per_scenario, "variants_per_group": variants_per_group,
+        "joint_gap_chunks": joint_gap_chunks if objective == "joint_v2" else None,
         "fact_placement": fact_placement,
         "future_mode": future_mode,
         "split_group_counts": split_counts,
@@ -329,7 +423,8 @@ def main():
     parser.add_argument("--background-data", help="Optional packed JSONL with content_split for distinct natural-text fillers")
     parser.add_argument("--fact-placement", choices=("repeated", "first_only"), default="repeated")
     parser.add_argument("--future-mode", choices=("full_chunk", "short_tail"), default="full_chunk")
-    parser.add_argument("--objective", choices=("forget", "write", "joint"), default="forget")
+    parser.add_argument("--objective", choices=("forget", "write", "joint", "joint_v2"), default="forget")
+    parser.add_argument("--joint-gap-chunks", type=int, default=2)
     parser.add_argument("--train-groups", type=int, default=100)
     parser.add_argument("--dev-groups", type=int, default=20)
     parser.add_argument("--test-groups", type=int, default=20)
@@ -347,14 +442,15 @@ def main():
     split_counts = {"train": args.train_groups, "dev": args.dev_groups, "test": args.test_groups}
     sources = load_sources(args.sources) if args.sources else synthetic_sources(sum(split_counts.values()), args.seed)
     background_count = len(sources) * args.variants_per_group * (
-        args.context_chunks + (args.future_chunks * args.futures_per_scenario
+        args.context_chunks + (args.joint_gap_chunks if args.objective == "joint_v2" else
+                               args.future_chunks * args.futures_per_scenario
                                if args.future_mode == "full_chunk" else 0)
     )
     backgrounds = load_backgrounds(args.background_data, background_count) if args.background_data else None
     scenarios, metadata = build_scenarios(
         tokenizer, sources, split_counts, args.variants_per_group, args.chunk_size,
         args.context_chunks, args.future_chunks, args.futures_per_scenario, args.seed, backgrounds,
-        args.fact_placement, args.future_mode, args.objective,
+        args.fact_placement, args.future_mode, args.objective, args.joint_gap_chunks,
     )
     metadata["tokenizer"] = args.tokenizer
     metadata["source_type"] = "provided" if args.sources else "synthetic"
