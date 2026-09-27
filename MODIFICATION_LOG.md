@@ -499,3 +499,5 @@ python -m scripts.summarize_cbf_joint_pilot --labels "$ROOT"/*_joint_labels.json
 ```
 
 上面两条 `run` 命令需要并发运行；脚本自身设置 `CUDA_VISIBLE_DEVICES`，外层变量并非必须。先用单场景运行 `collect-joint` 做模型 smoke，再启动全试点。尚未完成阶段 C 正式标签、联合控制器训练、独立测试及公开基准评测；必须等试点证明四动作可辨且资源可承受。风险包括近期答案经 attention KV 泄露导致四角点近乎同分、bf16 数值波动、9 分支导致显存或耗时增加，以及每个合成源组的多个变体高度相关。部署到远程时需确认 checkpoint、tokenizer、语料路径及 conda 环境。当前 SSH 经 Cloudflare 代理时有间歇性握手超时；因此远程实验状态只能以实际输出文件和进程日志确认。
+
+执行中发现并修复 `collect-joint` 的 CLI 入口错误：该子命令不定义 `--controller`，通用加载段原先直接访问 `args.controller` 导致模型加载后抛出 `AttributeError`；现使用 `getattr(..., None)`。该修复只影响未提供控制器参数的子命令，旧 `collect`/`eval`/`generate` 参数仍按原值使用。hku-gpu2 已从 GitHub commit `496f7ca` 克隆到 `/home/ctj/cbf_ttt_joint_exp_20260927`，远程 20 项测试通过；已生成 48 场景及两卡分片，首次单场景 smoke 因上述入口错误中断，未产出标签。修复同步到远程并通过 smoke 后才能启动全试点。

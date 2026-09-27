@@ -96,8 +96,9 @@ def main():
         )
     else:
         model = _load_model(args.model, args.device, args.dtype)
+        controller_path = getattr(args, "controller", None)
         controller = (
-            load_controller(args.controller, model, next(model.parameters()).device) if args.controller else None
+            load_controller(controller_path, model, next(model.parameters()).device) if controller_path else None
         )
         if args.command == "collect-joint":
             scenarios = load_scenarios(args.data, args.split)
