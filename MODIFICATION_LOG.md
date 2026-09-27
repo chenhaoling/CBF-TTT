@@ -311,3 +311,65 @@ CUDA_VISIBLE_DEVICES=0,1 bash train.sh tasks/train_torch.py configs/pretrain/qwe
 23:55 在相同 tmux 名称重新启动修正后的脚本；它复用已完成的两个来源文件，重新验证后合并出 `mixed_1b.jsonl`（约 4.16 GB），并进入两卡训练。23:59 左右检查到 rank0/rank1 都报告 `train_steps: 81381`，进度约第 88 步、约 `2.19 s/step`，两卡利用率均 100%、显存约 27.6–27.7 GiB，日志中的 loss 为有限值。若持续该速度，剩余纯训练约 49.5 小时，另加检查点保存时间；这只是早期速度外推，尚无收敛或最终结果。`data.train_size=1000009728` 是按固定长度的名义值，实测源元数据相加为 `1000009680`，差 48 token，实际 token 数仍超过 1B。首个检查点计划在第 10,000 步保存，因此目前尚无可恢复的正式中途检查点。
 
 **完成状态（2026-09-27 01:29）：**远程日志确认 `81381/81381` 步、epoch 1/1 完成，训练进度条约 `49:31:42`、平均约 `2.19 s/step`；没有新的 traceback 或 `NaN` loss。VeOmni 在 epoch 结束时报告峰值显存 `22.12 GB`（框架分配量；训练期间 `nvidia-smi` 曾见每卡约 27.6–27.7 GiB）。DCP 成功保存到 `/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381`，HF 权重成功导出到其 `hf_ckpt/`，含两个 safetensors 分片约 4.97 GB 和 3.94 GB、索引、配置和 tokenizer；整个最终检查点目录约 40 GB。中途检查点已保存到每 10,000 步至 80,000 步。`scripts/run_qwen3_4b_1b_hku_gpu2.sh` 于 01:29:03 输出 `Pretraining finished`，tmux session 退出，两卡恢复空闲。这里完成的是 **1B token 的 In-Place TTT 继续预训练**；尚未在最终模型上生成正式反事实标签、训练控制器或完成六项正式评测，不能据此宣称 CBF 方法收益。
+
+## 最终 1B 模型上的正式反事实标签构造（2026-09-27）
+
+### 目标、研究假设与方案调整
+
+使用上述第 `81381` 步 **Qwen3-4B In-Place TTT 最终 HF checkpoint**，对同一会话状态的 `alpha={0,0.5,1}` 分支做反事实答案损失比较，记录逐标签耗时和 CUDA 峰值显存。基础权重固定；只有快记忆中的历史增量按方法 3.3 的 `(1-alpha)M+ΔW` 衰减；`alpha=0` 仍是后续参考策略。场景中的账本事实和答案是按随机种子 42 生成的合成事实，**不等同于** ZsRE、MMLU 等公开评测集。自然文本背景取自该模型所用 `/home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl` 的不同 `content_split` 记录；这是训练语料的背景复用，不能据此声称完全独立的自然文本测试集。train/dev/test 按 `group_id` 一次性分组，三种场景变体始终位于同一 split。
+
+第一轮沿用 4 个 4096-token context chunk、1 个完整 future chunk、每隔 2 个边界取标签，但已训练权重与旧的零卷积资源夹具不同。最终模型在高度重复的合成填充下 24 条标签全部选 `alpha=1`，平均标签耗时 `6.219 s`，峰值分配/保留显存 `17.145/20.033 GiB`；改用不同自然文本记录后，chunk 的平均唯一 token 比例由约 `1.1%` 提高到约 `31.7%`，24 条仍全选 1。将原始事实只放首块、保留完整未来 chunk 的另 24 条也全选 1。三个完整 future chunk 试点的损失显示重复累积 TTT 更新后明显漂移；现有 1B 预训练样本为 6144 token，训练中最多跨过一个 4096-token 更新边界，不能假定 4 个连续更新边界的推理质量已经得到训练覆盖。
+
+为了区分当前遗忘动作本身与后续连续更新的影响，又做了短时距试点。直接删去 future continuation 的 12 条标签分布为 `alpha=0/0.5/1` 各 `2/1/9`，但更正与新主题的答案尚未在上下文出现，因此**只作为诊断，不用于正式训练**。正式采用 `short_tail`：future 的新事实先以不足一个 chunk 的尾部进入 KV，保证问答依据存在，但不额外写入 TTT 快记忆；context 为 2 个 4096-token chunk，仅在第 2 个边界评分。首块给出原始事实，后块不重复该事实，背景由不同自然文本记录填充。这个协议下 8 个训练源组、每组 3 变体的 24 条有效试点标签为 `alpha=0/0.5/1` 各 `5/2/17`；三个候选的平均损失分别为 `0.3301/0.3227/0.3106`，单条标签均值 `0.889 s`，最高分配/保留显存 `12.651/13.945 GiB`。三种状态都有样本，但 1 仍占多数，控制器训练时需检查类别/回归目标分布及独立开发集效果。
+
+### 修改计划与文件对应
+
+| 文件 | 本次具体修改 | 附件对应需求 | baseline 影响 |
+|---|---|---|---|
+| `tasks/build_cbf_scenarios.py` | 增加 `--background-data`、`--fact-placement first_only`、`--future-mode short_tail`；读取不同 `content_split` 背景记录，控制事实出现位置，并在短尾 future 中给出更正/新主题事实；元数据记录背景数和模式 | 3.5.2 后续情景、3.5.3 场景多样性与组划分 | 旧参数默认仍为合成填充、重复事实、完整 future chunk |
+| `scripts/shard_cbf_scenarios.py` | 两次流式扫描，按每个 split 内排序后的源组均衡分片；检验唯一场景 ID、组与 split 隔离，写分片 manifest | 3.5.1 同状态分支、3.6.3 源组隔离；两卡并行 | 新独立脚本 |
+| `scripts/run_cbf_formal_labels.sh` | 单 GPU/单分片顺序收集 train/dev/test，固定三点网格、BF16 与稀疏边界；已有输出拒绝覆盖 | 3.5 离线标签；逐标签成本记录 | 新独立脚本 |
+| `scripts/summarize_cbf_formal_labels.py` | 完成后逐场景核对六份标签的 ID、组、split、边界、网格、有限损失、唯一性与完成摘要，并汇总 alpha/耗时/显存 | 3.5 标签质量与实验记录 | 新独立脚本 |
+| `tests/test_cbf_scenarios.py` | 增加不同背景、首块事实、短尾 future、均衡分片与缺失标签检测 | 场景和划分正确性 | 仅测试 |
+| `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/formal_label_manifest.json` | 版本化保存正式 3600 条标签的分组、系数、时间和显存汇总，不含原始背景或高维特征 | 实验追踪与复现 | 新独立结果文件 |
+| `MODIFICATION_LOG.md` | 记录最终模型试点、正式协议、命令、状态和风险 | 用户要求的修改记录 | 文档 |
+
+### 正式规模、数据与运行命令
+
+正式场景为 train/dev/test `1000/100/100` 个互不重叠源组，每组 `stable/correction/topic_shift` 各一个变体，共 `3600` 场景、`3600` 条标签；每个场景的 2 个 context chunk 使用各不相同的自然文本背景，总计需要 `7200` 条背景记录。未来只有一个短尾情景，含历史事实与当前/新事实两种查询。每张 5090 接收 train/dev/test `1500/150/150` 场景；两卡样本数相同。远程位置为 `/home/ctj/cbf_ttt_1b_labels/formal_short_tail_v1`，最终权重为 `/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt`。远程场景元数据与分片清单已核对上述全部计数；正式运行使用 `cbf_formal_labels_gpu0`、`cbf_formal_labels_gpu1` 两个 tmux session，各自写 `gpu0.log`、`gpu1.log`。
+
+最终模型 `config.json` 记录 `model_type=qwen3`、36 层、隐藏维 2560、TTT 层 `[0,6,12,18,24,30,35]`、`ttt_chunk=4096`、`ttt_lr=0.3`、`ttt_proj=true`。这七层恰为标签器提取记忆特征并共同应用同一 `alpha` 的层。
+
+在 hku-gpu2 的 `/home/ctj/cbf_ttt_verify_20260923`、`cbf_ttt_train_py311` 环境下复现：
+
+```bash
+export PYTHONPATH=$PWD
+MODEL=/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt
+OUT=/home/ctj/cbf_ttt_1b_labels/formal_short_tail_v1
+python -m tasks.build_cbf_scenarios --tokenizer /home/ctj/models/Qwen3-4B --output "$OUT/scenarios.jsonl" --background-data /home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl --fact-placement first_only --future-mode short_tail --chunk-size 4096 --train-groups 1000 --dev-groups 100 --test-groups 100 --variants-per-group 3 --context-chunks 2 --future-chunks 1 --futures-per-scenario 1 --seed 42
+python -m scripts.shard_cbf_scenarios --input "$OUT/scenarios.jsonl" --output-dir "$OUT/shards" --shards 2
+bash scripts/run_cbf_formal_labels.sh "$MODEL" "$OUT" 0 0  # 在独立 tmux 中运行
+bash scripts/run_cbf_formal_labels.sh "$MODEL" "$OUT" 1 1  # 在另一 tmux 中运行
+python -m scripts.summarize_cbf_formal_labels --directory "$OUT" --shards 2 --boundary 2
+```
+
+生成器、分片器与汇总器是新入口，baseline 模型、预训练配置、训练脚本及默认推理路径没有改变。标签文件不包含原始背景文本，但包含从模型得到的特征、候选损失、选中系数、逐条耗时和峰值显存；正式大文件保存在远程，不提交到 Git。以有效试点 `0.889 s/label` 粗估，每卡 `1800` 条约 27 分钟标签计算，另计模型加载、场景读取和 I/O；长时距旧试点的约 6.2 秒/条不应用于这个短尾协议。
+
+### 正式完成结果与核对
+
+两卡于服务器当地时间 `10:23:44` 开始，GPU1 在 `10:57:52` 完成、GPU0 在 `10:58:24` 完成，最大墙钟约 **34 分 40 秒**。自动完成性校验读入六份标签与六份场景分片，验证每个场景恰好一条、分组不跨 split/分片、边界为 2、网格精确为 `[0,0.5,1]`、候选损失与收益有限、每份收集摘要存在；最终 `formal_label_manifest.json` 成功写出。正式场景文件约 158 MB，六份标签合计约 187 MB，均保留在上述远程目录；小型汇总已复制到仓库 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/formal_label_manifest.json`。
+
+| split | 独立源组 | 标签数 | `alpha=0` | `alpha=0.5` | `alpha=1` |
+|---|---:|---:|---:|---:|---:|
+| train | 1000 | 3000 | 674 | 259 | 2067 |
+| dev | 100 | 300 | 47 | 25 | 228 |
+| test | 100 | 300 | 58 | 20 | 222 |
+| 合计 | 1200 | **3600** | **779** | **304** | **2517** |
+
+按场景类型汇总：correction 的 `0/0.5/1` 为 `225/85/890`，stable 为 `213/100/887`，topic_shift 为 `341/119/740`；每类各有 1200 条。全体逐标签平均耗时 `0.888574 s`、最大 `1.016993 s`，最高分配/保留峰值 `12.651886/13.945313 GiB`。对每个状态先在三点网格中取最低损失，再与同一状态的 `alpha=0` 比较，平均 oracle 差值为 `0.025511` NLL；这使用了未来答案挑选系数，**不是**可部署控制器或独立评测收益。`alpha=1` 约占 69.9%，应在后续控制器训练时监控是否退化为常数预测。
+
+### 已完成、待完成与风险
+
+- 已完成：最终 HF 模型上的四种场景/时距诊断、正式场景生成与均衡分片、两卡全部 3600 条标签及六份逐文件 `.summary.json`、一次性完成性校验和版本化汇总；本地与远程 `python3 -m unittest tests.test_cbf_scenarios -q` 均 8 项通过，`bash -n scripts/run_cbf_formal_labels.sh` 与 `git diff --check` 通过。
+- 待完成：用 train/dev 标签训练并选择控制器，在 test 和目标公开基准上独立评测；本次请求仅完成标签构造，未启动控制器训练或六项正式评测。
+- 风险：短尾协议强调当前边界的近期问答，不能替代 4 个 context chunk 加完整 future chunk 的长时距效果；后者在试点全部偏向 `alpha=1`，说明当前 checkpoint 可能缺少多次连续更新的训练覆盖。正式 context 为 8192 token，也比预训练单样本 6144 token 长，仍需检测长度外推。自然背景来自同一 1B 预训练语料，事实虽新但背景不独立；未来应以未见语料和目标评测的实际任务情景复核。标签分布可能偏向 1；正式完成后应报告分布、最优与 `alpha=0` 的损失差和开发集控制器性能，不应仅以样本量称其有效。

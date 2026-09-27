@@ -1,0 +1,47 @@
+{
+  "scenarios_and_labels": 3600,
+  "groups_by_split": {
+    "train": 1000,
+    "dev": 100,
+    "test": 100
+  },
+  "alpha_counts_by_split": {
+    "train": {
+      "0.0": 674,
+      "1.0": 2067,
+      "0.5": 259
+    },
+    "dev": {
+      "0.0": 47,
+      "1.0": 228,
+      "0.5": 25
+    },
+    "test": {
+      "0.0": 58,
+      "1.0": 222,
+      "0.5": 20
+    }
+  },
+  "alpha_counts_by_regime": {
+    "correction": {
+      "0.0": 225,
+      "1.0": 890,
+      "0.5": 85
+    },
+    "stable": {
+      "1.0": 887,
+      "0.0": 213,
+      "0.5": 100
+    },
+    "topic_shift": {
+      "0.0": 341,
+      "1.0": 740,
+      "0.5": 119
+    }
+  },
+  "mean_label_time_s": 0.8885736237554294,
+  "max_label_time_s": 1.0169930523261428,
+  "max_peak_allocated_gib": 12.651885509490967,
+  "max_peak_reserved_gib": 13.9453125,
+  "mean_best_vs_alpha0_gain": 0.02551094750356343
+}
