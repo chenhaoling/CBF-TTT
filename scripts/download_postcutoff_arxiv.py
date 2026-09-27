@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import random
 import re
 import subprocess
 import time
@@ -137,8 +138,11 @@ def main() -> None:
     parser.add_argument("--max-results", type=int, default=200)
     parser.add_argument("--min-tokens", type=int, default=4256)
     parser.add_argument("--delay-s", type=float, default=3.0)
+    parser.add_argument("--selection-seed", type=int, default=118)
     parser.add_argument("--api-feed", type=Path,
                         help="saved official Atom feed when the GPU host cannot reach the API")
+    parser.add_argument("--pdf-cache", type=Path,
+                        help="reuse a PDF cache across repeat data builds")
     args = parser.parse_args()
     if args.max_results < args.target:
         parser.error("max-results must be at least target")
@@ -146,14 +150,17 @@ def main() -> None:
 
     entries, total, feed_hash = query_entries(args.category, args.start, args.end,
                                               args.max_results, args.api_feed)
+    random.Random(args.selection_seed).shuffle(entries)
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True)
     accepted, funnel = collect(entries, args.target, args.min_tokens, tokenizer,
-                               args.output.parent / "pdf_cache", args.delay_s)
+                               args.pdf_cache or args.output.parent / "pdf_cache", args.delay_s)
     metadata = {"protocol": "postcutoff_arxiv_v1", "category": args.category,
                 "start": args.start, "end": args.end, "total_api_results": total,
                 "max_results": args.max_results, "target": args.target,
                 "min_tokens": args.min_tokens, "tokenizer": args.tokenizer,
                 "api_feed_sha256": feed_hash,
+                "selection_seed": args.selection_seed,
+                "selection_method": "shuffle_API_top_max_results_then_first_eligible",
                 **funnel}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n"
