@@ -269,7 +269,8 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
                         "scalars": scalars.squeeze(0).cpu().tolist(), "energy_terms": energy,
                         "grid": grid, "actions": [[a, g] for a, g in actions], "losses": losses,
                         "future_meta": [{"gap_chunks": future.get("gap_chunks"),
-                                         "query_kinds": [query["kind"] for query in future["queries"]]}
+                                         "query_kinds": [query.get("kind", "unspecified")
+                                                         for query in future["queries"]]}
                                         for future in scenario["futures"]],
                         "losses_by_future": losses_by_future,
                         "query_losses_by_future": query_losses_by_future,
