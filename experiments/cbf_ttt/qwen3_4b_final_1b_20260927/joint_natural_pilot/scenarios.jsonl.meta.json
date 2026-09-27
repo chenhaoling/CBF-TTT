@@ -1,0 +1,38 @@
+{
+  "protocol": "joint_natural_v1",
+  "seed": 118,
+  "context_tokens": 4096,
+  "query_tokens": 32,
+  "answer_tokens": 128,
+  "record_count": 48,
+  "source_groups": 12,
+  "scenarios": 48,
+  "split_group_counts": {
+    "train": 8,
+    "dev": 2,
+    "test": 2
+  },
+  "split_groups": {
+    "train": [
+      "natural-pack-00000",
+      "natural-pack-00001",
+      "natural-pack-00003",
+      "natural-pack-00005",
+      "natural-pack-00006",
+      "natural-pack-00007",
+      "natural-pack-00008",
+      "natural-pack-00009"
+    ],
+    "dev": [
+      "natural-pack-00002",
+      "natural-pack-00004"
+    ],
+    "test": [
+      "natural-pack-00010",
+      "natural-pack-00011"
+    ]
+  },
+  "source_sha256": "c5c9a2fd282b2c50841c773c0f214437362c37ed1f416c0ebb589eecf4a35b4b",
+  "source_path": "/home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl",
+  "tokenizer": "/home/ctj/models/Qwen3-4B"
+}

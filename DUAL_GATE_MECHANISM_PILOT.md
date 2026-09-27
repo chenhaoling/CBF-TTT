@@ -44,3 +44,7 @@ python -m scripts.summarize_cbf_joint_pilot --labels "$ROOT"/{train,dev,test}_sh
 ```
 
 两条 `run` 命令在不同 GPU 的 tmux 会话中同时执行。正式模型测试、训练和新数据发布只有在机制诊断表明标签有用后才继续；原始逐样本数据保留本机与远程，GitHub 仅记录代码和聚合结果。
+
+## 执行结果
+
+2026-09-27 已完成四类场景 gap 诊断及 12 源组 × 4 条自然场景的小试点。自然标签平均 1.079 秒、最大峰值 reserved 13.854 GiB，无 OOM；但有用新信息条件下 `11` 优于 `00` 超过 0.005 NLL 的独立源组仅 2/12，低于预设 3/12 门槛。正式标签和控制器训练暂停。详细数值、复算命令、语料已参与预训练的限制见 [`自然试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_natural_pilot/REPORT.md)。

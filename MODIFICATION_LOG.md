@@ -528,6 +528,12 @@ v2 长间隔标签出现写入动作 NLL 急升后，将 `tests/test_cbf_ttt.py`
 
 本轮 GitHub 仅上传 `REPORT.md`、`summary.json`、`gate.json`、`leakage_audit.json` 和场景元数据。原始标签在本机及 hku-gpu2 保存并由 `.gitignore` 排除，以遵守此前针对完整派生数据上传的自动审批拒绝。
 
-### 后续写入机制与自然 continuation 诊断（进行中）
+### 后续写入机制与自然 continuation 诊断（已完成）
 
 按用户继续实验的要求，新增 [`DUAL_GATE_MECHANISM_PILOT.md`](DUAL_GATE_MECHANISM_PILOT.md) 固定诊断协议。`scripts/diagnose_cbf_gap.py` 从同一联合候选状态分支，对四角点分别比较 gap chunk 后续 `normal_11` 与 `freeze_10` 路径，记录 gap0/1/2 的逐查询 NLL、快记忆范数和资源耗时，用于定位 `joint_v2` 长间隔损失增幅。`tasks/build_cbf_natural_scenarios.py` 从 1B 混合语料的不同记录切出 4096-token 已见前缀和 32+128-token 未见 continuation，按 `both_relevant/old_only/new_only/neither_relevant` 四条件分组；它复用原有分片及 3×3 collector。`cbf_ttt/experiment.py`、`tasks/cbf_ttt.py`、`scripts/summarize_cbf_joint_pilot.py` 识别独立 `joint_natural_v1` 协议并按查询类型汇总。`tests/test_cbf_ttt.py`、`tests/test_cbf_natural_scenarios.py` 增加路径与数据校验。自然记录来自已训练的语料，只能做机制试点；原始 baseline 默认路径不变。
+
+新增 `scripts/summarize_cbf_gap_diagnostic.py`，计算各候选动作及后续策略在 gap0/1/2 的平均 NLL、快记忆范数比率和资源开销；新增 `scripts/evaluate_cbf_natural_gate.py`，按执行前 `0.005` NLL 和至少 3 个独立源组的门槛判断是否扩大标签。`tests/test_cbf_natural_gate.py` 检查源组去重、四条件完整性及轨迹完整性。两套脚本只输出聚合结果，不公开逐样本 payload。
+
+hku-gpu2 的最终 Qwen3-4B checkpoint 上，`joint_v2` 同一源组的四类诊断表明 `11` 在正常后续写入下 gap0/1/2 平均 NLL 为 **0.669/2.238/8.848**，冻结后续写入则为 **0.669/1.105/1.776**。自然试点用 1B 混合语料的 48 条不同记录构造 12 源组 × 4 条场景，两张 5090 并行完成 48 条 3×3 标签，平均每条 **1.079 秒**，最大显存 reserved **13.854 GiB**。四角点最优 `00/01/10/11=33/7/7/1`，但有用新信息条件下 `11` 对 `00` 超过 0.005 NLL 的独立源组只有 **2/12**，未达到预设 3/12；阶段门未通过。完整过程、命令、算法含义及限制见 [`自然试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_natural_pilot/REPORT.md)，机器可读结果为同目录 `summary.json`、`gate.json` 与 `joint_v2_pilot/gap_diagnostic_summary.json`。
+
+因此本轮**未**扩量正式反事实标签、训练双输出控制器或运行公开基准。自然文档来自当前 checkpoint 用过的预训练语料，目标只在本次 session 中未见，不能推断对全新文档的泛化。四类 gap 诊断来自同一源组，不能推断群体效应。原始逐样本标签和轨迹在本机忽略目录与远程输出目录保留，GitHub 只记录代码、场景元数据及聚合报告。后续 TODO：构造真正未参与预训练的任务相关文档，核查候选 `ΔW` 与任务增益的关系，并在新源组上预注册且复核阶段门；已有探索性 dev/test 不再用于正式结论。原始 baseline 路径未修改。

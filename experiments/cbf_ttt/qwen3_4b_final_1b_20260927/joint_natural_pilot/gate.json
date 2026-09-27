@@ -1,0 +1,25 @@
+{
+  "protocol": "joint_natural_v1",
+  "labels": 48,
+  "source_groups": 12,
+  "minimum_11_gain_nll": 0.005,
+  "required_positive_groups": 3,
+  "positive_groups": 2,
+  "positive_groups_by_regime": {
+    "both_relevant": 1,
+    "new_only": 1
+  },
+  "mean_11_gain_vs_00_by_regime": {
+    "both_relevant": -0.012321184078852335,
+    "neither_relevant": -0.1356818974018097,
+    "new_only": -0.017204344272613525,
+    "old_only": -0.22223140796025595
+  },
+  "best_corner_counts": {
+    "00": 33,
+    "01": 7,
+    "10": 7,
+    "11": 1
+  },
+  "passed": false
+}
