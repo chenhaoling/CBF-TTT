@@ -11,6 +11,10 @@ from pathlib import Path
 TEMPLATE_VERSION = 1
 REGIMES = ("stable", "correction", "topic_shift")
 WRITE_CASES = ("novel", "duplicate", "noise")
+JOINT_CASES = (
+    "old_relevant_new_informative", "old_relevant_new_noise",
+    "old_conflict_new_correction", "old_conflict_new_noise",
+)
 NOISE_LEVELS = ("low", "high")
 COLORS = ("amber", "blue", "coral", "green", "indigo", "silver", "violet")
 
@@ -147,8 +151,8 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
         raise ValueError("fact_placement must be repeated or first_only")
     if future_mode not in ("full_chunk", "short_tail"):
         raise ValueError("future_mode must be full_chunk or short_tail")
-    if objective not in ("forget", "write") or (objective == "write" and context_chunks < 2):
-        raise ValueError("objective must be forget or write; write needs at least two context chunks")
+    if objective not in ("forget", "write", "joint") or (objective in ("write", "joint") and context_chunks < 2):
+        raise ValueError("objective must be forget, write, or joint; write/joint need two context chunks")
     needed_backgrounds = len(sources) * variants_per_group * (
         context_chunks + (future_chunks * futures_per_scenario if future_mode == "full_chunk" else 0)
     )
@@ -179,12 +183,35 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
         for variant in range(variants_per_group):
             regime = REGIMES[(source_index + variant) % len(REGIMES)]
             candidate_kind = WRITE_CASES[(source_index + variant) % len(WRITE_CASES)] if objective == "write" else None
+            joint_case = JOINT_CASES[variant % len(JOINT_CASES)] if objective == "joint" else None
+            if objective == "joint":
+                candidate_kind = (
+                    "novel" if joint_case == "old_relevant_new_informative" else
+                    "correction" if joint_case == "old_conflict_new_correction" else
+                    "duplicate" if joint_case == "old_relevant_new_noise" and source_index % 2 == 0 else
+                    "noise"
+                )
             noise_level = NOISE_LEVELS[(source_index + variant) % len(NOISE_LEVELS)]
             hint, future_fact, current_query, current_answer = _facts(source, regime)
             entity, original = source["entity"], source["original_value"]
             context = []
             for chunk_index in range(context_chunks):
-                if objective == "write" and chunk_index == 1:
+                if objective == "joint" and chunk_index == 1:
+                    if joint_case == "old_relevant_new_informative":
+                        core = (f"New independent case {source['new_entity']} has verified access code "
+                                f"{source['new_value']}.")
+                    elif joint_case == "old_conflict_new_correction":
+                        core = (f"Authoritative correction: the current access code for {entity} is "
+                                f"{source['updated_value']}; {original} is obsolete.")
+                    elif candidate_kind == "duplicate":
+                        core = (f"Duplicate record: the access code for {entity} remains {original}. "
+                                "This repeats the verified earlier record without changing it.")
+                    else:
+                        core = (f"Untrusted unrelated note: item {source['new_entity']} shows random marker "
+                                f"{source['new_value']}. This is not a verified access code.")
+                elif objective == "joint" and chunk_index > 1:
+                    core = f"Routine background for {entity}; no verified access-code change."
+                elif objective == "write" and chunk_index == 1:
                     if candidate_kind == "novel":
                         core = (f"New independent case {source['new_entity']} has access code "
                                 f"{source['new_value']}. This is an authoritative new record.")
@@ -202,11 +229,11 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
                         f"No access-code update appears in section {chunk_index + 1} of {context_chunks}."
                     )
                 else:
-                    core = (
-                        f"Ledger case {entity}. The original access code for {entity} is {original}. "
-                        f"The current access code is {original}. {hint} "
-                        f"Section {chunk_index + 1} of {context_chunks}."
-                    )
+                    provisional = ("This code is provisional." if objective == "joint" and
+                                   joint_case.startswith("old_conflict") else hint)
+                    core = (f"Ledger case {entity}. The original access code for {entity} is {original}. "
+                            f"The current access code is {original}. {provisional} "
+                            f"Section {chunk_index + 1} of {context_chunks}.")
                 prefix = [bos] if chunk_index == 0 and bos is not None else []
                 context.extend(_fit_chunk(tokenizer, core, filler(noise_level, source["group_id"]),
                                           chunk_size, prefix))
@@ -215,6 +242,10 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
                 future_noise = NOISE_LEVELS[(future_index + variant) % len(NOISE_LEVELS)]
                 if objective == "write":
                     future_fact = f"The archive review for {entity} continues without an access-code change."
+                elif objective == "joint":
+                    future_fact = (f"Verified update: the current access code for {entity} is "
+                                   f"{source['updated_value']}." if joint_case == "old_conflict_new_noise"
+                                   else f"Review of {entity} continues without a further verified change.")
                 if future_mode == "short_tail":
                     # Introduce the future fact in the KV cache without another TTT write.
                     continuation = _encode(tokenizer, future_fact)
@@ -232,7 +263,20 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
                         "answer_ids": _encode(tokenizer, " " + original),
                     },
                 ]
-                if objective == "write":
+                if objective == "joint":
+                    if joint_case == "old_relevant_new_informative":
+                        queries.append({
+                            "kind": "new_independent",
+                            "query_ids": _encode(tokenizer, f"\nQuestion: What is the verified access code for {source['new_entity']}? Answer:"),
+                            "answer_ids": _encode(tokenizer, " " + source["new_value"]),
+                        })
+                    elif joint_case.startswith("old_conflict"):
+                        queries = [{
+                            "kind": "current_corrected",
+                            "query_ids": _encode(tokenizer, f"\nQuestion: What is the current access code for {entity}? Answer:"),
+                            "answer_ids": _encode(tokenizer, " " + source["updated_value"]),
+                        }]
+                elif objective == "write":
                     if candidate_kind == "novel":
                         queries.append({
                             "kind": "novel",
@@ -253,14 +297,16 @@ def build_scenarios(tokenizer, sources: list[dict], split_counts: dict[str, int]
             scenarios.append({
                 "id": f"{source['group_id']}-v{variant}", "group_id": source["group_id"],
                 "split": splits[source["group_id"]],
-                "regime": candidate_kind if objective == "write" else regime,
+                "regime": joint_case if objective == "joint" else
+                          candidate_kind if objective == "write" else regime,
                 "context_noise": noise_level,
                 "candidate_kind": candidate_kind, "objective": objective,
-                "candidate_boundary": 2 if objective == "write" else None,
+                "candidate_boundary": 2 if objective in ("write", "joint") else None,
                 "context_ids": context, "futures": futures,
             })
     metadata = {
-        "template_version": TEMPLATE_VERSION, "seed": seed, "chunk_size": chunk_size,
+        "template_version": 2 if objective == "joint" else TEMPLATE_VERSION,
+        "seed": seed, "chunk_size": chunk_size,
         "objective": objective,
         "context_chunks": context_chunks, "future_chunks": future_chunks,
         "futures_per_scenario": futures_per_scenario, "variants_per_group": variants_per_group,
@@ -283,7 +329,7 @@ def main():
     parser.add_argument("--background-data", help="Optional packed JSONL with content_split for distinct natural-text fillers")
     parser.add_argument("--fact-placement", choices=("repeated", "first_only"), default="repeated")
     parser.add_argument("--future-mode", choices=("full_chunk", "short_tail"), default="full_chunk")
-    parser.add_argument("--objective", choices=("forget", "write"), default="forget")
+    parser.add_argument("--objective", choices=("forget", "write", "joint"), default="forget")
     parser.add_argument("--train-groups", type=int, default=100)
     parser.add_argument("--dev-groups", type=int, default=20)
     parser.add_argument("--test-groups", type=int, default=20)

@@ -470,3 +470,32 @@ dev 的其余两种控制器各以 `--policies controller` 单独运行，训练
 ### 双门控实验计划（未执行）
 
 新增 [`DUAL_GATE_EXPERIMENT_PLAN.md`](DUAL_GATE_EXPERIMENT_PLAN.md)，按协议实现、两卡少量场景与 3×3 网格试点、阶段门、正式四角点标签、联合控制器、独立测试和六项公开基准安排实验。计划明确逐标签耗时/峰值显存、平坦标签与交互项、源组隔离、强固定角点对照、容量规则消融、长上下文限制和停止条件。用户此前要求先不开始实验；本次只写计划，没有运行任何新标签采集、控制器训练或模型评测。
+
+### 双门控试点实现与执行状态（2026-09-27）
+
+用户随后授权按上述计划进行实验。现已实现阶段 A 与阶段 B 所需入口，尚未把任何远程标签或性能数字当作完成结果。旧一维 `forget`/`write` 默认配置和已有标签文件保持原语义；联合标签使用独立的 `joint_v1` 协议，不能传给旧单输出控制器训练入口。
+
+| 文件 | 修改内容 | 对应需求 |
+|---|---|---|
+| `cbf_ttt/experiment.py` | 新增 `collect_joint_labels`：同一已观测边界克隆 3×3 `(α,g)` 分支，统一未来 rollout，保存四角点、全网格损失、交互项、收益、特征、归一化范数二次型 `A/B/C`、逐标签耗时和显存峰值 | 两独立控制量的可辨性与资源试点 |
+| `tasks/cbf_ttt.py` | 新增 `collect-joint` 命令与 `--grid`、`--every`、`--tie-tolerance` 参数 | 可配置稀疏边界采样 |
+| `tasks/build_cbf_scenarios.py` | 新增 `--objective joint` 和四类成对场景：旧记忆相关/冲突 × 新候选有效/噪声，统一在第二块采集；记录候选类型与版本 2 | 四动作物理含义的反事实数据构造 |
+| `scripts/run_cbf_joint_pilot.sh` | 两卡按 source-group 分片，各卡分别生成 train/dev/test 标签并拒绝覆盖已有文件 | 48 场景试点 |
+| `scripts/summarize_cbf_joint_pilot.py` | 汇总平坦比例、四角点分布、交互量、内部网格点收益与时间/显存 | 决定是否扩大正式规模 |
+| `tests/test_cbf_ttt.py`、`tests/test_cbf_scenarios.py`、`tests/test_cbf_joint_pilot_summary.py` | 添加联合更新、场景构造、9 点采集和汇总检查 | 接口与数据正确性 |
+| `DUAL_GATE_EXPERIMENT_PLAN.md`、`MODIFICATION_LOG.md` | 更新执行状态和运行说明 | 可复现实验记录 |
+
+试点命令（在含 PyTorch、模型和 1B 混合语料的远程环境中运行）：
+
+```bash
+ROOT=/home/ctj/cbf_ttt_joint_pilot_20260927
+MODEL=/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt
+mkdir -p "$ROOT"
+python -m tasks.build_cbf_scenarios --tokenizer /home/ctj/models/Qwen3-4B --output "$ROOT/scenarios.jsonl" --background-data /home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl --objective joint --future-mode short_tail --chunk-size 4096 --context-chunks 2 --future-chunks 1 --futures-per-scenario 1 --train-groups 8 --dev-groups 2 --test-groups 2 --variants-per-group 4 --seed 42
+python -m scripts.shard_cbf_scenarios --input "$ROOT/scenarios.jsonl" --output-dir "$ROOT/shards" --shards 2
+CUDA_VISIBLE_DEVICES=0 bash scripts/run_cbf_joint_pilot.sh "$MODEL" "$ROOT" 0 0
+CUDA_VISIBLE_DEVICES=1 bash scripts/run_cbf_joint_pilot.sh "$MODEL" "$ROOT" 1 1
+python -m scripts.summarize_cbf_joint_pilot --labels "$ROOT"/*_joint_labels.jsonl --output "$ROOT/summary.json"
+```
+
+上面两条 `run` 命令需要并发运行；脚本自身设置 `CUDA_VISIBLE_DEVICES`，外层变量并非必须。先用单场景运行 `collect-joint` 做模型 smoke，再启动全试点。尚未完成阶段 C 正式标签、联合控制器训练、独立测试及公开基准评测；必须等试点证明四动作可辨且资源可承受。风险包括近期答案经 attention KV 泄露导致四角点近乎同分、bf16 数值波动、9 分支导致显存或耗时增加，以及每个合成源组的多个变体高度相关。部署到远程时需确认 checkpoint、tokenizer、语料路径及 conda 环境。当前 SSH 经 Cloudflare 代理时有间歇性握手超时；因此远程实验状态只能以实际输出文件和进程日志确认。

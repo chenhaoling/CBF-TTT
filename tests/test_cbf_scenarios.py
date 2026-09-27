@@ -154,6 +154,24 @@ class ScenarioTests(unittest.TestCase):
         self.assertTrue(all(len({row["split"] for row in scenarios if row["group_id"] == group}) == 1
                             for group in {row["group_id"] for row in scenarios}))
 
+    def test_joint_generator_has_four_factor_cases_without_action_labels(self):
+        rows, metadata = build_scenarios(
+            WordTokenizer(), synthetic_sources(3, 19),
+            {"train": 1, "dev": 1, "test": 1}, 4, 64, 2, 1, 1, 19,
+            objective="joint", future_mode="short_tail",
+        )
+        self.assertEqual(metadata["template_version"], 2)
+        self.assertEqual(len(rows), 12)
+        self.assertEqual(len({row["regime"] for row in rows}), 4)
+        self.assertEqual({row["candidate_kind"] for row in rows},
+                         {"novel", "correction", "duplicate", "noise"})
+        for row in rows:
+            self.assertEqual(row["candidate_boundary"], 2)
+            self.assertEqual(len(row["context_ids"]), 128)
+            self.assertNotIn("best_action", row)
+            self.assertTrue(all(query["query_ids"] and query["answer_ids"]
+                                for query in row["futures"][0]["queries"]))
+
     def test_formal_summary_rejects_incomplete_labels(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

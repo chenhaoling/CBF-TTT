@@ -106,7 +106,7 @@ class CBFCoreTests(unittest.TestCase):
         self.assertAlmostEqual(stats[2].item(), 1 / 3, places=5)
 
     def test_tiny_qwen_and_llama_session(self):
-        from cbf_ttt.experiment import collect_labels, summarize_label_profile
+        from cbf_ttt.experiment import collect_joint_labels, collect_labels, summarize_label_profile
         from inference_model.hf_llama3.configuration_llama import LlamaConfig
         from inference_model.hf_llama3.modeling_llama import LlamaForCausalLM
         from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config
@@ -162,6 +162,18 @@ class CBFCoreTests(unittest.TestCase):
                 self.assertIn("write_gate_star", write_row)
                 self.assertNotIn("alpha_star", write_row)
                 self.assertAlmostEqual(write_row["benefits"][-1], 0.0)
+                joint_path = str(Path(directory) / "joint_labels.jsonl")
+                joint_scenario = {**scenario, "objective": "joint", "regime": "old_relevant_new_noise"}
+                self.assertEqual(collect_joint_labels(model, [joint_scenario], joint_path,
+                                                      [0.0, 0.5, 1.0], every=2), 1)
+                joint_row = json.loads(Path(joint_path).read_text())
+                self.assertEqual(len(joint_row["actions"]), 9)
+                self.assertEqual(joint_row["actions"][0], [0.0, 0.0])
+                self.assertEqual(joint_row["actions"][-1], [1.0, 1.0])
+                self.assertEqual(set(joint_row["corner_losses"]), {"00", "01", "10", "11"})
+                self.assertAlmostEqual(joint_row["benefits_vs_11"][-1], 0.0)
+                self.assertGreaterEqual(joint_row["energy_terms"]["A"], 0.0)
+                self.assertGreaterEqual(joint_row["energy_terms"]["C"], 0.0)
 
     def test_alpha_zero_matches_qwen_baseline_at_same_chunk_boundaries(self):
         from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config

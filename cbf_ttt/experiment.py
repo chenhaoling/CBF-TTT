@@ -171,6 +171,106 @@ def collect_labels(model, scenarios: list[dict], output: str, grid: list[float],
     return count
 
 
+def _joint_energy_terms(session: CBFSession) -> dict[str, float]:
+    """Exact normalized quadratic coefficients for ||alpha*M + g*delta||²."""
+    a = b = c = 0.0
+    for layer_idx in session.layers:
+        base = session.model.model.layers[layer_idx].mlp.down_proj.weight
+        delta = session.cache.cbf_candidates[layer_idx].float()
+        memory = session.cache.cbf_memory.get(layer_idx)
+        scale = torch.sum(base.float().square()).clamp_min(1e-8)
+        c += (torch.sum(delta.square()) / scale).item()
+        if memory is not None:
+            old = memory.float()
+            a += (torch.sum(old.square()) / scale).item()
+            b += (torch.sum(old * delta) / scale).item()
+    return {"A": a, "B": b, "C": c}
+
+
+def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[float],
+                         every: int = 2, tie_tolerance: float = 1e-6) -> int:
+    """Branch the same pending chunk over the Cartesian retention/write grid."""
+    if every < 1 or tie_tolerance < 0:
+        raise ValueError("every must be positive and tie_tolerance nonnegative")
+    if not grid or min(grid) != 0.0 or max(grid) != 1.0 or len(set(grid)) != len(grid) or any(
+        not math.isfinite(value) or not 0.0 <= value <= 1.0 for value in grid
+    ):
+        raise ValueError("joint grid must have unique finite values in [0,1], including 0 and 1")
+    actions = [(alpha, gate) for alpha in grid for gate in grid]
+    count = 0
+    with open(output, "w", encoding="utf-8") as sink:
+        for scenario in scenarios:
+            if scenario.get("objective") != "joint":
+                raise ValueError(f"scenario {scenario['id']} is not a joint-control scenario")
+            session = CBFSession(model)
+            context = scenario["context_ids"]
+            full_length = len(context) - len(context) % session.chunk_size
+            for start in range(0, full_length, session.chunk_size):
+                boundary = start // session.chunk_size + 1
+                selected = boundary % every == 0
+                if selected:
+                    device = session.device
+                    on_cuda = device.type == "cuda"
+                    if on_cuda:
+                        torch.cuda.synchronize(device)
+                        allocated_start = torch.cuda.memory_allocated(device)
+                        torch.cuda.reset_peak_memory_stats(device)
+                    else:
+                        allocated_start = None
+                    started = time.perf_counter()
+                semantic, scalars = session.observe(context[start : start + session.chunk_size])
+                if selected:
+                    energy = _joint_energy_terms(session)
+                    losses = []
+                    for alpha, gate in actions:
+                        future_losses = []
+                        for future in scenario["futures"]:
+                            branch = session.clone()
+                            branch.commit_both(alpha, gate)
+                            remaining = context[start + session.chunk_size:] + future.get("continuation_ids", [])
+                            if remaining:
+                                branch.consume(remaining, "baseline")
+                            future_losses.extend(
+                                branch.score_answer(query["query_ids"], query["answer_ids"])
+                                for query in future["queries"]
+                            )
+                        losses.append(sum(future_losses) / len(future_losses))
+                    if any(not math.isfinite(loss) for loss in losses):
+                        raise ValueError(f"nonfinite joint loss for {scenario['id']} boundary {boundary}")
+                    if on_cuda:
+                        torch.cuda.synchronize(device)
+                    elapsed = time.perf_counter() - started
+                    baseline = losses[actions.index((1.0, 1.0))]
+                    corner = {f"{int(alpha)}{int(gate)}": losses[actions.index((alpha, gate))]
+                              for alpha in (0.0, 1.0) for gate in (0.0, 1.0)}
+                    minimum = min(losses)
+                    best = next(i for i, loss in enumerate(losses) if loss <= minimum + tie_tolerance)
+                    gib = 1024 ** 3
+                    peak_allocated = torch.cuda.max_memory_allocated(device) if on_cuda else None
+                    peak_reserved = torch.cuda.max_memory_reserved(device) if on_cuda else None
+                    row = {
+                        "id": scenario["id"], "group_id": scenario["group_id"], "split": scenario["split"],
+                        "regime": scenario["regime"], "boundary": boundary,
+                        "protocol": "joint_v1", "state_policy": "baseline_11",
+                        "semantic": semantic.squeeze(0).cpu().tolist(),
+                        "scalars": scalars.squeeze(0).cpu().tolist(), "energy_terms": energy,
+                        "grid": grid, "actions": [[a, g] for a, g in actions], "losses": losses,
+                        "corner_losses": corner, "best_action": list(actions[best]),
+                        "benefits_vs_11": [baseline - loss for loss in losses],
+                        "interaction": corner["11"] - corner["10"] - corner["01"] + corner["00"],
+                        "label_time_s": elapsed,
+                        "start_allocated_gib": allocated_start / gib if on_cuda else None,
+                        "peak_allocated_gib": peak_allocated / gib if on_cuda else None,
+                        "peak_reserved_gib": peak_reserved / gib if on_cuda else None,
+                        "extra_peak_allocated_gib": (peak_allocated - allocated_start) / gib if on_cuda else None,
+                    }
+                    sink.write(json.dumps(row, ensure_ascii=False) + "\n")
+                    sink.flush()
+                    count += 1
+                session.commit_both(1.0, 1.0)
+    return count
+
+
 def summarize_label_profile(path: str) -> dict:
     """Summarize per-label cost without loading model weights or feature tensors."""
     times = []

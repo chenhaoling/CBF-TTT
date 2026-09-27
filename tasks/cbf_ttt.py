@@ -42,6 +42,15 @@ def main():
     collect.add_argument("--update-rule", choices=("forget", "write"), default="forget",
                          help="forget decays old memory; write gates the current candidate delta W")
 
+    joint = sub.add_parser("collect-joint", help="Counterfactual retention/write grid from identical states")
+    _model_args(joint)
+    joint.add_argument("--data", required=True)
+    joint.add_argument("--split", choices=("train", "dev", "test"), required=True)
+    joint.add_argument("--output", required=True)
+    joint.add_argument("--grid", default="0,0.5,1")
+    joint.add_argument("--every", type=int, default=2)
+    joint.add_argument("--tie-tolerance", type=float, default=1e-6)
+
     train = sub.add_parser("train", help="Fit controller on train labels, select epoch on dev labels")
     train.add_argument("--train-samples", nargs="+", required=True)
     train.add_argument("--dev-samples", nargs="+", required=True)
@@ -74,7 +83,7 @@ def main():
 
     args = parser.parse_args()
     from cbf_ttt.experiment import (
-        collect_labels, evaluate as run_evaluation, load_controller, load_scenarios, parse_grid,
+        collect_joint_labels, collect_labels, evaluate as run_evaluation, load_controller, load_scenarios, parse_grid,
         summarize_label_profile, train_controller,
     )
     from cbf_ttt.runtime import CBFSession
@@ -90,7 +99,19 @@ def main():
         controller = (
             load_controller(args.controller, model, next(model.parameters()).device) if args.controller else None
         )
-        if args.command == "collect":
+        if args.command == "collect-joint":
+            scenarios = load_scenarios(args.data, args.split)
+            Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+            count = collect_joint_labels(model, scenarios, args.output, parse_grid(args.grid),
+                                         args.every, args.tie_tolerance)
+            profile = summarize_label_profile(args.output)
+            profile.update({"scenarios": len(scenarios), "grid": parse_grid(args.grid),
+                            "every": args.every, "protocol": "joint_v1"})
+            Path(args.output + ".summary.json").write_text(
+                json.dumps(profile, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            result = {"states": count, "profile": profile}
+        elif args.command == "collect":
             if args.state_policy == "controller" and controller is None:
                 parser.error("--controller is required for controller state policy")
             scenarios = load_scenarios(args.data, args.split)
