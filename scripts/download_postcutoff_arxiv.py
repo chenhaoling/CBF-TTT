@@ -20,7 +20,8 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 OPENSEARCH = "{http://a9.com/-/spec/opensearch/1.1/}"
 
 
-def query_entries(category: str, start: str, end: str, max_results: int) -> tuple[list[dict], int]:
+def query_entries(category: str, start: str, end: str, max_results: int,
+                  api_feed: Path | None = None) -> tuple[list[dict], int, str]:
     if not re.fullmatch(r"[a-z-]+\.[A-Z]{2}", category):
         raise ValueError("category must look like cs.CL")
     if not re.fullmatch(r"\d{12}", start) or not re.fullmatch(r"\d{12}", end) or start > end:
@@ -30,9 +31,16 @@ def query_entries(category: str, start: str, end: str, max_results: int) -> tupl
                                      "max_results": max_results,
                                      "sortBy": "submittedDate", "sortOrder": "descending"})
     url = f"https://export.arxiv.org/api/query?{params}"
-    request = urllib.request.Request(url, headers={"User-Agent": "CBF-TTT-research/1.0"})
-    with urllib.request.urlopen(request, timeout=45) as response:
-        root = ET.fromstring(response.read())
+    if api_feed is None:
+        request = urllib.request.Request(url, headers={"User-Agent": "CBF-TTT-research/1.0"})
+        with urllib.request.urlopen(request, timeout=45) as response:
+            payload = response.read()
+    else:
+        payload = api_feed.read_bytes()
+    root = ET.fromstring(payload)
+    title = root.findtext(f"{ATOM}title", "")
+    if category not in title or start not in title or end not in title:
+        raise ValueError("API feed does not match requested category and date range")
     total = int(root.findtext(f"{OPENSEARCH}totalResults", "0"))
     entries = []
     for entry in root.findall(f"{ATOM}entry"):
@@ -47,7 +55,7 @@ def query_entries(category: str, start: str, end: str, max_results: int) -> tupl
             "pdf_url": pdf_url, "title": " ".join(entry.findtext(f"{ATOM}title", "").split()),
             "published": entry.findtext(f"{ATOM}published", ""),
         })
-    return entries, total
+    return entries, total, hashlib.sha256(payload).hexdigest()
 
 
 def clean_pdf_text(raw: str) -> str:
@@ -129,12 +137,15 @@ def main() -> None:
     parser.add_argument("--max-results", type=int, default=200)
     parser.add_argument("--min-tokens", type=int, default=4256)
     parser.add_argument("--delay-s", type=float, default=3.0)
+    parser.add_argument("--api-feed", type=Path,
+                        help="saved official Atom feed when the GPU host cannot reach the API")
     args = parser.parse_args()
     if args.max_results < args.target:
         parser.error("max-results must be at least target")
     from transformers import AutoTokenizer
 
-    entries, total = query_entries(args.category, args.start, args.end, args.max_results)
+    entries, total, feed_hash = query_entries(args.category, args.start, args.end,
+                                              args.max_results, args.api_feed)
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True)
     accepted, funnel = collect(entries, args.target, args.min_tokens, tokenizer,
                                args.output.parent / "pdf_cache", args.delay_s)
@@ -142,6 +153,7 @@ def main() -> None:
                 "start": args.start, "end": args.end, "total_api_results": total,
                 "max_results": args.max_results, "target": args.target,
                 "min_tokens": args.min_tokens, "tokenizer": args.tokenizer,
+                "api_feed_sha256": feed_hash,
                 **funnel}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n"

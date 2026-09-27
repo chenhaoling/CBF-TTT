@@ -552,3 +552,5 @@ hku-gpu2 的最终 Qwen3-4B checkpoint 上，`joint_v2` 同一源组的四类诊
 | `tests/test_cbf_postcutoff.py`、`tests/test_cbf_natural_scenarios.py`、`tests/test_cbf_ttt.py` | 检查 PDF 清理、标题审计、源组判据、新协议场景与采集闭环 | 只新增验证 |
 
 数据构造、单场景显存/耗时、两卡正式小试点和阶段门结果待远程执行后补记。原始 PDF、提取文本、场景及逐样本标签由实验目录 `.gitignore` 排除；GitHub 仅保存代码、来源元数据和聚合结果。
+
+hku-gpu2 对 arXiv 官方元数据 API 返回 HTTP 406，而本机可从同一 URL 获取、远程可下载官方 PDF。`scripts/download_postcutoff_arxiv.py` 因此增加 `--api-feed`：接收本机保存并传至远程的原始 Atom XML，核对查询类别和日期，在来源元数据中记录其 SHA256；数据筛选顺序和预注册阶段门均不变。

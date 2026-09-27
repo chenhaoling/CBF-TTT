@@ -42,3 +42,5 @@ python -m scripts.evaluate_cbf_postcutoff_gate --labels "$ROOT"/{train,dev,test}
 ```
 
 两条 `run` 命令的最后参数分别指定 GPU0 和 GPU1，须在不同会话中并发执行。首次 smoke 输出文件与正式分片文件不同。所有采集脚本拒绝覆盖已存在的正式标签文件；复现实验时应使用新目录。
+
+远程 hku-gpu2 对官方 arXiv 元数据 API 返回 HTTP 406。实际运行时先在本机用上面相同查询 URL 保存 Atom XML，传到 `$ROOT/api_feed.xml`，下载命令加 `--api-feed "$ROOT/api_feed.xml"`；脚本核对类别和日期，并在元数据中保存原始 XML 的 SHA256。PDF 仍由 hku-gpu2 从官方地址下载。上述阶段门和文档选择顺序不变。
