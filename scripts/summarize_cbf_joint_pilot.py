@@ -20,6 +20,9 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
     best_corners = Counter()
     regimes = defaultdict(Counter)
     label_times, allocated, reserved, interactions, ranges, interior_gains = [], [], [], [], [], []
+    corner_values = defaultdict(list)
+    group_rows = defaultdict(list)
+    energy_a, energy_c = [], []
     flat = interior_better = 0
     groups = set()
     grids = set()
@@ -34,6 +37,7 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
                     raise ValueError(f"duplicate or incompatible joint label {key}")
                 seen.add(key)
                 groups.add(row["group_id"])
+                group_rows[row["group_id"]].append(row)
                 actions = [tuple(action) for action in row["actions"]]
                 losses = row["losses"]
                 if len(actions) != len(losses) or len(set(actions)) != len(actions):
@@ -44,6 +48,8 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
                     raise ValueError(f"missing a corner action for {key}")
                 grids.add(tuple(row["grid"]))
                 corner_losses = [losses[actions.index(corner)] for corner in CORNERS]
+                for corner, loss in zip(CORNERS, corner_losses):
+                    corner_values["".join(str(int(value)) for value in corner)].append(loss)
                 best_index = min(range(4), key=lambda index: corner_losses[index])
                 action_name = "".join(str(int(value)) for value in CORNERS[best_index])
                 best_corners[action_name] += 1
@@ -56,6 +62,8 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
                 interior_better += advantage > flat_tolerance
                 interactions.append(row["interaction"])
                 label_times.append(row["label_time_s"])
+                energy_a.append(row["energy_terms"]["A"])
+                energy_c.append(row["energy_terms"]["C"])
                 if row["peak_allocated_gib"] is not None:
                     allocated.append(row["peak_allocated_gib"])
                     reserved.append(row["peak_reserved_gib"])
@@ -64,16 +72,27 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
     if len(grids) != 1:
         raise ValueError("label files use different joint grids")
     count = len(seen)
+    group_differences = [
+        statistics.mean(row["corner_losses"]["11"] - row["corner_losses"]["00"] for row in rows)
+        for rows in group_rows.values()
+    ]
     return {
         "labels": count, "source_groups": len(groups), "grid": list(next(iter(grids))),
         "flat_tolerance": flat_tolerance, "flat_fraction": flat / count,
         "best_corner_counts": dict(best_corners),
         "best_corner_by_regime": {name: dict(counts) for name, counts in sorted(regimes.items())},
+        "mean_corner_losses": {name: statistics.mean(values) for name, values in sorted(corner_values.items())},
+        "mean_group_11_minus_00": statistics.mean(group_differences),
+        "sd_group_11_minus_00": statistics.stdev(group_differences) if len(group_differences) > 1 else None,
+        "groups_00_better_than_11": sum(value > 0 for value in group_differences),
         "mean_corner_loss_spread": statistics.mean(ranges),
         "mean_interaction": statistics.mean(interactions),
         "mean_abs_interaction": statistics.mean(abs(value) for value in interactions),
         "interior_better_fraction": interior_better / count,
         "mean_interior_gain": statistics.mean(interior_gains),
+        "max_interior_gain": max(interior_gains),
+        "mean_energy_A": statistics.mean(energy_a),
+        "mean_energy_C": statistics.mean(energy_c),
         "mean_label_time_s": statistics.mean(label_times),
         "p95_label_time_s": sorted(label_times)[math.ceil(0.95 * count) - 1],
         "max_label_time_s": max(label_times),

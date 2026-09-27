@@ -18,6 +18,8 @@ class JointPilotSummaryTests(unittest.TestCase):
                 "id": "s", "group_id": "g", "regime": "old_relevant_new_noise", "boundary": 2,
                 "protocol": "joint_v1", "grid": [0.0, 0.5, 1.0],
                 "actions": actions, "losses": losses, "interaction": -0.1,
+                "corner_losses": {"00": 0.7, "01": 1.0, "10": 0.9, "11": 1.1},
+                "energy_terms": {"A": 0.1, "B": 0.0, "C": 0.2},
                 "label_time_s": 1.2, "peak_allocated_gib": 12.0, "peak_reserved_gib": 14.0,
             }
             path.write_text(json.dumps(row) + "\n")
@@ -25,6 +27,9 @@ class JointPilotSummaryTests(unittest.TestCase):
             self.assertEqual(result["best_corner_counts"], {"00": 1})
             self.assertEqual(result["interior_better_fraction"], 1.0)
             self.assertAlmostEqual(result["mean_interior_gain"], 0.2)
+            self.assertAlmostEqual(result["mean_group_11_minus_00"], 0.4)
+            self.assertEqual(result["groups_00_better_than_11"], 1)
+            self.assertAlmostEqual(result["mean_energy_C"], 0.2)
             self.assertEqual(result["max_peak_reserved_gib"], 14.0)
             with self.assertRaisesRegex(ValueError, "duplicate"):
                 summarize([path, path])

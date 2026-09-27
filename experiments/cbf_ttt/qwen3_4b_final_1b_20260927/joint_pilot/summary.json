@@ -1,0 +1,60 @@
+{
+  "labels": 48,
+  "source_groups": 12,
+  "grid": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "flat_tolerance": 0.0001,
+  "flat_fraction": 0.0,
+  "best_corner_counts": {
+    "00": 37,
+    "10": 7,
+    "11": 2,
+    "01": 2
+  },
+  "best_corner_by_regime": {
+    "old_conflict_new_correction": {
+      "10": 2,
+      "00": 9,
+      "11": 1
+    },
+    "old_conflict_new_noise": {
+      "00": 11,
+      "01": 1
+    },
+    "old_relevant_new_informative": {
+      "00": 9,
+      "11": 1,
+      "10": 2
+    },
+    "old_relevant_new_noise": {
+      "00": 8,
+      "10": 3,
+      "01": 1
+    }
+  },
+  "mean_corner_losses": {
+    "00": 0.3835720564903958,
+    "01": 0.41967998003025375,
+    "10": 0.4019049660908797,
+    "11": 0.4481765578042657
+  },
+  "mean_group_11_minus_00": 0.06460450131386991,
+  "sd_group_11_minus_00": 0.029299754927809892,
+  "groups_00_better_than_11": 12,
+  "mean_corner_loss_spread": 0.06964618752577476,
+  "mean_interaction": 0.010163668173527898,
+  "mean_abs_interaction": 0.02373905812523195,
+  "interior_better_fraction": 0.20833333333333334,
+  "mean_interior_gain": 0.0008891819577131957,
+  "max_interior_gain": 0.013656718390328532,
+  "mean_energy_A": 0.0001280982515711552,
+  "mean_energy_C": 0.0002906370101053805,
+  "mean_label_time_s": 1.3672421595353323,
+  "p95_label_time_s": 1.704735180363059,
+  "max_label_time_s": 1.7075800029560924,
+  "max_peak_allocated_gib": 12.649501323699951,
+  "max_peak_reserved_gib": 13.861328125
+}

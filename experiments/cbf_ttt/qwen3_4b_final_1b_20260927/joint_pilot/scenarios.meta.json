@@ -1,0 +1,42 @@
+{
+  "template_version": 2,
+  "seed": 42,
+  "chunk_size": 4096,
+  "objective": "joint",
+  "context_chunks": 2,
+  "future_chunks": 1,
+  "futures_per_scenario": 1,
+  "variants_per_group": 4,
+  "fact_placement": "repeated",
+  "future_mode": "short_tail",
+  "split_group_counts": {
+    "train": 8,
+    "dev": 2,
+    "test": 2
+  },
+  "split_groups": {
+    "train": [
+      "synthetic-ledger-000002",
+      "synthetic-ledger-000003",
+      "synthetic-ledger-000005",
+      "synthetic-ledger-000006",
+      "synthetic-ledger-000007",
+      "synthetic-ledger-000008",
+      "synthetic-ledger-000009",
+      "synthetic-ledger-000011"
+    ],
+    "dev": [
+      "synthetic-ledger-000000",
+      "synthetic-ledger-000004"
+    ],
+    "test": [
+      "synthetic-ledger-000001",
+      "synthetic-ledger-000010"
+    ]
+  },
+  "scenarios": 48,
+  "background_records": 96,
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "source_type": "synthetic",
+  "background_data": "/home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl"
+}
