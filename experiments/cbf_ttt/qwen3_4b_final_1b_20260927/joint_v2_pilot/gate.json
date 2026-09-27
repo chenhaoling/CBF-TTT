@@ -1,0 +1,43 @@
+{
+  "protocol": "joint_v2",
+  "labels": 48,
+  "source_groups": 12,
+  "meaningful_nll_threshold": 0.005,
+  "write_gain_groups_by_regime": {
+    "old_relevant_new_informative": 0,
+    "old_relevant_new_noise": 0,
+    "old_conflict_new_correction": 0,
+    "old_conflict_new_noise": 0
+  },
+  "skip_write_groups_by_regime": {
+    "old_relevant_new_informative": 12,
+    "old_relevant_new_noise": 12,
+    "old_conflict_new_correction": 12,
+    "old_conflict_new_noise": 11
+  },
+  "retain_old_groups_by_regime": {
+    "old_relevant_new_informative": 0,
+    "old_relevant_new_noise": 0,
+    "old_conflict_new_correction": 0,
+    "old_conflict_new_noise": 0
+  },
+  "meaningful_corner_winner_groups": {
+    "00": 12,
+    "01": 0,
+    "10": 0,
+    "11": 0
+  },
+  "substantive_interior_fraction": 0.0,
+  "max_peak_reserved_gib": 18.564453125,
+  "checks": {
+    "new_informative_write": false,
+    "correction_write": false,
+    "redundant_or_noise_skip": true,
+    "obsolete_and_noise_skip": true,
+    "old_relevant_retention": false,
+    "multiple_meaningful_corners": false,
+    "interior_not_dominant": true,
+    "memory_headroom": true
+  },
+  "passed_before_repeat_check": false
+}

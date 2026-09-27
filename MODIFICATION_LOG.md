@@ -521,3 +521,9 @@ python -m scripts.summarize_cbf_joint_pilot --labels "$ROOT"/*_joint_labels.json
 新增 `scripts/audit_cbf_joint_v2_scenarios.py`：使用实际 Qwen tokenizer 解码 context 与 gap，逐项验证规则迁移查询的目标答案字符串没有出现在可见输入中，并只输出聚合检查数；中性算术题单独计数。这补充了构造器的 token 子序列检查。
 
 v2 长间隔标签出现写入动作 NLL 急升后，将 `tests/test_cbf_ttt.py` 中原生 Qwen TTT 与 CBF `11` 的一致性检查从 2 个扩展到 4 个完整 chunk；同时核查本轮使用的 192 条自然背景记录经 Qwen tokenizer 编码均为 6143 token，因此 `_fit_chunk` 只截取而未重复平铺背景。该排查用于区分协议/模型行为和快记忆实现错误，不能单凭测试推断实际 4B checkpoint 的全部数值性质。
+
+#### `joint_v2` 完成结果与停止决定
+
+完整记录见 [`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_v2_pilot/REPORT.md`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_v2_pilot/REPORT.md)。两卡 48/48 条标签于约 6 分 20 秒墙钟完成；每条平均 14.915 秒，峰值 CUDA allocated/reserved 为 14.828/18.564 GiB。实际 tokenizer 审计的 96 个规则迁移目标均不在可见输入中；四类场景重跑逐查询损失最大差 0。本地按执行前阈值重算的 `gate.json` 与远程逐字节一致。聚合四角点 `00/01/10/11` 最佳次数为 `48/0/0/0`；长间隔 `47/0/1/0`，有用新信息写入收益为 0/12 组，旧规则保留收益为 0/12 组，阶段门**未通过**。真实最终模型的一例原生 `11` NLL 8.6255 与 CBF `11` NLL 8.6567 接近但非完全相同，显示大损失不只是 CBF 分支特有；还需更多精度/状态对照。正式标签、联合控制器与公开基准按计划暂停，不将退化的 `00` 分布用于训练。
+
+本轮 GitHub 仅上传 `REPORT.md`、`summary.json`、`gate.json`、`leakage_audit.json` 和场景元数据。原始标签在本机及 hku-gpu2 保存并由 `.gitignore` 排除，以遵守此前针对完整派生数据上传的自动审批拒绝。

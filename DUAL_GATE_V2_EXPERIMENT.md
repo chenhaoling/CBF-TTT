@@ -2,6 +2,8 @@
 
 2026-09-27。上一轮 `joint_v1` 的 48 条短尾精确代码问答中，`00` 赢 37 条；该结果触发 [`DUAL_GATE_EXPERIMENT_PLAN.md`](DUAL_GATE_EXPERIMENT_PLAN.md) 的暂停条件。本轮是独立的 `joint_v2` 探索试点，不能与旧标签混合训练或把看过的 pilot test 组当正式 test。
 
+执行状态：48 条 `joint_v2` 标签已完成，预设阶段门未通过；结果见 [`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_v2_pilot/REPORT.md`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_v2_pilot/REPORT.md)。以下规则保留执行前写定的原文，不按结果修改阈值。
+
 ## 场景与假设
 
 每个源组仍有四类：旧规则相关×新独立规则、旧规则相关×重复/矛盾噪声、旧规则已过时×可信纠正、旧规则已过时×无可信替代。旧规则在第一块，新候选在第二块，两个 chunk 均为 4096 token。规则示例给出票号 `11/23/35` 到 `SKU-(n+offset)` 的映射；查询票号 `47/53`，**未展示这些输入输出对**，构造器检查目标答案 token 序列没有出现在 context 或 gap 中。噪声和重复候选与有用候选位于同一票号主题、同一完整 chunk 长度，但其语义核心不完全等长；此限制必须随结果报告。

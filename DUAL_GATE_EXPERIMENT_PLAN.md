@@ -1,6 +1,6 @@
 # 双门控 CBF-TTT 实验计划与执行状态
 
-状态（2026-09-27）：**阶段 A 和 B 已执行；阶段 B 的预设阶段门未通过，阶段 C–E 暂停**。48 条 3×3 联合标签和两卡资源结果见 [`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_pilot/REPORT.md`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_pilot/REPORT.md)。本计划使用用户指定的 Qwen3-4B In-Place TTT 1B-token checkpoint，优先在 hku-gpu2 两张 5090 上执行；训练来源为 FineWeb-Edu 与 LongCrawl64 的既有 1:1 token 混合。用户此前要求先做少量场景、`0/0.5/1` 三点网格、稀疏边界采样，记录每条标签耗时及峰值显存，再决定正式规模；这些要求构成第一道阶段门。
+状态（2026-09-27）：**阶段 A 和 B 已执行，修订 `joint_v2` 试点也已完成；两轮均未通过预设阶段门，阶段 C–E 暂停**。首轮与修订试点分别见 [`joint_v1` 报告](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_pilot/REPORT.md)和 [`joint_v2` 报告](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_v2_pilot/REPORT.md)。本计划使用用户指定的 Qwen3-4B In-Place TTT 1B-token checkpoint，优先在 hku-gpu2 两张 5090 上执行；训练来源为 FineWeb-Edu 与 LongCrawl64 的既有 1:1 token 混合。用户此前要求先做少量场景、`0/0.5/1` 三点网格、稀疏边界采样，记录每条标签耗时及峰值显存，再决定正式规模；这些要求构成第一道阶段门。
 
 ## 1. 问题、动作和主要假设
 
@@ -60,4 +60,4 @@
 - 容量规则改善范数而损害 QA：保留无过滤器版本，不声称语义安全。
 - 每阶段保存配置、Git commit、checkpoint SHA256、数据 manifest、逐场景损失与资源指标；模型权重、大型数据与 rollout 留在远程，仓库只存小型汇总和 Markdown 记录。
 
-计划依赖四分支 collector、联合控制器与官方评测适配的后续实现。用户此前要求**先不开始实验**；本文件不表示已获得开始采样、训练或测试的指令。
+四分支 collector 与两轮小规模标签试点已实现和执行。联合控制器与官方评测适配仍是后续工作；由于两轮试点的阶段门均未通过，本计划目前不进入正式采样、控制器训练或公开基准测试。
