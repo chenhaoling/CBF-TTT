@@ -205,13 +205,14 @@ class CBFCoreTests(unittest.TestCase):
         standard_cache = TTTDynamicCache(config=config)
         controlled = CBFSession(model)
         with torch.inference_mode():
-            for ids in ([1, 2, 3, 4], [5, 6, 7, 8]):
+            for ids in ([1, 2, 3, 4], [5, 6, 7, 8],
+                        [9, 10, 11, 12], [13, 14, 15, 16]):
                 model.model(input_ids=torch.tensor([ids]), past_key_values=standard_cache, use_cache=True)
                 controlled.step(ids, "baseline")
             standard_query = model.model(
-                input_ids=torch.tensor([[9, 10]]), past_key_values=standard_cache, use_cache=True
+                input_ids=torch.tensor([[17, 18]]), past_key_values=standard_cache, use_cache=True
             ).last_hidden_state
-            controlled_query = controlled._forward([9, 10])
+            controlled_query = controlled._forward([17, 18])
         self.assertTrue(torch.allclose(standard_query, controlled_query, atol=1e-5, rtol=1e-4))
 
 
