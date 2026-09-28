@@ -136,6 +136,16 @@ class CBFCoreTests(unittest.TestCase):
                 )
             session.consume([5, 6], "baseline")
             length_before = session.cache.get_seq_length()
+            memory_only = session.clone_memory_only()
+            self.assertEqual(memory_only.cache.get_seq_length(), 0)
+            self.assertEqual(memory_only.cache.cbf_candidates, {})
+            for layer_idx in session.layers:
+                self.assertTrue(torch.equal(memory_only.cache.cbf_memory[layer_idx],
+                                            session.cache.cbf_memory[layer_idx]))
+                self.assertNotEqual(memory_only.cache.cbf_memory[layer_idx].data_ptr(),
+                                    session.cache.cbf_memory[layer_idx].data_ptr())
+            self.assertTrue(math.isfinite(memory_only.score_answer([7, 8], [9, 10])))
+            self.assertEqual(memory_only.cache.get_seq_length(), 0)
             self.assertTrue(math.isfinite(session.score_answer([7, 8], [9, 10])))
             self.assertEqual(session.cache.get_seq_length(), length_before)
             scenario = {
@@ -214,6 +224,19 @@ class CBFCoreTests(unittest.TestCase):
                                                       [0.0, 0.5, 1.0], every=2), 1)
                 self.assertEqual(json.loads(Path(postcutoff_path).read_text())["protocol"],
                                  "joint_postcutoff_v1")
+                title_path = str(Path(directory) / "title_recall_labels.jsonl")
+                title_queries = [{"kind": "old_title", "query_ids": [9], "answer_ids": [10, 11]}]
+                title_scenario = {**natural_scenario, "objective": "joint_title_recall_v1",
+                                  "futures": [{"gap_chunks": 0, "reset_kv": reset,
+                                               "continuation_ids": [], "queries": title_queries}
+                                              for reset in (False, True)]}
+                self.assertEqual(collect_joint_labels(model, [title_scenario], title_path,
+                                                      [0.0, 0.5, 1.0], every=2), 1)
+                title_row = json.loads(Path(title_path).read_text())
+                self.assertEqual(title_row["protocol"], "joint_title_recall_v1")
+                self.assertEqual([future["reset_kv"] for future in title_row["future_meta"]],
+                                 [False, True])
+                self.assertTrue(all(len(action) == 2 for action in title_row["losses_by_future"]))
                 from scripts.diagnose_cbf_update_scale import diagnose
                 scale_path = Path(directory) / "scale_diagnostic.jsonl"
                 reference = json.loads(Path(postcutoff_path).read_text())

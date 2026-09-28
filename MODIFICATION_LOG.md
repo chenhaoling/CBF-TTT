@@ -570,3 +570,36 @@ hku-gpu2 对 arXiv 官方元数据 API 返回 HTTP 406，而本机可从同一 U
 远程 tiny-model 测试验证 `s=0/1` 与旧标签一致，但其某个随机初始化模型的候选范数恰为零，故原测试断言“范数必须大于零”过强；已改为非负检查。实际 4B 模型的尺度结果仍需另行验证。
 
 最终 4B 模型的 16 条 bf16 轨迹全部通过 `s=0/1` 参考标签校验；为核查细微差异，同一批又完成 float32 全尺度复跑。`new_only` 在 `s=0/0.25/1/2` 的平均 NLL，bf16 为 **1.99441/1.99468/2.00362/2.04651**，float32 为 **1.99348/1.99391/2.00135/2.04441**。float32 下负尺度超过 0.005 NLL 的有益源组为 0/8，正尺度为 2/8；降低 `g` 虽缓解全写入损害，仍未建立平均正收益。bf16/float32 每条平均 **1.213/3.832 秒**，峰值 reserved **14.041/30.371 GiB**。两份聚合分别存放于随机主试点目录的 `update_scale_summary.json` 和 `update_scale_fp32_summary.json`，本地复算与远程逐字节一致，报告已补充原始假设、方法映射和限制。既定写入/保留阶段门未改变，正式标签与控制器训练继续暂停；后续需设计能真正检验新文档信息复用的任务，再用新源组预注册试点。
+### 发布后论文标题回忆与 KV 隔离试点（2026-09-29，执行中）
+
+本轮目标是在新源组上检验当前候选 `ΔW` 是否能承载新读论文的标题。此前紧接文档的 continuation 目标可能直接由 attention KV 提供，因而新增并列的 KV 完整、KV 清空但保留 session 快记忆两种读取条件。算法仍为 `M'=αM+gΔW`，固定第二个 4096-token chunk 的决策；后一条件是机制诊断，不是部署默认路径。四类场景及看标签前固定的阶段门见 [`DUAL_GATE_TITLE_RECALL_PILOT.md`](DUAL_GATE_TITLE_RECALL_PILOT.md)。如果门槛未过，不构造正式标签或训练控制器。
+
+| 文件 | 具体修改 | 对应研究需求及 baseline 影响 |
+|---|---|---|
+| `cbf_ttt/runtime.py` | 新增 `clone_memory_only()`，复制快记忆张量并创建空 KV 的独立分支 | 分离快权重与 attention KV；仅显式调用生效 |
+| `cbf_ttt/experiment.py` | 新增 `joint_title_recall_v1` 协议，检查两个 future 相同查询且按 KV 完整/清空顺序，记录逐 future NLL、`reset_kv`、时间和显存 | 对同一 `(α,g)` 比较两种读取条件；旧协议默认不变 |
+| `tasks/cbf_ttt.py`、`scripts/summarize_cbf_joint_pilot.py` | 接受新协议，并将两类 future 分别汇总为 `kv_intact`/`memory_only` | 闭环 CLI 和聚合；旧协议字段及含义不变 |
+| `scripts/download_postcutoff_arxiv.py` | 新增可重复的 `--exclude-metadata`、`--require-title-in-prefix`；记录排除集合哈希和标题检查 | 构造不重复且标题确实可见的新论文；默认下载行为不变 |
+| `tasks/build_cbf_title_recall_scenarios.py` | 新建四论文源组和四条件标题查询，验证 ID 唯一、API/PDF 标题在首块匹配、组内标题唯一、两读取条件同题 | 数据构造；独立 opt-in 协议 |
+| `scripts/evaluate_cbf_title_recall_gate.py` | 新建仅用 `memory_only` 四角点和完整源组判断的阶段门，同时报告 KV 完整条件 | 防止 KV 混杂与按场景伪重复 |
+| `tests/test_cbf_ttt.py`、`tests/test_cbf_title_recall.py` | 检查空 KV 与快记忆独立复制、tiny-model 采集闭环、构造和阶段门 | 验证新增路径；不改 baseline |
+| `DUAL_GATE_TITLE_RECALL_PILOT.md`、本文件 | 预注册假设、实验顺序、阈值、风险、命令和结果 | 实验可复核 |
+
+远程命令（目录 `/home/ctj/cbf_ttt_joint_exp_20260927`，环境 `/home/ctj/miniconda3/envs/cbf_ttt_train_py311`，模型 `/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt`）：
+
+```bash
+export PATH=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin:$PATH
+cd /home/ctj/cbf_ttt_joint_exp_20260927
+ROOT=/home/ctj/cbf_ttt_title_recall_pilot_20260929
+mkdir -p "$ROOT"
+python -m scripts.download_postcutoff_arxiv --tokenizer /home/ctj/models/Qwen3-4B --output "$ROOT/documents.jsonl" --api-feed /home/ctj/cbf_ttt_postcutoff_pilot_20260927/api_feed.xml --pdf-cache /home/ctj/cbf_ttt_postcutoff_pilot_20260927/pdf_cache --max-results 300 --target 48 --selection-seed 119 --require-title-in-prefix 4096 --exclude-metadata /home/ctj/cbf_ttt_postcutoff_pilot_20260927/documents.jsonl.meta.json --exclude-metadata /home/ctj/cbf_ttt_postcutoff_random_pilot_20260927/documents.jsonl.meta.json
+python -m scripts.audit_postcutoff_corpus --corpus /home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl --metadata "$ROOT/documents.jsonl.meta.json" --output "$ROOT/title_audit.json"
+python -m tasks.build_cbf_title_recall_scenarios --tokenizer /home/ctj/models/Qwen3-4B --data "$ROOT/documents.jsonl" --output "$ROOT/scenarios.jsonl" --seed 120
+python -m scripts.shard_cbf_scenarios --input "$ROOT/scenarios.jsonl" --output-dir "$ROOT/shards" --shards 2
+bash scripts/run_cbf_joint_pilot.sh /home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt "$ROOT" 0 0
+bash scripts/run_cbf_joint_pilot.sh /home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt "$ROOT" 1 1
+python -m scripts.summarize_cbf_joint_pilot --labels "$ROOT"/*_joint_labels.jsonl --output "$ROOT/summary.json"
+python -m scripts.evaluate_cbf_title_recall_gate --labels "$ROOT"/*_joint_labels.jsonl --output "$ROOT/gate.json"
+```
+
+两条 `run` 命令需分别在两张 GPU 的 tmux 窗口并发执行；正式启动前先对单场景 smoke。以上构建会检查标题在首块出现，若不匹配则继续筛选下一篇论文。当前代码本地纯数据测试通过，远程 PyTorch 验证和标签结果尚待完成。主要风险是 PDF 提取标题差异、标题 NLL 不代表自由生成、KV 清空后任务过难、48 篇论文仍可能与旧公开草稿相似。原始 PDF、全文、场景和逐条标签仅留在实验目录，不上传 GitHub。

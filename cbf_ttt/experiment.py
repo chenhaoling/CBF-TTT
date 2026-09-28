@@ -201,12 +201,21 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
     with open(output, "w", encoding="utf-8") as sink:
         for scenario in scenarios:
             objective = scenario.get("objective")
-            if objective not in ("joint", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1"):
+            if objective not in ("joint", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1",
+                                 "joint_title_recall_v1"):
                 raise ValueError(f"scenario {scenario['id']} is not a joint-control scenario")
             if objective == "joint_v2":
                 gaps = [future.get("gap_chunks") for future in scenario["futures"]]
                 if len(gaps) != 2 or gaps[0] != 0 or not isinstance(gaps[1], int) or gaps[1] < 1:
                     raise ValueError("joint_v2 needs zero-gap and positive-gap futures")
+            if objective == "joint_title_recall_v1":
+                futures = scenario["futures"]
+                if len(futures) != 2 or [future.get("reset_kv") for future in futures] != [False, True]:
+                    raise ValueError("title recall requires KV-intact then memory-only futures")
+                if any(future.get("continuation_ids", []) for future in futures):
+                    raise ValueError("title recall futures cannot add continuation before KV reset")
+                if futures[0]["queries"] != futures[1]["queries"]:
+                    raise ValueError("title recall futures must use identical queries")
             session = CBFSession(model)
             context = scenario["context_ids"]
             full_length = len(context) - len(context) % session.chunk_size
@@ -239,7 +248,8 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
                             remaining = context[start + session.chunk_size:] + future.get("continuation_ids", [])
                             if remaining:
                                 branch.consume(remaining, "baseline")
-                            query_losses = [branch.score_answer(query["query_ids"], query["answer_ids"])
+                            query_branch = branch.clone_memory_only() if future.get("reset_kv", False) else branch
+                            query_losses = [query_branch.score_answer(query["query_ids"], query["answer_ids"])
                                             for query in future["queries"]]
                             future_losses.extend(query_losses)
                             action_query_losses.append(query_losses)
@@ -269,6 +279,7 @@ def collect_joint_labels(model, scenarios: list[dict], output: str, grid: list[f
                         "scalars": scalars.squeeze(0).cpu().tolist(), "energy_terms": energy,
                         "grid": grid, "actions": [[a, g] for a, g in actions], "losses": losses,
                         "future_meta": [{"gap_chunks": future.get("gap_chunks"),
+                                         "reset_kv": future.get("reset_kv", False),
                                          "query_kinds": [query.get("kind", "unspecified")
                                                          for query in future["queries"]]}
                                         for future in scenario["futures"]],

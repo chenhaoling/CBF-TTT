@@ -39,7 +39,8 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
                 row = json.loads(line)
                 key = (row["id"], row["boundary"])
                 if key in seen or row["protocol"] not in (
-                    "joint_v1", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1"
+                    "joint_v1", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1",
+                    "joint_title_recall_v1"
                 ):
                     raise ValueError(f"duplicate or incompatible joint label {key}")
                 seen.add(key)
@@ -56,14 +57,20 @@ def summarize(paths: list[Path], flat_tolerance: float = 1e-4) -> dict:
                     raise ValueError(f"missing a corner action for {key}")
                 grids.add(tuple(row["grid"]))
                 corner_losses = [losses[actions.index(corner)] for corner in CORNERS]
-                if row["protocol"] in ("joint_v2", "joint_natural_v1", "joint_postcutoff_v1"):
-                    expected_futures = 2 if row["protocol"] == "joint_v2" else 1
+                if row["protocol"] in ("joint_v2", "joint_natural_v1", "joint_postcutoff_v1",
+                                       "joint_title_recall_v1"):
+                    expected_futures = 2 if row["protocol"] in ("joint_v2", "joint_title_recall_v1") else 1
                     if len(row["future_meta"]) != expected_futures or any(
                         len(action_futures) != expected_futures for action_futures in row["losses_by_future"]
                     ):
                         raise ValueError(f"invalid joint future table for {key}")
                     for future_index, future in enumerate(row["future_meta"]):
-                        gap = str(future["gap_chunks"])
+                        if row["protocol"] == "joint_title_recall_v1":
+                            if future["gap_chunks"] != 0 or future.get("reset_kv") is not (future_index == 1):
+                                raise ValueError(f"invalid title recall future order for {key}")
+                            gap = "kv_intact" if future_index == 0 else "memory_only"
+                        else:
+                            gap = str(future["gap_chunks"])
                         gap_losses = [row["losses_by_future"][actions.index(corner)][future_index]
                                       for corner in CORNERS]
                         gap_best = min(range(4), key=lambda index: gap_losses[index])

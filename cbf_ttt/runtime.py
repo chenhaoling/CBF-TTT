@@ -118,6 +118,15 @@ class CBFSession:
         """Deep-copy all KV and fast-memory state for an independent counterfactual branch."""
         return CBFSession(self.model, self.controller, copy.deepcopy(self.cache), self.update_rule)
 
+    def clone_memory_only(self):
+        """Keep session fast weights while starting a fresh attention KV cache."""
+        branch = CBFSession(self.model, self.controller, update_rule=self.update_rule)
+        branch.cache.cbf_memory = {
+            layer_idx: memory.detach().clone()
+            for layer_idx, memory in self.cache.cbf_memory.items()
+        }
+        return branch
+
     def _forward(self, ids: list[int], collect: bool = False) -> torch.Tensor:
         if not ids:
             raise ValueError("the input token sequence is empty")

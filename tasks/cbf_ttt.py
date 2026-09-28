@@ -104,7 +104,7 @@ def main():
             scenarios = load_scenarios(args.data, args.split)
             objectives = {scenario.get("objective") for scenario in scenarios}
             if len(objectives) != 1 or not objectives <= {
-                "joint", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1"
+                "joint", "joint_v2", "joint_natural_v1", "joint_postcutoff_v1", "joint_title_recall_v1"
             }:
                 raise ValueError("collect-joint requires one joint scenario protocol per input")
             Path(args.output).parent.mkdir(parents=True, exist_ok=True)

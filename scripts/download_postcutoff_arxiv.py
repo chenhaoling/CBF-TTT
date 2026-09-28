@@ -21,6 +21,11 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 OPENSEARCH = "{http://a9.com/-/spec/opensearch/1.1/}"
 
 
+def normalized_title(value: str) -> str:
+    """Compare API titles with PDF text despite line breaks and punctuation."""
+    return "".join(char for char in unicodedata.normalize("NFKC", value).casefold() if char.isalnum())
+
+
 def query_entries(category: str, start: str, end: str, max_results: int,
                   api_feed: Path | None = None) -> tuple[list[dict], int, str]:
     if not re.fullmatch(r"[a-z-]+\.[A-Z]{2}", category):
@@ -83,7 +88,7 @@ def fetch_pdf(url: str, path: Path, timeout: int = 60) -> bytes:
 
 
 def collect(entries: list[dict], target: int, min_tokens: int, tokenizer,
-            pdf_dir: Path, delay_s: float) -> tuple[list[dict], dict]:
+            pdf_dir: Path, delay_s: float, title_prefix_tokens: int = 0) -> tuple[list[dict], dict]:
     if target < 1 or min_tokens < 1 or delay_s < 0:
         raise ValueError("target and min_tokens must be positive; delay must be nonnegative")
     pdf_dir.mkdir(parents=True, exist_ok=True)
@@ -106,10 +111,17 @@ def collect(entries: list[dict], target: int, min_tokens: int, tokenizer,
                                   str(pdf_dir / f"{source_id}.pdf"), "-"],
                                  check=True, capture_output=True, text=True, timeout=60).stdout
             text = clean_pdf_text(raw)
-            count = len(tokenizer.encode(text, add_special_tokens=False))
+            token_ids = tokenizer.encode(text, add_special_tokens=False)
+            count = len(token_ids)
             if count < min_tokens:
                 rejected["too_short"] += 1
                 print(json.dumps({"source_id": source_id, "status": "too_short", "tokens": count}), flush=True)
+                continue
+            if title_prefix_tokens and normalized_title(entry["title"]) not in normalized_title(
+                tokenizer.decode(token_ids[:title_prefix_tokens])
+            ):
+                rejected["title_absent_from_prefix"] += 1
+                print(json.dumps({"source_id": source_id, "status": "title_absent_from_prefix"}), flush=True)
                 continue
         except (OSError, ValueError, subprocess.SubprocessError, UnicodeError) as exc:
             rejected["download_or_extract_error"] += 1
@@ -143,6 +155,10 @@ def main() -> None:
                         help="saved official Atom feed when the GPU host cannot reach the API")
     parser.add_argument("--pdf-cache", type=Path,
                         help="reuse a PDF cache across repeat data builds")
+    parser.add_argument("--exclude-metadata", action="append", type=Path, default=[],
+                        help="exclude accepted source IDs from a prior download metadata JSON; repeatable")
+    parser.add_argument("--require-title-in-prefix", type=int, default=0,
+                        help="require API title in the first N Qwen tokens of extracted PDF text")
     args = parser.parse_args()
     if args.max_results < args.target:
         parser.error("max-results must be at least target")
@@ -150,15 +166,24 @@ def main() -> None:
 
     entries, total, feed_hash = query_entries(args.category, args.start, args.end,
                                               args.max_results, args.api_feed)
+    excluded = set()
+    for metadata_path in args.exclude_metadata:
+        prior = json.loads(metadata_path.read_text(encoding="utf-8"))
+        excluded.update(item["source_id"] for item in prior["accepted"])
+    entries = [entry for entry in entries if entry["source_id"] not in excluded]
     random.Random(args.selection_seed).shuffle(entries)
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True)
     accepted, funnel = collect(entries, args.target, args.min_tokens, tokenizer,
-                               args.pdf_cache or args.output.parent / "pdf_cache", args.delay_s)
+                               args.pdf_cache or args.output.parent / "pdf_cache", args.delay_s,
+                               args.require_title_in_prefix)
     metadata = {"protocol": "postcutoff_arxiv_v1", "category": args.category,
                 "start": args.start, "end": args.end, "total_api_results": total,
                 "max_results": args.max_results, "target": args.target,
                 "min_tokens": args.min_tokens, "tokenizer": args.tokenizer,
                 "api_feed_sha256": feed_hash,
+                "excluded_source_count": len(excluded),
+                "excluded_source_ids_sha256": hashlib.sha256("\n".join(sorted(excluded)).encode()).hexdigest(),
+                "require_title_in_prefix_tokens": args.require_title_in_prefix,
                 "selection_seed": args.selection_seed,
                 "selection_method": "shuffle_API_top_max_results_then_first_eligible",
                 **funnel}
