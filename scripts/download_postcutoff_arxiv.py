@@ -89,8 +89,8 @@ def fetch_pdf(url: str, path: Path, timeout: int = 60) -> bytes:
 
 def collect(entries: list[dict], target: int, min_tokens: int, tokenizer,
             pdf_dir: Path, delay_s: float, title_prefix_tokens: int = 0) -> tuple[list[dict], dict]:
-    if target < 1 or min_tokens < 1 or delay_s < 0:
-        raise ValueError("target and min_tokens must be positive; delay must be nonnegative")
+    if target < 1 or min_tokens < 1 or delay_s < 0 or title_prefix_tokens < 0:
+        raise ValueError("target and min_tokens must be positive; delay and prefix length nonnegative")
     pdf_dir.mkdir(parents=True, exist_ok=True)
     accepted, source_meta = [], []
     rejected = Counter()
@@ -117,12 +117,13 @@ def collect(entries: list[dict], target: int, min_tokens: int, tokenizer,
                 rejected["too_short"] += 1
                 print(json.dumps({"source_id": source_id, "status": "too_short", "tokens": count}), flush=True)
                 continue
-            if title_prefix_tokens and normalized_title(entry["title"]) not in normalized_title(
-                tokenizer.decode(token_ids[:title_prefix_tokens])
-            ):
-                rejected["title_absent_from_prefix"] += 1
-                print(json.dumps({"source_id": source_id, "status": "title_absent_from_prefix"}), flush=True)
-                continue
+            if title_prefix_tokens:
+                title = normalized_title(entry["title"])
+                prefix = normalized_title(tokenizer.decode(token_ids[:title_prefix_tokens]))
+                if not title or title not in prefix:
+                    rejected["title_absent_from_prefix"] += 1
+                    print(json.dumps({"source_id": source_id, "status": "title_absent_from_prefix"}), flush=True)
+                    continue
         except (OSError, ValueError, subprocess.SubprocessError, UnicodeError) as exc:
             rejected["download_or_extract_error"] += 1
             print(json.dumps({"source_id": source_id, "status": "error",

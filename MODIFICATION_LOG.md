@@ -570,7 +570,7 @@ hku-gpu2 对 arXiv 官方元数据 API 返回 HTTP 406，而本机可从同一 U
 远程 tiny-model 测试验证 `s=0/1` 与旧标签一致，但其某个随机初始化模型的候选范数恰为零，故原测试断言“范数必须大于零”过强；已改为非负检查。实际 4B 模型的尺度结果仍需另行验证。
 
 最终 4B 模型的 16 条 bf16 轨迹全部通过 `s=0/1` 参考标签校验；为核查细微差异，同一批又完成 float32 全尺度复跑。`new_only` 在 `s=0/0.25/1/2` 的平均 NLL，bf16 为 **1.99441/1.99468/2.00362/2.04651**，float32 为 **1.99348/1.99391/2.00135/2.04441**。float32 下负尺度超过 0.005 NLL 的有益源组为 0/8，正尺度为 2/8；降低 `g` 虽缓解全写入损害，仍未建立平均正收益。bf16/float32 每条平均 **1.213/3.832 秒**，峰值 reserved **14.041/30.371 GiB**。两份聚合分别存放于随机主试点目录的 `update_scale_summary.json` 和 `update_scale_fp32_summary.json`，本地复算与远程逐字节一致，报告已补充原始假设、方法映射和限制。既定写入/保留阶段门未改变，正式标签与控制器训练继续暂停；后续需设计能真正检验新文档信息复用的任务，再用新源组预注册试点。
-### 发布后论文标题回忆与 KV 隔离试点（2026-09-29，执行中）
+### 发布后论文标题回忆与 KV 隔离试点（2026-09-29，已完成）
 
 本轮目标是在新源组上检验当前候选 `ΔW` 是否能承载新读论文的标题。此前紧接文档的 continuation 目标可能直接由 attention KV 提供，因而新增并列的 KV 完整、KV 清空但保留 session 快记忆两种读取条件。算法仍为 `M'=αM+gΔW`，固定第二个 4096-token chunk 的决策；后一条件是机制诊断，不是部署默认路径。四类场景及看标签前固定的阶段门见 [`DUAL_GATE_TITLE_RECALL_PILOT.md`](DUAL_GATE_TITLE_RECALL_PILOT.md)。如果门槛未过，不构造正式标签或训练控制器。
 
@@ -582,7 +582,7 @@ hku-gpu2 对 arXiv 官方元数据 API 返回 HTTP 406，而本机可从同一 U
 | `scripts/download_postcutoff_arxiv.py` | 新增可重复的 `--exclude-metadata`、`--require-title-in-prefix`；记录排除集合哈希和标题检查 | 构造不重复且标题确实可见的新论文；默认下载行为不变 |
 | `tasks/build_cbf_title_recall_scenarios.py` | 新建四论文源组和四条件标题查询，验证 ID 唯一、API/PDF 标题在首块匹配、组内标题唯一、两读取条件同题 | 数据构造；独立 opt-in 协议 |
 | `scripts/evaluate_cbf_title_recall_gate.py` | 新建仅用 `memory_only` 四角点和完整源组判断的阶段门，同时报告 KV 完整条件 | 防止 KV 混杂与按场景伪重复 |
-| `tests/test_cbf_ttt.py`、`tests/test_cbf_title_recall.py` | 检查空 KV 与快记忆独立复制、tiny-model 采集闭环、构造和阶段门 | 验证新增路径；不改 baseline |
+| `tests/test_cbf_ttt.py`、`tests/test_cbf_title_recall.py`、`tests/test_cbf_joint_pilot_summary.py` | 检查空 KV 与快记忆独立复制、tiny-model 采集闭环、构造、阶段门及两读取条件的分别汇总 | 验证新增路径；不改 baseline |
 | `DUAL_GATE_TITLE_RECALL_PILOT.md`、本文件 | 预注册假设、实验顺序、阈值、风险、命令和结果 | 实验可复核 |
 
 远程命令（目录 `/home/ctj/cbf_ttt_joint_exp_20260927`，环境 `/home/ctj/miniconda3/envs/cbf_ttt_train_py311`，模型 `/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt`）：
@@ -602,4 +602,10 @@ python -m scripts.summarize_cbf_joint_pilot --labels "$ROOT"/*_joint_labels.json
 python -m scripts.evaluate_cbf_title_recall_gate --labels "$ROOT"/*_joint_labels.jsonl --output "$ROOT/gate.json"
 ```
 
-两条 `run` 命令需分别在两张 GPU 的 tmux 窗口并发执行；正式启动前先对单场景 smoke。以上构建会检查标题在首块出现，若不匹配则继续筛选下一篇论文。当前代码本地纯数据测试通过，远程 PyTorch 验证和标签结果尚待完成。主要风险是 PDF 提取标题差异、标题 NLL 不代表自由生成、KV 清空后任务过难、48 篇论文仍可能与旧公开草稿相似。原始 PDF、全文、场景和逐条标签仅留在实验目录，不上传 GitHub。
+两条 `run` 命令需分别在两张 GPU 的 tmux 窗口并发执行；正式启动前先对单场景 smoke。以上构建会检查标题在首块出现，若不匹配则继续筛选下一篇论文。主要风险是 PDF 提取标题差异、标题 NLL 不代表自由生成、KV 清空后任务过难、48 篇论文仍可能与旧公开草稿相似。原始 PDF、全文、场景和逐条标签仅留在远程或本地忽略目录，不上传 GitHub。
+
+#### 完成结果与停止决定
+
+远程 PyTorch/纯数据 12 项测试通过；48 篇新论文来源与前两批入选的 88 个唯一 ID 不重叠，53 篇尝试后得到 48 篇，1B 语料精确标题匹配 0/48。单场景 smoke 1.670 秒、峰值 reserved 14.094 GiB。两卡约 51 秒完成 48 条 3×3 网格标签，平均每条 1.255 秒、p95 1.689 秒，最大 reserved 14.098 GiB，无 OOM。本地从逐条标签复算的聚合文件与远程 SHA256 一致。完整来源、命令、汇总与限制见 [`标题回忆试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_title_recall_pilot/REPORT.md)，机器可读结果为同目录的 `summary.json`、`gate.json`、`title_audit.json` 和来源元数据；逐条标签由 `.gitignore` 排除。
+
+预注册的 `memory_only` 阶段门未通过：`new_only` 有益写入 **1/12** 组，平均收益 **−0.02139 NLL**；无关写入有害 **8/12**；旧记忆保留有益 **0/12**，清除有益 **9/12**。KV 完整与仅快记忆的 `new_title` NLL 约 0.58 和 4.94，但清空 KV 后并未出现稳定正写入收益。按阶段门暂停正式标签、双输出控制器及公开基准对照。下一步需改进候选 `ΔW` 的信息写入目标或机制，再用新源组验证；不能将本轮 `neither` 未见标题视为可回答的问题。所有新增入口为 opt-in，原始 baseline 不受影响。

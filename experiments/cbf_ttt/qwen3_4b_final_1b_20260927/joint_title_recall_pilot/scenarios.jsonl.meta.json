@@ -1,0 +1,40 @@
+{
+  "protocol": "joint_title_recall_v1",
+  "seed": 120,
+  "context_tokens_per_paper": 4096,
+  "record_count": 48,
+  "source_groups": 12,
+  "scenarios": 48,
+  "split_group_counts": {
+    "train": 8,
+    "dev": 2,
+    "test": 2
+  },
+  "split_groups": {
+    "train": [
+      "title-recall-00000",
+      "title-recall-00001",
+      "title-recall-00002",
+      "title-recall-00004",
+      "title-recall-00005",
+      "title-recall-00006",
+      "title-recall-00009",
+      "title-recall-00011"
+    ],
+    "dev": [
+      "title-recall-00007",
+      "title-recall-00010"
+    ],
+    "test": [
+      "title-recall-00003",
+      "title-recall-00008"
+    ]
+  },
+  "read_conditions": [
+    "kv_intact",
+    "memory_only"
+  ],
+  "source_sha256": "45fe83479b6e150249b7f12127fadfc3d9f0394ed7bd096eb9d2bb1b65f82cb5",
+  "source_path": "/home/ctj/cbf_ttt_title_recall_pilot_20260929/documents.jsonl",
+  "tokenizer": "/home/ctj/models/Qwen3-4B"
+}

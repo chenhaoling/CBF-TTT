@@ -1,0 +1,40 @@
+{
+  "source": "/home/ctj/cbf_ttt_title_recall_pilot_20260929/scenarios.jsonl",
+  "shards": 2,
+  "scenarios": 48,
+  "splits": {
+    "train": {
+      "groups": 8,
+      "scenarios_per_shard": [
+        16,
+        16
+      ],
+      "groups_per_shard": [
+        4,
+        4
+      ]
+    },
+    "dev": {
+      "groups": 2,
+      "scenarios_per_shard": [
+        4,
+        4
+      ],
+      "groups_per_shard": [
+        1,
+        1
+      ]
+    },
+    "test": {
+      "groups": 2,
+      "scenarios_per_shard": [
+        4,
+        4
+      ],
+      "groups_per_shard": [
+        1,
+        1
+      ]
+    }
+  }
+}

@@ -63,6 +63,34 @@ class JointPilotSummaryTests(unittest.TestCase):
             self.assertAlmostEqual(result["mean_corner_losses_by_gap"]["2"]["01"], 0.8)
             self.assertAlmostEqual(result["mean_corner_losses_by_query_kind"]["gap_2/old_heldout"]["01"], 0.8)
 
+    def test_title_recall_conditions_are_reported_separately(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "labels.jsonl"
+            actions = [[a, g] for a in (0.0, 0.5, 1.0) for g in (0.0, 0.5, 1.0)]
+            kv = [1.0] * 9
+            memory = [1.2] * 9
+            memory[-1] = 0.9
+            losses = [(a + b) / 2 for a, b in zip(kv, memory)]
+            row = {
+                "id": "title", "group_id": "paper-group", "regime": "new_only", "boundary": 2,
+                "protocol": "joint_title_recall_v1", "grid": [0.0, 0.5, 1.0],
+                "actions": actions, "losses": losses,
+                "corner_losses": {"00": losses[0], "01": losses[2],
+                                  "10": losses[6], "11": losses[8]},
+                "interaction": losses[8] - losses[6] - losses[2] + losses[0],
+                "future_meta": [{"gap_chunks": 0, "reset_kv": False, "query_kinds": ["new_title"]},
+                                {"gap_chunks": 0, "reset_kv": True, "query_kinds": ["new_title"]}],
+                "losses_by_future": [[a, b] for a, b in zip(kv, memory)],
+                "query_losses_by_future": [[[a], [b]] for a, b in zip(kv, memory)],
+                "energy_terms": {"A": 0.1, "B": 0.0, "C": 0.2},
+                "label_time_s": 2.0, "peak_allocated_gib": 12.0, "peak_reserved_gib": 14.0,
+            }
+            path.write_text(json.dumps(row) + "\n", encoding="utf-8")
+            result = summarize([path])
+            self.assertEqual(set(result["mean_corner_losses_by_gap"]), {"kv_intact", "memory_only"})
+            self.assertAlmostEqual(result["mean_corner_losses_by_gap"]["memory_only"]["11"], 0.9)
+            self.assertAlmostEqual(result["mean_corner_losses_by_gap"]["kv_intact"]["11"], 1.0)
+
 
 if __name__ == "__main__":
     unittest.main()

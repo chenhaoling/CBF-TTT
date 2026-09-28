@@ -1,0 +1,53 @@
+{
+  "protocol": "joint_title_recall_v1",
+  "labels": 48,
+  "source_groups": 12,
+  "threshold_nll": 0.005,
+  "required_groups_per_direction": 3,
+  "useful_write_groups": 1,
+  "harmful_write_groups": 8,
+  "useful_keep_groups": 0,
+  "useful_clear_groups": 9,
+  "mean_write_gain_new_only_memory_only": -0.02139018592647098,
+  "mean_effect_by_condition_and_regime": {
+    "kv_intact": {
+      "both_relevant": {
+        "write": -0.0050719759776554725,
+        "keep": 0.0021348550409056497
+      },
+      "neither_relevant": {
+        "write": -0.023909497997184597,
+        "keep": -0.007436499772269382
+      },
+      "new_only": {
+        "write": -0.0023369716200737655,
+        "keep": 0.006529956679443606
+      },
+      "old_only": {
+        "write": -0.00488471286513423,
+        "keep": -0.0008029929424561664
+      }
+    },
+    "memory_only": {
+      "both_relevant": {
+        "write": -0.019083451648441496,
+        "keep": -0.10036995248929574
+      },
+      "neither_relevant": {
+        "write": -0.017552586918936686,
+        "keep": -0.07313196593276898
+      },
+      "new_only": {
+        "write": -0.02139018592647098,
+        "keep": -0.07361667394335636
+      },
+      "old_only": {
+        "write": -0.009857711773747243,
+        "keep": -0.12712323103523535
+      }
+    }
+  },
+  "passed_write_gate": false,
+  "passed_retention_gate": false,
+  "passed_joint_gate": false
+}
