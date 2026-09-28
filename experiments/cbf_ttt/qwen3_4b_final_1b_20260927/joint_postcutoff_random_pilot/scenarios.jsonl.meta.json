@@ -1,0 +1,38 @@
+{
+  "protocol": "joint_postcutoff_v1",
+  "seed": 118,
+  "context_tokens": 4096,
+  "query_tokens": 32,
+  "answer_tokens": 128,
+  "record_count": 48,
+  "source_groups": 12,
+  "scenarios": 48,
+  "split_group_counts": {
+    "train": 8,
+    "dev": 2,
+    "test": 2
+  },
+  "split_groups": {
+    "train": [
+      "postcutoff-paper-00000",
+      "postcutoff-paper-00001",
+      "postcutoff-paper-00003",
+      "postcutoff-paper-00005",
+      "postcutoff-paper-00006",
+      "postcutoff-paper-00007",
+      "postcutoff-paper-00008",
+      "postcutoff-paper-00009"
+    ],
+    "dev": [
+      "postcutoff-paper-00002",
+      "postcutoff-paper-00004"
+    ],
+    "test": [
+      "postcutoff-paper-00010",
+      "postcutoff-paper-00011"
+    ]
+  },
+  "source_sha256": "949b15d7d1cc6ad6a7c5ac2349c6ca49e4eb4445ccc01fcea2bb4c028e5e6bff",
+  "source_path": "/home/ctj/cbf_ttt_postcutoff_random_pilot_20260927/documents.jsonl",
+  "tokenizer": "/home/ctj/models/Qwen3-4B"
+}

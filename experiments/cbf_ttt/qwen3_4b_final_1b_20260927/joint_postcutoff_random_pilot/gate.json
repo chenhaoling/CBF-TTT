@@ -1,0 +1,39 @@
+{
+  "protocol": "joint_postcutoff_v1",
+  "labels": 48,
+  "source_groups": 12,
+  "threshold_nll": 0.005,
+  "required_groups_per_direction": 3,
+  "useful_write_groups": 1,
+  "harmful_write_groups": 12,
+  "useful_keep_groups": 2,
+  "useful_clear_groups": 6,
+  "mean_write_gain_new_only": -0.011926124493281046,
+  "mean_effect_by_regime": {
+    "both_relevant": {
+      "write": -0.014653215805689493,
+      "keep": -0.0025968352953592935
+    },
+    "neither_relevant": {
+      "write": -0.03809203704198202,
+      "keep": -0.010132392247517904
+    },
+    "new_only": {
+      "write": -0.011926124493281046,
+      "keep": -0.0024090210596720376
+    },
+    "old_only": {
+      "write": -0.019034127394358318,
+      "keep": -0.0026622116565704346
+    }
+  },
+  "best_corner_counts": {
+    "00": 28,
+    "01": 4,
+    "10": 13,
+    "11": 3
+  },
+  "passed_write_gate": false,
+  "passed_retention_gate": false,
+  "passed_joint_gate": false
+}

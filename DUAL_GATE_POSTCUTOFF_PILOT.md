@@ -47,3 +47,7 @@ python -m scripts.evaluate_cbf_postcutoff_gate --labels "$ROOT"/{train,dev,test}
 远程 hku-gpu2 对官方 arXiv 元数据 API 返回 HTTP 406。实际运行时先在本机用上面相同查询 URL 保存 Atom XML，传到 `FEED` 路径；脚本核对类别和日期，并在元数据中保存原始 XML 的 SHA256。PDF 仍由 hku-gpu2 从官方地址下载。上述阶段门不变。
 
 第一轮链路预检的下载器曾直接取时间排序后前 48 篇合格论文，与本节预设的随机选取不一致。该轮 48 条标签虽已采集，但**在未查看损失结果前发现偏差**，其标签只作为资源与代码链路预检；不用于阶段门结论。修正后另建 `cbf_ttt_postcutoff_random_pilot_20260927` 目录，用同一 API XML、`--selection-seed 118` 及独立标签文件执行本节主要试点；第一轮的来源排序不得用于决定阈值或挑选样本。
+
+## 执行状态
+
+随机主试点已于 2026-09-28 完成。写入有益仅 1/12 源组、平均收益 −0.01193 NLL，未达预设 3/12 且均值为正的要求；保留轴也未通过。正式标签和控制器暂停。完整结果与精度复核见 [`主试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_postcutoff_random_pilot/REPORT.md)。
