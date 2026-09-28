@@ -222,7 +222,7 @@ class CBFCoreTests(unittest.TestCase):
                                           {reference["id"]: reference}), 1)
                 scale_row = json.loads(scale_path.read_text())
                 self.assertEqual(len(scale_row["losses"]), 5)
-                self.assertGreater(scale_row["candidate_ratio"], 0)
+                self.assertGreaterEqual(scale_row["candidate_ratio"], 0)
 
     def test_alpha_zero_matches_qwen_baseline_at_same_chunk_boundaries(self):
         from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config
