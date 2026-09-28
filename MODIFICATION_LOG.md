@@ -563,8 +563,10 @@ hku-gpu2 对 arXiv 官方元数据 API 返回 HTTP 406，而本机可从同一 U
 
 正式反事实标签、双输出控制器训练及公开基准继续暂停。未来工作先排查当前 `ΔW` 的目标相关性和更新尺度，再用新论文/任务预注册有正写入样本的机制试点；已查看的探索性 dev/test 不作为正式测试。公开论文首投晚于 Qwen3 发布日是强来源代理，但不能证明此前无相似草稿；精确标题扫描不等于全文去重。PDF 转文本与 12 源组样本量也限制结论外推。所有新增逻辑均由独立脚本/协议启用，baseline 配置不受影响。
 
-### 候选 `ΔW` 方向与尺度诊断（2026-09-28，进行中）
+### 候选 `ΔW` 方向与尺度诊断（2026-09-28，已完成）
 
-用户要求继续上述机制排查。新增 [`DUAL_GATE_SCALE_DIAGNOSTIC.md`](DUAL_GATE_SCALE_DIAGNOSTIC.md)，在看结果前固定 8 个训练源组的 `new_only/old_only` 条件和尺度网格 `−2,−1,−0.5,0,0.25,0.5,1,2`。`scripts/diagnose_cbf_update_scale.py` 对同一已观测状态仅在独立克隆中应用超出门控范围的临时尺度，不修改 `CBFSession.commit_both` 或 baseline；`s=0/1` 与已采集的 `10/11` 标签逐值校验。`scripts/summarize_cbf_update_scale.py` 按源组汇总正负尺度收益、最优尺度、候选范数、surprise、时间和峰值显存。`tests/test_cbf_ttt.py`、`tests/test_cbf_update_scale.py` 覆盖参考标签一致性和汇总完整性。负尺度只用来诊断候选方向，不是拟部署的更新规则。实验结果待远程执行后补记。
+用户要求继续上述机制排查。新增 [`DUAL_GATE_SCALE_DIAGNOSTIC.md`](DUAL_GATE_SCALE_DIAGNOSTIC.md)，在看结果前固定 8 个训练源组的 `new_only/old_only` 条件和尺度网格 `−2,−1,−0.5,0,0.25,0.5,1,2`。`scripts/diagnose_cbf_update_scale.py` 对同一已观测状态仅在独立克隆中应用超出门控范围的临时尺度，不修改 `CBFSession.commit_both` 或 baseline；`s=0/1` 与已采集的 `10/11` 标签逐值校验。`scripts/summarize_cbf_update_scale.py` 按源组汇总正负尺度收益、最优尺度、候选范数、surprise、时间和峰值显存。`tests/test_cbf_ttt.py`、`tests/test_cbf_update_scale.py` 覆盖参考标签一致性和汇总完整性。负尺度只用来诊断候选方向，不是拟部署的更新规则。
 
 远程 tiny-model 测试验证 `s=0/1` 与旧标签一致，但其某个随机初始化模型的候选范数恰为零，故原测试断言“范数必须大于零”过强；已改为非负检查。实际 4B 模型的尺度结果仍需另行验证。
+
+最终 4B 模型的 16 条 bf16 轨迹全部通过 `s=0/1` 参考标签校验；为核查细微差异，同一批又完成 float32 全尺度复跑。`new_only` 在 `s=0/0.25/1/2` 的平均 NLL，bf16 为 **1.99441/1.99468/2.00362/2.04651**，float32 为 **1.99348/1.99391/2.00135/2.04441**。float32 下负尺度超过 0.005 NLL 的有益源组为 0/8，正尺度为 2/8；降低 `g` 虽缓解全写入损害，仍未建立平均正收益。bf16/float32 每条平均 **1.213/3.832 秒**，峰值 reserved **14.041/30.371 GiB**。两份聚合分别存放于随机主试点目录的 `update_scale_summary.json` 和 `update_scale_fp32_summary.json`，本地复算与远程逐字节一致，报告已补充原始假设、方法映射和限制。既定写入/保留阶段门未改变，正式标签与控制器训练继续暂停；后续需设计能真正检验新文档信息复用的任务，再用新源组预注册试点。

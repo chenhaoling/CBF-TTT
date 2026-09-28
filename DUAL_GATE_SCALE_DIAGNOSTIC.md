@@ -16,3 +16,7 @@ python -m scripts.summarize_cbf_update_scale --input "$ROOT/update_scale_train.j
 ```
 
 原始逐场景轨迹只留在远程和本地忽略目录；GitHub 仅记录聚合、脚本与报告。
+
+## 执行结果
+
+16 条 bf16 轨迹均通过 `s=0/1` 参考标签校验；同一 16 条 float32 曲线也完成。两种精度下，`new_only` 的平均 NLL 在 `s=0` 附近最低，`s=1/2` 明显更差；float32 的负尺度改善超过 0.005 NLL 为 0/8 组。减小到 `s=0.25` 未带来平均正收益。完整曲线、资源及解释见 [`发布后论文报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_postcutoff_random_pilot/REPORT.md)。
