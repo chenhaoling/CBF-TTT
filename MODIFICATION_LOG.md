@@ -562,3 +562,7 @@ hku-gpu2 对 arXiv 官方元数据 API 返回 HTTP 406，而本机可从同一 U
 两卡完成随机主试点 48/48 条标签，无 OOM。来源漏斗为 51 篇尝试、48 篇合格、3 篇长度不足，首投日期 2026-09-21 至 09-24；1B 续训语料中的精确标题匹配 0/48。每条标签平均 **1.075 秒**、p95 **1.423 秒**，最大 CUDA reserved **13.854 GiB**。固定 `α=1` 比较 `g=0/1`，`new_only` 中明显有益写入仅 **1/12** 源组，平均写入收益 **−0.01193 NLL**；无关写入损害 **12/12** 源组。固定 `g=0` 比较旧记忆，保留旧记忆有益 **2/12**、清除有益 **6/12**；写入、保留和联合阶段门均未通过。两个训练源组的 float32 四角点复核保留 bf16 写入效应符号，峰值 reserved 27.320 GiB，但不代表全部样本。完整模型、来源、哈希、命令和限制见 [`随机主试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_postcutoff_random_pilot/REPORT.md)，机器可读结果见同目录 `documents.jsonl.meta.json`、`scenarios.jsonl.meta.json`、`title_audit.json`、`summary.json` 和 `gate.json`。
 
 正式反事实标签、双输出控制器训练及公开基准继续暂停。未来工作先排查当前 `ΔW` 的目标相关性和更新尺度，再用新论文/任务预注册有正写入样本的机制试点；已查看的探索性 dev/test 不作为正式测试。公开论文首投晚于 Qwen3 发布日是强来源代理，但不能证明此前无相似草稿；精确标题扫描不等于全文去重。PDF 转文本与 12 源组样本量也限制结论外推。所有新增逻辑均由独立脚本/协议启用，baseline 配置不受影响。
+
+### 候选 `ΔW` 方向与尺度诊断（2026-09-28，进行中）
+
+用户要求继续上述机制排查。新增 [`DUAL_GATE_SCALE_DIAGNOSTIC.md`](DUAL_GATE_SCALE_DIAGNOSTIC.md)，在看结果前固定 8 个训练源组的 `new_only/old_only` 条件和尺度网格 `−2,−1,−0.5,0,0.25,0.5,1,2`。`scripts/diagnose_cbf_update_scale.py` 对同一已观测状态仅在独立克隆中应用超出门控范围的临时尺度，不修改 `CBFSession.commit_both` 或 baseline；`s=0/1` 与已采集的 `10/11` 标签逐值校验。`scripts/summarize_cbf_update_scale.py` 按源组汇总正负尺度收益、最优尺度、候选范数、surprise、时间和峰值显存。`tests/test_cbf_ttt.py`、`tests/test_cbf_update_scale.py` 覆盖参考标签一致性和汇总完整性。负尺度只用来诊断候选方向，不是拟部署的更新规则。实验结果待远程执行后补记。

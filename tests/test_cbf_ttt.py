@@ -214,6 +214,15 @@ class CBFCoreTests(unittest.TestCase):
                                                       [0.0, 0.5, 1.0], every=2), 1)
                 self.assertEqual(json.loads(Path(postcutoff_path).read_text())["protocol"],
                                  "joint_postcutoff_v1")
+                from scripts.diagnose_cbf_update_scale import diagnose
+                scale_path = Path(directory) / "scale_diagnostic.jsonl"
+                reference = json.loads(Path(postcutoff_path).read_text())
+                self.assertEqual(diagnose(model, [postcutoff_scenario],
+                                          [-1.0, 0.0, 0.5, 1.0, 2.0], scale_path,
+                                          {reference["id"]: reference}), 1)
+                scale_row = json.loads(scale_path.read_text())
+                self.assertEqual(len(scale_row["losses"]), 5)
+                self.assertGreater(scale_row["candidate_ratio"], 0)
 
     def test_alpha_zero_matches_qwen_baseline_at_same_chunk_boundaries(self):
         from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config
