@@ -179,7 +179,7 @@ def main() -> None:
     references = load_references(args.reference_labels) if args.reference_labels else None
     model = _load_model(args.model, args.device, args.dtype)
     count = diagnose(model, scenarios, Path(args.output), references)
-    print(json.dumps({"diagnosed": count, "output": args.output}))
+    print(json.dumps({"diagnosed": count, "output": str(args.output)}))
 
 
 if __name__ == "__main__":

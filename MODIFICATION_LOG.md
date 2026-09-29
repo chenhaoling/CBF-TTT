@@ -633,3 +633,5 @@ python -m scripts.summarize_cbf_query_gradient --input "$OUT/diagnostic.jsonl" -
 ```
 
 执行前先跑 tiny Qwen 测试和一条 GPU smoke；若 autograd 与 inference NLL 或已有标签不一致，停止解释轨迹。答案梯度泄露未来标签，不能用 oracle 收益代表实际可部署的适应方法。原始诊断逐条记录留在本地/远程忽略目录，只公开聚合结果。
+
+远程 tiny Qwen 首次测试触发测试 fixture 的零初始化 TTT 卷积，使候选范数为零；仅对该随机 tiny fixture 设置非零卷积权重后 10 项测试通过。真实最终模型的一条 `old_only` smoke 已计算并写入结果，`s=0/1` 与旧标签一致、梯度 NLL 与推理 NLL 差小于 `2e-7`，峰值 reserved 14.330 GiB；随后 CLI 打印阶段因 `Path` 未转字符串报错，未影响该条数值。已修正输出序列化，扩展运行前将用新输出文件复查命令退出码。
