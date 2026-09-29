@@ -272,6 +272,42 @@ class CBFCoreTests(unittest.TestCase):
             controlled_query = controlled._forward([17, 18])
         self.assertTrue(torch.allclose(standard_query, controlled_query, atol=1e-5, rtol=1e-4))
 
+    def test_query_gradient_diagnostic_matches_title_labels(self):
+        from cbf_ttt.experiment import collect_joint_labels
+        from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config
+        from inference_model.hf_qwen3.modeling_qwen3 import Qwen3ForCausalLM
+        from scripts.diagnose_cbf_query_gradient import diagnose
+
+        config = Qwen3Config(
+            vocab_size=32, hidden_size=8, intermediate_size=16, num_hidden_layers=2,
+            num_attention_heads=2, num_key_value_heads=2, head_dim=4,
+            max_position_embeddings=32, ttt_mode=True, ttt_layers=[0, 1],
+            ttt_chunk=4, ttt_lr=0.1, ttt_proj=True,
+        )
+        model = Qwen3ForCausalLM(config).eval()
+        model.requires_grad_(False)
+        query = {"kind": "new_title", "query_ids": [9], "answer_ids": [10, 11]}
+        scenario = {
+            "id": "gradient-tiny", "group_id": "gradient-group", "split": "train",
+            "regime": "new_only", "objective": "joint_title_recall_v1",
+            "context_ids": [1, 2, 3, 4, 5, 6, 7, 8],
+            "futures": [{"gap_chunks": 0, "reset_kv": reset,
+                         "continuation_ids": [], "queries": [query]}
+                        for reset in (False, True)],
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            label_path = Path(directory) / "labels.jsonl"
+            self.assertEqual(collect_joint_labels(model, [scenario], str(label_path),
+                                                  [0.0, 0.5, 1.0], every=2), 1)
+            diagnostic_path = Path(directory) / "diagnostic.jsonl"
+            reference = json.loads(label_path.read_text())
+            self.assertEqual(diagnose(model, [scenario], diagnostic_path,
+                                      {scenario["id"]: reference}), 1)
+            row = json.loads(diagnostic_path.read_text())
+            self.assertGreater(row["candidate_norm"], 0)
+            self.assertGreater(row["gradient_norm"], 0)
+            self.assertTrue(math.isfinite(row["gradient_candidate_cosine"]))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -609,3 +609,27 @@ python -m scripts.evaluate_cbf_title_recall_gate --labels "$ROOT"/*_joint_labels
 远程 PyTorch/纯数据 12 项测试通过；48 篇新论文来源与前两批入选的 88 个唯一 ID 不重叠，53 篇尝试后得到 48 篇，1B 语料精确标题匹配 0/48。单场景 smoke 1.670 秒、峰值 reserved 14.094 GiB。两卡约 51 秒完成 48 条 3×3 网格标签，平均每条 1.255 秒、p95 1.689 秒，最大 reserved 14.098 GiB，无 OOM。本地从逐条标签复算的聚合文件与远程 SHA256 一致。完整来源、命令、汇总与限制见 [`标题回忆试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/joint_title_recall_pilot/REPORT.md)，机器可读结果为同目录的 `summary.json`、`gate.json`、`title_audit.json` 和来源元数据；逐条标签由 `.gitignore` 排除。
 
 预注册的 `memory_only` 阶段门未通过：`new_only` 有益写入 **1/12** 组，平均收益 **−0.02139 NLL**；无关写入有害 **8/12**；旧记忆保留有益 **0/12**，清除有益 **9/12**。KV 完整与仅快记忆的 `new_title` NLL 约 0.58 和 4.94，但清空 KV 后并未出现稳定正写入收益。按阶段门暂停正式标签、双输出控制器及公开基准对照。下一步需改进候选 `ΔW` 的信息写入目标或机制，再用新源组验证；不能将本轮 `neither` 未见标题视为可回答的问题。所有新增入口为 opt-in，原始 baseline 不受影响。
+### 标题答案梯度与原始候选方向诊断（2026-09-29，执行中）
+
+标题回忆阶段门失败后，继续定位原因。原 In-Place TTT 候选是当前 chunk 表示外积，不直接对未来标题任务求梯度。本轮固定现有最终 Qwen3-4B、8 个 train 源组的 `new_only/old_only` 共 16 条场景；在 `g=0` 且仅快记忆的读取状态计算标题 NLL 对 `M` 的梯度，记录它与原始 `ΔW` 的内积/余弦，并比较等范数原始方向与答案梯度 oracle 方向的 `s=0.25/1` 局部扰动。答案梯度只用于事后容量探针，不可作为在线控制器输入；本轮不训练控制器、不改变既有阶段门。具体分析假设和判据见 [`DUAL_GATE_QUERY_GRADIENT_DIAGNOSTIC.md`](DUAL_GATE_QUERY_GRADIENT_DIAGNOSTIC.md)。
+
+| 文件 | 修改 | baseline 影响 |
+|---|---|---|
+| `scripts/diagnose_cbf_query_gradient.py` | 新增独立反事实梯度探针；只把克隆快记忆设为可求导叶子，核对 `s=0/1` 与已有标题标签，记录梯度方向、两扰动损失、耗时和峰值显存 | opt-in；原模型和运行时更新公式不变 |
+| `scripts/summarize_cbf_query_gradient.py` | 按完整 train 源组汇总方向、收益和资源，并执行预先写定的机制解释条件 | 仅离线聚合 |
+| `tests/test_cbf_ttt.py`、`tests/test_cbf_query_gradient.py` | tiny Qwen 梯度/参考标签闭环与纯数据汇总完整性检查 | 仅测试 |
+| `DUAL_GATE_QUERY_GRADIENT_DIAGNOSTIC.md`、本文件 | 固定样本、判据、风险、执行命令和结果 | 仅文档 |
+
+远程命令（先用 `--max-scenarios 1` 单场景 smoke；去掉该选项运行 16 条，输出换新路径）：
+
+```bash
+cd /home/ctj/cbf_ttt_joint_exp_20260927
+export PATH=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin:$PATH
+ROOT=/home/ctj/cbf_ttt_title_recall_pilot_20260929
+OUT=/home/ctj/cbf_ttt_query_gradient_20260929
+mkdir -p "$OUT"
+CUDA_VISIBLE_DEVICES=0 python -m scripts.diagnose_cbf_query_gradient --model /home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt --data "$ROOT/scenarios.jsonl" --split train --reference-labels "$ROOT/train_shard0_joint_labels.jsonl" "$ROOT/train_shard1_joint_labels.jsonl" --output "$OUT/diagnostic.jsonl"
+python -m scripts.summarize_cbf_query_gradient --input "$OUT/diagnostic.jsonl" --output "$OUT/summary.json"
+```
+
+执行前先跑 tiny Qwen 测试和一条 GPU smoke；若 autograd 与 inference NLL 或已有标签不一致，停止解释轨迹。答案梯度泄露未来标签，不能用 oracle 收益代表实际可部署的适应方法。原始诊断逐条记录留在本地/远程忽略目录，只公开聚合结果。
