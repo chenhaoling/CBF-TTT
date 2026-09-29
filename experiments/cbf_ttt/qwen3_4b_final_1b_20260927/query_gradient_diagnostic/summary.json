@@ -1,0 +1,41 @@
+{
+  "protocol": "query_gradient_diagnostic_v1",
+  "labels": 16,
+  "source_groups": 8,
+  "threshold_nll": 0.005,
+  "by_regime": {
+    "new_only": {
+      "groups": 8,
+      "mean_base_loss": 5.135892709616485,
+      "mean_candidate_norm": 1.2701303063168412,
+      "mean_gradient_norm": 35.171964684867056,
+      "mean_gradient_candidate_cosine": 0.0002646127325792604,
+      "mean_abs_gradient_candidate_cosine": 0.0003865756057181946,
+      "positive_directional_derivative_groups": 7,
+      "mean_raw_gain_at_0.25": -0.00907293511899232,
+      "mean_raw_gain_at_1": -0.017641144097832462,
+      "mean_oracle_gain_at_0.25": 3.158393178796808,
+      "mean_oracle_gain_at_1": 1.1539450067449561,
+      "oracle_gain_over_threshold_groups": 8
+    },
+    "old_only": {
+      "groups": 8,
+      "mean_base_loss": 4.917954117994566,
+      "mean_candidate_norm": 1.3181834196446072,
+      "mean_gradient_norm": 37.42838327148046,
+      "mean_gradient_candidate_cosine": 9.481039656059504e-05,
+      "mean_abs_gradient_candidate_cosine": 0.0005204232729068411,
+      "positive_directional_derivative_groups": 5,
+      "mean_raw_gain_at_0.25": 0.0004773436170637524,
+      "mean_raw_gain_at_1": -0.010113686392635102,
+      "mean_oracle_gain_at_0.25": 2.7669574052363366,
+      "mean_oracle_gain_at_1": -0.01697717785160424,
+      "oracle_gain_over_threshold_groups": 8
+    }
+  },
+  "supports_candidate_misalignment_hypothesis": true,
+  "mean_time_s": 0.9699944602325559,
+  "max_time_s": 1.5119797633960843,
+  "max_peak_allocated_gib": 14.630555152893066,
+  "max_peak_reserved_gib": 16.03125
+}

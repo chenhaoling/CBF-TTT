@@ -50,7 +50,13 @@ def summarize(paths: list[Path], expected_groups: int = 8, threshold: float = 0.
         subset = [rows[regime] for rows in rows_by_group.values()]
         by_regime[regime] = {
             "groups": len(subset),
+            "mean_base_loss": statistics.mean(row["base_loss"] for row in subset),
+            "mean_candidate_norm": statistics.mean(row["candidate_norm"] for row in subset),
+            "mean_gradient_norm": statistics.mean(row["gradient_norm"] for row in subset),
             "mean_gradient_candidate_cosine": statistics.mean(row["gradient_candidate_cosine"] for row in subset),
+            "mean_abs_gradient_candidate_cosine": statistics.mean(
+                abs(row["gradient_candidate_cosine"]) for row in subset
+            ),
             "positive_directional_derivative_groups": sum(row["gradient_dot_candidate"] > 0 for row in subset),
             "mean_raw_gain_at_0.25": statistics.mean(row["base_loss"] - row["raw_losses"]["0.25"]
                                                  for row in subset),
