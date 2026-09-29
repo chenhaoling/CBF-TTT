@@ -1,0 +1,30 @@
+{
+  "protocol": "task_writer_v1",
+  "best": {
+    "mean_nll": 4.37043921649456,
+    "epoch": 1,
+    "gate": 1.0,
+    "gain_vs_none": 0.5840709507465363,
+    "gain_vs_best_raw": 0.6036105901002884,
+    "improved_papers": 15
+  },
+  "raw_gate": 0.5,
+  "passed_dev_gate": true,
+  "smoke": false,
+  "seed": 123,
+  "lr": 0.001,
+  "rank": 8,
+  "epochs": 5,
+  "train_papers": 64,
+  "dev_papers": 16,
+  "optimizer_steps": 320,
+  "baseline_dev_means": {
+    "writer_0.5": 4.974049806594849,
+    "writer_1.0": 5.02363409101963,
+    "none": 4.9545101672410965,
+    "raw_0.5": 4.974049806594849,
+    "raw_1.0": 5.02363409101963
+  },
+  "checkpoint_sha256": "4fd6be58ae7bfa00c74911e4d4dc24c7ec31ba56cd8d98e003208561b2c05487",
+  "episodes_sha256": "ac51069aabf12bb7a836bf827cb15c36d532dcad1f42c3faf03b8a28fc3ef3a9"
+}

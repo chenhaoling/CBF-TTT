@@ -1,0 +1,984 @@
+{
+  "protocol": "postcutoff_arxiv_v1",
+  "category": "cs.CL",
+  "start": "202609010000",
+  "end": "202609262359",
+  "total_api_results": 1891,
+  "max_results": 300,
+  "target": 96,
+  "min_tokens": 4256,
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "api_feed_sha256": "9d647b67b617f065cdc89ab901851a798c54d6b79193f4440a4e30d157c5d4c4",
+  "excluded_source_count": 136,
+  "excluded_source_ids_sha256": "73dd9be17bbc49e57e041760b5f65005eb378372782dc96823a2306eae66ec6a",
+  "require_title_in_prefix_tokens": 4096,
+  "selection_seed": 121,
+  "selection_method": "shuffle_API_top_max_results_then_first_eligible",
+  "attempted": 106,
+  "rejected": {
+    "title_absent_from_prefix": 3,
+    "too_short": 7
+  },
+  "accepted": [
+    {
+      "source_id": "2609.24657v1",
+      "source_url": "https://arxiv.org/abs/2609.24657v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24657v1",
+      "title": "Circuit Hypernetworks for Quantum-Augmented Diffusion Language Models",
+      "published": "2026-09-21T14:25:04Z",
+      "pdf_sha256": "81352135cbd235508527fbb0b62b204e3942299e45c2443daeb1ccb6358a80e1",
+      "text_sha256": "1f29da986657f0a5a252f1670a850a7f56b1ecf426a4ed99d76098c89c56d763",
+      "qwen_tokens": 21978
+    },
+    {
+      "source_id": "2609.26488v1",
+      "source_url": "https://arxiv.org/abs/2609.26488v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26488v1",
+      "title": "Spoken Language Models that Think Aloud",
+      "published": "2026-09-22T14:25:04Z",
+      "pdf_sha256": "1c4117705a08648bc55f48f3f79870b6c4a8ce7b91fe9b8da9e6c2e05cfda7a9",
+      "text_sha256": "6d5b26b7d236239a150c2dd3a23c11f5dc4c405ae4ff1d4636d39f4034729700",
+      "qwen_tokens": 11149
+    },
+    {
+      "source_id": "2609.27380v1",
+      "source_url": "https://arxiv.org/abs/2609.27380v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27380v1",
+      "title": "MORSE: Multi-Context Ordering via Reverse Scoring for Evidence-Preserving Compression",
+      "published": "2026-09-23T05:32:04Z",
+      "pdf_sha256": "84a55e445d1e9a2cdd036394081f3ebbeffffeb61c9fe77a9f84c8d762768049",
+      "text_sha256": "98e4297031423585efe427705e3d215f0b6a3ddbaf3d4c45755b5873450bd162",
+      "qwen_tokens": 31132
+    },
+    {
+      "source_id": "2609.27678v1",
+      "source_url": "https://arxiv.org/abs/2609.27678v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27678v1",
+      "title": "Same Scores, Different Decisions: Evaluating JEV and Language Models for Legal Document Understanding",
+      "published": "2026-09-23T10:53:01Z",
+      "pdf_sha256": "f31e16b317badfbccd59da45add44f22cd610672f22436a2f876f8bde3b91da7",
+      "text_sha256": "9b2c0dc2ff7499e25a47f0beefd3084ae05ddb61da94d92f0614fe8966304bcb",
+      "qwen_tokens": 10222
+    },
+    {
+      "source_id": "2609.25755v1",
+      "source_url": "https://arxiv.org/abs/2609.25755v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25755v1",
+      "title": "Syndrome, Synergy, and Safety: Structured Reasoning and Knowledge-Driven Alignment for TCM Prescription Generation",
+      "published": "2026-09-22T06:49:19Z",
+      "pdf_sha256": "f996551690e5d8692928882855d69befaa8c2a85631e7e3988dacd1b8b31bdfd",
+      "text_sha256": "df2759ad4bffe0b6001b032a9dae50b2fdbe6b846ce8197ca8ca8488bbcdc05c",
+      "qwen_tokens": 8915
+    },
+    {
+      "source_id": "2609.25356v1",
+      "source_url": "https://arxiv.org/abs/2609.25356v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25356v1",
+      "title": "TelecomGPT-R1: Unified Post-Training for Reasoning Across Heterogeneous Telecom Tasks",
+      "published": "2026-09-21T19:48:02Z",
+      "pdf_sha256": "40d1f538d0a7858d8ac6c830500e4fdcc783c8ab3d8773300d71909620bdf7bd",
+      "text_sha256": "6643b125c6922ce04428ed1d89fa1dc617cac485a793c338b7d4038b01ff9588",
+      "qwen_tokens": 19487
+    },
+    {
+      "source_id": "2609.27607v1",
+      "source_url": "https://arxiv.org/abs/2609.27607v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27607v1",
+      "title": "Can Jev Judge Radiology Reports? Evaluating a System One Model for Clinical Factuality",
+      "published": "2026-09-23T09:26:46Z",
+      "pdf_sha256": "328eaef0c2bd221652869bb4bbbb08b251cc3617350a75368ab4c5fe6fad5fad",
+      "text_sha256": "186045f2c86f4a6b9e44a1dc9c1860c8a499fc36995f14f544e20008c1321055",
+      "qwen_tokens": 10878
+    },
+    {
+      "source_id": "2609.27396v1",
+      "source_url": "https://arxiv.org/abs/2609.27396v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27396v1",
+      "title": "When Parallel Drafter Meets Parallel Speculative Decoding",
+      "published": "2026-09-23T05:53:48Z",
+      "pdf_sha256": "02dbc137042cf8cc91715dbbbf9db3770768ac11e78ac0ef1df3874c6985951a",
+      "text_sha256": "e69c10a66f3a01679778dc8e96d7e39145495f8f9f571499192e7a820df51585",
+      "qwen_tokens": 16214
+    },
+    {
+      "source_id": "2609.24983v1",
+      "source_url": "https://arxiv.org/abs/2609.24983v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24983v1",
+      "title": "onPanda: Efficient Annotation of On-Policy Alignment Data for LLMs and Agents via Token-Level Correction",
+      "published": "2026-09-21T17:56:53Z",
+      "pdf_sha256": "7b9ebad648805d0ace85288fc77405e884dcd2c7a42c3d773bdf30980d07ff9b",
+      "text_sha256": "ef2e3d76714e203aa0dd5ec3d77f5dbc0c174be4a118d9c97c69a52fcf52fc1c",
+      "qwen_tokens": 6998
+    },
+    {
+      "source_id": "2609.28395v1",
+      "source_url": "https://arxiv.org/abs/2609.28395v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28395v1",
+      "title": "Fine-Tuning LLMs for Translation: General Forgetting Mitigation Does Not Preserve MT-Specific Instruction Following",
+      "published": "2026-09-23T17:02:59Z",
+      "pdf_sha256": "25a5076636665f22d8d675a3fe5d5ec2c6ac4f142e5107414338f12b329d16fa",
+      "text_sha256": "769ee5bc62b3d6db2663c7b56c8cebaf86b436fa192247e82ba8012a04b52a32",
+      "qwen_tokens": 12421
+    },
+    {
+      "source_id": "2609.24971v2",
+      "source_url": "https://arxiv.org/abs/2609.24971v2",
+      "pdf_url": "https://arxiv.org/pdf/2609.24971v2",
+      "title": "DolphinBench: Mapping the Pareto Frontier of Agent Memory",
+      "published": "2026-09-21T17:54:35Z",
+      "pdf_sha256": "d13780a8bce0325613402b42024a19d8e7266f8eb891e571011bef9f4371fe33",
+      "text_sha256": "96053cd9ba86744afa7f33abd6771a8f967196ef08e8fc7b9e1657e6984a0856",
+      "qwen_tokens": 4837
+    },
+    {
+      "source_id": "2609.25298v1",
+      "source_url": "https://arxiv.org/abs/2609.25298v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25298v1",
+      "title": "FineWeb-CLaR: Culture, Language, and Region Annotations for Benchmark-Aligned Corpus Auditing",
+      "published": "2026-09-21T18:41:30Z",
+      "pdf_sha256": "675eeda13323b6ec5a2e721fbeda6ec8b68f96bb155d89e58a630fe0f0f0d9bd",
+      "text_sha256": "4f0c9983d5acd36e0bb1341bbf7d58521d5785403a6184358d456a9e8815d21a",
+      "qwen_tokens": 10555
+    },
+    {
+      "source_id": "2609.26035v1",
+      "source_url": "https://arxiv.org/abs/2609.26035v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26035v1",
+      "title": "Truth for Believable AI: Expressed Doubt, Provenance, and Belief Revision as an Engineerable Stance",
+      "published": "2026-09-22T11:34:53Z",
+      "pdf_sha256": "541c2195755d4017d0c093d541dc1bca1be3d09196c6f6eddd05f6a967d8358a",
+      "text_sha256": "34e62c73b396ab37d89fd91b32ce3feb176d6e8243ff706de12b781dfd769489",
+      "qwen_tokens": 12263
+    },
+    {
+      "source_id": "2609.29102v1",
+      "source_url": "https://arxiv.org/abs/2609.29102v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29102v1",
+      "title": "ELF-REG: Scaling Continuous Diffusion Language Models to Reasoning Tasks",
+      "published": "2026-09-24T06:33:19Z",
+      "pdf_sha256": "88e467c9fe4071444cab2dc9a324f5da3a2b85567d2c191ca3c3744effe91f28",
+      "text_sha256": "0f20a4d13a694ba1f518201522ad53ffeeafe6f6bd6a950748c1671f79b7163f",
+      "qwen_tokens": 15977
+    },
+    {
+      "source_id": "2609.26796v1",
+      "source_url": "https://arxiv.org/abs/2609.26796v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26796v1",
+      "title": "Flash-dLLM: IO-Aware KV Caching and Parallel Decoding for Fast, Memory-Efficient Diffusion LLMs",
+      "published": "2026-09-22T17:59:57Z",
+      "pdf_sha256": "9a094f4548273a0c8eaef90fbc8c85068ed9a14d19a093f4a995edf85519dcce",
+      "text_sha256": "b13c8c6bfaceb78ce297e18fa74ff876ed8e4484ee4e8f290aa7691e7e299e8d",
+      "qwen_tokens": 11269
+    },
+    {
+      "source_id": "2609.24974v1",
+      "source_url": "https://arxiv.org/abs/2609.24974v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24974v1",
+      "title": "Harness-Zero: Harness Distillation via Agent-as-Harness",
+      "published": "2026-09-21T17:55:20Z",
+      "pdf_sha256": "bf0331faa974d446aa360d7ac8bf9bb0cb44363a4fcebc06aea52c6cfcc8101f",
+      "text_sha256": "80846c673dcb9960e745e9e72536cf7059a29fd9d67b9aca9a1e29128eb50134",
+      "qwen_tokens": 9470
+    },
+    {
+      "source_id": "2609.29131v1",
+      "source_url": "https://arxiv.org/abs/2609.29131v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29131v1",
+      "title": "Tag-Aware Structured Text Translation: Towards a Systematic Understanding",
+      "published": "2026-09-24T07:09:28Z",
+      "pdf_sha256": "8b63117079d8807d42e6af273106f609b178c39f9fd3df7eab120a0e82caa2cb",
+      "text_sha256": "375c9e8d7ab8a5c2d61e12008564208658ff1e69a8d8b980b58b7eec3f0a1002",
+      "qwen_tokens": 10331
+    },
+    {
+      "source_id": "2609.24432v1",
+      "source_url": "https://arxiv.org/abs/2609.24432v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24432v1",
+      "title": "1% of Tokens Can Be Enough: On Gradient Estimation in On-Policy Distillation",
+      "published": "2026-09-21T11:28:24Z",
+      "pdf_sha256": "e5318b63d9cf84b10599ee6649218373db4ed447714393b6fc76e999c8d0a572",
+      "text_sha256": "a8dd7a7896bc56f403e0527af3ef5775766a79ce2f31fa1d3cd71e557af03aef",
+      "qwen_tokens": 11061
+    },
+    {
+      "source_id": "2609.27374v1",
+      "source_url": "https://arxiv.org/abs/2609.27374v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27374v1",
+      "title": "Planned Test-Time Scaling with Coordinated Reasoning Paths",
+      "published": "2026-09-23T05:25:10Z",
+      "pdf_sha256": "b42a2a191c3f267fd76f860c98152643d4c69c38357ca2313f7a030682138794",
+      "text_sha256": "0c23f0d9fac9ef0c512548d83eca44d48e81d867bc1bc8d17d42f072470e67a0",
+      "qwen_tokens": 21991
+    },
+    {
+      "source_id": "2609.27372v1",
+      "source_url": "https://arxiv.org/abs/2609.27372v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27372v1",
+      "title": "Neither Silence nor Overlap Is Failure: Intent-Conditioned Evaluation of Turn-Taking in Full-Duplex Spoken Dialogue Models",
+      "published": "2026-09-23T05:21:10Z",
+      "pdf_sha256": "73147de353cd5718d0f2eeab8b859ad11953af1aa905a378f513aac3e91b6ebc",
+      "text_sha256": "2f4e9f4deac9b824a9b1a9ecdb988c1385c68ad4ce91711e1aba5b751007dd03",
+      "qwen_tokens": 14650
+    },
+    {
+      "source_id": "2609.29278v1",
+      "source_url": "https://arxiv.org/abs/2609.29278v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29278v1",
+      "title": "Reasoning Instructions Can Break Answer Decoding in Vision--Language Models",
+      "published": "2026-09-24T09:15:56Z",
+      "pdf_sha256": "9fc780ae280c405b4307b9cb902d204e4ecbbf7be085196de34aec03013ac7c7",
+      "text_sha256": "367ab033dc8eda243049770fa3952705855efd8dd998fee58fec5f3f5dc68bf5",
+      "qwen_tokens": 7867
+    },
+    {
+      "source_id": "2609.25186v1",
+      "source_url": "https://arxiv.org/abs/2609.25186v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25186v1",
+      "title": "From Pattern Recognizers to Personalized Companions: A Survey of Large Language Models in Mental Health",
+      "published": "2026-09-21T16:58:17Z",
+      "pdf_sha256": "8582c7bc09bc25f9c4b7ce01445cdbc96864d3e43fcf9449c5d0640691f7e4b1",
+      "text_sha256": "acab66bb334e30888dcd172c5de19bf36533210eb138a012205d31c113bdc89e",
+      "qwen_tokens": 39803
+    },
+    {
+      "source_id": "2609.24877v1",
+      "source_url": "https://arxiv.org/abs/2609.24877v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24877v1",
+      "title": "Decomposing Error and Style in Automated Clinical Coding",
+      "published": "2026-09-21T16:47:07Z",
+      "pdf_sha256": "3e9797aebc7b9007da1aee7ac8f315e9af39c5531edbb0c10617722d33a046b2",
+      "text_sha256": "f5d39acca1783155e88c2772feb0fb7bdcfca5e808621be49d6350a01c56d9be",
+      "qwen_tokens": 12805
+    },
+    {
+      "source_id": "2609.24156v1",
+      "source_url": "https://arxiv.org/abs/2609.24156v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24156v1",
+      "title": "TAC-Time: Texts as Channels For Multimodal Time Series Forecasting",
+      "published": "2026-09-21T06:18:11Z",
+      "pdf_sha256": "5021b174b1071d732dfa25f0e394195a8b857ca8eda7048ce17a928680e8126a",
+      "text_sha256": "3a456a22a7c0490bb3a3a8a54e68b10ea5a8010695916c4d8565e7e84a82d8a1",
+      "qwen_tokens": 19144
+    },
+    {
+      "source_id": "2609.25602v1",
+      "source_url": "https://arxiv.org/abs/2609.25602v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25602v1",
+      "title": "Rewired or Gated? How Instruction Tuning Shapes Knowledge-Conflict Circuits in LLMs",
+      "published": "2026-09-22T02:49:16Z",
+      "pdf_sha256": "e7c7bbf3a8edd6ebd6e8a67d7263f85826bd0236d582c9f08185c0b6fdc81510",
+      "text_sha256": "c2c240621fe29d0aa70d58b6ac84a8ff93fcdac5313990be92bf7b63c2199576",
+      "qwen_tokens": 8172
+    },
+    {
+      "source_id": "2609.27510v1",
+      "source_url": "https://arxiv.org/abs/2609.27510v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27510v1",
+      "title": "Uncheatable Eval: Dynamic Compression-Based Evaluation of Language Models",
+      "published": "2026-09-23T08:09:38Z",
+      "pdf_sha256": "25e76935126a9177714bc478512cb49e2d72562dcafe56fb7c81e1c3e27e3ec5",
+      "text_sha256": "e73b7b8528f6c491438ba9f770cf7e37774695b44dc3a1daeabeaafcc30a9c3b",
+      "qwen_tokens": 9073
+    },
+    {
+      "source_id": "2609.29333v1",
+      "source_url": "https://arxiv.org/abs/2609.29333v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29333v1",
+      "title": "Where LLM Graders Succeed and Break: Evidence from Two Computer-Science Exams",
+      "published": "2026-09-24T10:07:57Z",
+      "pdf_sha256": "07690023c4437d0316a4cfccc261dd775f034eb28abec6696bdc1f65bd4395af",
+      "text_sha256": "cc6a6bd75301f7e416aa0a6b4d49f4aaf39c92fd3cafcc832e08cb1b0a9aca42",
+      "qwen_tokens": 11790
+    },
+    {
+      "source_id": "2609.25441v1",
+      "source_url": "https://arxiv.org/abs/2609.25441v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25441v1",
+      "title": "Mining Legal Arguments in U.S. Corporate Case Law",
+      "published": "2026-09-21T21:52:00Z",
+      "pdf_sha256": "fafe9cde07f9877cb3c7117fe381d634a2d81c3a3b276a399de9213ccf505c21",
+      "text_sha256": "5ca70df5665d7da1b97e2ec0b085f65b082f5b23842cf6f0fd9b78202a2f2abc",
+      "qwen_tokens": 9718
+    },
+    {
+      "source_id": "2609.28080v1",
+      "source_url": "https://arxiv.org/abs/2609.28080v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28080v1",
+      "title": "Reference-Based Analysis of Coherence and Diversity in Open-Ended Text Generation",
+      "published": "2026-09-23T13:22:31Z",
+      "pdf_sha256": "96332e47d044dab1753650f7c1c93d0fc75f50c02fb0c15e1721d36412ccb201",
+      "text_sha256": "919e2e4300467922ea3b1d1b195bfa50ba94e2d14997a682769b6383f9f4358e",
+      "qwen_tokens": 8437
+    },
+    {
+      "source_id": "2609.25176v2",
+      "source_url": "https://arxiv.org/abs/2609.25176v2",
+      "pdf_url": "https://arxiv.org/pdf/2609.25176v2",
+      "title": "Qwen-Audio-3.1-Realtime: Towards Reliable Agentic Voice Interaction",
+      "published": "2026-09-21T14:20:47Z",
+      "pdf_sha256": "9206d6c6b98a456735169e7c393f33b69af0dbeffc54e1333a1dc4ce4e7ffd49",
+      "text_sha256": "a05b446d39a5cd1aa0454f214b39859053d21fb24945cec6d64bdf6c3a935827",
+      "qwen_tokens": 17989
+    },
+    {
+      "source_id": "2609.27669v1",
+      "source_url": "https://arxiv.org/abs/2609.27669v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27669v1",
+      "title": "The Path Matters: Evaluating Small Language Models Beyond Answer Accuracy in KGQA",
+      "published": "2026-09-23T10:38:23Z",
+      "pdf_sha256": "0be7e458e27281214a8feb7300d3ad96c5c93115351c5c2627e981628f01c59e",
+      "text_sha256": "34750aef82219306aba3c4ef5e8af1838f8b4e21a0218618c774d147bb8b8c62",
+      "qwen_tokens": 7427
+    },
+    {
+      "source_id": "2609.27110v1",
+      "source_url": "https://arxiv.org/abs/2609.27110v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27110v1",
+      "title": "Feed the Panel Dimensions, Not Verdicts: Rubric-Decomposed Fusion of Vision-Language Aesthetic Judges",
+      "published": "2026-09-22T22:07:52Z",
+      "pdf_sha256": "f8cbedc5f149f40e0109d9702478179d9690690ace1bdc163a4e535a1ce06df6",
+      "text_sha256": "bc143130265d41e26f37a0d140e235af8be58f1c8e82cba8149a969e692291d0",
+      "qwen_tokens": 9802
+    },
+    {
+      "source_id": "2609.24480v1",
+      "source_url": "https://arxiv.org/abs/2609.24480v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24480v1",
+      "title": "Fathom-Vaidya: Advancing Medical Reasoning with Rubric-Based Rewards",
+      "published": "2026-09-21T12:19:50Z",
+      "pdf_sha256": "4cf834c4023a7a214b752b326a1c0cd238068269652de3936999959d683cbf7e",
+      "text_sha256": "e4696da63f8a1dbe6ade801b06b7bf4edb5c65ce8a9ede20d8d39c877070751b",
+      "qwen_tokens": 8251
+    },
+    {
+      "source_id": "2609.28150v1",
+      "source_url": "https://arxiv.org/abs/2609.28150v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28150v1",
+      "title": "Exact Feedback Is Not Control: Evaluating Text-based Closed-Loop Revision in LLMs",
+      "published": "2026-09-23T14:06:52Z",
+      "pdf_sha256": "7eaa34e443b288756d7323bc686ccdb113f045a9de4e86610fbc5bfc12171830",
+      "text_sha256": "e15861408487d8bb92b3e5a0260f2425a54ddb2e6938525460e1382d26b69ffb",
+      "qwen_tokens": 39149
+    },
+    {
+      "source_id": "2609.29230v1",
+      "source_url": "https://arxiv.org/abs/2609.29230v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29230v1",
+      "title": "EAGER: Enhancing Generative Event Extraction via Reinforcement Learning with Verifiable Rewards",
+      "published": "2026-09-24T08:37:46Z",
+      "pdf_sha256": "4807af58f14e503faeb2c9d046aa234762f14e4661489cc3332ea51ea43b302a",
+      "text_sha256": "d594f3c8bffcf178f062f78cca583836bc9ae6b980a885fe561bf3253be2a1d5",
+      "qwen_tokens": 11354
+    },
+    {
+      "source_id": "2609.29056v1",
+      "source_url": "https://arxiv.org/abs/2609.29056v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29056v1",
+      "title": "Empath: Tracing Multi-Level Emotion Dynamics in Crisis Counseling Dialogues",
+      "published": "2026-09-24T05:40:15Z",
+      "pdf_sha256": "d1f1c8bb595f96cea39e6e46bd75221c58c1d2009a98523c9bb6cd68e4be4775",
+      "text_sha256": "ac3fbfa65a369cef93d091ec69e085b6f95b0118faffe6ed2868a75cab224eeb",
+      "qwen_tokens": 9136
+    },
+    {
+      "source_id": "2609.27195v1",
+      "source_url": "https://arxiv.org/abs/2609.27195v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27195v1",
+      "title": "Quieter Than the Room: Representation Drift and Task Robustness in Speech Encoders",
+      "published": "2026-09-23T00:58:15Z",
+      "pdf_sha256": "02c47579723e6f09c15fe88b7da585c500d369ddbafce47961c0768a9ae91742",
+      "text_sha256": "160bc55459dbbd1e5034e255225c221d4120ac6e146595eca31b0661b91f195e",
+      "qwen_tokens": 6820
+    },
+    {
+      "source_id": "2609.24574v2",
+      "source_url": "https://arxiv.org/abs/2609.24574v2",
+      "pdf_url": "https://arxiv.org/pdf/2609.24574v2",
+      "title": "Evaluating Decision Models for Text Annotation in Computational Social Science",
+      "published": "2026-09-21T13:41:54Z",
+      "pdf_sha256": "cadb37718281dfd4af23d143cb8aae5f58fb6e842cec64d86125178a7dba26ca",
+      "text_sha256": "f2fbd98ea508af1a733a5c1a8c991109a6d4f381821ba1dac04c676d1b5bcc0f",
+      "qwen_tokens": 15819
+    },
+    {
+      "source_id": "2609.26048v1",
+      "source_url": "https://arxiv.org/abs/2609.26048v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26048v1",
+      "title": "FIRE: Failure-Informed Runtime Engineering for Reliable Language-Model Agents",
+      "published": "2026-09-22T11:50:35Z",
+      "pdf_sha256": "1407108df044df6fc8cf0408586ac98417a742ab4d162c64c48ac2353b597e98",
+      "text_sha256": "07edb2e6988ba78f646a09f00d7127ea10690c612f80ee0b93a88969a7fa090d",
+      "qwen_tokens": 8302
+    },
+    {
+      "source_id": "2609.28048v1",
+      "source_url": "https://arxiv.org/abs/2609.28048v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28048v1",
+      "title": "TEMPS: Temporal Sentence Embeddings for Temporal Information Retrieval",
+      "published": "2026-09-23T13:05:09Z",
+      "pdf_sha256": "6a2d8c9835e25bde03627ecb4de5543d0344d067c3c74bd71046d0eb24b54659",
+      "text_sha256": "0670b337ee473b7ce01ee20fa4cf517d7fe7c8c85c61e8b6737b6ce2d8b55203",
+      "qwen_tokens": 12110
+    },
+    {
+      "source_id": "2609.26704v1",
+      "source_url": "https://arxiv.org/abs/2609.26704v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26704v1",
+      "title": "Beyond Repeated Sampling: Learning Search Policies for LLM Reasoning",
+      "published": "2026-09-22T16:56:53Z",
+      "pdf_sha256": "8cc5744f6daebbc482fe3b8a58170d6dc84becad062a9494c8d1082e2c21f7bb",
+      "text_sha256": "b5c2bc66780394a9836e8e82da1183a447b7863d180a35875f3cff482c14e1c6",
+      "qwen_tokens": 9517
+    },
+    {
+      "source_id": "2609.25862v1",
+      "source_url": "https://arxiv.org/abs/2609.25862v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25862v1",
+      "title": "Isolated Sign Language Recognition for Icelandic Sign Language: Experiments in a Low-resource Setting",
+      "published": "2026-09-22T08:26:36Z",
+      "pdf_sha256": "e050745ccd684e4a1076cb60575ecb614d4f940058da59cfad3a64200c18f414",
+      "text_sha256": "721ad0a44f0ddbb34abca428ec58b613da736c3518b027ebc682bd6c8516496d",
+      "qwen_tokens": 10141
+    },
+    {
+      "source_id": "2609.25890v1",
+      "source_url": "https://arxiv.org/abs/2609.25890v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25890v1",
+      "title": "Rethinking Length-Based Training: Batch Composition and Loss Normalization in Speech Token Language Models",
+      "published": "2026-09-22T08:56:01Z",
+      "pdf_sha256": "17616954b8e5d4d96ae1aefafb2a125d07ccf6279e08791224c0e07e92a3a541",
+      "text_sha256": "fcadccfe90bf266e52d3991a8335604aa1cf2c4d69cc31c68b793ac2716b9295",
+      "qwen_tokens": 6374
+    },
+    {
+      "source_id": "2609.26693v1",
+      "source_url": "https://arxiv.org/abs/2609.26693v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26693v1",
+      "title": "Measuring the Serving Stack Instead of the Model: Hidden Confounds in Local Tool-Use Evaluation",
+      "published": "2026-09-22T16:48:17Z",
+      "pdf_sha256": "adf0705d4a6b6a46fc9044a99e9a90d3f70eeefd6a6245a6fa811daf3a4ce324",
+      "text_sha256": "31cefc297aba9e7eb72031723851dc47379f247d48dff60b35a55da9066d5421",
+      "qwen_tokens": 8586
+    },
+    {
+      "source_id": "2609.29390v1",
+      "source_url": "https://arxiv.org/abs/2609.29390v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29390v1",
+      "title": "Likelihood Ranking doesn't Scale Like Prompting in LLMs",
+      "published": "2026-09-24T11:16:53Z",
+      "pdf_sha256": "f9ee3da110fe15a43a9521d8c0ac00f40b39be38464a679958de6b760bb0f4c6",
+      "text_sha256": "f05d94b11c3d2c349440bb42521fe808b343a049dde645c7dac35565f03a0961",
+      "qwen_tokens": 4294
+    },
+    {
+      "source_id": "2609.29410v1",
+      "source_url": "https://arxiv.org/abs/2609.29410v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29410v1",
+      "title": "Large Language Models for Programming: Actually Fixing or Reimplementing Incorrect Code?",
+      "published": "2026-09-24T11:33:36Z",
+      "pdf_sha256": "c262d029dcff89de74f908361df9d48defa8d6481b30084d9da5328cdaff3115",
+      "text_sha256": "9000799d4ac99b80efa5f37ea1a361bf0265cf1885e5a93121d45a1e12b41d64",
+      "qwen_tokens": 9151
+    },
+    {
+      "source_id": "2609.28117v1",
+      "source_url": "https://arxiv.org/abs/2609.28117v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28117v1",
+      "title": "Scaling Attention Head Analysis via Gradient-Based Attribution in Context-Aware Machine Translation",
+      "published": "2026-09-23T13:46:01Z",
+      "pdf_sha256": "9fc14d950df42af0110743eb1cbe458240351fc853402963751111daeb5c8cc2",
+      "text_sha256": "ad284cd019cc7b80b289788c857e289ad295c3f015df87dc9d07a5a12034f2e9",
+      "qwen_tokens": 11563
+    },
+    {
+      "source_id": "2609.25237v1",
+      "source_url": "https://arxiv.org/abs/2609.25237v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25237v1",
+      "title": "Trains but Doesn't Learn: A Post-Training Delivery Benchmark for LLM Agents as Forward-Deployed Engineers",
+      "published": "2026-09-21T18:01:24Z",
+      "pdf_sha256": "6a827b34a6dbaa9d0907bfe5c378c6876ed02758b521155aed07dabb9ef8c990",
+      "text_sha256": "9f9c0dfe038ebe80061a32935cd2f031ff388dcbe6cca2a357171528f1ada5bb",
+      "qwen_tokens": 9550
+    },
+    {
+      "source_id": "2609.29349v1",
+      "source_url": "https://arxiv.org/abs/2609.29349v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29349v1",
+      "title": "ArGuard Shared Task: Harmful Content Detection in Arabic Memes and LLM Prompts",
+      "published": "2026-09-24T10:22:59Z",
+      "pdf_sha256": "6475ee213da8f924fba7d2eef16cfb4643219710bab744fcccdc1d60f888bfcb",
+      "text_sha256": "d890ff58e6ad9271ec8432f5ba5a5de2ff8bd410e642ec41ee725fbd86f60eb6",
+      "qwen_tokens": 11103
+    },
+    {
+      "source_id": "2609.27297v1",
+      "source_url": "https://arxiv.org/abs/2609.27297v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27297v1",
+      "title": "Large Knowledge Model: From Papers to a Scientific Reasoning Landscape",
+      "published": "2026-09-23T03:32:50Z",
+      "pdf_sha256": "984959f193a2bd46025cc28d94850e71d487d7f83a9a9ade44173978080291be",
+      "text_sha256": "831e320d9bce070c4e24ab0e93f430111b592a49a5cc43d595c030dcefc0e990",
+      "qwen_tokens": 10567
+    },
+    {
+      "source_id": "2609.26976v1",
+      "source_url": "https://arxiv.org/abs/2609.26976v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26976v1",
+      "title": "When Learned Context Planning Fails to Beat Strong Retrieval: A Controlled Study of Planning, Routing, and Reranking for Long-Context QA",
+      "published": "2026-09-22T19:12:16Z",
+      "pdf_sha256": "a8a5757b089ac03fab77c7eef3b48ee9b9fa6bb605e48990ef411cdd46a10bb2",
+      "text_sha256": "752edd3e8f84d66e6c7595a38bc9299a15a89b41116cba68e2dee6330c8560a5",
+      "qwen_tokens": 4399
+    },
+    {
+      "source_id": "2609.25833v1",
+      "source_url": "https://arxiv.org/abs/2609.25833v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25833v1",
+      "title": "ARAFA: An LLM-Generated Arabic Fact-Checking Dataset",
+      "published": "2026-09-22T07:59:16Z",
+      "pdf_sha256": "f5e900a948847de66829a1c24c698a118a5f6e99d04b80b569a7b9c165042924",
+      "text_sha256": "1a71ec6091fb1219ca32e0cada7f927e90bb02e4555b0561428e63e2b7292c2f",
+      "qwen_tokens": 13974
+    },
+    {
+      "source_id": "2609.25447v2",
+      "source_url": "https://arxiv.org/abs/2609.25447v2",
+      "pdf_url": "https://arxiv.org/pdf/2609.25447v2",
+      "title": "Conduct Under Pressure: What Sixty Language Models Do When a User Pushes",
+      "published": "2026-09-21T21:55:55Z",
+      "pdf_sha256": "277b659f4bf476977464bad0b166462603e56e2eb8587ba362ed60c03ad37a23",
+      "text_sha256": "f6443ce3a4ab32c6dea939c4ad1f8789344628fcfb81de25053bf336d03f5295",
+      "qwen_tokens": 10026
+    },
+    {
+      "source_id": "2609.29328v1",
+      "source_url": "https://arxiv.org/abs/2609.29328v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29328v1",
+      "title": "Grammatical \"grandmother neurons\" are rare in LLMs",
+      "published": "2026-09-24T10:04:37Z",
+      "pdf_sha256": "4031b9a9a317e03ae122e9ef739e11f87bbb3e13ebcc3ea9a384dd81e29b1010",
+      "text_sha256": "bca3e53ecff5319e180cf9db76230e41ccb5a7fa5954b00569db0376ac3f97be",
+      "qwen_tokens": 9945
+    },
+    {
+      "source_id": "2609.28471v1",
+      "source_url": "https://arxiv.org/abs/2609.28471v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28471v1",
+      "title": "Contrastive Learning for Authorship Verification",
+      "published": "2026-09-23T17:59:08Z",
+      "pdf_sha256": "9281117ce61b0c27a594ce172111bf466d9bcb7f65c14ba5efea44a1f101603d",
+      "text_sha256": "d528563cfdccfcdcc2c65efde6b8973e5bca17dce6fd222ae72386f70d3c0ffc",
+      "qwen_tokens": 4258
+    },
+    {
+      "source_id": "2609.24275v1",
+      "source_url": "https://arxiv.org/abs/2609.24275v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24275v1",
+      "title": "Structure Before Sampling: Community-Aware Core-Set Selection for Data-Efficient Text-to-Speech",
+      "published": "2026-09-21T08:41:07Z",
+      "pdf_sha256": "7ff86e09865b78c5acb8d0351173abb738080f644272dabfbc8b849fb8945bad",
+      "text_sha256": "d3509adb887b4c677771b87d4745d92b9fc8701a94944ad6bb2a29222370e83a",
+      "qwen_tokens": 13021
+    },
+    {
+      "source_id": "2609.29245v1",
+      "source_url": "https://arxiv.org/abs/2609.29245v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29245v1",
+      "title": "No More Free Lunch: Corpus Task Complexity Matters as Corpora Grow",
+      "published": "2026-09-24T08:51:29Z",
+      "pdf_sha256": "c14bffe8378af563dc44858f857ac13197ee34197ff471c6867d9adfce54ec50",
+      "text_sha256": "0f8488a326447788b0a0c0c9b7fc9fa07088ac789e5e29d7e6174082ce0d504c",
+      "qwen_tokens": 10180
+    },
+    {
+      "source_id": "2609.25396v1",
+      "source_url": "https://arxiv.org/abs/2609.25396v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25396v1",
+      "title": "Passes Alone, Fails Together: Benchmarking Semantic Coordination in Parallel LLM-Agent Development",
+      "published": "2026-09-21T20:38:50Z",
+      "pdf_sha256": "e0d15f430eabad091ef4f6c591c189f3095990c505b7a958d917ba3d65e3b1e3",
+      "text_sha256": "16838dd94340ea6f499c7f9d75ef5be17f2a9dd77546d5b61d4fe88edde6b86d",
+      "qwen_tokens": 6937
+    },
+    {
+      "source_id": "2609.28352v1",
+      "source_url": "https://arxiv.org/abs/2609.28352v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28352v1",
+      "title": "Digital diglossia: Arabic between X and Facebook",
+      "published": "2026-09-23T16:25:47Z",
+      "pdf_sha256": "dcbeaa4e408e4130e674c09b1d802b26f87e19062e7bf62492e5d32943ce7b17",
+      "text_sha256": "1caf723f5250231dbd61f63873736b710c6fcc59e23b68915a8a2f82eaf230e5",
+      "qwen_tokens": 23408
+    },
+    {
+      "source_id": "2609.27359v1",
+      "source_url": "https://arxiv.org/abs/2609.27359v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27359v1",
+      "title": "Automated Extraction of Records of Processing Activities (RoPA) Using Hybrid RAG and Locally Deployed Large Language Models",
+      "published": "2026-09-23T04:55:53Z",
+      "pdf_sha256": "d826821b53410b7ae1de1cf41a2ea9081f540c9a97035c7332d226ac715d242d",
+      "text_sha256": "abc52dd7d84cb5a540024d38a1200ec1b5d4dbe8c242157f6e2fe59410562252",
+      "qwen_tokens": 7376
+    },
+    {
+      "source_id": "2609.24194v1",
+      "source_url": "https://arxiv.org/abs/2609.24194v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24194v1",
+      "title": "When Residualization Helps an Audit: Format Effects, Slice Gains, and Their Limits",
+      "published": "2026-09-21T07:06:37Z",
+      "pdf_sha256": "3a54922de088a6dee2cbc6dc88dbd5fe5a512a77d841a4826fad7bc84b7e4290",
+      "text_sha256": "fbf49c8957488495da48e8cc27e82c0b57546d0c9d9998addd46e92b65917d14",
+      "qwen_tokens": 18959
+    },
+    {
+      "source_id": "2609.24303v1",
+      "source_url": "https://arxiv.org/abs/2609.24303v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24303v1",
+      "title": "SupportCal: Label-Free Calibration of Post-Trained LLMs via Reference Support and Corroboration",
+      "published": "2026-09-21T09:02:41Z",
+      "pdf_sha256": "99181460e917b77e4772aa491c68b70e28731fbbc218b51071009ab38d36267d",
+      "text_sha256": "4e302c2fe6d4e9484ee68afa25a4e2349d94d23991cba85204943621d83571f4",
+      "qwen_tokens": 7621
+    },
+    {
+      "source_id": "2609.26422v1",
+      "source_url": "https://arxiv.org/abs/2609.26422v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26422v1",
+      "title": "Enriching Speech Emotion Representations with Conversational Context",
+      "published": "2026-09-22T13:50:02Z",
+      "pdf_sha256": "9187ee0cb8f29be72b256be3c2cc64f35e5c043c54668ef5d9a41938d0342c9a",
+      "text_sha256": "cb782a8b0d59c600a101acebe7c518eb812092eb8c43d52983721276b2fd3f97",
+      "qwen_tokens": 8212
+    },
+    {
+      "source_id": "2609.26658v1",
+      "source_url": "https://arxiv.org/abs/2609.26658v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26658v1",
+      "title": "Discovery-Driven Integration of Disjoint Tables via Text",
+      "published": "2026-09-22T16:22:54Z",
+      "pdf_sha256": "52634dd0954dd0e6df3ecc5f661782023e600a7c6aaa4dcbc70b238b9e188fd3",
+      "text_sha256": "6e7159d917f8ea7fdb608fd208d9e5e5c765eb7974eb03623117e80a3592367c",
+      "qwen_tokens": 18247
+    },
+    {
+      "source_id": "2609.27173v1",
+      "source_url": "https://arxiv.org/abs/2609.27173v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27173v1",
+      "title": "Realize What Matters: Principled Context Representation for Large-Scale Reasoning",
+      "published": "2026-09-23T00:12:45Z",
+      "pdf_sha256": "7faa854b17a6cf0b309c825e2c8437360581e3e5a5d49a323a050517ca6629b5",
+      "text_sha256": "f1f63707d2a8b4a831687485e6c4f3765b54a379a1e754df12beaf3c8b35e4c4",
+      "qwen_tokens": 40951
+    },
+    {
+      "source_id": "2609.27086v1",
+      "source_url": "https://arxiv.org/abs/2609.27086v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27086v1",
+      "title": "NADI 2026: The Second Multidialectal Arabic Speech Processing Shared Task",
+      "published": "2026-09-22T21:37:54Z",
+      "pdf_sha256": "19af89e8b2fbc6fb81c58727e57a61db9a931a641193a24b9add9c189bd7e1af",
+      "text_sha256": "ee37bee7a304de72b99b256e0bbc784795411af9473980010f83942f7cba353d",
+      "qwen_tokens": 11168
+    },
+    {
+      "source_id": "2609.28565v1",
+      "source_url": "https://arxiv.org/abs/2609.28565v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28565v1",
+      "title": "When Explanations Cannot Be Read: Measuring and Correcting SHAP and LIME Rendering for Right-to-Left Languages",
+      "published": "2026-09-23T11:04:09Z",
+      "pdf_sha256": "e493beba1bd85b4687862641aa8a77589fcf8bc0ad34cff127ed395adda54e94",
+      "text_sha256": "3c5513415dd506aae41c380893fe17e771e6b78c1c4b7fd0e81e4472bb3cca4b",
+      "qwen_tokens": 15214
+    },
+    {
+      "source_id": "2609.28416v1",
+      "source_url": "https://arxiv.org/abs/2609.28416v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28416v1",
+      "title": "Agent-Editing World Model: Rethinking World Modeling for LLM Agents",
+      "published": "2026-09-23T17:18:26Z",
+      "pdf_sha256": "29050477a4d3c83304779841ceb37e186f7507b87f7a3ef265498475977cc7a5",
+      "text_sha256": "24d3460c4a124d44a324e03c23a76175a25ebab1fc2b02d4cee76921fec1f17e",
+      "qwen_tokens": 10295
+    },
+    {
+      "source_id": "2609.27749v1",
+      "source_url": "https://arxiv.org/abs/2609.27749v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27749v1",
+      "title": "Evaluation of pre-trained models for pedagogical assessment of novel AI-assisted educational questions",
+      "published": "2026-09-23T12:00:33Z",
+      "pdf_sha256": "7a4990be6e7e4a2b9f39ffd3b56fd5264789acb9e9893916f748ecfbb18544d1",
+      "text_sha256": "5ffa3c563358e6889d0cbe5d4d546817725edb2dcc9a7b510febbdf4b930b48f",
+      "qwen_tokens": 7062
+    },
+    {
+      "source_id": "2609.27590v1",
+      "source_url": "https://arxiv.org/abs/2609.27590v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27590v1",
+      "title": "MWE-ECL: Recoverable Long-Range Context Does Not Always Override Local Lexical Priors",
+      "published": "2026-09-23T09:09:04Z",
+      "pdf_sha256": "5d00812dafa3d0e133057dc794bc89c9a56f21b986408f7c6ca89274dce093db",
+      "text_sha256": "587737adb8a4f5dbee77eb55a685faf139ea7d0784846e3a8998410e7bd0df7f",
+      "qwen_tokens": 9564
+    },
+    {
+      "source_id": "2609.24625v1",
+      "source_url": "https://arxiv.org/abs/2609.24625v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24625v1",
+      "title": "Custom Named Entity Recognition and Topic Classification for Global Health Publications",
+      "published": "2026-09-21T14:09:53Z",
+      "pdf_sha256": "14db8ed4ac30def8c13a02d9218ad4bc6f0f7eb242806ce13b748673e360a3b8",
+      "text_sha256": "f505be0d941383b93593008a08c282630e44d9a72cda01709b80eb2196f3435d",
+      "qwen_tokens": 28407
+    },
+    {
+      "source_id": "2609.29276v1",
+      "source_url": "https://arxiv.org/abs/2609.29276v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29276v1",
+      "title": "pylazaro: a Python package for anglicism extraction in Spanish",
+      "published": "2026-09-24T09:13:52Z",
+      "pdf_sha256": "421348b2a753eea74bae398d00a53f41fec8fc80c4eda109eae5066369be35b5",
+      "text_sha256": "6db4d4a791ae72f6da6e92bbafc0a36238f2265c897062240ee5a700c6114db9",
+      "qwen_tokens": 4696
+    },
+    {
+      "source_id": "2609.26539v1",
+      "source_url": "https://arxiv.org/abs/2609.26539v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26539v1",
+      "title": "A retrospective analysis on the use of LLMs to study infant syntax learning",
+      "published": "2026-09-22T14:58:07Z",
+      "pdf_sha256": "5f3fe03ad4f3dadb16f18e4eff8e891906485e514793970be063bfc1e05c37d1",
+      "text_sha256": "107d6030bc18588865c327a19aea81582f56a0bdf0a8bd509a36022936ec1174",
+      "qwen_tokens": 10183
+    },
+    {
+      "source_id": "2609.24911v1",
+      "source_url": "https://arxiv.org/abs/2609.24911v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24911v1",
+      "title": "SocioVerse2: A Longitudinal Dynamic Social Simulation Framework under a Human-AI Co-evolutionary Paradigm",
+      "published": "2026-09-21T17:14:09Z",
+      "pdf_sha256": "3131dd982402edfc7b03d1de4103d720af9352484aee460833495ea36434faf9",
+      "text_sha256": "95657f95ac68113a50eeec678140f456977c0617e885c67200d894a04d7a597d",
+      "qwen_tokens": 35187
+    },
+    {
+      "source_id": "2609.29418v1",
+      "source_url": "https://arxiv.org/abs/2609.29418v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29418v1",
+      "title": "Controlling Backchannels in Streamable Full-duplex Models",
+      "published": "2026-09-24T11:38:40Z",
+      "pdf_sha256": "d131697ace74f1faebc9657ce820536ca742a4a4bf999531ceebcd7100c5b570",
+      "text_sha256": "12fbd4689668ede4146bbaaa349d2dd7700f910dc8a352810aad24abe8ab8888",
+      "qwen_tokens": 6694
+    },
+    {
+      "source_id": "2609.26907v1",
+      "source_url": "https://arxiv.org/abs/2609.26907v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26907v1",
+      "title": "Small Cues, Big Consequences: Learning Pivotal Cues for Multimodal Meme Classification",
+      "published": "2026-09-22T18:04:27Z",
+      "pdf_sha256": "ebd933d9225d0fdeb94d307fc663b3ac5199e98bbc3987bf2714345dc59e2aba",
+      "text_sha256": "85f8b6ab5aa4b5b7925fe0ec049f283fdda4a4b99eb1b159fd5563977709e0c8",
+      "qwen_tokens": 10618
+    },
+    {
+      "source_id": "2609.27067v1",
+      "source_url": "https://arxiv.org/abs/2609.27067v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27067v1",
+      "title": "ChipMEM: Verification-Grounded Memory for EDA Agents",
+      "published": "2026-09-22T21:03:30Z",
+      "pdf_sha256": "94aebaaa175c1475a01164c60bef592db11bd7c1fd0c57e547ac3a89ed69a6a9",
+      "text_sha256": "861f8338a0eb91d7e7445b7ecc110f9e0f49d75f013a1fc2034c4dafecf8c85d",
+      "qwen_tokens": 8085
+    },
+    {
+      "source_id": "2609.26468v1",
+      "source_url": "https://arxiv.org/abs/2609.26468v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26468v1",
+      "title": "How to Estimate Whether You Have Found Several Needles in a Haystack: Measuring Calibration in Multi-Label Text Classification",
+      "published": "2026-09-22T14:15:54Z",
+      "pdf_sha256": "872f9e932d89e18e2ef41ad2f5cfbd08e83abe20d4286caa94336c7524cb1d67",
+      "text_sha256": "89ad6af305d54a395c6560c9fa154acd8a624285a7d3424f2aae6947cdc2e2dc",
+      "qwen_tokens": 10490
+    },
+    {
+      "source_id": "2609.27220v2",
+      "source_url": "https://arxiv.org/abs/2609.27220v2",
+      "pdf_url": "https://arxiv.org/pdf/2609.27220v2",
+      "title": "LOCKR: A Hidden-State Trajectory-Guided Planner for Detecting and Repairing Stable-but-Wrong Lock-In in Diffusion Language Models",
+      "published": "2026-09-23T01:35:24Z",
+      "pdf_sha256": "308a81a1a8705d8eb02103ef6feeb8bef9ac4d5b2d47f3daa16fbe81e61957f6",
+      "text_sha256": "55d7a0e22be257fdc22fe728cdb786109286c919aad56f167f5605f72de9333f",
+      "qwen_tokens": 40636
+    },
+    {
+      "source_id": "2609.28854v1",
+      "source_url": "https://arxiv.org/abs/2609.28854v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28854v1",
+      "title": "Persuaded, Not Informed: Incentive-Misaligned Witnesses Defeat In-Context Grounding",
+      "published": "2026-09-23T23:52:24Z",
+      "pdf_sha256": "0bcd0e2a1c2511b3c995237c0b60c685fa3f75c611aa10bc241f721c9e6e1a76",
+      "text_sha256": "67e0b4c43f6758ea80974952cbd6763676cd47475f735d825de5fe7557c36a16",
+      "qwen_tokens": 9482
+    },
+    {
+      "source_id": "2609.28673v1",
+      "source_url": "https://arxiv.org/abs/2609.28673v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28673v1",
+      "title": "Benchmarking Argumentative Behaviour of LLMs: A Study of Defences Against Character Attacks",
+      "published": "2026-09-23T18:14:32Z",
+      "pdf_sha256": "873d7979af423b65a23adff8c5003f20c16227026e38b8bc3db8e21219963962",
+      "text_sha256": "fbe3cabc2e3eadaefe97206fe078f450ffddc820362f2bdda339e292dfcbe09b",
+      "qwen_tokens": 7214
+    },
+    {
+      "source_id": "2609.26368v1",
+      "source_url": "https://arxiv.org/abs/2609.26368v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26368v1",
+      "title": "HySparse2: Hybrid Sparse Attention with Two-Level KV Sharing",
+      "published": "2026-09-22T13:10:32Z",
+      "pdf_sha256": "48b096f96ed9ca546bef78a9f55e2b39d6b029002b57495b4d21e5ca4aa556f1",
+      "text_sha256": "5913d8dafe46b69cc30902f801675cebb5a7c37e68c708c2e604716a328b9ead",
+      "qwen_tokens": 8205
+    },
+    {
+      "source_id": "2609.25859v1",
+      "source_url": "https://arxiv.org/abs/2609.25859v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25859v1",
+      "title": "BELXTR: Biomedical Entity Linking via Contextualized Token Retrieval",
+      "published": "2026-09-22T08:23:54Z",
+      "pdf_sha256": "859cb38cede710d8fce643c3e3dc674dd0580f785efea4d2c4a8de43b66e2fb6",
+      "text_sha256": "542c3404656ad0e8d49213c440ad6200c0a626d55eeb1224c22121a616a2d475",
+      "qwen_tokens": 11849
+    },
+    {
+      "source_id": "2609.29146v1",
+      "source_url": "https://arxiv.org/abs/2609.29146v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.29146v1",
+      "title": "BanglaKontho: Closing the Long-Form Gap in Bangla Text-to-Speech",
+      "published": "2026-09-24T07:24:01Z",
+      "pdf_sha256": "7fd2b9a2372a5299655601bc93fb55e31c7867538d691fd50134eb23efbb7fb9",
+      "text_sha256": "a2a8a4e60c50ce71472581ef4fdeec7adced23d72d7483283af6e90fc330e80e",
+      "qwen_tokens": 7283
+    },
+    {
+      "source_id": "2609.27059v1",
+      "source_url": "https://arxiv.org/abs/2609.27059v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27059v1",
+      "title": "The Illinois Social Attitudes Aggregate Corpus (ISAAC): An Open Tool and Reproducible Pipeline for Analyzing Social Group Discourse at Scale",
+      "published": "2026-09-22T20:59:57Z",
+      "pdf_sha256": "ab5645f0cb626f4cd6d973b880072459f951792ae1eeff47edaaffe10e5a2064",
+      "text_sha256": "aba4bcdc508def2a838d770b45c67627d762fb732c756448dc7f1f81e4b6d227",
+      "qwen_tokens": 21242
+    },
+    {
+      "source_id": "2609.25537v1",
+      "source_url": "https://arxiv.org/abs/2609.25537v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.25537v1",
+      "title": "Compressing Long Context into Answer-Aligned Memory Embeddings for LLM Inference",
+      "published": "2026-09-22T01:10:49Z",
+      "pdf_sha256": "3d434233ee0333c3ad8f0755a914b41b511216b0860267710c28091e25a4c8b4",
+      "text_sha256": "9572abe3b38b55a9c9be4e17937bfef2ccf50d7529b07c7f7163b6b94cdbba26",
+      "qwen_tokens": 11040
+    },
+    {
+      "source_id": "2609.24357v1",
+      "source_url": "https://arxiv.org/abs/2609.24357v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24357v1",
+      "title": "Mitigating Entity Type Confusion in Cross-Domain NER via Multidimensional Quantification and Reasoning Enhancement",
+      "published": "2026-09-21T09:46:59Z",
+      "pdf_sha256": "f97d0f89d2f5028b4f9479a79789738734040344e59f21de0810d40d270a703b",
+      "text_sha256": "2cfbe9fcf78c65dea9f7cbee33dd869d1b9cc00ff7653512ed55ac559c31a3ba",
+      "qwen_tokens": 10079
+    },
+    {
+      "source_id": "2609.27382v1",
+      "source_url": "https://arxiv.org/abs/2609.27382v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.27382v1",
+      "title": "When Entanglement Lower-Bounds Disparity: Auditing and Repairing Demographic Fairness in Audio Understanding Models",
+      "published": "2026-09-23T05:32:59Z",
+      "pdf_sha256": "cf9d83c872ae1f18704b0560294b52707a713019124833086c8245d174e37de3",
+      "text_sha256": "8bc06832af90462987e06290ea5b5aac527e74125d4625a2295ffbb661894669",
+      "qwen_tokens": 15290
+    },
+    {
+      "source_id": "2609.28845v1",
+      "source_url": "https://arxiv.org/abs/2609.28845v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28845v1",
+      "title": "LastOPD: Taming Collapse in Latent On-Policy Distillation",
+      "published": "2026-09-23T23:22:21Z",
+      "pdf_sha256": "a1f001a6497ffda4c8a2008dca0ca0beb320b0a42721026df3460b13630a7801",
+      "text_sha256": "57709531e71441f1d2ab8b00451473e4ed7bc729ca325b23146b83ce64eb3b37",
+      "qwen_tokens": 24515
+    },
+    {
+      "source_id": "2609.26381v1",
+      "source_url": "https://arxiv.org/abs/2609.26381v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26381v1",
+      "title": "Layout-Guided Masking for GROBID: Lightweight Structural Gains in Large-Scale Scientific PDF Ingestion",
+      "published": "2026-09-22T13:24:30Z",
+      "pdf_sha256": "ee5618c17e0c2beffe095c85a1f370cb8237f1b709f7a242c983a1e52a7dd23b",
+      "text_sha256": "d344258841721cce7950c277b0c218888517db455206ed312e3d411bd5d112c7",
+      "qwen_tokens": 10056
+    },
+    {
+      "source_id": "2609.28778v1",
+      "source_url": "https://arxiv.org/abs/2609.28778v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28778v1",
+      "title": "Reward-Tilted On-Policy Distillation for Acoustic Grounding in Audio-Language Models",
+      "published": "2026-09-23T20:43:32Z",
+      "pdf_sha256": "bb28a56364d4792ebc2acaf6a08cd2807a14833a2dade6991af6c74361286aae",
+      "text_sha256": "52352f4c84a6c0a4eff99f19824b368836a7a2ec27f95d917bd72cef06b93b9d",
+      "qwen_tokens": 6785
+    },
+    {
+      "source_id": "2609.28877v1",
+      "source_url": "https://arxiv.org/abs/2609.28877v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28877v1",
+      "title": "Learning New Words from Unlabeled Test Data in Automatic Speech Recognition",
+      "published": "2026-09-24T00:54:31Z",
+      "pdf_sha256": "ba4b6f361b090d2c79624a9f767718197b007907463a9fc4ef88abd88121ffd2",
+      "text_sha256": "1cf6e087d32bfa1c2dd337bf4225443ba36e7490107ebc139d5b3c7be94d39cc",
+      "qwen_tokens": 8911
+    },
+    {
+      "source_id": "2609.26780v2",
+      "source_url": "https://arxiv.org/abs/2609.26780v2",
+      "pdf_url": "https://arxiv.org/pdf/2609.26780v2",
+      "title": "SpeakerMem-R1: Speaker-Centered Dual-Track Memory for Multi-Party Dialogue",
+      "published": "2026-09-22T17:56:12Z",
+      "pdf_sha256": "165a6c4a193ddd965296a690ad25571b7fc6949f90e36a8e0f7ae8c803d95029",
+      "text_sha256": "00d8db017ad426ccf42f0ad8dc4ebe56bf35a907ab3d56d19693978b031af71c",
+      "qwen_tokens": 38681
+    },
+    {
+      "source_id": "2609.24199v1",
+      "source_url": "https://arxiv.org/abs/2609.24199v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.24199v1",
+      "title": "Vimarsha: Faithful ASR Evaluation for Indian Languages with Demographic Diversity, In-the-Wild Audio and Spelling Variations",
+      "published": "2026-09-21T07:14:46Z",
+      "pdf_sha256": "8effcf0d6b00aeccda2a906a238922d348f8a4db76d7c297708d6cb086002e86",
+      "text_sha256": "4392e2b70d774c7f63ccdf8f1647303fbac20ed3018ccdd0bfd9d9895d2d10a1",
+      "qwen_tokens": 9090
+    },
+    {
+      "source_id": "2609.26634v1",
+      "source_url": "https://arxiv.org/abs/2609.26634v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.26634v1",
+      "title": "Knowledge Pull Requests for Continual Document Authoring",
+      "published": "2026-09-22T16:07:13Z",
+      "pdf_sha256": "39abc4ee1a03347fab08dd88a45828263fc331a89ad97cd75e9539ae8ccb8361",
+      "text_sha256": "03b586ae4a2e578e4b8e6e44d89a4057b098d632b8527a8a1e2c3e654d3ccc4b",
+      "qwen_tokens": 9237
+    },
+    {
+      "source_id": "2609.28757v1",
+      "source_url": "https://arxiv.org/abs/2609.28757v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28757v1",
+      "title": "Small yet Assistive: Spatially-Aware Post-Training for Low Vision",
+      "published": "2026-09-23T20:10:25Z",
+      "pdf_sha256": "7356ca2e2b9b62dc3e6e71a7f516cbc1c578b5278bb2ed45e26b63b3afd5a70c",
+      "text_sha256": "9bf6228137f721bbaf6d3e213b3e2a8499b8f0f853e974e40d15a887857766f9",
+      "qwen_tokens": 9749
+    }
+  ]
+}

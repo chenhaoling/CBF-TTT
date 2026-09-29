@@ -637,7 +637,7 @@ python -m scripts.summarize_cbf_query_gradient --input "$OUT/diagnostic.jsonl" -
 远程 tiny Qwen 首次测试触发测试 fixture 的零初始化 TTT 卷积，使候选范数为零；仅对该随机 tiny fixture 设置非零卷积权重后 10 项测试通过。真实最终模型的一条 `old_only` smoke 已计算并写入结果，`s=0/1` 与旧标签一致、梯度 NLL 与推理 NLL 差小于 `2e-7`，峰值 reserved 14.330 GiB；随后 CLI 打印阶段因 `Path` 未转字符串报错，未影响该条数值。已修正输出序列化，并用新输出文件确认命令成功退出。
 
 修正后的单场景命令成功退出。两卡完成 8 个 train 源组的 16 条诊断，所有 `s=0/1` 均核对既有标签，平均每条 0.970 秒、最大 reserved 16.031 GiB。`new_only` 原始方向局部导数为正 7/8，原始写入 `s=.25/1` 平均收益为 −0.00907/−0.01764 NLL；等范数答案梯度 oracle 则为 +3.15839/+1.15395 NLL，8/8 组至少一个步长改善 >0.005。梯度与候选平均余弦仅 +0.000265，数值极小，故仅支持本任务的“候选与答案目标不对齐”机制解释，不能推断强稳定方向相关，也不能把使用答案的 oracle 当成可部署方法。`old_only` 的 oracle 大步长有过冲。详细结果、命令和下一步训练目标建议见 [`梯度机制诊断报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/query_gradient_diagnostic/REPORT.md) 与同目录 `summary.json`；逐条记录由 `.gitignore` 排除。原控制器阶段门未改变，正式标签和控制器训练仍暂停。
-### 内容驱动低秩写入器关键试点（2026-09-29，执行中）
+### 内容驱动低秩写入器关键试点（2026-09-29，已完成）
 
 用户要求完成下一步关键实验：验证仅从当前内容生成的更新能否在未见源组产生稳定写入收益。执行前固定 [`TASK_AWARE_WRITER_PILOT.md`](TASK_AWARE_WRITER_PILOT.md)：从原论文 API feed 排除前三批已用论文，构造新的 64/16/16 篇 train/dev/test。每篇一个 4096-token chunk，使用空旧记忆生成原始候选；以 rank-8 的 `D'=D+B(AD)` 对每层候选做可训练变换并限制 `||D'||≤||D||`。骨干、原卷积和投影冻结，初始 B=0 等价于 baseline。标题答案只作为训练 NLL 监督，写入器输入只有当前 chunk 的候选 D。
 
@@ -647,15 +647,18 @@ python -m scripts.summarize_cbf_query_gradient --input "$OUT/diagnostic.jsonl" -
 | `tasks/build_cbf_writer_episodes.py` | 构造单论文 episode、源组划分、标题可见性校验及哈希清单 | 新任务协议 `task_writer_v1` |
 | `tasks/cbf_writer.py` | `extract/train/test` 三入口，当前内容候选缓存、5 epoch 训练/dev 选型、dev 通过后才允许 test；保存逐步时间/显存、候选哈希、checkpoint 哈希 | 不改 baseline 参数或配置 |
 | `tests/test_cbf_writer.py`、`tests/test_cbf_writer_episodes.py` | 验证初始等价、范数上限、候选 detach、骨干冻结、训练闭环、dev 失败禁止 test、源组与查询标签隔离 | 仅测试 |
+| `scripts/audit_cbf_writer_results.py` | 从元数据与逐条输出独立核对来源排除/划分、训练预算、dev 选择与 test 聚合和阶段门 | 只读审计及聚合输出 |
 | `TASK_AWARE_WRITER_PILOT.md`、本记录 | 固定预算、数据来源、对照、阶段门和风险 | 仅文档 |
 
-默认配置为 rank=8、seed=123、AdamW lr=0.001/weight_decay=0.01、batch=1、clip=1、5 epochs。dev 在 `g=.5/1` 选模型和门值；需对无写入和最佳原始更新平均改善都 >0.005 且 ≥8/16 篇改善 >0.005，才冻结并测试。独立 test 增加错配论文和训练集平均更新对照，并记录 `g=0/.5/1`；阶段门只使用 dev 冻结的门值。单论文/标题/KV 清空只检验写入，不足以证明双门控有效。训练还未完成，实际执行结果将在同节追加。
+默认配置为 rank=8、seed=123、AdamW lr=0.001/weight_decay=0.01、batch=1、clip=1、5 epochs。dev 在 `g=.5/1` 选模型和门值；需对无写入和最佳原始更新平均改善都 >0.005 且 ≥8/16 篇改善 >0.005，才冻结并测试。独立 test 增加错配论文和训练集平均更新对照，并记录 `g=0/.5/1`；阶段门只使用 dev 冻结的门值。单论文/标题/KV 清空只检验写入，不足以证明双门控有效。
 
 运行命令（hku-gpu2，conda `cbf_ttt_train_py311`，代码目录 `/home/ctj/cbf_ttt_joint_exp_20260927`）：
 
 ```bash
 ROOT=/home/ctj/cbf_ttt_writer_pilot_20260929
 MODEL=/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt
+python -m scripts.download_postcutoff_arxiv --tokenizer /home/ctj/models/Qwen3-4B --output "$ROOT/documents.jsonl" --api-feed /home/ctj/cbf_ttt_postcutoff_pilot_20260927/api_feed.xml --pdf-cache /home/ctj/cbf_ttt_postcutoff_pilot_20260927/pdf_cache --max-results 300 --target 96 --selection-seed 121 --require-title-in-prefix 4096 --exclude-metadata /home/ctj/cbf_ttt_postcutoff_pilot_20260927/documents.jsonl.meta.json --exclude-metadata /home/ctj/cbf_ttt_postcutoff_random_pilot_20260927/documents.jsonl.meta.json --exclude-metadata /home/ctj/cbf_ttt_title_recall_pilot_20260929/documents.jsonl.meta.json
+python -m scripts.audit_postcutoff_corpus --metadata "$ROOT/documents.jsonl.meta.json" --corpus /home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl --output "$ROOT/title_audit.json"
 python -m tasks.build_cbf_writer_episodes --data "$ROOT/documents.jsonl" --output "$ROOT/episodes.jsonl" --tokenizer /home/ctj/models/Qwen3-4B
 CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_writer extract --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --shards 2 --shard 0
 CUDA_VISIBLE_DEVICES=1 python -m tasks.cbf_writer extract --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --shards 2 --shard 1
@@ -667,4 +670,16 @@ CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_writer test --model "$MODEL" --data "
 
 两条 extract 在两个 tmux 窗口并行运行；smoke 成功后运行完整训练，只有 dev gate 通过才运行 test。PDF、文本、特征张量、checkpoint 和逐样本输出只保留远程或本地忽略目录；GitHub 仅提交代码、公开来源元数据和聚合结果。
 
-新数据已完成：排除前三批 136 个唯一论文 ID，106 篇尝试中 7 篇长度不足、3 篇首块标题不匹配，得到 96 篇；精确标题扫描 1B 续训语料为 0/96。两卡各提取 48 篇，候选缓存总计约 32 GiB。远程 tiny 模型与数据测试通过，补充成功 dev gate 的测试分支以验证错配/平均更新对照的输出闭环。真实训练 smoke：286,720 参数、单步 0.442 秒、最大 reserved 11.551 GiB；初始 writer 与原始 `g=.5/1` 的 dev NLL 逐值一致。现已启动 64 篇 ×5 epoch 的固定预算训练。
+新数据已完成：排除前三批 136 个唯一论文 ID，106 篇尝试中 7 篇长度不足、3 篇首块标题不匹配，得到 96 篇；精确标题扫描 1B 续训语料为 0/96。两卡各提取 48 篇，候选缓存总计约 32 GiB。远程 tiny 模型与数据测试通过，补充成功 dev gate 的测试分支以验证错配/平均更新对照的输出闭环。真实训练 smoke：286,720 参数、单步 0.442 秒、最大 reserved 11.551 GiB；初始 writer 与原始 `g=.5/1` 的 dev NLL 逐值一致。随后完成 64 篇 ×5 epoch 的固定预算训练。
+
+#### 完成结果与阶段门
+
+独立复核命令（使用远程保留的逐条结果，不重新评分或训练）：
+
+```bash
+python -m scripts.audit_cbf_writer_results --root /home/ctj/cbf_ttt_writer_pilot_20260929 --prior-metadata /home/ctj/cbf_ttt_postcutoff_pilot_20260927/documents.jsonl.meta.json /home/ctj/cbf_ttt_postcutoff_random_pilot_20260927/documents.jsonl.meta.json /home/ctj/cbf_ttt_title_recall_pilot_20260929/documents.jsonl.meta.json --output /home/ctj/cbf_ttt_writer_pilot_20260929/audit.json
+```
+
+320 步训练完成。dev 选择 epoch 1、g=1，NLL 4.37044，相对无写入改善 0.58407、15/16 篇改善 >0.005，通过预设 dev 门槛后冻结 checkpoint 再首次测试。16 篇 test 的 NLL 为：无写入 **5.15830**、原始更新 **5.15812**、当前论文 writer **4.44029**、错配论文 writer **4.44186**、训练集平均更新 **4.42475**。虽然 writer 比无写入改善 0.71801、16/16 篇有收益，其对错配只优 0.00157，且劣于平均更新 0.01554，因此**内容相关写入阶段门未通过**。本轮收益主要支持通用标题任务适配，不能证明当前论文信息被有效写入，更不能据此训练双门控。阶段门和模型参数未按 test 改动。
+
+完整训练单步平均 0.237 秒、最大 reserved 11.631 GiB；test 含全部对照平均每篇 0.503 秒、最大 reserved 11.938 GiB，无 OOM。`audit_cbf_writer_results.py` 在本机从逐条轨迹独立复核：与旧源组无交叉、训练/dev/test 64/16/16、96 份候选缓存、每 epoch 完整 64 篇、320 步、dev 最优选择和 test 均值/阶段门均一致。详情见 [`关键试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/task_writer_pilot/REPORT.md)，同目录保存公开来源元数据、曲线、选择、资源与聚合结果。原始全文、特征、checkpoint 和逐样本数据由 `.gitignore` 排除；远程 checkpoint 位于 `/home/ctj/cbf_ttt_writer_pilot_20260929/train_seed123/best.pt`。后续应在新源组上使用正确/错配记忆的训练约束及事实区分任务，再验证内容相关收益；正式反事实扩量与控制器训练继续暂停。

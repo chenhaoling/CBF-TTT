@@ -1,0 +1,26 @@
+{
+  "protocol": "task_writer_v1",
+  "test_papers": 16,
+  "checkpoint_sha256": "4fd6be58ae7bfa00c74911e4d4dc24c7ec31ba56cd8d98e003208561b2c05487",
+  "gate": 1.0,
+  "raw_gate": 0.5,
+  "mean_nll": {
+    "none": 5.158304199576378,
+    "raw": 5.1581210643053055,
+    "writer": 4.440289422869682,
+    "mismatched": 4.44186344742775,
+    "train_mean": 4.424747034907341,
+    "writer_0.5": 4.5846781730651855,
+    "writer_1.0": 4.440289422869682
+  },
+  "writer_gain_vs_controls": {
+    "none": 0.7180147767066956,
+    "raw": 0.7178316414356232,
+    "mismatched": 0.0015740245580673218,
+    "train_mean": -0.015542387962341309
+  },
+  "improved_papers": 16,
+  "passed_test_gate": false,
+  "mean_time_s": 0.5028153322637081,
+  "max_peak_reserved_gib": 11.9375
+}

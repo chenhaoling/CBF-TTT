@@ -1,0 +1,25 @@
+{
+  "source_papers": 96,
+  "excluded_prior_papers": 136,
+  "prior_overlap": 0,
+  "split_counts": {
+    "train": 64,
+    "dev": 16,
+    "test": 16
+  },
+  "feature_records": 96,
+  "train_steps": 320,
+  "selected_epoch": 1,
+  "selected_gate": 1.0,
+  "dev_gate_recomputed": true,
+  "initial_writer_matches_raw": true,
+  "test_means_recomputed": true,
+  "test_gate_recomputed": false,
+  "writer_gain_vs_controls": {
+    "none": 0.7180147767066956,
+    "raw": 0.7178316414356232,
+    "mismatched": 0.0015740245580673218,
+    "train_mean": -0.015542387962341309
+  },
+  "summary_sha256": "4f28dc3bacea74cec1623e76e3b15050f2337e3e5c76928e483681127221d3bc"
+}
