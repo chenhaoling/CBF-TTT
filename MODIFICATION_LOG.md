@@ -666,3 +666,5 @@ CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_writer test --model "$MODEL" --data "
 ```
 
 两条 extract 在两个 tmux 窗口并行运行；smoke 成功后运行完整训练，只有 dev gate 通过才运行 test。PDF、文本、特征张量、checkpoint 和逐样本输出只保留远程或本地忽略目录；GitHub 仅提交代码、公开来源元数据和聚合结果。
+
+新数据已完成：排除前三批 136 个唯一论文 ID，106 篇尝试中 7 篇长度不足、3 篇首块标题不匹配，得到 96 篇；精确标题扫描 1B 续训语料为 0/96。两卡各提取 48 篇，候选缓存总计约 32 GiB。远程 tiny 模型与数据测试通过，补充成功 dev gate 的测试分支以验证错配/平均更新对照的输出闭环。真实训练 smoke：286,720 参数、单步 0.442 秒、最大 reserved 11.551 GiB；初始 writer 与原始 `g=.5/1` 的 dev NLL 逐值一致。现已启动 64 篇 ×5 epoch 的固定预算训练。

@@ -22,7 +22,7 @@ class WriterTests(unittest.TestCase):
         self.assertIsNone(raw.grad)
         with torch.no_grad():
             writer.b["0"].normal_(0, 2)
-        self.assertLessEqual(float(writer({0: raw})[0].norm()), float(raw.norm()) + 1e-5)
+        self.assertLessEqual(float(writer({0: raw})[0].detach().norm()), float(raw.detach().norm()) + 1e-5)
 
     def test_tiny_training_changes_writer_but_freezes_backbone(self):
         from inference_model.hf_qwen3.configuration_qwen3 import Qwen3Config
@@ -41,7 +41,7 @@ class WriterTests(unittest.TestCase):
         episodes = [{"id": f"p{i}", "group_id": f"p{i}", "protocol": "task_writer_v1",
                      "split": split, "context_ids": [1+i, 2+i, 3+i, 4+i],
                      "query_ids": [9], "answer_ids": [10+i, 11+i]}
-                    for i, split in enumerate(("train", "train", "dev", "test"))]
+                    for i, split in enumerate(("train", "train", "dev", "test", "test"))]
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             config.to_json_file(root / "config.json")
@@ -63,6 +63,13 @@ class WriterTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "dev stage gate failed"):
                 evaluate_test(args, model, episodes)
             self.assertFalse((root / "test").exists())
+            # Synthetic fixture exercises the successful-gate evaluation branch without tuning real test data.
+            selection.update({"passed_dev_gate": True, "smoke": False})
+            (root / "training/selection.json").write_text(json.dumps(selection))
+            evaluate_test(args, model, episodes)
+            result = json.loads((root / "test/summary.json").read_text())
+            self.assertEqual(result["test_papers"], 2)
+            self.assertEqual(set(result["writer_gain_vs_controls"]), {"none", "raw", "mismatched", "train_mean"})
 
 
 if __name__ == "__main__":
