@@ -286,6 +286,10 @@ class CBFCoreTests(unittest.TestCase):
         )
         model = Qwen3ForCausalLM(config).eval()
         model.requires_grad_(False)
+        # Tiny untrained TTT convs initialize to zero, unlike the continued-pretraining checkpoint.
+        with torch.no_grad():
+            for layer_idx in config.ttt_layers:
+                model.model.layers[layer_idx].mlp.ttt_conv.weight.normal_(0, 0.02)
         query = {"kind": "new_title", "query_ids": [9], "answer_ids": [10, 11]}
         scenario = {
             "id": "gradient-tiny", "group_id": "gradient-group", "split": "train",
