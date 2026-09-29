@@ -637,3 +637,32 @@ python -m scripts.summarize_cbf_query_gradient --input "$OUT/diagnostic.jsonl" -
 远程 tiny Qwen 首次测试触发测试 fixture 的零初始化 TTT 卷积，使候选范数为零；仅对该随机 tiny fixture 设置非零卷积权重后 10 项测试通过。真实最终模型的一条 `old_only` smoke 已计算并写入结果，`s=0/1` 与旧标签一致、梯度 NLL 与推理 NLL 差小于 `2e-7`，峰值 reserved 14.330 GiB；随后 CLI 打印阶段因 `Path` 未转字符串报错，未影响该条数值。已修正输出序列化，并用新输出文件确认命令成功退出。
 
 修正后的单场景命令成功退出。两卡完成 8 个 train 源组的 16 条诊断，所有 `s=0/1` 均核对既有标签，平均每条 0.970 秒、最大 reserved 16.031 GiB。`new_only` 原始方向局部导数为正 7/8，原始写入 `s=.25/1` 平均收益为 −0.00907/−0.01764 NLL；等范数答案梯度 oracle 则为 +3.15839/+1.15395 NLL，8/8 组至少一个步长改善 >0.005。梯度与候选平均余弦仅 +0.000265，数值极小，故仅支持本任务的“候选与答案目标不对齐”机制解释，不能推断强稳定方向相关，也不能把使用答案的 oracle 当成可部署方法。`old_only` 的 oracle 大步长有过冲。详细结果、命令和下一步训练目标建议见 [`梯度机制诊断报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/query_gradient_diagnostic/REPORT.md) 与同目录 `summary.json`；逐条记录由 `.gitignore` 排除。原控制器阶段门未改变，正式标签和控制器训练仍暂停。
+### 内容驱动低秩写入器关键试点（2026-09-29，执行中）
+
+用户要求完成下一步关键实验：验证仅从当前内容生成的更新能否在未见源组产生稳定写入收益。执行前固定 [`TASK_AWARE_WRITER_PILOT.md`](TASK_AWARE_WRITER_PILOT.md)：从原论文 API feed 排除前三批已用论文，构造新的 64/16/16 篇 train/dev/test。每篇一个 4096-token chunk，使用空旧记忆生成原始候选；以 rank-8 的 `D'=D+B(AD)` 对每层候选做可训练变换并限制 `||D'||≤||D||`。骨干、原卷积和投影冻结，初始 B=0 等价于 baseline。标题答案只作为训练 NLL 监督，写入器输入只有当前 chunk 的候选 D。
+
+| 文件 | 修改内容 | 对 baseline 的影响 |
+|---|---|---|
+| `cbf_ttt/writer.py` | 新增 `LowRankWriter` 范数受限低秩候选变换、可对快记忆求导的 `memory_nll` | 全新 opt-in 模块；不改原运行时 |
+| `tasks/build_cbf_writer_episodes.py` | 构造单论文 episode、源组划分、标题可见性校验及哈希清单 | 新任务协议 `task_writer_v1` |
+| `tasks/cbf_writer.py` | `extract/train/test` 三入口，当前内容候选缓存、5 epoch 训练/dev 选型、dev 通过后才允许 test；保存逐步时间/显存、候选哈希、checkpoint 哈希 | 不改 baseline 参数或配置 |
+| `tests/test_cbf_writer.py`、`tests/test_cbf_writer_episodes.py` | 验证初始等价、范数上限、候选 detach、骨干冻结、训练闭环、dev 失败禁止 test、源组与查询标签隔离 | 仅测试 |
+| `TASK_AWARE_WRITER_PILOT.md`、本记录 | 固定预算、数据来源、对照、阶段门和风险 | 仅文档 |
+
+默认配置为 rank=8、seed=123、AdamW lr=0.001/weight_decay=0.01、batch=1、clip=1、5 epochs。dev 在 `g=.5/1` 选模型和门值；需对无写入和最佳原始更新平均改善都 >0.005 且 ≥8/16 篇改善 >0.005，才冻结并测试。独立 test 增加错配论文和训练集平均更新对照，并记录 `g=0/.5/1`；阶段门只使用 dev 冻结的门值。单论文/标题/KV 清空只检验写入，不足以证明双门控有效。训练还未完成，实际执行结果将在同节追加。
+
+运行命令（hku-gpu2，conda `cbf_ttt_train_py311`，代码目录 `/home/ctj/cbf_ttt_joint_exp_20260927`）：
+
+```bash
+ROOT=/home/ctj/cbf_ttt_writer_pilot_20260929
+MODEL=/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt
+python -m tasks.build_cbf_writer_episodes --data "$ROOT/documents.jsonl" --output "$ROOT/episodes.jsonl" --tokenizer /home/ctj/models/Qwen3-4B
+CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_writer extract --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --shards 2 --shard 0
+CUDA_VISIBLE_DEVICES=1 python -m tasks.cbf_writer extract --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --shards 2 --shard 1
+CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_writer train --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --output "$ROOT/smoke" --smoke
+CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_writer train --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --output "$ROOT/train_seed123"
+# test 入口会核查 dev gate 与冻结 checkpoint/data 哈希。
+CUDA_VISIBLE_DEVICES=0 python -m tasks.cbf_writer test --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --checkpoint-dir "$ROOT/train_seed123" --output "$ROOT/test_seed123"
+```
+
+两条 extract 在两个 tmux 窗口并行运行；smoke 成功后运行完整训练，只有 dev gate 通过才运行 test。PDF、文本、特征张量、checkpoint 和逐样本输出只保留远程或本地忽略目录；GitHub 仅提交代码、公开来源元数据和聚合结果。
