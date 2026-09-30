@@ -717,3 +717,5 @@ bash scripts/run_cbf_paired_writer_pilot.sh > "$ROOT/pipeline.log" 2>&1
 正式执行放在 tmux；输出目录必须是新目录，复现时更换 ROOT。每步耗时包括候选加载及梯度更新，进程另含模型加载/dev/保存，不将步内累计当总耗时。双路径反传增加显存；其他风险有候选差异过小、范数约束、人工事实/固定位置/有限答案类型。论文全文、特征、逐条结果及 checkpoint 保留远程/忽略目录，仅代码、协议、公开元数据及聚合结果上传 GitHub。四条件门控与正式扩量继续等待内容写入证据。
 
 开始评分前补充 `sanity` 入口：dev 完整 KV、关闭快记忆写入的事实可读性准确率须 ≥.75，再启动提取与写入训练。该检查区分任务不可读与候选写入失败，不使用 test 或改变原有内容相关门槛。
+
+远程 5 项单元测试通过（配对数据、梯度与骨干冻结、成功/失败门槛分支及旧 writer）；新增 `tests/test_cbf_postcutoff.py` 的部分 PDF 传输重试测试。新增 `scripts/audit_cbf_paired_writer.py`，独立复核来源排除、配对与均衡、两支初始化/训练顺序、每 epoch 完整 train 覆盖、dev 选择和实际 test 是否遵守门槛；输出聚合审计 JSON。

@@ -1,14 +1,28 @@
 import json
+import http.client
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 from scripts.audit_postcutoff_corpus import audit
-from scripts.download_postcutoff_arxiv import clean_pdf_text
+from scripts.download_postcutoff_arxiv import clean_pdf_text, fetch_pdf
 from scripts.evaluate_cbf_postcutoff_gate import evaluate
 
 
 class PostcutoffPilotTests(unittest.TestCase):
+    def test_partial_pdf_transfer_retries_without_caching_partial_bytes(self):
+        broken, complete = MagicMock(), MagicMock()
+        broken.__enter__.return_value.read.side_effect = http.client.IncompleteRead(b"%PDF-partial", 10)
+        complete.__enter__.return_value.read.return_value = b"%PDF-complete"
+        with tempfile.TemporaryDirectory() as directory, patch("scripts.download_postcutoff_arxiv.time.sleep"), patch(
+            "scripts.download_postcutoff_arxiv.urllib.request.urlopen", side_effect=[broken, complete]
+        ) as request:
+            path = Path(directory)/"paper.pdf"
+            self.assertEqual(fetch_pdf("https://example.org/paper.pdf", path), b"%PDF-complete")
+            self.assertEqual(path.read_bytes(), b"%PDF-complete")
+            self.assertEqual(request.call_count, 2)
+
     def test_pdf_cleanup_and_title_scan(self):
         self.assertEqual(clean_pdf_text("hy-\nphen\n\n\nBody\nReferences\nignored"),
                          "hyphen\n\nBody")
