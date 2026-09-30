@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
 import random
 import re
@@ -77,8 +78,15 @@ def fetch_pdf(url: str, path: Path, timeout: int = 60) -> bytes:
         data = path.read_bytes()
     else:
         request = urllib.request.Request(url, headers={"User-Agent": "CBF-TTT-research/1.0"})
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            data = response.read()
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(request, timeout=timeout) as response:
+                    data = response.read()
+                break
+            except (OSError, http.client.HTTPException):
+                if attempt == 2:
+                    raise
+                time.sleep(3 * (attempt + 1))
         if not data.startswith(b"%PDF-"):
             raise ValueError("download is not a PDF")
         path.write_bytes(data)
@@ -124,7 +132,7 @@ def collect(entries: list[dict], target: int, min_tokens: int, tokenizer,
                     rejected["title_absent_from_prefix"] += 1
                     print(json.dumps({"source_id": source_id, "status": "title_absent_from_prefix"}), flush=True)
                     continue
-        except (OSError, ValueError, subprocess.SubprocessError, UnicodeError) as exc:
+        except (OSError, http.client.HTTPException, ValueError, subprocess.SubprocessError, UnicodeError) as exc:
             rejected["download_or_extract_error"] += 1
             print(json.dumps({"source_id": source_id, "status": "error",
                               "error_type": type(exc).__name__}), flush=True)

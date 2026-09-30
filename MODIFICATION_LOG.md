@@ -683,3 +683,35 @@ python -m scripts.audit_cbf_writer_results --root /home/ctj/cbf_ttt_writer_pilot
 320 步训练完成。dev 选择 epoch 1、g=1，NLL 4.37044，相对无写入改善 0.58407、15/16 篇改善 >0.005，通过预设 dev 门槛后冻结 checkpoint 再首次测试。16 篇 test 的 NLL 为：无写入 **5.15830**、原始更新 **5.15812**、当前论文 writer **4.44029**、错配论文 writer **4.44186**、训练集平均更新 **4.42475**。虽然 writer 比无写入改善 0.71801、16/16 篇有收益，其对错配只优 0.00157，且劣于平均更新 0.01554，因此**内容相关写入阶段门未通过**。本轮收益主要支持通用标题任务适配，不能证明当前论文信息被有效写入，更不能据此训练双门控。阶段门和模型参数未按 test 改动。
 
 完整训练单步平均 0.237 秒、最大 reserved 11.631 GiB；test 含全部对照平均每篇 0.503 秒、最大 reserved 11.938 GiB，无 OOM。`audit_cbf_writer_results.py` 在本机从逐条轨迹独立复核：与旧源组无交叉、训练/dev/test 64/16/16、96 份候选缓存、每 epoch 完整 64 篇、320 步、dev 最优选择和 test 均值/阶段门均一致。详情见 [`关键试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/task_writer_pilot/REPORT.md)，同目录保存公开来源元数据、曲线、选择、资源与聚合结果。原始全文、特征、checkpoint 和逐样本数据由 `.gitignore` 排除；远程 checkpoint 位于 `/home/ctj/cbf_ttt_writer_pilot_20260929/train_seed123/best.pt`。后续应在新源组上使用正确/错配记忆的训练约束及事实区分任务，再验证内容相关收益；正式反事实扩量与控制器训练继续暂停。
+
+### 配对事实写入器关键试点（2026-09-30，执行中）
+
+用户要求继续下一步。执行前固定 [`PAIRED_FACT_WRITER_PILOT.md`](PAIRED_FACT_WRITER_PILOT.md)：用新论文的人工事实双生版本排除通用任务偏移，比较普通 NLL 与配对约束。48 个新论文源按 32/8/8 分组，各生成两条仅一个事实 token 不同的上下文，共 64/16/16 条，8 类标签严格均衡。论文正文作长文本干扰，颜色事实人为插入，结果不能等同自然事实问答。
+
+| 文件 | 修改与需求对应 |
+|---|---|
+| `tasks/build_cbf_paired_facts.py` | 双生上下文、来源划分、均衡标签、单 token 差异校验及来源清单；固定 query 不含答案 |
+| `cbf_ttt/writer.py` | 追加 `memory_choice_nll`，单次无答案 forward 返回单 token 候选的全词表 NLL；保持可微，原入口不变 |
+| `tasks/cbf_paired_writer.py` | 复用候选缓存/低秩写入器；普通/配对训练、双生/平均对照、dev 选型、test 门槛、资源及哈希 |
+| `scripts/run_cbf_paired_writer_pilot.sh` | 两卡提取、smoke、两种目标并行训练，配对支 dev 通过后才评分 test |
+| `tests/test_cbf_paired_facts.py`、`tests/test_cbf_paired_writer.py` | 分组/均衡/单 token 差异、配对梯度符号、伪收益被拒绝、NLL 等价、骨干冻结和闭环 |
+| `scripts/download_postcutoff_arxiv.py` | PDF 发生 IncompleteRead 中断，新增 HTTP 传输失败三次有限重试，耗尽后记录拒绝原因；保持筛选顺序 |
+| `PAIRED_FACT_WRITER_PILOT.md`、本记录 | 固定预算、判据、失败停止规则及局限 |
+
+新增 CLI 参数 `--objective paired/nll`、`--margin .1`；默认 rank=8、lr=.001、seed=134、epochs=5，每支 320 步。`--paired-dir/--nll-dir` 指向冻结选择。原始 baseline 配置和标题实验入口保持兼容，无新增依赖。数据生成 seed=132、来源筛选 seed=131，排除旧四批源 ID。`L_pair=L_correct+relu(.1+L_correct−L_twin)`，两条路径均回传写入器，候选 detach；两个版本均作为正样本。
+
+dev 对 g=.5/1 按相对所有对照的最差平均 NLL 收益选 epoch/g。要求最差收益 >.005、至少半数源组对无写入及双生更新改善 >.005、八选一准确率 ≥.25 且高于每个对照 ≥.125。配对支失败则 test 保留未评分，不按已见结果调参。
+
+运行（hku-gpu2，仓库 `/home/ctj/cbf_ttt_joint_exp_20260927`）：
+
+```bash
+ROOT=/home/ctj/cbf_ttt_paired_fact_20260930
+PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python
+mkdir -p "$ROOT"
+"$PYTHON" -m scripts.download_postcutoff_arxiv --tokenizer /home/ctj/models/Qwen3-4B --output "$ROOT/documents.jsonl" --api-feed /home/ctj/cbf_ttt_postcutoff_pilot_20260927/api_feed.xml --pdf-cache /home/ctj/cbf_ttt_postcutoff_pilot_20260927/pdf_cache --max-results 300 --target 48 --selection-seed 131 --exclude-metadata /home/ctj/cbf_ttt_postcutoff_pilot_20260927/documents.jsonl.meta.json --exclude-metadata /home/ctj/cbf_ttt_postcutoff_random_pilot_20260927/documents.jsonl.meta.json --exclude-metadata /home/ctj/cbf_ttt_title_recall_pilot_20260929/documents.jsonl.meta.json --exclude-metadata /home/ctj/cbf_ttt_writer_pilot_20260929/documents.jsonl.meta.json
+"$PYTHON" -m unittest tests.test_cbf_paired_facts tests.test_cbf_paired_writer tests.test_cbf_writer
+export ROOT PYTHON
+bash scripts/run_cbf_paired_writer_pilot.sh > "$ROOT/pipeline.log" 2>&1
+```
+
+正式执行放在 tmux；输出目录必须是新目录，复现时更换 ROOT。每步耗时包括候选加载及梯度更新，进程另含模型加载/dev/保存，不将步内累计当总耗时。双路径反传增加显存；其他风险有候选差异过小、范数约束、人工事实/固定位置/有限答案类型。论文全文、特征、逐条结果及 checkpoint 保留远程/忽略目录，仅代码、协议、公开元数据及聚合结果上传 GitHub。四条件门控与正式扩量继续等待内容写入证据。

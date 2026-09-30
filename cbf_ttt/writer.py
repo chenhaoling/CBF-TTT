@@ -50,3 +50,16 @@ def memory_nll(model, memory: dict[int, torch.Tensor], query_ids: list[int],
     logits = model.lm_head(hidden[:, len(query_ids) - 1:]).float()
     target = torch.tensor(answer_ids, device=session.device, dtype=torch.long)
     return F.cross_entropy(logits.reshape(-1, logits.shape[-1]), target)
+
+
+def memory_choice_nll(model, memory, query_ids, choice_ids):
+    """Full-vocabulary NLL for single-token choices from one answer-free forward."""
+    if not query_ids or not choice_ids:
+        raise ValueError("nonempty query and choices required")
+    session = CBFSession(model)
+    dtype = next(model.parameters()).dtype
+    session.cache.cbf_memory = {layer: value.to(dtype) for layer, value in memory.items()}
+    ids = torch.tensor([query_ids], device=session.device, dtype=torch.long)
+    hidden = model.model(input_ids=ids, past_key_values=session.cache, use_cache=True).last_hidden_state
+    log_probs = F.log_softmax(model.lm_head(hidden[:, -1:]).float(), dim=-1)[0, 0]
+    return -log_probs[torch.tensor(choice_ids, device=session.device, dtype=torch.long)]
