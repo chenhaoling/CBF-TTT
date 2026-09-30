@@ -9,6 +9,7 @@ from pathlib import Path
 
 import torch
 
+from cbf_ttt.runtime import CBFSession
 from cbf_ttt.writer import LowRankWriter, memory_choice_nll
 from tasks.build_cbf_paired_facts import PROTOCOL, validate
 from tasks.cbf_ttt import _load_model
@@ -16,6 +17,33 @@ from tasks.cbf_writer import candidate_for, digest, end_profile, extract, start_
 
 
 CONTROLS = ("none", "raw", "twin", "train_mean")
+
+
+@torch.no_grad()
+def sanity(args, model, episodes):
+    """Check dev fact readability with full KV available and no fast-memory writing."""
+    output = Path(args.output)
+    if output.exists():
+        raise ValueError("sanity output directory must be new")
+    output.mkdir(parents=True)
+    records = []
+    for row in episodes:
+        if row["split"] != "dev":
+            continue
+        session = CBFSession(model)
+        session._forward(row["context_ids"], collect=False)
+        hidden = session._forward(row["query_ids"], collect=False)
+        log_probs = model.lm_head(hidden[:, -1:]).float().log_softmax(-1)[0, 0]
+        choices = -log_probs[torch.tensor(row["choice_ids"], device=session.device)]
+        records.append({"id": row["id"], "correct": int(int(choices.argmin()) == row["answer_index"]),
+                        "nll": float(choices[row["answer_index"]])})
+    (output/"rows.jsonl").write_text("".join(json.dumps(r)+"\n" for r in records))
+    accuracy = statistics.mean(r["correct"] for r in records)
+    write_json(output/"summary.json", {"dev_examples": len(records), "full_kv_accuracy": accuracy,
+                                       "mean_nll": statistics.mean(r["nll"] for r in records),
+                                       "passed_readability": accuracy >= .75})
+    if accuracy < .75:
+        raise ValueError("full-KV fact readability <75%; stop before writer training")
 
 
 def paired_loss(correct, wrong, margin=0.1):
@@ -223,7 +251,7 @@ def test(args, model, episodes):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("extract", "train", "test"))
+    parser.add_argument("command", choices=("sanity", "extract", "train", "test"))
     for name in ("model", "data", "features"):
         parser.add_argument("--"+name, required=True)
     for name in ("output", "paired-dir", "nll-dir"):
@@ -249,7 +277,7 @@ def main():
     episodes = [json.loads(line) for line in Path(args.data).read_text().splitlines()]
     validate(episodes)
     model = _load_model(args.model, args.device, args.dtype)
-    {"extract": extract, "train": train, "test": test}[args.command](args, model, episodes)
+    {"sanity": sanity, "extract": extract, "train": train, "test": test}[args.command](args, model, episodes)
 
 
 if __name__ == "__main__":

@@ -7,6 +7,7 @@ TOKENIZER=${TOKENIZER:-/home/ctj/models/Qwen3-4B}
 PYTHON=${PYTHON:-python}
 git rev-parse HEAD > "$ROOT/code_commit.txt"
 "$PYTHON" -m tasks.build_cbf_paired_facts --data "$ROOT/documents.jsonl" --output "$ROOT/episodes.jsonl" --tokenizer "$TOKENIZER"
+CUDA_VISIBLE_DEVICES=0 "$PYTHON" -m tasks.cbf_paired_writer sanity --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --output "$ROOT/sanity" > "$ROOT/sanity.log" 2>&1
 CUDA_VISIBLE_DEVICES=0 "$PYTHON" -m tasks.cbf_paired_writer extract --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --shards 2 --shard 0 > "$ROOT/extract0.log" 2>&1 &
 pid0=$!
 CUDA_VISIBLE_DEVICES=1 "$PYTHON" -m tasks.cbf_paired_writer extract --model "$MODEL" --data "$ROOT/episodes.jsonl" --features "$ROOT/features" --shards 2 --shard 1 > "$ROOT/extract1.log" 2>&1 &
