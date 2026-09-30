@@ -719,3 +719,5 @@ bash scripts/run_cbf_paired_writer_pilot.sh > "$ROOT/pipeline.log" 2>&1
 开始评分前补充 `sanity` 入口：dev 完整 KV、关闭快记忆写入的事实可读性准确率须 ≥.75，再启动提取与写入训练。该检查区分任务不可读与候选写入失败，不使用 test 或改变原有内容相关门槛。
 
 远程 5 项单元测试通过（配对数据、梯度与骨干冻结、成功/失败门槛分支及旧 writer）；新增 `tests/test_cbf_postcutoff.py` 的部分 PDF 传输重试测试。新增 `scripts/audit_cbf_paired_writer.py`，独立复核来源排除、配对与均衡、两支初始化/训练顺序、每 epoch 完整 train 覆盖、dev 选择和实际 test 是否遵守门槛；输出聚合审计 JSON。
+
+补充只读诊断 `scripts/summarize_cbf_paired_signal.py --root "$ROOT"`，在训练完成后度量 dev 双生候选的逐层相对 Frobenius 差异和非零差异比例，排查缓存是否完全相同；不运行模型、不使用 test 标签、不据此调参。输出 `candidate_signal.json`。事实可读性检查已达 16/16 正确；两支初始化 dev 数值一致。
