@@ -729,3 +729,24 @@ bash scripts/run_cbf_paired_writer_pilot.sh > "$ROOT/pipeline.log" 2>&1
 本轮仅支持当前受限低秩写入器仍未学会可靠的事实区分，不能据 NLL 下降声称内容记忆成功，也不能据此否定所有双门控架构。完整说明见 [`配对事实试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/paired_fact_writer_pilot/REPORT.md)。远程审计输出为 `/home/ctj/cbf_ttt_paired_fact_20260930/audit.json`，原始训练轨迹和 checkpoint 保存在同目录。SSH 网络多次断连影响本地归档，但不改变已完成的训练和已返回的审计结果。
 
 2026-10-03 已完成聚合结果本地同步：候选均值耗时 0.914 秒/条、最大 reserved 9.096 GiB；配对/普通 NLL 训练均值 0.509/0.263 秒每步、最大 reserved 14.115/11.430 GiB。后台流程于 2026-09-30 23:48:31（北京时间）完成。只读 dev 信号诊断确认双生候选不是相同缓存，相对 Frobenius 差异中位数 0.2378%（0.1682%–0.4649%）；该诊断没有涉及 test。公开元数据、选择、曲线、资源、审计及信号摘要均归档在 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/paired_fact_writer_pilot/`，原始 token/全文/逐条结果/模型仍不上传。后续 TODO 是候选生成与写入表达能力的独立实验，而非继续扩量当前控制器。
+
+### 写入—读取链路检查（2026-10-03，执行中）
+
+用户要求下一步检查。代码核查发现当前读出在模型 dtype 中合并 W₀+M，并以该 dtype 计算词表 logits；BF16 是否限制微小事实差异需要实测，暂不认定是 bug。固定 [`WRITER_PATH_DIAGNOSTIC.md`](WRITER_PATH_DIAGNOSTIC.md)，只用已评分的 8 个 dev 源组，冻结已有模型、writer、候选及门值，不评分 test、不训练。
+
+| 新增文件 | 功能及检查目标 |
+|---|---|
+| `scripts/diagnose_cbf_writer_path.py` | 核对原 BF16 dev 逐条结果；比较 BF16、仅 head FP32、全读取 FP32；追踪候选/低秩变换/范数限制/BF16 合并中的双生差异；输出查询 hidden 差异、NLL、准确率及错配收益 |
+| `scripts/run_cbf_writer_path_diagnostic.sh` | 测试通过后两 GPU 并行精度诊断，记录代码提交及完成标记 |
+| `tests/test_cbf_writer_path.py` | 检验投影范数、s=0 共享记忆、s=1 恒等、双生交换指标、原 forward 等价及 head 精度读取 |
+| `WRITER_PATH_DIAGNOSTIC.md`、本记录 | 执行前固定检查顺序、网格、数据范围及解释边界 |
+
+配对写入器额外检查 C±sR，s=0/1/8/32，其中 C/R 来自两个双生输入；这属于不可部署的诊断，不是独立测试集结果。s=0 共同投影保证完全相同记忆；s=1 保持原张量；其他点限制为各自原候选范数。FP32 只改变读取精度，候选仍是原 BF16 缓存。禁用 TF32，保留所有预设点，不依结果扩展网格或重新选模型。所有实现为独立诊断入口，不修改 baseline 数值路径；无新依赖。
+
+运行命令（hku-gpu2 仓库内，以 tmux 后台执行）：
+
+```bash
+PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python bash scripts/run_cbf_writer_path_diagnostic.sh
+```
+
+ROOT 默认 `/home/ctj/cbf_ttt_paired_fact_20260930`，OUT 默认 `$ROOT/path_diagnostic_20261003`，输出必须新建。命令行允许显式 `--dtype bfloat16/float32`、`--root`、`--model`、`--output`、`--device`。每组记录时间和峰值显存；逐组记录只留远程/忽略目录，公开聚合与报告。若 FP32 OOM 或原结果不能复现则明确停止记录，不擅自改模型或预算。
