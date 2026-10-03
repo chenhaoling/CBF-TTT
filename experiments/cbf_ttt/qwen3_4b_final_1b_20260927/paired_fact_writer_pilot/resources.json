@@ -1,0 +1,21 @@
+{
+  "extraction_examples": 96,
+  "extraction_mean_time_s": 0.9141406403990308,
+  "extraction_peak_reserved_gib": 9.095703125,
+  "training": {
+    "paired": {
+      "steps": 320,
+      "trainable_parameters": 286720,
+      "mean_step_time_s": 0.5094357404770562,
+      "max_peak_allocated_gib": 13.430216312408447,
+      "max_peak_reserved_gib": 14.115234375
+    },
+    "nll": {
+      "steps": 320,
+      "trainable_parameters": 286720,
+      "mean_step_time_s": 0.26259195353195536,
+      "max_peak_allocated_gib": 10.792669773101807,
+      "max_peak_reserved_gib": 11.4296875
+    }
+  }
+}

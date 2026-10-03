@@ -1,0 +1,37 @@
+{
+  "protocol": "paired_fact_writer_v1",
+  "objective": "nll",
+  "seed": 134,
+  "rank": 8,
+  "lr": 0.001,
+  "margin": 0.1,
+  "epochs": 5,
+  "best": {
+    "epoch": 1,
+    "gate": 1.0,
+    "mean_nll": 2.2582858502864838,
+    "min_gain": 0.019531235098838806,
+    "gain_vs_controls": {
+      "none": 4.9110285341739655,
+      "raw": 4.8777812123298645,
+      "twin": 0.019531235098838806,
+      "train_mean": 0.02003994584083557
+    },
+    "accuracy": 0.125,
+    "accuracy_gain_vs_controls": {
+      "none": 0.0,
+      "raw": -0.0625,
+      "twin": 0.0,
+      "train_mean": 0.0
+    },
+    "improved_groups": 5,
+    "groups": 8,
+    "passed": false
+  },
+  "raw_gate": 0.5,
+  "smoke": false,
+  "passed_dev_gate": false,
+  "optimizer_steps": 320,
+  "checkpoint_sha256": "17bf83ccd1ecd4d963681368933e31145f9074353939c1977821135fc11d0cfa",
+  "episodes_sha256": "da746bd471d6425df553729a32a0cb35ab5036ee7a95d10661f1586d2d0f661d"
+}

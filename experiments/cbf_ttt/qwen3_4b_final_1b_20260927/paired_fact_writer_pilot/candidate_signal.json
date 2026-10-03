@@ -1,0 +1,20 @@
+{
+  "split": "dev",
+  "groups": 8,
+  "layer_pair_records": 56,
+  "relative_difference_definition": "||D_a-D_b||_F / ((||D_a||_F+||D_b||_F)/2)",
+  "all_layer_pairs_identical": false,
+  "relative_norm_min": 0.0016821471508592367,
+  "relative_norm_median": 0.002378394710831344,
+  "relative_norm_max": 0.004648654721677303,
+  "changed_fraction_median": 0.41876332461833954,
+  "by_layer": {
+    "0": {"relative_norm_mean": 0.003407931566471234, "changed_fraction_mean": 0.43211913481354713},
+    "6": {"relative_norm_mean": 0.0019939417979912832, "changed_fraction_mean": 0.5420395284891129},
+    "12": {"relative_norm_mean": 0.0026174105296377093, "changed_fraction_mean": 0.43262970820069313},
+    "18": {"relative_norm_mean": 0.0024428413016721606, "changed_fraction_mean": 0.3853203095495701},
+    "24": {"relative_norm_mean": 0.0032196298998314887, "changed_fraction_mean": 0.4556937664747238},
+    "30": {"relative_norm_mean": 0.0021369734895415604, "changed_fraction_mean": 0.3859536834061146},
+    "35": {"relative_norm_mean": 0.0019015345606021583, "changed_fraction_mean": 0.32725780084729195}
+  }
+}

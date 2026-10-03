@@ -684,7 +684,7 @@ python -m scripts.audit_cbf_writer_results --root /home/ctj/cbf_ttt_writer_pilot
 
 完整训练单步平均 0.237 秒、最大 reserved 11.631 GiB；test 含全部对照平均每篇 0.503 秒、最大 reserved 11.938 GiB，无 OOM。`audit_cbf_writer_results.py` 在本机从逐条轨迹独立复核：与旧源组无交叉、训练/dev/test 64/16/16、96 份候选缓存、每 epoch 完整 64 篇、320 步、dev 最优选择和 test 均值/阶段门均一致。详情见 [`关键试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/task_writer_pilot/REPORT.md)，同目录保存公开来源元数据、曲线、选择、资源与聚合结果。原始全文、特征、checkpoint 和逐样本数据由 `.gitignore` 排除；远程 checkpoint 位于 `/home/ctj/cbf_ttt_writer_pilot_20260929/train_seed123/best.pt`。后续应在新源组上使用正确/错配记忆的训练约束及事实区分任务，再验证内容相关收益；正式反事实扩量与控制器训练继续暂停。
 
-### 配对事实写入器关键试点（2026-09-30，执行中）
+### 配对事实写入器关键试点（2026-09-30，训练与阶段门审计已完成）
 
 用户要求继续下一步。执行前固定 [`PAIRED_FACT_WRITER_PILOT.md`](PAIRED_FACT_WRITER_PILOT.md)：用新论文的人工事实双生版本排除通用任务偏移，比较普通 NLL 与配对约束。48 个新论文源按 32/8/8 分组，各生成两条仅一个事实 token 不同的上下文，共 64/16/16 条，8 类标签严格均衡。论文正文作长文本干扰，颜色事实人为插入，结果不能等同自然事实问答。
 
@@ -721,3 +721,11 @@ bash scripts/run_cbf_paired_writer_pilot.sh > "$ROOT/pipeline.log" 2>&1
 远程 5 项单元测试通过（配对数据、梯度与骨干冻结、成功/失败门槛分支及旧 writer）；新增 `tests/test_cbf_postcutoff.py` 的部分 PDF 传输重试测试。新增 `scripts/audit_cbf_paired_writer.py`，独立复核来源排除、配对与均衡、两支初始化/训练顺序、每 epoch 完整 train 覆盖、dev 选择和实际 test 是否遵守门槛；输出聚合审计 JSON。
 
 补充只读诊断 `scripts/summarize_cbf_paired_signal.py --root "$ROOT"`，在训练完成后度量 dev 双生候选的逐层相对 Frobenius 差异和非零差异比例，排查缓存是否完全相同；不运行模型、不使用 test 标签、不据此调参。输出 `candidate_signal.json`。事实可读性检查已达 16/16 正确；两支初始化 dev 数值一致。
+
+#### 完成结果
+
+两支各完成 5 epoch /320 步，远程独立审计通过。新 48 个论文源与旧 232 个源无交叉，96 个候选来源完整，两支训练顺序/初始化一致。完整 KV 下 dev 可读性准确率 100%；清空 KV 后，无写入 NLL 7.16931、准确率 12.5%，原始候选 NLL 7.13607、准确率 18.75%。普通 NLL 支选 epoch 1/g=1：NLL 2.25829、准确率 12.5%；配对支选 epoch 2/g=1：NLL 2.22286、准确率 12.5%。配对支对双生错配仅改善 0.00781 NLL，组内改善达标 2/8；两支均未达到准确率门槛，因此 **test 未评分**，没有进一步调整预算或阈值。
+
+本轮仅支持当前受限低秩写入器仍未学会可靠的事实区分，不能据 NLL 下降声称内容记忆成功，也不能据此否定所有双门控架构。完整说明见 [`配对事实试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/paired_fact_writer_pilot/REPORT.md)。远程审计输出为 `/home/ctj/cbf_ttt_paired_fact_20260930/audit.json`，原始训练轨迹和 checkpoint 保存在同目录。SSH 网络多次断连影响本地归档，但不改变已完成的训练和已返回的审计结果。
+
+2026-10-03 已完成聚合结果本地同步：候选均值耗时 0.914 秒/条、最大 reserved 9.096 GiB；配对/普通 NLL 训练均值 0.509/0.263 秒每步、最大 reserved 14.115/11.430 GiB。后台流程于 2026-09-30 23:48:31（北京时间）完成。只读 dev 信号诊断确认双生候选不是相同缓存，相对 Frobenius 差异中位数 0.2378%（0.1682%–0.4649%）；该诊断没有涉及 test。公开元数据、选择、曲线、资源、审计及信号摘要均归档在 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/paired_fact_writer_pilot/`，原始 token/全文/逐条结果/模型仍不上传。后续 TODO 是候选生成与写入表达能力的独立实验，而非继续扩量当前控制器。
