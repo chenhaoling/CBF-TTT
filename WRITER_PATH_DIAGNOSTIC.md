@@ -10,3 +10,7 @@
 两 GPU 分别运行 BF16（同时含 head-FP32）和全 FP32 分片，记录每源组时间及峰值显存、数据/checkpoint 哈希、精度设置。仅发生实现错误时修复重跑到新目录；不以结果扩展网格或更换数据。CPU tiny 测试验证投影、交换指标和三条读取路径；真实 bf16 全集同时核对历史结果。完整 FP32 若 OOM 则记录限制，不改变模型或样本预算掩盖问题。
 
 输出在 `/home/ctj/cbf_ttt_paired_fact_20260930/path_diagnostic_20261003`。GitHub 保存代码、协议和聚合诊断；逐条记录保持忽略。完成后判断优先检查数值实现还是候选生成/写入表达能力，不启动控制器或正式扩量。
+
+## 已返回结果
+
+原 BF16 逐条复现误差为 0；两 writer 在三种读取配置下准确率均为 12.5%，差异放大也未改善。完整 FP32 的 checkpoint 存储精度/参数逐值等价附加核验因自动审批超时尚未完成，因果解释受限。共享 backbone 的 head FP32 对照及其他结果见 [`诊断报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/writer_path_diagnostic/REPORT.md)。

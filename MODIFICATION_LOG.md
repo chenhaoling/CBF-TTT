@@ -730,7 +730,7 @@ bash scripts/run_cbf_paired_writer_pilot.sh > "$ROOT/pipeline.log" 2>&1
 
 2026-10-03 已完成聚合结果本地同步：候选均值耗时 0.914 秒/条、最大 reserved 9.096 GiB；配对/普通 NLL 训练均值 0.509/0.263 秒每步、最大 reserved 14.115/11.430 GiB。后台流程于 2026-09-30 23:48:31（北京时间）完成。只读 dev 信号诊断确认双生候选不是相同缓存，相对 Frobenius 差异中位数 0.2378%（0.1682%–0.4649%）；该诊断没有涉及 test。公开元数据、选择、曲线、资源、审计及信号摘要均归档在 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/paired_fact_writer_pilot/`，原始 token/全文/逐条结果/模型仍不上传。后续 TODO 是候选生成与写入表达能力的独立实验，而非继续扩量当前控制器。
 
-### 写入—读取链路检查（2026-10-03，执行中）
+### 写入—读取链路检查（2026-10-03，核心诊断完成，附加核验受阻）
 
 用户要求下一步检查。代码核查发现当前读出在模型 dtype 中合并 W₀+M，并以该 dtype 计算词表 logits；BF16 是否限制微小事实差异需要实测，暂不认定是 bug。固定 [`WRITER_PATH_DIAGNOSTIC.md`](WRITER_PATH_DIAGNOSTIC.md)，只用已评分的 8 个 dev 源组，冻结已有模型、writer、候选及门值，不评分 test、不训练。
 
@@ -750,3 +750,11 @@ PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python bash scripts/run
 ```
 
 ROOT 默认 `/home/ctj/cbf_ttt_paired_fact_20260930`，OUT 默认 `$ROOT/path_diagnostic_20261003`，输出必须新建。命令行允许显式 `--dtype bfloat16/float32`、`--root`、`--model`、`--output`、`--device`。每组记录时间和峰值显存；逐组记录只留远程/忽略目录，公开聚合与报告。若 FP32 OOM 或原结果不能复现则明确停止记录，不擅自改模型或预算。
+
+#### 返回结果与解释边界（2026-10-05 归档）
+
+两项测试通过，两精度分片均完成 8 个 dev 组；原 BF16 16 条结果逐值复现，最大误差 0。配对 writer 的 BF16/head-FP32/full-FP32 准确率均为 12.5%，正确对错配 NLL 收益分别 +0.007813/+0.001665/−0.000018；普通 writer 也均为 12.5%。s=0/1/8/32 所有预设诊断点均未提高准确率，但查询 hidden 随双生变化而变化，排除完全没有读取响应的解释。原候选相对差异中位数 0.2376%，配对 writer 范数投影前后均约 0.1662%，投影并未明显改变该相对差异。
+
+完整 FP32 只作为配置敏感性结果：额外读取 checkpoint 存储 dtype 的自动审批及唯一重试均超时，操作未执行；尚未核验两种加载参数的逐值等价，不能把所有变化严格归因于算术精度。上述结果来自此前已批准执行的远程日志读取（含完整 summary 输出），没有绕过审批去重新执行被阻断的请求。原始完整逐组文件尚未同步独立审计。head FP32 使用同一 backbone/hidden，原路径复现与准确率结论不受该限制。
+
+BF16+head FP32/全 FP32 峰值 reserved 13.477/19.611 GiB，无 OOM。数值摘录与详细解释新增于 [`writer_path_diagnostic/REPORT.md`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/writer_path_diagnostic/REPORT.md) 及同目录 `retrieved_summary.json`；逐组数据仍留远程。下一步候选颜色可解码性探针尚未执行；test 继续保持未评分，控制器不扩量。
