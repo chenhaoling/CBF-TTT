@@ -847,3 +847,9 @@ R 于 11:28:40–11:29:13 完成（33 秒，代码 `91359fe`）。冻结骨干�
 新增聚合归档 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/train_infer_parity/{REPORT.md,summary.json,execution_audit.json,.gitignore}`，涵盖 P/R 全部聚合、哈希、耗时显存、测试、解释和复现方式；原始逐来源/逐参数日志留远程。计划和 README 补完成入口。原 baseline 配置、模型和 runtime 不改，无新依赖。
 
 根据新观察到的风险，L 正式短长对照暂不启动：下一步先核验融合 loss 与标准 CE 的梯度，再记录逐层实际相对参数位移，明确第 35 层梯度集中与优化尺度的作用。之后才做同 token/同 optimizer 步数的短长序列适配，并以独立来源比较累积/清除/不写入。当前完成前向核验和资源闭环，尚未完成长序列有效性训练，更未扩大控制器。
+
+### Writer 梯度与 optimizer 位移诊断（2026-10-08，执行前登记）
+
+用户要求继续，新增 `OPTIMIZER_AUDIT_PLAN.md`，固定原三步训练轨迹，核验 Liger 融合 CE/标准 CE 梯度，记录真实相对参数更新，并在第二次更新处干预第 35 层 conv 的 delta。保持原学习率，不训练控制器、不评分保留集。
+
+新增 `scripts/diagnose_ttt_optimizer.py`：标准 CE 按 128 token 分块，同一 hidden 计算上游梯度，两次 VJP 比较各 writer 梯度；恢复融合梯度进行原 AdamW step；记录每层相对位移；完整/撤销末层 conv/仅末层 conv/末层 conv 减半四分支评分后恢复参数。输入哈希、冻结骨干和原 loss 轨迹均核验。新增 `tests/test_ttt_optimizer.py` 检验标准 CE 分块的标签对齐与归一化、梯度一致性和干预隔离；新增 `scripts/run_ttt_optimizer_audit.sh` 先测试再双卡执行。配置和运行命令见计划，复用现有依赖，baseline 模型/runtime/配置不修改。

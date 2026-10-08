@@ -1,0 +1,30 @@
+# Writer 梯度与更新尺度诊断（2026-10-08，执行前固定）
+
+前向一致性已通过，冻结骨干的长序列资源试跑可行，但同输入第三步 loss 升至 4.4116。按用户要求继续检查该优化波动，原模型/runtime/训练配置不修改，不直接扩大训练。
+
+## 固定实验
+
+1. 复用上一轮相同最终 4B checkpoint、训练 token 前缀、6144/12288 长度和 3 步轨迹；输入哈希必须一致。FP32 writer / AdamW 状态、BF16 autocast、SDPA、非重入梯度检查点、lr=1e-5、weight_decay=.01、clip=1，均保持不变。
+2. 每个状态只计算一次骨干 hidden。在相同 hidden 上计算原 Liger 融合 CE 和标准 `F.linear + FP32 F.cross_entropy`，后者每块 128 token，按全序列有效目标数归一化。标签左移、最后一个目标及 -100 忽略严格对齐。
+3. 两种 head 上游梯度分别通过同一骨干图反向，比较所有 14 个 writer 的梯度范数、相对 L2、cosine，以及全局梯度差。随后恢复融合梯度执行原 AdamW 更新，保证轨迹未被标准 CE 改变。
+4. 记录每步每层参数初始/更新后范数、绝对和相对位移。第 2 次更新后做四个同输入反事实：完整更新、撤销第 35 层 conv 更新、只保留该 conv 更新、该 conv 更新减半。其他权重和 optimizer 状态不变，评分后恢复完整参数，继续第三步。此操作隔离单次参数更新效果，不是持久冻结层训练或独立测试。
+5. 三个融合训练 loss 必须重现上一轮（最大误差≤1e-5）；冻结骨干版本不变、梯度有限；否则先定位诊断实现。记录时间和峰值显存，无训练 checkpoint 保存。
+
+## 解释门槛
+
+诊断触发条件：任一步 loss 差>0.005、全局梯度相对 L2>5%、全局 cosine<0.99 或某 writer 相对 L2>10%。触发只表示需要进一步区分 BF16 舍入、梯度放大或融合实现问题，不自动认定库有 bug。未触发也不证明所有数据/精度下等价。
+
+是否恢复短长序列训练取决于梯度正确性与更新尺度证据；本轮不进行学习率搜索，不根据此训练输入选择最优控制器，也不评分 confirm/test。单输入的局部参数干预不能直接推广为删去第 35 层或证明普遍失稳原因。
+
+## 实现及运行
+
+- `scripts/diagnose_ttt_optimizer.py`：分块 CE 上游梯度、同图两次 VJP、逐层位移及四分支更新干预。
+- `tests/test_ttt_optimizer.py`：分块 loss/梯度与完整标准 CE 一致，含 ignore 标签、边界和无有效标签拒绝；干预只影响指定 delta。
+- `scripts/run_ttt_optimizer_audit.sh`：先测试，两个长度分别运行在两张 5090，拒绝覆盖已有目录，记录源码/时间和失败状态。
+
+```bash
+cd /home/ctj/cbf_ttt_joint_exp_20260927
+ROOT=/home/ctj/cbf_ttt_optimizer_audit_20261008 bash scripts/run_ttt_optimizer_audit.sh
+```
+
+环境变量 ROOT/REFERENCE/PYTHON/MODEL/TRAINING_DATA/TOKENIZER；诊断 CLI 为 `--model/--training-data/--tokenizer/--length/--reference/--output`。复用已有依赖。原始训练 token/梯度张量不上传，仅聚合诊断与审计进入 GitHub。双 VJP 与四分支评分有额外开销，耗时不作为正式训练吞吐。
