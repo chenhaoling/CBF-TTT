@@ -100,38 +100,50 @@ def main():
                 if len(anchor) < 96:
                     raise ValueError("source lacks sufficiently long overlap anchors")
                 doc_anchors.append(anchor)
-            anchors.extend(doc_anchors)
+            anchors.append(sorted(set(doc_anchors)))
             hashes.add(sha)
             documents.append({"sha256": sha, "row_index": row_index, "ids": used,
                               "original_qwen_tokens": len(tokens)})
             print(json.dumps({"documents": len(documents), "row_index": row_index}), flush=True)
-            if len(documents) == 16:
+            if len(documents) == 64:
                 break
-        if len(documents) == 16:
+        if len(documents) == 64:
             break
-    if len(documents) != 16:
+    if len(documents) != 64:
         raise RuntimeError("not enough long unique documents in final row group; protocol not changed")
     # Match against the exact packed training text, after whitespace normalization.
-    unique_anchors = sorted(set(anchors))
     training_rows = matches = 0
+    matching_rows_by_source = [0] * len(documents)
     with Path(args.training_data).open() as stream:
         for line in stream:
             row = json.loads(line)
             packed = normalize(packed_text(row))
-            matches += any(anchor in packed for anchor in unique_anchors)
+            row_hit = False
+            for index, source_anchors in enumerate(anchors):
+                if any(anchor in packed for anchor in source_anchors):
+                    matching_rows_by_source[index] += 1
+                    row_hit = True
+            matches += row_hit
             training_rows += 1
             if training_rows % 20000 == 0:
                 print(json.dumps({"training_rows_scanned": training_rows, "matches": matches}), flush=True)
+    eligible = [d for d, count in zip(documents, matching_rows_by_source) if count == 0]
+    selected = eligible[:16]
     metadata = {"protocol": "selective_forgetting_v1", "source": "manifestai/longcrawl64",
                 "source_parquet": args.parquet, "parquet_rows": parquet.metadata.num_rows,
                 "source_row_group": rg, "training_data": args.training_data,
-                "training_rows_scanned": training_rows, "overlap_matching_rows": matches,
-                "anchors": len(set(anchors)), "audit": "normalized long-anchor exact match, not semantic dedup",
-                "documents": [{k: v for k, v in d.items() if k != "ids"} for d in documents]}
+                "training_rows_scanned": training_rows, "overlap_matching_rows": 0,
+                "candidate_pool_matching_rows": matches, "candidate_pool": 64,
+                "eligible_sources": len(eligible),
+                "anchors": sum(len(a) for a in anchors),
+                "audit": "reject any source with a normalized long-anchor match, not semantic dedup",
+                "candidate_sources": [{**{k: v for k, v in d.items() if k != "ids"}, "matching_rows": count}
+                                      for d, count in zip(documents, matching_rows_by_source)],
+                "documents": [{k: v for k, v in d.items() if k != "ids"} for d in selected]}
     Path(str(output)+".meta.json").write_text(json.dumps(metadata, indent=2)+"\n")
-    if matches or not training_rows:
-        raise RuntimeError("training overlap audit failed; no scenarios written")
-    scenes = make_scenes(documents)
+    if len(selected) != 16 or not training_rows:
+        raise RuntimeError("fewer than 16 audited sources; no scenarios written")
+    scenes = make_scenes(selected)
     output.write_text("".join(json.dumps(row)+"\n" for row in scenes))
     print(json.dumps({"scenarios": len(scenes), "groups": 8, "overlap_matching_rows": matches}), flush=True)
 
