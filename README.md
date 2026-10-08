@@ -138,6 +138,8 @@ For the training/inference forward comparison and bounded writer training resour
 
 The subsequent [optimizer audit](OPTIMIZER_AUDIT_PLAN.md) compares fused/standard CE gradients and isolates writer updates using fixed parameter snapshots. Its [completed report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/optimizer_audit/REPORT.md) includes actual relative parameter displacements, local interventions, and reproducibility limits.
 
+The [multi-decision forgetting study](MULTIDECISION_FORGETTING_PLAN.md) directly compares one versus two/three forgetting opportunities, exhaustive global schedules, sampled local schedules, and fixed controls. See its [launch record](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/multidecision_forgetting/RUN_STATUS.md) for the frozen design and current execution stage.
+
 The recommended configs assume:
 
 - `data.data_type=plaintext`

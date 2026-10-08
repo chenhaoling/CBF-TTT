@@ -879,3 +879,7 @@ v2（源码 `d4659c9`）于 2026-10-08 15:06:57–15:08:31 完成，94 秒；5 �
 新增 `tasks/cbf_multidecision.py`：build 写入确定性时间点和候选清单并复核来源；collect 复用 CohortSession，完整穷举全局 3/9/27 序列，局部每个多点日程固定采样 27 序列，另有等候选数对照。跨日程动作编码去重，导入 432 个旧单点评分；新多点轨迹 1144、新清除/不写入对照 32、单点重现桥接 48，共 1224 GPU 轨迹。后续候选各分支重新计算，查询不污染轨迹。半保留/窗口固定对照复用旧标签，逐场景重现三个全局单点动作及每步清除；来源/checkpoint 一致、误差≤1e-5 才继续。
 
 新增 `tests/test_cbf_multidecision.py`：候选预算/日程嵌套、编码与随机复现、完整重放与共享前缀多点分支一致、查询和父分支不被改动、缺失标签拒绝；新增 `scripts/run_cbf_multidecision.sh`：先测试/build/smoke，预计双卡90分钟内且峰值 allocated<30 GiB 才执行全部16场景。CLI/配置/运行命令见计划。原模型/runtime/训练配置不改、无额外依赖；历史 pilot/confirm 均已看过，不宣称新的独立验证。局部结果是采样集合最优值，不能冒称完整局部 oracle；图片第三条联合训练尚未执行。
+
+多决策实验于 2026-10-08 15:36:48 +08:00 启动，代码 `2a57ac1`，tmux `cbf-multidecision-20261008`，远程目录 `/home/ctj/cbf_ttt_multidecision_20261008`。19 项测试通过，固定候选构建完成，smoke 复现与资源门槛通过；每轨迹平均 3.880 秒（含桥接和全程对照）、最大 allocated 22.182 GiB，估计双卡完整批次约49.5分钟（含25%余量）。双卡采集已启动，尚无最终结果；不将启动视为实验完成。
+
+新增启动归档 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/multidecision_forgetting/{RUN_STATUS.md,design.json,estimate.json,.gitignore}`，仅含固定动作设计、来源哈希、资源预算和状态，不包含原始文本/token/逐场景标签。最终16场景齐全后脚本自动审计聚合，后续需归档完整报告；图片第三条端到端联合训练仍未执行。

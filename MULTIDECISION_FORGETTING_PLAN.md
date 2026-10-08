@@ -62,3 +62,7 @@ ROOT=/home/ctj/cbf_ttt_multidecision_20261008 bash scripts/run_cbf_multidecision
 ```
 
 环境参数 ROOT/SOURCE/PYTHON/MODEL；CLI build=`--data/--output`，collect=`--data/--design/--reference/--model/--output/--shard/--smoke`，summarize=`--design/--inputs/--output`。此为离线标签/轨迹实验，无新训练 checkpoint。控制器训练、随机全部决策位置、更大局部搜索、FineWeb-Edu 和端到端联合训练仍属后续，不能以本轮代替。
+
+## 启动状态（2026-10-08）
+
+采集提交 `2a57ac1`，15:36:48 +08:00 启动。19 项测试通过、构建设计完成，smoke 旧结果重现通过；包含桥接和固定对照的平均 smoke 轨迹耗时 3.880 秒、峰值 allocated 22.182 GiB，双卡总耗时加25%余量估计49.5分钟，资源门槛通过。双卡固定16场景采集中，完整结果待审计，不做提前结论。启动登记和设计见 [运行状态](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/multidecision_forgetting/RUN_STATUS.md)。
