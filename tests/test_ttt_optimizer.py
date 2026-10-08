@@ -17,7 +17,7 @@ class OptimizerAuditTests(unittest.TestCase):
         loss.backward()
         for size in (1, 4, 128):
             value, grad = standard_head_gradient(h, w, labels, size)
-            self.assertAlmostEqual(value, float(loss), places=5)
+            self.assertAlmostEqual(value, float(loss.detach()), places=5)
             torch.testing.assert_close(grad, h.grad, rtol=1e-5, atol=1e-6)
         with self.assertRaises(ValueError):
             standard_head_gradient(h, w, torch.full_like(labels, -100))

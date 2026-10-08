@@ -28,3 +28,11 @@ ROOT=/home/ctj/cbf_ttt_optimizer_audit_20261008 bash scripts/run_ttt_optimizer_a
 ```
 
 环境变量 ROOT/REFERENCE/PYTHON/MODEL/TRAINING_DATA/TOKENIZER；诊断 CLI 为 `--model/--training-data/--tokenizer/--length/--reference/--output`。复用已有依赖。原始训练 token/梯度张量不上传，仅聚合诊断与审计进入 GitHub。双 VJP 与四分支评分有额外开销，耗时不作为正式训练吞吐。
+
+## 首轮复现失败与 v2 修订（2026-10-08）
+
+首轮 5 项测试通过，但跨运行轨迹门槛失败：短/长序列最大 NLL 偏差 0.0001607/0.0158076。保留首轮日志，不据此解释干预。随后的原资源脚本独立复跑也偏离历史结果 0.0002980/0.0187774，说明固定 seed 的当前训练设置未实现跨运行逐值复现；不能把所有偏差都归因于诊断，也未定位具体非确定性算子。
+
+因此 v2 改为：**先完整执行普通三步优化，再从逐步保存的参数快照进行诊断**。每个 writer 的 before/after 快照保存在 CPU 内存，恢复时逐值核验；梯度对照不执行 optimizer；实际位移来自普通轨迹快照。四分支干预也在第二次更新的固定快照上进行，不影响训练轨迹。
+
+历史 loss 偏差仍完整报告，但不作为 v2 的通过条件；改为同次运行的固定状态前向重放误差≤1e-5，完整更新分支须重现普通第三步的更新前 loss，且恢复快照逐值相同。梯度/loss 对照触发阈值、所有学习率、数据、干预分支不变。此为针对独立重跑证据的协议修订，不将 v1 失败改判为通过。新输出 `/home/ctj/cbf_ttt_optimizer_audit_20261008_r2`，失败时也保留完整 JSON。

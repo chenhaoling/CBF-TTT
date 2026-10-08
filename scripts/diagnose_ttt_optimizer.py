@@ -120,17 +120,48 @@ def main():
     model.config.use_cache = False
     optimizer = torch.optim.AdamW(list(selected.values()), lr=1e-5, weight_decay=.01)
     frozen = {n: p._version for n, p in model.named_parameters() if not p.requires_grad}
-    result = {"protocol": "optimizer_audit_v1", "model": args.model, "length": args.length,
+    result = {"protocol": "optimizer_audit_v2", "model": args.model, "length": args.length,
               "input_ids_sha256": digest, "packed_training_row_sha256": hashes,
               "reference": args.reference, "lr": 1e-5, "weight_decay": .01, "clip": 1.,
-              "ce_block_size": 128, "measurements": [], "interventions": {},
+              "ce_block_size": 128, "measurements": [], "interventions": {}, "baseline_measurements": [],
               "target_tensor": "model.layers.35.mlp.ttt_conv.weight"}
     target = result["target_tensor"]
     if target not in selected:
         raise ValueError("expected layer 35 writer")
+    # Complete the ordinary optimizer trajectory FIRST. All subsequent probes use
+    # fixed snapshots and cannot change later optimization states.
+    snapshots = []
     for step in range(3):
-        def audit_step():
+        before = {n: p.detach().cpu().clone() for n, p in selected.items()}
+        def ordinary_step():
             optimizer.zero_grad(set_to_none=True)
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                loss = model(input_ids=inputs, labels=inputs, use_cache=False).loss
+            loss.backward()
+            if any(p.grad is None or not torch.isfinite(p.grad).all() for p in selected.values()):
+                raise RuntimeError("invalid ordinary gradient")
+            norm = float(torch.nn.utils.clip_grad_norm_(list(selected.values()), 1.0))
+            optimizer.step()
+            return {"step": step+1, "loss": float(loss.detach()), "unclipped_grad_norm": norm}
+        row, profile = measure(ordinary_step)
+        row.update(profile)
+        after = {n: p.detach().cpu().clone() for n, p in selected.items()}
+        snapshots.append((before, after))
+        result["baseline_measurements"].append(row)
+        print(json.dumps({"ordinary_step": step+1, **row}), flush=True)
+    del optimizer
+
+    def restore(weights):
+        with torch.no_grad():
+            for n, p in selected.items():
+                p.copy_(weights[n])
+        if not all(torch.equal(p.detach().cpu(), weights[n]) for n, p in selected.items()):
+            raise RuntimeError("writer snapshot restoration failed")
+
+    for step, (before, after) in enumerate(snapshots):
+        restore(before)
+        def audit_step():
+            model.zero_grad(set_to_none=True)
             with torch.autocast("cuda", dtype=torch.bfloat16):
                 hidden = model.model(input_ids=inputs, use_cache=False).last_hidden_state
                 hidden.retain_grad()
@@ -141,39 +172,27 @@ def main():
             with torch.autocast("cuda", dtype=torch.bfloat16):
                 standard_loss, upstream = standard_head_gradient(hidden, model.lm_head.weight, inputs)
             head_diff = difference(upstream, hg)
-            optimizer.zero_grad(set_to_none=True)
+            model.zero_grad(set_to_none=True)
             hidden.grad = None
-            # Same backbone graph, second VJP with the independently computed CE gradient.
             hidden.backward(upstream)
             sg = {n: p.grad for n, p in selected.items()}
             if any(g is None or not torch.isfinite(g).all() for g in list(fg.values())+list(sg.values())):
                 raise RuntimeError("missing/nonfinite gradient")
             comparison = gradient_comparison(sg, fg)
-            before = {n: p.detach().clone() for n, p in selected.items()}
-            # Restore the original fused gradient: this trajectory must reproduce R.
-            for n, p in selected.items():
-                p.grad = fg[n]
-            norm = float(torch.nn.utils.clip_grad_norm_(list(selected.values()), 1.0))
-            optimizer.step()
-            changes = displacement(before, selected)
             row = {"step": step+1, "fused_loss": float(loss.detach()), "standard_loss": standard_loss,
                    "loss_abs_difference": abs(float(loss.detach())-standard_loss),
-                   "reference_loss_abs_difference": abs(float(loss.detach())-reference["measurements"][step]["loss"]),
+                   "reference_loss_abs_difference": abs(result["baseline_measurements"][step]["loss"]-reference["measurements"][step]["loss"]),
+                   "state_replay_loss_abs_difference": abs(float(loss.detach())-result["baseline_measurements"][step]["loss"]),
                    "head_gradient": head_diff, "writer_gradients": comparison,
-                   "unclipped_grad_norm": norm, "displacements": changes}
+                   "unclipped_grad_norm": result["baseline_measurements"][step]["unclipped_grad_norm"],
+                   "displacements": displacement(before, after)}
             if step == 1:
-                after = {n: p.detach().clone() for n, p in selected.items()}
                 try:
                     for name in ("full", "without_last_conv", "only_last_conv", "half_last_conv"):
-                        weights = intervention_weights(before, after, name, target)
-                        with torch.no_grad():
-                            for n, p in selected.items():
-                                p.copy_(weights[n])
+                        restore(intervention_weights(before, after, name, target))
                         result["interventions"][name] = score(model, inputs)
                 finally:
-                    with torch.no_grad():
-                        for n, p in selected.items():
-                            p.copy_(after[n])
+                    restore(before)
                 result["interventions"]["before_second_update"] = row["fused_loss"]
             return row
         row, profile = measure(audit_step)
@@ -182,11 +201,10 @@ def main():
         print(json.dumps({"step": row["step"], "loss": row["fused_loss"],
                           "ce_loss_gap": row["loss_abs_difference"],
                           "writer_gradient_relative_l2": row["writer_gradients"]["global_relative_l2"], **profile}), flush=True)
+    restore(snapshots[-1][1])
     if frozen != {n: p._version for n, p in model.named_parameters() if not p.requires_grad}:
         raise RuntimeError("frozen backbone changed")
     result["reference_max_loss_error"] = max(r["reference_loss_abs_difference"] for r in result["measurements"])
-    if result["reference_max_loss_error"] > 1e-5:
-        raise RuntimeError(f"original trajectory changed: {result['reference_max_loss_error']}")
     result["frozen_backbone_unchanged"] = True
     result["checkpoint_saved"] = False
     result["gradient_tripwire"] = any(r["loss_abs_difference"] > .005 or
@@ -194,7 +212,14 @@ def main():
         r["writer_gradients"]["global_cosine"] < .99 or
         any(v["relative_l2"] > .10 for v in r["writer_gradients"]["layers"].values())
         for r in result["measurements"])
+    result["state_replay_max_loss_error"] = max(r["state_replay_loss_abs_difference"] for r in result["measurements"])
+    result["intervention_restore_loss_error"] = abs(result["interventions"]["full"]-result["baseline_measurements"][2]["loss"])
+    result["snapshot_restore_bytewise_equal"] = True
+    result["passed_replay_audit"] = result["state_replay_max_loss_error"] <= 1e-5 and result["intervention_restore_loss_error"] <= 1e-5
+    # Keep a failure artifact as well as the log; do not silently discard evidence.
     output.write_text(json.dumps(result, indent=2)+"\n")
+    if not result["passed_replay_audit"]:
+        raise RuntimeError("fixed-state forward replay did not reproduce ordinary trajectory states")
 
 
 if __name__ == "__main__":

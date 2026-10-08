@@ -12,12 +12,12 @@ def summarize(paths):
         raise ValueError('expected both lengths exactly once')
     if len({r['model'] for r in rows}) != 1:
         raise ValueError('mixed checkpoints')
-    output = {'protocol': 'optimizer_audit_v1', 'model': rows[0]['model'], 'lengths': {}}
+    output = {'protocol': 'optimizer_audit_v2', 'model': rows[0]['model'], 'lengths': {}}
     for path, row in zip(paths, rows):
         ms = row['measurements']
         if [m['step'] for m in ms] != [1, 2, 3] or not row['frozen_backbone_unchanged']:
             raise ValueError('incomplete or mutating run')
-        if row['checkpoint_saved'] or row['reference_max_loss_error'] > 1e-5:
+        if row['checkpoint_saved'] or not row['passed_replay_audit'] or not row['snapshot_restore_bytewise_equal']:
             raise ValueError('trajectory audit failed')
         if set(row['interventions']) != {'full', 'without_last_conv', 'only_last_conv', 'half_last_conv', 'before_second_update'}:
             raise ValueError('incomplete interventions')
@@ -33,6 +33,10 @@ def summarize(paths):
             'raw_result_sha256': hashlib.sha256(Path(path).read_bytes()).hexdigest(),
             'input_ids_sha256': row['input_ids_sha256'],
             'reference_max_loss_error': row['reference_max_loss_error'],
+            'state_replay_max_loss_error': row['state_replay_max_loss_error'],
+            'intervention_restore_loss_error': row['intervention_restore_loss_error'],
+            'snapshot_restore_bytewise_equal': row['snapshot_restore_bytewise_equal'],
+            'baseline_measurements': row['baseline_measurements'],
             'frozen_backbone_unchanged': row['frozen_backbone_unchanged'],
             'gradient_tripwire': row['gradient_tripwire'],
             'fused_losses': [m['fused_loss'] for m in ms],
