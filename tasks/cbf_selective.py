@@ -217,6 +217,17 @@ def summarize(args):
             "policy_mean_nll": {name: mean(r["results"][name]["nll"] for r in rows if r["split"] == split)
                                 for name in grid_names+fixed_names}, "passed": passed}
     report["passed_stage_a"] = all(s["passed"] for s in report["splits"].values())
+    # Diagnostic specified before reading real NLL: freeze the pilot's best
+    # constant policy, then report its confirm loss without reselecting there.
+    report["pilot_selected_constant_policies"] = {}
+    for family, names in (("same_state_cohort", grid_names), ("all_fixed_policies", grid_names+fixed_names)):
+        selected_policy = min(names, key=report["splits"]["pilot"]["policy_mean_nll"].get)
+        report["pilot_selected_constant_policies"][family] = {
+            "policy": selected_policy,
+            "pilot_nll": report["splits"]["pilot"]["policy_mean_nll"][selected_policy],
+            "confirm_nll": report["splits"]["confirm"]["policy_mean_nll"][selected_policy],
+            "confirm_gain_of_local_oracle": report["splits"]["confirm"]["policy_mean_nll"][selected_policy]
+                                            - report["splits"]["confirm"]["oracle_nll"]["local_nll"]}
     report["next_action"] = ("preregister stage B on fresh source groups" if report["passed_stage_a"]
                              else "stop scaling; no multi-decision or controller training")
     seconds = sorted(r["seconds"] for r in all_profiles)

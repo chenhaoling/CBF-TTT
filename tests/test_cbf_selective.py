@@ -150,6 +150,14 @@ class SelectiveTests(unittest.TestCase):
             labels.write_text("".join(json.dumps(r)+"\n" for r in rows))
             summarize(args)
             self.assertTrue(json.loads(Path(args.output).read_text())["passed_stage_a"])
+            for row in rows:
+                if row["split"] == "confirm":
+                    row["results"][action_name((1., 0., 1.))].update({"losses": [1.8]*3, "nll": 1.8})
+            labels.write_text("".join(json.dumps(r)+"\n" for r in rows))
+            summarize(args)
+            selection = json.loads(Path(args.output).read_text())["pilot_selected_constant_policies"]
+            self.assertEqual(selection["same_state_cohort"]["policy"], action_name((1., 1., 0.)))
+            self.assertAlmostEqual(selection["same_state_cohort"]["confirm_nll"], 1.9)
             labels.write_text("".join(json.dumps(r)+"\n" for r in rows[:-1]))
             with self.assertRaises(ValueError):
                 summarize(args)
