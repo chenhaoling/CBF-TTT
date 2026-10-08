@@ -1,0 +1,483 @@
+{
+  "protocol": "selective_forgetting_v1",
+  "source": "manifestai/longcrawl64",
+  "source_parquet": "/home/ctj/data/cbf_ttt_pilot/longcrawl64/train/0-of-256.parquet",
+  "parquet_rows": 96689,
+  "source_row_group": 200,
+  "training_data": "/home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl",
+  "training_rows_scanned": 162762,
+  "overlap_matching_rows": 0,
+  "candidate_pool_matching_rows": 140,
+  "candidate_pool": 64,
+  "eligible_sources": 52,
+  "anchors": 512,
+  "audit": "reject any source with a normalized long-anchor match, not semantic dedup",
+  "candidate_sources": [
+    {
+      "sha256": "243933520d6210e0d5ca267c3e074c38166f98219784d6923978d4aae5233e8e",
+      "row_index": 96400,
+      "original_qwen_tokens": 35589,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "08a187189b842619c19c8939d1adbbeba19e22484dc781d4ee32c63606fa67dc",
+      "row_index": 96401,
+      "original_qwen_tokens": 44206,
+      "matching_rows": 10
+    },
+    {
+      "sha256": "a2286f791deaf57b4e5c78b24d7a916d5abb7af1041e104d50cd1e279f447bb3",
+      "row_index": 96402,
+      "original_qwen_tokens": 39421,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "47dab1c828b54443608feff13a99ae045cc535db96fdd7510d4d585f43a78199",
+      "row_index": 96403,
+      "original_qwen_tokens": 30365,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "f0b909481058bc7ff4b1e91894113acf14a924a4e71b94387169280676d9cf33",
+      "row_index": 96404,
+      "original_qwen_tokens": 34417,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "4621670e1b41ec6b1a8d5d14a2fc7f0b5dc74921e2f0725b4d3cb0f34ca7fc36",
+      "row_index": 96406,
+      "original_qwen_tokens": 85199,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "658cc4e86ea82d94c00b744732ef306c0570ee5bd5c7e754bff9b53a688be33a",
+      "row_index": 96407,
+      "original_qwen_tokens": 30068,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "a6c1747794685af5f07e304d2bc403ab83978f0b15039b8b81a3ffcbbd180501",
+      "row_index": 96408,
+      "original_qwen_tokens": 63105,
+      "matching_rows": 3
+    },
+    {
+      "sha256": "1a96219deb68fffa430c81e352e04cdaaaf9507f92c6f35fdb9fee9e3eba6b55",
+      "row_index": 96409,
+      "original_qwen_tokens": 126587,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "35022db333f07d9ab76ec93d1ded9eca51b91d61c1035bd00fd3b2f38d0c115f",
+      "row_index": 96410,
+      "original_qwen_tokens": 35142,
+      "matching_rows": 6
+    },
+    {
+      "sha256": "29d2f268c27d513a70e3bd73e01409ee817f229747dab27631c6fed0b0fe628e",
+      "row_index": 96412,
+      "original_qwen_tokens": 77056,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "31bd5f3ac5396491265eff50d96c0c6e8bab064854da5970cc9e5059be75ddfc",
+      "row_index": 96413,
+      "original_qwen_tokens": 95620,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "633205d0d52a7b056042b95d2b3cc03b155620cdd93269fe86024f564b0d85c7",
+      "row_index": 96414,
+      "original_qwen_tokens": 44672,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "839d3d77d47ee22e48828b7baab2c56a967dba7d217663fe85f2d9e5bc3cfe6c",
+      "row_index": 96416,
+      "original_qwen_tokens": 45034,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "26fb196a930b484ff92eba11781abb16fc7502745099fb1391f68bd62b21c7e7",
+      "row_index": 96417,
+      "original_qwen_tokens": 57161,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "dab5e9a59766b0496b6715f03b843f4f54be7c4b47cfd10bcdba46f01011ef6f",
+      "row_index": 96418,
+      "original_qwen_tokens": 33538,
+      "matching_rows": 5
+    },
+    {
+      "sha256": "731e4511b13268c9cd35669d4bc1c6f6ad34a0aa225c0b88995acaa561ba7988",
+      "row_index": 96419,
+      "original_qwen_tokens": 73357,
+      "matching_rows": 6
+    },
+    {
+      "sha256": "fa245428af76c9eb442580f593ca6529be1682a4bdbd61dd1c50f8cb046c439e",
+      "row_index": 96420,
+      "original_qwen_tokens": 90065,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "da028f777eb74f55bb0143d45adc893cf972a388df228544908d95f1c4fecdfc",
+      "row_index": 96421,
+      "original_qwen_tokens": 30563,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "06e332c9d7d7b51fffb24a217e870efa0c1b43f76a188a70173aec1b41368b54",
+      "row_index": 96422,
+      "original_qwen_tokens": 30910,
+      "matching_rows": 6
+    },
+    {
+      "sha256": "b37ccd804a81cf16362939764fc718bc39e520f00cb5ba1b923de495023a30d7",
+      "row_index": 96423,
+      "original_qwen_tokens": 58633,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "fbe01064e0df9c12213266574bb5a608f5d66311c135ec9304e360bca4dcc9be",
+      "row_index": 96424,
+      "original_qwen_tokens": 36584,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "e733fc623bf1aaaa7f1ff47c1b33b9ebc9845760fccfa25ade2767bee392939c",
+      "row_index": 96426,
+      "original_qwen_tokens": 32425,
+      "matching_rows": 4
+    },
+    {
+      "sha256": "36fc893793d282bec93a9436369affa1b517389cadea1cac31efd357b3d7d6d4",
+      "row_index": 96428,
+      "original_qwen_tokens": 35311,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "5fdafb6f09fddf40d26ea38915ee16c4e9345dec82b2190c1e17dcab5a75d77e",
+      "row_index": 96429,
+      "original_qwen_tokens": 31090,
+      "matching_rows": 1
+    },
+    {
+      "sha256": "aca6e942abe6b86655ab8bd4e975a72d4ba691840be080c3cc3ef328fa213ee6",
+      "row_index": 96432,
+      "original_qwen_tokens": 41138,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "fb39546fdde5a6aef3305fc4227c9647814bb25249fd627c9dfc4968a74cd443",
+      "row_index": 96433,
+      "original_qwen_tokens": 87951,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "00d6451d55e86ec2b2b8f1d2e9e806e22e15c5d6bccf491008bbe35acc071971",
+      "row_index": 96434,
+      "original_qwen_tokens": 33851,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "38c9052ef0a644349a44619147eefdc84e42caed68ff345566c603961c21a966",
+      "row_index": 96437,
+      "original_qwen_tokens": 34068,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "63dd0e0d998ca3411221196443cfc37c00ff3ef4a6abb2585ca718dd86b3c2d0",
+      "row_index": 96438,
+      "original_qwen_tokens": 56497,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "2673ac5ed8f0046a2dcd92e1cb259bc6f2eb897f1628557ebe2da3e5c8329744",
+      "row_index": 96441,
+      "original_qwen_tokens": 85360,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "1fe91eb52d1c50b98bc0a21b77de1e7328c04ea378ce5816476005ff6d55d629",
+      "row_index": 96442,
+      "original_qwen_tokens": 44372,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "8324d1a099c9fe56afdcca257d6f51a5493656c41797734432efd3c38a6d5200",
+      "row_index": 96443,
+      "original_qwen_tokens": 130147,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "d1e7db48609a3ad8af69fabef2cbe4f78d516e9f13d4b78666c339e3f08c26ac",
+      "row_index": 96445,
+      "original_qwen_tokens": 53577,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "5eae0c3c789a0fc377532bfb7e623efaff75c9921f4d8a30fbafaf009b52d3a1",
+      "row_index": 96447,
+      "original_qwen_tokens": 31858,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "977663810ec3b8bac6bf417201ea75da85a89b1c2876c13184408d509ecdf4d0",
+      "row_index": 96449,
+      "original_qwen_tokens": 31707,
+      "matching_rows": 37
+    },
+    {
+      "sha256": "674589628f3647c74a73b6765cbdfcd41a87de4add6224dc7d75549bf64afc3d",
+      "row_index": 96451,
+      "original_qwen_tokens": 34786,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "07a2fefe91998ed55c9a974d76eeca816fbb4de779e5659981015a0228094741",
+      "row_index": 96452,
+      "original_qwen_tokens": 38683,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "e8e764a1c8d415ee631f9edcbca671cab3d2f874f84840e4a8bceb5b007d1cfb",
+      "row_index": 96453,
+      "original_qwen_tokens": 39206,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "4bab901637d1dad75094500cf6b999eaddadc422b77746790d983dcce3dca9d6",
+      "row_index": 96454,
+      "original_qwen_tokens": 80052,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "ba88049d18cc06c38fc57c1aa02d30ba32ab9ad7c001686bcb34353ebef04476",
+      "row_index": 96457,
+      "original_qwen_tokens": 43731,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "4a7ec300c8b663112e432b156162cb4a10c9b697cfc179b9e96aa2296a2374d6",
+      "row_index": 96458,
+      "original_qwen_tokens": 75942,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "925fdc73d7a72104289c5fb9df7bce055681a905482b9ae78a1fdf2a93198795",
+      "row_index": 96460,
+      "original_qwen_tokens": 49492,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "c6b0c1c586ff0b2100e92d93f519ffe621d5711b23fd4adc207c23672a14e7c3",
+      "row_index": 96462,
+      "original_qwen_tokens": 31711,
+      "matching_rows": 50
+    },
+    {
+      "sha256": "3febdf4ac9774dd5a38ec72d7fa4144f2650e7c0625f03dba1ed64c50c02256e",
+      "row_index": 96464,
+      "original_qwen_tokens": 48864,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "3ffee94ce06884f1ed969993f695faaccf12082d723f1fdefeccb255acb078be",
+      "row_index": 96466,
+      "original_qwen_tokens": 31923,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "3a0cf1997212efeadb24a597a5f3ae90f06e6102295d3fa819601e2e0fa4339e",
+      "row_index": 96467,
+      "original_qwen_tokens": 39312,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "5d587003226edfca2ac0e7aa6319643daf8165f03556ef3d11f65eb82dcd35f2",
+      "row_index": 96469,
+      "original_qwen_tokens": 32383,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "f32d6323c3742b14999578c1f662a58f1c3c1dbdc3c5374cc7df5bf35349940e",
+      "row_index": 96470,
+      "original_qwen_tokens": 70609,
+      "matching_rows": 6
+    },
+    {
+      "sha256": "dc163c3e814dcdfa6f77054bc32dddbe451044d6719b3cc36ddb15fafdabc55e",
+      "row_index": 96472,
+      "original_qwen_tokens": 29286,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "565be771ab391c63ee0306ce2f181e7be2b1c6ef385da550cb8f5ecf86c9db94",
+      "row_index": 96473,
+      "original_qwen_tokens": 29220,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "4f49fe26bd07731bad0863b5f92c692c6002e8ba3e9037126b61304d3a1f30c5",
+      "row_index": 96474,
+      "original_qwen_tokens": 85600,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "b959141c9455ad2805c6875b29899fb13e0296b5a3110892436eb71df2f8c8ad",
+      "row_index": 96476,
+      "original_qwen_tokens": 72416,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "4ed457f0bb6322309788d648513fd836f7e6b85a9288694ed44e8855980ec23d",
+      "row_index": 96477,
+      "original_qwen_tokens": 28924,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "c1d1b90e8e60950e1e831ba21fdf1a0f8ccd99be5de1f10de1b574f5b25bd18d",
+      "row_index": 96482,
+      "original_qwen_tokens": 43834,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "256d45ce8db13b63dc5b6d4f68452f616b27a81dc219da6da9806e584e57d64a",
+      "row_index": 96483,
+      "original_qwen_tokens": 49800,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "4295e1bf39ad896bdfaf14cd253778eb0aecc322059c30836f2a1bf23a7de12f",
+      "row_index": 96484,
+      "original_qwen_tokens": 47003,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "4c9b7c9626af3e4e954a270048a5a3e0fff7d71194cfbca2812664d1630bf896",
+      "row_index": 96485,
+      "original_qwen_tokens": 31489,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "2920a3e2cceec42735b18c0924abca0caf6f73c9f7bdd268916cb22364955a13",
+      "row_index": 96486,
+      "original_qwen_tokens": 87616,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "fe0f4dbe0701b65749f78897df4329056613e71220ddb9e8030a52c45e99c582",
+      "row_index": 96487,
+      "original_qwen_tokens": 33419,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "b39289d315fe4d80478b042494d5c4266b149db601b63786569d7d6e106e9b1e",
+      "row_index": 96488,
+      "original_qwen_tokens": 57154,
+      "matching_rows": 6
+    },
+    {
+      "sha256": "239b6a877e9f60613332ffadb65dd5e14f42a856ffc761a7e64c8844840ac804",
+      "row_index": 96489,
+      "original_qwen_tokens": 42765,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "07c100af7b51908ad18af3640152cdae17acb779ed469260ceec17458905341d",
+      "row_index": 96490,
+      "original_qwen_tokens": 30024,
+      "matching_rows": 0
+    },
+    {
+      "sha256": "f9af8f1ffdce52a398b8e286fb581ebae5a294e772c7b53fce23e6da12a3e723",
+      "row_index": 96491,
+      "original_qwen_tokens": 108734,
+      "matching_rows": 0
+    }
+  ],
+  "documents": [
+    {
+      "sha256": "243933520d6210e0d5ca267c3e074c38166f98219784d6923978d4aae5233e8e",
+      "row_index": 96400,
+      "original_qwen_tokens": 35589
+    },
+    {
+      "sha256": "a2286f791deaf57b4e5c78b24d7a916d5abb7af1041e104d50cd1e279f447bb3",
+      "row_index": 96402,
+      "original_qwen_tokens": 39421
+    },
+    {
+      "sha256": "47dab1c828b54443608feff13a99ae045cc535db96fdd7510d4d585f43a78199",
+      "row_index": 96403,
+      "original_qwen_tokens": 30365
+    },
+    {
+      "sha256": "f0b909481058bc7ff4b1e91894113acf14a924a4e71b94387169280676d9cf33",
+      "row_index": 96404,
+      "original_qwen_tokens": 34417
+    },
+    {
+      "sha256": "4621670e1b41ec6b1a8d5d14a2fc7f0b5dc74921e2f0725b4d3cb0f34ca7fc36",
+      "row_index": 96406,
+      "original_qwen_tokens": 85199
+    },
+    {
+      "sha256": "658cc4e86ea82d94c00b744732ef306c0570ee5bd5c7e754bff9b53a688be33a",
+      "row_index": 96407,
+      "original_qwen_tokens": 30068
+    },
+    {
+      "sha256": "1a96219deb68fffa430c81e352e04cdaaaf9507f92c6f35fdb9fee9e3eba6b55",
+      "row_index": 96409,
+      "original_qwen_tokens": 126587
+    },
+    {
+      "sha256": "29d2f268c27d513a70e3bd73e01409ee817f229747dab27631c6fed0b0fe628e",
+      "row_index": 96412,
+      "original_qwen_tokens": 77056
+    },
+    {
+      "sha256": "31bd5f3ac5396491265eff50d96c0c6e8bab064854da5970cc9e5059be75ddfc",
+      "row_index": 96413,
+      "original_qwen_tokens": 95620
+    },
+    {
+      "sha256": "633205d0d52a7b056042b95d2b3cc03b155620cdd93269fe86024f564b0d85c7",
+      "row_index": 96414,
+      "original_qwen_tokens": 44672
+    },
+    {
+      "sha256": "839d3d77d47ee22e48828b7baab2c56a967dba7d217663fe85f2d9e5bc3cfe6c",
+      "row_index": 96416,
+      "original_qwen_tokens": 45034
+    },
+    {
+      "sha256": "26fb196a930b484ff92eba11781abb16fc7502745099fb1391f68bd62b21c7e7",
+      "row_index": 96417,
+      "original_qwen_tokens": 57161
+    },
+    {
+      "sha256": "fa245428af76c9eb442580f593ca6529be1682a4bdbd61dd1c50f8cb046c439e",
+      "row_index": 96420,
+      "original_qwen_tokens": 90065
+    },
+    {
+      "sha256": "da028f777eb74f55bb0143d45adc893cf972a388df228544908d95f1c4fecdfc",
+      "row_index": 96421,
+      "original_qwen_tokens": 30563
+    },
+    {
+      "sha256": "b37ccd804a81cf16362939764fc718bc39e520f00cb5ba1b923de495023a30d7",
+      "row_index": 96423,
+      "original_qwen_tokens": 58633
+    },
+    {
+      "sha256": "fbe01064e0df9c12213266574bb5a608f5d66311c135ec9304e360bca4dcc9be",
+      "row_index": 96424,
+      "original_qwen_tokens": 36584
+    }
+  ]
+}

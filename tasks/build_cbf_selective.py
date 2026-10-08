@@ -145,7 +145,9 @@ def main():
         raise RuntimeError("fewer than 16 audited sources; no scenarios written")
     scenes = make_scenes(selected)
     output.write_text("".join(json.dumps(row)+"\n" for row in scenes))
-    print(json.dumps({"scenarios": len(scenes), "groups": 8, "overlap_matching_rows": matches}), flush=True)
+    print(json.dumps({"scenarios": len(scenes), "groups": 8, "overlap_matching_rows": 0,
+                      "candidate_pool_matching_rows": matches,
+                      "rejected_sources": len(documents)-len(eligible)}), flush=True)
 
 
 if __name__ == "__main__":

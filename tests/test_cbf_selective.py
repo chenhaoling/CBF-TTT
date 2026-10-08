@@ -14,7 +14,7 @@ import torch
 from cbf_ttt.runtime import CBFSession
 from cbf_ttt.selective import CohortSession, GRID, FIXED
 from tasks.build_cbf_selective import make_scenes, packed_text
-from tasks.cbf_selective import action_name, summarize
+from tasks.cbf_selective import action_name, summarize, audit_sources
 
 
 class SelectiveTests(unittest.TestCase):
@@ -95,6 +95,22 @@ class SelectiveTests(unittest.TestCase):
     def documents(self):
         return [{"sha256": str(i), "ids": list(range(i*1000, i*1000+188))} for i in range(16)]
 
+    def metadata(self):
+        return {"overlap_matching_rows": 0, "training_rows_scanned": 3,
+                "documents": [{"sha256": str(i)} for i in range(16)],
+                "candidate_sources": [{"sha256": str(i), "matching_rows": 0} for i in range(16)]}
+
+    def test_source_audit_rejects_training_overlap_and_cross_group_chunks(self):
+        scenes = make_scenes(self.documents(), chunk_size=4)
+        metadata = self.metadata()
+        self.assertEqual(audit_sources(metadata, scenes)["selected_sources"], 16)
+        metadata["candidate_sources"][0]["matching_rows"] = 1
+        with self.assertRaisesRegex(ValueError, "selection mismatch"):
+            audit_sources(metadata, scenes)
+        scenes[4]["prefix"][0] = scenes[0]["prefix"][0]
+        with self.assertRaisesRegex(ValueError, "identical full chunks"):
+            audit_sources(self.metadata(), scenes)
+
     def test_data_groups_source_layout_and_causality(self):
         scenes = make_scenes(self.documents(), chunk_size=4)
         self.assertEqual(len(scenes), 32)
@@ -115,8 +131,7 @@ class SelectiveTests(unittest.TestCase):
             root = Path(directory)
             data = root / "scenes.jsonl"
             data.write_text("".join(json.dumps(s)+"\n" for s in scenes))
-            Path(str(data)+".meta.json").write_text(json.dumps({"overlap_matching_rows": 0,
-                "training_rows_scanned": 3, "documents": [{"sha256": str(i)} for i in range(16)]}))
+            Path(str(data)+".meta.json").write_text(json.dumps(self.metadata()))
             rows = []
             for scene in scenes:
                 results = {name: {"losses": [2., 2., 2.], "nll": 2., "seconds": 1.,

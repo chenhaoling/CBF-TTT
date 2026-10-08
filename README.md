@@ -130,6 +130,8 @@ PY
 
 The baseline expects a processed dataset through `data.train_path`. For the optional CBF-TTT Qwen3-4B FineWeb-Edu/LongCrawl64 preparation and public evaluation downloads, see [DATA_DOWNLOAD_GUIDE.md](DATA_DOWNLOAD_GUIDE.md).
 
+For the optional selective-forgetting experiment (global history plus the last two update contributions), see [SELECTIVE_FORGETTING_PLAN.md](SELECTIVE_FORGETTING_PLAN.md). Its standalone data builder and runner preserve the original baseline; implementation changes and experimental status are recorded in [MODIFICATION_LOG.md](MODIFICATION_LOG.md).
+
 The recommended configs assume:
 
 - `data.data_type=plaintext`

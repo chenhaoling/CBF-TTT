@@ -26,6 +26,27 @@ def ci(values):
     return [draws[249], draws[9749]]
 
 
+def audit_sources(metadata, scenes):
+    """Check source-level rejection and exact chunk independence separately."""
+    candidates = {d["sha256"]: d for d in metadata["candidate_sources"]}
+    eligible = [d["sha256"] for d in metadata["candidate_sources"] if d["matching_rows"] == 0]
+    selected = [d["sha256"] for d in metadata["documents"]]
+    if len(candidates) != len(metadata["candidate_sources"]) or selected != eligible[:16]:
+        raise ValueError("source filtering/selection mismatch")
+    owners = {}
+    for scene in scenes:
+        for ids in scene["prefix"]+[f["ids"] for f in scene["future"]]:
+            digest = hashlib.sha256(json.dumps(ids).encode()).hexdigest()
+            owners.setdefault(digest, set()).add(scene["group"])
+    duplicates = sum(len(groups) > 1 for groups in owners.values())
+    if duplicates:
+        raise ValueError("identical full chunks across source groups")
+    return {"training_rows_scanned": metadata["training_rows_scanned"],
+            "candidate_sources": len(candidates), "rejected_sources": len(candidates)-len(eligible),
+            "selected_sources": len(selected), "selected_sources_with_matches": 0,
+            "cross_group_identical_full_chunks": duplicates}
+
+
 def measure(fn):
     import torch
     torch.cuda.synchronize()
@@ -119,12 +140,15 @@ def summarize(args):
         raise ValueError("source overlap audit failed")
     raw = Path(args.data).read_bytes()
     expected = {s["id"]: s for s in (json.loads(line) for line in raw.splitlines())}
+    source_audit = audit_sources(metadata, expected.values())
     grid_names = [action_name(a) for a in itertools.product((0., .5, 1.), repeat=3)]
     global_names = [action_name((a,)*3) for a in (0., .5, 1.)]
     fixed_names = ["fixed_"+n for n in ("global_clear", "global_half", "window2", "window3")]
     rows = [json.loads(line) for path in args.inputs for line in Path(path).read_text().splitlines()]
     if len(rows) != 32 or len(expected) != 32 or {r["id"] for r in rows} != set(expected):
         raise ValueError("incomplete or duplicate scenes")
+    if len({row["model"] for row in rows}) != 1:
+        raise ValueError("shards used different checkpoints")
     doc_hashes = [doc["sha256"] for doc in metadata["documents"]]
     if len(doc_hashes) != 16 or len(set(doc_hashes)) != 16:
         raise ValueError("source groups are not independent")
@@ -163,6 +187,7 @@ def summarize(args):
                       "horizon_gain": [b-a for a, b in zip(row["results"][best_local]["losses"],
                                                           row["results"][best_strong]["losses"])]})
     report = {"protocol": "selective_forgetting_v1", "audit_passed": True,
+              "source_audit": source_audit,
               "scenes": len(rows), "groups": 8, "data_sha256": hashlib.sha256(raw).hexdigest(),
               "model": sorted(set(r["model"] for r in rows)), "splits": {}}
     for split in ("pilot", "confirm"):
@@ -180,6 +205,11 @@ def summarize(args):
             "gain_vs_global_oracle": mean(g["vs_global"] for g in selected),
             "gain_vs_strong_controls": mean(group_values), "group_gains": group_values,
             "group_bootstrap_95ci": interval, "regime_gains": by_regime,
+            "regime_gains_vs_global": {regime: mean(g["vs_global"] for g in selected if g["regime"] == regime)
+                                       for regime in REGIMES},
+            "regime_oracle_action_counts": {
+                regime: dict(collections.Counter(g["local_action"] for g in selected if g["regime"] == regime))
+                for regime in REGIMES},
             "horizon_gains_fixed_selected_action": [mean(g["horizon_gain"][i] for g in selected)
                                                      for i in range(3)],
             "oracle_action_counts": dict(collections.Counter(g["local_action"] for g in selected)),
