@@ -138,7 +138,10 @@ def layer_metrics(session, before, candidates):
         base = session.model.model.layers[layer].mlp.down_proj.weight.float()
         after = effective(session.model, session.cache, layer).float()
         memory = session.cache.cbf_memory.get(layer)
-        represented = after-base if memory is None else memory.float()
+        if session.cache.stability_mode in ("native_ops_w", "native_ops_w_fp32"):
+            represented = session.cache.stability_weights[layer].float()-base
+        else:
+            represented = after-base if memory is None else memory.float()
         delta = candidates.get(layer)
         prior = before[layer].float()-base
         denom = base.norm().clamp_min(1e-12)
