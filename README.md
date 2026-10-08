@@ -132,6 +132,8 @@ The baseline expects a processed dataset through `data.train_path`. For the opti
 
 For the optional selective-forgetting experiment (global history plus the last two update contributions), see [SELECTIVE_FORGETTING_PLAN.md](SELECTIVE_FORGETTING_PLAN.md). Its standalone data builder and runner preserve the original baseline; implementation changes and experimental status are recorded in [MODIFICATION_LOG.md](MODIFICATION_LOG.md).
 
+For the subsequent native/CBF multi-chunk numerical-path diagnostic, see [MEMORY_STABILITY_PLAN.md](MEMORY_STABILITY_PLAN.md) and its [completed report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/memory_stability/REPORT.md). This diagnostic preserves the baseline and does not train a new controller.
+
 The recommended configs assume:
 
 - `data.data_type=plaintext`

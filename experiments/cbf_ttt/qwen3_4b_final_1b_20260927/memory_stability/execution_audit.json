@@ -1,0 +1,23 @@
+{
+  "collection_code_commit": "59fbba64badbc2964e3e46e7c8fd9d7f0404088a",
+  "started_at": "2026-10-08T11:04:25+08:00",
+  "completed_at": "2026-10-08T11:06:38+08:00",
+  "pipeline_wall_seconds": 133,
+  "unit_tests_passed": 20,
+  "raw_data_location": "/home/ctj/cbf_ttt_memory_stability_20261008",
+  "source_data_location": "/home/ctj/cbf_ttt_selective_forgetting_20261008_r3",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "gpu": "2 x NVIDIA GeForce RTX 5090",
+  "groups": 4,
+  "trajectories": 36,
+  "native_bridge_matching_boundaries": 28,
+  "reference_loss_values_reproduced": 24,
+  "reference_max_nll_error": 0.0,
+  "backbone_unchanged": true,
+  "data_sha256": "fe7f47a6b17ce5d861a9696add92398aed57670d601d45b14307a9d8085d0b8a",
+  "summary_sha256": "895e8db010f73f5917589692f4a23518f9808b26b72101fbcbcdd6b3d9589410",
+  "max_peak_allocated_gib": 17.316006660461426,
+  "max_peak_reserved_gib": 22.779296875,
+  "summed_trajectory_seconds": 243.02682002447546,
+  "scope": "Four previously observed pilot stable scenes only; no confirm/test scoring or training."
+}
