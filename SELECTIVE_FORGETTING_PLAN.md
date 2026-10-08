@@ -55,3 +55,7 @@ bash scripts/run_cbf_selective_pilot.sh
 ```
 
 脚本拒绝覆盖已有运行。用 tmux 启动；原始文本、token、逐条标签和日志保留服务器，只将代码、协议、来源哈希和聚合结果纳入 Git。正式规模由本轮每条标签耗时、显存和实际收益共同决定，不预先承诺 3000 条足够。
+
+## 2026-10-08 执行结论
+
+阶段 A 已完成并经独立审计：32 个场景的局部最优动作均为全局清除，局部相对同状态全局 oracle 的收益为 0，pilot/confirm 均未通过预定门槛。按计划停止 B/C/D 和正式扩量。完整数字、时间/显存、限制及下一项稳定性检查建议见 [`试点报告`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/selective_forgetting_pilot/REPORT.md)。上述执行结论不修改此前的预注册判据。
