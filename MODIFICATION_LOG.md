@@ -823,3 +823,11 @@ r3 于 2026-10-08 09:35:10–10:13:20（北京时间）完成，流水线 38 分
 新增归档 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/memory_stability/{REPORT.md,summary.json,execution_audit.json,.gitignore}`，包含全九路径汇总、逐 chunk 曲线、耗时显存、来源与源码哈希、运行命令和局限；原始逐层/逐步记录与日志仍在远程同名实验目录。计划文档补完成状态，README 补诊断入口。baseline 模型/runtime/训练配置不修改，无额外依赖。
 
 后续 TODO：先审计短序列训练/推理路径，再做长序列训练资源试跑和匹配 token 预算的短/长序列小实验。6144-token 训练、4096 chunk 的现有实现只覆盖一次用于后续 token 的更新，可能不足以支持七次推理更新，但尚未建立因果证据。此前 8192-token 全参数训练发生 OOM，因此须先验证可训练参数冻结/检查点等资源方案，并在短长对照保持一致。只有恢复有益且稳定的快记忆后，才重启局部遗忘 oracle、多决策标签和控制器。上述训练未执行，本轮不扩量，也不宣称研究构思普遍无效。
+
+### 训练/推理前向核验（2026-10-08，执行前登记）
+
+用户要求继续，新增 `TRAIN_INFER_PARITY_PLAN.md`，先 P 前向核验，再根据结果进入 R 资源检查与 L 短长对照。代码审计确认训练端分块并行+cumsum、推理端顺序完整 W 更新；需检查差异对真实模型的影响，不能直接归因于训练长度。
+
+新增 `scripts/diagnose_ttt_train_infer.py`：显式加载训练/原生推理类，逐张量检查 checkpoint 一致；四个 pilot stable 来源的 6144/12288 token，三路径（训练整段/推理整段/推理流式）×原 TTT lr/零 TTT lr，16 比较共 48 前向；报告相同末尾 128 token NLL、hidden 差异、耗时和显存。原模型/runtime 不改，无新依赖。新增 `tests/test_ttt_train_infer.py` 检查 FP32 非零更新下完整/不完整块一致性、writer 因果梯度与零更新系数恢复。新增 `scripts/run_ttt_train_infer.sh` 先测试、双卡分来源采集、完整性审计汇总，拒绝覆盖输出目录。
+
+脚本环境参数 ROOT/SOURCE/PYTHON/MODEL；collect 参数 `--data/--model/--output/--shard`；summarize 参数 `--inputs/--output`。运行 `ROOT=/home/ctj/cbf_ttt_train_infer_20261008 bash scripts/run_ttt_train_infer.sh`。6144/12288 的成对 NLL 差大于 0.1/0.5 触发优先定位，非显著性/等价性判据；仅 pilot 机制诊断。长序列资源检查和训练尚未启动，原始 token/逐来源结果留远程。
