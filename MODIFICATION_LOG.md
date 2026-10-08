@@ -758,3 +758,26 @@ ROOT 默认 `/home/ctj/cbf_ttt_paired_fact_20260930`，OUT 默认 `$ROOT/path_di
 完整 FP32 只作为配置敏感性结果：额外读取 checkpoint 存储 dtype 的自动审批及唯一重试均超时，操作未执行；尚未核验两种加载参数的逐值等价，不能把所有变化严格归因于算术精度。上述结果来自此前已批准执行的远程日志读取（含完整 summary 输出），没有绕过审批去重新执行被阻断的请求。原始完整逐组文件尚未同步独立审计。head FP32 使用同一 backbone/hidden，原路径复现与准确率结论不受该限制。
 
 BF16+head FP32/全 FP32 峰值 reserved 13.477/19.611 GiB，无 OOM。数值摘录与详细解释新增于 [`writer_path_diagnostic/REPORT.md`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/writer_path_diagnostic/REPORT.md) 及同目录 `retrieved_summary.json`；逐组数据仍留远程。下一步候选颜色可解码性探针尚未执行；test 继续保持未评分，控制器不扩量。
+
+### 选择性遗忘研究转向（2026-10-08，执行前登记）
+
+按用户的新要求，停止沿写入器/颜色探针方向扩展，依据图片建议制定 [`SELECTIVE_FORGETTING_PLAN.md`](SELECTIVE_FORGETTING_PLAN.md)，先验证全局 + last-2 + last-1 遗忘的收益空间。保留 g=1，已有证据仅支持遗忘优于累积，不支持旧控制器优于全部清除。阶段 A 的双 split 小规模 oracle 通过后，才进入多次遗忘决策和控制器训练；联合端到端训练属于更后阶段。
+
+| 新增文件 | 实现与需求对应 |
+|---|---|
+| `cbf_ttt/selective.py` | `CohortSession` 保存最近两次实际保留的直接更新贡献，分别控制旧历史/R2/R1；系数为保留率。均匀系数复用原 `commit_both`，g 固定 1；查询独立克隆，不污染轨迹 |
+| `tasks/build_cbf_selective.py` | 构建独立自然来源的四类场景；从 LongCrawl64 最后 row group 确定性选择 16 份足够长的文档，8 组、32 场景；扫描实际 1B 混合训练文本的长锚点，匹配即失败；保留元信息和哈希，不重复填充文本 |
+| `tasks/cbf_selective.py` | 第四 chunk 单点稀疏干预，0/.5/1 的 27 动作；后续 3 个评分点；另有从头运行的全局清除/半保留/最近 2 和 3 更新窗口；每标签时间与峰值显存；完整性审计、组级置信区间与预设继续门槛 |
+| `tests/test_cbf_selective.py` | FP32/BF16 均匀系数与旧更新逐值相等、贡献旋转、clone 独立、模型读取闭环、来源隔离与因果答案、门槛通过/失败及不完整标签拒绝 |
+| `scripts/run_cbf_selective_pilot.sh` | 先测试、构建/查重、smoke，再双卡按源组分片运行，审计聚合；输出目录必须全新，任一阶段失败停止 |
+| `SELECTIVE_FORGETTING_PLAN.md`、本记录 | 明确假设、对照、预注册门槛、运行命令、后续阶段及解释限制 |
+
+复用原模型加载与候选计算，原 runtime/baseline 配置不修改，无额外依赖。新增构建参数 `--parquet/--tokenizer/--training-data/--output`；采集参数 `--data/--model/--output/--shard/--shards/--smoke`；聚合参数 `--data/--inputs/--output`。脚本支持 ROOT/PYTHON/MODEL/TOKENIZER/PARQUET/TRAINING_DATA 环境变量覆盖路径。默认 4B 最终 1B checkpoint、chunk=4096、完整 KV、BF16；源与模型 chunk 不一致时报错。
+
+```bash
+PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python \
+ROOT=/home/ctj/cbf_ttt_selective_forgetting_20261008 \
+bash scripts/run_cbf_selective_pilot.sh
+```
+
+本地语法编译、shell 语法与 diff 空白检查通过；本地没有 torch，张量/模型测试随远程脚本先运行。风险：粗时间来源不是语义模块；清除直接贡献不能撤销 KV/后续 delta 的间接影响；FP32 来源缓存增加显存；27 动作 oracle 有选择容量优势；4 组/split 的 bootstrap 很不稳定；长文本锚点检查非完整语义去重；尚未检验 FineWeb-Edu 和正式下游任务；现有短序列预训练对多更新轨迹覆盖不足。原始文本/token/标签保留服务器，仅代码、文档、来源哈希和聚合结果上传 GitHub。
