@@ -1,0 +1,470 @@
+{
+  "protocol": "optimizer_audit_v2",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "lengths": {
+    "6144": {
+      "raw_result_sha256": "5fee86840076271ef02a2f6e886d5fdb1458fd605782e48fe9b267a5282f8d5b",
+      "input_ids_sha256": "8ab4ef44b1b783b9d85f3b1e761fe03bf7a5e2e4d646863eee24515872c63322",
+      "reference_max_loss_error": 0.0004668235778808594,
+      "state_replay_max_loss_error": 0.0,
+      "intervention_restore_loss_error": 0.0,
+      "snapshot_restore_bytewise_equal": true,
+      "baseline_measurements": [
+        {
+          "step": 1,
+          "loss": 2.2155604362487793,
+          "unclipped_grad_norm": 72.40886688232422,
+          "seconds": 3.515914972871542,
+          "peak_allocated_gib": 10.648278713226318,
+          "peak_reserved_gib": 11.20703125
+        },
+        {
+          "step": 2,
+          "loss": 2.198741912841797,
+          "unclipped_grad_norm": 986.9949340820312,
+          "seconds": 2.8420562651008368,
+          "peak_allocated_gib": 10.991109371185303,
+          "peak_reserved_gib": 11.767578125
+        },
+        {
+          "step": 3,
+          "loss": 2.2090444564819336,
+          "unclipped_grad_norm": 461.629150390625,
+          "seconds": 2.8461866602301598,
+          "peak_allocated_gib": 10.990132808685303,
+          "peak_reserved_gib": 11.767578125
+        }
+      ],
+      "frozen_backbone_unchanged": true,
+      "gradient_tripwire": false,
+      "fused_losses": [
+        2.2155604362487793,
+        2.198741912841797,
+        2.2090444564819336
+      ],
+      "max_loss_abs_difference": 6.92903995513916e-07,
+      "head_gradient_relative_l2_by_step": [
+        7.168685988290235e-05,
+        6.895871774759144e-05,
+        6.394660886144266e-05
+      ],
+      "writer_gradient_global_relative_l2_by_step": [
+        0.0010675386128542244,
+        0.0005253405865323443,
+        0.0003287523375862753
+      ],
+      "writer_gradient_global_cosine_by_step": [
+        0.9999993793797479,
+        0.9999998160048543,
+        1.0000000545939534
+      ],
+      "max_layer_gradient_relative_l2": 0.014036377891898155,
+      "relative_update_by_tensor_and_step": {
+        "model.layers.0.mlp.ttt_proj.weight": [
+          0.012682517990469933,
+          0.008223757147789001,
+          0.006939065642654896
+        ],
+        "model.layers.0.mlp.ttt_conv.weight": [
+          0.02719857729971409,
+          0.01937330700457096,
+          0.01783483475446701
+        ],
+        "model.layers.6.mlp.ttt_proj.weight": [
+          0.01867993362247944,
+          0.012792813591659069,
+          0.011047433130443096
+        ],
+        "model.layers.6.mlp.ttt_conv.weight": [
+          0.06953300535678864,
+          0.05011025071144104,
+          0.04484547674655914
+        ],
+        "model.layers.12.mlp.ttt_proj.weight": [
+          0.02000366896390915,
+          0.013962912373244762,
+          0.012124290689826012
+        ],
+        "model.layers.12.mlp.ttt_conv.weight": [
+          0.12333985418081284,
+          0.0883026197552681,
+          0.0777318924665451
+        ],
+        "model.layers.18.mlp.ttt_proj.weight": [
+          0.019211871549487114,
+          0.013320115394890308,
+          0.011439659632742405
+        ],
+        "model.layers.18.mlp.ttt_conv.weight": [
+          0.10043859481811523,
+          0.07230313867330551,
+          0.06375143676996231
+        ],
+        "model.layers.24.mlp.ttt_proj.weight": [
+          0.020794598385691643,
+          0.014654719270765781,
+          0.012126429006457329
+        ],
+        "model.layers.24.mlp.ttt_conv.weight": [
+          0.16809332370758057,
+          0.11542951315641403,
+          0.08635631948709488
+        ],
+        "model.layers.30.mlp.ttt_proj.weight": [
+          0.02236456796526909,
+          0.016137931495904922,
+          0.012677042745053768
+        ],
+        "model.layers.30.mlp.ttt_conv.weight": [
+          0.16245268285274506,
+          0.11310580372810364,
+          0.07147838920354843
+        ],
+        "model.layers.35.mlp.ttt_proj.weight": [
+          0.02518506534397602,
+          0.017957596108317375,
+          0.014591981656849384
+        ],
+        "model.layers.35.mlp.ttt_conv.weight": [
+          0.6364210844039917,
+          0.3630814254283905,
+          0.2187236249446869
+        ]
+      },
+      "initial_norm_by_tensor": {
+        "model.layers.0.mlp.ttt_proj.weight": 1.0543339252471924,
+        "model.layers.0.mlp.ttt_conv.weight": 0.0372571125626564,
+        "model.layers.6.mlp.ttt_proj.weight": 1.074794054031372,
+        "model.layers.6.mlp.ttt_conv.weight": 0.01606142334640026,
+        "model.layers.12.mlp.ttt_proj.weight": 1.073297381401062,
+        "model.layers.12.mlp.ttt_conv.weight": 0.00912819430232048,
+        "model.layers.18.mlp.ttt_proj.weight": 1.0705339908599854,
+        "model.layers.18.mlp.ttt_conv.weight": 0.011177362874150276,
+        "model.layers.24.mlp.ttt_proj.weight": 1.0652788877487183,
+        "model.layers.24.mlp.ttt_conv.weight": 0.00671901972964406,
+        "model.layers.30.mlp.ttt_proj.weight": 1.049523115158081,
+        "model.layers.30.mlp.ttt_conv.weight": 0.006960575934499502,
+        "model.layers.35.mlp.ttt_proj.weight": 0.9886963367462158,
+        "model.layers.35.mlp.ttt_conv.weight": 0.0017776226159185171
+      },
+      "absolute_update_by_tensor_and_step": {
+        "model.layers.0.mlp.ttt_proj.weight": [
+          0.013371609151363373,
+          0.008671747520565987,
+          0.007318297401070595
+        ],
+        "model.layers.0.mlp.ttt_conv.weight": [
+          0.0010133404284715652,
+          0.0007261229329742491,
+          0.0006726337596774101
+        ],
+        "model.layers.6.mlp.ttt_proj.weight": [
+          0.02007708139717579,
+          0.013752142898738384,
+          0.01187975239008665
+        ],
+        "model.layers.6.mlp.ttt_conv.weight": [
+          0.0011167990742251277,
+          0.0008073636563494802,
+          0.0007292532827705145
+        ],
+        "model.layers.12.mlp.ttt_proj.weight": [
+          0.021469885483384132,
+          0.014989504590630531,
+          0.013020753860473633
+        ],
+        "model.layers.12.mlp.ttt_conv.weight": [
+          0.0011258701561018825,
+          0.0008141034631989896,
+          0.0007361764437519014
+        ],
+        "model.layers.18.mlp.ttt_proj.weight": [
+          0.02056696079671383,
+          0.014262407086789608,
+          0.012253203429281712
+        ],
+        "model.layers.18.mlp.ttt_conv.weight": [
+          0.0011226385831832886,
+          0.0008135695243254304,
+          0.000731599167920649
+        ],
+        "model.layers.24.mlp.ttt_proj.weight": [
+          0.022152045741677284,
+          0.015614815056324005,
+          0.012925895862281322
+        ],
+        "model.layers.24.mlp.ttt_conv.weight": [
+          0.0011294223368167877,
+          0.0007851608097553253,
+          0.000602995976805687
+        ],
+        "model.layers.30.mlp.ttt_proj.weight": [
+          0.023472130298614502,
+          0.01694139465689659,
+          0.01331453025341034
+        ],
+        "model.layers.30.mlp.ttt_conv.weight": [
+          0.0011307642562314868,
+          0.0007948389975354075,
+          0.0005126142059452832
+        ],
+        "model.layers.35.mlp.ttt_proj.weight": [
+          0.02490038238465786,
+          0.017760278657078743,
+          0.014438452199101448
+        ],
+        "model.layers.35.mlp.ttt_conv.weight": [
+          0.0011313165305182338,
+          0.0007684211595915258,
+          0.0005650625098496675
+        ]
+      },
+      "interventions": {
+        "full": 2.2090444564819336,
+        "without_last_conv": 2.192028045654297,
+        "only_last_conv": 2.189964532852173,
+        "half_last_conv": 2.1990139484405518,
+        "before_second_update": 2.198741912841797
+      },
+      "seconds_by_step": [
+        5.192682592198253,
+        7.981122989207506,
+        5.188695142045617
+      ],
+      "max_peak_allocated_gib": 10.965384483337402,
+      "max_peak_reserved_gib": 11.767578125
+    },
+    "12288": {
+      "raw_result_sha256": "8dd012697deeb8333c46f9962d32a350974e06163a556ce178fbfb6ac0cefd34",
+      "input_ids_sha256": "0cba9d0ba883b2a948bcba3c15b35539e4ae6cb5db1daab5ca2640291f397851",
+      "reference_max_loss_error": 0.013247013092041016,
+      "state_replay_max_loss_error": 0.0,
+      "intervention_restore_loss_error": 0.0,
+      "snapshot_restore_bytewise_equal": true,
+      "baseline_measurements": [
+        {
+          "step": 1,
+          "loss": 1.970543384552002,
+          "unclipped_grad_norm": 5979.30126953125,
+          "seconds": 9.751200845465064,
+          "peak_allocated_gib": 13.30826711654663,
+          "peak_reserved_gib": 14.1484375
+        },
+        {
+          "step": 2,
+          "loss": 1.918994665145874,
+          "unclipped_grad_norm": 1451.71337890625,
+          "seconds": 9.082479950040579,
+          "peak_allocated_gib": 13.650609493255615,
+          "peak_reserved_gib": 14.849609375
+        },
+        {
+          "step": 3,
+          "loss": 4.398329734802246,
+          "unclipped_grad_norm": 10305.0546875,
+          "seconds": 9.099119454622269,
+          "peak_allocated_gib": 13.651586055755615,
+          "peak_reserved_gib": 14.849609375
+        }
+      ],
+      "frozen_backbone_unchanged": true,
+      "gradient_tripwire": false,
+      "fused_losses": [
+        1.970543384552002,
+        1.918994665145874,
+        4.398329734802246
+      ],
+      "max_loss_abs_difference": 4.284083843231201e-07,
+      "head_gradient_relative_l2_by_step": [
+        0.0029140168335288763,
+        0.002930613001808524,
+        0.0025785404723137617
+      ],
+      "writer_gradient_global_relative_l2_by_step": [
+        0.002949859744175556,
+        0.004437629435663634,
+        0.007577101914987706
+      ],
+      "writer_gradient_global_cosine_by_step": [
+        0.9999963108623011,
+        0.9999906131247449,
+        0.9999714889684181
+      ],
+      "max_layer_gradient_relative_l2": 0.06770980358123779,
+      "relative_update_by_tensor_and_step": {
+        "model.layers.0.mlp.ttt_proj.weight": [
+          0.007714292500168085,
+          0.010296897031366825,
+          0.008252610452473164
+        ],
+        "model.layers.0.mlp.ttt_conv.weight": [
+          0.024322405457496643,
+          0.020835621282458305,
+          0.0169649850577116
+        ],
+        "model.layers.6.mlp.ttt_proj.weight": [
+          0.012924524024128914,
+          0.014038607478141785,
+          0.011175649240612984
+        ],
+        "model.layers.6.mlp.ttt_conv.weight": [
+          0.06766258925199509,
+          0.05049679055809975,
+          0.040037788450717926
+        ],
+        "model.layers.12.mlp.ttt_proj.weight": [
+          0.014292488805949688,
+          0.012907981872558594,
+          0.011370386928319931
+        ],
+        "model.layers.12.mlp.ttt_conv.weight": [
+          0.1209404245018959,
+          0.08827777206897736,
+          0.07300423085689545
+        ],
+        "model.layers.18.mlp.ttt_proj.weight": [
+          0.013526971451938152,
+          0.010410054586827755,
+          0.010351338423788548
+        ],
+        "model.layers.18.mlp.ttt_conv.weight": [
+          0.09829675406217575,
+          0.07045134902000427,
+          0.05821390077471733
+        ],
+        "model.layers.24.mlp.ttt_proj.weight": [
+          0.01893984153866768,
+          0.014393850229680538,
+          0.012968050315976143
+        ],
+        "model.layers.24.mlp.ttt_conv.weight": [
+          0.16784973442554474,
+          0.12154753506183624,
+          0.09215592592954636
+        ],
+        "model.layers.30.mlp.ttt_proj.weight": [
+          0.02143556997179985,
+          0.016886668279767036,
+          0.013624366372823715
+        ],
+        "model.layers.30.mlp.ttt_conv.weight": [
+          0.16244885325431824,
+          0.12090571969747543,
+          0.08503603935241699
+        ],
+        "model.layers.35.mlp.ttt_proj.weight": [
+          0.023198626935482025,
+          0.018492000177502632,
+          0.01586511917412281
+        ],
+        "model.layers.35.mlp.ttt_conv.weight": [
+          0.6363857984542847,
+          0.3509555757045746,
+          0.25687938928604126
+        ]
+      },
+      "initial_norm_by_tensor": {
+        "model.layers.0.mlp.ttt_proj.weight": 1.0543339252471924,
+        "model.layers.0.mlp.ttt_conv.weight": 0.0372571125626564,
+        "model.layers.6.mlp.ttt_proj.weight": 1.074794054031372,
+        "model.layers.6.mlp.ttt_conv.weight": 0.01606142334640026,
+        "model.layers.12.mlp.ttt_proj.weight": 1.073297381401062,
+        "model.layers.12.mlp.ttt_conv.weight": 0.00912819430232048,
+        "model.layers.18.mlp.ttt_proj.weight": 1.0705339908599854,
+        "model.layers.18.mlp.ttt_conv.weight": 0.011177362874150276,
+        "model.layers.24.mlp.ttt_proj.weight": 1.0652788877487183,
+        "model.layers.24.mlp.ttt_conv.weight": 0.00671901972964406,
+        "model.layers.30.mlp.ttt_proj.weight": 1.049523115158081,
+        "model.layers.30.mlp.ttt_conv.weight": 0.006960575934499502,
+        "model.layers.35.mlp.ttt_proj.weight": 0.9886963367462158,
+        "model.layers.35.mlp.ttt_conv.weight": 0.0017776226159185171
+      },
+      "absolute_update_by_tensor_and_step": {
+        "model.layers.0.mlp.ttt_proj.weight": [
+          0.008133440278470516,
+          0.01085703819990158,
+          0.00870240293443203
+        ],
+        "model.layers.0.mlp.ttt_conv.weight": [
+          0.0009061825694516301,
+          0.0007786602363921702,
+          0.0006365312146954238
+        ],
+        "model.layers.6.mlp.ttt_proj.weight": [
+          0.013891201466321945,
+          0.015089699998497963,
+          0.012013769708573818
+        ],
+        "model.layers.6.mlp.ttt_conv.weight": [
+          0.001086757518351078,
+          0.0008134436211548746,
+          0.0006451763911172748
+        ],
+        "model.layers.12.mlp.ttt_proj.weight": [
+          0.015340090729296207,
+          0.013855352997779846,
+          0.012206683866679668
+        ],
+        "model.layers.12.mlp.ttt_conv.weight": [
+          0.0011039676610380411,
+          0.0008114358060993254,
+          0.0006771744810976088
+        ],
+        "model.layers.18.mlp.ttt_proj.weight": [
+          0.014481082558631897,
+          0.01114540547132492,
+          0.011084270663559437
+        ],
+        "model.layers.18.mlp.ttt_conv.weight": [
+          0.0010986984707415104,
+          0.0007916191243566573,
+          0.0006609565461985767
+        ],
+        "model.layers.24.mlp.ttt_proj.weight": [
+          0.02017621323466301,
+          0.015335659496486187,
+          0.013820221647620201
+        ],
+        "model.layers.24.mlp.ttt_conv.weight": [
+          0.0011277856538072228,
+          0.00082367192953825,
+          0.0006353995413519442
+        ],
+        "model.layers.30.mlp.ttt_proj.weight": [
+          0.022497126832604408,
+          0.017726102843880653,
+          0.014305551536381245
+        ],
+        "model.layers.30.mlp.ttt_conv.weight": [
+          0.0011307375971227884,
+          0.0008481124532409012,
+          0.0006049799849279225
+        ],
+        "model.layers.35.mlp.ttt_proj.weight": [
+          0.022936398163437843,
+          0.01828654296696186,
+          0.015691842883825302
+        ],
+        "model.layers.35.mlp.ttt_conv.weight": [
+          0.001131253782659769,
+          0.0007333022076636553,
+          0.000622242980170995
+        ]
+      },
+      "interventions": {
+        "full": 4.398329734802246,
+        "without_last_conv": 3.556957483291626,
+        "only_last_conv": 1.9220812320709229,
+        "half_last_conv": 4.00924015045166,
+        "before_second_update": 1.918994665145874
+      },
+      "seconds_by_step": [
+        16.584436278790236,
+        24.17416426166892,
+        16.652160184457898
+      ],
+      "max_peak_allocated_gib": 13.773322105407715,
+      "max_peak_reserved_gib": 14.990234375
+    }
+  }
+}

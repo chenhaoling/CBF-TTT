@@ -136,6 +136,8 @@ For the subsequent native/CBF multi-chunk numerical-path diagnostic, see [MEMORY
 
 For the training/inference forward comparison and bounded writer training resource checks, see [TRAIN_INFER_PARITY_PLAN.md](TRAIN_INFER_PARITY_PLAN.md) and the [results and optimization risks](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/train_infer_parity/REPORT.md). These checks do not replace the pretrained checkpoint.
 
+The subsequent [optimizer audit](OPTIMIZER_AUDIT_PLAN.md) compares fused/standard CE gradients and isolates writer updates using fixed parameter snapshots. Its [completed report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/optimizer_audit/REPORT.md) includes actual relative parameter displacements, local interventions, and reproducibility limits.
+
 The recommended configs assume:
 
 - `data.data_type=plaintext`

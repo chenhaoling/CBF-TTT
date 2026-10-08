@@ -1,0 +1,36 @@
+{
+  "v1_failed": {
+    "directory": "/home/ctj/cbf_ttt_optimizer_audit_20261008",
+    "code_commit": "d676d6cac9e6fc47fb516ae1acbcd6c5349646a7",
+    "started_at": "2026-10-08T14:57:51+08:00",
+    "tests_log_sha256": "fe7fecf67f3cbeadab275b6198d57eb3ea0d26285b748593d8270c59f8c9daae",
+    "unit_tests_passed": 5,
+    "status": "failed_historical_trajectory_gate",
+    "historical_max_loss_error": {
+      "6144": 0.00016069412231445312,
+      "12288": 0.015807628631591797
+    }
+  },
+  "ordinary_repeat": {
+    "directory": "/home/ctj/cbf_ttt_writer_resource_20261008_repeat",
+    "code_commit": "d676d6cac9e6fc47fb516ae1acbcd6c5349646a7",
+    "started_at": "2026-10-08T15:02:16+08:00",
+    "completed_at": "2026-10-08T15:02:49+08:00",
+    "pipeline_wall_seconds": 33.0,
+    "historical_max_loss_error": {
+      "6144": 0.0002980232238769531,
+      "12288": 0.01877737045288086
+    }
+  },
+  "v2": {
+    "directory": "/home/ctj/cbf_ttt_optimizer_audit_20261008_r2",
+    "code_commit": "d4659c9f7ade2bfc80e3854112d7950ebb4b0a4c",
+    "started_at": "2026-10-08T15:06:57+08:00",
+    "completed_at": "2026-10-08T15:08:31+08:00",
+    "pipeline_wall_seconds": 94.0,
+    "tests_log_sha256": "c6886121e381e430e8a0fc751a4b09794214bece7a5cb18da2b2728ea7d6ac2a",
+    "unit_tests_passed": 5,
+    "summary_sha256": "37c1a138e09fe301093bf1a2af05c5d77de6462c43b95786699a45cbdb975ca4",
+    "status": "completed_fixed_snapshot_audit"
+  }
+}
