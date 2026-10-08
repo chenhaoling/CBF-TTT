@@ -801,3 +801,13 @@ r3 于 2026-10-08 09:35:10–10:13:20（北京时间）完成，流水线 38 分
 平均动作评分 3.5309 秒（P95 3.5980），最大 allocated/reserved 22.1824/30.6406 GiB，无 OOM；完整决策状态平均 120.1315 秒。沿用本流程的 3000 状态预计两张 5090 约 50 小时，但当前无扩量依据。注意完整批次 reserved 峰值高于 smoke 的 26.2 GiB。
 
 完整报告与聚合/执行审计新增于 [`selective_forgetting_pilot/REPORT.md`](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/selective_forgetting_pilot/REPORT.md)、同目录 `summary.json` 和 `execution_audit.json`；原始文件仍保留远程。README 增加可选实验入口链接。当前结论限定于此 checkpoint/运行路径/自然代理任务，不能把单点和全程干预的全部差距归因于粒度，也不能直接否定所有局部遗忘设计。下一 TODO 是逐 chunk 快记忆稳定性、原生 TTT 与 CBF 的 BF16 更新路径核验；现有短序列预训练覆盖不足只是待验证解释，未开展长序列再训练。
+
+### 多 chunk 记忆稳定性诊断（2026-10-08，执行前登记）
+
+用户要求继续，按上一轮 TODO 固定 [`MEMORY_STABILITY_PLAN.md`](MEMORY_STABILITY_PLAN.md)。只用已有 4 个 pilot stable 场景、每场景 7 chunk，冻结 4B checkpoint；不评分 confirm、不训练。代码检查发现除了完整权重/独立 M 的累积舍入，原生三操作数 contraction 与 CBF 两次 matmul 的候选计算顺序也不同，需分开核验。
+
+新增 `scripts/diagnose_cbf_memory_stability.py`：原生、CBF、每步清除、不写入、原生运算+BF16 M/W、CBF+FP32 M、原生运算+FP32 M/W 共九条固定路径；逐步记录 NLL、逐层记忆/候选/有效权重变化与对齐；native 与桥接路径比对完整权重/hidden 字节哈希；同输入候选计算比较 FP32 参考；已有 CBF/clear 结果须复现。FP32 仅指累积状态，骨干/候选激活/读出均保持 BF16，原 runtime 和模型文件不改，诊断进程临时 hook 退出自动恢复。
+
+新增 `tests/test_cbf_memory_stability.py`：原生桥接 FP32/BF16 hidden/权重/NLL 一致性、BF16 完整权重与独立 M 舍入差异及 FP32 状态对照、查询克隆与零写入、同输入候选运算参考。新增 `scripts/run_cbf_memory_stability.sh`：先测试，双 GPU 按来源组运行，聚合时校验旧结果并记录完成标记，拒绝覆盖目录。复用已有依赖。
+
+运行：`ROOT=/home/ctj/cbf_ttt_memory_stability_20261008 bash scripts/run_cbf_memory_stability.sh`。脚本可覆盖 ROOT/SOURCE/PYTHON/MODEL；采集 CLI 支持 `--data/--model/--output/--shard`，聚合支持 `--inputs/--reference/--output`。逐步轨迹保留远程，聚合与说明才上传。此为已看过数据上的诊断，不支持独立泛化或训练覆盖不足的因果结论；如桥接不逐值相等，必须报告而不能单独归因于累积形式。
