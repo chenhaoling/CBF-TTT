@@ -871,3 +871,11 @@ v2（源码 `d4659c9`）于 2026-10-08 15:06:57–15:08:31 完成，94 秒；5 �
 新增公开归档 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/optimizer_audit/{REPORT.md,summary.json,execution_audit.json,.gitignore}`，记录失败/修订/独立复跑/最终结果、全部层位移、资源和复现命令；计划和 README 同步完成入口。峰值 allocated/reserved 短 10.965/11.768 GiB、长 13.773/14.990 GiB，无 OOM，未保存模型。SSH 代理超时后重连读取，未绕过认证。
 
 后续 TODO：在多个训练前缀上比较固定的外层优化尺度设置，验证较小学习率或实际相对位移约束，再启动等 token/等 optimizer 步数短长适配。这里的 Δθ 是外层 conv/proj 参数更新，不是会话 ΔW；本轮 lr=1e-5 试跑与原 1B lr=1e-6 全参数训练不同，不能将结果当作原 checkpoint 长程退化根因。baseline 模型/runtime/配置未改，无新依赖，控制器不扩量。
+
+### 回到图片第二条：随机 1–3 决策点实验（2026-10-08，执行前登记）
+
+按用户要求，直接开展多点遗忘，新增 `MULTIDECISION_FORGETTING_PLAN.md`；此次明确覆盖旧计划 A 失败则暂停 B 的执行安排，但不改变旧 A 结果，不以 optimizer 诊断作为前提。采用已有来源组 0/1/4/5×四场景共 16 场景，第一点 chunk 4 固定、后续点在 5/6/7 预先随机抽取，构成 1/2/3 点嵌套日程。
+
+新增 `tasks/cbf_multidecision.py`：build 写入确定性时间点和候选清单并复核来源；collect 复用 CohortSession，完整穷举全局 3/9/27 序列，局部每个多点日程固定采样 27 序列，另有等候选数对照。跨日程动作编码去重，导入 432 个旧单点评分；新多点轨迹 1144、新清除/不写入对照 32、单点重现桥接 48，共 1224 GPU 轨迹。后续候选各分支重新计算，查询不污染轨迹。半保留/窗口固定对照复用旧标签，逐场景重现三个全局单点动作及每步清除；来源/checkpoint 一致、误差≤1e-5 才继续。
+
+新增 `tests/test_cbf_multidecision.py`：候选预算/日程嵌套、编码与随机复现、完整重放与共享前缀多点分支一致、查询和父分支不被改动、缺失标签拒绝；新增 `scripts/run_cbf_multidecision.sh`：先测试/build/smoke，预计双卡90分钟内且峰值 allocated<30 GiB 才执行全部16场景。CLI/配置/运行命令见计划。原模型/runtime/训练配置不改、无额外依赖；历史 pilot/confirm 均已看过，不宣称新的独立验证。局部结果是采样集合最优值，不能冒称完整局部 oracle；图片第三条联合训练尚未执行。
