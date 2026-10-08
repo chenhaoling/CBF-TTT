@@ -781,3 +781,5 @@ bash scripts/run_cbf_selective_pilot.sh
 ```
 
 本地语法编译、shell 语法与 diff 空白检查通过；本地没有 torch，张量/模型测试随远程脚本先运行。风险：粗时间来源不是语义模块；清除直接贡献不能撤销 KV/后续 delta 的间接影响；FP32 来源缓存增加显存；27 动作 oracle 有选择容量优势；4 组/split 的 bootstrap 很不稳定；长文本锚点检查非完整语义去重；尚未检验 FineWeb-Edu 和正式下游任务；现有短序列预训练对多更新轨迹覆盖不足。原始文本/token/标签保留服务器，仅代码、文档、来源哈希和聚合结果上传 GitHub。
+
+远程首次运行 14 项测试通过，构建阶段在查重前发现原训练 JSONL 使用 `content_split` 而非 `text`，按预期停止、未评分模型。读取器补充原 VeOmni 字段兼容及回归测试，协议和场景来源不变；保留首次日志，新目录 `/home/ctj/cbf_ttt_selective_forgetting_20261008_r2` 重新执行。

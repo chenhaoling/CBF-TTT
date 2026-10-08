@@ -13,11 +13,17 @@ import torch
 
 from cbf_ttt.runtime import CBFSession
 from cbf_ttt.selective import CohortSession, GRID, FIXED
-from tasks.build_cbf_selective import make_scenes
+from tasks.build_cbf_selective import make_scenes, packed_text
 from tasks.cbf_selective import action_name, summarize
 
 
 class SelectiveTests(unittest.TestCase):
+    def test_training_plaintext_schema(self):
+        self.assertEqual(packed_text({"content_split": "packed data", "source": "longcrawl"}), "packed data")
+        self.assertEqual(packed_text({"text": "packed data"}), "packed data")
+        with self.assertRaises(ValueError):
+            packed_text({"messages": []})
+
     def fake_session(self, dtype=torch.float32):
         session = object.__new__(CohortSession)
         session.layers = (0,)

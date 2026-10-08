@@ -49,6 +49,14 @@ def normalize(text):
     return " ".join(text.split())
 
 
+def packed_text(row):
+    # VeOmni's plaintext adapter stores the packed string in content_split.
+    text = row.get("content_split", row.get("text"))
+    if not isinstance(text, str):
+        raise ValueError("training data must expose content_split or text")
+    return text
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--parquet", required=True)
@@ -109,9 +117,7 @@ def main():
     with Path(args.training_data).open() as stream:
         for line in stream:
             row = json.loads(line)
-            if not isinstance(row.get("text"), str):
-                raise ValueError("training data must expose packed text")
-            packed = normalize(row["text"])
+            packed = normalize(packed_text(row))
             matches += any(anchor in packed for anchor in unique_anchors)
             training_rows += 1
             if training_rows % 20000 == 0:
