@@ -831,3 +831,7 @@ r3 于 2026-10-08 09:35:10–10:13:20（北京时间）完成，流水线 38 分
 新增 `scripts/diagnose_ttt_train_infer.py`：显式加载训练/原生推理类，逐张量检查 checkpoint 一致；四个 pilot stable 来源的 6144/12288 token，三路径（训练整段/推理整段/推理流式）×原 TTT lr/零 TTT lr，16 比较共 48 前向；报告相同末尾 128 token NLL、hidden 差异、耗时和显存。原模型/runtime 不改，无新依赖。新增 `tests/test_ttt_train_infer.py` 检查 FP32 非零更新下完整/不完整块一致性、writer 因果梯度与零更新系数恢复。新增 `scripts/run_ttt_train_infer.sh` 先测试、双卡分来源采集、完整性审计汇总，拒绝覆盖输出目录。
 
 脚本环境参数 ROOT/SOURCE/PYTHON/MODEL；collect 参数 `--data/--model/--output/--shard`；summarize 参数 `--inputs/--output`。运行 `ROOT=/home/ctj/cbf_ttt_train_infer_20261008 bash scripts/run_ttt_train_infer.sh`。6144/12288 的成对 NLL 差大于 0.1/0.5 触发优先定位，非显著性/等价性判据；仅 pilot 机制诊断。长序列资源检查和训练尚未启动，原始 token/逐来源结果留远程。
+
+P 阶段通过：7 项测试、48 条前向完成，训练/原生整段 hidden 和 NLL 全部逐值相同；训练/流式最大 NLL 差 0.005233，未触发诊断阈值。进入 R，新增 `scripts/probe_ttt_writer_training.py`，只训练现有 conv/proj、FP32 writer/AdamW 配合 BF16 autocast 和非重入梯度检查点。现有训练语料开头按 6144/12288 截取，每长度从相同 checkpoint 独立跑 3 步，测量反向/优化器/梯度/参数修改/显存与耗时，不保存模型。CLI：`--model/--training-data/--tokenizer/--length/--output`。设计和具体命令追加于 `TRAIN_INFER_PARITY_PLAN.md`。此脚本为资源诊断，不能把跨 packed 文档输入或三步 loss 变化当作算法收益；模型与原训练配置不修改。
+
+新增 `scripts/run_ttt_writer_resource.sh` 校验 P 汇总通过后，按长度在两张卡各启动一个资源试跑，记录源码/起止时间并传播失败。环境变量 ROOT/PARITY/PYTHON/MODEL/TRAINING_DATA/TOKENIZER 可覆盖；输出目录必须全新。

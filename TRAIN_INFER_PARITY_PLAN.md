@@ -30,3 +30,21 @@ P 未发现需要先修复的差异时，在真实训练语料上检查 6144/122
 在同一初始化、同一可训练参数集合、相同 token 预算和优化器设定下比较短/长序列训练，另行固定数据构建、独立保留来源和成功标准，再执行。已有 pilot 只用于诊断。若稳定快记忆不能优于不写入/每步清除，继续定位 writer/readout，不扩大控制器训练。
 
 风险：BF16 运算顺序与 attention kernel 造成小误差；全量 hidden 范数不等价于下游任务收益；四个已看过的来源不提供泛化结论；冻结 backbone 的适配不同于此前全参数预训练。两张 5090 上此前 8192 全参数训练 OOM，因此不能跳过资源检查直接扩量。
+
+## P 完成与 R 启动登记
+
+P 48 条前向完成，7 项测试通过；训练/原生整段 hidden 与 NLL 全部逐值相同，训练/流式最大 NLL 差 0.005233，未触发门槛。零更新参考也有类似 hidden 运算误差，不支持以此解释原先 22 左右的长程退化。
+
+R 固定使用现有 `mixed_1b.jsonl` 最前面的 packed 训练记录，经原 Qwen3 tokenizer 编码并加 EOS，分别截取 6144/12288 token。它可能跨文档，仅检查资源，不用来声称自然长文学习收益。每长度从最终 checkpoint 独立初始化，在一张卡上各做 3 步（两卡并行），只更新 7 层现有 conv/proj，其他权重冻结；writer master 参数和 AdamW moments 为 FP32，计算 autocast BF16，SDPA、非重入梯度检查点、lr=1e-5、weight_decay=.01、clip=1、batch=1。复用已安装 Liger 训练 loss。
+
+每步记录 loss、每个 writer 的梯度范数、总梯度、耗时和峰值 allocated/reserved；检查每个 writer 的梯度有限非零、最终确实改变，以及冻结参数版本不变。三步用于覆盖优化器状态分配和后续稳定开销，不据此选择学习率。失败保留日志，未通过前不开始 L。不会保存或替换训练 checkpoint，输入 token 和逐参数日志只留服务器。
+
+```bash
+CUDA_VISIBLE_DEVICES=0 /home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python \
+  -m scripts.probe_ttt_writer_training \
+  --model /home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt \
+  --training-data /home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl \
+  --tokenizer /home/ctj/models/Qwen3-4B --length 6144 \
+  --output /home/ctj/cbf_ttt_writer_resource_20261008/probe_6144.json
+# 另一 GPU 同样执行 --length 12288，并改成独立输出文件。
+```
