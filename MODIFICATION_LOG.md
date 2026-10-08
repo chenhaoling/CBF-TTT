@@ -853,3 +853,5 @@ R 于 11:28:40–11:29:13 完成（33 秒，代码 `91359fe`）。冻结骨干�
 用户要求继续，新增 `OPTIMIZER_AUDIT_PLAN.md`，固定原三步训练轨迹，核验 Liger 融合 CE/标准 CE 梯度，记录真实相对参数更新，并在第二次更新处干预第 35 层 conv 的 delta。保持原学习率，不训练控制器、不评分保留集。
 
 新增 `scripts/diagnose_ttt_optimizer.py`：标准 CE 按 128 token 分块，同一 hidden 计算上游梯度，两次 VJP 比较各 writer 梯度；恢复融合梯度进行原 AdamW step；记录每层相对位移；完整/撤销末层 conv/仅末层 conv/末层 conv 减半四分支评分后恢复参数。输入哈希、冻结骨干和原 loss 轨迹均核验。新增 `tests/test_ttt_optimizer.py` 检验标准 CE 分块的标签对齐与归一化、梯度一致性和干预隔离；新增 `scripts/run_ttt_optimizer_audit.sh` 先测试再双卡执行。配置和运行命令见计划，复用现有依赖，baseline 模型/runtime/配置不修改。
+
+新增只读聚合 `scripts/summarize_ttt_optimizer.py`：要求两个长度及全部三步/四干预齐全，检查冻结骨干、原轨迹复现、完整干预评分与第三步前向相同；输出逐层更新比例、梯度差与资源统计，不含原始 token/梯度。运行脚本补聚合步骤。此聚合在采集启动后补充，不改变模型路径、干预或判据；首轮采集提交与聚合提交分别记录。

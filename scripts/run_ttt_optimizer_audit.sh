@@ -22,4 +22,7 @@ done
 status=0
 for pid in "${pids[@]}"; do wait "$pid" || status=1; done
 if (( status != 0 )); then exit 1; fi
+"$PYTHON" -m scripts.summarize_ttt_optimizer \
+  --inputs "$ROOT/audit_6144.json" "$ROOT/audit_12288.json" \
+  --output "$ROOT/summary.json" > "$ROOT/summary.log" 2>&1
 date -Is > "$ROOT/completed_at.txt"
