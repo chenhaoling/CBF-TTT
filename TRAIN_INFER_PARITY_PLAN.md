@@ -48,3 +48,9 @@ CUDA_VISIBLE_DEVICES=0 /home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python 
   --output /home/ctj/cbf_ttt_writer_resource_20261008/probe_6144.json
 # 另一 GPU 同样执行 --length 12288，并改成独立输出文件。
 ```
+
+## R 完成与 L 暂不启动（2026-10-08）
+
+两长度各 3 步训练完成，14 个 writer 张量、45,964,800 个参数全部有有限非零梯度并实际更新，冻结骨干未变。6144/12288 峰值 allocated 分别 11.169/13.830 GiB，第 2–3 步平均 2.847/9.093 秒。资源可行。
+
+但长序列三步 loss 为 1.9705→1.9188→4.4116，裁剪前梯度最大 10362；每步均实际 clip=1，梯度主要集中在第 35 层 conv。按新观察到的优化风险，L 暂不启动，先追加融合 loss/标准 CE 梯度核验和逐层相对 optimizer 位移诊断；不从这三步宣称最优学习率或训练收益。没有保存适配 checkpoint。P/R 完整结果与局限见 [完成报告](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/train_infer_parity/REPORT.md)。

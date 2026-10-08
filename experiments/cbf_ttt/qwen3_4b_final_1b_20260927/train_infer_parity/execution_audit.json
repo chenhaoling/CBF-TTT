@@ -1,0 +1,98 @@
+{
+  "parity": {
+    "root": "/home/ctj/cbf_ttt_train_infer_20261008",
+    "code_commit": "ef29877af33e8aff594a9e2be2ac77728abf797c",
+    "started_at": "2026-10-08T11:25:45+08:00",
+    "completed_at": "2026-10-08T11:26:22+08:00",
+    "pipeline_wall_seconds": 37.0,
+    "unit_tests_passed": 7,
+    "tests_log_sha256": "d8e01167985ec5db69077dd915972445504827185df34527f0d7d061b0614b19",
+    "summary_sha256": "7c6df2fc1c6fc7d3305921bc9e2751e7c8ebea0701bd81f8f4a56463ab4f54a4"
+  },
+  "resource": {
+    "root": "/home/ctj/cbf_ttt_writer_resource_20261008",
+    "code_commit": "91359fea83baead2d81fb8c33702bf4cfb884927",
+    "started_at": "2026-10-08T11:28:40+08:00",
+    "completed_at": "2026-10-08T11:29:13+08:00",
+    "pipeline_wall_seconds": 33.0,
+    "lengths": {
+      "6144": {
+        "probe_json_sha256": "a254be77ae74f9a93ec2bad8abd03947b39c3f03feb4d735ee99ae2fe9518011",
+        "trainable_parameters": 45964800,
+        "trainable_tensors": 14,
+        "frozen_backbone_unchanged": true,
+        "optimizer_state_fp32": true,
+        "checkpoint_saved": false,
+        "all_writers_updated": true,
+        "all_writer_grad_norms_positive": true,
+        "loss_by_step": [
+          2.2155604362487793,
+          2.198967456817627,
+          2.2095112800598145
+        ],
+        "unclipped_grad_norm_by_step": [
+          72.4090347290039,
+          974.6171264648438,
+          468.3543701171875
+        ],
+        "seconds_by_step": [
+          3.8021483533084393,
+          2.844233790412545,
+          2.849636070430279
+        ],
+        "steady_step_seconds_mean": 2.846934930421412,
+        "max_peak_allocated_gib": 11.169177532196045,
+        "max_peak_reserved_gib": 11.9453125,
+        "dominant_gradient_tensor_by_step": [
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_conv.weight"
+        ],
+        "dominant_squared_gradient_fraction_by_step": [
+          0.9866076326137897,
+          0.9856332012278096,
+          0.8937451208815722
+        ]
+      },
+      "12288": {
+        "probe_json_sha256": "bd08d3db5072cea310572a82f36583c496a9e86a568f5966adfdd0371b920173",
+        "trainable_parameters": 45964800,
+        "trainable_tensors": 14,
+        "frozen_backbone_unchanged": true,
+        "optimizer_state_fp32": true,
+        "checkpoint_saved": false,
+        "all_writers_updated": true,
+        "all_writer_grad_norms_positive": true,
+        "loss_by_step": [
+          1.970543384552002,
+          1.9188445806503296,
+          4.411576747894287
+        ],
+        "unclipped_grad_norm_by_step": [
+          5979.2978515625,
+          1442.89111328125,
+          10362.3994140625
+        ],
+        "seconds_by_step": [
+          9.70967860147357,
+          9.082505328580737,
+          9.103289876133204
+        ],
+        "steady_step_seconds_mean": 9.09289760235697,
+        "max_peak_allocated_gib": 13.829654216766357,
+        "max_peak_reserved_gib": 15.16796875,
+        "dominant_gradient_tensor_by_step": [
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_conv.weight"
+        ],
+        "dominant_squared_gradient_fraction_by_step": [
+          0.9949812830094138,
+          0.9731601439658554,
+          0.6833724606570812
+        ]
+      }
+    }
+  },
+  "interpretation": "Resource feasibility established; no trained checkpoint or learning-benefit claim. Long-sequence loss spike requires stability checks before expansion."
+}

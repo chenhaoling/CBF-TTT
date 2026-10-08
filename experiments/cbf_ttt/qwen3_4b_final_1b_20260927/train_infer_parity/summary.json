@@ -1,0 +1,130 @@
+{
+  "protocol": "train_infer_parity_v1",
+  "source_groups": 4,
+  "comparisons": 16,
+  "forward_paths": 48,
+  "data_sha256": "fe7f47a6b17ce5d861a9696add92398aed57670d601d45b14307a9d8085d0b8a",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "audits": [
+    {
+      "checkpoint_tensors_equal": true,
+      "checkpoint_unchanged": true,
+      "rows": 8,
+      "torch": "2.9.1+cu130",
+      "transformers": "4.57.3"
+    },
+    {
+      "checkpoint_tensors_equal": true,
+      "checkpoint_unchanged": true,
+      "rows": 8,
+      "torch": "2.9.1+cu130",
+      "transformers": "4.57.3"
+    }
+  ],
+  "groups": {
+    "6144_zero_lr": {
+      "nll_mean": {
+        "train_full": 2.30851674079895,
+        "native_full": 2.30851674079895,
+        "native_stream": 2.3098064064979553
+      },
+      "max_abs_paired_nll_gap_train_stream": 0.00302886962890625,
+      "hidden_comparison_means": {
+        "hidden_train_vs_native_full": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "equal_fraction": 1.0
+        },
+        "hidden_train_vs_native_stream": {
+          "relative_l2": 0.015076664043590426,
+          "max_abs": 7.734375,
+          "equal_fraction": 0.14076071977615356
+        },
+        "hidden_native_full_vs_stream": {
+          "relative_l2": 0.015076664043590426,
+          "max_abs": 7.734375,
+          "equal_fraction": 0.14076071977615356
+        }
+      }
+    },
+    "6144_ttt": {
+      "nll_mean": {
+        "train_full": 2.326322376728058,
+        "native_full": 2.326322376728058,
+        "native_stream": 2.3259602785110474
+      },
+      "max_abs_paired_nll_gap_train_stream": 0.0011696815490722656,
+      "hidden_comparison_means": {
+        "hidden_train_vs_native_full": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "equal_fraction": 1.0
+        },
+        "hidden_train_vs_native_stream": {
+          "relative_l2": 0.015049220761284232,
+          "max_abs": 7.359375,
+          "equal_fraction": 0.14156542345881462
+        },
+        "hidden_native_full_vs_stream": {
+          "relative_l2": 0.015049220761284232,
+          "max_abs": 7.359375,
+          "equal_fraction": 0.14156542345881462
+        }
+      }
+    },
+    "12288_zero_lr": {
+      "nll_mean": {
+        "train_full": 1.7900510430335999,
+        "native_full": 1.7900510430335999,
+        "native_stream": 1.78912915289402
+      },
+      "max_abs_paired_nll_gap_train_stream": 0.005053520202636719,
+      "hidden_comparison_means": {
+        "hidden_train_vs_native_full": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "equal_fraction": 1.0
+        },
+        "hidden_train_vs_native_stream": {
+          "relative_l2": 0.015094790607690811,
+          "max_abs": 9.40625,
+          "equal_fraction": 0.1366061121225357
+        },
+        "hidden_native_full_vs_stream": {
+          "relative_l2": 0.015094790607690811,
+          "max_abs": 9.40625,
+          "equal_fraction": 0.1366061121225357
+        }
+      }
+    },
+    "12288_ttt": {
+      "nll_mean": {
+        "train_full": 2.085283011198044,
+        "native_full": 2.085283011198044,
+        "native_stream": 2.086714491248131
+      },
+      "max_abs_paired_nll_gap_train_stream": 0.005232572555541992,
+      "hidden_comparison_means": {
+        "hidden_train_vs_native_full": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "equal_fraction": 1.0
+        },
+        "hidden_train_vs_native_stream": {
+          "relative_l2": 0.014353207778185606,
+          "max_abs": 9.765625,
+          "equal_fraction": 0.14080718904733658
+        },
+        "hidden_native_full_vs_stream": {
+          "relative_l2": 0.014353207778185606,
+          "max_abs": 9.765625,
+          "equal_fraction": 0.14080718904733658
+        }
+      }
+    }
+  },
+  "max_peak_allocated_gib": 17.890992164611816,
+  "max_peak_reserved_gib": 18.455078125,
+  "summed_comparison_seconds": 52.93058127723634,
+  "needs_mismatch_investigation": false
+}

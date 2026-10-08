@@ -134,6 +134,8 @@ For the optional selective-forgetting experiment (global history plus the last t
 
 For the subsequent native/CBF multi-chunk numerical-path diagnostic, see [MEMORY_STABILITY_PLAN.md](MEMORY_STABILITY_PLAN.md) and its [completed report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/memory_stability/REPORT.md). This diagnostic preserves the baseline and does not train a new controller.
 
+For the training/inference forward comparison and bounded writer training resource checks, see [TRAIN_INFER_PARITY_PLAN.md](TRAIN_INFER_PARITY_PLAN.md) and the [results and optimization risks](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/train_infer_parity/REPORT.md). These checks do not replace the pretrained checkpoint.
+
 The recommended configs assume:
 
 - `data.data_type=plaintext`
