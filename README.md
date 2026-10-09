@@ -328,3 +328,5 @@ The [completed record interference report](experiments/cbf_ttt/qwen3_4b_final_1b
 The next [identity-matched position experiment](MATCHED_POSITION_PLAN.md) moves exactly the same two distracting records across three positions, using two donor pairs, fixed surrounding slots and three exact bridges to the prior run.
 
 The [completed matched-position report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/matched_position/REPORT.md) contains 112 contexts / 224 queries with 96 exact bridge checks. Fixed distracting identities did not support a uniform later-is-worse rule. An explicitly exploratory label-overlap diagnostic also flags accidental correct-color matches; fresh four-regime readability and memory-value tests remain pending.
+
+The next [disjoint-color four-regime readout calibration](DISJOINT_READOUT_PLAN.md) retains distracting records while excluding both target variants, anchor and old correction values from distractor colors. It compares two fixed query formats under a per-domain, per-regime, per-query gate.

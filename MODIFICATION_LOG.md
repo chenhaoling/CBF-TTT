@@ -998,3 +998,11 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 探索性诊断：d3重合目标三位置均100%，不重合目标75/75/87.5%；d6所有锚点均重合，缺少不重合锚点对照。固定两donor均不重合的共同8目标/8来源组，d3为75/75/87.5%，d6为75/62.5/62.5%，方向仍不同。该诊断在启动后因输入元数据检查补充，主样本和规则未改，不当独立确认。
 
 新增归档 `matched_position/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json,.gitignore}`，同步README和计划完成入口，完整命令/文件/配置/风险/后续事项见REPORT。没有新来源四场景Q、V/F、控制器或联合训练。下一步优先构建排除正确颜色重合的统一四场景任务，冻结读取协议，再使用新来源按Q→V→F推进；旧confirm未评分。本轮依旧是M=0的输入位置对照，不声称快速记忆遗忘有效。
+
+### 无颜色重合四场景读出校准（2026-10-09，执行前）
+
+新增 `DISJOINT_READOUT_PLAN.md`，保留dev0–7四场景、原记录数/设备键/事实位置/六块背景，干扰palette固定排除两个双生目标值、锚点值和correction旧值。只重编码无关键记录的颜色，要求相同token长度且恰一token/变色记录；合法target/anchor全部记录保持原值。原QA和固定binding指令各评分，不添加答案候选提示。clean64轨迹加两域各一来源组的四场景16桥接，共80轨迹/288查询。
+
+新增 `tasks/cbf_disjoint_readout.py` 的clean_scene/make_rows/validate/build/summarize/choose_format；复用多格式collector，`tasks/cbf_readability.py`仅增加可选validator/bridge_cells/identity_fields参数，旧默认行为不改。新增 `scripts/run_cbf_disjoint_readout.sh`（ROOT/SOURCE/PYTHON/MODEL/TOKENIZER可配）、四项构造/重合拒绝/逐域逐场景门槛/完整汇总与篡改拒绝测试。新旧13项本地测试通过（1.159秒），无新依赖或baseline模型/runtime变化。
+
+每格式4场景×2域×2问题的16格均须≥75%，按最弱格最大选择，平局qa；没有合格格式则停止新来源/M写入，不删难例或改模板追加。若通过，冻结格式再以修复来源排除器构建新来源进行Q，之后才按原协议资源smoke/V/F。此时尚未启动GPU采集，旧confirm不评分。
