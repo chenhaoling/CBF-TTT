@@ -925,3 +925,9 @@ README 新增计划入口，多决策计划追加最终状态与后续链接。�
 独立审计通过：84个来源ID和两类哈希唯一、指定重叠为0、64行与128查询齐全、Q重算相同、模型权重字节哈希不变、confirm未评分。完整六块rollout平均4.118秒，最大allocated/reserved为14.770/18.828 GiB，两分片墙钟513.418/501.100秒；大部分额外开销包含CPU缓存搬运与状态哈希。无OOM。审计补按来源的Q分层和资源有限值检查，未改采集路径或门槛。
 
 新增完成归档 `memory_value_validation/{REPORT.md,q_summary.json,execution_audit.json,design.json}`，更新RUN_STATUS、README和计划最终状态；原始数据/逐条结果留远程。下一步需单独校准短长时距、键绑定或回答格式，再使用新来源重做价值验证；此次未擅自改场景重跑，V/F实现尚未获得本轮4B实测结果。
+
+### 下一步：开发集可读性校准（2026-10-09，执行前）
+
+新增 `READABILITY_CALIBRATION_PLAN.md`，固定3种时距（短2块、长6块早事实、长6块近事实）×单/双键×QA/cloze格式，另加双键记录槽位交换及原Q路径桥接。仅使用已经观察的8个dev源组、16条stable双生；不评分旧confirm，不训练或写入M。背景从原始parquet按行号重取并验证SHA，不重复filler。新的双键场景只保留目标和锚点两条人工记录，其他块恢复自然背景，因此不能把它的成绩冒充原始四场景均通过。
+
+新增 `tasks/cbf_readability.py`、`tests/test_cbf_readability.py`、`scripts/run_cbf_readability.sh`。128条上下文轨迹/384个查询，查询格式共享同一前缀并独立克隆，父缓存完整哈希和模型权重不变；原stable桥接32个NLL要求误差≤1e-5且预测一致。格式选择只允许long_far/dual默认顺序，目标/锚点在整体和两域均≥75%，否则不推荐完整长程双键协议。新CPU构造测试3项通过，无新依赖，旧模型/runtime不改。

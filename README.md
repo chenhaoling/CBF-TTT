@@ -142,6 +142,8 @@ The [multi-decision forgetting study](MULTIDECISION_FORGETTING_PLAN.md) directly
 
 The next [memory value validation plan](MEMORY_VALUE_VALIDATION_PLAN.md) specifies fresh paired facts, four fixed policies, full-KV and memory-only reads, and correct/zero/twin memory controls. It separates content value, forgetting tradeoffs, and optional local selection. Its standalone builder and V/F runner are implemented. The first run stopped at the preregistered readability gate; see the [completed Q report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/memory_value_validation/REPORT.md). V/F and confirmation remain untested.
 
+The subsequent [readability calibration](READABILITY_CALIBRATION_PLAN.md) uses only observed development sources to compare fact distance, key load, query format and record order, with an exact bridge to the original Q scores.
+
 The recommended configs assume:
 
 - `data.data_type=plaintext`
