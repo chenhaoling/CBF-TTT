@@ -1044,3 +1044,15 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增checkpoint_readout/{REPORT.md,RUN_STATUS.md,summary.json,execution_audit.json,.gitignore}正式归档；更新CHECKPOINT_READOUT_PLAN、README和本日志。报告完整包含目标/假设、加载与文件说明、参数、总体与分域/源组配对表、NLL/首token、资源、复现命令、附件对应、baseline兼容性、已完成与TODO及局限。核心新增4项测试（含完整汇总/权重不匹配拒绝）和disjoint共8项本地通过；服务器采集启动前12项通过。
 
 本轮无baseline模型/runtime改动，无新依赖；未做新来源Q、M写入、V/F、标签扩容、控制器或联合训练。下一步建议固定少量长度条件，保留事实键值/干扰记录、缩短自然背景并保持24K对照，验证可读区间；长度变化也影响相对距离，必须另列限制。通过新的冻结Q并在新来源确认后才回到附件局部遗忘/多分支/联合训练。该建议尚未执行。
+
+### 固定记录6K/12K/24K读取对照（2026-10-10，执行前）
+
+按用户下一步要求新增LENGTH_READOUT_PLAN.md：保留原disjoint四场景dev0–7的全部设备/颜色/记录顺序和两个query，每个4096-token段取最后1024/2048/4096 tokens，固定6K/12K/24K。要求header及两条记录完整、不重新分词、不补填充；短窗嵌套，真值/双生/无重合干扰保持。删除自然背景同时改变位置和距离，不能宣称单一纯长度因果效应。
+
+新增tasks/cbf_length_readout.py（make_rows/validate精确尾窗、build/load_data、复用采集、reference_summary重算旧归档、summarize及逐组长度/模型配对差）；scripts/run_cbf_length_readout.sh（双GPU，ROOT/SOURCE/REFERENCE/PYTHON/ORIGINAL/FINAL可配，拒绝覆盖）；tests/test_cbf_length_readout.py四项构造/裁断拒绝/最长合格选择/完整汇总与长度身份篡改拒绝测试。旧tasks/cbf_checkpoint_readout.collect仅增加data_path/validator/identity_fields/expected_data_sha可选参数，原默认不变；baseline模型/runtime/训练配置不修改，无新依赖。
+
+新采集两模型合计288上下文/1152查询：每模型两个短长度各64场景，另组0、2四场景双生的16条24K clean作64查询桥接。24K主分析复用上轮已审计的完整64条/模型，要求权重/配置/源文件一致、桥接所有候选NLL≤1e-5且预测一致。桥接不重复计入主矩阵；三长度两模型主分析384条件/1536查询。逐查询/轨迹耗时与峰值显存保留远程，公开聚合和元数据。
+
+每模型/长度/格式仍须16个域×场景×问题单元全部≥75%；若最终短长度通过，仅选最长合格长度作为新来源Q候选，同长度最弱格最大选格式、平局QA。若均失败停止此版本标签扩容，不加长度/模板或删难例。不自动进入M写入/V/F/控制器/联合训练；后续需要区分当前前向分段与4096-token TTT写入边界。当前尚未GPU采集。
+
+新增只读scripts/audit_cbf_length_readout.py：完成后独立检查实际每段suffix、完整header/记录/查询、144输入的1728条记录及三长度计数，重算summary、重新哈希源checkpoint并核验终态。新旧12项本地测试通过（7.512秒），shell语法、Python审计脚本语法、git diff检查通过；依赖torch的旧缓存测试将在服务器启动前运行。尚无本轮GPU结果。

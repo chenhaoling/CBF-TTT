@@ -93,14 +93,14 @@ def cache_digest(cache):
     return h.hexdigest()
 
 
-def collect(args):
+def collect(args, data_path=None, validator=validate, identity_fields=IDENTITY, expected_data_sha=DATA_SHA):
     import torch
     import transformers
     from tasks.cbf_selective import measure
     from tasks.cbf_memory_value import score_query
-    data=Path(args.source)/'data/scenes.jsonl'
-    if file_digest(data)!=DATA_SHA:raise ValueError('frozen data changed')
-    scenes=list(map(json.loads,data.read_text().splitlines()));validate(scenes)
+    data=Path(data_path) if data_path is not None else Path(args.source)/'data/scenes.jsonl'
+    if file_digest(data)!=expected_data_sha:raise ValueError('frozen data changed')
+    scenes=list(map(json.loads,data.read_text().splitlines()));validator(scenes)
     selected=[r for r in scenes if (r['group']//2+r['group']%2)%2==args.shard
               and (args.arm!='original_native' or r['is_bridge'])]
     selected.sort(key=lambda r:(not r['is_bridge'],r['group'],r['id'],r['cell']))
@@ -126,8 +126,8 @@ def collect(args):
                     v,p=measure(lambda:score_query(session,q,r['choice_ids'],'full_kv',{}))
                     queries[name][fmt]={**v,**p}
             if parent!=cache_digest(session.cache):raise RuntimeError('query changed prefix')
-            row={k:r[k] for k in IDENTITY}
-            row.update(arm=args.arm,model=args.model,weights_sha256=before,data_sha256=DATA_SHA,
+            row={k:r[k] for k in identity_fields}
+            row.update(arm=args.arm,model=args.model,weights_sha256=before,data_sha256=expected_data_sha,
                        parent_unchanged=True,queries=queries,rollout=profile)
             sink.write(json.dumps(row)+'\n');sink.flush()
             print(json.dumps({'arm':args.arm,'completed':i+1,'total':len(selected)}),flush=True)
