@@ -86,4 +86,17 @@ class MatchedPositionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'score mismatch'):summarize(args)
 
 
+    def test_overlap_supplement_keeps_shared_sample_and_empty_strata_explicit(self):
+        from scripts.audit_cbf_matched_position import binding_diagnostic
+        outputs=[dict(id=r['id'],cell=r['cell'],group=r['group'],queries={
+            name:dict(correct=1,nll=1.,greedy_correct=0) for name in ('target','anchor')}) for r in self.rows]
+        d=binding_diagnostic(self.rows,outputs)
+        self.assertEqual(d['common_disjoint_target_sessions'],8)
+        self.assertEqual(d['common_disjoint_target_groups'],8)
+        self.assertEqual(d['common_disjoint_target_means']['d3_p1']['count'],8)
+        self.assertEqual(d['strata']['d6_p1']['anchor']['disjoint']['count'],0)
+        self.assertIsNone(d['strata']['d6_p1']['anchor']['disjoint']['means'])
+        self.assertEqual(d['strata']['d3_p1']['target']['overlap']['count'],8)
+
+
 if __name__=='__main__':unittest.main()
