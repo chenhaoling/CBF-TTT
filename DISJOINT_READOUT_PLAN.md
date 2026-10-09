@@ -42,3 +42,11 @@ ROOT=/home/ctj/cbf_ttt_disjoint_readout_20261009 bash scripts/run_cbf_disjoint_r
 ```
 
 SOURCE为原memory_value目录；ROOT/PYTHON/MODEL/TOKENIZER可配。预估约11分钟仅参考既有吞吐，实测时间另记。原始文本/token/逐条评分留远程，公开设计/聚合/审计/报告。
+
+## 完成记录（2026-10-09）
+
+采集提交45525be，18:48:08–18:59:10 +08:00，共662秒，80上下文/288查询。独立审计重新编码构造、检查624条干扰/144条保护记录、重算summary通过；32桥接查询误差0。峰值allocated/reserved为14.779/18.893 GiB。
+
+原QA四场景目标为0/100/25/18.75%，binding为25/100/25/43.75%；原QA失败14/16格，binding失败12/16格，最弱格均0%。无格式合格，按预登记停止于 `stopped_by_disjoint_Q`，未进入新来源或M写入/V/F，confirm未评分。不调整门槛或追加模板。
+
+完整分域、锚点、NLL、首token、资源与审计见 [完成报告](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/disjoint_readout/REPORT.md)。本轮是M=0读取诊断，不能判定遗忘机制无效。下一项建议原始Qwen3-4B与最终1B checkpoint在相同冻结任务上的能力对照；尚未启动。

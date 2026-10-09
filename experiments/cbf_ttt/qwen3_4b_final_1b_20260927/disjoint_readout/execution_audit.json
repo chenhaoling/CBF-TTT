@@ -1,0 +1,215 @@
+{
+  "audit_passed": true,
+  "construction_rechecked": true,
+  "queries_rechecked": true,
+  "summary_recomputed": true,
+  "code_commit": "45525be1e59d731b7427f5a566d141455d7bab24",
+  "started_at": "2026-10-09T18:48:08+08:00",
+  "completed_at": "2026-10-09T18:59:10+08:00",
+  "wall_seconds": 662.0,
+  "audit_script_sha256": "ce32e1a87c588e6bdd3c7e641ed024a84b2259918a4fc15e130da779cfb8f3d8",
+  "data_sha256": "6740c33875d20cb42f53865daedff1dee71dda53dbcda590e13e6fda447cafe4",
+  "design_sha256": "1ce665875eb6a5a26a1c16c355de380beee72d77d8071d0cfdd2b49ba555cb1a",
+  "summary_sha256": "a4430326b8ec9a0229f0840fd532bf2cde47a245fd5e6e5779fce904e8aab718",
+  "rows_sha256": {
+    "rows_0.jsonl": "e141b4e42b9cdd3542e899130d594c866b2cb88d45edcda894b573946d729596",
+    "rows_1.jsonl": "9f2dab5e369ca9f24c80094456c723a8339f066a148d602aa16e9586b2fcf142"
+  },
+  "weights_sha256": "92cbda3397da2d40b6335cb14258dc7bef9767ff8156167fccac10177db4713a",
+  "contexts": 80,
+  "queries": 288,
+  "source_groups": 8,
+  "confirm_scored": false,
+  "terminal_status": "stopped_by_disjoint_Q",
+  "distractor_records_checked": 624,
+  "protected_records_unchanged": 144,
+  "changed_color_tokens": 572,
+  "artificial_distractor_overlap": 0,
+  "bridge_checks": 32,
+  "bridge_max_error": 0.0,
+  "selection": {
+    "selected_format": null,
+    "formats": {
+      "qa": {
+        "worst_accuracy": 0.0,
+        "passed": false,
+        "failed_cells": [
+          {
+            "domain": "fineweb",
+            "regime": "stable",
+            "query": "target",
+            "accuracy": 0.0
+          },
+          {
+            "domain": "fineweb",
+            "regime": "stable",
+            "query": "anchor",
+            "accuracy": 0.375
+          },
+          {
+            "domain": "fineweb",
+            "regime": "correction",
+            "query": "anchor",
+            "accuracy": 0.25
+          },
+          {
+            "domain": "fineweb",
+            "regime": "recent1_distractor",
+            "query": "target",
+            "accuracy": 0.0
+          },
+          {
+            "domain": "fineweb",
+            "regime": "recent1_distractor",
+            "query": "anchor",
+            "accuracy": 0.375
+          },
+          {
+            "domain": "fineweb",
+            "regime": "recent2_distractor",
+            "query": "target",
+            "accuracy": 0.25
+          },
+          {
+            "domain": "fineweb",
+            "regime": "recent2_distractor",
+            "query": "anchor",
+            "accuracy": 0.0
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "stable",
+            "query": "target",
+            "accuracy": 0.0
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "stable",
+            "query": "anchor",
+            "accuracy": 0.25
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "correction",
+            "query": "anchor",
+            "accuracy": 0.375
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "recent1_distractor",
+            "query": "target",
+            "accuracy": 0.5
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "recent1_distractor",
+            "query": "anchor",
+            "accuracy": 0.25
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "recent2_distractor",
+            "query": "target",
+            "accuracy": 0.125
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "recent2_distractor",
+            "query": "anchor",
+            "accuracy": 0.25
+          }
+        ]
+      },
+      "binding": {
+        "worst_accuracy": 0.0,
+        "passed": false,
+        "failed_cells": [
+          {
+            "domain": "fineweb",
+            "regime": "stable",
+            "query": "target",
+            "accuracy": 0.25
+          },
+          {
+            "domain": "fineweb",
+            "regime": "recent1_distractor",
+            "query": "target",
+            "accuracy": 0.0
+          },
+          {
+            "domain": "fineweb",
+            "regime": "recent1_distractor",
+            "query": "anchor",
+            "accuracy": 0.625
+          },
+          {
+            "domain": "fineweb",
+            "regime": "recent2_distractor",
+            "query": "target",
+            "accuracy": 0.625
+          },
+          {
+            "domain": "fineweb",
+            "regime": "recent2_distractor",
+            "query": "anchor",
+            "accuracy": 0.5
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "stable",
+            "query": "target",
+            "accuracy": 0.25
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "stable",
+            "query": "anchor",
+            "accuracy": 0.5
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "correction",
+            "query": "anchor",
+            "accuracy": 0.375
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "recent1_distractor",
+            "query": "target",
+            "accuracy": 0.5
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "recent1_distractor",
+            "query": "anchor",
+            "accuracy": 0.5
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "recent2_distractor",
+            "query": "target",
+            "accuracy": 0.25
+          },
+          {
+            "domain": "longcrawl",
+            "regime": "recent2_distractor",
+            "query": "anchor",
+            "accuracy": 0.5
+          }
+        ]
+      }
+    },
+    "passed": false,
+    "rule": "Every regime/domain/query cell >= 75%; maximize worst cell; ties prefer qa."
+  },
+  "profile": {
+    "peak_allocated_gib": 14.778658866882324,
+    "peak_reserved_gib": 18.892578125,
+    "shard_seconds": [
+      638.672014657408,
+      618.7780836001039
+    ],
+    "rollout_mean_seconds": 4.114091584016569,
+    "query_mean_seconds": 0.1035055214823741
+  }
+}

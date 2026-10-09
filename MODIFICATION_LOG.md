@@ -1006,3 +1006,15 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增 `tasks/cbf_disjoint_readout.py` 的clean_scene/make_rows/validate/build/summarize/choose_format；复用多格式collector，`tasks/cbf_readability.py`仅增加可选validator/bridge_cells/identity_fields参数，旧默认行为不改。新增 `scripts/run_cbf_disjoint_readout.sh`（ROOT/SOURCE/PYTHON/MODEL/TOKENIZER可配）、四项构造/重合拒绝/逐域逐场景门槛/完整汇总与篡改拒绝测试。新旧13项本地测试通过（1.159秒），无新依赖或baseline模型/runtime变化。
 
 每格式4场景×2域×2问题的16格均须≥75%，按最弱格最大选择，平局qa；没有合格格式则停止新来源/M写入，不删难例或改模板追加。若通过，冻结格式再以修复来源排除器构建新来源进行Q，之后才按原协议资源smoke/V/F。此时尚未启动GPU采集，旧confirm不评分。
+
+### 无颜色重合四场景读出校准完成（2026-10-09）
+
+采集提交 `45525be1e59d731b7427f5a566d141455d7bab24` 已同步hku-gpu2并运行结束；ROOT `/home/ctj/cbf_ttt_disjoint_readout_20261009`，tmux `cbf-disjoint-readout-20261009` 正常退出。实际开始/结束18:48:08–18:59:10 +08:00，662秒；两卡各40轨迹，共80上下文/288查询。服务器14项测试通过（2.664秒）。峰值allocated/reserved14.779/18.893 GiB，分片638.672/618.778秒；rollout均值4.114秒、query0.104秒。
+
+新增 `scripts/audit_cbf_disjoint_readout.py`：audit(root, tokenizer)按原输入重编码所有记录/查询，核验源文件哈希、双生、固定背景和位置、624条不重合干扰与144条合法保护记录；实际改变572个颜色token。重算summary完全一致，32桥接查询误差0，权重/父缓存不变，confirm未评分。CLI为--root/--output/--tokenizer，无新依赖；不修改baseline或采集算法。
+
+首次归档传输因自动审批服务额度故障未执行；用户继续后经正常审批重新上传并运行审计通过。另一次SCP连接中断后下载重试成功；本地summary/design哈希与远程execution_audit吻合。没有把未执行的检查计为通过。
+
+原QA四场景目标准确率0/100/25/18.75%，binding为25/100/25/43.75%。原QA失败14/16门槛格，binding失败12/16，最弱均0%，无格式被选中，终态 `stopped_by_disjoint_Q`。按事前规则停止新来源/M写入/V/F/控制器或联合训练。M=0诊断不能证明或否定遗忘机制；四色干扰分布也改变，不能把旧结果差异全部归为颜色重合。
+
+新增归档 `disjoint_readout/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json,.gitignore}`，更新DISJOINT_READOUT_PLAN与README完成入口。REPORT包含目标/假设、逐文件说明、参数、总体及分域准确率/NLL/首token、资源、完整复现/审计命令、附件对应、baseline兼容性与限制。原始语料/token/逐条评分和权重留远程。下一项TODO为冻结任务上的原始Qwen3-4B与最终1B checkpoint能力对照，并核对可比推理路径；本轮没有启动该对照。附件局部遗忘/多分支/端到端联合训练仍需后续Q→V→F验证。
