@@ -320,3 +320,5 @@ If you have any questions about this project, please feel free to contact us:
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
 
 Readability calibration is [complete](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/readability_calibration/REPORT.md): 128 contexts / 384 queries, exact original-Q bridge. Rebuilt QA targets reached 100% eight-choice accuracy, while cloze failed on near dual-key facts; this is development-only protocol evidence, not memory or forgetting efficacy. The original confirmation split remains unscored.
+
+The next [fixed-slot record interference experiment](RECORD_INTERFERENCE_PLAN.md) keeps the original QA, target facts and background prefixes fixed while varying distractor slots, with natural-token and newline controls and two exact reproduction bridges.

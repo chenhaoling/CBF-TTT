@@ -946,3 +946,11 @@ README 新增计划入口，多决策计划追加最终状态与后续链接。�
 新增归档 `readability_calibration/{REPORT.md,summary.json,execution_audit.json}`，更新RUN_STATUS、README、计划完成记录；raw文本/token/逐条评分保留远程。本轮baseline和训练配置不变、无新依赖。附件第一/二条遗忘建议没有新增效应证据，第三条联合训练未启动。
 
 后续TODO：固定QA分离人工记录负载与背景变化；所有四场景通过统一Q后再做新来源V/F。新来源构造前需要修复旧来源排除器目前只识别 `*.meta.json` 和 `ids/context_ids/prefix` 的局限，补充 `design.json/chunks` 并验证来源ID唯一，避免遗漏本轮/上轮新格式来源。此问题不影响本次有意复用dev的校准。没有因单个容易条件通过而自动扩大实验或训练控制器。
+
+### 固定记录槽位干扰实验（2026-10-09，执行前）
+
+按用户继续下一步要求，新增 `RECORD_INTERFERENCE_PLAN.md`，固定QA和原六块输入，仅改动第1/3/4/5/6块的10条无关记录正文槽；背景前缀、header、行尾token、目标/锚点块和所有位置不变。主控制用原背景同绝对位置token替换槽正文，辅助控制填换行；占位文本仍是干预的一部分，不宣称完全无混杂。0/2/4/8/10负载、before/early/late位置及两类原始精确桥接共160条/320查询，仅原dev stable，不评分confirm。
+
+新增 `tasks/cbf_record_interference.py` build/collect/summarize，复用背景来源校验、session/模型/评分/显存计时；加入64评分桥接、逐token槽外不变、双生与标签平衡、父缓存/权重不变检查、分域/分组配对差和错误颜色审计。新增 `tests/test_cbf_record_interference.py` 三项构造与失败拒绝测试；本地新旧6项通过（5.166秒）。新增 `scripts/run_cbf_record_interference.sh`，ROOT/SOURCE/READABILITY/PYTHON/MODEL/TOKENIZER参数与旧入口一致，严格失败标记、不覆盖旧输出。无新依赖，baseline模型/runtime不改。
+
+数量曲线由末段向前扩展，位置和键身份也未完全正交；报告将明确这些限制。natural0可读性门槛为target/anchor整体与每域均≥75%，不自动触发V/F或控制器训练。旧新来源排除器的design/chunks支持问题不影响本次有意复用dev，留待新来源实验前修复。
