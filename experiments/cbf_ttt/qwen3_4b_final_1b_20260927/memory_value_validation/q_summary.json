@@ -1,0 +1,28 @@
+{
+  "stage": "q",
+  "rows": 64,
+  "data_sha256": "c32faa173682cdb9193e9c185de411256a050f206914b925694e7149f408d934",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "weights_sha256": "92cbda3397da2d40b6335cb14258dc7bef9767ff8156167fccac10177db4713a",
+  "Q": {
+    "passed": false,
+    "accuracy": {
+      "stable": {
+        "target": 0.3125,
+        "anchor": 0.875
+      },
+      "correction": {
+        "target": 1.0,
+        "anchor": 0.8125
+      },
+      "recent1_distractor": {
+        "target": 0.5625,
+        "anchor": 0.875
+      },
+      "recent2_distractor": {
+        "target": 0.625,
+        "anchor": 0.9375
+      }
+    }
+  }
+}

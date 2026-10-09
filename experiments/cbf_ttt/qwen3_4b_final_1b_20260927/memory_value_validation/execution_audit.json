@@ -1,0 +1,161 @@
+{
+  "audit_passed": true,
+  "status": "stopped_by_Q",
+  "started_at": "2026-10-09T10:55:33+08:00",
+  "completed_at": "2026-10-09T11:06:17+08:00",
+  "wall_seconds": 644.0,
+  "code_commit": "077d32059f11bad2bdef9a9687f07be3a6454e83",
+  "data_sha256": "c32faa173682cdb9193e9c185de411256a050f206914b925694e7149f408d934",
+  "design_sha256": "577915a2a9cf74e21252d6270a3537fd34fd7d50dbc7436ec4c32017d68c857b",
+  "weights_sha256": "92cbda3397da2d40b6335cb14258dc7bef9767ff8156167fccac10177db4713a",
+  "selected_sources": 84,
+  "selected_source_overlap": 0,
+  "source_domain_counts": {
+    "fineweb": 72,
+    "longcrawl": 12
+  },
+  "training_rows_scanned": 162762,
+  "old_manifest_count": 39,
+  "old_context_file_count": 21,
+  "phases": {
+    "q": {
+      "rows": 64,
+      "query_forwards": 128,
+      "rollout_mean_seconds": 4.118303987226682,
+      "peak_allocated_gib": 14.770254611968994,
+      "peak_reserved_gib": 18.828125,
+      "shard_wall_seconds": [
+        513.4182896502316,
+        501.0997082609683
+      ],
+      "rows_sha256": {
+        "q_0.jsonl": "151329a87c32e4b507d97984dcabd322c5c37dc3c2dfcc7f86a533b7f8fd258c",
+        "q_1.jsonl": "66497c5377b7a35622d4421f5f5bc4ee59518ee3a0871c10123e1af11475b330"
+      }
+    }
+  },
+  "Q": {
+    "passed": false,
+    "accuracy": {
+      "stable": {
+        "target": 0.3125,
+        "anchor": 0.875
+      },
+      "correction": {
+        "target": 1.0,
+        "anchor": 0.8125
+      },
+      "recent1_distractor": {
+        "target": 0.5625,
+        "anchor": 0.875
+      },
+      "recent2_distractor": {
+        "target": 0.625,
+        "anchor": 0.9375
+      }
+    }
+  },
+  "Q_strata": {
+    "fineweb": {
+      "stable": {
+        "target": {
+          "correct": 0.375,
+          "nll": 3.8779787719249725,
+          "greedy_correct": 0.0
+        },
+        "anchor": {
+          "correct": 1.0,
+          "nll": 2.3814963698387146,
+          "greedy_correct": 0.0
+        }
+      },
+      "correction": {
+        "target": {
+          "correct": 1.0,
+          "nll": 2.6922786086797714,
+          "greedy_correct": 0.0
+        },
+        "anchor": {
+          "correct": 0.875,
+          "nll": 2.528774172067642,
+          "greedy_correct": 0.0
+        }
+      },
+      "recent1_distractor": {
+        "target": {
+          "correct": 0.5,
+          "nll": 3.956495016813278,
+          "greedy_correct": 0.0
+        },
+        "anchor": {
+          "correct": 1.0,
+          "nll": 2.5154991149902344,
+          "greedy_correct": 0.0
+        }
+      },
+      "recent2_distractor": {
+        "target": {
+          "correct": 0.625,
+          "nll": 3.640630602836609,
+          "greedy_correct": 0.0
+        },
+        "anchor": {
+          "correct": 1.0,
+          "nll": 2.4626185297966003,
+          "greedy_correct": 0.0
+        }
+      }
+    },
+    "longcrawl": {
+      "stable": {
+        "target": {
+          "correct": 0.25,
+          "nll": 2.954102635383606,
+          "greedy_correct": 0.125
+        },
+        "anchor": {
+          "correct": 0.75,
+          "nll": 1.9788861870765686,
+          "greedy_correct": 0.0
+        }
+      },
+      "correction": {
+        "target": {
+          "correct": 1.0,
+          "nll": 1.4335176944732666,
+          "greedy_correct": 0.5
+        },
+        "anchor": {
+          "correct": 0.75,
+          "nll": 2.082729920744896,
+          "greedy_correct": 0.0
+        }
+      },
+      "recent1_distractor": {
+        "target": {
+          "correct": 0.625,
+          "nll": 2.1039213612675667,
+          "greedy_correct": 0.25
+        },
+        "anchor": {
+          "correct": 0.75,
+          "nll": 2.0046733170747757,
+          "greedy_correct": 0.0
+        }
+      },
+      "recent2_distractor": {
+        "target": {
+          "correct": 0.625,
+          "nll": 2.419058546423912,
+          "greedy_correct": 0.125
+        },
+        "anchor": {
+          "correct": 0.875,
+          "nll": 1.9222716093063354,
+          "greedy_correct": 0.125
+        }
+      }
+    }
+  },
+  "confirm_scored": false
+}
