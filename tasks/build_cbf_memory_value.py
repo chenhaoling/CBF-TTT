@@ -131,12 +131,39 @@ def excluded_values(paths):
             for key,value in x.items():
                 if key in ('sha256','source_id','id','url','normalized_sha256') and isinstance(value,str):
                     excluded.add(value)
+                if key in ('sources','source_ids') and isinstance(value,list):
+                    excluded.update(v for v in value if isinstance(v,str))
                 visit(value)
         elif isinstance(x,list):
             for value in x: visit(value)
     for path in paths:
         visit(json.loads(Path(path).read_text()))
     return excluded
+
+
+def old_manifests(root, output):
+    """Include newer design manifests, while never scanning the output being built."""
+    root, output = Path(root), Path(output)
+    paths = set(root.glob('cbf_ttt*/**/*.meta.json'))
+    paths.update(root.glob('cbf_ttt*/**/design.json'))
+    return sorted(p for p in paths if output.resolve() not in p.resolve().parents)
+
+
+def context_texts(x, tokenizer):
+    """Read legacy and current scene token containers for the overlap scan."""
+    if isinstance(x,dict):
+        for k,v in x.items():
+            if k in ('text','content_split') and isinstance(v,str): yield v
+            elif k in ('ids','context_ids') and isinstance(v,list) and v and isinstance(v[0],int):
+                yield tokenizer.decode(v)
+            elif k in ('prefix','chunks') and isinstance(v,list):
+                for chunk in v:
+                    if isinstance(chunk,list) and chunk and all(isinstance(i,int) for i in chunk):
+                        yield tokenizer.decode(chunk)
+                    else: yield from context_texts(chunk,tokenizer)
+            else: yield from context_texts(v,tokenizer)
+    elif isinstance(x,list):
+        for v in x: yield from context_texts(v,tokenizer)
 
 
 def publisher_rows(parquet, columns):
@@ -158,8 +185,7 @@ def prepare(args):
     if out.exists(): raise FileExistsError(out)
     out.mkdir(parents=True)
     tok = AutoTokenizer.from_pretrained(args.tokenizer)
-    manifests = sorted(Path(args.old_root).glob('cbf_ttt*/**/*.meta.json'))
-    manifests = [p for p in manifests if out not in p.parents]
+    manifests = old_manifests(args.old_root,out)
     excluded = excluded_values(manifests)
     pool, seen = [], set()
     for dataset,path,quota,needed in (('fineweb',args.fineweb,96,4096),('longcrawl',args.longcrawl,32,6*4096)):
@@ -180,7 +206,8 @@ def prepare(args):
             pool.append({'domain':dataset,'sha256':sha,'normalized_sha256':norm_sha,
                 'source_id':row.get('id') or row.get('url') or f'{dataset}:{index}',
                 'parquet':path,'row_index':index,'chunks':chunks,'anchors':anchors,'matches':[]})
-            seen.update((sha,norm_sha)); count+=1
+            # Hash-only dedup allowed the same publisher ID with changed text twice.
+            seen.update(x for x in (sha,norm_sha,row.get('id'),row.get('url')) if x); count+=1
             if count%16==0: print(json.dumps({'domain':dataset,'candidates':count}),flush=True)
             if count == quota: break
         if count != quota: raise RuntimeError(f'candidate pool too small: {dataset}={count}')
@@ -208,21 +235,12 @@ def prepare(args):
     old_files=set()
     for glob in ('cbf_ttt*/**/documents.jsonl','cbf_ttt*/**/scenarios.jsonl','cbf_ttt*/**/scenes.jsonl','cbf_ttt*/**/episodes.jsonl','cbf_ttt*/pilot*scenarios.jsonl'):
         old_files.update(p for p in Path(args.old_root).glob(glob) if out not in p.parents)
-    def texts(x):
-        if isinstance(x,dict):
-            for k,v in x.items():
-                if k in ('text','content_split') and isinstance(v,str): yield v
-                elif k in ('ids','context_ids') and isinstance(v,list) and v and isinstance(v[0],int): yield tok.decode(v)
-                elif k=='prefix' and isinstance(v,list):
-                    for chunk in v:
-                        if isinstance(chunk,list): yield tok.decode(chunk)
-                else: yield from texts(v)
-        elif isinstance(x,list):
-            for v in x: yield from texts(v)
     for path in sorted(old_files):
         for line in path.open():
-            for text in texts(json.loads(line)): scan(text,'old:'+str(path))
+            for text in context_texts(json.loads(line),tok): scan(text,'old:'+str(path))
     eligible={name:[p for p in pool if p['domain']==name and not p['matches']] for name in ('fineweb','longcrawl')}
+    if len({p['source_id'] for p in pool})!=len(pool):
+        raise RuntimeError('duplicate candidate source IDs')
     if len(eligible['fineweb'])<72 or len(eligible['longcrawl'])<12:
         raise RuntimeError('insufficient nonoverlapping sources; protocol unchanged')
     rng=random.Random(208)

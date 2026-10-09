@@ -1,0 +1,56 @@
+{
+  "audit_passed": true,
+  "summary_recomputed": true,
+  "construction_rechecked": true,
+  "started_at": "2026-10-09T15:18:53+08:00",
+  "completed_at": "2026-10-09T15:39:54+08:00",
+  "wall_seconds": 1261.0,
+  "code_commit": "f163f176e9f392412b3d0fc14ba7b2cf3c38cdcf",
+  "audit_script_sha256": "d7b18342f1b87bde0e058c0766f4c80597a860e194ce1c3904c8ef754cc550ed",
+  "design_sha256": "6698813bf852cf4332e12f66c0564812776e2e4dca8d2eda5b1d90b9d01a5242",
+  "data_sha256": "bf171476791db7e20511ff801ddfd73c9e90a3b3636ae00bbf283176ed1eb338",
+  "summary_sha256": "f8d280cf003678913393b38d67b6d84068b5744685f7b8d164485c0cf99aa8f4",
+  "rows_sha256": {
+    "rows_0.jsonl": "2d9fc871037fabb7ea22b8c4414e6aee33739ea1f2b78c668468485ed4483f9c",
+    "rows_1.jsonl": "ca7b9adf73c2bb9397fde02e0a8b56845c110be4826a0fe6b58684e1f432ec7c"
+  },
+  "contexts": 160,
+  "queries": 320,
+  "groups": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "confirm_scored": false,
+  "cells": {
+    "original10": 16,
+    "natural0": 16,
+    "natural_before2": 16,
+    "natural_early2": 16,
+    "natural_late2": 16,
+    "natural_late4": 16,
+    "natural_after8": 16,
+    "newline0": 16,
+    "newline_late2": 16,
+    "rebuilt_bridge": 16
+  },
+  "weights_sha256": "92cbda3397da2d40b6335cb14258dc7bef9767ff8156167fccac10177db4713a",
+  "bridge_checks": 64,
+  "bridge_max_error": 0.0,
+  "profile": {
+    "peak_allocated_gib": 14.770254611968994,
+    "peak_reserved_gib": 18.904296875,
+    "shard_seconds": [
+      1232.5760753210634,
+      1205.0330675449222
+    ],
+    "rollout_mean_seconds": 4.118167101952713,
+    "query_mean_seconds": 0.10339012493495829
+  },
+  "natural0_readability_passed": true
+}

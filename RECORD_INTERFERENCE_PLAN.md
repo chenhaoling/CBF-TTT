@@ -48,3 +48,8 @@ ROOT=/home/ctj/cbf_ttt_record_interference_20261009 bash scripts/run_cbf_record_
 ```
 
 环境变量SOURCE/READABILITY分别指向原memory_value和readability目录；MODEL为1B训练最终Qwen3-4B。ROOT必须新目录。两卡预计约20分钟仅参考上轮耗时；不以估计代替真实墙钟。构造/单元测试先通过，再双卡采集；任何失败保留标记和日志。
+
+
+## 完成记录（保持上述执行前设计不变）
+
+2026-10-09 15:39:54 +08:00完成160条/320查询，1261秒，64评分桥接误差0。natural0目标100%、锚点87.5%，最弱域锚点75%，通过本轮可读性门槛；原始目标31.25%，8/8来源组移除干扰后改善。newline0相同，但late2对占位敏感且负载曲线不单调。输入/来源/汇总独立审计通过，M始终为0，未评分confirm或启动V/F。详见[完成报告](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/record_interference/REPORT.md)。

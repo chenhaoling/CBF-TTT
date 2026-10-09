@@ -954,3 +954,22 @@ README 新增计划入口，多决策计划追加最终状态与后续链接。�
 新增 `tasks/cbf_record_interference.py` build/collect/summarize，复用背景来源校验、session/模型/评分/显存计时；加入64评分桥接、逐token槽外不变、双生与标签平衡、父缓存/权重不变检查、分域/分组配对差和错误颜色审计。新增 `tests/test_cbf_record_interference.py` 三项构造与失败拒绝测试；本地新旧6项通过（5.166秒）。新增 `scripts/run_cbf_record_interference.sh`，ROOT/SOURCE/READABILITY/PYTHON/MODEL/TOKENIZER参数与旧入口一致，严格失败标记、不覆盖旧输出。无新依赖，baseline模型/runtime不改。
 
 数量曲线由末段向前扩展，位置和键身份也未完全正交；报告将明确这些限制。natural0可读性门槛为target/anchor整体与每域均≥75%，不自动触发V/F或控制器训练。旧新来源排除器的design/chunks支持问题不影响本次有意复用dev，留待新来源实验前修复。
+
+固定槽位实验采集提交 `f163f17` 已同步hku-gpu2，tmux `cbf-record-interference-20261009`、ROOT `/home/ctj/cbf_ttt_record_interference_20261009`。服务器11项测试通过（5.124秒），真实tokenizer的suffix/行边界检查通过，160条/320查询设计已构建；原始数据SHA `bf171476791db7e20511ff801ddfd73c9e90a3b3636ae00bbf283176ed1eb338`。新增启动归档及design，仅含元数据；结果尚待完成。
+
+采集期间新增只读 `scripts/audit_cbf_record_interference.py`，准备在完成后按原来源重新读取背景并核验每个槽实际内容、两个桥接原输入、原dev身份、summary重算、权重/结果哈希及confirm未评分。另补完整汇总与篡改拒绝测试：合法分片哈希不允许掩盖NLL/logits不一致，4项本地测试通过（5.086秒）。此审计与测试变更不更改正在运行的采集代码或设计。
+
+两类桥接于采集中先行核验：32条上下文、64查询NLL最大误差0，八选一与全词表首token预测均一致。此处只核验桥接，不依据新增条件部分分数修改设计。
+
+同步修复后续新来源构造的已知遗漏（仅本地，尚未用于本次已冻结采集）：`tasks/build_cbf_memory_value.py` 新增 `old_manifests` 同时识别旧meta和新版design并排除自身输出；`excluded_values`识别sources/source_ids字符串列表；新增 `context_texts`支持当前chunks与旧prefix/ids/context_ids；候选去重加入publisher id/url并拒绝重复source_id。新增 `tests/test_cbf_source_exclusion.py` 两项回归测试，证明新旧格式均能排除且输出目录不自排除、chunks正确进入文本扫描。新旧13项本地测试通过（5.866秒），尚未执行新的全语料构造，不能称为完成下一轮数据准备。该修复不修改baseline、旧归档或当前运行条件。
+
+来源排除修复的临时副本在服务器真实归档上只读核验通过：识别46个manifest、713个排除值；原memory_value的84个选中来源，以及readability/record_interference各28个选中来源哈希全部进入排除集；当前6个chunks正确解码。归档 `record_interference/source_guard_audit.json`。没有构建新语料，未修改远程正在运行的模块。
+
+
+### 固定槽位记录干扰完成（2026-10-09）
+
+15:18:53至15:39:54 +08:00，1261秒；两卡各80条、共160轨迹/320查询。64桥接评分误差0，父缓存/权重不变；独立审计按原parquet重取背景、核验每槽实际token和桥接原输入，重算summary完全一致。最大allocated/reserved 14.770/18.904 GiB，两分片1232.576/1205.033秒；rollout均值4.118秒、query0.103秒，无OOM。
+
+原始10条干扰目标准确率31.25%，natural0与newline0均100%；锚点均87.5%。主移除对比+68.75个百分点，8/8来源组改善，两域目标都100%，最弱域锚点75%达到预登记门槛。natural末段0/2/4/8条目标100/75/62.5/68.75%，并非单调；不同2条位置锚点反应不同，且键身份未正交。newline_late2目标56.25%，说明效应量对占位方式敏感。目标100%是八选一，natural0全词表首token仅12.5%。结论限于输入读取干扰，M为空，不能称为遗忘算法有效。
+
+归档 `record_interference/{REPORT.md,summary.json,execution_audit.json,source_guard_audit.json,design.json,RUN_STATUS.md,.gitignore}`，同步计划和README完成入口。复现/审计命令、文件/配置项、与附件建议关系、风险和TODO见REPORT。当前旧confirm未评分，未启动新来源四场景Q、V/F、控制器或联合训练。后续需保留含干扰任务校准读取，冻结协议后用已修复排除器建立新来源，再按Q→V→F推进。
