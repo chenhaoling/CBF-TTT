@@ -1,0 +1,51 @@
+{
+  "audit_passed": true,
+  "summary_recomputed": true,
+  "independent_suffix_record_check": true,
+  "checkpoint_files_rehashed": true,
+  "records_checked_once_per_input": 1728,
+  "contexts_by_segment_tokens": {
+    "1024": 64,
+    "2048": 64,
+    "4096": 16
+  },
+  "removed_tokens_by_segment_tokens": {
+    "1024": 1179648,
+    "2048": 786432,
+    "4096": 0
+  },
+  "new_contexts": 288,
+  "new_queries": 1152,
+  "analysis_conditions": 384,
+  "analysis_queries": 1536,
+  "confirm_scored": false,
+  "M": 0,
+  "code_commit": "a792bfc382b35a3dbd4530dc3ecf2770ba3fc59d",
+  "started_at": "2026-10-10T00:11:23+08:00",
+  "completed_at": "2026-10-10T00:26:30+08:00",
+  "wall_seconds": 907.0,
+  "audit_script_sha256": "21b55e29da5b4c530b471bb94c6d9c473d194ab16398308d06286bc4f087e4db",
+  "summary_sha256": "0bc121d5d92e1314b8c364849b88e18a302f1f19eaa01e7a725666c8e2e21b60",
+  "data_sha256": "dfaab6b69f23468d99881fa2a620f3ae4a79de60146caf4521edc6ac1e04aa22",
+  "design_sha256": "8a651a0dcc3209856264ea4d9dd67a8f04c8184c81f00c58271ac3918c6cce93",
+  "reference_summary_sha256": "407d5b1cfca505f07e3bf30630417c06c4d270ef6ea166be9ba0bc5ef5857763",
+  "rows_sha256": {
+    "original_repo_0.jsonl": "a68b52f191e0210004ebda93282e263452a15472dd67889f6245cb27da4c80d6",
+    "original_repo_1.jsonl": "431eaa488a285a057d1c017d12fa4b2eb84753a0e0f1228d9fc76a0b3321fd2f",
+    "final_repo_0.jsonl": "cdbf6ea67e932b1372d9ead9533969191dd50da2564b7325ebb109b5b65419b7",
+    "final_repo_1.jsonl": "367aff8b231b1106eb62fbc786c0a085c72c72f04df05ed8befd4502654c564e"
+  },
+  "bridges": {
+    "original_repo": {
+      "queries": 64,
+      "max_choice_nll_error": 0.0,
+      "predictions_identical": true
+    },
+    "final_repo": {
+      "queries": 64,
+      "max_choice_nll_error": 0.0,
+      "predictions_identical": true
+    }
+  },
+  "terminal_status": "stopped_by_length_Q"
+}
