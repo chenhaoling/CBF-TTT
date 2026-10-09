@@ -11,3 +11,5 @@
 - M=0、完整KV，原权重不变；没有新来源、confirm、M写入/V/F或训练。
 - ROOT `/home/ctj/cbf_ttt_length_readout_20261010`；tmux `cbf-length-readout-20261010` 已结束。
 - [完整报告与复现](REPORT.md)；[冻结计划](../../../../LENGTH_READOUT_PLAN.md)。
+
+归档同步说明：正式结果提交7f155aa已推送GitHub；最后同步服务器代码目录时SSH连续中断/超时，报告提交的服务器快进状态未确认。远程原始结果和独立审计已完成，本地归档完整；SSH恢复后执行git pull --ff-only origin main即可同步报告，不需重跑。

@@ -1074,3 +1074,5 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 终态stopped_by_length_Q，按预登记停止该版本标签扩容，不追加长度/格式，不删场景，不进入新来源Q、M写入/V/F、控制器或端到端训练。原始12K通过提供了可读正对照，建议下一步冻结该条件，比较中间checkpoint并加原生TTT路径诊断，核验训练/导出及主干变化和对快记忆的依赖；尚未执行。本轮M=0差异不能直接当作原生TTT整体退化或遗忘机制有效性结论。
 
 新增length_readout/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json,.gitignore}正式归档，更新LENGTH_READOUT_PLAN/README/本日志。报告包含完整总体与分域/源组配对表、NLL/首token、资源、构造/参数/函数/文件说明、复现及审计命令、与附件建议关系、baseline兼容性和风险/TODO。无新依赖，baseline模型/runtime/训练配置未改，原始文本/tokens/逐条评分/权重未上传。
+
+正式结果归档提交7f155aa已推送GitHub。最后向hku-gpu2快进同步报告时，复用连接两次中断，随后使用同一SSH配置的新连接也在banner交换阶段超时；因此未确认服务器代码目录更新到报告提交。GPU实验、远程summary/独立审计及本地下载哈希验证均在此前完成，不受影响。下次SSH恢复后仅需在服务器仓库执行git pull --ff-only origin main，无需重跑实验。
