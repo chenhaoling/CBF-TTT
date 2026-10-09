@@ -973,3 +973,11 @@ README 新增计划入口，多决策计划追加最终状态与后续链接。�
 原始10条干扰目标准确率31.25%，natural0与newline0均100%；锚点均87.5%。主移除对比+68.75个百分点，8/8来源组改善，两域目标都100%，最弱域锚点75%达到预登记门槛。natural末段0/2/4/8条目标100/75/62.5/68.75%，并非单调；不同2条位置锚点反应不同，且键身份未正交。newline_late2目标56.25%，说明效应量对占位方式敏感。目标100%是八选一，natural0全词表首token仅12.5%。结论限于输入读取干扰，M为空，不能称为遗忘算法有效。
 
 归档 `record_interference/{REPORT.md,summary.json,execution_audit.json,source_guard_audit.json,design.json,RUN_STATUS.md,.gitignore}`，同步计划和README完成入口。复现/审计命令、文件/配置项、与附件建议关系、风险和TODO见REPORT。当前旧confirm未评分，未启动新来源四场景Q、V/F、控制器或联合训练。后续需保留含干扰任务校准读取，冻结协议后用已修复排除器建立新来源，再按Q→V→F推进。
+
+### 同键值位置对照（2026-10-09，执行前）
+
+新增 `MATCHED_POSITION_PLAN.md`：两组原第3/6块干扰键值，各固定两条及内部顺序，分别移到第1/3/6块；自然占位、原QA、目标/锚点第2块和总长度不变。只复用原dev stable，none加六条件共112轨迹/224查询；三个旧条件精确桥接96评分。每donor内p6−p1/p3及两donor等权配对为主，身份×位置交互单列；不把两donor当独立来源，不自动进入四场景Q/V/F。
+
+新增 `tasks/cbf_matched_position.py` build/collect/summarize，直接搬运donor正文token，长度或行尾token不一致则拒绝；验证固定槽外不变、事实块不变、双生/八类平衡、桥接及权重/缓存审计。旧 `tasks/cbf_record_interference.py` collector只添加可选validator/bridge_cells，默认行为保持原实验路径；模型/runtime不改。新增 `scripts/run_cbf_matched_position.sh`，ROOT/REFERENCE/PYTHON/MODEL可配；新增四项构造、错误输入和完整汇总/篡改拒绝测试。新旧10项本地测试通过（5.888秒），无新依赖。
+
+本轮结论限制为自然占位下相同身份的输入位置干扰；移动仍改变周围上下文与相对距离，不能把它解释为M遗忘收益。后续四场景进入要求和已有QA弱项明确记入计划。采集尚未启动，原始文本/token/逐条分数不上传GitHub。

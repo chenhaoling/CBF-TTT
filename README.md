@@ -324,3 +324,5 @@ Readability calibration is [complete](experiments/cbf_ttt/qwen3_4b_final_1b_2026
 The next [fixed-slot record interference experiment](RECORD_INTERFERENCE_PLAN.md) keeps the original QA, target facts and background prefixes fixed while varying distractor slots, with natural-token and newline controls and two exact reproduction bridges.
 
 The [completed record interference report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/record_interference/REPORT.md) documents 160 contexts / 320 queries: removing distractor records raised target eight-choice accuracy from 31.25% to 100% under both fillers, with exact bridges and fixed surrounding tokens. Position/load effects were non-monotonic and filler-sensitive. This is evidence of input-reading interference, not fast-memory forgetting efficacy.
+
+The next [identity-matched position experiment](MATCHED_POSITION_PLAN.md) moves exactly the same two distracting records across three positions, using two donor pairs, fixed surrounding slots and three exact bridges to the prior run.

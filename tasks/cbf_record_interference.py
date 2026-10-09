@@ -140,14 +140,14 @@ def build(args):
     print(json.dumps({k:v for k,v in manifest.items() if k!='context_hashes'}))
 
 
-def collect(args):
+def collect(args, validator=validate, bridge_cells=('original10','rebuilt_bridge')):
     import torch
     from tasks.cbf_ttt import _load_model
     from tasks.cbf_memory_value import build_session,score_query,state_digest,weight_digest
     from tasks.cbf_selective import measure
-    data = Path(args.data);rows = [json.loads(x) for x in data.read_text().splitlines()];validate(rows)
+    data = Path(args.data);rows = [json.loads(x) for x in data.read_text().splitlines()];validator(rows)
     rows = [r for r in rows if (r['group']//2+r['group']%2)%2==args.shard]
-    rows.sort(key=lambda r:(r['cell'] not in ('original10','rebuilt_bridge'),r['group'],r['id'],r['cell']))
+    rows.sort(key=lambda r:(r['cell'] not in bridge_cells,r['group'],r['id'],r['cell']))
     out = Path(args.output)
     if out.exists():raise FileExistsError(out)
     torch.manual_seed(211);torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
