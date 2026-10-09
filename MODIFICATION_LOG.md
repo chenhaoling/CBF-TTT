@@ -883,3 +883,31 @@ v2（源码 `d4659c9`）于 2026-10-08 15:06:57–15:08:31 完成，94 秒；5 �
 多决策实验于 2026-10-08 15:36:48 +08:00 启动，代码 `2a57ac1`，tmux `cbf-multidecision-20261008`，远程目录 `/home/ctj/cbf_ttt_multidecision_20261008`。19 项测试通过，固定候选构建完成，smoke 复现与资源门槛通过；每轨迹平均 3.880 秒（含桥接和全程对照）、最大 allocated 22.182 GiB，估计双卡完整批次约49.5分钟（含25%余量）。双卡采集已启动，尚无最终结果；不将启动视为实验完成。
 
 新增启动归档 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/multidecision_forgetting/{RUN_STATUS.md,design.json,estimate.json,.gitignore}`，仅含固定动作设计、来源哈希、资源预算和状态，不包含原始文本/token/逐场景标签。最终16场景齐全后脚本自动审计聚合，后续需归档完整报告；图片第三条端到端联合训练仍未执行。
+
+### 多决策遗忘实验完成（2026-10-08）
+
+远程完成标记 16:15:42 +08:00，实际墙钟 38 分 54 秒；16/16 场景、4 来源组齐全，两分片骨干未变，64 项参考检查误差均为 0。新计分轨迹 1176 条，另有 48 条复现桥接；平均新计分轨迹 3.594 秒，最大 allocated/reserved 22.183/26.189 GiB。
+
+单/双/三点全局最优 NLL 为 13.703427/5.997364/3.378568；加入局部候选仍为 3.378568。每步清空/不写入为 2.084365/2.025309。预设时间维度改善门槛通过，选择性遗忘超越强对照门槛未通过。此为已观察数据上的 oracle 诊断，不能宣称控制器泛化有效或否定完整局部空间；图片第三条联合训练仍未执行。
+
+归档目录 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/multidecision_forgetting` 新增最终 `REPORT.md`、聚合 `summary.json`，更新 `RUN_STATUS.md`。未修改 baseline 或新增依赖，未启动后续实验。
+
+### 快速记忆价值验证计划（2026-10-08，尚未执行）
+
+新增 `MEMORY_VALUE_VALIDATION_PLAN.md`。核对多决策、标题 writer 和配对事实历史报告后，明确不能只凭 NLL 下降声称内容记忆有效。固定 V 内容价值、F 遗忘取舍、S 局部动作空间三个问题；24 个新来源组（dev 8 / confirm 16），FineWeb-Edu 和 LongCrawl64 各半，四场景乘双生版本共 192 会话。设计四全程策略、两 KV 条件、self/zero/twin 读取干预；按来源组确认，避免将答案类型偏移当作事实记忆。
+
+计划包含来源排除和 1B 重叠审计、标签与真值、可读性门槛、dev 选型和 confirm 封存、准确率天花板处理、资源上限、逐轨迹耗时显存、待实现文件和 CLI、失败分支及联合训练梯度接口风险。V/F 最多 768 条完整六块轨迹和 7680 次单 token 查询；S 另计，ETA 需要新 smoke 实测。
+
+README 新增计划入口，多决策计划追加最终状态与后续链接。未更改 baseline、模型或依赖，未新增可运行 collector，未启动新 GPU 实验；本次交付是实验计划，不能与已完成的多决策结果混淆。
+
+### 记忆价值验证实现与执行准备（2026-10-09）
+
+新增 `tasks/build_cbf_memory_value.py`、`tasks/cbf_memory_value.py`、`tests/test_cbf_memory_value.py`、`scripts/run_cbf_memory_value.sh`。构造器固定24组、四场景、双生版本和六块4096-token输入；两个来源内标签各自平衡；开发8组、确认16组。双生只差一个事实token，真值从最后一条同键记录审计。来源候选从原始parquet行组末尾倒序读取，排除旧manifest来源及原始上下文/1B训练文本长锚点匹配。只按结构筛选，不使用模型分数。
+
+下载FineWeb-Edu固定revision `87f09149ef4734204d70ed1d046ddc9ca3f2b8f9` 的 `sample/10BT/013_00000.parquet`；复用原LongCrawl64分片。FineWeb末尾行组只有101行，因此按预先固定的行组倒序继续选择候选，不限制在最后一个行组。新增可选 `requirements-memory-value.txt` 的 `pyahocorasick==2.1.0`，用于CPU单遍多锚点扫描；baseline依赖不变。
+
+评测复用CBFSession，四策略从起点推进，两KV条件下独立克隆self/zero/twin记忆，双生完整缓存转CPU以限制显存，查询时只更换M。单次logits计算NLL/八选一/greedy；父缓存完整字节哈希、模型参数版本及权重哈希核验。每条轨迹和评分都记录耗时/allocated/reserved；确认阶段强制读取通过dev的冻结选择。
+
+入口先跑完整dev可读性Q，再做两个dev组的smoke和重复检查，预算通过后跑完整dev。没有KV条件通过V则confirm保持未评分；通过才开启对应条件。S为另外计量的条件式后续，当前脚本不冒称已执行S。Q失败是任务验证未通过，不能当作算法失效。为简化完整性审计，smoke不复用进正式dev，额外计算单列，资源预测按剩余12组/卡上限估计。
+
+本地4项纯协议测试通过；远程新旧共21项测试通过，包含真实tiny Qwen缓存隔离与zero/none一致。此时尚无本轮4B效果结论。待采集完成后另行记录阶段结果，模型/runtime及原训练配置未修改。
