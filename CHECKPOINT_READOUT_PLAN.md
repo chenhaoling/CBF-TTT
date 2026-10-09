@@ -1,0 +1,37 @@
+# 原始Qwen3-4B与最终1B checkpoint读取能力对照 v1
+
+## 执行前冻结（2026-10-09）
+
+目的：区分当前任务的共同读取瓶颈与最终checkpoint相对原始模型的变化。只做完整KV、M=0推理，不产生更新、不训练、不构造新来源，不评分旧confirm。
+
+固定数据为disjoint_readout_v1的80上下文/288查询，SHA256 `6740c33875d20cb42f53865daedff1dee71dda53dbcda590e13e6fda447cafe4`。64clean轨迹覆盖已观察dev0–7、两域、四场景、两个双生版本和两个固定格式；16原输入桥接轨迹保留。不得改模板、颜色、来源、顺序、候选或75%门槛。两模型均使用相同token ids，不使用chat模板或thinking开关。
+
+## 主对照与实现核验
+
+1. 原始 `/home/ctj/models/Qwen3-4B` 与最终 `/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt` 均用仓库Qwen3类、关闭TTT、BF16、SDPA、TF32关闭、冻结权重，分别评分全部80上下文/288查询；每张5090各处理40条/模型。
+2. 从最终checkpoint加载普通主干时只允许明确列出的ttt_conv/ttt_proj参数未使用，不允许任何主干参数缺失、额外未知参数或尺寸不匹配。保存配置、实际类、加载信息、源文件及实际权重哈希。TTT参数不会用于本轮M=0前向；不更改原checkpoint或baseline类。
+3. 最终模型的288查询全部与上轮CBF M=0逐条核对：8候选NLL最大误差≤1e-5，八选一和全词表首token预测完全一致。该门槛失败即停止解释模型差异，不悄悄放宽。
+4. 原始模型另以Transformers原生Qwen3类评分固定原桥接组0、2（两域四场景16上下文/32查询），与仓库路径逐条核对同一数值门槛；两路径实际普通主干权重哈希必须相同。该有限子样本校验不等于全输入形式等价证明。
+5. 推理均分六块4096token建立完整KV；每条查询独立深拷贝缓存，检查父缓存和权重不变。每轨迹/查询记录时间和峰值allocated/reserved，完成哈希核验后才能汇总。加载失败/OOM/非有限值/路径核验失败均保留失败记录。
+
+## 预定分析与决策
+
+主表为clean64中每模型×格式×场景×问题正确率/NLL/全词表首token率，以及两域对应表。按源组配对报告final−original，双生/格式不当作独立重复。每模型每格式仍要求16个域×场景×问题格全部≥75%，仅判断可读性，不选择更容易场景或把八选一当自由生成。
+
+- 原始通过、最终失败：提示checkpoint相关差异；尚不能将原因直接归为1B训练（仍需检查训练配置、导出和权重变化）。
+- 两者失败：共同任务/读出瓶颈仍存在；可报告局部相对差异，不能据此判定训练无影响或遗忘机制无效。
+- 最终也通过：必须先解释与已审计旧结果不一致，否则不进入后续阶段。
+- 路径/加载核验失败：结论标为实现不可比，先修复，不输出训练损伤结论。
+
+无论结果如何，本轮不自动启动新来源Q、M写入、V/F、标签扩大或联合训练。附件的局部遗忘/多分支/端到端建议仍以可靠可测记忆为前提。本轮背景来自旧dev，不是独立确认集；四色循环干扰、人工绑定、无chat模板及有限8组都限制外推。
+
+## 文件和复现
+
+新增 `tasks/cbf_checkpoint_readout.py`（独立普通session、严格加载、采集/校验/配对汇总）、`scripts/run_cbf_checkpoint_readout.sh`、必要测试；不修改baseline和旧实验模块。运行参数ROOT/SOURCE/PYTHON/ORIGINAL/FINAL可通过环境变量传入；SOURCE固定指向已完成disjoint归档并验证哈希。公开元数据/聚合/报告，原始tokens/逐条评分/权重留远程。
+
+```bash
+cd /home/ctj/cbf_ttt_joint_exp_20260927
+ROOT=/home/ctj/cbf_ttt_checkpoint_readout_20261009 bash scripts/run_cbf_checkpoint_readout.sh
+```
+
+双卡预计约25分钟，最终按started_at/completed_at实测记录。脚本拒绝覆盖已有ROOT。

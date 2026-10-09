@@ -1018,3 +1018,11 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 原QA四场景目标准确率0/100/25/18.75%，binding为25/100/25/43.75%。原QA失败14/16门槛格，binding失败12/16，最弱均0%，无格式被选中，终态 `stopped_by_disjoint_Q`。按事前规则停止新来源/M写入/V/F/控制器或联合训练。M=0诊断不能证明或否定遗忘机制；四色干扰分布也改变，不能把旧结果差异全部归为颜色重合。
 
 新增归档 `disjoint_readout/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json,.gitignore}`，更新DISJOINT_READOUT_PLAN与README完成入口。REPORT包含目标/假设、逐文件说明、参数、总体及分域准确率/NLL/首token、资源、完整复现/审计命令、附件对应、baseline兼容性与限制。原始语料/token/逐条评分和权重留远程。下一项TODO为冻结任务上的原始Qwen3-4B与最终1B checkpoint能力对照，并核对可比推理路径；本轮没有启动该对照。附件局部遗忘/多分支/端到端联合训练仍需后续Q→V→F验证。
+
+### 原始4B与最终1B checkpoint读取对照（2026-10-09，执行前）
+
+按用户下一步要求，新增CHECKPOINT_READOUT_PLAN.md冻结同一disjoint数据（80上下文/288查询）及两种格式。两个checkpoint共用仓库普通Qwen3类（TTT关闭、M=0、完整KV、BF16/SDPA、TF32关闭），最终checkpoint只允许排除明确的ttt_conv/ttt_proj参数。最终模型全部288查询须复现旧CBF M=0候选NLL≤1e-5与相同预测；原始模型另以Transformers原生类复现固定16桥接上下文/32查询并核对实际主干权重哈希。总176上下文/608查询，不进入新来源或V/F。
+
+新增tasks/cbf_checkpoint_readout.py（PlainSession、严格参数加载、逐查询缓存隔离、collect、validate_scores、compare_scores、summarize及源组配对差）、scripts/run_cbf_checkpoint_readout.sh（双GPU三个固定分支，ROOT/SOURCE/PYTHON/ORIGINAL/FINAL可配，拒绝覆盖），tests/test_cbf_checkpoint_readout.py（三项加载/篡改/全候选路径检查测试）。不更改baseline和旧实验模块，无新依赖。新增与disjoint共7项本地测试通过（0.501秒），shell语法/diff检查通过；本地系统Python缺少torch，完整12项中的缓存测试不能在本地执行，将在远程现有环境作为启动前门槛执行，不把缺依赖计为通过。
+
+当前仅完成方案及代码，尚无本轮模型对照分数。结论将按每模型每格式16格统一门槛及final−original源组配对汇总；八选一/全词表首token不当自由生成准确率。原始权重与训练后checkpoint的任何差异仍需区分训练、加载与导出原因，有限dev不能证明普适训练损伤。
