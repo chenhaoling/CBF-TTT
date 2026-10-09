@@ -1,0 +1,38 @@
+{
+  "audit_passed": true,
+  "summary_recomputed": true,
+  "source_construction_audit_verified": true,
+  "source_checkpoint_hashes_rechecked": true,
+  "contexts": 176,
+  "queries": 608,
+  "confirm_scored": false,
+  "terminal_status": "completed_checkpoint_diagnostic",
+  "code_commit": "87866f698654ca6b50b1f8f6414630e51a715d1c",
+  "started_at": "2026-10-09T23:27:34+08:00",
+  "completed_at": "2026-10-09T23:52:12+08:00",
+  "wall_seconds": 1478.0,
+  "summary_sha256": "407d5b1cfca505f07e3bf30630417c06c4d270ef6ea166be9ba0bc5ef5857763",
+  "audit_script_sha256": "6a4b77257ce4310371cd022692c0bc72383cc41a6f7027af42f2ba6398439b53",
+  "data_sha256": "6740c33875d20cb42f53865daedff1dee71dda53dbcda590e13e6fda447cafe4",
+  "source_audit_sha256": "d8ab34c3eb3b26cf647dcedd5a3144fb432a013288822a8f65f198c1fba41bd2",
+  "rows_sha256": {
+    "original_repo_0.jsonl": "48f32646675b20819274db727bc2b9fe075d287611de9d1090a86abe4cfaacff",
+    "original_repo_1.jsonl": "2b6de2b2e1e4a732a2ab36247a1a29ba78400c0c0319a8ad386df52b49b0d36c",
+    "final_repo_0.jsonl": "8ebc5334677746e7919dab14afd51381850537254b3c61d672d9c090ddfe4f52",
+    "final_repo_1.jsonl": "784dd3295ac24e9ecf35d34e9ce13885fb457b64f92e7b4defff6be604aae511",
+    "original_native_0.jsonl": "37059cb9f62425b80589501eaad0f8c26832d2428a2e0ad0c2811b5b11b23eac",
+    "original_native_1.jsonl": "0573e9d02b0284138438744ca7e65f673f75471488e5f95ec9644817ae611c74"
+  },
+  "bridges": {
+    "final_vs_previous_cbf": {
+      "queries": 288,
+      "max_choice_nll_error": 0.0,
+      "predictions_identical": true
+    },
+    "original_native_vs_repo": {
+      "queries": 32,
+      "max_choice_nll_error": 0.0,
+      "predictions_identical": true
+    }
+  }
+}
