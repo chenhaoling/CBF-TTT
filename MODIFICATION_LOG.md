@@ -931,3 +931,18 @@ README 新增计划入口，多决策计划追加最终状态与后续链接。�
 新增 `READABILITY_CALIBRATION_PLAN.md`，固定3种时距（短2块、长6块早事实、长6块近事实）×单/双键×QA/cloze格式，另加双键记录槽位交换及原Q路径桥接。仅使用已经观察的8个dev源组、16条stable双生；不评分旧confirm，不训练或写入M。背景从原始parquet按行号重取并验证SHA，不重复filler。新的双键场景只保留目标和锚点两条人工记录，其他块恢复自然背景，因此不能把它的成绩冒充原始四场景均通过。
 
 新增 `tasks/cbf_readability.py`、`tests/test_cbf_readability.py`、`scripts/run_cbf_readability.sh`。128条上下文轨迹/384个查询，查询格式共享同一前缀并独立克隆，父缓存完整哈希和模型权重不变；原stable桥接32个NLL要求误差≤1e-5且预测一致。格式选择只允许long_far/dual默认顺序，目标/锚点在整体和两域均≥75%，否则不推荐完整长程双键协议。新CPU构造测试3项通过，无新依赖，旧模型/runtime不改。
+
+可读性校准采集提交 `c07d98c` 已同步服务器并在 `cbf-readability-20261009` tmux 启动，ROOT=`/home/ctj/cbf_ttt_readability_20261009`。正式入口8项测试通过（2.408秒）；128条上下文/384查询构建通过，来源只含原dev0–7，旧confirm未评分。14:46:50两分片各完成5/64条。新增启动归档 `readability_calibration/RUN_STATUS.md`，完整结果待审计。
+
+采集中独立核验原路径桥接：16条原stable会话、32个查询NLL最大误差0，八选一与greedy预测逐条一致。该检查只读原Q与已生成桥接结果，不改变采集代码或根据新条件成绩选型。固定设计与上下文哈希已归档，最终校准表仍待全部128条齐全。
+
+
+### 可读性校准完成与审计（2026-10-09）
+
+采集提交 `c07d98c`，14:45:09至14:58:49 +08:00，共820秒；128条轨迹/384查询齐全，8项测试通过，原Q的32桥接评分误差0。新增只读 `scripts/audit_cbf_readability.py`：验证原dev stable来源和桥接输入、文件/上下文哈希、分片归属，重算summary完全一致，检查模型/父缓存审计及confirm未评分，汇总逐条件耗时。最大allocated/reserved为14.770/18.822 GiB；两分片795.830/774.890秒。无OOM，未训练、M为空。
+
+重建自然背景、仅保留目标/锚点记录后QA目标准确率各布局100%，原stable桥接31.25%；移除额外人工记录同时恢复背景，不能独立归因于格式或干扰数量。远事实cloze目标/锚点100%，按预登记窄门槛选中cloze；短程/长程近事实双键cloze目标0%，不能据此推广到四场景或进入V/F。完整分域、分组、NLL、首token和资源表已归档。候选八选一与自由生成不能混称。
+
+新增归档 `readability_calibration/{REPORT.md,summary.json,execution_audit.json}`，更新RUN_STATUS、README、计划完成记录；raw文本/token/逐条评分保留远程。本轮baseline和训练配置不变、无新依赖。附件第一/二条遗忘建议没有新增效应证据，第三条联合训练未启动。
+
+后续TODO：固定QA分离人工记录负载与背景变化；所有四场景通过统一Q后再做新来源V/F。新来源构造前需要修复旧来源排除器目前只识别 `*.meta.json` 和 `ids/context_ids/prefix` 的局限，补充 `design.json/chunks` 并验证来源ID唯一，避免遗漏本轮/上轮新格式来源。此问题不影响本次有意复用dev的校准。没有因单个容易条件通过而自动扩大实验或训练控制器。

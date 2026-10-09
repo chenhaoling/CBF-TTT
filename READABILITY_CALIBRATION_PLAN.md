@@ -50,4 +50,9 @@ cd /home/ctj/cbf_ttt_joint_exp_20260927
 ROOT=/home/ctj/cbf_ttt_readability_20261009 bash scripts/run_cbf_readability.sh
 ```
 
-此文件为执行前设计，结果尚未产生。
+以上为执行前固定设计。
+
+
+## 完成记录（不更改上述预登记规则）
+
+2026-10-09 14:58:49 +08:00完成128条/384查询，820秒；原桥接32评分误差0。远事实默认双键按原规则选中cloze，但近事实/短程双键cloze目标均0%，不能推广到完整四场景。重建背景QA目标各条件100%，原桥接31.25%；人工记录负载和恢复背景一起变化，不能当作纯格式收益。独立重算审计通过，旧confirm未评分，V/F尚未启动。见[完成报告](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/readability_calibration/REPORT.md)。
