@@ -1112,3 +1112,11 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增实验REPORT.md与.gitignore，计划含图片对应、训练目标/通路、数据规模、复现命令、下一步、baseline兼容性与风险。无旧模型/runtime/config更改、无新依赖。当前仅语义文本原型，未自然背景接入/分词/装箱/训练/动作标签，不声称已训练控制器或方法有效。合成规则容易产生显式指令捷径，后续需自然来源修订/弱提示与真实基准；同世界变体不能算独立样本。建议接下来以100步上限的writer训练验证学习通路，实际GPU方案需在训练适配器完成后固定。
 
 构造代码2ccd5a3已推送GitHub并同步hku-gpu2。服务器CPU复现五项测试通过（0.123秒），在/home/ctj/cbf_ttt_event_curriculum_v1生成同一原型；cmp确认远程manifest与本地归档逐字节一致（其中含全部12份JSONL的SHA256），未启动GPU训练。补明确阶段A仅使用warmup/retain，撤销/reset留到阶段B，避免writer学习与策略学习混淆。
+
+### 事件语料writer首次100步训练（执行前）
+
+用户授权下一步训练。新增EVENT_WRITER_TRAINING_PLAN.md：原始Qwen3-4B骨干冻结、原生7层conv/proj FP32训练，单块4096+fresh-KV答案读取、100步AdamW lr1e-7/clip1/无weight decay、固定0/25/50/100评估。GPU0训练GPU1评估，保留空/错配/fullKV和anchor-twin对照，完整答案EM与全词表NLL，未评分test。阶段A仅warmup，不混入撤销/reset或训练控制器。
+
+新增tasks/pack_cbf_event_warmup.py：train64/dev16样本分词，完整事实后缀+唯一程序生成维修背景装4096块；明确纯合成背景，未接入FineWeb/LongCrawl。联合分词验证答案边界，context/group/twin标识和固定异组错配，manifest哈希；test文件不读取。新增cbf_ttt/event_writer.py：严格加载原始骨干只允许14个新增writer缺失，零conv+正常随机proj；复用cbf_forward_mlp可微写入，freshcache不detach memory，答案/EOS对齐；骨干hash核验。新增tasks/train_cbf_event_writer.py：100步梯度/参数/FP32状态审计、原子checkpoint、异步评估、生成EM、分组对照、固定终点汇总。新增scripts/run_cbf_event_writer.sh：测试/装箱、双进程不同GPU、失败标记与完整终态。
+
+新增tests/test_cbf_event_writer.py：装箱/答案边界/未读test、conv与proj真实梯度、原生非零delta和freshcache读取一致、答案位置/EOS；与事件语料测试本地9项中6通过3无torch跳过（0.486秒）。全部torch测试将在服务器运行后才启动。原baseline/runtime/配置未修改，无新增依赖。当前仅单块可微writer训练，不声称多次控制决策联合训练已完成；数值/范数停止线、dev判据及局限写入计划。
