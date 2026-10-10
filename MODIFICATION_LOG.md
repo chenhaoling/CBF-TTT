@@ -1266,3 +1266,5 @@ bash scripts/run_cbf_dynamic_memory.sh
 提交`e7f7ff6`的双臂8/2/2 smoke完成训练、三点评测、汇总和独立审计；随后正式臂在checkpoint 0评测、尚未训练时OOM。原因是初版评测器把train probe与16个dev世界所需的约50份七层dense fast memory同时保留，GPU0只余44–61 MiB并因8.27 GiB allocator碎片无法再申请76 MiB。该失败属于评测实现的规模错误，不是模型/方法结果；失败目录保留。
 
 修正后按来源世界流式评测：每次只构造当前两个twin context与相邻wrong donor的两个context，共4份memory；完成该世界8题全部策略后释放并清理CUDA cache。问题、策略、checkpoint、训练预算和预登记门槛均不变。新增单测固定每世界评测闭包恰为4 contexts；安全tripwire统计显式detach，去除无害的requires-grad转float警告。正式实验从已审计的相同数据和smoke继续，不重跑或选择smoke结果。
+
+新增`scripts/resume_cbf_dynamic_memory_formal.sh`作为可复现恢复入口：先要求smoke独立审计通过，把首次OOM的`formal`非破坏性移动为`formal_failed_e7f7ff6`，记录修正提交，重跑4项新测试，再用完全相同的数据、初始化、训练预算、评测矩阵和门槛启动正式双臂。该恢复只改变评测memory的驻留生命周期。
