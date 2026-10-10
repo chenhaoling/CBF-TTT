@@ -323,5 +323,13 @@
       }
     }
   },
-  "adaptive_forgetting_gate": true
+  "adaptive_forgetting_gate": true,
+  "stage_gate": {
+    "controller_memory_content_passes": 0,
+    "required_controller_memory_content_passes": 2,
+    "memory_content_gate": false,
+    "adaptive_forgetting_gate": true,
+    "passed": false,
+    "interpretation": "The adaptive comparison is interpretable only after the fast-memory content gate passes."
+  }
 }

@@ -18,7 +18,7 @@
     "controller_seed43.jsonl": "840dae2344b614e393cbfaf9c2ebd7e57b241f176ed4b3cc5cd2b72f9d8591cb",
     "controller_seed44.jsonl": "7d36af2784dc1269139adb1ce8814379b8f6bde597a74516de1785a0f6b95f48"
   },
-  "summary_sha256": "052300add61c580f304fe66d2b18d8d2876b1a3074d122edeb4dcb7e3796acb2",
+  "summary_sha256": "0460b888f5abc1a6b621a639a24030b13d3bffa99fc305e77b0fc3a738324bfb",
   "recomputed_mean_nll": {
     "fixed_0": {
       "full_context": 0.3733287859530676,
@@ -60,6 +60,8 @@
   "reciprocal_wrong_memory_pairs": true,
   "finite_losses": true,
   "nonempty_fast_memory": true,
+  "controller_memory_content_passes": 0,
+  "stage_gate_recomputed": false,
   "reference_full_context_reproduction": {
     "path": "/home/ctj/cbf_ttt_1b_labels/controller_study_20260927/test_all_rollouts.jsonl",
     "sha256": "d7f41127ce4c3910fea8fb9b1259eb3460cfd318ec20bea5cf25a8c532e87583",
