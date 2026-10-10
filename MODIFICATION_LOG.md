@@ -1184,3 +1184,27 @@ CPU修正的单项服务器测试通过（1.339秒）。64fc0c7已推送；先cm
 训练计时总241.927/88.344/229.789秒，峰值allocated10.188/11.987/16.266GiB。新增scripts/summarize_cbf_fact_resources.py只读聚合训练/评估/干预资源并保存来源hash、new_model_calls=0；通过临时脚本在服务器执行，resources.json已归档。每臂8次context干预合计39.634/37.927/39.108秒，峰值allocated12.851/12.849/12.848GiB；context时间包含分支，不能重复相加。联合复用写入、优化步更少，非严格FLOPs配平。资源JSON源hash与审计/summary本地核对一致。
 
 归档fact_interference_v1/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json,resources.json}，更新FACT_INTERFERENCE_PLAN/TRAINING_CORPUS_PLAN/README/本日志，包含目标假设、全部指标/分组/矩阵例子、文件/函数/配置/复现命令、附件映射、baseline兼容性、已完成/风险/TODO。实验结束两卡空闲（139/18MiB、0%），原始骨干不变，无新增依赖或baseline/runtime改动。后续建议同查询动态重赋值及更多独立世界泛化训练，保留multi-query和负对照；未自动启动后续或控制器。
+# 2026-10-10：仅训练遗忘策略的严格复现（执行中）
+
+## 目标与实验假设
+
+论文主线暂时固定 `g=1`，只验证 session 快记忆遗忘。旧控制器相对持续累积有收益，但在旧 test 上没有超过固定完全清除；本轮增加三个随机种子的统一 rollout，以及清空 KV 后的 Correct/Wrong/Empty fast-memory 对照，分别检验“快记忆有内容”和“学习策略优于最佳固定策略”。执行前协议及停止条件见 [`FORGETTING_ONLY_VALIDATION_PLAN.md`](FORGETTING_ONLY_VALIDATION_PLAN.md)。
+
+## 新增文件
+
+| 文件 | 内容 | baseline 影响 |
+|---|---|---|
+| `tasks/cbf_forgetting_only_validation.py` | 确定性跨来源 wrong-memory 配对、四种记忆条件采集、按历史查询汇总、来源组 bootstrap 和两级门槛 | 独立任务入口，无默认路径改动 |
+| `scripts/run_cbf_forgetting_only_validation.sh` | GPU 空闲等待、测试、双卡 smoke、六策略正式采集、汇总和审计 | 独立脚本，不修改训练配置 |
+| `scripts/audit_cbf_forgetting_only_validation.py` | 独立核验 300 场景覆盖、donor 对称性、有限损失、非空记忆、汇总均值和旧 rollout 逐场景复现 | 只读审计 |
+| `tests/test_cbf_forgetting_only_validation.py` | CPU 检查配对确定性及 historical-only 内容门槛 | 测试辅助 |
+| `FORGETTING_ONLY_VALIDATION_PLAN.md` | 研究口径、固定资产、阈值、停止条件与运行命令 | 文档 |
+
+## 实现边界
+
+- `correct_memory/wrong_memory/empty_memory` 都从空 attention KV 开始，避免把上下文 KV 读取误算为快记忆内容。
+- 内容门槛只使用 `historical` 查询；`current_or_new` 仍完整记录，因为旧 short-tail 协议中的新事实可能未跨过 TTT 写入边界。
+- wrong memory 来自同 regime、相邻的另一来源组，映射互为 donor；六种策略使用同一配对。
+- 三个控制器固定为旧 500-source-group 训练的 seed 42/43/44 checkpoint，不读取本轮 test 重新选种子。
+- 当前旧控制器包含当前 chunk 的 semantic 特征；history-only 输入消融属于通过本轮门槛后的下一阶段，本轮不提前声称已经验证。
+- 尚未产生正式 GPU 结果；hku-gpu2 当前被其他用户的双卡任务占用，运行脚本将在不抢占任务的前提下排队。
