@@ -1100,3 +1100,13 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 归档checkpoint_native/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json,greedy_diagnostic.json,.gitignore}，更新计划/README/本日志。报告包含假设、主表/机制/域/8来源配对、NLL/首token、资源、核验、文件/配置/命令、baseline兼容性、附件对应、局限/TODO。下一步建议固定12K对比原生累积、一次写入、清除旧快权重再写、禁写，检查错误终止与多次更新关系；骨干能力保留另需稳定writer训练对照。上述后续均未执行，不自动重跑1B或标签/控制器；仍需合格基座和新来源确认后再回到局部遗忘/多分支/联合训练。
 
 正式报告c6b56d1已推送并快进同步hku-gpu2；服务器确认实验tmux退出、两卡已空闲。首token描述用新增正式脚本从已审计jsonl复现，分布不变；补归档summary/逐分片/tokenizer/script哈希，本地全部核对通过。所有本轮已授权实验及报告归档完成，无后台新训练任务。
+
+### 转向任务训练语料：可验证事件流原型
+
+用户指出连续诊断缺少目标进展，并询问能否通过构造训练语料实现图片中的全局/局部遗忘、多次决策及联合训练。新增TRAINING_CORPUS_PLAN.md，明确先训练可用writer，再收集实际反事实标签训练策略，最后联合训练；当前checkpoint退化不证明语料是唯一原因。现有LowRankWriter对detach候选做变换、CohortSession.commit_cohorts为inference_mode，均不能直接作为原生writer/多步联合训练闭环。计划写明分词/实际4096块装箱、答案mask、可微训练适配器等下一步代码任务，保留原始Qwen3-4B冻结骨干起点。
+
+新增tasks/build_cbf_event_curriculum.py：可执行的赋值/撤销/会话重置规则；保留、撤销last1、撤销last2、全局reset四类；8文本块中4–8边界随机嵌套1/2/3点；同时问当前事实、历史事实、保护anchor；成对样本仅首块anchor值改变。group/entity/batch跨split隔离，三种不同措辞模板；inputs不含family/真值事件，targets教师私有；supervision_records只保留问题时刻之前文本/决策，warmup_records导出单块4事实查询。程序仅给语义答案，显式oracle_actions_generated=false，不能将撤销批次直接当成最优alpha标签。
+
+新增tests/test_cbf_event_curriculum.py五项测试，全通过（0.166秒）；包括用独立反向账本重算全部问题答案、撤销后旧值恢复与anchor保留、reset、未来块/私有标签隔离、twin/完整矩阵、输出hash及禁止覆盖。生成experiments/cbf_ttt/event_curriculum_v1/pilot：train/dev/test8/2/2世界组，192/48/48会话（共288），1152/288/288答案监督（共1728），64/16/16单块warmup（共96）。JSONL本地保留，Git归档manifest/报告/代码；不使用旧诊断集生成训练样本，未模型评分test。
+
+新增实验REPORT.md与.gitignore，计划含图片对应、训练目标/通路、数据规模、复现命令、下一步、baseline兼容性与风险。无旧模型/runtime/config更改、无新依赖。当前仅语义文本原型，未自然背景接入/分词/装箱/训练/动作标签，不声称已训练控制器或方法有效。合成规则容易产生显式指令捷径，后续需自然来源修订/弱提示与真实基准；同世界变体不能算独立样本。建议接下来以100步上限的writer训练验证学习通路，实际GPU方案需在训练适配器完成后固定。
