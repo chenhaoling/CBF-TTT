@@ -1138,3 +1138,11 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增event_writer_100step_v1/REPORT.md、summary.json、execution_audit.json，更新RUN_STATUS/训练计划/语料计划/README。报告列出目标/假设、修改文件及函数模块/路径配置、附件对应、参数、复现命令、baseline兼容、负结果/局限/TODO。无baseline代码或新增依赖变动；未实现多步联合训练/全局局部遗忘实验。下一轮建议先固定预算学习完整编号并区分内容/格式指标，待正确vs错配/twin可复现后再进B/C；该后续未执行。
 
 用户再次要求重连后，hku-gpu2连接恢复；服务器从c25c35a快进同步52c5390报告。只读执行summarize_cbf_event_generation，不新增模型调用/test评分：100步正确记忆7/16仅code_，8/16含数字编号但均错误，另1/16无完整数字编号；首行和首个编号正确均0/16。full-KV四checkpoint均首行/首个编号正确12/16，16/16耗尽预算，严格EM仍0。结果补存generation_diagnostic.json并更新REPORT/RUN_STATUS；事后描述不改变预登记门槛。检查时两张5090利用率均0%，显存139/18MiB。未启动额外训练。
+
+### 阶段A第二轮：少量世界的内容训练（执行前）
+
+用户授权继续实验计划。新增EVENT_CONTENT_TRAINING_PLAN.md：两张5090分别运行CE和content_pair；共同从原始冻结Qwen3-4B/相同新writer开始，排序前2个训练世界16问题/8对、原dev2世界16题，复用4096装箱且不读test。固定400步、每问题50次，初始化seed301/顺序seed302、lr1e-7、FP32 writer/state、0/100/400评估，816策略查询。content_pair为0.75数字+0.125前缀+0.125EOS及仅变化anchor的0.5 softplus(.2+正确数字NLL−twin数字NLL)；普通CE臂同样计算交叉前向但成对项权重0。配置/参数/推理g=1不变，不对本轮结果保证收益。
+
+新增tasks/train_cbf_event_content.py：select_rows/split_answer验证数字mask、twin因果对应与两世界错配；training_order固定50轮；regions/objective保留两个记忆的可微梯度；run固定训练/检查/保存/evaluate；extra_score记录预登记首行/首个编号指标、数字NLL及原严格EM；summarize验证全矩阵/初始两臂/冻结控制并按固定400终点判定train/dev内容门槛。新增scripts/run_cbf_event_content.sh双臂tmux内并行；scripts/audit_cbf_event_content.py重建数据/顺序/目标、复核保存参数与FP32 optimizer、解码EM/编号/资源、重算summary、与上一轮dev空/full-KV完全桥接及源文件hash。新增tests/test_cbf_event_content.py验证小数据选择/50次暴露、数字边界拒绝、变化/不变事实对比梯度、真实两记忆原生writer梯度。
+
+本轮新增独立入口，无baseline/runtime/上轮训练修改和新依赖。ROOT/SOURCE/MODEL/PYTHON为路径配置；预算/目标/门槛冻结于计划与代码。训练门槛要求编号≥75%、相对空/错配≥25百分点、两训练组各≥50%、twin数字NLL优势；dev≥25%、相对对照≥12.5百分点、两组数字NLL增益≥.05、twin优势；严格EM仍单独报告，不将新内容指标替代旧EM门槛。只验证阶段A，附件三项遗忘/多边界/联合训练尚未进入。当前两卡空闲、磁盘约1.4T，服务器测试通过后才启动；未根据结果调整超参。
