@@ -341,4 +341,4 @@ The next [fixed-record length diagnostic](LENGTH_READOUT_PLAN.md) compares 6K/12
 
 The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/length_readout/REPORT.md) contains 288 newly evaluated contexts / 1152 queries, with exact 24K replay and independent suffix/record/score audits. Original Qwen3-4B passed the 16-cell gate at 12K with the binding prompt; the final checkpoint passed neither 6K nor 12K. The run stopped before label expansion or V/F. These M=0 results do not establish native TTT performance or forgetting efficacy; the readable original-model condition can anchor a checkpoint and native-TTT diagnostic.
 
-固定12K的中间checkpoint与原生TTT对照：见 [实验计划](CHECKPOINT_NATIVE_PLAN.md) 与 [运行状态](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/checkpoint_native/RUN_STATUS.md)。
+固定12K的中间checkpoint与原生TTT对照：见 [实验计划](CHECKPOINT_NATIVE_PLAN.md) 与 [完整实验结果](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/checkpoint_native/REPORT.md)。

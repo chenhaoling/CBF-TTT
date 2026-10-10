@@ -33,3 +33,11 @@ ROOT=/home/ctj/cbf_ttt_checkpoint_native_20261010 bash scripts/run_cbf_checkpoin
 ```
 
 环境变量 ROOT / SOURCE（上一轮 length 输出）/ PYTHON / ORIGINAL / CHECKPOINTS。原始语料、逐样本结果、模型仅留服务器；GitHub 归档计划、代码、聚合报告与审计。最终以完整 summary+audit 为完成依据，不以 tmux 消失为依据。
+
+## 执行结果（方案冻结后补充）
+
+采集提交7077d5b；2026-10-10 09:59:10–10:33:42 +08:00完成464/1856矩阵，2072秒。11项服务器测试通过，10000/40000 DCP各413个BF16模型张量导出一致；独立审计重算/模型/记录位置检查通过。
+
+原始plain正对照通过；10000/40000/81381的plain与native均未通过binding读取gate。10000步native八候选均值略改善，40000步和最终下降；后两者binding全词表首token命中为0。观察后仅解码已存argmax token，发现各128查询均为<|im_end|>；这是事后描述，不改变主指标或阈值，没有新增forward。最终zero_lr桥接64查询全部NLL误差0；2048/4096分块桥接存在BF16数值/少数预测差异，报告主表统一用本轮4096块。
+
+完整结果、局限和下一步：[checkpoint_native/REPORT.md](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/checkpoint_native/REPORT.md)。暂不扩容标签；下一步固定输入区分一次写入/累积/清除旧快权重的作用，特别检查错误结束token概率。尚未执行后续机制对照或训练。
