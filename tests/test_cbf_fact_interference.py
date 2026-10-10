@@ -62,7 +62,15 @@ class InterferenceTests(unittest.TestCase):
     def test_adam_interventions_restore_weights_moments_and_readout(self):
         from tasks.cbf_fact_interference import batch_loss,probe_context,cpu_copy,equal_state
         from cbf_ttt.event_writer import backbone_digest
-        model,params,rows=self.fixture();opt=torch.optim.AdamW(params.values(),lr=1e-4,weight_decay=0.)
+        model,params,rows=self.fixture()
+        # Tiny random MLPs otherwise hide a genuine parameter change below FP32 loss resolution.
+        # Amplify only this CPU fixture; the real experiment keeps its frozen base and lr1e-7.
+        with torch.no_grad():
+            model.lm_head.weight.mul_(100.)
+            for layer in model.model.layers:
+                layer.mlp.ttt_conv.weight.mul_(100.)
+                layer.mlp.ttt_proj.weight.mul_(20.)
+        opt=torch.optim.AdamW(params.values(),lr=1e-3,weight_decay=0.)
         batch_loss(model,rows,1)[0].backward();opt.step();opt.zero_grad(set_to_none=True)
         weights=cpu_copy(params);state=cpu_copy(opt.state_dict());digest=backbone_digest(model)
         rec=probe_context(model,params,opt,rows,1,contextlib.nullcontext,

@@ -1168,3 +1168,5 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增scripts/run_cbf_fact_interference.sh：GPU0 sequential，GPU1 joint后mixed；测试/prepare/汇总/审计/失败终态。新增scripts/audit_cbf_fact_interference.py：数据与固定预算重建、CE分解/步数、FP32状态、初始参数相同、1224评分解码/前轮控制桥接、120干预恢复记录/矩阵形状对称/独立事件计数、源文件hash；不新增forward，余弦向量未另存，独立审计不声称重新计算梯度。新增tests/test_cbf_fact_interference.py验证暴露/分组、干扰定义、共享图与独立平均梯度一致、真实AdamW多分支恢复及读出不漂移。本地17测试10通过7无torch跳过（1.025秒），Python/shell语法通过；服务器测试通过后启动。
 
 ROOT/SOURCE/MODEL/PYTHON为路径配置，预算/lr1e-7/clip1/无decay/阈值执行前固定。所有实现为独立入口，无baseline/runtime/旧训练改动和新依赖。风险：2训练世界/2开发世界/1seed，模板与世界同时变化；AdamW有限步干预不等同原始梯度内积；联合组省写入且优化步数少，必须结合mixed解释。存在干扰不等于遗忘机制有效，未进入B/C。方案/状态/后续实际报告同步Markdown。
+
+077e0a4已同步服务器，2026-10-10 15:15:55 +08:00首次启动在测试阶段停止，尚未prepare/模型评分/训练。17测试中恢复参数/optimizer/读出检查已通过，但微型随机模型的一步更新未产生可分辨的FP32 CE变化，测试的“至少一题loss改变”断言失败。只增强该CPU测试fixture的lm_head/conv/proj尺度和toy优化lr以验证非零干预；正式4B/lr1e-7/预算/阈值未改。保留首次preflight失败日志，重测通过后在原计划新输出目录执行，不重复已有GPU实验。
