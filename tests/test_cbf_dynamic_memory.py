@@ -91,6 +91,20 @@ class DynamicMemoryTests(unittest.TestCase):
         dev["means"]["correct"]["code_correct"] = 0.55
         self.assertFalse(content_gate(dev)["passed"])
 
+    def test_evaluation_memory_closure_is_four_contexts_per_group(self):
+        with tempfile.TemporaryDirectory() as temp:
+            _, _, _, rows = self.build(Path(temp))
+            rows, _ = select_view(rows, train_groups=2, dev_groups=2)
+            for split in ("train", "dev"):
+                split_rows = [row for row in rows if row["split"] == split]
+                for group in {row["group_id"] for row in split_rows}:
+                    group_rows = [row for row in split_rows if row["group_id"] == group]
+                    needed = {
+                        context_id for row in group_rows
+                        for context_id in (row["context_id"], row["wrong_context_id"], row["twin_context_id"])
+                    }
+                    self.assertEqual(len(needed), 4)
+
 
 if __name__ == "__main__":
     unittest.main()

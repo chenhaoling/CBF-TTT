@@ -1260,3 +1260,9 @@ bash scripts/run_cbf_dynamic_memory.sh
 新增3项标准库测试通过；Python语法、shell语法和`git diff --check`通过。本地完整CBF发现集中的无torch项目通过，但8项旧测试因本机没有PyTorch无法导入，这不是代码断言失败；GPU服务器会运行新增测试后再启动。正式smoke/训练/评测尚未执行，结果将追加到本节并归档独立报告。
 
 主要风险是joint-context一次保留四个answer图，显存高于sequential；smoke的reserved显存达到28 GiB即停止正式训练。自然背景与世界模板同时跨split变化，失败可能来自写入容量、表示绑定或跨模板泛化，不能只归因为事实间优化干扰。单seed与16个开发世界仅适合pilot；即使通过也需多seed复现。Full-KV同样使用正在学习的writer，因此它是端到端可读性对照，会随训练变化；Empty才是严格冻结读出对照。
+
+### 首次smoke与正式预检修正
+
+提交`e7f7ff6`的双臂8/2/2 smoke完成训练、三点评测、汇总和独立审计；随后正式臂在checkpoint 0评测、尚未训练时OOM。原因是初版评测器把train probe与16个dev世界所需的约50份七层dense fast memory同时保留，GPU0只余44–61 MiB并因8.27 GiB allocator碎片无法再申请76 MiB。该失败属于评测实现的规模错误，不是模型/方法结果；失败目录保留。
+
+修正后按来源世界流式评测：每次只构造当前两个twin context与相邻wrong donor的两个context，共4份memory；完成该世界8题全部策略后释放并清理CUDA cache。问题、策略、checkpoint、训练预算和预登记门槛均不变。新增单测固定每世界评测闭包恰为4 contexts；安全tripwire统计显式detach，去除无害的requires-grad转float警告。正式实验从已审计的相同数据和smoke继续，不重跑或选择smoke结果。

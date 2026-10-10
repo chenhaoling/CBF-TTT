@@ -161,38 +161,47 @@ def evaluate(model, tokenizer, rows: list[dict], manifest: dict, output: Path, e
     write_profiles = {}
     with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
         all_contexts = {row["context_id"]: row["context_ids"] for row in rows}
-        needed_contexts = {
-            context_id
-            for row in selected
-            for context_id in (row["context_id"], row["wrong_context_id"], row["twin_context_id"])
-        }
-        contexts = {context_id: all_contexts[context_id] for context_id in sorted(needed_contexts)}
-        memories = {}
-        for context_id, ids in sorted(contexts.items()):
-            memories[context_id], write_profiles[context_id] = measure(lambda: write_memory(model, ids))
         path = output / f"evaluation_{exposure}.jsonl"
         with path.open("x") as sink:
-            for row in selected:
-                policies = {}
-                names = ("correct", "empty", "wrong", "full_kv") + (("twin",) if row["anchor_query"] else ())
-                for name in names:
-                    key = (row["context_id"] if name == "correct" else
-                           row["wrong_context_id"] if name == "wrong" else
-                           row["twin_context_id"] if name == "twin" else None)
-                    memory = memories[key] if key else {}
-                    value, profile = measure(lambda: extra_score(
-                        model, tokenizer, row, memory, manifest["eos_token_id"], name == "full_kv"
-                    ))
-                    policies[name] = {**value, **profile}
-                record = {
-                    "id": row["id"], "group_id": row["group_id"], "split": row["split"],
-                    "evaluation_split": "dev" if row["split"] == "dev" else "train_probe",
-                    "anchor_query": row["anchor_query"], "policies": policies,
-                }
-                sink.write(json.dumps(record) + "\n")
-                sink.flush()
-                records.append(record)
-        del memories
+            for split in ("train", "dev"):
+                split_rows = [row for row in selected if row["split"] == split]
+                for group in sorted({row["group_id"] for row in split_rows}):
+                    group_rows = [row for row in split_rows if row["group_id"] == group]
+                    # A Qwen3-4B memory contains seven dense down-projection deltas.
+                    # Keep only this twin pair plus its wrong-world donor pair live.
+                    needed_contexts = {
+                        context_id
+                        for row in group_rows
+                        for context_id in (row["context_id"], row["wrong_context_id"], row["twin_context_id"])
+                    }
+                    memories = {}
+                    for context_id in sorted(needed_contexts):
+                        memories[context_id], profile = measure(
+                            lambda context_id=context_id: write_memory(model, all_contexts[context_id])
+                        )
+                        write_profiles[f"{group}:{context_id}"] = profile
+                    for row in group_rows:
+                        policies = {}
+                        names = ("correct", "empty", "wrong", "full_kv") + (("twin",) if row["anchor_query"] else ())
+                        for name in names:
+                            key = (row["context_id"] if name == "correct" else
+                                   row["wrong_context_id"] if name == "wrong" else
+                                   row["twin_context_id"] if name == "twin" else None)
+                            memory = memories[key] if key else {}
+                            value, profile = measure(lambda: extra_score(
+                                model, tokenizer, row, memory, manifest["eos_token_id"], name == "full_kv"
+                            ))
+                            policies[name] = {**value, **profile}
+                        record = {
+                            "id": row["id"], "group_id": row["group_id"], "split": row["split"],
+                            "evaluation_split": "dev" if row["split"] == "dev" else "train_probe",
+                            "anchor_query": row["anchor_query"], "policies": policies,
+                        }
+                        sink.write(json.dumps(record) + "\n")
+                        sink.flush()
+                        records.append(record)
+                    del memories, memory
+                    torch.cuda.empty_cache()
     result = aggregate(records)
     result.update({
         "exposure": exposure,
@@ -275,7 +284,7 @@ def run(args) -> dict:
                     loss = sum(value["ce"] for value in values) / len(values)
                 if not torch.isfinite(loss):
                     raise RuntimeError("nonfinite dynamic writer loss")
-                relative = max(float(value.float().norm() /
+                relative = max(float(value.detach().float().norm() /
                                      model.model.layers[layer].mlp.down_proj.weight.float().norm())
                                for layer, value in memory.items())
                 if relative > 1:
