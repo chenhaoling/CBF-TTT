@@ -1146,3 +1146,15 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增tasks/train_cbf_event_content.py：select_rows/split_answer验证数字mask、twin因果对应与两世界错配；training_order固定50轮；regions/objective保留两个记忆的可微梯度；run固定训练/检查/保存/evaluate；extra_score记录预登记首行/首个编号指标、数字NLL及原严格EM；summarize验证全矩阵/初始两臂/冻结控制并按固定400终点判定train/dev内容门槛。新增scripts/run_cbf_event_content.sh双臂tmux内并行；scripts/audit_cbf_event_content.py重建数据/顺序/目标、复核保存参数与FP32 optimizer、解码EM/编号/资源、重算summary、与上一轮dev空/full-KV完全桥接及源文件hash。新增tests/test_cbf_event_content.py验证小数据选择/50次暴露、数字边界拒绝、变化/不变事实对比梯度、真实两记忆原生writer梯度。
 
 本轮新增独立入口，无baseline/runtime/上轮训练修改和新依赖。ROOT/SOURCE/MODEL/PYTHON为路径配置；预算/目标/门槛冻结于计划与代码。训练门槛要求编号≥75%、相对空/错配≥25百分点、两训练组各≥50%、twin数字NLL优势；dev≥25%、相对对照≥12.5百分点、两组数字NLL增益≥.05、twin优势；严格EM仍单独报告，不将新内容指标替代旧EM门槛。只验证阶段A，附件三项遗忘/多边界/联合训练尚未进入。当前两卡空闲、磁盘约1.4T，服务器测试通过后才启动；未根据结果调整超参。
+
+采集代码3901eca已推送并同步服务器，2026-10-10 14:20:09 +08:00 tmux cbf-event-content-v1启动。ROOT=/home/ctj/cbf_ttt_event_content_v1；服务器13项测试全通过（1.895秒），本地13项8通过5无torch跳过（1.037秒）。分词mask/选组准备完成，两个原始模型均已加载；后续按固定计划执行，无中途方法有效结论。
+
+### 阶段A第二轮：双臂400步完成
+
+2026-10-10 14:20:09–14:28:25 +08:00完成，496秒；采集3901eca。每臂400步/每问题50次暴露，合计800步/816策略查询。13服务器测试通过，独立审计通过32行选择/mask/twin重建、目标分解/顺序、实际writer更新及FP32状态、生成EM/编号、summary重算、两臂初始化逐张量相同、旧dev空/full-KV原指标精确桥接、冻结骨干与源文件hash。test未读取评分。本地下载summary/design/audit并核对SHA一致；下载尚未结束时一次本地读取报文件未找到，等待scp成功后重读/验hash通过，未影响远程实验。
+
+固定400终点训练完整编号与严格EM：CE4/16(25%)、content_pair7/16(43.75%)；空0/16，错配分别2/16与3/16。开发两臂全部0/16。训练数字NLL CE0.578284、content_pair0.734783，成对方案虽然多答对3题，但均值NLL更差；anchor的twin减正确数字NLL CE+0.029201、content_pair−0.023363，后者未显示单事实绑定优势。开发数字NLL7.447014/7.665306，高于空2.662896；anchor优势−0.009225/−0.093651。两臂train/dev门槛均false。只支持小训练集部分拟合，不能声称成对机制或选择性遗忘有效。dev世界/值/模板同时变化，泛化失败不能单独归因某一因素。
+
+平均训练step CE0.700420秒/content_pair0.686629秒，allocated峰值两者13.578647GiB、reserved13.902344GiB。每臂800个4096写入块=3,276,800重复token暴露（只有4个不同上下文、2独立世界），非同量独立数据。逐条时间/显存和权重保留服务器。两臂初始checkpoint文件hash不同源于manifest的arm字段，writer张量审计相同。无超参中途更改/延长预算/控制器启动。
+
+归档event_content_v1/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json}，更新EVENT_CONTENT_TRAINING_PLAN/TRAINING_CORPUS_PLAN/README/本日志。报告包含目标假设/全指标分组/门槛/资源审计、修改文件与函数配置、命令/附件映射、baseline兼容性和风险/TODO；无新增依赖或baseline/runtime更改。下一步建议对同一context多事实共同监督，与逐query优化作预算固定对照，验证是否存在事实间优化干扰及双生anchor切换；这是假设和未执行后续，不是本轮已证明原因。

@@ -36,3 +36,7 @@
 主要风险：极小训练组过拟合、随机编号难学、4096背景稀释、成对项可仅降低错误记忆概率、重复模板捷径、400步预算可能不足；因此必须同时看真实生成、空/错配与twin，不能以训练loss或排名成功代替记忆。
 
 运行：`ROOT=/home/ctj/cbf_ttt_event_content_v1 bash scripts/run_cbf_event_content.sh`。SOURCE默认上轮`/home/ctj/cbf_ttt_event_writer_100step_v1`，MODEL/PYTHON控制模型/环境；新ROOT拒绝覆盖。本轮2世界/400步/权重/门槛冻结，改变设计需新计划/目录。
+
+## 实际完成（原冻结设计不变）
+
+2026-10-10 14:20:09–14:28:25 +08:00，496秒。13项服务器测试和独立审计通过，800优化步/816策略查询齐全。CE/content_pair训练完整编号4/16、7/16，开发均0/16；两臂train/dev门槛全未通过。成对方案训练EM较高但数字NLL/twin绑定不一致，不支持方法有效结论。未追加预算或进入B/C；[完整报告](experiments/cbf_ttt/event_content_v1/REPORT.md)记录全部分组、资源、代码/命令及后续建议。

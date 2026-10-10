@@ -348,3 +348,5 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 原始Qwen3-4B冻结骨干的[原生writer首次100步训练报告](experiments/cbf_ttt/event_writer_100step_v1/REPORT.md)：已在双5090完成训练、四点评估与独立审计。正确记忆NLL下降，但完整答案EM为0、预登记记忆门槛未通过；尚未进入控制器或联合训练。
 
 阶段A第二轮：[少量世界的成对内容训练计划](EVENT_CONTENT_TRAINING_PLAN.md)，固定两个训练世界、CE/content_pair各400步，分别检查内容记忆和输出格式。[执行状态](experiments/cbf_ttt/event_content_v1/RUN_STATUS.md)。
+
+已完成[双臂400步内容训练与独立审计](experiments/cbf_ttt/event_content_v1/REPORT.md)：训练集完整编号CE4/16、content_pair7/16，开发集均0/16；两臂均未通过固定内容门槛，未进入遗忘控制器/联合训练。

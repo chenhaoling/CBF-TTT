@@ -1,0 +1,42 @@
+{
+  "audit_passed": true,
+  "rows_reconstructed": 32,
+  "total_optimizer_steps": 800,
+  "policy_queries": 816,
+  "train_exposures_per_row_per_arm": 50,
+  "test_scored": false,
+  "old_dev_control_bridge_exact": true,
+  "initial_writer_states_equal": true,
+  "saved_writer_optimizer_fp32": true,
+  "original_source_files_rehashed": true,
+  "started_at": "2026-10-10T14:20:09+08:00",
+  "completed_at": "2026-10-10T14:28:25+08:00",
+  "wall_seconds": 496.0,
+  "code_commit": "3901eca60331d25b068ca8c81712d9793b60588a",
+  "summary_sha256": "2c7bccd43e6e72b3a0b28e262bb3be167876f51542e01c012e221de1cad64d54",
+  "design_sha256": "642eb1b20436dbda5321456a8ddbef628ad4378a0fe7a455e913d6763cc30291",
+  "data_sha256": "afa22cfdd373fd7be048112f3afe7b0d706fea1d4fb010c053a022c96ba87215",
+  "checkpoint_sha256": {
+    "ce": {
+      "0": "5de925df73122f4d8206f9521e509c81f445cc2e10e0664912a51a37ac3fba08",
+      "100": "da1f35dabd433d4f9c7196033f6ef07abca17e0afd1773d8e2eb77fe89f05078",
+      "400": "c6bcd9aa67127dec80f7396b06161f1ed90daabd01aef2db12475d1048b77534"
+    },
+    "content_pair": {
+      "0": "0b51f62fa558fbb898d449e6325128ba8fca372a752f09f111d085f744a4f43e",
+      "100": "53a79717c8cd66c1ad036dc806a9e500e206aa291c3655eb4f8c06276634de63",
+      "400": "8ce5a1d8f52df33dfc80e7395a56ab45811c57122fe7088cd4a9508712db8013"
+    }
+  },
+  "script_sha256": "593b6b0fdd30153bd795440c94b0100c92fe39659dc7cc1aa1e48bed0b4e2139",
+  "content_gates": {
+    "ce": {
+      "train": false,
+      "dev": false
+    },
+    "content_pair": {
+      "train": false,
+      "dev": false
+    }
+  }
+}

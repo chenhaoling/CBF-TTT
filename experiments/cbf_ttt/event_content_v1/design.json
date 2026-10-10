@@ -1,0 +1,46 @@
+{
+  "protocol": "event_content_v1",
+  "groups": {
+    "train": [
+      "053736ed3ca26ad0",
+      "202bfd9735db6b7c"
+    ],
+    "dev": [
+      "11162e7e35a26dad",
+      "76d75d7ae1859607"
+    ]
+  },
+  "rows": {
+    "train": 16,
+    "dev": 16
+  },
+  "source": "/home/ctj/cbf_ttt_event_writer_100step_v1",
+  "source_data_sha256": "4ef4899cc21ec3229a67d8f9c9c1dbf7345da0104aac54d93e6213ef13c87d6e",
+  "source_manifest_sha256": "b02992da0be52507bfefd26d9824fd902317de3716126251274c0807acd54959",
+  "data_sha256": "afa22cfdd373fd7be048112f3afe7b0d706fea1d4fb010c053a022c96ba87215",
+  "eos_token_id": 151645,
+  "test_scored": false,
+  "steps": [
+    0,
+    100,
+    400
+  ],
+  "arms": [
+    "ce",
+    "content_pair"
+  ],
+  "seed": 301,
+  "order_seed": 302,
+  "lr": 1e-07,
+  "weight_decay": 0.0,
+  "clip": 1.0,
+  "content_weights": {
+    "digits": 0.75,
+    "prefix": 0.125,
+    "eos": 0.125,
+    "pair": 0.5,
+    "margin": 0.2
+  },
+  "train_gate": "code>=.75, gain>=.25 vs empty/wrong, each group code>=.5, anchor digit gain vs twin>0",
+  "dev_gate": "code>=.25, gain>=.125 vs empty/wrong, each group wrong-correct digit NLL>=.05, anchor digit gain>0"
+}
