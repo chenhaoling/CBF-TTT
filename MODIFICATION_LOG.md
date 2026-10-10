@@ -1110,3 +1110,5 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增tests/test_cbf_event_curriculum.py五项测试，全通过（0.166秒）；包括用独立反向账本重算全部问题答案、撤销后旧值恢复与anchor保留、reset、未来块/私有标签隔离、twin/完整矩阵、输出hash及禁止覆盖。生成experiments/cbf_ttt/event_curriculum_v1/pilot：train/dev/test8/2/2世界组，192/48/48会话（共288），1152/288/288答案监督（共1728），64/16/16单块warmup（共96）。JSONL本地保留，Git归档manifest/报告/代码；不使用旧诊断集生成训练样本，未模型评分test。
 
 新增实验REPORT.md与.gitignore，计划含图片对应、训练目标/通路、数据规模、复现命令、下一步、baseline兼容性与风险。无旧模型/runtime/config更改、无新依赖。当前仅语义文本原型，未自然背景接入/分词/装箱/训练/动作标签，不声称已训练控制器或方法有效。合成规则容易产生显式指令捷径，后续需自然来源修订/弱提示与真实基准；同世界变体不能算独立样本。建议接下来以100步上限的writer训练验证学习通路，实际GPU方案需在训练适配器完成后固定。
+
+构造代码2ccd5a3已推送GitHub并同步hku-gpu2。服务器CPU复现五项测试通过（0.123秒），在/home/ctj/cbf_ttt_event_curriculum_v1生成同一原型；cmp确认远程manifest与本地归档逐字节一致（其中含全部12份JSONL的SHA256），未启动GPU训练。补明确阶段A仅使用warmup/retain，撤销/reset留到阶段B，避免writer学习与策略学习混淆。

@@ -12,3 +12,5 @@
 - 当前是完全合成文本，未接入FineWeb/LongCrawl背景，未分词装箱，未调用GPU/模型。不能将此报告作为方法有效性的证据。
 
 [manifest.json](pilot/manifest.json)记录文件hash、构造种子及未训练状态。JSONL由构造器本地生成，不推送到Git；复现命令和训练接口TODO见计划。
+
+服务器复现：hku-gpu2 `/home/ctj/cbf_ttt_event_curriculum_v1`；5项测试通过（0.123秒），manifest与本地逐字节一致，包括全部12份JSONL的hash。只执行CPU数据构造，尚无模型训练结果。
