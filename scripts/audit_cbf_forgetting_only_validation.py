@@ -92,6 +92,14 @@ def audit(root: Path, reference: Path | None = None) -> dict:
                for condition in CONDITIONS):
             raise ValueError(f"summary mean mismatch for {policy}")
 
+    controller_content_passes = sum(
+        summary["policies"][policy]["memory_content_gate"]
+        for policy in POLICIES if policy.startswith("controller_seed")
+    )
+    expected_stage_passed = controller_content_passes >= 2 and summary["adaptive_forgetting_gate"]
+    if summary.get("stage_gate", {}).get("passed") != expected_stage_passed:
+        raise ValueError("overall stage gate is inconsistent with component gates")
+
     reference_check = None
     if reference is not None:
         old = defaultdict(dict)
@@ -125,6 +133,8 @@ def audit(root: Path, reference: Path | None = None) -> dict:
         "reciprocal_wrong_memory_pairs": True,
         "finite_losses": True,
         "nonempty_fast_memory": True,
+        "controller_memory_content_passes": controller_content_passes,
+        "stage_gate_recomputed": expected_stage_passed,
         "reference_full_context_reproduction": reference_check,
     }
     return result

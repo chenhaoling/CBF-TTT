@@ -75,6 +75,7 @@ class ForgettingOnlyValidationTests(unittest.TestCase):
                 "historical",
             )
             self.assertTrue(result["adaptive_forgetting_gate"])
+            self.assertTrue(result["stage_gate"]["passed"])
             self.assertTrue(output.is_file())
 
 

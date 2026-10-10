@@ -305,6 +305,23 @@ def summarize(inputs: list[Path], output: Path, draws: int = 5000, seed: int = 1
         and sum(controller_comparisons[name]["correct_memory"]["source_group_bootstrap_95ci"][0] > 0
                 for name in controller_names) >= 2
     )
+    controller_content_passes = sum(
+        result["policies"][name]["memory_content_gate"] for name in controller_names
+    )
+    result["stage_gate"] = {
+        "controller_memory_content_passes": controller_content_passes,
+        "required_controller_memory_content_passes": 2,
+        "memory_content_gate": len(controller_names) == 3 and controller_content_passes >= 2,
+        "adaptive_forgetting_gate": result["adaptive_forgetting_gate"],
+        "passed": (
+            len(controller_names) == 3
+            and controller_content_passes >= 2
+            and result["adaptive_forgetting_gate"]
+        ),
+        "interpretation": (
+            "The adaptive comparison is interpretable only after the fast-memory content gate passes."
+        ),
+    }
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     return result

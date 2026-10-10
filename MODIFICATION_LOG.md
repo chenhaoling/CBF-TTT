@@ -1208,3 +1208,11 @@ CPU修正的单项服务器测试通过（1.339秒）。64fc0c7已推送；先cm
 - 三个控制器固定为旧 500-source-group 训练的 seed 42/43/44 checkpoint，不读取本轮 test 重新选种子。
 - 当前旧控制器包含当前 chunk 的 semantic 特征；history-only 输入消融属于通过本轮门槛后的下一阶段，本轮不提前声称已经验证。
 - 尚未产生正式 GPU 结果；hku-gpu2 当前被其他用户的双卡任务占用，运行脚本将在不抢占任务的前提下排队。
+
+## 完成结果
+
+任务使用提交 `b2fd6d3`，17:30:47 入队，因其他用户双卡 27B 推理等待至 20:25:55，20:41:39 完成。11 项服务器测试通过；六策略各覆盖 300 场景、100 来源组；旧 full-context rollout 的四个可复现策略逐场景最大误差均为 0；参数版本不变，独立审计通过。每策略 294–303 秒，峰值 allocated/reserved 为 14.115/16.336 GiB。
+
+六个策略的 Correct-vs-Wrong historical 收益仅 `0.001287–0.004311`，所有来源组 bootstrap 95% 区间跨 0，正场景比例 `49.33%–52.33%`；Correct-vs-Empty 也没有任何策略通过预设阈值。故快记忆内容门槛 0/6 通过。三个控制器在 correct-memory historical 条件下相对 fixed 1 分别改善 `0.010286/0.010393/0.012106`，但正确快记忆本身比空快记忆差；完整上下文中三个控制器相对 fixed 1 分别为 `-0.003888/-0.004321/-0.006142`。总体阶段门槛失败，停止扩大旧标签和 history-only 特征消融。
+
+完整结论、表格、资源、复现与下一步见 [`experiments/cbf_ttt/forgetting_only_validation_v1/REPORT.md`](experiments/cbf_ttt/forgetting_only_validation_v1/REPORT.md)。下一步需先构造动态赋值且可由 memory-only 路径读取的语料，确认新世界上 Correct 显著优于 Wrong/Empty，再重启遗忘策略训练。

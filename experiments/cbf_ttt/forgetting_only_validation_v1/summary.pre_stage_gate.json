@@ -1,0 +1,327 @@
+{
+  "scenarios": 300,
+  "policies": {
+    "controller_seed42": {
+      "mean_nll": {
+        "full_context": 0.3511065242569598,
+        "correct_memory": 4.6900782434524055,
+        "wrong_memory": 4.692831630176968,
+        "empty_memory": 4.680230638715956
+      },
+      "mean_nll_by_query_kind": {
+        "current_or_new": {
+          "full_context": 0.36294409090564367,
+          "correct_memory": 4.712143107066079,
+          "wrong_memory": 4.714053744512891,
+          "empty_memory": 4.703930699636066
+        },
+        "historical": {
+          "full_context": 0.33926895760827597,
+          "correct_memory": 4.668013379838731,
+          "wrong_memory": 4.671609515841045,
+          "empty_memory": 4.656530577795846
+        }
+      },
+      "mean_last_coefficient": 0.768141406973203,
+      "mean_memory_norm": 2.4366114332452775,
+      "correct_gain_vs_wrong_memory": {
+        "query_kind": "historical",
+        "mean": 0.003596136002313548,
+        "source_group_bootstrap_95ci": [
+          -0.004086259206136044,
+          0.011265845071701803
+        ],
+        "fraction_positive": 0.5233333333333333
+      },
+      "correct_gain_vs_empty_memory": {
+        "query_kind": "historical",
+        "mean": -0.011482802042885477,
+        "source_group_bootstrap_95ci": [
+          -0.020429652834695552,
+          -0.0021206908755832775
+        ],
+        "fraction_positive": 0.41333333333333333
+      },
+      "memory_content_gate": false
+    },
+    "controller_seed43": {
+      "mean_nll": {
+        "full_context": 0.35153959591237327,
+        "correct_memory": 4.689704828110952,
+        "wrong_memory": 4.692476396106539,
+        "empty_memory": 4.680230638715956
+      },
+      "mean_nll_by_query_kind": {
+        "current_or_new": {
+          "full_context": 0.3633459894477375,
+          "correct_memory": 4.711502837680635,
+          "wrong_memory": 4.713243805870177,
+          "empty_memory": 4.703930699636066
+        },
+        "historical": {
+          "full_context": 0.339733202377009,
+          "correct_memory": 4.66790681854127,
+          "wrong_memory": 4.6717089863428995,
+          "empty_memory": 4.656530577795846
+        }
+      },
+      "mean_last_coefficient": 0.7676409336924553,
+      "mean_memory_norm": 2.437117657610214,
+      "correct_gain_vs_wrong_memory": {
+        "query_kind": "historical",
+        "mean": 0.003802167801629966,
+        "source_group_bootstrap_95ci": [
+          -0.003963771396213055,
+          0.011614921812027256
+        ],
+        "fraction_positive": 0.52
+      },
+      "correct_gain_vs_empty_memory": {
+        "query_kind": "historical",
+        "mean": -0.011376240745423372,
+        "source_group_bootstrap_95ci": [
+          -0.020158431946285228,
+          -0.0021510015215192788
+        ],
+        "fraction_positive": 0.41
+      },
+      "memory_content_gate": false
+    },
+    "controller_seed44": {
+      "mean_nll": {
+        "full_context": 0.3533602591331989,
+        "correct_memory": 4.686443929445176,
+        "wrong_memory": 4.689622931177654,
+        "empty_memory": 4.680230638715956
+      },
+      "mean_nll_by_query_kind": {
+        "current_or_new": {
+          "full_context": 0.3649439725610945,
+          "correct_memory": 4.706693714232672,
+          "wrong_memory": 4.708740683812944,
+          "empty_memory": 4.703930699636066
+        },
+        "historical": {
+          "full_context": 0.3417765457053033,
+          "correct_memory": 4.66619414465768,
+          "wrong_memory": 4.670505178542364,
+          "empty_memory": 4.656530577795846
+        }
+      },
+      "mean_last_coefficient": 0.6738361578558882,
+      "mean_memory_norm": 2.484112334623191,
+      "correct_gain_vs_wrong_memory": {
+        "query_kind": "historical",
+        "mean": 0.0043110338846842474,
+        "source_group_bootstrap_95ci": [
+          -0.0032817029196118303,
+          0.012265048254103877
+        ],
+        "fraction_positive": 0.5166666666666667
+      },
+      "correct_gain_vs_empty_memory": {
+        "query_kind": "historical",
+        "mean": -0.009663566861833913,
+        "source_group_bootstrap_95ci": [
+          -0.019779366538638148,
+          0.0006068714081294074
+        ],
+        "fraction_positive": 0.4666666666666667
+      },
+      "memory_content_gate": false
+    },
+    "fixed_0": {
+      "mean_nll": {
+        "full_context": 0.3733287859530676,
+        "correct_memory": 4.648573559579395,
+        "wrong_memory": 4.65102357955206,
+        "empty_memory": 4.680230638715956
+      },
+      "mean_nll_by_query_kind": {
+        "current_or_new": {
+          "full_context": 0.38603044995712854,
+          "correct_memory": 4.64501848326789,
+          "wrong_memory": 4.6471790337941,
+          "empty_memory": 4.703930699636066
+        },
+        "historical": {
+          "full_context": 0.36062712194900665,
+          "correct_memory": 4.6521286358909,
+          "wrong_memory": 4.65486812531002,
+          "empty_memory": 4.656530577795846
+        }
+      },
+      "mean_last_coefficient": 0.0,
+      "mean_memory_norm": 3.048232088299935,
+      "correct_gain_vs_wrong_memory": {
+        "query_kind": "historical",
+        "mean": 0.002739489419119714,
+        "source_group_bootstrap_95ci": [
+          -0.006580452086433537,
+          0.0121732640644861
+        ],
+        "fraction_positive": 0.5033333333333333
+      },
+      "correct_gain_vs_empty_memory": {
+        "query_kind": "historical",
+        "mean": 0.004401941904945933,
+        "source_group_bootstrap_95ci": [
+          -0.019148152517893997,
+          0.027780861476111005
+        ],
+        "fraction_positive": 0.55
+      },
+      "memory_content_gate": false
+    },
+    "fixed_0.5": {
+      "mean_nll": {
+        "full_context": 0.36315080924639626,
+        "correct_memory": 4.680999674948435,
+        "wrong_memory": 4.682273387833247,
+        "empty_memory": 4.680230638715956
+      },
+      "mean_nll_by_query_kind": {
+        "current_or_new": {
+          "full_context": 0.3754122339496537,
+          "correct_memory": 4.700041515713647,
+          "wrong_memory": 4.701301938919794,
+          "empty_memory": 4.703930699636066
+        },
+        "historical": {
+          "full_context": 0.35088938454313884,
+          "correct_memory": 4.661957834183224,
+          "wrong_memory": 4.6632448367467,
+          "empty_memory": 4.656530577795846
+        }
+      },
+      "mean_last_coefficient": 0.5,
+      "mean_memory_norm": 2.6204096841953497,
+      "correct_gain_vs_wrong_memory": {
+        "query_kind": "historical",
+        "mean": 0.0012870025634765566,
+        "source_group_bootstrap_95ci": [
+          -0.0055359866127135445,
+          0.0084369751763722
+        ],
+        "fraction_positive": 0.49333333333333335
+      },
+      "correct_gain_vs_empty_memory": {
+        "query_kind": "historical",
+        "mean": -0.005427256387377617,
+        "source_group_bootstrap_95ci": [
+          -0.017805746472071223,
+          0.006745735198732326
+        ],
+        "fraction_positive": 0.5433333333333333
+      },
+      "memory_content_gate": false
+    },
+    "fixed_1": {
+      "mean_nll": {
+        "full_context": 0.3472182002356128,
+        "correct_memory": 4.697571983488779,
+        "wrong_memory": 4.699514759154547,
+        "empty_memory": 4.680230638715956
+      },
+      "mean_nll_by_query_kind": {
+        "current_or_new": {
+          "full_context": 0.3591626390057897,
+          "correct_memory": 4.71684410428244,
+          "wrong_memory": 4.718749474116734,
+          "empty_memory": 4.703930699636066
+        },
+        "historical": {
+          "full_context": 0.3352737614654359,
+          "correct_memory": 4.678299862695119,
+          "wrong_memory": 4.68028004419236,
+          "empty_memory": 4.656530577795846
+        }
+      },
+      "mean_last_coefficient": 1.0,
+      "mean_memory_norm": 2.31046319419468,
+      "correct_gain_vs_wrong_memory": {
+        "query_kind": "historical",
+        "mean": 0.0019801814972408255,
+        "source_group_bootstrap_95ci": [
+          -0.004896985008603035,
+          0.008775057262844535
+        ],
+        "fraction_positive": 0.5133333333333333
+      },
+      "correct_gain_vs_empty_memory": {
+        "query_kind": "historical",
+        "mean": -0.02176928489927267,
+        "source_group_bootstrap_95ci": [
+          -0.027931399118332704,
+          -0.01517456024412131
+        ],
+        "fraction_positive": 0.27666666666666667
+      },
+      "memory_content_gate": false
+    }
+  },
+  "bootstrap_draws": 5000,
+  "controller_vs_fixed_1": {
+    "controller_seed42": {
+      "full_context": {
+        "query_kind": "all",
+        "mean_gain_vs_fixed_1": -0.0038883240213469852,
+        "source_group_bootstrap_95ci": [
+          -0.005027669434036529,
+          -0.002851841776143936
+        ],
+        "fraction_positive": 0.25666666666666665
+      },
+      "correct_memory": {
+        "query_kind": "historical",
+        "mean_gain_vs_fixed_1": 0.010286482856387193,
+        "source_group_bootstrap_95ci": [
+          0.004425889878045982,
+          0.015766708585951084
+        ],
+        "fraction_positive": 0.62
+      }
+    },
+    "controller_seed43": {
+      "full_context": {
+        "query_kind": "all",
+        "mean_gain_vs_fixed_1": -0.004321395676760446,
+        "source_group_bootstrap_95ci": [
+          -0.005658890209973803,
+          -0.003124167573830439
+        ],
+        "fraction_positive": 0.25666666666666665
+      },
+      "correct_memory": {
+        "query_kind": "historical",
+        "mean_gain_vs_fixed_1": 0.010393044153849298,
+        "source_group_bootstrap_95ci": [
+          0.004520048111204119,
+          0.015870419305468373
+        ],
+        "fraction_positive": 0.62
+      }
+    },
+    "controller_seed44": {
+      "full_context": {
+        "query_kind": "all",
+        "mean_gain_vs_fixed_1": -0.006142058897586096,
+        "source_group_bootstrap_95ci": [
+          -0.007818904852583294,
+          -0.004553173401999095
+        ],
+        "fraction_positive": 0.26
+      },
+      "correct_memory": {
+        "query_kind": "historical",
+        "mean_gain_vs_fixed_1": 0.012105718037438757,
+        "source_group_bootstrap_95ci": [
+          0.004423827368115593,
+          0.019374137000432074
+        ],
+        "fraction_positive": 0.6733333333333333
+      }
+    }
+  },
+  "adaptive_forgetting_gate": true
+}
