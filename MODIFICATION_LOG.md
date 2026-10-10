@@ -1098,3 +1098,5 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 最终zero_lr原生与plain64查询所有候选NLL差0、预测/首token全一致。4096 vs 2048分块：原始/最终256查询预测一致率98.4375/97.265625%，最大NLL差0.867893/0.263764，不能逐值混用旧结果。主表统一4096；原始binding不变、最终binding目标从旧59.375变为60.9375。原生峰值allocated约11.871GiB、reserved13.8125GiB；逐条耗时/显存留服务器，rollout约plain1.289s/native1.344s，wall还包括哈希/加载/导出等审计成本。
 
 归档checkpoint_native/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json,greedy_diagnostic.json,.gitignore}，更新计划/README/本日志。报告包含假设、主表/机制/域/8来源配对、NLL/首token、资源、核验、文件/配置/命令、baseline兼容性、附件对应、局限/TODO。下一步建议固定12K对比原生累积、一次写入、清除旧快权重再写、禁写，检查错误终止与多次更新关系；骨干能力保留另需稳定writer训练对照。上述后续均未执行，不自动重跑1B或标签/控制器；仍需合格基座和新来源确认后再回到局部遗忘/多分支/联合训练。
+
+正式报告c6b56d1已推送并快进同步hku-gpu2；服务器确认实验tmux退出、两卡已空闲。首token描述用新增正式脚本从已审计jsonl复现，分布不变；补归档summary/逐分片/tokenizer/script哈希，本地全部核对通过。所有本轮已授权实验及报告归档完成，无后台新训练任务。

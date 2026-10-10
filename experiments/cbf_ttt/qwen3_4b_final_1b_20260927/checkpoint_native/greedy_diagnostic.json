@@ -208,5 +208,36 @@
         "decoded": "<|im_end|>"
       }
     ]
+  },
+  "_provenance": {
+    "post_hoc_descriptive_only": true,
+    "new_forwards": 0,
+    "tokenizer": "/home/ctj/models/Qwen3-4B",
+    "summary_sha256": "00912a997f0ada7017aafa0c5ef662cd62b0aa1caca50c1b12c7d427cb0a1a0f",
+    "rows_sha256": {
+      "original_plain_0.jsonl": "ebc3adfc03ba579fea805e840c753ce84cc5fa054e37b1f26633b09766dd4a98",
+      "original_plain_1.jsonl": "2caffdb483e390535b7dc8f882d760558f77d5c759ded925c3febd81296c0b2f",
+      "step10000_plain_0.jsonl": "a871f9c030f439d9196e04c380bd943e5836cc8b9d27aefffbed73845e19a76f",
+      "step10000_plain_1.jsonl": "53d811f091e5a2f004b46cfc906fb1ecd3e8c38ea5cd2cd4782bf37c7d13931e",
+      "step10000_native_0.jsonl": "7fd778111571dd741070117f00edaa50f052799fd3f50e1e0f1d2604afd85d86",
+      "step10000_native_1.jsonl": "1c8fc8f9fc94e3ed84d50b7c60422ecefa26d7dbc5d880cfe038a19d3cefa736",
+      "step40000_plain_0.jsonl": "704a6be08aac8da8e38277221bc684d35358c4ff191a86e4271089a612675980",
+      "step40000_plain_1.jsonl": "80903fc63006adcc096d65bfe489ace302ae063180155a145428b5b3e1ca2c90",
+      "step40000_native_0.jsonl": "5b78e15fb1291209987e935d50af085e2c07874084af7eeb175e5b06d26f6b57",
+      "step40000_native_1.jsonl": "552e7a26ff602e60d40b2db81fa37cbf7f99151f962d6456c88ba7e21e4d047e",
+      "step81381_plain_0.jsonl": "c496762cc72619c50ef47b340b313f0a0f8fd31f2b592df6bccaac647e502451",
+      "step81381_plain_1.jsonl": "2ae2a97b93186e7b6d9ece69e96c77fe24abe4c0dee657e890a0a1f4fa7b927e",
+      "step81381_native_0.jsonl": "c882a93a6a0cff8ebc164300b4b963d131dce963ea58b3b1fce65def863f7047",
+      "step81381_native_1.jsonl": "279e9732748f74345e7a8ba35c474ccbd0189abb87065a43f20fb4b36783169e",
+      "final_zero_lr_0.jsonl": "a3189158e50806a005575352ba8daa0bc0dbe264d9d156665d044925a57910a5",
+      "final_zero_lr_1.jsonl": "78fec66d9cf575af9827c971bf61312b67793739901c398ddba4588a427eae24"
+    },
+    "script_sha256": "aab929c49f40582493c5b8695f62f9d23ac8f168ac1e4f0bdfb050aaa699854b",
+    "tokenizer_files_sha256": {
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
   }
 }
