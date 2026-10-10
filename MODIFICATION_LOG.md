@@ -1076,3 +1076,11 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增length_readout/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json,.gitignore}正式归档，更新LENGTH_READOUT_PLAN/README/本日志。报告包含完整总体与分域/源组配对表、NLL/首token、资源、构造/参数/函数/文件说明、复现及审计命令、与附件建议关系、baseline兼容性和风险/TODO。无新依赖，baseline模型/runtime/训练配置未改，原始文本/tokens/逐条评分/权重未上传。
 
 正式结果归档提交7f155aa已推送GitHub。最后向hku-gpu2快进同步报告时，复用连接两次中断，随后使用同一SSH配置的新连接也在banner交换阶段超时；因此未确认服务器代码目录更新到报告提交。GPU实验、远程summary/独立审计及本地下载哈希验证均在此前完成，不受影响。下次SSH恢复后仅需在服务器仓库执行git pull --ff-only origin main，无需重跑实验。
+
+### 固定12K checkpoint轨迹与原生TTT（2026-10-10，执行前）
+
+用户要求继续下一步实验。SSH已恢复，服务器已补同步f12e237的上一轮报告；两卡空闲，10000至80000每万步DCP和最终81381均在，磁盘可用1.4T。新增CHECKPOINT_NATIVE_PLAN.md，在新评分前固定原始plain及10000/40000/81381各plain/native，64个既有12K场景；final_zero_lr额外16场景。合计464 rollout/1856查询，binding主指标、QA辅助。数据不增改，将六个2048段无损合并为三个4096块；用原始/最终plain与旧分块桥接，避免分块混淆。仍仅observed dev，不启用新来源/训练/标签/控制器。
+
+新增tasks/cbf_checkpoint_native.py：reblock/build/load_data保存输入及源hash；NativeSession使用原生TTTDynamicCache且拒绝CBF路径，核验完整块/尾缓冲/查询不写入；native_digest隔离核验、native_stats三次更新各层相对位移；load_model严格加载和零lr对照；collect逐查询计时/峰值及前后参数hash；summarize严格完整性和各步/来源/机制聚合。新增scripts/export_cbf_diagnostic_checkpoint.py复用官方DCP转换并逐张量对照原DCP，源文件只读、独立导出目录、保存审计。新增scripts/run_cbf_checkpoint_native.sh负责测试/构造/导出/双卡，环境变量ROOT/SOURCE/PYTHON/ORIGINAL/CHECKPOINTS。新增tests/test_cbf_checkpoint_native.py覆盖无损分块/记录位置/双生真值/上下文不匹配拒绝及非零原生更新、部分块缓存、查询clone隔离、FP32零lr等价。
+
+首次本地构造测试发现源record.chunk是1-based，已按原格式修正重分块映射并验证；没有用错误映射启动GPU。本地macPython无torch，原生张量测试将在服务器执行，失败即停止。baseline模型/runtime/预训练配置未改，无新增依赖。中间导出使用最终相同TTT结构配置，只复制配置不复制权重；风险是只测3个训练点、12K超出原6144训练长度、BF16流式差异与dev适配。不能将普通读取退化直接等同原生TTT退化，更不能视为局部遗忘有效性检验。完整方案/判读阈值/复现命令见计划。
