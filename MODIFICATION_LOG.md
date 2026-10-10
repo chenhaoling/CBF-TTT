@@ -1136,3 +1136,5 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 只读查看已有100步生成，发现正确memory的裸code_提前终止/错误编号，以及full-KV正确编号后继续解释或先解释耗尽16token预算。新增scripts/summarize_cbf_event_generation.py用于事后首行/首个数字编号匹配及裸前缀/耗尽预算统计，无新forward、不改变严格EM/门槛。审计完成后SSH出现证书校验失败/连接关闭，多次安全重连仍未成功，因此该事后全量统计尚未在服务器执行；不据部分行推断全量次数，不禁用证书校验。核心100步训练/评估/独立审计已在断线前完成，工件仍保留服务器。
 
 新增event_writer_100step_v1/REPORT.md、summary.json、execution_audit.json，更新RUN_STATUS/训练计划/语料计划/README。报告列出目标/假设、修改文件及函数模块/路径配置、附件对应、参数、复现命令、baseline兼容、负结果/局限/TODO。无baseline代码或新增依赖变动；未实现多步联合训练/全局局部遗忘实验。下一轮建议先固定预算学习完整编号并区分内容/格式指标，待正确vs错配/twin可复现后再进B/C；该后续未执行。
+
+用户再次要求重连后，hku-gpu2连接恢复；服务器从c25c35a快进同步52c5390报告。只读执行summarize_cbf_event_generation，不新增模型调用/test评分：100步正确记忆7/16仅code_，8/16含数字编号但均错误，另1/16无完整数字编号；首行和首个编号正确均0/16。full-KV四checkpoint均首行/首个编号正确12/16，16/16耗尽预算，严格EM仍0。结果补存generation_diagnostic.json并更新REPORT/RUN_STATUS；事后描述不改变预登记门槛。检查时两张5090利用率均0%，显存139/18MiB。未启动额外训练。

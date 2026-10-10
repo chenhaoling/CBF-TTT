@@ -1,0 +1,203 @@
+{
+  "analysis": "post-hoc, descriptive only; does not alter preregistered strict EM or memory gate",
+  "new_model_calls": 0,
+  "test_scored": false,
+  "checkpoints": {
+    "0": {
+      "correct": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "empty": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "wrong": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "full_kv": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 12,
+        "first_code_correct": 12,
+        "has_any_numeric_code": 12,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "twin": {
+        "queries": 4,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 4
+      }
+    },
+    "25": {
+      "correct": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "empty": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "wrong": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "full_kv": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 12,
+        "first_code_correct": 12,
+        "has_any_numeric_code": 12,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "twin": {
+        "queries": 4,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 4
+      }
+    },
+    "50": {
+      "correct": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 2,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 0
+      },
+      "empty": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "wrong": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 2,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 0
+      },
+      "full_kv": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 12,
+        "first_code_correct": 12,
+        "has_any_numeric_code": 12,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "twin": {
+        "queries": 4,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 2,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 0
+      }
+    },
+    "100": {
+      "correct": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 8,
+        "bare_code_prefix": 7,
+        "token_budget_reached": 0
+      },
+      "empty": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 0,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "wrong": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 4,
+        "bare_code_prefix": 6,
+        "token_budget_reached": 0
+      },
+      "full_kv": {
+        "queries": 16,
+        "strict_exact": 0,
+        "first_line_exact": 12,
+        "first_code_correct": 12,
+        "has_any_numeric_code": 12,
+        "bare_code_prefix": 0,
+        "token_budget_reached": 16
+      },
+      "twin": {
+        "queries": 4,
+        "strict_exact": 0,
+        "first_line_exact": 0,
+        "first_code_correct": 0,
+        "has_any_numeric_code": 3,
+        "bare_code_prefix": 1,
+        "token_budget_reached": 0
+      }
+    }
+  },
+  "data_sha256": "4ef4899cc21ec3229a67d8f9c9c1dbf7345da0104aac54d93e6213ef13c87d6e",
+  "evaluation_sha256": {
+    "evaluation_0.jsonl": "acfdd9e331d9cf9b3f942501b14571a63d0cab4e23ca132036a0d8ccb376d241",
+    "evaluation_25.jsonl": "5960683373c3a481c86504465b9560af39019ca240e0018d1148924b7fed8c4f",
+    "evaluation_50.jsonl": "272b00ef6515f44cfcb1b5b91054c5741c6286e65be2dc945909d26bfb13044c",
+    "evaluation_100.jsonl": "a54142be68cd7eaef27c168992db2ffabf9aae19bf83100bc944eb9092420469"
+  },
+  "script_sha256": "73b40cbaa982e26974b628020e2c71e63549543ca5cb3bc8a6a1b9c54c440241"
+}
