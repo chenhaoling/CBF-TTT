@@ -1,0 +1,47 @@
+{
+  "protocol": "fact_interference_v1",
+  "source": "/home/ctj/cbf_ttt_event_content_v1",
+  "source_design_sha256": "642eb1b20436dbda5321456a8ddbef628ad4378a0fe7a455e913d6763cc30291",
+  "data_sha256": "afa22cfdd373fd7be048112f3afe7b0d706fea1d4fb010c053a022c96ba87215",
+  "eos_token_id": 151645,
+  "groups": {
+    "train": [
+      "053736ed3ca26ad0",
+      "202bfd9735db6b7c"
+    ],
+    "dev": [
+      "11162e7e35a26dad",
+      "76d75d7ae1859607"
+    ]
+  },
+  "arms": [
+    "sequential",
+    "joint_context",
+    "mixed_context"
+  ],
+  "exposures": [
+    0,
+    400,
+    800
+  ],
+  "rounds": 50,
+  "seed": 301,
+  "order_seed": 403,
+  "lr": 1e-07,
+  "weight_decay": 0.0,
+  "clip": 1.0,
+  "loss": "mean answer-plus-EOS CE",
+  "interference_threshold": 0.01,
+  "negative_cosine_threshold": -0.05,
+  "test_scored": false,
+  "optimizer_steps": {
+    "sequential": 800,
+    "joint_context": 200,
+    "mixed_context": 200
+  },
+  "training_write_blocks": {
+    "sequential": 800,
+    "joint_context": 200,
+    "mixed_context": 800
+  }
+}

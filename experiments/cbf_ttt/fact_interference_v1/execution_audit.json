@@ -1,0 +1,74 @@
+{
+  "audit_passed": true,
+  "optimizer_steps": 1200,
+  "policy_queries": 1224,
+  "intervention_trials": 120,
+  "test_scored": false,
+  "example_budgets_equal": true,
+  "initial_writer_states_equal": true,
+  "previous_controls_bridge_exact": true,
+  "saved_parameters_optimizer_verified": true,
+  "restoration_flags_and_readout_drift_checked": true,
+  "gradient_cosine_shape_symmetry_checked": true,
+  "new_model_calls": 0,
+  "started_at": "2026-10-10T15:22:07+08:00",
+  "completed_at": "2026-10-10T15:35:36+08:00",
+  "wall_seconds": 809.0,
+  "code_commit": "64fc0c774b5c2f61e3065fee20a38484e2c8caad",
+  "data_sha256": "afa22cfdd373fd7be048112f3afe7b0d706fea1d4fb010c053a022c96ba87215",
+  "design_sha256": "c5d55ed54217fbe0b94ecf30d14c29d5f5acdff015e699ad317455804e82ecc6",
+  "summary_sha256": "fabbecf5c44d28f73f0ce811c9f46c82caa304757d5cab2ed63ed45d70236055",
+  "script_sha256": "5b4f9997ee3f6924405a4fda5f4c2e97f98e1288751c870f110ee14480541671",
+  "artifacts_sha256": {
+    "sequential": {
+      "checkpoints": {
+        "0": "9d8d9b0b1199f8febc5d34c987b64f619a68bfb0e101664f7f917b01b40e3985",
+        "400": "668a8458abb7a99ce4905a537b05e1c6a1f8400667c04569b1af3fdba71496a4",
+        "800": "b62e07bd210dbe3bd79e37992cb811d74eeead5ce9c5959225a5e960e3065bd2"
+      },
+      "steps": "5f7b3bdd7b601e9ca82e9a69b81047d86ecc17bfce74c7e974adb60d6c9a5f25",
+      "probes": {
+        "400": "af0c75b6a97f3019d55ccdac06161cff5c487de753be257ada73630303b17d0a",
+        "800": "8248dc880e33cfe159eb3bfae7ed693ed7ccfbe240240a30dd6dc8f290880849"
+      }
+    },
+    "joint_context": {
+      "checkpoints": {
+        "0": "240c59d31cb35e58ac1cb296653fe8d25b522ec327512cdb4d7da5af803df85b",
+        "400": "8b8afd9da4bc7395df2dfecc2253fab79f0bb7a4287c1327d32e60aa2500058f",
+        "800": "771f8f0be7af09d04ccc707b8a72c9d054fc1440eed388b2fb5fa2070276e43f"
+      },
+      "steps": "809aa032f3da1960977da209ca7812cabd579048611136610c80597610ee17da",
+      "probes": {
+        "400": "01c27a060b70f8c98d060bb508978d97bd1cd7acf4ac54eb018a8c0ac5cb0ad5",
+        "800": "c390ec7e62e32d1b88aa2ef8c7a47e9508b572e81bd05fd2387f5a3ddf76ed90"
+      }
+    },
+    "mixed_context": {
+      "checkpoints": {
+        "0": "6ace2e80ec7cd54bd3676f3b8fd7852ed6576ebb06c55f2dea38d42284be48bc",
+        "400": "c0ee15ab8d78f1bd9724b4e82e571cf92859be5e9cf49551281dd9019ae98251",
+        "800": "9a80e615be86ce9766ad5f10e97599835d8380f593820e16afd6eac6a376c520"
+      },
+      "steps": "1ba9e03bda83451cbc0acf3d4330bc0de43883af870693dc2ee5f6f2e6daab7c",
+      "probes": {
+        "400": "4bf680fcd7f4c1978113a6435644473a9cda369475e0d380509e3c436be44d97",
+        "800": "3b2ba37aa55c5a9371d557417116b5fd91d1a48e1f89a7713888303b0bd190af"
+      }
+    }
+  },
+  "content_gates": {
+    "sequential": {
+      "train": false,
+      "dev": false
+    },
+    "joint_context": {
+      "train": true,
+      "dev": false
+    },
+    "mixed_context": {
+      "train": true,
+      "dev": false
+    }
+  }
+}

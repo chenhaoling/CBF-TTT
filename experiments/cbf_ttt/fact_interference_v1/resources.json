@@ -1,0 +1,147 @@
+{
+  "new_model_calls": 0,
+  "arms": {
+    "sequential": {
+      "training": {
+        "count": 800,
+        "total_seconds": 241.92719367332757,
+        "mean_seconds": 0.30240899209165945,
+        "peak_allocated_gib": 10.188379764556885,
+        "peak_reserved_gib": 13.2109375
+      },
+      "evaluation_queries": {
+        "count": 408,
+        "total_seconds": 166.55554756708443,
+        "mean_seconds": 0.4082243812918736,
+        "peak_allocated_gib": 10.428948879241943,
+        "peak_reserved_gib": 13.2109375
+      },
+      "evaluation_writes": {
+        "count": 24,
+        "total_seconds": 5.708257088437676,
+        "mean_seconds": 0.23784404535156986,
+        "peak_allocated_gib": 10.384026050567627,
+        "peak_reserved_gib": 13.2109375
+      },
+      "probe_contexts": {
+        "count": 8,
+        "total_seconds": 39.63409666158259,
+        "mean_seconds": 4.954262082697824,
+        "peak_allocated_gib": 12.851028442382812,
+        "peak_reserved_gib": 13.3046875
+      },
+      "probe_trials": {
+        "count": 40,
+        "total_seconds": 25.276544207707047,
+        "mean_seconds": 0.6319136051926761,
+        "peak_allocated_gib": 12.851028442382812,
+        "peak_reserved_gib": 13.3046875
+      }
+    },
+    "joint_context": {
+      "training": {
+        "count": 200,
+        "total_seconds": 88.34447361342609,
+        "mean_seconds": 0.44172236806713044,
+        "peak_allocated_gib": 11.98718547821045,
+        "peak_reserved_gib": 13.23046875
+      },
+      "evaluation_queries": {
+        "count": 408,
+        "total_seconds": 166.61562507413328,
+        "mean_seconds": 0.40837163008366,
+        "peak_allocated_gib": 10.429172039031982,
+        "peak_reserved_gib": 13.23046875
+      },
+      "evaluation_writes": {
+        "count": 24,
+        "total_seconds": 5.56808116286993,
+        "mean_seconds": 0.2320033817862471,
+        "peak_allocated_gib": 10.382784366607666,
+        "peak_reserved_gib": 13.23046875
+      },
+      "probe_contexts": {
+        "count": 8,
+        "total_seconds": 37.92698874138296,
+        "mean_seconds": 4.74087359267287,
+        "peak_allocated_gib": 12.84893798828125,
+        "peak_reserved_gib": 13.27734375
+      },
+      "probe_trials": {
+        "count": 40,
+        "total_seconds": 24.86702580936253,
+        "mean_seconds": 0.6216756452340633,
+        "peak_allocated_gib": 12.84893798828125,
+        "peak_reserved_gib": 13.27734375
+      }
+    },
+    "mixed_context": {
+      "training": {
+        "count": 200,
+        "total_seconds": 229.78876374289393,
+        "mean_seconds": 1.1489438187144696,
+        "peak_allocated_gib": 16.266350269317627,
+        "peak_reserved_gib": 17.7265625
+      },
+      "evaluation_queries": {
+        "count": 408,
+        "total_seconds": 164.31670912727714,
+        "mean_seconds": 0.40273703217469886,
+        "peak_allocated_gib": 10.427545070648193,
+        "peak_reserved_gib": 17.7265625
+      },
+      "evaluation_writes": {
+        "count": 24,
+        "total_seconds": 5.584744879975915,
+        "mean_seconds": 0.23269770333232978,
+        "peak_allocated_gib": 10.380669116973877,
+        "peak_reserved_gib": 17.7265625
+      },
+      "probe_contexts": {
+        "count": 8,
+        "total_seconds": 39.10780714638531,
+        "mean_seconds": 4.888475893298164,
+        "peak_allocated_gib": 12.848209381103516,
+        "peak_reserved_gib": 17.7265625
+      },
+      "probe_trials": {
+        "count": 40,
+        "total_seconds": 24.5704994648695,
+        "mean_seconds": 0.6142624866217374,
+        "peak_allocated_gib": 12.848209381103516,
+        "peak_reserved_gib": 17.7265625
+      }
+    }
+  },
+  "source_sha256": {
+    "sequential/evaluation_0.jsonl": "1e59bfc423fa45e6dc44355ee5312d1a8824b095d2244f4be753cfd829bed86d",
+    "sequential/evaluation_0.summary.json": "8ee3201d9eada27928c1032476a1fa5fb39e3aced545cca94d46063058adc6c8",
+    "sequential/evaluation_400.jsonl": "c6ea4975b4d692c9480c4f89ea9aae4f6eccb7be89074631f2c0dd027b643eda",
+    "sequential/evaluation_400.summary.json": "61c1cab58593c22a9712c6e26bc2e0b279c32c4c4842890563fd5eeee2c3ccca",
+    "sequential/probes_400.jsonl": "af0c75b6a97f3019d55ccdac06161cff5c487de753be257ada73630303b17d0a",
+    "sequential/evaluation_800.jsonl": "73ca14170e59650e6169e74a3a35c1ba438a2024cea9e1f09e1af220b847ad56",
+    "sequential/evaluation_800.summary.json": "3f758bea70e02c637e05aebb5ee7e4b8c8152a51027cc549a5fa1b623db8dbfb",
+    "sequential/probes_800.jsonl": "8248dc880e33cfe159eb3bfae7ed693ed7ccfbe240240a30dd6dc8f290880849",
+    "sequential/steps.jsonl": "5f7b3bdd7b601e9ca82e9a69b81047d86ecc17bfce74c7e974adb60d6c9a5f25",
+    "joint_context/evaluation_0.jsonl": "c94108b6a5b7d4265c66f57dd4443ee24c657d1ea2b1e68b997080a588108cd5",
+    "joint_context/evaluation_0.summary.json": "c18178152a7153680c28792206ee1d49fd0eb7daa7750c7a50784e7788b704c0",
+    "joint_context/evaluation_400.jsonl": "9a865a610be30c799d8a3500b5c0344eb0991eb6c90939a75cfbe75b2e67ea95",
+    "joint_context/evaluation_400.summary.json": "6aa6d6e7b8d55b85c6517964fbbd60464a3146aa5ec213ff3846e51f36b67121",
+    "joint_context/probes_400.jsonl": "01c27a060b70f8c98d060bb508978d97bd1cd7acf4ac54eb018a8c0ac5cb0ad5",
+    "joint_context/evaluation_800.jsonl": "07597cd1b7a0e4e0eb00ca5f09c3af79f8b0445164c0e0d50857a1b6ad1056fd",
+    "joint_context/evaluation_800.summary.json": "5625dbf32d6140d510e266920b1955eb252ebda44cc41a8219d14f6790af8e78",
+    "joint_context/probes_800.jsonl": "c390ec7e62e32d1b88aa2ef8c7a47e9508b572e81bd05fd2387f5a3ddf76ed90",
+    "joint_context/steps.jsonl": "809aa032f3da1960977da209ca7812cabd579048611136610c80597610ee17da",
+    "mixed_context/evaluation_0.jsonl": "da352603fb8cbedf00e424fc9e0ba243110c4f3b4f26a3f18b039f7078dc926a",
+    "mixed_context/evaluation_0.summary.json": "3aeca556a054bc33ff53f7ff235e44a53aa6d04089882167d3a3aff30f70e9ab",
+    "mixed_context/evaluation_400.jsonl": "1a70597974ae9b0a730fa5c708c75df3af3817b9e8a6f86b1663915221781358",
+    "mixed_context/evaluation_400.summary.json": "beec22f0c6a151ec2d9f76d8b3a4db550e0423954886ffffbe5a6e2802a811c6",
+    "mixed_context/probes_400.jsonl": "4bf680fcd7f4c1978113a6435644473a9cda369475e0d380509e3c436be44d97",
+    "mixed_context/evaluation_800.jsonl": "f077ace53d91403f2695f3ad8741d9e675b6d3b6fc818cb78e7a1db289f51240",
+    "mixed_context/evaluation_800.summary.json": "61cc9e2449c74beaec81c1bacd42e3293373092745aff15a00274ea9ef01e0aa",
+    "mixed_context/probes_800.jsonl": "3b2ba37aa55c5a9371d557417116b5fd91d1a48e1f89a7713888303b0bd190af",
+    "mixed_context/steps.jsonl": "1ba9e03bda83451cbc0acf3d4330bc0de43883af870693dc2ee5f6f2e6daab7c"
+  },
+  "script_sha256": "fe9afb18e66524c1de5ddd4567b90458a6b82cbdb8175cb07f7f819ef4224adc",
+  "note": "probe_contexts includes probe_trials: do not add both time totals; timings exclude model loading/hash work"
+}

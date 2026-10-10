@@ -111,3 +111,5 @@ python3 -m tasks.build_cbf_event_curriculum \
 已完成：生成/规则校验/可复现数据原型；随后完成train/dev Qwen分词和4096块装箱、原生writer可微单块训练器及实际100步阶段A试跑。见[100步报告](experiments/cbf_ttt/event_writer_100step_v1/REPORT.md)：训练/审计通过，有用记忆门槛未通过，不能按原条件进入B/C。未完成：自然背景接入、可微多步训练器、反事实动作标签、策略训练/联合训练及其效果检验。合成数据只是提供学习信号，其实际有效性仍待验证。
 
 阶段A又完成[双臂400步小数据内容训练](experiments/cbf_ttt/event_content_v1/REPORT.md)：原始冻结骨干、CE vs 数字加权/单事实成对损失。训练集完整编号4/16 vs 7/16，开发均0/16，train/dev预登记内容门槛全未通过。当前只支持部分训练样本拟合，下一步优先验证同context多事实联合监督是否缓解优化干扰，尚未执行；B/C继续等待可用writer。
+
+随后已完成[逐问题/同context联合/跨context batch与可回滚干扰实验](experiments/cbf_ttt/fact_interference_v1/REPORT.md)。固定每臂800问题暴露：训练正确/错配14/16对14/16、14/16对7/16、13/16对5/16；两batch臂通过train内容门槛，但dev均0/16。中点存在9/16、10/16、13/16局部干扰事件。联合一步有局部改善，同context分组未显示独特泛化优势；下一步优先扩充独立世界/同查询动态赋值来检验泛化，保留多问题监督和负对照。B/C尚未启动。
