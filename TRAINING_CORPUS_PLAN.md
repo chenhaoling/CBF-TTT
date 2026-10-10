@@ -108,4 +108,4 @@ python3 -m tasks.build_cbf_event_curriculum \
 - `experiments/cbf_ttt/event_curriculum_v1/pilot/`：实际288会话及96热身文本、1728因果监督；JSONL留本地，可由代码复现，Git仅归档manifest与报告。
 - `MODIFICATION_LOG.md`：目标、修改与当前完成状态。
 
-已完成：生成/规则校验/可复现数据原型。未完成：自然背景数据接入、Qwen分词和真实TTT块装箱、可微多步训练器、反事实动作标签、模型训练及效果检验。合成数据只是提供学习信号，其实际有效性需要上述A/B/C实验来回答。
+已完成：生成/规则校验/可复现数据原型；随后完成train/dev Qwen分词和4096块装箱、原生writer可微单块训练器及实际100步阶段A试跑。见[100步报告](experiments/cbf_ttt/event_writer_100step_v1/REPORT.md)：训练/审计通过，有用记忆门槛未通过，不能按原条件进入B/C。未完成：自然背景接入、可微多步训练器、反事实动作标签、策略训练/联合训练及其效果检验。合成数据只是提供学习信号，其实际有效性仍待验证。

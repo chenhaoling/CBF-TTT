@@ -40,6 +40,10 @@ ROOT=/home/ctj/cbf_ttt_event_writer_100step_v1 bash scripts/run_cbf_event_writer
 
 ROOT/SOURCE/PYTHON/MODEL控制路径；矩阵和100步预算冻结，修改研究设置需新目录/记录。默认SOURCE=/home/ctj/cbf_ttt_event_curriculum_v1，MODEL=/home/ctj/models/Qwen3-4B。拒绝覆盖已有输出。
 
-本地9项测试中6通过、3无torch跳过；服务器运行全部9项后才启动。测试覆盖真实非零writer梯度、零初始化的预期、原生单块delta和fresh-KV读取对齐、答案位置/EOS、pack完整事实/未来test不读取。GPU结果、资源与结论待实际完成。
+本地9项测试中6通过、3无torch跳过；服务器运行全部9项后才启动。测试覆盖真实非零writer梯度、零初始化的预期、原生单块delta和fresh-KV读取对齐、答案位置/EOS、pack完整事实/未来test不读取。
 
 风险：只有8训练世界与2验证世界；code字符串共享格式可能产生语言格式学习而非内容记忆，所以必须看错配、twin及完整EM；合成背景可能稀释事实；100步可能不足；4096块与原始短事实分布差异大。结论必须区分训练loss下降、格式学习、内容记忆和泛化。只有本轮有用记忆信号成立，后续才进入多块retain、遗忘动作标签和联合训练。
+
+## 实际完成（2026-10-10；原冻结方案不变）
+
+100步及0/25/50/100评估全部完成，9项服务器测试和独立审计通过。11:01:41–11:03:58 +08:00，137秒；单步0.299秒、训练峰值10.186GiB。100步dev正确/空/错配NLL2.053/4.277/2.235，但严格EM全部0，分组条件也失败，passed_memory_gate=false。未自动加步数、改门槛或训练控制器。完整结果、生成格式局限、代码/参数/命令与TODO见[报告](experiments/cbf_ttt/event_writer_100step_v1/REPORT.md)。

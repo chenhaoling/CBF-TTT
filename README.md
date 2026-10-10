@@ -344,3 +344,5 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 固定12K的中间checkpoint与原生TTT对照：见 [实验计划](CHECKPOINT_NATIVE_PLAN.md) 与 [完整实验结果](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/checkpoint_native/REPORT.md)。
 
 任务训练语料方向：[可验证事件流训练计划](TRAINING_CORPUS_PLAN.md)，以及[已生成的288会话原型](experiments/cbf_ttt/event_curriculum_v1/REPORT.md)。
+
+原始Qwen3-4B冻结骨干的[原生writer首次100步训练报告](experiments/cbf_ttt/event_writer_100step_v1/REPORT.md)：已在双5090完成训练、四点评估与独立审计。正确记忆NLL下降，但完整答案EM为0、预登记记忆门槛未通过；尚未进入控制器或联合训练。

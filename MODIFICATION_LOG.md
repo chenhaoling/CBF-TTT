@@ -1124,3 +1124,15 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 采集代码3a0457e已推送并同步hku-gpu2，tmux cbf-event-writer-100step于2026-10-10 11:01:41 +08:00启动，ROOT /home/ctj/cbf_ttt_event_writer_100step_v1。服务器9项测试全通过（1.649秒），装箱及原始骨干hash验证成功；100步已执行，单步约0.30秒，峰值allocated约10.2GiB，GPU1仍在评估。新增RUN_STATUS跟踪；此时未报告记忆有效结论。
 
 新增scripts/audit_cbf_event_writer.py：完成后独立核对80条实际pack后缀/答案边界、100步固定洗牌序列/答案与EOS loss分解、checkpoint实际FP32参数变化及optimizer状态、272条dev策略生成EM与16条train probe数量、原始模型文件hash和完整状态；test不评分。summarize增加save=False选项，使独立审计重算不覆盖原始summary；默认CLI行为保持不变，不改训练/评分计算。
+
+### 事件语料writer首次100步：完成与负结果
+
+2026-10-10 11:01:41–11:03:58 +08:00，137秒完成测试/装箱/加载/100步优化及0/25/50/100评估。随后独立审计通过：80条实际pack、100步采样与loss分解、FP32保存参数/optimizer、14个writer张量实际更新、冻结骨干及原始文件hash、272次dev策略查询/16次train probe和summary重算；test未tokenize/评分。服务器9测试全通过（1.649秒）。本地下载summary/审计，summary/script/checkpoint引用hash已相互核对。
+
+固定终点正确/空/错配/完整KV答案NLL为2.053219/4.277348/2.235196/0.105974，所有策略严格EM均0/16。正确对错配NLL平均改善0.181977，但两个dev世界增益+0.415777/−0.051823；anchor正确减twin NLL为+0.012688，未显示单事实区分优势。train固定16题probe NLL2.702084、EM0；前10/后10在线训练NLL4.582447/1.937432不是同题配对。passed_memory_gate=false，不追加训练预算或启动控制器。
+
+平均单步0.299468秒，训练峰值allocated10.186427GiB、reserved10.792969GiB；逐步/逐写入/逐查询资源留远程。原始Qwen3-4B骨干未动，当前训练conv/proj共45,964,800参数；100步first im_end概率约1.03e-7，不能把当前失败直接当作此前1B骨干的首token终止问题。
+
+只读查看已有100步生成，发现正确memory的裸code_提前终止/错误编号，以及full-KV正确编号后继续解释或先解释耗尽16token预算。新增scripts/summarize_cbf_event_generation.py用于事后首行/首个数字编号匹配及裸前缀/耗尽预算统计，无新forward、不改变严格EM/门槛。审计完成后SSH出现证书校验失败/连接关闭，多次安全重连仍未成功，因此该事后全量统计尚未在服务器执行；不据部分行推断全量次数，不禁用证书校验。核心100步训练/评估/独立审计已在断线前完成，工件仍保留服务器。
+
+新增event_writer_100step_v1/REPORT.md、summary.json、execution_audit.json，更新RUN_STATUS/训练计划/语料计划/README。报告列出目标/假设、修改文件及函数模块/路径配置、附件对应、参数、复现命令、baseline兼容、负结果/局限/TODO。无baseline代码或新增依赖变动；未实现多步联合训练/全局局部遗忘实验。下一轮建议先固定预算学习完整编号并区分内容/格式指标，待正确vs错配/twin可复现后再进B/C；该后续未执行。
