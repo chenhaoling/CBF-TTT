@@ -187,7 +187,7 @@ def evaluate(args):
     write_json(root/'evaluation_complete.json',{'steps':list(STEPS),'backbone_unchanged':True,'test_scored':False})
 
 
-def summarize(root):
+def summarize(root, save=True):
     root=Path(root);rows,m=data(root)
     train=json.loads((root/'training_complete.json').read_text());ev=json.loads((root/'evaluation_complete.json').read_text())
     if train['steps']!=100 or not train['backbone_unchanged'] or not ev['backbone_unchanged'] or ev['test_scored']:raise ValueError('incomplete run')
@@ -219,7 +219,7 @@ def summarize(root):
             'passed_memory_gate':passed,'test_scored':False,'data_sha256':m['data_sha256'],
             'terminal_status':'completed_writer_warmup','rule':'fixed step100, NLL gain >=.05 and EM gain >=.125 against empty/wrong; both dev groups positive NLL gain',
             'files_sha256':{p.name:sha(p) for p in root.glob('*.jsonl')}}
-    write_json(root/'summary.json',result)
+    if save:write_json(root/'summary.json',result)
     return result
 
 

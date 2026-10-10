@@ -1120,3 +1120,7 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 新增tasks/pack_cbf_event_warmup.py：train64/dev16样本分词，完整事实后缀+唯一程序生成维修背景装4096块；明确纯合成背景，未接入FineWeb/LongCrawl。联合分词验证答案边界，context/group/twin标识和固定异组错配，manifest哈希；test文件不读取。新增cbf_ttt/event_writer.py：严格加载原始骨干只允许14个新增writer缺失，零conv+正常随机proj；复用cbf_forward_mlp可微写入，freshcache不detach memory，答案/EOS对齐；骨干hash核验。新增tasks/train_cbf_event_writer.py：100步梯度/参数/FP32状态审计、原子checkpoint、异步评估、生成EM、分组对照、固定终点汇总。新增scripts/run_cbf_event_writer.sh：测试/装箱、双进程不同GPU、失败标记与完整终态。
 
 新增tests/test_cbf_event_writer.py：装箱/答案边界/未读test、conv与proj真实梯度、原生非零delta和freshcache读取一致、答案位置/EOS；与事件语料测试本地9项中6通过3无torch跳过（0.486秒）。全部torch测试将在服务器运行后才启动。原baseline/runtime/配置未修改，无新增依赖。当前仅单块可微writer训练，不声称多次控制决策联合训练已完成；数值/范数停止线、dev判据及局限写入计划。
+
+采集代码3a0457e已推送并同步hku-gpu2，tmux cbf-event-writer-100step于2026-10-10 11:01:41 +08:00启动，ROOT /home/ctj/cbf_ttt_event_writer_100step_v1。服务器9项测试全通过（1.649秒），装箱及原始骨干hash验证成功；100步已执行，单步约0.30秒，峰值allocated约10.2GiB，GPU1仍在评估。新增RUN_STATUS跟踪；此时未报告记忆有效结论。
+
+新增scripts/audit_cbf_event_writer.py：完成后独立核对80条实际pack后缀/答案边界、100步固定洗牌序列/答案与EOS loss分解、checkpoint实际FP32参数变化及optimizer状态、272条dev策略生成EM与16条train probe数量、原始模型文件hash和完整状态；test不评分。summarize增加save=False选项，使独立审计重算不覆盖原始summary；默认CLI行为保持不变，不改训练/评分计算。
