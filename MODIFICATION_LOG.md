@@ -1216,3 +1216,47 @@ CPU修正的单项服务器测试通过（1.339秒）。64fc0c7已推送；先cm
 六个策略的 Correct-vs-Wrong historical 收益仅 `0.001287–0.004311`，所有来源组 bootstrap 95% 区间跨 0，正场景比例 `49.33%–52.33%`；Correct-vs-Empty 也没有任何策略通过预设阈值。故快记忆内容门槛 0/6 通过。三个控制器在 correct-memory historical 条件下相对 fixed 1 分别改善 `0.010286/0.010393/0.012106`，但正确快记忆本身比空快记忆差；完整上下文中三个控制器相对 fixed 1 分别为 `-0.003888/-0.004321/-0.006142`。总体阶段门槛失败，停止扩大旧标签和 history-only 特征消融。
 
 完整结论、表格、资源、复现与下一步见 [`experiments/cbf_ttt/forgetting_only_validation_v1/REPORT.md`](experiments/cbf_ttt/forgetting_only_validation_v1/REPORT.md)。下一步需先构造动态赋值且可由 memory-only 路径读取的语料，确认新世界上 Correct 显著优于 Wrong/Empty，再重启遗忘策略训练。
+
+# 2026-10-11：动态世界记忆写入与联合监督实验（执行前）
+
+## 目标、理解与实现假设
+
+前一轮仅训练遗忘策略的严格复现表明：Correct/Wrong/Empty fast memory 在 fresh attention KV 下不可区分，因此现阶段不能用该 memory 训练有含义的遗忘控制器。本轮先解决写入前提，在从未见过的随机动态事实上训练原生 conv/proj writer，并以开发世界的 Correct-vs-Wrong/Empty 内容门槛决定是否继续。附件中“整体遗忘、last-1/last-2局部遗忘和端到端联合训练”的建议保留为通过内容门槛后的后续；本轮不训练遗忘策略，也不生成3000条反事实标签。
+
+动态世界沿用已审计事件语义生成器：同一问题的两个 twin session 随机赋不同 anchor 值，其他三个事实、自然背景及问题保持一致；train/dev/test 实体、模板与值由 split 隔离。每个世界用FineWeb-Edu或LongCrawl64的唯一长文本作为4096-token背景，只在尾部写入四项session事实。正式规模预注册为64/16/16世界；test只生成语义真值，不由装箱器读取、分词或评分。单种子pilot只能作阶段筛选，不能给最终泛化置信度。
+
+## 修改文件与需求对应
+
+| 文件 | 具体修改 | 对 baseline 的影响 |
+|---|---|---|
+| `tasks/pack_cbf_dynamic_memory.py` | 从1B混合预训练语料流式选取唯一长文档，FineWeb-Edu/LongCrawl64交替；把任意规模train/dev动态事实装成4096 token；保存来源行号/hash、twin/wrong映射；封存test | 新入口；不改旧packer和baseline数据 |
+| `tasks/train_cbf_dynamic_memory.py` | 两个matched-exposure臂：逐问题更新与同context四问题共享一次可微写入；固定0/中点/终点评估；fresh-KV Correct/Wrong/Empty/twin及Full-KV；来源组bootstrap内容门槛 | 新入口；冻结Qwen3-4B backbone，不改baseline训练 |
+| `scripts/audit_cbf_dynamic_memory.py` | 独立复核语料hash/矩阵/twin因果、问题暴露与优化顺序、FP32 writer/optimizer、实际参数变化、评测覆盖与汇总、两臂相同初始化 | 只读审计；不新增模型调用 |
+| `scripts/run_cbf_dynamic_memory.sh` | 串起测试、64/16/16构建、8/2/2双卡smoke、显存阈值、64/16正式双臂、汇总与审计；失败写状态 | 独立脚本 |
+| `tests/test_cbf_dynamic_memory.py` | 检查test封存、自然背景平衡/唯一性、twin因果、wrong跨世界、两臂相同问题暴露和固定内容门槛 | 测试辅助 |
+| `DYNAMIC_MEMORY_WRITER_PLAN.md` | GPU执行前冻结数据、预算、阈值、停止条件和命令 | 文档 |
+| `README.md` | 增加本轮计划入口 | 文档 |
+
+## 配置、算法闭环与门槛
+
+- 语义seed `20261012`，writer seed `301`，顺序seed `503`；模型 `/home/ctj/models/Qwen3-4B`，自然语料 `/home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl`。
+- 每世界2个context、每context 4题；四轮共2048问题暴露。sequential为2048次optimizer step/write；joint-context为512次step/write，每次对四题CE取均值。两臂问题暴露完全一致，但计算量和更新次数不同。
+- checkpoint固定为0/1024/2048暴露；训练probe固定前8个训练世界，开发使用全部16世界。模型主干冻结，writer和AdamW状态均为FP32，BF16 forward，lr `1e-7`、clip 1、无weight decay。
+- 内容门槛要求开发Full-KV编号正确率≥80%、Correct-memory≥60%；Correct相对Wrong和Empty均高至少20个百分点；两个对照的来源组平均digit-NLL收益均≥0.10且5000次bootstrap 95%下界>0。任一臂固定终点全通过才允许进入遗忘oracle。
+
+## 运行命令
+
+```bash
+cd /home/ctj/cbf_ttt_joint_exp_20260927
+ROOT=/home/ctj/cbf_ttt_dynamic_memory_v1 \
+MODEL=/home/ctj/models/Qwen3-4B \
+CORPUS=/home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl \
+PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python \
+bash scripts/run_cbf_dynamic_memory.sh
+```
+
+## 当前验证、未完成内容与风险
+
+新增3项标准库测试通过；Python语法、shell语法和`git diff --check`通过。本地完整CBF发现集中的无torch项目通过，但8项旧测试因本机没有PyTorch无法导入，这不是代码断言失败；GPU服务器会运行新增测试后再启动。正式smoke/训练/评测尚未执行，结果将追加到本节并归档独立报告。
+
+主要风险是joint-context一次保留四个answer图，显存高于sequential；smoke的reserved显存达到28 GiB即停止正式训练。自然背景与世界模板同时跨split变化，失败可能来自写入容量、表示绑定或跨模板泛化，不能只归因为事实间优化干扰。单seed与16个开发世界仅适合pilot；即使通过也需多seed复现。Full-KV同样使用正在学习的writer，因此它是端到端可读性对照，会随训练变化；Empty才是严格冻结读出对照。
