@@ -1158,3 +1158,13 @@ d3在位置1/3/6的目标准确率87.5/87.5/93.75%，d6为81.25/56.25/75%。两d
 平均训练step CE0.700420秒/content_pair0.686629秒，allocated峰值两者13.578647GiB、reserved13.902344GiB。每臂800个4096写入块=3,276,800重复token暴露（只有4个不同上下文、2独立世界），非同量独立数据。逐条时间/显存和权重保留服务器。两臂初始checkpoint文件hash不同源于manifest的arm字段，writer张量审计相同。无超参中途更改/延长预算/控制器启动。
 
 归档event_content_v1/{REPORT.md,RUN_STATUS.md,design.json,summary.json,execution_audit.json}，更新EVENT_CONTENT_TRAINING_PLAN/TRAINING_CORPUS_PLAN/README/本日志。报告包含目标假设/全指标分组/门槛/资源审计、修改文件与函数配置、命令/附件映射、baseline兼容性和风险/TODO；无新增依赖或baseline/runtime更改。下一步建议对同一context多事实共同监督，与逐query优化作预算固定对照，验证是否存在事实间优化干扰及双生anchor切换；这是假设和未执行后续，不是本轮已证明原因。
+
+### 逐问题与同上下文多问题监督：干扰对照（执行前）
+
+用户要求比较两种监督并检查不同事实的优化干扰。新增FACT_INTERFERENCE_PLAN.md：固定普通CE、原始冻结4B骨干/新writer初始化seed301，复用前轮32行及4096块；三臂sequential、joint_context、mixed_context（后者区分上下文分组与batch效应）。seed403每轮4×4问题表；50轮每题50次，每臂800问题暴露，更新800/200/200次，写入800/200/800块。0/400/800暴露统一评估，共1224策略查询；不将不同更新数/计算量称为完全配平。
+
+新增tasks/cbf_fact_interference.py：schedules构建顺序/分组；batch_loss在同context共享可微memory、各query fresh KV；run复用原生writer/评分并保存问题暴露及真实optimizer步；probe_context在400/800暴露、4训练context各做4单题与1联合一步AdamW干预，测4事实前后loss及4×4梯度余弦。cpu_copy/equal_state/restore独立保存和逐张量恢复参数/动量/step，回滚后读出漂移≤1e-6；最终状态必须等于干预前checkpoint。0.01数字NLL阈值定义自己改善且其他事实恶化的事件；describe_probes保存矩阵/计数。三臂共120干预，不进入主训练，不访问dev/test作为干预目标。
+
+新增scripts/run_cbf_fact_interference.sh：GPU0 sequential，GPU1 joint后mixed；测试/prepare/汇总/审计/失败终态。新增scripts/audit_cbf_fact_interference.py：数据与固定预算重建、CE分解/步数、FP32状态、初始参数相同、1224评分解码/前轮控制桥接、120干预恢复记录/矩阵形状对称/独立事件计数、源文件hash；不新增forward，余弦向量未另存，独立审计不声称重新计算梯度。新增tests/test_cbf_fact_interference.py验证暴露/分组、干扰定义、共享图与独立平均梯度一致、真实AdamW多分支恢复及读出不漂移。本地17测试10通过7无torch跳过（1.025秒），Python/shell语法通过；服务器测试通过后启动。
+
+ROOT/SOURCE/MODEL/PYTHON为路径配置，预算/lr1e-7/clip1/无decay/阈值执行前固定。所有实现为独立入口，无baseline/runtime/旧训练改动和新依赖。风险：2训练世界/2开发世界/1seed，模板与世界同时变化；AdamW有限步干预不等同原始梯度内积；联合组省写入且优化步数少，必须结合mixed解释。存在干扰不等于遗忘机制有效，未进入B/C。方案/状态/后续实际报告同步Markdown。
