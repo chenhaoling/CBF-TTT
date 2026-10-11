@@ -1296,3 +1296,11 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 预登记内容门槛失败，不能把小幅NLL改善解释为可靠随机值绑定，也未构建遗忘标签或训练遗忘控制器。两臂dev Correct digit-NLL均在2048暴露优于4096终点，记录为非单调诊断，不事后选checkpoint。下一步应修改writer的实体条件检索/绑定机制，并加入四事实全量key-query或memory permutation对比；只有Correct稳定优于within-world permuted/Wrong/twin且生成门槛通过后，才恢复遗忘oracle。
 
 新增`experiments/cbf_ttt/dynamic_binding_v1/{REPORT.md,RUN_STATUS.md,RUN_STATUS.json,ARTIFACTS_SHA256.txt,.gitignore}`及source/data manifest、smoke/formal summary、execution audit、每臂manifest/complete/checkpoint summary。报告记录目标、假设、文件与函数、配置、附件构思对应、完整指标、资源、命令、baseline兼容性、已完成/未完成、风险和TODO。原始逐步/逐题JSONL及checkpoint保留在服务器`/home/ctj/cbf_ttt_dynamic_binding_v1`；传输tar与合并日志仅本地忽略。baseline代码、预训练配置和入口未修改，无新增依赖。
+
+### 2/5/16候选排序定位（2026-10-11，执行前）
+
+用户要求继续下一步实验。新增`CANDIDATE_RANKING_PLAN.md`，固定复用dynamic binding的joint CE/binding在0/2048/4096暴露六个checkpoint，不重新训练或选点；train probe为原前8世界、dev全32世界、test继续封存。每题构造嵌套候选：变化anchor的correct/twin二选一、同twin世界5个唯一值、加入固定Wrong context与同split哈希负值的16选一。候选集合完全由数据和row id在评分前决定。
+
+新增`tasks/evaluate_cbf_candidate_ranking.py`：一次批量teacher-force全16候选，通过`torch.func.functional_call`仅替换七层有效down-projection，输出digit/full-answer NLL、top1/MRR/rank/best-negative margin；按Correct/twin/Wrong/Empty、split、世界和checkpoint聚合，并做5000次来源世界bootstrap。每个checkpoint用真实Correct/Empty样本与既有CBF fresh-KV regions评分桥接，最大误差阈值`2e-5`；源checkpoint评分前后重哈希。上一轮已审计Full-KV 95.70%及其summary hash作为长上下文正对照，不重复昂贵forward。
+
+新增`scripts/audit_cbf_candidate_ranking.py`，不调用模型地重构候选集合、排名、聚合、CI、初始双臂一致性、checkpoint/data/formal-summary hash、矩阵与test封存；`scripts/run_cbf_candidate_ranking.sh`在两张GPU按臂并行，拒绝覆盖输出并写终态；`tests/test_cbf_candidate_ranking.py`覆盖嵌套候选、digit-NLL排序/边际、聚合和固定strong/weak/absent判读。与旧动态测试合计10项本地8通过、2项无torch跳过；语法、shell和diff检查通过。原baseline/runtime、writer权重及数据未修改，无新增依赖。正式运行尚未启动。
