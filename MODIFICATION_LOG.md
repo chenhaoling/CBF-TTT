@@ -1304,3 +1304,5 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 新增`tasks/evaluate_cbf_candidate_ranking.py`：一次批量teacher-force全16候选，通过`torch.func.functional_call`仅替换七层有效down-projection，输出digit/full-answer NLL、top1/MRR/rank/best-negative margin；按Correct/twin/Wrong/Empty、split、世界和checkpoint聚合，并做5000次来源世界bootstrap。每个checkpoint用真实Correct/Empty样本与既有CBF fresh-KV regions评分桥接，最大误差阈值`2e-5`；源checkpoint评分前后重哈希。上一轮已审计Full-KV 95.70%及其summary hash作为长上下文正对照，不重复昂贵forward。
 
 新增`scripts/audit_cbf_candidate_ranking.py`，不调用模型地重构候选集合、排名、聚合、CI、初始双臂一致性、checkpoint/data/formal-summary hash、矩阵与test封存；`scripts/run_cbf_candidate_ranking.sh`在两张GPU按臂并行，拒绝覆盖输出并写终态；`tests/test_cbf_candidate_ranking.py`覆盖嵌套候选、digit-NLL排序/边际、聚合和固定strong/weak/absent判读。与旧动态测试合计10项本地8通过、2项无torch跳过；语法、shell和diff检查通过。原baseline/runtime、writer权重及数据未修改，无新增依赖。正式运行尚未启动。
+
+首次服务器启动在模型加载前失败：测试10/10通过后，直接执行`python tasks/evaluate_cbf_candidate_ranking.py`使Python仅把`tasks/`加入模块路径，无法导入`tasks.pack_cbf_event_warmup`。无GPU进程、checkpoint读取或模型评分发生，失败目录保留。运行器改为`python -m tasks.evaluate_cbf_candidate_ranking`和`python -m scripts.audit_cbf_candidate_ranking`，仅修正模块入口，不改协议、候选、阈值或评分。

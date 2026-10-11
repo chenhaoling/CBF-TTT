@@ -22,20 +22,20 @@ trap 'status failed' ERR
 git rev-parse HEAD > "$ROOT/git_commit.txt"
 "$PYTHON" -m unittest tests.test_cbf_dynamic_memory tests.test_cbf_dynamic_binding tests.test_cbf_candidate_ranking
 
-CUDA_VISIBLE_DEVICES=0 "$PYTHON" tasks/evaluate_cbf_candidate_ranking.py evaluate \
+CUDA_VISIBLE_DEVICES=0 "$PYTHON" -m tasks.evaluate_cbf_candidate_ranking evaluate \
   --source "$SOURCE" --data-root "$DATA" --output "$ROOT" --model "$MODEL" --arm joint_ce \
   > "$ROOT/joint_ce.log" 2>&1 &
 left=$!
-CUDA_VISIBLE_DEVICES=1 "$PYTHON" tasks/evaluate_cbf_candidate_ranking.py evaluate \
+CUDA_VISIBLE_DEVICES=1 "$PYTHON" -m tasks.evaluate_cbf_candidate_ranking evaluate \
   --source "$SOURCE" --data-root "$DATA" --output "$ROOT" --model "$MODEL" --arm joint_binding \
   > "$ROOT/joint_binding.log" 2>&1 &
 right=$!
 wait "$left"
 wait "$right"
 
-"$PYTHON" tasks/evaluate_cbf_candidate_ranking.py summarize \
+"$PYTHON" -m tasks.evaluate_cbf_candidate_ranking summarize \
   --root "$ROOT" --formal-summary "$SOURCE/summary.json" > "$ROOT/summary.stdout.json"
-"$PYTHON" scripts/audit_cbf_candidate_ranking.py \
+"$PYTHON" -m scripts.audit_cbf_candidate_ranking \
   --root "$ROOT" --source "$SOURCE" --data-root "$DATA" \
   --formal-summary "$SOURCE/summary.json" > "$ROOT/audit.stdout.json"
 
