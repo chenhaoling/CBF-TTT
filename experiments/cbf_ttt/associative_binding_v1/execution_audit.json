@@ -1,0 +1,102 @@
+{
+  "protocol": "associative_binding_v1_audit",
+  "passed": true,
+  "data_sha256": "fb35206f49c9d733e78572c8f55ca0bfd6852029e972025b81f437b42b03a971",
+  "arms": {
+    "anchor_twin": {
+      "updates": 256,
+      "exposures": 1024,
+      "contrast_questions": 1,
+      "checkpoints": {
+        "0": {
+          "checks": {
+            "full_kv_readable": true,
+            "correct_top1": false,
+            "permuted_top1_separation": false,
+            "permuted_nll_confidence": false,
+            "wrong_top1_separation": false,
+            "wrong_nll_confidence": false
+          },
+          "passed": false
+        },
+        "512": {
+          "checks": {
+            "full_kv_readable": true,
+            "correct_top1": false,
+            "permuted_top1_separation": false,
+            "permuted_nll_confidence": false,
+            "wrong_top1_separation": false,
+            "wrong_nll_confidence": false
+          },
+          "passed": false
+        },
+        "1024": {
+          "checks": {
+            "full_kv_readable": true,
+            "correct_top1": false,
+            "permuted_top1_separation": false,
+            "permuted_nll_confidence": true,
+            "wrong_top1_separation": false,
+            "wrong_nll_confidence": false
+          },
+          "passed": false
+        }
+      },
+      "steps_sha256": "b311428baa2cad3672439eba10b8a9310bc680a0d87a84f7ef117ece93bec230"
+    },
+    "all_fact_permutation": {
+      "updates": 256,
+      "exposures": 1024,
+      "contrast_questions": 4,
+      "checkpoints": {
+        "0": {
+          "checks": {
+            "full_kv_readable": true,
+            "correct_top1": false,
+            "permuted_top1_separation": false,
+            "permuted_nll_confidence": false,
+            "wrong_top1_separation": false,
+            "wrong_nll_confidence": false
+          },
+          "passed": false
+        },
+        "512": {
+          "checks": {
+            "full_kv_readable": true,
+            "correct_top1": false,
+            "permuted_top1_separation": false,
+            "permuted_nll_confidence": true,
+            "wrong_top1_separation": false,
+            "wrong_nll_confidence": false
+          },
+          "passed": false
+        },
+        "1024": {
+          "checks": {
+            "full_kv_readable": true,
+            "correct_top1": false,
+            "permuted_top1_separation": false,
+            "permuted_nll_confidence": false,
+            "wrong_top1_separation": false,
+            "wrong_nll_confidence": false
+          },
+          "passed": false
+        }
+      },
+      "steps_sha256": "34e91c5c9017f3bb652bf3ed42ce1f02e6ce30cf62504c6485382016ba2a1848"
+    }
+  },
+  "identical_initialization": true,
+  "primary_gate": {
+    "checks": {
+      "full_kv_readable": true,
+      "correct_top1": false,
+      "permuted_top1_separation": false,
+      "permuted_nll_confidence": false,
+      "wrong_top1_separation": false,
+      "wrong_nll_confidence": false
+    },
+    "passed": false
+  },
+  "test_scored": false
+}

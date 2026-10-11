@@ -46,3 +46,11 @@ PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python \
 TEST_PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python \
 bash scripts/run_cbf_associative_binding.sh
 ```
+
+## Completed result
+
+The two-GPU pilot completed on 2026-10-11 and the independent audit passed. Both arms completed 256 updates and 1,024 exposures without OOM, NaN, or a safety stop; test remained sealed.
+
+The fixed final all-fact development `global16` Correct top-1 was 0.0469, versus 0.0625 for permutation, 0.0469 for Wrong, and chance 0.0625. Permutation-minus-Correct digit-NLL gain was 0.0017 with 95% CI [-0.0048, 0.0082]. Complete-code accuracy remained zero. The gate failed.
+
+At the midpoint the permutation NLL gain was 0.0125 with CI [0.0079, 0.0183], but top-1 did not change and the effect disappeared at the fixed endpoint. The training permutation contrast also remained flat, from 0.7989 in the first 32 updates to 0.8072 in the last 32. The next experiment should use entity-conditioned candidate selection as the primary listwise objective rather than a 0.5-weight auxiliary contrast. Full results are in [`experiments/cbf_ttt/associative_binding_v1/REPORT.md`](experiments/cbf_ttt/associative_binding_v1/REPORT.md).

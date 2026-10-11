@@ -1328,3 +1328,13 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 固定主要判定为最终`all_fact_permutation`开发集global16：Correct top-1至少25%，相对permuted/Wrong均高至少10个百分点，且两个control-minus-Correct digit-NLL来源世界bootstrap 95%下界均大于0；另要求Full-KV完整code至少80%。中点只作诊断，不选checkpoint。通过仅授权新seed正式生成实验，不直接进入遗忘控制器。GPU正式结果尚未产生。
 
 服务器预检发现训练环境`cbf_ttt_train_py311`没有pytest，但其PyTorch 2.9.1+cu130和Transformers 4.57.3完整；既有`cbf_ttt_verify_20260923`环境包含相同版本及pytest 9.1.1。运行器因此新增`TEST_PYTHON`，仅用验证环境跑测试，模型训练/评测/审计继续使用原训练环境，不安装或升级依赖。
+
+## 完成结果
+
+双5090运行于23:17:49–23:38:50 +08:00完成。服务器测试11/11通过；80个context全部通过4096-token长度不变、四值无固定点置换预检。两臂各完成256更新/1024问题暴露及0/512/1024三点评测，独立审计通过，初始化张量一致，冻结骨干未变，optimizer/writer为FP32，test未评分。无OOM/NaN/安全停止；anchor/all-fact训练峰值allocated为14.1099/16.0142GiB，平均更新0.7457/0.8805秒，最大相对delta为0.5603/0.5597。
+
+固定终点all-fact开发`global16`的Correct/permuted/twin/Wrong/Empty top-1为4.69/6.25/4.69/4.69/6.25%，Correct低于1/16随机水平。permuted-minus-Correct digit-NLL收益0.0017（95% CI -0.0048–0.0082），Wrong收益-0.0076（-0.1799–0.1549），完整code全部为0；Full-KV code为92.19%。预登记门槛失败。
+
+中点all-fact的permutation收益0.0125（0.0079–0.0183），说明硬负例具备局部辨别力，但两者top-1仍同为6.25%，且终点效应消失。训练首/中/末32步的balanced loss为5.7064/2.0600/2.0514，而contrast为0.7989/0.7985/0.8072；辅助关联目标没有下降。终点train probe虽有17.19% Correct top-1，但permuted同为17.19%，仍未学习实体对应关系。因此不扩大同一目标、不评分test、不进入遗忘控制器。下一步将四值listwise实体检索改为主要目标，并做gradient-balanced与retrieval-only消融；若训练probe也不能拟合，再转向显式关联检索头。
+
+归档`experiments/cbf_ttt/associative_binding_v1/{REPORT.md,RUN_STATUS.md,RUN_STATUS.json,ARTIFACTS_SHA256.txt,.gitignore}`、summary、execution audit、两臂manifest/complete/三点summary。大checkpoint、optimizer、steps和逐题JSONL保留服务器。新功能全部为opt-in，baseline配置与入口未修改。
