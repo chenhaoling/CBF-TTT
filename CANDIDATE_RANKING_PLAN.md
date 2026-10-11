@@ -27,7 +27,7 @@ Each candidate receives teacher-forced full-answer and digit-only NLL. Primary r
 
 ## Bridge and integrity checks
 
-- For a fixed real row at every loaded checkpoint, compare the new batched effective-weight scorer against the established CBF fresh-KV scorer for the true candidate under Correct and Empty memory. Maximum full-answer and digit-NLL error must be at most `2e-5`.
+- For a fixed real row at every loaded checkpoint, compare the new batched CBF fresh-KV scorer against the established single-example CBF scorer for the true candidate under Correct and Empty memory. Maximum full-answer and digit-NLL error must be at most `2e-5`.
 - Verify writer checkpoint and data hashes before and after scoring.
 - Independently reconstruct all candidate sets, rankings, aggregates, and 5000-draw source-world bootstrap intervals from raw JSONL.
 - Require identical checkpoint-0 writer tensors across arms and identical checkpoint-0 scores.

@@ -9,8 +9,10 @@ import torch.nn.functional as F
 
 def cbf_forward_mlp(mlp, x: torch.Tensor, target: torch.Tensor, cache, layer_idx: int) -> torch.Tensor:
     """Read W0+M for output, then stage the original TTT candidate for a later shared commit."""
-    if x.shape[0] != 1 or target.shape != (1, x.shape[1], mlp.hidden_size):
-        raise ValueError("CBF-TTT requires batch size one and matching target states")
+    if target.shape != (x.shape[0], x.shape[1], mlp.hidden_size):
+        raise ValueError("CBF-TTT requires matching target states")
+    if cache.cbf_collect and x.shape[0] != 1:
+        raise ValueError("CBF-TTT candidate collection requires batch size one")
     h = mlp.act_fn(mlp.gate_proj(x)) * mlp.up_proj(x)
     base = mlp.down_proj.weight
     memory = cache.cbf_memory.get(layer_idx)

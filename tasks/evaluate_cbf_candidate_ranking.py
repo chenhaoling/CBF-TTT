@@ -76,10 +76,10 @@ def answer_vocabulary(rows: list[dict], tokenizer) -> dict[str, dict]:
 
 
 def score_candidates(model, memory: dict, row: dict, candidates: list[str], vocab: dict[str, dict]) -> list[dict]:
-    """Batch query-only reads by functionally replacing the seven effective down projections."""
+    """Batch query-only reads through the established CBF fresh-KV path."""
     import torch
     import torch.nn.functional as F
-    from torch.func import functional_call
+    from cbf_ttt.event_writer import cache_for
 
     lengths = {len(vocab[value]["ids"]) for value in candidates}
     if lengths != {7}:
@@ -88,13 +88,8 @@ def score_candidates(model, memory: dict, row: dict, candidates: list[str], voca
         [row["query_ids"] + vocab[value]["ids"][:-1] for value in candidates],
         device=next(model.parameters()).device,
     )
-    overrides = {}
-    for layer, delta in memory.items():
-        base = model.model.layers[layer].mlp.down_proj.weight
-        overrides[f"layers.{layer}.mlp.down_proj.weight"] = base + delta
-    hidden = functional_call(
-        model.model, overrides, (tokens,), {"use_cache": False}, strict=False
-    ).last_hidden_state
+    cache = cache_for(model, memory)
+    hidden = model.model(input_ids=tokens, past_key_values=cache, use_cache=True).last_hidden_state
     answer_length = next(iter(lengths))
     logits = model.lm_head(hidden[:, len(row["query_ids"]) - 1:
                                   len(row["query_ids"]) - 1 + answer_length]).float()

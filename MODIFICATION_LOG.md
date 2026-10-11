@@ -1306,3 +1306,5 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 新增`scripts/audit_cbf_candidate_ranking.py`，不调用模型地重构候选集合、排名、聚合、CI、初始双臂一致性、checkpoint/data/formal-summary hash、矩阵与test封存；`scripts/run_cbf_candidate_ranking.sh`在两张GPU按臂并行，拒绝覆盖输出并写终态；`tests/test_cbf_candidate_ranking.py`覆盖嵌套候选、digit-NLL排序/边际、聚合和固定strong/weak/absent判读。与旧动态测试合计10项本地8通过、2项无torch跳过；语法、shell和diff检查通过。原baseline/runtime、writer权重及数据未修改，无新增依赖。正式运行尚未启动。
 
 首次服务器启动在模型加载前失败：测试10/10通过后，直接执行`python tasks/evaluate_cbf_candidate_ranking.py`使Python仅把`tasks/`加入模块路径，无法导入`tasks.pack_cbf_event_warmup`。无GPU进程、checkpoint读取或模型评分发生，失败目录保留。运行器改为`python -m tasks.evaluate_cbf_candidate_ranking`和`python -m scripts.audit_cbf_candidate_ranking`，仅修正模块入口，不改协议、候选、阈值或评分。
+
+第二次启动在每checkpoint必做的首个真实桥接处停止，函数式effective-weight无cache评分相对既有CBF fresh-KV路径的answer/digit NLL误差约0.0510/0.0483，超过固定`2e-5`；未写任何ranking行。没有放宽桥接阈值。`cbf_ttt/runtime.py::cbf_forward_mlp`改为仅在`cbf_collect=false`读路径允许batch>1，target batch维仍严格匹配；候选delta收集继续要求batch=1。评分器改为直接使用同一CBF cache批量读出。新增torch单测逐值比较batch读与逐样本读，并确认批量collect仍拒绝。默认batch1 baseline语义不变。

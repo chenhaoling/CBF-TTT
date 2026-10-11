@@ -1,6 +1,7 @@
 """Candidate-set, ranking, aggregate, and interpretation invariants."""
 
 import copy
+from types import SimpleNamespace
 import unittest
 
 from tasks.evaluate_cbf_candidate_ranking import (
@@ -82,6 +83,53 @@ class CandidateRankingTests(unittest.TestCase):
         self.assertEqual(result["dev"]["sets"]["global16"]["policies"]["correct"]["top1"], 1)
         self.assertEqual(result["dev"]["sets"]["pair2"]["rows"], 2)
         self.assertEqual(interpretation(result["dev"])["label"], "strong_latent_binding")
+
+
+try:
+    import torch
+except ImportError:
+    torch = None
+
+
+@unittest.skipIf(torch is None, "torch tests run on experiment server")
+class BatchedReadTests(unittest.TestCase):
+    def test_batched_read_matches_individual_and_collect_stays_single(self):
+        from cbf_ttt.runtime import cbf_forward_mlp
+
+        class TinyMLP:
+            hidden_size = 3
+            ttt_chunk = 4
+            ttt_lr = .3
+            ttt_proj = None
+            ttt_conv = None
+            down_proj = SimpleNamespace(weight=torch.arange(12, dtype=torch.float32).reshape(3, 4), bias=None)
+
+            @staticmethod
+            def act_fn(value):
+                return value
+
+            @staticmethod
+            def gate_proj(value):
+                return value[..., :4]
+
+            @staticmethod
+            def up_proj(value):
+                return torch.ones_like(value[..., :4])
+
+        mlp = TinyMLP()
+        x = torch.arange(24, dtype=torch.float32).reshape(2, 2, 6)
+        target = x[..., :3]
+        memory = torch.full_like(mlp.down_proj.weight, .25)
+        cache = SimpleNamespace(cbf_collect=False, cbf_memory={0: memory})
+        batched = cbf_forward_mlp(mlp, x, target, cache, 0)
+        singles = torch.cat([
+            cbf_forward_mlp(mlp, x[index:index + 1], target[index:index + 1], cache, 0)
+            for index in range(2)
+        ])
+        self.assertTrue(torch.equal(batched, singles))
+        collecting = SimpleNamespace(cbf_collect=True, cbf_memory={}, cbf_candidates={})
+        with self.assertRaisesRegex(ValueError, "batch size one"):
+            cbf_forward_mlp(mlp, x, target, collecting, 0)
 
 
 if __name__ == "__main__":
