@@ -1338,3 +1338,11 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 中点all-fact的permutation收益0.0125（0.0079–0.0183），说明硬负例具备局部辨别力，但两者top-1仍同为6.25%，且终点效应消失。训练首/中/末32步的balanced loss为5.7064/2.0600/2.0514，而contrast为0.7989/0.7985/0.8072；辅助关联目标没有下降。终点train probe虽有17.19% Correct top-1，但permuted同为17.19%，仍未学习实体对应关系。因此不扩大同一目标、不评分test、不进入遗忘控制器。下一步将四值listwise实体检索改为主要目标，并做gradient-balanced与retrieval-only消融；若训练probe也不能拟合，再转向显式关联检索头。
 
 归档`experiments/cbf_ttt/associative_binding_v1/{REPORT.md,RUN_STATUS.md,RUN_STATUS.json,ARTIFACTS_SHA256.txt,.gitignore}`、summary、execution audit、两臂manifest/complete/三点summary。大checkpoint、optimizer、steps和逐题JSONL保留服务器。新功能全部为opt-in，baseline配置与入口未修改。
+
+# 2026-10-12：候选对齐listwise实体绑定（执行前）
+
+上一轮辅助permutation contrast保持在约`softplus(0.2)=0.798`，没有被优化。本轮把实体条件数值选择改为主要目标：每个Correct context写入后，对四个查询分别在该context的四个被查询值中计算batched teacher-forced digit-NLL，以负NLL为logit训练四分类cross-entropy。比较`retrieval_only`和`retrieval_plus_lm`，后者仅保留0.25倍balanced LM loss；两臂均计算相同的四个LM read与四个batch-4 retrieval read，使用一次context write，初始化、顺序和计算图结构配平。
+
+新增`tasks/train_cbf_listwise_binding.py`，包含可微batch候选评分、listwise目标、单更新真实GPU smoke、32/8世界四轮正式训练、0/512/1024生成与global16评测，以及训练拟合+开发泛化联合门槛。新增`scripts/audit_cbf_listwise_binding.py`独立复核smoke、四值候选集合、调度、loss聚合、初始化、checkpoint/evaluation hash、门槛与test封存；`scripts/run_cbf_listwise_binding.sh`双卡依次执行测试、并行smoke、资源阈值、并行formal、汇总和审计；`tests/test_cbf_listwise_binding.py`覆盖候选集合、retrieval-only梯度隔离、混合权重和联合门槛。预注册见`LISTWISE_BINDING_PLAN.md`。
+
+正式primary仍为`retrieval_plus_lm`固定终点dev global16门槛，并新增三项优化sanity：末32步四分类训练准确率>50%、retrieval loss低于`log(4)`、终点train-probe Correct相对permuted top-1至少高10个百分点。中点不用于选模。该实验为opt-in，不改baseline；GPU结果尚未产生。

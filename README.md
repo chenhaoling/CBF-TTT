@@ -362,3 +362,5 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 已完成[候选排序定位实验](experiments/cbf_ttt/candidate_ranking_v1/REPORT.md)：复用六个writer checkpoint，在Correct/twin/Wrong/Empty记忆下固定比较2/5/16候选，独立审计通过。最终binding臂的Correct-memory `global16` top-1为6.25%，正好等于随机水平，并与twin/Wrong相同；Correct相对Wrong的digit-NLL增益0.0401且95% CI跨0。固定结论为`no_localized_binding`：瓶颈在实体—数值绑定，而不是只在自由生成。下一步先改为四事实全量实体条件检索与within-world permutation对比，内容门槛通过后再恢复遗忘控制器。
 
 已完成[全事实关联绑定pilot](experiments/cbf_ttt/associative_binding_v1/REPORT.md)：32/8世界、两臂各1024问题暴露，独立审计通过。新方法在中点产生Correct相对permutation的0.0125 digit-NLL收益且95% CI大于0，但终点缩至0.0017、区间跨0；终点Correct `global16` top-1为4.69%，低于6.25%随机水平，完整code仍为0。训练contrast从首段0.7989到末段0.8072，没有被优化。下一步应把同一Correct memory下的四值listwise实体检索设为主要目标，并加入梯度配平或去除LM正项消融。
+
+下一步[候选对齐listwise绑定实验](LISTWISE_BINDING_PLAN.md)将同一Correct memory下的四值实体选择直接设为主要交叉熵目标，比较retrieval-only与`retrieval + 0.25 * LM`。使用相同32/8世界、固定0/512/1024三点、真实GPU smoke及Correct/permuted/Wrong/Empty门槛；训练probe拟合与开发泛化必须同时通过，test继续封存。
