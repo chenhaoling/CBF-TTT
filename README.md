@@ -372,3 +372,7 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 反事实重赋值实验已[完成并独立审计](experiments/cbf_ttt/episodic_binding_v1/REPORT.md)：固定映射末段四分类准确率36.72%，平衡重赋值仅26.56%，说明固定query→value关系夸大训练拟合；episodic开发Correct/Counterfactual四候选top-1为25.00/22.66%，NLL区间跨0，仍没有可靠current-memory绑定。
 
 下一步[同一步反事实配对实验](PAIRED_BINDING_PLAN.md)把相反赋值放进同一个optimizer step，比较对称listwise与显式memory-swap loss；两臂复用相同两个write和全部候选score，使每个目标必须在自己的memory下优于配对memory。
+
+同一步反事实配对已[完成并独立审计](experiments/cbf_ttt/paired_binding_v1/REPORT.md)：swap loss 0.79807→0.79864未下降，dev Correct/Counterfactual context4 top-1为21.09/21.88%，NLL差异显著朝错误方向；去掉LM后memory digit-NLL升至15.81而Empty为2.71。结果排除“仅缺同一步反事实loss”，停止继续调同一LM-head目标。
+
+下一步[显式候选检索头pilot](RETRIEVAL_HEAD_PLAN.md)以256维归一化query/value投影读取候选，比较冻结writer的head-only捷径控制与joint head+writer；仍用平衡重赋值、Correct/Counterfactual/Wrong/Empty和4/16候选门槛。

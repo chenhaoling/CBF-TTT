@@ -1,0 +1,77 @@
+{
+  "protocol": "paired_episodic_binding_v1_audit",
+  "passed": true,
+  "data_sha256": "fb35206f49c9d733e78572c8f55ca0bfd6852029e972025b81f437b42b03a971",
+  "arms": {
+    "paired_listwise": {
+      "smoke": {
+        "arm": "paired_listwise",
+        "shifts": [
+          3,
+          1
+        ],
+        "loss": 1.398543357849121,
+        "retrieval_loss": 1.398543357849121,
+        "swap_loss": 0.7981389760971069,
+        "listwise_accuracy": 0.25,
+        "unclipped_gradient_norm": 169845.453125,
+        "max_relative_delta": 0.0,
+        "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf",
+        "memory_cap": 0.3,
+        "test_scored": false,
+        "seconds": 1.5955970250070095,
+        "peak_allocated_gib": 23.86464834213257,
+        "peak_reserved_gib": 24.279296875
+      },
+      "updates": 128,
+      "exposures": 1024,
+      "steps_sha256": "4796f8a01f57e1b1c9da2afadf7fa2c410175eb0d84817e856f99bb3a52c0162",
+      "final_gate": {
+        "checks": {
+          "full_kv_readable": true,
+          "context4_correct_top1": false,
+          "context4_counterfactual_gap": false,
+          "context4_counterfactual_nll_confidence": false,
+          "global16_correct_top1": false
+        },
+        "passed": false
+      }
+    },
+    "paired_swap": {
+      "smoke": {
+        "arm": "paired_swap",
+        "shifts": [
+          3,
+          1
+        ],
+        "loss": 1.7976129055023193,
+        "retrieval_loss": 1.398543357849121,
+        "swap_loss": 0.7981389760971069,
+        "listwise_accuracy": 0.25,
+        "unclipped_gradient_norm": 167834.859375,
+        "max_relative_delta": 0.0,
+        "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf",
+        "memory_cap": 0.3,
+        "test_scored": false,
+        "seconds": 1.5720149502158165,
+        "peak_allocated_gib": 23.86464834213257,
+        "peak_reserved_gib": 24.279296875
+      },
+      "updates": 128,
+      "exposures": 1024,
+      "steps_sha256": "0609ed2d37e6e795ce70cffea5f38e75c7450b73208a31fe6b0c369db00d3707",
+      "final_gate": {
+        "checks": {
+          "full_kv_readable": true,
+          "context4_correct_top1": false,
+          "context4_counterfactual_gap": false,
+          "context4_counterfactual_nll_confidence": false,
+          "global16_correct_top1": false
+        },
+        "passed": false
+      }
+    }
+  },
+  "identical_initialization": true,
+  "test_scored": false
+}

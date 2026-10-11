@@ -1382,3 +1382,17 @@ episodic终点dev Correct/Counterfactual/Wrong/Empty context4 top-1为25.00/22.6
 新增`tasks/train_cbf_paired_binding.py`：固定(0,2)/(1,3)两对，每context覆盖四赋值一次；`paired_listwise`同时优化两赋值listwise CE，`paired_swap`在同一批候选NLL上增加对称`0.5*softplus(0.2+own-cross)`，无需额外前向。每臂128更新、每步2次4096写入/8问题、总1024暴露，去除LM项以隔离关联检索；两臂计算完全匹配。复用episodic的Correct/Counterfactual/Wrong/Empty/Full-KV与固定门槛。
 
 新增`scripts/run_cbf_paired_binding.sh`、`scripts/audit_cbf_paired_binding.py`和`tests/test_cbf_paired_binding.py`，覆盖四赋值配对、swap梯度方向、schedule/target/聚合/checkpoint/初始张量/test封存。真实双写+八候选图先做双卡smoke，reserved≥28GiB或cap舍入>0.305立即停止；通过才正式运行。所有入口opt-in，无baseline修改和新依赖。
+
+### 同一步反事实配对：完成结果
+
+commit `3b758a5`的双卡实验完成，22项服务器测试与独立审计通过；两臂各128更新/1024问题暴露。paired-listwise首末16步retrieval 1.5900→1.3955、accuracy25.00→24.22%；paired-swap 1.5887→1.3920、25.00→28.13%。关键swap loss为0.79807→0.79864，没有低于`softplus(0.2)`无区分值。训练峰值allocated/reserved 24.385/24.752GiB，平均更新约0.97–0.99秒，cap舍入最大0.30109。
+
+primary swap终点dev Correct/Counterfactual/Wrong/Empty context4 top-1为21.09/21.88/27.34/26.56%，global16为6.25/6.25/4.69/5.47%。Counterfactual-minus-Correct NLL为-0.00539，95% CI -0.00842–-0.00204，显著方向错误；正确memory完整code仍0。去掉LM后Correct digit-NLL升至15.8077，Empty保持2.7108，说明相对候选目标伴随严重绝对语言退化。门槛失败、test未评分、两卡释放。
+
+归档`experiments/cbf_ttt/paired_binding_v1`报告/summary/audit/status/hash来源；大工件保留服务器。结论是同一步配对也未使现有dense delta+冻结LM head产生可用绑定，停止继续调listwise/permutation/swap权重。
+
+### 显式候选检索头pilot（执行前）
+
+新增`RETRIEVAL_HEAD_PLAN.md`与`tasks/train_cbf_retrieval_head.py`。检索头把fresh-KV查询末端hidden和候选数字token的冻结平均embedding分别投影到256维，L2归一化后按temperature0.1余弦评分。`head_only`冻结零初始化writer只训练head，作为平衡赋值下query-prior捷径控制；`joint_head_writer`同时训练相同head和七层writer。两臂head seed1301、writer seed301、四个平衡pair cycle、512更新/4096暴露；head lr1e-4、writer lr1e-7，分别clip1，cap0.3，骨干/embedding冻结。
+
+评测固定shift0/2的Correct/同实体Counterfactual/Wrong/Empty，报告context4/global16并增加Full-KV head排序。门槛要求dev Correct context4≥60%、相对Counterfactual≥25点且NLL bootstrap下界>0、Correct global16≥25%、Full-KV global16≥50%。新增`scripts/run_cbf_retrieval_head.sh`、`scripts/audit_cbf_retrieval_head.py`和`tests/test_cbf_retrieval_head.py`；audit重建schedule、检查head-only writer零变化/joint writer全变化、相同head+writer初始化、FP32 optimizer、evaluation聚合和test封存。新head只在opt-in task中创建，不改baseline logits或模型类。
