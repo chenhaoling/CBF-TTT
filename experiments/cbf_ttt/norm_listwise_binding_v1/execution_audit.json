@@ -1,0 +1,69 @@
+{
+  "protocol": "norm_listwise_binding_v1_audit",
+  "passed": true,
+  "data_sha256": "fb35206f49c9d733e78572c8f55ca0bfd6852029e972025b81f437b42b03a971",
+  "arms": {
+    "retrieval_only": {
+      "smoke": {
+        "arm": "retrieval_only",
+        "loss": 1.3704807758331299,
+        "retrieval_loss": 1.3704807758331299,
+        "balanced_loss": 5.978113174438477,
+        "lm_weight": 0.0,
+        "listwise_accuracy": 0.25,
+        "unclipped_gradient_norm": 116008.4765625,
+        "max_relative_delta": 0.0,
+        "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf",
+        "test_scored": false,
+        "memory_cap": 0.3,
+        "seconds": 1.3091411255300045,
+        "peak_allocated_gib": 18.372031211853027,
+        "peak_reserved_gib": 18.626953125
+      },
+      "updates": 256,
+      "exposures": 1024,
+      "steps_sha256": "4f1790a24500048d3eb1aefe838aeb374b610e9d0d63684fd546fff413eeaaa1",
+      "final_gate": {
+        "checks": {
+          "last32_listwise_accuracy": false,
+          "retrieval_below_chance": true,
+          "train_permutation_top1_gap": false,
+          "development_ranking_gate": false
+        },
+        "passed": false
+      }
+    },
+    "retrieval_plus_lm": {
+      "smoke": {
+        "arm": "retrieval_plus_lm",
+        "loss": 2.865009069442749,
+        "retrieval_loss": 1.3704807758331299,
+        "balanced_loss": 5.978113174438477,
+        "lm_weight": 0.25,
+        "listwise_accuracy": 0.25,
+        "unclipped_gradient_norm": 792891.25,
+        "max_relative_delta": 0.0,
+        "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf",
+        "test_scored": false,
+        "memory_cap": 0.3,
+        "seconds": 1.2949509005993605,
+        "peak_allocated_gib": 18.372031211853027,
+        "peak_reserved_gib": 18.626953125
+      },
+      "updates": 256,
+      "exposures": 1024,
+      "steps_sha256": "5289fb3f4e80b7e7266da5269831e054566fc7e71cd75059d4cbacf60e30691a",
+      "final_gate": {
+        "checks": {
+          "last32_listwise_accuracy": false,
+          "retrieval_below_chance": true,
+          "train_permutation_top1_gap": false,
+          "development_ranking_gate": false
+        },
+        "passed": false
+      }
+    }
+  },
+  "identical_initialization": true,
+  "test_scored": false
+}

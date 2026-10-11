@@ -364,3 +364,7 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 已完成[全事实关联绑定pilot](experiments/cbf_ttt/associative_binding_v1/REPORT.md)：32/8世界、两臂各1024问题暴露，独立审计通过。新方法在中点产生Correct相对permutation的0.0125 digit-NLL收益且95% CI大于0，但终点缩至0.0017、区间跨0；终点Correct `global16` top-1为4.69%，低于6.25%随机水平，完整code仍为0。训练contrast从首段0.7989到末段0.8072，没有被优化。下一步应把同一Correct memory下的四值listwise实体检索设为主要目标，并加入梯度配平或去除LM正项消融。
 
 下一步[候选对齐listwise绑定实验](LISTWISE_BINDING_PLAN.md)将同一Correct memory下的四值实体选择直接设为主要交叉熵目标，比较retrieval-only与`retrieval + 0.25 * LM`。使用相同32/8世界、固定0/512/1024三点、真实GPU smoke及Correct/permuted/Wrong/Empty门槛；训练probe拟合与开发泛化必须同时通过，test继续封存。
+
+范数约束恢复实验已[完成并独立审计](experiments/cbf_ttt/norm_listwise_binding_v1/REPORT.md)：cap 0.3解决了无界fast memory安全停止，两臂末段四分类loss均低于随机损失；primary训练准确率37.5%，但dev 16候选Correct/Permuted top-1同为7.81%，完整code仍为0，正式门槛失败。小幅permutation NLL差异没有转化为排序或Wrong/Empty内容区分。
+
+下一步[反事实重赋值episodic binding实验](EPISODIC_BINDING_PLAN.md)让同一问题在四个episode中分别对应四个不同值，消除慢参数直接记忆固定实体—编号的捷径；与只看原始赋值的matched baseline比较，并以Correct/同实体Counterfactual/跨世界Wrong/Empty及4/16候选指标检验是否真正读取当前session memory。

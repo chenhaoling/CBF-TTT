@@ -1352,3 +1352,19 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 提交`7455ea3`的真实smoke通过，两个臂初始retrieval loss均1.3705、四分类准确率25%，峰值18.37GiB。formal完成checkpoint 0后开始训练；retrieval-only在约第41次更新前触发原有`||delta W||/||W||>1`安全阈值，runner终止两臂并写`failed`，GPU释放，test未评分。停止前retrieval-only第40步loss为1.4112且未优于初始值，说明直接listwise梯度会放大fast memory而未改善检索。失败目录`/home/ctj/cbf_ttt_listwise_binding_v1`保留，不作为正式结果。
 
 新增`cbf_ttt.event_writer.bound_memory`及`write_memory(..., max_relative_norm)`可选参数：逐层把fast-weight delta相对冻结down-projection的范数限制到固定上限，缩放系数detach，从而保留delta方向梯度；默认`None`保持所有baseline和旧实验语义。关联评测器新增可选`memory_cap`并在Correct/permuted/twin/Wrong所有writer memory上统一应用。恢复实验固定cap 0.3，两臂训练与评测一致，其他数据、预算、顺序、lr和门槛不变。新增`NORM_LISTWISE_BINDING_PLAN.md`和独立runner；单测检查范数上限与非零有限梯度。正式恢复尚未执行。
+
+### 范数约束listwise完成结果
+
+双5090正式恢复实验完成：retrieval-only与retrieval-plus-LM各256更新/1024问题暴露，0/512/1024三点评测齐全，服务器14项测试和独立审计通过。冻结骨干hash不变，writer/AdamW状态FP32，test未评分。训练allocated峰值18.8164/18.8200GiB，reserved峰值19.1055/19.1152GiB，平均更新0.6932/0.6807秒，最大测得相对delta 0.30109/0.30087；未触发阈值1的安全停止。
+
+四分类retrieval-only首/末32步loss 1.5732→1.2629、accuracy 26.56%→46.09%；hybrid为1.5010→1.3198、23.44%→37.50%，均低于`log(4)`随机loss但未达>50%门槛。固定终点hybrid train-probe Correct/Permuted global16 top-1为18.75/15.62%，dev为7.81/7.81%；dev permuted-minus-Correct digit-NLL收益0.0200，95% CI 0.0013–0.0411，但top-1无差。Wrong收益-0.0442且CI跨0，Empty收益-0.5377且CI严格为负，完整code仍0；Full-KV dev code 92.19%。retrieval-only训练Correct/Permuted终点均20.31%，dev 4.69/3.12%，同时发生严重LM退化。
+
+预登记stage gate失败。结论限定为：cap解决数值爆炸，listwise目标可以下降，但没有建立可靠的current-memory实体—值绑定。新增归档`experiments/cbf_ttt/norm_listwise_binding_v1/{REPORT.md,RUN_STATUS.md,RUN_STATUS.json,summary.json,execution_audit.json,git_commit.txt,.gitignore}`；原始step/evaluation/checkpoint/optimizer保留服务器`/home/ctj/cbf_ttt_norm_listwise_binding_v1`。baseline默认cap为None，兼容性不变。
+
+### 反事实重赋值episodic binding（执行前）
+
+结果审查发现新的混淆：固定训练query在所有轮次长期对应同一答案，writer慢参数可记住query→value而绕过当前session memory。新增`EPISODIC_BINDING_PLAN.md`，以相同32/8世界、4轮、1024问题暴露、256更新和cap 0.3比较`fixed_assignment`与`episodic_assignment`。后者在每个context中定位四个等长value token span，构造四个长度不变的循环赋值episode；每个query在四轮中均衡对应四个值，背景、实体、query和值集合不变。
+
+新增`tasks/train_cbf_episodic_binding.py`：`rotation_episodes`构造/验证四个赋值，`episode_schedule`保证episodic每context覆盖0/1/2/3且fixed始终0，训练复用四候选listwise+0.25 balanced LM与原生可微writer。评测固定assignment shift 0/2，Correct memory与同实体下一赋值Counterfactual、跨世界Wrong、Empty比较，同时报告context4/global16排序和完整生成，Full-KV作为可读性对照。最终episodic门槛要求dev Full-KV code≥80%、Correct context4 top-1≥60%、相对Counterfactual至少+25点且NLL gain bootstrap 95%下界>0、Correct global16 top-1≥25%。
+
+新增`scripts/run_cbf_episodic_binding.sh`双卡测试/smoke/formal/汇总/审计流程，`scripts/audit_cbf_episodic_binding.py`独立重建token替换、schedule/target、训练聚合、初始张量、checkpoint/evaluation hash、门槛及test封存；`tests/test_cbf_episodic_binding.py`覆盖循环赋值、均衡调度和因果门槛。与既有相关测试本地18项中13通过、5项因本地无torch跳过；Python及shell语法通过。所有新行为为opt-in，不改baseline配置或旧工件，无新增依赖。风险包括仅四个循环排列、8个dev来源组和单seed；即使通过仍需新排列族与新seed确认。
