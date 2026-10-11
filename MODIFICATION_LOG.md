@@ -1410,3 +1410,5 @@ primary joint的dev Correct/Counterfactual/Wrong/Empty context4 top-1为25.00/25
 新增`FULLKV_HEAD_CONTROL_PLAN.md`、`tasks/train_cbf_fullkv_head_control.py`、`scripts/run_cbf_fullkv_head_control.sh`、`scripts/audit_cbf_fullkv_head_control.py`和`tests/test_cbf_fullkv_head_control.py`。两臂`same_lr/high_lr`分别使用1e-4/1e-3 head学习率，共享seed1301初始化、32/8 train/dev世界、四轮反事实均衡调度、512次更新和4096问题暴露。writer/骨干/embedding全冻结；先对完整4096-token context+query提取固定末位hidden特征，再只优化与上软pilot完全相同的256维余弦head。评测shift0/2的context4/global16，primary high-lr门槛要求末32步训练accuracy≥80%、dev context4≥75%、dev global16≥50%且来源组bootstrap 95%下界高于6.25%随机水平。
 
 审计重建schedule、逐行聚合、gate、feature/step hash，并核对两臂head初始张量一致、参数确实更新和test封存。本地7项相关测试6通过、1项因本地无torch跳过；Python语法、shell语法和diff检查通过。所有行为opt-in，未改baseline模型或默认训练。
+
+首次服务器启动11/11测试和双卡smoke通过，正式双臂各提取完1152条Full-KV特征，但在checkpoint-0首个排序前因`_scores`把候选list误作单个dict key而停止；尚无optimizer step或效果结果，GPU已释放。修正为按候选顺序stack value tensor，并增加直接覆盖列表候选的单测；不改数据、门槛、学习率或预算。失败目录保留为preflight来源。

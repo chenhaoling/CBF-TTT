@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.train_cbf_fullkv_head_control import aggregate, feature_key, gate, required_items
+from tasks.train_cbf_fullkv_head_control import _scores, aggregate, feature_key, gate, required_items
 
 
 class FullKVHeadControlTests(unittest.TestCase):
@@ -36,6 +36,21 @@ class FullKVHeadControlTests(unittest.TestCase):
         result = aggregate(records)
         self.assertEqual(result["dev"]["rows"], 2)
         self.assertEqual(result["dev"]["sets"]["global16"]["top1"], 1)
+
+    def test_scores_stacks_member_vectors(self):
+        try:
+            import torch
+        except ImportError:
+            self.skipTest("torch unavailable")
+
+        class Head:
+            def __call__(self, query, values):
+                return query @ values.T
+
+        scores = _scores(Head(), torch.tensor([[1., 0.]]), ["a", "b"],
+                         {"a": torch.tensor([1., 0.]), "b": torch.tensor([0., 1.])})
+        self.assertEqual([row["answer"] for row in scores], ["a", "b"])
+        self.assertLess(scores[0]["digit_nll"], scores[1]["digit_nll"])
 
 
 if __name__ == "__main__":

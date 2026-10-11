@@ -72,8 +72,9 @@ def extract_features(model, items, vocab, output: Path):
 
 def _scores(head, query, members, value_map):
     import torch.nn.functional as F
+    import torch
 
-    vectors = value_map[members]
+    vectors = torch.stack([value_map[value] for value in members])
     logits = head(query, vectors).squeeze(0)
     nll = -F.log_softmax(logits.float(), dim=-1)
     return [{"answer": value, "digit_nll": float(nll[index]),
