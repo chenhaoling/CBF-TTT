@@ -51,3 +51,8 @@ PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python \
 bash scripts/run_cbf_dynamic_binding.sh
 ```
 
+## Completed result
+
+The two-GPU run completed on 2026-10-11. Both arms finished 4,096 question exposures and the independent execution audit passed. At the fixed development endpoint, joint CE and joint binding both had zero complete-code accuracy. Binding improved Correct-memory digit NLL from 2.6741 to 2.5776, but its Wrong-minus-Correct gain was only 0.0394 with bootstrap 95% CI [-0.0917, 0.1707]. Full-KV code accuracy was 95.70%, so the failure is specific to learned memory content rather than prompt readability.
+
+The preregistered content gate failed. Test remained sealed and no forgetting controller was trained. See [the complete report](experiments/cbf_ttt/dynamic_binding_v1/REPORT.md).

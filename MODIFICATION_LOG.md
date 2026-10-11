@@ -1286,3 +1286,13 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 正式数据固定seed 20261013、train/dev/test 128/32/32世界、FineWeb-Edu/LongCrawl64自然背景等量交替、4096 token；四轮共4096问题暴露/1024更新，checkpoint 0/2048/4096。train probe固定8世界，dev全32世界，test不装箱/评分。模型、lr1e-7、FP32 writer/AdamW、BF16 forward、clip1和`||delta||/||W||<=1`均与上一轮一致；内容门槛不变。
 
 新增`scripts/audit_cbf_dynamic_binding.py`独立复核数据、调度、逐步目标分解、对比臂启用、checkpoint/optimizer FP32、参数变化、策略矩阵、summary和初始张量一致；`tests/test_cbf_dynamic_binding.py`检查四问题调度和contrast梯度方向；`scripts/run_cbf_dynamic_binding.sh`串起8/2/2双卡smoke、资源门槛、正式双臂和审计。完整预注册见`DYNAMIC_BINDING_PLAN.md`。这些均为独立入口，不改baseline或上一轮工件；尚未产生GPU结果。
+
+### 动态随机值绑定实验：完成与负结果（2026-10-11）
+
+双5090运行于11:07:50–11:59:29 +08:00完成，包含数据构建、8/2/2 smoke、128/32 formal双臂、三点评测、汇总和独立审计。服务器启动脚本聚焦7项测试全部通过；smoke和formal审计均通过。正式joint CE/joint binding各完成1024 update、4096问题暴露，训练峰值allocated 12.0963/14.1159GiB、平均update 0.4495/0.7290秒、最大相对delta 0.7371/0.7252，未触发OOM/NaN/安全停止。冻结骨干hash不变，writer与AdamW状态FP32；test保持语义文本且未tokenize/评分。
+
+固定终点dev中，joint CE的Correct/Wrong/Empty digit-NLL为2.6741/2.6726/2.6962，binding为2.5776/2.6170/2.6962；binding相对CE将Correct digit-NLL降低0.0965、answer-NLL降低0.0620。Binding的Wrong-minus-Correct来源组收益0.0394（5000次bootstrap 95% CI −0.0917–0.1707），Empty-minus-Correct为0.1186（0.0224–0.2010），anchor correct-minus-twin仅0.0090。两臂Correct/Wrong/Empty完整编号正确率全部为0；Correct首token正确约91.41%/88.28%，说明主要学到`code_`格式。Full-KV编号95.70%，输入可读。
+
+预登记内容门槛失败，不能把小幅NLL改善解释为可靠随机值绑定，也未构建遗忘标签或训练遗忘控制器。两臂dev Correct digit-NLL均在2048暴露优于4096终点，记录为非单调诊断，不事后选checkpoint。下一步应修改writer的实体条件检索/绑定机制，并加入四事实全量key-query或memory permutation对比；只有Correct稳定优于within-world permuted/Wrong/twin且生成门槛通过后，才恢复遗忘oracle。
+
+新增`experiments/cbf_ttt/dynamic_binding_v1/{REPORT.md,RUN_STATUS.md,RUN_STATUS.json,ARTIFACTS_SHA256.txt,.gitignore}`及source/data manifest、smoke/formal summary、execution audit、每臂manifest/complete/checkpoint summary。报告记录目标、假设、文件与函数、配置、附件构思对应、完整指标、资源、命令、baseline兼容性、已完成/未完成、风险和TODO。原始逐步/逐题JSONL及checkpoint保留在服务器`/home/ctj/cbf_ttt_dynamic_binding_v1`；传输tar与合并日志仅本地忽略。baseline代码、预训练配置和入口未修改，无新增依赖。

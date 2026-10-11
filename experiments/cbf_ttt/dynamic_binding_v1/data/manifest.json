@@ -1,0 +1,43 @@
+{
+  "protocol": "dynamic_memory_writer_v1",
+  "source": "/home/ctj/cbf_ttt_dynamic_binding_v1/source",
+  "source_manifest_sha256": "c2e42487cf44d74578b8f7934077ce16de426eabd5d2050567c0cc2cad62df38",
+  "data_sha256": "fb35206f49c9d733e78572c8f55ca0bfd6852029e972025b81f437b42b03a971",
+  "backgrounds_sha256": "d435a6d871a8ade10f579536bf20897a9c6da09576575d5e920614948f156991",
+  "natural_corpus": "/home/ctj/data/cbf_ttt_1b/mixed_1b.jsonl",
+  "natural_corpus_size": 4158720502,
+  "chunk": 4096,
+  "rows": {
+    "train": 1024,
+    "dev": 256
+  },
+  "contexts": {
+    "train": 256,
+    "dev": 64
+  },
+  "groups": {
+    "train": 128,
+    "dev": 32
+  },
+  "test_tokenized": false,
+  "background_sources": {
+    "fineweb_edu": 80,
+    "longcrawl64": 80
+  },
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "tokenizer_files_sha256": {
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+  },
+  "answer_tokens_range": [
+    7,
+    7
+  ],
+  "fact_suffix_tokens_range": [
+    109,
+    152
+  ],
+  "eos_token_id": 151645
+}

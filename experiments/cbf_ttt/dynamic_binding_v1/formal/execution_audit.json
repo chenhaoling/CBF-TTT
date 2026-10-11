@@ -1,0 +1,36 @@
+{
+  "protocol": "dynamic_binding_writer_v1_audit",
+  "passed": true,
+  "data": {
+    "rows": 1280,
+    "data_sha256": "fb35206f49c9d733e78572c8f55ca0bfd6852029e972025b81f437b42b03a971",
+    "backgrounds_sha256": "d435a6d871a8ade10f579536bf20897a9c6da09576575d5e920614948f156991",
+    "semantic_seed": 20261013,
+    "test_tokenized": false
+  },
+  "arms": {
+    "joint_ce": {
+      "arm": "joint_ce",
+      "updates": 1024,
+      "question_exposures": 4096,
+      "context_writes": 1024,
+      "peak_training_allocated_gib": 12.0962815284729,
+      "peak_training_reserved_gib": 12.3359375,
+      "max_relative_delta": 0.7371082901954651,
+      "max_evaluation_seconds": 0.9949624165892601,
+      "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf"
+    },
+    "joint_binding": {
+      "arm": "joint_binding",
+      "updates": 1024,
+      "question_exposures": 4096,
+      "context_writes": 2048,
+      "peak_training_allocated_gib": 14.11586856842041,
+      "peak_training_reserved_gib": 14.85546875,
+      "max_relative_delta": 0.7252055406570435,
+      "max_evaluation_seconds": 0.9683594182133675,
+      "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf"
+    }
+  },
+  "stage_passed": false
+}

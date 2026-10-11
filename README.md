@@ -357,4 +357,4 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 
 动态世界记忆写入[实验计划](DYNAMIC_MEMORY_WRITER_PLAN.md)与[完成报告](experiments/cbf_ttt/dynamic_memory_writer_v1/REPORT.md)：64/16/16个独立随机世界、FineWeb-Edu/LongCrawl64自然背景。Joint完成2048问题暴露但dev Correct/Wrong/Empty编号均为0，内容门槛失败；sequential在第1095步触发delta安全阈值。当前不进入遗忘控制器训练。
 
-下一轮[动态随机值绑定实验](DYNAMIC_BINDING_PLAN.md)：扩大到128/32/32世界和4096问题暴露，对照普通joint CE与数字区域加权、anchor twin contrast，继续以fresh-KV Correct/Wrong/Empty门槛决定是否进入遗忘研究。
+已完成[动态随机值绑定实验](experiments/cbf_ttt/dynamic_binding_v1/REPORT.md)：128/32/32世界、每臂4096问题暴露，独立审计通过。Binding相对joint CE将dev Correct-memory digit NLL降低0.0965，但两臂完整编号正确率仍为0；Binding的Wrong-minus-Correct增益仅0.0394且95% CI跨0。Full-KV为95.70%，说明writer仍未可靠绑定随机值。预登记内容门槛失败，test未评分，未进入遗忘控制器训练。
