@@ -1,0 +1,33 @@
+{
+  "protocol": "dynamic_memory_writer_v1_safety_stop_audit",
+  "passed": true,
+  "data": {
+    "rows": 640,
+    "data_sha256": "cc62cd72134334532a5250152a74c5e0a52442419a5ade265f40d7c31f0da48d",
+    "backgrounds_sha256": "5235c118f999c9e83ae767338210a66eb4b8ca5063a131ee548e7b2760005059",
+    "test_tokenized": false
+  },
+  "joint_context": {
+    "arm": "joint_context",
+    "updates": 512,
+    "question_exposures": 2048,
+    "peak_training_allocated_gib": 12.097898960113525,
+    "peak_training_reserved_gib": 12.3359375,
+    "max_evaluation_seconds": 0.969633175060153,
+    "max_evaluation_allocated_gib": 10.429437160491943,
+    "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf"
+  },
+  "sequential": {
+    "completed_updates": 1094,
+    "failed_update": 1095,
+    "steps_sha256": "e59b93f1058f5edf71310719679f01fe945d9219f3ce683f910aac315051f852",
+    "run_log_sha256": "003972548803d893171f3a0b26c00a5e3da122ae8336c48c9cf2b8b152d6622f",
+    "evaluated_checkpoints": [
+      "0",
+      "1024"
+    ],
+    "schedule_prefix_verified": true,
+    "initial_tensors_match_joint": true
+  },
+  "stage_passed": false
+}

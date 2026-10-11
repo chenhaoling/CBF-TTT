@@ -1270,3 +1270,11 @@ bash scripts/run_cbf_dynamic_memory.sh
 新增`scripts/resume_cbf_dynamic_memory_formal.sh`作为可复现恢复入口：先要求smoke独立审计通过，把首次OOM的`formal`非破坏性移动为`formal_failed_e7f7ff6`，记录修正提交，重跑4项新测试，再用完全相同的数据、初始化、训练预算、评测矩阵和门槛启动正式双臂。该恢复只改变评测memory的驻留生命周期。
 
 正式恢复运行中joint-context臂完成2048问题暴露，sequential臂在第1095次更新前触发预登记的`||delta||/||W|| > 1`安全阈值。新增`scripts/finalize_cbf_dynamic_memory_safety_stop.py`，不调用模型，独立核验完整joint臂、sequential固定调度的1094步前缀、0/1024评测、两臂相同初始张量、保存参数dtype/变化、失败日志证据和test封存，并明确生成“一个臂完成、一个臂安全停止”的summary，避免把部分臂伪装成完整正式实验。
+
+## 完成结果
+
+服务器20项相关测试通过；8/2/2 smoke双臂完成且独立审计通过。初版formal评测因同时保留约50份dense memory发生OOM，未开始训练；失败工件保留。按世界流式修正后显存约11GiB，joint完成512更新/2048问题暴露，训练allocated/reserved峰值12.10/12.34GiB、平均update 0.4428秒；sequential完成1094步，第1095步在optimizer更新前触发`||delta||/||W||>1`并停止。终态审计通过640 packed rows、hash/twin/调度/checkpoint/FP32/冻结骨干/聚合/安全日志/test封存，状态为`completed_with_sequential_safety_stop`。
+
+Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7358，但三者编号正确率均0；dev为2.6992/2.7392/2.7586且编号同样全0。dev Correct相对Wrong/Empty的来源组收益为0.0401（95% CI −0.0963–0.1851）和0.0594（−0.0412–0.1612），未达0.10且区间跨0；anchor twin优势−0.00444。Full-KV dev编号93.75%，说明输入可读。Correct answer-NLL相对Empty从4.3280降到2.3471，但随机数字改善很小，表明主要学习共享格式而非session随机值绑定。Sequential中点dev也为0编号，Correct相对Empty digit-NLL更差0.0366。
+
+预登记内容门槛失败，test未评分，不训练遗忘控制器或3000条反事实标签。完整目标/假设、文件清单、数据、指标、资源、审计、命令、兼容性、风险和TODO已归档于`experiments/cbf_ttt/dynamic_memory_writer_v1/REPORT.md`；小型manifest/summary/audit一并入库，大checkpoint与逐行日志保留远程。下一步建议稳定使用joint-context，在更多独立世界上比较普通CE与仅对变化anchor使用的twin-contrast/数字区域损失；内容门槛通过后才进入遗忘oracle。

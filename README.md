@@ -355,4 +355,4 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 
 该[干扰实验已完成](experiments/cbf_ttt/fact_interference_v1/REPORT.md)：发现局部“学一题伤其他题”事件，joint/mixed通过小样本训练内容门槛，但三臂开发均0/16。逐问题正确/错配均14/16，联合14/16对7/16，mixed13/16对5/16；尚未验证同context分组的独特泛化优势。
 
-下一轮[动态世界记忆写入实验](DYNAMIC_MEMORY_WRITER_PLAN.md)：将训练/开发/封存测试扩为64/16/16个独立随机世界，使用FineWeb-Edu与LongCrawl64自然背景，对照逐问题与同context四问题联合训练。先跑8/2/2 smoke；只有fresh-KV下Correct显著优于Wrong/Empty时才进入遗忘策略训练。
+动态世界记忆写入[实验计划](DYNAMIC_MEMORY_WRITER_PLAN.md)与[完成报告](experiments/cbf_ttt/dynamic_memory_writer_v1/REPORT.md)：64/16/16个独立随机世界、FineWeb-Edu/LongCrawl64自然背景。Joint完成2048问题暴露但dev Correct/Wrong/Empty编号均为0，内容门槛失败；sequential在第1095步触发delta安全阈值。当前不进入遗忘控制器训练。

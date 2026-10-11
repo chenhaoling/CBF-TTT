@@ -1,0 +1,34 @@
+{
+  "protocol": "dynamic_memory_writer_v1_audit",
+  "passed": true,
+  "data": {
+    "rows": 640,
+    "data_sha256": "cc62cd72134334532a5250152a74c5e0a52442419a5ade265f40d7c31f0da48d",
+    "backgrounds_sha256": "5235c118f999c9e83ae767338210a66eb4b8ca5063a131ee548e7b2760005059",
+    "semantic_seed": 20261012,
+    "test_tokenized": false
+  },
+  "arms": {
+    "sequential": {
+      "arm": "sequential",
+      "updates": 64,
+      "question_exposures": 64,
+      "peak_training_allocated_gib": 10.296563625335693,
+      "peak_training_reserved_gib": 19.0625,
+      "max_evaluation_seconds": 0.9883799180388451,
+      "max_evaluation_allocated_gib": 15.625726222991943,
+      "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf"
+    },
+    "joint_context": {
+      "arm": "joint_context",
+      "updates": 16,
+      "question_exposures": 64,
+      "peak_training_allocated_gib": 12.179608821868896,
+      "peak_training_reserved_gib": 19.546875,
+      "max_evaluation_seconds": 0.9734888393431902,
+      "max_evaluation_allocated_gib": 15.625060558319092,
+      "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf"
+    }
+  },
+  "stage_passed": false
+}
