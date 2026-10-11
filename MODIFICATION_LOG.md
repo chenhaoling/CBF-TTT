@@ -1268,3 +1268,5 @@ bash scripts/run_cbf_dynamic_memory.sh
 修正后按来源世界流式评测：每次只构造当前两个twin context与相邻wrong donor的两个context，共4份memory；完成该世界8题全部策略后释放并清理CUDA cache。问题、策略、checkpoint、训练预算和预登记门槛均不变。新增单测固定每世界评测闭包恰为4 contexts；安全tripwire统计显式detach，去除无害的requires-grad转float警告。正式实验从已审计的相同数据和smoke继续，不重跑或选择smoke结果。
 
 新增`scripts/resume_cbf_dynamic_memory_formal.sh`作为可复现恢复入口：先要求smoke独立审计通过，把首次OOM的`formal`非破坏性移动为`formal_failed_e7f7ff6`，记录修正提交，重跑4项新测试，再用完全相同的数据、初始化、训练预算、评测矩阵和门槛启动正式双臂。该恢复只改变评测memory的驻留生命周期。
+
+正式恢复运行中joint-context臂完成2048问题暴露，sequential臂在第1095次更新前触发预登记的`||delta||/||W|| > 1`安全阈值。新增`scripts/finalize_cbf_dynamic_memory_safety_stop.py`，不调用模型，独立核验完整joint臂、sequential固定调度的1094步前缀、0/1024评测、两臂相同初始张量、保存参数dtype/变化、失败日志证据和test封存，并明确生成“一个臂完成、一个臂安全停止”的summary，避免把部分臂伪装成完整正式实验。
