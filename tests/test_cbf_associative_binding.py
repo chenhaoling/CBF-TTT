@@ -64,7 +64,7 @@ class AssociativeObjectiveTests(unittest.TestCase):
                      for value in [2., 3., 4., 5.]]
         loss, _, contrast, terms = objective(positives, negatives, "all_fact_permutation")
         self.assertEqual(len(terms), 4)
-        self.assertGreater(float(contrast), 0)
+        self.assertGreater(float(contrast.detach()), 0)
         loss.backward()
         self.assertTrue(all(value["digits"].grad.item() > 0 for value in positives))
         self.assertTrue(all(value["digits"].grad.item() < 0 for value in negatives))
@@ -90,4 +90,3 @@ class AssociativeGateTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
