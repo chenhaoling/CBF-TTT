@@ -24,14 +24,31 @@ def forward(model, ids, cache):
     return model.model(input_ids=tokens,past_key_values=cache,use_cache=True).last_hidden_state
 
 
-def write_memory(model, ids):
+def bound_memory(model, memory, max_relative_norm):
+    """Bound each fast-weight delta relative to its frozen base matrix norm."""
+    if max_relative_norm is None:
+        return memory
+    if not 0 < max_relative_norm <= 1:
+        raise ValueError('max_relative_norm must be in (0, 1]')
+    bounded={}
+    for layer,delta in memory.items():
+        base=model.model.layers[layer].mlp.down_proj.weight
+        relative=delta.float().norm()/base.float().norm().clamp_min(1e-8)
+        # Stop gradients through the norm controller while preserving gradients
+        # through the bounded delta direction.
+        scale=(relative.new_tensor(max_relative_norm)/relative.clamp_min(1e-12)).clamp(max=1).detach()
+        bounded[layer]=delta*scale.to(delta.dtype)
+    return bounded
+
+
+def write_memory(model, ids, max_relative_norm=None):
     if len(ids)!=model.config.ttt_chunk:raise ValueError('writer requires one complete chunk')
     cache=cache_for(model,collect=True)
     forward(model,ids,cache)
     memory=cache.cbf_candidates
     if set(memory)!=set(model.config.ttt_layers):raise ValueError('missing writer layer')
     if any(not torch.isfinite(v).all() for v in memory.values()):raise RuntimeError('nonfinite delta')
-    return memory
+    return bound_memory(model,memory,max_relative_norm)
 
 
 def answer_logits(model,memory,query,answer,cache=None):

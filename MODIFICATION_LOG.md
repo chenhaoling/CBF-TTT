@@ -1346,3 +1346,9 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 新增`tasks/train_cbf_listwise_binding.py`，包含可微batch候选评分、listwise目标、单更新真实GPU smoke、32/8世界四轮正式训练、0/512/1024生成与global16评测，以及训练拟合+开发泛化联合门槛。新增`scripts/audit_cbf_listwise_binding.py`独立复核smoke、四值候选集合、调度、loss聚合、初始化、checkpoint/evaluation hash、门槛与test封存；`scripts/run_cbf_listwise_binding.sh`双卡依次执行测试、并行smoke、资源阈值、并行formal、汇总和审计；`tests/test_cbf_listwise_binding.py`覆盖候选集合、retrieval-only梯度隔离、混合权重和联合门槛。预注册见`LISTWISE_BINDING_PLAN.md`。
 
 正式primary仍为`retrieval_plus_lm`固定终点dev global16门槛，并新增三项优化sanity：末32步四分类训练准确率>50%、retrieval loss低于`log(4)`、终点train-probe Correct相对permuted top-1至少高10个百分点。中点不用于选模。该实验为opt-in，不改baseline；GPU结果尚未产生。
+
+### 无界listwise安全停止与范数约束恢复
+
+提交`7455ea3`的真实smoke通过，两个臂初始retrieval loss均1.3705、四分类准确率25%，峰值18.37GiB。formal完成checkpoint 0后开始训练；retrieval-only在约第41次更新前触发原有`||delta W||/||W||>1`安全阈值，runner终止两臂并写`failed`，GPU释放，test未评分。停止前retrieval-only第40步loss为1.4112且未优于初始值，说明直接listwise梯度会放大fast memory而未改善检索。失败目录`/home/ctj/cbf_ttt_listwise_binding_v1`保留，不作为正式结果。
+
+新增`cbf_ttt.event_writer.bound_memory`及`write_memory(..., max_relative_norm)`可选参数：逐层把fast-weight delta相对冻结down-projection的范数限制到固定上限，缩放系数detach，从而保留delta方向梯度；默认`None`保持所有baseline和旧实验语义。关联评测器新增可选`memory_cap`并在Correct/permuted/twin/Wrong所有writer memory上统一应用。恢复实验固定cap 0.3，两臂训练与评测一致，其他数据、预算、顺序、lr和门槛不变。新增`NORM_LISTWISE_BINDING_PLAN.md`和独立runner；单测检查范数上限与非零有限梯度。正式恢复尚未执行。

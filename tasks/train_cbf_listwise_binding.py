@@ -105,7 +105,8 @@ def smoke(args) -> dict:
         optimizer.zero_grad(set_to_none=True)
         with torch.autocast("cuda", dtype=torch.bfloat16):
             context_id = selected[0]["context_id"]
-            memory = write_memory(model, selected[0]["context_ids"])
+            memory = write_memory(model, selected[0]["context_ids"],
+                                  max_relative_norm=args.memory_cap)
             values = [regions(model, memory, row, data_manifest["eos_token_id"]) for row in selected]
             balanced = sum(.75 * value["digits"] + .125 * value["prefix"] + .125 * value["eos"]
                            for value in values) / len(values)
@@ -132,6 +133,7 @@ def smoke(args) -> dict:
             "listwise_accuracy": statistics.fmean(item[2] for item in retrieval_items),
             "unclipped_gradient_norm": gradient_norm, "max_relative_delta": relative,
             "backbone_sha256": model_meta["backbone_sha256"], "test_scored": False,
+            "memory_cap": args.memory_cap,
         }
 
     result, profile = measure(one_step)
@@ -159,7 +161,7 @@ def run(args) -> dict:
                 if not parameter.requires_grad}
     initial = {name: parameter.detach().cpu().clone() for name, parameter in params.items()}
     manifest = {
-        **model_meta, "protocol": "listwise_binding_v1", "arm": args.arm,
+        **model_meta, "protocol": "norm_listwise_binding_v1", "arm": args.arm,
         "rounds": args.rounds, "question_exposures": total_exposures,
         "optimizer_updates": len(batches), "context_writes_per_update": 1,
         "query_reads_per_update": 8, "listwise_candidates": 4,
@@ -167,6 +169,7 @@ def run(args) -> dict:
         "lr": args.lr, "clip": 1.0, "weight_decay": 0.0, "groups": selected_groups,
         "data_sha256": data_manifest["data_sha256"], "train_groups": args.train_groups,
         "dev_groups": args.dev_groups, "temperature": 1.0,
+        "memory_cap": args.memory_cap,
         "lm_weight": 0.0 if args.arm == "retrieval_only" else 0.25,
         "test_scored": False,
     }
@@ -182,7 +185,8 @@ def run(args) -> dict:
         temp.replace(path)
 
     save(0)
-    evaluate(model, tokenizer, rows, data_manifest, output, 0, permutation, vocab)
+    evaluate(model, tokenizer, rows, data_manifest, output, 0, permutation, vocab,
+             memory_cap=args.memory_cap)
     exposure = 0
     records = []
     with (output / "steps.jsonl").open("x") as sink:
@@ -195,7 +199,8 @@ def run(args) -> dict:
                     context_id = selected[0]["context_id"]
                     if any(row["context_id"] != context_id for row in selected):
                         raise ValueError("listwise batch mixes contexts")
-                    memory = write_memory(model, selected[0]["context_ids"])
+                    memory = write_memory(model, selected[0]["context_ids"],
+                                          max_relative_norm=args.memory_cap)
                     values = [regions(model, memory, row, data_manifest["eos_token_id"])
                               for row in selected]
                     balanced = sum(.75 * value["digits"] + .125 * value["prefix"] + .125 * value["eos"]
@@ -242,7 +247,8 @@ def run(args) -> dict:
             sink.flush()
             if exposure in checkpoints[1:]:
                 save(exposure)
-                evaluate(model, tokenizer, rows, data_manifest, output, exposure, permutation, vocab)
+                evaluate(model, tokenizer, rows, data_manifest, output, exposure, permutation, vocab,
+                         memory_cap=args.memory_cap)
             if update % 32 == 0:
                 print(json.dumps({key: record[key] for key in
                                   ("update", "exposure_end", "loss", "retrieval_loss",
@@ -316,7 +322,7 @@ def summarize(root: str | Path, save: bool = True) -> dict:
         if arms[ARMS[0]]["manifest"][key] != arms[ARMS[1]]["manifest"][key]:
             raise ValueError("listwise arms are not matched")
     result = {
-        "protocol": "listwise_binding_v1", "arms": arms,
+        "protocol": "norm_listwise_binding_v1", "arms": arms,
         "primary_arm": "retrieval_plus_lm",
         "stage_passed": arms["retrieval_plus_lm"]["final_gate"]["passed"],
         "test_scored": False, "terminal_status": "completed_listwise_binding",
@@ -339,6 +345,7 @@ def main() -> None:
         item.add_argument("--dev-groups", type=int, default=8)
         item.add_argument("--order-seed", type=int, default=919)
         item.add_argument("--lr", type=float, default=1e-7)
+        item.add_argument("--memory-cap", type=float, default=.3)
         if name == "run":
             item.add_argument("--rounds", type=int, default=4)
     summary = sub.add_parser("summarize")
@@ -350,4 +357,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

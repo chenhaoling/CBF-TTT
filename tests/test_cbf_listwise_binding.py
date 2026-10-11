@@ -21,6 +21,30 @@ class ListwiseDataTests(unittest.TestCase):
 
 
 class ListwiseObjectiveTests(unittest.TestCase):
+    def test_fast_memory_norm_bound_preserves_gradient(self):
+        try:
+            import torch
+        except ImportError:
+            self.skipTest("torch unavailable")
+        from cbf_ttt.event_writer import bound_memory
+
+        class Node:
+            pass
+
+        model = Node()
+        model.model = Node()
+        model.model.layers = [Node()]
+        model.model.layers[0].mlp = Node()
+        model.model.layers[0].mlp.down_proj = Node()
+        model.model.layers[0].mlp.down_proj.weight = torch.ones(2, 2)
+        delta = torch.full((2, 2), 2.0, requires_grad=True)
+        bounded = bound_memory(model, {0: delta}, .3)[0]
+        ratio = bounded.float().norm() / model.model.layers[0].mlp.down_proj.weight.norm()
+        self.assertAlmostEqual(float(ratio.detach()), .3, places=6)
+        bounded.sum().backward()
+        self.assertTrue(torch.isfinite(delta.grad).all())
+        self.assertGreater(float(delta.grad.abs().sum()), 0)
+
     def test_retrieval_only_excludes_lm_gradient(self):
         try:
             import torch
@@ -72,4 +96,3 @@ class ListwiseGateTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

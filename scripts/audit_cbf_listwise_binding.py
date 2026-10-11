@@ -33,10 +33,10 @@ def audit(root: str | Path, data_root: str | Path) -> dict:
         output = root / arm
         manifest = json.loads((output / "training_manifest.json").read_text())
         complete = json.loads((output / "complete.json").read_text())
-        if (manifest["protocol"] != "listwise_binding_v1" or manifest["arm"] != arm
+        if (manifest["protocol"] != "norm_listwise_binding_v1" or manifest["arm"] != arm
                 or manifest["data_sha256"] != data_manifest["data_sha256"]
                 or manifest["test_scored"] or manifest["context_writes_per_update"] != 1
-                or manifest["listwise_candidates"] != 4):
+                or manifest["listwise_candidates"] != 4 or manifest["memory_cap"] != .3):
             raise ValueError("listwise manifest mismatch")
         selected_groups = manifest["groups"]
         rows = [row for row in all_rows if row["group_id"] in selected_groups[row["split"]]]
@@ -92,14 +92,14 @@ def audit(root: str | Path, data_root: str | Path) -> dict:
             "steps_sha256": sha(steps_path), "final_gate": gate,
         }
     summary = json.loads((root / "summary.json").read_text())
-    if summary["protocol"] != "listwise_binding_v1" or summary["test_scored"]:
+    if summary["protocol"] != "norm_listwise_binding_v1" or summary["test_scored"]:
         raise ValueError("listwise summary mismatch")
     if any(summary["arms"][arm]["final_gate"] != audits[arm]["final_gate"] for arm in ARMS):
         raise ValueError("listwise gate recomputation mismatch")
     if summary["stage_passed"] != audits["retrieval_plus_lm"]["final_gate"]["passed"]:
         raise ValueError("listwise stage decision mismatch")
     result = {
-        "protocol": "listwise_binding_v1_audit", "passed": True,
+        "protocol": "norm_listwise_binding_v1_audit", "passed": True,
         "data_sha256": data_manifest["data_sha256"], "arms": audits,
         "identical_initialization": True, "test_scored": False,
     }

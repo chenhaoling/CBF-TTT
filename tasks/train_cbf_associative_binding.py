@@ -180,7 +180,8 @@ def ranking_gate(dev: dict) -> dict:
 
 
 def evaluate(model, tokenizer, rows: list[dict], data_manifest: dict, output: Path,
-             exposure: int, permutation: dict[str, list[int]], vocab: dict[str, dict]) -> dict:
+             exposure: int, permutation: dict[str, list[int]], vocab: dict[str, dict],
+             memory_cap: float | None = None) -> dict:
     import torch
     from cbf_ttt.event_writer import write_memory
     from tasks.cbf_selective import measure
@@ -204,11 +205,13 @@ def evaluate(model, tokenizer, rows: list[dict], data_manifest: dict, output: Pa
                 permuted_memories = {}
                 for context_id in sorted(needed):
                     memories[context_id], profile = measure(
-                        lambda context_id=context_id: write_memory(model, all_contexts[context_id]))
+                        lambda context_id=context_id: write_memory(
+                            model, all_contexts[context_id], max_relative_norm=memory_cap))
                     write_profiles.append(profile)
                 for context_id in sorted({row["context_id"] for row in group_rows}):
                     permuted_memories[context_id], profile = measure(
-                        lambda context_id=context_id: write_memory(model, permutation[context_id]))
+                        lambda context_id=context_id: write_memory(
+                            model, permutation[context_id], max_relative_norm=memory_cap))
                     write_profiles.append(profile)
                 for row in group_rows:
                     candidates = build_candidate_sets(rows, row)["global16"]
