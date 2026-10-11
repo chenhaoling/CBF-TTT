@@ -1,0 +1,37 @@
+{
+  "arm": "head_only",
+  "question_exposures": 4096,
+  "optimizer_updates": 512,
+  "backbone_unchanged": true,
+  "optimizer_state_fp32": true,
+  "writer_update_norms": {
+    "model.layers.0.mlp.ttt_proj.weight": 0.0,
+    "model.layers.0.mlp.ttt_conv.weight": 0.0,
+    "model.layers.6.mlp.ttt_proj.weight": 0.0,
+    "model.layers.6.mlp.ttt_conv.weight": 0.0,
+    "model.layers.12.mlp.ttt_proj.weight": 0.0,
+    "model.layers.12.mlp.ttt_conv.weight": 0.0,
+    "model.layers.18.mlp.ttt_proj.weight": 0.0,
+    "model.layers.18.mlp.ttt_conv.weight": 0.0,
+    "model.layers.24.mlp.ttt_proj.weight": 0.0,
+    "model.layers.24.mlp.ttt_conv.weight": 0.0,
+    "model.layers.30.mlp.ttt_proj.weight": 0.0,
+    "model.layers.30.mlp.ttt_conv.weight": 0.0,
+    "model.layers.35.mlp.ttt_proj.weight": 0.0,
+    "model.layers.35.mlp.ttt_conv.weight": 0.0
+  },
+  "head_update_norms": {
+    "query.weight": 0.6976578831672668,
+    "value.weight": 1.0233653783798218
+  },
+  "first32_loss": 1.3948928639292717,
+  "last32_loss": 1.3868278376758099,
+  "first32_accuracy": 0.2578125,
+  "last32_accuracy": 0.2265625,
+  "mean_update_seconds": 0.6103375790771679,
+  "peak_allocated_gib": 9.348011016845703,
+  "peak_reserved_gib": 9.642578125,
+  "max_relative_delta": 0.0,
+  "steps_sha256": "faecee2cacb63ff0f9cb189eaa2830d192dd6c764b4cbefedf33e311621563b1",
+  "test_scored": false
+}

@@ -1396,3 +1396,17 @@ primary swap终点dev Correct/Counterfactual/Wrong/Empty context4 top-1为21.09/
 新增`RETRIEVAL_HEAD_PLAN.md`与`tasks/train_cbf_retrieval_head.py`。检索头把fresh-KV查询末端hidden和候选数字token的冻结平均embedding分别投影到256维，L2归一化后按temperature0.1余弦评分。`head_only`冻结零初始化writer只训练head，作为平衡赋值下query-prior捷径控制；`joint_head_writer`同时训练相同head和七层writer。两臂head seed1301、writer seed301、四个平衡pair cycle、512更新/4096暴露；head lr1e-4、writer lr1e-7，分别clip1，cap0.3，骨干/embedding冻结。
 
 评测固定shift0/2的Correct/同实体Counterfactual/Wrong/Empty，报告context4/global16并增加Full-KV head排序。门槛要求dev Correct context4≥60%、相对Counterfactual≥25点且NLL bootstrap下界>0、Correct global16≥25%、Full-KV global16≥50%。新增`scripts/run_cbf_retrieval_head.sh`、`scripts/audit_cbf_retrieval_head.py`和`tests/test_cbf_retrieval_head.py`；audit重建schedule、检查head-only writer零变化/joint writer全变化、相同head+writer初始化、FP32 optimizer、evaluation聚合和test封存。新head只在opt-in task中创建，不改baseline logits或模型类。
+
+### 显式候选检索头pilot：完成结果
+
+commit `3d3457f`的实验完成：25项服务器聚焦测试、双臂smoke、每臂512次更新/4096问题暴露、两点评测和独立工件审计全部通过。骨干hash不变，test未评分，显存已释放。head-only/joint首末32步loss为1.3949→1.3868、1.3979→1.3847，accuracy为25.78→22.66%、25.00→26.56%，都没有稳定优于四分类随机水平。
+
+primary joint的dev Correct/Counterfactual/Wrong/Empty context4 top-1为25.00/25.00/24.22/25.00%，global16为13.28/13.28/7.81/3.12%。Counterfactual-minus-Correct NLL仅`0.00001196`，来源组bootstrap 95% CI `[-0.00000062, 0.00002883]`，top-1差为0；global16相对Empty的升高不能归因于正确session绑定。终点Full-KV head dev global16仅3.91%，因该head没有直接在Full-KV上训练，不能据此单独判定writer失败。五项门槛全失败。
+
+归档`experiments/cbf_ttt/retrieval_head_v1`的完整报告、状态、summary、audit、manifest、complete和两点评测摘要；大checkpoint、optimizer、steps、逐题JSONL和log保留在服务器。下一步用完全上下文KV直接训练同一head作为正控制：通过则锁定dense writer为瓶颈，失败则改用candidate-conditioned自回归表征或显式结构化key-value memory。
+
+### Full-KV直训检索头正控制（执行前）
+
+新增`FULLKV_HEAD_CONTROL_PLAN.md`、`tasks/train_cbf_fullkv_head_control.py`、`scripts/run_cbf_fullkv_head_control.sh`、`scripts/audit_cbf_fullkv_head_control.py`和`tests/test_cbf_fullkv_head_control.py`。两臂`same_lr/high_lr`分别使用1e-4/1e-3 head学习率，共享seed1301初始化、32/8 train/dev世界、四轮反事实均衡调度、512次更新和4096问题暴露。writer/骨干/embedding全冻结；先对完整4096-token context+query提取固定末位hidden特征，再只优化与上软pilot完全相同的256维余弦head。评测shift0/2的context4/global16，primary high-lr门槛要求末32步训练accuracy≥80%、dev context4≥75%、dev global16≥50%且来源组bootstrap 95%下界高于6.25%随机水平。
+
+审计重建schedule、逐行聚合、gate、feature/step hash，并核对两臂head初始张量一致、参数确实更新和test封存。本地7项相关测试6通过、1项因本地无torch跳过；Python语法、shell语法和diff检查通过。所有行为opt-in，未改baseline模型或默认训练。
