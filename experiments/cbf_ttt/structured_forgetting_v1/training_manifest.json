@@ -1,0 +1,31 @@
+{
+  "protocol": "structured_forgetting_v1",
+  "data_protocol": "cbf_event_curriculum_v1",
+  "data_manifest_sha256": "2acf6a22399d4e4cab9de1bc46349d5566147fc9c1b33a3c960b0852a9281c13",
+  "group_counts": {
+    "train": 64,
+    "dev": 16,
+    "test": 16
+  },
+  "actions": [
+    "retain",
+    "last1",
+    "last2",
+    "global"
+  ],
+  "features": [
+    "memory_size",
+    "known_reference",
+    "reference_last1",
+    "reference_last2",
+    "reference_deeper",
+    "prelude_lines",
+    "block_position",
+    "fact_count",
+    "active_key_count"
+  ],
+  "controller": "linear_softmax",
+  "update_gate": 1,
+  "test_release_rule": "score once only if development gate passes",
+  "test_scored": true
+}

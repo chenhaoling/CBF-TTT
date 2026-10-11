@@ -1,0 +1,1161 @@
+{
+  "protocol": "structured_forgetting_v1",
+  "training": {
+    "seed": 1517,
+    "epochs": 500,
+    "seconds": 0.960726348683238,
+    "full_examples": {
+      "examples": 3072,
+      "ties": 1114,
+      "label_counts": {
+        "retain": 768,
+        "last1": 1114,
+        "last2": 768,
+        "global": 422
+      }
+    },
+    "blind_examples": {
+      "examples": 3072,
+      "ties": 1114,
+      "label_counts": {
+        "retain": 768,
+        "last1": 1114,
+        "last2": 768,
+        "global": 422
+      }
+    },
+    "learned_curve": [
+      {
+        "epoch": 1,
+        "loss": 1.3871079683303833,
+        "accuracy": 0.283203125
+      },
+      {
+        "epoch": 10,
+        "loss": 0.8749191761016846,
+        "accuracy": 0.8626301884651184
+      },
+      {
+        "epoch": 50,
+        "loss": 0.2686481773853302,
+        "accuracy": 0.9850260615348816
+      },
+      {
+        "epoch": 100,
+        "loss": 0.13833843171596527,
+        "accuracy": 0.994140625
+      },
+      {
+        "epoch": 250,
+        "loss": 0.05896012485027313,
+        "accuracy": 0.994140625
+      },
+      {
+        "epoch": 500,
+        "loss": 0.03917921707034111,
+        "accuracy": 0.994140625
+      }
+    ],
+    "history_blind_curve": [
+      {
+        "epoch": 1,
+        "loss": 1.3815165758132935,
+        "accuracy": 0.283203125
+      },
+      {
+        "epoch": 10,
+        "loss": 1.102063536643982,
+        "accuracy": 0.6126301884651184
+      },
+      {
+        "epoch": 50,
+        "loss": 0.6367895603179932,
+        "accuracy": 0.7233073115348816
+      },
+      {
+        "epoch": 100,
+        "loss": 0.5006964802742004,
+        "accuracy": 0.7376301884651184
+      },
+      {
+        "epoch": 250,
+        "loss": 0.4148094356060028,
+        "accuracy": 0.744140625
+      },
+      {
+        "epoch": 500,
+        "loss": 0.390921026468277,
+        "accuracy": 0.744140625
+      }
+    ],
+    "checkpoint_sha256": "64944ae9835efe44395b9b1c4cacb890a86efdb0f89ef8a3634f6847884d34c6"
+  },
+  "dev": {
+    "fixed_retain": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.6666666666666666,
+      "action_accuracy": 0.34375,
+      "mean_retained_batches": 8.0,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.6666666666666666
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.6666666666666666
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.75
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.25
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 0.6666666666666666,
+        "1751732f28445393": 0.6666666666666666,
+        "1af2b4df6b1087bf": 0.6666666666666666,
+        "303bd53c03ca144b": 0.6666666666666666,
+        "4cac103ca63f7dc0": 0.6666666666666666,
+        "70dcf69f78f8ab48": 0.6666666666666666,
+        "72c2ce0612576cdb": 0.6666666666666666,
+        "75ef89c198a53408": 0.6666666666666666,
+        "76854c191bb4f289": 0.6666666666666666,
+        "76d75d7ae1859607": 0.6666666666666666,
+        "7a4937ed83c43200": 0.6666666666666666,
+        "9eaae3abe57afe0e": 0.6666666666666666,
+        "b3a517a2f5a0b2fe": 0.6666666666666666,
+        "cf5a5e8afdb549c4": 0.6666666666666666,
+        "d256b9553e400456": 0.6666666666666666,
+        "dd134f83c7fbcbec": 0.6666666666666666
+      }
+    },
+    "fixed_last1": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.6814236111111112,
+      "action_accuracy": 0.25,
+      "mean_retained_batches": 6.0,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 0.6666666666666666
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.7256944444444444
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.75
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.2942708333333333
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 0.6666666666666666,
+        "1751732f28445393": 0.6666666666666666,
+        "1af2b4df6b1087bf": 0.7083333333333334,
+        "303bd53c03ca144b": 0.6666666666666666,
+        "4cac103ca63f7dc0": 0.6805555555555556,
+        "70dcf69f78f8ab48": 0.6666666666666666,
+        "72c2ce0612576cdb": 0.6805555555555556,
+        "75ef89c198a53408": 0.6666666666666666,
+        "76854c191bb4f289": 0.6666666666666666,
+        "76d75d7ae1859607": 0.6666666666666666,
+        "7a4937ed83c43200": 0.7083333333333334,
+        "9eaae3abe57afe0e": 0.7083333333333334,
+        "b3a517a2f5a0b2fe": 0.6805555555555556,
+        "cf5a5e8afdb549c4": 0.6944444444444444,
+        "d256b9553e400456": 0.7083333333333334,
+        "dd134f83c7fbcbec": 0.6666666666666666
+      }
+    },
+    "fixed_last2": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.75,
+      "action_accuracy": 0.25,
+      "mean_retained_batches": 6.0,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.6666666666666666
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 1.0
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.75
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.5
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 0.75,
+        "1751732f28445393": 0.75,
+        "1af2b4df6b1087bf": 0.75,
+        "303bd53c03ca144b": 0.75,
+        "4cac103ca63f7dc0": 0.75,
+        "70dcf69f78f8ab48": 0.75,
+        "72c2ce0612576cdb": 0.75,
+        "75ef89c198a53408": 0.75,
+        "76854c191bb4f289": 0.75,
+        "76d75d7ae1859607": 0.75,
+        "7a4937ed83c43200": 0.75,
+        "9eaae3abe57afe0e": 0.75,
+        "b3a517a2f5a0b2fe": 0.75,
+        "cf5a5e8afdb549c4": 0.75,
+        "d256b9553e400456": 0.75,
+        "dd134f83c7fbcbec": 0.75
+      }
+    },
+    "fixed_global": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.5,
+      "action_accuracy": 0.125,
+      "mean_retained_batches": 2.3333333333333335,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.25
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.25
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 0.5,
+        "1751732f28445393": 0.5,
+        "1af2b4df6b1087bf": 0.5,
+        "303bd53c03ca144b": 0.5,
+        "4cac103ca63f7dc0": 0.5,
+        "70dcf69f78f8ab48": 0.5,
+        "72c2ce0612576cdb": 0.5,
+        "75ef89c198a53408": 0.5,
+        "76854c191bb4f289": 0.5,
+        "76d75d7ae1859607": 0.5,
+        "7a4937ed83c43200": 0.5,
+        "9eaae3abe57afe0e": 0.5,
+        "b3a517a2f5a0b2fe": 0.5,
+        "cf5a5e8afdb549c4": 0.5,
+        "d256b9553e400456": 0.5,
+        "dd134f83c7fbcbec": 0.5
+      }
+    },
+    "random": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.6080729166666666,
+      "action_accuracy": 0.22265625,
+      "mean_retained_batches": 5.130208333333333,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.5277777777777778
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 0.7100694444444444
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.5850694444444444
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.609375
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.5611979166666666
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.2630208333333333
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 0.5902777777777778,
+        "1751732f28445393": 0.6180555555555556,
+        "1af2b4df6b1087bf": 0.5972222222222222,
+        "303bd53c03ca144b": 0.625,
+        "4cac103ca63f7dc0": 0.5972222222222222,
+        "70dcf69f78f8ab48": 0.6319444444444444,
+        "72c2ce0612576cdb": 0.5763888888888888,
+        "75ef89c198a53408": 0.5625,
+        "76854c191bb4f289": 0.5555555555555556,
+        "76d75d7ae1859607": 0.6180555555555556,
+        "7a4937ed83c43200": 0.5555555555555556,
+        "9eaae3abe57afe0e": 0.7083333333333334,
+        "b3a517a2f5a0b2fe": 0.6805555555555556,
+        "cf5a5e8afdb549c4": 0.5763888888888888,
+        "d256b9553e400456": 0.6388888888888888,
+        "dd134f83c7fbcbec": 0.5972222222222222
+      }
+    },
+    "physics": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 1.0,
+      "action_accuracy": 0.875,
+      "mean_retained_batches": 5.583333333333333,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 1.0
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 1.0
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 1.0,
+        "1751732f28445393": 1.0,
+        "1af2b4df6b1087bf": 1.0,
+        "303bd53c03ca144b": 1.0,
+        "4cac103ca63f7dc0": 1.0,
+        "70dcf69f78f8ab48": 1.0,
+        "72c2ce0612576cdb": 1.0,
+        "75ef89c198a53408": 1.0,
+        "76854c191bb4f289": 1.0,
+        "76d75d7ae1859607": 1.0,
+        "7a4937ed83c43200": 1.0,
+        "9eaae3abe57afe0e": 1.0,
+        "b3a517a2f5a0b2fe": 1.0,
+        "cf5a5e8afdb549c4": 1.0,
+        "d256b9553e400456": 1.0,
+        "dd134f83c7fbcbec": 1.0
+      }
+    },
+    "history_blind": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.8993055555555556,
+      "action_accuracy": 0.6692708333333334,
+      "mean_retained_batches": 5.75,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.9965277777777778
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.71875
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.8819444444444444
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.6979166666666666
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 0.8888888888888888,
+        "1751732f28445393": 0.8888888888888888,
+        "1af2b4df6b1087bf": 0.9166666666666666,
+        "303bd53c03ca144b": 0.8888888888888888,
+        "4cac103ca63f7dc0": 0.9027777777777778,
+        "70dcf69f78f8ab48": 0.8888888888888888,
+        "72c2ce0612576cdb": 0.8888888888888888,
+        "75ef89c198a53408": 0.875,
+        "76854c191bb4f289": 0.9027777777777778,
+        "76d75d7ae1859607": 0.8888888888888888,
+        "7a4937ed83c43200": 0.9166666666666666,
+        "9eaae3abe57afe0e": 0.9166666666666666,
+        "b3a517a2f5a0b2fe": 0.9166666666666666,
+        "cf5a5e8afdb549c4": 0.9027777777777778,
+        "d256b9553e400456": 0.9166666666666666,
+        "dd134f83c7fbcbec": 0.8888888888888888
+      }
+    },
+    "learned": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.9991319444444444,
+      "action_accuracy": 0.9973958333333334,
+      "mean_retained_batches": 5.75,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.9965277777777778
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 1.0
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.9973958333333334
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 1.0,
+        "1751732f28445393": 1.0,
+        "1af2b4df6b1087bf": 1.0,
+        "303bd53c03ca144b": 1.0,
+        "4cac103ca63f7dc0": 1.0,
+        "70dcf69f78f8ab48": 1.0,
+        "72c2ce0612576cdb": 1.0,
+        "75ef89c198a53408": 0.9861111111111112,
+        "76854c191bb4f289": 1.0,
+        "76d75d7ae1859607": 1.0,
+        "7a4937ed83c43200": 1.0,
+        "9eaae3abe57afe0e": 1.0,
+        "b3a517a2f5a0b2fe": 1.0,
+        "cf5a5e8afdb549c4": 1.0,
+        "d256b9553e400456": 1.0,
+        "dd134f83c7fbcbec": 1.0
+      }
+    },
+    "oracle": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 1.0,
+      "action_accuracy": 1.0,
+      "mean_retained_batches": 5.739583333333333,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 1.0
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 1.0
+        }
+      },
+      "groups": {
+        "11162e7e35a26dad": 1.0,
+        "1751732f28445393": 1.0,
+        "1af2b4df6b1087bf": 1.0,
+        "303bd53c03ca144b": 1.0,
+        "4cac103ca63f7dc0": 1.0,
+        "70dcf69f78f8ab48": 1.0,
+        "72c2ce0612576cdb": 1.0,
+        "75ef89c198a53408": 1.0,
+        "76854c191bb4f289": 1.0,
+        "76d75d7ae1859607": 1.0,
+        "7a4937ed83c43200": 1.0,
+        "9eaae3abe57afe0e": 1.0,
+        "b3a517a2f5a0b2fe": 1.0,
+        "cf5a5e8afdb549c4": 1.0,
+        "d256b9553e400456": 1.0,
+        "dd134f83c7fbcbec": 1.0
+      }
+    }
+  },
+  "dev_gate": {
+    "checks": {
+      "learned_action_accuracy": true,
+      "learned_query_accuracy": true,
+      "best_fixed_margin": true,
+      "best_fixed_confidence": true
+    },
+    "best_fixed": "fixed_last2",
+    "comparison": {
+      "mean_accuracy_gain": 0.24913194444444445,
+      "source_group_bootstrap_95ci": [
+        0.24739583333333334,
+        0.25
+      ]
+    },
+    "passed": true
+  },
+  "test": {
+    "fixed_retain": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.6666666666666666,
+      "action_accuracy": 0.3072916666666667,
+      "mean_retained_batches": 8.0,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.6666666666666666
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.6666666666666666
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.75
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.25
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 0.6666666666666666,
+        "2afa6583e17e5dc0": 0.6666666666666666,
+        "437da0aabfeb8557": 0.6666666666666666,
+        "45df799427e277f1": 0.6666666666666666,
+        "46f786e0b00e04fc": 0.6666666666666666,
+        "551882c853dca6cd": 0.6666666666666666,
+        "567f1a96c0a88e66": 0.6666666666666666,
+        "665701faac6c2448": 0.6666666666666666,
+        "8c3bc1bd1eb74362": 0.6666666666666666,
+        "cee5aa00fd9af6f3": 0.6666666666666666,
+        "d673c7db71d4fe21": 0.6666666666666666,
+        "ddfcc0918923c67a": 0.6666666666666666,
+        "f30db86d8582f09f": 0.6666666666666666,
+        "f36f74bc1b575028": 0.6666666666666666,
+        "f51fa4a8f0601de5": 0.6666666666666666,
+        "fab3efceebdd9eea": 0.6666666666666666
+      }
+    },
+    "fixed_last1": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.6866319444444444,
+      "action_accuracy": 0.25,
+      "mean_retained_batches": 6.0,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 0.6666666666666666
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.7465277777777778
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.75
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.3098958333333333
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 0.7083333333333334,
+        "2afa6583e17e5dc0": 0.7083333333333334,
+        "437da0aabfeb8557": 0.7083333333333334,
+        "45df799427e277f1": 0.6666666666666666,
+        "46f786e0b00e04fc": 0.6944444444444444,
+        "551882c853dca6cd": 0.6666666666666666,
+        "567f1a96c0a88e66": 0.6944444444444444,
+        "665701faac6c2448": 0.7083333333333334,
+        "8c3bc1bd1eb74362": 0.6805555555555556,
+        "cee5aa00fd9af6f3": 0.6805555555555556,
+        "d673c7db71d4fe21": 0.6805555555555556,
+        "ddfcc0918923c67a": 0.6666666666666666,
+        "f30db86d8582f09f": 0.6666666666666666,
+        "f36f74bc1b575028": 0.6805555555555556,
+        "f51fa4a8f0601de5": 0.7083333333333334,
+        "fab3efceebdd9eea": 0.6666666666666666
+      }
+    },
+    "fixed_last2": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.75,
+      "action_accuracy": 0.25,
+      "mean_retained_batches": 6.0,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.6666666666666666
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 1.0
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.75
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.5
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 0.75,
+        "2afa6583e17e5dc0": 0.75,
+        "437da0aabfeb8557": 0.75,
+        "45df799427e277f1": 0.75,
+        "46f786e0b00e04fc": 0.75,
+        "551882c853dca6cd": 0.75,
+        "567f1a96c0a88e66": 0.75,
+        "665701faac6c2448": 0.75,
+        "8c3bc1bd1eb74362": 0.75,
+        "cee5aa00fd9af6f3": 0.75,
+        "d673c7db71d4fe21": 0.75,
+        "ddfcc0918923c67a": 0.75,
+        "f30db86d8582f09f": 0.75,
+        "f36f74bc1b575028": 0.75,
+        "f51fa4a8f0601de5": 0.75,
+        "fab3efceebdd9eea": 0.75
+      }
+    },
+    "fixed_global": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.5,
+      "action_accuracy": 0.125,
+      "mean_retained_batches": 2.0833333333333335,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.3333333333333333
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.25
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.25
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 0.5,
+        "2afa6583e17e5dc0": 0.5,
+        "437da0aabfeb8557": 0.5,
+        "45df799427e277f1": 0.5,
+        "46f786e0b00e04fc": 0.5,
+        "551882c853dca6cd": 0.5,
+        "567f1a96c0a88e66": 0.5,
+        "665701faac6c2448": 0.5,
+        "8c3bc1bd1eb74362": 0.5,
+        "cee5aa00fd9af6f3": 0.5,
+        "d673c7db71d4fe21": 0.5,
+        "ddfcc0918923c67a": 0.5,
+        "f30db86d8582f09f": 0.5,
+        "f36f74bc1b575028": 0.5,
+        "f51fa4a8f0601de5": 0.5,
+        "fab3efceebdd9eea": 0.5
+      }
+    },
+    "random": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.625,
+      "action_accuracy": 0.2630208333333333,
+      "mean_retained_batches": 4.958333333333333,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.5538194444444444
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 0.6979166666666666
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.5954861111111112
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.6527777777777778
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 0.5598958333333334
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.3151041666666667
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 0.6041666666666666,
+        "2afa6583e17e5dc0": 0.6666666666666666,
+        "437da0aabfeb8557": 0.6041666666666666,
+        "45df799427e277f1": 0.625,
+        "46f786e0b00e04fc": 0.6527777777777778,
+        "551882c853dca6cd": 0.6875,
+        "567f1a96c0a88e66": 0.6666666666666666,
+        "665701faac6c2448": 0.6458333333333334,
+        "8c3bc1bd1eb74362": 0.5555555555555556,
+        "cee5aa00fd9af6f3": 0.6041666666666666,
+        "d673c7db71d4fe21": 0.6388888888888888,
+        "ddfcc0918923c67a": 0.6666666666666666,
+        "f30db86d8582f09f": 0.6111111111111112,
+        "f36f74bc1b575028": 0.5138888888888888,
+        "f51fa4a8f0601de5": 0.5902777777777778,
+        "fab3efceebdd9eea": 0.6666666666666666
+      }
+    },
+    "physics": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 1.0,
+      "action_accuracy": 0.875,
+      "mean_retained_batches": 5.520833333333333,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 1.0
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 1.0
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 1.0,
+        "2afa6583e17e5dc0": 1.0,
+        "437da0aabfeb8557": 1.0,
+        "45df799427e277f1": 1.0,
+        "46f786e0b00e04fc": 1.0,
+        "551882c853dca6cd": 1.0,
+        "567f1a96c0a88e66": 1.0,
+        "665701faac6c2448": 1.0,
+        "8c3bc1bd1eb74362": 1.0,
+        "cee5aa00fd9af6f3": 1.0,
+        "d673c7db71d4fe21": 1.0,
+        "ddfcc0918923c67a": 1.0,
+        "f30db86d8582f09f": 1.0,
+        "f36f74bc1b575028": 1.0,
+        "f51fa4a8f0601de5": 1.0,
+        "fab3efceebdd9eea": 1.0
+      }
+    },
+    "history_blind": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.9027777777777778,
+      "action_accuracy": 0.6796875,
+      "mean_retained_batches": 5.661458333333333,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.9895833333333334
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 0.7291666666666666
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 0.8923611111111112
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.7083333333333334
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 0.9166666666666666,
+        "2afa6583e17e5dc0": 0.9166666666666666,
+        "437da0aabfeb8557": 0.9166666666666666,
+        "45df799427e277f1": 0.8888888888888888,
+        "46f786e0b00e04fc": 0.9027777777777778,
+        "551882c853dca6cd": 0.875,
+        "567f1a96c0a88e66": 0.9166666666666666,
+        "665701faac6c2448": 0.9166666666666666,
+        "8c3bc1bd1eb74362": 0.9027777777777778,
+        "cee5aa00fd9af6f3": 0.8888888888888888,
+        "d673c7db71d4fe21": 0.9027777777777778,
+        "ddfcc0918923c67a": 0.9027777777777778,
+        "f30db86d8582f09f": 0.8888888888888888,
+        "f36f74bc1b575028": 0.9166666666666666,
+        "f51fa4a8f0601de5": 0.9166666666666666,
+        "fab3efceebdd9eea": 0.875
+      }
+    },
+    "learned": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 0.9973958333333334,
+      "action_accuracy": 0.9921875,
+      "mean_retained_batches": 5.661458333333333,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 0.9895833333333334
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 1.0
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 0.9921875
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 1.0,
+        "2afa6583e17e5dc0": 1.0,
+        "437da0aabfeb8557": 1.0,
+        "45df799427e277f1": 0.9861111111111112,
+        "46f786e0b00e04fc": 1.0,
+        "551882c853dca6cd": 0.9861111111111112,
+        "567f1a96c0a88e66": 1.0,
+        "665701faac6c2448": 1.0,
+        "8c3bc1bd1eb74362": 1.0,
+        "cee5aa00fd9af6f3": 1.0,
+        "d673c7db71d4fe21": 1.0,
+        "ddfcc0918923c67a": 1.0,
+        "f30db86d8582f09f": 1.0,
+        "f36f74bc1b575028": 1.0,
+        "f51fa4a8f0601de5": 1.0,
+        "fab3efceebdd9eea": 0.9861111111111112
+      }
+    },
+    "oracle": {
+      "episodes": 384,
+      "queries": 2304,
+      "decisions": 768,
+      "query_accuracy": 1.0,
+      "action_accuracy": 1.0,
+      "mean_retained_batches": 5.630208333333333,
+      "by_family": {
+        "reset": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "retain": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last1": {
+          "queries": 576,
+          "accuracy": 1.0
+        },
+        "revoke_last2": {
+          "queries": 576,
+          "accuracy": 1.0
+        }
+      },
+      "by_role": {
+        "anchor": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "current": {
+          "queries": 768,
+          "accuracy": 1.0
+        },
+        "historical": {
+          "queries": 768,
+          "accuracy": 1.0
+        }
+      },
+      "groups": {
+        "177cfbae1387e0ac": 1.0,
+        "2afa6583e17e5dc0": 1.0,
+        "437da0aabfeb8557": 1.0,
+        "45df799427e277f1": 1.0,
+        "46f786e0b00e04fc": 1.0,
+        "551882c853dca6cd": 1.0,
+        "567f1a96c0a88e66": 1.0,
+        "665701faac6c2448": 1.0,
+        "8c3bc1bd1eb74362": 1.0,
+        "cee5aa00fd9af6f3": 1.0,
+        "d673c7db71d4fe21": 1.0,
+        "ddfcc0918923c67a": 1.0,
+        "f30db86d8582f09f": 1.0,
+        "f36f74bc1b575028": 1.0,
+        "f51fa4a8f0601de5": 1.0,
+        "fab3efceebdd9eea": 1.0
+      }
+    }
+  },
+  "test_scored": true,
+  "stage_passed": true,
+  "terminal_status": "completed_structured_forgetting"
+}

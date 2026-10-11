@@ -1,0 +1,36 @@
+{
+  "protocol": "structured_forgetting_v1_audit",
+  "passed": true,
+  "data_protocol": "cbf_event_curriculum_v1",
+  "data_manifest_sha256": "2acf6a22399d4e4cab9de1bc46349d5566147fc9c1b33a3c960b0852a9281c13",
+  "train_examples": 3072,
+  "dev_raw_sha256": {
+    "fixed_retain": "9423503343bffeee0eacbc7f84e0de2ec4cba27e9d076c15e01514e14e28aac7",
+    "fixed_last1": "adee3c5a3b53e84565b7e900e5974ce1cb006cac35726fce4cb5fef92cccdb1b",
+    "fixed_last2": "7f91bcac528a77ea8b399f84fe84cd7634280cf8e737a40a222c32aa15931da0",
+    "fixed_global": "9a2b02daa55c8172c9e1d1a383f5f9735832be081e6cdcd9d4e9b8936eb07bac",
+    "random": "32fc9c719c1809593be4163efcffc493ef773340ce934792915bed69877f0ef5",
+    "physics": "37ead4e3dafaf3db23689bf3b4b4e44f454260bc790fe7178ba9c760a1a28305",
+    "history_blind": "48c12c6d7483624c6e90270877070b97871778e73d2180b42b05303e4a38a2f8",
+    "learned": "f6d031c29954382abea2a45d0ef9116155177406f7887c77c8eab7f9244f5677",
+    "oracle": "bfa6b4a13bb5917c0b8ed51e9554d0bb1d71f637974881f27fd4af4c740d4359"
+  },
+  "dev_gate": {
+    "checks": {
+      "learned_action_accuracy": true,
+      "learned_query_accuracy": true,
+      "best_fixed_margin": true,
+      "best_fixed_confidence": true
+    },
+    "best_fixed": "fixed_last2",
+    "comparison": {
+      "mean_accuracy_gain": 0.24913194444444445,
+      "source_group_bootstrap_95ci": [
+        0.24739583333333334,
+        0.25
+      ]
+    },
+    "passed": true
+  },
+  "test_scored": true
+}

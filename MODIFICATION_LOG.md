@@ -1426,3 +1426,9 @@ primary joint的dev Correct/Counterfactual/Wrong/Empty context4 top-1为25.00/25
 dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对最优固定动作提升≥15点且成对来源组bootstrap 95%下界>10点。本地5项新单测全通过，Python/shell语法和diff检查通过。实验仅验证结构化memory上的遗忘策略，不预先声称TTT fast-weight端到端有效。
 
 首次服务器预检10/10测试通过，64/16/16世界、2304 episodes/13824 queries语料构建完成。控制器训练后在评测故意错误的固定策略时停止：错误策略可能已删掉后续撤销事件引用的batch，旧parser依赖当前memory判定新batch，把缺失旧引用误判为第二个新batch。无dev汇总或test评分。修正为按可见block结构取最后一个batch引用为紧邻facts的新写入，保留更早引用为撤销目标；physics在错误轨迹上找不到目标时安全retain。增加策略状态分歧回归测试，不改语料、特征、标签、预算或门槛。
+
+修正后commit `4596028`的正式实验完成：11项服务器测试、64/16/16互斥世界、3072训练决策样本、dev gate、按gate一次性test解封和独立重算审计全通过。学习控制器dev查询/动作正确率99.91/99.74%，最优固定last2查询75.00%；提升24.91点，成对来源组bootstrap 95% CI `[24.74,25.00]`，四项预注册门槛全通过。
+
+解封后test上学习控制器查询/动作正确率99.74/99.22%，最优固定仍为75.00%；提升24.74点，95% CI `[24.48,25.00]`。history-blind为90.28%，恢复batch recency后提升9.46点，95% CI `[8.94,9.98]`；revoke-last1/last2分支从72.92/89.24%升至100/100%。这是修订后遗忘主线的首个正向预验证：在可读结构化session memory上，状态依赖的局部/全局遗忘显著优于任一固定策略。
+
+限制：3072训练决策中1114个有反事实并列最优，按最小遗忘顺序解除，因此主效果以query accuracy和成对基线差为准；当前语料有显式结构语法，且结果不等于原姆TTT dense fast-weight端到端有效。完整报告和小工件归档于`experiments/cbf_ttt/structured_forgetting_v1`；下一步是加入噪声/重复/更长延迟撤销、多语料seed复现，再向可读TTT-compatible memory蒸馏。
