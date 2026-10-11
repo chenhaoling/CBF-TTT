@@ -1308,3 +1308,13 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 首次服务器启动在模型加载前失败：测试10/10通过后，直接执行`python tasks/evaluate_cbf_candidate_ranking.py`使Python仅把`tasks/`加入模块路径，无法导入`tasks.pack_cbf_event_warmup`。无GPU进程、checkpoint读取或模型评分发生，失败目录保留。运行器改为`python -m tasks.evaluate_cbf_candidate_ranking`和`python -m scripts.audit_cbf_candidate_ranking`，仅修正模块入口，不改协议、候选、阈值或评分。
 
 第二次启动在每checkpoint必做的首个真实桥接处停止，函数式effective-weight无cache评分相对既有CBF fresh-KV路径的answer/digit NLL误差约0.0510/0.0483，超过固定`2e-5`；未写任何ranking行。没有放宽桥接阈值。`cbf_ttt/runtime.py::cbf_forward_mlp`改为仅在`cbf_collect=false`读路径允许batch>1，target batch维仍严格匹配；候选delta收集继续要求batch=1。评分器改为直接使用同一CBF cache批量读出。新增torch单测逐值比较batch读与逐样本读，并确认批量collect仍拒绝。默认batch1 baseline语义不变。
+
+### 2/5/16候选排序定位：完成结果（2026-10-11）
+
+正式运行于22:43:19–22:50:28 +08:00完成。服务器聚焦测试11/11通过；两个臂各在0/2048/4096暴露checkpoint完成320行评分，独立审计通过。批量CBF评分与逐样本路径最大误差为0，checkpoint/data hash未变化，test未tokenize或评分。每臂峰值allocated/reserved为10.1881/10.6641GiB。两次预检失败均未产生正式评分：第一次是直接脚本入口导入错误，第二次是近似评分器未通过固定桥接阈值；失败目录保留，阈值未放宽。
+
+固定终点`joint_binding`的dev Correct-memory top-1为pair2 46.88%、world5 20.31%、global16 6.25%；分别接近2/5/16候选的随机水平。global16的twin和Wrong也均为6.25%，Empty为7.42%。Correct相对Wrong的digit-NLL收益0.0401（5000次来源世界bootstrap 95% CI -0.0892–0.1669），相对twin为0.0011（-0.0012–0.0031）；相对Empty的NLL收益0.1183（0.0217–0.1975），但top-1反而低1.17个百分点。2048中点Correct global16为9.38%，相对Wrong有4.30个百分点的小优势，仍低于预登记weak阈值25%，且终点消失；未事后选点。
+
+固定解释为`no_localized_binding`，strong/weak规则均失败。结果说明writer能形成“有记忆”或输出格式效应，但没有可用的实体—随机值排序；此前0生成正确率不能归因于自由生成终止问题。当前不扩大相同训练、不构建遗忘标签、不训练控制器。下一步先在32/8小规模上加入四事实全量实体条件关联检索、within-world permutation负例及Correct/twin/Wrong/Empty门槛，通过候选门槛后再做新seed完整生成，随后才恢复只训练遗忘策略的主线。
+
+新增归档`experiments/cbf_ttt/candidate_ranking_v1/{REPORT.md,RUN_STATUS.md,RUN_STATUS.json,ARTIFACTS_SHA256.txt,.gitignore}`以及总summary、execution audit、双臂manifest/complete/checkpoint summary。完整报告记录目标、假设、实现映射、两次安全失败、指标、命令、兼容性、风险和TODO；原始ranking JSONL与失败日志保留服务器。baseline配置、数据、训练入口、checkpoint和optimizer均未修改；runtime只在关闭collect时允许batch读，原batch1语义与collect限制不变。

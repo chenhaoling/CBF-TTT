@@ -1,0 +1,78 @@
+{
+  "protocol": "candidate_ranking_v1",
+  "arm": "joint_binding",
+  "exposures": [
+    0,
+    2048,
+    4096
+  ],
+  "source": "/home/ctj/cbf_ttt_dynamic_binding_v1/formal/joint_binding",
+  "source_training_manifest_sha256": "08120874d0a5129753d535fc22211c793a02ea34f1099e99ad5d1f51019d38c0",
+  "source_checkpoints_sha256": {
+    "0": "6479d06b551c356eba0b9a7c4b3eb4aaceafc9752e227b8d2872f2778702f363",
+    "2048": "16cdaf33b09c81b49356cea53fe2a5402f476c2aa5d09bab7fcef8fef7dd844b",
+    "4096": "6aec27c059321f6eed38cedeb30014bbea917e6a09e9096b93e08093d0beb82c"
+  },
+  "data_sha256": "fb35206f49c9d733e78572c8f55ca0bfd6852029e972025b81f437b42b03a971",
+  "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf",
+  "candidate_sets": {
+    "pair2": 2,
+    "world5": 5,
+    "global16": 16
+  },
+  "policies": [
+    "correct",
+    "twin",
+    "wrong",
+    "empty"
+  ],
+  "ranking_metric": "digit_nll",
+  "bridge_tolerance": 2e-05,
+  "groups": {
+    "train_probe": [
+      "0537275c86862f1c",
+      "07370623161d26ed",
+      "08c5851283db74f3",
+      "08ee4295e9f902bf",
+      "0a6f150df5a435ae",
+      "0e7c3ca90b087eab",
+      "0f352ba98b34c78a",
+      "102830aafe3dadac"
+    ],
+    "dev": [
+      "07142e1016b70124",
+      "0c0d48720084c3d3",
+      "0cc17540209007e8",
+      "107e1bfbd9e02248",
+      "174d923763af4cdb",
+      "1f119cc96739d83b",
+      "2636256230bd5732",
+      "2c9dad594ce59973",
+      "377bc8f09a782ba2",
+      "377d0b08f1094b57",
+      "3e4f9f6c80614ac2",
+      "3f3714e93b2ae86a",
+      "41e687f6940c0740",
+      "49474e3fb5290c00",
+      "4aab02cf6772330c",
+      "637e34e4184be451",
+      "73009bd048ac9ab1",
+      "749493ef19740ba2",
+      "8103087b8e224df3",
+      "90720c4622b21669",
+      "92c46d2c303e272b",
+      "93418201ba4bb26b",
+      "a24898833cb2e751",
+      "af1b7dbad2ef60c7",
+      "ba468d8c16cc2db5",
+      "c41c2a0261fd8d93",
+      "c6469e9c8b082677",
+      "cb7493be178ebfaf",
+      "cf8bd8afb5fe3117",
+      "d382b97daad4515a",
+      "da87b097b607e28e",
+      "e8fe943bba721f83"
+    ]
+  },
+  "test_scored": false
+}

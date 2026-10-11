@@ -359,4 +359,4 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 
 已完成[动态随机值绑定实验](experiments/cbf_ttt/dynamic_binding_v1/REPORT.md)：128/32/32世界、每臂4096问题暴露，独立审计通过。Binding相对joint CE将dev Correct-memory digit NLL降低0.0965，但两臂完整编号正确率仍为0；Binding的Wrong-minus-Correct增益仅0.0394且95% CI跨0。Full-KV为95.70%，说明writer仍未可靠绑定随机值。预登记内容门槛失败，test未评分，未进入遗忘控制器训练。
 
-下一步[候选排序定位实验](CANDIDATE_RANKING_PLAN.md)复用上述六个writer checkpoint，在Correct/twin/Wrong/Empty记忆下固定比较2/5/16候选，以区分“值已存在但自由生成失败”和“writer未形成实体—数值绑定”。该诊断不训练或选择checkpoint，也不能替代上一轮生成门槛。
+已完成[候选排序定位实验](experiments/cbf_ttt/candidate_ranking_v1/REPORT.md)：复用六个writer checkpoint，在Correct/twin/Wrong/Empty记忆下固定比较2/5/16候选，独立审计通过。最终binding臂的Correct-memory `global16` top-1为6.25%，正好等于随机水平，并与twin/Wrong相同；Correct相对Wrong的digit-NLL增益0.0401且95% CI跨0。固定结论为`no_localized_binding`：瓶颈在实体—数值绑定，而不是只在自由生成。下一步先改为四事实全量实体条件检索与within-world permutation对比，内容门槛通过后再恢复遗忘控制器。

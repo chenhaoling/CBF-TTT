@@ -54,3 +54,11 @@ MODEL=/home/ctj/models/Qwen3-4B \
 PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python \
 bash scripts/run_cbf_candidate_ranking.sh
 ```
+
+## Completed result
+
+The formal run completed on 2026-10-11 and the independent audit passed. The exact batched scorer had zero bridge error, both arms covered all fixed rows at all three checkpoints, source artifacts were unchanged, and test remained unscored.
+
+At the fixed final `joint_binding` development endpoint, Correct-memory top-1 was 0.4688 for `pair2`, 0.2031 for `world5`, and 0.0625 for `global16`. The latter equals 1/16 chance and exactly matches twin and Wrong memory. Correct-versus-Wrong digit-NLL gain was 0.0401 with 95% CI [-0.0892, 0.1669]. Correct-versus-Empty NLL improved by 0.1183, but top-1 was lower by 0.0117. Both strong and weak rules failed, so the fixed label is `no_localized_binding`.
+
+The full report is [`experiments/cbf_ttt/candidate_ranking_v1/REPORT.md`](experiments/cbf_ttt/candidate_ranking_v1/REPORT.md). The next stage must change the entity-conditioned binding mechanism; this result does not authorize forgetting-controller training.
