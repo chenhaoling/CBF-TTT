@@ -54,3 +54,5 @@ The runner refuses to overwrite an existing output root, runs focused tests, per
 ## Scope and risks
 
 The cyclic episodes are derived from train/dev data already used in earlier diagnostics; they are not new blind test examples. Four cyclic permutations are a small subset of all assignments and may allow a rotation specific shortcut, although held out worlds and exact counterfactual memories still test content dependence. The evaluation has eight development source groups and one writer seed. A passing result therefore needs a fresh assignment family and seed confirmation before a paper claim. A failing result would reject the slow parameter shortcut as the sole explanation but would not prove that the frozen Qwen writer architecture cannot learn associative memory at larger scale.
+
+The cap is computed in FP32 and applied to a BF16 delta. Resource and artifact checks allow a fixed 0.005 absolute norm-ratio tolerance for BF16 rounding; the independent safety stop remains 1.0. This tolerance changes neither the generated memory nor an optimization or efficacy threshold.

@@ -45,7 +45,8 @@ from pathlib import Path
 root=Path(sys.argv[1])
 for arm in ('fixed_assignment','episodic_assignment'):
     row=json.loads((root/f'smoke_{arm}.json').read_text())
-    if row['peak_reserved_gib'] >= 28 or row['max_relative_delta'] > .3001:
+    # The bounded BF16 tensor can round slightly above the FP32 target.
+    if row['peak_reserved_gib'] >= 28 or row['max_relative_delta'] > .305:
         raise SystemExit(f'unsafe episodic smoke for {arm}: {row}')
 PY
 
