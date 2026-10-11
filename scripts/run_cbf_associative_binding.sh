@@ -5,6 +5,7 @@ ROOT=${ROOT:-/home/ctj/cbf_ttt_associative_binding_v1}
 DATA=${DATA:-/home/ctj/cbf_ttt_dynamic_binding_v1/data}
 MODEL=${MODEL:-/home/ctj/models/Qwen3-4B}
 PYTHON=${PYTHON:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python}
+TEST_PYTHON=${TEST_PYTHON:-/home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python}
 
 if [[ -e "$ROOT" ]]; then
   echo "Refusing to overwrite existing root: $ROOT" >&2
@@ -23,7 +24,7 @@ fail() {
 trap fail ERR
 
 cd "$(dirname "$0")/.."
-"$PYTHON" -m pytest -q \
+"$TEST_PYTHON" -m pytest -q \
   tests/test_cbf_associative_binding.py \
   tests/test_cbf_dynamic_binding.py \
   tests/test_cbf_candidate_ranking.py
@@ -56,4 +57,3 @@ root=Path(sys.argv[1])
 })+'\n')
 PY
 trap - ERR
-

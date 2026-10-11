@@ -43,6 +43,6 @@ ROOT=/home/ctj/cbf_ttt_associative_binding_v1 \
 DATA=/home/ctj/cbf_ttt_dynamic_binding_v1/data \
 MODEL=/home/ctj/models/Qwen3-4B \
 PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python \
+TEST_PYTHON=/home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python \
 bash scripts/run_cbf_associative_binding.sh
 ```
-
