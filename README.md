@@ -368,3 +368,7 @@ The [completed length diagnostic](experiments/cbf_ttt/qwen3_4b_final_1b_20260927
 范数约束恢复实验已[完成并独立审计](experiments/cbf_ttt/norm_listwise_binding_v1/REPORT.md)：cap 0.3解决了无界fast memory安全停止，两臂末段四分类loss均低于随机损失；primary训练准确率37.5%，但dev 16候选Correct/Permuted top-1同为7.81%，完整code仍为0，正式门槛失败。小幅permutation NLL差异没有转化为排序或Wrong/Empty内容区分。
 
 下一步[反事实重赋值episodic binding实验](EPISODIC_BINDING_PLAN.md)让同一问题在四个episode中分别对应四个不同值，消除慢参数直接记忆固定实体—编号的捷径；与只看原始赋值的matched baseline比较，并以Correct/同实体Counterfactual/跨世界Wrong/Empty及4/16候选指标检验是否真正读取当前session memory。
+
+反事实重赋值实验已[完成并独立审计](experiments/cbf_ttt/episodic_binding_v1/REPORT.md)：固定映射末段四分类准确率36.72%，平衡重赋值仅26.56%，说明固定query→value关系夸大训练拟合；episodic开发Correct/Counterfactual四候选top-1为25.00/22.66%，NLL区间跨0，仍没有可靠current-memory绑定。
+
+下一步[同一步反事实配对实验](PAIRED_BINDING_PLAN.md)把相反赋值放进同一个optimizer step，比较对称listwise与显式memory-swap loss；两臂复用相同两个write和全部候选score，使每个目标必须在自己的memory下优于配对memory。

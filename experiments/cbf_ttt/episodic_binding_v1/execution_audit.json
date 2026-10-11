@@ -1,0 +1,71 @@
+{
+  "protocol": "episodic_binding_v1_audit",
+  "passed": true,
+  "data_sha256": "fb35206f49c9d733e78572c8f55ca0bfd6852029e972025b81f437b42b03a971",
+  "arms": {
+    "fixed_assignment": {
+      "smoke": {
+        "arm": "fixed_assignment",
+        "shift": 0,
+        "loss": 2.8601772785186768,
+        "retrieval_loss": 1.400449275970459,
+        "balanced_loss": 5.838912010192871,
+        "listwise_accuracy": 0.25,
+        "unclipped_gradient_norm": 1031832.5,
+        "max_relative_delta": 0.0,
+        "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf",
+        "memory_cap": 0.3,
+        "test_scored": false,
+        "seconds": 1.3050039559602737,
+        "peak_allocated_gib": 18.371334075927734,
+        "peak_reserved_gib": 18.619140625
+      },
+      "updates": 256,
+      "exposures": 1024,
+      "steps_sha256": "fce357c42bda93597ebe4597195f33618532b9cf8057552c95a6aba6b7a18d87",
+      "final_gate": {
+        "checks": {
+          "full_kv_readable": true,
+          "context4_correct_top1": false,
+          "context4_counterfactual_gap": false,
+          "context4_counterfactual_nll_confidence": true,
+          "global16_correct_top1": false
+        },
+        "passed": false
+      }
+    },
+    "episodic_assignment": {
+      "smoke": {
+        "arm": "episodic_assignment",
+        "shift": 3,
+        "loss": 2.8547191619873047,
+        "retrieval_loss": 1.39212167263031,
+        "balanced_loss": 5.85038948059082,
+        "listwise_accuracy": 0.25,
+        "unclipped_gradient_norm": 1072834.75,
+        "max_relative_delta": 0.0,
+        "backbone_sha256": "e75c7303535af6a2711b970f7765d33951074f10e19155ba826d9a3dad967aaf",
+        "memory_cap": 0.3,
+        "test_scored": false,
+        "seconds": 1.289319520816207,
+        "peak_allocated_gib": 18.371334075927734,
+        "peak_reserved_gib": 18.619140625
+      },
+      "updates": 256,
+      "exposures": 1024,
+      "steps_sha256": "78afed99594a5e4af975ce2261fd4284cdb69b49c23623e8a9959d4bd0eb496c",
+      "final_gate": {
+        "checks": {
+          "full_kv_readable": true,
+          "context4_correct_top1": false,
+          "context4_counterfactual_gap": false,
+          "context4_counterfactual_nll_confidence": false,
+          "global16_correct_top1": false
+        },
+        "passed": false
+      }
+    }
+  },
+  "identical_initialization": true,
+  "test_scored": false
+}

@@ -1370,3 +1370,15 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 新增`scripts/run_cbf_episodic_binding.sh`双卡测试/smoke/formal/汇总/审计流程，`scripts/audit_cbf_episodic_binding.py`独立重建token替换、schedule/target、训练聚合、初始张量、checkpoint/evaluation hash、门槛及test封存；`tests/test_cbf_episodic_binding.py`覆盖循环赋值、均衡调度和因果门槛。与既有相关测试本地18项中13通过、5项因本地无torch跳过；Python及shell语法通过。所有新行为为opt-in，不改baseline配置或旧工件，无新增依赖。风险包括仅四个循环排列、8个dev来源组和单seed；即使通过仍需新排列族与新seed确认。
 
 首次服务器启动18/18测试与双卡smoke通过，峰值reserved约18.62GiB；正式训练前的checkpoint-0流式评测开始后主动停止。原因是代码审查发现artifact审计将BF16 cap 0.3按0.3001检查，而上一正式实验已观测到舍入后0.30109；若不修正会在完整训练后误报失败。该启动尚无optimizer step，目录保留为`/home/ctj/cbf_ttt_episodic_binding_v1_preflight_cf42a6e`。runner/audit固定改为0.305数值容差，实际cap、训练安全阈值1.0、数据、预算、loss和效果门槛均不改；计划补记该容差后从新目录重启。
+
+### 反事实重赋值episodic binding：完成结果
+
+正式重启于commit `1a152a1`完成；18/18服务器测试、双臂smoke、各256更新/1024暴露、0/1024两点评测和独立审计全部通过。固定/episodic首末32步retrieval loss为1.5526→1.3163、1.5387→1.4316，准确率23.44→36.72%、25.00→26.56%。两臂相同初始化/数据/曝光/计算路径下，固定关系明显更易拟合，支持固定query→value捷径会夸大writer学习；但这不是参数内部机制的直接证明。
+
+episodic终点dev Correct/Counterfactual/Wrong/Empty context4 top-1为25.00/22.66/22.66/26.56%，global16为7.03/4.69/10.16/5.47%。Counterfactual-minus-Correct digit-NLL 0.0073（95% CI -0.0033–0.0188），Wrong 0.0601（-0.1263–0.2585），Empty 0.0943（-0.0057–0.1933）；完整code仍0，Full-KV code95.31%。train probe Correct/Counterfactual也仅25.00/24.22%，表明并非只有开发泛化失败。固定臂dev有极小正NLL区间但top-1方向相反，验证联合门槛必要。预登记stage gate失败，test未评分，两卡释放。
+
+归档`experiments/cbf_ttt/episodic_binding_v1/{REPORT.md,RUN_STATUS.md,RUN_STATUS.json,summary.json,execution_audit.json,git_commit.txt,.gitignore}`；大工件保留服务器。下一步新增`PAIRED_BINDING_PLAN.md`：在同一optimizer step放入相反赋值，消除跨step梯度漂移。
+
+新增`tasks/train_cbf_paired_binding.py`：固定(0,2)/(1,3)两对，每context覆盖四赋值一次；`paired_listwise`同时优化两赋值listwise CE，`paired_swap`在同一批候选NLL上增加对称`0.5*softplus(0.2+own-cross)`，无需额外前向。每臂128更新、每步2次4096写入/8问题、总1024暴露，去除LM项以隔离关联检索；两臂计算完全匹配。复用episodic的Correct/Counterfactual/Wrong/Empty/Full-KV与固定门槛。
+
+新增`scripts/run_cbf_paired_binding.sh`、`scripts/audit_cbf_paired_binding.py`和`tests/test_cbf_paired_binding.py`，覆盖四赋值配对、swap梯度方向、schedule/target/聚合/checkpoint/初始张量/test封存。真实双写+八候选图先做双卡smoke，reserved≥28GiB或cap舍入>0.305立即停止；通过才正式运行。所有入口opt-in，无baseline修改和新依赖。
