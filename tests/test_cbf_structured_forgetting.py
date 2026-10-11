@@ -22,6 +22,15 @@ class StructuredMemoryTests(unittest.TestCase):
             self.assertTrue(parsed["batch"].startswith("batch_"))
             self.assertGreaterEqual(len(parsed["facts"]), 5)
 
+    def test_parser_keeps_old_reference_when_policy_state_diverged(self):
+        pairs = generate_group(9, "dev", 0)
+        inp, target = next(pair for pair in pairs if pair[1]["family"] == "revoke_last1")
+        boundary = inp["decision_boundaries"][0]
+        block = next(row for row in inp["blocks"] if row["index"] == boundary)
+        parsed = parse_block(block["text"], [])
+        self.assertEqual(len(parsed["old_refs"]), 1)
+        self.assertNotEqual(parsed["old_refs"][0], parsed["batch"])
+
     def test_counterfactual_labels_cover_registered_actions(self):
         pairs = generate_group(11, "train", 0)
         examples, meta = build_examples(pairs, True)

@@ -1424,3 +1424,5 @@ primary joint的dev Correct/Counterfactual/Wrong/Empty context4 top-1为25.00/25
 每个决策点对四动作进行真实当前查询反事实回放，以最小遗忘的最大正确率动作为监督。线性softmax控制器只读memory size、已知batch引用及其recency、新写入前行数、block位置、fact数和active-key数；不读family/split/ID/答案/未来block。history-blind消融清零last1/last2/deeper特征。比较学习策略、消融、四个固定动作、确定随机、物理规则和反事实oracle，报告分family/role查询正确率、动作正确率、保留batch数和来源组bootstrap。
 
 dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对最优固定动作提升≥15点且成对来源组bootstrap 95%下界>10点。本地5项新单测全通过，Python/shell语法和diff检查通过。实验仅验证结构化memory上的遗忘策略，不预先声称TTT fast-weight端到端有效。
+
+首次服务器预检10/10测试通过，64/16/16世界、2304 episodes/13824 queries语料构建完成。控制器训练后在评测故意错误的固定策略时停止：错误策略可能已删掉后续撤销事件引用的batch，旧parser依赖当前memory判定新batch，把缺失旧引用误判为第二个新batch。无dev汇总或test评分。修正为按可见block结构取最后一个batch引用为紧邻facts的新写入，保留更早引用为撤销目标；physics在错误轨迹上找不到目标时安全retain。增加策略状态分歧回归测试，不改语料、特征、标签、预算或门槛。

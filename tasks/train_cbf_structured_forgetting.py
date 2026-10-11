@@ -40,12 +40,15 @@ def load_split(root: str | Path, split: str) -> list[tuple[dict, dict]]:
 
 
 def parse_block(text: str, state: list[dict]) -> dict:
-    known = {item["batch"] for item in state}
     refs = BATCH_RE.findall(text)
-    new = [value for value in dict.fromkeys(refs) if value not in known]
-    old = [value for value in dict.fromkeys(refs) if value in known]
-    if len(new) != 1 or len(old) > 1:
+    ordered = list(dict.fromkeys(refs))
+    if not ordered or len(ordered) > 2:
         raise ValueError("visible block does not identify one new and at most one old batch")
+    # Every block ends in one assignment header followed by facts. A revoke, when
+    # present, appears before that header. This stays valid even when a deliberately
+    # wrong policy has already removed the referenced old batch from its state.
+    new = ordered[-1]
+    old = ordered[:-1]
     facts = {}
     for line in text.splitlines():
         entities, values = ENTITY_RE.findall(line), VALUE_RE.findall(line)
@@ -56,8 +59,8 @@ def parse_block(text: str, state: list[dict]) -> dict:
     if not facts:
         raise ValueError("visible block has no assignments")
     lines = text.splitlines()
-    new_line = next(index for index, line in enumerate(lines) if new[0] in line)
-    return {"batch": new[0], "facts": facts, "old_refs": old,
+    new_line = next(index for index, line in enumerate(lines) if new in line)
+    return {"batch": new, "facts": facts, "old_refs": old,
             "prelude_lines": new_line, "text": text}
 
 
@@ -183,7 +186,11 @@ def choose_action(policy: str, state: list[dict], assignment: dict, block_index:
     if policy == "physics":
         old = assignment["old_refs"][0] if assignment["old_refs"] else None
         if old is not None:
-            age = len(state) - next(index for index, item in enumerate(state) if item["batch"] == old)
+            position = next((index for index, item in enumerate(state)
+                             if item["batch"] == old), None)
+            if position is None:
+                return "retain"
+            age = len(state) - position
             return "last1" if age == 1 else "last2" if age == 2 else "retain"
         return "global" if assignment["prelude_lines"] > 0 else "retain"
     if policy in ("learned", "history_blind"):
