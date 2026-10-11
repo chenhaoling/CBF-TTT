@@ -1318,3 +1318,11 @@ Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7
 固定解释为`no_localized_binding`，strong/weak规则均失败。结果说明writer能形成“有记忆”或输出格式效应，但没有可用的实体—随机值排序；此前0生成正确率不能归因于自由生成终止问题。当前不扩大相同训练、不构建遗忘标签、不训练控制器。下一步先在32/8小规模上加入四事实全量实体条件关联检索、within-world permutation负例及Correct/twin/Wrong/Empty门槛，通过候选门槛后再做新seed完整生成，随后才恢复只训练遗忘策略的主线。
 
 新增归档`experiments/cbf_ttt/candidate_ranking_v1/{REPORT.md,RUN_STATUS.md,RUN_STATUS.json,ARTIFACTS_SHA256.txt,.gitignore}`以及总summary、execution audit、双臂manifest/complete/checkpoint summary。完整报告记录目标、假设、实现映射、两次安全失败、指标、命令、兼容性、风险和TODO；原始ranking JSONL与失败日志保留服务器。baseline配置、数据、训练入口、checkpoint和optimizer均未修改；runtime只在关闭collect时允许batch读，原batch1语义与collect限制不变。
+
+# 2026-10-11：四事实关联绑定与world内置换pilot（执行前）
+
+候选排序定位表明当前writer没有隐藏的实体—值排序能力。本轮固定比较`anchor_twin`和`all_fact_permutation`：前者复现单个变化anchor的twin对比，后者在同一context内循环置换四个被查询值，保持背景、实体和值集合不变，并对四个问题分别要求Correct-memory digit-NLL低于permuted-memory。两臂使用相同初始化、32/8 train/dev世界、四轮、1024问题暴露、256更新、两次可微context write、lr 1e-7和0/512/1024固定checkpoint；test继续封存。
+
+新增`tasks/train_cbf_associative_binding.py`，实现token长度不变的四值derangement、matched schedule、四事实contrast、Correct/permuted/twin/Wrong/Empty/Full-KV生成评测和16候选排名。新增`scripts/audit_cbf_associative_binding.py`独立复核数据hash、固定调度、置换多重集与无固定点、contrast数、初始化一致、checkpoint/evaluation hash、聚合、门槛和test封存；`scripts/run_cbf_associative_binding.sh`使用双GPU并行两臂；`tests/test_cbf_associative_binding.py`覆盖调度、置换、梯度方向和固定门槛；完整预注册见`ASSOCIATIVE_BINDING_PLAN.md`。所有入口均为opt-in，不修改baseline训练配置。
+
+固定主要判定为最终`all_fact_permutation`开发集global16：Correct top-1至少25%，相对permuted/Wrong均高至少10个百分点，且两个control-minus-Correct digit-NLL来源世界bootstrap 95%下界均大于0；另要求Full-KV完整code至少80%。中点只作诊断，不选checkpoint。通过仅授权新seed正式生成实验，不直接进入遗忘控制器。GPU正式结果尚未产生。
