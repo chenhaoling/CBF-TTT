@@ -1278,3 +1278,11 @@ bash scripts/run_cbf_dynamic_memory.sh
 Joint固定终点train probe的Correct/Wrong/Empty digit-NLL为2.2502/2.5073/2.7358，但三者编号正确率均0；dev为2.6992/2.7392/2.7586且编号同样全0。dev Correct相对Wrong/Empty的来源组收益为0.0401（95% CI −0.0963–0.1851）和0.0594（−0.0412–0.1612），未达0.10且区间跨0；anchor twin优势−0.00444。Full-KV dev编号93.75%，说明输入可读。Correct answer-NLL相对Empty从4.3280降到2.3471，但随机数字改善很小，表明主要学习共享格式而非session随机值绑定。Sequential中点dev也为0编号，Correct相对Empty digit-NLL更差0.0366。
 
 预登记内容门槛失败，test未评分，不训练遗忘控制器或3000条反事实标签。完整目标/假设、文件清单、数据、指标、资源、审计、命令、兼容性、风险和TODO已归档于`experiments/cbf_ttt/dynamic_memory_writer_v1/REPORT.md`；小型manifest/summary/audit一并入库，大checkpoint与逐行日志保留远程。下一步建议稳定使用joint-context，在更多独立世界上比较普通CE与仅对变化anchor使用的twin-contrast/数字区域损失；内容门槛通过后才进入遗忘oracle。
+
+# 2026-10-11：动态随机值绑定实验（执行前）
+
+上一轮joint writer降低了共享answer-NLL，但dev随机编号为0；本轮区分格式学习与值绑定。新增`tasks/train_cbf_dynamic_binding.py`，以完全相同初始化/顺序/问题暴露比较`joint_ce`和`joint_binding`。后者对四题使用0.75数字、0.125前缀、0.125 EOS的区域损失，并只对twin间真正变化的anchor加入`0.5*softplus(0.2+correct digit NLL-twin digit NLL)`；正确与twin memory均保持可微。两臂问题暴露配平，但binding每步写两次context，明确不作compute matched声明。
+
+正式数据固定seed 20261013、train/dev/test 128/32/32世界、FineWeb-Edu/LongCrawl64自然背景等量交替、4096 token；四轮共4096问题暴露/1024更新，checkpoint 0/2048/4096。train probe固定8世界，dev全32世界，test不装箱/评分。模型、lr1e-7、FP32 writer/AdamW、BF16 forward、clip1和`||delta||/||W||<=1`均与上一轮一致；内容门槛不变。
+
+新增`scripts/audit_cbf_dynamic_binding.py`独立复核数据、调度、逐步目标分解、对比臂启用、checkpoint/optimizer FP32、参数变化、策略矩阵、summary和初始张量一致；`tests/test_cbf_dynamic_binding.py`检查四问题调度和contrast梯度方向；`scripts/run_cbf_dynamic_binding.sh`串起8/2/2双卡smoke、资源门槛、正式双臂和审计。完整预注册见`DYNAMIC_BINDING_PLAN.md`。这些均为独立入口，不改baseline或上一轮工件；尚未产生GPU结果。
