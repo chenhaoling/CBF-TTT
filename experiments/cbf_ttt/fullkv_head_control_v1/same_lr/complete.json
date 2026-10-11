@@ -1,0 +1,18 @@
+{
+  "arm": "same_lr",
+  "optimizer_updates": 512,
+  "question_exposures": 4096,
+  "first32_loss": 1.3904837183654308,
+  "last32_loss": 1.1800982542335987,
+  "first32_accuracy": 0.265625,
+  "last32_accuracy": 0.48828125,
+  "head_update_norms": {
+    "query.weight": 2.3573062419891357,
+    "value.weight": 1.590440034866333
+  },
+  "mean_update_seconds": 0.0013111571097397245,
+  "peak_reserved_gib": 8.865234375,
+  "steps_sha256": "97d7a63221bc0d247893f10fec7044a8bb729d65c748ee6390f4b5ddf304df0a",
+  "backbone_unchanged": true,
+  "test_scored": false
+}

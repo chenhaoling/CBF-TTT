@@ -1,0 +1,37 @@
+{
+  "protocol": "fullkv_head_control_v1_audit",
+  "passed": true,
+  "data_sha256": "fb35206f49c9d733e78572c8f55ca0bfd6852029e972025b81f437b42b03a971",
+  "arms": {
+    "same_lr": {
+      "updates": 512,
+      "question_exposures": 4096,
+      "feature_sha256": "b56f30948540a3bf8b5ae19829d4fbcba744f36fd97a4a6e4827368100779572",
+      "final_gate": {
+        "checks": {
+          "last32_train_accuracy": false,
+          "dev_context4_top1": false,
+          "dev_global16_top1": false,
+          "dev_global16_confidence": false
+        },
+        "passed": false
+      }
+    },
+    "high_lr": {
+      "updates": 512,
+      "question_exposures": 4096,
+      "feature_sha256": "b56f30948540a3bf8b5ae19829d4fbcba744f36fd97a4a6e4827368100779572",
+      "final_gate": {
+        "checks": {
+          "last32_train_accuracy": false,
+          "dev_context4_top1": false,
+          "dev_global16_top1": false,
+          "dev_global16_confidence": false
+        },
+        "passed": false
+      }
+    }
+  },
+  "identical_head_initialization": true,
+  "test_scored": false
+}

@@ -1412,3 +1412,15 @@ primary joint的dev Correct/Counterfactual/Wrong/Empty context4 top-1为25.00/25
 审计重建schedule、逐行聚合、gate、feature/step hash，并核对两臂head初始张量一致、参数确实更新和test封存。本地7项相关测试6通过、1项因本地无torch跳过；Python语法、shell语法和diff检查通过。所有行为opt-in，未改baseline模型或默认训练。
 
 首次服务器启动11/11测试和双卡smoke通过，正式双臂各提取完1152条Full-KV特征，但在checkpoint-0首个排序前因`_scores`把候选list误作单个dict key而停止；尚无optimizer step或效果结果，GPU已释放。修正为按候选顺序stack value tensor，并增加直接覆盖列表候选的单测；不改数据、门槛、学习率或预算。失败目录保留为preflight来源。
+
+修正后commit `c2e37ae`的正式实验完成，12/12服务器测试、双臂smoke、各512更新/4096暴露、固定评测和独立审计通过。same/high-lr末32步训练accuracy为48.83/38.67%；dev context4为28.13/24.22%，global16为4.69/7.81%。high-lr dev global16来源组bootstrap 95% CI `[2.34%,13.28%]`，same-lr为`[0.78%,9.38%]`；两臂四项门槛全失败。
+
+两臂1152条特征的SHA-256一致，提取271–279秒，峰值allocated/reserved 8.597/8.865GiB；head更新仅约1.3ms。结论是单个query末位hidden对齐五个数字embedding均值的表征无法解码未见多token code，提高学习率不能修复。停止调该pooled cosine head；下一步使用可读的结构化session key-value memory，独立训练retain/last1/last2/global遗忘控制器，再考虑向TTT可微快记忆蒸馏。完整归档位于`experiments/cbf_ttt/fullkv_head_control_v1`，test未评分，baseline不受影响。
+
+### 基于物理不变量的结构化遗忘控制器（执行前）
+
+新增`STRUCTURED_FORGETTING_PLAN.md`、`tasks/train_cbf_structured_forgetting.py`、`scripts/run_cbf_structured_forgetting.sh`、`scripts/audit_cbf_structured_forgetting.py`和`tests/test_cbf_structured_forgetting.py`。固定更新门`g=1`，在可读的batch式session key-value memory上只学习`retain/last1/last2/global`四种遗忘动作。使用已有event-curriculum生成器扩展64/16/16个实体互斥且模板互斥的train/dev/test世界，test只在dev gate通过后一次性解封。
+
+每个决策点对四动作进行真实当前查询反事实回放，以最小遗忘的最大正确率动作为监督。线性softmax控制器只读memory size、已知batch引用及其recency、新写入前行数、block位置、fact数和active-key数；不读family/split/ID/答案/未来block。history-blind消融清零last1/last2/deeper特征。比较学习策略、消融、四个固定动作、确定随机、物理规则和反事实oracle，报告分family/role查询正确率、动作正确率、保留batch数和来源组bootstrap。
+
+dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对最优固定动作提升≥15点且成对来源组bootstrap 95%下界>10点。本地5项新单测全通过，Python/shell语法和diff检查通过。实验仅验证结构化memory上的遗忘策略，不预先声称TTT fast-weight端到端有效。
