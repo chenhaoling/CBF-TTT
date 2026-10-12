@@ -23,6 +23,7 @@ QUERY_TYPES = ("exact", "rephrase", "locality")
 THRESHOLDS = tuple(value / 10 for value in range(1, 10))
 CHECKPOINT_EPOCHS = (10, 25, 50, 100, 200)
 PAIR_TEMPLATE = "Memory update scope: {key}\nCandidate query: {query}\nSame factual scope:"
+MAX_KEYS = 8
 
 
 def split_calibration(sessions):
@@ -37,7 +38,9 @@ def query_groups(sessions, split):
     output = []
     for session in sessions:
         keys = [fact["prompt"] for fact in session["facts"]]
-        defer = len(keys)
+        if not 1 <= len(keys) <= MAX_KEYS:
+            raise ValueError("scope resolver expects one to eight memory keys")
+        defer = MAX_KEYS
         for index, fact in enumerate(session["facts"]):
             rows = [("exact", fact["prompt"], index),
                     ("rephrase", fact["rephrase_prompt"], index)]
@@ -82,8 +85,17 @@ def extract_pair_features(model, tokenizer, names, batch_size):
 def feature_tensor(groups, features):
     import torch
 
-    return torch.stack([torch.stack([features[PAIR_TEMPLATE.format(key=key, query=group["query"])]
-                                     for key in group["keys"]]) for group in groups])
+    rows = []
+    for group in groups:
+        values = [features[PAIR_TEMPLATE.format(key=key, query=group["query"])]
+                  for key in group["keys"]]
+        values.extend(torch.zeros_like(values[0]) for _ in range(MAX_KEYS - len(values)))
+        rows.append(torch.stack(values))
+    return torch.stack(rows)
+
+
+def candidate_counts(groups):
+    return __import__("torch").tensor([len(group["keys"]) for group in groups])
 
 
 def tensor_hash(values):
@@ -103,10 +115,13 @@ class ScopeHead:
     def parameters(self):
         return [*self.linear.parameters(), self.defer]
 
-    def logits(self, values):
+    def logits(self, values, counts=None):
         import torch
 
         scores = self.linear(values).squeeze(-1)
+        if counts is not None:
+            valid = torch.arange(scores.shape[1])[None, :] < counts[:, None]
+            scores = scores.masked_fill(~valid, float("-inf"))
         return torch.cat((scores, self.defer.expand(scores.shape[0], 1)), dim=1)
 
     def state_dict(self):
@@ -133,17 +148,20 @@ def train_head(train_groups, tune_groups, train_features, tune_features, seed, e
     optimizer = torch.optim.AdamW(head.parameters(), lr=.01, weight_decay=1e-4)
     train_targets = torch.tensor([group["target"] for group in train_groups])
     tune_targets = torch.tensor([group["target"] for group in tune_groups])
+    train_counts, tune_counts = candidate_counts(train_groups), candidate_counts(tune_groups)
     curve, candidates = [], []
     for epoch in range(1, epochs + 1):
         optimizer.zero_grad(set_to_none=True)
-        logits = head.logits(train_features)
+        logits = head.logits(train_features, train_counts)
         loss = torch.nn.functional.cross_entropy(logits, train_targets)
         loss.backward(); torch.nn.utils.clip_grad_norm_(head.parameters(), 1.)
         optimizer.step()
         if epoch in CHECKPOINT_EPOCHS:
             with torch.no_grad():
-                train_acc, train_nll = metrics_from_logits(head.logits(train_features), train_targets)
-                tune_acc, tune_nll = metrics_from_logits(head.logits(tune_features), tune_targets)
+                train_acc, train_nll = metrics_from_logits(
+                    head.logits(train_features, train_counts), train_targets)
+                tune_acc, tune_nll = metrics_from_logits(
+                    head.logits(tune_features, tune_counts), tune_targets)
             row = {"epoch": epoch, "train_accuracy": train_acc, "train_nll": train_nll,
                    "tune_accuracy": tune_acc, "tune_nll": tune_nll}
             curve.append(row); candidates.append((tune_acc, -tune_nll, -epoch,
@@ -176,7 +194,7 @@ def rows_from_logits(groups, logits, seed, arm):
 def head_records(groups, feature_values, head, seed, arm="cross_linear"):
     import torch
 
-    with torch.no_grad(): logits = head.logits(feature_values)
+    with torch.no_grad(): logits = head.logits(feature_values, candidate_counts(groups))
     return rows_from_logits(groups, logits, seed, arm)
 
 
@@ -188,7 +206,8 @@ def cosine_logits(groups, embeddings, defer_logit):
         query = embeddings.get("entity", group["query"])
         keys = torch.stack([embeddings.get("entity", key) for key in group["keys"]])
         scores = keys @ query / .07
-        rows.append(torch.cat((scores, torch.tensor([defer_logit / .07]))))
+        padding = torch.full((MAX_KEYS - len(group["keys"]),), float("-inf"))
+        rows.append(torch.cat((scores, padding, torch.tensor([defer_logit / .07]))))
     return torch.stack(rows)
 
 

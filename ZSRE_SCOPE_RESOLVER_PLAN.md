@@ -20,7 +20,7 @@ Can frozen Qwen text evidence decide whether a query is inside the scope of one 
 
 ## Frozen pair representation
 
-For every query and every one of the eight memory prompts in its session, encode:
+For every query and every memory prompt in its session (up to eight), encode:
 
 ```text
 Memory update scope: {memory prompt}
@@ -35,7 +35,7 @@ Use the final frozen Qwen3-4B checkpoint's L2-normalized last-layer hidden state
 ### Primary: `cross_linear`
 
 - One affine score over the frozen pair hidden state plus one learned scalar `defer` logit.
-- For each query, score the eight session keys and append `defer` as the ninth action.
+- For each query, score up to eight session keys and append `defer` as the ninth action. A final short session is zero-padded to eight keys and invalid logits are masked to negative infinity.
 - Exact and rephrase queries target their own memory key.
 - Both locality queries target `defer`.
 - Optimize nine-way cross-entropy for 200 full-batch epochs with AdamW, learning rate 0.01 and weight decay 1e-4.

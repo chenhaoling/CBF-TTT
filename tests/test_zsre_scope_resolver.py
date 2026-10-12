@@ -3,7 +3,8 @@
 import unittest
 
 from tasks.train_zsre_scope_resolver import (
-    ARMS, HEAD_SEEDS, development_gate, query_groups, split_calibration,
+    ARMS, HEAD_SEEDS, candidate_counts, development_gate, feature_tensor,
+    query_groups, split_calibration,
 )
 
 
@@ -39,7 +40,7 @@ class ProtocolTests(unittest.TestCase):
         groups = query_groups([session(0)], "calibration")
         self.assertEqual(len(groups), 8)
         self.assertEqual([row["type"] for row in groups].count("locality"), 4)
-        self.assertEqual([row["target"] for row in groups], [0, 0, 2, 2, 1, 1, 2, 2])
+        self.assertEqual([row["target"] for row in groups], [0, 0, 8, 8, 1, 1, 8, 8])
 
     def test_gate_requires_all_metrics_and_control(self):
         primary = {"by_type": {kind: {"accuracy": .95} for kind in
@@ -59,6 +60,17 @@ class HeadTests(unittest.TestCase):
         loss = torch.nn.functional.cross_entropy(head.logits(values), targets); loss.backward()
         gradient = sum(float(parameter.grad.abs().sum()) for parameter in head.parameters())
         self.assertGreater(gradient, 0.); self.assertTrue(torch.isfinite(loss))
+
+    def test_short_session_is_padded_and_masked(self):
+        from tasks.train_zsre_scope_resolver import PAIR_TEMPLATE, ScopeHead, pair_texts
+        groups = query_groups([session(9, facts=3)], "calibration")
+        features = {name: torch.randn(5) for name in pair_texts(groups)}
+        values = feature_tensor(groups, features)
+        self.assertEqual(tuple(values.shape), (12, 8, 5))
+        self.assertTrue(torch.equal(candidate_counts(groups), torch.full((12,), 3)))
+        logits = ScopeHead(5, 2).logits(values, candidate_counts(groups))
+        self.assertTrue(torch.isneginf(logits[:, 3:8]).all())
+        self.assertTrue(torch.isfinite(logits[:, [0, 1, 2, 8]]).all())
 
 
 if __name__ == "__main__": unittest.main()
