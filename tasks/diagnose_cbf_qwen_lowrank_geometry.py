@@ -73,10 +73,11 @@ def build_representations(model, tokenizer, pairs):
     import torch
 
     entities, values = strings(pairs)
-    raw = {
-        "entity": _mean_rows(model.get_input_embeddings().weight, tokenizer, entities, ""),
-        "value": _mean_rows(model.lm_head.weight, tokenizer, values, " "),
-    }
+    with torch.no_grad():
+        raw = {
+            "entity": _mean_rows(model.get_input_embeddings().weight, tokenizer, entities, ""),
+            "value": _mean_rows(model.lm_head.weight, tokenizer, values, " "),
+        }
     names = {"entity": entities, "value": values}
     means = {kind: torch.stack([raw[kind][name] for name in names[kind]]).mean(0)
              for kind in ("entity", "value")}
@@ -130,7 +131,8 @@ def build_representations(model, tokenizer, pairs):
     # The registered baseline is produced through the exact v1 scalar projection path.
     # A batched GEMM is mathematically equivalent but not bit-identical because its
     # floating-point reduction order differs, which would break the artifact bridge.
-    baseline, baseline_meta, baseline_transforms = build_embeddings(model, tokenizer, pairs, 128)
+    with torch.no_grad():
+        baseline, baseline_meta, baseline_transforms = build_embeddings(model, tokenizer, pairs, 128)
     transforms["means"] = baseline_transforms["means"]
     for seed in SEEDS:
         tables["rp128", str(seed)] = baseline[str(seed)]
