@@ -1432,3 +1432,11 @@ dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对�
 解封后test上学习控制器查询/动作正确率99.74/99.22%，最优固定仍为75.00%；提升24.74点，95% CI `[24.48,25.00]`。history-blind为90.28%，恢复batch recency后提升9.46点，95% CI `[8.94,9.98]`；revoke-last1/last2分支从72.92/89.24%升至100/100%。这是修订后遗忘主线的首个正向预验证：在可读结构化session memory上，状态依赖的局部/全局遗忘显著优于任一固定策略。
 
 限制：3072训练决策中1114个有反事实并列最优，按最小遗忘顺序解除，因此主效果以query accuracy和成对基线差为准；当前语料有显式结构语法，且结果不等于原姆TTT dense fast-weight端到端有效。完整报告和小工件归档于`experiments/cbf_ttt/structured_forgetting_v1`；下一步是加入噪声/重复/更长延迟撤销、多语料seed复现，再向可读TTT-compatible memory蒸馏。
+
+### 低秩fast-weight连续+局部遗忘（执行前）
+
+新增`LOWRANK_FORGETTING_PLAN.md`、`tasks/train_cbf_lowrank_forgetting.py`、`scripts/run_cbf_lowrank_forgetting.sh`、`scripts/audit_cbf_lowrank_forgetting.py`和`tests/test_cbf_lowrank_forgetting.py`。每个可见实体-值写入构造实体key与value向量的外积，batch delta为这些外积之和，session memory为带权batch delta的加和。该受控代理保留`M_t=(1-alpha)M_{t-1}+DeltaW_t`的加性fast-weight形式，同时允许审计每个分量。
+
+反事实动作为`retain(alpha=0)`、`half(alpha=0.5)`、`local(删除被引用batch)`和`global(alpha=1)`，所有分支写入完全相同的当前delta；以当前三类查询平均NLL选标签，并列按实测记忆改变最小解除。控制器输入包括memory/delta范数、对齐度、引用分量范数/时间距离、词面结构、实体重叠/重复和capacity统计，不读答案、未来、family/split或ID。
+
+新语料固定128/32/32 train/dev/test世界，使用三个独立低秩投影seed 1701/1702/1703。比较完整控制器、reference-blind、仅`0/0.5/1`的global controller、四个固定策略、随机、物理规则和oracle。dev gate要求oracle≥90%、learned平均≥88%且每seed≥85%、距oracle≤3点、相对最强固定/global-only控制至少+8点且来源组bootstrap 95%下界>5点。只有聚合dev gate通过才一次性读test。本地非torches单测通过，torch真实外积/反事实测试因环境无torch跳过；语法、shell和diff检查通过。
