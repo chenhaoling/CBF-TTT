@@ -46,6 +46,7 @@ In-Place TTT is a drop-in test-time training method for Transformer LLMs. This r
 - Final-checkpoint writer result: [audited Q-gate report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/final_writer_binding_v1/REPORT.md).
 - Low-rank Qwen memory bridge: [pre-registered protocol](QWEN_LOWRANK_BRIDGE_PLAN.md).
 - Low-rank Qwen bridge result: [audited Q/V report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_bridge_v1/REPORT.md).
+- Qwen-grounded multi-component forgetting: [pre-registered protocol](QWEN_LOWRANK_FORGETTING_PLAN.md).
 
 [2026/03] The codebase is open-sourced.
 <br>
