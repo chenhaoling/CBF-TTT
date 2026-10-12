@@ -227,7 +227,8 @@ def apply_controller(memory, event, version, controller):
                     "controller_probability": result["probability"]}
 
 
-def replay_controller(session, scorer, readout_seed, controller_seed, controller):
+def replay_controller(session, scorer, readout_seed, controller_seed, controller,
+                      split="calibration_loso"):
     chains = {chain["id"]: chain for chain in session["chains"]}
     memory, active, decisions, queries, sizes = [], {}, [], [], []
     for step, event in enumerate(session["events"]):
@@ -239,7 +240,7 @@ def replay_controller(session, scorer, readout_seed, controller_seed, controller
         decisions.append(decision); active[event["chain_id"]] = event["version"]; sizes.append(len(memory))
         queries.extend(query_memory(query, memory, scorer, readout_seed)
                        for query in active_queries(session, active))
-    return {"session_id": session["id"], "split": "calibration_loso",
+    return {"session_id": session["id"], "split": split,
             "policy": "trained_controller", "seed": controller_seed,
             "readout_seed": readout_seed, "decisions": decisions,
             "queries": queries, "memory_sizes": sizes}
