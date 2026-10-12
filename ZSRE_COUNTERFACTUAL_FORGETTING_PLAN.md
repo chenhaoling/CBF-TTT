@@ -12,7 +12,7 @@ For every canonical ZsRE fact, build one three-event sequence:
 2. write the independent same-subject relation-specificity fact and retain the first fact;
 3. present the source rephrase with `target_new` and locally replace only the first fact.
 
-No answer is generated. Original, counterfactual, rephrase and locality fields all come from the downloaded ZsRE record. Four subject pairs are interleaved per session, producing 267/267/534 subject-disjoint calibration/development/test units. Development and test are transformed mechanically but remain unscored during calibration.
+No answer is generated. Original, counterfactual, rephrase and locality fields all come from the downloaded ZsRE record. Records whose normalized source and target values are identical are explicitly excluded and hashed in the manifest (9/11/18 records), leaving 258/256/516 subject-disjoint calibration/development/test units. Four subject pairs are interleaved per session. Development and test are transformed mechanically but remain unscored during calibration.
 
 ## Calibration gate
 

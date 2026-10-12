@@ -24,10 +24,14 @@ def source_hash(row):
     return hashlib.sha256(canonical(row).encode()).hexdigest()
 
 
+def is_counterfactual(fact):
+    return normalize(fact["original"]) != normalize(fact["updated"])
+
+
 def chains(fact, source_row, split):
     if source_hash(source_row) != fact["source_row_sha256"]:
         raise ValueError("source row hash mismatch")
-    if normalize(fact["original"]) == normalize(fact["updated"]):
+    if not is_counterfactual(fact):
         raise ValueError("counterfactual target must differ from original")
     locality = source_row.get("locality", {}).get("Relation_Specificity", [])
     if len(locality) != 2:
@@ -84,13 +88,15 @@ def build(source, context_root, output):
     context_manifest = json.loads((context_root / "manifest.json").read_text())
     if context_manifest["protocol"] != "zsre_contextual_readout_v1":
         raise ValueError("context protocol mismatch")
-    output.mkdir(parents=True); files, counts, subject_hashes = {}, {}, {}
+    output.mkdir(parents=True); files, counts, subject_hashes, excluded_noop = {}, {}, {}, {}
     for split in ("calibration", "dev", "test"):
         context_path = context_root / f"{split}.jsonl"
         if sha(context_path) != context_manifest["files_sha256"][context_path.name]:
             raise ValueError("context split hash mismatch")
         context_sessions = [json.loads(line) for line in context_path.read_text().splitlines() if line]
-        facts = [fact for session in context_sessions for fact in session["facts"]]
+        source_facts = [fact for session in context_sessions for fact in session["facts"]]
+        rejected = [fact for fact in source_facts if not is_counterfactual(fact)]
+        facts = [fact for fact in source_facts if is_counterfactual(fact)]
         subjects = [fact["subject"] for fact in facts]
         if len(subjects) != len(set(subjects)):
             raise ValueError("context split must contain one fact per subject")
@@ -103,11 +109,16 @@ def build(source, context_root, output):
                          "hard_retain_events": len(pairs), "local_transitions": len(pairs),
                          "sessions": len(sessions), "events": 3 * len(pairs)}
         subject_hashes[split] = hashlib.sha256(json.dumps(sorted(subjects)).encode()).hexdigest()
+        excluded_noop[split] = {
+            "count": len(rejected),
+            "subject_hash": hashlib.sha256(json.dumps(
+                sorted(fact["subject"] for fact in rejected)).encode()).hexdigest()}
     manifest = {"protocol": PROTOCOL, "source_sha256": SOURCE_SHA256,
                 "context_manifest_sha256": sha(context_root / "manifest.json"), "seed": SEED,
                 "primary_session_width": 4, "ideal_active_records": 8,
                 "sequence": ["original_retain", "same_subject_hard_retain", "counterfactual_local"],
                 "counts": counts, "subject_hashes": subject_hashes, "files_sha256": files,
+                "excluded_noop_updates": excluded_noop,
                 "construction_splits": ["calibration", "dev", "test"],
                 "selection_used_heldout_labels": False, "test_scored": False}
     write_json(output / "manifest.json", manifest); return manifest

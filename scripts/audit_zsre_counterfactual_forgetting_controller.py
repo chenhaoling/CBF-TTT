@@ -13,9 +13,9 @@ from tasks.train_zsre_forgetting_controller_v2 import THRESHOLDS
 from tasks.train_zsre_counterfactual_forgetting_controller import PROTOCOL
 
 
-EXPECTED_CALIBRATION = {"subjects": 267, "primary_chains": 267, "auxiliary_chains": 267,
-                        "primary_versions": 534, "hard_retain_events": 267,
-                        "local_transitions": 267, "sessions": 67, "events": 801}
+EXPECTED_CALIBRATION = {"subjects": 258, "primary_chains": 258, "auxiliary_chains": 258,
+                        "primary_versions": 516, "hard_retain_events": 258,
+                        "local_transitions": 258, "sessions": 65, "events": 774}
 
 
 def read_rows(path):
@@ -33,9 +33,10 @@ def audit(root, data_root, source_root, scope_root):
         "data_protocol": manifest["data_protocol"] == data_manifest["protocol"] == DATA_PROTOCOL,
         "data_hash": manifest["data_manifest_sha256"] == sha(data_root / "manifest.json"),
         "data_counts": data_manifest["counts"]["calibration"] == EXPECTED_CALIBRATION,
+        "noop_exclusion": data_manifest["excluded_noop_updates"]["calibration"]["count"] == 9,
         "heldout_not_selected": data_manifest["selection_used_heldout_labels"] is False,
         "nested_loso": manifest["split"] == "calibration_nested_loso"
-                       and len(manifest["outer_folds"]) == len(set(manifest["outer_folds"])) == 67,
+                       and len(manifest["outer_folds"]) == len(set(manifest["outer_folds"])) == 65,
         "seeds": tuple(manifest["controller_seeds"]) == CONTROLLER_SEEDS
                  and tuple(manifest["readout_seeds"]) == GATE_SEEDS,
         "threshold_grid": tuple(manifest["thresholds"]) == THRESHOLDS,
@@ -45,7 +46,7 @@ def audit(root, data_root, source_root, scope_root):
                             and not summary["test_scored"] and not manifest["dev_loaded"]
                             and not manifest["test_loaded"] and not manifest["test_scored"],
         "no_heldout_raw": not list(root.glob("dev_*.jsonl")) and not list(root.glob("test_*.jsonl")),
-        "event_count": training["events_with_candidates"] == 734 and training["feature_dim"] == 13,
+        "event_count": training["events_with_candidates"] == 709 and training["feature_dim"] == 13,
         "checkpoint_hash": training["checkpoint_sha256"] == sha(
             root / "counterfactual_forgetting_gate.pt"),
         "source_hashes": training["source_summary_sha256"] == sha(source / "summary.json")
@@ -70,13 +71,13 @@ def audit(root, data_root, source_root, scope_root):
     checks["baseline_recomputed"] = summarize_seed_metrics(baseline_metrics) == summary["cosine_local"]
     checks["comparison_recomputed"] = paired_comparison(
         controller_records, baseline_records, 9001) == summary["comparison"]
-    checks["paired_units"] = summary["comparison"]["paired_subject_units"] == 267
+    checks["paired_units"] = summary["comparison"]["paired_subject_units"] == 258
     for outer_id, fold in training["folds"].items():
         outer_train, inner_train = set(fold["outer_train_sessions"]), set(fold["inner_train_sessions"])
         tune = fold["inner_tune_session"]
         checks[f"fold_partition_{outer_id}"] = (outer_train == inner_train | {tune}
                                                 and outer_id not in outer_train
-                                                and len(outer_train) == 66 and len(inner_train) == 65)
+                                                and len(outer_train) == 64 and len(inner_train) == 63)
     return {"protocol": PROTOCOL, "audit_passed": all(checks.values()), "checks": checks,
             "dev_loaded": False, "test_loaded": False, "test_scored": False,
             "summary_sha256": sha(root / "summary.json"),

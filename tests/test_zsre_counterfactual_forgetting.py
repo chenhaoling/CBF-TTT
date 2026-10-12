@@ -2,7 +2,7 @@
 
 import unittest
 
-from tasks.build_zsre_counterfactual_forgetting import chains, pack
+from tasks.build_zsre_counterfactual_forgetting import chains, is_counterfactual, pack
 
 
 def fact():
@@ -21,6 +21,10 @@ def source():
 
 
 class CounterfactualForgettingTests(unittest.TestCase):
+    def test_equal_target_is_not_a_counterfactual(self):
+        item = fact(); item["updated"] = " ann "
+        self.assertFalse(is_counterfactual(item))
+
     def test_sequence_uses_original_then_counterfactual(self):
         row = source(); item = fact(); item["source_row_sha256"] = row.pop("_computed_hash")
         primary, auxiliary = chains(item, row, "calibration")
