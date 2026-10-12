@@ -1520,3 +1520,9 @@ v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与
 ### Qwen表征多组件遗忘（执行前）
 
 新增`QWEN_LOWRANK_FORGETTING_PLAN.md`、`tasks/train_cbf_qwen_lowrank_forgetting.py`及对应runner/audit/test。使用新seed构建128/32/32世界event curriculum；实体key来自最终Qwen输入embedding，value来自最终Qwen LM-head token方向，分别用train+dev统计中心化，再以三个固定Gaussian投影映射到128维。测试命名空间只在dev聚合门通过后读取，并严格复用train+dev中心和投影。每个assignment写入value-key外积，比较四个固定动作、随机、history-blind、global-only learned、full learned、物理规则和oracle；门槛沿用三seed低秩正式实验。模型checkpoint冻结，只训练小型遗忘控制器。
+
+### Qwen表征多组件遗忘：完成结果与下一轮计划
+
+提交`3b1d6e6`在hku-gpu2完成正式运行。生成4,608个episode和27,648个query，三个投影seed的控制器训练与开发评测耗时102.67秒，总墙钟117秒。full learned准确率/NLL为27.73%/4.0998，最强固定策略global reset为32.20%/4.7087；尽管learned NLL更低，准确率差值为-4.48点，来源组95% CI `[-6.35,-2.60]`。greedy oracle准确率只有28.49%，可读性、learned准确率、全seed、控制增益和置信区间五项门槛失败；test保持封存。独立审计验证数据/表示/raw记录hash、聚合、门控和test lock全部通过。runner未记录GPU峰值，因此不报告该数值。
+
+新增归档`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_forgetting_v1`，包含报告、summary、training、manifest、审计和运行状态；原始JSONL和checkpoint保留服务器。新增`QWEN_LOWRANK_GEOMETRY_PLAN.md`，下一轮先在完美语义状态下比较`rp128`、`rp128_whiten`、`rp256_whiten`与随机码上限，量化1–32组件cross-talk。只有mean≥90%、最差seed/事件族/16组件≥85%的Qwen表示才能进入v2遗忘控制器；否则停止并预注册contextual hidden-state表示实验。baseline入口和配置均未修改。

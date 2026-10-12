@@ -325,6 +325,12 @@ If you have any questions about this project, please feel free to contact us:
 > Guhao Feng (fenguhao@stu.pku.edu.cn)  
 > Shengjie Luo (shengjieluo@bytedance.com)
 
+## CBF-TTT latest experiment
+
+The audited Qwen-grounded multi-component forgetting run completed on the final 1B-token Qwen3-4B checkpoint. Development accuracy was 27.73% for the full learned policy versus 32.20% for fixed global reset; the greedy oracle reached only 28.49%. The preregistered readability and policy gates failed, so test remained sealed. See the [complete report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_forgetting_v1/REPORT.md).
+
+The next experiment follows the [Qwen memory geometry and readability plan](QWEN_LOWRANK_GEOMETRY_PLAN.md): compare the current projection against 128/256-dimensional whitening under a perfect semantic state, quantify cross-talk, and retrain the forgetting controller only after a representation passes the fixed readability gate.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.

@@ -20,6 +20,8 @@ Directly fine-tuning the final checkpoint writer with balanced eight-value count
 
 The Qwen-grounded rank-one bridge passed that prerequisite: both independent Q and one-time V achieved 100% candidate and full-vocabulary first-token accuracy under Correct memory, versus 0% for Wrong and 12.5% for Zero. On V, Correct improved answer NLL over Zero by 2.3364 (95% CI [2.3300, 2.3435]). This demonstrates a readable additive session memory in the actual frozen Qwen embedding/readout geometry, while leaving multi-component interference and forgetting as the next causal test.
 
+The first multi-component Qwen-derived experiment then exposed that missing condition. On development, the full learned forgetting policy reached 27.73% candidate accuracy, below fixed global reset at 32.20%; learned-minus-fixed-global accuracy was -4.48 points with source-group 95% CI [-6.35, -2.60]. The greedy oracle reached only 28.49%, far below the preregistered 90% readability requirement. The gate failed and test remained sealed. Thus the single-component bridge does not yet supply an interference-resistant multi-component memory; the next study must improve and validate representation geometry before retraining the controller.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -31,6 +33,7 @@ The Qwen-grounded rank-one bridge passed that prerequisite: both independent Q a
 ## Claims that are not supported
 
 - The current Qwen3-4B native TTT writer has not shown reliable memory-only random fact binding.
+- The current centered random projection of Qwen mean-token keys and LM-head value directions is not readable under multi-component interference.
 - Restricting native writes removes the observed termination collapse, but has not yet made fast weights outperform the no-write condition.
 - The controlled results do not establish improvements on ZsRE, MMLU, RULER, LongMemEval-S, or LoCoMo.
 - Clean semantic conflict/duplicate ratios are available in the constructed environment; a real deployment must estimate them from activations or retrieved session state.
@@ -52,3 +55,4 @@ Key reports:
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/fastweight_content_v2/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/final_writer_binding_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_bridge_v1/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_forgetting_v1/REPORT.md`
