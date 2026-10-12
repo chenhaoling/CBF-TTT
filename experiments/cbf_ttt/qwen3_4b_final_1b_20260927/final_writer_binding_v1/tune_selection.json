@@ -1,0 +1,33 @@
+{
+  "protocol": "final_writer_binding_v1",
+  "stage": "tune_selection",
+  "candidates": [
+    {
+      "arm": "lr3e7",
+      "lr": 3e-07,
+      "score": 0.01171875,
+      "candidate_accuracy": 0.0625,
+      "greedy_accuracy": 0.0625,
+      "passed_full_gate": false,
+      "summary_sha256": "ce0b4b38d0cb5ad737fa10ec3b6dc3d35d4bb0e0c111ce1db60b390309ec7f2e",
+      "training_complete_sha256": "50ded8f4122c9f691d6d63429d97007a183c41ade53a024d9d1d97283f2bf39c",
+      "last32_accuracy": 0.140625
+    },
+    {
+      "arm": "lr1e6",
+      "lr": 1e-06,
+      "score": 0.00390625,
+      "candidate_accuracy": 0.125,
+      "greedy_accuracy": 0.125,
+      "passed_full_gate": false,
+      "summary_sha256": "cfc27a4fb7aeae3ba9b0fcc62d891bad994c0c02019623ef8661f1e7e2eabe95",
+      "training_complete_sha256": "25a1bf9d6a63696a5af1a79469c7ee28fd1680d5172cb9061de04d66918127e7",
+      "last32_accuracy": 0.125
+    }
+  ],
+  "selected_arm": "lr3e7",
+  "selected_lr": 3e-07,
+  "selection_rule": "gate, minimum Correct-vs-control NLL gain, candidate accuracy, greedy accuracy, lower LR",
+  "q_scored": false,
+  "v_scored": false
+}

@@ -16,6 +16,8 @@ The actual Qwen3-4B final-checkpoint mechanism diagnostic adds a boundary result
 
 After fixing the open-vocabulary readout on source-disjoint data, the single-update causal intervention also failed the content gate. Full-KV candidate and first-token accuracy were both 100%, but Correct versus Wrong-twin fast weights improved answer NLL by only 0.00216 (95% CI [-0.00064, 0.00493]); Zero and norm-matched Random weights had lower NLL than Correct. This isolates the current native writer, rather than the forgetting controller, as the next component requiring training changes.
 
+Directly fine-tuning the final checkpoint writer with balanced eight-value counterfactual assignments did not recover content binding. On eight new source groups, Correct fast memory reached 10.94% versus 12.50% for Wrong and Zero; Wrong-minus-Correct answer NLL was -0.01074 (95% CI [-0.02051, -0.00293]). Correct did improve NLL over Zero, separating a generic populated-memory effect from value-specific binding. This rules out simple writer fine-tuning as the bridge to the native dense memory and motivates a readable low-rank key-value substrate for the forgetting policy.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -46,3 +48,4 @@ Key reports:
 - `experiments/cbf_ttt/forgetting_only_validation_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_accumulation/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/fastweight_content_v2/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/final_writer_binding_v1/REPORT.md`

@@ -43,6 +43,7 @@ In-Place TTT is a drop-in test-time training method for Transformer LLMs. This r
 - Readout-calibrated follow-up: [fast-weight content v2 protocol](FASTWEIGHT_CONTENT_V2_PLAN.md).
 - Completed content result: [single-update fast-weight content v2 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/fastweight_content_v2/REPORT.md).
 - Final-checkpoint writer recovery: [pre-registered binding protocol](FINAL_WRITER_BINDING_PLAN.md).
+- Final-checkpoint writer result: [audited Q-gate report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/final_writer_binding_v1/REPORT.md).
 
 [2026/03] The codebase is open-sourced.
 <br>

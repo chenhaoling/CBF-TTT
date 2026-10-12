@@ -1508,3 +1508,5 @@ v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与
 新增`FINAL_WRITER_BINDING_PLAN.md`、`tasks/train_final_writer_binding.py`、`scripts/run_final_writer_binding.sh`、`scripts/audit_final_writer_binding.py`及`tests/test_final_writer_binding.py`。与此前从Qwen基座新初始化writer的实验不同，本轮加载1B-token最终checkpoint中的既有`ttt_conv/ttt_proj`，冻结全部非writer参数。已审计v2场景只替换唯一颜色token，为每个来源组生成同一查询对应8种反事实值；组0–7用于嵌套调参与最终训练，组8–15为Q，组16–23保持封存至Q通过。
 
 `cbf_ttt.event_writer.write_memory_after_prefix`新增可选的两块写入路径：第一块只构造冻结KV，第二个完整块生成可微delta，查询使用fresh KV。训练采用八选一CE、全词表CE、同一步对称counterfactual swap和Correct-vs-Zero margin，逐层delta cap固定为0.3。调参只比较预登记的`3e-7/1e-6`，随后从原最终checkpoint重新初始化、用组选定学习率训练；Q门要求Correct同时优于Wrong/Zero/等范数Random且source-group bootstrap下界大于0，通过后才允许一次性V。所有入口均为opt-in，baseline默认配置和原生公式未修改。
+
+正式实验在提交`672f9a9`完成。双学习率开发门均失败，冻结规则选择`3e-7`后从最终checkpoint重新训练256步。独立Q的Correct/Wrong/Zero/Random准确率为10.94%/12.50%/12.50%/14.06%；Wrong-minus-Correct NLL为-0.01074，95% CI `[-0.02051,-0.00293]`，而Zero/Random-minus-Correct为正。该组合说明writer产生通用memory效应但没有当前值绑定。Q失败后V保持封存；独立审计全部通过。总墙钟14分09秒，最终训练峰值allocated/reserved 12.558/13.643GiB。完整报告与紧凑工件位于`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/final_writer_binding_v1`。

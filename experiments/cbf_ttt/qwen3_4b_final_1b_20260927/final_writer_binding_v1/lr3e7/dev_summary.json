@@ -1,0 +1,97 @@
+{
+  "protocol": "final_writer_binding_v1",
+  "stage": "dev",
+  "groups": [
+    5,
+    6
+  ],
+  "rows": 16,
+  "policies": {
+    "correct": {
+      "nll": 2.166021019220352,
+      "candidate_nll": 2.1067855209112167,
+      "candidate_correct": 0.0625,
+      "greedy_correct": 0.0625,
+      "eos_first": 0.0
+    },
+    "wrong": {
+      "nll": 2.177739769220352,
+      "candidate_nll": 2.1185042709112167,
+      "candidate_correct": 0.1875,
+      "greedy_correct": 0.1875,
+      "eos_first": 0.0
+    },
+    "zero": {
+      "nll": 2.334620714187622,
+      "candidate_nll": 2.2269968762993813,
+      "candidate_correct": 0.125,
+      "greedy_correct": 0.125,
+      "eos_first": 0.0
+    },
+    "random": {
+      "nll": 2.3369913697242737,
+      "candidate_nll": 2.2338872626423836,
+      "candidate_correct": 0.125,
+      "greedy_correct": 0.125,
+      "eos_first": 0.0
+    }
+  },
+  "domains": {
+    "fineweb": 0.0,
+    "longcrawl": 0.125
+  },
+  "comparisons": {
+    "correct_vs_wrong_nll_gain": {
+      "mean": 0.01171875,
+      "ci95": [
+        0.0078125,
+        0.015625
+      ]
+    },
+    "correct_vs_wrong_candidate_correct_gain": {
+      "mean": -0.125,
+      "ci95": [
+        -0.25,
+        0.0
+      ]
+    },
+    "correct_vs_zero_nll_gain": {
+      "mean": 0.1685996949672699,
+      "ci95": [
+        0.15320813655853271,
+        0.18399125337600708
+      ]
+    },
+    "correct_vs_zero_candidate_correct_gain": {
+      "mean": -0.0625,
+      "ci95": [
+        -0.125,
+        0.0
+      ]
+    },
+    "correct_vs_random_nll_gain": {
+      "mean": 0.1709703505039215,
+      "ci95": [
+        0.15211381018161774,
+        0.18982689082622528
+      ]
+    },
+    "correct_vs_random_candidate_correct_gain": {
+      "mean": -0.0625,
+      "ci95": [
+        -0.125,
+        0.0
+      ]
+    }
+  },
+  "passed": false,
+  "writer_sha256": "014a41642f9b3acd7d659590fee7edee9312b863ddd3815902318964baab7f5b",
+  "checkpoint_sha256": "63d3452c2a402dcab9fb8ba8ed715611907dea6a651c6d76f6c779dd6a60b20e",
+  "rows_sha256": {
+    "dev.jsonl": "6f764bdef92403685cead10ccb4fe9118bed88c65e9104007308be3784ac5931"
+  },
+  "source_data_sha256": "1b2d7e10617b0bd1b742ae24057af5717fcf12d9db7348f3013d542939cdcf7c",
+  "terminal_status": "stopped_by_dev",
+  "v_scored": false,
+  "audit_count": 1
+}

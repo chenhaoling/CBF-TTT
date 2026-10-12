@@ -1,0 +1,70 @@
+{
+  "stage": "q",
+  "groups": [
+    9,
+    11,
+    13,
+    15
+  ],
+  "rows": 32,
+  "rows_sha256": "afb061b085e62346dad858fb31613d22c638a7d7d1b95028d7c1ab138e1cb392",
+  "writer_sha256": "57004b384f72aaf590a273bcb252c1486046fd105652222f5f180739f31cfdaa",
+  "checkpoint_sha256": "69b3ab252afdda97298fa0636d9353803c441708451c4643061329dc0388b424",
+  "backbone_sha256": "1b3a8bd9b92f0c3f6ed1385e723d41b5a875b2a66cb17a3d56b2859c77c36f4f",
+  "backbone_unchanged": true,
+  "source_data_sha256": "1b2d7e10617b0bd1b742ae24057af5717fcf12d9db7348f3013d542939cdcf7c",
+  "training_manifest": {
+    "protocol": "final_writer_binding_v1",
+    "stage": "final",
+    "arm": "selected",
+    "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+    "groups": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rounds": 8,
+    "updates": 256,
+    "memory_writes": 512,
+    "lr": 3e-07,
+    "seed": 1730,
+    "order_seed": 1729,
+    "memory_cap": 0.3,
+    "loss_weights": {
+      "candidate_weight": 1.0,
+      "full_vocab_weight": 0.25,
+      "swap_weight": 1.0,
+      "zero_weight": 0.5,
+      "margin": 0.2
+    },
+    "source_data_sha256": "1b2d7e10617b0bd1b742ae24057af5717fcf12d9db7348f3013d542939cdcf7c",
+    "episodes_sha256": "ea689cf96d716b4b5a7546218bbe8d664bee286d4bd4590436398fe09088e8eb",
+    "initial_writer_sha256": "df3d47f6d530546955cabcf66e614f2c189a1100e7b2501aa208f615e1d2a887",
+    "backbone_sha256": "1b3a8bd9b92f0c3f6ed1385e723d41b5a875b2a66cb17a3d56b2859c77c36f4f",
+    "loading_info": {
+      "missing_keys": [],
+      "unexpected_keys": [],
+      "mismatched_keys": [],
+      "error_msgs": []
+    },
+    "trainable_parameters": 45964800,
+    "writer_dtype": "float32",
+    "compute_dtype": "bfloat16",
+    "test_scored": false
+  },
+  "seconds": 26.793780371546745,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "torch": "2.9.1+cu130",
+  "transformers": "4.57.3",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  }
+}
