@@ -29,3 +29,6 @@ bash scripts/run_cbf_fastweight_content_v2.sh
 
 本方案在 v2 的任何模型评分前冻结。
 
+## 完成记录（评分后追加）
+
+dev的lowercase/options首token均100%，按较低NLL选择options；独立Q的两个域八选一和首token均100%，Q门通过。V完成16上下文×6干预并独立审计。Correct相对Wrong的NLL收益0.00216，95% CI跨0；特异性margin增益0.01953，CI跨0。Zero和Random分别比Correct低0.02025/0.01793 NLL，且CI均排除0。内容绑定和内容效用门均失败，终态`completed_fastweight_content_v2`，完整结果见归档REPORT。

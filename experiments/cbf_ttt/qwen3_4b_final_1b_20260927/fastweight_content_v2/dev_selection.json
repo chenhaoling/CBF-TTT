@@ -1,0 +1,71 @@
+{
+  "protocol": "fastweight_content_v2",
+  "stage": "dev",
+  "data_sha256": "1b2d7e10617b0bd1b742ae24057af5717fcf12d9db7348f3013d542939cdcf7c",
+  "formats": {
+    "lowercase": {
+      "overall": {
+        "nll": 0.2109793173149228,
+        "correct": 1.0,
+        "greedy_correct": 1.0
+      },
+      "domains": {
+        "fineweb": {
+          "nll": 0.24749387055635452,
+          "correct": 1.0,
+          "greedy_correct": 1.0
+        },
+        "longcrawl": {
+          "nll": 0.1744647640734911,
+          "correct": 1.0,
+          "greedy_correct": 1.0
+        }
+      },
+      "minimum_domain_greedy": 1.0
+    },
+    "options": {
+      "overall": {
+        "nll": 0.13820899976417422,
+        "correct": 1.0,
+        "greedy_correct": 1.0
+      },
+      "domains": {
+        "fineweb": {
+          "nll": 0.08109839167445898,
+          "correct": 1.0,
+          "greedy_correct": 1.0
+        },
+        "longcrawl": {
+          "nll": 0.19531960785388947,
+          "correct": 1.0,
+          "greedy_correct": 1.0
+        }
+      },
+      "minimum_domain_greedy": 1.0
+    },
+    "completion": {
+      "overall": {
+        "nll": 2.4881725013256073,
+        "correct": 1.0,
+        "greedy_correct": 0.3125
+      },
+      "domains": {
+        "fineweb": {
+          "nll": 2.2313541173934937,
+          "correct": 1.0,
+          "greedy_correct": 0.625
+        },
+        "longcrawl": {
+          "nll": 2.744990885257721,
+          "correct": 1.0,
+          "greedy_correct": 0.0
+        }
+      },
+      "minimum_domain_greedy": 0.0
+    }
+  },
+  "selected_format": "options",
+  "passed": true,
+  "q_scored": false,
+  "terminal_status": "dev_format_selected"
+}

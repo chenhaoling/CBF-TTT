@@ -1500,3 +1500,5 @@ dev全门通过后才生成最终评测：换用投影3901/3902/3903、五个新
 v1实际Q的两个域八选一均100%，8/8组双twin正确，但全词表首token仅31.25%，低于预登记50%门槛；流程以`stopped_by_content_Q`结束，V文件不存在，独立重建审计通过。事后只解码已存argmax，6条为` The`、5条为首字母大写颜色、5条为正确小写颜色，提示开放词表格式是门槛失败的重要组成。
 
 新增`FASTWEIGHT_CONTENT_V2_PLAN.md`、`tasks/cbf_fastweight_content_v2.py`及对应runner/audit/test。v2不降低门槛：在已观察dev组0–7比较三个预设小写单词模板，按最差域首token固定选择；只将唯一模板送到组8–15 Q，Q通过后才首次评分组16–23 V。V的干预、内容绑定/效用阈值与v1相同。
+
+v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与首token均100%；随后首次解封V。Correct/Wrong/Zero/Random的答案NLL为0.12824/0.13041/0.10799/0.11032。Correct相对Wrong收益0.00216，95% CI `[-0.00064,0.00493]`；特异性margin提升0.01953，CI `[-0.00781,0.04297]`。Zero与Random均显著优于Correct，内容绑定和内容效用门失败。独立审计从parquet重建48场景并重算三阶段和bootstrap通过；墙钟164秒，峰值allocated/reserved 10.867/11.746GiB。完整归档位于`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/fastweight_content_v2`。

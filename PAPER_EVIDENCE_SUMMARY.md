@@ -14,6 +14,8 @@ The claim is supported by a staged evidence chain:
 
 The actual Qwen3-4B final-checkpoint mechanism diagnostic adds a boundary result: three native TTT writes caused `<|im_end|>` to become the first-token argmax on 100% of 128 binding queries. Retaining only the last update reduced this to 4.69% and improved answer NLL by 5.4088 (source-group 95% CI [3.4846, 7.4589]) versus cumulative writing. However, no-write still had lower NLL by 0.0634 (95% CI [0.0245, 0.1021] in favor of no-write), so the experiment supports accumulation control but not content utility of the current writer.
 
+After fixing the open-vocabulary readout on source-disjoint data, the single-update causal intervention also failed the content gate. Full-KV candidate and first-token accuracy were both 100%, but Correct versus Wrong-twin fast weights improved answer NLL by only 0.00216 (95% CI [-0.00064, 0.00493]); Zero and norm-matched Random weights had lower NLL than Correct. This isolates the current native writer, rather than the forgetting controller, as the next component requiring training changes.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -43,3 +45,4 @@ Key reports:
 - `experiments/cbf_ttt/continuous_robust_v2/REPORT.md`
 - `experiments/cbf_ttt/forgetting_only_validation_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_accumulation/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/fastweight_content_v2/REPORT.md`

@@ -1,0 +1,27 @@
+{
+  "protocol": "fastweight_content_v2",
+  "stage": "q",
+  "data_sha256": "1b2d7e10617b0bd1b742ae24057af5717fcf12d9db7348f3013d542939cdcf7c",
+  "selected_format": "options",
+  "overall": {
+    "nll": 0.13308497797697783,
+    "correct": 1.0,
+    "greedy_correct": 1.0
+  },
+  "domains": {
+    "fineweb": {
+      "nll": 0.1064653480425477,
+      "correct": 1.0,
+      "greedy_correct": 1.0
+    },
+    "longcrawl": {
+      "nll": 0.15970460791140795,
+      "correct": 1.0,
+      "greedy_correct": 1.0
+    }
+  },
+  "twin_both_correct_groups": 8,
+  "passed": true,
+  "v_scored": false,
+  "terminal_status": "q_passed_v_locked"
+}
