@@ -22,6 +22,8 @@ The Qwen-grounded rank-one bridge passed that prerequisite: both independent Q a
 
 The first multi-component Qwen-derived experiment then exposed that missing condition. On development, the full learned forgetting policy reached 27.73% candidate accuracy, below fixed global reset at 32.20%; learned-minus-fixed-global accuracy was -4.48 points with source-group 95% CI [-6.35, -2.60]. The greedy oracle reached only 28.49%, far below the preregistered 90% readability requirement. The gate failed and test remained sealed. Thus the single-component bridge does not yet supply an interference-resistant multi-component memory; the next study must improve and validate representation geometry before retraining the controller.
 
+A perfect-semantic-state geometry diagnostic confirmed that controller error was not responsible. The exact prior representation reached 32.65% development accuracy; 128-dimensional whitening improved the generic 16-component load sweep from 69.16% to 87.03% but event-world accuracy remained 31.62%. A deterministic random-code control reached 100% throughout. Exploratory slicing of the saved rows found 17.38% historical-query accuracy and 3.56% unknown accuracy for 256-dimensional whitening, motivating a preregistered key/value factorial and contextual-hidden-state representation study.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -56,3 +58,4 @@ Key reports:
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/final_writer_binding_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_bridge_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_forgetting_v1/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_geometry_v1/REPORT.md`

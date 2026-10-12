@@ -176,7 +176,7 @@ def _read_output(active, query_key, embeddings):
     return output
 
 
-def perfect_state_records(pairs, embeddings, variant):
+def perfect_state_records(pairs, embeddings, variant, unknown_raw=.35):
     records = []
     for inp, target in pairs:
         events, queries = [], []
@@ -188,7 +188,8 @@ def perfect_state_records(pairs, embeddings, variant):
                 continue
             active = replay(events)
             for query in boundary_truth(inp, target, block["index"]):
-                metrics = read_metrics_with_embeddings(active, query, candidates, embeddings)
+                metrics = read_metrics_with_embeddings(
+                    active, query, candidates, embeddings, unknown_raw=unknown_raw)
                 queries.append({**query, **metrics, "after_block": block["index"],
                                 "active_components": len(active)})
         records.append({"episode_id": inp["id"], "group_id": inp["group_id"],
@@ -197,10 +198,10 @@ def perfect_state_records(pairs, embeddings, variant):
     return records
 
 
-def read_metrics_with_embeddings(active, query, candidates, embeddings):
+def read_metrics_with_embeddings(active, query, candidates, embeddings, unknown_raw=.35):
     values = [embeddings.get("value", value) for value in candidates]
     output = _read_output(active, embeddings.get("entity", query["key"]), embeddings)
-    return read_metrics(output, query["answer"], candidates, values)
+    return read_metrics(output, query["answer"], candidates, values, unknown_raw=unknown_raw)
 
 
 def aggregate_readability(records):

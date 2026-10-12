@@ -331,6 +331,8 @@ The audited Qwen-grounded multi-component forgetting run completed on the final 
 
 The next experiment follows the [Qwen memory geometry and readability plan](QWEN_LOWRANK_GEOMETRY_PLAN.md): compare the current projection against 128/256-dimensional whitening under a perfect semantic state, quantify cross-talk, and retrain the forgetting controller only after a representation passes the fixed readability gate.
 
+That geometry experiment is now [complete](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_geometry_v1/REPORT.md). Whitening raised the generic 16-component sweep from 69.16% to 87.03%, but perfect-state event accuracy remained near 32%; random codes reached 100%. The next registered step is the [Qwen contextual geometry study](QWEN_CONTEXTUAL_GEOMETRY_PLAN.md), which isolates key versus value collisions and evaluates frozen final-layer contextual identifiers before releasing controller v2.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.

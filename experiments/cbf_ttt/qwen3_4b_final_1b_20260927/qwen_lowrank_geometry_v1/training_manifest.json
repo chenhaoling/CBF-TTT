@@ -1,0 +1,43 @@
+{
+  "protocol": "qwen_lowrank_geometry_v1",
+  "data_manifest_sha256": "59e95c1199c5ed7b72aaf82c538d21327fb6d368805d74fd24d96a6714002690",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "seeds": [
+    2301,
+    2302,
+    2303
+  ],
+  "registered_variants": [
+    "rp128",
+    "rp128_whiten",
+    "rp256_whiten"
+  ],
+  "regularizers": [
+    0.0001,
+    0.001,
+    0.01
+  ],
+  "loads": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "fit_splits": [
+    "train",
+    "dev"
+  ],
+  "selection_split": "train",
+  "gate_split": "dev",
+  "test_loaded": false,
+  "test_scored": false
+}

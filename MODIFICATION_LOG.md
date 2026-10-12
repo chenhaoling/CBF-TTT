@@ -1526,3 +1526,9 @@ v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与
 提交`3b1d6e6`在hku-gpu2完成正式运行。生成4,608个episode和27,648个query，三个投影seed的控制器训练与开发评测耗时102.67秒，总墙钟117秒。full learned准确率/NLL为27.73%/4.0998，最强固定策略global reset为32.20%/4.7087；尽管learned NLL更低，准确率差值为-4.48点，来源组95% CI `[-6.35,-2.60]`。greedy oracle准确率只有28.49%，可读性、learned准确率、全seed、控制增益和置信区间五项门槛失败；test保持封存。独立审计验证数据/表示/raw记录hash、聚合、门控和test lock全部通过。runner未记录GPU峰值，因此不报告该数值。
 
 新增归档`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_forgetting_v1`，包含报告、summary、training、manifest、审计和运行状态；原始JSONL和checkpoint保留服务器。新增`QWEN_LOWRANK_GEOMETRY_PLAN.md`，下一轮先在完美语义状态下比较`rp128`、`rp128_whiten`、`rp256_whiten`与随机码上限，量化1–32组件cross-talk。只有mean≥90%、最差seed/事件族/16组件≥85%的Qwen表示才能进入v2遗忘控制器；否则停止并预注册contextual hidden-state表示实验。baseline入口和配置均未修改。
+
+### Qwen低秩表示几何：完成结果
+
+提交`34a2e70`的正式G1/G2诊断在单张RTX5090完成，墙钟54秒、核心诊断49.27秒，峰值allocated/reserved 7.633/7.643GiB。`rp128`、128维白化、256维白化的完美语义状态dev准确率分别为32.65%、31.62%、32.20%，均未通过90%门；随机码控制为100%。白化仍将通用16组件load sweep从69.16%提高到87.03%，32组件从36.36%提高到约67%，说明其改善全局容量但没有解决同一世界共享前缀key的局部冲突。test未读取，控制器未训练，独立审计与`rp128`逐bit旧结果桥均通过。
+
+新增结果归档`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_geometry_v1`。事后仅分解已存dev行：256维白化的known/unknown为37.93%/3.56%，current/historical/anchor为41.67%/17.38%/37.57%，标记为探索性定位。新增`QWEN_CONTEXTUAL_GEOMETRY_PLAN.md`及contextual诊断代码：先做Qwen/random key-value二因素替换，再比较final-layer last-token与目标span mean两种256维白化表示；白化正则与unknown阈值只在train选择，dev门槛不变，test继续封存。所有入口opt-in，baseline未修改。
