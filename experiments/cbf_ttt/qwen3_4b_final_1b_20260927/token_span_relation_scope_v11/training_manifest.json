@@ -1,0 +1,44 @@
+{
+  "protocol": "token_span_relation_scope_v11",
+  "counterfact_source_sha256": "d017056125178a13728594e66a801357a8db9ed7973a7425554bb4271de9fc6f",
+  "corpus_manifest_sha256": "300b180fbf3a0595a73582f7747302730dcbdc5a19f2d321db931f8a983fafc8",
+  "v5_summary_sha256": "625525cdd0cf4a629fdfe2cf522035ea774c59fb1138633375db006afd12bfee",
+  "v10_summary_sha256": "db4a47476e05907882964cc1ef7ae038c454832a69497ff436405562d8a7c145",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "head_seeds": [
+    19101,
+    19102,
+    19103
+  ],
+  "epochs": [
+    3,
+    8,
+    15
+  ],
+  "thresholds": [
+    0.3,
+    0.5,
+    0.7
+  ],
+  "arms": [
+    "hard_equal",
+    "overlap8"
+  ],
+  "projection_dim": 256,
+  "head_rank": 128,
+  "max_length": 128,
+  "training_subject_labels_used": true,
+  "inference_subject_metadata_used": false,
+  "inference_relation_ids_used": false,
+  "candidate_age_used": false,
+  "counterfact_status": "observed_development_only",
+  "longmemeval_scored": false,
+  "locomo_scored": false
+}

@@ -371,6 +371,8 @@ The completed [V6 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automat
 
 [V10](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/entity_fusion_scope_v10/REPORT.md) reached 94.65% top-1 and 97.29% MRR. Its +0.64-point gain over V8 had CI `[-0.25,1.66]`, so the registered gate failed and existing-score fusion is closed. A post-hoc audit found that 41/42 errors selected the correct subject but the wrong relation, while oracle segmentation fixed 32/42. [V11](TOKEN_SPAN_RELATION_SCOPE_V11_PLAN.md) therefore learns subject spans to construct de-identified relation views rather than adding another entity score.
 
+[V11 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/token_span_relation_scope_v11/REPORT.md) at 97.20% top-1 and 98.60% MRR. Its +2.55-point gain over V10 had paired-bootstrap CI `[1.02,4.20]`, span token F1 was 98.14%, and the complete registered gate passed. The resolver is now frozen for the [V12 causal sequential-memory experiment](CAUSAL_TOKEN_SPAN_FORGETTING_V12_PLAN.md).
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
