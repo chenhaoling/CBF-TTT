@@ -359,6 +359,8 @@ The no-weight-change [constraint replay](experiments/cbf_ttt/qwen3_4b_final_1b_2
 
 The completed [V4 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/scoped_delta_ranker_v4/REPORT.md) shows a significant but insufficient improvement: candidate top-1 rose from 79.62% to 82.93% (gain 3.31 points, 95% CI `[0.64,5.86]`), while the 88%/93% top-1/MRR gate failed. All 95 remaining same-subject errors selected a different relation. [Relation-supervised V5](RELATION_SUPERVISED_SCOPE_V5_PLAN.md) therefore tests a frozen-Qwen relation classifier with subject-disjoint raw-CounterFact training; relation IDs are supervision only and are not inference features.
 
+The completed [V5 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/relation_supervised_scope_v5/REPORT.md) reached 97.83% candidate top-1 and 98.92% MRR, a 14.90-point gain over V4 with CI `[12.23,17.58]`. Its exact relation-class auxiliary was 87.64%, below the preregistered 90% floor, even though pairwise compatibility remained correct for 82/97 class errors. [Automatic factorized V6](AUTOMATIC_FACTORIZED_SCOPE_V6_PLAN.md) now replaces the supplied subject span with an IDF-weighted shared-span rule and evaluates fully text-only entity/relation scope resolution before any causal deletion experiment.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.

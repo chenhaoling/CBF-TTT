@@ -1,0 +1,30 @@
+{
+  "protocol": "relation_supervised_scope_v5",
+  "data_status": "observed_development_only",
+  "counterfact_oof": {
+    "events": 785,
+    "top1_accuracy": 0.978343949044586,
+    "mrr": 0.989171974522293,
+    "query_relation_accuracy": 0.8764331210191083
+  },
+  "v5_vs_v4": {
+    "top1_gain": 0.14904458598726114,
+    "bootstrap_95ci": [
+      0.12229299363057325,
+      0.17579617834394903
+    ],
+    "units": 785
+  },
+  "development_gate": {
+    "checks": {
+      "top1_at_least_90": true,
+      "mrr_at_least_95": true,
+      "query_relation_at_least_90": false,
+      "gain_at_least_5pp": true,
+      "gain_ci_positive": true
+    },
+    "passed": false
+  },
+  "next_stage": "revise_relation_representation",
+  "terminal_status": "completed_relation_supervised_scope_v5"
+}

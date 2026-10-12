@@ -1,0 +1,33 @@
+{
+  "protocol": "relation_supervised_scope_v5",
+  "corpus_manifest_sha256": "300b180fbf3a0595a73582f7747302730dcbdc5a19f2d321db931f8a983fafc8",
+  "counterfact_source_sha256": "d017056125178a13728594e66a801357a8db9ed7973a7425554bb4271de9fc6f",
+  "v4_summary_sha256": "315538754f1e5a43b31834953d758a30458475b45e00e5c1667bc9a71ad99801",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "seeds": [
+    14101,
+    14102,
+    14103
+  ],
+  "epochs": 10,
+  "arms": [
+    "posterior_dot",
+    "logit_cosine",
+    "query_class_probability",
+    "embedding_cosine"
+  ],
+  "window": 10,
+  "relation_ids_are_targets_only": true,
+  "subject_metadata_role": "oracle_segmentation_diagnostic",
+  "chain_identity_in_features": false,
+  "candidate_age_used": false,
+  "longmemeval_scored": false,
+  "locomo_scored": false
+}
