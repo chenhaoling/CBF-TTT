@@ -1,0 +1,32 @@
+{
+  "protocol": "crossdomain_forgetting_reranker_v2",
+  "audit_passed": true,
+  "checks": {
+    "protocol": true,
+    "observed_development_only": true,
+    "final_sources_sealed": true,
+    "zsre_manifest": true,
+    "counterfact_manifest": true,
+    "v1_summary": true,
+    "previous_summary": true,
+    "checkpoint_hashes": true,
+    "raw_hash_8601": true,
+    "raw_identity_8601": true,
+    "raw_hash_8602": true,
+    "raw_identity_8602": true,
+    "raw_hash_8603": true,
+    "raw_identity_8603": true,
+    "causal_recomputed": true,
+    "oracle_hash": true,
+    "oracle_recomputed": true,
+    "oracle_fold_identity": true,
+    "oracle_event_identity": true,
+    "v1_comparison_recomputed": true,
+    "previous_comparison_recomputed": true,
+    "gate_recomputed": true,
+    "paired_units": true
+  },
+  "summary_sha256": "57fb4d0acc7f3e069fda89581f59e21eb26356934fea306a646246708038992b",
+  "training_sha256": "7fe88c60c1e2d041c174eb6261bdc3ccbe65b23827bc7921cf38b63a8d4cc9c8",
+  "manifest_sha256": "e711f4340f7115c945566351373e9531ba3fa1071aed7f831cbde199358eb073"
+}

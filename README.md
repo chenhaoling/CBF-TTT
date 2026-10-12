@@ -351,6 +351,8 @@ The expanded subject-disjoint [ZsRE learned-forgetting test](experiments/cbf_ttt
 
 The preregistered [CounterFact zero-shot transfer](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/counterfact_zero_shot_forgetting_v1/REPORT.md) also completed and passed independent audit. The frozen ZsRE controller beat cosine by +4.57 query points (95% CI `[3.90,5.24]`) and +11.51 action points (CI `[9.51,13.50]`), but reached only 67.77% action and 30.70% update accuracy; fixed retain had higher query accuracy. A hash-verified diagnostic found probability AUC 0.759 but only 49.08% correct old-chain selection among triggered updates. This rejects reliable zero-shot transfer and identifies pairwise candidate ranking plus conflict calibration as the next method target.
 
+Cross-domain reranker [V1](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/crossdomain_forgetting_reranker_v1/REPORT.md) raised observed CounterFact OOF candidate top-1 to 78.47% and causal action to 84.93%, but update remained 63.69%. Class-balanced [V2](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/crossdomain_forgetting_reranker_v2/REPORT.md) improved candidate top-1 to 79.62% and oracle-state update to 78.22%, yet aggressive 0.20–0.25 thresholds caused causal rollout collapse to 78.26% action and 46.79% query. The V2 independent audit passed. This identifies irreversible state-distribution shift, rather than static candidate capacity alone, as the next forgetting-policy problem.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
