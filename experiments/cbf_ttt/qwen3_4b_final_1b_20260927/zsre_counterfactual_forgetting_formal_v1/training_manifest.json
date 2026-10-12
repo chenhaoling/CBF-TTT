@@ -1,0 +1,30 @@
+{
+  "protocol": "zsre_counterfactual_forgetting_controller_formal_v1",
+  "source_protocol": "zsre_counterfactual_forgetting_controller_loso_v3",
+  "data_protocol": "zsre_counterfactual_forgetting_v1",
+  "data_manifest_sha256": "c5056824efa867532a33ff460976aaaf6d709ff1900acc562fc26c4b5ae1026f",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "controller_threshold": 0.4,
+  "controller_epochs": 200,
+  "controller_seeds": [
+    8601,
+    8602,
+    8603
+  ],
+  "readout_seeds": [
+    7301,
+    7302,
+    7303
+  ],
+  "dev_loaded": true,
+  "test_release_rule": "all six frozen development checks",
+  "test_loaded": false,
+  "test_scored": false
+}
