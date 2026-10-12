@@ -1,0 +1,38 @@
+{
+  "protocol": "fastweight_content_v1",
+  "stage": "q",
+  "data_sha256": "928ef76973212d1bf274442c790ff104f4901bf56ea3bc3bb9d5bcf892177cf5",
+  "contexts": 16,
+  "queries": 16,
+  "overall": {
+    "nll": 1.4953971169888973,
+    "correct": 1.0,
+    "greedy_correct": 0.3125
+  },
+  "domains": {
+    "fineweb": {
+      "nll": 1.5156825110316277,
+      "correct": 1.0,
+      "greedy_correct": 0.25
+    },
+    "longcrawl": {
+      "nll": 1.475111722946167,
+      "correct": 1.0,
+      "greedy_correct": 0.375
+    }
+  },
+  "twin_both_correct_groups": 8,
+  "passed": false,
+  "v_scored": false,
+  "weights_sha256": "1b3a8bd9b92f0c3f6ed1385e723d41b5a875b2a66cb17a3d56b2859c77c36f4f",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "profile": {
+    "peak_allocated_gib": 10.145097255706787,
+    "peak_reserved_gib": 10.9609375,
+    "shard_seconds": [
+      30.635529685765505,
+      30.58100383915007
+    ]
+  },
+  "terminal_status": "stopped_by_content_Q"
+}

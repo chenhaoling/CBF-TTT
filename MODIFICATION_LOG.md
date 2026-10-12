@@ -1496,3 +1496,7 @@ dev全门通过后才生成最终评测：换用投影3901/3902/3903、五个新
 新增`FASTWEIGHT_CONTENT_PLAN.md`、`tasks/cbf_fastweight_content.py`、`scripts/run_cbf_fastweight_content.sh`、`scripts/audit_cbf_fastweight_content.py`和`tests/test_cbf_fastweight_content.py`。复用从未评分的16个confirm来源组，组8–15只做`short/single/qa`完整KV读取门，组16–23在Q通过后才评分。V固定第一块禁写、事实所在第二块单次写入；每个查询保持self KV不变，只替换为Correct、Wrong-twin、Zero或三个逐层等范数Rademacher随机fast weight。
 
 内容绑定与内容效用分开判定：前者要求Correct相对Wrong/Random同时改善答案NLL并提升own-vs-twin margin，后者要求Correct相对Zero改善NLL且候选准确率不降；全部差值按8个来源组bootstrap。构造器验证Q/V来源互斥、twin只差一个事实token和分域颜色平衡；collector验证单次写入、父cache/骨干不变和随机范数；独立审计从原始parquet重建场景并重算Q/V结果。baseline入口和配置不变。
+
+v1实际Q的两个域八选一均100%，8/8组双twin正确，但全词表首token仅31.25%，低于预登记50%门槛；流程以`stopped_by_content_Q`结束，V文件不存在，独立重建审计通过。事后只解码已存argmax，6条为` The`、5条为首字母大写颜色、5条为正确小写颜色，提示开放词表格式是门槛失败的重要组成。
+
+新增`FASTWEIGHT_CONTENT_V2_PLAN.md`、`tasks/cbf_fastweight_content_v2.py`及对应runner/audit/test。v2不降低门槛：在已观察dev组0–7比较三个预设小写单词模板，按最差域首token固定选择；只将唯一模板送到组8–15 Q，Q通过后才首次评分组16–23 V。V的干预、内容绑定/效用阈值与v1相同。

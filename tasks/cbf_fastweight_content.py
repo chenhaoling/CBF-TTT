@@ -130,9 +130,9 @@ def load_data(root):
     return rows,design
 
 
-def plain_score(session,row):
+def plain_score(session,row,fmt='qa'):
     import torch
-    q=row['queries']['target']['qa']; branch=session.clone()
+    q=row['queries']['target'][fmt]; branch=session.clone()
     with torch.inference_mode():
         hidden=branch._forward(q['ids']); logits=branch.model.lm_head(hidden[:,-1:]).float().reshape(-1); logp=logits.log_softmax(-1)
         scores=(-logp[row['choice_ids']]).tolist(); pred=min(range(8),key=lambda i:scores[i]); greedy=int(logits.argmax())
@@ -166,8 +166,8 @@ def collect_q(args):
     Path(str(out)+'.audit.json').write_text(json.dumps(meta,indent=2)+'\n')
 
 
-def _validate_score(value,row):
-    q=row['queries']['target']['qa']; scores=value['choice_nll']
+def _validate_score(value,row,fmt='qa'):
+    q=row['queries']['target'][fmt]; scores=value['choice_nll']
     if len(scores)!=8 or not all(math.isfinite(x) for x in scores+[value['nll']]): raise ValueError('invalid scores')
     pred=min(range(8),key=lambda i:scores[i])
     if value['prediction']!=pred or value['correct']!=int(pred==q['label']) or abs(value['nll']-scores[q['label']])>1e-6 or value['greedy_correct']!=int(value['greedy_id']==q['answer_id']):
@@ -246,9 +246,9 @@ def intervention_weights(session,name,wrong_weights=None,seed=None):
     return result,ratios
 
 
-def score_intervention(session,row,name,wrong_weights,eos_id,seed):
+def score_intervention(session,row,name,wrong_weights,eos_id,seed,fmt='qa'):
     import torch
-    q=row['queries']['target']['qa'];weights,ratios=intervention_weights(session,name,wrong_weights,seed);branch=session.clone()
+    q=row['queries']['target'][fmt];weights,ratios=intervention_weights(session,name,wrong_weights,seed);branch=session.clone()
     for i,w in weights.items():
         h,t,_=branch.cache.ttt_states[i]
         if h is not None or t is not None: raise RuntimeError('intervention inside partial chunk')
