@@ -28,6 +28,8 @@ The preregistered factorial localized this failure to keys: random keys with mea
 
 With that frozen contextual substrate, the unchanged full forgetting controller passed all development checks and was evaluated once on the sealed test. It reached 89.05% test accuracy versus 79.01% for the strongest fixed policy, a gain of 10.04 points with source-group 95% CI [9.35, 10.82]; NLL improved by 0.4657 with CI [0.4437, 0.4908]. The minimum projection-seed accuracy was 88.80%. Reference-blind matched fixed local and global-only learned reached 76.50%, supporting the value of history-conditioned local/global decisions. However, the explicit physics rule and greedy oracle matched the learned controller's query accuracy, so this controlled result does not yet demonstrate an advantage over direct access to symbolic revoke/reset cues.
 
+The natural ZsRE scope study removes that symbolic-reference privilege for memory applicability. A decomposed gate freezes three-projection cosine candidate selection and learns only retrieve versus defer from frozen joint-Qwen evidence and score geometry. After a six-part development gate passed, the original 534-subject test was scored once. The learned gate reached 98.47% versus 88.58% for an ensemble similarity threshold, a 9.90-point gain with 67-session bootstrap 95% CI [8.57, 11.24]. Exact, rephrase and locality accuracy were 100.00%, 97.75% and 98.06%, with 98.46% minimum seed accuracy. This validates automatic natural update-scope evidence in structured memory, but does not yet show causal benefit from deleting accumulated memory.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -41,7 +43,7 @@ With that frozen contextual substrate, the unchanged full forgetting controller 
 - The current Qwen3-4B native TTT writer has not shown reliable memory-only random fact binding.
 - The current centered random projection of Qwen mean-token keys and LM-head value directions is not readable under multi-component interference.
 - Restricting native writes removes the observed termination collapse, but has not yet made fast weights outperform the no-write condition.
-- The controlled results do not establish improvements on ZsRE, MMLU, RULER, LongMemEval-S, or LoCoMo.
+- The ZsRE result establishes structured retrieve/defer scope accuracy, not official generative knowledge-editing accuracy. Improvements on MMLU, RULER, LongMemEval-S, LoCoMo, and native dense TTT remain unestablished.
 - Clean semantic conflict/duplicate ratios are available in the constructed environment; a real deployment must estimate them from activations or retrieved session state.
 - The five-point label oracle is discrete; a continuous optimum was not exhaustively computed.
 
@@ -65,3 +67,4 @@ Key reports:
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_geometry_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_geometry_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_forgetting_v2/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_decomposed_scope_gate_v1/REPORT.md`

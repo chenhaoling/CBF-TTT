@@ -1589,3 +1589,9 @@ Commit `00f949f` recovery completed and passed the independent audit. Structured
 Added `ZSRE_DECOMPOSED_SCOPE_GATE_PLAN.md`, `tasks/train_zsre_decomposed_scope_gate.py`, `scripts/run_zsre_decomposed_scope_gate.sh`, `scripts/audit_zsre_decomposed_scope_gate.py`, and `tests/test_zsre_decomposed_scope_gate.py`. The candidate key is fixed by the mean cosine across all three frozen contextual projections. A binary linear gate sees only the top pair's frozen joint-Qwen hidden plus top score, cross-projection standard deviation, top1–top2 margin, and projection agreement; it can retrieve that key or defer but cannot rerank it.
 
 Calibration fit/tune sessions, epochs, checkpoint epochs and optimizer stay fixed. The threshold-only ensemble is the control. The stronger development gate requires ≥95% exact, ≥90% rephrase, ≥92% locality, ≥93% minimum-seed overall, ≥1 point overall gain over control, and a positive source-session bootstrap lower bound. Only a full pass releases test once. No baseline path or dependency changes.
+
+### Decomposed scope gate result
+
+Commit `043462c` completed with 13/13 server tests and a fully passing independent audit. Dev decomposed gate/control accuracy was 98.50/91.20%; all six gates passed and released the original 534-subject test once. Test accuracy was 98.47% versus 88.58%, a gain of 9.90 points with 67-session bootstrap 95% CI `[8.57,11.24]`. Test exact/rephrase/locality were 100.00/97.75/98.06%, minimum gate-seed overall was 98.46%, and NLL was 0.0901 versus 0.2781. The candidate-selection upper bound was 99.95%.
+
+This establishes automatic scope evidence on natural subject-disjoint text and removes the explicit symbolic-reference limitation of the preceding controlled controller. It does not yet establish natural sequential forgetting: the gate decides whether a query should read a structured update, not which accumulated memory components should be deleted before future queries.

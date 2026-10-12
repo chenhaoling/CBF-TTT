@@ -343,6 +343,8 @@ That [contrastive key study is complete](experiments/cbf_ttt/qwen3_4b_final_1b_2
 
 The first [pairwise scope resolver](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_scope_resolver_v1/REPORT.md) also completed with test sealed. A structured cosine control reached 94.51% overall, 100% exact, 98.38% rephrase and 89.83% locality. A frozen cross-linear nine-way head improved locality to 95.13% but created many false deferrals, reducing overall accuracy to 82.12%. The next iteration freezes cosine key selection and learns only the binary retrieve/defer decision.
 
+The decomposed retrieve/defer gate [passed development and its one-time test](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_decomposed_scope_gate_v1/REPORT.md). Test accuracy was 98.47% versus 88.58% for an ensemble cosine threshold, a +9.90 point gain with 67-session bootstrap 95% CI `[8.57,11.24]`. Exact/rephrase/locality were 100.00/97.75/98.06%, and the minimum gate seed reached 98.46%. This validates automatic update-scope evidence in structured natural memory; the next experiment must use it for causal retain/local/global forgetting over natural sequences.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
