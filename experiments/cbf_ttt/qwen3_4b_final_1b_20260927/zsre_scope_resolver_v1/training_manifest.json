@@ -1,0 +1,58 @@
+{
+  "protocol": "zsre_scope_resolver_v1",
+  "data_manifest_sha256": "34d95490f326d3b5f57bb4ab4d7e208c6eada246a92510264d20a38996f68b21",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "arms": [
+    "bi_cosine",
+    "cross_linear"
+  ],
+  "head_seeds": [
+    7101,
+    7102,
+    7103
+  ],
+  "bi_seeds": [
+    5101,
+    5102,
+    5103
+  ],
+  "pair_template": "Memory update scope: {key}\nCandidate query: {query}\nSame factual scope:",
+  "pair_pooling": "normalized_context_last",
+  "calibration_sessions": {
+    "fit": 27,
+    "tune": 7
+  },
+  "epochs": 200,
+  "checkpoint_epochs": [
+    10,
+    25,
+    50,
+    100,
+    200
+  ],
+  "learning_rate": 0.01,
+  "weight_decay": 0.0001,
+  "cosine_thresholds": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "fit_split": "calibration_fit",
+  "selection_split": "calibration_tune",
+  "gate_split": "dev",
+  "test_release_rule": "score once only after every scope-resolver dev check",
+  "test_scored": false
+}

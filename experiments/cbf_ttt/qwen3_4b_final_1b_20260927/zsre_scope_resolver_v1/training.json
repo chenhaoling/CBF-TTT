@@ -1,0 +1,228 @@
+{
+  "seconds": 50.0558474753052,
+  "gpu_peak_allocated_gib": 8.49683141708374,
+  "gpu_peak_reserved_gib": 10.98828125,
+  "curves": {
+    "7101": [
+      {
+        "epoch": 10,
+        "train_accuracy": 0.5,
+        "train_nll": 1.688405990600586,
+        "tune_accuracy": 0.5,
+        "tune_nll": 1.6945849657058716
+      },
+      {
+        "epoch": 25,
+        "train_accuracy": 0.5,
+        "train_nll": 1.4986790418624878,
+        "tune_accuracy": 0.5,
+        "tune_nll": 1.4947808980941772
+      },
+      {
+        "epoch": 50,
+        "train_accuracy": 0.5130331516265869,
+        "train_nll": 1.2311152219772339,
+        "tune_accuracy": 0.5401785969734192,
+        "tune_nll": 1.2388505935668945
+      },
+      {
+        "epoch": 100,
+        "train_accuracy": 0.6883886456489563,
+        "train_nll": 0.9083940982818604,
+        "tune_accuracy": 0.7142857313156128,
+        "tune_nll": 0.9248188138008118
+      },
+      {
+        "epoch": 200,
+        "train_accuracy": 0.828199028968811,
+        "train_nll": 0.6151675581932068,
+        "tune_accuracy": 0.8169642686843872,
+        "tune_nll": 0.6390784382820129
+      }
+    ],
+    "7102": [
+      {
+        "epoch": 10,
+        "train_accuracy": 0.5,
+        "train_nll": 1.6884478330612183,
+        "tune_accuracy": 0.5,
+        "tune_nll": 1.6946532726287842
+      },
+      {
+        "epoch": 25,
+        "train_accuracy": 0.5,
+        "train_nll": 1.4987150430679321,
+        "tune_accuracy": 0.5,
+        "tune_nll": 1.4948304891586304
+      },
+      {
+        "epoch": 50,
+        "train_accuracy": 0.5130331516265869,
+        "train_nll": 1.2311450242996216,
+        "tune_accuracy": 0.5401785969734192,
+        "tune_nll": 1.238901972770691
+      },
+      {
+        "epoch": 100,
+        "train_accuracy": 0.6883886456489563,
+        "train_nll": 0.9084296822547913,
+        "tune_accuracy": 0.7142857313156128,
+        "tune_nll": 0.9248676300048828
+      },
+      {
+        "epoch": 200,
+        "train_accuracy": 0.828199028968811,
+        "train_nll": 0.6151959300041199,
+        "tune_accuracy": 0.8169642686843872,
+        "tune_nll": 0.6391149759292603
+      }
+    ],
+    "7103": [
+      {
+        "epoch": 10,
+        "train_accuracy": 0.5,
+        "train_nll": 1.6884242296218872,
+        "tune_accuracy": 0.5,
+        "tune_nll": 1.6946232318878174
+      },
+      {
+        "epoch": 25,
+        "train_accuracy": 0.5,
+        "train_nll": 1.4986976385116577,
+        "tune_accuracy": 0.5,
+        "tune_nll": 1.494801640510559
+      },
+      {
+        "epoch": 50,
+        "train_accuracy": 0.5130331516265869,
+        "train_nll": 1.2311304807662964,
+        "tune_accuracy": 0.5401785969734192,
+        "tune_nll": 1.2388807535171509
+      },
+      {
+        "epoch": 100,
+        "train_accuracy": 0.6883886456489563,
+        "train_nll": 0.9084188342094421,
+        "tune_accuracy": 0.7142857313156128,
+        "tune_nll": 0.9248461723327637
+      },
+      {
+        "epoch": 200,
+        "train_accuracy": 0.828199028968811,
+        "train_nll": 0.6151891946792603,
+        "tune_accuracy": 0.8169642686843872,
+        "tune_nll": 0.6390973329544067
+      }
+    ]
+  },
+  "selected_epochs": {
+    "7101": 200,
+    "7102": 200,
+    "7103": 200
+  },
+  "cosine_threshold_grid": {
+    "5101": {
+      "0.1": 0.7008928571428571,
+      "0.2": 0.90625,
+      "0.3": 0.9821428571428571,
+      "0.4": 0.9776785714285714,
+      "0.5": 0.9642857142857143,
+      "0.6": 0.9419642857142857,
+      "0.7": 0.8839285714285714,
+      "0.8": 0.8169642857142857,
+      "0.9": 0.7767857142857143
+    },
+    "5102": {
+      "0.1": 0.6785714285714286,
+      "0.2": 0.90625,
+      "0.3": 0.96875,
+      "0.4": 0.9776785714285714,
+      "0.5": 0.9508928571428571,
+      "0.6": 0.9330357142857143,
+      "0.7": 0.8839285714285714,
+      "0.8": 0.8258928571428571,
+      "0.9": 0.7678571428571429
+    },
+    "5103": {
+      "0.1": 0.7232142857142857,
+      "0.2": 0.9151785714285714,
+      "0.3": 0.9776785714285714,
+      "0.4": 0.9776785714285714,
+      "0.5": 0.9553571428571429,
+      "0.6": 0.9241071428571429,
+      "0.7": 0.8839285714285714,
+      "0.8": 0.8258928571428571,
+      "0.9": 0.7767857142857143
+    }
+  },
+  "cosine_thresholds": {
+    "5101": 0.3,
+    "5102": 0.4,
+    "5103": 0.4
+  },
+  "train_session_ids": [
+    "6ca51d7ee9f25eb1",
+    "55fefdc5d9bbb670",
+    "7bc02e5dd984c9ba",
+    "e5983bd80c8c08b1",
+    "a6312510ac82dcb5",
+    "44c0664b6fbce6ea",
+    "e683f97ccdc6374a",
+    "6820d4085c2cfbb8",
+    "38bc5e1e21653e25",
+    "a91aaedb1214e782",
+    "52b3f695c83554a2",
+    "8cb4eb0f15549518",
+    "65e906612d73a9d9",
+    "aab931dd196d930b",
+    "e4965e3fb62f200d",
+    "b526c9f6aa38fbbe",
+    "324a2c33b8e0e251",
+    "946774f985de1e38",
+    "3cb84c68315ac7cc",
+    "6eb29b4297301c20",
+    "1f1637aa0f571225",
+    "ace826770a544732",
+    "b3895db9bac56e41",
+    "73416b064a57bbc4",
+    "9db4187fcd068bd6",
+    "62307e328a9000c4",
+    "6de43490b31dbbe0"
+  ],
+  "tune_session_ids": [
+    "56bef959ad1caf57",
+    "d16152156bf78984",
+    "ed2715b485b7c40c",
+    "e5f999a1817384e9",
+    "5579d310d73b9acd",
+    "1737e5380b256e41",
+    "9d15af12f939f3c5"
+  ],
+  "train_feature_sha256": "75158b77c1719573362248af2570f082439337450d30c9a23d0efed1f59c4616",
+  "tune_feature_sha256": "b94fb8ffc6704938bc8d84e622b258846796f152d44244d41daa6bc793465f48",
+  "dev_feature_sha256": "7148ac29740a810f43b91d7096a1361e8673117ebce1065400e1202fe0c6e186",
+  "test_feature_sha256": null,
+  "calibration_embedding_hashes": {
+    "5101": "b0d466d912cba649199dfe5da0befed0cf8c05b874d6a421003eebb55fcc75c6",
+    "5102": "9afa101d43924911156df34621deb815f9707992e0a377ad51f87c51513c8e21",
+    "5103": "5227253d54111a9ffae21289b49f39a634d43969e3ec9c1cffd09110fbf120c6"
+  },
+  "dev_embedding_hashes": {
+    "5101": "791d3b0c861d66fe29c435dfe0dab5d0fb4b64fbcf1300d972e690938cf39b7b",
+    "5102": "311df8f536cb4fff0efc2fe1d26639b7ded1148f2537f70b2862b2be37fefc03",
+    "5103": "98b7c5a84670c295a1618f9af28cd909fa44ebb5400f78d711774ce8c2624dba"
+  },
+  "test_embedding_hashes": null,
+  "raw_rows_sha256": {
+    "dev_bi_cosine_seed5101.jsonl": "2e6e72506537ac09ec531a406ce7c20704f837b98e5855e3f368062eeab9c9c0",
+    "dev_bi_cosine_seed5102.jsonl": "51d7c4a59ede8ab70a90b0be0dce189d71e62fbe3fd70dfbbdc74a5ac52d3d24",
+    "dev_bi_cosine_seed5103.jsonl": "6511732e0da5af2323d0726b86d3b01ce220ca3c1c8063f3e53baefc513015e3",
+    "dev_cross_linear_seed7101.jsonl": "046e526fde21d6373733a74722839ae2a2edbbf192f40bfb7077732205c04fd7",
+    "dev_cross_linear_seed7102.jsonl": "4f6c8b9601080b366cd85ee514a3f58590c181b4ec55c35a04406085fbac843c",
+    "dev_cross_linear_seed7103.jsonl": "2e52c9c59d62ad6ad3c6aac403431c885f60a8d4180e2ca55e4c35e05b156804"
+  },
+  "checkpoint_sha256": "7de45da9b5dfc7f5ddd3a498443ce2f07ca13f2167900c29d6e6af59a12b48d4",
+  "source_summary_sha256": "843a0c23b15125e2298f71fcf5d99ef3f96d997bc5a6616ee102d6d949e8cafe",
+  "source_training_sha256": "6707f7659f028fa1c7c8dda4f1befe4f8c56221cf448aada8042a722b4298439",
+  "source_transforms_sha256": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378"
+}

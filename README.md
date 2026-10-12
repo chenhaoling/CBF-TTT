@@ -341,6 +341,8 @@ The first subject-disjoint [ZsRE contextual readout](experiments/cbf_ttt/qwen3_4
 
 That [contrastive key study is complete](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_contrastive_keys_v1/REPORT.md). Relation-aware alignment raised locality from 88.26% to 99.09%, but unseen-subject rephrase accuracy fell to about 69.5%; positive-only alignment showed the same generalization problem. The gate failed and test remained sealed. The next iteration replaces the global key warp with a pairwise query–memory scope resolver and explicitly treats locality as “defer to the frozen model.”
 
+The first [pairwise scope resolver](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_scope_resolver_v1/REPORT.md) also completed with test sealed. A structured cosine control reached 94.51% overall, 100% exact, 98.38% rephrase and 89.83% locality. A frozen cross-linear nine-way head improved locality to 95.13% but created many false deferrals, reducing overall accuracy to 82.12%. The next iteration freezes cosine key selection and learns only the binary retrieve/defer decision.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
