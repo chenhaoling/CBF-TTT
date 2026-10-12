@@ -1,0 +1,42 @@
+{
+  "protocol": "zsre_counterfactual_forgetting_dev_threshold_v1",
+  "formal_protocol": "zsre_counterfactual_forgetting_controller_formal_v1",
+  "controller_protocol": "zsre_counterfactual_forgetting_controller_loso_v3",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "thresholds": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "selection_objective": [
+    "action_accuracy",
+    "worst_hard_or_update",
+    "query_accuracy"
+  ],
+  "controller_seeds": [
+    8601,
+    8602,
+    8603
+  ],
+  "readout_seeds": [
+    7301,
+    7302,
+    7303
+  ],
+  "dev_loaded": true,
+  "test_loaded": false,
+  "test_scored": false
+}
