@@ -1,0 +1,72 @@
+{
+  "protocol": "continuous_forgetting_robust_v2",
+  "frozen_checkpoint_sha256": "3af3a89d26222484951a4f2232cda9a26ccaab621e5611ef42ef2aca411e685d",
+  "train_seeds": [
+    1901,
+    1902,
+    1903
+  ],
+  "dev_seeds": [
+    2901,
+    2902,
+    2903
+  ],
+  "test_seeds": [
+    3901,
+    3902,
+    3903
+  ],
+  "domains": [
+    "base",
+    "long_memory",
+    "weak_update",
+    "strong_update",
+    "extreme_overlap"
+  ],
+  "compound_test_domains": [
+    "long_weak",
+    "long_strong",
+    "extreme_scale"
+  ],
+  "train_groups": 64,
+  "dev_groups": 16,
+  "test_groups": 32,
+  "per_group": 20,
+  "train_seed": 20261105,
+  "dev_seed": 20261106,
+  "test_seed": 20261107,
+  "controller_seed": 3941,
+  "bootstrap_seed": 3951,
+  "dim": 32,
+  "epochs": 300,
+  "feature_names": [
+    "memory_norm",
+    "delta_norm",
+    "alignment",
+    "conflict_ratio",
+    "duplicate_ratio",
+    "new_ratio",
+    "old_count",
+    "delta_count",
+    "retained_ratio",
+    "current_scale",
+    "mean_key_correlation",
+    "max_key_correlation"
+  ],
+  "policies": [
+    "learned",
+    "grid_learned",
+    "structure_blind",
+    "endpoint_learned",
+    "physics",
+    "train_mean",
+    "fixed_0.0",
+    "fixed_0.25",
+    "fixed_0.5",
+    "fixed_0.75",
+    "fixed_1.0",
+    "oracle_grid"
+  ],
+  "test_release_rule": "generate only after robust development gate",
+  "test_scored": true
+}

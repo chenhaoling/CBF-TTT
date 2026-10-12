@@ -1470,3 +1470,11 @@ dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对�
 压力测试中连续控制器在四类上均显著优于事后最优固定alpha，但`strong_update`的端点控制器NLL低0.00117，预注册总门失败且不事后修改。新增`CONTINUOUS_ROBUST_PLAN.md`、`tasks/train_cbf_continuous_robust.py`、运行器、独立审计与复合偏移测试。保持控制器结构不变，以base/long/weak/strong/extreme五域等量训练；dev使用未见投影2901/2902/2903并同时比较原冻结控制器。
 
 dev全门通过后才生成最终评测：换用投影3901/3902/3903、五个新组内测试域和未在训练中出现的long+weak、long+strong、extreme+scale三种复合偏移。门槛包括相对固定、端点和原控制器的来源组CI、强写入端点非劣、各域/各seed一致性。所有大工件保留远程，新入口不改baseline。
+
+### 域增强连续遗忘控制器：完成结果
+
+服务器9项测试通过，五域训练共19,200个投影后反事实样本。七项dev门全部通过：相对原冻结控制器NLL改善0.01023，来源组bootstrap 95% CI `[0.00710,0.01388]`；strong-update相对端点仅差0.000539，满足0.002非劣界。随后脚本首次生成最终test，换用投影3901/3902/3903及八个域。
+
+最终宏平均continuous NLL/accuracy为0.7591/87.78%，事后最佳固定alpha为0.9139/76.80%；NLL收益0.1548，95% CI `[0.1476,0.1620]`，accuracy提升10.98点。端点控制为0.8165/87.07%；continuous NLL收益0.05737，CI `[0.05048,0.06445]`。long+weak、long+strong、extreme+scale三个未见组合相对固定和端点均显著为正。孤立strong-update仍由端点alpha0微弱领先0.00067，符合强写入无需中间遗忘的机制边界。
+
+独立审计重建训练标签、5个dev域、8个test域、184,320条test策略记录、全部bootstrap和hash并通过。归档`experiments/cbf_ttt/continuous_robust_v2`，新增`PAPER_EVIDENCE_SUMMARY.md`明确论文可支持的受控机制结论与不能声称的Qwen端到端效果。baseline、预训练checkpoint及既有实验工件未修改。

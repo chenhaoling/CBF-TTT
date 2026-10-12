@@ -1,0 +1,46 @@
+{
+  "protocol": "continuous_forgetting_robust_v2_audit",
+  "passed": true,
+  "checkpoint_sha256": "48e8e1cdf18561148552f8c7f472b09d658b49c8a6dc466edd2290f019437ad7",
+  "record_sha256": {
+    "dev_base": "7c7233b11fde83803e0d99aa024e3ec568476ee98ba27ff4d1529740d3a7a9a3",
+    "dev_long_memory": "6118b4bf8aff06ab8b193d8dd11e0e8d1dba502a47774424771178248b7e7cc0",
+    "dev_weak_update": "f40d01a0a023a18f29b7cb926821ac5f4c151c504ae1d7d517b5c563f9f06c7d",
+    "dev_strong_update": "ef043f33ff513bff2c336a6f58884ac937fa2db5bbab41c856812a9cdb5b9d3a",
+    "dev_extreme_overlap": "6565ab6c51f11c5ad323589729ffa4fdc75dfe67ba600efbc2b03d05cd14dfb6",
+    "test_base": "228d46c064ca3eaf2c0c3b3cf5aa0dccbb9543719e3ca28a958822728017595f",
+    "test_long_memory": "a91d746e57899f6a40803bbff1e37914248a204909923b3dda43516350442f60",
+    "test_weak_update": "dad6d52c4cdeef8702a4a0eb2d86ff457d214a1a4c72a52bbc36c80b44bae183",
+    "test_strong_update": "683737fabffdad0c7fddba526e8eb3fd17bdee4a61c7ad1b81126316a0966472",
+    "test_extreme_overlap": "24f59151a46277c176e4146db0d22d17393caa4ba869deaad66cb4c371a3dab4",
+    "test_long_weak": "f6ea86077ad2321897732b6263702fdb76d2204690a3a7f3575f0ed9cf12cabd",
+    "test_long_strong": "cad56bc0ffd908f8613ebd31fa755c4a34992af23a14102afc5b95d160b670c2",
+    "test_extreme_scale": "b1c2c3cf73650ad410fc548639ad190eebc6fd28195e12dc4109d3e6cf29fc5b"
+  },
+  "dev_gate": {
+    "checks": {
+      "macro_alpha_mae": true,
+      "macro_fixed_margin": true,
+      "macro_endpoint_margin": true,
+      "augmentation_improves_frozen": true,
+      "strong_update_endpoint_noninferiority": true,
+      "all_domains_beat_hindsight_fixed": true,
+      "all_dev_seeds_beat_macro_fixed": true
+    },
+    "frozen_comparison": {
+      "nll_gain": 0.010231206934394079,
+      "nll_gain_bootstrap_95ci": [
+        0.007099408434472425,
+        0.013882289616463622
+      ],
+      "accuracy_gain": -0.0011312369995059677,
+      "accuracy_gain_bootstrap_95ci": [
+        -0.007196361240889034,
+        0.004580721435651036
+      ]
+    },
+    "strong_endpoint_nll_gap": 0.0005391977407672444,
+    "passed": true
+  },
+  "test_scored": true
+}
