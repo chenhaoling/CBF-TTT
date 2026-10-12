@@ -150,7 +150,10 @@ def extract_projected_features(model, tokenizer, examples, batch_size, max_lengt
                                    device="cuda")
             features = torch.cat((projected, global_value, projected * global_value,
                                   surface), dim=-1).half().cpu()
-            labels = token_labels(text_offsets, character_spans(row["text"], row["subject"]))
+            # Match V5's first-occurrence masking convention when a subject is
+            # mentioned more than once in the same text.
+            labels = token_labels(text_offsets,
+                                  character_spans(row["text"], row["subject"])[:1])
             if not any(labels):
                 skipped += 1; continue
             output.append({**row, "features": features,
