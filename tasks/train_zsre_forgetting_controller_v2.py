@@ -156,13 +156,15 @@ class TopGateController:
                 "probability": probability}
 
 
-def run(args):
+def run(args, protocol=PROTOCOL, data_protocol="zsre_hard_retain_forgetting_v1",
+        output_stem="top_gate", checkpoint_filename="forgetting_top_gate.pt",
+        comparison_seed=8801):
     import torch
     from transformers import AutoTokenizer
     from tasks.cbf_checkpoint_native import load_model
 
     root = Path(args.output); root.mkdir(parents=True, exist_ok=False)
-    sessions, _ = load_calibration(args.data_root); groups = oracle_event_groups(sessions)
+    sessions, _ = load_calibration(args.data_root, data_protocol); groups = oracle_event_groups(sessions)
     source, scope = Path(args.source_root), Path(args.scope_root)
     source_summary = json.loads((source / "summary.json").read_text())
     source_training = json.loads((source / "training.json").read_text())
@@ -218,7 +220,7 @@ def run(args):
 
     controller_metrics, raw_hashes = {}, {}
     for seed, records in controller_records.items():
-        path = root / f"calibration_loso_top_gate_seed{seed}.jsonl"
+        path = root / f"calibration_loso_{output_stem}_seed{seed}.jsonl"
         path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in records))
         raw_hashes[path.name] = sha(path); controller_metrics[seed] = aggregate(records)
     baseline_records, baseline_metrics = {}, {}
@@ -237,14 +239,14 @@ def run(args):
         head, mean, std = train_fixed(groups, values, seed, epoch)
         final_heads[str(seed)] = head.state_dict(); final_epochs[str(seed)] = epoch
         final_thresholds[str(seed)] = threshold
-    checkpoint = root / "forgetting_top_gate.pt"
+    checkpoint = root / checkpoint_filename
     torch.save({"heads": final_heads, "mean": mean, "std": std,
                 "selected_epochs": final_epochs, "thresholds": final_thresholds,
                 "controller_seeds": CONTROLLER_SEEDS, "feature_dim": values.shape[-1]}, checkpoint)
 
-    summary = {"protocol": PROTOCOL, "controller": summarize_seed_metrics(controller_metrics),
+    summary = {"protocol": protocol, "controller": summarize_seed_metrics(controller_metrics),
                "cosine_local": summarize_seed_metrics(baseline_metrics),
-               "comparison": paired_comparison(controller_records, baseline_records, 8801),
+               "comparison": paired_comparison(controller_records, baseline_records, comparison_seed),
                "dev_loaded": False, "test_loaded": False, "test_scored": False,
                "terminal_status": "completed_calibration_nested_loso_v2"}
     training = {"seconds": time.perf_counter() - started,
@@ -261,7 +263,8 @@ def run(args):
                 "source_transforms_sha256": sha(source / "transforms.pt"),
                 "scope_training_sha256": sha(scope / "training.json"),
                 "scope_checkpoint_sha256": sha(scope / "scope_gates.pt")}
-    manifest = {"protocol": PROTOCOL, "data_manifest_sha256": sha(Path(args.data_root) / "manifest.json"),
+    manifest = {"protocol": protocol, "data_protocol": data_protocol,
+                "data_manifest_sha256": sha(Path(args.data_root) / "manifest.json"),
                 "model": args.model, "tokenizer": args.tokenizer, "loading_info": model_meta["loading_info"],
                 "split": "calibration_nested_loso", "controller_seeds": list(CONTROLLER_SEEDS),
                 "readout_seeds": list(GATE_SEEDS), "checkpoint_epochs": list(CHECKPOINT_EPOCHS),

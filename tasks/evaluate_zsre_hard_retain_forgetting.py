@@ -23,9 +23,9 @@ PROTOCOL = "zsre_hard_retain_forgetting_pilot_v1"
 QUERY_TYPES = ("current_exact", "current_rephrase", "historical")
 
 
-def load_calibration(root):
+def load_calibration(root, expected_protocol="zsre_hard_retain_forgetting_v1"):
     root = Path(root); manifest = json.loads((root / "manifest.json").read_text())
-    if manifest["protocol"] != "zsre_hard_retain_forgetting_v1": raise ValueError("protocol mismatch")
+    if manifest["protocol"] != expected_protocol: raise ValueError("protocol mismatch")
     path = root / "calibration.jsonl"
     if sha(path) != manifest["files_sha256"][path.name]: raise ValueError("split hash mismatch")
     return [json.loads(line) for line in path.read_text().splitlines() if line], manifest
