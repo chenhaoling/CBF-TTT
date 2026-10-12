@@ -1,0 +1,30 @@
+{
+  "protocol": "zsre_contextual_readout_v1",
+  "source": "/home/ctj/data/cbf_ttt_eval/zsre/benchmark/ZsRE/ZsRE-test-all.json",
+  "source_sha256": "0e0214dda853a906ef02bef58c7ce2978af5a962e91fc4a10827e0125459905c",
+  "split_seed": "20261201",
+  "selection": "one canonical row per subject",
+  "session_width": 8,
+  "subjects": {
+    "calibration": 267,
+    "dev": 267,
+    "test": 534
+  },
+  "sessions": {
+    "calibration": 34,
+    "dev": 34,
+    "test": 67
+  },
+  "subject_hashes": {
+    "calibration": "8a89c4e29bc44d7b2047f1ccb3b084a5297c31e682537b5fc3b4e9eee8a087cb",
+    "dev": "28b582a3e673d045aa6a2ce3dd0b70b50c2cc76c167ef7521f875be4b5c2cb7d",
+    "test": "ddb6ab37821b1d52132df1dff0500ed458a450fc5290e938e1db3fb2d02990a4"
+  },
+  "files_sha256": {
+    "calibration.jsonl": "d19bb92ca6f487ce046e75a0a65e384b831a7bbc988e81436df68b3cd7beec6f",
+    "dev.jsonl": "352f4e5162eec2133707bcd45ff998ab44774536a426e27c311d2cd6c482a65f",
+    "test.jsonl": "9dbc11ac83548c5005c933892ba861f58b7fd4827bbc898ce1d50734cb28c6d2"
+  },
+  "test_loaded": false,
+  "test_scored": false
+}

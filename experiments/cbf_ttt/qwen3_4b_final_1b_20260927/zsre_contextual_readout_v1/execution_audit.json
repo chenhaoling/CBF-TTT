@@ -1,0 +1,33 @@
+{
+  "protocol": "zsre_contextual_readout_v1",
+  "audit_passed": true,
+  "checks": {
+    "protocol": true,
+    "data_hash": true,
+    "source_hash": true,
+    "subject_counts": true,
+    "subject_disjoint": true,
+    "seeds": true,
+    "regularizers": true,
+    "unknown_grid": true,
+    "selection": true,
+    "transform_hash": true,
+    "dev_hash_5101": true,
+    "dev_identity_5101": true,
+    "dev_hash_5102": true,
+    "dev_identity_5102": true,
+    "dev_hash_5103": true,
+    "dev_identity_5103": true,
+    "dev_recomputed": true,
+    "gate_recomputed": true,
+    "test_lock": true,
+    "test_embeddings_absent": true
+  },
+  "dev_gate_passed": false,
+  "stage_passed": false,
+  "test_scored": false,
+  "summary_sha256": "843a0c23b15125e2298f71fcf5d99ef3f96d997bc5a6616ee102d6d949e8cafe",
+  "training_sha256": "6707f7659f028fa1c7c8dda4f1befe4f8c56221cf448aada8042a722b4298439",
+  "manifest_sha256": "50f0443834a31add368181f29f76a6b8fe7241dc2f673fc5ce49446083309cbf",
+  "data_manifest_sha256": "34d95490f326d3b5f57bb4ab4d7e208c6eada246a92510264d20a38996f68b21"
+}

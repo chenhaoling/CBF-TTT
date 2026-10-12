@@ -337,6 +337,8 @@ The contextual study also [completed and passed](experiments/cbf_ttt/qwen3_4b_fi
 
 The contextual forgetting v2 [passed its development gate and one-time sealed test](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_forgetting_v2/REPORT.md). Full learned reached 89.05% versus 79.01% for fixed local, a +10.04 point gain with 95% CI `[9.35,10.82]`. The explicit physics rule matched learned accuracy, so the next paper-level experiment must remove symbolic-reference privilege and test automatic evidence on natural sequential updates.
 
+The first subject-disjoint [ZsRE contextual readout](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_contextual_readout_v1/REPORT.md) reached 100% exact and about 98.7% rephrase accuracy, but same-subject different-relation locality reached 88.26%, below the fixed 90% development gate. Test remained sealed. The registered [contrastive key study](ZSRE_CONTRASTIVE_KEY_PLAN.md) now isolates whether calibration-only prompt/rephrase alignment with explicit locality hard negatives fixes that natural-key failure without changing values, memory, backbone, or the release gate.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
