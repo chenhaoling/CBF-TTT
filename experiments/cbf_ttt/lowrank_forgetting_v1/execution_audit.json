@@ -1,0 +1,74 @@
+{
+  "protocol": "lowrank_forgetting_v1_audit",
+  "passed": true,
+  "data_manifest_sha256": "68be6e88cb83338c98569e8ef726a38b815af82efeace6a74cf09a880d978c9a",
+  "memory_seeds": [
+    1701,
+    1702,
+    1703
+  ],
+  "dev_raw_sha256": {
+    "1701": {
+      "fixed_retain": "a3d8ecde326acf78498f8aa24d91252e2baddbe48517b963f332e2e3460d775a",
+      "fixed_half": "df9925538a332eba1279a6f0a58c3f6f10ae3914eb8245c073b7301c3e517074",
+      "fixed_local": "9ff01e65061e93dd7bf8bda307197c4b6cf96753f7eaae70fd75d91ef5790b97",
+      "fixed_global": "726ef64a8ec9bc3b38f591c2187a943ec8161c836cee94cc824521cb746f2c08",
+      "random": "3380dc9c32bf2eee41cbc4c89416876923aff6e16c9bbad379248a868186e318",
+      "reference_blind": "23ee4c016ee9fcf15fc77268711e77c1fbad5a38a1fbbb42e2a76335d67b765b",
+      "global_learned": "d8de67ca2781103f8c81014acdb79c81c4326f172bda1ce7d2cd031d34944f83",
+      "learned": "76cc604e1d75d0ea3795c760d77224b2644db1eaa5d6510c2eb10b45f1dc8793",
+      "physics": "686b3af7b3935fc471bf76f041c0aca910cebe3a52e92cb717cf0e76eee0916e",
+      "oracle": "d77b251d098893cdccc909e20658c17696ae26b4b1dca507da9979b39227c176"
+    },
+    "1702": {
+      "fixed_retain": "11cdac6d4d91b376e078a0e41ae4ad024bb7e17cabc65da02759eab23ac7b153",
+      "fixed_half": "e7cbc35c42dcdbe560adba2b1c6a38d2adef57064cedadaf101037926f7974a6",
+      "fixed_local": "dec11aac47f4b6936ded81afbc4010a28ddc2589926abc0cd821c5c4713b1ace",
+      "fixed_global": "eba5e6d71b0981049701e8557256d70f19cac669afcf4f13631a68c464bcdc86",
+      "random": "22b986c19b813a2815b22d49dba4d05559c2bbe9ed349bbe55870aaffd1f0ac9",
+      "reference_blind": "fefe2392e34373eb6f18b8629742c274fe592e81bee6d94573923414d5c9ead6",
+      "global_learned": "b031640161c3b1be7027a3f3fdcd48b6ab7582a5aa6be054d70865b4fe8b3e99",
+      "learned": "dfd2b1f7a6fd78d55c42ea04ad62038d09ded0d757fb49a26266f6154d42039f",
+      "physics": "f1db628d88bf0ae876954e5c39d40e911862e78fd95e3d63619b1f2b044665dd",
+      "oracle": "14c3ddc555b62d34ffcd5fbaa9f2c3b116fb7ce5d402fa5377321c319912acb0"
+    },
+    "1703": {
+      "fixed_retain": "8c2adfd1a5d941effe5c7f8e145ff8e6e6f4794674f2ed963c37332b9e8992c6",
+      "fixed_half": "6fef9349c1485a2de0127926ae21cdb3a90cff239eb0e423cd6774fe7b56edf1",
+      "fixed_local": "308c0706708b7c54c89f20112d510b71b91b13e548525c484c0d23ceb62a6e50",
+      "fixed_global": "b0ee960c40757b246abb5ee039209d00b4eddae8ae6e60aa4c19b4956a05a650",
+      "random": "b4584c7edd65be8c14a7bd9b7d149aa4333dedb89475e4f5acaea33d70d27c73",
+      "reference_blind": "856ad14f0b94e4b2ba210b84a3d1e1c136e78793776cec45983a13fbd58e17d7",
+      "global_learned": "61d2b7629e896e40918ad1fa73421ab7b3aeae4101be06fb87b480bd1d6c7f5b",
+      "learned": "b4688f117832f8b57fcd007abfc5f7fbb948ee3801b1f82027cd5207d9953df9",
+      "physics": "28acc8b765a269faf1e16a0ad7c6be7332a8dc8663db4b33d36d0a5ef241d627",
+      "oracle": "557a5adb08e1c3835ec1011f698bcaa902f41dbd36879bb8c473e986afefc9fd"
+    }
+  },
+  "dev_gate": {
+    "checks": {
+      "oracle_readable": true,
+      "learned_accuracy": true,
+      "all_seeds": true,
+      "near_oracle": true,
+      "control_margin": true,
+      "control_confidence": true
+    },
+    "best_fixed": "fixed_local",
+    "stronger_control": "fixed_local",
+    "comparison": {
+      "accuracy_gain": 0.14749710648148145,
+      "accuracy_bootstrap_95ci": [
+        0.14062499999999997,
+        0.1535011574074074
+      ],
+      "nll_gain": 0.7159330684740629,
+      "nll_bootstrap_95ci": [
+        0.6926574245015437,
+        0.7404753378050457
+      ]
+    },
+    "passed": true
+  },
+  "test_scored": true
+}

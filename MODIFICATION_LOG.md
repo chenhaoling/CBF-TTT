@@ -1440,3 +1440,7 @@ dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对�
 反事实动作为`retain(alpha=0)`、`half(alpha=0.5)`、`local(删除被引用batch)`和`global(alpha=1)`，所有分支写入完全相同的当前delta；以当前三类查询平均NLL选标签，并列按实测记忆改变最小解除。控制器输入包括memory/delta范数、对齐度、引用分量范数/时间距离、词面结构、实体重叠/重复和capacity统计，不读答案、未来、family/split或ID。
 
 新语料固定128/32/32 train/dev/test世界，使用三个独立低秩投影seed 1701/1702/1703。比较完整控制器、reference-blind、仅`0/0.5/1`的global controller、四个固定策略、随机、物理规则和oracle。dev gate要求oracle≥90%、learned平均≥88%且每seed≥85%、距oracle≤3点、相对最强固定/global-only控制至少+8点且来源组bootstrap 95%下界>5点。只有聚合dev gate通过才一次性读test。本地非torches单测通过，torch真实外积/反事实测试因环境无torch跳过；语法、shell和diff检查通过。
+
+服务器13/13测试、128/32/32新语料、三投影seed、dev gate、按gate一次性test和独立全量重算审计通过。learned的dev/test top-1为96.82/96.68%，NLL为0.3842/0.3895；oracle为96.93/96.85%。最强固定local为82.07/82.13%；learned在dev提升14.75点，95% CI `[14.06,15.35]`，test提升14.55点，95% CI `[13.98,15.12]`。相对只允许global alpha 0/0.5/1的learned controller，test提升18.32点，95% CI `[17.80,18.85]`。三个test投影seed的learned为97.85/95.75/96.74%，稳定贴近oracle。CPU全流程139.3秒。
+
+但每seed 6144个训练决策中，alpha=0.5仅出现14–17次（0.23–0.28%），local约3060次，alpha=0约1530次，alpha=1固定1536次。因此结果强力支持选择性local/global遗忘，但不支持“中间连续alpha普遍有用”。归档`experiments/cbf_ttt/lowrank_forgetting_v1`；下一实验专门构造旧事实保留与新更新接受的连续权衡场景，用更密alpha网格验证内点最优和连续回归。

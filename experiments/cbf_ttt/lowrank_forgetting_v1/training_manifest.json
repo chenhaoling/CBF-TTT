@@ -1,0 +1,28 @@
+{
+  "protocol": "lowrank_forgetting_v1",
+  "data_manifest_sha256": "68be6e88cb83338c98569e8ef726a38b815af82efeace6a74cf09a880d978c9a",
+  "group_counts": {
+    "train": 128,
+    "dev": 32,
+    "test": 32
+  },
+  "memory_seeds": [
+    1701,
+    1702,
+    1703
+  ],
+  "dim": 64,
+  "actions": [
+    "retain",
+    "half",
+    "local",
+    "global"
+  ],
+  "global_grid": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "test_release_rule": "score once only after aggregate development gate",
+  "test_scored": true
+}
