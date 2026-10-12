@@ -1,0 +1,38 @@
+{
+  "protocol": "automatic_scope_boundary_v7",
+  "data_status": "observed_development_only",
+  "counterfact_oof": {
+    "events": 785,
+    "top1_accuracy": 0.9363057324840764,
+    "mrr": 0.9676220806794056
+  },
+  "v6_vs_v4": {
+    "top1_gain": 0.1070063694267516,
+    "bootstrap_95ci": [
+      0.07898089171974522,
+      0.13630573248407643
+    ],
+    "units": 785
+  },
+  "v6_vs_oracle_segmented_v5": {
+    "top1_gain": -0.04203821656050955,
+    "bootstrap_95ci": [
+      -0.05732484076433121,
+      -0.02802547770700637
+    ],
+    "units": 785
+  },
+  "oracle_segmented_v5_top1": 0.978343949044586,
+  "development_gate": {
+    "checks": {
+      "top1_at_least_95": false,
+      "mrr_at_least_97": false,
+      "within_3pp_of_v5": false,
+      "gain_over_v4_at_least_10pp": true,
+      "gain_ci_positive": true
+    },
+    "passed": false
+  },
+  "next_stage": "revise_automatic_entity_scope",
+  "terminal_status": "completed_automatic_scope_boundary_v7"
+}

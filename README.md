@@ -363,6 +363,8 @@ The completed [V5 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/relatio
 
 The completed [V6 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automatic_factorized_scope_v6/REPORT.md) reached 93.25% text-only top-1 and 96.37% MRR, improving over V4 by 10.32 points with CI `[7.52,13.25]`, but it missed the 95%/97% gate. Every inner fold selected the maximum registered combination weight and improved monotonically through that boundary. [V7](AUTOMATIC_SCOPE_BOUNDARY_V7_PLAN.md) therefore performs one fixed boundary extension; failure permanently stops scalar scope-weight tuning, while a pass freezes the resolver for causal evaluation.
 
+[V7](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automatic_scope_boundary_v7/REPORT.md) reached only 93.63% top-1 and 96.76% MRR, so scalar combination tuning has stopped. [Text-only calibrator V8](TEXT_ONLY_SCOPE_CALIBRATOR_V8_PLAN.md) now trains a nested-OOF rank-16 residual over fixed relation compatibility, automatic IDF-span evidence, and lexical similarity. It still receives no subject/relation/chain metadata at inference and must significantly beat V7 before causal forgetting resumes.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
