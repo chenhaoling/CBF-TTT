@@ -1478,3 +1478,9 @@ dev全门通过后才生成最终评测：换用投影3901/3902/3903、五个新
 最终宏平均continuous NLL/accuracy为0.7591/87.78%，事后最佳固定alpha为0.9139/76.80%；NLL收益0.1548，95% CI `[0.1476,0.1620]`，accuracy提升10.98点。端点控制为0.8165/87.07%；continuous NLL收益0.05737，CI `[0.05048,0.06445]`。long+weak、long+strong、extreme+scale三个未见组合相对固定和端点均显著为正。孤立strong-update仍由端点alpha0微弱领先0.00067，符合强写入无需中间遗忘的机制边界。
 
 独立审计重建训练标签、5个dev域、8个test域、184,320条test策略记录、全部bootstrap和hash并通过。归档`experiments/cbf_ttt/continuous_robust_v2`，新增`PAPER_EVIDENCE_SUMMARY.md`明确论文可支持的受控机制结论与不能声称的Qwen端到端效果。baseline、预训练checkpoint及既有实验工件未修改。
+
+### 原生 TTT 快权重累积机制实验（执行前）
+
+新增`NATIVE_ACCUMULATION_PLAN.md`、`tasks/cbf_native_accumulation.py`、`scripts/run_cbf_native_accumulation.sh`、`scripts/audit_cbf_native_accumulation.py`和`tests/test_cbf_native_accumulation.py`。实验固定最终Qwen3-4B 1B-token checkpoint、既有12K/binding场景和完整KV，只改变三个4096-token边界的快权重规则：禁写、仅首块写入、仅末块写入、每块写入前清除旧快权重、原生三次累积。
+
+主指标为正确答案NLL、正确答案相对`<|im_end|>`的logit margin及全词表首token命中；八候选和QA只作辅助。所有比较按8个来源组配对bootstrap。预登记的累积损伤门要求受限写入臂相对累积臂同时改善NLL、answer-vs-EOS margin和首token命中；另与禁写臂比较，只有NLL配对CI下界大于0才声称写入具有内容收益。清除只替换7层fast weight并保留KV；查询使用prefix深拷贝，审计父cache、参数、数据及checkpoint hash。无baseline代码路径或训练配置变更。
