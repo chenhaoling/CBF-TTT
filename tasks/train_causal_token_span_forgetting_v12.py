@@ -122,7 +122,9 @@ class FrozenV11Resolver:
             float(relation.mean()), float(overlap.mean()),
         ])
         return {"top": top, "feature": feature, "scores": scores,
-                "relation": relation, "overlap": overlap}
+                "relation": relation, "overlap": overlap,
+                "query_posterior": query_posterior,
+                "candidate_posterior": candidate_posterior}
 
 
 def gate_rows(groups, resolver):

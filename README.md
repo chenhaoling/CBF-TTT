@@ -373,6 +373,8 @@ The completed [V6 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automat
 
 [V11 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/token_span_relation_scope_v11/REPORT.md) at 97.20% top-1 and 98.60% MRR. Its +2.55-point gain over V10 had paired-bootstrap CI `[1.02,4.20]`, span token F1 was 98.14%, and the complete registered gate passed. The resolver is now frozen for the [V12 causal sequential-memory experiment](CAUSAL_TOKEN_SPAN_FORGETTING_V12_PLAN.md).
 
+[V12](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/causal_token_span_forgetting_v12/REPORT.md) improved causal query accuracy over fixed retain by 1.46 points with CI `[0.99,1.96]`, but its linear gate reached only 93.50% hard-retain and 80.00% update accuracy. The candidate resolver stayed at 97.07%. The final registered CounterFact iteration is [V13](CAUSAL_ONPOLICY_SCOPE_V13_PLAN.md): a nonlinear gate with richer posterior geometry and one policy-induced state aggregation round.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)

@@ -1,0 +1,5758 @@
+{
+  "seconds": 441.11477541550994,
+  "gpu_peak_allocated_gib": 9.026355743408203,
+  "gpu_peak_reserved_gib": 10.744140625,
+  "update_texts": 2349,
+  "projection": {
+    "projection_seed": 19001,
+    "projection_dim": 256,
+    "feature_dim": 772,
+    "skipped_after_truncation": 0
+  },
+  "unique_relation_texts": 1129,
+  "unique_readout_texts": 3134,
+  "unique_readout_pairs": 37482,
+  "embedding_hashes": {
+    "5101": "3e721aa85ad2cf93b9345d3d23ae33cea1b93839f6a6e17a03b3bc6204b0b431",
+    "5102": "3a7bf4f8fafe7a1e9a6138f53420b73227ffe0b7b9c0d5133eb8244e2e1a24cf",
+    "5103": "83a007df606c15663a7d18112c98df98433ef78362bdeee7bbc444f7a8e75c0f"
+  },
+  "readout_pair_features_sha256": "45ce8c729465bf959e04aa00093e3eaf4b07d6e9fe72dc1f583d34c5d7028886",
+  "fold_map": {
+    "9224cd55a8fc10ce": 0,
+    "e7776b7693e15f71": 1,
+    "7c60a37e0f117e2d": 2,
+    "ea2be0280afe2fce": 3,
+    "53fe724a557a8768": 4,
+    "c6c10d9588186ec0": 0,
+    "3116ad9655f3da32": 1,
+    "5aab001f81ae2287": 2,
+    "8b6d5fda0b49642f": 3,
+    "dbf174c84f86928d": 4,
+    "3ba2a9c85a9e4d58": 0,
+    "ad19595584c8ea67": 1,
+    "ee9a6e87c998578f": 2,
+    "e2bcd2ef72d1465c": 3,
+    "5c6a936e73919666": 4,
+    "a752d39d38387b17": 0,
+    "940f0b6adcd4465d": 1,
+    "e31fa267c7eed240": 2,
+    "34d1a2ed3077db8d": 3,
+    "85d606afe23de5ce": 4,
+    "88811f851926ad7f": 0,
+    "a41aae44d34318ed": 1,
+    "6becb0aaecfa25c2": 2,
+    "20b53578b1a82ed5": 3,
+    "5067f5405d09563c": 4,
+    "af596e63eb9bf9c3": 0,
+    "2402c2fb7a36d3ca": 1,
+    "04e0ea0a80d786c8": 2,
+    "d2aaaa26f1e929ba": 3,
+    "c4fa14241c15cae3": 4,
+    "2d5b69ce838db69b": 0,
+    "43c82e49ccb97d53": 1,
+    "81c8ef4d789dd8b0": 2,
+    "cc2f6c82c93285a6": 3,
+    "acd1781e68fa4b85": 4,
+    "37aab4d05f33dccd": 0,
+    "0e288fb98b7793f9": 1,
+    "07b6638b6405e1a7": 2,
+    "87bb2703d11ae25f": 3,
+    "5a7bb4747920a9b3": 4,
+    "1d74ff199278853d": 0,
+    "fad5f436c1c31c54": 1,
+    "cdb9cca34cb3c6bc": 2,
+    "fb4f2f2d36e21c35": 3,
+    "5a9806beca207b6b": 4,
+    "1a9ba15b02a1b860": 0,
+    "53ac170a6abd04c9": 1,
+    "9c5fa011345d6175": 2,
+    "d45ad616c69163eb": 3,
+    "ed4c62248db25aa6": 4,
+    "a44cafafc21c6be2": 0,
+    "a04dda1043b16069": 1,
+    "34ec92213db562aa": 2,
+    "23086c23475563e9": 3,
+    "ae18cd4c6674255f": 4,
+    "7208c1b3da5e2674": 0,
+    "c8a61293f47a9d67": 1,
+    "7c3c1af06dfa6dbf": 2,
+    "89f73ca80935aff5": 3,
+    "71dbc95c93e41a2c": 4,
+    "4e9c11efa6c81378": 0,
+    "2e874b137aec5c48": 1,
+    "2be0b25ad1b7a572": 2,
+    "e450bcba9793d0b2": 3,
+    "473544bf7b5ca257": 4,
+    "83a806320385b0f6": 0,
+    "d501e91bc28649bc": 1,
+    "6bd4aa556aa0ec39": 2,
+    "b24ba95ed50107dd": 3,
+    "f5d640c44f7034c2": 4,
+    "fcf3f3453bde0b79": 0,
+    "63a1eee79263590f": 1,
+    "ae84084b6d53b97d": 2,
+    "19baa7da77ced1ce": 3,
+    "b8faee981034f967": 4,
+    "7854ad640633f1ed": 0,
+    "49d658ee00012e34": 1,
+    "fa63f2ec93d741bf": 2,
+    "6f52ace9ad4b47de": 3,
+    "73d2c0b998b8a269": 4,
+    "9a37a923fd73536c": 0,
+    "24ee23e9e4c0027a": 1,
+    "322c98ac3e23272a": 2,
+    "5169142d95f70e28": 3,
+    "ceade0a66e792e9e": 4,
+    "fc9719f1436e8b54": 0,
+    "62d04a0413bae702": 1,
+    "2a10659715c46813": 2,
+    "4f1e7198773a4b90": 3,
+    "7e4825c1b0c7bfeb": 4,
+    "47dc9866a0fba177": 0,
+    "15723cbe7bd72272": 1,
+    "46f89ba5f7d08897": 2,
+    "328d145e61a575a9": 3,
+    "87175410a8781170": 4,
+    "c8581f9a10bb4579": 0,
+    "76e010c4e1a1af6a": 1,
+    "e47248a828045f1b": 2,
+    "3f5813b44e34730f": 3,
+    "f72a774babdd6275": 4,
+    "d96cba6d58a1af10": 0,
+    "34e94f96a30ae37f": 1,
+    "3b31827dba05d381": 2,
+    "921836660c361ccb": 3,
+    "3d9909355bd7bd28": 4,
+    "a58e8defb9ab6b97": 0,
+    "bfff0117c8fab113": 1,
+    "b132a6c57514a97a": 2,
+    "c1b3a5729a3101e1": 3,
+    "ad85a3d13c50e74f": 4,
+    "b397d681ff9e954b": 0,
+    "8c862619e998976c": 1,
+    "970e1f78ceabb96c": 2,
+    "b11583942f89a3db": 3,
+    "dffc33091423aec7": 4,
+    "dad736672d458570": 0,
+    "0f24c50394db203e": 1,
+    "9ee5a3da1316d50f": 2,
+    "624c7f3ec5e2a46a": 3,
+    "7222ee6dea5d096f": 4,
+    "9b64c5babaac6e7c": 0,
+    "a9166d1b6d7ce662": 1,
+    "3b65a6d66e71bdcd": 2,
+    "c9bf0a7ea515fa44": 3,
+    "ef27fe068e4c1143": 4,
+    "f29ff220f5438fb8": 0,
+    "4ae1de17e5037d25": 1,
+    "1499551cc6cf4e41": 2,
+    "d549f6ed6e197810": 3,
+    "c64552878a5d4c88": 4,
+    "6d6050833d4d6656": 0,
+    "9b2144d8467aaacb": 1,
+    "89a50aa9e317e383": 2,
+    "5cd8a7baadb31fc0": 3,
+    "e19f1157bbf3d297": 4,
+    "cac52c9a584bdfb3": 0,
+    "f304a7485ad03dcc": 1,
+    "6933da88817d795b": 2,
+    "71e4ce7b79beab1d": 3,
+    "51c8d731a1d354fa": 4,
+    "7290b91984a1478d": 0,
+    "38224cbbc401c5cb": 1,
+    "26dcfd3aed9c5261": 2,
+    "aa5521093fd21a2c": 3,
+    "dba1f0b5331d36f9": 4,
+    "2d431e21af449e0d": 0,
+    "53c7f6e8af42d270": 1,
+    "68fafd37a55c17ee": 2,
+    "b105ec7c226b1685": 3,
+    "c0742c8f75b30fce": 4,
+    "752f6d44c538c7a8": 0,
+    "7c4f79e3fdcf0cef": 1,
+    "d08a5b3d3e035429": 2,
+    "d5b84173c6086234": 3,
+    "956a06ad8a2d9fb9": 4,
+    "7ee08eb37c58aead": 0,
+    "0aaa5e174c779602": 1,
+    "499fce45544be58e": 2,
+    "9bb6cb2c17c6dfde": 3,
+    "5fb6da3e5b806e27": 4,
+    "b9f0d31aa0096cb0": 0,
+    "72f6927c54ddee9a": 1,
+    "5fa6fea9f0f7e09c": 2,
+    "e16cc067f0f7ba1d": 3,
+    "0e30d16a8c97efc4": 4,
+    "128ce516da2e83d9": 0,
+    "757fd58ebf1ff2d4": 1,
+    "e9049044c005ce76": 2,
+    "7177fa68d31958a5": 3,
+    "9eeda0a8ed4f7b2e": 4,
+    "9f8d2ada4c9a4c3f": 0,
+    "38ac415a6e2cb661": 1,
+    "d4857fe376542099": 2,
+    "11a579e66e1a5613": 3,
+    "a10e8f44946960d6": 4,
+    "2979a2e4f60a8f90": 0,
+    "259164965a82d115": 1,
+    "36bef848f5fb6b1b": 2,
+    "e976e1b06212651d": 3,
+    "3003652a38c3107b": 4,
+    "0cda5f6c45ea52c7": 0,
+    "72e511370153e49e": 1,
+    "c0177947ea9d59d0": 2,
+    "9fecede3ae6865f4": 3,
+    "3fd60c179d370c00": 4,
+    "bfa23c353d2fc15f": 0,
+    "e0416947365ad357": 1,
+    "286165b884e7dd09": 2,
+    "df88a3a020d6014c": 3,
+    "d065cbf19b8f868b": 4,
+    "399279de8f2c2612": 0,
+    "32c8efcfbd7aab7b": 1,
+    "06b20608f4e6d9ab": 2,
+    "bc2e583d1d853b94": 3,
+    "b56238ceab403558": 4,
+    "f55a59ce23956f02": 0,
+    "8fa3c7537ba4b144": 1
+  },
+  "selection": {
+    "0": {
+      "inner_fold": 1,
+      "epoch": 50,
+      "threshold": 0.6,
+      "status": "minimum_constraint_deficit",
+      "curves": {
+        "10": {
+          "threshold": 0.6,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 480,
+            "action_accuracy": 0.9,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 160,
+                "accuracy": 0.99375
+              },
+              "hard_retain": {
+                "events": 160,
+                "accuracy": 0.96875
+              },
+              "primary_update": {
+                "events": 160,
+                "accuracy": 0.7375
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 480,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.1": {
+              "actions": 480,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.15": {
+              "actions": 480,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.2": {
+              "actions": 480,
+              "action_accuracy": 0.0875,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.2625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.25": {
+              "actions": 480,
+              "action_accuracy": 0.18333333333333332,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.5125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.025
+                }
+              }
+            },
+            "0.3": {
+              "actions": 480,
+              "action_accuracy": 0.26458333333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.66875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.04375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.08125
+                }
+              }
+            },
+            "0.35": {
+              "actions": 480,
+              "action_accuracy": 0.44375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.78125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.29375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.25625
+                }
+              }
+            },
+            "0.4": {
+              "actions": 480,
+              "action_accuracy": 0.5458333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.84375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.425
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.36875
+                }
+              }
+            },
+            "0.45": {
+              "actions": 480,
+              "action_accuracy": 0.6395833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.825
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.59375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.5
+                }
+              }
+            },
+            "0.5": {
+              "actions": 480,
+              "action_accuracy": 0.7625,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.84375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.775
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.66875
+                }
+              }
+            },
+            "0.55": {
+              "actions": 480,
+              "action_accuracy": 0.8479166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.9125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.75625
+                }
+              }
+            },
+            "0.6": {
+              "actions": 480,
+              "action_accuracy": 0.9,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.99375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.96875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.7375
+                }
+              }
+            },
+            "0.65": {
+              "actions": 480,
+              "action_accuracy": 0.8083333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.425
+                }
+              }
+            },
+            "0.7": {
+              "actions": 480,
+              "action_accuracy": 0.6729166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.01875
+                }
+              }
+            },
+            "0.75": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.8": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.85": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.9": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "25": {
+          "threshold": 0.65,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 480,
+            "action_accuracy": 0.8958333333333334,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 160,
+                "accuracy": 0.95
+              },
+              "hard_retain": {
+                "events": 160,
+                "accuracy": 0.95
+              },
+              "primary_update": {
+                "events": 160,
+                "accuracy": 0.7875
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 480,
+              "action_accuracy": 0.12291666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.3625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.00625
+                }
+              }
+            },
+            "0.1": {
+              "actions": 480,
+              "action_accuracy": 0.22708333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.5875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.025
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.06875
+                }
+              }
+            },
+            "0.15": {
+              "actions": 480,
+              "action_accuracy": 0.3416666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.74375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.1375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.14375
+                }
+              }
+            },
+            "0.2": {
+              "actions": 480,
+              "action_accuracy": 0.4666666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.78125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.33125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.2875
+                }
+              }
+            },
+            "0.25": {
+              "actions": 480,
+              "action_accuracy": 0.5395833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.84375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.4125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.3625
+                }
+              }
+            },
+            "0.3": {
+              "actions": 480,
+              "action_accuracy": 0.56875,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.45625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.4
+                }
+              }
+            },
+            "0.35": {
+              "actions": 480,
+              "action_accuracy": 0.6291666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.83125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.56875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.4875
+                }
+              }
+            },
+            "0.4": {
+              "actions": 480,
+              "action_accuracy": 0.66875,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.83125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.6375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.5375
+                }
+              }
+            },
+            "0.45": {
+              "actions": 480,
+              "action_accuracy": 0.7229166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.84375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.7125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.6125
+                }
+              }
+            },
+            "0.5": {
+              "actions": 480,
+              "action_accuracy": 0.76875,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.7875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.66875
+                }
+              }
+            },
+            "0.55": {
+              "actions": 480,
+              "action_accuracy": 0.8083333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.8375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.73125
+                }
+              }
+            },
+            "0.6": {
+              "actions": 480,
+              "action_accuracy": 0.8729166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.9125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.93125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.775
+                }
+              }
+            },
+            "0.65": {
+              "actions": 480,
+              "action_accuracy": 0.8958333333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.95
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.95
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.7875
+                }
+              }
+            },
+            "0.7": {
+              "actions": 480,
+              "action_accuracy": 0.9020833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.96875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.7375
+                }
+              }
+            },
+            "0.75": {
+              "actions": 480,
+              "action_accuracy": 0.8791666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.6375
+                }
+              }
+            },
+            "0.8": {
+              "actions": 480,
+              "action_accuracy": 0.8083333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.425
+                }
+              }
+            },
+            "0.85": {
+              "actions": 480,
+              "action_accuracy": 0.70625,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.11875
+                }
+              }
+            },
+            "0.9": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "50": {
+          "threshold": 0.6,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 480,
+            "action_accuracy": 0.91875,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 160,
+                "accuracy": 0.95625
+              },
+              "hard_retain": {
+                "events": 160,
+                "accuracy": 0.94375
+              },
+              "primary_update": {
+                "events": 160,
+                "accuracy": 0.85625
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 480,
+              "action_accuracy": 0.32916666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.79375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.075
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.11875
+                }
+              }
+            },
+            "0.1": {
+              "actions": 480,
+              "action_accuracy": 0.4979166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.83125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.34375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.31875
+                }
+              }
+            },
+            "0.15": {
+              "actions": 480,
+              "action_accuracy": 0.5458333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.84375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.425
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.36875
+                }
+              }
+            },
+            "0.2": {
+              "actions": 480,
+              "action_accuracy": 0.575,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.84375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.475
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.40625
+                }
+              }
+            },
+            "0.25": {
+              "actions": 480,
+              "action_accuracy": 0.6270833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.5625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.48125
+                }
+              }
+            },
+            "0.3": {
+              "actions": 480,
+              "action_accuracy": 0.6583333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.61875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.51875
+                }
+              }
+            },
+            "0.35": {
+              "actions": 480,
+              "action_accuracy": 0.6916666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.65625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.56875
+                }
+              }
+            },
+            "0.4": {
+              "actions": 480,
+              "action_accuracy": 0.7395833333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.7375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.63125
+                }
+              }
+            },
+            "0.45": {
+              "actions": 480,
+              "action_accuracy": 0.7770833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.7875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.6875
+                }
+              }
+            },
+            "0.5": {
+              "actions": 480,
+              "action_accuracy": 0.8291666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.86875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.8625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.75625
+                }
+              }
+            },
+            "0.55": {
+              "actions": 480,
+              "action_accuracy": 0.89375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.925
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.925
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.83125
+                }
+              }
+            },
+            "0.6": {
+              "actions": 480,
+              "action_accuracy": 0.91875,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.95625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.94375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.85625
+                }
+              }
+            },
+            "0.65": {
+              "actions": 480,
+              "action_accuracy": 0.9270833333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.9875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.95
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.84375
+                }
+              }
+            },
+            "0.7": {
+              "actions": 480,
+              "action_accuracy": 0.925,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.95625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.81875
+                }
+              }
+            },
+            "0.75": {
+              "actions": 480,
+              "action_accuracy": 0.9041666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.95625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.75625
+                }
+              }
+            },
+            "0.8": {
+              "actions": 480,
+              "action_accuracy": 0.90625,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.71875
+                }
+              }
+            },
+            "0.85": {
+              "actions": 480,
+              "action_accuracy": 0.84375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.53125
+                }
+              }
+            },
+            "0.9": {
+              "actions": 480,
+              "action_accuracy": 0.7875,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.3625
+                }
+              }
+            },
+            "0.95": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "1": {
+      "inner_fold": 2,
+      "epoch": 50,
+      "threshold": 0.65,
+      "status": "minimum_constraint_deficit",
+      "curves": {
+        "10": {
+          "threshold": 0.55,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 468,
+            "action_accuracy": 0.8803418803418803,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 156,
+                "accuracy": 0.9358974358974359
+              },
+              "hard_retain": {
+                "events": 156,
+                "accuracy": 0.9038461538461539
+              },
+              "primary_update": {
+                "events": 156,
+                "accuracy": 0.8012820512820513
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 468,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.1": {
+              "actions": 468,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.15": {
+              "actions": 468,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.2": {
+              "actions": 468,
+              "action_accuracy": 0.08974358974358974,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.2692307692307692
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.25": {
+              "actions": 468,
+              "action_accuracy": 0.1794871794871795,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.5128205128205128
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.00641025641025641
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.019230769230769232
+                }
+              }
+            },
+            "0.3": {
+              "actions": 468,
+              "action_accuracy": 0.2905982905982906,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7435897435897436
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.05128205128205128
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.07692307692307693
+                }
+              }
+            },
+            "0.35": {
+              "actions": 468,
+              "action_accuracy": 0.4551282051282051,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8461538461538461
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.2564102564102564
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.26282051282051283
+                }
+              }
+            },
+            "0.4": {
+              "actions": 468,
+              "action_accuracy": 0.5705128205128205,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8717948717948718
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.4166666666666667
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.4230769230769231
+                }
+              }
+            },
+            "0.45": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8910256410256411
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.5641025641025641
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5448717948717948
+                }
+              }
+            },
+            "0.5": {
+              "actions": 468,
+              "action_accuracy": 0.7841880341880342,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8974358974358975
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.75
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7051282051282052
+                }
+              }
+            },
+            "0.55": {
+              "actions": 468,
+              "action_accuracy": 0.8803418803418803,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9358974358974359
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9038461538461539
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8012820512820513
+                }
+              }
+            },
+            "0.6": {
+              "actions": 468,
+              "action_accuracy": 0.8995726495726496,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9743589743589743
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7243589743589743
+                }
+              }
+            },
+            "0.65": {
+              "actions": 468,
+              "action_accuracy": 0.8183760683760684,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.4551282051282051
+                }
+              }
+            },
+            "0.7": {
+              "actions": 468,
+              "action_accuracy": 0.6752136752136753,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.02564102564102564
+                }
+              }
+            },
+            "0.75": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.8": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.85": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.9": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "25": {
+          "threshold": 0.65,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 468,
+            "action_accuracy": 0.9209401709401709,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 156,
+                "accuracy": 0.9871794871794872
+              },
+              "hard_retain": {
+                "events": 156,
+                "accuracy": 0.9615384615384616
+              },
+              "primary_update": {
+                "events": 156,
+                "accuracy": 0.8141025641025641
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 468,
+              "action_accuracy": 0.10042735042735043,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.30128205128205127
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.1": {
+              "actions": 468,
+              "action_accuracy": 0.23931623931623933,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.6217948717948718
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.04487179487179487
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.05128205128205128
+                }
+              }
+            },
+            "0.15": {
+              "actions": 468,
+              "action_accuracy": 0.36752136752136755,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7756410256410257
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.16025641025641027
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.16666666666666666
+                }
+              }
+            },
+            "0.2": {
+              "actions": 468,
+              "action_accuracy": 0.4807692307692308,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8397435897435898
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.30128205128205127
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.30128205128205127
+                }
+              }
+            },
+            "0.25": {
+              "actions": 468,
+              "action_accuracy": 0.5427350427350427,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8653846153846154
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.3782051282051282
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.38461538461538464
+                }
+              }
+            },
+            "0.3": {
+              "actions": 468,
+              "action_accuracy": 0.5876068376068376,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8717948717948718
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.44871794871794873
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.4423076923076923
+                }
+              }
+            },
+            "0.35": {
+              "actions": 468,
+              "action_accuracy": 0.6324786324786325,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8846153846153846
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.5128205128205128
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5
+                }
+              }
+            },
+            "0.4": {
+              "actions": 468,
+              "action_accuracy": 0.6944444444444444,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8846153846153846
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.6153846153846154
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5833333333333334
+                }
+              }
+            },
+            "0.45": {
+              "actions": 468,
+              "action_accuracy": 0.7542735042735043,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8974358974358975
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.7051282051282052
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6602564102564102
+                }
+              }
+            },
+            "0.5": {
+              "actions": 468,
+              "action_accuracy": 0.7970085470085471,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8974358974358975
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.7692307692307693
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7243589743589743
+                }
+              }
+            },
+            "0.55": {
+              "actions": 468,
+              "action_accuracy": 0.8589743589743589,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9230769230769231
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8589743589743589
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7948717948717948
+                }
+              }
+            },
+            "0.6": {
+              "actions": 468,
+              "action_accuracy": 0.8846153846153846,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9487179487179487
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9038461538461539
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8012820512820513
+                }
+              }
+            },
+            "0.65": {
+              "actions": 468,
+              "action_accuracy": 0.9209401709401709,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9871794871794872
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9615384615384616
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8141025641025641
+                }
+              }
+            },
+            "0.7": {
+              "actions": 468,
+              "action_accuracy": 0.9017094017094017,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9743589743589743
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7307692307692307
+                }
+              }
+            },
+            "0.75": {
+              "actions": 468,
+              "action_accuracy": 0.8675213675213675,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9807692307692307
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6217948717948718
+                }
+              }
+            },
+            "0.8": {
+              "actions": 468,
+              "action_accuracy": 0.8162393162393162,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.44871794871794873
+                }
+              }
+            },
+            "0.85": {
+              "actions": 468,
+              "action_accuracy": 0.7200854700854701,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.16025641025641027
+                }
+              }
+            },
+            "0.9": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "50": {
+          "threshold": 0.65,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 468,
+            "action_accuracy": 0.938034188034188,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 156,
+                "accuracy": 1.0
+              },
+              "hard_retain": {
+                "events": 156,
+                "accuracy": 0.9487179487179487
+              },
+              "primary_update": {
+                "events": 156,
+                "accuracy": 0.8653846153846154
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 468,
+              "action_accuracy": 0.3525641025641026,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8141025641025641
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.10256410256410256
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.14102564102564102
+                }
+              }
+            },
+            "0.1": {
+              "actions": 468,
+              "action_accuracy": 0.5,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8653846153846154
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.3076923076923077
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.3269230769230769
+                }
+              }
+            },
+            "0.15": {
+              "actions": 468,
+              "action_accuracy": 0.5405982905982906,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8653846153846154
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.3782051282051282
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.3782051282051282
+                }
+              }
+            },
+            "0.2": {
+              "actions": 468,
+              "action_accuracy": 0.5854700854700855,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8782051282051282
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.4423076923076923
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.4358974358974359
+                }
+              }
+            },
+            "0.25": {
+              "actions": 468,
+              "action_accuracy": 0.6239316239316239,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8910256410256411
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.5
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.4807692307692308
+                }
+              }
+            },
+            "0.3": {
+              "actions": 468,
+              "action_accuracy": 0.688034188034188,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9038461538461539
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.5961538461538461
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5641025641025641
+                }
+              }
+            },
+            "0.35": {
+              "actions": 468,
+              "action_accuracy": 0.717948717948718,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8974358974358975
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.6474358974358975
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6089743589743589
+                }
+              }
+            },
+            "0.4": {
+              "actions": 468,
+              "action_accuracy": 0.7713675213675214,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8974358974358975
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.7307692307692307
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6858974358974359
+                }
+              }
+            },
+            "0.45": {
+              "actions": 468,
+              "action_accuracy": 0.8141025641025641,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9038461538461539
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8012820512820513
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7371794871794872
+                }
+              }
+            },
+            "0.5": {
+              "actions": 468,
+              "action_accuracy": 0.8739316239316239,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9423076923076923
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8653846153846154
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8141025641025641
+                }
+              }
+            },
+            "0.55": {
+              "actions": 468,
+              "action_accuracy": 0.9038461538461539,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.967948717948718
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8974358974358975
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8461538461538461
+                }
+              }
+            },
+            "0.6": {
+              "actions": 468,
+              "action_accuracy": 0.9316239316239316,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9871794871794872
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9294871794871795
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8782051282051282
+                }
+              }
+            },
+            "0.65": {
+              "actions": 468,
+              "action_accuracy": 0.938034188034188,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9487179487179487
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8653846153846154
+                }
+              }
+            },
+            "0.7": {
+              "actions": 468,
+              "action_accuracy": 0.9294871794871795,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9743589743589743
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8141025641025641
+                }
+              }
+            },
+            "0.75": {
+              "actions": 468,
+              "action_accuracy": 0.9102564102564102,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9743589743589743
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7564102564102564
+                }
+              }
+            },
+            "0.8": {
+              "actions": 468,
+              "action_accuracy": 0.8867521367521367,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9807692307692307
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6794871794871795
+                }
+              }
+            },
+            "0.85": {
+              "actions": 468,
+              "action_accuracy": 0.8461538461538461,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9935897435897436
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5448717948717948
+                }
+              }
+            },
+            "0.9": {
+              "actions": 468,
+              "action_accuracy": 0.7841880341880342,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.3525641025641026
+                }
+              }
+            },
+            "0.95": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "2": {
+      "inner_fold": 3,
+      "epoch": 50,
+      "threshold": 0.65,
+      "status": "minimum_constraint_deficit",
+      "curves": {
+        "10": {
+          "threshold": 0.55,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 468,
+            "action_accuracy": 0.8418803418803419,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 156,
+                "accuracy": 0.8717948717948718
+              },
+              "hard_retain": {
+                "events": 156,
+                "accuracy": 0.8782051282051282
+              },
+              "primary_update": {
+                "events": 156,
+                "accuracy": 0.7756410256410257
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 468,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.1": {
+              "actions": 468,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.15": {
+              "actions": 468,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.2": {
+              "actions": 468,
+              "action_accuracy": 0.0876068376068376,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.2564102564102564
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.00641025641025641
+                }
+              }
+            },
+            "0.25": {
+              "actions": 468,
+              "action_accuracy": 0.17307692307692307,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.4807692307692308
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.01282051282051282
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.02564102564102564
+                }
+              }
+            },
+            "0.3": {
+              "actions": 468,
+              "action_accuracy": 0.24145299145299146,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.6217948717948718
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.04487179487179487
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.057692307692307696
+                }
+              }
+            },
+            "0.35": {
+              "actions": 468,
+              "action_accuracy": 0.38461538461538464,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7371794871794872
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.21794871794871795
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.1987179487179487
+                }
+              }
+            },
+            "0.4": {
+              "actions": 468,
+              "action_accuracy": 0.4807692307692308,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7692307692307693
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.358974358974359
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.3141025641025641
+                }
+              }
+            },
+            "0.45": {
+              "actions": 468,
+              "action_accuracy": 0.5683760683760684,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7756410256410257
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.4935897435897436
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.4358974358974359
+                }
+              }
+            },
+            "0.5": {
+              "actions": 468,
+              "action_accuracy": 0.7264957264957265,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8012820512820513
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.7371794871794872
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6410256410256411
+                }
+              }
+            },
+            "0.55": {
+              "actions": 468,
+              "action_accuracy": 0.8418803418803419,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8717948717948718
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8782051282051282
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7756410256410257
+                }
+              }
+            },
+            "0.6": {
+              "actions": 468,
+              "action_accuracy": 0.8760683760683761,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.967948717948718
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9615384615384616
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6987179487179487
+                }
+              }
+            },
+            "0.65": {
+              "actions": 468,
+              "action_accuracy": 0.7991452991452992,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.3974358974358974
+                }
+              }
+            },
+            "0.7": {
+              "actions": 468,
+              "action_accuracy": 0.6730769230769231,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.019230769230769232
+                }
+              }
+            },
+            "0.75": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.8": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.85": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.9": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "25": {
+          "threshold": 0.65,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 468,
+            "action_accuracy": 0.8803418803418803,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 156,
+                "accuracy": 0.9423076923076923
+              },
+              "hard_retain": {
+                "events": 156,
+                "accuracy": 0.9358974358974359
+              },
+              "primary_update": {
+                "events": 156,
+                "accuracy": 0.7628205128205128
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 468,
+              "action_accuracy": 0.12393162393162394,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.36538461538461536
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.00641025641025641
+                }
+              }
+            },
+            "0.1": {
+              "actions": 468,
+              "action_accuracy": 0.21153846153846154,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.5576923076923077
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.03205128205128205
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.04487179487179487
+                }
+              }
+            },
+            "0.15": {
+              "actions": 468,
+              "action_accuracy": 0.30982905982905984,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7371794871794872
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.08974358974358974
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.10256410256410256
+                }
+              }
+            },
+            "0.2": {
+              "actions": 468,
+              "action_accuracy": 0.3974358974358974,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7435897435897436
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.23076923076923078
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.21794871794871795
+                }
+              }
+            },
+            "0.25": {
+              "actions": 468,
+              "action_accuracy": 0.4594017094017094,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7628205128205128
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.3269230769230769
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.28846153846153844
+                }
+              }
+            },
+            "0.3": {
+              "actions": 468,
+              "action_accuracy": 0.4935897435897436,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.782051282051282
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.3717948717948718
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.3269230769230769
+                }
+              }
+            },
+            "0.35": {
+              "actions": 468,
+              "action_accuracy": 0.5341880341880342,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.782051282051282
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.4358974358974359
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.38461538461538464
+                }
+              }
+            },
+            "0.4": {
+              "actions": 468,
+              "action_accuracy": 0.6175213675213675,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7884615384615384
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.5641025641025641
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5
+                }
+              }
+            },
+            "0.45": {
+              "actions": 468,
+              "action_accuracy": 0.6730769230769231,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7884615384615384
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.6538461538461539
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5769230769230769
+                }
+              }
+            },
+            "0.5": {
+              "actions": 468,
+              "action_accuracy": 0.75,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8141025641025641
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.7628205128205128
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6730769230769231
+                }
+              }
+            },
+            "0.55": {
+              "actions": 468,
+              "action_accuracy": 0.7991452991452992,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8205128205128205
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8397435897435898
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7371794871794872
+                }
+              }
+            },
+            "0.6": {
+              "actions": 468,
+              "action_accuracy": 0.8504273504273504,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8782051282051282
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8846153846153846
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7884615384615384
+                }
+              }
+            },
+            "0.65": {
+              "actions": 468,
+              "action_accuracy": 0.8803418803418803,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9423076923076923
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9358974358974359
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7628205128205128
+                }
+              }
+            },
+            "0.7": {
+              "actions": 468,
+              "action_accuracy": 0.8760683760683761,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.967948717948718
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9615384615384616
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6987179487179487
+                }
+              }
+            },
+            "0.75": {
+              "actions": 468,
+              "action_accuracy": 0.8547008547008547,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9807692307692307
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5833333333333334
+                }
+              }
+            },
+            "0.8": {
+              "actions": 468,
+              "action_accuracy": 0.7948717948717948,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.38461538461538464
+                }
+              }
+            },
+            "0.85": {
+              "actions": 468,
+              "action_accuracy": 0.6987179487179487,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.09615384615384616
+                }
+              }
+            },
+            "0.9": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "50": {
+          "threshold": 0.65,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 468,
+            "action_accuracy": 0.9038461538461539,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 156,
+                "accuracy": 0.9615384615384616
+              },
+              "hard_retain": {
+                "events": 156,
+                "accuracy": 0.9294871794871795
+              },
+              "primary_update": {
+                "events": 156,
+                "accuracy": 0.8205128205128205
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 468,
+              "action_accuracy": 0.29273504273504275,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7371794871794872
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.0641025641025641
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.07692307692307693
+                }
+              }
+            },
+            "0.1": {
+              "actions": 468,
+              "action_accuracy": 0.3974358974358974,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7564102564102564
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.22435897435897437
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.21153846153846154
+                }
+              }
+            },
+            "0.15": {
+              "actions": 468,
+              "action_accuracy": 0.46153846153846156,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.782051282051282
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.3141025641025641
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.28846153846153844
+                }
+              }
+            },
+            "0.2": {
+              "actions": 468,
+              "action_accuracy": 0.49572649572649574,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7884615384615384
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.36538461538461536
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.3333333333333333
+                }
+              }
+            },
+            "0.25": {
+              "actions": 468,
+              "action_accuracy": 0.5384615384615384,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7884615384615384
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.4423076923076923
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.38461538461538464
+                }
+              }
+            },
+            "0.3": {
+              "actions": 468,
+              "action_accuracy": 0.5833333333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7884615384615384
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.5128205128205128
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.44871794871794873
+                }
+              }
+            },
+            "0.35": {
+              "actions": 468,
+              "action_accuracy": 0.6367521367521367,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.7948717948717948
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.5897435897435898
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5256410256410257
+                }
+              }
+            },
+            "0.4": {
+              "actions": 468,
+              "action_accuracy": 0.6923076923076923,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8076923076923077
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.6666666666666666
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6025641025641025
+                }
+              }
+            },
+            "0.45": {
+              "actions": 468,
+              "action_accuracy": 0.7799145299145299,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8205128205128205
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8076923076923077
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7115384615384616
+                }
+              }
+            },
+            "0.5": {
+              "actions": 468,
+              "action_accuracy": 0.8333333333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.8525641025641025
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8461538461538461
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8012820512820513
+                }
+              }
+            },
+            "0.55": {
+              "actions": 468,
+              "action_accuracy": 0.8717948717948718,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9038461538461539
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.8782051282051282
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8333333333333334
+                }
+              }
+            },
+            "0.6": {
+              "actions": 468,
+              "action_accuracy": 0.8910256410256411,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9423076923076923
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9102564102564102
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8205128205128205
+                }
+              }
+            },
+            "0.65": {
+              "actions": 468,
+              "action_accuracy": 0.9038461538461539,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 0.9615384615384616
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9294871794871795
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.8205128205128205
+                }
+              }
+            },
+            "0.7": {
+              "actions": 468,
+              "action_accuracy": 0.9081196581196581,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9423076923076923
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.782051282051282
+                }
+              }
+            },
+            "0.75": {
+              "actions": 468,
+              "action_accuracy": 0.8995726495726496,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9615384615384616
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.7371794871794872
+                }
+              }
+            },
+            "0.8": {
+              "actions": 468,
+              "action_accuracy": 0.8931623931623932,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 0.9807692307692307
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.6987179487179487
+                }
+              }
+            },
+            "0.85": {
+              "actions": 468,
+              "action_accuracy": 0.8376068376068376,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.5128205128205128
+                }
+              }
+            },
+            "0.9": {
+              "actions": 468,
+              "action_accuracy": 0.7713675213675214,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.3141025641025641
+                }
+              }
+            },
+            "0.95": {
+              "actions": 468,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 156,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 156,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "3": {
+      "inner_fold": 4,
+      "epoch": 50,
+      "threshold": 0.65,
+      "status": "minimum_constraint_deficit",
+      "curves": {
+        "10": {
+          "threshold": 0.6,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 459,
+            "action_accuracy": 0.9084967320261438,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 153,
+                "accuracy": 1.0
+              },
+              "hard_retain": {
+                "events": 153,
+                "accuracy": 0.9738562091503268
+              },
+              "primary_update": {
+                "events": 153,
+                "accuracy": 0.7516339869281046
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 459,
+              "action_accuracy": 0.08496732026143791,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.2549019607843137
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.1": {
+              "actions": 459,
+              "action_accuracy": 0.08496732026143791,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.2549019607843137
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.15": {
+              "actions": 459,
+              "action_accuracy": 0.08496732026143791,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.2549019607843137
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.2": {
+              "actions": 459,
+              "action_accuracy": 0.08714596949891068,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.26143790849673204
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.25": {
+              "actions": 459,
+              "action_accuracy": 0.18518518518518517,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.5294117647058824
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.006535947712418301
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0196078431372549
+                }
+              }
+            },
+            "0.3": {
+              "actions": 459,
+              "action_accuracy": 0.2701525054466231,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.673202614379085
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.05228758169934641
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.08496732026143791
+                }
+              }
+            },
+            "0.35": {
+              "actions": 459,
+              "action_accuracy": 0.3877995642701525,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8431372549019608
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.1503267973856209
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.16993464052287582
+                }
+              }
+            },
+            "0.4": {
+              "actions": 459,
+              "action_accuracy": 0.4880174291938998,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8562091503267973
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.3006535947712418
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.30718954248366015
+                }
+              }
+            },
+            "0.45": {
+              "actions": 459,
+              "action_accuracy": 0.6470588235294118,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8758169934640523
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.5424836601307189
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.5228758169934641
+                }
+              }
+            },
+            "0.5": {
+              "actions": 459,
+              "action_accuracy": 0.775599128540305,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8954248366013072
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.7320261437908496
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.6993464052287581
+                }
+              }
+            },
+            "0.55": {
+              "actions": 459,
+              "action_accuracy": 0.8627450980392157,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.9281045751633987
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.869281045751634
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.7908496732026143
+                }
+              }
+            },
+            "0.6": {
+              "actions": 459,
+              "action_accuracy": 0.9084967320261438,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.9738562091503268
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.7516339869281046
+                }
+              }
+            },
+            "0.65": {
+              "actions": 459,
+              "action_accuracy": 0.8169934640522876,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.45098039215686275
+                }
+              }
+            },
+            "0.7": {
+              "actions": 459,
+              "action_accuracy": 0.6710239651416122,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.013071895424836602
+                }
+              }
+            },
+            "0.75": {
+              "actions": 459,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.8": {
+              "actions": 459,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.85": {
+              "actions": 459,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.9": {
+              "actions": 459,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 459,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "25": {
+          "threshold": 0.65,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 459,
+            "action_accuracy": 0.9237472766884531,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 153,
+                "accuracy": 0.9934640522875817
+              },
+              "hard_retain": {
+                "events": 153,
+                "accuracy": 0.954248366013072
+              },
+              "primary_update": {
+                "events": 153,
+                "accuracy": 0.8235294117647058
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 459,
+              "action_accuracy": 0.10457516339869281,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.3137254901960784
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.1": {
+              "actions": 459,
+              "action_accuracy": 0.2178649237472767,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.5816993464052288
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.026143790849673203
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0457516339869281
+                }
+              }
+            },
+            "0.15": {
+              "actions": 459,
+              "action_accuracy": 0.31808278867102396,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.7516339869281046
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.09803921568627451
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.10457516339869281
+                }
+              }
+            },
+            "0.2": {
+              "actions": 459,
+              "action_accuracy": 0.4400871459694989,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8366013071895425
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.24183006535947713
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.24183006535947713
+                }
+              }
+            },
+            "0.25": {
+              "actions": 459,
+              "action_accuracy": 0.4793028322440087,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8496732026143791
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.29411764705882354
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.29411764705882354
+                }
+              }
+            },
+            "0.3": {
+              "actions": 459,
+              "action_accuracy": 0.5359477124183006,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8627450980392157
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.3790849673202614
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.3660130718954248
+                }
+              }
+            },
+            "0.35": {
+              "actions": 459,
+              "action_accuracy": 0.6100217864923747,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8758169934640523
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.48366013071895425
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.47058823529411764
+                }
+              }
+            },
+            "0.4": {
+              "actions": 459,
+              "action_accuracy": 0.6753812636165577,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8823529411764706
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.5816993464052288
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.5620915032679739
+                }
+              }
+            },
+            "0.45": {
+              "actions": 459,
+              "action_accuracy": 0.738562091503268,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8888888888888888
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.673202614379085
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.6535947712418301
+                }
+              }
+            },
+            "0.5": {
+              "actions": 459,
+              "action_accuracy": 0.7843137254901961,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8954248366013072
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.7450980392156863
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.7124183006535948
+                }
+              }
+            },
+            "0.55": {
+              "actions": 459,
+              "action_accuracy": 0.8278867102396514,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.9019607843137255
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.8300653594771242
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.7516339869281046
+                }
+              }
+            },
+            "0.6": {
+              "actions": 459,
+              "action_accuracy": 0.8888888888888888,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.9281045751633987
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.9150326797385621
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.8235294117647058
+                }
+              }
+            },
+            "0.65": {
+              "actions": 459,
+              "action_accuracy": 0.9237472766884531,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.9934640522875817
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.954248366013072
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.8235294117647058
+                }
+              }
+            },
+            "0.7": {
+              "actions": 459,
+              "action_accuracy": 0.9128540305010894,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.9738562091503268
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.7647058823529411
+                }
+              }
+            },
+            "0.75": {
+              "actions": 459,
+              "action_accuracy": 0.869281045751634,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.9869281045751634
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.6209150326797386
+                }
+              }
+            },
+            "0.8": {
+              "actions": 459,
+              "action_accuracy": 0.8126361655773421,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.43790849673202614
+                }
+              }
+            },
+            "0.85": {
+              "actions": 459,
+              "action_accuracy": 0.7080610021786492,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.12418300653594772
+                }
+              }
+            },
+            "0.9": {
+              "actions": 459,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 459,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "50": {
+          "threshold": 0.65,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 459,
+            "action_accuracy": 0.9433551198257081,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 153,
+                "accuracy": 1.0
+              },
+              "hard_retain": {
+                "events": 153,
+                "accuracy": 0.954248366013072
+              },
+              "primary_update": {
+                "events": 153,
+                "accuracy": 0.8758169934640523
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 459,
+              "action_accuracy": 0.3137254901960784,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.7777777777777778
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.06535947712418301
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.09803921568627451
+                }
+              }
+            },
+            "0.1": {
+              "actions": 459,
+              "action_accuracy": 0.4553376906318083,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8496732026143791
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.2549019607843137
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.26143790849673204
+                }
+              }
+            },
+            "0.15": {
+              "actions": 459,
+              "action_accuracy": 0.4880174291938998,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8562091503267973
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.3006535947712418
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.30718954248366015
+                }
+              }
+            },
+            "0.2": {
+              "actions": 459,
+              "action_accuracy": 0.5250544662309368,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8758169934640523
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.35294117647058826
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.3464052287581699
+                }
+              }
+            },
+            "0.25": {
+              "actions": 459,
+              "action_accuracy": 0.5947712418300654,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8823529411764706
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.45751633986928103
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.4444444444444444
+                }
+              }
+            },
+            "0.3": {
+              "actions": 459,
+              "action_accuracy": 0.6492374727668845,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8888888888888888
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.5359477124183006
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.5228758169934641
+                }
+              }
+            },
+            "0.35": {
+              "actions": 459,
+              "action_accuracy": 0.6971677559912854,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8954248366013072
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.6078431372549019
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.5882352941176471
+                }
+              }
+            },
+            "0.4": {
+              "actions": 459,
+              "action_accuracy": 0.7516339869281046,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.8954248366013072
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.6928104575163399
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.6666666666666666
+                }
+              }
+            },
+            "0.45": {
+              "actions": 459,
+              "action_accuracy": 0.8017429193899782,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.9019607843137255
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.7777777777777778
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.7254901960784313
+                }
+              }
+            },
+            "0.5": {
+              "actions": 459,
+              "action_accuracy": 0.8366013071895425,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.9150326797385621
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.8235294117647058
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.7712418300653595
+                }
+              }
+            },
+            "0.55": {
+              "actions": 459,
+              "action_accuracy": 0.8823529411764706,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.9411764705882353
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.8823529411764706
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.8235294117647058
+                }
+              }
+            },
+            "0.6": {
+              "actions": 459,
+              "action_accuracy": 0.9215686274509803,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 0.9803921568627451
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.9215686274509803
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.8627450980392157
+                }
+              }
+            },
+            "0.65": {
+              "actions": 459,
+              "action_accuracy": 0.9433551198257081,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.954248366013072
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.8758169934640523
+                }
+              }
+            },
+            "0.7": {
+              "actions": 459,
+              "action_accuracy": 0.9281045751633987,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.954248366013072
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.8300653594771242
+                }
+              }
+            },
+            "0.75": {
+              "actions": 459,
+              "action_accuracy": 0.9193899782135077,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.9738562091503268
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.7843137254901961
+                }
+              }
+            },
+            "0.8": {
+              "actions": 459,
+              "action_accuracy": 0.8932461873638344,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 0.9869281045751634
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.6928104575163399
+                }
+              }
+            },
+            "0.85": {
+              "actions": 459,
+              "action_accuracy": 0.8518518518518519,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.5555555555555556
+                }
+              }
+            },
+            "0.9": {
+              "actions": 459,
+              "action_accuracy": 0.7777777777777778,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.3333333333333333
+                }
+              }
+            },
+            "0.95": {
+              "actions": 459,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 153,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 153,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "4": {
+      "inner_fold": 0,
+      "epoch": 50,
+      "threshold": 0.7,
+      "status": "minimum_constraint_deficit",
+      "curves": {
+        "10": {
+          "threshold": 0.6,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 480,
+            "action_accuracy": 0.8875,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 160,
+                "accuracy": 0.9875
+              },
+              "hard_retain": {
+                "events": 160,
+                "accuracy": 0.975
+              },
+              "primary_update": {
+                "events": 160,
+                "accuracy": 0.7
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 480,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.1": {
+              "actions": 480,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.15": {
+              "actions": 480,
+              "action_accuracy": 0.08333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.25
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.2": {
+              "actions": 480,
+              "action_accuracy": 0.09166666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.275
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.25": {
+              "actions": 480,
+              "action_accuracy": 0.18125,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.525
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.00625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0125
+                }
+              }
+            },
+            "0.3": {
+              "actions": 480,
+              "action_accuracy": 0.26458333333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.7375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.01875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0375
+                }
+              }
+            },
+            "0.35": {
+              "actions": 480,
+              "action_accuracy": 0.4083333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.83125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.20625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.1875
+                }
+              }
+            },
+            "0.4": {
+              "actions": 480,
+              "action_accuracy": 0.525,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.38125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.33125
+                }
+              }
+            },
+            "0.45": {
+              "actions": 480,
+              "action_accuracy": 0.64375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.60625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.4875
+                }
+              }
+            },
+            "0.5": {
+              "actions": 480,
+              "action_accuracy": 0.7333333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.7375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.6125
+                }
+              }
+            },
+            "0.55": {
+              "actions": 480,
+              "action_accuracy": 0.85,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.93125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.86875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.75
+                }
+              }
+            },
+            "0.6": {
+              "actions": 480,
+              "action_accuracy": 0.8875,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.9875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.975
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.7
+                }
+              }
+            },
+            "0.65": {
+              "actions": 480,
+              "action_accuracy": 0.7895833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.36875
+                }
+              }
+            },
+            "0.7": {
+              "actions": 480,
+              "action_accuracy": 0.675,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.025
+                }
+              }
+            },
+            "0.75": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.8": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.85": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.9": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "25": {
+          "threshold": 0.65,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 480,
+            "action_accuracy": 0.88125,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 160,
+                "accuracy": 0.95
+              },
+              "hard_retain": {
+                "events": 160,
+                "accuracy": 0.93125
+              },
+              "primary_update": {
+                "events": 160,
+                "accuracy": 0.7625
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 480,
+              "action_accuracy": 0.12291666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.36875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.1": {
+              "actions": 480,
+              "action_accuracy": 0.21458333333333332,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.61875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.00625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.01875
+                }
+              }
+            },
+            "0.15": {
+              "actions": 480,
+              "action_accuracy": 0.32916666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0875
+                }
+              }
+            },
+            "0.2": {
+              "actions": 480,
+              "action_accuracy": 0.4375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.83125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.25625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.225
+                }
+              }
+            },
+            "0.25": {
+              "actions": 480,
+              "action_accuracy": 0.5041666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.35
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.30625
+                }
+              }
+            },
+            "0.3": {
+              "actions": 480,
+              "action_accuracy": 0.5583333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.86875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.43125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.375
+                }
+              }
+            },
+            "0.35": {
+              "actions": 480,
+              "action_accuracy": 0.625,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.575
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.4625
+                }
+              }
+            },
+            "0.4": {
+              "actions": 480,
+              "action_accuracy": 0.6729166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.84375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.64375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.53125
+                }
+              }
+            },
+            "0.45": {
+              "actions": 480,
+              "action_accuracy": 0.7270833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.73125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.6
+                }
+              }
+            },
+            "0.5": {
+              "actions": 480,
+              "action_accuracy": 0.7479166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.75625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.63125
+                }
+              }
+            },
+            "0.55": {
+              "actions": 480,
+              "action_accuracy": 0.79375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.825
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.68125
+                }
+              }
+            },
+            "0.6": {
+              "actions": 480,
+              "action_accuracy": 0.85625,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.93125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.88125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.75625
+                }
+              }
+            },
+            "0.65": {
+              "actions": 480,
+              "action_accuracy": 0.88125,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.95
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.93125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.7625
+                }
+              }
+            },
+            "0.7": {
+              "actions": 480,
+              "action_accuracy": 0.89375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.99375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.975
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.7125
+                }
+              }
+            },
+            "0.75": {
+              "actions": 480,
+              "action_accuracy": 0.8583333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.9875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.5875
+                }
+              }
+            },
+            "0.8": {
+              "actions": 480,
+              "action_accuracy": 0.7875,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.3625
+                }
+              }
+            },
+            "0.85": {
+              "actions": 480,
+              "action_accuracy": 0.6979166666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.09375
+                }
+              }
+            },
+            "0.9": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            },
+            "0.95": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        },
+        "50": {
+          "threshold": 0.7,
+          "status": "minimum_constraint_deficit",
+          "selected": {
+            "actions": 480,
+            "action_accuracy": 0.9166666666666666,
+            "by_event_kind": {
+              "primary_initial": {
+                "events": 160,
+                "accuracy": 1.0
+              },
+              "hard_retain": {
+                "events": 160,
+                "accuracy": 0.95
+              },
+              "primary_update": {
+                "events": 160,
+                "accuracy": 0.8
+              }
+            }
+          },
+          "grid": {
+            "0.05": {
+              "actions": 480,
+              "action_accuracy": 0.325,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.0625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.075
+                }
+              }
+            },
+            "0.1": {
+              "actions": 480,
+              "action_accuracy": 0.45416666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.26875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.24375
+                }
+              }
+            },
+            "0.15": {
+              "actions": 480,
+              "action_accuracy": 0.50625,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.3375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.30625
+                }
+              }
+            },
+            "0.2": {
+              "actions": 480,
+              "action_accuracy": 0.5625,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.88125
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.43125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.375
+                }
+              }
+            },
+            "0.25": {
+              "actions": 480,
+              "action_accuracy": 0.6166666666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.5625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.45
+                }
+              }
+            },
+            "0.3": {
+              "actions": 480,
+              "action_accuracy": 0.6604166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.8375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.63125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.5125
+                }
+              }
+            },
+            "0.35": {
+              "actions": 480,
+              "action_accuracy": 0.6895833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.675
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.54375
+                }
+              }
+            },
+            "0.4": {
+              "actions": 480,
+              "action_accuracy": 0.74375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.85625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.75
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.625
+                }
+              }
+            },
+            "0.45": {
+              "actions": 480,
+              "action_accuracy": 0.7708333333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.86875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.78125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.6625
+                }
+              }
+            },
+            "0.5": {
+              "actions": 480,
+              "action_accuracy": 0.80625,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.9
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.8125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.70625
+                }
+              }
+            },
+            "0.55": {
+              "actions": 480,
+              "action_accuracy": 0.8645833333333334,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.9375
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.78125
+                }
+              }
+            },
+            "0.6": {
+              "actions": 480,
+              "action_accuracy": 0.8895833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.95625
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.90625
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.80625
+                }
+              }
+            },
+            "0.65": {
+              "actions": 480,
+              "action_accuracy": 0.9083333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 0.9875
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.91875
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.81875
+                }
+              }
+            },
+            "0.7": {
+              "actions": 480,
+              "action_accuracy": 0.9166666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.95
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.8
+                }
+              }
+            },
+            "0.75": {
+              "actions": 480,
+              "action_accuracy": 0.9104166666666667,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.98125
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.75
+                }
+              }
+            },
+            "0.8": {
+              "actions": 480,
+              "action_accuracy": 0.89375,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 0.99375
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.6875
+                }
+              }
+            },
+            "0.85": {
+              "actions": 480,
+              "action_accuracy": 0.8270833333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.48125
+                }
+              }
+            },
+            "0.9": {
+              "actions": 480,
+              "action_accuracy": 0.7583333333333333,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.275
+                }
+              }
+            },
+            "0.95": {
+              "actions": 480,
+              "action_accuracy": 0.6666666666666666,
+              "by_event_kind": {
+                "primary_initial": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "hard_retain": {
+                  "events": 160,
+                  "accuracy": 1.0
+                },
+                "primary_update": {
+                  "events": 160,
+                  "accuracy": 0.0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "raw_rows_sha256": {
+    "counterfact_causal_v12_seed7301.jsonl": "8622ba64b637a4299fbad72c180eef10aad0d0219b49b0ebd1ec3dd020fdf596",
+    "counterfact_causal_v12_seed7302.jsonl": "0f53b374bb1ffbda0d8dffb4ceff11f53214be5b300a37176ecc60b2f5b4ef6c",
+    "counterfact_causal_v12_seed7303.jsonl": "63b887c4790e76c1479dc3aa030f55e113ae9ef6eefccc3bbf50bfdfd7668b2f"
+  },
+  "checkpoint_sha256": "22e4f38d91461b4c7dd512986c090b36edc5964a0f3fd76ac9e4d29251d3d516"
+}

@@ -1,0 +1,38 @@
+{
+  "protocol": "causal_token_span_forgetting_v12_posthoc_error_audit",
+  "trace_seed": 7301,
+  "decisions": 2355,
+  "correct_decisions": 2129,
+  "errors": 226,
+  "by_event_kind": {
+    "primary_initial": {
+      "events": 785,
+      "errors": 18,
+      "false_deletions": 18
+    },
+    "hard_retain": {
+      "events": 785,
+      "errors": 51,
+      "false_deletions": 51
+    },
+    "primary_update": {
+      "events": 785,
+      "errors": 157,
+      "false_retains": 121,
+      "wrong_candidate_deletions": 36
+    }
+  },
+  "session_query_accuracy": {
+    "no_action_error": {
+      "sessions": 77,
+      "queries": 12012,
+      "accuracy": 0.5367965367965368
+    },
+    "at_least_one_action_error": {
+      "sessions": 120,
+      "queries": 18576,
+      "accuracy": 0.49300172265288544
+    }
+  },
+  "interpretation": "The frozen candidate resolver remains strong; false retains dominate update errors, so the final iteration targets nonlinear and on-policy gate calibration."
+}

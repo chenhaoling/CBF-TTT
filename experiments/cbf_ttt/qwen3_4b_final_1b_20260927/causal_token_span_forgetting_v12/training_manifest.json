@@ -1,0 +1,58 @@
+{
+  "protocol": "causal_token_span_forgetting_v12",
+  "counterfact_manifest_sha256": "ef5b929858c44c7c582cd10044989496267163aa0c095d5166729d71189b93ed",
+  "v11_training_sha256": "b65083dc3defb17b7a525d4d553674ef32b5dbd48c57e74be5ffb88055696536",
+  "v11_checkpoint_sha256": "ffa46119f97a4cda0ec2db146ef50021459b480ee5c44666eb88b6e5d0ecc0e4",
+  "v5_training_sha256": "1cd96344fa84b8723420e0d55e69cee3ca523a90bcb9eb6eda860225ff4b02d6",
+  "previous_summary_sha256": "347799fca888f3faf206a7c35d73f072e208bb1a567530feefeb85f682a2e4f1",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "head_seeds": [
+    20101,
+    20102,
+    20103
+  ],
+  "epochs": [
+    10,
+    25,
+    50
+  ],
+  "thresholds": [
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95
+  ],
+  "current_write_gate": 1,
+  "v11_frozen": true,
+  "v5_frozen": true,
+  "query_readout_frozen": true,
+  "inference_subject_metadata_used": false,
+  "inference_relation_ids_used": false,
+  "candidate_age_used": false,
+  "counterfact_status": "observed_development_only",
+  "longmemeval_scored": false,
+  "locomo_scored": false,
+  "units": 785
+}
