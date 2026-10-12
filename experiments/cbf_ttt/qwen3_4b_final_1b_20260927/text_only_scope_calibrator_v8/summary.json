@@ -1,0 +1,38 @@
+{
+  "protocol": "text_only_scope_calibrator_v8",
+  "data_status": "observed_development_only",
+  "counterfact_oof": {
+    "events": 785,
+    "top1_accuracy": 0.9401273885350319,
+    "mrr": 0.9697452229299363
+  },
+  "v8_vs_v4": {
+    "top1_gain": 0.11082802547770701,
+    "bootstrap_95ci": [
+      0.08280254777070063,
+      0.13885350318471337
+    ],
+    "units": 785
+  },
+  "v8_vs_v7": {
+    "top1_gain": 0.003821656050955414,
+    "bootstrap_95ci": [
+      -0.007643312101910828,
+      0.016560509554140127
+    ],
+    "units": 785
+  },
+  "development_gate": {
+    "checks": {
+      "top1_at_least_95": false,
+      "mrr_at_least_97": false,
+      "gain_v4_at_least_10pp": true,
+      "gain_v4_ci_positive": true,
+      "gain_v7_at_least_1pp": false,
+      "gain_v7_ci_positive": false
+    },
+    "passed": false
+  },
+  "next_stage": "learned_entity_encoder",
+  "terminal_status": "completed_text_only_scope_calibrator_v8"
+}

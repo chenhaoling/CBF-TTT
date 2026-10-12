@@ -365,6 +365,8 @@ The completed [V6 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automat
 
 [V7](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automatic_scope_boundary_v7/REPORT.md) reached only 93.63% top-1 and 96.76% MRR, so scalar combination tuning has stopped. [Text-only calibrator V8](TEXT_ONLY_SCOPE_CALIBRATOR_V8_PLAN.md) now trains a nested-OOF rank-16 residual over fixed relation compatibility, automatic IDF-span evidence, and lexical similarity. It still receives no subject/relation/chain metadata at inference and must significantly beat V7 before causal forgetting resumes.
 
+[V8](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/text_only_scope_calibrator_v8/REPORT.md) reached 94.01% top-1 and did not significantly improve V7, so calibration on the fixed feature family has stopped. [Learned entity scope V9](LEARNED_ENTITY_SCOPE_V9_PLAN.md) trains subject-disjoint binary same-entity heads from raw text pairs, using same-relation/different-subject hard negatives, and combines their probability with the frozen automatic relation posterior. Inference remains text-only.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
