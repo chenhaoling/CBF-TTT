@@ -1538,3 +1538,9 @@ v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与
 提交`d445a8e`的C0/C1正式实验完成，墙钟150秒、任务时间145.99秒，峰值allocated/reserved 7.867/8.277GiB。二因素dev对照中mean-Qwen/mean-Qwen为32.20%，Qwen-key/random-value为54.88%，random-key/Qwen-value为98.18%，random/random为100%，将旧表示的主要瓶颈定位到同世界相似entity key。`context_last`经train选择regularizer0.01与unknown_raw0.75后，train 99.89%，dev所有seed、family及1/2/4/8/16/32组件均100%；`context_mean`仅76.51%，未通过。独立审计通过，test未读取。
 
 新增归档`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_geometry_v1`。新增`tasks/train_cbf_qwen_contextual_forgetting.py`及runner/audit/test，冻结通过的context-last表示后复用原四动作、三seed、300 epoch控制器、全部固定/随机/盲/global-only/physics/oracle对照和原dev门槛；只有门槛通过才首次读取原封存test。`train_cbf_lowrank_forgetting.py`仅增加默认0.35不变的可选`unknown_raw`参数传递，既有baseline行为不变。
+
+### Contextual Qwen遗忘控制器v2：通过
+
+提交`30c70ce`的正式v2完成，dev全部六项门通过后首次解封原32组test。test full learned准确率/NLL为89.05%/0.4321，最强固定local为79.01%/0.8979；准确率提升10.04点、来源组95% CI `[9.35,10.82]`，NLL收益0.4657、CI `[0.4437,0.4908]`。global-only为76.50%，reference-blind与fixed-local同为79.01%；full learned最差投影seed为88.80%，动作oracle匹配率97.79%。retain/revoke-last1/revoke-last2/reset分别98.32%/93.23%/91.44%/73.21%。
+
+独立审计验证contextual来源、transform和embedding逐bit桥、60个raw策略文件、聚合、dev门与条件test解封全部通过。墙钟575秒、任务时间570.04秒，峰值allocated/reserved 7.868/8.277GiB。归档位于`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_forgetting_v2`。限制是physics与greedy oracle的test准确率同为89.05%；当前结果证明状态依赖遗忘优于固定/global-only策略，但没有证明学习优于直接读取显式revoke/reset规则。下一步必须使用自动activation/text evidence并迁移到ZsRE等自然顺序更新。

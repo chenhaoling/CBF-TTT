@@ -26,6 +26,8 @@ A perfect-semantic-state geometry diagnostic confirmed that controller error was
 
 The preregistered factorial localized this failure to keys: random keys with mean-Qwen values reached 98.18% development accuracy, whereas mean-Qwen keys with random values reached 54.88%. Replacing mean-token identifiers with the frozen final-layer hidden state at the last identifier token reached 100% on all development seeds, event families and registered 1–32 component loads. Target-span mean pooling reached only 76.51%. This releases the exact `context_last`, 256-dimensional whitening and train-selected unknown calibration into the unchanged forgetting-controller protocol; it does not itself establish a forgetting gain.
 
+With that frozen contextual substrate, the unchanged full forgetting controller passed all development checks and was evaluated once on the sealed test. It reached 89.05% test accuracy versus 79.01% for the strongest fixed policy, a gain of 10.04 points with source-group 95% CI [9.35, 10.82]; NLL improved by 0.4657 with CI [0.4437, 0.4908]. The minimum projection-seed accuracy was 88.80%. Reference-blind matched fixed local and global-only learned reached 76.50%, supporting the value of history-conditioned local/global decisions. However, the explicit physics rule and greedy oracle matched the learned controller's query accuracy, so this controlled result does not yet demonstrate an advantage over direct access to symbolic revoke/reset cues.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -62,3 +64,4 @@ Key reports:
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_forgetting_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_geometry_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_geometry_v1/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_forgetting_v2/REPORT.md`

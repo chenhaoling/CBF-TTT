@@ -335,6 +335,8 @@ That geometry experiment is now [complete](experiments/cbf_ttt/qwen3_4b_final_1b
 
 The contextual study also [completed and passed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_geometry_v1/REPORT.md). Random-key/Qwen-value reached 98.18%, while Qwen-key/random-value reached 54.88%, localizing the old failure primarily to keys. Frozen final-layer `context_last` reached 100% across every seed, family and 1–32 component load; the unchanged forgetting-controller v2 is now the active experiment.
 
+The contextual forgetting v2 [passed its development gate and one-time sealed test](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_forgetting_v2/REPORT.md). Full learned reached 89.05% versus 79.01% for fixed local, a +10.04 point gain with 95% CI `[9.35,10.82]`. The explicit physics rule matched learned accuracy, so the next paper-level experiment must remove symbolic-reference privilege and test automatic evidence on natural sequential updates.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
