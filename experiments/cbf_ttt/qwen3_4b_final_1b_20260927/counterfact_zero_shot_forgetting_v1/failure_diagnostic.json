@@ -1,0 +1,186 @@
+{
+  "protocol": "counterfact_zero_shot_failure_diagnostic_v1",
+  "source_summary_sha256": "347799fca888f3faf206a7c35d73f072e208bb1a567530feefeb85f682a2e4f1",
+  "source_training_sha256": "3b9dd1f4f039ffbdfb2b387ce47734c6c278901fcf6a9f38da6ecfa95519fb0c",
+  "raw_hashes_verified": {
+    "8601": true,
+    "8602": true,
+    "8603": true
+  },
+  "controller_decisions_identical_across_readout_seeds": true,
+  "units": 785,
+  "selected_threshold": 0.675,
+  "by_event_kind": {
+    "primary_initial": {
+      "events": 785,
+      "mean_probability": 0.09246174264854935,
+      "probability_quantiles": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.008213941939175129,
+        "p75": 0.034879378974437714,
+        "p90": 0.2743232548236847
+      },
+      "predicted_local_rate": 0.061146496815286625,
+      "action_accuracy": 0.9388535031847134,
+      "triggered_candidate_accuracy": 0.0
+    },
+    "hard_retain": {
+      "events": 785,
+      "mean_probability": 0.32794826941188,
+      "probability_quantiles": {
+        "p10": 0.017282528802752495,
+        "p25": 0.04374777525663376,
+        "p50": 0.16267800331115723,
+        "p75": 0.5923951864242554,
+        "p90": 0.965534508228302
+      },
+      "predicted_local_rate": 0.21273885350318472,
+      "action_accuracy": 0.7872611464968153,
+      "triggered_candidate_accuracy": 0.0
+    },
+    "primary_update": {
+      "events": 785,
+      "mean_probability": 0.5679250996464205,
+      "probability_quantiles": {
+        "p10": 0.04771645739674568,
+        "p25": 0.1590537577867508,
+        "p50": 0.6433131694793701,
+        "p75": 0.9406256675720215,
+        "p90": 0.9857215881347656
+      },
+      "predicted_local_rate": 0.6254777070063694,
+      "action_accuracy": 0.3070063694267516,
+      "triggered_candidate_accuracy": 0.4908350305498982
+    }
+  },
+  "local_vs_retain_probability_auc": 0.7591433515339046,
+  "noncausal_fixed_trajectory_threshold_grid": {
+    "0.05": {
+      "threshold": 0.05,
+      "binary_action_accuracy": 0.6204819277108434,
+      "local_recall": 0.8904458598726115,
+      "retain_recall": 0.46613255644573925
+    },
+    "0.10": {
+      "threshold": 0.1,
+      "binary_action_accuracy": 0.6584800741427247,
+      "local_recall": 0.8076433121019109,
+      "retain_recall": 0.57319737800437
+    },
+    "0.15": {
+      "threshold": 0.15,
+      "binary_action_accuracy": 0.6797961075069509,
+      "local_recall": 0.759235668789809,
+      "retain_recall": 0.6343772760378733
+    },
+    "0.20": {
+      "threshold": 0.2,
+      "binary_action_accuracy": 0.6904541241890639,
+      "local_recall": 0.7235668789808917,
+      "retain_recall": 0.6715222141296431
+    },
+    "0.25": {
+      "threshold": 0.25,
+      "binary_action_accuracy": 0.6978683966635774,
+      "local_recall": 0.6955414012738853,
+      "retain_recall": 0.6991988346686089
+    },
+    "0.30": {
+      "threshold": 0.3,
+      "binary_action_accuracy": 0.7075996292863763,
+      "local_recall": 0.6713375796178344,
+      "retain_recall": 0.7283321194464676
+    },
+    "0.35": {
+      "threshold": 0.35,
+      "binary_action_accuracy": 0.7154772937905468,
+      "local_recall": 0.6535031847133758,
+      "retain_recall": 0.7509104151493081
+    },
+    "0.40": {
+      "threshold": 0.4,
+      "binary_action_accuracy": 0.7215013901760889,
+      "local_recall": 0.6369426751592356,
+      "retain_recall": 0.7698470502549163
+    },
+    "0.45": {
+      "threshold": 0.45,
+      "binary_action_accuracy": 0.7247451343836886,
+      "local_recall": 0.6140127388535032,
+      "retain_recall": 0.7880553532410779
+    },
+    "0.50": {
+      "threshold": 0.5,
+      "binary_action_accuracy": 0.7261353104726599,
+      "local_recall": 0.5910828025477707,
+      "retain_recall": 0.8033503277494537
+    },
+    "0.55": {
+      "threshold": 0.55,
+      "binary_action_accuracy": 0.7196478220574606,
+      "local_recall": 0.5592356687898089,
+      "retain_recall": 0.8113619810633649
+    },
+    "0.60": {
+      "threshold": 0.6,
+      "binary_action_accuracy": 0.7150139017608897,
+      "local_recall": 0.5299363057324841,
+      "retain_recall": 0.820830298616169
+    },
+    "0.65": {
+      "threshold": 0.65,
+      "binary_action_accuracy": 0.7140871177015755,
+      "local_recall": 0.4980891719745223,
+      "retain_recall": 0.8375819373634378
+    },
+    "0.70": {
+      "threshold": 0.7,
+      "binary_action_accuracy": 0.7071362372567191,
+      "local_recall": 0.46496815286624205,
+      "retain_recall": 0.8455935906773488
+    },
+    "0.75": {
+      "threshold": 0.75,
+      "binary_action_accuracy": 0.7029657089898054,
+      "local_recall": 0.4267515923566879,
+      "retain_recall": 0.8608885651857247
+    },
+    "0.80": {
+      "threshold": 0.8,
+      "binary_action_accuracy": 0.7034291010194624,
+      "local_recall": 0.4063694267515924,
+      "retain_recall": 0.8732702112163147
+    },
+    "0.85": {
+      "threshold": 0.85,
+      "binary_action_accuracy": 0.6913809082483782,
+      "local_recall": 0.36178343949044584,
+      "retain_recall": 0.8798252002913328
+    },
+    "0.90": {
+      "threshold": 0.9,
+      "binary_action_accuracy": 0.6811862835959221,
+      "local_recall": 0.30828025477707005,
+      "retain_recall": 0.8943918426802622
+    },
+    "0.95": {
+      "threshold": 0.95,
+      "binary_action_accuracy": 0.6663577386468953,
+      "local_recall": 0.23439490445859873,
+      "retain_recall": 0.9133284777858703
+    }
+  },
+  "best_noncausal_fixed_trajectory_threshold": {
+    "threshold": 0.5,
+    "binary_action_accuracy": 0.7261353104726599,
+    "local_recall": 0.5910828025477707,
+    "retain_recall": 0.8033503277494537
+  },
+  "interpretation_limits": [
+    "The threshold grid reclassifies probabilities on the observed 0.675 trajectory.",
+    "It does not replay the memory state and cannot be reported as a tuned policy result.",
+    "Triggered candidate accuracy covers only events where the frozen policy attempted deletion."
+  ],
+  "diagnostic_checks_passed": true
+}
