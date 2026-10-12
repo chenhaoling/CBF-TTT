@@ -369,6 +369,8 @@ The completed [V6 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automat
 
 [V9](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/learned_entity_scope_v9/REPORT.md) obtained 96.57% entity-pair AUC but only 92.48% candidate top-1; the fixed probability product was worse than V8. This rejects rigid entity/relation multiplication while leaving OOF entity probability as a potentially complementary feature. The next allowed experiment is one nested-OOF fusion with V8; failure ends CounterFact score calibration and moves to token-level entity-span extraction.
 
+[Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
