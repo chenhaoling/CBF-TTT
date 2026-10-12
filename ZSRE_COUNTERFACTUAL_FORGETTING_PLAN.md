@@ -16,4 +16,6 @@ No answer is generated. Original, counterfactual, rephrase and locality fields a
 
 ## Calibration gate
 
-Repeat the residual cosine-top controller with nested leave-one-session-out on all 267 calibration subjects. Freeze the controller only if both paired query and action gains over cosine have bootstrap 95% lower bounds above zero, hard-retain and local-update action accuracies exceed 90%, and no development or test record has been loaded by the evaluator.
+Repeat the residual cosine-top controller with nested leave-one-session-out on all 258 valid calibration subjects. Freeze the controller only if both paired query and action gains over cosine have bootstrap 95% lower bounds above zero, hard-retain and local-update action accuracies exceed 90%, and no development or test record has been loaded by the evaluator.
+
+The first 258-unit run made query gain significant (+0.91 points, CI `[0.13,1.77]`) while action gain remained borderline (+1.68 points, CI `[-0.13,3.75]`). Its single four-subject inner tune session produced noisy thresholds. The repair fixes the consistently selected 200-epoch fit and chooses each outer fold's threshold through five-fold grouped inner out-of-fold causal replay over all 64 available training sessions. The threshold objective is causal query accuracy, then action accuracy; the untouched outer session remains the only reported fold result.
