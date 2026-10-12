@@ -247,9 +247,9 @@ def select_alpha(policy: str, scenario: dict, label: dict, controllers: dict,
 
 
 def evaluate(scenarios: list[dict], controllers: dict, dim: int,
-             train_mean: float) -> list[dict]:
+             train_mean: float, memory_seeds: tuple[int, ...] = MEMORY_SEEDS) -> list[dict]:
     records = []
-    for memory_seed in MEMORY_SEEDS:
+    for memory_seed in memory_seeds:
         embeddings = Embeddings(memory_seed, dim)
         for scenario in scenarios:
             label = label_scenario(scenario, embeddings)
@@ -262,12 +262,12 @@ def evaluate(scenarios: list[dict], controllers: dict, dim: int,
     return records
 
 
-def aggregate(records: list[dict]) -> dict:
+def aggregate(records: list[dict], memory_seeds: tuple[int, ...] = MEMORY_SEEDS) -> dict:
     output = {}
     for policy in POLICIES:
         rows = [row for row in records if row["policy"] == policy]
         per_seed = {}
-        for memory_seed in MEMORY_SEEDS:
+        for memory_seed in memory_seeds:
             subset = [row for row in rows if row["memory_seed"] == memory_seed]
             per_seed[str(memory_seed)] = {"nll": statistics.fmean(row["nll"] for row in subset),
                                           "accuracy": statistics.fmean(row["accuracy"] for row in subset),

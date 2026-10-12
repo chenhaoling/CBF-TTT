@@ -1,0 +1,54 @@
+{
+  "protocol": "continuous_forgetting_probe_v1",
+  "scenarios": 800,
+  "memory_seeds": [
+    1901,
+    1902,
+    1903
+  ],
+  "grid": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "per_seed": {
+    "1901": {
+      "0.0": 287,
+      "0.25": 232,
+      "0.5": 146,
+      "0.75": 77,
+      "1.0": 58
+    },
+    "1902": {
+      "0.0": 292,
+      "0.25": 223,
+      "0.5": 143,
+      "0.75": 88,
+      "1.0": 54
+    },
+    "1903": {
+      "0.0": 289,
+      "0.25": 233,
+      "0.5": 138,
+      "0.75": 81,
+      "1.0": 59
+    }
+  },
+  "combined": {
+    "0.0": 868,
+    "0.25": 688,
+    "0.5": 427,
+    "0.75": 246,
+    "1.0": 171
+  },
+  "interior_fraction": 0.5670833333333334,
+  "supported_interior_points": 3,
+  "checks": {
+    "interior_fraction": true,
+    "two_interior_points": true
+  },
+  "passed": true,
+  "test_generated": false
+}

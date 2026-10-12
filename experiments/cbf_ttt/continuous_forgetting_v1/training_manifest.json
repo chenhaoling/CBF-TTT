@@ -1,0 +1,56 @@
+{
+  "protocol": "continuous_forgetting_formal_v1",
+  "probe_sha256": "dfcfa8986d0bd6bcb3ba21cc681b43ef8c3f1464ef15e6f8793f58944ff547ef",
+  "seed": 20261101,
+  "controller_seed": 1941,
+  "dim": 32,
+  "epochs": 300,
+  "group_counts": {
+    "train": 128,
+    "dev": 32,
+    "test": 32
+  },
+  "per_group": 20,
+  "memory_seeds": [
+    1901,
+    1902,
+    1903
+  ],
+  "grid": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "feature_names": [
+    "memory_norm",
+    "delta_norm",
+    "alignment",
+    "conflict_ratio",
+    "duplicate_ratio",
+    "new_ratio",
+    "old_count",
+    "delta_count",
+    "retained_ratio",
+    "current_scale",
+    "mean_key_correlation",
+    "max_key_correlation"
+  ],
+  "policies": [
+    "learned",
+    "grid_learned",
+    "structure_blind",
+    "endpoint_learned",
+    "physics",
+    "train_mean",
+    "fixed_0.0",
+    "fixed_0.25",
+    "fixed_0.5",
+    "fixed_0.75",
+    "fixed_1.0",
+    "oracle_grid"
+  ],
+  "test_release_rule": "generate and score once only after development gate",
+  "test_scored": true
+}

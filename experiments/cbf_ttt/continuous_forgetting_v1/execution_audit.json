@@ -1,0 +1,46 @@
+{
+  "protocol": "continuous_forgetting_formal_v1_audit",
+  "passed": true,
+  "probe_sha256": "dfcfa8986d0bd6bcb3ba21cc681b43ef8c3f1464ef15e6f8793f58944ff547ef",
+  "checkpoint_sha256": "3af3a89d26222484951a4f2232cda9a26ccaab621e5611ef42ef2aca411e685d",
+  "dev_records_sha256": "62850b1daf9320277494961b1eb7e3af76519717433e91ccb95d781f9bf3b7b9",
+  "dev_gate": {
+    "checks": {
+      "alpha_mae": true,
+      "oracle_regret": true,
+      "fixed_nll_margin": true,
+      "fixed_nll_confidence": true,
+      "endpoint_nll_margin": true,
+      "endpoint_nll_confidence": true,
+      "all_seeds_beat_fixed": true
+    },
+    "best_fixed": "fixed_0.25",
+    "fixed_comparison": {
+      "nll_gain": 0.08939332905516327,
+      "nll_gain_bootstrap_95ci": [
+        0.08207101896009694,
+        0.09738948114842494
+      ],
+      "accuracy_gain": 0.05976933367558369,
+      "accuracy_gain_bootstrap_95ci": [
+        0.050666663342444615,
+        0.06941556707181709
+      ]
+    },
+    "endpoint_comparison": {
+      "nll_gain": 0.06335013310307606,
+      "nll_gain_bootstrap_95ci": [
+        0.05788976623585426,
+        0.06898063181044754
+      ],
+      "accuracy_gain": 0.05642422320156696,
+      "accuracy_gain_bootstrap_95ci": [
+        0.049078090601528096,
+        0.06442229428557554
+      ]
+    },
+    "passed": true
+  },
+  "test_scored": true,
+  "test_records_sha256": "44ec70e5805ed87d2b8078d0db35a915c29361b9f1fc9a2d76c3790959d91389"
+}

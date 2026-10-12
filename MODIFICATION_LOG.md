@@ -1458,3 +1458,9 @@ dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对�
 新增`formal`子命令、`scripts/run_cbf_continuous_forgetting.sh`和`scripts/audit_cbf_continuous_forgetting.py`。正式评测对每个策略回放真实alpha并重算NLL/top-1，按来源组做bootstrap。dev门固定为：alpha MAE≤0.15；距grid oracle的NLL≤0.03；相对最佳固定alpha的NLL收益≥0.05且95% CI下界>0.02；相对端点控制器收益≥0.02且下界>0.005；三个投影seed均优于最佳固定alpha。审计会重建训练标签、dev记录、控制器消融与条件test结果，并校验probe/checkpoint/raw记录hash。
 
 本机无PyTorch，因此新增的两个真实张量测试跳过；其余3项连续实验测试、Python语法、shell语法和diff检查通过。另用不入库的Python标准库随机向量实现做机制预检，内点比例57.42%，三个内点均超过5%；该数值只用于排除明显场景设计错误，不能替代服务器PyTorch正式probe。baseline入口、配置和既有实验工件均未修改。
+
+### 连续alpha新投影与分布外压力测试（执行前）
+
+正式结果通过后，在生成任何压力场景前新增`CONTINUOUS_STRESS_PLAN.md`、`tasks/evaluate_cbf_continuous_stress.py`、`scripts/run_cbf_continuous_stress.sh`、独立审计与测试。冻结上一轮checkpoint且不再训练，换用未见投影seed 2901/2902/2903，并固定`long_memory`、`weak_update`、`strong_update`、`extreme_overlap`四类训练支持外场景，每类32组×20场景。
+
+每类主对照是在该压力集结果上事后选择的最优固定alpha，因此比部署时固定常数更强。通过标准冻结为：四类中连续控制器相对事后最优固定alpha和端点控制器的来源组bootstrap 95%下界均大于0；宏平均alpha MAE≤0.20；三个新投影seed均优于宏平均最佳固定alpha。审计重构全部场景、策略回放、聚合与CI并校验原checkpoint/summary hash。该实验不修改baseline或已有checkpoint。
