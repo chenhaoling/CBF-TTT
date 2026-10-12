@@ -25,3 +25,7 @@ Repeat with three controller seeds and pair them with the three frozen readout s
 ## Decision gate
 
 Compare against the preregistered cosine-local baseline by paired primary/auxiliary subject unit. Enter development only if both memory-query accuracy and action accuracy have bootstrap 95% lower bounds above zero. Otherwise diagnose calibration errors and revise the feature or objective without loading development or test.
+
+## V1 outcome and V2 repair
+
+The full 2,571-dimensional candidate controller overfit 75 candidate-bearing events: nested-LOSO query/action accuracy was 54.64/54.88%, versus 74.02/91.46% for cosine. Low-dimensional lexical diagnostics reached at most 76.00% action accuracy alone. V2 therefore freezes cosine candidate selection and trains only a 13-dimensional binary delete/retain gate from three cosine scores and general lexical/relation similarities. Epoch and probability threshold selection remain nested inside each outer fold. This residual design can only change whether the strongest cosine candidate is deleted; it cannot replace the stable candidate ordering.
