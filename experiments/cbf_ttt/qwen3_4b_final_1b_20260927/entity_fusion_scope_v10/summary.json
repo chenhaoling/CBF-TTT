@@ -1,0 +1,38 @@
+{
+  "protocol": "entity_fusion_scope_v10",
+  "data_status": "observed_development_only",
+  "counterfact_oof": {
+    "events": 785,
+    "top1_accuracy": 0.9464968152866242,
+    "mrr": 0.9729299363057324
+  },
+  "v10_vs_v8": {
+    "top1_gain": 0.006369426751592357,
+    "bootstrap_95ci": [
+      -0.0025477707006369425,
+      0.016560509554140127
+    ],
+    "units": 785
+  },
+  "v10_vs_v4": {
+    "top1_gain": 0.11719745222929936,
+    "bootstrap_95ci": [
+      0.09044585987261146,
+      0.14522292993630573
+    ],
+    "units": 785
+  },
+  "development_gate": {
+    "checks": {
+      "top1_at_least_95": false,
+      "mrr_at_least_97": true,
+      "gain_v8_at_least_1pp": false,
+      "gain_v8_ci_positive": false,
+      "gain_v4_at_least_12pp": false,
+      "gain_v4_ci_positive": true
+    },
+    "passed": false
+  },
+  "next_stage": "token_level_entity_span_extractor",
+  "terminal_status": "completed_entity_fusion_scope_v10"
+}
