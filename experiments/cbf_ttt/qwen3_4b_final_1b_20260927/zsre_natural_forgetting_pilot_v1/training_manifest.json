@@ -1,0 +1,30 @@
+{
+  "protocol": "zsre_natural_forgetting_pilot_v1",
+  "data_manifest_sha256": "bd95b9caf161ef5be6c0db3dd4c780080077a26df795f094ca07cf59db9f4b8b",
+  "source_protocol": "zsre_contextual_readout_v1",
+  "scope_protocol": "zsre_decomposed_scope_gate_v1",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "split": "calibration_only",
+  "policies": [
+    "fixed_retain",
+    "fixed_global",
+    "fixed_top",
+    "cosine_local",
+    "learned_local",
+    "oracle_local"
+  ],
+  "gate_seeds": [
+    7301,
+    7302,
+    7303
+  ],
+  "test_loaded": false,
+  "test_scored": false
+}

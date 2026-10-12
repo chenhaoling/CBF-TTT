@@ -345,6 +345,8 @@ The first [pairwise scope resolver](experiments/cbf_ttt/qwen3_4b_final_1b_202609
 
 The decomposed retrieve/defer gate [passed development and its one-time test](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_decomposed_scope_gate_v1/REPORT.md). Test accuracy was 98.47% versus 88.58% for an ensemble cosine threshold, a +9.90 point gain with 67-session bootstrap 95% CI `[8.57,11.24]`. Exact/rephrase/locality were 100.00/97.75/98.06%, and the minimum gate seed reached 98.46%. This validates automatic update-scope evidence in structured natural memory; the next experiment must use it for causal retain/local/global forgetting over natural sequences.
 
+The first calibration-only [natural sequential forgetting pilot](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_natural_forgetting_pilot_v1/REPORT.md) found that simple cosine-local deletion already reached 97.21%, near the 97.77% oracle, while direct learned-gate transfer reached only 84.43%. Development and test remained unopened. The next calibration pilot adds same-subject locality facts as hard retain events so semantic scope, rather than only subject novelty, is required.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
