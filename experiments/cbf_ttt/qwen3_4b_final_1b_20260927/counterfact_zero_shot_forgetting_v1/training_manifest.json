@@ -1,0 +1,26 @@
+{
+  "protocol": "counterfact_zero_shot_forgetting_eval_v1",
+  "data_protocol": "counterfact_zero_shot_forgetting_v1",
+  "controller_protocol": "zsre_counterfactual_forgetting_controller_loso_v3",
+  "boundary_protocol": "zsre_counterfactual_forgetting_dev_threshold_v1",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "selected_threshold": 0.675,
+  "control_policies": [
+    "fixed_retain",
+    "fixed_global",
+    "fixed_top",
+    "oracle_local"
+  ],
+  "primary_control": "cosine_local",
+  "selection_split": "ZsRE development only",
+  "counterfact_training_rows": 0,
+  "counterfact_tuning_rows": 0,
+  "test_scored": true
+}
