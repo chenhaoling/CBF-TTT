@@ -1450,3 +1450,11 @@ dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对�
 新增`CONTINUOUS_FORGETTING_PLAN.md`、`tasks/train_cbf_continuous_forgetting.py`和`tests/test_cbf_continuous_forgetting.py`。每个场景先写6–12个低秩旧事实，当前delta以0.55–1.55的强度覆盖其中变动数量的key、重复部分事实并加0–4个新key；未被更新的历史事实和新值同时纳入固定查询集。对`alpha={0,0.25,0.5,0.75,1}`在同一`(1-alpha)M+Delta`状态上比较查询NLL，并列选较小alpha。
 
 控制特征只包括memory/delta范数和对齐、conflict/duplicate/new/retained比例、fact数、当前写入强度和key相关性，不包含值ID、答案或任何未来损失。正式实验前先对40组×20场景×3个memory seed做label-distribution probe；只有内点总比例≥30%且至少两个不同内点各占≥5%才冻结正式协议。本地确定性/互斥性测试通过，torch网格最优测试因本地无torch跳过；语法和diff检查通过。
+
+### 连续alpha正式控制器实验（执行前）
+
+在尚未读取服务器PyTorch探针结果时冻结正式协议：128/32/32个来源组、每组20场景、三个独立fast-weight投影seed；test场景只在聚合dev门通过后生成一次。主控制器为两隐层sigmoid回归器，以五点反事实最优alpha作MSE监督。对照包括五分类网格控制器、去除conflict/duplicate/new/retained/count/scale结构特征的盲回归器、只允许alpha 0/1的端点控制器、固定物理启发式、train均值、五个固定alpha及grid oracle。
+
+新增`formal`子命令、`scripts/run_cbf_continuous_forgetting.sh`和`scripts/audit_cbf_continuous_forgetting.py`。正式评测对每个策略回放真实alpha并重算NLL/top-1，按来源组做bootstrap。dev门固定为：alpha MAE≤0.15；距grid oracle的NLL≤0.03；相对最佳固定alpha的NLL收益≥0.05且95% CI下界>0.02；相对端点控制器收益≥0.02且下界>0.005；三个投影seed均优于最佳固定alpha。审计会重建训练标签、dev记录、控制器消融与条件test结果，并校验probe/checkpoint/raw记录hash。
+
+本机无PyTorch，因此新增的两个真实张量测试跳过；其余3项连续实验测试、Python语法、shell语法和diff检查通过。另用不入库的Python标准库随机向量实现做机制预检，内点比例57.42%，三个内点均超过5%；该数值只用于排除明显场景设计错误，不能替代服务器PyTorch正式probe。baseline入口、配置和既有实验工件均未修改。
