@@ -1,0 +1,40 @@
+{
+  "protocol": "learned_entity_scope_v9",
+  "data_status": "observed_development_only",
+  "counterfact_oof": {
+    "events": 785,
+    "top1_accuracy": 0.9248407643312102,
+    "mrr": 0.9579102214134062,
+    "entity_pair_auc": 0.9656845779713159
+  },
+  "v9_vs_v8": {
+    "top1_gain": -0.015286624203821656,
+    "bootstrap_95ci": [
+      -0.033121019108280254,
+      0.0025477707006369425
+    ],
+    "units": 785
+  },
+  "v9_vs_v4": {
+    "top1_gain": 0.09554140127388536,
+    "bootstrap_95ci": [
+      0.06624203821656051,
+      0.12484076433121019
+    ],
+    "units": 785
+  },
+  "development_gate": {
+    "checks": {
+      "top1_at_least_96": false,
+      "mrr_at_least_98": false,
+      "entity_auc_at_least_97": false,
+      "gain_v8_at_least_1pp": false,
+      "gain_v8_ci_positive": false,
+      "gain_v4_at_least_12pp": false,
+      "gain_v4_ci_positive": true
+    },
+    "passed": false
+  },
+  "next_stage": "revise_entity_encoder",
+  "terminal_status": "completed_learned_entity_scope_v9"
+}

@@ -367,6 +367,8 @@ The completed [V6 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automat
 
 [V8](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/text_only_scope_calibrator_v8/REPORT.md) reached 94.01% top-1 and did not significantly improve V7, so calibration on the fixed feature family has stopped. [Learned entity scope V9](LEARNED_ENTITY_SCOPE_V9_PLAN.md) trains subject-disjoint binary same-entity heads from raw text pairs, using same-relation/different-subject hard negatives, and combines their probability with the frozen automatic relation posterior. Inference remains text-only.
 
+[V9](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/learned_entity_scope_v9/REPORT.md) obtained 96.57% entity-pair AUC but only 92.48% candidate top-1; the fixed probability product was worse than V8. This rejects rigid entity/relation multiplication while leaving OOF entity probability as a potentially complementary feature. The next allowed experiment is one nested-OOF fusion with V8; failure ends CounterFact score calibration and moves to token-level entity-span extraction.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.
