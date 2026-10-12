@@ -1,0 +1,75 @@
+{
+  "protocol": "native_accumulation_v1",
+  "audit_passed": true,
+  "data_sha256": "b86c0be0d4ab05141f8e4f05a47c2cc0dd68dc3ee865c7ccda66d4fe4917e408",
+  "design_sha256": "48d7afb910b4ad440c647fba9fefc72cb71530559e36b2b84a7610ad1a29e184",
+  "summary_sha256": "5fb33b079697e85deb822e3073507c644637152accb8b5a8a9ed51e77d9a53d9",
+  "audit_script_sha256": "e2878d895c57aa54a5356192856fb15d9b5561fb0061a1e81a74dfde8d33ced3",
+  "source_summary_sha256": "00912a997f0ada7017aafa0c5ef662cd62b0aa1caca50c1b12c7d427cb0a1a0f",
+  "rows_sha256": {
+    "zero_0.jsonl": "22ec2e80d85c118bf724d72d0ad88cbb4f2e4f61592704fd42f78d8cfa6e005a",
+    "zero_1.jsonl": "eee0154c7ac099b04c94caf9e68f08a53a9b9d1a0f69390f136d7dbf74422778",
+    "first_only_0.jsonl": "ef40a177b42c2e6b8e8369802110e41e965e302632b905b2c12f6017dbe090d8",
+    "first_only_1.jsonl": "5ea4e3acc15bde040670946b8b6a18360c7b54735aea6a765483325e5ce99457",
+    "last_only_0.jsonl": "e9b00b49f64f5231904053e4d58b850c507cccde6e7b73a3da54cbaba8ac5a90",
+    "last_only_1.jsonl": "7171e3e86b3e193483058be37a771ec070a2389b155476be2d1ae382f7d4889b",
+    "reset_each_0.jsonl": "fed3507586d341d70fcc7de14e6de3966dbd4843da6f5af5ec432b67311d1b4d",
+    "reset_each_1.jsonl": "50b4d24d118e552fce7f9ad75ba362185456d0850b97b13abdab9fa11716ced9",
+    "cumulative_0.jsonl": "06f4b6f37082ec515c636be872b403216bdcb21a5b1ac2fa08f7bd0606c0fae7",
+    "cumulative_1.jsonl": "a7f0adbacc7c9463c96b0d92ca7e652109c7d6b905d86419082bb0a02c1f84f5"
+  },
+  "bridges": {
+    "cumulative_vs_previous_native": {
+      "contexts": 64,
+      "queries": 256,
+      "max_choice_nll_error": 0.0,
+      "max_answer_nll_error": 0.0,
+      "prediction_agreement": 1.0,
+      "greedy_agreement": 1.0
+    },
+    "zero_vs_previous_plain": {
+      "contexts": 64,
+      "queries": 256,
+      "max_choice_nll_error": 0.0,
+      "max_answer_nll_error": 0.0,
+      "prediction_agreement": 1.0,
+      "greedy_agreement": 1.0
+    },
+    "last_only_vs_reset_each": {
+      "contexts": 64,
+      "queries": 256,
+      "max_choice_nll_error": 0.0,
+      "max_answer_nll_error": 0.0,
+      "prediction_agreement": 1.0,
+      "greedy_agreement": 1.0,
+      "max_eos_margin_error": 0.0
+    }
+  },
+  "terminal_status": "completed_native_accumulation_diagnostic",
+  "decision": {
+    "selected_constrained_arm": "reset_each",
+    "accumulation_harm_supported": true,
+    "restricted_write_vs_zero_nll_improvement": {
+      "mean": -0.06339334230870008,
+      "ci95": [
+        -0.10205736756324768,
+        -0.024478173814713955
+      ],
+      "group_differences": [
+        -0.08085719868540764,
+        -0.10741083323955536,
+        0.035023659467697144,
+        -0.030808160081505775,
+        -0.09020063653588295,
+        -0.1579602099955082,
+        -0.008998751640319824,
+        -0.06593460775911808
+      ],
+      "unit": "source_group",
+      "samples": 20000,
+      "seed": 1210
+    },
+    "restricted_write_content_benefit_supported": false,
+    "rule": "lowest binding answer NLL among reset_each, first_only, last_only; frozen tie order"
+  }
+}

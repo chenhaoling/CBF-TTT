@@ -12,6 +12,8 @@ The claim is supported by a staged evidence chain:
 4. Frozen OOD controller: it beat the hindsight-best fixed alpha across four shifts and three unseen projections; the failed all-endpoint gate identified strong updates as a boundary where alpha=0 is sufficient.
 5. Domain-augmented controller: on three new projection seeds and eight final domains, including three unseen shift compositions, macro NLL improved by 0.1548 over hindsight-best fixed alpha and 0.0574 over endpoint control. Both source-group confidence intervals excluded zero. Independent reconstruction audits passed at every positive stage.
 
+The actual Qwen3-4B final-checkpoint mechanism diagnostic adds a boundary result: three native TTT writes caused `<|im_end|>` to become the first-token argmax on 100% of 128 binding queries. Retaining only the last update reduced this to 4.69% and improved answer NLL by 5.4088 (source-group 95% CI [3.4846, 7.4589]) versus cumulative writing. However, no-write still had lower NLL by 0.0634 (95% CI [0.0245, 0.1021] in favor of no-write), so the experiment supports accumulation control but not content utility of the current writer.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -23,6 +25,7 @@ The claim is supported by a staged evidence chain:
 ## Claims that are not supported
 
 - The current Qwen3-4B native TTT writer has not shown reliable memory-only random fact binding.
+- Restricting native writes removes the observed termination collapse, but has not yet made fast weights outperform the no-write condition.
 - The controlled results do not establish improvements on ZsRE, MMLU, RULER, LongMemEval-S, or LoCoMo.
 - Clean semantic conflict/duplicate ratios are available in the constructed environment; a real deployment must estimate them from activations or retrieved session state.
 - The five-point label oracle is discrete; a continuous optimum was not exhaustively computed.
@@ -39,3 +42,4 @@ Key reports:
 - `experiments/cbf_ttt/continuous_stress_v1/REPORT.md`
 - `experiments/cbf_ttt/continuous_robust_v2/REPORT.md`
 - `experiments/cbf_ttt/forgetting_only_validation_v1/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_accumulation/REPORT.md`

@@ -38,7 +38,7 @@ In-Place TTT is a drop-in test-time training method for Transformer LLMs. This r
 
 ## News
 
-- CBF-TTT experiment notes: [native TTT accumulation diagnostic](NATIVE_ACCUMULATION_PLAN.md).
+- CBF-TTT experiment notes: [native TTT accumulation diagnostic](NATIVE_ACCUMULATION_PLAN.md) and [completed report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_accumulation/REPORT.md).
 
 [2026/03] The codebase is open-sourced.
 <br>

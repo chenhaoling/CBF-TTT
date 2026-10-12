@@ -48,3 +48,9 @@ bash scripts/run_cbf_native_accumulation.sh
 ```
 
 该文件在读取本实验任何新评分之前冻结。完成后追加实际结果，不回改上述臂、指标或门槛。
+
+## 完成记录（评分后追加）
+
+2026-10-12 在 hku-gpu2 两张 RTX 5090 完成 320 rollout/1280 查询，墙钟 24 分 13 秒；9 项服务器测试和独立重算/桥接审计通过。预登记选择为 `reset_each`，相对 `cumulative` 的答案 NLL 改善 5.4088（来源组 bootstrap 95% CI [3.4846, 7.4589]），answer-vs-EOS margin 提升 8.7588（CI [6.8975, 10.9180]），首 token 正确率从 0% 恢复到 53.13%；累积损伤门通过。
+
+`reset_each` 相对完全禁写的 NLL 收益为 -0.06339（CI [-0.10206, -0.02448]），内容收益门失败。`reset_each` 与 `last_only` 全部 256 查询逐值相同，符合块尾更新、下一块前清除的时序。完整报告见 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_accumulation/REPORT.md`。

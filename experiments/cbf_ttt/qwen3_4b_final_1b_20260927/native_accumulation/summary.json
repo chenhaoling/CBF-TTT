@@ -1,0 +1,3048 @@
+{
+  "protocol": "native_accumulation_v1",
+  "contexts": 320,
+  "queries": 1280,
+  "primary_format": "binding",
+  "confirm_scored": false,
+  "data_sha256": "b86c0be0d4ab05141f8e4f05a47c2cc0dd68dc3ee865c7ccda66d4fe4917e408",
+  "source_summary_sha256": "00912a997f0ada7017aafa0c5ef662cd62b0aa1caca50c1b12c7d427cb0a1a0f",
+  "models": {
+    "zero": {
+      "binding": {
+        "answer_nll": 1.4242834218312055,
+        "eos_nll": 4.699674041941762,
+        "answer_eos_margin": 3.2753906201105565,
+        "correct": 0.578125,
+        "greedy_correct": 0.578125,
+        "eos_greedy": 0.0
+      },
+      "qa": {
+        "answer_nll": 2.576612560544163,
+        "eos_nll": 6.875196561217308,
+        "answer_eos_margin": 4.298584000673145,
+        "correct": 0.6875,
+        "greedy_correct": 0.1640625,
+        "eos_greedy": 0.0
+      },
+      "binding_by_query": {
+        "target": {
+          "answer_nll": 1.3969613597728312,
+          "eos_nll": 4.764637142419815,
+          "answer_eos_margin": 3.367675782646984,
+          "correct": 0.609375,
+          "greedy_correct": 0.609375,
+          "eos_greedy": 0.0
+        },
+        "anchor": {
+          "answer_nll": 1.4516054838895798,
+          "eos_nll": 4.634710941463709,
+          "answer_eos_margin": 3.183105457574129,
+          "correct": 0.546875,
+          "greedy_correct": 0.546875,
+          "eos_greedy": 0.0
+        }
+      },
+      "binding_by_regime": {
+        "stable": {
+          "answer_nll": 1.547275485470891,
+          "eos_nll": 4.667392671108246,
+          "answer_eos_margin": 3.120117185637355,
+          "correct": 0.53125,
+          "greedy_correct": 0.53125,
+          "eos_greedy": 0.0
+        },
+        "correction": {
+          "answer_nll": 1.1466660676524043,
+          "eos_nll": 4.851744189858437,
+          "answer_eos_margin": 3.7050781222060323,
+          "correct": 0.71875,
+          "greedy_correct": 0.71875,
+          "eos_greedy": 0.0
+        },
+        "recent1_distractor": {
+          "answer_nll": 1.5732102375477552,
+          "eos_nll": 4.658171162009239,
+          "answer_eos_margin": 3.084960924461484,
+          "correct": 0.5,
+          "greedy_correct": 0.5,
+          "eos_greedy": 0.0
+        },
+        "recent2_distractor": {
+          "answer_nll": 1.4299818966537714,
+          "eos_nll": 4.621388144791126,
+          "answer_eos_margin": 3.191406248137355,
+          "correct": 0.5625,
+          "greedy_correct": 0.5625,
+          "eos_greedy": 0.0
+        }
+      },
+      "binding_by_domain": {
+        "fineweb": {
+          "answer_nll": 1.450556738767773,
+          "eos_nll": 3.977900482714176,
+          "answer_eos_margin": 2.5273437439464033,
+          "correct": 0.5,
+          "greedy_correct": 0.5,
+          "eos_greedy": 0.0
+        },
+        "longcrawl": {
+          "answer_nll": 1.398010104894638,
+          "eos_nll": 5.421447601169348,
+          "answer_eos_margin": 4.02343749627471,
+          "correct": 0.65625,
+          "greedy_correct": 0.65625,
+          "eos_greedy": 0.0
+        }
+      },
+      "binding_by_group": {
+        "0": {
+          "answer_nll": 1.6969725228846073,
+          "eos_nll": 3.7594725489616394,
+          "answer_eos_margin": 2.062500026077032,
+          "correct": 0.375,
+          "greedy_correct": 0.375,
+          "eos_greedy": 0.0
+        },
+        "1": {
+          "answer_nll": 1.5917048398405313,
+          "eos_nll": 3.2010798156261444,
+          "answer_eos_margin": 1.609374975785613,
+          "correct": 0.3125,
+          "greedy_correct": 0.3125,
+          "eos_greedy": 0.0
+        },
+        "2": {
+          "answer_nll": 2.1790096685290337,
+          "eos_nll": 6.800103425979614,
+          "answer_eos_margin": 4.621093757450581,
+          "correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_greedy": 0.0
+        },
+        "3": {
+          "answer_nll": 0.8952545449137688,
+          "eos_nll": 7.207754522562027,
+          "answer_eos_margin": 6.312499977648258,
+          "correct": 1.0,
+          "greedy_correct": 1.0,
+          "eos_greedy": 0.0
+        },
+        "4": {
+          "answer_nll": 1.07948924228549,
+          "eos_nll": 4.431051731109619,
+          "answer_eos_margin": 3.351562488824129,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "5": {
+          "answer_nll": 1.4382869638502598,
+          "eos_nll": 3.2468807250261307,
+          "answer_eos_margin": 1.808593761175871,
+          "correct": 0.625,
+          "greedy_correct": 0.625,
+          "eos_greedy": 0.0
+        },
+        "6": {
+          "answer_nll": 1.1753134652972221,
+          "eos_nll": 4.718282222747803,
+          "answer_eos_margin": 3.5429687574505806,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "7": {
+          "answer_nll": 1.3382361270487309,
+          "eos_nll": 4.232767343521118,
+          "answer_eos_margin": 2.8945312164723873,
+          "correct": 0.4375,
+          "greedy_correct": 0.4375,
+          "eos_greedy": 0.0
+        }
+      },
+      "rollout_seconds_mean": 1.3413215886976104,
+      "query_seconds_mean": 0.05838892495376058,
+      "peak": {
+        "peak_allocated_gib": 11.871291160583496,
+        "peak_reserved_gib": 13.8046875
+      },
+      "relative_displacement_mean": [
+        {
+          "0": 0.0,
+          "6": 0.0,
+          "12": 0.0,
+          "18": 0.0,
+          "24": 0.0,
+          "30": 0.0,
+          "35": 0.0
+        },
+        {
+          "0": 0.0,
+          "6": 0.0,
+          "12": 0.0,
+          "18": 0.0,
+          "24": 0.0,
+          "30": 0.0,
+          "35": 0.0
+        },
+        {
+          "0": 0.0,
+          "6": 0.0,
+          "12": 0.0,
+          "18": 0.0,
+          "24": 0.0,
+          "30": 0.0,
+          "35": 0.0
+        }
+      ]
+    },
+    "first_only": {
+      "binding": {
+        "answer_nll": 1.5718139375094324,
+        "eos_nll": 2.9023803449235857,
+        "answer_eos_margin": 1.3305664074141532,
+        "correct": 0.5859375,
+        "greedy_correct": 0.46875,
+        "eos_greedy": 0.25
+      },
+      "qa": {
+        "answer_nll": 2.584371401462704,
+        "eos_nll": 4.756978799588978,
+        "answer_eos_margin": 2.1726073981262743,
+        "correct": 0.7109375,
+        "greedy_correct": 0.140625,
+        "eos_greedy": 0.1328125
+      },
+      "binding_by_query": {
+        "target": {
+          "answer_nll": 1.5329706412740052,
+          "eos_nll": 2.9401972079649568,
+          "answer_eos_margin": 1.4072265666909516,
+          "correct": 0.578125,
+          "greedy_correct": 0.453125,
+          "eos_greedy": 0.25
+        },
+        "anchor": {
+          "answer_nll": 1.6106572337448597,
+          "eos_nll": 2.8645634818822145,
+          "answer_eos_margin": 1.2539062481373549,
+          "correct": 0.59375,
+          "greedy_correct": 0.484375,
+          "eos_greedy": 0.25
+        }
+      },
+      "binding_by_regime": {
+        "stable": {
+          "answer_nll": 1.690173590555787,
+          "eos_nll": 2.916736086830497,
+          "answer_eos_margin": 1.2265624962747097,
+          "correct": 0.53125,
+          "greedy_correct": 0.40625,
+          "eos_greedy": 0.25
+        },
+        "correction": {
+          "answer_nll": 1.2781615583226085,
+          "eos_nll": 2.9685912504792213,
+          "answer_eos_margin": 1.6904296921566129,
+          "correct": 0.71875,
+          "greedy_correct": 0.59375,
+          "eos_greedy": 0.25
+        },
+        "recent1_distractor": {
+          "answer_nll": 1.732872312888503,
+          "eos_nll": 2.892051998525858,
+          "answer_eos_margin": 1.1591796856373549,
+          "correct": 0.5,
+          "greedy_correct": 0.40625,
+          "eos_greedy": 0.25
+        },
+        "recent2_distractor": {
+          "answer_nll": 1.586048288270831,
+          "eos_nll": 2.8321420438587666,
+          "answer_eos_margin": 1.2460937555879354,
+          "correct": 0.59375,
+          "greedy_correct": 0.46875,
+          "eos_greedy": 0.25
+        }
+      },
+      "binding_by_domain": {
+        "fineweb": {
+          "answer_nll": 1.4894021032378078,
+          "eos_nll": 3.0831521041691303,
+          "answer_eos_margin": 1.5937500009313226,
+          "correct": 0.515625,
+          "greedy_correct": 0.5,
+          "eos_greedy": 0.0
+        },
+        "longcrawl": {
+          "answer_nll": 1.6542257717810571,
+          "eos_nll": 2.721608585678041,
+          "answer_eos_margin": 1.0673828138969839,
+          "correct": 0.65625,
+          "greedy_correct": 0.4375,
+          "eos_greedy": 0.5
+        }
+      },
+      "binding_by_group": {
+        "0": {
+          "answer_nll": 1.7724765092134476,
+          "eos_nll": 2.823257729411125,
+          "answer_eos_margin": 1.0507812201976776,
+          "correct": 0.375,
+          "greedy_correct": 0.3125,
+          "eos_greedy": 0.0
+        },
+        "1": {
+          "answer_nll": 1.6591551657766104,
+          "eos_nll": 2.268530175089836,
+          "answer_eos_margin": 0.6093750093132257,
+          "correct": 0.3125,
+          "greedy_correct": 0.3125,
+          "eos_greedy": 0.0
+        },
+        "2": {
+          "answer_nll": 2.5580222830176353,
+          "eos_nll": 1.3861473128199577,
+          "answer_eos_margin": -1.1718749701976776,
+          "correct": 0.125,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "3": {
+          "answer_nll": 0.9016825798898935,
+          "eos_nll": 6.018870025873184,
+          "answer_eos_margin": 5.117187445983291,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "4": {
+          "answer_nll": 1.174431424587965,
+          "eos_nll": 2.7291189581155777,
+          "answer_eos_margin": 1.5546875335276127,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "5": {
+          "answer_nll": 1.9827667996287346,
+          "eos_nll": 0.7522980459034443,
+          "answer_eos_margin": -1.2304687537252903,
+          "correct": 0.75,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "6": {
+          "answer_nll": 1.1650239452719688,
+          "eos_nll": 4.247055247426033,
+          "answer_eos_margin": 3.082031302154064,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "7": {
+          "answer_nll": 1.3609527926892042,
+          "eos_nll": 2.993765264749527,
+          "answer_eos_margin": 1.6328124720603228,
+          "correct": 0.5,
+          "greedy_correct": 0.5,
+          "eos_greedy": 0.0
+        }
+      },
+      "rollout_seconds_mean": 1.3441548514529131,
+      "query_seconds_mean": 0.05842946569464402,
+      "peak": {
+        "peak_allocated_gib": 11.871291160583496,
+        "peak_reserved_gib": 13.8046875
+      },
+      "relative_displacement_mean": [
+        {
+          "0": 0.0011974974831900909,
+          "6": 0.002238110206235433,
+          "12": 0.0015922033144306624,
+          "18": 0.0015236735926009715,
+          "24": 0.002080070978990989,
+          "30": 0.008094625431112945,
+          "35": 0.00931596942973556
+        },
+        {
+          "0": 0.0011974974831900909,
+          "6": 0.002238110206235433,
+          "12": 0.0015922033144306624,
+          "18": 0.0015236735926009715,
+          "24": 0.002080070978990989,
+          "30": 0.008094625431112945,
+          "35": 0.00931596942973556
+        },
+        {
+          "0": 0.0011974974831900909,
+          "6": 0.002238110206235433,
+          "12": 0.0015922033144306624,
+          "18": 0.0015236735926009715,
+          "24": 0.002080070978990989,
+          "30": 0.008094625431112945,
+          "35": 0.00931596942973556
+        }
+      ]
+    },
+    "last_only": {
+      "binding": {
+        "answer_nll": 1.4876767641399056,
+        "eos_nll": 3.4129697317257524,
+        "answer_eos_margin": 1.9252929675858468,
+        "correct": 0.5625,
+        "greedy_correct": 0.53125,
+        "eos_greedy": 0.046875
+      },
+      "qa": {
+        "answer_nll": 2.5322272568009794,
+        "eos_nll": 5.997559279203415,
+        "answer_eos_margin": 3.4653320224024355,
+        "correct": 0.6875,
+        "greedy_correct": 0.1640625,
+        "eos_greedy": 0.0
+      },
+      "binding_by_query": {
+        "target": {
+          "answer_nll": 1.4593797042034566,
+          "eos_nll": 3.478422675281763,
+          "answer_eos_margin": 2.0190429710783064,
+          "correct": 0.59375,
+          "greedy_correct": 0.578125,
+          "eos_greedy": 0.015625
+        },
+        "anchor": {
+          "answer_nll": 1.5159738240763545,
+          "eos_nll": 3.3475167881697416,
+          "answer_eos_margin": 1.8315429640933871,
+          "correct": 0.53125,
+          "greedy_correct": 0.484375,
+          "eos_greedy": 0.078125
+        }
+      },
+      "binding_by_regime": {
+        "stable": {
+          "answer_nll": 1.6083179023116827,
+          "eos_nll": 3.391521032899618,
+          "answer_eos_margin": 1.7832031305879354,
+          "correct": 0.53125,
+          "greedy_correct": 0.5,
+          "eos_greedy": 0.0625
+        },
+        "correction": {
+          "answer_nll": 1.1952940849587321,
+          "eos_nll": 3.5400206483900547,
+          "answer_eos_margin": 2.3447265634313226,
+          "correct": 0.75,
+          "greedy_correct": 0.75,
+          "eos_greedy": 0.0
+        },
+        "recent1_distractor": {
+          "answer_nll": 1.6454643458127975,
+          "eos_nll": 3.382769037038088,
+          "answer_eos_margin": 1.7373046912252903,
+          "correct": 0.4375,
+          "greedy_correct": 0.40625,
+          "eos_greedy": 0.0625
+        },
+        "recent2_distractor": {
+          "answer_nll": 1.50163072347641,
+          "eos_nll": 3.3375682085752487,
+          "answer_eos_margin": 1.8359374850988388,
+          "correct": 0.53125,
+          "greedy_correct": 0.46875,
+          "eos_greedy": 0.0625
+        }
+      },
+      "binding_by_domain": {
+        "fineweb": {
+          "answer_nll": 1.5163570865988731,
+          "eos_nll": 2.606200832873583,
+          "answer_eos_margin": 1.0898437462747097,
+          "correct": 0.5,
+          "greedy_correct": 0.484375,
+          "eos_greedy": 0.0
+        },
+        "longcrawl": {
+          "answer_nll": 1.458996441680938,
+          "eos_nll": 4.219738630577922,
+          "answer_eos_margin": 2.760742188896984,
+          "correct": 0.625,
+          "greedy_correct": 0.578125,
+          "eos_greedy": 0.09375
+        }
+      },
+      "binding_by_group": {
+        "0": {
+          "answer_nll": 1.777829721570015,
+          "eos_nll": 2.7036109566688538,
+          "answer_eos_margin": 0.9257812350988388,
+          "correct": 0.3125,
+          "greedy_correct": 0.25,
+          "eos_greedy": 0.0
+        },
+        "1": {
+          "answer_nll": 1.6991156730800867,
+          "eos_nll": 2.0428656935691833,
+          "answer_eos_margin": 0.34375002048909664,
+          "correct": 0.3125,
+          "greedy_correct": 0.3125,
+          "eos_greedy": 0.0
+        },
+        "2": {
+          "answer_nll": 2.1439860090613365,
+          "eos_nll": 5.241642236709595,
+          "answer_eos_margin": 3.097656227648258,
+          "correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_greedy": 0.0
+        },
+        "3": {
+          "answer_nll": 0.9260627049952745,
+          "eos_nll": 7.183875232934952,
+          "answer_eos_margin": 6.257812527939677,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "4": {
+          "answer_nll": 1.169689878821373,
+          "eos_nll": 2.661877378821373,
+          "answer_eos_margin": 1.4921875,
+          "correct": 0.9375,
+          "greedy_correct": 0.9375,
+          "eos_greedy": 0.0
+        },
+        "5": {
+          "answer_nll": 1.596247173845768,
+          "eos_nll": 1.791559673845768,
+          "answer_eos_margin": 0.1953125,
+          "correct": 0.5625,
+          "greedy_correct": 0.375,
+          "eos_greedy": 0.375
+        },
+        "6": {
+          "answer_nll": 1.184312216937542,
+          "eos_nll": 3.231187179684639,
+          "answer_eos_margin": 2.046874962747097,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "7": {
+          "answer_nll": 1.404170734807849,
+          "eos_nll": 2.4471395015716553,
+          "answer_eos_margin": 1.0429687667638063,
+          "correct": 0.5,
+          "greedy_correct": 0.5,
+          "eos_greedy": 0.0
+        }
+      },
+      "rollout_seconds_mean": 1.344976698368555,
+      "query_seconds_mean": 0.05846575155010214,
+      "peak": {
+        "peak_allocated_gib": 11.870219230651855,
+        "peak_reserved_gib": 13.73046875
+      },
+      "relative_displacement_mean": [
+        {
+          "0": 0.0,
+          "6": 0.0,
+          "12": 0.0,
+          "18": 0.0,
+          "24": 0.0,
+          "30": 0.0,
+          "35": 0.0
+        },
+        {
+          "0": 0.0,
+          "6": 0.0,
+          "12": 0.0,
+          "18": 0.0,
+          "24": 0.0,
+          "30": 0.0,
+          "35": 0.0
+        },
+        {
+          "0": 0.0011417381647333968,
+          "6": 0.0013014767746426514,
+          "12": 0.0016151018971868325,
+          "18": 0.0018402724690531613,
+          "24": 0.002433714236758533,
+          "30": 0.008162421581801027,
+          "35": 0.008936775229813065
+        }
+      ]
+    },
+    "reset_each": {
+      "binding": {
+        "answer_nll": 1.4876767641399056,
+        "eos_nll": 3.4129697317257524,
+        "answer_eos_margin": 1.9252929675858468,
+        "correct": 0.5625,
+        "greedy_correct": 0.53125,
+        "eos_greedy": 0.046875
+      },
+      "qa": {
+        "answer_nll": 2.5322272568009794,
+        "eos_nll": 5.997559279203415,
+        "answer_eos_margin": 3.4653320224024355,
+        "correct": 0.6875,
+        "greedy_correct": 0.1640625,
+        "eos_greedy": 0.0
+      },
+      "binding_by_query": {
+        "target": {
+          "answer_nll": 1.4593797042034566,
+          "eos_nll": 3.478422675281763,
+          "answer_eos_margin": 2.0190429710783064,
+          "correct": 0.59375,
+          "greedy_correct": 0.578125,
+          "eos_greedy": 0.015625
+        },
+        "anchor": {
+          "answer_nll": 1.5159738240763545,
+          "eos_nll": 3.3475167881697416,
+          "answer_eos_margin": 1.8315429640933871,
+          "correct": 0.53125,
+          "greedy_correct": 0.484375,
+          "eos_greedy": 0.078125
+        }
+      },
+      "binding_by_regime": {
+        "stable": {
+          "answer_nll": 1.6083179023116827,
+          "eos_nll": 3.391521032899618,
+          "answer_eos_margin": 1.7832031305879354,
+          "correct": 0.53125,
+          "greedy_correct": 0.5,
+          "eos_greedy": 0.0625
+        },
+        "correction": {
+          "answer_nll": 1.1952940849587321,
+          "eos_nll": 3.5400206483900547,
+          "answer_eos_margin": 2.3447265634313226,
+          "correct": 0.75,
+          "greedy_correct": 0.75,
+          "eos_greedy": 0.0
+        },
+        "recent1_distractor": {
+          "answer_nll": 1.6454643458127975,
+          "eos_nll": 3.382769037038088,
+          "answer_eos_margin": 1.7373046912252903,
+          "correct": 0.4375,
+          "greedy_correct": 0.40625,
+          "eos_greedy": 0.0625
+        },
+        "recent2_distractor": {
+          "answer_nll": 1.50163072347641,
+          "eos_nll": 3.3375682085752487,
+          "answer_eos_margin": 1.8359374850988388,
+          "correct": 0.53125,
+          "greedy_correct": 0.46875,
+          "eos_greedy": 0.0625
+        }
+      },
+      "binding_by_domain": {
+        "fineweb": {
+          "answer_nll": 1.5163570865988731,
+          "eos_nll": 2.606200832873583,
+          "answer_eos_margin": 1.0898437462747097,
+          "correct": 0.5,
+          "greedy_correct": 0.484375,
+          "eos_greedy": 0.0
+        },
+        "longcrawl": {
+          "answer_nll": 1.458996441680938,
+          "eos_nll": 4.219738630577922,
+          "answer_eos_margin": 2.760742188896984,
+          "correct": 0.625,
+          "greedy_correct": 0.578125,
+          "eos_greedy": 0.09375
+        }
+      },
+      "binding_by_group": {
+        "0": {
+          "answer_nll": 1.777829721570015,
+          "eos_nll": 2.7036109566688538,
+          "answer_eos_margin": 0.9257812350988388,
+          "correct": 0.3125,
+          "greedy_correct": 0.25,
+          "eos_greedy": 0.0
+        },
+        "1": {
+          "answer_nll": 1.6991156730800867,
+          "eos_nll": 2.0428656935691833,
+          "answer_eos_margin": 0.34375002048909664,
+          "correct": 0.3125,
+          "greedy_correct": 0.3125,
+          "eos_greedy": 0.0
+        },
+        "2": {
+          "answer_nll": 2.1439860090613365,
+          "eos_nll": 5.241642236709595,
+          "answer_eos_margin": 3.097656227648258,
+          "correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_greedy": 0.0
+        },
+        "3": {
+          "answer_nll": 0.9260627049952745,
+          "eos_nll": 7.183875232934952,
+          "answer_eos_margin": 6.257812527939677,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "4": {
+          "answer_nll": 1.169689878821373,
+          "eos_nll": 2.661877378821373,
+          "answer_eos_margin": 1.4921875,
+          "correct": 0.9375,
+          "greedy_correct": 0.9375,
+          "eos_greedy": 0.0
+        },
+        "5": {
+          "answer_nll": 1.596247173845768,
+          "eos_nll": 1.791559673845768,
+          "answer_eos_margin": 0.1953125,
+          "correct": 0.5625,
+          "greedy_correct": 0.375,
+          "eos_greedy": 0.375
+        },
+        "6": {
+          "answer_nll": 1.184312216937542,
+          "eos_nll": 3.231187179684639,
+          "answer_eos_margin": 2.046874962747097,
+          "correct": 0.875,
+          "greedy_correct": 0.875,
+          "eos_greedy": 0.0
+        },
+        "7": {
+          "answer_nll": 1.404170734807849,
+          "eos_nll": 2.4471395015716553,
+          "answer_eos_margin": 1.0429687667638063,
+          "correct": 0.5,
+          "greedy_correct": 0.5,
+          "eos_greedy": 0.0
+        }
+      },
+      "rollout_seconds_mean": 1.3455120729631744,
+      "query_seconds_mean": 0.058576205919962376,
+      "peak": {
+        "peak_allocated_gib": 11.871779441833496,
+        "peak_reserved_gib": 13.888671875
+      },
+      "relative_displacement_mean": [
+        {
+          "0": 0.0011974974831900909,
+          "6": 0.002238110206235433,
+          "12": 0.0015922033144306624,
+          "18": 0.0015236735926009715,
+          "24": 0.002080070978990989,
+          "30": 0.008094625431112945,
+          "35": 0.00931596942973556
+        },
+        {
+          "0": 0.0012055202778356033,
+          "6": 0.0012926987474202178,
+          "12": 0.0015906800344964722,
+          "18": 0.0017229383083758876,
+          "24": 0.002491199147698353,
+          "30": 0.008375591605727095,
+          "35": 0.008989908070361707
+        },
+        {
+          "0": 0.0011417381647333968,
+          "6": 0.0013014767746426514,
+          "12": 0.0016151018971868325,
+          "18": 0.0018402724690531613,
+          "24": 0.002433714236758533,
+          "30": 0.008162421581801027,
+          "35": 0.008936775229813065
+        }
+      ]
+    },
+    "cumulative": {
+      "binding": {
+        "answer_nll": 6.8965207869187,
+        "eos_nll": 0.06302468787208682,
+        "answer_eos_margin": -6.833496099046613,
+        "correct": 0.4921875,
+        "greedy_correct": 0.0,
+        "eos_greedy": 1.0
+      },
+      "qa": {
+        "answer_nll": 5.507214244455099,
+        "eos_nll": 0.35780020357924514,
+        "answer_eos_margin": -5.149414040875854,
+        "correct": 0.6796875,
+        "greedy_correct": 0.0,
+        "eos_greedy": 0.9453125
+      },
+      "binding_by_query": {
+        "target": {
+          "answer_nll": 6.898536054417491,
+          "eos_nll": 0.06455164466092356,
+          "answer_eos_margin": -6.833984409756567,
+          "correct": 0.5,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "anchor": {
+          "answer_nll": 6.8945055194199085,
+          "eos_nll": 0.06149773108325007,
+          "answer_eos_margin": -6.8330077883366585,
+          "correct": 0.484375,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        }
+      },
+      "binding_by_regime": {
+        "stable": {
+          "answer_nll": 6.910213217139244,
+          "eos_nll": 0.07036948713857782,
+          "answer_eos_margin": -6.839843730000666,
+          "correct": 0.53125,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "correction": {
+          "answer_nll": 6.618991885334253,
+          "eos_nll": 0.06235127758282033,
+          "answer_eos_margin": -6.556640607751433,
+          "correct": 0.71875,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "recent1_distractor": {
+          "answer_nll": 7.055392950773239,
+          "eos_nll": 0.06320537788110414,
+          "answer_eos_margin": -6.992187572892135,
+          "correct": 0.3125,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "recent2_distractor": {
+          "answer_nll": 7.001485094428062,
+          "eos_nll": 0.056172608885844966,
+          "answer_eos_margin": -6.9453124855422175,
+          "correct": 0.40625,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        }
+      },
+      "binding_by_domain": {
+        "fineweb": {
+          "answer_nll": 6.605361856520176,
+          "eos_nll": 0.007705573916609865,
+          "answer_eos_margin": -6.597656282603566,
+          "correct": 0.515625,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "longcrawl": {
+          "answer_nll": 7.1876797173172235,
+          "eos_nll": 0.11834380182756377,
+          "answer_eos_margin": -7.06933591548966,
+          "correct": 0.46875,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        }
+      },
+      "binding_by_group": {
+        "0": {
+          "answer_nll": 7.886381506919861,
+          "eos_nll": 0.0035689408105099574,
+          "answer_eos_margin": -7.882812566109351,
+          "correct": 0.125,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "1": {
+          "answer_nll": 6.40722793340683,
+          "eos_nll": 0.008790431020315737,
+          "answer_eos_margin": -6.398437502386514,
+          "correct": 0.4375,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "2": {
+          "answer_nll": 11.66810953617096,
+          "eos_nll": 0.0001409473493367841,
+          "answer_eos_margin": -11.667968588821623,
+          "correct": 0.0,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "3": {
+          "answer_nll": 2.194039724767208,
+          "eos_nll": 0.3620084747672081,
+          "answer_eos_margin": -1.83203125,
+          "correct": 0.75,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "4": {
+          "answer_nll": 3.4861512929201126,
+          "eos_nll": 0.11115124495700002,
+          "answer_eos_margin": -3.3750000479631126,
+          "correct": 0.8125,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "5": {
+          "answer_nll": 11.402418315410614,
+          "eos_nll": 7.45402367101633e-05,
+          "answer_eos_margin": -11.402343775173904,
+          "correct": 0.3125,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "6": {
+          "answer_nll": 6.264732003211975,
+          "eos_nll": 0.006919489605934359,
+          "answer_eos_margin": -6.257812513606041,
+          "correct": 0.875,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        },
+        "7": {
+          "answer_nll": 5.863105982542038,
+          "eos_nll": 0.011543434229679406,
+          "answer_eos_margin": -5.851562548312359,
+          "correct": 0.625,
+          "greedy_correct": 0.0,
+          "eos_greedy": 1.0
+        }
+      },
+      "rollout_seconds_mean": 1.345201543532312,
+      "query_seconds_mean": 0.058326072423369624,
+      "peak": {
+        "peak_allocated_gib": 11.871291160583496,
+        "peak_reserved_gib": 13.8046875
+      },
+      "relative_displacement_mean": [
+        {
+          "0": 0.0011974974831900909,
+          "6": 0.002238110206235433,
+          "12": 0.0015922033144306624,
+          "18": 0.0015236735926009715,
+          "24": 0.002080070978990989,
+          "30": 0.008094625431112945,
+          "35": 0.00931596942973556
+        },
+        {
+          "0": 0.0022810281607235083,
+          "6": 0.0029767373744107317,
+          "12": 0.0027627739546005614,
+          "18": 0.002826780697432696,
+          "24": 0.00415532087572501,
+          "30": 0.015787316238856874,
+          "35": 0.01728964236099273
+        },
+        {
+          "0": 0.0032963818521238863,
+          "6": 0.003800554532062961,
+          "12": 0.0038532414873770904,
+          "18": 0.004094116571650375,
+          "24": 0.006079203987610526,
+          "30": 0.023155084549216554,
+          "35": 0.027966788416961208
+        }
+      ]
+    }
+  },
+  "paired_vs_cumulative": {
+    "zero": {
+      "answer_nll_improvement": {
+        "mean": 5.472237365087494,
+        "ci95": [
+          3.540096021257341,
+          7.530019883764908
+        ],
+        "group_differences": [
+          6.1894089840352535,
+          4.8155230935662985,
+          9.489099867641926,
+          1.2987851798534393,
+          2.4066620506346226,
+          9.964131351560354,
+          5.089418537914753,
+          4.524869855493307
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "margin_improvement": {
+        "mean": 10.10888671915717,
+        "ci95": [
+          8.263183610699343,
+          12.322753844627414
+        ],
+        "group_differences": [
+          9.945312592186383,
+          8.007812478172127,
+          16.289062346272203,
+          8.144531227648258,
+          6.726562536787242,
+          13.210937536349775,
+          9.800781271056621,
+          8.746093764784746
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "greedy_accuracy_improvement": {
+        "mean": 0.578125,
+        "ci95": [
+          0.375,
+          0.78125
+        ],
+        "group_differences": [
+          0.375,
+          0.3125,
+          0.125,
+          1.0,
+          0.875,
+          0.625,
+          0.875,
+          0.4375
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "choice_accuracy_improvement": {
+        "mean": 0.0859375,
+        "ci95": [
+          -0.03125,
+          0.203125
+        ],
+        "group_differences": [
+          0.25,
+          -0.125,
+          0.125,
+          0.25,
+          0.0625,
+          0.3125,
+          0.0,
+          -0.1875
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      }
+    },
+    "first_only": {
+      "answer_nll_improvement": {
+        "mean": 5.324706849409267,
+        "ci95": [
+          3.4890933542046696,
+          7.252437652787194
+        ],
+        "group_differences": [
+          6.113904997706413,
+          4.7480727676302195,
+          9.110087253153324,
+          1.2923571448773146,
+          2.3117198683321476,
+          9.41965151578188,
+          5.099708057940006,
+          4.502153189852834
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "margin_improvement": {
+        "mean": 8.164062506460766,
+        "ci95": [
+          6.89794923359824,
+          9.357910142594164
+        ],
+        "group_differences": [
+          8.933593786307028,
+          7.00781251169974,
+          10.496093618623945,
+          6.949218695983291,
+          4.929687581490725,
+          10.171875021448614,
+          9.339843815760105,
+          7.484375020372681
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "greedy_accuracy_improvement": {
+        "mean": 0.46875,
+        "ci95": [
+          0.2265625,
+          0.7109375
+        ],
+        "group_differences": [
+          0.3125,
+          0.3125,
+          0.0,
+          0.875,
+          0.875,
+          0.0,
+          0.875,
+          0.5
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "choice_accuracy_improvement": {
+        "mean": 0.09375,
+        "ci95": [
+          -0.0234375,
+          0.21875
+        ],
+        "group_differences": [
+          0.25,
+          -0.125,
+          0.125,
+          0.125,
+          0.0625,
+          0.4375,
+          0.0,
+          -0.125
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      }
+    },
+    "last_only": {
+      "answer_nll_improvement": {
+        "mean": 5.408844022778794,
+        "ci95": [
+          3.484606384765357,
+          7.458870444679633
+        ],
+        "group_differences": [
+          6.108551785349846,
+          4.708112260326743,
+          9.524123527109623,
+          1.2679770197719336,
+          2.3164614140987396,
+          9.806171141564846,
+          5.080419786274433,
+          4.458935247734189
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "margin_improvement": {
+        "mean": 8.75878906663246,
+        "ci95": [
+          6.897460959751697,
+          10.91796870509205
+        ],
+        "group_differences": [
+          8.80859380120819,
+          6.742187522875611,
+          14.765624816469881,
+          8.089843777939677,
+          4.867187547963113,
+          11.597656275173904,
+          8.304687476353138,
+          6.894531315076165
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "greedy_accuracy_improvement": {
+        "mean": 0.53125,
+        "ci95": [
+          0.328125,
+          0.7421875
+        ],
+        "group_differences": [
+          0.25,
+          0.3125,
+          0.125,
+          0.875,
+          0.9375,
+          0.375,
+          0.875,
+          0.5
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "choice_accuracy_improvement": {
+        "mean": 0.0703125,
+        "ci95": [
+          -0.0234375,
+          0.15625
+        ],
+        "group_differences": [
+          0.1875,
+          -0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.25,
+          0.0,
+          -0.125
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      }
+    },
+    "reset_each": {
+      "answer_nll_improvement": {
+        "mean": 5.408844022778794,
+        "ci95": [
+          3.484606384765357,
+          7.458870444679633
+        ],
+        "group_differences": [
+          6.108551785349846,
+          4.708112260326743,
+          9.524123527109623,
+          1.2679770197719336,
+          2.3164614140987396,
+          9.806171141564846,
+          5.080419786274433,
+          4.458935247734189
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "margin_improvement": {
+        "mean": 8.75878906663246,
+        "ci95": [
+          6.897460959751697,
+          10.91796870509205
+        ],
+        "group_differences": [
+          8.80859380120819,
+          6.742187522875611,
+          14.765624816469881,
+          8.089843777939677,
+          4.867187547963113,
+          11.597656275173904,
+          8.304687476353138,
+          6.894531315076165
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "greedy_accuracy_improvement": {
+        "mean": 0.53125,
+        "ci95": [
+          0.328125,
+          0.7421875
+        ],
+        "group_differences": [
+          0.25,
+          0.3125,
+          0.125,
+          0.875,
+          0.9375,
+          0.375,
+          0.875,
+          0.5
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      },
+      "choice_accuracy_improvement": {
+        "mean": 0.0703125,
+        "ci95": [
+          -0.0234375,
+          0.15625
+        ],
+        "group_differences": [
+          0.1875,
+          -0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.25,
+          0.0,
+          -0.125
+        ],
+        "unit": "source_group",
+        "samples": 20000,
+        "seed": 1210
+      }
+    }
+  },
+  "decision": {
+    "selected_constrained_arm": "reset_each",
+    "accumulation_harm_supported": true,
+    "restricted_write_vs_zero_nll_improvement": {
+      "mean": -0.06339334230870008,
+      "ci95": [
+        -0.10205736756324768,
+        -0.024478173814713955
+      ],
+      "group_differences": [
+        -0.08085719868540764,
+        -0.10741083323955536,
+        0.035023659467697144,
+        -0.030808160081505775,
+        -0.09020063653588295,
+        -0.1579602099955082,
+        -0.008998751640319824,
+        -0.06593460775911808
+      ],
+      "unit": "source_group",
+      "samples": 20000,
+      "seed": 1210
+    },
+    "restricted_write_content_benefit_supported": false,
+    "rule": "lowest binding answer NLL among reset_each, first_only, last_only; frozen tie order"
+  },
+  "loading_audits": {
+    "zero": [
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "zero",
+        "shard": 0,
+        "rows": 32,
+        "rows_sha256": "22ec2e80d85c118bf724d72d0ad88cbb4f2e4f61592704fd42f78d8cfa6e005a",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 287.549092059955,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "zero",
+        "shard": 1,
+        "rows": 32,
+        "rows_sha256": "eee0154c7ac099b04c94caf9e68f08a53a9b9d1a0f69390f136d7dbf74422778",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 286.8115195836872,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "first_only": [
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "first_only",
+        "shard": 0,
+        "rows": 32,
+        "rows_sha256": "ef40a177b42c2e6b8e8369802110e41e965e302632b905b2c12f6017dbe090d8",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 286.4358851443976,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.3,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "first_only",
+        "shard": 1,
+        "rows": 32,
+        "rows_sha256": "5ea4e3acc15bde040670946b8b6a18360c7b54735aea6a765483325e5ce99457",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 284.8977880720049,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.3,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "last_only": [
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "last_only",
+        "shard": 0,
+        "rows": 32,
+        "rows_sha256": "e9b00b49f64f5231904053e4d58b850c507cccde6e7b73a3da54cbaba8ac5a90",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 285.45530733652413,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.0,
+          0.0,
+          0.3
+        ]
+      },
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "last_only",
+        "shard": 1,
+        "rows": 32,
+        "rows_sha256": "7171e3e86b3e193483058be37a771ec070a2389b155476be2d1ae382f7d4889b",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 285.063453624025,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.0,
+          0.0,
+          0.3
+        ]
+      }
+    ],
+    "reset_each": [
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "reset_each",
+        "shard": 0,
+        "rows": 32,
+        "rows_sha256": "fed3507586d341d70fcc7de14e6de3966dbd4843da6f5af5ec432b67311d1b4d",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 286.99326319247484,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.3,
+          0.3,
+          0.3
+        ]
+      },
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "reset_each",
+        "shard": 1,
+        "rows": 32,
+        "rows_sha256": "50b4d24d118e552fce7f9ad75ba362185456d0850b97b13abdab9fa11716ced9",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 286.949523800984,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.3,
+          0.3,
+          0.3
+        ]
+      }
+    ],
+    "cumulative": [
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "cumulative",
+        "shard": 0,
+        "rows": 32,
+        "rows_sha256": "06f4b6f37082ec515c636be872b403216bdcb21a5b1ac2fa08f7bd0606c0fae7",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 287.5471930913627,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.3,
+          0.3,
+          0.3
+        ]
+      },
+      {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "excluded_adapters": [],
+        "config": {
+          "vocab_size": 151936,
+          "max_position_embeddings": 40960,
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "use_sliding_window": false,
+          "sliding_window": null,
+          "max_window_layers": 36,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "initializer_range": 0.02,
+          "rms_norm_eps": 1e-06,
+          "use_cache": true,
+          "rope_theta": 1000000,
+          "rope_scaling": null,
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "layer_types": [
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention",
+            "full_attention"
+          ],
+          "ttt_layers": [
+            0,
+            6,
+            12,
+            18,
+            24,
+            30,
+            35
+          ],
+          "ttt_mode": true,
+          "ttt_proj": true,
+          "ttt_lr": 0.3,
+          "ttt_chunk": 4096,
+          "ttt_target": "hidden_states",
+          "return_dict": true,
+          "output_hidden_states": false,
+          "torchscript": false,
+          "dtype": "bfloat16",
+          "pruned_heads": {},
+          "tie_word_embeddings": true,
+          "chunk_size_feed_forward": 0,
+          "is_encoder_decoder": false,
+          "is_decoder": false,
+          "cross_attention_hidden_size": null,
+          "add_cross_attention": false,
+          "tie_encoder_decoder": false,
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "finetuning_task": null,
+          "id2label": {
+            "0": "LABEL_0",
+            "1": "LABEL_1"
+          },
+          "label2id": {
+            "LABEL_0": 0,
+            "LABEL_1": 1
+          },
+          "task_specific_params": null,
+          "problem_type": null,
+          "tokenizer_class": null,
+          "prefix": null,
+          "bos_token_id": 151643,
+          "pad_token_id": null,
+          "eos_token_id": 151645,
+          "sep_token_id": null,
+          "decoder_start_token_id": null,
+          "max_length": 20,
+          "min_length": 0,
+          "do_sample": false,
+          "early_stopping": false,
+          "num_beams": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "no_repeat_ngram_size": 0,
+          "encoder_no_repeat_ngram_size": 0,
+          "bad_words_ids": null,
+          "num_return_sequences": 1,
+          "output_scores": false,
+          "return_dict_in_generate": false,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": false,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "num_beam_groups": 1,
+          "diversity_penalty": 0.0,
+          "_name_or_path": "",
+          "transformers_version": "4.57.3",
+          "model_type": "qwen3",
+          "tf_legacy_loss": false,
+          "use_bfloat16": false,
+          "output_attentions": false
+        },
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4068432896,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "effective_ttt_lr": 0.3,
+        "arm": "cumulative",
+        "shard": 1,
+        "rows": 32,
+        "rows_sha256": "a7f0adbacc7c9463c96b0d92ca7e652109c7d6b905d86419082bb0a02c1f84f5",
+        "weights_sha256": "1947114f49a948c0f40202abb2d098fc8d68b339bc46c95333ab4221dfe00eb4",
+        "backbone_unchanged": true,
+        "seconds": 286.51921310834587,
+        "torch": "2.9.1+cu130",
+        "transformers": "4.57.3",
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "schedule": [
+          0.3,
+          0.3,
+          0.3
+        ]
+      }
+    ]
+  },
+  "rows_sha256": {
+    "zero_0.jsonl": "22ec2e80d85c118bf724d72d0ad88cbb4f2e4f61592704fd42f78d8cfa6e005a",
+    "zero_1.jsonl": "eee0154c7ac099b04c94caf9e68f08a53a9b9d1a0f69390f136d7dbf74422778",
+    "first_only_0.jsonl": "ef40a177b42c2e6b8e8369802110e41e965e302632b905b2c12f6017dbe090d8",
+    "first_only_1.jsonl": "5ea4e3acc15bde040670946b8b6a18360c7b54735aea6a765483325e5ce99457",
+    "last_only_0.jsonl": "e9b00b49f64f5231904053e4d58b850c507cccde6e7b73a3da54cbaba8ac5a90",
+    "last_only_1.jsonl": "7171e3e86b3e193483058be37a771ec070a2389b155476be2d1ae382f7d4889b",
+    "reset_each_0.jsonl": "fed3507586d341d70fcc7de14e6de3966dbd4843da6f5af5ec432b67311d1b4d",
+    "reset_each_1.jsonl": "50b4d24d118e552fce7f9ad75ba362185456d0850b97b13abdab9fa11716ced9",
+    "cumulative_0.jsonl": "06f4b6f37082ec515c636be872b403216bdcb21a5b1ac2fa08f7bd0606c0fae7",
+    "cumulative_1.jsonl": "a7f0adbacc7c9463c96b0d92ca7e652109c7d6b905d86419082bb0a02c1f84f5"
+  },
+  "terminal_status": "completed_native_accumulation_diagnostic",
+  "scope": "Observed dev mechanism diagnostic; no training, labels, controller, or held-out evaluation."
+}

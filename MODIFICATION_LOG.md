@@ -1484,3 +1484,9 @@ dev全门通过后才生成最终评测：换用投影3901/3902/3903、五个新
 新增`NATIVE_ACCUMULATION_PLAN.md`、`tasks/cbf_native_accumulation.py`、`scripts/run_cbf_native_accumulation.sh`、`scripts/audit_cbf_native_accumulation.py`和`tests/test_cbf_native_accumulation.py`。实验固定最终Qwen3-4B 1B-token checkpoint、既有12K/binding场景和完整KV，只改变三个4096-token边界的快权重规则：禁写、仅首块写入、仅末块写入、每块写入前清除旧快权重、原生三次累积。
 
 主指标为正确答案NLL、正确答案相对`<|im_end|>`的logit margin及全词表首token命中；八候选和QA只作辅助。所有比较按8个来源组配对bootstrap。预登记的累积损伤门要求受限写入臂相对累积臂同时改善NLL、answer-vs-EOS margin和首token命中；另与禁写臂比较，只有NLL配对CI下界大于0才声称写入具有内容收益。清除只替换7层fast weight并保留KV；查询使用prefix深拷贝，审计父cache、参数、数据及checkpoint hash。无baseline代码路径或训练配置变更。
+
+### 原生 TTT 快权重累积机制实验：完成结果
+
+数据采集提交`546707d`在hku-gpu2两张RTX5090完成320 rollout/1280查询，9项服务器测试通过，总墙钟1453秒，最高allocated/reserved为11.872/13.889GiB。`cumulative`的binding答案NLL为6.8965，128/128查询首token均为`<|im_end|>`；`reset_each`/`last_only`的NLL为1.4877、EOS率4.69%、正确首token53.13%。相对累积，NLL改善5.4088，来源组bootstrap 95% CI `[3.4846,7.4589]`；margin提升8.7588，CI `[6.8975,10.9180]`，预登记累积损伤门通过。
+
+完全禁写的NLL为1.4243，仍显著优于`reset_each` 0.06339，95% CI `[0.02448,0.10206]`；因此受限写入内容收益门失败。`reset_each`与`last_only`全部分数逐值相同，证明块尾更新在下一块前清除后，早期delta没有被使用。增强后的独立审计提交`547f2c5`将本轮cumulative/zero与上一轮native/plain逐值桥接，所有256查询最大误差0。聚合工件和完整报告归档于`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_accumulation`；原始JSONL、语料和模型留服务器。
