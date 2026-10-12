@@ -1532,3 +1532,9 @@ v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与
 提交`34a2e70`的正式G1/G2诊断在单张RTX5090完成，墙钟54秒、核心诊断49.27秒，峰值allocated/reserved 7.633/7.643GiB。`rp128`、128维白化、256维白化的完美语义状态dev准确率分别为32.65%、31.62%、32.20%，均未通过90%门；随机码控制为100%。白化仍将通用16组件load sweep从69.16%提高到87.03%，32组件从36.36%提高到约67%，说明其改善全局容量但没有解决同一世界共享前缀key的局部冲突。test未读取，控制器未训练，独立审计与`rp128`逐bit旧结果桥均通过。
 
 新增结果归档`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_geometry_v1`。事后仅分解已存dev行：256维白化的known/unknown为37.93%/3.56%，current/historical/anchor为41.67%/17.38%/37.57%，标记为探索性定位。新增`QWEN_CONTEXTUAL_GEOMETRY_PLAN.md`及contextual诊断代码：先做Qwen/random key-value二因素替换，再比较final-layer last-token与目标span mean两种256维白化表示；白化正则与unknown阈值只在train选择，dev门槛不变，test继续封存。所有入口opt-in，baseline未修改。
+
+### Qwen contextual key/value几何：通过
+
+提交`d445a8e`的C0/C1正式实验完成，墙钟150秒、任务时间145.99秒，峰值allocated/reserved 7.867/8.277GiB。二因素dev对照中mean-Qwen/mean-Qwen为32.20%，Qwen-key/random-value为54.88%，random-key/Qwen-value为98.18%，random/random为100%，将旧表示的主要瓶颈定位到同世界相似entity key。`context_last`经train选择regularizer0.01与unknown_raw0.75后，train 99.89%，dev所有seed、family及1/2/4/8/16/32组件均100%；`context_mean`仅76.51%，未通过。独立审计通过，test未读取。
+
+新增归档`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_geometry_v1`。新增`tasks/train_cbf_qwen_contextual_forgetting.py`及runner/audit/test，冻结通过的context-last表示后复用原四动作、三seed、300 epoch控制器、全部固定/随机/盲/global-only/physics/oracle对照和原dev门槛；只有门槛通过才首次读取原封存test。`train_cbf_lowrank_forgetting.py`仅增加默认0.35不变的可选`unknown_raw`参数传递，既有baseline行为不变。

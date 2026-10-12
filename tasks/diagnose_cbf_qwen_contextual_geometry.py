@@ -138,6 +138,30 @@ def project_contextual(raw, names, dim=256):
     return tables, transforms, meta
 
 
+def apply_contextual_transform(raw, names, transforms, pooling, regularizer, dim=256):
+    """Apply a frozen train+dev contextual transform to any disjoint namespace."""
+    import torch
+
+    output, hashes = {}, {}
+    for seed in SEEDS:
+        values_by_name = {}
+        for kind in ("entity", "value"):
+            item = transforms[pooling]["seeds"][seed][kind]
+            centered = torch.stack([
+                raw[pooling][kind][name] - transforms[pooling]["means"][kind]
+                for name in names[kind]
+            ])
+            projected = centered @ item["projection"]
+            inverse = torch.rsqrt(item["eigenvalues"] + regularizer * item["regularizer_scale"])
+            matrix = (projected @ item["eigenvectors"] * inverse) @ item["eigenvectors"].T
+            matrix = matrix / matrix.norm(dim=1, keepdim=True).clamp_min(1e-8)
+            for index, name in enumerate(names[kind]):
+                values_by_name[kind, name] = matrix[index]
+        output[str(seed)] = QwenEmbeddings(seed, dim, values_by_name)
+        hashes[str(seed)] = _hash_table(values_by_name)
+    return output, hashes
+
+
 def train_grid(pairs, tables):
     output = {}
     for (internal, seed), embeddings in sorted(tables.items()):

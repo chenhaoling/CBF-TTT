@@ -110,7 +110,7 @@ def query_metrics(state: list[dict], query: dict, candidates: list[str], embeddi
 
 
 def action_outcomes(state, assignment, delta, truth, candidates, embeddings,
-                    allowed=ACTIONS) -> dict:
+                    allowed=ACTIONS, unknown_raw=.35) -> dict:
     outcomes = {}
     base_mass = sum(row["weight"] for row in state)
     target = assignment["old_refs"][0] if assignment["old_refs"] else None
@@ -119,7 +119,8 @@ def action_outcomes(state, assignment, delta, truth, candidates, embeddings,
              "global": base_mass}
     for action in allowed:
         candidate = apply_action(state, action, assignment, delta)
-        metrics = [query_metrics(candidate, row, candidates, embeddings) for row in truth]
+        metrics = [query_metrics(candidate, row, candidates, embeddings,
+                                 unknown_raw=unknown_raw) for row in truth]
         outcomes[action] = {"nll": statistics.fmean(row["nll"] for row in metrics),
                             "accuracy": statistics.fmean(row["correct"] for row in metrics),
                             "cost": costs[action]}
@@ -153,7 +154,8 @@ def features(state, assignment, delta, block_index: int, history: bool = True) -
             len(state) / 8., len(old_facts) / 20., overlap, duplicate]
 
 
-def build_examples(pairs, embeddings: Embeddings, allowed=ACTIONS, history=True):
+def build_examples(pairs, embeddings: Embeddings, allowed=ACTIONS, history=True,
+                   unknown_raw=.35):
     rows, ties = [], 0
     for inp, target in pairs:
         state, candidates = [], episode_candidates(target)
@@ -163,7 +165,8 @@ def build_examples(pairs, embeddings: Embeddings, allowed=ACTIONS, history=True)
             delta = batch_delta(assignment, block["index"], embeddings)
             if block["index"] in boundaries:
                 truth = boundary_truth(inp, target, block["index"])
-                outcome = action_outcomes(state, assignment, delta, truth, candidates, embeddings, allowed)
+                outcome = action_outcomes(state, assignment, delta, truth, candidates, embeddings,
+                                          allowed, unknown_raw)
                 ties += outcome["tied"]
                 rows.append({"group_id": inp["group_id"], "episode_id": inp["id"],
                              "block_index": block["index"],
@@ -207,7 +210,7 @@ def controller_action(controller, values) -> str:
 
 
 def select_action(policy, state, assignment, delta, block_index, truth, candidates,
-                  embeddings, controllers, episode_id):
+                  embeddings, controllers, episode_id, unknown_raw=.35):
     if policy.startswith("fixed_"):
         return policy.removeprefix("fixed_")
     if policy == "random":
@@ -216,7 +219,8 @@ def select_action(policy, state, assignment, delta, block_index, truth, candidat
     if policy == "physics":
         return "local" if assignment["old_refs"] else "global" if assignment["prelude_lines"] else "retain"
     if policy == "oracle":
-        return action_outcomes(state, assignment, delta, truth, candidates, embeddings)["label"]
+        return action_outcomes(state, assignment, delta, truth, candidates, embeddings,
+                               unknown_raw=unknown_raw)["label"]
     if policy == "learned":
         return controller_action(controllers["learned"], features(state, assignment, delta, block_index, True))
     if policy == "reference_blind":
@@ -226,7 +230,7 @@ def select_action(policy, state, assignment, delta, block_index, truth, candidat
     raise ValueError("unknown low-rank policy")
 
 
-def evaluate_policy(pairs, policy, embeddings, controllers):
+def evaluate_policy(pairs, policy, embeddings, controllers, unknown_raw=.35):
     records = []
     for inp, target in pairs:
         state, queries, decisions = [], [], []
@@ -237,12 +241,14 @@ def evaluate_policy(pairs, policy, embeddings, controllers):
             if block["index"] in boundaries:
                 truth = boundary_truth(inp, target, block["index"])
                 action = select_action(policy, state, assignment, delta, block["index"], truth,
-                                       candidates, embeddings, controllers, inp["id"])
-                oracle = action_outcomes(state, assignment, delta, truth, candidates, embeddings)["label"]
+                                       candidates, embeddings, controllers, inp["id"], unknown_raw)
+                oracle = action_outcomes(state, assignment, delta, truth, candidates, embeddings,
+                                         unknown_raw=unknown_raw)["label"]
                 state = apply_action(state, action, assignment, delta)
                 decisions.append({"block": block["index"], "selected": action, "oracle": oracle})
                 for row in truth:
-                    queries.append({**row, **query_metrics(state, row, candidates, embeddings)})
+                    queries.append({**row, **query_metrics(
+                        state, row, candidates, embeddings, unknown_raw=unknown_raw)})
             else:
                 state = apply_action(state, "retain", assignment, delta)
         records.append({"episode_id": inp["id"], "group_id": inp["group_id"],
