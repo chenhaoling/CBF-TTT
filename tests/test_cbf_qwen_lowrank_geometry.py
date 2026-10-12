@@ -58,6 +58,24 @@ class GeometryTests(unittest.TestCase):
         self.assertLess(geometry(_normalize_rows(white))["absolute_off_diagonal_cosine"]["mean"],
                         geometry(_normalize_rows(rows))["absolute_off_diagonal_cosine"]["mean"])
 
+    def test_rp128_is_bit_exact_v1_bridge(self):
+        from tasks.diagnose_cbf_qwen_lowrank_geometry import build_representations
+        from tasks.train_cbf_qwen_lowrank_forgetting import build_embeddings
+        class Tokenizer:
+            def encode(self, text, add_special_tokens=False):
+                return [ord(char) % 31 for char in text]
+        class Model:
+            def __init__(self):
+                self.embedding = torch.nn.Embedding(32, 12)
+                self.lm_head = torch.nn.Linear(12, 32, bias=False)
+            def get_input_embeddings(self): return self.embedding
+        pairs = [({}, {"semantic_events": [[{"op": "assign", "facts": {
+            "unit_a": "code_1", "unit_b": "code_2"}}]]})]
+        model, tokenizer = Model(), Tokenizer()
+        _, _, meta = build_representations(model, tokenizer, pairs)
+        _, old_meta, _ = build_embeddings(model, tokenizer, pairs, 128)
+        self.assertEqual(meta["hashes"]["rp128"], old_meta["hashes"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -14,7 +14,9 @@ from tasks.build_cbf_event_curriculum import replay
 from tasks.pack_cbf_event_warmup import sha
 from tasks.train_cbf_event_writer import write_json
 from tasks.train_cbf_lowrank_forgetting import Embeddings, episode_candidates
-from tasks.train_cbf_qwen_lowrank_forgetting import QwenEmbeddings, SEEDS, _mean_rows, strings
+from tasks.train_cbf_qwen_lowrank_forgetting import (
+    QwenEmbeddings, SEEDS, _mean_rows, build_embeddings, strings,
+)
 from tasks.train_cbf_structured_forgetting import boundary_truth, load_split
 
 
@@ -125,6 +127,22 @@ def build_representations(model, tokenizer, pairs):
                 tables[label, str(seed)] = QwenEmbeddings(seed, dim, values_by_name)
                 meta["hashes"].setdefault(label, {})[str(seed)] = _hash_table(values_by_name)
                 meta["geometry"].setdefault(label, {})[str(seed)] = geometry_by_kind
+    # The registered baseline is produced through the exact v1 scalar projection path.
+    # A batched GEMM is mathematically equivalent but not bit-identical because its
+    # floating-point reduction order differs, which would break the artifact bridge.
+    baseline, baseline_meta, baseline_transforms = build_embeddings(model, tokenizer, pairs, 128)
+    transforms["means"] = baseline_transforms["means"]
+    for seed in SEEDS:
+        tables["rp128", str(seed)] = baseline[str(seed)]
+        meta["hashes"]["rp128"][str(seed)] = baseline_meta["hashes"][str(seed)]
+        transforms["dimensions"][128][seed]["entity"]["projection"] = \
+            baseline_transforms["projections"][(str(seed), "entity")]
+        transforms["dimensions"][128][seed]["value"]["projection"] = \
+            baseline_transforms["projections"][(str(seed), "value")]
+        for kind in ("entity", "value"):
+            rows = __import__("torch").stack(
+                [baseline[str(seed)].get(kind, name) for name in names[kind]])
+            meta["geometry"]["rp128"][str(seed)][kind] = geometry(rows)
     return tables, transforms, meta
 
 
