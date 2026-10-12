@@ -339,6 +339,8 @@ The contextual forgetting v2 [passed its development gate and one-time sealed te
 
 The first subject-disjoint [ZsRE contextual readout](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_contextual_readout_v1/REPORT.md) reached 100% exact and about 98.7% rephrase accuracy, but same-subject different-relation locality reached 88.26%, below the fixed 90% development gate. Test remained sealed. The registered [contrastive key study](ZSRE_CONTRASTIVE_KEY_PLAN.md) now isolates whether calibration-only prompt/rephrase alignment with explicit locality hard negatives fixes that natural-key failure without changing values, memory, backbone, or the release gate.
 
+That [contrastive key study is complete](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_contrastive_keys_v1/REPORT.md). Relation-aware alignment raised locality from 88.26% to 99.09%, but unseen-subject rephrase accuracy fell to about 69.5%; positive-only alignment showed the same generalization problem. The gate failed and test remained sealed. The next iteration replaces the global key warp with a pairwise query–memory scope resolver and explicitly treats locality as “defer to the frozen model.”
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.

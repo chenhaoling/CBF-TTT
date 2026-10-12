@@ -1,0 +1,33 @@
+{
+  "protocol": "zsre_contrastive_keys_v1",
+  "data_manifest_sha256": "34d95490f326d3b5f57bb4ab4d7e208c6eada246a92510264d20a38996f68b21",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "seeds": [
+    5101,
+    5102,
+    5103
+  ],
+  "arms": [
+    "identity",
+    "positive_only",
+    "relation_aware"
+  ],
+  "rank": 16,
+  "epochs": 300,
+  "temperature": 0.07,
+  "locality_margin": 0.2,
+  "locality_weight": 0.5,
+  "learning_rate": 0.01,
+  "weight_decay": 0.0001,
+  "fit_split": "calibration",
+  "gate_split": "dev",
+  "test_release_rule": "primary relation-aware arm passes unchanged ZsRE v1 gate",
+  "test_scored": false
+}

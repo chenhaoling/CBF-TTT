@@ -1565,3 +1565,17 @@ bash scripts/run_zsre_contrastive_keys.sh
 ```
 
 No baseline entry point or default configuration is changed. The learned head is an opt-in diagnostic module and introduces no new dependency. If it fails development, the registered stop rule keeps test sealed and requires a joint reference resolver/retrieval objective rather than lowering the locality threshold.
+
+### Contrastive alignment result
+
+Commit `f2c6ed9` completed on one RTX5090. All six server tests and the independent artifact audit passed; the identity arm reproduced every v1 development JSONL byte for byte. The primary relation-aware arm raised combined locality from 88.26% to 99.09%, while original/updated rephrase fell to 69.66/69.29%, below the unchanged 70% gates. Positive-only reached 99.97% locality but only 70.66/68.29% rephrase. Exact accuracy stayed at 100.00/99.63% for relation-aware. The test split remained sealed.
+
+All trained seeds reached 100% calibration prompt-to-rephrase retrieval, so this is subject-disjoint overfitting rather than under-optimization. Source inspection clarified that ZsRE locality may be nearly synonymous with the edited relation but carries an unchanged ground truth; `unknown` in this constructed memory benchmark means deferring to the frozen model, not claiming the factual answer is unknown. The next registered method will learn pairwise query–memory scope instead of applying one global key transform.
+
+### Pairwise scope resolver (before execution)
+
+Added `ZSRE_SCOPE_RESOLVER_PLAN.md`, `tasks/train_zsre_scope_resolver.py`, `scripts/run_zsre_scope_resolver.sh`, `scripts/audit_zsre_scope_resolver.py`, and `tests/test_zsre_scope_resolver.py`. The primary resolver encodes each query jointly with each of the eight session memory prompts using the frozen final Qwen checkpoint, L2-normalizes the final-token hidden state, and trains only a linear score plus a `defer` logit. It receives no subject ID, relation label, answer, future event, split name, or row identifier.
+
+The 34 calibration sessions are deterministically divided into 27 fit and seven checkpoint-selection sessions. Three initialization seeds train for 200 full-batch epochs; only epochs 10/25/50/100/200 can be selected by calibration-tune accuracy/NLL. A structured frozen bi-encoder cosine resolver is the control. The unchanged 267-subject dev split is used only for a six-part release gate, including ≥90% exact, ≥70% rephrase, ≥90% locality, ≥80% minimum-seed overall, ≥5-point gain over the control, and a positive session-bootstrap lower bound. Test remains conditionally sealed.
+
+Run with `bash scripts/run_zsre_scope_resolver.sh` on `hku-gpu2`. All behavior is opt-in and does not modify baseline inference, training, `ttt_proj`, or `ttt_conv`.
