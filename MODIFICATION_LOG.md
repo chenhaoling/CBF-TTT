@@ -1444,3 +1444,9 @@ dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对�
 服务器13/13测试、128/32/32新语料、三投影seed、dev gate、按gate一次性test和独立全量重算审计通过。learned的dev/test top-1为96.82/96.68%，NLL为0.3842/0.3895；oracle为96.93/96.85%。最强固定local为82.07/82.13%；learned在dev提升14.75点，95% CI `[14.06,15.35]`，test提升14.55点，95% CI `[13.98,15.12]`。相对只允许global alpha 0/0.5/1的learned controller，test提升18.32点，95% CI `[17.80,18.85]`。三个test投影seed的learned为97.85/95.75/96.74%，稳定贴近oracle。CPU全流程139.3秒。
 
 但每seed 6144个训练决策中，alpha=0.5仅出现14–17次（0.23–0.28%），local约3060次，alpha=0约1530次，alpha=1固定1536次。因此结果强力支持选择性local/global遗忘，但不支持“中间连续alpha普遍有用”。归档`experiments/cbf_ttt/lowrank_forgetting_v1`；下一实验专门构造旧事实保留与新更新接受的连续权衡场景，用更密alpha网格验证内点最优和连续回归。
+
+### 连续alpha权衡场景分布预检（执行前）
+
+新增`CONTINUOUS_FORGETTING_PLAN.md`、`tasks/train_cbf_continuous_forgetting.py`和`tests/test_cbf_continuous_forgetting.py`。每个场景先写6–12个低秩旧事实，当前delta以0.55–1.55的强度覆盖其中变动数量的key、重复部分事实并加0–4个新key；未被更新的历史事实和新值同时纳入固定查询集。对`alpha={0,0.25,0.5,0.75,1}`在同一`(1-alpha)M+Delta`状态上比较查询NLL，并列选较小alpha。
+
+控制特征只包括memory/delta范数和对齐、conflict/duplicate/new/retained比例、fact数、当前写入强度和key相关性，不包含值ID、答案或任何未来损失。正式实验前先对40组×20场景×3个memory seed做label-distribution probe；只有内点总比例≥30%且至少两个不同内点各占≥5%才冻结正式协议。本地确定性/互斥性测试通过，torch网格最优测试因本地无torch跳过；语法和diff检查通过。
