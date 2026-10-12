@@ -361,6 +361,8 @@ The completed [V4 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/scoped_
 
 The completed [V5 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/relation_supervised_scope_v5/REPORT.md) reached 97.83% candidate top-1 and 98.92% MRR, a 14.90-point gain over V4 with CI `[12.23,17.58]`. Its exact relation-class auxiliary was 87.64%, below the preregistered 90% floor, even though pairwise compatibility remained correct for 82/97 class errors. [Automatic factorized V6](AUTOMATIC_FACTORIZED_SCOPE_V6_PLAN.md) now replaces the supplied subject span with an IDF-weighted shared-span rule and evaluates fully text-only entity/relation scope resolution before any causal deletion experiment.
 
+The completed [V6 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/automatic_factorized_scope_v6/REPORT.md) reached 93.25% text-only top-1 and 96.37% MRR, improving over V4 by 10.32 points with CI `[7.52,13.25]`, but it missed the 95%/97% gate. Every inner fold selected the maximum registered combination weight and improved monotonically through that boundary. [V7](AUTOMATIC_SCOPE_BOUNDARY_V7_PLAN.md) therefore performs one fixed boundary extension; failure permanently stops scalar scope-weight tuning, while a pass freezes the resolver for causal evaluation.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.

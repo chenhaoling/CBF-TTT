@@ -161,9 +161,9 @@ def metrics(rows):
             "mrr": statistics.fmean(row["reciprocal_rank"] for row in rows)}
 
 
-def select_weight(rows):
-    grid = {str(value): metrics(predict(rows, value, "inner")) for value in LAMBDAS}
-    selected = max(LAMBDAS, key=lambda value: (
+def select_weight(rows, weights=LAMBDAS):
+    grid = {str(value): metrics(predict(rows, value, "inner")) for value in weights}
+    selected = max(weights, key=lambda value: (
         grid[str(value)]["top1_accuracy"], grid[str(value)]["mrr"],
         -abs(value - 2.), -value))
     return selected, grid
@@ -210,6 +210,8 @@ def run(args):
     from tasks.cbf_checkpoint_native import load_model
 
     root = Path(args.output); root.mkdir(parents=True, exist_ok=False)
+    weights = tuple(args.lambdas) if getattr(args, "lambdas", None) else LAMBDAS
+    protocol = getattr(args, "protocol", PROTOCOL)
     corpus, corpus_manifest = load_corpus(args.corpus_root)
     groups = [row for row in corpus if row["source"] == "counterfact"
               and row["target"] < MAX_KEYS]
@@ -241,7 +243,7 @@ def run(args):
     final_rows, selection = [], {}
     for outer in range(FOLDS):
         inner = (outer + 1) % FOLDS
-        weight, grid = select_weight(scores_by_fold[str(inner)])
+        weight, grid = select_weight(scores_by_fold[str(inner)], weights)
         final_rows.extend(predict(scores_by_fold[str(outer)], weight, outer))
         selection[str(outer)] = {"inner_fold": inner, "weight": weight,
                                   "inner_grid": grid}
@@ -256,14 +258,14 @@ def run(args):
     v5_top1 = v5_summary["counterfact_oof"]["top1_accuracy"]
     gate = development_gate(metric, versus_v4, v5_top1)
     seconds = time.perf_counter() - started
-    summary = {"protocol": PROTOCOL, "data_status": "observed_development_only",
+    summary = {"protocol": protocol, "data_status": "observed_development_only",
                "counterfact_oof": metric, "v6_vs_v4": versus_v4,
                "v6_vs_oracle_segmented_v5": versus_v5,
                "oracle_segmented_v5_top1": v5_top1,
                "development_gate": gate,
                "next_stage": "causal_automatic_scope_forgetting" if gate["passed"]
                else "revise_automatic_entity_scope",
-               "terminal_status": "completed_automatic_factorized_scope_v6"}
+               "terminal_status": f"completed_{protocol}"}
     training = {"seconds": seconds,
                 "gpu_peak_allocated_gib": torch.cuda.max_memory_allocated() / 2**30,
                 "gpu_peak_reserved_gib": torch.cuda.max_memory_reserved() / 2**30,
@@ -271,14 +273,14 @@ def run(args):
                 "source_documents": len(documents), "idf_training_documents": idf_sizes,
                 "selection": selection, "embedding_hashes": embedding_hashes,
                 "raw_rows_sha256": {path.name: sha(path)}}
-    manifest = {"protocol": PROTOCOL,
+    manifest = {"protocol": protocol,
                 "corpus_manifest_sha256": sha(Path(args.corpus_root) / "manifest.json"),
                 "counterfact_source_sha256": sha(args.counterfact_source),
                 "v5_summary_sha256": sha(Path(args.v5_root) / "summary.json"),
                 "v4_summary_sha256": sha(Path(args.v4_root) / "summary.json"),
                 "model": args.model, "tokenizer": args.tokenizer,
                 "loading_info": model_meta["loading_info"],
-                "lambdas": list(LAMBDAS), "window": WINDOW,
+                "lambdas": list(weights), "window": WINDOW,
                 "inference_subject_metadata_used": False,
                 "inference_relation_ids_used": False,
                 "chain_identity_in_features": False, "candidate_age_used": False,
@@ -301,9 +303,10 @@ def main():
     parser.add_argument("--model", required=True)
     parser.add_argument("--tokenizer", required=True)
     parser.add_argument("--batch-size", type=int, default=256)
+    parser.add_argument("--lambdas", type=float, nargs="+")
+    parser.add_argument("--protocol", default=PROTOCOL)
     print(json.dumps(run(parser.parse_args()), indent=2))
 
 
 if __name__ == "__main__":
     main()
-
