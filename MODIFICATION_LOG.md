@@ -1502,3 +1502,9 @@ v1实际Q的两个域八选一均100%，8/8组双twin正确，但全词表首tok
 新增`FASTWEIGHT_CONTENT_V2_PLAN.md`、`tasks/cbf_fastweight_content_v2.py`及对应runner/audit/test。v2不降低门槛：在已观察dev组0–7比较三个预设小写单词模板，按最差域首token固定选择；只将唯一模板送到组8–15 Q，Q通过后才首次评分组16–23 V。V的干预、内容绑定/效用阈值与v1相同。
 
 v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与首token均100%；随后首次解封V。Correct/Wrong/Zero/Random的答案NLL为0.12824/0.13041/0.10799/0.11032。Correct相对Wrong收益0.00216，95% CI `[-0.00064,0.00493]`；特异性margin提升0.01953，CI `[-0.00781,0.04297]`。Zero与Random均显著优于Correct，内容绑定和内容效用门失败。独立审计从parquet重建48场景并重算三阶段和bootstrap通过；墙钟164秒，峰值allocated/reserved 10.867/11.746GiB。完整归档位于`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/fastweight_content_v2`。
+
+### 最终checkpoint writer内容绑定恢复（执行前）
+
+新增`FINAL_WRITER_BINDING_PLAN.md`、`tasks/train_final_writer_binding.py`、`scripts/run_final_writer_binding.sh`、`scripts/audit_final_writer_binding.py`及`tests/test_final_writer_binding.py`。与此前从Qwen基座新初始化writer的实验不同，本轮加载1B-token最终checkpoint中的既有`ttt_conv/ttt_proj`，冻结全部非writer参数。已审计v2场景只替换唯一颜色token，为每个来源组生成同一查询对应8种反事实值；组0–7用于嵌套调参与最终训练，组8–15为Q，组16–23保持封存至Q通过。
+
+`cbf_ttt.event_writer.write_memory_after_prefix`新增可选的两块写入路径：第一块只构造冻结KV，第二个完整块生成可微delta，查询使用fresh KV。训练采用八选一CE、全词表CE、同一步对称counterfactual swap和Correct-vs-Zero margin，逐层delta cap固定为0.3。调参只比较预登记的`3e-7/1e-6`，随后从原最终checkpoint重新初始化、用组选定学习率训练；Q门要求Correct同时优于Wrong/Zero/等范数Random且source-group bootstrap下界大于0，通过后才允许一次性V。所有入口均为opt-in，baseline默认配置和原生公式未修改。

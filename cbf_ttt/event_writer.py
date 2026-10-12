@@ -51,6 +51,26 @@ def write_memory(model, ids, max_relative_norm=None):
     return bound_memory(model,memory,max_relative_norm)
 
 
+def write_memory_after_prefix(model, prefix_ids, ids, max_relative_norm=None):
+    """Generate one differentiable delta after a frozen attention-only prefix.
+
+    The prefix recreates the two-block native layout, but its KV is discarded
+    before the query. Only the complete second block contributes a candidate.
+    """
+    if len(prefix_ids)!=model.config.ttt_chunk or len(ids)!=model.config.ttt_chunk:
+        raise ValueError('prefix and writer block must each be one complete chunk')
+    cache=cache_for(model,collect=False)
+    with torch.no_grad():
+        forward(model,prefix_ids,cache)
+    cache.cbf_collect=True
+    cache.cbf_candidates={}
+    forward(model,ids,cache)
+    memory=cache.cbf_candidates
+    if set(memory)!=set(model.config.ttt_layers):raise ValueError('missing prefixed writer layer')
+    if any(not torch.isfinite(v).all() for v in memory.values()):raise RuntimeError('nonfinite prefixed delta')
+    return bound_memory(model,memory,max_relative_norm)
+
+
 def answer_logits(model,memory,query,answer,cache=None):
     if not query or not answer:raise ValueError('empty supervision')
     cache=cache if cache is not None else cache_for(model,memory)
