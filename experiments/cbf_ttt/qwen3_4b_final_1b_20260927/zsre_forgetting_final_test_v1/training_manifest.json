@@ -1,0 +1,22 @@
+{
+  "protocol": "zsre_counterfactual_forgetting_final_test_v1",
+  "boundary_protocol": "zsre_counterfactual_forgetting_dev_threshold_v1",
+  "controller_protocol": "zsre_counterfactual_forgetting_controller_loso_v3",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "selected_threshold": 0.675,
+  "selection_rule": [
+    "action_accuracy",
+    "worst_hard_or_update",
+    "query_accuracy"
+  ],
+  "test_release_evidence": "audited passing development boundary diagnostic",
+  "test_loaded": true,
+  "test_scored": true
+}

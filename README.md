@@ -347,6 +347,8 @@ The decomposed retrieve/defer gate [passed development and its one-time test](ex
 
 The first calibration-only [natural sequential forgetting pilot](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_natural_forgetting_pilot_v1/REPORT.md) found that simple cosine-local deletion already reached 97.21%, near the 97.77% oracle, while direct learned-gate transfer reached only 84.43%. Development and test remained unopened. The next calibration pilot adds same-subject locality facts as hard retain events so semantic scope, rather than only subject novelty, is required.
 
+The expanded subject-disjoint [ZsRE learned-forgetting test](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_forgetting_final_test_v1/REPORT.md) is complete. At the development-selected threshold, learned forgetting reached 77.23% query and 95.16% action accuracy versus cosine-local 70.67/82.43%, with paired gains of +6.59 points (95% CI `[5.43,7.79]`) and +12.73 points (CI `[10.27,15.25]`). The independent audit passed. The strict absolute gate failed because update action was 89.34%; the supported claim is robust relative improvement in constructed candidate memory. Native dense-writer content binding remains unsupported, so the next architecture step uses the validated Qwen low-rank fast memory with automatic natural evidence and a new untouched benchmark.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.

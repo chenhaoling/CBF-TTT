@@ -84,6 +84,7 @@ python -m scripts.download_cbf_eval_data --output /data/cbf_ttt/eval
 | MMLU | [cais/mmlu](https://huggingface.co/datasets/cais/mmlu) | `mmlu/dev.jsonl`、`mmlu/test.jsonl`，配置 `all` |
 | LongMemEval-S | [longmemeval-cleaned](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned) | `longmemeval_s/longmemeval_s_cleaned.json`；约 277 MB |
 | LoCoMo | [snap-research/locomo](https://github.com/snap-research/locomo) | `locomo/locomo10.json`；本项目文本评测使用文字和图片 caption |
+| CounterFact | [ROME 官方数据](https://github.com/kmeng01/rome) | `counterfact/counterfact.json`；用于 ZsRE 控制器的零样本跨数据集遗忘验证 |
 | RULER | [OpenCompass RULER 数据配置](https://github.com/open-compass/opencompass/tree/main/opencompass/configs/datasets/ruler) | 按 `eval_config/ruler_*.py` 在评测时生成，不由下载脚本取固定 JSON |
 | RULER/QA | 同上 | 使用 RULER 的 SQuAD/HotpotQA 子任务；入口 [`eval_config/ruler_qa_4k.py`](eval_config/ruler_qa_4k.py) |
 

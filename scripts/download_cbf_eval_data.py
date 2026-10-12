@@ -49,6 +49,14 @@ def main():
     manifest["locomo"] = {"url": locomo_url, "file": str(locomo_path),
                           "sha256": sha256(locomo_path), "bytes": locomo_path.stat().st_size}
 
+    counterfact_url = "https://rome.baulab.info/data/dsets/counterfact.json"
+    counterfact_path = root / "counterfact" / "counterfact.json"
+    counterfact_path.parent.mkdir(parents=True, exist_ok=True)
+    urllib.request.urlretrieve(counterfact_url, counterfact_path)
+    manifest["counterfact"] = {"url": counterfact_url, "file": str(counterfact_path),
+                               "sha256": sha256(counterfact_path),
+                               "bytes": counterfact_path.stat().st_size}
+
     mmlu_folder = root / "mmlu"
     mmlu_folder.mkdir(parents=True, exist_ok=True)
     for split in ("dev", "test"):
