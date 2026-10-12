@@ -1,0 +1,25 @@
+{
+  "protocol": "crossdomain_forgetting_reranker_v2_constraint_calibration",
+  "source_protocol": "crossdomain_forgetting_reranker_v2",
+  "counterfact_manifest_sha256": "ef5b929858c44c7c582cd10044989496267163aa0c095d5166729d71189b93ed",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "selection_rule": [
+    "feasible_hard_85_update_75",
+    "overall_action",
+    "primary_update",
+    "proximity_to_0.5",
+    "minimum_constraint_deficit_fallback"
+  ],
+  "weights_changed": false,
+  "counterfact_status": "observed_development_only",
+  "longmemeval_scored": false,
+  "locomo_scored": false,
+  "units": 785
+}
