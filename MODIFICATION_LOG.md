@@ -1490,3 +1490,9 @@ dev全门通过后才生成最终评测：换用投影3901/3902/3903、五个新
 数据采集提交`546707d`在hku-gpu2两张RTX5090完成320 rollout/1280查询，9项服务器测试通过，总墙钟1453秒，最高allocated/reserved为11.872/13.889GiB。`cumulative`的binding答案NLL为6.8965，128/128查询首token均为`<|im_end|>`；`reset_each`/`last_only`的NLL为1.4877、EOS率4.69%、正确首token53.13%。相对累积，NLL改善5.4088，来源组bootstrap 95% CI `[3.4846,7.4589]`；margin提升8.7588，CI `[6.8975,10.9180]`，预登记累积损伤门通过。
 
 完全禁写的NLL为1.4243，仍显著优于`reset_each` 0.06339，95% CI `[0.02448,0.10206]`；因此受限写入内容收益门失败。`reset_each`与`last_only`全部分数逐值相同，证明块尾更新在下一块前清除后，早期delta没有被使用。增强后的独立审计提交`547f2c5`将本轮cumulative/zero与上一轮native/plain逐值桥接，所有256查询最大误差0。聚合工件和完整报告归档于`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_accumulation`；原始JSONL、语料和模型留服务器。
+
+### 单次原生 Fast Weight 内容因果实验（执行前）
+
+新增`FASTWEIGHT_CONTENT_PLAN.md`、`tasks/cbf_fastweight_content.py`、`scripts/run_cbf_fastweight_content.sh`、`scripts/audit_cbf_fastweight_content.py`和`tests/test_cbf_fastweight_content.py`。复用从未评分的16个confirm来源组，组8–15只做`short/single/qa`完整KV读取门，组16–23在Q通过后才评分。V固定第一块禁写、事实所在第二块单次写入；每个查询保持self KV不变，只替换为Correct、Wrong-twin、Zero或三个逐层等范数Rademacher随机fast weight。
+
+内容绑定与内容效用分开判定：前者要求Correct相对Wrong/Random同时改善答案NLL并提升own-vs-twin margin，后者要求Correct相对Zero改善NLL且候选准确率不降；全部差值按8个来源组bootstrap。构造器验证Q/V来源互斥、twin只差一个事实token和分域颜色平衡；collector验证单次写入、父cache/骨干不变和随机范数；独立审计从原始parquet重建场景并重算Q/V结果。baseline入口和配置不变。
