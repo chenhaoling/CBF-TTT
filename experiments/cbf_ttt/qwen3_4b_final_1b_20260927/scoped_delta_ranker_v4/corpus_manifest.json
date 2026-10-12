@@ -1,0 +1,45 @@
+{
+  "protocol": "scoped_delta_corpus_v1",
+  "max_keys": 8,
+  "sources": {
+    "zsre_manifest_sha256": "c5056824efa867532a33ff460976aaaf6d709ff1900acc562fc26c4b5ae1026f",
+    "counterfact_manifest_sha256": "ef5b929858c44c7c582cd10044989496267163aa0c095d5166729d71189b93ed"
+  },
+  "statistics": {
+    "zsre": {
+      "groups": 2832,
+      "local_groups": 1030,
+      "retain_groups": 1802,
+      "candidates": 15434,
+      "candidate_types": {
+        "same_chain_positive": 1030,
+        "same_subject_different_chain": 2060,
+        "different_subject": 12344
+      },
+      "query_subject_span_rate": 0.9774011299435028,
+      "candidate_subject_span_rate": 0.9926785020085526
+    },
+    "counterfact": {
+      "groups": 2158,
+      "local_groups": 785,
+      "retain_groups": 1373,
+      "candidates": 11763,
+      "candidate_types": {
+        "same_chain_positive": 785,
+        "same_subject_different_chain": 1570,
+        "different_subject": 9408
+      },
+      "query_subject_span_rate": 1.0,
+      "candidate_subject_span_rate": 1.0
+    }
+  },
+  "chain_identity_in_model_features": false,
+  "subject_metadata_role": "oracle_segmentation_diagnostic",
+  "relation_labels_used": false,
+  "longmemeval_scored": false,
+  "locomo_scored": false,
+  "files_sha256": {
+    "groups.jsonl": "629da2eec08ec4f9d56de136c5d558ba03e73004665616131f15e681ae0567d4"
+  },
+  "content_sha256": "629da2eec08ec4f9d56de136c5d558ba03e73004665616131f15e681ae0567d4"
+}

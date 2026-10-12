@@ -78,6 +78,7 @@ def decision_groups(sessions, source, split):
                         "label": int(index == target),
                         "age": step - row["written_step"],
                         "chain_id": row["chain_id"],
+                        "source_row_sha256": row["source_row_sha256"],
                     })
                 groups.append({
                     "source": source,
@@ -91,6 +92,7 @@ def decision_groups(sessions, source, split):
                     "query_subject": chain["subject"],
                     "query_relation": query_relation,
                     "query_subject_span_found": query_found,
+                    "query_source_row_sha256": version.get("source_row_sha256"),
                     "target": target,
                     "candidates": candidates,
                 })
@@ -99,7 +101,8 @@ def decision_groups(sessions, source, split):
             relation_prompt, found = mask_subject(version["prompt"], chain["subject"])
             memory.append({"chain_id": event["chain_id"], "prompt": version["prompt"],
                            "subject": chain["subject"], "relation_prompt": relation_prompt,
-                           "subject_span_found": found, "written_step": step})
+                           "subject_span_found": found, "written_step": step,
+                           "source_row_sha256": version.get("source_row_sha256")})
     return groups
 
 

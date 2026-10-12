@@ -14,9 +14,10 @@ class ScopedDeltaCorpusTests(unittest.TestCase):
     def test_decision_groups_label_hard_negative(self):
         sessions = [{"id": "s", "chains": [
             {"id": "p", "subject": "Ada", "versions": [
-                {"prompt": "Ada was born in"}, {"prompt": "Birthplace of Ada"}]},
+                {"prompt": "Ada was born in", "source_row_sha256": "p0"},
+                {"prompt": "Birthplace of Ada", "source_row_sha256": "p1"}]},
             {"id": "a", "subject": "Ada", "parent_chain_id": "p", "versions": [
-                {"prompt": "Ada worked as"}]},
+                {"prompt": "Ada worked as", "source_row_sha256": "a0"}]},
         ], "events": [
             {"chain_id": "p", "version": 0, "action": "retain", "kind": "primary_initial"},
             {"chain_id": "a", "version": 0, "action": "retain", "kind": "hard_retain"},
@@ -30,6 +31,8 @@ class ScopedDeltaCorpusTests(unittest.TestCase):
         self.assertEqual([row["negative_type"] for row in update["candidates"]],
                          ["same_chain_positive", "same_subject_different_chain"])
         self.assertEqual([row["label"] for row in update["candidates"]], [1, 0])
+        self.assertEqual(update["query_source_row_sha256"], "p1")
+        self.assertEqual(update["candidates"][0]["source_row_sha256"], "p0")
 
     def test_chain_identity_is_not_encoded_in_visible_fields(self):
         text, _ = mask_subject("Grace Hopper created", "Grace Hopper")
@@ -38,4 +41,3 @@ class ScopedDeltaCorpusTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

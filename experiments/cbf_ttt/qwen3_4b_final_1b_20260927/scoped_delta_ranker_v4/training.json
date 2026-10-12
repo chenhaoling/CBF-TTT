@@ -1,0 +1,2819 @@
+{
+  "seconds": 158.52105547487736,
+  "gpu_peak_allocated_gib": 8.60197114944458,
+  "gpu_peak_reserved_gib": 10.546875,
+  "groups": {
+    "zsre_local": 1030,
+    "counterfact_local": 785
+  },
+  "unique_texts": 7763,
+  "unique_pair_texts": 28577,
+  "feature_dimensions": {
+    "structured_full": 5143,
+    "no_relation": 2572,
+    "no_subject": 5142
+  },
+  "component_dimensions": {
+    "base_dim": 2571,
+    "relation_dim": 2571
+  },
+  "counterfact_folds": {
+    "9224cd55a8fc10ce": 0,
+    "e7776b7693e15f71": 1,
+    "7c60a37e0f117e2d": 2,
+    "ea2be0280afe2fce": 3,
+    "53fe724a557a8768": 4,
+    "c6c10d9588186ec0": 0,
+    "3116ad9655f3da32": 1,
+    "5aab001f81ae2287": 2,
+    "8b6d5fda0b49642f": 3,
+    "dbf174c84f86928d": 4,
+    "3ba2a9c85a9e4d58": 0,
+    "ad19595584c8ea67": 1,
+    "ee9a6e87c998578f": 2,
+    "e2bcd2ef72d1465c": 3,
+    "5c6a936e73919666": 4,
+    "a752d39d38387b17": 0,
+    "940f0b6adcd4465d": 1,
+    "e31fa267c7eed240": 2,
+    "34d1a2ed3077db8d": 3,
+    "85d606afe23de5ce": 4,
+    "88811f851926ad7f": 0,
+    "a41aae44d34318ed": 1,
+    "6becb0aaecfa25c2": 2,
+    "20b53578b1a82ed5": 3,
+    "5067f5405d09563c": 4,
+    "af596e63eb9bf9c3": 0,
+    "2402c2fb7a36d3ca": 1,
+    "04e0ea0a80d786c8": 2,
+    "d2aaaa26f1e929ba": 3,
+    "c4fa14241c15cae3": 4,
+    "2d5b69ce838db69b": 0,
+    "43c82e49ccb97d53": 1,
+    "81c8ef4d789dd8b0": 2,
+    "cc2f6c82c93285a6": 3,
+    "acd1781e68fa4b85": 4,
+    "37aab4d05f33dccd": 0,
+    "0e288fb98b7793f9": 1,
+    "07b6638b6405e1a7": 2,
+    "87bb2703d11ae25f": 3,
+    "5a7bb4747920a9b3": 4,
+    "1d74ff199278853d": 0,
+    "fad5f436c1c31c54": 1,
+    "cdb9cca34cb3c6bc": 2,
+    "fb4f2f2d36e21c35": 3,
+    "5a9806beca207b6b": 4,
+    "1a9ba15b02a1b860": 0,
+    "53ac170a6abd04c9": 1,
+    "9c5fa011345d6175": 2,
+    "d45ad616c69163eb": 3,
+    "ed4c62248db25aa6": 4,
+    "a44cafafc21c6be2": 0,
+    "a04dda1043b16069": 1,
+    "34ec92213db562aa": 2,
+    "23086c23475563e9": 3,
+    "ae18cd4c6674255f": 4,
+    "7208c1b3da5e2674": 0,
+    "c8a61293f47a9d67": 1,
+    "7c3c1af06dfa6dbf": 2,
+    "89f73ca80935aff5": 3,
+    "71dbc95c93e41a2c": 4,
+    "4e9c11efa6c81378": 0,
+    "2e874b137aec5c48": 1,
+    "2be0b25ad1b7a572": 2,
+    "e450bcba9793d0b2": 3,
+    "473544bf7b5ca257": 4,
+    "83a806320385b0f6": 0,
+    "d501e91bc28649bc": 1,
+    "6bd4aa556aa0ec39": 2,
+    "b24ba95ed50107dd": 3,
+    "f5d640c44f7034c2": 4,
+    "fcf3f3453bde0b79": 0,
+    "63a1eee79263590f": 1,
+    "ae84084b6d53b97d": 2,
+    "19baa7da77ced1ce": 3,
+    "b8faee981034f967": 4,
+    "7854ad640633f1ed": 0,
+    "49d658ee00012e34": 1,
+    "fa63f2ec93d741bf": 2,
+    "6f52ace9ad4b47de": 3,
+    "73d2c0b998b8a269": 4,
+    "9a37a923fd73536c": 0,
+    "24ee23e9e4c0027a": 1,
+    "322c98ac3e23272a": 2,
+    "5169142d95f70e28": 3,
+    "ceade0a66e792e9e": 4,
+    "fc9719f1436e8b54": 0,
+    "62d04a0413bae702": 1,
+    "2a10659715c46813": 2,
+    "4f1e7198773a4b90": 3,
+    "7e4825c1b0c7bfeb": 4,
+    "47dc9866a0fba177": 0,
+    "15723cbe7bd72272": 1,
+    "46f89ba5f7d08897": 2,
+    "328d145e61a575a9": 3,
+    "87175410a8781170": 4,
+    "c8581f9a10bb4579": 0,
+    "76e010c4e1a1af6a": 1,
+    "e47248a828045f1b": 2,
+    "3f5813b44e34730f": 3,
+    "f72a774babdd6275": 4,
+    "d96cba6d58a1af10": 0,
+    "34e94f96a30ae37f": 1,
+    "3b31827dba05d381": 2,
+    "921836660c361ccb": 3,
+    "3d9909355bd7bd28": 4,
+    "a58e8defb9ab6b97": 0,
+    "bfff0117c8fab113": 1,
+    "b132a6c57514a97a": 2,
+    "c1b3a5729a3101e1": 3,
+    "ad85a3d13c50e74f": 4,
+    "b397d681ff9e954b": 0,
+    "8c862619e998976c": 1,
+    "970e1f78ceabb96c": 2,
+    "b11583942f89a3db": 3,
+    "dffc33091423aec7": 4,
+    "dad736672d458570": 0,
+    "0f24c50394db203e": 1,
+    "9ee5a3da1316d50f": 2,
+    "624c7f3ec5e2a46a": 3,
+    "7222ee6dea5d096f": 4,
+    "9b64c5babaac6e7c": 0,
+    "a9166d1b6d7ce662": 1,
+    "3b65a6d66e71bdcd": 2,
+    "c9bf0a7ea515fa44": 3,
+    "ef27fe068e4c1143": 4,
+    "f29ff220f5438fb8": 0,
+    "4ae1de17e5037d25": 1,
+    "1499551cc6cf4e41": 2,
+    "d549f6ed6e197810": 3,
+    "c64552878a5d4c88": 4,
+    "6d6050833d4d6656": 0,
+    "9b2144d8467aaacb": 1,
+    "89a50aa9e317e383": 2,
+    "5cd8a7baadb31fc0": 3,
+    "e19f1157bbf3d297": 4,
+    "cac52c9a584bdfb3": 0,
+    "f304a7485ad03dcc": 1,
+    "6933da88817d795b": 2,
+    "71e4ce7b79beab1d": 3,
+    "51c8d731a1d354fa": 4,
+    "7290b91984a1478d": 0,
+    "38224cbbc401c5cb": 1,
+    "26dcfd3aed9c5261": 2,
+    "aa5521093fd21a2c": 3,
+    "dba1f0b5331d36f9": 4,
+    "2d431e21af449e0d": 0,
+    "53c7f6e8af42d270": 1,
+    "68fafd37a55c17ee": 2,
+    "b105ec7c226b1685": 3,
+    "c0742c8f75b30fce": 4,
+    "752f6d44c538c7a8": 0,
+    "7c4f79e3fdcf0cef": 1,
+    "d08a5b3d3e035429": 2,
+    "d5b84173c6086234": 3,
+    "956a06ad8a2d9fb9": 4,
+    "7ee08eb37c58aead": 0,
+    "0aaa5e174c779602": 1,
+    "499fce45544be58e": 2,
+    "9bb6cb2c17c6dfde": 3,
+    "5fb6da3e5b806e27": 4,
+    "b9f0d31aa0096cb0": 0,
+    "72f6927c54ddee9a": 1,
+    "5fa6fea9f0f7e09c": 2,
+    "e16cc067f0f7ba1d": 3,
+    "0e30d16a8c97efc4": 4,
+    "128ce516da2e83d9": 0,
+    "757fd58ebf1ff2d4": 1,
+    "e9049044c005ce76": 2,
+    "7177fa68d31958a5": 3,
+    "9eeda0a8ed4f7b2e": 4,
+    "9f8d2ada4c9a4c3f": 0,
+    "38ac415a6e2cb661": 1,
+    "d4857fe376542099": 2,
+    "11a579e66e1a5613": 3,
+    "a10e8f44946960d6": 4,
+    "2979a2e4f60a8f90": 0,
+    "259164965a82d115": 1,
+    "36bef848f5fb6b1b": 2,
+    "e976e1b06212651d": 3,
+    "3003652a38c3107b": 4,
+    "0cda5f6c45ea52c7": 0,
+    "72e511370153e49e": 1,
+    "c0177947ea9d59d0": 2,
+    "9fecede3ae6865f4": 3,
+    "3fd60c179d370c00": 4,
+    "bfa23c353d2fc15f": 0,
+    "e0416947365ad357": 1,
+    "286165b884e7dd09": 2,
+    "df88a3a020d6014c": 3,
+    "d065cbf19b8f868b": 4,
+    "399279de8f2c2612": 0,
+    "32c8efcfbd7aab7b": 1,
+    "06b20608f4e6d9ab": 2,
+    "bc2e583d1d853b94": 3,
+    "b56238ceab403558": 4,
+    "f55a59ce23956f02": 0,
+    "8fa3c7537ba4b144": 1
+  },
+  "selection": {
+    "structured_full": {
+      "0": {
+        "inner_fold": 1,
+        "epochs": {
+          "13101": 10,
+          "13102": 10,
+          "13103": 10
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.862500011920929,
+                "nll": 0.9105642437934875,
+                "target_beats_same_subject": 0.84375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.85,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8125,
+                "mrr": 0.8965624570846558,
+                "nll": 0.7019491195678711,
+                "target_beats_same_subject": 0.85625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.768750011920929,
+                "mrr": 0.8744791150093079,
+                "nll": 0.800396740436554,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.8875,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.78125,
+                "mrr": 0.8812500238418579,
+                "nll": 0.8447734713554382,
+                "target_beats_same_subject": 0.83125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.90625,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.862500011920929,
+                "nll": 0.9085341691970825,
+                "target_beats_same_subject": 0.84375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.85,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8125,
+                "mrr": 0.8965624570846558,
+                "nll": 0.702649712562561,
+                "target_beats_same_subject": 0.85625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.768750011920929,
+                "mrr": 0.8744791150093079,
+                "nll": 0.7990196943283081,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.8875,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.78125,
+                "mrr": 0.8812500238418579,
+                "nll": 0.8433380126953125,
+                "target_beats_same_subject": 0.83125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.90625,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8621875047683716,
+                "nll": 0.9094415903091431,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.85,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8125,
+                "mrr": 0.8965624570846558,
+                "nll": 0.6984082460403442,
+                "target_beats_same_subject": 0.85625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7749999761581421,
+                "mrr": 0.8776041269302368,
+                "nll": 0.799327552318573,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.78125,
+                "mrr": 0.8812500238418579,
+                "nll": 0.8435929417610168,
+                "target_beats_same_subject": 0.83125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.90625,
+                "different_subject_events": 160
+              }
+            }
+          ]
+        }
+      },
+      "1": {
+        "inner_fold": 2,
+        "epochs": {
+          "13101": 50,
+          "13102": 50,
+          "13103": 50
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.8652778267860413,
+                "nll": 0.749873161315918,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8589743589743589,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8269230723381042,
+                "mrr": 0.8970085382461548,
+                "nll": 0.5715867280960083,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8461538553237915,
+                "mrr": 0.9158119559288025,
+                "nll": 0.4312693178653717,
+                "target_beats_same_subject": 0.8717948717948718,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9423076923076923,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8717948794364929,
+                "mrr": 0.9318376183509827,
+                "nll": 0.4256689250469208,
+                "target_beats_same_subject": 0.8910256410256411,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9551282051282052,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7628205418586731,
+                "mrr": 0.8631410002708435,
+                "nll": 0.7488873600959778,
+                "target_beats_same_subject": 0.8333333333333334,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8589743589743589,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8269230723381042,
+                "mrr": 0.8970085382461548,
+                "nll": 0.5712452530860901,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8461538553237915,
+                "mrr": 0.9158119559288025,
+                "nll": 0.4283057451248169,
+                "target_beats_same_subject": 0.8717948717948718,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9423076923076923,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8653846383094788,
+                "mrr": 0.9286324977874756,
+                "nll": 0.4235480725765228,
+                "target_beats_same_subject": 0.8846153846153846,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9551282051282052,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.8674145936965942,
+                "nll": 0.7436703443527222,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8653846153846154,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8269230723381042,
+                "mrr": 0.8970085382461548,
+                "nll": 0.5721355080604553,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8461538553237915,
+                "mrr": 0.9158119559288025,
+                "nll": 0.42788803577423096,
+                "target_beats_same_subject": 0.8717948717948718,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9423076923076923,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8717948794364929,
+                "mrr": 0.9318376183509827,
+                "nll": 0.4216623902320862,
+                "target_beats_same_subject": 0.8910256410256411,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9551282051282052,
+                "different_subject_events": 156
+              }
+            }
+          ]
+        }
+      },
+      "2": {
+        "inner_fold": 3,
+        "epochs": {
+          "13101": 50,
+          "13102": 50,
+          "13103": 50
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7564102411270142,
+                "mrr": 0.8614926338195801,
+                "nll": 0.6977377533912659,
+                "target_beats_same_subject": 0.8012820512820513,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8839285373687744,
+                "nll": 0.611488938331604,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8875533938407898,
+                "nll": 0.6627113819122314,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8141025900840759,
+                "mrr": 0.8957799077033997,
+                "nll": 0.6571028232574463,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7564102411270142,
+                "mrr": 0.8620268702507019,
+                "nll": 0.7013493776321411,
+                "target_beats_same_subject": 0.8012820512820513,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8827456831932068,
+                "nll": 0.6147853136062622,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8012820482254028,
+                "mrr": 0.8907585144042969,
+                "nll": 0.6602574586868286,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9230769230769231,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.807692289352417,
+                "mrr": 0.8925747871398926,
+                "nll": 0.6560413837432861,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7628205418586731,
+                "mrr": 0.8663003444671631,
+                "nll": 0.6975015997886658,
+                "target_beats_same_subject": 0.8076923076923077,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8827456831932068,
+                "nll": 0.6141968965530396,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8875533938407898,
+                "nll": 0.6585718989372253,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9230769230769231,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.807692289352417,
+                "mrr": 0.8925747871398926,
+                "nll": 0.6533457040786743,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            }
+          ]
+        }
+      },
+      "3": {
+        "inner_fold": 4,
+        "epochs": {
+          "13101": 50,
+          "13102": 50,
+          "13103": 50
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8104575276374817,
+                "mrr": 0.8964051604270935,
+                "nll": 0.537321925163269,
+                "target_beats_same_subject": 0.8496732026143791,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9078947368421053,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8562091588973999,
+                "mrr": 0.9204792976379395,
+                "nll": 0.46235284209251404,
+                "target_beats_same_subject": 0.8758169934640523,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8562091588973999,
+                "mrr": 0.9237473607063293,
+                "nll": 0.4140491485595703,
+                "target_beats_same_subject": 0.8758169934640523,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9270153045654297,
+                "nll": 0.4019184410572052,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8039215803146362,
+                "mrr": 0.8929194211959839,
+                "nll": 0.5357841849327087,
+                "target_beats_same_subject": 0.8496732026143791,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9013157894736842,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8562091588973999,
+                "mrr": 0.9204792976379395,
+                "nll": 0.45990273356437683,
+                "target_beats_same_subject": 0.8758169934640523,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8562091588973999,
+                "mrr": 0.9237473607063293,
+                "nll": 0.4102645516395569,
+                "target_beats_same_subject": 0.8758169934640523,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9270153045654297,
+                "nll": 0.39833471179008484,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.7973856329917908,
+                "mrr": 0.889869213104248,
+                "nll": 0.5352982878684998,
+                "target_beats_same_subject": 0.8431372549019608,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9013157894736842,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8562091588973999,
+                "mrr": 0.9204792976379395,
+                "nll": 0.4599038064479828,
+                "target_beats_same_subject": 0.8758169934640523,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8562091588973999,
+                "mrr": 0.9237473607063293,
+                "nll": 0.41112327575683594,
+                "target_beats_same_subject": 0.8758169934640523,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9270153045654297,
+                "nll": 0.39830055832862854,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            }
+          ]
+        }
+      },
+      "4": {
+        "inner_fold": 0,
+        "epochs": {
+          "13101": 25,
+          "13102": 25,
+          "13103": 25
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8647916913032532,
+                "nll": 0.7012835144996643,
+                "target_beats_same_subject": 0.8,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.768750011920929,
+                "mrr": 0.8752083778381348,
+                "nll": 0.7071613073348999,
+                "target_beats_same_subject": 0.81875,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.8929166793823242,
+                "nll": 0.7533008456230164,
+                "target_beats_same_subject": 0.8125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.793749988079071,
+                "mrr": 0.89166659116745,
+                "nll": 0.7918829321861267,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8647916913032532,
+                "nll": 0.7016962766647339,
+                "target_beats_same_subject": 0.8,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.768750011920929,
+                "mrr": 0.8752083778381348,
+                "nll": 0.708774209022522,
+                "target_beats_same_subject": 0.81875,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.8929166793823242,
+                "nll": 0.7511550188064575,
+                "target_beats_same_subject": 0.8125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.793749988079071,
+                "mrr": 0.89166659116745,
+                "nll": 0.7882465124130249,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8647916913032532,
+                "nll": 0.7051414847373962,
+                "target_beats_same_subject": 0.8,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.762499988079071,
+                "mrr": 0.8710416555404663,
+                "nll": 0.7099738717079163,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.8932291269302368,
+                "nll": 0.7532097101211548,
+                "target_beats_same_subject": 0.8125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.793749988079071,
+                "mrr": 0.89166659116745,
+                "nll": 0.792519748210907,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            }
+          ]
+        }
+      }
+    },
+    "no_relation": {
+      "0": {
+        "inner_fold": 1,
+        "epochs": {
+          "13101": 25,
+          "13102": 25,
+          "13103": 25
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7437499761581421,
+                "mrr": 0.8588541746139526,
+                "nll": 1.0487152338027954,
+                "target_beats_same_subject": 0.85,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.84375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7562500238418579,
+                "mrr": 0.8656250238418579,
+                "nll": 0.9542238116264343,
+                "target_beats_same_subject": 0.83125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.875,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7875000238418579,
+                "mrr": 0.8828125,
+                "nll": 0.8288189172744751,
+                "target_beats_same_subject": 0.85625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7749999761581421,
+                "mrr": 0.87604159116745,
+                "nll": 0.8229504823684692,
+                "target_beats_same_subject": 0.84375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.8875,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7437499761581421,
+                "mrr": 0.8604167103767395,
+                "nll": 1.0447345972061157,
+                "target_beats_same_subject": 0.85,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.85,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.862500011920929,
+                "nll": 0.9614494442939758,
+                "target_beats_same_subject": 0.825,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.875,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.793749988079071,
+                "mrr": 0.885937511920929,
+                "nll": 0.8227018117904663,
+                "target_beats_same_subject": 0.8625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7749999761581421,
+                "mrr": 0.8770833015441895,
+                "nll": 0.8176525235176086,
+                "target_beats_same_subject": 0.84375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.731249988079071,
+                "mrr": 0.8541666865348816,
+                "nll": 1.043379545211792,
+                "target_beats_same_subject": 0.85,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.8375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.862500011920929,
+                "nll": 0.9666374325752258,
+                "target_beats_same_subject": 0.825,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.875,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.793749988079071,
+                "mrr": 0.8864582777023315,
+                "nll": 0.8195928335189819,
+                "target_beats_same_subject": 0.86875,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.768750011920929,
+                "mrr": 0.8739582896232605,
+                "nll": 0.8152211904525757,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            }
+          ]
+        }
+      },
+      "1": {
+        "inner_fold": 2,
+        "epochs": {
+          "13101": 25,
+          "13102": 25,
+          "13103": 25
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7564102411270142,
+                "mrr": 0.8621795773506165,
+                "nll": 0.8599990606307983,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8461538461538461,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7820512652397156,
+                "mrr": 0.8779380917549133,
+                "nll": 0.7306793928146362,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8846153846153846,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8012820482254028,
+                "mrr": 0.8886218070983887,
+                "nll": 0.6122785210609436,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9230769230769231,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7884615659713745,
+                "mrr": 0.8810897469520569,
+                "nll": 0.5980269312858582,
+                "target_beats_same_subject": 0.8076923076923077,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7564102411270142,
+                "mrr": 0.8621795773506165,
+                "nll": 0.8608372807502747,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8461538461538461,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7884615659713745,
+                "mrr": 0.8795406818389893,
+                "nll": 0.7314563393592834,
+                "target_beats_same_subject": 0.8333333333333334,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8012820482254028,
+                "mrr": 0.8886218070983887,
+                "nll": 0.6123369336128235,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9230769230769231,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7884615659713745,
+                "mrr": 0.8810897469520569,
+                "nll": 0.5978667140007019,
+                "target_beats_same_subject": 0.8076923076923077,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7564102411270142,
+                "mrr": 0.8621795773506165,
+                "nll": 0.860602080821991,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8461538461538461,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.8709936141967773,
+                "nll": 0.7315188646316528,
+                "target_beats_same_subject": 0.8269230769230769,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8846153846153846,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8012820482254028,
+                "mrr": 0.8886218070983887,
+                "nll": 0.612438976764679,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9230769230769231,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7884615659713745,
+                "mrr": 0.8810897469520569,
+                "nll": 0.5978500843048096,
+                "target_beats_same_subject": 0.8076923076923077,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            }
+          ]
+        }
+      },
+      "2": {
+        "inner_fold": 3,
+        "epochs": {
+          "13101": 50,
+          "13102": 50,
+          "13103": 10
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8575854897499084,
+                "nll": 0.8183497190475464,
+                "target_beats_same_subject": 0.8076923076923077,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8717948717948718,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7628205418586731,
+                "mrr": 0.8691239953041077,
+                "nll": 0.6939751505851746,
+                "target_beats_same_subject": 0.8141025641025641,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.870787501335144,
+                "nll": 0.6504856944084167,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.8711080551147461,
+                "nll": 0.7413647770881653,
+                "target_beats_same_subject": 0.8141025641025641,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8575854897499084,
+                "nll": 0.8143537640571594,
+                "target_beats_same_subject": 0.8076923076923077,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8717948717948718,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7628205418586731,
+                "mrr": 0.8691239953041077,
+                "nll": 0.6882978677749634,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.870787501335144,
+                "nll": 0.6532158255577087,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7756410241127014,
+                "mrr": 0.8743131756782532,
+                "nll": 0.7435344457626343,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8575854897499084,
+                "nll": 0.8138420581817627,
+                "target_beats_same_subject": 0.8076923076923077,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8717948717948718,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.8723291158676147,
+                "nll": 0.6881664991378784,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.870787501335144,
+                "nll": 0.6517483592033386,
+                "target_beats_same_subject": 0.8205128205128205,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.8711080551147461,
+                "nll": 0.7430119514465332,
+                "target_beats_same_subject": 0.8141025641025641,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            }
+          ]
+        }
+      },
+      "3": {
+        "inner_fold": 4,
+        "epochs": {
+          "13101": 25,
+          "13102": 25,
+          "13103": 25
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8169934749603271,
+                "mrr": 0.897603452205658,
+                "nll": 0.5399059057235718,
+                "target_beats_same_subject": 0.8562091503267973,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9078947368421053,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8039215803146362,
+                "mrr": 0.8956426382064819,
+                "nll": 0.5210098028182983,
+                "target_beats_same_subject": 0.8235294117647058,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9407894736842105,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8300653696060181,
+                "mrr": 0.9081699252128601,
+                "nll": 0.5029548406600952,
+                "target_beats_same_subject": 0.8366013071895425,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.7973856329917908,
+                "mrr": 0.8948801159858704,
+                "nll": 0.5484904050827026,
+                "target_beats_same_subject": 0.8235294117647058,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8169934749603271,
+                "mrr": 0.8970588445663452,
+                "nll": 0.5387500524520874,
+                "target_beats_same_subject": 0.8562091503267973,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9078947368421053,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8104575276374817,
+                "mrr": 0.898910641670227,
+                "nll": 0.5198060274124146,
+                "target_beats_same_subject": 0.8235294117647058,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8300653696060181,
+                "mrr": 0.9081699252128601,
+                "nll": 0.5010477900505066,
+                "target_beats_same_subject": 0.8366013071895425,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.7973856329917908,
+                "mrr": 0.8948801159858704,
+                "nll": 0.5459825396537781,
+                "target_beats_same_subject": 0.8235294117647058,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8169934749603271,
+                "mrr": 0.8969032168388367,
+                "nll": 0.5402714014053345,
+                "target_beats_same_subject": 0.8562091503267973,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9078947368421053,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8104575276374817,
+                "mrr": 0.898910641670227,
+                "nll": 0.5215319395065308,
+                "target_beats_same_subject": 0.8235294117647058,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8300653696060181,
+                "mrr": 0.9081699252128601,
+                "nll": 0.5014187693595886,
+                "target_beats_same_subject": 0.8366013071895425,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.7973856329917908,
+                "mrr": 0.8948801159858704,
+                "nll": 0.545157253742218,
+                "target_beats_same_subject": 0.8235294117647058,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            }
+          ]
+        }
+      },
+      "4": {
+        "inner_fold": 0,
+        "epochs": {
+          "13101": 25,
+          "13102": 25,
+          "13103": 25
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.762499988079071,
+                "mrr": 0.8679167032241821,
+                "nll": 0.7841119170188904,
+                "target_beats_same_subject": 0.7875,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.90625,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.762499988079071,
+                "mrr": 0.8722917437553406,
+                "nll": 0.7515336275100708,
+                "target_beats_same_subject": 0.78125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.93125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.8903125524520874,
+                "nll": 0.7335587739944458,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.887708306312561,
+                "nll": 0.8174827694892883,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9375,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.768750011920929,
+                "mrr": 0.8710416555404663,
+                "nll": 0.78484046459198,
+                "target_beats_same_subject": 0.7875,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7562500238418579,
+                "mrr": 0.8691667318344116,
+                "nll": 0.7529151439666748,
+                "target_beats_same_subject": 0.775,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.93125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.8897916674613953,
+                "nll": 0.7350368499755859,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.887708306312561,
+                "nll": 0.8191474676132202,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9375,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7749999761581421,
+                "mrr": 0.8741666674613953,
+                "nll": 0.7836982607841492,
+                "target_beats_same_subject": 0.79375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.762499988079071,
+                "mrr": 0.8722917437553406,
+                "nll": 0.751728892326355,
+                "target_beats_same_subject": 0.78125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.93125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.8897916674613953,
+                "nll": 0.7331313490867615,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.800000011920929,
+                "mrr": 0.887708306312561,
+                "nll": 0.8165656328201294,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9375,
+                "different_subject_events": 160
+              }
+            }
+          ]
+        }
+      }
+    },
+    "no_subject": {
+      "0": {
+        "inner_fold": 1,
+        "epochs": {
+          "13101": 10,
+          "13102": 10,
+          "13103": 10
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7437499761581421,
+                "mrr": 0.8590624928474426,
+                "nll": 0.9254757165908813,
+                "target_beats_same_subject": 0.83125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.85,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8125,
+                "mrr": 0.8965624570846558,
+                "nll": 0.7080873250961304,
+                "target_beats_same_subject": 0.85625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7749999761581421,
+                "mrr": 0.8776041269302368,
+                "nll": 0.8182255625724792,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.78125,
+                "mrr": 0.8812500238418579,
+                "nll": 0.8612704277038574,
+                "target_beats_same_subject": 0.83125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.90625,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8621875047683716,
+                "nll": 0.921686053276062,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.85,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8125,
+                "mrr": 0.8965624570846558,
+                "nll": 0.7094408869743347,
+                "target_beats_same_subject": 0.85625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.768750011920929,
+                "mrr": 0.8744791150093079,
+                "nll": 0.8177551031112671,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.8875,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.78125,
+                "mrr": 0.8812500238418579,
+                "nll": 0.8604741096496582,
+                "target_beats_same_subject": 0.83125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.90625,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8621875047683716,
+                "nll": 0.921222984790802,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.85,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8125,
+                "mrr": 0.8965624570846558,
+                "nll": 0.7089277505874634,
+                "target_beats_same_subject": 0.85625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9125,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7749999761581421,
+                "mrr": 0.8776041269302368,
+                "nll": 0.8165029287338257,
+                "target_beats_same_subject": 0.8375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.78125,
+                "mrr": 0.8812500238418579,
+                "nll": 0.8610979914665222,
+                "target_beats_same_subject": 0.83125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.90625,
+                "different_subject_events": 160
+              }
+            }
+          ]
+        }
+      },
+      "1": {
+        "inner_fold": 2,
+        "epochs": {
+          "13101": 50,
+          "13102": 50,
+          "13103": 50
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7628205418586731,
+                "mrr": 0.8626068234443665,
+                "nll": 0.7536623477935791,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8589743589743589,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8269230723381042,
+                "mrr": 0.8970085382461548,
+                "nll": 0.5764645934104919,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8461538553237915,
+                "mrr": 0.9158119559288025,
+                "nll": 0.43853163719177246,
+                "target_beats_same_subject": 0.8717948717948718,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9423076923076923,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8653846383094788,
+                "mrr": 0.9264956712722778,
+                "nll": 0.43503448367118835,
+                "target_beats_same_subject": 0.8846153846153846,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9551282051282052,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.8647435307502747,
+                "nll": 0.7535445094108582,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8589743589743589,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8205128312110901,
+                "mrr": 0.8938034176826477,
+                "nll": 0.5806772708892822,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9102564102564102,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8461538553237915,
+                "mrr": 0.9158119559288025,
+                "nll": 0.43993523716926575,
+                "target_beats_same_subject": 0.8717948717948718,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9423076923076923,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8653846383094788,
+                "mrr": 0.9264956712722778,
+                "nll": 0.4362252652645111,
+                "target_beats_same_subject": 0.8846153846153846,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9551282051282052,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7692307829856873,
+                "mrr": 0.8652778267860413,
+                "nll": 0.7539812922477722,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8589743589743589,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8269230723381042,
+                "mrr": 0.8970085382461548,
+                "nll": 0.58262699842453,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8461538553237915,
+                "mrr": 0.9158119559288025,
+                "nll": 0.4389647841453552,
+                "target_beats_same_subject": 0.8717948717948718,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9423076923076923,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8653846383094788,
+                "mrr": 0.9264956712722778,
+                "nll": 0.43409866094589233,
+                "target_beats_same_subject": 0.8846153846153846,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9551282051282052,
+                "different_subject_events": 156
+              }
+            }
+          ]
+        }
+      },
+      "2": {
+        "inner_fold": 3,
+        "epochs": {
+          "13101": 50,
+          "13102": 50,
+          "13103": 50
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7564102411270142,
+                "mrr": 0.8620268702507019,
+                "nll": 0.7002548575401306,
+                "target_beats_same_subject": 0.8012820512820513,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8827456831932068,
+                "nll": 0.6209657192230225,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8875533938407898,
+                "nll": 0.6706728935241699,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8141025900840759,
+                "mrr": 0.8957799077033997,
+                "nll": 0.6673247814178467,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8588217496871948,
+                "nll": 0.7072044610977173,
+                "target_beats_same_subject": 0.8076923076923077,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8782051282051282,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8827456831932068,
+                "nll": 0.6218629479408264,
+                "target_beats_same_subject": 0.8397435897435898,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8864850997924805,
+                "nll": 0.6768959164619446,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9102564102564102,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.807692289352417,
+                "mrr": 0.8925747871398926,
+                "nll": 0.676803469657898,
+                "target_beats_same_subject": 0.8525641025641025,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9102564102564102,
+                "different_subject_events": 156
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7564102411270142,
+                "mrr": 0.8620268702507019,
+                "nll": 0.702589213848114,
+                "target_beats_same_subject": 0.8012820512820513,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8910256410256411,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7884615659713745,
+                "mrr": 0.8806089758872986,
+                "nll": 0.6190491318702698,
+                "target_beats_same_subject": 0.8333333333333334,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.8974358974358975,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.7948718070983887,
+                "mrr": 0.8875533938407898,
+                "nll": 0.6767615079879761,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9166666666666666,
+                "different_subject_events": 156
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 156,
+                "top1_accuracy": 0.8012820482254028,
+                "mrr": 0.8893696665763855,
+                "nll": 0.6746932864189148,
+                "target_beats_same_subject": 0.8461538461538461,
+                "same_subject_events": 156,
+                "target_beats_all_different_subject": 0.9102564102564102,
+                "different_subject_events": 156
+              }
+            }
+          ]
+        }
+      },
+      "3": {
+        "inner_fold": 4,
+        "epochs": {
+          "13101": 50,
+          "13102": 25,
+          "13103": 25
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.7973856329917908,
+                "mrr": 0.8899781703948975,
+                "nll": 0.5379063487052917,
+                "target_beats_same_subject": 0.8562091503267973,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.8947368421052632,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8562091588973999,
+                "mrr": 0.9204792976379395,
+                "nll": 0.4642699360847473,
+                "target_beats_same_subject": 0.8758169934640523,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8562091588973999,
+                "mrr": 0.9237473607063293,
+                "nll": 0.41879796981811523,
+                "target_beats_same_subject": 0.8758169934640523,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9270153045654297,
+                "nll": 0.4079776704311371,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.7908496856689453,
+                "mrr": 0.886056661605835,
+                "nll": 0.5411546230316162,
+                "target_beats_same_subject": 0.8496732026143791,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.8947368421052632,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9226579070091248,
+                "nll": 0.46189066767692566,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9407894736842105,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9270153045654297,
+                "nll": 0.4106041491031647,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9270153045654297,
+                "nll": 0.403647243976593,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8039215803146362,
+                "mrr": 0.8929194211959839,
+                "nll": 0.5399091243743896,
+                "target_beats_same_subject": 0.8496732026143791,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9013157894736842,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9237472414970398,
+                "nll": 0.4642956256866455,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9473684210526315,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9270153045654297,
+                "nll": 0.41655173897743225,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 153,
+                "top1_accuracy": 0.8627451062202454,
+                "mrr": 0.9270153045654297,
+                "nll": 0.40591561794281006,
+                "target_beats_same_subject": 0.8823529411764706,
+                "same_subject_events": 153,
+                "target_beats_all_different_subject": 0.9539473684210527,
+                "different_subject_events": 152
+              }
+            }
+          ]
+        }
+      },
+      "4": {
+        "inner_fold": 0,
+        "epochs": {
+          "13101": 25,
+          "13102": 25,
+          "13103": 25
+        },
+        "curves": {
+          "13101": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7437499761581421,
+                "mrr": 0.8616666793823242,
+                "nll": 0.7097440958023071,
+                "target_beats_same_subject": 0.79375,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8647916913032532,
+                "nll": 0.7187777757644653,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.8875,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8062499761581421,
+                "mrr": 0.8960416913032532,
+                "nll": 0.7557071447372437,
+                "target_beats_same_subject": 0.81875,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.793749988079071,
+                "mrr": 0.8901041746139526,
+                "nll": 0.7971574068069458,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13102": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8645833134651184,
+                "nll": 0.7099469900131226,
+                "target_beats_same_subject": 0.8,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8658334016799927,
+                "nll": 0.7156938314437866,
+                "target_beats_same_subject": 0.8125,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.8875,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8062499761581421,
+                "mrr": 0.8960416913032532,
+                "nll": 0.7574004530906677,
+                "target_beats_same_subject": 0.81875,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.793749988079071,
+                "mrr": 0.8901041746139526,
+                "nll": 0.7966880798339844,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            }
+          ],
+          "13103": [
+            {
+              "epoch": 5,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.75,
+                "mrr": 0.8647916913032532,
+                "nll": 0.7089492082595825,
+                "target_beats_same_subject": 0.8,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.9,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 10,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.7562500238418579,
+                "mrr": 0.8679167032241821,
+                "nll": 0.7148181200027466,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.89375,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 25,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.8062499761581421,
+                "mrr": 0.8960416913032532,
+                "nll": 0.7574198246002197,
+                "target_beats_same_subject": 0.81875,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            },
+            {
+              "epoch": 50,
+              "tune": {
+                "events": 160,
+                "top1_accuracy": 0.793749988079071,
+                "mrr": 0.8901041746139526,
+                "nll": 0.7962378859519958,
+                "target_beats_same_subject": 0.80625,
+                "same_subject_events": 160,
+                "target_beats_all_different_subject": 0.95,
+                "different_subject_events": 160
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "embedding_hashes": {
+    "5101": "f30e38e0ccdff7d4d8aec5cfe7dd683190320ca6b20c50416f9cf4d42f06d8dd",
+    "5102": "9a5c7b9f0b5d039ce23ab70e838406413b9b445f94487ccf482f2743f3ac136d",
+    "5103": "821988a857804e69fd6896b2597c6cc06d09bb8ca67b2cf61d73864e4b064e3b"
+  },
+  "pair_features_sha256": "8214804ef845be4d70abfc7cb46f6e3a3ac03642f0e0769c5f99bca106a50265",
+  "raw_rows_sha256": {
+    "counterfact_oof_structured_full.jsonl": "3469005937d17e8b1dc8858d70e78519bf6db0a1e4ac2592c410d705112fac40",
+    "counterfact_oof_no_relation.jsonl": "16b5c7e7354b7ea5bef7901f7a7a3cba8f1a74ba48234f0ae25e3b056c8f81f8",
+    "counterfact_oof_no_subject.jsonl": "0606d0b4f821a1888eefcbe0f473391710f72e0e517d50a1c328a2cf198d60f0"
+  },
+  "checkpoint_sha256": "ee093c9b8513683e434878830d28f25f81331fb77e0b82c131a56e54d5bf0b81"
+}

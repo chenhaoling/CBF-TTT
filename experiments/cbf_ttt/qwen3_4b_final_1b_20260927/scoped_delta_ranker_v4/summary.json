@@ -1,0 +1,64 @@
+{
+  "protocol": "scoped_delta_ranker_v4",
+  "data_status": "observed_development_only",
+  "counterfact_oof": {
+    "structured_full": {
+      "events": 785,
+      "top1_accuracy": 0.8292993903160095,
+      "mrr": 0.9091189503669739,
+      "nll": 0.5507310628890991,
+      "target_beats_same_subject": 0.8585987261146497,
+      "same_subject_events": 785,
+      "target_beats_all_different_subject": 0.9387755102040817,
+      "different_subject_events": 784,
+      "wrong_same_subject": 95,
+      "wrong_different_subject": 39
+    },
+    "no_relation": {
+      "events": 785,
+      "top1_accuracy": 0.808917224407196,
+      "mrr": 0.8972398042678833,
+      "nll": 0.613756537437439,
+      "target_beats_same_subject": 0.8382165605095542,
+      "same_subject_events": 785,
+      "target_beats_all_different_subject": 0.9375,
+      "different_subject_events": 784,
+      "wrong_same_subject": 110,
+      "wrong_different_subject": 40
+    },
+    "no_subject": {
+      "events": 785,
+      "top1_accuracy": 0.8254777193069458,
+      "mrr": 0.9067531228065491,
+      "nll": 0.5612213611602783,
+      "target_beats_same_subject": 0.8560509554140128,
+      "same_subject_events": 785,
+      "target_beats_all_different_subject": 0.9362244897959183,
+      "different_subject_events": 784,
+      "wrong_same_subject": 98,
+      "wrong_different_subject": 39
+    }
+  },
+  "primary_vs_v2": {
+    "top1_gain": 0.033121019108280254,
+    "bootstrap_95ci": [
+      0.006369426751592357,
+      0.05859872611464968
+    ],
+    "units": 785
+  },
+  "v2_candidate_top1": 0.7961783439490446,
+  "development_gate": {
+    "checks": {
+      "top1_at_least_88": false,
+      "mrr_at_least_93": false,
+      "gain_at_least_5pp": false,
+      "gain_ci_positive": true,
+      "same_subject_at_least_85": true,
+      "different_subject_at_least_95": false
+    },
+    "passed": false
+  },
+  "next_stage": "stop_causal_gate_and_revise_scope_representation",
+  "terminal_status": "completed_scoped_delta_ranker_v4"
+}

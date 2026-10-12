@@ -357,6 +357,8 @@ The no-weight-change [constraint replay](experiments/cbf_ttt/qwen3_4b_final_1b_2
 
 [Scoped Delta Ranker V4](SCOPED_DELTA_RANKER_V4_PLAN.md) is the next preregistered stage. It builds audited same-chain, same-subject/different-chain, and different-subject pair supervision, then evaluates a relation-focused Qwen3-4B candidate representation with five-fold CounterFact OOF predictions. The supplied subject span is used only as an oracle-segmentation diagnostic; chain IDs, relation IDs, candidate age, LongMemEval-S, and LoCoMo are excluded from model selection. A causal delta-bank experiment is allowed only if the fixed candidate-ranking gate passes.
 
+The completed [V4 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/scoped_delta_ranker_v4/REPORT.md) shows a significant but insufficient improvement: candidate top-1 rose from 79.62% to 82.93% (gain 3.31 points, 95% CI `[0.64,5.86]`), while the 88%/93% top-1/MRR gate failed. All 95 remaining same-subject errors selected a different relation. [Relation-supervised V5](RELATION_SUPERVISED_SCOPE_V5_PLAN.md) therefore tests a frozen-Qwen relation classifier with subject-disjoint raw-CounterFact training; relation IDs are supervision only and are not inference features.
+
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
 
 Founded in 2023, ByteDance Seed Team is dedicated to crafting the industry's most advanced AI foundation models. The team aspires to become a world-class research team and make significant contributions to the advancement of science and society.

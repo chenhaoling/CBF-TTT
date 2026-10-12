@@ -1,0 +1,39 @@
+{
+  "protocol": "scoped_delta_ranker_v4",
+  "corpus_manifest_sha256": "5546b61cc4e5a25d137f27dc7fa66fd1e4ae47ff216b5e7d0fee0118f737859a",
+  "v2_summary_sha256": "57fb4d0acc7f3e069fda89581f59e21eb26356934fea306a646246708038992b",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "arms": [
+    "structured_full",
+    "no_relation",
+    "no_subject"
+  ],
+  "seeds": [
+    13101,
+    13102,
+    13103
+  ],
+  "folds": 5,
+  "checkpoint_epochs": [
+    5,
+    10,
+    25,
+    50
+  ],
+  "margin": 0.25,
+  "margin_weight": 0.5,
+  "subject_metadata_role": "oracle_segmentation_diagnostic",
+  "chain_identity_in_features": false,
+  "relation_ids_used": false,
+  "age_feature_used": false,
+  "counterfact_status": "observed_development_only",
+  "longmemeval_scored": false,
+  "locomo_scored": false
+}
