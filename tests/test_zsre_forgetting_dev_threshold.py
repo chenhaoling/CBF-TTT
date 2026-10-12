@@ -2,7 +2,11 @@
 
 import unittest
 
-from tasks.diagnose_zsre_forgetting_dev_threshold import rank_threshold, threshold_key
+from tasks.diagnose_zsre_forgetting_dev_threshold import (
+    parse_thresholds,
+    rank_threshold,
+    threshold_key,
+)
 
 
 class ThresholdDiagnosticTests(unittest.TestCase):
@@ -26,6 +30,12 @@ class ThresholdDiagnosticTests(unittest.TestCase):
 
     def test_threshold_key_is_stable(self):
         self.assertEqual(threshold_key(.4), "0.4")
+        self.assertEqual(threshold_key(.625), "0.625")
+
+    def test_parse_thresholds_requires_ordered_interior_values(self):
+        self.assertEqual(parse_thresholds("0.625,0.65,0.675"), (.625, .65, .675))
+        with self.assertRaises(Exception):
+            parse_thresholds("0.7,0.6")
 
 
 if __name__ == "__main__":

@@ -14,7 +14,6 @@ from tasks.train_zsre_forgetting_controller import (
 )
 from tasks.diagnose_zsre_forgetting_dev_threshold import (
     PROTOCOL,
-    THRESHOLDS,
     rank_threshold,
     read_rows,
     threshold_key,
@@ -26,10 +25,12 @@ def audit(root, formal_root, controller_root):
     summary = json.loads((root / "summary.json").read_text())
     training = json.loads((root / "training.json").read_text())
     manifest = json.loads((root / "training_manifest.json").read_text())
+    thresholds = tuple(manifest["thresholds"])
     formal_training = json.loads((formal / "training.json").read_text())
     checks = {
         "protocol": summary["protocol"] == manifest["protocol"] == PROTOCOL,
-        "thresholds": manifest["thresholds"] == list(THRESHOLDS),
+        "thresholds": bool(thresholds) and tuple(sorted(set(thresholds))) == thresholds
+                      and all(0 < value < 1 for value in thresholds),
         "test_sealed": not summary["test_loaded"] and not summary["test_scored"]
                        and not manifest["test_loaded"] and not manifest["test_scored"]
                        and not list(root.glob("test*")),
@@ -49,7 +50,7 @@ def audit(root, formal_root, controller_root):
     checks["baseline_recomputed"] = summarize_seed_metrics(baseline_metrics) == summary["baseline"]
 
     rebuilt = {}
-    for threshold in THRESHOLDS:
+    for threshold in thresholds:
         records_by_seed, metrics_by_seed = {}, {}
         for seed in CONTROLLER_SEEDS:
             path = root / f"dev_threshold_{threshold_key(threshold)}_controller_seed{seed}.jsonl"
@@ -74,6 +75,11 @@ def audit(root, formal_root, controller_root):
     selected = max(rebuilt.values(), key=rank_threshold)
     checks["selection_recomputed"] = selected == summary["selected_by_reliability"]
     passing = [row["threshold"] for row in rebuilt.values() if row["development_gate"]["passed"]]
+    selected_passing = max(
+        (row for row in rebuilt.values() if row["development_gate"]["passed"]),
+        key=rank_threshold, default=None)
+    checks["passing_selection_recomputed"] = \
+        selected_passing == summary.get("selected_passing_original_gate")
     checks["sufficiency_recomputed"] = passing == summary["thresholds_passing_original_gate"] \
         and bool(passing) == summary["threshold_only_sufficient"]
     return {

@@ -32,7 +32,16 @@ THRESHOLDS = tuple(value / 10 for value in range(1, 10))
 
 
 def threshold_key(value):
-    return f"{value:.1f}"
+    return f"{value:.3f}".rstrip("0").rstrip(".")
+
+
+def parse_thresholds(value):
+    values = tuple(float(item) for item in value.split(","))
+    if not values or any(not 0 < item < 1 for item in values):
+        raise argparse.ArgumentTypeError("thresholds must be comma-separated values in (0,1)")
+    if tuple(sorted(set(values))) != values:
+        raise argparse.ArgumentTypeError("thresholds must be unique and strictly increasing")
+    return values
 
 
 def rank_threshold(row):
@@ -99,8 +108,9 @@ def run(args):
         sessions, model, tokenizer, transforms["transforms"],
         source_summary["selected_config"]["regularizer"], gate_artifact, args.batch_size)
 
+    thresholds = getattr(args, "thresholds", THRESHOLDS)
     grid, raw_hashes = {}, {}
-    for threshold in THRESHOLDS:
+    for threshold in thresholds:
         controller = TopGateController(scorer, head, artifact["mean"], artifact["std"], threshold)
         records_by_seed, metrics_by_seed = {}, {}
         for replicate, seed in enumerate(CONTROLLER_SEEDS):
@@ -122,6 +132,9 @@ def run(args):
         }
     selected = max(grid.values(), key=rank_threshold)
     passing = [row["threshold"] for row in grid.values() if row["development_gate"]["passed"]]
+    selected_passing = max(
+        (row for row in grid.values() if row["development_gate"]["passed"]),
+        key=rank_threshold, default=None)
     peak_allocated = torch.cuda.max_memory_allocated() / 2**30
     peak_reserved = torch.cuda.max_memory_reserved() / 2**30
     del model; torch.cuda.empty_cache()
@@ -132,6 +145,7 @@ def run(args):
         "baseline": baseline_summary,
         "grid": grid,
         "selected_by_reliability": selected,
+        "selected_passing_original_gate": selected_passing,
         "thresholds_passing_original_gate": passing,
         "threshold_only_sufficient": bool(passing),
         "test_loaded": False,
@@ -156,7 +170,7 @@ def run(args):
         "model": args.model,
         "tokenizer": args.tokenizer,
         "loading_info": model_meta["loading_info"],
-        "thresholds": list(THRESHOLDS),
+        "thresholds": list(thresholds),
         "selection_objective": ["action_accuracy", "worst_hard_or_update", "query_accuracy"],
         "controller_seeds": list(CONTROLLER_SEEDS),
         "readout_seeds": list(GATE_SEEDS),
@@ -181,6 +195,8 @@ def main():
     parser.add_argument("--model", required=True)
     parser.add_argument("--tokenizer", required=True)
     parser.add_argument("--batch-size", type=int, default=128)
+    parser.add_argument("--thresholds", type=parse_thresholds,
+                        default=THRESHOLDS, help="Comma-separated strictly increasing grid")
     print(json.dumps(run(parser.parse_args()), indent=2))
 
 
