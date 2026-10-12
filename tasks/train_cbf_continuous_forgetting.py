@@ -148,9 +148,10 @@ def probe(args) -> dict:
     write_json(args.output, result); return result
 
 
-def build_rows(scenarios: list[dict], dim: int) -> list[dict]:
+def build_rows(scenarios: list[dict], dim: int,
+               memory_seeds: tuple[int, ...] = MEMORY_SEEDS) -> list[dict]:
     rows = []
-    for memory_seed in MEMORY_SEEDS:
+    for memory_seed in memory_seeds:
         embeddings = Embeddings(memory_seed, dim)
         for scenario in scenarios:
             row = label_scenario(scenario, embeddings)

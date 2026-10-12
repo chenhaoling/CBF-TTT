@@ -1464,3 +1464,9 @@ dev门槛固定为学习动作正确率≥95%、查询正确率≥98%、相对�
 正式结果通过后，在生成任何压力场景前新增`CONTINUOUS_STRESS_PLAN.md`、`tasks/evaluate_cbf_continuous_stress.py`、`scripts/run_cbf_continuous_stress.sh`、独立审计与测试。冻结上一轮checkpoint且不再训练，换用未见投影seed 2901/2902/2903，并固定`long_memory`、`weak_update`、`strong_update`、`extreme_overlap`四类训练支持外场景，每类32组×20场景。
 
 每类主对照是在该压力集结果上事后选择的最优固定alpha，因此比部署时固定常数更强。通过标准冻结为：四类中连续控制器相对事后最优固定alpha和端点控制器的来源组bootstrap 95%下界均大于0；宏平均alpha MAE≤0.20；三个新投影seed均优于宏平均最佳固定alpha。审计重构全部场景、策略回放、聚合与CI并校验原checkpoint/summary hash。该实验不修改baseline或已有checkpoint。
+
+### 域增强连续遗忘控制器（执行前）
+
+压力测试中连续控制器在四类上均显著优于事后最优固定alpha，但`strong_update`的端点控制器NLL低0.00117，预注册总门失败且不事后修改。新增`CONTINUOUS_ROBUST_PLAN.md`、`tasks/train_cbf_continuous_robust.py`、运行器、独立审计与复合偏移测试。保持控制器结构不变，以base/long/weak/strong/extreme五域等量训练；dev使用未见投影2901/2902/2903并同时比较原冻结控制器。
+
+dev全门通过后才生成最终评测：换用投影3901/3902/3903、五个新组内测试域和未在训练中出现的long+weak、long+strong、extreme+scale三种复合偏移。门槛包括相对固定、端点和原控制器的来源组CI、强写入端点非劣、各域/各seed一致性。所有大工件保留远程，新入口不改baseline。

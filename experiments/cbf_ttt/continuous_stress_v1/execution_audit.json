@@ -1,0 +1,17 @@
+{
+  "protocol": "continuous_forgetting_stress_v1_audit",
+  "passed": true,
+  "formal_checkpoint_sha256": "3af3a89d26222484951a4f2232cda9a26ccaab621e5611ef42ef2aca411e685d",
+  "record_sha256": {
+    "long_memory": "fa98eabf973559990c5ce7c20493d16b505880ec4a7514d02bf4aba8c44cfec4",
+    "weak_update": "dcdf51c69a98d0ccaf6187e1ee88d6b5d4f871a991bf8f50e1a7cec4a15f2841",
+    "strong_update": "24b4bf3219e6c4e97ec37e19b6f200368eb466f47e9cab97cff3772f8842f05c",
+    "extreme_overlap": "28b3c9b6fd8aebf90b1ff81abeed4c03a9c5eb102c2c09e2d98085ecf98677c6"
+  },
+  "stress_checks": {
+    "all_suites_beat_hindsight_fixed": true,
+    "all_suites_beat_endpoint": false,
+    "macro_alpha_mae": true,
+    "every_new_seed_beats_macro_fixed": true
+  }
+}
