@@ -1,0 +1,497 @@
+{
+  "protocol": "qwen_lowrank_bridge_v1",
+  "stage": "dev",
+  "tables": {
+    "0.0": {
+      "scale": 0.0,
+      "policies": {
+        "correct": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        },
+        "wrong": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        },
+        "zero": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        },
+        "random": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        }
+      },
+      "comparisons": {
+        "correct_vs_wrong_nll_gain": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "correct_vs_wrong_candidate_correct_gain": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "correct_vs_zero_nll_gain": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "correct_vs_zero_candidate_correct_gain": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "correct_vs_random_nll_gain": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "correct_vs_random_candidate_correct_gain": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "domains": {
+        "fineweb": 0.125,
+        "longcrawl": 0.125
+      }
+    },
+    "1.0": {
+      "scale": 1.0,
+      "policies": {
+        "correct": {
+          "nll": 1.6991086388006806,
+          "candidate_nll": 1.6232235310599208,
+          "candidate_correct": 0.375,
+          "greedy_correct": 0.375,
+          "eos_first": 0.0
+        },
+        "wrong": {
+          "nll": 2.4354367535561323,
+          "candidate_nll": 2.359551666304469,
+          "candidate_correct": 0.0,
+          "greedy_correct": 0.0,
+          "eos_first": 0.0
+        },
+        "zero": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        },
+        "random": {
+          "nll": 2.3420062828809023,
+          "candidate_nll": 2.229914117604494,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        }
+      },
+      "comparisons": {
+        "correct_vs_wrong_nll_gain": {
+          "mean": 0.7363281147554517,
+          "ci95": [
+            0.7265624888241291,
+            0.7470702957361937
+          ]
+        },
+        "correct_vs_wrong_candidate_correct_gain": {
+          "mean": 0.375,
+          "ci95": [
+            0.375,
+            0.375
+          ]
+        },
+        "correct_vs_zero_nll_gain": {
+          "mean": 0.6390454871580005,
+          "ci95": [
+            0.6342728994786739,
+            0.6437323205173016
+          ]
+        },
+        "correct_vs_zero_candidate_correct_gain": {
+          "mean": 0.25,
+          "ci95": [
+            0.25,
+            0.25
+          ]
+        },
+        "correct_vs_random_nll_gain": {
+          "mean": 0.6428976440802217,
+          "ci95": [
+            0.6381859993562102,
+            0.6478369636461139
+          ]
+        },
+        "correct_vs_random_candidate_correct_gain": {
+          "mean": 0.25,
+          "ci95": [
+            0.25,
+            0.25
+          ]
+        }
+      },
+      "domains": {
+        "fineweb": 0.375,
+        "longcrawl": 0.375
+      }
+    },
+    "2.0": {
+      "scale": 2.0,
+      "policies": {
+        "correct": {
+          "nll": 1.1526918234303594,
+          "candidate_nll": 1.1054098485037684,
+          "candidate_correct": 0.84375,
+          "greedy_correct": 0.84375,
+          "eos_first": 0.0
+        },
+        "wrong": {
+          "nll": 2.6253480706363916,
+          "candidate_nll": 2.578066099435091,
+          "candidate_correct": 0.0,
+          "greedy_correct": 0.0,
+          "eos_first": 0.0
+        },
+        "zero": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        },
+        "random": {
+          "nll": 2.3349962066859007,
+          "candidate_nll": 2.2228852659463882,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        }
+      },
+      "comparisons": {
+        "correct_vs_wrong_nll_gain": {
+          "mean": 1.4726562472060323,
+          "ci95": [
+            1.464843763038516,
+            1.4824218591675162
+          ]
+        },
+        "correct_vs_wrong_candidate_correct_gain": {
+          "mean": 0.84375,
+          "ci95": [
+            0.796875,
+            0.875
+          ]
+        },
+        "correct_vs_zero_nll_gain": {
+          "mean": 1.1854623025283217,
+          "ci95": [
+            1.1790708238258958,
+            1.191808084025979
+          ]
+        },
+        "correct_vs_zero_candidate_correct_gain": {
+          "mean": 0.71875,
+          "ci95": [
+            0.671875,
+            0.75
+          ]
+        },
+        "correct_vs_random_nll_gain": {
+          "mean": 1.1823043832555413,
+          "ci95": [
+            1.1759354211390018,
+            1.187997286207974
+          ]
+        },
+        "correct_vs_random_candidate_correct_gain": {
+          "mean": 0.71875,
+          "ci95": [
+            0.671875,
+            0.75
+          ]
+        }
+      },
+      "domains": {
+        "fineweb": 0.84375,
+        "longcrawl": 0.84375
+      }
+    },
+    "4.0": {
+      "scale": 4.0,
+      "policies": {
+        "correct": {
+          "nll": 0.4314439125591889,
+          "candidate_nll": 0.41722298017702997,
+          "candidate_correct": 1.0,
+          "greedy_correct": 1.0,
+          "eos_first": 0.0
+        },
+        "wrong": {
+          "nll": 3.3572251610457897,
+          "candidate_nll": 3.343004234135151,
+          "candidate_correct": 0.0,
+          "greedy_correct": 0.0,
+          "eos_first": 0.0
+        },
+        "zero": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        },
+        "random": {
+          "nll": 2.335944391787052,
+          "candidate_nll": 2.223616959527135,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        }
+      },
+      "comparisons": {
+        "correct_vs_wrong_nll_gain": {
+          "mean": 2.925781248486601,
+          "ci95": [
+            2.916015628259629,
+            2.934570318670012
+          ]
+        },
+        "correct_vs_wrong_candidate_correct_gain": {
+          "mean": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "correct_vs_zero_nll_gain": {
+          "mean": 1.9067102133994922,
+          "ci95": [
+            1.903091858024709,
+            1.9109090467682108
+          ]
+        },
+        "correct_vs_zero_candidate_correct_gain": {
+          "mean": 0.875,
+          "ci95": [
+            0.875,
+            0.875
+          ]
+        },
+        "correct_vs_random_nll_gain": {
+          "mean": 1.9045004792278633,
+          "ci95": [
+            1.8928848425857723,
+            1.914459977298975
+          ]
+        },
+        "correct_vs_random_candidate_correct_gain": {
+          "mean": 0.875,
+          "ci95": [
+            0.875,
+            0.875
+          ]
+        }
+      },
+      "domains": {
+        "fineweb": 1.0,
+        "longcrawl": 1.0
+      }
+    },
+    "8.0": {
+      "scale": 8.0,
+      "policies": {
+        "correct": {
+          "nll": 0.033402626220777165,
+          "candidate_nll": 0.032511661789612845,
+          "candidate_correct": 1.0,
+          "greedy_correct": 1.0,
+          "eos_first": 0.0
+        },
+        "wrong": {
+          "nll": 5.900590129196644,
+          "candidate_nll": 5.8996991738677025,
+          "candidate_correct": 0.0,
+          "greedy_correct": 0.0,
+          "eos_first": 0.0
+        },
+        "zero": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        },
+        "random": {
+          "nll": 2.3390757758170366,
+          "candidate_nll": 2.2262180987745523,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        }
+      },
+      "comparisons": {
+        "correct_vs_wrong_nll_gain": {
+          "mean": 5.867187502975867,
+          "ci95": [
+            5.853515627764864,
+            5.882812508738425
+          ]
+        },
+        "correct_vs_wrong_candidate_correct_gain": {
+          "mean": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "correct_vs_zero_nll_gain": {
+          "mean": 2.304751499737904,
+          "ci95": [
+            2.3002180684998166,
+            2.3094753309633234
+          ]
+        },
+        "correct_vs_zero_candidate_correct_gain": {
+          "mean": 0.875,
+          "ci95": [
+            0.875,
+            0.875
+          ]
+        },
+        "correct_vs_random_nll_gain": {
+          "mean": 2.3056731495962595,
+          "ci95": [
+            2.279896054904384,
+            2.326850701094372
+          ]
+        },
+        "correct_vs_random_candidate_correct_gain": {
+          "mean": 0.875,
+          "ci95": [
+            0.875,
+            0.875
+          ]
+        }
+      },
+      "domains": {
+        "fineweb": 1.0,
+        "longcrawl": 1.0
+      }
+    },
+    "16.0": {
+      "scale": 16.0,
+      "policies": {
+        "correct": {
+          "nll": 0.00021143378378951638,
+          "candidate_nll": 0.00015128436102429532,
+          "candidate_correct": 1.0,
+          "greedy_correct": 1.0,
+          "eos_first": 0.0
+        },
+        "wrong": {
+          "nll": 11.740445762872696,
+          "candidate_nll": 11.740385606884956,
+          "candidate_correct": 0.0,
+          "greedy_correct": 0.0,
+          "eos_first": 0.0
+        },
+        "zero": {
+          "nll": 2.338154125958681,
+          "candidate_nll": 2.2259976379573345,
+          "candidate_correct": 0.125,
+          "greedy_correct": 0.125,
+          "eos_first": 0.0
+        },
+        "random": {
+          "nll": 2.366522880271077,
+          "candidate_nll": 2.2507416047155857,
+          "candidate_correct": 0.203125,
+          "greedy_correct": 0.203125,
+          "eos_first": 0.0
+        }
+      },
+      "comparisons": {
+        "correct_vs_wrong_nll_gain": {
+          "mean": 11.740234329088906,
+          "ci95": [
+            11.726562399497794,
+            11.753906261343758
+          ]
+        },
+        "correct_vs_wrong_candidate_correct_gain": {
+          "mean": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "correct_vs_zero_nll_gain": {
+          "mean": 2.3379426921748916,
+          "ci95": [
+            2.3335136253396627,
+            2.342677589720779
+          ]
+        },
+        "correct_vs_zero_candidate_correct_gain": {
+          "mean": 0.875,
+          "ci95": [
+            0.875,
+            0.875
+          ]
+        },
+        "correct_vs_random_nll_gain": {
+          "mean": 2.3663114464872876,
+          "ci95": [
+            2.318425124695551,
+            2.4069594973059054
+          ]
+        },
+        "correct_vs_random_candidate_correct_gain": {
+          "mean": 0.796875,
+          "ci95": [
+            0.71875,
+            0.859375
+          ]
+        }
+      },
+      "domains": {
+        "fineweb": 1.0,
+        "longcrawl": 1.0
+      }
+    }
+  },
+  "selected_scale": 16.0,
+  "selected_passed": true,
+  "selection_rule": "candidate accuracy, greedy accuracy, min control NLL, lower scale",
+  "q_scored": false,
+  "v_scored": false
+}

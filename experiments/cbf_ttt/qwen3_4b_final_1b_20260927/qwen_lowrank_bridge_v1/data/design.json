@@ -1,0 +1,54 @@
+{
+  "protocol": "qwen_lowrank_bridge_v1",
+  "source_root": "/home/ctj/cbf_ttt_fastweight_content_v2_20261012",
+  "source_data_sha256": "1b2d7e10617b0bd1b742ae24057af5717fcf12d9db7348f3013d542939cdcf7c",
+  "episodes_sha256": "54a1d68245c50eddaae626a0a2f006e6bdbd1e81b7a0601bf8b9709fe0df8987",
+  "dev_groups": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "q_groups": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "v_groups": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "scales": [
+    0.0,
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0
+  ],
+  "selection": "candidate accuracy, greedy accuracy, min control NLL, lower scale",
+  "gate": {
+    "candidate_accuracy": 0.75,
+    "domain_candidate_accuracy": 0.75,
+    "greedy_accuracy": 0.75,
+    "accuracy_gain": 0.5,
+    "nll_gain": 0.2,
+    "eos_rate_max": 0.05
+  },
+  "v_locked_until_q": true
+}

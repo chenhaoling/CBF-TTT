@@ -1,0 +1,91 @@
+{
+  "protocol": "qwen_lowrank_bridge_v1",
+  "stage": "q",
+  "scale": 16.0,
+  "policies": {
+    "correct": {
+      "nll": 0.00021064946889737257,
+      "candidate_nll": 0.00015101021566010786,
+      "candidate_correct": 1.0,
+      "greedy_correct": 1.0,
+      "eos_first": 0.0
+    },
+    "wrong": {
+      "nll": 11.752163618803024,
+      "candidate_nll": 11.752104088664055,
+      "candidate_correct": 0.0,
+      "greedy_correct": 0.0,
+      "eos_first": 0.0
+    },
+    "zero": {
+      "nll": 2.331286882981658,
+      "candidate_nll": 2.2216120902448893,
+      "candidate_correct": 0.125,
+      "greedy_correct": 0.125,
+      "eos_first": 0.0
+    },
+    "random": {
+      "nll": 2.3426325898617506,
+      "candidate_nll": 2.2278178595006466,
+      "candidate_correct": 0.140625,
+      "greedy_correct": 0.15625,
+      "eos_first": 0.0
+    }
+  },
+  "comparisons": {
+    "correct_vs_wrong_nll_gain": {
+      "mean": 11.751952969334127,
+      "ci95": [
+        11.738281127159127,
+        11.763671774884898
+      ]
+    },
+    "correct_vs_wrong_candidate_correct_gain": {
+      "mean": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ]
+    },
+    "correct_vs_zero_nll_gain": {
+      "mean": 2.3310762335127606,
+      "ci95": [
+        2.326817022685873,
+        2.3354148703465967
+      ]
+    },
+    "correct_vs_zero_candidate_correct_gain": {
+      "mean": 0.875,
+      "ci95": [
+        0.875,
+        0.875
+      ]
+    },
+    "correct_vs_random_nll_gain": {
+      "mean": 2.3424219403928532,
+      "ci95": [
+        2.237666649632814,
+        2.4534555594061374
+      ]
+    },
+    "correct_vs_random_candidate_correct_gain": {
+      "mean": 0.859375,
+      "ci95": [
+        0.78125,
+        0.921875
+      ]
+    }
+  },
+  "domains": {
+    "fineweb": 1.0,
+    "longcrawl": 1.0
+  },
+  "passed": true,
+  "rows": 64,
+  "terminal_status": "q_passed",
+  "v_scored": false,
+  "rows_sha256": {
+    "q_0.jsonl": "016f6d5b62b20e16763aecedaaa3244d5ddd393dc15feb8438c82d52a0ea554c",
+    "q_1.jsonl": "f4c9b791d1ddecbf5e3fd8164c7aad16124e7921d02f235e5a3495be442257d8"
+  }
+}

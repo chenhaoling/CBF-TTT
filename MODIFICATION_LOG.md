@@ -1514,3 +1514,5 @@ v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与
 ### Qwen低秩key-value memory桥接（执行前）
 
 新增`QWEN_LOWRANK_BRIDGE_PLAN.md`、`tasks/cbf_qwen_lowrank_bridge.py`及对应runner/audit/test。表示将实体字符串的Qwen输入embedding均值作为归一化key，将观测值token的Qwen LM-head方向作为归一化value，以rank-one外积形成session-local fast memory；query读出的残差加到冻结Qwen的fresh-KV末位hidden后仍由原LM head评分。dev仅在`[0,1,2,4,8,16]`选择残差scale，Q/V来源隔离并沿用Correct/Wrong/Zero/等范数Random因果门，Q失败不读取V。该桥接明确标记为可读memory substrate，不声称原生dense writer已经学到此表示；目标是通过后接回多块累积和遗忘策略。
+
+提交`8217ee3`的正式桥接在37秒内完成，dev按冻结规则选择scale16，独立Q和解封V均通过。Q/V Correct候选及全词表首token均100%，Wrong均0%，Zero均12.5%；V Correct相对Wrong/Zero/Random的答案NLL收益为11.7500/2.3364/2.3784，bootstrap下界均大于0，两域均100%，EOS为0。独立审计重算全部阶段通过。该结果只证明Qwen-grounded低秩单组件memory可读；后续将冻结表示并验证多组件累积下的学习局部/全局遗忘，同时报告scale4/8/16敏感性。

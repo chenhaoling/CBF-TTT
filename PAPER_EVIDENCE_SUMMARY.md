@@ -18,6 +18,8 @@ After fixing the open-vocabulary readout on source-disjoint data, the single-upd
 
 Directly fine-tuning the final checkpoint writer with balanced eight-value counterfactual assignments did not recover content binding. On eight new source groups, Correct fast memory reached 10.94% versus 12.50% for Wrong and Zero; Wrong-minus-Correct answer NLL was -0.01074 (95% CI [-0.02051, -0.00293]). Correct did improve NLL over Zero, separating a generic populated-memory effect from value-specific binding. This rules out simple writer fine-tuning as the bridge to the native dense memory and motivates a readable low-rank key-value substrate for the forgetting policy.
 
+The Qwen-grounded rank-one bridge passed that prerequisite: both independent Q and one-time V achieved 100% candidate and full-vocabulary first-token accuracy under Correct memory, versus 0% for Wrong and 12.5% for Zero. On V, Correct improved answer NLL over Zero by 2.3364 (95% CI [2.3300, 2.3435]). This demonstrates a readable additive session memory in the actual frozen Qwen embedding/readout geometry, while leaving multi-component interference and forgetting as the next causal test.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -49,3 +51,4 @@ Key reports:
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_accumulation/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/fastweight_content_v2/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/final_writer_binding_v1/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_bridge_v1/REPORT.md`

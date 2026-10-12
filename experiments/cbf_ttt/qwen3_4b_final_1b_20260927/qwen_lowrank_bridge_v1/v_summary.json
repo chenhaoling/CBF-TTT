@@ -1,0 +1,91 @@
+{
+  "protocol": "qwen_lowrank_bridge_v1",
+  "stage": "v",
+  "scale": 16.0,
+  "policies": {
+    "correct": {
+      "nll": 0.00021379448250513633,
+      "candidate_nll": 0.00015247945806606822,
+      "candidate_correct": 1.0,
+      "greedy_correct": 1.0,
+      "eos_first": 0.0
+    },
+    "wrong": {
+      "nll": 11.750213697552681,
+      "candidate_nll": 11.750152438879013,
+      "candidate_correct": 0.0,
+      "greedy_correct": 0.0,
+      "eos_first": 0.0
+    },
+    "zero": {
+      "nll": 2.3366109132766724,
+      "candidate_nll": 2.223049033433199,
+      "candidate_correct": 0.125,
+      "greedy_correct": 0.125,
+      "eos_first": 0.0
+    },
+    "random": {
+      "nll": 2.3786192815750837,
+      "candidate_nll": 2.2566339699551463,
+      "candidate_correct": 0.09375,
+      "greedy_correct": 0.09375,
+      "eos_first": 0.0
+    }
+  },
+  "comparisons": {
+    "correct_vs_wrong_nll_gain": {
+      "mean": 11.749999903070176,
+      "ci95": [
+        11.73632805909969,
+        11.763671738495106
+      ]
+    },
+    "correct_vs_wrong_candidate_correct_gain": {
+      "mean": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ]
+    },
+    "correct_vs_zero_nll_gain": {
+      "mean": 2.3363971187941672,
+      "ci95": [
+        2.329991450500472,
+        2.3434815164121687
+      ]
+    },
+    "correct_vs_zero_candidate_correct_gain": {
+      "mean": 0.875,
+      "ci95": [
+        0.875,
+        0.875
+      ]
+    },
+    "correct_vs_random_nll_gain": {
+      "mean": 2.3784054870925786,
+      "ci95": [
+        2.3083897507217443,
+        2.4416930306451547
+      ]
+    },
+    "correct_vs_random_candidate_correct_gain": {
+      "mean": 0.90625,
+      "ci95": [
+        0.84375,
+        0.953125
+      ]
+    }
+  },
+  "domains": {
+    "fineweb": 1.0,
+    "longcrawl": 1.0
+  },
+  "passed": true,
+  "rows": 64,
+  "terminal_status": "v_passed",
+  "v_scored": true,
+  "rows_sha256": {
+    "v_0.jsonl": "317e50bd3de4b868e9cf3832dae8ab6651f23597603dc79b08ce78a11ad2843a",
+    "v_1.jsonl": "a8f8cd6c089a0765e0d5cbad4baedf46afb6119969a4cc39318cb3b8bf55a443"
+  }
+}
