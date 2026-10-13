@@ -1627,6 +1627,26 @@ paired baseline. The release gate additionally requires fixed scope-key maximum
 cosine to beat the original full-text maximum by 30 points, so a passing claim
 must demonstrate the factorization mechanism independently of the learned MLP.
 
+V3 completed in 32.22 seconds at 8.026/8.988 GiB peak allocated/reserved and
+passed all nine independent audit checks. Learned top-1/MRR reached
+97.07/98.38%; all four lengths were at least 95.63% top-1, and the minimum seed
+was 96.63%. Primary gain over V2 was 29.40 points with 95% CI
+`[24.72,34.18]`. Fixed scope-only maximum cosine rose from 33.99% full-text to
+93.63%, establishing key/value factorization independently of the learned
+ranker. Compact artifacts are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/factorized_scope_candidate_v3`.
+
+Registered `FACTORIZED_CAUSAL_FORGETTING_V4_PLAN.md` and implemented its causal
+trainer, runner, auditor, and tests. V4 freezes V3, uses a scope-max top-4
+cascade followed by the listwise ranker, and trains a rank-16 deletion gate on
+scope evidence plus value-payload conflict. Payload remains excluded from
+candidate ranking; age and unit position remain excluded entirely. Complete
+causal tune replay imposes 98% current, 97% non-target, 97% hard-retain, and
+85% update constraints before maximizing strict pair state. The development
+release gate checks shortlist/candidate recall, cumulative safety, stale
+deletion, every length, and clustered gains over both V1 and exact
+deletion-count-matched random. LoCoMo remains sealed until every check passes.
+
 ## 2026-10-12: ZsRE contextual readout and relation-aware key alignment
 
 ### Completed natural readout

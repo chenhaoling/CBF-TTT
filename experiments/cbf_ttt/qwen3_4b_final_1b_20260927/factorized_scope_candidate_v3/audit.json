@@ -1,0 +1,30 @@
+{
+  "protocol": "factorized_scope_candidate_v3_audit",
+  "audit_passed": true,
+  "checks": {
+    "raw_hashes": true,
+    "record_identities": true,
+    "row_invariants": true,
+    "aggregates": true,
+    "fit_tune_selection": true,
+    "v2_comparison": true,
+    "release_gate": true,
+    "source_checkpoint_v2_hashes": true,
+    "factorization_and_claim_locks": true
+  },
+  "summary_sha256": "998cf4def12c884caccc101cbd2574c7f67945f7b48ce716656b0112bd4e51c0",
+  "training_sha256": "216afd4451631c0527c5a25bee0b12b490a985b2a7e998cbe2c4d0c04f20b80b",
+  "training_manifest_sha256": "6dd9bd872a40de173c1d4be03ca0b1e384cedf8fbf0849a0893cccc8d80d02a3",
+  "episodes": 1068,
+  "recomputed_gate": {
+    "checks": {
+      "mean_top1_at_least_95": true,
+      "minimum_seed_top1_at_least_93": true,
+      "every_length_mean_top1_at_least_93": true,
+      "mean_mrr_at_least_97": true,
+      "gain_over_v2_lower_bound_above_15": true,
+      "scope_max_beats_full_max_by_30": true
+    },
+    "passed": true
+  }
+}

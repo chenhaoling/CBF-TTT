@@ -391,6 +391,8 @@ The executable stage is `scripts/run_long_session_sparse_gate_v1.sh`. It embeds 
 
 [V2 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/long_session_candidate_v2/REPORT.md) at 67.38% top-1 and 73.16% MRR. Its 33.33-point gain over V1 was significant (95% CI `[28.93,37.64]`) and stable across seeds, but the 95% release gate failed. The [factorized scope-key V3 plan](FACTORIZED_SCOPE_CANDIDATE_V3_PLAN.md) now removes changed value payloads from candidate keys while preserving them as memory contents. It repeats the frozen split/listwise protocol and requires both a 95% learned result and a 30-point fixed scope-key mechanism gain before causal deletion can resume.
 
+[V3 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/factorized_scope_candidate_v3/REPORT.md) and passed all six checks: learned top-1/MRR were 97.07/98.38%, every length exceeded 95.6% top-1, and paired gain over V2 was 29.40 points with CI `[24.72,34.18]`. Fixed scope-only maximum cosine independently rose by 59.64 points over the full-text key. [Factorized causal forgetting V4](FACTORIZED_CAUSAL_FORGETTING_V4_PLAN.md) now freezes that resolver and trains a high-specificity scope-plus-payload-conflict gate. It uses complete causal tune replay and cumulative memory-retention checks before any LoCoMo release.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
