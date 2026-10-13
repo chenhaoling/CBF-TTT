@@ -1,0 +1,29 @@
+{
+  "protocol": "mquake_temporal_transfer_v7_audit",
+  "audit_passed": true,
+  "checks": {
+    "aggregates_and_preregistered_gate": true,
+    "dev_episode_identities": true,
+    "matched_random_deletions": true,
+    "raw_output_hashes": true,
+    "source_and_checkpoint_hashes": true,
+    "entity_disjoint_splits": true,
+    "claim_and_data_access_locks": true
+  },
+  "summary_sha256": "1a0bca5dfe464196aa60621ae282b5cdf10431b791d1e5d5bcd6fe1600dbe977",
+  "training_sha256": "9b1ade0d1096a77016bea13296996ff376fbefe218e5026e7a290dbcfa456b32",
+  "training_manifest_sha256": "cd1991ca4d3abef9b3a268b10f0d9ef641da3c8c41b8739860ab027e35f5d775",
+  "recomputed_gate": {
+    "checks": {
+      "shortlist_recall_at_least_90": false,
+      "candidate_top1_at_least_80": false,
+      "current_retention_at_least_97": false,
+      "non_target_retention_at_least_95": false,
+      "hard_retain_at_least_95": false,
+      "stale_deletion_at_least_70": true,
+      "pair_state_at_least_70": false,
+      "random_gain_lower_bound_above_zero": false
+    },
+    "passed": false
+  }
+}

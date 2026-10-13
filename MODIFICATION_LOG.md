@@ -1869,3 +1869,23 @@ The first server launch stopped before model loading because the V5 runner defau
 used the historical `development/` layout while the archived cross-fit run stores its
 checkpoint under `result/`. The default was corrected; no MQuAKE embedding, prediction,
 or metric existed in the failed directory.
+
+V7 then completed on all 1,496 entity-disjoint dev episodes in 156.89 seconds at
+7.867/8.115 GiB peak allocated/reserved memory. Candidate shortlist/top-1 were
+31.28/26.34%. The frozen controller reached 78.01% stale deletion but only 31.82%
+current retention, 29.16% non-target retention, and 9.83% strict pair state. Exact
+deletion-count matched random reached 51.14% pair state; controller-minus-random was
+-41.31 points with subject-bootstrap CI `[-45.52,-39.18]`. Oracle was 100%. The audit
+passed all checks, the gate failed, and LoCoMo remained unscored. Compact evidence and
+`REPORT.md` are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_temporal_transfer_v7`.
+
+Added `MQUAKE_TEMPORAL_ADAPTATION_V8_PLAN.md`,
+`tasks/train_mquake_temporal_adaptation_v8.py`, its runner, audit, and focused tests.
+V8 fits three 50-epoch factorized candidate heads and three 50-epoch BCE deletion
+heads on MQuAKE train. Tune selects only deletion thresholds; no model is refit after
+calibration. A six-check tune prerequisite conditionally permits entity-disjoint dev,
+where an independently recomputed nine-check gate requires scope, safety, deletion,
+every-length, and matched-random confidence criteria. MQuAKE-CF, LongMemEval-S, and
+LoCoMo are locked out. The baseline remains unchanged because this is a separate
+opt-in runner.

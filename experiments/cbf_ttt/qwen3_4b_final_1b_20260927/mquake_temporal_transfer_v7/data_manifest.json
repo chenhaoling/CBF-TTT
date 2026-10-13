@@ -1,0 +1,66 @@
+{
+  "protocol": "mquake_temporal_sessions_v1",
+  "source": "MQuAKE-T",
+  "source_url": "https://raw.githubusercontent.com/princeton-nlp/MQuAKE/main/datasets/MQuAKE-T.json",
+  "license_url": "https://github.com/princeton-nlp/MQuAKE/blob/main/LICENSE",
+  "source_sha256": "58500a1d4aaf9e036c23a1d9dd6be2d73d693e35a695614842f211ea5aff59f2",
+  "source_cases": 1868,
+  "unique_edited_subjects": 86,
+  "split_method": "edited_subject_disjoint_greedy_case_balance",
+  "split_weights": {
+    "train": 0.6,
+    "tune": 0.2,
+    "dev": 0.2
+  },
+  "split_case_loads": {
+    "train": 1121,
+    "tune": 373,
+    "dev": 374
+  },
+  "lengths": [
+    16,
+    32,
+    48,
+    64
+  ],
+  "units_per_session": 4,
+  "counts": {
+    "train": {
+      "source_cases": 1121,
+      "source_subjects": 50,
+      "episodes": 4484,
+      "events": 179360,
+      "hard_retain_events": 8968,
+      "same_relation_hard_retain_events": 8880
+    },
+    "tune": {
+      "source_cases": 373,
+      "source_subjects": 18,
+      "episodes": 1492,
+      "events": 59680,
+      "hard_retain_events": 2984,
+      "same_relation_hard_retain_events": 2976
+    },
+    "dev": {
+      "source_cases": 374,
+      "source_subjects": 18,
+      "episodes": 1496,
+      "events": 59840,
+      "hard_retain_events": 2992,
+      "same_relation_hard_retain_events": 2968
+    }
+  },
+  "unique_texts": 2019,
+  "files_sha256": {
+    "train.jsonl": "3b4bb98892baa617520c7d85f04d2e025bd172e4460ca6446333dc0d51e83c21",
+    "tune.jsonl": "def303923bb36ea5de17c6e9f5d13f0d35b3a15cc4b56274eecdccd517e0412c",
+    "dev.jsonl": "39c3785cee8fcd9d9fa122c110307bed9415c378a1eceed40642aa77a540ad50",
+    "texts.json": "41f146413e07d5624dc583795602ca18c38acb882ce8a82704f1fd570c21aa02"
+  },
+  "subject_disjoint": true,
+  "real_temporal_updates": true,
+  "mquake_cf_used": false,
+  "longmemeval_used": false,
+  "locomo_used": false,
+  "chain_identity_model_feature": false
+}

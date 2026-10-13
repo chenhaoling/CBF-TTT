@@ -406,6 +406,15 @@ resolver plus V5 forgetting ensemble with no MQuAKE fitting or threshold selecti
 Only a preregistered zero-shot transfer pass may advance to one-time LoCoMo confirmation;
 otherwise MQuAKE train/tune adaptation is allowed while its dev split remains locked.
 
+[V7 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_temporal_transfer_v7/REPORT.md)
+and failed its independently audited zero-shot gate. Candidate top-1 was 26.34%,
+current/non-target retention was 31.82/29.16%, and strict pair state was 9.83% versus
+51.14% for exact deletion-count matched random. The 100% oracle leaves a valid local
+deletion opportunity, but universal zero-shot transfer is rejected. The registered
+[V8 adaptation](MQUAKE_TEMPORAL_ADAPTATION_V8_PLAN.md) trains only on MQuAKE train,
+calibrates only on tune without refitting, and conditionally reads entity-disjoint dev.
+LoCoMo remains sealed.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
