@@ -54,9 +54,15 @@ def render_session(session: list[dict], date: str) -> str:
     lines = [f"Session date: {date}"]
     for turn in session:
         role, content = str(turn.get("role", "")).strip(), str(turn.get("content", "")).strip()
-        if not role or not content:
-            raise ValueError("empty LongMemEval turn")
+        # The cleaned source contains three role-labelled placeholder turns
+        # with empty content. They carry no model-visible information.
+        if not content:
+            continue
+        if not role:
+            raise ValueError("nonempty LongMemEval turn has no role")
         lines.append(f"{role}: {content}")
+    if len(lines) == 1:
+        raise ValueError("LongMemEval session has no nonempty turns")
     return "\n".join(lines)
 
 

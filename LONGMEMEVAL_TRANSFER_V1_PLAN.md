@@ -39,7 +39,9 @@ generation score. It will not be presented as official benchmark accuracy.
 
 Every session is rendered with its date and role-labelled turns, tokenized, and
 split into non-overlapping 1024-token windows. All windows are encoded; no
-session is truncated. A session-to-session score is the maximum contextual
+session is truncated. Three source turns with an empty `content` field are
+discarded by deterministic schema normalization; no session becomes empty. A
+session-to-session score is the maximum contextual
 cosine over window pairs, averaged across the three frozen projections. The
 same maximum-window construction scores the final question against retained
 sessions.

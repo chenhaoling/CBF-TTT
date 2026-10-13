@@ -28,7 +28,8 @@ class FakeScores:
 
 class TransferTest(unittest.TestCase):
     def test_render_and_oracle_pair(self):
-        text = render_session([{"role": "user", "content": "hello"}], "2024-01-01")
+        text = render_session([{"role": "assistant", "content": ""},
+                               {"role": "user", "content": "hello"}], "2024-01-01")
         self.assertEqual(text, "Session date: 2024-01-01\nuser: hello")
         ids = ["a", "old", "b", "new", "c"]
         self.assertEqual(oracle_rollout(ids, ["old", "new"]), [0, 2, 3, 4])
