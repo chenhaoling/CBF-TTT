@@ -1864,3 +1864,8 @@ transfer fails, the registered next stage can fit only on MQuAKE train, calibrat
 on tune, and then score the entity-disjoint dev once. Risks include only 96 unique
 temporal scopes, skewed subject frequencies, repeated contexts, and the remaining gap
 between structured memory units and raw conversational sessions.
+
+The first server launch stopped before model loading because the V5 runner default
+used the historical `development/` layout while the archived cross-fit run stores its
+checkpoint under `result/`. The default was corrected; no MQuAKE embedding, prediction,
+or metric existed in the failed directory.

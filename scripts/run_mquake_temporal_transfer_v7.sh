@@ -8,7 +8,7 @@ RAW=${RAW:-/home/ctj/data/mquake_official/MQuAKE-T.json}
 DATA=${DATA:-/home/ctj/cbf_ttt_mquake_temporal_sessions_v1}
 SOURCE=${SOURCE:-/home/ctj/cbf_ttt_zsre_contextual_readout_v1/formal}
 V3=${V3:-/home/ctj/cbf_ttt_factorized_scope_candidate_v3/development}
-V5=${V5:-/home/ctj/cbf_ttt_crossfit_calibrated_forgetting_v5/development}
+V5=${V5:-/home/ctj/cbf_ttt_crossfit_calibrated_forgetting_v5/result}
 MODEL=${MODEL:-/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt}
 TOKENIZER=${TOKENIZER:-/home/ctj/models/Qwen3-4B}
 
