@@ -1,0 +1,72 @@
+{
+  "protocol": "episode_barrier_forgetting_v6",
+  "oof": {
+    "episodes": 1068,
+    "actions": 42720,
+    "action_accuracy": 0.99562265917603,
+    "pair_state_accuracy": 0.8342696629213483,
+    "stale_deletion": 0.8352059925093633,
+    "current_retention": 0.99812734082397,
+    "non_target_retention": 0.9997974131213963,
+    "memory_fraction": 0.9723343867041199,
+    "by_event_kind": {
+      "primary_old": {
+        "events": 1068,
+        "accuracy": 1.0
+      },
+      "hard_retain": {
+        "events": 2136,
+        "accuracy": 1.0
+      },
+      "distractor": {
+        "events": 38448,
+        "accuracy": 0.999713899292551
+      },
+      "primary_update": {
+        "events": 1068,
+        "accuracy": 0.8352059925093633
+      }
+    },
+    "by_length": {
+      "16": {
+        "episodes": 267,
+        "pair_state_accuracy": 0.850187265917603,
+        "current_retention": 0.9962546816479401,
+        "non_target_retention": 1.0
+      },
+      "32": {
+        "episodes": 267,
+        "pair_state_accuracy": 0.8352059925093633,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9998751560549313
+      },
+      "48": {
+        "episodes": 267,
+        "pair_state_accuracy": 0.8239700374531835,
+        "current_retention": 0.9962546816479401,
+        "non_target_retention": 0.9999185800358247
+      },
+      "64": {
+        "episodes": 267,
+        "pair_state_accuracy": 0.8277153558052435,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9993959163948289
+      }
+    }
+  },
+  "oof_gate": {
+    "checks": {
+      "current_retention_at_least_97": true,
+      "non_target_retention_at_least_95": true,
+      "hard_retain_at_least_95": true,
+      "stale_deletion_at_least_85": false,
+      "pair_state_at_least_85": false
+    },
+    "passed": false
+  },
+  "development_scored": false,
+  "longmemeval_used": false,
+  "locomo_scored": false,
+  "next_stage": "stop_crossfit_oof",
+  "terminal_status": "completed_episode_barrier_forgetting_v6_oof"
+}

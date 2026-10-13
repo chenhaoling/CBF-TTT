@@ -1683,6 +1683,16 @@ features, candidate resolver, epochs, calibration thresholds, OOF prerequisite,
 conditional development gate, and stop rule remain unchanged. The runner and
 auditor add an explicit objective lock; no V5 threshold or dev result is used.
 
+V6 completed on the same 1,068 nested-OOF episodes and passed all eleven audit
+checks. Current/non-target/hard-retain safety was 99.81/99.98/100.00%, but stale
+deletion and strict pair state were 83.52/83.43%, slightly below V5 and below
+the unchanged 85% prerequisite. Subject-disjoint development was not loaded;
+the archive contains no dev records. This rejects the registered fixed-margin
+episode barrier as the missing ingredient and activates the stop rule for any
+further loss, epoch, margin, or threshold iteration on this constructed ZsRE
+corpus. Compact artifacts are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/episode_barrier_forgetting_v6`.
+
 ## 2026-10-12: ZsRE contextual readout and relation-aware key alignment
 
 ### Completed natural readout

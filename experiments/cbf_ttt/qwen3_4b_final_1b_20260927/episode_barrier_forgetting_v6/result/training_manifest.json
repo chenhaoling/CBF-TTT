@@ -1,0 +1,52 @@
+{
+  "protocol": "episode_barrier_forgetting_v6",
+  "data_manifest_sha256": "f0853a9a6eda61ae7dd9d5313dad4b4f25cb7530efaa4f337db0c47bfc75133f",
+  "source_summary_sha256": "843a0c23b15125e2298f71fcf5d99ef3f96d997bc5a6616ee102d6d949e8cafe",
+  "source_training_sha256": "6707f7659f028fa1c7c8dda4f1befe4f8c56221cf448aada8042a722b4298439",
+  "source_transforms_sha256": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "git_commit": "98c34a38010ae55d685c38a96582ae93bfac8f5a",
+  "folds": 5,
+  "epoch": 50,
+  "gate_seeds": [
+    32101,
+    32102,
+    32103
+  ],
+  "objective": "episode_max_retain_barrier_margin_0.5_plus_0.25_bce",
+  "candidate_seeds": [
+    30101,
+    30102,
+    30103
+  ],
+  "thresholds": [
+    0.5,
+    0.6,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.925,
+    0.95,
+    0.975,
+    0.99,
+    0.995
+  ],
+  "shortlist": 4,
+  "nested_train_calibrate_validate": true,
+  "refit_after_calibration": false,
+  "ranker_logits_in_gate_feature": false,
+  "payload_excluded_from_candidate_ranking": true,
+  "candidate_age_feature": false,
+  "unit_position_feature": false,
+  "longmemeval_used": false,
+  "locomo_used": false
+}

@@ -397,6 +397,8 @@ The executable stage is `scripts/run_long_session_sparse_gate_v1.sh`. It embeds 
 
 [V5 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/crossfit_calibrated_forgetting_v5/REPORT.md) on 1,068 strictly held-out OOF episodes. It reached 99.81% current, 99.70% non-target, and 99.86% hard-retain retention, but stale deletion/pair state were 83.99/83.90%, about one point below the fixed 85% prerequisite; dev was never loaded. Threshold search is closed. [Episode-barrier V6](EPISODE_BARRIER_FORGETTING_V6_PLAN.md) keeps the entire cross-fit protocol fixed and replaces independent BCE with a fixed-margin objective that ranks each episode's update above its maximum retain event.
 
+[V6 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/episode_barrier_forgetting_v6/REPORT.md) at 99.81% current, 99.98% non-target, and 100% hard-retain safety, but stale deletion/pair state were 83.52/83.43%; the fixed barrier did not improve V5. All audits passed and dev remained absent. The registered stop rule now closes loss, epoch, and threshold iteration on this constructed ZsRE corpus. The next stage requires a separate natural long-session training/development source while preserving LoCoMo as confirmation.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
