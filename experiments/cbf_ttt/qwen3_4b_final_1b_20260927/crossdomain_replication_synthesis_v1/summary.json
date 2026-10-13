@@ -1,0 +1,121 @@
+{
+  "protocol": "crossdomain_forgetting_replication_synthesis_v1",
+  "domains": {
+    "counterfact": {
+      "name": "CounterFact",
+      "data_status": "grouped_oof_observed_development",
+      "sessions": 197,
+      "actions": 2355,
+      "query_accuracy": 0.5152238350551415,
+      "action_accuracy": 0.9528662420382167,
+      "by_event_kind": {
+        "primary_initial": {
+          "events": 785,
+          "correct": 783,
+          "accuracy": 0.9974522292993631
+        },
+        "hard_retain": {
+          "events": 785,
+          "correct": 758,
+          "accuracy": 0.9656050955414012
+        },
+        "primary_update": {
+          "events": 785,
+          "correct": 703,
+          "accuracy": 0.8955414012738854
+        }
+      },
+      "baseline_query_gain": 0.0194910051348168,
+      "baseline_query_bootstrap_95ci": [
+        0.015473760543699347,
+        0.02368003754290753
+      ],
+      "baseline_action_gain": 0.28619957537154994,
+      "baseline_action_bootstrap_95ci": [
+        0.2760084925690022,
+        0.29596602972399155
+      ]
+    },
+    "zsre": {
+      "name": "ZsRE",
+      "data_status": "one_time_subject_disjoint_heldout_test",
+      "sessions": 129,
+      "actions": 1548,
+      "query_accuracy": 0.7723116676605049,
+      "action_accuracy": 0.9515503875968992,
+      "by_event_kind": {
+        "primary_initial": {
+          "events": 516,
+          "correct": 516,
+          "accuracy": 1.0
+        },
+        "hard_retain": {
+          "events": 516,
+          "correct": 496,
+          "accuracy": 0.9612403100775194
+        },
+        "primary_update": {
+          "events": 516,
+          "correct": 461,
+          "accuracy": 0.8934108527131782
+        }
+      },
+      "baseline_query_gain": 0.06586956226909106,
+      "baseline_query_bootstrap_95ci": [
+        0.05429686360488914,
+        0.07789622615679007
+      ],
+      "baseline_action_gain": 0.12726098191214472,
+      "baseline_action_bootstrap_95ci": [
+        0.10271317829457366,
+        0.1524547803617571
+      ]
+    }
+  },
+  "descriptive_pooled_counts": {
+    "actions": 3903,
+    "correct": 3717,
+    "accuracy": 0.9523443504996156,
+    "by_event_kind": {
+      "primary_initial": {
+        "events": 1301,
+        "correct": 1299,
+        "accuracy": 0.9984627209838586
+      },
+      "hard_retain": {
+        "events": 1301,
+        "correct": 1254,
+        "accuracy": 0.9638739431206764
+      },
+      "primary_update": {
+        "events": 1301,
+        "correct": 1164,
+        "accuracy": 0.8946963873943121
+      }
+    },
+    "statistical_role": "descriptive_only; domain-specific clustered intervals remain primary"
+  },
+  "absolute_domain_differences": {
+    "overall_action_abs": 0.0013158544413174322,
+    "hard_retain_abs": 0.0043647854638817485,
+    "primary_update_abs": 0.0021305485607071573
+  },
+  "replication_checks": {
+    "positive_query_gain_both_domains": true,
+    "positive_action_gain_both_domains": true,
+    "overall_action_within_one_point": true,
+    "hard_retain_within_one_point": true,
+    "primary_update_within_one_point": true
+  },
+  "replicated": true,
+  "claim_boundary": {
+    "counterfact": "observed development-only grouped OOF",
+    "zsre": "one-time held-out subject-disjoint test",
+    "query_metrics_comparable": false,
+    "native_dense_fast_weight_proven": false,
+    "longmemeval_scored": false,
+    "locomo_scored": false
+  },
+  "next_stage": "natural_contextual_lowrank_sequential_validation",
+  "terminal_status": "completed_crossdomain_replication_synthesis"
+}
