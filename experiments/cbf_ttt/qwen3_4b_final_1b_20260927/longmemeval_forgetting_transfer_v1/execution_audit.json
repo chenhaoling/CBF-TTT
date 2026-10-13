@@ -1,0 +1,27 @@
+{
+  "protocol": "longmemeval_forgetting_transfer_v1_audit",
+  "audit_passed": true,
+  "checks": {
+    "shard_hashes": true,
+    "identities": true,
+    "metric_ranges": true,
+    "aggregates": true,
+    "comparisons": true,
+    "gate": true,
+    "claim_locks": true,
+    "terminal_marker": true
+  },
+  "summary_sha256": "54b5884125a91ae0810ccf73031751abfd8f418f5f30e463135c4f055bd63085",
+  "training_sha256": "1ca5d45b7409dc0ed9ca5da8d6fec344c2e6ce520580588174902746d4df4b3e",
+  "questions": 78,
+  "recomputed_gate": {
+    "checks": {
+      "pair_state_beats_random": false,
+      "current_hit5_noninferior": false,
+      "stale_hit5_reduced": true,
+      "latest_retention_at_least_95": false,
+      "nonanswer_retention_at_least_80": false
+    },
+    "passed": false
+  }
+}

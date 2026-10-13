@@ -1,0 +1,116 @@
+{
+  "protocol": "longmemeval_forgetting_transfer_v1",
+  "data_status": "one_time_knowledge_update_transfer",
+  "questions": 78,
+  "policies": {
+    "retain_all": {
+      "pair_state_correct": 0.0,
+      "latest_retained": 1.0,
+      "stale_deleted": 0.0,
+      "nonanswer_retention": 1.0,
+      "memory_fraction": 1.0,
+      "current_hit1": 0.23076923076923078,
+      "current_hit5": 0.6025641025641025,
+      "stale_hit1": 0.32051282051282054,
+      "stale_hit5": 0.6153846153846154,
+      "latest_over_stale": 0.48717948717948717
+    },
+    "window8": {
+      "pair_state_correct": 0.5,
+      "latest_retained": 0.5256410256410257,
+      "stale_deleted": 0.9743589743589743,
+      "nonanswer_retention": 0.16437838556016873,
+      "memory_fraction": 0.16918347091023203,
+      "current_hit1": 0.28205128205128205,
+      "current_hit5": 0.5256410256410257,
+      "stale_hit1": 0.0,
+      "stale_hit5": 0.02564102564102564,
+      "latest_over_stale": 0.5256410256410257
+    },
+    "fixed_top": {
+      "pair_state_correct": 0.08974358974358974,
+      "latest_retained": 0.08974358974358974,
+      "stale_deleted": 1.0,
+      "nonanswer_retention": 0.020048156060910316,
+      "memory_fraction": 0.021147933863779004,
+      "current_hit1": 0.08974358974358974,
+      "current_hit5": 0.08974358974358974,
+      "stale_hit1": 0.0,
+      "stale_hit5": 0.0,
+      "latest_over_stale": 0.08974358974358974
+    },
+    "random_matched": {
+      "pair_state_correct": 0.5128205128205128,
+      "latest_retained": 0.6923076923076923,
+      "stale_deleted": 0.7435897435897436,
+      "nonanswer_retention": 0.4091353579887508,
+      "memory_fraction": 0.41191469991856283,
+      "current_hit1": 0.3333333333333333,
+      "current_hit5": 0.6153846153846154,
+      "stale_hit1": 0.10256410256410256,
+      "stale_hit5": 0.21794871794871795,
+      "latest_over_stale": 0.6025641025641025
+    },
+    "frozen_controller": {
+      "pair_state_correct": 0.44871794871794873,
+      "latest_retained": 0.5,
+      "stale_deleted": 0.9102564102564102,
+      "nonanswer_retention": 0.4169355642110277,
+      "memory_fraction": 0.41191469991856283,
+      "current_hit1": 0.24358974358974358,
+      "current_hit5": 0.5,
+      "stale_hit1": 0.02564102564102564,
+      "stale_hit5": 0.07692307692307693,
+      "latest_over_stale": 0.48717948717948717
+    },
+    "oracle_pair": {
+      "pair_state_correct": 1.0,
+      "latest_retained": 1.0,
+      "stale_deleted": 1.0,
+      "nonanswer_retention": 1.0,
+      "memory_fraction": 0.978852066136221,
+      "current_hit1": 0.2948717948717949,
+      "current_hit5": 0.6666666666666666,
+      "stale_hit1": 0.0,
+      "stale_hit5": 0.0,
+      "latest_over_stale": 1.0
+    }
+  },
+  "comparisons": {
+    "pair_state_vs_random": {
+      "gain": -0.06410256410256404,
+      "bootstrap_95ci": [
+        -0.20512820512820512,
+        0.07692307692307693
+      ]
+    },
+    "current_hit5_vs_retain": {
+      "gain": -0.10256410256410253,
+      "bootstrap_95ci": [
+        -0.24358974358974358,
+        0.038461538461538464
+      ]
+    },
+    "stale_hit5_reduction_vs_retain": {
+      "gain": 0.5384615384615385,
+      "bootstrap_95ci": [
+        0.41025641025641024,
+        0.6666666666666666
+      ]
+    }
+  },
+  "transfer_gate": {
+    "checks": {
+      "pair_state_beats_random": false,
+      "current_hit5_noninferior": false,
+      "stale_hit5_reduced": true,
+      "latest_retention_at_least_95": false,
+      "nonanswer_retention_at_least_80": false
+    },
+    "passed": false
+  },
+  "official_longmemeval_score": false,
+  "locomo_scored": false,
+  "next_stage": "stop_longmemeval_zero_shot_transfer",
+  "terminal_status": "completed_longmemeval_forgetting_transfer_v1"
+}
