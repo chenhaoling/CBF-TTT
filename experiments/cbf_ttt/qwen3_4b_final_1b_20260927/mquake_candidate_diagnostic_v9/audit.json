@@ -1,0 +1,27 @@
+{
+  "protocol": "mquake_candidate_diagnostic_v9_audit",
+  "audit_passed": true,
+  "checks": {
+    "metrics_and_release_gate": true,
+    "tune_episode_identities": true,
+    "raw_output_hash": true,
+    "source_and_v8_hashes": true,
+    "protocol_and_access_locks": true
+  },
+  "summary_sha256": "1008194b7e8a8a4a62293ffa27ce1b23b0253862516460a3274803656765cf7f",
+  "training_sha256": "4fae4ed7f18413a59a229f1fe7019ea40934d0a5a1f039c0b471349997d77630",
+  "training_manifest_sha256": "6518bcfdf974a62cfc32ee377f53dc3597611eb53fafaf189eeffd98b716862e",
+  "recomputed_release_gate": {
+    "eligible": [
+      "anchor_16",
+      "anchor_32",
+      "anchor_4",
+      "anchor_8",
+      "learned_full",
+      "max_16",
+      "max_32"
+    ],
+    "selected": "anchor_4",
+    "passed": true
+  }
+}

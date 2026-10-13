@@ -1904,3 +1904,19 @@ compares full-list learned ranking, all-unit maximum and explicit scope-anchor
 shortlists at widths 4/8/16/32. It records raw target ranks and selects an arm only at
 >=90% recall and >=80% top-1. No deletion model is trained and dev, MQuAKE-CF,
 LongMemEval-S, and LoCoMo are inaccessible.
+
+V9 completed on all 1,492 tune episodes and passed the independent audit. Raw all-unit
+maximum cosine achieved 31.84% top-1 with mean target rank 7.25. All-unit shortlist
+recall rose from 34.52% at width 4 to 92.09% at width 16 and 100% at width 32. Raw
+explicit-anchor cosine, every anchor shortlist, and learned full-list ranking were
+100% top-1 at all four session lengths. The registered selector chose `anchor_4`.
+Compact evidence and `REPORT.md` are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_candidate_diagnostic_v9`.
+
+Added `MQUAKE_ANCHOR_FORGETTING_V10_PLAN.md`,
+`tasks/train_mquake_anchor_forgetting_v10.py`, its independent audit, runner, and gate
+tests. V10 freezes the declared anchor-field shortlist and V8 listwise reranker, trains
+only three new 50-epoch deletion heads on train causal states, and calibrates tune
+thresholds without refitting. A six-check tune prerequisite conditionally releases a
+nine-check entity-disjoint dev evaluation. All outputs are separate and baseline paths
+remain unchanged.

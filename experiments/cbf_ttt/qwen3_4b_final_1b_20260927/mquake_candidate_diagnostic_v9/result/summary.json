@@ -1,0 +1,331 @@
+{
+  "protocol": "mquake_candidate_diagnostic_v9",
+  "split": "tune",
+  "metrics": {
+    "learned_full": {
+      "episodes": 1492,
+      "top1": 1.0,
+      "mrr": 1.0,
+      "mean_rank": 1.0,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 1.0
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 1.0
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 1.0
+        }
+      }
+    },
+    "max_4": {
+      "episodes": 1492,
+      "top1": 0.34517426273458446,
+      "mrr": 0.6725871313672922,
+      "mean_rank": 1.6548257372654156,
+      "target_recall": 0.34517426273458446,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 0.4289544235924933,
+          "target_recall": 0.4289544235924933
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 0.3297587131367292,
+          "target_recall": 0.3297587131367292
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 0.3109919571045576,
+          "target_recall": 0.3109919571045576
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 0.3109919571045576,
+          "target_recall": 0.3109919571045576
+        }
+      }
+    },
+    "max_8": {
+      "episodes": 1492,
+      "top1": 0.5549597855227882,
+      "mrr": 0.7774798927613941,
+      "mean_rank": 1.4450402144772119,
+      "target_recall": 0.5549597855227882,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 0.5817694369973191,
+          "target_recall": 0.5817694369973191
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 0.32439678284182305,
+          "target_recall": 0.32439678284182305
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 0.3136729222520107,
+          "target_recall": 0.3136729222520107
+        }
+      }
+    },
+    "max_16": {
+      "episodes": 1492,
+      "top1": 0.920911528150134,
+      "mrr": 0.960455764075067,
+      "mean_rank": 1.079088471849866,
+      "target_recall": 0.920911528150134,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 0.6836461126005362,
+          "target_recall": 0.6836461126005362
+        }
+      }
+    },
+    "max_32": {
+      "episodes": 1492,
+      "top1": 1.0,
+      "mrr": 1.0,
+      "mean_rank": 1.0,
+      "target_recall": 1.0,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        }
+      }
+    },
+    "anchor_4": {
+      "episodes": 1492,
+      "top1": 1.0,
+      "mrr": 1.0,
+      "mean_rank": 1.0,
+      "target_recall": 1.0,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        }
+      }
+    },
+    "anchor_8": {
+      "episodes": 1492,
+      "top1": 1.0,
+      "mrr": 1.0,
+      "mean_rank": 1.0,
+      "target_recall": 1.0,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        }
+      }
+    },
+    "anchor_16": {
+      "episodes": 1492,
+      "top1": 1.0,
+      "mrr": 1.0,
+      "mean_rank": 1.0,
+      "target_recall": 1.0,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        }
+      }
+    },
+    "anchor_32": {
+      "episodes": 1492,
+      "top1": 1.0,
+      "mrr": 1.0,
+      "mean_rank": 1.0,
+      "target_recall": 1.0,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 1.0,
+          "target_recall": 1.0
+        }
+      }
+    }
+  },
+  "controls": {
+    "max_mean_raw": {
+      "episodes": 1492,
+      "top1": 0.3183646112600536,
+      "mrr": 0.40006277300473797,
+      "mean_rank": 7.2520107238605895,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 0.32171581769436997
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 0.3297587131367292
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 0.3109919571045576
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 0.3109919571045576
+        }
+      }
+    },
+    "anchor_raw": {
+      "episodes": 1492,
+      "top1": 1.0,
+      "mrr": 1.0,
+      "mean_rank": 1.0,
+      "by_length": {
+        "16": {
+          "episodes": 373,
+          "top1": 1.0
+        },
+        "32": {
+          "episodes": 373,
+          "top1": 1.0
+        },
+        "48": {
+          "episodes": 373,
+          "top1": 1.0
+        },
+        "64": {
+          "episodes": 373,
+          "top1": 1.0
+        }
+      }
+    }
+  },
+  "release_gate": {
+    "eligible": [
+      "anchor_16",
+      "anchor_32",
+      "anchor_4",
+      "anchor_8",
+      "learned_full",
+      "max_16",
+      "max_32"
+    ],
+    "selected": "anchor_4",
+    "passed": true
+  },
+  "development_loaded": false,
+  "mquake_cf_used": false,
+  "longmemeval_used": false,
+  "locomo_scored": false,
+  "next_stage": "train_causal_with_selected_candidate",
+  "terminal_status": "completed_mquake_candidate_diagnostic_v9"
+}

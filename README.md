@@ -422,6 +422,13 @@ and 97.49% hard-retain accuracy, but shortlist/top-1 remained 28.82% and pair st
 compares full-list and 4/8/16/32 shortlist ranking with explicit scope anchors on tune;
 no deletion head is retrained and dev remains absent.
 
+[V9 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_candidate_diagnostic_v9/REPORT.md)
+with a passing audit. Raw explicit-anchor cosine and `anchor_4` both reached 100% tune
+top-1 at every length, while raw all-unit maximum was 31.84% with mean target rank
+7.25. [V10](MQUAKE_ANCHOR_FORGETTING_V10_PLAN.md) freezes `anchor_4`, retrains only
+the causal deletion heads on train, calibrates on tune without refitting, and permits
+dev only after a six-check prerequisite. LoCoMo remains sealed.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
