@@ -1,0 +1,509 @@
+{
+  "protocol": "long_session_sparse_gate_v1",
+  "data_status": "constructed_subject_disjoint_development",
+  "candidate_top1": 0.3398876404494382,
+  "controller": {
+    "action_accuracy": 0.5520131086142323,
+    "pair_state_accuracy": 0.5518102372034956,
+    "stale_deletion": 0.7375156054931336,
+    "current_retention": 0.7780898876404495,
+    "non_target_retention": 0.5843167972846338,
+    "memory_fraction": 0.579586389409072,
+    "by_event_kind": {
+      "primary_old": {
+        "accuracy": 0.7521847690387017
+      },
+      "hard_retain": {
+        "accuracy": 0.5329275905118601
+      },
+      "distractor": {
+        "accuracy": 0.5575235816340686
+      },
+      "primary_update": {
+        "accuracy": 0.19163545568039952
+      }
+    },
+    "by_length": {
+      "16": {
+        "pair_state_accuracy": 0.5880149812734082,
+        "current_retention": 0.867665418227216,
+        "non_target_retention": 0.6752273943285179
+      },
+      "32": {
+        "pair_state_accuracy": 0.5268414481897629,
+        "current_retention": 0.7740324594257179,
+        "non_target_retention": 0.5987099459009572
+      },
+      "48": {
+        "pair_state_accuracy": 0.5518102372034956,
+        "current_retention": 0.7353308364544319,
+        "non_target_retention": 0.5494761982304728
+      },
+      "64": {
+        "pair_state_accuracy": 0.540574282147316,
+        "current_retention": 0.7353308364544321,
+        "non_target_retention": 0.5138536506785872
+      }
+    }
+  },
+  "controller_per_seed": {
+    "28101": {
+      "episodes": 1068,
+      "actions": 42720,
+      "action_accuracy": 0.7482443820224719,
+      "pair_state_accuracy": 0.5833333333333334,
+      "stale_deletion": 0.5926966292134831,
+      "current_retention": 0.9775280898876404,
+      "non_target_retention": 0.775489820503373,
+      "memory_fraction": 0.7692288935705368,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1068,
+          "accuracy": 0.9681647940074907
+        },
+        "hard_retain": {
+          "events": 2136,
+          "accuracy": 0.7392322097378277
+        },
+        "distractor": {
+          "events": 38448,
+          "accuracy": 0.7561641697877652
+        },
+        "primary_update": {
+          "events": 1068,
+          "accuracy": 0.2612359550561798
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.5617977528089888,
+          "current_retention": 0.9925093632958801,
+          "non_target_retention": 0.8376136971642589
+        },
+        "32": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.550561797752809,
+          "current_retention": 0.9887640449438202,
+          "non_target_retention": 0.7882646691635455
+        },
+        "48": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.6142322097378277,
+          "current_retention": 0.9588014981273408,
+          "non_target_retention": 0.7511805894805406
+        },
+        "64": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.6067415730337079,
+          "current_retention": 0.9700374531835206,
+          "non_target_retention": 0.7249003262051469
+        }
+      }
+    },
+    "28102": {
+      "episodes": 1068,
+      "actions": 42720,
+      "action_accuracy": 0.591058052434457,
+      "pair_state_accuracy": 0.599250936329588,
+      "stale_deletion": 0.7134831460674157,
+      "current_retention": 0.8389513108614233,
+      "non_target_retention": 0.6334911892592684,
+      "memory_fraction": 0.6279747971285893,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1068,
+          "accuracy": 0.8586142322097379
+        },
+        "hard_retain": {
+          "events": 2136,
+          "accuracy": 0.602996254681648
+        },
+        "distractor": {
+          "events": 38448,
+          "accuracy": 0.5929307116104869
+        },
+        "primary_update": {
+          "events": 1068,
+          "accuracy": 0.23220973782771537
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.599250936329588,
+          "current_retention": 0.9325842696629213,
+          "non_target_retention": 0.7619047619047619
+        },
+        "32": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.5617977528089888,
+          "current_retention": 0.8202247191011236,
+          "non_target_retention": 0.6504369538077402
+        },
+        "48": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.6404494382022472,
+          "current_retention": 0.8089887640449438,
+          "non_target_retention": 0.5862237420615535
+        },
+        "64": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.5955056179775281,
+          "current_retention": 0.7940074906367042,
+          "non_target_retention": 0.535399299263018
+        }
+      }
+    },
+    "28103": {
+      "episodes": 1068,
+      "actions": 42720,
+      "action_accuracy": 0.31673689138576777,
+      "pair_state_accuracy": 0.47284644194756553,
+      "stale_deletion": 0.9063670411985019,
+      "current_retention": 0.5177902621722846,
+      "non_target_retention": 0.34396938209125993,
+      "memory_fraction": 0.3415554775280899,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1068,
+          "accuracy": 0.4297752808988764
+        },
+        "hard_retain": {
+          "events": 2136,
+          "accuracy": 0.2565543071161049
+        },
+        "distractor": {
+          "events": 38448,
+          "accuracy": 0.3234758635039534
+        },
+        "primary_update": {
+          "events": 1068,
+          "accuracy": 0.08146067415730338
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.602996254681648,
+          "current_retention": 0.6779026217228464,
+          "non_target_retention": 0.4261637239165329
+        },
+        "32": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.4681647940074906,
+          "current_retention": 0.5131086142322098,
+          "non_target_retention": 0.35742821473158554
+        },
+        "48": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.40074906367041196,
+          "current_retention": 0.43820224719101125,
+          "non_target_retention": 0.3110242631493242
+        },
+        "64": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.41947565543071164,
+          "current_retention": 0.4419475655430712,
+          "non_target_retention": 0.28126132656759695
+        }
+      }
+    }
+  },
+  "controls": {
+    "retain_all": {
+      "episodes": 1068,
+      "actions": 42720,
+      "action_accuracy": 0.975,
+      "pair_state_accuracy": 0.0,
+      "stale_deletion": 0.0,
+      "current_retention": 1.0,
+      "non_target_retention": 1.0,
+      "memory_fraction": 1.0,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1068,
+          "accuracy": 1.0
+        },
+        "hard_retain": {
+          "events": 2136,
+          "accuracy": 1.0
+        },
+        "distractor": {
+          "events": 38448,
+          "accuracy": 1.0
+        },
+        "primary_update": {
+          "events": 1068,
+          "accuracy": 0.0
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "32": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "48": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "64": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        }
+      }
+    },
+    "fixed_top": {
+      "episodes": 1068,
+      "actions": 42720,
+      "action_accuracy": 0.025,
+      "pair_state_accuracy": 0.0,
+      "stale_deletion": 1.0,
+      "current_retention": 0.0,
+      "non_target_retention": 0.03565751686368797,
+      "memory_fraction": 0.032552083333333336,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1068,
+          "accuracy": 0.0
+        },
+        "hard_retain": {
+          "events": 2136,
+          "accuracy": 0.0
+        },
+        "distractor": {
+          "events": 38448,
+          "accuracy": 0.027777777777777776
+        },
+        "primary_update": {
+          "events": 1068,
+          "accuracy": 0.0
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 0.0,
+          "non_target_retention": 0.07142857142857142
+        },
+        "32": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 0.0,
+          "non_target_retention": 0.03333333333333333
+        },
+        "48": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 0.0,
+          "non_target_retention": 0.021739130434782608
+        },
+        "64": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 0.0,
+          "non_target_retention": 0.016129032258064516
+        }
+      }
+    },
+    "cosine": {
+      "episodes": 1068,
+      "actions": 42720,
+      "action_accuracy": 0.5980337078651685,
+      "pair_state_accuracy": 0.4812734082397004,
+      "stale_deletion": 0.6189138576779026,
+      "current_retention": 0.7837078651685393,
+      "non_target_retention": 0.6459965766094325,
+      "memory_fraction": 0.6409029728464419,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1068,
+          "accuracy": 0.7200374531835206
+        },
+        "hard_retain": {
+          "events": 2136,
+          "accuracy": 0.6872659176029963
+        },
+        "distractor": {
+          "events": 38448,
+          "accuracy": 0.6020599250936329
+        },
+        "primary_update": {
+          "events": 1068,
+          "accuracy": 0.15262172284644196
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.46441947565543074,
+          "current_retention": 0.8726591760299626,
+          "non_target_retention": 0.78330658105939
+        },
+        "32": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.42696629213483145,
+          "current_retention": 0.7752808988764045,
+          "non_target_retention": 0.653183520599251
+        },
+        "48": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.5280898876404494,
+          "current_retention": 0.7340823970037453,
+          "non_target_retention": 0.5954241980133529
+        },
+        "64": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.5056179775280899,
+          "current_retention": 0.7528089887640449,
+          "non_target_retention": 0.5520720067657364
+        }
+      }
+    },
+    "random_matched": {
+      "episodes": 1068,
+      "actions": 42720,
+      "action_accuracy": 0.7337312734082397,
+      "pair_state_accuracy": 0.31086142322097376,
+      "stale_deletion": 0.3464419475655431,
+      "current_retention": 0.9110486891385767,
+      "non_target_retention": 0.7527130920550874,
+      "memory_fraction": 0.7545548533083646,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1068,
+          "accuracy": 0.7397003745318352
+        },
+        "hard_retain": {
+          "events": 2136,
+          "accuracy": 0.7448501872659176
+        },
+        "distractor": {
+          "events": 38448,
+          "accuracy": 0.7529650436953808
+        },
+        "primary_update": {
+          "events": 1068,
+          "accuracy": 0.013108614232209739
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.299625468164794,
+          "current_retention": 0.898876404494382,
+          "non_target_retention": 0.7597645799892991
+        },
+        "32": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.27340823970037453,
+          "current_retention": 0.9176029962546817,
+          "non_target_retention": 0.7515605493133583
+        },
+        "48": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.3258426966292135,
+          "current_retention": 0.9288389513108615,
+          "non_target_retention": 0.7500407099820876
+        },
+        "64": {
+          "episodes": 267,
+          "pair_state_accuracy": 0.3445692883895131,
+          "current_retention": 0.898876404494382,
+          "non_target_retention": 0.7494865289356047
+        }
+      }
+    },
+    "oracle": {
+      "episodes": 1068,
+      "actions": 42720,
+      "action_accuracy": 1.0,
+      "pair_state_accuracy": 1.0,
+      "stale_deletion": 1.0,
+      "current_retention": 1.0,
+      "non_target_retention": 1.0,
+      "memory_fraction": 0.9674479166666666,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1068,
+          "accuracy": 1.0
+        },
+        "hard_retain": {
+          "events": 2136,
+          "accuracy": 1.0
+        },
+        "distractor": {
+          "events": 38448,
+          "accuracy": 1.0
+        },
+        "primary_update": {
+          "events": 1068,
+          "accuracy": 1.0
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 267,
+          "pair_state_accuracy": 1.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "32": {
+          "episodes": 267,
+          "pair_state_accuracy": 1.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "48": {
+          "episodes": 267,
+          "pair_state_accuracy": 1.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "64": {
+          "episodes": 267,
+          "pair_state_accuracy": 1.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        }
+      }
+    }
+  },
+  "controller_vs_random": {
+    "gain": 0.2724719101123596,
+    "subject_clusters": 267,
+    "bootstrap_95ci": [
+      0.22659176029962547,
+      0.31647940074906367
+    ]
+  },
+  "development_gate": {
+    "checks": {
+      "candidate_top1_at_least_95": false,
+      "current_retention_at_least_95": false,
+      "non_target_retention_at_least_95": false,
+      "stale_deletion_at_least_90": false,
+      "pair_state_at_least_90": false,
+      "every_length_pair_at_least_85": false,
+      "beats_random_by_five_points_confidently": true
+    },
+    "passed": false
+  },
+  "longmemeval_used_for_fit_or_selection": false,
+  "locomo_scored": false,
+  "next_stage": "stop_sparse_session_gate_v1",
+  "terminal_status": "completed_long_session_sparse_gate_v1"
+}

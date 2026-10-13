@@ -1582,6 +1582,32 @@ cd /home/ctj/cbf_ttt_joint_exp_20260927
 bash scripts/run_long_session_sparse_gate_v1.sh
 ```
 
+The audited run completed in 164.52 seconds at 8.090/10.023 GiB peak
+allocated/reserved. Candidate top-1 was 33.99%; the learned three-seed mean was
+55.20% action accuracy, 55.18% strict stale/current pair state, 73.75% stale
+deletion, 77.81% current retention, and 58.43% non-target retention. The
+primary seed beat exact action-count-matched random in pair state by 27.25
+points with 95% CI `[22.66,31.65]`, but only that comparison check passed.
+Oracle local deletion reached 100% on all lengths. The result rejects flat
+maximum-cosine candidate selection under multi-fact sessions rather than local
+forgetting itself. LoCoMo stayed sealed. Compact artifacts and the full report
+are archived at
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/long_session_sparse_gate_v1`;
+61 MiB of hash-covered raw trajectories remain on `hku-gpu2`.
+
+Registered and implemented `LONG_SESSION_CANDIDATE_V2_PLAN.md`,
+`tasks/train_long_session_candidate_v2.py`, its immutable runner, independent
+auditor, and regression tests. V2 isolates candidate retrieval before another
+causal deletion experiment. It uses listwise supervision over all active
+sessions, order-neutral per-projection max/top-k/mean/dispersion geometry,
+projection agreement, similarity-density, lexical, and relation evidence. Its
+primary ranker cannot observe age or unit position, preventing exploitation of
+the synthetic event schedule and anchor serialization. Three seeds select only
+on calibration-tune and are refit on fit+tune before development. V1 maximum
+cosine, top-4, full-mean, consensus, and an ineligible anchor-only diagnostic
+are fixed controls. A 95% mean top-1 gate with seed, length, MRR, and clustered
+gain checks must pass before a separately registered sparse deletion gate.
+
 ## 2026-10-12: ZsRE contextual readout and relation-aware key alignment
 
 ### Completed natural readout
