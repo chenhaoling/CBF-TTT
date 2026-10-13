@@ -389,6 +389,8 @@ The executable stage is `scripts/run_long_session_sparse_gate_v1.sh`. It embeds 
 
 [Hierarchical candidate V2](LONG_SESSION_CANDIDATE_V2_PLAN.md) is the frozen next stage. It trains a rank-16 listwise session resolver over order-neutral multi-instance geometry and lexical/relation evidence, with no age, unit-position, chain, subject, or target features. Fit/tune choices are frozen before the already designated subject-disjoint development split is materialized. Passing a five-check 95%-top1 release gate is required before any new deletion controller; an independent auditor recomputes all selections, ranks, clustered bootstrap results, hashes, and claim locks.
 
+[V2 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/long_session_candidate_v2/REPORT.md) at 67.38% top-1 and 73.16% MRR. Its 33.33-point gain over V1 was significant (95% CI `[28.93,37.64]`) and stable across seeds, but the 95% release gate failed. The [factorized scope-key V3 plan](FACTORIZED_SCOPE_CANDIDATE_V3_PLAN.md) now removes changed value payloads from candidate keys while preserving them as memory contents. It repeats the frozen split/listwise protocol and requires both a 95% learned result and a 30-point fixed scope-key mechanism gain before causal deletion can resume.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)

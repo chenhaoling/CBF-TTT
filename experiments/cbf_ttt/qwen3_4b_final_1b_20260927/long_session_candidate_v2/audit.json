@@ -1,0 +1,29 @@
+{
+  "protocol": "long_session_candidate_v2_audit",
+  "audit_passed": true,
+  "checks": {
+    "raw_hashes": true,
+    "record_identities": true,
+    "row_invariants": true,
+    "aggregates": true,
+    "fit_tune_selection": true,
+    "comparison": true,
+    "release_gate": true,
+    "source_and_checkpoint_hashes": true,
+    "feature_and_claim_locks": true
+  },
+  "summary_sha256": "2c9825d3f0528e3f81a59213ae69818db937e590496bf496841c303dd6cc83fe",
+  "training_sha256": "5ab90a0674b7ffbe7111a7b222ea9f0bd7cbdb3ba8a789b0d6f46ab54b0f952c",
+  "training_manifest_sha256": "98e759bf8ae6541e0feba2ee6647147a97ac5eb9c31faff4c865fe029ead4302",
+  "episodes": 1068,
+  "recomputed_gate": {
+    "checks": {
+      "mean_top1_at_least_95": false,
+      "minimum_seed_top1_at_least_93": false,
+      "every_length_mean_top1_at_least_93": false,
+      "mean_mrr_at_least_97": false,
+      "gain_over_v1_lower_bound_above_20": true
+    },
+    "passed": false
+  }
+}

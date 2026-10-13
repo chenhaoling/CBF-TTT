@@ -1608,6 +1608,25 @@ cosine, top-4, full-mean, consensus, and an ineligible anchor-only diagnostic
 are fixed controls. A 95% mean top-1 gate with seed, length, MRR, and clustered
 gain checks must pass before a separately registered sparse deletion gate.
 
+V2 completed in 38.73 seconds at 8.090/10.023 GiB peak allocated/reserved and
+passed all nine independent audit checks. The learned resolver reached 67.38%
+top-1 and 73.16% MRR versus 33.99%/47.18% for V1 maximum cosine. Primary-seed
+top-1 gain was 33.33 points with 95% CI `[28.93,37.64]`, and the three seeds
+were stable within 0.19 points. Only the gain check passed; causal deletion did
+not run and LoCoMo remained sealed. The ineligible anchor-only result of 79.21%
+showed that the combined prompt-plus-changed-value key remains a bottleneck.
+Compact results are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/long_session_candidate_v2`.
+
+Registered `FACTORIZED_SCOPE_CANDIDATE_V3_PLAN.md` and implemented its trainer,
+runner, auditor, and tests. V3 mechanically splits each existing unit at the
+audited `Value:` delimiter, embeds only the prompt/rephrase as the retrieval
+scope key, and keeps the value as excluded payload. It reuses V2's fixed
+listwise protocol without age or position features and hash-verifies the V2
+paired baseline. The release gate additionally requires fixed scope-key maximum
+cosine to beat the original full-text maximum by 30 points, so a passing claim
+must demonstrate the factorization mechanism independently of the learned MLP.
+
 ## 2026-10-12: ZsRE contextual readout and relation-aware key alignment
 
 ### Completed natural readout
