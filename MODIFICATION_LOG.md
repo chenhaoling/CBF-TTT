@@ -1889,3 +1889,18 @@ where an independently recomputed nine-check gate requires scope, safety, deleti
 every-length, and matched-random confidence criteria. MQuAKE-CF, LongMemEval-S, and
 LoCoMo are locked out. The baseline remains unchanged because this is a separate
 opt-in runner.
+
+V8 completed in 892.01 seconds at 7.867/8.115 GiB peak allocated/reserved memory and
+passed the independent audit. All three heads found safety-feasible tune thresholds
+(0.85, 0.85, 0.75). Current/non-target/hard-retain accuracy reached
+100.00/98.86/97.49%, but candidate shortlist/top-1 was 28.82% and pair state 15.88%.
+The tune prerequisite failed, so dev artifacts are absent. Added the compact result and
+full report under `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_temporal_adaptation_v8`.
+
+Added `MQUAKE_CANDIDATE_DIAGNOSTIC_V9_PLAN.md`,
+`tasks/diagnose_mquake_candidate_scope_v9.py`, its independent audit, runner, and gate
+tests. The tune-only diagnostic reuses V8's frozen train-fitted candidate heads and
+compares full-list learned ranking, all-unit maximum and explicit scope-anchor
+shortlists at widths 4/8/16/32. It records raw target ranks and selects an arm only at
+>=90% recall and >=80% top-1. No deletion model is trained and dev, MQuAKE-CF,
+LongMemEval-S, and LoCoMo are inaccessible.

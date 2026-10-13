@@ -415,6 +415,13 @@ deletion opportunity, but universal zero-shot transfer is rejected. The register
 calibrates only on tune without refitting, and conditionally reads entity-disjoint dev.
 LoCoMo remains sealed.
 
+[V8 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_temporal_adaptation_v8/REPORT.md)
+and stopped before dev. Tune safety recovered to 100.00% current, 98.86% non-target,
+and 97.49% hard-retain accuracy, but shortlist/top-1 remained 28.82% and pair state was
+15.88%. The next [V9 candidate diagnostic](MQUAKE_CANDIDATE_DIAGNOSTIC_V9_PLAN.md)
+compares full-list and 4/8/16/32 shortlist ranking with explicit scope anchors on tune;
+no deletion head is retrained and dev remains absent.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)

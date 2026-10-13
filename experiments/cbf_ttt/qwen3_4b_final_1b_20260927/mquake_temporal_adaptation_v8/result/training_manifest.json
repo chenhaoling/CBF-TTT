@@ -1,0 +1,37 @@
+{
+  "protocol": "mquake_temporal_adaptation_v8",
+  "data_manifest_sha256": "b4d898408ea3fb46270e66ed02023f5a5dbf5bca15c5947f6fa2fe07c1bfa9ab",
+  "mquake_source_sha256": "58500a1d4aaf9e036c23a1d9dd6be2d73d693e35a695614842f211ea5aff59f2",
+  "source_summary_sha256": "843a0c23b15125e2298f71fcf5d99ef3f96d997bc5a6616ee102d6d949e8cafe",
+  "source_training_sha256": "6707f7659f028fa1c7c8dda4f1befe4f8c56221cf448aada8042a722b4298439",
+  "source_transforms_sha256": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "git_commit": "d1c700d70462000c0c912146978585b7d2460d3d",
+  "candidate_seeds": [
+    30101,
+    30102,
+    30103
+  ],
+  "gate_seeds": [
+    32101,
+    32102,
+    32103
+  ],
+  "candidate_epoch": 50,
+  "gate_epoch": 50,
+  "refit_after_calibration": false,
+  "development_labels_loaded_conditionally": true,
+  "payload_excluded_from_candidate_ranking": true,
+  "candidate_age_feature": false,
+  "unit_position_feature": false,
+  "mquake_cf_used": false,
+  "longmemeval_used": false,
+  "locomo_used": false
+}

@@ -1,0 +1,78 @@
+{
+  "protocol": "mquake_temporal_adaptation_v8",
+  "tune": {
+    "episodes": 1492,
+    "actions": 59680,
+    "action_accuracy": 0.969152144772118,
+    "pair_state_accuracy": 0.15884718498659517,
+    "stale_deletion": 0.15884718498659517,
+    "current_retention": 1.0,
+    "non_target_retention": 0.9886218428202042,
+    "memory_fraction": 0.9844448168007149,
+    "by_event_kind": {
+      "primary_old": {
+        "events": 1492,
+        "accuracy": 0.9979892761394102
+      },
+      "hard_retain": {
+        "events": 2984,
+        "accuracy": 0.9748659517426274
+      },
+      "distractor": {
+        "events": 53712,
+        "accuracy": 0.9906538576109621
+      },
+      "primary_update": {
+        "events": 1492,
+        "accuracy": 0.15482573726541554
+      }
+    },
+    "by_length": {
+      "16": {
+        "episodes": 373,
+        "pair_state_accuracy": 0.13941018766756033,
+        "current_retention": 1.0,
+        "non_target_retention": 0.986786671773267
+      },
+      "32": {
+        "episodes": 373,
+        "pair_state_accuracy": 0.16353887399463807,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9881143878462914
+      },
+      "48": {
+        "episodes": 373,
+        "pair_state_accuracy": 0.1581769436997319,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9902669308777247
+      },
+      "64": {
+        "episodes": 373,
+        "pair_state_accuracy": 0.1742627345844504,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9893193807835337
+      }
+    }
+  },
+  "tune_candidate": {
+    "shortlist_recall": 0.28820375335120646,
+    "candidate_top1": 0.28820375335120646
+  },
+  "tune_prerequisite": {
+    "checks": {
+      "shortlist_recall_at_least_90": false,
+      "candidate_top1_at_least_80": false,
+      "current_retention_at_least_97": true,
+      "non_target_retention_at_least_95": true,
+      "hard_retain_at_least_95": true,
+      "pair_state_at_least_70": false
+    },
+    "passed": false
+  },
+  "development_scored": false,
+  "mquake_cf_used": false,
+  "longmemeval_used": false,
+  "locomo_scored": false,
+  "next_stage": "stop_mquake_tune",
+  "terminal_status": "completed_mquake_temporal_adaptation_v8_tune"
+}
