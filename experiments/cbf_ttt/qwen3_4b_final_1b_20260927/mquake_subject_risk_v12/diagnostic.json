@@ -1,0 +1,474 @@
+{
+  "protocol": "mquake_subject_risk_v12_diagnostic",
+  "analysis_type": "read_only_posthoc_failure_attribution",
+  "no_model_calls": true,
+  "no_threshold_selection": true,
+  "source_terminal_status": "completed_mquake_subject_risk_v12",
+  "source_gate_passed": false,
+  "fold_loads_recomputed": [
+    1196,
+    1196,
+    1196,
+    1196,
+    1192
+  ],
+  "selected_thresholds": {
+    "0": {
+      "32101": {
+        "threshold": 0.975,
+        "feasible": true
+      },
+      "32102": {
+        "threshold": 0.975,
+        "feasible": true
+      },
+      "32103": {
+        "threshold": 0.95,
+        "feasible": true
+      }
+    },
+    "1": {
+      "32101": {
+        "threshold": 0.95,
+        "feasible": true
+      },
+      "32102": {
+        "threshold": 0.95,
+        "feasible": true
+      },
+      "32103": {
+        "threshold": 0.95,
+        "feasible": true
+      }
+    },
+    "2": {
+      "32101": {
+        "threshold": 0.95,
+        "feasible": true
+      },
+      "32102": {
+        "threshold": 0.975,
+        "feasible": true
+      },
+      "32103": {
+        "threshold": 0.95,
+        "feasible": true
+      }
+    },
+    "3": {
+      "32101": {
+        "threshold": 0.7,
+        "feasible": true
+      },
+      "32102": {
+        "threshold": 0.6,
+        "feasible": true
+      },
+      "32103": {
+        "threshold": 0.6,
+        "feasible": true
+      }
+    },
+    "4": {
+      "32101": {
+        "threshold": 0.95,
+        "feasible": true
+      },
+      "32102": {
+        "threshold": 0.95,
+        "feasible": true
+      },
+      "32103": {
+        "threshold": 0.95,
+        "feasible": true
+      }
+    }
+  },
+  "primary_update": {
+    "episodes": 5976,
+    "counts": {
+      "correct_candidate_threshold_reject": 3703,
+      "correct_deletion": 2191,
+      "wrong_candidate_deleted": 21,
+      "wrong_candidate_threshold_reject": 61
+    },
+    "rates": {
+      "correct_candidate_threshold_reject": 0.6196452476572959,
+      "correct_deletion": 0.3666331994645248,
+      "wrong_candidate_deleted": 0.0035140562248995983,
+      "wrong_candidate_threshold_reject": 0.010207496653279786
+    },
+    "candidate_matches_target": 0.9862784471218207,
+    "threshold_accepts": 0.37014725568942436,
+    "target_deleted": 0.3666331994645248,
+    "primary_probability": {
+      "count": 5976,
+      "min": 0.00025735259919067654,
+      "p10": 0.06395757231202215,
+      "p25": 0.14698526391832598,
+      "median": 0.34643048811777677,
+      "p75": 0.6531448712610213,
+      "p90": 0.8763894542055527,
+      "max": 0.9896215475694217,
+      "mean": 0.4105216576934833
+    },
+    "probability_when_candidate_matches": {
+      "count": 5894,
+      "min": 0.0067298996363899305,
+      "p10": 0.06856219905117057,
+      "p25": 0.15107121061693968,
+      "median": 0.3484081156772646,
+      "p75": 0.6536483155091543,
+      "p90": 0.8758440806170144,
+      "max": 0.9896215475694217,
+      "mean": 0.4127186516173785
+    },
+    "probability_when_candidate_misses": {
+      "count": 82,
+      "min": 0.00025735259919067654,
+      "p10": 0.0012021549394804348,
+      "p25": 0.0013933833588594703,
+      "median": 0.0030119399745059785,
+      "p75": 0.5196958885808612,
+      "p90": 0.9260764604210026,
+      "max": 0.9885887506386095,
+      "mean": 0.25260602126131215
+    }
+  },
+  "primary_update_by_fold": {
+    "0": {
+      "episodes": 1196,
+      "counts": {
+        "correct_candidate_threshold_reject": 1032,
+        "correct_deletion": 152,
+        "wrong_candidate_deleted": 2,
+        "wrong_candidate_threshold_reject": 10
+      },
+      "rates": {
+        "correct_candidate_threshold_reject": 0.862876254180602,
+        "correct_deletion": 0.12709030100334448,
+        "wrong_candidate_deleted": 0.0016722408026755853,
+        "wrong_candidate_threshold_reject": 0.008361204013377926
+      },
+      "candidate_matches_target": 0.9899665551839465,
+      "threshold_accepts": 0.12876254180602006,
+      "target_deleted": 0.12709030100334448,
+      "primary_probability": {
+        "count": 1196,
+        "min": 0.00025735259919067654,
+        "p10": 0.0476560588207736,
+        "p25": 0.09773101201936846,
+        "median": 0.20259836628388986,
+        "p75": 0.3523484750857465,
+        "p90": 0.5306694337151922,
+        "max": 0.8890928774961493,
+        "mean": 0.24794693732071463
+      },
+      "probability_when_candidate_matches": {
+        "count": 1184,
+        "min": 0.0067298996363899305,
+        "p10": 0.048170624491321236,
+        "p25": 0.09925116172262285,
+        "median": 0.20303642699386737,
+        "p75": 0.3523484750857465,
+        "p90": 0.5307325586472165,
+        "max": 0.8890928774961493,
+        "mean": 0.2485131455768415
+      },
+      "probability_when_candidate_misses": {
+        "count": 12,
+        "min": 0.00025735259919067654,
+        "p10": 0.0006706118611873605,
+        "p25": 0.002477634566695871,
+        "median": 0.05049794699073664,
+        "p75": 0.35532504634035844,
+        "p90": 0.5240214216525977,
+        "max": 0.6101334003391842,
+        "mean": 0.19208105604953388
+      }
+    },
+    "1": {
+      "episodes": 1196,
+      "counts": {
+        "correct_candidate_threshold_reject": 949,
+        "correct_deletion": 237,
+        "wrong_candidate_deleted": 9,
+        "wrong_candidate_threshold_reject": 1
+      },
+      "rates": {
+        "correct_candidate_threshold_reject": 0.7934782608695652,
+        "correct_deletion": 0.19816053511705686,
+        "wrong_candidate_deleted": 0.007525083612040134,
+        "wrong_candidate_threshold_reject": 0.0008361204013377926
+      },
+      "candidate_matches_target": 0.9916387959866221,
+      "threshold_accepts": 0.205685618729097,
+      "target_deleted": 0.19816053511705686,
+      "primary_probability": {
+        "count": 1196,
+        "min": 0.014333981793851957,
+        "p10": 0.05417844409493176,
+        "p25": 0.1330485750262228,
+        "median": 0.24709384784310523,
+        "p75": 0.45708723975908394,
+        "p90": 0.6185500212787345,
+        "max": 0.9260764604210024,
+        "mean": 0.305534270463876
+      },
+      "probability_when_candidate_matches": {
+        "count": 1186,
+        "min": 0.014333981793851957,
+        "p10": 0.054116761294016866,
+        "p25": 0.13259757391225313,
+        "median": 0.2432203601394162,
+        "p75": 0.4541977072588511,
+        "p90": 0.610331494902371,
+        "max": 0.8756130792053273,
+        "mean": 0.3008901395673373
+      },
+      "probability_when_candidate_misses": {
+        "count": 10,
+        "min": 0.41439917823856515,
+        "p10": 0.7076838955182388,
+        "p25": 0.9260764604210024,
+        "median": 0.9260764604210024,
+        "p75": 0.9260764604210024,
+        "p90": 0.9260764604210024,
+        "max": 0.9260764604210024,
+        "mean": 0.8563281947933676
+      }
+    },
+    "2": {
+      "episodes": 1196,
+      "counts": {
+        "correct_candidate_threshold_reject": 643,
+        "correct_deletion": 552,
+        "wrong_candidate_deleted": 1
+      },
+      "rates": {
+        "correct_candidate_threshold_reject": 0.5376254180602007,
+        "correct_deletion": 0.46153846153846156,
+        "wrong_candidate_deleted": 0.0008361204013377926
+      },
+      "candidate_matches_target": 0.9991638795986622,
+      "threshold_accepts": 0.46237458193979936,
+      "target_deleted": 0.46153846153846156,
+      "primary_probability": {
+        "count": 1196,
+        "min": 0.020272503242176748,
+        "p10": 0.11293716474365756,
+        "p25": 0.22772954992812355,
+        "median": 0.4760200486315841,
+        "p75": 0.6362248840178634,
+        "p90": 0.7525764777930497,
+        "max": 0.868644238511017,
+        "mean": 0.4428246923054226
+      },
+      "probability_when_candidate_matches": {
+        "count": 1195,
+        "min": 0.020272503242176748,
+        "p10": 0.11291180624138429,
+        "p25": 0.22770106808704602,
+        "median": 0.4756923406073345,
+        "p75": 0.6359499328600853,
+        "p90": 0.751541463773295,
+        "max": 0.868644238511017,
+        "mean": 0.4424883299725072
+      },
+      "probability_when_candidate_misses": {
+        "count": 1,
+        "min": 0.844777680139264,
+        "p10": 0.844777680139264,
+        "p25": 0.844777680139264,
+        "median": 0.844777680139264,
+        "p75": 0.844777680139264,
+        "p90": 0.844777680139264,
+        "max": 0.844777680139264,
+        "mean": 0.844777680139264
+      }
+    },
+    "3": {
+      "episodes": 1196,
+      "counts": {
+        "correct_candidate_threshold_reject": 71,
+        "correct_deletion": 1109,
+        "wrong_candidate_deleted": 9,
+        "wrong_candidate_threshold_reject": 7
+      },
+      "rates": {
+        "correct_candidate_threshold_reject": 0.05936454849498328,
+        "correct_deletion": 0.927257525083612,
+        "wrong_candidate_deleted": 0.007525083612040134,
+        "wrong_candidate_threshold_reject": 0.005852842809364548
+      },
+      "candidate_matches_target": 0.9866220735785953,
+      "threshold_accepts": 0.9347826086956522,
+      "target_deleted": 0.927257525083612,
+      "primary_probability": {
+        "count": 1196,
+        "min": 0.014692850135586119,
+        "p10": 0.6004418145552102,
+        "p25": 0.7862221247745537,
+        "median": 0.873038983550843,
+        "p75": 0.9237063326003674,
+        "p90": 0.9624266992130486,
+        "max": 0.9896215475694217,
+        "mean": 0.821746942962163
+      },
+      "probability_when_candidate_matches": {
+        "count": 1180,
+        "min": 0.19248160252132793,
+        "p10": 0.6059115141102359,
+        "p25": 0.7882230445717877,
+        "median": 0.8740680815995576,
+        "p75": 0.9237063326003674,
+        "p90": 0.9621080173699639,
+        "max": 0.9896215475694217,
+        "mean": 0.8259346459294731
+      },
+      "probability_when_candidate_misses": {
+        "count": 16,
+        "min": 0.014692850135586119,
+        "p10": 0.04566098766035184,
+        "p25": 0.14785460389017807,
+        "median": 0.6152407824290966,
+        "p75": 0.8355320118973393,
+        "p90": 0.9874842146884948,
+        "max": 0.9885887506386095,
+        "mean": 0.5129038491230524
+      }
+    },
+    "4": {
+      "episodes": 1192,
+      "counts": {
+        "correct_candidate_threshold_reject": 1008,
+        "correct_deletion": 141,
+        "wrong_candidate_threshold_reject": 43
+      },
+      "rates": {
+        "correct_candidate_threshold_reject": 0.8456375838926175,
+        "correct_deletion": 0.11828859060402684,
+        "wrong_candidate_threshold_reject": 0.03607382550335571
+      },
+      "candidate_matches_target": 0.9639261744966443,
+      "threshold_accepts": 0.11828859060402684,
+      "target_deleted": 0.11828859060402684,
+      "primary_probability": {
+        "count": 1192,
+        "min": 0.0010238434066802361,
+        "p10": 0.039678265830587964,
+        "p25": 0.08137445867987465,
+        "median": 0.17455016863903158,
+        "p75": 0.3473227568551677,
+        "p90": 0.5268848392493513,
+        "max": 0.8923192592939113,
+        "mean": 0.23396495477001117
+      },
+      "probability_when_candidate_matches": {
+        "count": 1149,
+        "min": 0.010814504724990869,
+        "p10": 0.049673874385211564,
+        "p25": 0.08865606207757568,
+        "median": 0.18686951872665059,
+        "p75": 0.3529649244566403,
+        "p90": 0.5302699864965787,
+        "max": 0.8923192592939113,
+        "mean": 0.2420296137763811
+      },
+      "probability_when_candidate_misses": {
+        "count": 43,
+        "min": 0.0010238434066802361,
+        "p10": 0.0011381068926820917,
+        "p25": 0.001280187036361612,
+        "median": 0.0014426274375682212,
+        "p75": 0.0022658928352194997,
+        "p90": 0.003508191832829183,
+        "max": 0.4258963128755772,
+        "mean": 0.018469764111428217
+      }
+    }
+  },
+  "candidate_by_fold": {
+    "0": {
+      "episodes": 1196,
+      "shortlist_recall": 1.0,
+      "top1": 0.9949832775919732
+    },
+    "1": {
+      "episodes": 1196,
+      "shortlist_recall": 1.0,
+      "top1": 0.9983277591973244
+    },
+    "2": {
+      "episodes": 1196,
+      "shortlist_recall": 1.0,
+      "top1": 0.9941471571906354
+    },
+    "3": {
+      "episodes": 1196,
+      "shortlist_recall": 1.0,
+      "top1": 0.9933110367892977
+    },
+    "4": {
+      "episodes": 1192,
+      "shortlist_recall": 1.0,
+      "top1": 0.9656040268456376
+    }
+  },
+  "gate_ranking": {
+    "pooled_auc": 0.9898436330575596,
+    "by_fold": {
+      "0": 0.993494954577807,
+      "1": 0.9945601397370452,
+      "2": 0.9967857160728804,
+      "3": 0.9939060146065716,
+      "4": 0.9870981762912528
+    }
+  },
+  "probability_by_event_kind": {
+    "distractor": {
+      "count": 209160,
+      "min": 6.826893522548425e-05,
+      "p10": 0.0001833850906365802,
+      "p25": 0.00027461838278542783,
+      "median": 0.0004894290775050711,
+      "p75": 0.00245420947147979,
+      "p90": 0.0060743522044602975,
+      "max": 0.9906872649203008,
+      "mean": 0.007943080444275337
+    },
+    "hard_retain": {
+      "count": 11952,
+      "min": 8.433498891241658e-05,
+      "p10": 0.0005651018687513015,
+      "p25": 0.0009958697151186964,
+      "median": 0.0021251704511196096,
+      "p75": 0.006888553418191953,
+      "p90": 0.018601301249351547,
+      "max": 0.9906872649203008,
+      "mean": 0.010965628369323514
+    },
+    "primary_old": {
+      "count": 5976,
+      "min": 8.3343283162669e-05,
+      "p10": 0.0002059986233593741,
+      "p25": 0.0002915518575102789,
+      "median": 0.0004525967341010119,
+      "p75": 0.0022550833000603353,
+      "p90": 0.006017806545963095,
+      "max": 0.98856204371999,
+      "mean": 0.008390379549757436
+    },
+    "primary_update": {
+      "count": 5976,
+      "min": 0.00025735259919067654,
+      "p10": 0.06395757231202215,
+      "p25": 0.14698526391832598,
+      "median": 0.34643048811777677,
+      "p75": 0.6531448712610213,
+      "p90": 0.8763894542055527,
+      "max": 0.9896215475694217,
+      "mean": 0.4105216576934833
+    }
+  }
+}

@@ -1968,3 +1968,32 @@ OOF candidate top-1 为 96.82%，current/non-target/hard-retain 为 100.00/99.05
 首版 V12 运行 32 分 54 秒仍未完成 fold 0，进程持续约 31 核计算、无 OOM。静态分析确认 anchor-16 的单个校准折约产生 75 万个唯一 pair，超过 `PairEvidence` 原 40 万 LRU 上限；22 阈值×3 seed 的顺序回放会反复驱逐并重算相同的确定性特征。该运行通过 tmux `C-c` 安全停止，完整保留为 `/home/ctj/cbf_ttt_mquake_subject_risk_v12_slow_incomplete_20261013`，未产生或冒充正式指标。
 
 `PairEvidence` 新增可选 `cache_limit`，默认仍为 400000，所有旧调用和 baseline 数值/内存行为保持不变；V12 显式使用 1000000，并在 manifest、training 与独立审计中记录/核验 limit、entries、hits、misses、evictions。新增真实多-unit 数值等价测试，服务器 6 项测试通过，证明小/大缓存的 scope/payload feature 逐值相同，只改变 eviction。加速正式重跑于 2026-10-13 14:14:38 +08:00 启动，tmux `cbf_mquake_v12`、PID 997567；外部确认集仍封存。
+
+### MQuAKE-T V12 完成与 V13 最终集成校准
+
+V12 加速重跑在 hku-gpu2 完成并通过独立七项审计。5976 个主体互斥 OOF
+episode 上，anchor-16 shortlist recall、candidate top-1 和主体宏 top-1 分别为
+100.00%、98.93% 和 97.34%；current/non-target/hard-retain 为
+99.82/99.51/99.72%。然而 stale deletion/strict pair 只有 37.18/37.01%，主体宏
+pair 44.66%，五折 pair 为 13.38/20.32/46.15/93.06/12.08%。相对精确匹配删除
+数的随机策略提升 34.84 个百分点，主体聚类 95% CI `[23.19,49.46]`。总耗时
+10366.71 秒，峰值 CUDA allocated/reserved 7.867/8.115 GiB。
+
+新增只读 `scripts/analyze_mquake_subject_risk_v12.py`。它确认 61.96% 更新已
+选中正确旧记忆却被最终阈值拒绝，仅 0.35% 更新错误删除；部署分数 pooled
+AUROC 0.9898，各折 0.9871--0.9968。primary-update 中位概率 0.346，而
+hard-retain 中位数/90 分位仅 0.0021/0.0186。结果支持“最终阈值组合过度保守”
+这一具体诊断，不支持将 V12 概括为表征没有学到遗忘。
+
+新增 `MQUAKE_ENSEMBLE_CALIBRATION_V13_PLAN.md` 并锁定 V12 四个来源哈希。新增
+`tasks/evaluate_mquake_ensemble_calibration_v13.py`：冻结每折 anchor-16 候选器和
+三个 Gate，忽略旧的成员阈值，先对原始 Gate logit 取中位数，再在独立
+calibration fold 上通过完整因果回放选择一次最终阈值。22 点低阈值扩展网格、
+主体宏安全 98.5%、单侧 LCB 97% 和原 V12 release gate 均在运行前锁定；V10
+dev、MQuAKE-CF、LongMemEval-S、LoCoMo 继续封存。
+
+新增 `scripts/audit_mquake_ensemble_calibration_v13.py`，独立复算阈值选择、折划分、
+OOF/主体指标、匹配随机区间、来源/checkpoint/原始输出哈希与数据访问锁；新增
+runner 和四项纯 Python 测试，覆盖原始 logit 中位数、可行/不可行阈值选择以及
+V12 来源哈希锁。所有改动是独立 opt-in 实验路径，不修改 baseline 的模型、
+训练、优化器、数据或评测入口。
