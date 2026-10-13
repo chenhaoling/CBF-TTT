@@ -1958,3 +1958,9 @@ OOF candidate top-1 为 96.82%，current/non-target/hard-retain 为 100.00/99.05
 新增 `scripts/analyze_mquake_robust_calibration_v11.py`，只读分析终态 OOF 轨迹，不调用模型、不选择阈值。5976 次 primary update 中：4912 次正确删除（82.20%）、832 次候选正确但阈值拒绝（13.92%）、61 次错误候选被删除（1.02%）、171 次错误候选被拒绝（2.86%）。oracle-memory candidate 只有 3/68 主体不完美；其中一个 700-episode 主体的 anchor-4 shortlist/top-1 均为 73.71%，主导 fold-0 失败。这证明 episode 频率不平衡与跨主体分数漂移是下一轮应处理的两个具体问题，不能将结果概括成候选或遗忘机制整体无效。
 
 新增完整归档 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_robust_calibration_v11/`，包含 REPORT、summary、training、manifest、cross-fit checkpoint、audit、diagnostic、日志、时间戳和终态；约 122 MiB 的原始 OOF JSONL 保留服务器并由 training.json 哈希锁定。新增 `MQUAKE_SUBJECT_RISK_V12_PLAN.md`：继续只用 MQuAKE-T train+tune，固定 anchor-16，在每个外折内部训练候选器，候选和 gate 均做主体等权优化；阈值通过主体聚类安全下界选择。V12 通过 OOF 门后才运行消融并一次性开放 MQuAKE-CF。
+
+实现 V12：`tasks/train_mquake_subject_risk_v12.py` 在每个外折内部以三个 fit 折训练三种候选 seed，固定 anchor-16，再以主体总权重完全相等的 BCE 训练三个 gate seed。校准逐点完整因果回放 0.05–0.95、0.975、0.99、0.995，并以每主体 current/non-target/hard-retain 三者最小值计算宏平均和单侧 95% 正态下界；只在聚合安全≥97%、主体宏安全≥98.5%、下界≥97%的可行集合中最大化主体宏 pair。输出增加主体宏 candidate、pair、安全下界、每折指标、匹配随机、完整 checkpoint 与访问锁。
+
+新增 `scripts/audit_mquake_subject_risk_v12.py`，独立重算 OOF/主体聚类/candidate/随机对照/门槛，复原每个阈值选择、主体折和身份覆盖，并核对删除数、原始行、来源、checkpoint、任务源文件 hash 与 benchmark 锁。新增 runner 和 3 项聚焦测试；与 V11 测试合计 5 项本地及服务器均通过，远程真实 PyTorch ranker/gate 小规模训练 smoke 通过。警告中的 requires-grad 张量转标量改为显式 detach，不改变 loss。
+
+由于自动审批认为 GitHub 仓库公开范围未确认，包含实验结果和 checkpoint 的提交推送被拒绝；未绕过审核。V11 归档与 V12 计划已本地提交 `81b336e`，V12 源文件经 SSH 直接同步用于已授权远程实验。正式运行于 2026-10-13 13:32:15 +08:00 在 tmux `cbf_mquake_v12` 启动，root `/home/ctj/cbf_ttt_mquake_subject_risk_v12`，PID 995204；启动测试通过、Qwen 特征提取完成，MQuAKE-CF/LongMemEval/LoCoMo 未访问。

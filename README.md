@@ -453,6 +453,10 @@ one 700-episode subject. The next registered experiment is
 training, a fixed anchor-16 shortlist, subject-equal losses, and cluster-level safety
 calibration. External MQuAKE-CF and LoCoMo remain sealed.
 
+V12 is implemented by `tasks/train_mquake_subject_risk_v12.py`, its independent
+auditor, runner, and focused tests. The five-fold formal run uses a separate output
+root and does not modify baseline training or inference defaults.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
