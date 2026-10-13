@@ -27,8 +27,10 @@ without retraining or threshold selection, to real temporal knowledge changes?
 Each MQuAKE-T case becomes sessions of 16, 32, 48, and 64 events. The old
 temporal fact is inserted at one quarter of the session and its real update at
 three quarters. Other hops in the original MQuAKE chain are retained as natural
-context. Two same-relation, different-subject events form hard-retain negatives;
-the remaining events are entity-distinct distractors. Every memory event contains
+context. Two different-subject events form hard-retain negatives, prioritizing the
+same relation and falling back to other relations when a natural split has no such
+entity; the manifest reports actual same-relation coverage. The remaining events are
+entity-distinct distractors. Every memory event contains
 four units, matching the previously frozen sparse-session protocol.
 
 ## Primary preregistered gate

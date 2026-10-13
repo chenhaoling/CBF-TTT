@@ -41,6 +41,16 @@ class MquakeTemporalSessionsTest(unittest.TestCase):
         self.assertEqual(update["desired"], "local")
         self.assertEqual(sum(row["event_kind"] == "hard_retain"
                              for row in episode["sessions"]), 2)
+        self.assertTrue(all(row["hard_relation_matched"]
+                            for row in episode["sessions"]
+                            if row["event_kind"] == "hard_retain"))
+
+    def test_rare_relation_uses_entity_distinct_retain_fallback(self):
+        rows = [case(0, relation="rare")] + [case(index) for index in range(1, 12)]
+        episode = build_episode(rows[0], rows, 16, "dev", {})
+        hard = [row for row in episode["sessions"] if row["event_kind"] == "hard_retain"]
+        self.assertEqual(len(hard), 2)
+        self.assertFalse(any(row["hard_relation_matched"] for row in hard))
 
 
 if __name__ == "__main__":

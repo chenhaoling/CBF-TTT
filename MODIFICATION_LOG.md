@@ -1846,7 +1846,8 @@ subject remain in the same split. LoCoMo stays sealed, and MQuAKE-CF is not used
 - Added `tasks/build_mquake_temporal_sessions.py`. It verifies the one-update schema,
   creates a deterministic subject-disjoint 60/20/20 split, and builds 16/32/48/64
   event episodes containing an old fact, its real update, natural multi-hop context,
-  two same-relation different-subject hard retains, and distractors. The manifest
+  two different-subject hard retains (same relation when available, with coverage
+  recorded), and distractors. The manifest
   records official source/license URLs and all source/output hashes.
 - Added `tasks/evaluate_mquake_temporal_transfer_v7.py`. It reads only MQuAKE dev,
   freezes the V3 resolver and V5 calibrated ensemble, and compares against retain-all,
