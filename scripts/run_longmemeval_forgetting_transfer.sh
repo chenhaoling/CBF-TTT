@@ -5,9 +5,9 @@ ROOT=${ROOT:-/home/ctj/cbf_ttt_longmemeval_forgetting_transfer_v1}
 REPO=${REPO:-/home/ctj/cbf_ttt_joint_exp_20260927}
 PYTHON=${PYTHON:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python}
 DATA=${DATA:-/home/ctj/data/cbf_ttt_eval/longmemeval_s/longmemeval_s_cleaned.json}
-SOURCE=${SOURCE:-/home/ctj/cbf_ttt_zsre_contextual_readout_v1}
-CONTROLLER=${CONTROLLER:-/home/ctj/cbf_ttt_zsre_counterfactual_forgetting_controller_loso_v3}
-FINAL=${FINAL:-/home/ctj/cbf_ttt_zsre_forgetting_final_test_v1/summary.json}
+SOURCE=${SOURCE:-/home/ctj/cbf_ttt_zsre_contextual_readout_v1/formal}
+CONTROLLER=${CONTROLLER:-/home/ctj/cbf_ttt_zsre_counterfactual_forgetting_controller_loso_v3/formal}
+FINAL=${FINAL:-/home/ctj/cbf_ttt_zsre_forgetting_final_test_v1/test/summary.json}
 MODEL=${MODEL:-/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt}
 TOKENIZER=${TOKENIZER:-/home/ctj/models/Qwen3-4B}
 
