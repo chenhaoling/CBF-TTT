@@ -1668,6 +1668,21 @@ the frozen three-ranker V3 ensemble still selects a shared candidate. An OOF
 gate must pass before development is loaded; the unchanged V4 ten-check gate
 then controls any LoCoMo release.
 
+V5 completed on 1,068 nested-OOF episodes and passed all ten audit checks.
+Current/non-target/hard-retain safety reached 99.81/99.70/99.86%, while stale
+deletion and pair state reached 83.99/83.90%. The latter missed the unchanged
+85% prerequisite by roughly one point, so subject-disjoint development was not
+loaded and no development files exist. Compact artifacts are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/crossfit_calibrated_forgetting_v5`.
+
+Registered `EPISODE_BARRIER_FORGETTING_V6_PLAN.md` and implemented V6 as a
+fixed-objective variant of the audited V5 cross-fit engine. It changes only the
+gate loss to `softplus(0.5 - (positive - max_retain)) + 0.25 * BCE`, directly
+optimizing the per-episode update-versus-worst-retain safety barrier. Folds,
+features, candidate resolver, epochs, calibration thresholds, OOF prerequisite,
+conditional development gate, and stop rule remain unchanged. The runner and
+auditor add an explicit objective lock; no V5 threshold or dev result is used.
+
 ## 2026-10-12: ZsRE contextual readout and relation-aware key alignment
 
 ### Completed natural readout

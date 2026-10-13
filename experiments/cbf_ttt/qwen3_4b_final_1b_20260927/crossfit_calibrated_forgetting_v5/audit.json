@@ -1,0 +1,30 @@
+{
+  "protocol": "crossfit_calibrated_forgetting_v5_audit",
+  "audit_passed": true,
+  "checks": {
+    "raw_hashes": true,
+    "oof_identities": true,
+    "oof_aggregates_and_gate": true,
+    "fold_calibration_selection": true,
+    "fold_validation_aggregates": true,
+    "fold_assignment": true,
+    "conditional_development": true,
+    "matched_random": true,
+    "source_v3_checkpoint_hashes": true,
+    "protocol_and_claim_locks": true
+  },
+  "summary_sha256": "66904bc5b63be5057c0f54c20e2010af5e6b04a6a1a7b79a1b7cab3c732f9bb4",
+  "training_sha256": "dc07f21795883bd48a9224eefb822c586b164f77b6d4a289d6bf5534b77f583c",
+  "training_manifest_sha256": "6a2af385b7d1bd666314c5f16f2cb0dbcab5e30b5678ae4d2efe7e6b24b4a40b",
+  "oof_episodes": 1068,
+  "recomputed_oof_gate": {
+    "checks": {
+      "current_retention_at_least_97": true,
+      "non_target_retention_at_least_95": true,
+      "hard_retain_at_least_95": true,
+      "stale_deletion_at_least_85": false,
+      "pair_state_at_least_85": false
+    },
+    "passed": false
+  }
+}

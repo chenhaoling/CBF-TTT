@@ -126,7 +126,7 @@ def oof_gate(metric):
     return {"checks": checks, "passed": all(checks.values())}
 
 
-def run(args):
+def run(args, protocol=PROTOCOL, fit_gate_fn=fit_snapshots, objective="binary_bce"):
     import torch
     from transformers import AutoTokenizer
     from tasks.cbf_checkpoint_native import load_model
@@ -174,7 +174,7 @@ def run(args):
         train_rows = [row for row in all_rows if row["subject"] in train_subjects]
         fold_members, fold_details[str(fold)] = [], {"models": {}}
         for seed in GATE_SEEDS:
-            artifact = fit_snapshots(train_rows, seed + 100 * fold, EPOCH)[EPOCH]
+            artifact = fit_gate_fn(train_rows, seed + 100 * fold, EPOCH)[EPOCH]
             threshold, grid, feasible = calibration_threshold(
                 artifact, calibration_fold, evidence, resolver)
             fold_members.append((artifact, threshold)); members.append((artifact, threshold))
@@ -189,9 +189,9 @@ def run(args):
     (root / "oof_validation.jsonl").write_text(
         "".join(json.dumps(row) + "\n" for row in oof_records))
 
-    summary = {"protocol": PROTOCOL, "oof": oof_metric, "oof_gate": prerequisite,
+    summary = {"protocol": protocol, "oof": oof_metric, "oof_gate": prerequisite,
                "development_scored": False, "longmemeval_used": False, "locomo_scored": False,
-               "next_stage": "stop_crossfit_oof", "terminal_status": "completed_crossfit_oof_v5"}
+               "next_stage": "stop_crossfit_oof", "terminal_status": f"completed_{protocol}_oof"}
     dev_records = controls = None
     if prerequisite["passed"]:
         dev, _ = load_data(args.data_root, "dev")
@@ -228,7 +228,7 @@ def run(args):
                         "versus_v1": versus_v1, "versus_random": versus_random,
                         "development_gate": gate,
                         "next_stage": "preregister_locomo" if gate["passed"] else "stop_crossfit_dev",
-                        "terminal_status": "completed_crossfit_calibrated_forgetting_v5"})
+                        "terminal_status": f"completed_{protocol}"})
     else:
         v1_hashes = None; deletion_count = None
 
@@ -247,7 +247,7 @@ def run(args):
                               "checkpoint": sha(v3 / "scope_candidate_rankers.pt")},
                 "random_matched_deletions": deletion_count,
                 "raw_rows_sha256": raw_hashes, "checkpoint_sha256": sha(checkpoint)}
-    training_manifest = {"protocol": PROTOCOL,
+    training_manifest = {"protocol": protocol,
                          "data_manifest_sha256": sha(Path(args.data_root) / "manifest.json"),
                          "source_summary_sha256": sha(source / "summary.json"),
                          "source_training_sha256": sha(source / "training.json"),
@@ -257,6 +257,7 @@ def run(args):
                          "git_commit": subprocess.check_output(
                              ["git", "rev-parse", "HEAD"], text=True).strip(),
                          "folds": FOLDS, "epoch": EPOCH, "gate_seeds": list(GATE_SEEDS),
+                         "objective": objective,
                          "candidate_seeds": list(CANDIDATE_SEEDS),
                          "thresholds": list(THRESHOLDS), "shortlist": SHORTLIST,
                          "nested_train_calibrate_validate": True, "refit_after_calibration": False,

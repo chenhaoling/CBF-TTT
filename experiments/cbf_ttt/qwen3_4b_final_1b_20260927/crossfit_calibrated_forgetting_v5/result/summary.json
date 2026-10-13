@@ -1,0 +1,72 @@
+{
+  "protocol": "crossfit_calibrated_forgetting_v5",
+  "oof": {
+    "episodes": 1068,
+    "actions": 42720,
+    "action_accuracy": 0.9927200374531835,
+    "pair_state_accuracy": 0.8389513108614233,
+    "stale_deletion": 0.8398876404494382,
+    "current_retention": 0.99812734082397,
+    "non_target_retention": 0.9969957596582713,
+    "memory_fraction": 0.9695595349563045,
+    "by_event_kind": {
+      "primary_old": {
+        "events": 1068,
+        "accuracy": 0.99812734082397
+      },
+      "hard_retain": {
+        "events": 2136,
+        "accuracy": 0.9985955056179775
+      },
+      "distractor": {
+        "events": 38448,
+        "accuracy": 0.9965147732001665
+      },
+      "primary_update": {
+        "events": 1068,
+        "accuracy": 0.8389513108614233
+      }
+    },
+    "by_length": {
+      "16": {
+        "episodes": 267,
+        "pair_state_accuracy": 0.850187265917603,
+        "current_retention": 0.9962546816479401,
+        "non_target_retention": 0.9989299090422686
+      },
+      "32": {
+        "episodes": 267,
+        "pair_state_accuracy": 0.846441947565543,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9965043695380774
+      },
+      "48": {
+        "episodes": 267,
+        "pair_state_accuracy": 0.8277153558052435,
+        "current_retention": 0.9962546816479401,
+        "non_target_retention": 0.9961732616837647
+      },
+      "64": {
+        "episodes": 267,
+        "pair_state_accuracy": 0.8314606741573034,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9963754983689743
+      }
+    }
+  },
+  "oof_gate": {
+    "checks": {
+      "current_retention_at_least_97": true,
+      "non_target_retention_at_least_95": true,
+      "hard_retain_at_least_95": true,
+      "stale_deletion_at_least_85": false,
+      "pair_state_at_least_85": false
+    },
+    "passed": false
+  },
+  "development_scored": false,
+  "longmemeval_used": false,
+  "locomo_scored": false,
+  "next_stage": "stop_crossfit_oof",
+  "terminal_status": "completed_crossfit_oof_v5"
+}
