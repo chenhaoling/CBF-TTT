@@ -1936,3 +1936,15 @@ resolver and runs five-fold subject OOF gate calibration on MQuAKE-T train+tune 
 stricter 99% calibration safety constraints and no refit. V10 dev will not be rescored
 or used for option selection. Only an OOF pass may release one-time MQuAKE-CF-3k-v2
 safety confirmation; LoCoMo remains a later confirmation set.
+
+Implemented V11 in `tasks/train_mquake_robust_calibration_v11.py`, with
+`scripts/run_mquake_robust_calibration_v11.sh`,
+`scripts/audit_mquake_robust_calibration_v11.py`, and focused tests. Subjects are
+assigned intact to five episode-count-balanced folds. Each outer fold trains three
+fixed 50-epoch gates on three folds, calibrates on the next fold under 99% current,
+non-target, and hard-retain constraints, and causally replays the untouched fold.
+Calibration never refits. The run writes pooled OOF controller/candidate/random traces,
+per-fold metrics and thresholds, clustered paired intervals, runtime, GPU peak, hashes,
+and a cross-fit checkpoint. The auditor independently reconstructs fold membership,
+threshold selection, metrics, gate decisions, matched deletion counts, and the absence
+of V10 dev, MQuAKE-CF, LongMemEval-S, and LoCoMo access.

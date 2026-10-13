@@ -438,6 +438,11 @@ non-target and hard-retain safety were 91.80/91.81% versus the 95% floors.
 subject-level OOF conservative calibration before any independent MQuAKE-CF stress
 test. V10 dev will not be rescored; LoCoMo remains sealed.
 
+V11 is implemented by `tasks/train_mquake_robust_calibration_v11.py` and
+`scripts/run_mquake_robust_calibration_v11.sh`. Its independent auditor recomputes
+fold assignments, every calibrated threshold, pooled and per-fold metrics, the exact
+deletion-count random comparison, artifact hashes, and benchmark-access locks.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
