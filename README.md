@@ -49,6 +49,8 @@ In-Place TTT is a drop-in test-time training method for Transformer LLMs. This r
 - Qwen-grounded multi-component forgetting: [pre-registered protocol](QWEN_LOWRANK_FORGETTING_PLAN.md).
 - MQuAKE subject-risk result: [V12 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_subject_risk_v12/REPORT.md).
 - Final raw-ensemble calibration: [V13 pre-registered protocol](MQUAKE_ENSEMBLE_CALIBRATION_V13_PLAN.md).
+- Final raw-ensemble result: [V13 audited report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_ensemble_calibration_v13/REPORT.md).
+- Session-relative forgetting: [V14 pre-registered protocol](MQUAKE_ONLINE_MARGIN_V14_PLAN.md).
 
 [2026/03] The codebase is open-sourced.
 <br>

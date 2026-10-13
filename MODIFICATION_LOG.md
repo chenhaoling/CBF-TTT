@@ -1997,3 +1997,43 @@ OOF/主体指标、匹配随机区间、来源/checkpoint/原始输出哈希与�
 runner 和四项纯 Python 测试，覆盖原始 logit 中位数、可行/不可行阈值选择以及
 V12 来源哈希锁。所有改动是独立 opt-in 实验路径，不修改 baseline 的模型、
 训练、优化器、数据或评测入口。
+
+### MQuAKE-T V13 完成与 V14 在线相对 margin
+
+V13 在 hku-gpu2 完成全部五折、matched-random 对照和独立审计，runner exit=0。
+训练/评测耗时 4015.68 秒，完整 runner 从 17:43:34 到 18:50:47 +08:00；峰值
+CUDA allocated/reserved 为 7.867/8.115 GiB。独立审计的指标、单次最终阈值、
+主体折、身份、删除数、原始输出、V12 来源/checkpoint 哈希和访问锁七项全部通过。
+
+V13 strict pair/stale 为 37.048/37.216%，current/non-target/hard-retain 为
+99.799/99.493/99.699%，主体宏 pair 44.724%。五折阈值为
+0.975/0.95/0.95/0.60/0.95，validation pair 为
+13.21/20.32/46.15/93.39/12.08%。完整 release gate 失败，MQuAKE-CF、V10 dev、
+LongMemEval-S、LoCoMo 均未访问。
+
+新增 `scripts/analyze_mquake_ensemble_calibration_v13.py` 做只读 V12→V13 配对归因。
+5976 个 episode 中仅 4 个 pair 从错变对、2 个从对变错，净增 2 个；V13 相对
+V12 为 +0.033 个百分点，主体聚类 95% CI `[-0.050,0.145]`。primary update 正确
+删除仅从 2191 增至 2192，安全动作略有回退。该结果否定“成员阈值组合是主要
+瓶颈”的假设。
+
+V13 raw-logit pooled AUROC 仍为 0.9933，各折 0.9871--0.9969。只读架构筛选显示，
+减去同一 episode 历史分数中位数后，各折 AUROC 为 0.9875--0.9978，在 0.5%
+经验 retain FPR 下 update recall 相对 raw score 在所有折提高，但现有 BCE Gate
+仍只有 53.0--92.4%，因此不能把静态筛选冒充因果成功。完整 V13 归档和报告保存于
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_ensemble_calibration_v13/`；
+大体积 OOF JSONL 留在服务器并由 training hash 锁定。
+
+新增 `MQUAKE_ONLINE_MARGIN_V14_PLAN.md`。V14 冻结 V12 fold-specific anchor-16
+候选器，在每个外折的三个 fit 折训练三种 subject-equal episode-listwise rank-16
+Gate；每个 episode 的唯一 update 与全部 retain 动作共同进入 listwise CE。成员
+用 fit score 中位数/IQR 对齐尺度，部署分数减去当前 episode 全部历史动作分数的
+中位数，只在 margin 超过已校准阈值时删除。规则不输入位置、长度、主体、未来
+分数或正确性，首个 scored action 不能删除。
+
+实现 `tasks/train_mquake_online_margin_v14.py`、独立审计、runner 和五项测试。审计
+额外逐动作验证 `history_size == max(0, step-1)`，锁定历史仅含过去分数、每
+episode 重置、无 future/position/identity feature。20 点 margin 网格通过完整
+因果回放选择，使用原 cluster-risk 安全约束和 release gate。Mac 上 4 项通过、
+1 项因无 torch 跳过；hku-gpu2 真实 PyTorch listwise 拟合和精确在线回放共 5 项
+全部通过。所有功能仍为独立 opt-in 路径，baseline 不变。
