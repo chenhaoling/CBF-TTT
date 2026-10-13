@@ -1647,6 +1647,27 @@ release gate checks shortlist/candidate recall, cumulative safety, stale
 deletion, every length, and clustered gains over both V1 and exact
 deletion-count-matched random. LoCoMo remains sealed until every check passes.
 
+V4 completed in 383.54 seconds at 8.026/8.988 GiB peak allocated/reserved and
+passed all ten independent audit checks. Candidate recall@4/top-1 remained
+99.25/96.63%. The three-seed gate averaged 98.85% current retention, 97.34%
+non-target retention, 97.32% hard-retain accuracy, 83.71% stale deletion, and
+82.74% strict pair state. Six of ten release checks passed. Seed 31102 reached
+91.48% pair state and 92.42% stale deletion with all safety metrics and every
+length above 90%, while seed 31103 reached only 70.04% pair state. Inspection
+of the frozen tune grids showed no fit-only threshold jointly met update and
+safety constraints; refitting changed probability calibration. This supports
+cross-fit calibration rather than another scope representation change.
+
+Registered `CROSSFIT_CALIBRATED_FORGETTING_V5_PLAN.md` and implemented its
+trainer, conditional runner, auditor, and tests. V5 uses deterministic nested
+five-fold train/calibrate/validate subject splits, fixed 50-epoch gates, no
+post-calibration refit, three gate seeds, and fold-specific causal thresholds.
+The deployment controller takes the median signed margin of 15 calibrated
+models. Absolute listwise ranker logits are removed from gate features, while
+the frozen three-ranker V3 ensemble still selects a shared candidate. An OOF
+gate must pass before development is loaded; the unchanged V4 ten-check gate
+then controls any LoCoMo release.
+
 ## 2026-10-12: ZsRE contextual readout and relation-aware key alignment
 
 ### Completed natural readout

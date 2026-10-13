@@ -1,0 +1,36 @@
+{
+  "protocol": "factorized_causal_forgetting_v4_audit",
+  "audit_passed": true,
+  "checks": {
+    "raw_hashes": true,
+    "record_identities": true,
+    "aggregates": true,
+    "candidate_metrics": true,
+    "fit_tune_selection": true,
+    "matched_random": true,
+    "comparisons": true,
+    "release_gate": true,
+    "source_v1_v3_checkpoint_hashes": true,
+    "feature_and_claim_locks": true
+  },
+  "summary_sha256": "b796c9bf64c1ebd3f744df3c9b333478595ae3ba7fe41b6d7d48748ed2c9f613",
+  "training_sha256": "23dd70820d76ff9a3d8b7f18a891e8df7d68f1335353fd34b82453af3e709e93",
+  "training_manifest_sha256": "b06890ced1b38f6273d7c842483f04aa51e3f0f0052a33025b399f902e15d12c",
+  "episodes": 1068,
+  "candidate_rows": 41652,
+  "recomputed_gate": {
+    "checks": {
+      "shortlist_recall_at_least_99": true,
+      "candidate_top1_at_least_95": true,
+      "current_retention_at_least_97": true,
+      "non_target_retention_at_least_95": true,
+      "hard_retain_at_least_95": true,
+      "stale_deletion_at_least_90": false,
+      "pair_state_at_least_90": false,
+      "every_length_pair_at_least_85": false,
+      "v1_gain_lower_bound_above_25": false,
+      "random_gain_lower_bound_above_10": true
+    },
+    "passed": false
+  }
+}
