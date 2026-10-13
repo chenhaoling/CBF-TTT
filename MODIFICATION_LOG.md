@@ -1948,3 +1948,13 @@ per-fold metrics and thresholds, clustered paired intervals, runtime, GPU peak, 
 and a cross-fit checkpoint. The auditor independently reconstructs fold membership,
 threshold selection, metrics, gate decisions, matched deletion counts, and the absence
 of V10 dev, MQuAKE-CF, LongMemEval-S, and LoCoMo access.
+
+### MQuAKE-T V11 鲁棒校准完成与 V12 预注册
+
+V11 在 hku-gpu2 完成五个主体互斥外折、每折三个种子训练、内层校准、完整因果回放和独立审计。总耗时 2784.49 秒，峰值 CUDA allocated/reserved 为 7.867/8.115 GiB；5976 个 OOF episode、239040 个动作，控制器与匹配随机各删除 6954 次。独立审计的指标重算、阈值选择、主体划分、删除数、原始输出哈希、来源 checkpoint 哈希和数据访问锁七项全部通过。
+
+OOF candidate top-1 为 96.82%，current/non-target/hard-retain 为 100.00/99.05/99.51%，stale deletion 与 strict pair 均为 83.08%；五折 pair 为 83.28/85.62/79.68/96.91/69.88%。相对匹配随机的增益为 79.53 个百分点，主体聚类 95% CI `[72.69,86.49]`。安全门槛和随机对照通过，candidate、删除、pair 与最差折门槛失败；MQuAKE-CF、LongMemEval、LoCoMo 未访问。
+
+新增 `scripts/analyze_mquake_robust_calibration_v11.py`，只读分析终态 OOF 轨迹，不调用模型、不选择阈值。5976 次 primary update 中：4912 次正确删除（82.20%）、832 次候选正确但阈值拒绝（13.92%）、61 次错误候选被删除（1.02%）、171 次错误候选被拒绝（2.86%）。oracle-memory candidate 只有 3/68 主体不完美；其中一个 700-episode 主体的 anchor-4 shortlist/top-1 均为 73.71%，主导 fold-0 失败。这证明 episode 频率不平衡与跨主体分数漂移是下一轮应处理的两个具体问题，不能将结果概括成候选或遗忘机制整体无效。
+
+新增完整归档 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_robust_calibration_v11/`，包含 REPORT、summary、training、manifest、cross-fit checkpoint、audit、diagnostic、日志、时间戳和终态；约 122 MiB 的原始 OOF JSONL 保留服务器并由 training.json 哈希锁定。新增 `MQUAKE_SUBJECT_RISK_V12_PLAN.md`：继续只用 MQuAKE-T train+tune，固定 anchor-16，在每个外折内部训练候选器，候选和 gate 均做主体等权优化；阈值通过主体聚类安全下界选择。V12 通过 OOF 门后才运行消融并一次性开放 MQuAKE-CF。

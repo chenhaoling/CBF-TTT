@@ -443,6 +443,16 @@ V11 is implemented by `tasks/train_mquake_robust_calibration_v11.py` and
 fold assignments, every calibrated threshold, pooled and per-fold metrics, the exact
 deletion-count random comparison, artifact hashes, and benchmark-access locks.
 
+[V11 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_robust_calibration_v11/REPORT.md)
+with an independently audited negative release result. OOF current/non-target/
+hard-retain reached 100.00/99.05/99.51%, while stale deletion and strict pair state
+were 83.08%; fold pair state ranged from 69.88% to 96.91%. Read-only attribution found
+13.92% correct-candidate threshold rejections and candidate failure concentrated in
+one 700-episode subject. The next registered experiment is
+[V12 subject-balanced risk control](MQUAKE_SUBJECT_RISK_V12_PLAN.md): nested candidate
+training, a fixed anchor-16 shortlist, subject-equal losses, and cluster-level safety
+calibration. External MQuAKE-CF and LoCoMo remain sealed.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)

@@ -1,0 +1,361 @@
+{
+  "protocol": "mquake_robust_calibration_v11",
+  "candidate_policy": "anchor_4_then_v8_ranker",
+  "oof": {
+    "episodes": 5976,
+    "actions": 239040,
+    "action_accuracy": 0.9872615461847389,
+    "pair_state_accuracy": 0.8308232931726908,
+    "stale_deletion": 0.8308232931726908,
+    "current_retention": 1.0,
+    "non_target_retention": 0.9904556503804125,
+    "memory_fraction": 0.9638798248549754,
+    "by_event_kind": {
+      "primary_old": {
+        "events": 5976,
+        "accuracy": 0.9907965194109772
+      },
+      "hard_retain": {
+        "events": 11952,
+        "accuracy": 0.9950635876840697
+      },
+      "distractor": {
+        "events": 215136,
+        "accuracy": 0.9913217685557043
+      },
+      "primary_update": {
+        "events": 5976,
+        "accuracy": 0.821954484605087
+      }
+    },
+    "by_length": {
+      "16": {
+        "episodes": 1494,
+        "pair_state_accuracy": 0.8473895582329317,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9873302734748518
+      },
+      "32": {
+        "episodes": 1494,
+        "pair_state_accuracy": 0.8400267737617135,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9908522980812137
+      },
+      "48": {
+        "episodes": 1494,
+        "pair_state_accuracy": 0.822623828647925,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9915749956347129
+      },
+      "64": {
+        "episodes": 1494,
+        "pair_state_accuracy": 0.8132530120481928,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9920650343308719
+      }
+    }
+  },
+  "oof_candidate": {
+    "shortlist_recall": 0.9692101740294511,
+    "candidate_top1": 0.9682061579651942
+  },
+  "oof_vs_random": {
+    "gain": 0.7953480589022758,
+    "subject_clusters": 68,
+    "bootstrap_95ci": [
+      0.7269205939315687,
+      0.8649017467248908
+    ]
+  },
+  "fold_metrics": {
+    "0": {
+      "episodes": 1196,
+      "actions": 47840,
+      "action_accuracy": 0.9858277591973245,
+      "pair_state_accuracy": 0.8327759197324415,
+      "stale_deletion": 0.8327759197324415,
+      "current_retention": 1.0,
+      "non_target_retention": 0.9888724006444599,
+      "memory_fraction": 0.9611029821627648,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1196,
+          "accuracy": 0.9924749163879598
+        },
+        "hard_retain": {
+          "events": 2392,
+          "accuracy": 0.9954013377926422
+        },
+        "distractor": {
+          "events": 43056,
+          "accuracy": 0.9897342995169082
+        },
+        "primary_update": {
+          "events": 1196,
+          "accuracy": 0.8193979933110368
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.9498327759197325,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9868609651218346
+        },
+        "32": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.8662207357859532,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9885172798216276
+        },
+        "48": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.7792642140468228,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9898211429402356
+        },
+        "64": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.7357859531772575,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9902902146941418
+        }
+      }
+    },
+    "1": {
+      "episodes": 1196,
+      "actions": 47840,
+      "action_accuracy": 0.9880434782608696,
+      "pair_state_accuracy": 0.8561872909698997,
+      "stale_deletion": 0.8561872909698997,
+      "current_retention": 1.0,
+      "non_target_retention": 0.9907026962914517,
+      "memory_fraction": 0.9636810200668896,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1196,
+          "accuracy": 0.9899665551839465
+        },
+        "hard_retain": {
+          "events": 2392,
+          "accuracy": 0.9937290969899666
+        },
+        "distractor": {
+          "events": 43056,
+          "accuracy": 0.991662021553326
+        },
+        "primary_update": {
+          "events": 1196,
+          "accuracy": 0.8444816053511706
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.842809364548495,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9878165312947921
+        },
+        "32": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.8494983277591973,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9906354515050166
+        },
+        "48": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.8595317725752508,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9918569143521886
+        },
+        "64": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.8729096989966555,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9925018880138095
+        }
+      }
+    },
+    "2": {
+      "episodes": 1196,
+      "actions": 47840,
+      "action_accuracy": 0.9891095317725752,
+      "pair_state_accuracy": 0.7968227424749164,
+      "stale_deletion": 0.7968227424749164,
+      "current_retention": 1.0,
+      "non_target_retention": 0.9934700912031847,
+      "memory_fraction": 0.968083716555184,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1196,
+          "accuracy": 0.9916387959866221
+        },
+        "hard_retain": {
+          "events": 2392,
+          "accuracy": 0.9949832775919732
+        },
+        "distractor": {
+          "events": 43056,
+          "accuracy": 0.9942400594574508
+        },
+        "primary_update": {
+          "events": 1196,
+          "accuracy": 0.790133779264214
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.7926421404682275,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9916387959866221
+        },
+        "32": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.7892976588628763,
+          "current_retention": 1.0,
+          "non_target_retention": 0.992530657748049
+        },
+        "48": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.7959866220735786,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9946197469826958
+        },
+        "64": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.8093645484949833,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9950911640953718
+        }
+      }
+    },
+    "3": {
+      "episodes": 1196,
+      "actions": 47840,
+      "action_accuracy": 0.9883779264214047,
+      "pair_state_accuracy": 0.9690635451505016,
+      "stale_deletion": 0.9690635451505016,
+      "current_retention": 1.0,
+      "non_target_retention": 0.9877162337022695,
+      "memory_fraction": 0.9570268952062431,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1196,
+          "accuracy": 0.9874581939799331
+        },
+        "hard_retain": {
+          "events": 2392,
+          "accuracy": 0.9924749163879598
+        },
+        "distractor": {
+          "events": 43056,
+          "accuracy": 0.9888981791155704
+        },
+        "primary_update": {
+          "events": 1196,
+          "accuracy": 0.9623745819397993
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.9732441471571907,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9827998088867653
+        },
+        "32": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.9665551839464883,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9892976588628762
+        },
+        "48": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.9732441471571907,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9885851388686927
+        },
+        "64": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.9632107023411371,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9901823281907434
+        }
+      }
+    },
+    "4": {
+      "episodes": 1192,
+      "actions": 47680,
+      "action_accuracy": 0.9849412751677852,
+      "pair_state_accuracy": 0.6988255033557047,
+      "stale_deletion": 0.6988255033557047,
+      "current_retention": 1.0,
+      "non_target_retention": 0.9915203910663356,
+      "memory_fraction": 0.9695233850671141,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1192,
+          "accuracy": 0.9924496644295302
+        },
+        "hard_retain": {
+          "events": 2384,
+          "accuracy": 0.9987416107382551
+        },
+        "distractor": {
+          "events": 42912,
+          "accuracy": 0.9920768083519761
+        },
+        "primary_update": {
+          "events": 1192,
+          "accuracy": 0.6929530201342282
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 298,
+          "pair_state_accuracy": 0.6778523489932886,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9875359539789069
+        },
+        "32": {
+          "episodes": 298,
+          "pair_state_accuracy": 0.7281879194630873,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9932885906040269
+        },
+        "48": {
+          "episodes": 298,
+          "pair_state_accuracy": 0.7046979865771812,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9929967901955062
+        },
+        "64": {
+          "episodes": 298,
+          "pair_state_accuracy": 0.6845637583892618,
+          "current_retention": 1.0,
+          "non_target_retention": 0.992260229486902
+        }
+      }
+    }
+  },
+  "oof_gate": {
+    "checks": {
+      "candidate_top1_at_least_99": false,
+      "current_retention_at_least_99": true,
+      "non_target_retention_at_least_97": true,
+      "hard_retain_at_least_97": true,
+      "stale_deletion_at_least_90": false,
+      "pair_state_at_least_90": false,
+      "minimum_fold_pair_at_least_85": false,
+      "random_gain_lower_bound_above_zero": true
+    },
+    "passed": false
+  },
+  "v10_development_loaded": false,
+  "mquake_cf_used": false,
+  "longmemeval_used": false,
+  "locomo_scored": false,
+  "next_stage": "stop_threshold_tuning_redesign_safety_gate",
+  "terminal_status": "completed_mquake_robust_calibration_v11"
+}

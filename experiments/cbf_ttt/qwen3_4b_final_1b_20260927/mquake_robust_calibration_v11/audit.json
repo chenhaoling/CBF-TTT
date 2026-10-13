@@ -1,0 +1,29 @@
+{
+  "protocol": "mquake_robust_calibration_v11_audit",
+  "audit_passed": true,
+  "checks": {
+    "oof_metrics_comparison_and_gate": true,
+    "robust_threshold_selection": true,
+    "subject_fold_assignment_and_identities": true,
+    "matched_random_deletions": true,
+    "raw_output_hashes": true,
+    "source_v8_checkpoint_hashes": true,
+    "protocol_and_access_locks": true
+  },
+  "summary_sha256": "7b31c3dcef4da378d482fb5173e1fa2447ccd2297f81b442456193773d75a1d8",
+  "training_sha256": "2aa3ff5f2647fff29adcf3e51d4b0609ae116a9e2bffc5e183fd1751e85bb610",
+  "training_manifest_sha256": "6bda709cf6a3adda984b9a75c038ea06e4c9e4613deb9dfa722c28430d93c4f7",
+  "recomputed_oof_gate": {
+    "checks": {
+      "candidate_top1_at_least_99": false,
+      "current_retention_at_least_99": true,
+      "non_target_retention_at_least_97": true,
+      "hard_retain_at_least_97": true,
+      "stale_deletion_at_least_90": false,
+      "pair_state_at_least_90": false,
+      "minimum_fold_pair_at_least_85": false,
+      "random_gain_lower_bound_above_zero": true
+    },
+    "passed": false
+  }
+}
