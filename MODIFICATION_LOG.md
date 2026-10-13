@@ -1558,8 +1558,10 @@ overlap, unit counts, candidate age, and memory size. Chain identity, source
 subject, split, and labels are not model inputs.
 
 To make the 16/32/48/64-session causal grid tractable, all session-pair ranking
-scores are precomputed once per episode and detailed top-pair features use a
-bounded LRU cache. Calibration-fit trains three fixed seeds; calibration-tune
+scores are precomputed once per episode on GPU, retained as compact CPU score
+tables, and detailed top-pair features use a bounded LRU cache. An initial
+single-CPU precompute attempt was stopped before any development summary after
+15 minutes; no result from that attempt is used. Calibration-fit trains three fixed seeds; calibration-tune
 selects epoch and threshold; fit+tune refitting precedes a one-time
 subject-disjoint development replay. Controls include retain-all, always-delete
 top candidate, tune-selected cosine, exact action-count-matched deterministic
@@ -1567,7 +1569,11 @@ random deletion, and oracle local deletion. Candidate top-1 and all release
 checks are evaluated on development. LongMemEval-S remains locked and LoCoMo is
 not loaded. Passing every registered check is required before a separate
 LoCoMo preregistration; failure stops V1 and is retained as an architecture
-diagnostic. Baseline training and inference entry points are unchanged.
+diagnostic. `scripts/audit_long_session_sparse_gate_v1.py` independently
+recomputes raw hashes, aggregates, fit/tune selections, candidate accuracy,
+matched-random counts, clustered bootstrap comparison, release gate, source
+hashes, and claim locks. Baseline training and inference entry points are
+unchanged.
 
 Run on `hku-gpu2` with:
 

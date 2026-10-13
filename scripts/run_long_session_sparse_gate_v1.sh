@@ -12,11 +12,15 @@ TOKENIZER=${TOKENIZER:-/home/ctj/models/Qwen3-4B}
 cd "$REPO"
 test ! -e "$ROOT"
 mkdir -p "$ROOT"
-"$PYTHON" -m unittest tests.test_build_long_session_sparse_corpus tests.test_train_long_session_sparse_gate_v1
+"$PYTHON" -m unittest tests.test_build_long_session_sparse_corpus \
+  tests.test_train_long_session_sparse_gate_v1 tests.test_audit_long_session_sparse_gate_v1
 date --iso-8601=seconds > "$ROOT/started_at.txt"
 CUDA_VISIBLE_DEVICES=0 "$PYTHON" -m tasks.train_long_session_sparse_gate_v1 \
   --data-root "$DATA" --source-root "$SOURCE" --output "$ROOT/development" \
   --model "$MODEL" --tokenizer "$TOKENIZER" --batch-size 128 > "$ROOT/development.log" 2>&1
+"$PYTHON" -m scripts.audit_long_session_sparse_gate_v1 \
+  --root "$ROOT/development" --data-root "$DATA" --source-root "$SOURCE" \
+  --output "$ROOT/audit.json" > "$ROOT/audit.log" 2>&1
 echo completed_long_session_sparse_gate_v1 > "$ROOT/terminal_status.txt"
 date --iso-8601=seconds > "$ROOT/completed_at.txt"
 cat "$ROOT/development/summary.json"

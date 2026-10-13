@@ -11,6 +11,7 @@ import math
 from pathlib import Path
 import random
 import statistics
+import subprocess
 import time
 
 from tasks.build_long_session_sparse_corpus import (
@@ -66,7 +67,11 @@ def embedding_matrices(embeddings, text_ids, texts):
 
 class Evidence:
     def __init__(self, matrices, index, texts):
+        import torch
+
         self.matrices, self.index, self.texts = matrices, index, texts
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.score_matrices = {key: value.to(device) for key, value in matrices.items()}
         self.cache, self.episode_scores = OrderedDict(), {}
         self.cache_hits = self.cache_misses = self.cache_evictions = 0
 
@@ -77,16 +82,17 @@ class Evidence:
         identifier = episode["episode_id"]
         if identifier in self.episode_scores:
             return self.episode_scores[identifier]
+        device = next(iter(self.score_matrices.values())).device
         indices = torch.tensor([
             [self.index[value] for value in session["units"]]
             for session in episode["sessions"]
-        ], dtype=torch.long)
+        ], dtype=torch.long, device=device)
         per_seed = []
         for seed in EMBEDDING_SEEDS:
-            values = self.matrices[str(seed)][indices]
+            values = self.score_matrices[str(seed)][indices]
             similarities = torch.einsum("aud,bvd->abuv", values, values)
             per_seed.append(similarities.amax(dim=(2, 3)))
-        scores = torch.stack(per_seed).mean(0)
+        scores = torch.stack(per_seed).mean(0).cpu()
         self.episode_scores[identifier] = scores
         return scores
 
@@ -392,16 +398,20 @@ def run(args):
         raise ValueError("contextual transform mismatch")
     transforms = torch.load(source / "transforms.pt", map_location="cpu", weights_only=False)["transforms"]
     torch.cuda.reset_peak_memory_stats(); started = time.perf_counter()
+    print("stage=load_model", flush=True)
     model, model_meta = load_model(args.model, "step81381_native")
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True)
     names = sorted(texts.values()); raw = extract(model, tokenizer, {"entity": names, "value": ["unknown"]},
                                                   args.batch_size)
+    print(f"stage=embedded_texts count={len(names)}", flush=True)
     embeddings, embedding_hashes = apply(raw, {"entity": names, "value": ["unknown"]}, transforms,
                                          source_summary["selected_config"]["regularizer"])
     matrices, index = embedding_matrices(embeddings, texts, texts); evidence = Evidence(matrices, index, texts)
     del model, raw; torch.cuda.empty_cache()
 
+    print("stage=oracle_rows split=train", flush=True)
     train_rows = oracle_rows(train, evidence); tune_rows = oracle_rows(tune, evidence)
+    print("stage=oracle_rows split=tune complete", flush=True)
     cosine_threshold, cosine_grid = select_cosine(tune, evidence)
     selections, artifacts, seed_records, seed_metrics = {}, {}, {}, {}
     combined_rows = train_rows + tune_rows
@@ -415,6 +425,7 @@ def run(args):
         seed_metrics[str(seed)] = aggregate(records)
         path = root / f"dev_controller_seed{seed}.jsonl"
         path.write_text("".join(json.dumps(row) + "\n" for row in records))
+        print(f"stage=controller_complete seed={seed}", flush=True)
 
     primary_seed = str(SEEDS[0]); primary = seed_records[primary_seed]
     deletion_count = sum(decision["deleted"] is not None
@@ -430,6 +441,11 @@ def run(args):
     for name, records in controls.items():
         (root / f"dev_{name}.jsonl").write_text("".join(json.dumps(row) + "\n" for row in records))
     dev_rows = oracle_rows(dev, evidence)
+    candidate_path = root / "dev_candidate_rows.jsonl"
+    candidate_path.write_text("".join(json.dumps({key: row[key] for key in (
+        "episode_id", "subject", "length", "step", "event_kind", "label",
+        "pair_score", "candidate_correct"
+    )}) + "\n" for row in dev_rows))
     candidate_accuracy = statistics.fmean(
         row["candidate_correct"] for row in dev_rows if row["label"])
     mean_metric = {}
@@ -472,6 +488,8 @@ def run(args):
                          "source_training_sha256": sha(source / "training.json"),
                          "source_transforms_sha256": sha(source / "transforms.pt"),
                          "model": args.model, "tokenizer": args.tokenizer,
+                         "git_commit": subprocess.check_output(
+                             ["git", "rev-parse", "HEAD"], text=True).strip(),
                          "loading_info": model_meta["loading_info"], "seeds": list(SEEDS),
                          "embedding_seeds": list(EMBEDDING_SEEDS), "epochs": list(EPOCHS),
                          "thresholds": list(THRESHOLDS), "rank": RANK,
