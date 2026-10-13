@@ -1964,3 +1964,7 @@ OOF candidate top-1 为 96.82%，current/non-target/hard-retain 为 100.00/99.05
 新增 `scripts/audit_mquake_subject_risk_v12.py`，独立重算 OOF/主体聚类/candidate/随机对照/门槛，复原每个阈值选择、主体折和身份覆盖，并核对删除数、原始行、来源、checkpoint、任务源文件 hash 与 benchmark 锁。新增 runner 和 3 项聚焦测试；与 V11 测试合计 5 项本地及服务器均通过，远程真实 PyTorch ranker/gate 小规模训练 smoke 通过。警告中的 requires-grad 张量转标量改为显式 detach，不改变 loss。
 
 由于自动审批认为 GitHub 仓库公开范围未确认，包含实验结果和 checkpoint 的提交推送被拒绝；未绕过审核。V11 归档与 V12 计划已本地提交 `81b336e`，V12 源文件经 SSH 直接同步用于已授权远程实验。正式运行于 2026-10-13 13:32:15 +08:00 在 tmux `cbf_mquake_v12` 启动，root `/home/ctj/cbf_ttt_mquake_subject_risk_v12`，PID 995204；启动测试通过、Qwen 特征提取完成，MQuAKE-CF/LongMemEval/LoCoMo 未访问。
+
+首版 V12 运行 32 分 54 秒仍未完成 fold 0，进程持续约 31 核计算、无 OOM。静态分析确认 anchor-16 的单个校准折约产生 75 万个唯一 pair，超过 `PairEvidence` 原 40 万 LRU 上限；22 阈值×3 seed 的顺序回放会反复驱逐并重算相同的确定性特征。该运行通过 tmux `C-c` 安全停止，完整保留为 `/home/ctj/cbf_ttt_mquake_subject_risk_v12_slow_incomplete_20261013`，未产生或冒充正式指标。
+
+`PairEvidence` 新增可选 `cache_limit`，默认仍为 400000，所有旧调用和 baseline 数值/内存行为保持不变；V12 显式使用 1000000，并在 manifest、training 与独立审计中记录/核验 limit、entries、hits、misses、evictions。新增真实多-unit 数值等价测试，服务器 6 项测试通过，证明小/大缓存的 scope/payload feature 逐值相同，只改变 eviction。加速正式重跑于 2026-10-13 14:14:38 +08:00 启动，tmux `cbf_mquake_v12`、PID 997567；外部确认集仍封存。

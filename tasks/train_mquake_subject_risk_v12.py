@@ -41,6 +41,7 @@ RISK_THRESHOLDS = tuple(value / 20 for value in range(1, 20)) + (.975, .99, .995
 SAFETY_MACRO_FLOOR = .985
 SAFETY_LCB_FLOOR = .97
 Z_ONE_SIDED_95 = 1.645
+PAIR_CACHE_LIMIT = 1_000_000
 
 
 class WideAnchorResolver(AnchorResolver):
@@ -332,7 +333,10 @@ def run(args):
     del model, raw
     torch.cuda.empty_cache()
     print("stage=embeddings_complete", flush=True)
-    evidence = PairEvidence(scope_matrices, embeddings, index, texts, scopes)
+    evidence = PairEvidence(
+        scope_matrices, embeddings, index, texts, scopes,
+        cache_limit=PAIR_CACHE_LIMIT,
+    )
     all_groups = build_groups(episodes, scope_matrices, index, scopes, "train_tune")
     groups_by_id = {row["episode_id"]: row for row in all_groups}
     folds, fold_loads = subject_folds(episodes)
@@ -447,6 +451,9 @@ def run(args):
         "folds": fold_details,
         "embedding_hashes": embedding_hashes,
         "matched_random_deletions": deletion_count,
+        "pair_cache": {"limit": evidence.cache_limit, "entries": len(evidence.cache),
+                       "hits": evidence.hits, "misses": evidence.misses,
+                       "evictions": evidence.evictions},
         "raw_rows_sha256": {path.name: sha(path) for path in root.glob("*.jsonl")},
         "checkpoint_sha256": sha(checkpoint),
     }
@@ -471,6 +478,7 @@ def run(args):
         "safety_macro_floor": SAFETY_MACRO_FLOOR,
         "safety_lcb_floor": SAFETY_LCB_FLOOR,
         "one_sided_z": Z_ONE_SIDED_95,
+        "pair_cache_limit": PAIR_CACHE_LIMIT,
         "nested_train_calibrate_validate": True,
         "candidate_subject_equal_loss": True,
         "gate_subject_equal_loss": True,

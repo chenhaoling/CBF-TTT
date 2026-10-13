@@ -53,7 +53,8 @@ def payload(text):
 
 
 class PairEvidence:
-    def __init__(self, scope_matrices, value_embeddings, index, full_texts, scope_texts):
+    def __init__(self, scope_matrices, value_embeddings, index, full_texts, scope_texts,
+                 cache_limit=400_000):
         import torch
 
         self.scope_matrices = scope_matrices
@@ -61,7 +62,10 @@ class PairEvidence:
         self.index = index; self.full_texts = full_texts; self.scope_texts = scope_texts
         device = "cuda" if torch.cuda.is_available() else "cpu"
         self.score_matrices = {key: value.to(device) for key, value in scope_matrices.items()}
+        if cache_limit <= 0:
+            raise ValueError("cache_limit must be positive")
         self.episode_scores, self.cache = {}, OrderedDict()
+        self.cache_limit = int(cache_limit)
         self.hits = self.misses = self.evictions = 0
 
     def prepare_episode(self, episode):
@@ -129,7 +133,7 @@ class PairEvidence:
                   "scope_score": statistics.fmean(maxima),
                   "best_left": left_units[left], "best_right": right_units[right]}
         self.cache[key] = result
-        if len(self.cache) > 400_000:
+        if len(self.cache) > self.cache_limit:
             self.cache.popitem(last=False); self.evictions += 1
         return result
 

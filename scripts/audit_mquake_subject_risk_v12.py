@@ -12,6 +12,7 @@ from tasks.train_mquake_robust_calibration_v11 import subject_folds
 from tasks.train_mquake_subject_risk_v12 import (
     EPOCH,
     FOLDS,
+    PAIR_CACHE_LIMIT,
     RISK_THRESHOLDS,
     SAFETY_LCB_FLOOR,
     SAFETY_MACRO_FLOOR,
@@ -136,6 +137,8 @@ def audit(root, data_root, source_root):
         and manifest["risk_thresholds"] == list(RISK_THRESHOLDS)
         and manifest["safety_macro_floor"] == SAFETY_MACRO_FLOOR
         and manifest["safety_lcb_floor"] == SAFETY_LCB_FLOOR
+        and manifest["pair_cache_limit"] == PAIR_CACHE_LIMIT
+        and training["pair_cache"]["limit"] == PAIR_CACHE_LIMIT
         and manifest["candidate_subject_equal_loss"]
         and manifest["gate_subject_equal_loss"]
         and manifest["nested_train_calibrate_validate"]

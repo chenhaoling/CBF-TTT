@@ -71,6 +71,42 @@ class SubjectRiskV12Test(unittest.TestCase):
         }
         self.assertEqual(selected_threshold(grid), (.3, True))
 
+    def test_pair_cache_limit_changes_eviction_not_features(self):
+        try:
+            import torch
+        except ImportError:
+            self.skipTest("torch unavailable")
+        from tasks.train_factorized_causal_forgetting_v4 import PairEvidence
+        from tasks.train_long_session_sparse_gate_v1 import EMBEDDING_SEEDS
+
+        class Values:
+            def get(self, kind, value):
+                del kind
+                return {"x": torch.tensor([1., 0.]),
+                        "y": torch.tensor([0., 1.])}[value]
+
+        units = ["a", "b", "c", "d"]
+        matrices = {str(seed): torch.eye(4) for seed in EMBEDDING_SEEDS}
+        embeddings = {str(seed): Values() for seed in EMBEDDING_SEEDS}
+        index = {unit: position for position, unit in enumerate(units)}
+        full = {"a": "Memory statement: A\nValue: x",
+                "b": "Memory statement: B\nValue: y",
+                "c": "Memory statement: C\nValue: x",
+                "d": "Memory statement: D\nValue: y"}
+        scopes = {"a": "A", "b": "B", "c": "C", "d": "D"}
+        small = PairEvidence(matrices, embeddings, index, full, scopes, cache_limit=1)
+        large = PairEvidence(matrices, embeddings, index, full, scopes, cache_limit=10)
+        first_small = small.pair(["a", "b"], ["c", "d"])
+        first_large = large.pair(["a", "b"], ["c", "d"])
+        self.assertTrue(torch.equal(first_small["scope_feature"],
+                                    first_large["scope_feature"]))
+        self.assertTrue(torch.equal(first_small["payload_feature"],
+                                    first_large["payload_feature"]))
+        small.pair(["b", "c"], ["a", "d"])
+        large.pair(["b", "c"], ["a", "d"])
+        self.assertEqual(small.evictions, 1)
+        self.assertEqual(large.evictions, 0)
+
 
 if __name__ == "__main__":
     unittest.main()
