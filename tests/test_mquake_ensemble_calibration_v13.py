@@ -2,6 +2,10 @@ import math
 import unittest
 
 from scripts.audit_mquake_ensemble_calibration_v13 import selected_threshold
+from scripts.analyze_mquake_ensemble_calibration_v13 import (
+    binary_transitions,
+    decision_outcome,
+)
 from tasks.evaluate_mquake_ensemble_calibration_v13 import (
     EXPECTED_V12_HASHES,
     median_logit_probability,
@@ -50,6 +54,20 @@ class EnsembleCalibrationV13Test(unittest.TestCase):
             "mquake_subject_risk_crossfit.pt",
         })
         self.assertTrue(all(len(value) == 64 for value in EXPECTED_V12_HASHES.values()))
+
+    def test_paired_diagnostic_counts_improvements_and_regressions(self):
+        transition = binary_transitions([0, 0, 1, 1], [0, 1, 0, 1])
+        self.assertEqual(transition["counts"], {
+            "0->0": 1, "0->1": 1, "1->0": 1, "1->1": 1,
+        })
+        self.assertEqual(transition["delta"], 0.)
+        event = {"target_session_id": "old"}
+        self.assertEqual(decision_outcome(event, {
+            "top": "old", "deleted": None, "probability": .2,
+        })["outcome"], "correct_candidate_threshold_reject")
+        self.assertEqual(decision_outcome(event, {
+            "top": "old", "deleted": "old", "probability": .9,
+        })["outcome"], "correct_deletion")
 
 
 if __name__ == "__main__":
