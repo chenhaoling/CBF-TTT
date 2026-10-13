@@ -1920,3 +1920,19 @@ only three new 50-epoch deletion heads on train causal states, and calibrates tu
 thresholds without refitting. A six-check tune prerequisite conditionally releases a
 nine-check entity-disjoint dev evaluation. All outputs are separate and baseline paths
 remain unchanged.
+
+V10 completed in 935.92 seconds at 7.867/8.115 GiB peak allocated/reserved memory and
+passed its independent audit. Tune passed all prerequisites at 100% candidate top-1,
+99.20% pair state, 100% current retention, and 98.42% non-target retention. The fixed
+method then reached 99.67% candidate top-1, 96.19% stale deletion, 99.87% current
+retention, and 96.12% pair state on entity-disjoint dev. Every length exceeded 95%
+pair state and matched-random gain was +84.49 points, CI `[81.71,88.18]`. Non-target
+and hard-retain safety were 91.80/91.81%, below the registered 95% floors, so the gate
+failed and LoCoMo stayed sealed. Added the compact result and report under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_anchor_forgetting_v10`.
+
+Added `MQUAKE_ROBUST_CALIBRATION_V11_PLAN.md`. It freezes the successful `anchor_4`
+resolver and runs five-fold subject OOF gate calibration on MQuAKE-T train+tune with
+stricter 99% calibration safety constraints and no refit. V10 dev will not be rescored
+or used for option selection. Only an OOF pass may release one-time MQuAKE-CF-3k-v2
+safety confirmation; LoCoMo remains a later confirmation set.

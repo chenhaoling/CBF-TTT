@@ -1,0 +1,323 @@
+{
+  "protocol": "mquake_anchor_forgetting_v10",
+  "candidate_policy": "anchor_4_then_v8_ranker",
+  "tune": {
+    "episodes": 1492,
+    "actions": 59680,
+    "action_accuracy": 0.9866621983914209,
+    "pair_state_accuracy": 0.9919571045576407,
+    "stale_deletion": 0.9919571045576407,
+    "current_retention": 1.0,
+    "non_target_retention": 0.9841990471141172,
+    "memory_fraction": 0.9531459450402144,
+    "by_event_kind": {
+      "primary_old": {
+        "events": 1492,
+        "accuracy": 0.9966487935656837
+      },
+      "hard_retain": {
+        "events": 2984,
+        "accuracy": 0.9778820375335121
+      },
+      "distractor": {
+        "events": 53712,
+        "accuracy": 0.9868558236520703
+      },
+      "primary_update": {
+        "events": 1492,
+        "accuracy": 0.9872654155495979
+      }
+    },
+    "by_length": {
+      "16": {
+        "episodes": 373,
+        "pair_state_accuracy": 0.9892761394101877,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9754883186518575
+      },
+      "32": {
+        "episodes": 373,
+        "pair_state_accuracy": 0.9946380697050938,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9845397676496873
+      },
+      "48": {
+        "episodes": 373,
+        "pair_state_accuracy": 0.9919571045576407,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9895675486653457
+      },
+      "64": {
+        "episodes": 373,
+        "pair_state_accuracy": 0.9919571045576407,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9872005534895789
+      }
+    }
+  },
+  "tune_candidate": {
+    "shortlist_recall": 1.0,
+    "candidate_top1": 1.0
+  },
+  "tune_prerequisite": {
+    "checks": {
+      "shortlist_recall_at_least_99": true,
+      "candidate_top1_at_least_99": true,
+      "current_retention_at_least_97": true,
+      "non_target_retention_at_least_95": true,
+      "hard_retain_at_least_95": true,
+      "pair_state_at_least_75": true
+    },
+    "passed": true
+  },
+  "development_scored": true,
+  "mquake_cf_used": false,
+  "longmemeval_used": false,
+  "locomo_scored": false,
+  "next_stage": "stop_anchor_dev_no_retuning",
+  "terminal_status": "completed_mquake_anchor_forgetting_v10",
+  "development": {
+    "episodes": 1496,
+    "actions": 59840,
+    "action_accuracy": 0.931216577540107,
+    "pair_state_accuracy": 0.9612299465240641,
+    "stale_deletion": 0.9618983957219251,
+    "current_retention": 0.9986631016042781,
+    "non_target_retention": 0.9180212305501061,
+    "memory_fraction": 0.8930899064171123,
+    "by_event_kind": {
+      "primary_old": {
+        "events": 1496,
+        "accuracy": 0.8997326203208557
+      },
+      "hard_retain": {
+        "events": 2992,
+        "accuracy": 0.9181149732620321
+      },
+      "distractor": {
+        "events": 53856,
+        "accuracy": 0.9340092097445039
+      },
+      "primary_update": {
+        "events": 1496,
+        "accuracy": 0.8883689839572193
+      }
+    },
+    "by_length": {
+      "16": {
+        "episodes": 374,
+        "pair_state_accuracy": 0.9518716577540107,
+        "current_retention": 0.9946524064171123,
+        "non_target_retention": 0.8726126814362107
+      },
+      "32": {
+        "episodes": 374,
+        "pair_state_accuracy": 0.9598930481283422,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9163992869875224
+      },
+      "48": {
+        "episodes": 374,
+        "pair_state_accuracy": 0.9572192513368984,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9372820274354802
+      },
+      "64": {
+        "episodes": 374,
+        "pair_state_accuracy": 0.9759358288770054,
+        "current_retention": 1.0,
+        "non_target_retention": 0.945790926341211
+      }
+    }
+  },
+  "development_candidate": {
+    "shortlist_recall": 1.0,
+    "candidate_top1": 0.9966577540106952
+  },
+  "controls": {
+    "retain_all": {
+      "episodes": 1496,
+      "actions": 59840,
+      "action_accuracy": 0.975,
+      "pair_state_accuracy": 0.0,
+      "stale_deletion": 0.0,
+      "current_retention": 1.0,
+      "non_target_retention": 1.0,
+      "memory_fraction": 1.0,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1496,
+          "accuracy": 1.0
+        },
+        "hard_retain": {
+          "events": 2992,
+          "accuracy": 1.0
+        },
+        "distractor": {
+          "events": 53856,
+          "accuracy": 1.0
+        },
+        "primary_update": {
+          "events": 1496,
+          "accuracy": 0.0
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 374,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "32": {
+          "episodes": 374,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "48": {
+          "episodes": 374,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "64": {
+          "episodes": 374,
+          "pair_state_accuracy": 0.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        }
+      }
+    },
+    "random_matched": {
+      "episodes": 1496,
+      "actions": 59840,
+      "action_accuracy": 0.8875334224598931,
+      "pair_state_accuracy": 0.1163101604278075,
+      "stale_deletion": 0.12032085561497326,
+      "current_retention": 0.9779411764705882,
+      "non_target_retention": 0.9087652292843696,
+      "memory_fraction": 0.9102258801247772,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1496,
+          "accuracy": 0.9097593582887701
+        },
+        "hard_retain": {
+          "events": 2992,
+          "accuracy": 0.9097593582887701
+        },
+        "distractor": {
+          "events": 53856,
+          "accuracy": 0.9102978312537136
+        },
+        "primary_update": {
+          "events": 1496,
+          "accuracy": 0.001336898395721925
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 374,
+          "pair_state_accuracy": 0.10160427807486631,
+          "current_retention": 0.9786096256684492,
+          "non_target_retention": 0.9085179526355996
+        },
+        "32": {
+          "episodes": 374,
+          "pair_state_accuracy": 0.11497326203208556,
+          "current_retention": 0.9786096256684492,
+          "non_target_retention": 0.9072192513368984
+        },
+        "48": {
+          "episodes": 374,
+          "pair_state_accuracy": 0.11497326203208556,
+          "current_retention": 0.9759358288770054,
+          "non_target_retention": 0.909672169262962
+        },
+        "64": {
+          "episodes": 374,
+          "pair_state_accuracy": 0.13368983957219252,
+          "current_retention": 0.9786096256684492,
+          "non_target_retention": 0.9096515439020182
+        }
+      }
+    },
+    "oracle": {
+      "episodes": 1496,
+      "actions": 59840,
+      "action_accuracy": 1.0,
+      "pair_state_accuracy": 1.0,
+      "stale_deletion": 1.0,
+      "current_retention": 1.0,
+      "non_target_retention": 1.0,
+      "memory_fraction": 0.9674479166666666,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1496,
+          "accuracy": 1.0
+        },
+        "hard_retain": {
+          "events": 2992,
+          "accuracy": 1.0
+        },
+        "distractor": {
+          "events": 53856,
+          "accuracy": 1.0
+        },
+        "primary_update": {
+          "events": 1496,
+          "accuracy": 1.0
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 374,
+          "pair_state_accuracy": 1.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "32": {
+          "episodes": 374,
+          "pair_state_accuracy": 1.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "48": {
+          "episodes": 374,
+          "pair_state_accuracy": 1.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "64": {
+          "episodes": 374,
+          "pair_state_accuracy": 1.0,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        }
+      }
+    }
+  },
+  "primary_vs_random": {
+    "gain": 0.8449197860962566,
+    "subject_clusters": 18,
+    "bootstrap_95ci": [
+      0.8171296296296297,
+      0.8818027210884354
+    ]
+  },
+  "development_gate": {
+    "checks": {
+      "shortlist_recall_at_least_99": true,
+      "candidate_top1_at_least_99": true,
+      "current_retention_at_least_97": true,
+      "non_target_retention_at_least_95": false,
+      "hard_retain_at_least_95": false,
+      "stale_deletion_at_least_85": true,
+      "pair_state_at_least_85": true,
+      "every_length_pair_at_least_80": true,
+      "random_gain_lower_bound_above_zero": true
+    },
+    "passed": false
+  }
+}

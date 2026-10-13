@@ -1,0 +1,27 @@
+{
+  "protocol": "mquake_anchor_forgetting_v10_audit",
+  "audit_passed": true,
+  "checks": {
+    "tune_metrics_and_gate": true,
+    "threshold_selection": true,
+    "conditional_development": true,
+    "matched_random": true,
+    "raw_hashes": true,
+    "source_v8_checkpoint_hashes": true,
+    "protocol_and_access_locks": true
+  },
+  "summary_sha256": "cbcf0b239eafa42c2fee415016b94f3d99b82a284d6aec8c61c78a4e4d0fb73e",
+  "training_sha256": "aaa0e08d23d54daa8608d3d5453695dd5739b95734c9eb9fccbbe8c048d16c7d",
+  "training_manifest_sha256": "3be7a650d5b92230923542f309c87c398e437bf9d527edd1f9c979668b7b5ca1",
+  "recomputed_tune_prerequisite": {
+    "checks": {
+      "shortlist_recall_at_least_99": true,
+      "candidate_top1_at_least_99": true,
+      "current_retention_at_least_97": true,
+      "non_target_retention_at_least_95": true,
+      "hard_retain_at_least_95": true,
+      "pair_state_at_least_75": true
+    },
+    "passed": true
+  }
+}

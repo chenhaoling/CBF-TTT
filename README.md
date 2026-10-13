@@ -429,6 +429,15 @@ top-1 at every length, while raw all-unit maximum was 31.84% with mean target ra
 the causal deletion heads on train, calibrates on tune without refitting, and permits
 dev only after a six-check prerequisite. LoCoMo remains sealed.
 
+[V10 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_anchor_forgetting_v10/REPORT.md)
+with 99.67% candidate top-1, 96.19% stale deletion, 99.87% current retention, and
+96.12% strict pair state on entity-disjoint dev. Its +84.49-point pair-state gain over
+matched random had 95% CI `[81.71,88.18]`. The formal gate still failed because
+non-target and hard-retain safety were 91.80/91.81% versus the 95% floors.
+[V11](MQUAKE_ROBUST_CALIBRATION_V11_PLAN.md) therefore freezes the resolver and uses
+subject-level OOF conservative calibration before any independent MQuAKE-CF stress
+test. V10 dev will not be rescored; LoCoMo remains sealed.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
