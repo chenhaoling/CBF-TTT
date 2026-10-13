@@ -14,13 +14,16 @@ TOKENIZER=${TOKENIZER:-/home/ctj/models/Qwen3-4B}
 
 cd "$REPO"
 test ! -e "$ROOT"
-test ! -e "$DATA"
 mkdir -p "$ROOT"
 "$PYTHON" -m unittest tests.test_build_mquake_temporal_sessions \
   tests.test_mquake_temporal_transfer_v7
 date --iso-8601=seconds > "$ROOT/started_at.txt"
-"$PYTHON" -m tasks.build_mquake_temporal_sessions \
-  --source "$RAW" --output "$DATA" > "$ROOT/build.log" 2>&1
+if test -e "$DATA"; then
+  echo "reuse_existing_hashed_dataset=$DATA" > "$ROOT/build.log"
+else
+  "$PYTHON" -m tasks.build_mquake_temporal_sessions \
+    --source "$RAW" --output "$DATA" > "$ROOT/build.log" 2>&1
+fi
 CUDA_VISIBLE_DEVICES=0 "$PYTHON" -m tasks.evaluate_mquake_temporal_transfer_v7 \
   --data-root "$DATA" --source-root "$SOURCE" --v3-root "$V3" --v5-root "$V5" \
   --output "$ROOT/result" --model "$MODEL" --tokenizer "$TOKENIZER" \
