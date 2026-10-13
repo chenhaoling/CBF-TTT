@@ -1833,3 +1833,33 @@ The first LongMemEval transfer launch stopped before embedding or scoring becaus
 The one-time LongMemEval-S knowledge-update transfer completed on all 78 questions and failed its registered gate. The frozen controller reduced stale hit@5 from 61.54% to 7.69%, a 53.85-point reduction with question-bootstrap CI `[41.03,66.67]`, but over-deleted: current answer-session retention was 50.00%, non-answer retention 41.69%, current hit@5 50.00% versus 60.26% for retain-all, and strict stale/current pair state 44.87% versus 51.28% for action-rate-matched random (difference CI `[-20.51,7.69]`). The answer-ID oracle reached 100% pair state, current hit@5 66.67%, and stale hit@5 0, demonstrating that local deletion is feasible while the zero-shot session controller is miscalibrated. Both RTX 5090 shards processed 39 questions and 10,101 total windows in about 407 seconds wall time; peak allocated/reserved memory was 7.983/8.184 GiB. Added compact raw metrics, resource records, a full report, and `scripts/audit_longmemeval_forgetting_transfer.py`; seven focused tests pass and the independent audit recomputes all hashes, metrics, intervals, locks, and the failed gate. This is not an official LongMemEval generation score, the 78 outcomes are locked against retuning, and LoCoMo remains unscored.
 
 Added `LONG_SESSION_SPARSE_GATE_V1_PLAN.md` and `tasks/build_long_session_sparse_corpus.py` for the independent corrective stage. The builder uses only the existing ZsRE contextual-readout calibration/dev splits, deterministically splits calibration source sessions into fit/tune, and constructs one 16/32/48/64-session episode per primary fact. Each episode has exactly one old/current update pair, two same-subject locality hard-retain sessions, unrelated sessions, and four factual units per session. It stores source/chain metadata only for labels and auditing, verifies subject disjointness, and records that LongMemEval and LoCoMo are not used. Added deterministic construction tests; no LongMemEval outcome is an input to corpus construction or later fit/tune selection.
+
+## 2026-10-13: MQuAKE-T natural temporal transfer V7
+
+The constructed ZsRE loss/threshold loop is closed after V6. V7 tests whether the
+factorized forgetting rule transfers to naturally occurring temporal changes.
+Official MQuAKE-T is an independent development source; repeated cases for one edited
+subject remain in the same split. LoCoMo stays sealed, and MQuAKE-CF is not used.
+
+- Added `MQUAKE_TEMPORAL_TRANSFER_V7_PLAN.md` with frozen data access, method, metrics,
+  and release criteria.
+- Added `tasks/build_mquake_temporal_sessions.py`. It verifies the one-update schema,
+  creates a deterministic subject-disjoint 60/20/20 split, and builds 16/32/48/64
+  event episodes containing an old fact, its real update, natural multi-hop context,
+  two same-relation different-subject hard retains, and distractors. The manifest
+  records official source/license URLs and all source/output hashes.
+- Added `tasks/evaluate_mquake_temporal_transfer_v7.py`. It reads only MQuAKE dev,
+  freezes the V3 resolver and V5 calibrated ensemble, and compares against retain-all,
+  exact deletion-count matched random, and oracle policies.
+- Added `scripts/audit_mquake_temporal_transfer_v7.py` to recompute metrics and gates,
+  verify data/checkpoint/output hashes, split separation, exact matched deletions, and
+  the absence of MQuAKE fitting, MQuAKE-CF, LongMemEval, and LoCoMo access.
+- Added `scripts/run_mquake_temporal_transfer_v7.sh` and focused construction/gate
+  tests. Updated `DATA_DOWNLOAD_GUIDE.md` and `README.md`.
+
+Run with `bash scripts/run_mquake_temporal_transfer_v7.sh`. The feature is opt-in and
+does not alter baseline model, optimizer, dataset, or evaluation paths. If zero-shot
+transfer fails, the registered next stage can fit only on MQuAKE train, calibrate only
+on tune, and then score the entity-disjoint dev once. Risks include only 96 unique
+temporal scopes, skewed subject frequencies, repeated contexts, and the remaining gap
+between structured memory units and raw conversational sessions.

@@ -108,3 +108,27 @@ sha256sum -c SHA256SUMS
 ```
 
 移动目录后，`MANIFEST.json` 中记录的绝对路径可能仍指向旧机器；SHA256 校验以当前文件实际位置为准。模型和数据下载需要满足各来源的许可及使用条款。
+
+## 5. MQuAKE-T 自然时间更新会话
+
+V7 使用 [MQuAKE 官方仓库](https://github.com/princeton-nlp/MQuAKE)中的
+`MQuAKE-T.json` 构建真实时间知识更新会话。该文件只用于独立开发源，
+LoCoMo 仍保留为确认性评测。
+
+```bash
+mkdir -p /data/cbf_ttt/eval/mquake_official
+curl -L --fail --retry 3 \
+  https://raw.githubusercontent.com/princeton-nlp/MQuAKE/main/datasets/MQuAKE-T.json \
+  -o /data/cbf_ttt/eval/mquake_official/MQuAKE-T.json
+sha256sum /data/cbf_ttt/eval/mquake_official/MQuAKE-T.json
+
+python -m tasks.build_mquake_temporal_sessions \
+  --source /data/cbf_ttt/eval/mquake_official/MQuAKE-T.json \
+  --output /data/cbf_ttt/eval/mquake_temporal_sessions_v1
+```
+
+本次服务器下载文件的 SHA256 为
+`58500a1d4aaf9e036c23a1d9dd6be2d73d693e35a695614842f211ea5aff59f2`。
+构建器会重新记录实际源文件哈希，并按被编辑 subject 做 60/20/20 互斥切分，
+生成 16/32/48/64 长度的会话。MQuAKE 官方仓库声明 MIT 许可证；发布衍生物时
+仍应保留原作者引用与许可证。
