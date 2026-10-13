@@ -1545,6 +1545,37 @@ v2提交`a1984b2`在两张RTX5090完成。dev选择options，独立Q的候选与
 
 独立审计验证contextual来源、transform和embedding逐bit桥、60个raw策略文件、聚合、dev门与条件test解封全部通过。墙钟575秒、任务时间570.04秒，峰值allocated/reserved 7.868/8.277GiB。归档位于`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_forgetting_v2`。限制是physics与greedy oracle的test准确率同为89.05%；当前结果证明状态依赖遗忘优于固定/global-only策略，但没有证明学习优于直接读取显式revoke/reset规则。下一步必须使用自动activation/text evidence并迁移到ZsRE等自然顺序更新。
 
+## 2026-10-13: Sparse long-session forgetting gate V1 implementation
+
+Implemented `tasks/train_long_session_sparse_gate_v1.py`,
+`scripts/run_long_session_sparse_gate_v1.sh`, and regression tests for the
+registered long-session correction stage. The implementation freezes the final
+Qwen3-4B checkpoint and the three contextual transforms, embeds the 2,136
+audited corpus texts once, and trains only a rank-16 binary deletion gate. Its
+observable features cover three projected cosine maxima, dispersion, candidate
+margin, projection agreement, fixed similarity fractions, lexical/relation
+overlap, unit counts, candidate age, and memory size. Chain identity, source
+subject, split, and labels are not model inputs.
+
+To make the 16/32/48/64-session causal grid tractable, all session-pair ranking
+scores are precomputed once per episode and detailed top-pair features use a
+bounded LRU cache. Calibration-fit trains three fixed seeds; calibration-tune
+selects epoch and threshold; fit+tune refitting precedes a one-time
+subject-disjoint development replay. Controls include retain-all, always-delete
+top candidate, tune-selected cosine, exact action-count-matched deterministic
+random deletion, and oracle local deletion. Candidate top-1 and all release
+checks are evaluated on development. LongMemEval-S remains locked and LoCoMo is
+not loaded. Passing every registered check is required before a separate
+LoCoMo preregistration; failure stops V1 and is retained as an architecture
+diagnostic. Baseline training and inference entry points are unchanged.
+
+Run on `hku-gpu2` with:
+
+```bash
+cd /home/ctj/cbf_ttt_joint_exp_20260927
+bash scripts/run_long_session_sparse_gate_v1.sh
+```
+
 ## 2026-10-12: ZsRE contextual readout and relation-aware key alignment
 
 ### Completed natural readout

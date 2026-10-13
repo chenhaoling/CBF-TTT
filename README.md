@@ -383,6 +383,8 @@ The deterministic [cross-domain synthesis](experiments/cbf_ttt/qwen3_4b_final_1b
 
 [Sparse long-session gate V1](LONG_SESSION_SPARSE_GATE_V1_PLAN.md) is the registered corrective development stage. `tasks/build_long_session_sparse_corpus.py` turns the already observed, subject-disjoint ZsRE calibration/dev facts into 16/32/48/64-session trajectories with exactly one update, two same-subject hard-retain events, unrelated sessions, and four fact units per session. LongMemEval outcomes, session IDs, and labels are excluded. Fit/tune selection must recover stale deletion while keeping current and unrelated sessions before LoCoMo can be scored.
 
+The executable stage is `scripts/run_long_session_sparse_gate_v1.sh`. It embeds every fact unit once with the frozen final Qwen3-4B checkpoint, precomputes session-pair evidence for efficient causal replay, trains three rank-16 deletion gates on calibration-fit, selects epoch/threshold on calibration-tune, refits on fit+tune, and reads the subject-disjoint development split once. The deterministic random control matches the primary controller's exact deletion count without reading labels. Development candidate accuracy and every release check are computed on development rather than tune; LoCoMo remains sealed unless all registered checks pass.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
