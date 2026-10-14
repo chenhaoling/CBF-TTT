@@ -8,6 +8,10 @@ from tasks.train_qwen_sparse_cohort_forgetting import (
     development_gate,
     test_gate,
 )
+from scripts.audit_qwen_sparse_cohort_forgetting import (
+    development_gate as audit_development_gate,
+    test_gate as audit_test_gate,
+)
 
 
 class QwenSparseCohortForgettingTest(unittest.TestCase):
@@ -50,12 +54,15 @@ class QwenSparseCohortForgettingTest(unittest.TestCase):
         training = {str(seed): {"interior_fraction": 0.2} for seed in SEEDS}
         gate = development_gate(self.passing_summary(), training)
         self.assertTrue(gate["passed"])
+        self.assertEqual(gate, audit_development_gate(self.passing_summary(), training))
         summary = self.passing_summary()
         summary["learned"] = self.policy(0.945, 0.35)
         self.assertFalse(development_gate(summary, training)["passed"])
 
     def test_one_time_test_gate(self):
-        self.assertTrue(test_gate(self.passing_summary())["passed"])
+        gate = test_gate(self.passing_summary())
+        self.assertTrue(gate["passed"])
+        self.assertEqual(gate, audit_test_gate(self.passing_summary()))
 
 
 if __name__ == "__main__":
