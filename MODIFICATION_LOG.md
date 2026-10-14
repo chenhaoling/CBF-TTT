@@ -2145,3 +2145,9 @@ fallback 为 20。三个 artifact SHA-256 分别为 manifest `6dbe6154...`, pilo
 `sessions[:query_step]` 选择，并在每行记录 `query_step`；新增未来 distractor 排除
 测试，构建测试共五项。首版成功清单在远程改名保留，修订版重新构建并产生新 hash，
 不得混用旧清单。
+
+因果可见性修订后的最终预评分清单保持 40/272 行与 40/252 matched-hard，SHA-256
+更新为 manifest `9eea25d6aa253014d47553e0e45fb01107546a3ff14b86bc3881b6c60b208be1`、
+pilot `4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38`、
+formal `4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11`。
+本地归档已覆盖为修订版，RUN_STATUS 明确旧远程目录只作失败/修订历史，不能评分。

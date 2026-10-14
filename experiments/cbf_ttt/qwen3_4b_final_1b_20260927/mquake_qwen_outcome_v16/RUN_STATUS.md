@@ -20,9 +20,9 @@ original corpus builder's hard-retain marker and will be reported separately.
 
 ## Artifact hashes
 
-- `manifest.json`: `6dbe6154ecd9a1c06cb1b60be132d9eac542f8a20f6f86006b43c0c539802981`
-- `pilot.jsonl`: `e9a61d5f31227a828311a2fc739bf31ff65435275d228ad2d6cb6d213a0d0222`
-- `formal.jsonl`: `352c2cabef9f7ece3d879c3e65bf928674de9341e50a99ffbc738adec2e7748c`
+- `manifest.json`: `9eea25d6aa253014d47553e0e45fb01107546a3ff14b86bc3881b6c60b208be1`
+- `pilot.jsonl`: `4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38`
+- `formal.jsonl`: `4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11`
 
 The source manifest and train/tune/text hashes are recorded inside
 `manifest.json`.  The manifest explicitly records `model_scored=false` and all
@@ -37,4 +37,11 @@ failed directory is preserved remotely as
 `/home/ctj/cbf_ttt_mquake_qwen_outcome_v16_failed_ineligible_safety_20261014`.
 The deterministic matched-first fallback rule was frozen before any Qwen score
 or V15 outer-fold metric was available.
+
+A second source-only correction fixed the query time immediately after the
+primary-current session and restricted hard/unrelated safety units to earlier
+visible sessions.  The first successful but pre-causal-visibility sample is
+preserved remotely as
+`/home/ctj/cbf_ttt_mquake_qwen_outcome_v16_previsible_fix_20261014`; the hashes
+above refer exclusively to the corrected sample.
 
