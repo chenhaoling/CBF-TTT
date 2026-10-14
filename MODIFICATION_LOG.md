@@ -2093,3 +2093,14 @@ oracle 是否存在至少 5 点可控空间，再决定是否用真实 future-NL
 原生 writer 作为独立桥接分支，需先通过单组件与 2/4/8/16 多组件内容门，之后才可
 接入遗忘策略。新增内容仅为预注册文档与 README 链接，不改变正在运行的 V15、
 baseline 默认配置、模型、优化器、数据或评测入口。
+
+随后在 V15 仍未产生首个 inner/outer 指标时核对数据和读出代码：MQuAKE episode
+只存 session/unit，现有 contextual memory 在 256 维候选空间评分，没有经过审计的
+Qwen-vocabulary decoder。因此把下一阶段直接称为“Qwen answer accuracy”会越过证据。
+计划补充固定的无训练 readout：将每个策略保留的原始 `Memory statement`/`Value`
+按时间顺序序列化，使用 fresh KV 的冻结 Qwen 自回归评分 current/stale 完整答案；
+它只证明文本证据选择的下游效用，仍不冒充 native fast-weight。远程只读统计覆盖
+train+tune 全部 5,976 个 episode：完整未过滤文本为 1,202--6,137 tokens，64-session
+最大 6,137；checkpoint `max_position_embeddings=40960`、无 sliding window，因此
+协议可不截断地评分所有 retained units。正式入口仍需逐行检查加上 prompt/answer 后
+不越界，并由 auditor 重建 prompt 和 token 长度。

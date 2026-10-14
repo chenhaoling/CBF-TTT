@@ -57,16 +57,43 @@ and safety checks pass:
 The frozen candidate resolver's approximately 98.93% top-1 is reported as a
 separate known ceiling.  It must not be hidden by a controller-only pass.
 
-## Branch A: V15 passes -- exact Qwen outcome experiment
+## Branch A: V15 passes -- frozen-Qwen downstream outcome experiment
+
+### Readout prerequisite and fixed realization
+
+The contextual memory currently exposes a 256-dimensional candidate-space
+readout.  It has no existing, audited decoder into Qwen vocabulary logits.
+Candidate-space accuracy must therefore not be renamed Qwen answer accuracy.
+
+The first downstream realization uses no learned decoder.  A policy's retained
+session components are serialized back to their original, immutable
+`Memory statement`/`Value` text in chronological order, followed by a fixed
+instruction, the primary current question and an answer prefix.  Frozen Qwen
+scores the complete current answer and stale answer autoregressively from a
+fresh KV cache.  All policies use byte-identical text for every component they
+share.  Deletion changes only whether the selected historical session appears
+in the serialized memory.
+
+Across all 5,976 MQuAKE train+tune episodes, the complete unfiltered session
+text is 1,202--6,137 tokenizer tokens (64-session maximum 6,137).  The frozen
+checkpoint declares 40,960 positions, so this protocol uses every retained
+unit without truncation.  Prompt scaffolding and both answer candidates must
+still be checked to remain below the declared limit for every row before any
+model score is accepted.
+
+This experiment measures whether the learned memory-selection policy improves
+actual frozen-Qwen use of retained textual evidence.  It is a downstream
+utility bridge for the contextual memory and is reported as such; it is not a
+native dense-fast-weight result.
 
 ### Intervention
 
 Replay every held-out subject episode with the exact contextual memory
-components and frozen Qwen readout.  At each event, the deployed cross-fitted
-V15 policy may remove only a component visible at that time.  The current
-component is then always admitted.  Every answer is scored from a fresh query
-KV cache so that the measured effect comes from session memory rather than
-attention-cache leakage.
+components.  At each event, the deployed cross-fitted V15 policy may remove
+only a component visible at that time.  The current component is then always
+admitted.  At the registered query points, retained sessions are serialized by
+the fixed realization above and every answer is scored from a fresh query KV
+cache so that no attention state leaks across arms.
 
 ### Fixed arms
 
@@ -89,7 +116,8 @@ source.
 
 ### Primary outcomes and release gate
 
-- current-answer exact/candidate accuracy and answer NLL;
+- current-answer exact generation, current-versus-stale preference and answer
+  NLL;
 - stale-answer suppression and old/current pair accuracy;
 - non-target and hard-retain query accuracy;
 - subject-macro values and the minimum outer-fold value;
@@ -104,8 +132,9 @@ The stage passes only when all of the following hold:
    CI lower bound for fixed-minus-V15 NLL is above zero;
 3. current, non-target and hard-retain query accuracy are at least 97%;
 4. no outer fold has a negative V15-minus-strongest-fixed accuracy difference;
-5. the independent audit reconstructs every memory state, Qwen score,
-   cross-fit identity, paired comparison and artifact hash.
+5. the independent audit reconstructs every memory state, serialized prompt,
+   token-length check, Qwen score, cross-fit identity, paired comparison and
+   artifact hash.
 
 Action-label accuracy remains secondary.  A controller that predicts symbolic
 deletions but does not improve Qwen answers does not pass.
