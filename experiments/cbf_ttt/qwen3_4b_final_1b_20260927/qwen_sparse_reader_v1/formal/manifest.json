@@ -1,0 +1,58 @@
+{
+  "protocol": "qwen_sparse_reader_diagnostic_v1",
+  "data_manifest_sha256": "90532e6b79cde8064d6df4a25ba6a5070d7f6067371211a08846eb92757b56c9",
+  "geometry_hashes": {
+    "summary.json": "4fa6e0aba9fa5ab335ee9650b31547379a7525cd4c52db3b02d49aa49fbd272c",
+    "training.json": "01ecc4e9e5875485750b1f5a6121826eb254d9d865442a2c45ba79456ebb170c",
+    "training_manifest.json": "d13cfa35397f65ed5231aace10d0338480482f08aba3f14f4e4f5b55c9347510",
+    "contextual_transforms.pt": "524d213a82f158fddadab8973a28770a687138f528e269659430490affe74ae5"
+  },
+  "contextual_config": {
+    "internal": "context_last_r0.01",
+    "regularizer": 0.01,
+    "unknown_raw": 0.75,
+    "train_accuracy": 0.9988787615740741
+  },
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "readers": [
+    "dense_all",
+    "component_top1",
+    "component_top2",
+    "component_top4",
+    "component_top8",
+    "component_top16",
+    "exact_key_upper"
+  ],
+  "eligible_readers": [
+    "component_top1",
+    "component_top2",
+    "component_top4",
+    "component_top8",
+    "component_top16"
+  ],
+  "policies": [
+    "fixed_retain",
+    "physics_cohort",
+    "exact_reference",
+    "oracle_grid"
+  ],
+  "projection_seeds": [
+    2301,
+    2302,
+    2303
+  ],
+  "splits_loaded": [
+    "train",
+    "dev"
+  ],
+  "test_loaded": false,
+  "test_scored": false,
+  "source_group_count": 32
+}

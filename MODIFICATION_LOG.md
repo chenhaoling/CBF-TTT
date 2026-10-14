@@ -3231,3 +3231,50 @@ checks. Summary/checkpoint/prediction/audit SHA256 values are
 `586398646e98744ed97e677098fcb60291ba1d053fa301d69507887aa01278e0`,
 `e8e3ac25e57b5d2e55b2e56b1c02a22afeaa65299e8e89b5331abb9e81f61652`
 and `89624d89f7822498af7e4594598b90931af6988c5c09b0c1d3da9f732c09ff77`.
+
+### Qwen continuous cohort forgetting and sparse-reader recovery
+
+Added `QWEN_COHORT_FORGETTING_PLAN.md`,
+`tasks/train_qwen_cohort_forgetting.py`, its runner, focused tests and an
+independent row-level auditor. The experiment keeps the current write and
+learns three continuous retention coefficients for history, last-2 and last-1
+from 27-grid counterfactual labels. A fresh 128/32/64-group corpus and three
+projection seeds were used. The controller reached 88.35% development
+accuracy versus 66.41% for retain-all, a 21.94-point gain with 95% CI
+`[20.15,23.80]`; NLL gain was 0.7271 with CI `[0.6822,0.7752]`. It recovered
+96.9% of dense-reader oracle headroom, but failed the unchanged absolute role,
+family and retention-MAE gates. Physics/exact deletion reached 88.54% and the
+oracle only 89.06%, exposing a reader ceiling. Test remained unencoded. All 13
+audit checks pass; summary/training/manifest/checkpoint/audit SHA256 values are
+`b8de681ae8ff62af0eb2a974724a2a6555d18c1b8c42bfafae39847e65591f67`,
+`33ad664dd628df8ee3b3c68d1dcb3eac6d1fd96a33d6a4a865e01c76ddcf8d47`,
+`8d3446d6959686e51b7ae1c5da4b1e3bc44d58ac2ee73fa0cba75fb4b24a732e`,
+`bd96395c622f4747625e8dbfaf35da2dc5eb77b9c52342a92dad4a61c77c6d5b`
+and `92949bdef771e25ad6509a3ee94e292ddacdcb37cdc116809fd7dc17abdd949f`.
+
+Added `QWEN_SPARSE_READER_DIAGNOSTIC_PLAN.md`,
+`tasks/diagnose_qwen_sparse_reader.py`, its GPU-selectable runner, six tests
+and `scripts/audit_qwen_sparse_reader.py`. Two attempts are retained but
+excluded: the first used an algebraically equivalent floating reduction order
+that changed near-tied oracle actions, and retry1 extracted development names
+without the registered train+development batching. Retry2 exactly matches all
+4,608 dense seed-2301 queries, actions and NLL values. Across three seeds,
+top-1 key routing raises oracle accuracy from 89.06% to 99.33%, historical
+accuracy from 67.90% to 98.00%, and minimum family accuracy from 71.82% to
+97.34%. Top-2 reaches 97.12%; exact-key upper reaches 100%. Top-1 is the
+registered selection. All 11 audit checks pass; summary/training/manifest/audit
+SHA256 values are
+`c281b79253dd7ab13bf4a30467a751af3f3985e4bd2729a9176b5a0552153836`,
+`f106805b049db2237e4623209d051479d9e1abea8e601c8dd110702d781653c1`,
+`ace92f1ef2293ec39ca38b9f17fb705eebed1fe91c00c143bd75b8289a8545db`
+and `684f4e2b9e99074f3daf08b08b605a05cbe6d78818eca09585f7bb6f7066256e`.
+
+Added and froze `QWEN_SPARSE_COHORT_FORMAL_PLAN.md` before its fresh corpus,
+plus `tasks/train_qwen_sparse_cohort_forgetting.py`, its runner, gate tests and
+an independent auditor. It uses seed `202610152`, 256/64/128 source groups and
+the audited top-1 reader. The primary release test requires at least 97%
+accuracy, a three-point gain over physics with positive paired intervals,
+every-seed improvement, at most two points to oracle, and strict role/family
+floors. A 24-episode end-to-end smoke covers label construction, controller
+training and fixed/learned/physics/oracle replay. The formal run is recorded
+separately and may access test once only if every development gate passes.

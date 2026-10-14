@@ -54,6 +54,34 @@ source test and both FewRel test partitions therefore remain sealed. This
 rejects relation-description metric learning as the missing bridge for safe
 natural forgetting under the current frozen representation.
 
+Returning to the forgetting-only mainline, a fresh Qwen-grounded continuous
+cohort study independently controlled history, last-2 and last-1 retention on
+the grid `{0, 0.5, 1}` while always admitting the current write. Across three
+projection seeds, the continuous controller reached 88.35% development
+accuracy versus 66.41% for the strongest fixed policy, a 21.94-point gain with
+source-group 95% CI `[20.15, 23.80]`; NLL improved by 0.7271, CI
+`[0.6822, 0.7752]`. It recovered 96.9% of the available dense-reader oracle
+gain. The complete release gate nevertheless failed: historical accuracy was
+65.49%, minimum family accuracy 71.59%, and retention MAE 0.1787. The oracle
+itself reached only 89.06%/67.90% overall/historical accuracy, localizing the
+dominant failure to the reader rather than the controller. Physics and exact
+referenced-batch deletion reached 88.54%, so learned control did not beat the
+visible symbolic rule. All 13 independent audit checks passed and test stayed
+unencoded.
+
+The preregistered causal reader diagnostic then isolated dense cross-key
+interference. On the same development sessions and frozen embeddings, the
+27-grid oracle improved from 89.06% with all active components to 99.33% with
+top-1 key routing; historical accuracy rose from 67.90% to 98.00% and minimum
+family accuracy from 71.82% to 97.34%. Top-2 reached 97.12%, while top-4/8/16
+collapsed toward dense performance. The ineligible exact-key upper bound was
+100%. Top-1 passed every registered check on all seeds and was selected by the
+smallest-reader rule. An exact reproduction check matched every dense action,
+query and NLL before comparing readers, and all 11 independent audit checks
+passed. Under top-1 reading, physics reaches 92.90% while the oracle reaches
+99.33%, creating a clean 6.44-point target for the separately frozen
+fresh-corpus controller confirmation.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
