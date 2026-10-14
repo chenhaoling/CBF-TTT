@@ -2994,3 +2994,28 @@ formal scoring locked behind an audited passing pilot. The outcome auditor
 reconstructs prompt hashes, state sharing, predictions, resource counts,
 clustered intervals and the complete scientific gate. The longest pilot
 retain-all prompt is 1,826 tokens.
+
+### Natural semantic headroom model results
+
+Ran the 80-row pilot on two RTX 5090 GPUs. One initial attempt stopped before a
+completed row because a one-token candidate entered the inherited multi-token
+branch and produced an empty float input tensor. The scorer now uses the
+prompt's final hidden state directly for one-token answers. The successful
+model scoring completed all rows. Its summary passed every scientific gate;
+an auditor-only missing `QUERY_KINDS` import was repaired without rescoring,
+and the recovery audit passes all eight checks.
+
+The pilot semantic oracle reached 95.00% joint success versus 51.25% for exact
+surface deletion, with subject-cluster 95% CI [32.50, 55.00] points and every
+fold positive. The pilot MQuAKE stratum contained only seven rows and had zero
+gain, so the conclusion remained provisional.
+
+The audited pilot release unlocked the previously sealed 320-row confirmation.
+The formal semantic oracle reached 92.19% versus 36.56% for exact/retain-all
+and 48.75% for the outer-fold fixed comparator. Semantic-minus-exact gain was
+55.63 points; subject and relation cluster intervals were [50.00, 61.25] and
+[49.17, 61.74] points. All folds were positive, and CounterFact/MQuAKE gains
+were 56.86/38.10 points. Update, retention and locality were
+95.31%/99.22%/100%. All ten scientific and eight independent audit checks
+passed. `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/natural_semantic_headroom_v1`
+archives the data, pilot and formal terminal summaries plus a full report.

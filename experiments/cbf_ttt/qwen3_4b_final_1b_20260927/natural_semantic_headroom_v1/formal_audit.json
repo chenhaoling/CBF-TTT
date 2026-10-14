@@ -1,0 +1,35 @@
+{
+  "protocol": "audit_post_v19_natural_semantic_outcome_v1",
+  "split": "formal",
+  "checks": {
+    "audited_data_and_release_dependencies": true,
+    "complete_ordered_two_shard_coverage": true,
+    "episode_state_and_arm_identities": true,
+    "deduplicated_state_sources": true,
+    "prompt_scores_predictions_generation_and_resources": true,
+    "shard_counts_and_resources": true,
+    "independent_metrics_intervals_and_gate_recomputation": true,
+    "scientific_terminal_and_next_stage": true
+  },
+  "audit_passed": true,
+  "summary_sha256": "5301773ddf293959ac7c9ac0fd015cc3dfc504f1d44ac0aef821c1db5c13a830",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "534000eb27a886ae7039b4d7a7707768593c5a307b4d7409a73364318de82347",
+    "shard1.jsonl": "75a634bcb0c1f7fcf5be48ee73f2a4dd3c9e87a7fd33b1f316cbfd6eb4025bb1"
+  },
+  "recomputed_gate": {
+    "checks": {
+      "subject_macro_joint_gain_over_exact_at_least_10_points": true,
+      "subject_cluster_ci_lower_above_zero": true,
+      "relation_cluster_ci_lower_above_zero": true,
+      "semantic_update_accuracy_at_least_90": true,
+      "semantic_retained_fact_accuracy_at_least_90": true,
+      "semantic_locality_accuracy_at_least_97": true,
+      "no_negative_fold": true,
+      "no_negative_source": true,
+      "at_least_40_percent_of_exact_to_semantic_gap_preserved_over_strongest_non_oracle": true,
+      "exact_surface_identical_to_retain_all": true
+    },
+    "passed": true
+  }
+}

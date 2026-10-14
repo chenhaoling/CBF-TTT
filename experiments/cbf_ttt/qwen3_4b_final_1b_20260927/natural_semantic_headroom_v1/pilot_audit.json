@@ -1,0 +1,31 @@
+{
+  "protocol": "audit_post_v19_natural_semantic_outcome_v1",
+  "split": "pilot",
+  "checks": {
+    "audited_data_and_release_dependencies": true,
+    "complete_ordered_two_shard_coverage": true,
+    "episode_state_and_arm_identities": true,
+    "deduplicated_state_sources": true,
+    "prompt_scores_predictions_generation_and_resources": true,
+    "shard_counts_and_resources": true,
+    "independent_metrics_intervals_and_gate_recomputation": true,
+    "scientific_terminal_and_next_stage": true
+  },
+  "audit_passed": true,
+  "summary_sha256": "64c9d8c7025ad48c0847a4fb2035634b4bd2fa4218a253431f2a45f4ddd587dc",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "81ff454263e5210a6f34c05e4fefa7fa5eb1182e8a6b35ae57dd5c09e4831b96",
+    "shard1.jsonl": "692ddd550bc140d6b39bff4dac1a3a8f3a92f803ff0839dbd2188eedb511f63b"
+  },
+  "recomputed_gate": {
+    "checks": {
+      "subject_macro_joint_gain_over_exact_at_least_5_points": true,
+      "semantic_update_accuracy_at_least_85": true,
+      "semantic_retained_fact_accuracy_at_least_90": true,
+      "semantic_locality_accuracy_at_least_97": true,
+      "no_negative_fold": true,
+      "exact_surface_identical_to_retain_all": true
+    },
+    "passed": true
+  }
+}

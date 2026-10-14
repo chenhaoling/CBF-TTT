@@ -32,6 +32,8 @@ The natural ZsRE scope study removes that symbolic-reference privilege for memor
 
 The independent V19 confirmation directly established that causal benefit on a new controlled contextual-memory corpus. The registered locality-safe oracle reached 96.25% joint update-and-retention success versus 39.38% for the outer-fold fixed comparator, a 56.88-point gain with subject-cluster 95% CI [52.81, 61.25]. Exact complete-key deletion reached 86.56% and explained 82.97% of the oracle gap. A nested five-fold, three-seed learned forgetting policy reached 86.67%, only 0.10 points above the exact rule; its subject-cluster interval [-1.56, 1.88] crossed zero and only one of five inner selections met the registered constraints. This confirms selective forgetting as the causal mechanism while rejecting a learned-policy advantage on a corpus whose conflicts are already exposed by exact keys. The next preregistered study tests natural paraphrase conflicts before any semantic controller is trained.
 
+The disjoint natural-paraphrase headroom study then supplied that missing case. On 320 sealed CounterFact/MQuAKE episodes, relation-aware deletion reached 92.19% joint success versus 36.56% for exact surface deletion, a 55.63-point gain with subject-cluster 95% CI [50.00, 61.25] and relation-cluster CI [49.17, 61.74]. Every fold was positive; CounterFact and MQuAKE gains were 56.86 and 38.10 points. Update, retention and locality were 95.31%, 99.22% and 100%. All registered gates and independent audits passed. This is an oracle relation-ID result: it establishes semantic forgetting headroom and releases learned residual training, but does not yet establish an inference-time semantic controller.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -71,3 +73,4 @@ Key reports:
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_contextual_forgetting_v2/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_decomposed_scope_gate_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/memory_interference_v19_final/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/natural_semantic_headroom_v1/REPORT.md`

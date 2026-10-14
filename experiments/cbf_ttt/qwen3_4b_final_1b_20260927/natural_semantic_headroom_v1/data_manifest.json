@@ -1,0 +1,201 @@
+{
+  "protocol": "post_v19_natural_semantic_headroom_v1",
+  "seed": 2101,
+  "folds": 5,
+  "lengths": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "mechanisms": [
+    "single_conflict",
+    "stale_repetition",
+    "useful_repetition",
+    "relation_distractor"
+  ],
+  "fixed_policies": [
+    "no_memory",
+    "retain_all",
+    "global_reset",
+    "last_1",
+    "last_2"
+  ],
+  "query_kinds": [
+    "update_old_surface",
+    "update_current_surface",
+    "retain_1",
+    "retain_2",
+    "locality"
+  ],
+  "splits": {
+    "pilot": {
+      "rows": 80,
+      "by_fold": {
+        "0": 16,
+        "1": 16,
+        "2": 16,
+        "3": 16,
+        "4": 16
+      },
+      "by_source": {
+        "counterfact": 73,
+        "mquake": 7
+      },
+      "by_relation": {
+        "P101": 2,
+        "P103": 2,
+        "P106": 2,
+        "P108": 4,
+        "P127": 2,
+        "P1303": 2,
+        "P131": 2,
+        "P136": 2,
+        "P138": 2,
+        "P140": 2,
+        "P1412": 2,
+        "P159": 2,
+        "P17": 2,
+        "P176": 2,
+        "P178": 4,
+        "P19": 2,
+        "P190": 4,
+        "P20": 2,
+        "P264": 2,
+        "P27": 2,
+        "P276": 2,
+        "P30": 2,
+        "P35": 2,
+        "P36": 2,
+        "P364": 2,
+        "P37": 2,
+        "P39": 2,
+        "P407": 2,
+        "P413": 2,
+        "P449": 2,
+        "P463": 2,
+        "P495": 2,
+        "P6": 2,
+        "P641": 2,
+        "P740": 4,
+        "P937": 2
+      },
+      "by_length": {
+        "8": 20,
+        "16": 20,
+        "32": 20,
+        "64": 20
+      },
+      "by_mechanism": {
+        "single_conflict": 20,
+        "stale_repetition": 20,
+        "useful_repetition": 20,
+        "relation_distractor": 20
+      },
+      "semantic_deletions": 488,
+      "exact_deletions": 0
+    },
+    "formal": {
+      "rows": 320,
+      "by_fold": {
+        "0": 64,
+        "1": 64,
+        "2": 64,
+        "3": 64,
+        "4": 64
+      },
+      "by_source": {
+        "counterfact": 299,
+        "mquake": 21
+      },
+      "by_relation": {
+        "P101": 8,
+        "P103": 10,
+        "P106": 8,
+        "P108": 8,
+        "P127": 10,
+        "P1303": 10,
+        "P131": 10,
+        "P136": 8,
+        "P138": 8,
+        "P140": 8,
+        "P1412": 10,
+        "P159": 8,
+        "P17": 10,
+        "P176": 10,
+        "P178": 10,
+        "P19": 8,
+        "P190": 10,
+        "P20": 10,
+        "P264": 8,
+        "P27": 8,
+        "P276": 10,
+        "P30": 10,
+        "P35": 10,
+        "P36": 8,
+        "P364": 10,
+        "P37": 8,
+        "P39": 8,
+        "P407": 8,
+        "P413": 8,
+        "P449": 10,
+        "P463": 10,
+        "P495": 8,
+        "P6": 8,
+        "P641": 8,
+        "P740": 8,
+        "P937": 8
+      },
+      "by_length": {
+        "8": 80,
+        "16": 80,
+        "32": 80,
+        "64": 80
+      },
+      "by_mechanism": {
+        "single_conflict": 80,
+        "stale_repetition": 80,
+        "useful_repetition": 80,
+        "relation_distractor": 80
+      },
+      "semantic_deletions": 1952,
+      "exact_deletions": 0
+    }
+  },
+  "files_sha256": {
+    "pilot.jsonl": "83013d9232cd6d86011619b9c358496e2b7a2f66194e92db8c69c6a1bfa364d6",
+    "pilot_states.jsonl": "00ee83450c7abcdf9d541338234f51e84c6cf728673e98a3c386320c90dfeede",
+    "formal.jsonl": "fb7abe62d3141db862de7e773201dcaaf1c43bb03caeb6edc9b3a90d75fd278c",
+    "formal_states.jsonl": "f723330fbb7679574ebd56b5235b9949d18091482d5edfb7cb509f6b561250cb"
+  },
+  "dependencies": {
+    "inventory_manifest_sha256": "df3002f4913663ef829b865b3d1502305b712f5a96c401568c413a9fa2862836",
+    "inventory_audit_sha256": "568735b83bb7f8ebdc752e1004dd424a142a7af42b580eaa65804e3b76e7aa8f",
+    "semantic_rows_sha256": "222f7c51d384a9e26da93ecfd0dda91dd0add148c9901e5765f2fe4458614a99"
+  },
+  "checks": {
+    "pilot_formal_source_rows_disjoint": true,
+    "pilot_formal_subjects_disjoint": true,
+    "current_update_always_retained": true,
+    "exact_rule_relation_id_free": true,
+    "semantic_oracle_query_and_answer_free": true
+  },
+  "pilot_gate": {
+    "subject_macro_joint_gain_over_exact_at_least": 0.05,
+    "update_accuracy_at_least": 0.85,
+    "retained_fact_accuracy_at_least": 0.9,
+    "locality_accuracy_at_least": 0.97,
+    "no_negative_fold": true
+  },
+  "formal_gate": {
+    "subject_macro_joint_gain_over_exact_at_least": 0.1,
+    "subject_and_relation_cluster_ci_lower_above": 0.0,
+    "update_and_retained_fact_accuracy_at_least": 0.9,
+    "locality_and_unrelated_retention_at_least": 0.97,
+    "no_negative_fold_or_source": true
+  },
+  "model_scored": false,
+  "controller_trained": false,
+  "sealed_benchmarks_loaded": false,
+  "terminal_status": "frozen_post_v19_natural_data_before_model_scoring"
+}

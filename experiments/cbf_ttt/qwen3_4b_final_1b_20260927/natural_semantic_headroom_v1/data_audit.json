@@ -1,0 +1,24 @@
+{
+  "protocol": "audit_post_v19_natural_semantic_headroom_v1",
+  "checks": {
+    "protocol_and_access_locks": true,
+    "audited_inventory_and_hash_dependencies": true,
+    "deterministic_selection_and_exact_reconstruction": true,
+    "file_hashes_exact": true,
+    "complete_balanced_split_coverage": true,
+    "pilot_formal_source_and_subject_disjoint": true,
+    "relation_and_subject_fold_isolation": true,
+    "exact_surface_and_semantic_oracle_states": true,
+    "manifest_separation_checks": true
+  },
+  "audit_passed": true,
+  "manifest_sha256": "d5cecdde72c2080c2c9eef0b3a52cb8cb23197ce2affde4372aa55205f903185",
+  "files_sha256": {
+    "pilot.jsonl": "83013d9232cd6d86011619b9c358496e2b7a2f66194e92db8c69c6a1bfa364d6",
+    "pilot_states.jsonl": "00ee83450c7abcdf9d541338234f51e84c6cf728673e98a3c386320c90dfeede",
+    "formal.jsonl": "fb7abe62d3141db862de7e773201dcaaf1c43bb03caeb6edc9b3a90d75fd278c",
+    "formal_states.jsonl": "f723330fbb7679574ebd56b5235b9949d18091482d5edfb7cb509f6b561250cb"
+  },
+  "pilot_rows": 80,
+  "formal_rows": 320
+}

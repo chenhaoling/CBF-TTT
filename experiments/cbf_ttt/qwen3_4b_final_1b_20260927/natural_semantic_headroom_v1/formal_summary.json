@@ -1,0 +1,337 @@
+{
+  "protocol": "post_v19_natural_semantic_headroom_qwen_v1",
+  "split": "formal",
+  "fixed_selected_by_outer_fold": {
+    "0": "global_reset",
+    "1": "global_reset",
+    "2": "global_reset",
+    "3": "global_reset",
+    "4": "global_reset"
+  },
+  "arm_metrics": {
+    "semantic_oracle": {
+      "joint_success": 0.921875,
+      "update_accuracy": 0.953125,
+      "retained_key_accuracy": 0.9921875,
+      "locality_accuracy": 1.0,
+      "generation_joint_success": 0.321875,
+      "joint_answer_nll": 0.4360546087239553
+    },
+    "exact_surface": {
+      "joint_success": 0.365625,
+      "update_accuracy": 0.5921875,
+      "retained_key_accuracy": 0.9890625,
+      "locality_accuracy": 1.0,
+      "generation_joint_success": 0.171875,
+      "joint_answer_nll": 0.7093564180959947
+    },
+    "retain_all": {
+      "joint_success": 0.365625,
+      "update_accuracy": 0.5921875,
+      "retained_key_accuracy": 0.9890625,
+      "locality_accuracy": 1.0,
+      "generation_joint_success": 0.171875,
+      "joint_answer_nll": 0.7093564180959947
+    },
+    "outer_fold_fixed": {
+      "joint_success": 0.4875,
+      "update_accuracy": 0.9921875,
+      "retained_key_accuracy": 0.7125,
+      "locality_accuracy": 1.0,
+      "generation_joint_success": 0.015625,
+      "joint_answer_nll": 1.8576229751754056
+    }
+  },
+  "semantic_oracle_vs_exact_surface": {
+    "joint_gain_micro": 0.55625,
+    "joint_gain_subject_macro": {
+      "mean": 0.55625,
+      "lower_95": 0.5,
+      "upper_95": 0.6125,
+      "clusters": 320,
+      "draws": 20000,
+      "seed": 2117
+    },
+    "joint_gain_relation_macro": {
+      "mean": 0.5534722222222223,
+      "lower_95": 0.49166666666666664,
+      "upper_95": 0.6173611111111111,
+      "clusters": 36,
+      "draws": 20000,
+      "seed": 2118
+    },
+    "by_fold_gain": {
+      "0": 0.53125,
+      "1": 0.625,
+      "2": 0.546875,
+      "3": 0.546875,
+      "4": 0.53125
+    },
+    "by_source_gain": {
+      "counterfact": 0.568561872909699,
+      "mquake": 0.38095238095238093
+    },
+    "positive_exact_to_semantic_gap": 0.55625,
+    "strongest_non_oracle_joint_success": 0.4875,
+    "fraction_exact_to_semantic_gap_preserved_over_strongest_non_oracle": 0.7808988764044944
+  },
+  "formal_gate": {
+    "checks": {
+      "subject_macro_joint_gain_over_exact_at_least_10_points": true,
+      "subject_cluster_ci_lower_above_zero": true,
+      "relation_cluster_ci_lower_above_zero": true,
+      "semantic_update_accuracy_at_least_90": true,
+      "semantic_retained_fact_accuracy_at_least_90": true,
+      "semantic_locality_accuracy_at_least_97": true,
+      "no_negative_fold": true,
+      "no_negative_source": true,
+      "at_least_40_percent_of_exact_to_semantic_gap_preserved_over_strongest_non_oracle": true,
+      "exact_surface_identical_to_retain_all": true
+    },
+    "passed": true
+  },
+  "rows": 320,
+  "raw_rows_sha256": {
+    "shard0.jsonl": "534000eb27a886ae7039b4d7a7707768593c5a307b4d7409a73364318de82347",
+    "shard1.jsonl": "75a634bcb0c1f7fcf5be48ee73f2a4dd3c9e87a7fd33b1f316cbfd6eb4025bb1"
+  },
+  "shard_resources": [
+    {
+      "protocol": "post_v19_natural_semantic_headroom_qwen_v1",
+      "split": "formal",
+      "shard": 0,
+      "num_shards": 2,
+      "rows": 160,
+      "rows_sha256": "534000eb27a886ae7039b4d7a7707768593c5a307b4d7409a73364318de82347",
+      "dependencies": {
+        "data_manifest_sha256": "d5cecdde72c2080c2c9eef0b3a52cb8cb23197ce2affde4372aa55205f903185",
+        "data_audit_sha256": "91fa2276adc31c95331d0fd6cdec579e0b2a7b277c0790f95f0deae4883bb3d0",
+        "pilot_sha256": "83013d9232cd6d86011619b9c358496e2b7a2f66194e92db8c69c6a1bfa364d6",
+        "pilot_states_sha256": "00ee83450c7abcdf9d541338234f51e84c6cf728673e98a3c386320c90dfeede",
+        "formal_sha256": "fb7abe62d3141db862de7e773201dcaaf1c43bb03caeb6edc9b3a90d75fd278c",
+        "formal_states_sha256": "f723330fbb7679574ebd56b5235b9949d18091482d5edfb7cb509f6b561250cb",
+        "pilot_summary_sha256": "64c9d8c7025ad48c0847a4fb2035634b4bd2fa4218a253431f2a45f4ddd587dc",
+        "pilot_audit_sha256": "55aea20a1851d84476381beae9542b291c8ac5747f368c21208a0c199af42f5b"
+      },
+      "seconds": 677.7263312283903,
+      "unique_memory_states_scored": 800,
+      "reused_arm_states": 320,
+      "query_measurements": 4000,
+      "gpu_peak_allocated_gib": 8.095973491668701,
+      "gpu_peak_reserved_gib": 8.52734375,
+      "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+      "tokenizer": "/home/ctj/models/Qwen3-4B",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "loading_info": {
+        "missing_keys": [],
+        "unexpected_keys": [
+          "model.layers.0.mlp.ttt_conv.weight",
+          "model.layers.0.mlp.ttt_proj.weight",
+          "model.layers.12.mlp.ttt_conv.weight",
+          "model.layers.12.mlp.ttt_proj.weight",
+          "model.layers.18.mlp.ttt_conv.weight",
+          "model.layers.18.mlp.ttt_proj.weight",
+          "model.layers.24.mlp.ttt_conv.weight",
+          "model.layers.24.mlp.ttt_proj.weight",
+          "model.layers.30.mlp.ttt_conv.weight",
+          "model.layers.30.mlp.ttt_proj.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_proj.weight",
+          "model.layers.6.mlp.ttt_conv.weight",
+          "model.layers.6.mlp.ttt_proj.weight"
+        ],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "readout_mode": "plain_ttt_disabled_fresh_kv_contextual_evidence_memory",
+      "candidate_scoring": "variable_1_to_10_token_normalized_answer_nll",
+      "generation": "greedy_from_independent_shared_prompt_cache_16_tokens",
+      "model_provenance": {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4022468096,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "excluded_adapters": [
+          "model.layers.0.mlp.ttt_conv.weight",
+          "model.layers.0.mlp.ttt_proj.weight",
+          "model.layers.12.mlp.ttt_conv.weight",
+          "model.layers.12.mlp.ttt_proj.weight",
+          "model.layers.18.mlp.ttt_conv.weight",
+          "model.layers.18.mlp.ttt_proj.weight",
+          "model.layers.24.mlp.ttt_conv.weight",
+          "model.layers.24.mlp.ttt_proj.weight",
+          "model.layers.30.mlp.ttt_conv.weight",
+          "model.layers.30.mlp.ttt_proj.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_proj.weight",
+          "model.layers.6.mlp.ttt_conv.weight",
+          "model.layers.6.mlp.ttt_proj.weight"
+        ],
+        "ttt_mode": false
+      },
+      "tokenizer_files_sha256": {
+        "config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors.index.json": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "answer_token_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "torch": "2.9.1+cu130",
+      "transformers": "4.57.3",
+      "model_scored": true,
+      "controller_trained": false,
+      "sealed_benchmarks_loaded": false
+    },
+    {
+      "protocol": "post_v19_natural_semantic_headroom_qwen_v1",
+      "split": "formal",
+      "shard": 1,
+      "num_shards": 2,
+      "rows": 160,
+      "rows_sha256": "75a634bcb0c1f7fcf5be48ee73f2a4dd3c9e87a7fd33b1f316cbfd6eb4025bb1",
+      "dependencies": {
+        "data_manifest_sha256": "d5cecdde72c2080c2c9eef0b3a52cb8cb23197ce2affde4372aa55205f903185",
+        "data_audit_sha256": "91fa2276adc31c95331d0fd6cdec579e0b2a7b277c0790f95f0deae4883bb3d0",
+        "pilot_sha256": "83013d9232cd6d86011619b9c358496e2b7a2f66194e92db8c69c6a1bfa364d6",
+        "pilot_states_sha256": "00ee83450c7abcdf9d541338234f51e84c6cf728673e98a3c386320c90dfeede",
+        "formal_sha256": "fb7abe62d3141db862de7e773201dcaaf1c43bb03caeb6edc9b3a90d75fd278c",
+        "formal_states_sha256": "f723330fbb7679574ebd56b5235b9949d18091482d5edfb7cb509f6b561250cb",
+        "pilot_summary_sha256": "64c9d8c7025ad48c0847a4fb2035634b4bd2fa4218a253431f2a45f4ddd587dc",
+        "pilot_audit_sha256": "55aea20a1851d84476381beae9542b291c8ac5747f368c21208a0c199af42f5b"
+      },
+      "seconds": 672.6590097863227,
+      "unique_memory_states_scored": 800,
+      "reused_arm_states": 320,
+      "query_measurements": 4000,
+      "gpu_peak_allocated_gib": 8.072851657867432,
+      "gpu_peak_reserved_gib": 8.462890625,
+      "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+      "tokenizer": "/home/ctj/models/Qwen3-4B",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "loading_info": {
+        "missing_keys": [],
+        "unexpected_keys": [
+          "model.layers.0.mlp.ttt_conv.weight",
+          "model.layers.0.mlp.ttt_proj.weight",
+          "model.layers.12.mlp.ttt_conv.weight",
+          "model.layers.12.mlp.ttt_proj.weight",
+          "model.layers.18.mlp.ttt_conv.weight",
+          "model.layers.18.mlp.ttt_proj.weight",
+          "model.layers.24.mlp.ttt_conv.weight",
+          "model.layers.24.mlp.ttt_proj.weight",
+          "model.layers.30.mlp.ttt_conv.weight",
+          "model.layers.30.mlp.ttt_proj.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_proj.weight",
+          "model.layers.6.mlp.ttt_conv.weight",
+          "model.layers.6.mlp.ttt_proj.weight"
+        ],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "readout_mode": "plain_ttt_disabled_fresh_kv_contextual_evidence_memory",
+      "candidate_scoring": "variable_1_to_10_token_normalized_answer_nll",
+      "generation": "greedy_from_independent_shared_prompt_cache_16_tokens",
+      "model_provenance": {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4022468096,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "excluded_adapters": [
+          "model.layers.0.mlp.ttt_conv.weight",
+          "model.layers.0.mlp.ttt_proj.weight",
+          "model.layers.12.mlp.ttt_conv.weight",
+          "model.layers.12.mlp.ttt_proj.weight",
+          "model.layers.18.mlp.ttt_conv.weight",
+          "model.layers.18.mlp.ttt_proj.weight",
+          "model.layers.24.mlp.ttt_conv.weight",
+          "model.layers.24.mlp.ttt_proj.weight",
+          "model.layers.30.mlp.ttt_conv.weight",
+          "model.layers.30.mlp.ttt_proj.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_proj.weight",
+          "model.layers.6.mlp.ttt_conv.weight",
+          "model.layers.6.mlp.ttt_proj.weight"
+        ],
+        "ttt_mode": false
+      },
+      "tokenizer_files_sha256": {
+        "config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors.index.json": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "answer_token_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "torch": "2.9.1+cu130",
+      "transformers": "4.57.3",
+      "model_scored": true,
+      "controller_trained": false,
+      "sealed_benchmarks_loaded": false
+    }
+  ],
+  "dependencies": {
+    "data_manifest_sha256": "d5cecdde72c2080c2c9eef0b3a52cb8cb23197ce2affde4372aa55205f903185",
+    "data_audit_sha256": "91fa2276adc31c95331d0fd6cdec579e0b2a7b277c0790f95f0deae4883bb3d0",
+    "pilot_sha256": "83013d9232cd6d86011619b9c358496e2b7a2f66194e92db8c69c6a1bfa364d6",
+    "pilot_states_sha256": "00ee83450c7abcdf9d541338234f51e84c6cf728673e98a3c386320c90dfeede",
+    "formal_sha256": "fb7abe62d3141db862de7e773201dcaaf1c43bb03caeb6edc9b3a90d75fd278c",
+    "formal_states_sha256": "f723330fbb7679574ebd56b5235b9949d18091482d5edfb7cb509f6b561250cb",
+    "pilot_summary_sha256": "64c9d8c7025ad48c0847a4fb2035634b4bd2fa4218a253431f2a45f4ddd587dc",
+    "pilot_audit_sha256": "55aea20a1851d84476381beae9542b291c8ac5747f368c21208a0c199af42f5b"
+  },
+  "resources": {
+    "unique_memory_states": 1600,
+    "query_measurements": 8000,
+    "wall_seconds_slower_shard": 677.7263312283903,
+    "mean_seconds_per_query": 0.16449656026554293,
+    "median_seconds_per_query": 0.14804689958691597,
+    "p95_seconds_per_query": 0.2967850510030985,
+    "max_seconds_per_query": 0.4454900845885277,
+    "max_gpu_peak_allocated_gib": 8.095973491668701,
+    "max_gpu_peak_reserved_gib": 8.52734375
+  },
+  "model_scored": true,
+  "controller_trained": false,
+  "sealed_benchmarks_loaded": false,
+  "memory_substrate": "contextual_evidence_not_native_dense_ttt_writer",
+  "next_stage": "train_natural_semantic_residual_controller",
+  "terminal_status": "formal_semantic_headroom_supported"
+}
