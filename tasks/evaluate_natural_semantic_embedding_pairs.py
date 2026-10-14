@@ -88,11 +88,40 @@ def threshold_candidates(scores):
 
 
 def select_threshold(labels, scores):
-    candidates = threshold_candidates(scores)
-    rows = []
-    for threshold in candidates:
-        metric = binary_metrics(labels, [int(score >= threshold) for score in scores])
-        rows.append((threshold, metric))
+    if len(labels) != len(scores) or not labels:
+        raise ValueError("invalid threshold inputs")
+    positives, negatives = sum(labels), len(labels) - sum(labels)
+    if not positives or not negatives:
+        raise ValueError("threshold selection requires both labels")
+
+    def from_counts(tp, fp):
+        fn, tn = positives - tp, negatives - fp
+        recall, specificity = tp / positives, tn / negatives
+        precision = tp / (tp + fp) if tp + fp else 0.0
+        return {
+            "rows": len(labels), "positive": positives, "negative": negatives,
+            "accuracy": (tp + tn) / len(labels),
+            "balanced_accuracy": (recall + specificity) / 2,
+            "positive_recall": recall, "negative_specificity": specificity,
+            "precision": precision,
+            "f1": (2 * precision * recall / (precision + recall)
+                   if precision + recall else 0.0),
+            "tp": tp, "tn": tn, "fp": fp, "fn": fn,
+        }
+
+    groups = []
+    for score, label in sorted(zip(scores, labels), reverse=True):
+        if not groups or score != groups[-1][0]:
+            groups.append([score, 0, 0])
+        groups[-1][1 + int(label)] += 1  # index 1: negatives, 2: positives
+    rows = [(math.nextafter(groups[0][0], math.inf), from_counts(0, 0))]
+    tp = fp = 0
+    for index, (score, group_negative, group_positive) in enumerate(groups):
+        tp += group_positive; fp += group_negative
+        threshold = ((score + groups[index + 1][0]) / 2
+                     if index + 1 < len(groups)
+                     else math.nextafter(score, -math.inf))
+        rows.append((threshold, from_counts(tp, fp)))
     feasible = [value for value in rows
                 if value[1]["positive_recall"] >= .80
                 and value[1]["negative_specificity"] >= .95]

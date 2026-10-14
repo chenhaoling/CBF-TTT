@@ -1,4 +1,5 @@
 import unittest
+import random
 
 from tasks.evaluate_natural_semantic_embedding_pairs import (
     binary_metrics,
@@ -28,6 +29,32 @@ class NaturalSemanticEmbeddingPairsTest(unittest.TestCase):
         self.assertFalse(feasible)
         self.assertTrue(math_is_finite(threshold))
         self.assertGreaterEqual(metric["balanced_accuracy"], .5)
+
+    def test_fast_threshold_matches_brute_force(self):
+        rng = random.Random(17)
+        labels = [index % 2 for index in range(40)]
+        scores = [rng.choice([.1, .2, .4, .8, .9]) for _ in labels]
+        threshold, metric, feasible = select_threshold(labels, scores)
+        candidates = sorted(set([
+            float("-inf"), float("inf"),
+            *[(left + right) / 2 for left, right in
+              zip(sorted(set(scores)), sorted(set(scores))[1:])],
+        ]))
+        brute = []
+        for value in candidates:
+            result = binary_metrics(labels, [int(score >= value) for score in scores])
+            brute.append((value, result))
+        feasible_rows = [value for value in brute
+                         if value[1]["positive_recall"] >= .8
+                         and value[1]["negative_specificity"] >= .95]
+        selected = max(feasible_rows or brute, key=lambda value: (
+            value[1]["balanced_accuracy"], value[1]["f1"],
+            value[1]["negative_specificity"], -value[0]))
+        self.assertEqual(feasible, bool(feasible_rows))
+        self.assertEqual(metric, selected[1])
+        self.assertEqual(
+            [int(score >= threshold) for score in scores],
+            [int(score >= selected[0]) for score in scores])
 
 
 def math_is_finite(value):
