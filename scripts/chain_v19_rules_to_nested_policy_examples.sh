@@ -5,6 +5,7 @@ RULE_ROOT=${RULE_ROOT:-/home/ctj/cbf_ttt_v19_causal_rule_diagnostic_20261014}
 UPSTREAM_CHAIN=${UPSTREAM_CHAIN:-/home/ctj/cbf_ttt_v19_outcome_to_rules_chain_20261014}
 EXAMPLE_ROOT=${EXAMPLE_ROOT:-/home/ctj/cbf_ttt_v19_nested_policy_examples_20261014}
 POLICY_ROOT=${POLICY_ROOT:-/home/ctj/cbf_ttt_v19_nested_forgetting_policy_20261014}
+EVAL_ROOT=${EVAL_ROOT:-/home/ctj/cbf_ttt_v19_nested_forgetting_policy_qwen_20261014}
 CHAIN_ROOT=${CHAIN_ROOT:-/home/ctj/cbf_ttt_v19_rules_to_nested_policy_chain_20261014}
 REPO=${REPO:-/home/ctj/cbf_ttt_joint_exp_20260927}
 PYTHON=${PYTHON:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python}
@@ -72,5 +73,11 @@ date --iso-8601=seconds > "$CHAIN_ROOT/policy_released_at.txt"
 ROOT="$POLICY_ROOT" EXAMPLES="$EXAMPLE_ROOT" \
   bash scripts/run_v19_nested_forgetting_policy.sh \
   > "$CHAIN_ROOT/policy_runner.log" 2>&1
-echo completed_v19_nested_policy_after_rule_gate > "$CHAIN_ROOT/terminal_status.txt"
+echo audited_nested_policy_launching_qwen_rescore > "$CHAIN_ROOT/release_status.txt"
+date --iso-8601=seconds > "$CHAIN_ROOT/eval_released_at.txt"
+ROOT="$EVAL_ROOT" EXAMPLES="$EXAMPLE_ROOT" POLICY="$POLICY_ROOT" \
+  RULE_ROOT="$RULE_ROOT" \
+  bash scripts/run_v19_nested_forgetting_policy_qwen.sh \
+  > "$CHAIN_ROOT/eval_runner.log" 2>&1
+echo completed_v19_nested_policy_qwen_after_rule_gate > "$CHAIN_ROOT/terminal_status.txt"
 date --iso-8601=seconds > "$CHAIN_ROOT/completed_at.txt"
