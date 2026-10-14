@@ -3372,3 +3372,32 @@ confirmation on GPU 1 with `test_loaded=false`.  Compact audited artifacts,
 controller checkpoint, action diagnostic, prerequisite decision and a complete
 report are archived under
 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_sparse_cohort_v1/`.
+
+### Frozen-controller lifecycle OOD execution and audit
+
+Added `tasks/evaluate_qwen_discrete_cohort_ood.py`.  The evaluator refuses to
+create its result directory until the fresh confirmation audit, one-time test
+release and registered test gate all pass with matching summary and controller
+hashes.  It then verifies the conditionally generated seed-`202610154` corpus,
+extracts the frozen Qwen3-4B contextual representations once, restores the
+confirmation controllers without training or calibration, and replays all 13
+registered policies across all four lifecycle suites and three projection
+seeds.  It records every raw row, suite and macro aggregates, source-group
+bootstrap comparisons, endpoint/interior action diagnostics, elapsed time,
+peak GPU memory and dependency hashes.  An atomic progress file exposes the
+current seed, suite and policy but is not used by any scientific decision.
+
+Added `scripts/audit_qwen_discrete_cohort_ood.py`, which independently reloads
+the corpus and recomputes all 156 policy/suite/seed files, source alignment,
+aggregates, 20,000-draw paired bootstrap intervals, action diagnostics and the
+eleven frozen success checks.  It also verifies confirmation, controller,
+geometry, corpus and raw-result hashes and requires explicit runner completion.
+Added `scripts/run_qwen_discrete_cohort_ood.sh` and
+`scripts/run_qwen_discrete_cohort_ood_chain.sh`; dependency verification occurs
+before formal corpus generation, and the independent audit runs only after the
+workload's EXIT trap records zero.  Seven focused pure-Python tests cover corpus
+causality, deterministic hashes, visible parsing, dependency hash binding,
+training/audit gate parity and independent endpoint/interior accounting.  The
+formal OOD corpus and result directory remain absent until confirmation passes,
+so the pre-registered conditional release remains intact.  These additions do
+not change baseline model, training or inference defaults.
