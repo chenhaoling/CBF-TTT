@@ -2843,3 +2843,41 @@ deterministic manifest/data/state hashes
 `567cdcf69702bc02c51bc13d4266351393a28dbde6d16bb61af709507bee2787`
 and `85b8bbaf5f4a241ae08d623a2ab5b831816074220edcbf0119bd8a32b03b762e`.
 This smoke is not an experimental result and is not consumed by the chain.
+
+### V19 nested-OOF policy fallback frozen before outcome
+
+At 84/320 V19 scored rows and before reading any arm outcome, added
+`POST_V19_NESTED_OOF_POLICY_FALLBACK_PLAN.md`. This branch is mutually
+exclusive with V20: it is released only if the audited V19 confirmation passes
+but the exact-key rule explanation fails. It freezes three seeds, a two-head
+64-unit MLP, nested subject/template-disjoint selection, epoch/threshold/risk
+penalty grids and the final model-level gate before labels exist.
+
+Added `tasks/build_v19_nested_policy_examples.py`. Each historical component
+receives a three-point causal utility label from retain-all versus its
+single-deletion arm and, for exact conflicts, its registered group-deletion
+arm. A separate target records locality risk. Its 17 inference features use
+only history through the current update: exact key/value conflict, age,
+repetition counts, character-key similarity, conflict context and memory
+length. Query, answer, score, fold and oracle-selection features are excluded;
+the current update is never a deletion candidate.
+
+Added `scripts/audit_v19_nested_policy_examples.py`, which independently
+recomputes string features, intervention choice, utility/risk labels, ordering,
+coverage, hashes and access locks. Five focused tests pass, including exact
+agreement between production and independent example reconstruction. The
+runner and complementary automatic chain create examples only when the V19
+rule diagnostic selects `train_v19_nested_oof_causal_policy`; otherwise the
+chain records an explicit stopped terminal state.
+
+Added `tasks/train_v19_nested_forgetting_policy.py` and its independent audit.
+The shared 64-unit MLP predicts utility and locality risk; the registered score
+subtracts a nested-selected risk penalty from utility. Three seeds, three
+epochs, three thresholds and four penalties are selected on the fixed inner
+fold under positive-recall, conservation and locality-risk constraints, then
+refit without the held-out outer fold. The auditor reloads every checkpoint,
+recomputes the complete inner grid and verifies all three-seed OOF memory
+states and current-update retention. The complementary chain now trains and
+audits this policy after an audited example release. Combined-state Qwen
+rescoring remains conditional on that policy artifact and is required before
+any efficacy claim.
