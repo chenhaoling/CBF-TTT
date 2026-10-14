@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import argparse
-from collections import Counter
+from collections import Counter, defaultdict
 import hashlib
 import json
 from pathlib import Path
@@ -77,29 +77,47 @@ def eligible(row):
 
 def allocate_fold(rows, fold, seed=SEED):
     candidates = [row for row in rows if row["outer_fold"] == fold and eligible(row)]
-    relation_counts, source_counts = Counter(), Counter()
-    selected, used_subjects = [], set()
-    while len(selected) < TOTAL_PER_FOLD:
-        available = [row for row in candidates
-                     if row["subject_normalized"] not in used_subjects]
-        if not available:
-            raise ValueError(f"fold {fold} lacks {TOTAL_PER_FOLD} eligible subjects")
-        choice = min(
-            available,
-            key=lambda row: (
-                relation_counts[row["relation_id"]],
-                source_counts[row["source"]],
-                rank(seed, "target", row["source_row_sha256"]),
-            ),
-        )
-        selected.append(choice)
-        used_subjects.add(choice["subject_normalized"])
-        relation_counts[choice["relation_id"]] += 1
-        source_counts[choice["source"]] += 1
-    pilot = [row for index, row in enumerate(selected) if index % 5 == 0]
-    formal = [row for index, row in enumerate(selected) if index % 5 != 0]
-    if len(pilot) != PILOT_PER_FOLD or len(formal) != FORMAL_PER_FOLD:
-        raise RuntimeError("deterministic pilot/formal interleave is malformed")
+    used_subjects, source_counts = set(), Counter()
+
+    def select_pairs(count, namespace):
+        selected, relation_counts = [], Counter()
+        while len(selected) < count:
+            by_relation = defaultdict(list)
+            for row in candidates:
+                if row["subject_normalized"] not in used_subjects:
+                    by_relation[row["relation_id"]].append(row)
+            viable = {relation: values for relation, values in by_relation.items()
+                      if len({row["subject_normalized"] for row in values}) >= 2}
+            if not viable:
+                raise ValueError(
+                    f"fold {fold} lacks paired same-relation donors for {namespace}")
+            relation = min(
+                viable,
+                key=lambda value: (relation_counts[value],
+                                   rank(seed, f"{namespace}-relation", value)),
+            )
+            pair = []
+            for _ in range(2):
+                available = [row for row in viable[relation]
+                             if row["subject_normalized"] not in used_subjects]
+                choice = min(
+                    available,
+                    key=lambda row: (
+                        source_counts[row["source"]],
+                        rank(seed, f"{namespace}-target", row["source_row_sha256"]),
+                    ),
+                )
+                pair.append(choice)
+                used_subjects.add(choice["subject_normalized"])
+                source_counts[choice["source"]] += 1
+            selected.extend(pair)
+            relation_counts[relation] += 2
+        if len(selected) != count:
+            raise RuntimeError("paired allocation exceeded its registered count")
+        return selected
+
+    pilot = select_pairs(PILOT_PER_FOLD, "pilot")
+    formal = select_pairs(FORMAL_PER_FOLD, "formal")
     return pilot, formal
 
 
