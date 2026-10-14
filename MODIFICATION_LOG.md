@@ -2467,3 +2467,21 @@ spaced four-digit base-16 code (`Z A A A A` form); an exhaustive check of 400
 codes produced exactly five tokens for every value. The builder and independent
 auditor now freeze this format and the recovery uses a fresh
 `_tokmatch_retry1` root.
+
+Added `tasks/evaluate_controlled_interference_v18_pilot.py` and an independent
+outcome auditor. Two GPUs score every unique fixed, single-deletion and
+key-group-deletion memory state on five registered queries. Candidate branches
+share only an immutable prompt cache; each query also performs independent
+13-token greedy generation and records latency plus CUDA start/peak allocated
+and reserved memory. The scorer rechecks all 320 opaque values and every
+prompt-context answer at exactly five tokens before evaluation.
+
+Pilot aggregation selects the exact oracle by joint update-plus-retention
+success, update accuracy, retained-key accuracy, lower joint NLL, retain-all
+and registered deletion order. The corpus admission checks are the frozen
+no-memory, retain-all, reset-retention, oracle-update, oracle-retention and
+oracle-minus-fixed joint-success bounds from
+`POST_V17_INTERFERENCE_CORPUS_PLAN.md`. The independent auditor reconstructs
+all prompts, arms, deduplicated score sources, predictions, generation flags,
+resources, model/tokenizer provenance and admission metrics. Focused tests
+cover a passing nontrivial corpus and reject a retain-all ceiling.
