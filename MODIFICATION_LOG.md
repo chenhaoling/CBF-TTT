@@ -3098,9 +3098,90 @@ no inner fold reaches 80% recall together with 95% specificity and at most 3%
 risk violation. The 320 model-level outcomes remain unopened for controller
 selection.
 
-The next registered diagnostic uses a symmetric frozen-Qwen pair cross-encoder
-to address the remaining hard-negative interaction error. The extractor
-encodes both statement orders, averages their normalized last-token states and
-records a one-token zero-shot yes-minus-no margin. It remains TTT-disabled,
-label-free during extraction and relation-disjoint during subsequent head
-training. External LoCoMo, RULER/RULER-QA and MMLU confirmation remains sealed.
+Added a symmetric frozen-Qwen pair cross-encoder to address the remaining
+interaction error. It encodes both statement orders, averages their normalized
+last-token states and records a one-token zero-shot yes-minus-no margin. The
+63,782-pair extraction took 192/191 seconds on two RTX 5090 cards and peaked at
+8.02/7.82 GiB allocated memory. All seven feature-audit checks pass with exact
+fixed-sample vector and margin reproduction; audit SHA256 is
+`b0ff99e28a13e8744527b86ccf9b70a20504e9b1e6ccbf403effb3fd482cfcc3`.
+The zero-shot margin reached 64.03% balanced accuracy and 0.6798 AUROC.
+
+The nested three-seed cross-feature controller reached 83.56% OOF balanced
+accuracy, 0.8796 AUROC, 86.77% positive recall and 80.35% specificity. Every
+fold exceeded 0.76 balanced accuracy and every seed exceeded 0.833. This is a
+9.48-point balanced-accuracy and 0.0685 AUROC improvement over the independent
+embedding controller. The registered safety gate nevertheless failed:
+lexical-hard-negative specificity was 72.89%, and no inner seed/ensemble
+selection satisfied the frozen recall/specificity/risk constraints. An
+independent auditor reconstructed all 63,782 OOF rows, aggregate/fold/kind
+metrics, gate logic, dependencies and checkpoint hashes; all 20 audit checks
+pass and its SHA256 is
+`30d793dec40f0480c4852a9e33d354f9611648fb8fa933ff85c2ec5b046123b7`.
+The registered stop on CounterFact/MQuAKE controller tuning is therefore in
+force. Their 320 model outcomes and external benchmarks remain unused.
+
+### Source-disjoint FewRel selective-deletion development
+
+Added `FEWREL_SELECTIVE_FORGETTING_PLAN.md` before any FewRel feature or model
+score was produced. It moves development to the official THU FewRel commit
+`278a2315d2138810a379cd8d5718914dc56e2582`, separates 48/8/8 training,
+development and internal-test relations, and reserves all 16 official
+validation relations as external test. Every subject/head entity and masked
+surface is partition-disjoint. Relation IDs are supervision/audit metadata
+only. `scripts/download_fewrel_official.sh` pins the repository and the three
+source file hashes.
+
+The first model-free corpus build revealed a protocol implementation mismatch:
+the plan specified SHA256 of `2311:relation:<id>`, while the generic stable-hash
+helper inserted `:.:` separators. No model features or scores had been
+computed. That build is excluded. The corrected builder uses the exact
+registered byte string, and its strengthened auditor independently recomputes
+the relation partition from the official files. The corrected manifest/audit
+SHA256 values are
+`6f1dc9c9bacc934c5e44693b59a841220e18772ef0250eb64a5afb76aee77a1d`
+and `960e706573916846fa46194bc6323dea1756a15be0cb4dc87d0e99d32ced7a3f`;
+all 16 audit checks pass.
+
+The release retains 24,000 instances, exactly 300 per relation, and constructs
+95,354 class-balanced pairs. Train/development contain 57,104/9,554 pairs;
+internal/external test contain 9,570/19,126 pairs and remain unscored. Excluded
+rows and reasons are fully recorded, including 3,678 cross-partition subject
+rows, 485 duplicate surfaces, 22 ambiguous/cross-partition surfaces and 27,815
+relation-cap rows.
+
+Added a train/development-only two-GPU cross-feature extractor. It encodes
+66,658 pairs and writes no internal/external test feature. The two RTX 5090
+shards took 367/363 seconds and peaked at 7.91/7.92 GiB allocated memory.
+Prompt lengths are 44--154 tokens. All nine audit checks pass; eight independent
+re-encodings have minimum cosine 0.99999994 and zero maximum absolute vector
+or margin error. Feature-audit SHA256 is
+`9fd6a12b5a1c28f676aa1febb44af30c9dcd654c6b3941afaaf1f2c79a396857`.
+The next step trains three fixed controller seeds, reports full binary and
+conservative selective-deletion gates, and opens internal-test features once
+only if a preregistered development gate passes.
+
+That controller development completed in 5.35 seconds. The three selected
+25-epoch heads have development AUROC 0.7621--0.7637. Their ensemble reaches
+70.76% balanced accuracy and 0.7680 AUROC, versus 55.59%/0.5856 for the
+zero-shot margin and 50.00%/0.3894 for character trigrams. The full binary
+gate fails every registered check: recall/specificity are 72.20%/69.31%, well
+below the 80%/95% constraint. At a relation-bootstrap upper false-deletion
+bound of zero, the selective ensemble can delete only 9/4,777 positives
+(0.19% recall), far below the 25% floor. All seeds fail similarly. Internal
+and external test features were neither generated nor scored, and the branch
+stops as registered.
+
+The independent controller audit reconstructs all 9,554 development rows,
+full metrics, selective actions, 20,000-draw relation bootstrap, baselines,
+gate logic, feature/checkpoint hashes and sealing state. All 15 checks pass;
+the summary and audit SHA256 values are
+`ff5a36e551a3155ed3877fc97f80d54d1bc4f543153e3895e475cecb7674c129`
+and `9b257ba36a7df6f9489940866eeb394c79949b31010c5dd30434d8a9859916fa`.
+A threshold-free diagnostic shows relation-macro balanced accuracy/AUROC of
+70.75%/0.7702, ranging from 61.33%--82.71% and 0.6595--0.9024 across the eight
+relations. Random and lexical-hard negatives have nearly identical
+specificity (69.33%/69.48%), so the failure is broad unseen-relation separation
+rather than a lexical-negative-only artifact. Same-subject negatives number
+only eight and cannot support a separate claim. Diagnostic SHA256 is
+`8e24b5b8c505dd1dd21fb9888c931633b2cbe8ddf515d59f41fed9030271ca0e`.

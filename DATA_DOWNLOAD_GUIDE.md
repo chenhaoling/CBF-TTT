@@ -132,3 +132,29 @@ python -m tasks.build_mquake_temporal_sessions \
 构建器会重新记录实际源文件哈希，并按被编辑 subject 做 60/20/20 互斥切分，
 生成 16/32/48/64 长度的会话。MQuAKE 官方仓库声明 MIT 许可证；发布衍生物时
 仍应保留原作者引用与许可证。
+
+## 6. FewRel 选择性遗忘训练语料
+
+新的关系泛化实验使用 THU 官方 FewRel 固定提交，不使用 ZsRE、LoCoMo 或
+RULER 测试数据训练控制器：
+
+```bash
+DEST=/data/cbf_ttt/fewrel_official_20261015 \
+  bash scripts/download_fewrel_official.sh
+
+ROOT=/data/cbf_ttt/fewrel_selective_pairs_v1 \
+SOURCE_ROOT=/data/cbf_ttt/fewrel_official_20261015 \
+  bash scripts/run_fewrel_selective_forgetting_pairs.sh
+```
+
+下载脚本固定官方仓库提交
+`278a2315d2138810a379cd8d5718914dc56e2582`，并验证：
+
+- `train_wiki.json`: `8e9e58a05d559be773cbe18a8d4a16ba17e6d397663f9f05a056f894a94b92c1`；
+- `val_wiki.json`: `76bb44c2485b6faed358a3ce040eadafcc8a8835245cd7e6afc1bef672d4a0bf`；
+- `pid2name.json`: `eeedd25512a8e4c2bc06b78009836d27de81807bcba6ed929debd5cd713c07ea`。
+
+构建器将实体替换为 `[SUBJECT]`/`[VALUE]`，按关系和主体实体互斥划分，并把
+官方验证关系保留为 external test。下游训练只能使用 `train` 与 `development`；
+`internal_test` 和 `external_test` 必须由注册 gate 条件解锁。完整协议见
+[`FEWREL_SELECTIVE_FORGETTING_PLAN.md`](FEWREL_SELECTIVE_FORGETTING_PLAN.md)。
