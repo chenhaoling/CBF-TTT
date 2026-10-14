@@ -11,7 +11,7 @@ PYTHON_BIN=${PYTHON_BIN:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/pytho
 test ! -e "$ROOT/audit.json"
 cd "$REPO"
 export PYTHONDONTWRITEBYTECODE=1
-"$PYTHON_BIN" scripts/audit_natural_semantic_pair_cross_controller.py \
+"$PYTHON_BIN" -m scripts.audit_natural_semantic_pair_cross_controller \
   --controller-root "$ROOT" --pair-root "$PAIR_ROOT" \
   --cross-root "$CROSS_ROOT" --zero-root "$ZERO_ROOT" \
   --output "$ROOT/audit.json" > "$ROOT/audit.log" 2>&1
