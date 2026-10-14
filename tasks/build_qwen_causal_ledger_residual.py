@@ -21,12 +21,14 @@ PILOT_SEED = 202610159
 DEVELOPMENT_SEED = 202610160
 CONFIRMATION_SEED = 202610161
 OOD_SEED = 202610162
-PHASES = ("pilot", "development", "confirmation")
+RESOURCE_V2_SEED = 202610163
+PHASES = ("pilot", "development", "confirmation", "resource_v2")
 PHASE_VALUE_OFFSETS = {
     "pilot": 0,
     "development": 16**4 // 4,
     "confirmation": 2 * (16**4 // 4),
     "ood": 3 * (16**4 // 4),
+    "resource_v2": 0,
 }
 VALUE_POOL_SIZE = 16**4 // 4
 TEMPLATES = {
@@ -51,6 +53,13 @@ TEMPLATES = {
         "reset": "Close the old ledger epoch and invalidate its slips.",
         "query": "Which code is now valid for {key}? Output only that code.",
     },
+    "resource_v2": {
+        "header": "Log state capsule {record}.",
+        "fact": "For index {key}, the active symbol is {value}.",
+        "revoke": "Cancel state capsule {record}.",
+        "reset": "Begin a clean state epoch and cancel all prior capsules.",
+        "query": "Give the active symbol at index {key}. Return only the symbol.",
+    },
 }
 
 
@@ -60,8 +69,13 @@ def digest(value):
     ).hexdigest()
 
 
+def code_value(phase, index):
+    value = opaque_value(index)
+    return "Y" + value[1:] if phase == "resource_v2" else value
+
+
 def null_value(phase):
-    return opaque_value(PHASE_VALUE_OFFSETS[phase] + VALUE_POOL_SIZE - 1)
+    return code_value(phase, PHASE_VALUE_OFFSETS[phase] + VALUE_POOL_SIZE - 1)
 
 
 def render(events, phase):
@@ -189,7 +203,7 @@ def generate_group(seed, phase, family, group_index):
     ]
     offset = PHASE_VALUE_OFFSETS[phase]
     indices = rng.sample(range(offset, offset + VALUE_POOL_SIZE - 1), 3 * length + 32)
-    values = [opaque_value(index) for index in indices]
+    values = [code_value(phase, index) for index in indices]
     outputs = []
     for twin in (0, 1):
         blocks, all_events, semantic, questions, answers, assignments = [], [], [], [], [], []
@@ -278,7 +292,7 @@ def generate_group(seed, phase, family, group_index):
     return outputs
 
 
-def validate(pairs, expected_groups=None):
+def validate(pairs, expected_groups=None, expected_phase="pilot"):
     if not pairs:
         raise ValueError("empty causal-ledger corpus")
     by_id = {inp["id"]: (inp, target) for inp, target in pairs}
@@ -357,7 +371,7 @@ def validate(pairs, expected_groups=None):
                 raise ValueError("causal-ledger symbols leaked across phases")
     if expected_groups is not None:
         for family in FAMILIES:
-            if counts["pilot", family] != 2 * expected_groups:
+            if counts[expected_phase, family] != 2 * expected_groups:
                 raise ValueError("causal-ledger pilot family count mismatch")
     return {
         "episodes": len(pairs),
@@ -395,7 +409,10 @@ def materialize_pilot(output, groups_per_family=8, seed=PILOT_SEED):
         "seed": seed,
         "groups_per_family": groups_per_family,
         "families": list(FAMILIES),
-        "templates_sha256": digest(TEMPLATES),
+        "templates_sha256": digest({
+            phase: TEMPLATES[phase]
+            for phase in ("pilot", "development", "confirmation")
+        }),
         "value_pool": {
             "offset": PHASE_VALUE_OFFSETS["pilot"],
             "size": VALUE_POOL_SIZE,

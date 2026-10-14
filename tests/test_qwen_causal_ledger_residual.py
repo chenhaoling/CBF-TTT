@@ -8,12 +8,18 @@ from tasks.build_qwen_causal_ledger_residual import (
     DEVELOPMENT_SEED,
     FAMILIES,
     PILOT_SEED,
+    RESOURCE_V2_SEED,
+    code_value,
     generate_group,
     load_pilot,
     materialize_pilot,
     null_value,
     parse_visible_block,
     validate,
+)
+from tasks.build_qwen_causal_ledger_residual_v2 import (
+    load as load_v2,
+    materialize as materialize_v2,
 )
 from tasks.pilot_qwen_causal_ledger_residual import (
     ACTIONS,
@@ -126,6 +132,21 @@ class CausalLedgerResidualCorpusTest(unittest.TestCase):
         for row in table.values():
             row["free_exact"] = 0.80
         self.assertIsNone(select_scale(table))
+
+    def test_v2_resource_namespace_is_fresh_and_hash_locked(self):
+        self.assertTrue(code_value("resource_v2", 0).startswith("Y "))
+        self.assertTrue(code_value("pilot", 0).startswith("Z "))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "v2"
+            manifest = materialize_v2(root)
+            loaded, pairs = load_v2(root)
+            self.assertEqual(manifest, loaded)
+            self.assertEqual(manifest["seed"], RESOURCE_V2_SEED)
+            self.assertEqual(len(pairs), 8 * len(FAMILIES) * 2)
+            self.assertTrue(all(
+                row["answer"].startswith("Y ")
+                for _, target in pairs for row in target["answers"]
+            ))
 
 
 if __name__ == "__main__":
