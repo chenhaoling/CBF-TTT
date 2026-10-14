@@ -91,10 +91,19 @@ def apply_exact_reference(state, assignment, delta, block_index):
 def dense_output(state, query_key, dim):
     import torch
 
-    output = torch.zeros(dim, dtype=torch.float32, device=query_key.device)
+    if not state:
+        return (
+            torch.zeros(dim, dtype=torch.float32, device=query_key.device),
+            0,
+        )
+    # Match the registered baseline's reduction order exactly: sum matrices
+    # first, then perform one matrix-vector product.  Summing per-component
+    # products is algebraically equivalent but can change near-tied oracle
+    # actions through floating-point roundoff.
+    memory = torch.zeros_like(state[0]["delta"])
     for row in state:
-        output += row["weight"] * (row["delta"] @ query_key)
-    return output, sum(len(row["facts"]) for row in state)
+        memory += row["weight"] * row["delta"]
+    return memory @ query_key, sum(len(row["facts"]) for row in state)
 
 
 def sparse_output(state, query, embeddings, reader):
