@@ -159,7 +159,8 @@ def collect(args):
                     for name, residual in residuals.items():
                         scored = score_candidates(model, prepared, residual)
                         generation = generate_with_residual(
-                            model, tokenizer, prepared, residual, SCALE, max_new_tokens=5
+                            model, tokenizer, prepared, residual, SCALE, max_new_tokens=5,
+                            stop_on_eos_or_newline=False,
                         )
                         generation["truth_exact"] = int(
                             generation["ids"] == factors["token_ids"][answer["answer"]]
@@ -179,7 +180,8 @@ def collect(args):
                         ensure_value(model, tokenizer, factors, other_twin)
                         residual = single_component_residual(query["key"], other_twin, factors)
                         generation = generate_with_residual(
-                            model, tokenizer, prepared, residual, SCALE, max_new_tokens=5
+                            model, tokenizer, prepared, residual, SCALE, max_new_tokens=5,
+                            stop_on_eos_or_newline=False,
                         )
                         twin = {
                             "answer": other_twin,

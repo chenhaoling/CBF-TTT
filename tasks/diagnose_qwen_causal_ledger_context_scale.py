@@ -74,7 +74,8 @@ def collect(args):
                     teacher_correct = prediction.eq(labels)
                     nll = torch.nn.functional.cross_entropy(logits, labels, reduction="none")
                     generation = generate_with_residual(
-                        model, tokenizer, prepared, residual, scale, max_new_tokens=5
+                        model, tokenizer, prepared, residual, scale, max_new_tokens=5,
+                        stop_on_eos_or_newline=False,
                     )
                     generated_ids = generation["ids"]
                     generated_text = generation["text"]

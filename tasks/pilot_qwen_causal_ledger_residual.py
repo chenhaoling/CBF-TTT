@@ -215,7 +215,10 @@ def score_residuals(model, prepared, candidates, residuals, chunk_size=18):
     return output
 
 
-def generate_with_residual(model, tokenizer, prepared, residual, scale, max_new_tokens=13):
+def generate_with_residual(
+    model, tokenizer, prepared, residual, scale, max_new_tokens=13,
+    stop_on_eos_or_newline=True,
+):
     import torch
 
     session = prepared["session"].clone()
@@ -232,9 +235,9 @@ def generate_with_residual(model, tokenizer, prepared, residual, scale, max_new_
         logits = model.lm_head(adjusted.to(model.lm_head.weight.dtype)).float()
         next_id = int(logits.argmax(-1).item()); generated.append(next_id)
         text = tokenizer.decode(generated, skip_special_tokens=True)
-        if next_id in eos_ids:
+        if stop_on_eos_or_newline and next_id in eos_ids:
             stop_reason = "eos"; break
-        if "\n" in text:
+        if stop_on_eos_or_newline and "\n" in text:
             stop_reason = "newline"; break
         if index + 1 < max_new_tokens:
             hidden = session._forward([next_id])
@@ -245,6 +248,7 @@ def generate_with_residual(model, tokenizer, prepared, residual, scale, max_new_
         "stop_reason": stop_reason,
         "max_new_tokens": max_new_tokens,
         "scale": float(scale),
+        "fixed_length": not stop_on_eos_or_newline,
     }
 
 
