@@ -139,6 +139,24 @@ def expected_arms(state):
             for seed in SEEDS]
 
 
+def expected_shard_state_counts(episodes, state_index, shards=2):
+    """Count deduplicated policy states in the data sharding order.
+
+    OOF states are serialized by outer fold, whereas collection shards the
+    original confirmation order.  Episode identity, rather than state-file row
+    position, is therefore the only valid join key.
+    """
+    unique, reused = {shard: 0 for shard in range(shards)}, {
+        shard: 0 for shard in range(shards)}
+    for index, episode in enumerate(episodes):
+        shard = index % shards
+        state = state_index[episode["episode_id"]]
+        memories = [tuple(row["memory_session_ids"]) for row in expected_arms(state)]
+        unique[shard] += len(set(memories))
+        reused[shard] += len(memories) - len(set(memories))
+    return unique, reused
+
+
 def audit(data_root, outcome_root, rule_root, examples_root, policy_root, model,
           tokenizer, inputs, summary_path, output):
     roots = map(Path, (data_root, outcome_root, rule_root, examples_root, policy_root,
@@ -224,15 +242,8 @@ def audit(data_root, outcome_root, rule_root, examples_root, policy_root, model,
                         >= measurement.get("gpu_start_reserved_gib", 0) >= 0)
     expected_shards = {shard: [row["episode_id"] for index, row in enumerate(episodes)
                                 if index % 2 == shard] for shard in (0, 1)}
-    expected_unique, expected_reused = {}, {}
-    for shard in (0, 1):
-        unique = reused = 0
-        for index, state in enumerate(states):
-            if index % 2 != shard:
-                continue
-            memories = [tuple(row["memory_session_ids"]) for row in expected_arms(state)]
-            unique += len(set(memories)); reused += len(memories) - len(set(memories))
-        expected_unique[shard], expected_reused[shard] = unique, reused
+    expected_unique, expected_reused = expected_shard_state_counts(
+        episodes, state_index, shards=2)
     data_audit_path = data_root.parent / "audit.json"
     if not data_audit_path.exists():
         data_audit_path = data_root / "audit.json"
