@@ -84,20 +84,31 @@ claims must then come from unseen semantic aliases and natural data.
 
 ## Stage D: causal deletion-utility policy
 
-Fit one score per historical component.  The target is the downstream joint
-loss difference between retaining and deleting that component, using only
-counterfactual arms available in the frozen training folds.  Query answers,
+Fit one score per historical component. The controller runs when a new event
+is written and may suppress historical components; the new component itself is
+always written. There is no learned current-update acceptance gate. Targets
+use only counterfactual arms available in the frozen training folds. A single
+component receives utility from its single-deletion arm and, when it belongs
+to an exact-key conflict group, from the registered group-deletion arm. The
+larger causal utility supplies group credit for stale repetitions whose members
+have little effect when deleted one at a time. Query text, query answers,
 future losses, fold identity, episode length and absolute position are never
 inputs at inference.
 
-Allowed features are available from past state only:
+Deletion utility uses the registered three-point target: `1` when deletion
+improves joint success over retain-all, `0` when it harms joint success and
+`0.5` when joint success is unchanged. Joint answer NLL breaks selection ties
+and supplies pairwise ranking, but cannot relabel a joint-success regression.
 
-- current-query/key and component-key cosine;
+Allowed features are available at write time from the past state and newest
+event only:
+
 - newest-event key and component-key cosine;
 - value agreement or conflict with newer components;
-- component readout magnitude and query-conditioned contribution;
-- relative age within the same inferred key, repetition count and past access;
-- fast-memory norm and component interaction summaries.
+- exact-key match, exact-value match and conflict indicators;
+- relative age, same-key and same-value repetition counts;
+- maximum/mean key similarity to newer components;
+- same-key group size and the component's normalized low-rank magnitude.
 
 Use a two-layer 64-unit MLP with GELU, layer normalization and one scalar
 utility output.  Seeds are `18031`, `18037` and `18043`; AdamW learning rate is
