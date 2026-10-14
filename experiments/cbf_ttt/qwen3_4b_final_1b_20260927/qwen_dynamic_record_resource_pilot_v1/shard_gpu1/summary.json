@@ -1,0 +1,55 @@
+{
+  "protocol": "qwen_dynamic_record_resource_pilot_v1",
+  "rows": 336,
+  "groups": 56,
+  "projection_seeds": [
+    2302
+  ],
+  "families": {
+    "retain": 48,
+    "recent_revoke": 48,
+    "distant_revoke": 48,
+    "reset": 48,
+    "exact_duplicate": 48,
+    "overwritten_noop": 48,
+    "mixed_two_event": 48
+  },
+  "wall_seconds": 18.69702266342938,
+  "mean_label_seconds": 0.02089815558533051,
+  "p95_label_seconds": 0.04476265422999859,
+  "mean_seconds_per_action": 0.001199068872601359,
+  "label_peak_allocated_gib": 0.014079093933105469,
+  "label_peak_reserved_gib": 0.02734375,
+  "extraction_peak_allocated_gib": 7.911609172821045,
+  "extraction_peak_reserved_gib": 8.220703125,
+  "overall_peak_allocated_gib": 7.911609172821045,
+  "overall_peak_reserved_gib": 8.220703125,
+  "max_prompt_tokens": 1730,
+  "max_answer_tokens": 24,
+  "max_active_records": 15,
+  "valid_action_counts": {
+    "3": 6,
+    "9": 184,
+    "27": 146
+  },
+  "label_counts": {
+    "[0, [1.0, 1.0, 1.0]]": 220,
+    "[0, [0.0, 1.0, 1.0]]": 36,
+    "[0, [1.0, 0.0, 1.0]]": 8,
+    "[0, [0.0, 0.5, 1.0]]": 4,
+    "[0, [1.0, 0.5, 1.0]]": 2,
+    "[1, [0.0, 0.0, 1.0]]": 48,
+    "[0, [0.0, 0.0, 0.5]]": 2,
+    "[0, [0.0, 0.0, 1.0]]": 6,
+    "[0, [1.0, 1.0, 0.0]]": 6,
+    "[0, [0.0, 1.0, 0.5]]": 2,
+    "[0, [0.0, 0.0, 0.0]]": 2
+  },
+  "estimated_two_gpu_seconds": {
+    "128": 42.736051802124294,
+    "256": 85.47210360424859,
+    "512": 170.94420720849718
+  },
+  "selected_formal_train_groups": 512,
+  "resource_gate_passed": true
+}

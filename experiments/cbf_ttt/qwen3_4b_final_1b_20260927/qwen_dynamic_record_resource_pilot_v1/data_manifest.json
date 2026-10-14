@@ -1,0 +1,39 @@
+{
+  "protocol": "qwen_dynamic_record_forgetting_corpus_v1",
+  "phase": "pilot",
+  "seed": 202610156,
+  "groups_per_family": 8,
+  "families": [
+    "retain",
+    "recent_revoke",
+    "distant_revoke",
+    "reset",
+    "exact_duplicate",
+    "overwritten_noop",
+    "mixed_two_event"
+  ],
+  "templates_sha256": "b69915a421b4485886d2df7fa6f2bd84fc421d00a05db06e993a4f33b441ff21",
+  "audit": {
+    "episodes": 112,
+    "groups": 56,
+    "counts": {
+      "pilot/retain": 16,
+      "pilot/recent_revoke": 16,
+      "pilot/distant_revoke": 16,
+      "pilot/reset": 16,
+      "pilot/exact_duplicate": 16,
+      "pilot/overwritten_noop": 16,
+      "pilot/mixed_two_event": 16
+    },
+    "causal_answers_verified": true,
+    "counterfactual_twins_verified": true,
+    "symbols_disjoint": true,
+    "oracle_actions_generated": false
+  },
+  "files_sha256": {
+    "pilot.inputs.jsonl": "41d2e30c6abb7d228987beaa87a0f39e99163a7a8cdeba2985b09b2999cf86a6",
+    "pilot.targets.jsonl": "614e423613f3639d7ad7fa76d108e0bb24053dbb1003cf96a95ead744a464752"
+  },
+  "training_status": "not_trained",
+  "oracle_status": "not_constructed"
+}

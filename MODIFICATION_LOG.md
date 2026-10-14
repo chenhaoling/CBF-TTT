@@ -3516,3 +3516,13 @@ auditor reloads and hashes both GPU shards and the source corpus, strips only
 timing/memory fields to require exact label reproduction against the excluded
 first execution, recomputes every count and resource statistic, reapplies the
 24-GiB/six-hour size rule, and requires the formal root to remain absent.
+
+The corrected resource retry completed with zero exit code and all nine audit
+checks passing. It built 1,008 labels across 56 source groups and three
+projection seeds. Mean/P95 label time was 0.0208/0.0447 seconds; extraction,
+label and overall allocated peaks were 7.9116, 0.0141 and 7.9116 GiB. The
+two-GPU critical path was 26.73 seconds, yielding a registered 512-group
+estimate of 244.38 seconds. The resource rule therefore selected 512 formal
+training groups. Compact manifests, every per-label resource row, the excluded
+attempt summary, audit and report are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_dynamic_record_resource_pilot_v1/`.

@@ -1,0 +1,22 @@
+{
+  "protocol": "qwen_dynamic_record_resource_pilot_v1",
+  "data_manifest_sha256": "7cf97aeea9b19611ae639839a8fb388173ea11a1a91179a55fadbfe2cb0cfaf7",
+  "projection_seeds": [
+    2301,
+    2302,
+    2303
+  ],
+  "shards": [
+    {
+      "path": "shard_gpu0",
+      "manifest_sha256": "61f0434f77ec131c1c72a6ae321b77c7fd1569859ebb157c8f7d3777b3703bc6",
+      "summary_sha256": "f4c39e23d0fb48a342eac7e92f049190425376602953ae32795cec892a13b53b"
+    },
+    {
+      "path": "shard_gpu1",
+      "manifest_sha256": "615c8eb16397871832825d077f4615d0a5dc253f3673de64af905811aae1a4af",
+      "summary_sha256": "5d0d0613cfe4879ae475d72ffc13d2c4ddc901a50bc6f94afb910cd9d0c1a7d0"
+    }
+  ],
+  "all_label_rows_hashed": true
+}
