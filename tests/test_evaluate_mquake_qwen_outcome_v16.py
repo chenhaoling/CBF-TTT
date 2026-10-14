@@ -3,7 +3,8 @@
 import unittest
 
 from tasks.evaluate_mquake_qwen_outcome_v16 import (
-    aggregate, encode_candidates, encode_pair, policy_memory, query_specs, render_prompt,
+    aggregate, encode_candidates, encode_pair, normalize_generation, policy_memory,
+    query_specs, render_prompt,
 )
 
 
@@ -62,6 +63,10 @@ class QwenOutcomePilotTest(unittest.TestCase):
         self.assertEqual(bytes(answers["Bob"]).decode(), "Bob")
         with self.assertRaises(ValueError):
             encode_candidates(Tokenizer(), "Answer:\n", ["Alice", "Alice"])
+
+    def test_generation_normalization_is_conservative(self):
+        self.assertEqual(normalize_generation("  New   YORK \n"), "new york")
+        self.assertNotEqual(normalize_generation("New-York"), "new york")
 
     def test_aggregate_reports_per_query_resources(self):
         def query(kind, correct):

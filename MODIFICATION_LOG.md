@@ -2262,3 +2262,42 @@ CLI help/compile 后在全新 `_retry1` 目录运行。两候选 NLL 误差均�
 归档 `prefix_scoring_bridge.json`，SHA-256
 `a81c98a535ea6bd961395357d0b98df7a8055b209cc92ef0c948b74952ec6a49`。
 脚本与结果均声明 `pilot_rows_loaded=0`、实验 `model_scored=false`、外部集未加载。
+# 2026-10-14: V16 frozen-Qwen nine-arm formal outcome scorer (before outcomes)
+
+While the registered V15 jackknife-consensus run was still computing its
+fourth outer fold and before any V15 terminal result existed, the downstream
+formal protocol was completed without inspecting formal outcomes.  Added
+`tasks/evaluate_mquake_qwen_outcome_v16_formal.py`,
+`scripts/audit_mquake_qwen_outcome_v16_formal.py`,
+`scripts/run_mquake_qwen_outcome_v16_formal.sh` and focused unit tests.  The
+runner is hard-gated by a passed/audited V15, passed/audited 40-episode V16
+resource pilot and passed/audited 272-row frozen-state matrix.
+
+The scorer evaluates no-memory, retain-all, global-reset, last-1, last-2,
+deletion-count-matched random, V14, V15 and causal oracle on both primary
+phrasings plus hard-retain and unrelated queries.  It uses the previously
+bridged one-prompt candidate NLL path and now optionally performs an independent
+greedy decode from a cloned prompt cache, reporting strict and conservative
+case/whitespace-normalized exact match.  Within an episode, arms with identical
+retained session IDs are scored once and copied exactly, with score provenance
+recorded; this covers the registered global-reset/last-1 identity and any
+additional coincident states without changing an arm's result.
+
+The strongest fixed baseline is selected separately for each held-out outer
+fold from the other four folds by primary candidate accuracy, lower NLL and
+registered arm order.  V15-minus-fixed accuracy and fixed-minus-V15 NLL use
+subject-cluster bootstrap with 20,000 draws (seeds 1611/1612).  Release still
+requires both CI lower bounds above zero, current/unrelated/hard-retain accuracy
+at least 97%, no negative outer-fold accuracy gain, finite in-context scores,
+and an independent audit.  The auditor reconstructs every causal memory and
+prompt, independently tokenizes candidates and generated IDs, verifies score
+deduplication/model/tokenizer/resource provenance, and reimplements all policy,
+fold, bootstrap and gate aggregation without importing the formal scorer.
+External sets remain locked.  These additions are opt-in and do not alter the
+baseline configuration or native `ttt_conv`/`ttt_proj` path.
+
+Added `scripts/check_mquake_qwen_outcome_v16_generation.py`, a synthetic-only
+real-checkpoint preflight that exercises candidate scoring plus greedy decoding
+without loading any pilot/formal/external row.  The formal summary and auditor
+require its passed artifact and exact hash; the formal runner executes it on
+GPU 0 before launching the two scoring shards.
