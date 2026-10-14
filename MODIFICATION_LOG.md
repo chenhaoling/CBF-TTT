@@ -3548,3 +3548,8 @@ The formal-corpus dry run also exposed that the development fact template puts
 `{value}` before `{key}`. The visible-text parser now derives a named regular
 expression from either placeholder order, with a round-trip test over every
 registered split and family.
+
+Added `scripts/audit_qwen_dynamic_record_development.py` to reconstruct the
+development source view, all 30 raw policy files, per-seed and multi-seed
+aggregates, bootstrap gate, checkpoint structure, dependency hashes, resource
+accounting and sealed-split state independently of the producer result.
