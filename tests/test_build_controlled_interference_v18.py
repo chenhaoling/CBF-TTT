@@ -5,11 +5,17 @@ import unittest
 
 from scripts.audit_controlled_interference_v18 import audit
 from tasks.build_controlled_interference_v18 import (
-    FIXED_POLICIES, MECHANISMS, build, build_episode, build_states,
+    FIXED_POLICIES, MECHANISMS, build, build_episode, build_states, opaque_value,
 )
 
 
 class ControlledInterferenceV18Test(unittest.TestCase):
+    def test_opaque_values_use_fixed_spaced_base16_format(self):
+        values = [opaque_value(index) for index in range(400)]
+        self.assertEqual(len(values), len(set(values)))
+        self.assertTrue(all(value.startswith("Z ") and len(value.split()) == 5
+                            for value in values))
+
     def test_episode_mechanisms_and_causal_states(self):
         for index, mechanism in enumerate(MECHANISMS):
             episode = build_episode(index, 16, mechanism)

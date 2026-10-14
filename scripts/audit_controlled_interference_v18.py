@@ -18,7 +18,7 @@ MECHANISMS = ("clean_update", "stale_repetition", "irrelevant_near_duplicate",
 FIXED = ("no_memory", "retain_all", "global_reset", "last_1", "last_2")
 KINDS = ("update_old_surface", "update_current_surface", "retain_1", "retain_2",
          "locality")
-OPAQUE = re.compile(r"^Z[0-9A-F]{10}$")
+OPAQUE = re.compile(r"^Z(?: [A-P]){4}$")
 
 
 def read_json(path):
@@ -157,6 +157,8 @@ def audit(root, output):
             and manifest.get("fixed_policies") == list(FIXED)
             and manifest.get("query_kinds") == list(KINDS)
             and manifest.get("slow_parameter_answerable_by_design") is False
+            and manifest.get("opaque_value_format")
+                == "Z plus four spaced base-16 letters; exactly five Qwen3 tokens"
             and manifest.get("current_session_deletion_allowed") is False),
     }
     result = {"protocol": f"{PROTOCOL}_audit", "audit_passed": all(checks.values()),
