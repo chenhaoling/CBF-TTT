@@ -3278,3 +3278,44 @@ every-seed improvement, at most two points to oracle, and strict role/family
 floors. A 24-episode end-to-end smoke covers label construction, controller
 training and fixed/learned/physics/oracle replay. The formal run is recorded
 separately and may access test once only if every development gate passes.
+
+### Conditional discrete cohort-state confirmation
+
+The first completed predecessor projection showed a qualitative mismatch
+between continuous retention and the sparse reader: the continuous controller
+reached 83.30% despite low retention MAE, whereas an already registered
+27-class grid controller reached 98.86%.  A small nonzero coefficient leaves a
+component active under top-1 routing, so exact zero is a physical state rather
+than an interchangeable approximation.  Before observing predecessor seeds
+2302/2303, `QWEN_DISCRETE_COHORT_CONFIRMATION_PLAN.md` froze a conditional
+confirmation on corpus seed `202610153` with 256/64/128 source groups.  It may
+run only if the independently audited predecessor keeps test sealed and the
+grid controller meets four fixed accuracy, per-seed, physics-gain and oracle-gap
+prerequisites.
+
+Added `tasks/train_qwen_discrete_cohort_confirmation.py` and
+`scripts/run_qwen_discrete_cohort_confirmation.sh`.  The primary controller
+selects one of the 27 exact `{0, 0.5, 1}^3` cohort actions.  Comparators include
+the continuous controller, its independently snapped output, a reference-blind
+controller, fixed/random policies, explicit physics, exact-reference deletion
+and the causal grid oracle.  Development must pass all 12 registered checks
+before test identifiers are loaded or encoded.  The implementation passed a
+24-episode remote end-to-end smoke and four focused local/remote tests.
+
+Added `scripts/audit_qwen_discrete_cohort_confirmation.py`, which independently
+reconstructs source views, every row and aggregate, bootstrap comparisons,
+gates, checkpoint structure, dependency hashes and test sealing.  Gate parity
+tests require the training and audit implementations to return identical
+decisions.  Added `scripts/chain_sparse_to_discrete_confirmation.sh` to wait for
+the predecessor's real EXIT-trap status, audit it, recompute the frozen
+prerequisites and launch the confirmation on GPU 1 only if all prerequisites
+pass; the confirmation is independently audited after completion.  The chain
+records each exit code and cannot relax a failed prerequisite.  Baseline
+training and inference defaults remain unchanged.
+
+At the time of this entry the predecessor formal run remains active on
+`hku-gpu2`: seed 2301 has completed all 12 development policies, seed 2302 is
+in progress, seed 2303 has not started and no test row exists.  The chained
+confirmation monitor is active but consumes no GPU while waiting.  Formal
+metrics and hashes will be added only after both producer and independent audit
+reach terminal state.
