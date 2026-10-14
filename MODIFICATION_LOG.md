@@ -2881,3 +2881,23 @@ states and current-update retention. The complementary chain now trains and
 audits this policy after an audited example release. Combined-state Qwen
 rescoring remains conditional on that policy artifact and is required before
 any efficacy claim.
+
+Added `tasks/evaluate_v19_nested_forgetting_policy.py`, the two-GPU runner and
+an independent model-outcome auditor. The evaluator applies each outer-fold
+checkpoint's three OOF memory states, deduplicates identical states, and
+rescales none of the model outputs. Every combined state is scored anew by the
+frozen Qwen3-4B checkpoint with fresh KV. Comparators are reconstructed from
+the immutable V19 raw rows: outer-fold fixed, causal whole-key exact deletion
+and the registered 3% oracle. It reports three-seed means, subject/template
+cluster intervals, every fold and seed, oracle-gap closure, generation,
+latency and peak GPU memory.
+
+The registered model gate requires five-point gain over fixed with positive
+subject/template interval lower bounds, no negative fold or seed, 90% update
+and retention, 97% locality, 40% oracle-gap closure, and a two-point gain over
+whole-key exact deletion with positive subject-cluster lower bound. The
+independent auditor reconstructs every policy memory state, prompt, score,
+generation, resource record, model/tokenizer provenance, comparator, interval
+and gate. Production and audit aggregation match exactly on a 320-row fixture.
+The fallback chain now proceeds through model rescoring only after both label
+and checkpoint audits pass.
