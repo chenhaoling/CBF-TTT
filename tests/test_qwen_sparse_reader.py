@@ -7,6 +7,7 @@ from tasks.diagnose_qwen_sparse_reader import (
     sparse_output,
 )
 from tasks.train_cbf_qwen_lowrank_forgetting import SEEDS
+from scripts.audit_qwen_sparse_reader import decision as audit_decision
 
 
 class FakeEmbeddings:
@@ -117,6 +118,7 @@ class QwenSparseReaderTest(unittest.TestCase):
         decision = select_reader(summary)
         self.assertTrue(decision["passed"])
         self.assertEqual(decision["selected"], "component_top4")
+        self.assertEqual(decision, audit_decision(summary))
 
 
 if __name__ == "__main__":
