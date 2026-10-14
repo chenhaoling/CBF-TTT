@@ -3482,3 +3482,22 @@ plan registers fresh development, matched-test and external-OOD seeds, strict
 split sealing, an eight-group per-label time/VRAM pilot, fixed comparators,
 ablations, bootstrap units and release gates. The disclosed failed OOD corpus
 is diagnosis-only and cannot enter successor training or evaluation.
+
+Implemented the successor resource stage in
+`tasks/build_qwen_dynamic_record_forgetting.py` and
+`tasks/pilot_qwen_dynamic_record_forgetting.py`. The deterministic builder
+creates seven lifecycle families at lengths 8/12/16, exactly eight pilot
+source groups per family, two anchor twins and three sparse boundaries. It
+audits visible parsing, causal answers, split symbols, idempotent duplicates,
+query-level overwritten no-ops and absence of oracle actions. The pilot selects
+up to three dynamic records, enumerates the registered global-clear plus full
+`{0,0.5,1}^3` action grid, uses the accuracy-first lexicographic oracle and
+records per-label timing, token counts, action counts and peak memory.
+
+Added a two-GPU runner and hash-verifying shard merger. GPU 0 evaluates
+projection seeds 2301/2303 and GPU 1 evaluates seed 2302; the merged critical
+path selects only among the preregistered 128/256/512 formal sizes. Five local
+tests cover all corpus families, deterministic materialization and hash
+failure, frozen pilot size, candidate/constraint behavior, lexicographic
+selection and the resource extrapolation rule; the one torch-specific test is
+also run by the remote runner.
