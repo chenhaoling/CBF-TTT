@@ -3432,3 +3432,23 @@ endpoint/interior diagnostics and the complete gate.  Its artifact explicitly re
 `scientific_evidence=false` and `formal_seed_used=false`; its metrics are not a
 pilot, are not used by any gate and cannot influence the registered formal
 run.
+
+The conditional discrete confirmation subsequently completed in 4,270.44
+seconds.  All 12 development release checks passed before any test identifier
+or embedding was loaded.  On the one-time sealed test, the exact 27-class
+controller reached 98.6762% accuracy versus 93.3955% for cohort physics.  Its
+5.2807-point paired gain had source-group bootstrap 95% CI
+`[4.8575,5.7075]`; the NLL gain was 0.07284 with CI
+`[0.06238,0.08327]`, and the oracle gap was 0.6275 points.  Current, anchor and
+historical accuracy were 100.00%, 99.83% and 96.20%.  Every registered test
+gate and all 16 independent audit checks passed.  The continuous controller
+remained a negative control at 83.29%, whereas independently snapping it
+reached 98.50%, reinforcing the exact-state interpretation.
+
+Archived the compact confirmation evidence, controller checkpoint, hashes and
+full report under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_discrete_cohort_confirmation_v1/`.
+The passing independent audit released the already frozen seed-`202610154`
+lifecycle OOD evaluation without retraining or calibration.  At this entry the
+formal OOD run is active on `hku-gpu2`; its metrics will be added only after the
+producer and independent audit reach terminal state.

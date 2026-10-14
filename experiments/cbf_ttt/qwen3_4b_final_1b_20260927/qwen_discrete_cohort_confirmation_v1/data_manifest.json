@@ -1,0 +1,41 @@
+{
+  "protocol": "cbf_event_curriculum_v1",
+  "seed": 202610153,
+  "group_counts": {
+    "train": 256,
+    "dev": 64,
+    "test": 128
+  },
+  "audit": {
+    "episodes": 10752,
+    "groups": 448,
+    "counts": {
+      "train": 6144,
+      "dev": 1536,
+      "test": 3072
+    },
+    "queries": 64512,
+    "causal_answers_verified": true,
+    "entities_disjoint": true,
+    "templates_disjoint": true,
+    "oracle_actions_generated": false
+  },
+  "files_sha256": {
+    "train.inputs.jsonl": "7ea7cc6027611499df6d9858a4975874497a0d5bc6b3e7ecbe30742bd819b259",
+    "train.targets.jsonl": "bbf178eefb8a88b296ba61a5ad9974d1109f56b34b74b77646105dae8680d6b4",
+    "train.supervision.jsonl": "53ac97489273f7ad7d095791ffbec4b16a4200dd9b173507c7dd939f4bed6ad1",
+    "train.warmup.jsonl": "c2e730316e6caad59ce79d02ddde246812a22fe5bf89fdc0143058997cd6614f",
+    "dev.inputs.jsonl": "a1c535be61bf91c55cd9383f11e3519a872539ebdc5beb0111e88a1376a36d07",
+    "dev.targets.jsonl": "47671be92b535d0d1303df705d0f366f3f31e77b5cb7fbd2d8d66571cf20055a",
+    "dev.supervision.jsonl": "7759cf654e51cae8e66ea187e4074f32e252c4894b594e2d77a350a862a1e4c2",
+    "dev.warmup.jsonl": "f802268dc00e366a108a185d2a6415283cf3c07e42185ac5e2ef6f9b0205aba7",
+    "test.inputs.jsonl": "b59e84a5c4e1cf60a068f957bedf1222e3e08d1c163d6e6ae8f273bfcbd8bdfb",
+    "test.targets.jsonl": "c900599172d919f58eb36d131019a2c979dadcec7936d82b958bdf392aaf6d30",
+    "test.supervision.jsonl": "d1dcca2c15bf63e17cd64c6c43e935da6c9fa6d0a41bc5662102b53cd8d848c0",
+    "test.warmup.jsonl": "3004fd8ccbb85d21ce144fbfb6b61bd937931c31e53c7d7c0fc2fb216d3f669a"
+  },
+  "training_status": "not_trained",
+  "tokenization_status": "semantic_text_only",
+  "notice": "IDs/split/group are join metadata, never model features. Read only prefix through after_block. Targets and semantic events are teacher-only. No native fixed-chunk packing is implied.",
+  "templates_sha256": "c0ce74c85f0265c3d48a807cf07afc56810d75479ea4ffd3638220a3cab54a7d"
+}

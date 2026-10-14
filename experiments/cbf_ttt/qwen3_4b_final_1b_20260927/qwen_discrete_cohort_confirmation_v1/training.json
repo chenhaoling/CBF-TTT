@@ -1,0 +1,517 @@
+{
+  "seconds": 4270.437270089984,
+  "train_dev_extraction_seconds": 15.953678730875254,
+  "peak_allocated_gib": 7.867497444152832,
+  "peak_reserved_gib": 8.12109375,
+  "embedding_hashes": {
+    "2301": "2e95a0b19354bbd8a4298c359990499543a93d71d7d0fb47c5d24ddedc076d7f",
+    "2302": "0647503d5a117228151672a74d5807d1f2bbaae345dd1bf8753b89467d08a589",
+    "2303": "d29c7796c4d19f77573365bacaa7ee3b2a0c918a6648de77ff39b35508e72b58"
+  },
+  "extraction": {
+    "prompts": {
+      "entity": "Entity identifier: ",
+      "value": "Assigned value code: "
+    },
+    "prompt_token_ids": {
+      "entity": [
+        3030,
+        12816,
+        25,
+        220
+      ],
+      "value": [
+        94025,
+        897,
+        2038,
+        25,
+        220
+      ]
+    },
+    "entities": 3840,
+    "values": 6176,
+    "entity_names_sha256": "dbd9bbc10f617e1d6d024831cbb5b3428b1d11d47d18ea524cdc35c7873db28a",
+    "value_names_sha256": "4bdccc9c3e22bcc2c9364c997083b9f21a9627bd7c6eb3a0c7e2e38e482385c6"
+  },
+  "test_embedding_meta": {
+    "hashes": {
+      "2301": "0b662506e25d80a0517934041791798d708956f859edab3477093321dc383da8",
+      "2302": "17c8724ad5b86eed430ed1bf80d5d81b06d79c0c224dc5fd87403a248d2e2b09",
+      "2303": "c56d8956a9c2b3110c703e6d243861b6f61ba6c290fea5b2126110e48d92a7c2"
+    },
+    "extraction": {
+      "prompts": {
+        "entity": "Entity identifier: ",
+        "value": "Assigned value code: "
+      },
+      "prompt_token_ids": {
+        "entity": [
+          3030,
+          12816,
+          25,
+          220
+        ],
+        "value": [
+          94025,
+          897,
+          2038,
+          25,
+          220
+        ]
+      },
+      "entities": 1536,
+      "values": 2526,
+      "entity_names_sha256": "c207c924acc4684207f5492c72b40fa207f14426a53092942d30e235b12dc7b9",
+      "value_names_sha256": "4b9e083265d31be20e95f49b15c505498e9c7cc461336340edfb6c1ccec04499"
+    }
+  },
+  "seeds": {
+    "2301": {
+      "examples": 12288,
+      "interior_examples": 2914,
+      "interior_fraction": 0.23714192708333334,
+      "label_counts": {
+        "(1.0, 1.0, 1.0)": 3072,
+        "(1.0, 1.0, 0.0)": 3135,
+        "(1.0, 0.0, 1.0)": 3072,
+        "(0.0, 0.5, 0.5)": 89,
+        "(0.5, 0.5, 0.0)": 60,
+        "(0.5, 1.0, 0.0)": 1255,
+        "(0.0, 0.5, 0.0)": 770,
+        "(1.0, 1.0, 0.5)": 131,
+        "(0.5, 0.0, 0.0)": 177,
+        "(0.0, 1.0, 0.5)": 197,
+        "(0.5, 1.0, 0.5)": 37,
+        "(0.0, 0.0, 0.5)": 91,
+        "(1.0, 0.5, 0.0)": 107,
+        "(0.0, 0.0, 0.0)": 42,
+        "(0.0, 1.0, 0.0)": 49,
+        "(1.0, 0.0, 0.0)": 4
+      },
+      "blind_derived_from_primary_rows": true,
+      "curves": {
+        "learned": [
+          {
+            "epoch": 1,
+            "loss": 0.23205719888210297,
+            "mae": 0.46264922618865967
+          },
+          {
+            "epoch": 10,
+            "loss": 0.04386535659432411,
+            "mae": 0.17028844356536865
+          },
+          {
+            "epoch": 50,
+            "loss": 0.013563861139118671,
+            "mae": 0.05517460033297539
+          },
+          {
+            "epoch": 100,
+            "loss": 0.011763728223741055,
+            "mae": 0.0455830954015255
+          },
+          {
+            "epoch": 250,
+            "loss": 0.00980457291007042,
+            "mae": 0.037126582115888596
+          },
+          {
+            "epoch": 300,
+            "loss": 0.008857380598783493,
+            "mae": 0.03552677109837532
+          }
+        ],
+        "reference_blind": [
+          {
+            "epoch": 1,
+            "loss": 0.22470930218696594,
+            "mae": 0.45421499013900757
+          },
+          {
+            "epoch": 10,
+            "loss": 0.1582181304693222,
+            "mae": 0.32304075360298157
+          },
+          {
+            "epoch": 50,
+            "loss": 0.14177349209785461,
+            "mae": 0.30271413922309875
+          },
+          {
+            "epoch": 100,
+            "loss": 0.13853198289871216,
+            "mae": 0.2969520390033722
+          },
+          {
+            "epoch": 250,
+            "loss": 0.12903852760791779,
+            "mae": 0.2788148522377014
+          },
+          {
+            "epoch": 300,
+            "loss": 0.1266576498746872,
+            "mae": 0.2737213373184204
+          }
+        ],
+        "grid_classifier": [
+          {
+            "epoch": 1,
+            "loss": 3.3057124614715576,
+            "accuracy": 0.015218098647892475
+          },
+          {
+            "epoch": 10,
+            "loss": 0.8110112547874451,
+            "accuracy": 0.8379719853401184
+          },
+          {
+            "epoch": 50,
+            "loss": 0.2965526878833771,
+            "accuracy": 0.8846028447151184
+          },
+          {
+            "epoch": 100,
+            "loss": 0.23845134675502777,
+            "accuracy": 0.916259765625
+          },
+          {
+            "epoch": 250,
+            "loss": 0.16827942430973053,
+            "accuracy": 0.9386393427848816
+          },
+          {
+            "epoch": 300,
+            "loss": 0.1458856612443924,
+            "accuracy": 0.9449055790901184
+          }
+        ]
+      }
+    },
+    "2302": {
+      "examples": 12288,
+      "interior_examples": 2926,
+      "interior_fraction": 0.23811848958333334,
+      "label_counts": {
+        "(1.0, 1.0, 1.0)": 3072,
+        "(1.0, 1.0, 0.0)": 3150,
+        "(1.0, 0.0, 1.0)": 3072,
+        "(0.0, 0.5, 0.5)": 60,
+        "(0.0, 0.5, 0.0)": 786,
+        "(1.0, 1.0, 0.5)": 135,
+        "(0.5, 1.0, 0.0)": 1256,
+        "(0.5, 0.0, 0.0)": 189,
+        "(0.0, 1.0, 0.5)": 213,
+        "(0.5, 1.0, 0.5)": 38,
+        "(0.0, 1.0, 0.0)": 29,
+        "(0.5, 0.5, 0.0)": 55,
+        "(0.0, 0.0, 0.5)": 90,
+        "(1.0, 0.5, 0.0)": 104,
+        "(0.0, 0.0, 0.0)": 39
+      },
+      "blind_derived_from_primary_rows": true,
+      "curves": {
+        "learned": [
+          {
+            "epoch": 1,
+            "loss": 0.23535007238388062,
+            "mae": 0.4642094373703003
+          },
+          {
+            "epoch": 10,
+            "loss": 0.037176940590143204,
+            "mae": 0.1638774573802948
+          },
+          {
+            "epoch": 50,
+            "loss": 0.012822314165532589,
+            "mae": 0.052900902926921844
+          },
+          {
+            "epoch": 100,
+            "loss": 0.011018640361726284,
+            "mae": 0.04306725785136223
+          },
+          {
+            "epoch": 250,
+            "loss": 0.009587219916284084,
+            "mae": 0.03606272488832474
+          },
+          {
+            "epoch": 300,
+            "loss": 0.009112773463129997,
+            "mae": 0.03490206226706505
+          }
+        ],
+        "reference_blind": [
+          {
+            "epoch": 1,
+            "loss": 0.2240733504295349,
+            "mae": 0.4545864462852478
+          },
+          {
+            "epoch": 10,
+            "loss": 0.15750223398208618,
+            "mae": 0.3274652659893036
+          },
+          {
+            "epoch": 50,
+            "loss": 0.1416512131690979,
+            "mae": 0.3007252812385559
+          },
+          {
+            "epoch": 100,
+            "loss": 0.13784368336200714,
+            "mae": 0.2949943244457245
+          },
+          {
+            "epoch": 250,
+            "loss": 0.1301344484090805,
+            "mae": 0.27994072437286377
+          },
+          {
+            "epoch": 300,
+            "loss": 0.1280776411294937,
+            "mae": 0.2754868268966675
+          }
+        ],
+        "grid_classifier": [
+          {
+            "epoch": 1,
+            "loss": 3.2705013751983643,
+            "accuracy": 0.0472005195915699
+          },
+          {
+            "epoch": 10,
+            "loss": 0.8588442802429199,
+            "accuracy": 0.81787109375
+          },
+          {
+            "epoch": 50,
+            "loss": 0.2693822383880615,
+            "accuracy": 0.9098307490348816
+          },
+          {
+            "epoch": 100,
+            "loss": 0.2207360863685608,
+            "accuracy": 0.9222819209098816
+          },
+          {
+            "epoch": 250,
+            "loss": 0.1619289219379425,
+            "accuracy": 0.9404296875
+          },
+          {
+            "epoch": 300,
+            "loss": 0.13995592296123505,
+            "accuracy": 0.9505208134651184
+          }
+        ]
+      }
+    },
+    "2303": {
+      "examples": 12288,
+      "interior_examples": 2934,
+      "interior_fraction": 0.23876953125,
+      "label_counts": {
+        "(1.0, 1.0, 1.0)": 3072,
+        "(1.0, 1.0, 0.0)": 3136,
+        "(1.0, 0.0, 1.0)": 3072,
+        "(0.0, 0.0, 0.5)": 49,
+        "(1.0, 0.5, 0.0)": 91,
+        "(1.0, 1.0, 0.5)": 102,
+        "(0.0, 0.5, 0.0)": 775,
+        "(0.5, 1.0, 0.0)": 1328,
+        "(0.5, 0.0, 0.0)": 184,
+        "(0.0, 0.5, 0.5)": 85,
+        "(0.5, 1.0, 0.5)": 50,
+        "(0.0, 1.0, 0.5)": 219,
+        "(0.5, 0.5, 0.0)": 50,
+        "(0.0, 0.0, 0.0)": 36,
+        "(0.0, 1.0, 0.0)": 32,
+        "(1.0, 0.0, 0.5)": 1,
+        "(1.0, 0.0, 0.0)": 6
+      },
+      "blind_derived_from_primary_rows": true,
+      "curves": {
+        "learned": [
+          {
+            "epoch": 1,
+            "loss": 0.2359648495912552,
+            "mae": 0.4670126140117645
+          },
+          {
+            "epoch": 10,
+            "loss": 0.044246260076761246,
+            "mae": 0.18412698805332184
+          },
+          {
+            "epoch": 50,
+            "loss": 0.012716741301119328,
+            "mae": 0.05438869819045067
+          },
+          {
+            "epoch": 100,
+            "loss": 0.01079347264021635,
+            "mae": 0.04322004318237305
+          },
+          {
+            "epoch": 250,
+            "loss": 0.008871454745531082,
+            "mae": 0.034338679164648056
+          },
+          {
+            "epoch": 300,
+            "loss": 0.008425495587289333,
+            "mae": 0.032859478145837784
+          }
+        ],
+        "reference_blind": [
+          {
+            "epoch": 1,
+            "loss": 0.22866755723953247,
+            "mae": 0.458791583776474
+          },
+          {
+            "epoch": 10,
+            "loss": 0.15484081208705902,
+            "mae": 0.327830970287323
+          },
+          {
+            "epoch": 50,
+            "loss": 0.1418331116437912,
+            "mae": 0.3025892674922943
+          },
+          {
+            "epoch": 100,
+            "loss": 0.13757866621017456,
+            "mae": 0.2952759861946106
+          },
+          {
+            "epoch": 250,
+            "loss": 0.12874068319797516,
+            "mae": 0.2756798565387726
+          },
+          {
+            "epoch": 300,
+            "loss": 0.12711089849472046,
+            "mae": 0.27223217487335205
+          }
+        ],
+        "grid_classifier": [
+          {
+            "epoch": 1,
+            "loss": 3.326641798019409,
+            "accuracy": 0.01749674417078495
+          },
+          {
+            "epoch": 10,
+            "loss": 0.8837516903877258,
+            "accuracy": 0.8091633915901184
+          },
+          {
+            "epoch": 50,
+            "loss": 0.2790912687778473,
+            "accuracy": 0.9031575322151184
+          },
+          {
+            "epoch": 100,
+            "loss": 0.22228582203388214,
+            "accuracy": 0.9222005009651184
+          },
+          {
+            "epoch": 250,
+            "loss": 0.15670828521251678,
+            "accuracy": 0.9422200322151184
+          },
+          {
+            "epoch": 300,
+            "loss": 0.136928990483284,
+            "accuracy": 0.9508463740348816
+          }
+        ]
+      }
+    }
+  },
+  "checkpoint_sha256": "15b42d85e3a9a5f648865f367b11113f8d0bc247376de1a3493f2df3517a6c65",
+  "raw_rows_sha256": {
+    "dev_seed2301_fixed_retain.jsonl": "d7751c594bfa68033f2f7b4134fe1de524a2d065c3d5529558336324191e312b",
+    "dev_seed2301_fixed_global_clear.jsonl": "78d38e7c1f0b523276a81af892efc39e24ee714b02918de26227210f2c603795",
+    "dev_seed2301_fixed_global_half.jsonl": "ed67e78cb1d40bca6efca398aa5e27841e5af2f15cc98f649ca85e3b9775e999",
+    "dev_seed2301_fixed_window2.jsonl": "34d20b13d2cc19c5ecad20bd90185cd642e18a5bc957aa0d983fe254b607fa49",
+    "dev_seed2301_fixed_window3.jsonl": "92f488a30e41786c1350b9cb13ae8b70e6088a5e7fdefa8d5e726d93a00acb50",
+    "dev_seed2301_deterministic_random.jsonl": "8d58c0428d7da444bd1f0c99f61ae25ac6f938226f3950bc1799e294270d0254",
+    "dev_seed2301_reference_blind.jsonl": "b4613d271b79ad2ad817899198c7bd8a4a87b0cbc687beedcb5a5c54a86e54b4",
+    "dev_seed2301_learned_snapped.jsonl": "7bbad719547b3daaa01a3a3399040060838a8385ee557207526d9a5ce368d1ea",
+    "dev_seed2301_grid_classifier.jsonl": "1fb217fc05434d94f07e9a2f2461501bc9d21b5ab4d8e7c3df6870ba36850472",
+    "dev_seed2301_learned.jsonl": "7ce379a8fe7a4290bcbd381f49154401dc9634f945d582e90f772ac0c3dacea8",
+    "dev_seed2301_physics_cohort.jsonl": "383291e0ab1d7491ad11829cf5a34fc158a97304a4ecc7ce9719ca174492d9bd",
+    "dev_seed2301_exact_reference.jsonl": "44b9944016b155f568aaa87baa1bdb46faa1d8ce7495775e524b2a5ee4c681b9",
+    "dev_seed2301_oracle_grid.jsonl": "24e9b2f4651fb26594eb1f807ca114a52555c4bdf54a4fd90d3fd67ed5899a54",
+    "dev_seed2302_fixed_retain.jsonl": "18964af9899feabd9562d6e17805ae4c7b2bb456811597806c9335a3304faa7b",
+    "dev_seed2302_fixed_global_clear.jsonl": "27614e262d102248f9db5f60d0963a89848c115a8ab5cf6e07be34d8b9fa0994",
+    "dev_seed2302_fixed_global_half.jsonl": "1b58ef56538f7bc43ffa970c49f6df2af623f3d4cb62674106923d1490d225d9",
+    "dev_seed2302_fixed_window2.jsonl": "09685aad1e133b363de74ebcc830fe6d98aa419dbde36938fb38e7f269aa4edb",
+    "dev_seed2302_fixed_window3.jsonl": "92c86990359186f7a7c237b3a97ad498547a0985d450e3cd782fbae61e86015b",
+    "dev_seed2302_deterministic_random.jsonl": "19cd089557dfa5c993da8a725593fd7cd3d96f69c192dda6531ea766f7e27faa",
+    "dev_seed2302_reference_blind.jsonl": "447b539f5e68d06ade253ee18c437f710ba358d59199c7674c67dbb21d74dbd7",
+    "dev_seed2302_learned_snapped.jsonl": "12a0c43afcf433f9ff35789ee1101cd896fa2281e433239335c98633afdbea62",
+    "dev_seed2302_grid_classifier.jsonl": "e8e677f6df8c16272a77ff9eddf516e95c2c6df77cc331b2892c56ef39397213",
+    "dev_seed2302_learned.jsonl": "40cbfbbee6313b9c66d25b63df9723e5829f877a4bca26cafafa44d303aa1067",
+    "dev_seed2302_physics_cohort.jsonl": "bd89c952fd5d293382920bb4a0de000832d48f912d4a04450187b42fe70764b9",
+    "dev_seed2302_exact_reference.jsonl": "ad4991e43f7266aa2d22058eae3297cdf162bd38e9cf2f0fbf297ef8616e9b8c",
+    "dev_seed2302_oracle_grid.jsonl": "242fa94453f14804cc6578b480446d1df59d601341dd72fd8fc96f9c80880659",
+    "dev_seed2303_fixed_retain.jsonl": "fb245683e757fa250f5c5f46147ef0a81a16c02a92642ffcd5902c7b3e9a86fd",
+    "dev_seed2303_fixed_global_clear.jsonl": "c0f95de98e623eaf46394c925d3f894730610ca8a685f1dade638feae8553ec3",
+    "dev_seed2303_fixed_global_half.jsonl": "f001d9efce5cc600ba82f095db9c9c340f97a0a52b325e2166648efa2be87f8e",
+    "dev_seed2303_fixed_window2.jsonl": "9f3a3545bc1917d28d40e73a5c5707fb47b6b6a7430367b3ee73fea69e920643",
+    "dev_seed2303_fixed_window3.jsonl": "2be131052d9a3e58c670c0d5c351147a0c8e144f25ba683020d6c2e9d2c6dfb5",
+    "dev_seed2303_deterministic_random.jsonl": "b9bde0f7784af8fe483da03ac72ad55c6ccef2263f7e2c4524894f2b44c9a1e6",
+    "dev_seed2303_reference_blind.jsonl": "aa4c7d13a2fbb11dd6b5aea270b4bf84d289692b5e4bca3800f678a2595cdbc6",
+    "dev_seed2303_learned_snapped.jsonl": "16aa6d580fc0dde99b298fce78c1b4e57971dc8dd4949681af66d76ae6082619",
+    "dev_seed2303_grid_classifier.jsonl": "ac290d8d63ce87aaea99980df7fd673bf08ee1055e9793e643197eb9daf44562",
+    "dev_seed2303_learned.jsonl": "4bd82a862d1e7caf566223f4528cc36fd873be5397ddf95648e190876b8203a5",
+    "dev_seed2303_physics_cohort.jsonl": "3950d434444edf6f811a8dd41706b9fa7ce98bd35c60ac9419fba5385513f2f5",
+    "dev_seed2303_exact_reference.jsonl": "a0d8ff40a9ca583c680c4909fd804dbb5ab67d060455861876231ee09a3b5760",
+    "dev_seed2303_oracle_grid.jsonl": "9105d80d1e57444dba75617bf6ee5bd8df88f44a36f148cdee3ec6311cdf52ee",
+    "test_seed2301_fixed_retain.jsonl": "a7035f927a9375f516edcdc61b94636d1b5fb118d102ab77dff5bda4888f38c1",
+    "test_seed2301_fixed_global_clear.jsonl": "92723b415a5127aeecc6d1f85f6940934c1fd881778a31240e6f5172fed77528",
+    "test_seed2301_fixed_global_half.jsonl": "a4be27532a2d080b32c3492ff547d69c90fa754c0d4aad7db45183a7a1607359",
+    "test_seed2301_fixed_window2.jsonl": "0bafef4397437eb48d581af25f2483f20c5b9c53c428285271321bf5a059839f",
+    "test_seed2301_fixed_window3.jsonl": "7374fb7f631eae90c5f55a248aaf7ea10b715ca835704e7a78f7ed195c6a6304",
+    "test_seed2301_deterministic_random.jsonl": "6db75cf77fa72568620594cd6d538843eca294e3857ab29c8e82b38f45ecbc05",
+    "test_seed2301_reference_blind.jsonl": "1771dab3cd08d090997bac60e51a354800b55617973adb02fc0f0c3697451de2",
+    "test_seed2301_learned_snapped.jsonl": "8578aff28b2e9b153620782f9d2c0ef1c8ab0509d36cf02c4cdc3d58d1c42244",
+    "test_seed2301_grid_classifier.jsonl": "f0484a001b5eb3085398cce0889a26f10510521c205a824614923695d7b9133a",
+    "test_seed2301_learned.jsonl": "3bc68291731695937d6acdef8f05b8d909662c135ddfc254cec206b01d361b65",
+    "test_seed2301_physics_cohort.jsonl": "1d73d1de3a4587650f12780d5bc2c96ffcc54192d597ce4c89a29d5405e937d3",
+    "test_seed2301_exact_reference.jsonl": "f5f14b7957c7a87f06661d1cd442e31d3451aba45f29301ca3ab58cf8ea9d4fb",
+    "test_seed2301_oracle_grid.jsonl": "a4b10650584d0b7376e79061cee020423304e618ef7fcc494315fb426c5da817",
+    "test_seed2302_fixed_retain.jsonl": "43cf242c7f6d89a89f1872eed421663472c28f3a6e069296fa143af443396752",
+    "test_seed2302_fixed_global_clear.jsonl": "f290112f545301e91c9a3a7b94f69318a032fc5c2865f4f199056258365f72d9",
+    "test_seed2302_fixed_global_half.jsonl": "7c208c20d3bf8e3bd9324c747ac27011c489a3dc5a89a85e4f651e45c1f6c79d",
+    "test_seed2302_fixed_window2.jsonl": "f5729a26e43bf2a6c45cc22baee5219e33b5c2900a11cd72cda9522def45ab72",
+    "test_seed2302_fixed_window3.jsonl": "f9282ae993819d8c7ff40b46c877a93b44e84de9e10efc68d1675534ebaf89c7",
+    "test_seed2302_deterministic_random.jsonl": "c197cfeeeb2fac14b766bb1805a8a99c42b49e402e71016d751431716bd6a3fd",
+    "test_seed2302_reference_blind.jsonl": "a1f0f95ba00db5c880c64f4ed8e3cf85b0c8002f3c6ca864d6ffff3ae7c6fb47",
+    "test_seed2302_learned_snapped.jsonl": "59a16281c0a4cbc2384839c9b2240add5873bb22749416b0eb7ec6fd92de4cde",
+    "test_seed2302_grid_classifier.jsonl": "31bdeca00c97fb5f18a4a849cc7afc66c1d4663b20dc0aa709a0aac4105b9b89",
+    "test_seed2302_learned.jsonl": "a877a9a2786e0955470a9607a4876c30e0ecba3e5b0f9f13648d28e34aac8cb9",
+    "test_seed2302_physics_cohort.jsonl": "9004f8c1bff76cfb113e57ab1d5d988a8990faaf16c1b393b9cc05da4ed79804",
+    "test_seed2302_exact_reference.jsonl": "e3ba26b2fed98702ba1c9244147998363ef6e2547205a3435aef0ad50901c54c",
+    "test_seed2302_oracle_grid.jsonl": "2db12e5e4ce806663daa9873d66b5195aca1b3be67d3a6bf268a0560a5fb18e5",
+    "test_seed2303_fixed_retain.jsonl": "149fa7f5a6ddbd2f361ffa5073538a8d40ed6ccefcba395d45bb130ea8cd8714",
+    "test_seed2303_fixed_global_clear.jsonl": "3c4cff0c99c85cd61b9a3406e9d6102570903ca3930bb2b89f5e45f853e6f7a8",
+    "test_seed2303_fixed_global_half.jsonl": "a155b861441e0240aad2934c317781b183bf046ebe16553f8b872a4ceab6f1ba",
+    "test_seed2303_fixed_window2.jsonl": "105125a74c61aad0e1beedbfd04ee3b9836f2d9603635c3774c045afdb8c74e9",
+    "test_seed2303_fixed_window3.jsonl": "168e043c0ac4812822dbe4ab1ff37ffd6e9d4a45f16da389876ffb37f1a1d3b8",
+    "test_seed2303_deterministic_random.jsonl": "3171ce0941057ff594e43207150ebea13f1013dae94b04ca0b629eef0f36288a",
+    "test_seed2303_reference_blind.jsonl": "88516defd95a565884b8b0c5395db2b49717d293d1ccef0f439bd02c0cb3d414",
+    "test_seed2303_learned_snapped.jsonl": "002f3a89cd07b2956d93173fd12386d0b8fcdfeb42b255b8edc67aff24629dae",
+    "test_seed2303_grid_classifier.jsonl": "cc91b60af397b7e51177e94d35f4eae61be7e7f4a47ff7a1ee7cfb26c9b3ea56",
+    "test_seed2303_learned.jsonl": "4fcbedc7fbebba23e8cfad1b9a973580197617cde24638f7d294cb19d8580faa",
+    "test_seed2303_physics_cohort.jsonl": "0d23eba6000cb238e688cc03f22385054398192e2b98f472b87f298f6a82b135",
+    "test_seed2303_exact_reference.jsonl": "274b994cfddbe135ec917bba8c5e90f058ecfc03512bebb5e507d440bed1abda",
+    "test_seed2303_oracle_grid.jsonl": "24609da4be0eb1b66aa154085ca7474aa3f787340b44cef922cb1d083655e437"
+  }
+}

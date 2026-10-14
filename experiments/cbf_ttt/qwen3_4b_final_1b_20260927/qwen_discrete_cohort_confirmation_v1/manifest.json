@@ -1,0 +1,252 @@
+{
+  "protocol": "qwen_discrete_cohort_confirmation_v1",
+  "data_manifest_sha256": "d0c681e09da54edd0b8e3355fd6c6e4f0c8b477b7cbc7fb55c72a6bed230b16e",
+  "reader_audit_sha256": "684f4e2b9e99074f3daf08b08b605a05cbe6d78818eca09585f7bb6f7066256e",
+  "predecessor_audit_sha256": "bc99e2f696aa20e67cdeae51fe3a055f43928a6c2ea8e267faed3c20a4aa5b62",
+  "predecessor_prerequisites": {
+    "grid_accuracy_at_least_point_985": true,
+    "every_seed_at_least_point_98": true,
+    "gain_over_physics_at_least_point_05": true,
+    "oracle_gap_at_most_point_01": true
+  },
+  "geometry_hashes": {
+    "summary.json": "4fa6e0aba9fa5ab335ee9650b31547379a7525cd4c52db3b02d49aa49fbd272c",
+    "training.json": "01ecc4e9e5875485750b1f5a6121826eb254d9d865442a2c45ba79456ebb170c",
+    "training_manifest.json": "d13cfa35397f65ed5231aace10d0338480482f08aba3f14f4e4f5b55c9347510",
+    "contextual_transforms.pt": "524d213a82f158fddadab8973a28770a687138f528e269659430490affe74ae5"
+  },
+  "contextual_config": {
+    "internal": "context_last_r0.01",
+    "regularizer": 0.01,
+    "unknown_raw": 0.75,
+    "train_accuracy": 0.9988787615740741
+  },
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "reader": "component_top1",
+  "grid": [
+    [
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.5
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.5,
+      1.0
+    ],
+    [
+      1.0,
+      0.5,
+      0.5
+    ],
+    [
+      1.0,
+      0.5,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.5
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.5,
+      1.0,
+      1.0
+    ],
+    [
+      0.5,
+      1.0,
+      0.5
+    ],
+    [
+      0.5,
+      1.0,
+      0.0
+    ],
+    [
+      0.5,
+      0.5,
+      1.0
+    ],
+    [
+      0.5,
+      0.5,
+      0.5
+    ],
+    [
+      0.5,
+      0.5,
+      0.0
+    ],
+    [
+      0.5,
+      0.0,
+      1.0
+    ],
+    [
+      0.5,
+      0.0,
+      0.5
+    ],
+    [
+      0.5,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.5
+    ],
+    [
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.5,
+      1.0
+    ],
+    [
+      0.0,
+      0.5,
+      0.5
+    ],
+    [
+      0.0,
+      0.5,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.5
+    ],
+    [
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "fixed": {
+    "fixed_retain": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "fixed_global_clear": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "fixed_global_half": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "fixed_window2": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "fixed_window3": [
+      0.0,
+      1.0,
+      1.0
+    ]
+  },
+  "policies": [
+    "fixed_retain",
+    "fixed_global_clear",
+    "fixed_global_half",
+    "fixed_window2",
+    "fixed_window3",
+    "deterministic_random",
+    "reference_blind",
+    "learned_snapped",
+    "grid_classifier",
+    "learned",
+    "physics_cohort",
+    "exact_reference",
+    "oracle_grid"
+  ],
+  "features": [
+    "memory_norm",
+    "delta_norm",
+    "memory_delta_alignment",
+    "history_norm_fraction",
+    "last2_norm_fraction",
+    "last1_norm_fraction",
+    "history_delta_alignment",
+    "last2_delta_alignment",
+    "last1_delta_alignment",
+    "has_reference",
+    "reference_last1",
+    "reference_last2",
+    "reference_history",
+    "target_mass_fraction",
+    "reset_or_revoke_prelude",
+    "block_index",
+    "cohort_count",
+    "active_fact_count",
+    "fact_overlap",
+    "fact_duplicate"
+  ],
+  "projection_seeds": [
+    2301,
+    2302,
+    2303
+  ],
+  "controller_seeds": [
+    2611,
+    2617,
+    2621
+  ],
+  "epochs": 300,
+  "test_loaded": true,
+  "test_scored": true,
+  "group_counts": {
+    "train": 256,
+    "dev": 64,
+    "test": 128
+  }
+}
