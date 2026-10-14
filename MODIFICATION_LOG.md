@@ -2327,3 +2327,9 @@ session, excluding current and future sessions.  The exact oracle tie-break,
 cross-fold fixed comparator, resource-pilot prerequisite and five-point
 subject-macro headroom gate are now frozen in
 `POST_V15_PAPER_EXPERIMENT_PLAN.md`.  No Qwen row is scored by this builder.
+
+Added `scripts/chain_mquake_v15_to_v17_states.sh`.  It observes the same V15
+PID and terminal artifacts as the Branch-A watcher, exits without V17 work when
+V15 is supported, and launches only the model-free V17 state runner when V15 is
+audited and explicitly unsupported.  Missing/failed/invalid V15 states receive
+distinct terminal markers.
