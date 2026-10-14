@@ -97,34 +97,57 @@ def encode_pair(tokenizer, prompt, answer):
     return prefix, combined[len(prefix):]
 
 
+def encode_candidates(tokenizer, prompt, candidates):
+    prompt_ids = tokenizer.encode(prompt, add_special_tokens=False)
+    encoded = {}
+    for answer in candidates:
+        prefix, answer_ids = encode_pair(tokenizer, prompt, answer)
+        if prefix != prompt_ids:
+            raise RuntimeError("inconsistent prompt tokenization")
+        encoded[answer] = answer_ids
+    if len(encoded) != len(candidates):
+        raise ValueError("duplicate answer candidates")
+    return prompt_ids, encoded
+
+
 def score_query(model, tokenizer, memory, texts, spec):
     import torch
     from cbf_ttt.runtime import _nll_from_hidden
     from tasks.cbf_checkpoint_readout import PlainSession
 
     prompt = render_prompt(memory, texts, spec["statement"])
-    prompt_ids = tokenizer.encode(prompt, add_special_tokens=False)
+    prompt_ids, encoded = encode_candidates(tokenizer, prompt, spec["candidates"])
+    for answer_ids in encoded.values():
+        if len(prompt_ids) + len(answer_ids) > model.config.max_position_embeddings:
+            raise ValueError("prompt and answer exceed the checkpoint context limit")
     torch.cuda.synchronize()
     torch.cuda.reset_peak_memory_stats()
     start_allocated = torch.cuda.memory_allocated()
     start_reserved = torch.cuda.memory_reserved()
     started = time.perf_counter()
     scores, answer_lengths = {}, {}
-    for answer in spec["candidates"]:
-        prefix, answer_ids = encode_pair(tokenizer, prompt, answer)
-        if prefix != prompt_ids:
-            raise RuntimeError("inconsistent prompt tokenization")
-        total = len(prefix) + len(answer_ids)
-        if total > model.config.max_position_embeddings:
-            raise ValueError("prompt and answer exceed the checkpoint context limit")
-        session = PlainSession(model)
-        hidden = session._forward(prefix + answer_ids[:-1])
-        labels = torch.tensor(answer_ids, dtype=torch.long, device=session.device)
-        value = _nll_from_hidden(
-            model, hidden[:, len(prefix) - 1:len(prefix) - 1 + len(answer_ids)], labels)
+    prefix_session = PlainSession(model)
+    prefix_hidden = prefix_session._forward(prompt_ids)
+    prefix_cache_length = prefix_session.cache.get_seq_length()
+    if prefix_cache_length != len(prompt_ids):
+        raise RuntimeError("prompt cache length mismatch")
+    for answer, answer_ids in encoded.items():
+        if len(answer_ids) == 1:
+            hidden = prefix_hidden[:, -1:]
+        else:
+            branch = prefix_session.clone()
+            tail = branch._forward(answer_ids[:-1])
+            hidden = torch.cat((prefix_hidden[:, -1:], tail), dim=1)
+        labels = torch.tensor(answer_ids, dtype=torch.long, device=prefix_session.device)
+        value = _nll_from_hidden(model, hidden, labels)
         if not math.isfinite(value):
             raise RuntimeError("non-finite Qwen answer NLL")
         scores[answer] = value; answer_lengths[answer] = len(answer_ids)
+        del hidden, labels
+        if len(answer_ids) > 1:
+            del branch, tail
+    if prefix_session.cache.get_seq_length() != prefix_cache_length:
+        raise RuntimeError("candidate branch mutated the shared prompt cache")
     torch.cuda.synchronize()
     elapsed = time.perf_counter() - started
     resources = {
@@ -224,6 +247,7 @@ def collect(args):
              "model": args.model, "tokenizer": args.tokenizer,
              "loading_info": model_meta["loading_info"], "gpu": torch.cuda.get_device_name(),
              "readout_mode": "plain_ttt_disabled_fresh_kv",
+             "candidate_scoring": "one_prompt_forward_with_independent_answer_cache_branches",
              "model_provenance": {key: model_meta[key] for key in (
                  "path", "class", "config_sha256", "attention", "parameter_count",
                  "source_files_sha256", "excluded_adapters")}
