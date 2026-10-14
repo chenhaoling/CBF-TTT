@@ -10,16 +10,15 @@ class NaturalSemanticEmbeddingGeometryTest(unittest.TestCase):
             {"outer_fold": 0, "left_surface_id": "b", "right_surface_id": "c"},
             {"outer_fold": 1, "left_surface_id": "d", "right_surface_id": "e"},
         ]
-        self.assertEqual(surface_folds(rows), {"a": 0, "b": 0, "c": 0,
-                                              "d": 1, "e": 1})
+        self.assertEqual(surface_folds(rows), {"a": {0}, "b": {0}, "c": {0},
+                                              "d": {1}, "e": {1}})
 
-    def test_cross_fold_surface_is_rejected(self):
+    def test_cross_fold_surface_is_recorded(self):
         rows = [
             {"outer_fold": 0, "left_surface_id": "a", "right_surface_id": "b"},
             {"outer_fold": 1, "left_surface_id": "a", "right_surface_id": "c"},
         ]
-        with self.assertRaises(ValueError):
-            surface_folds(rows)
+        self.assertEqual(surface_folds(rows)["a"], {0, 1})
 
 
 if __name__ == "__main__":

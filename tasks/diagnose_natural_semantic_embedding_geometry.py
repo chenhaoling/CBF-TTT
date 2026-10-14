@@ -30,9 +30,7 @@ def surface_folds(pairs):
         fold = int(row["outer_fold"])
         for key in ("left_surface_id", "right_surface_id"):
             surface_id = row[key]
-            if surface_id in mapping and mapping[surface_id] != fold:
-                raise ValueError("surface crosses registered relation folds")
-            mapping[surface_id] = fold
+            mapping.setdefault(surface_id, set()).add(fold)
     return mapping
 
 
@@ -78,9 +76,12 @@ def run(args):
     for outer in range(FOLDS):
         inner = (outer + 1) % FOLDS
         train_folds = set(range(FOLDS)) - {outer, inner}
+        # Exclude a surface from the normalization statistics if any identical
+        # occurrence belongs to inner or outer folds. This makes the geometry
+        # diagnostic stricter than the registered relation split.
         train_indices = torch.tensor([
             index[surface_id] for surface_id in surface_ids
-            if folds[surface_id] in train_folds], device=device)
+            if folds[surface_id] <= train_folds], device=device)
         inner_pairs = [row for row in pairs if int(row["outer_fold"]) == inner]
         outer_pairs = [row for row in pairs if int(row["outer_fold"]) == outer]
         inner_labels = [int(row["same_relation"]) for row in inner_pairs]
@@ -139,6 +140,13 @@ def run(args):
                       - aggregate["raw"]["balanced_accuracy"] >= .05
                       else "pooling_or_supervision_requires_revision"),
         "dependencies": dependencies,
+        "surface_fold_overlap": {
+            "unique_surfaces": len(folds),
+            "surfaces_in_multiple_folds": sum(len(value) > 1 for value in folds.values()),
+            "maximum_folds_per_surface": max(map(len, folds.values())),
+            "fraction_in_multiple_folds": (
+                sum(len(value) > 1 for value in folds.values()) / len(folds)),
+        },
         "training_fold_statistics_only": True,
         "model_outcomes_loaded": False,
         "sealed_benchmarks_loaded": False,
