@@ -2587,3 +2587,24 @@ Stage-B runner exit handle, verifies the positive summary, independent audit,
 summary hash and terminal marker, and starts Stage C only after all release
 conditions pass. A failed or unsupported bridge produces an explicit terminal
 stop marker and never creates the physical-rule result root.
+
+### Stage-D causal deletion example construction
+
+Before any Stage-A outcome was available, tightened the Stage-D policy to a
+write-time historical-memory decision. The newest component is always written;
+the controller has no current-update acceptance output and receives no query
+text, answer, future loss, fold identity, episode length or absolute position.
+The registered target is 0/0.5/1 for harmful/neutral/helpful deletion under
+joint success. Exact-key group deletion supplies interaction credit to stale
+repetitions when deleting any single member is insufficient.
+
+Added `tasks/build_v18_causal_deletion_examples.py`, its independent auditor,
+runner, chain and focused tests. Each historical component receives thirteen
+normalized write-time features covering newest-event key cosine, exact key and
+value agreement/conflict, relative age, repetition fractions and similarity
+summaries. The builder joins the audited Stage-B single/key counterfactual arms
+to the audited Stage-C key geometry and emits all 9,280 historical components.
+The independent auditor separately reconstructs every feature, three-point
+target, group credit, NLL tie evidence, fold count, identity and source hash.
+The physical-to-example chain creates this dataset only after the physical
+summary and independent audit pass.
