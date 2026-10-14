@@ -11,6 +11,11 @@ from tasks.train_qwen_discrete_cohort_confirmation import (
     snap_retention,
     test_gate,
 )
+from scripts.audit_qwen_discrete_cohort_confirmation import (
+    development_gate as audit_development_gate,
+    prerequisites as audit_prerequisites,
+    test_gate as audit_test_gate,
+)
 
 
 class QwenDiscreteCohortConfirmationTest(unittest.TestCase):
@@ -61,11 +66,26 @@ class QwenDiscreteCohortConfirmationTest(unittest.TestCase):
 
     def test_registered_gates(self):
         training = {str(seed): {"interior_fraction": 0.2} for seed in SEEDS}
-        self.assertTrue(development_gate(self.passing_summary(), training)["passed"])
-        self.assertTrue(test_gate(self.passing_summary())["passed"])
+        summary = self.passing_summary()
+        self.assertEqual(
+            development_gate(summary, training),
+            audit_development_gate(summary, training),
+        )
+        self.assertEqual(test_gate(summary), audit_test_gate(summary))
+        self.assertTrue(development_gate(summary, training)["passed"])
+        self.assertTrue(test_gate(summary)["passed"])
         failed = self.passing_summary()
         failed["grid_classifier"] = self.policy(0.97, 0.2)
         self.assertFalse(development_gate(failed, training)["passed"])
+
+    def test_predecessor_prerequisite_boundary(self):
+        summary = self.passing_summary()
+        predecessor = {"development": summary}
+        self.assertTrue(all(audit_prerequisites(predecessor).values()))
+        summary["grid_classifier"] = self.policy(0.979, 0.15)
+        checks = audit_prerequisites(predecessor)
+        self.assertFalse(checks["grid_accuracy_at_least_point_985"])
+        self.assertFalse(checks["every_seed_at_least_point_98"])
 
 
 if __name__ == "__main__":
