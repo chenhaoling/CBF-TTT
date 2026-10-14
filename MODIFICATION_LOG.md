@@ -3652,3 +3652,37 @@ This selects a value for a new versioned content validation only. It neither
 repairs the failed V1 gate nor releases development; the next stage must test
 the complete multi-record ledger, fixed five-token generation, corrected
 wrong/twin controls, role and absent-value floors.
+
+Froze `QWEN_CAUSAL_LEDGER_RESIDUAL_V2_PLAN.md` and implemented a fresh
+`resource_v2` corpus at seed `202610163`, a new surface template and a disjoint
+`Y ...` value namespace. V2 fixes scale 32 and exactly five decoding steps,
+reports single Correct/Wrong/Zero/Random, a twin counterfactual only when the
+lifecycle preserves a distinct twin answer, dense visible-key summation,
+addressable top-1 and an exact lookup oracle. It records reset-induced twin
+equality rather than incorrectly treating an erased twin value as wrong.
+
+The first V2 formal attempt was stopped after 199 partial rows when audit code
+review found that the shared generator could still stop early on EOS/newline.
+It was marked failed, never summarized and excluded. Added an explicit
+fixed-length generation flag, re-smoked a different twin, and reran from a new
+root. The corrected run completed 1,008 queries in 322.17 seconds with
+7.668/7.693 GiB peak allocated/reserved memory. It passed all 12 registered
+checks and all six independent audit checks. Single Correct, addressable top-1
+and exact lookup reached 100% candidate and five-token exact; Wrong reached 0%
+truth and 100% injected-value exact. Zero/Random candidate accuracy was
+18.06/19.44%. All seven families, all roles and absent/null were 100%. On 234
+causally different twin rows, truth/twin exact was 0/100%. Dense visible-key
+summation reached only 60.42% candidate and 3.37% exact, establishing
+multi-record cross-talk and the necessity of sparse addressable readout in
+this controlled task.
+
+After the audited V2 pass and before any development row existed, froze
+`QWEN_CAUSAL_LEDGER_DEVELOPMENT_V2_PLAN.md`. Added a deterministic 64-group per
+family development builder and a scale-32 evaluator over 448 groups, 896
+episodes and 8,064 queries. Policies are no memory, retain-latest, global
+boundary clear, last-1, last-2, dense-full, full causal ledger and a semantic
+oracle. The registered gate requires at least a five-point exact gain over the
+strongest non-oracle comparator with bootstrap lower bound above two points,
+positive NLL lower bound, role/family/absence floors, nonnegative family and
+length gains, exact oracle agreement and a passing independent audit before
+confirmation can be generated.

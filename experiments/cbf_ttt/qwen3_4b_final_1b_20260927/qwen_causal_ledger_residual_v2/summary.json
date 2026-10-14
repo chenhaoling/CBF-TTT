@@ -1,0 +1,176 @@
+{
+  "protocol": "qwen_causal_ledger_residual_v2_validation_v1",
+  "scale": 32.0,
+  "rows": 1008,
+  "metrics": {
+    "single_correct": {
+      "candidate_accuracy": 1.0,
+      "truth_exact": 1.0,
+      "answer_nll": 0.010140350305831932
+    },
+    "single_wrong": {
+      "candidate_accuracy": 0.0,
+      "truth_exact": 0.0,
+      "answer_nll": 15.949158080513515,
+      "injected_exact": 1.0
+    },
+    "zero": {
+      "candidate_accuracy": 0.18055555555555555,
+      "truth_exact": 0.0,
+      "answer_nll": 6.307561074457471
+    },
+    "random": {
+      "candidate_accuracy": 0.19444444444444445,
+      "truth_exact": 0.0,
+      "answer_nll": 6.53751910158566
+    },
+    "dense_visible": {
+      "candidate_accuracy": 0.6041666666666666,
+      "truth_exact": 0.03373015873015873,
+      "answer_nll": 14.772290006307779
+    },
+    "addressable_top1": {
+      "candidate_accuracy": 1.0,
+      "truth_exact": 1.0,
+      "answer_nll": 0.010140350305831932
+    },
+    "exact_lookup": {
+      "candidate_accuracy": 1.0,
+      "truth_exact": 1.0,
+      "answer_nll": 0.010140350305831932
+    }
+  },
+  "primary_family_exact": {
+    "retain": 1.0,
+    "recent_revoke": 1.0,
+    "distant_revoke": 1.0,
+    "reset": 1.0,
+    "exact_duplicate": 1.0,
+    "overwritten_noop": 1.0,
+    "mixed_two_event": 1.0
+  },
+  "primary_role_exact": {
+    "current": 1.0,
+    "historical": 1.0,
+    "anchor": 1.0
+  },
+  "primary_absent_exact": 1.0,
+  "oracle_agreement": 1.0,
+  "twin_counterfactual": {
+    "rows": 234,
+    "groups": 39,
+    "families": [
+      "distant_revoke",
+      "exact_duplicate",
+      "mixed_two_event",
+      "overwritten_noop",
+      "recent_revoke",
+      "retain"
+    ],
+    "truth_exact": 0.0,
+    "twin_exact": 1.0
+  },
+  "nll_gain_intervals": {
+    "single_wrong": {
+      "mean": 15.939017730207683,
+      "bootstrap_95ci": [
+        15.789549143146129,
+        16.08822532175763
+      ]
+    },
+    "zero": {
+      "mean": 6.29742072415164,
+      "bootstrap_95ci": [
+        6.269478316403813,
+        6.326200373978685
+      ]
+    },
+    "random": {
+      "mean": 6.527378751279828,
+      "bootstrap_95ci": [
+        6.488753301752796,
+        6.563225815674423
+      ]
+    }
+  },
+  "gate": {
+    "checks": {
+      "primary_candidate_at_least_point_95": true,
+      "primary_exact_at_least_point_85": true,
+      "every_family_exact_at_least_point_80": true,
+      "current_anchor_at_least_point_90": true,
+      "historical_at_least_point_80": true,
+      "absent_at_least_point_85": true,
+      "exact_oracle_agreement": true,
+      "single_correct_candidate_exact_floor": true,
+      "wrong_truth_ceiling_and_injected_floor": true,
+      "zero_random_candidate_at_most_point_30": true,
+      "twin_truth_ceiling_and_twin_floor": true,
+      "all_nll_gain_ci_lowers_above_zero": true
+    },
+    "passed": true
+  },
+  "resources": {
+    "two_gpu_critical_path_seconds": 322.16947227716446,
+    "peak_allocated_gib": 7.667799949645996,
+    "peak_reserved_gib": 7.693359375,
+    "shards": [
+      {
+        "protocol": "qwen_causal_ledger_residual_v2_validation_v1",
+        "shard": 0,
+        "num_shards": 2,
+        "episodes": 56,
+        "rows": 504,
+        "seconds": 320.9688090328127,
+        "peak_allocated_gib": 7.667799949645996,
+        "peak_reserved_gib": 7.693359375,
+        "rows_sha256": "2089d08a21fd724f91a3a3b4d36fb3a1065ced6d76e1ae49a3375e3be8db3bcd",
+        "data_manifest_sha256": "35f12ef686a593c40602ac2fe178ebacef2eb037c7637f7ca7506e775285907e",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "scale": 32.0,
+        "seed": 202610163,
+        "development_generated": false,
+        "confirmation_generated": false,
+        "ood_generated": false
+      },
+      {
+        "protocol": "qwen_causal_ledger_residual_v2_validation_v1",
+        "shard": 1,
+        "num_shards": 2,
+        "episodes": 56,
+        "rows": 504,
+        "seconds": 322.16947227716446,
+        "peak_allocated_gib": 7.667799949645996,
+        "peak_reserved_gib": 7.693359375,
+        "rows_sha256": "e088d7fdf7c08067148c5d4a9966dccfcd78edf9dc0807fcec08505320520a0f",
+        "data_manifest_sha256": "35f12ef686a593c40602ac2fe178ebacef2eb037c7637f7ca7506e775285907e",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "scale": 32.0,
+        "seed": 202610163,
+        "development_generated": false,
+        "confirmation_generated": false,
+        "ood_generated": false
+      }
+    ]
+  },
+  "development_generated": false,
+  "confirmation_generated": false,
+  "ood_generated": false,
+  "next_stage": "independent_v2_audit_before_development"
+}

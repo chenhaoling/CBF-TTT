@@ -1,0 +1,45 @@
+{
+  "protocol": "qwen_causal_ledger_residual_v2_corpus_v1",
+  "phase": "resource_v2",
+  "seed": 202610163,
+  "groups_per_family": 8,
+  "families": [
+    "retain",
+    "recent_revoke",
+    "distant_revoke",
+    "reset",
+    "exact_duplicate",
+    "overwritten_noop",
+    "mixed_two_event"
+  ],
+  "template_sha256": "3fd20240e7d0abd3cc44d1b3f7668fc72224a0c55be00b3b77986011f4a97eb2",
+  "value_namespace": "Y plus four space-prefixed A-P tokens",
+  "value_pool_size": 16384,
+  "null": "Y P P P D",
+  "files_sha256": {
+    "resource_v2.inputs.jsonl": "0968258c1f3d4bb7415846fc3f3c4479c4f25df21bf7c446ef0ccc5775c57713",
+    "resource_v2.targets.jsonl": "2973a5fed1300e6e9160bd38c6f9b4fa3bd2959b47dcb7a81c5aa342e0b480f6"
+  },
+  "audit": {
+    "episodes": 112,
+    "groups": 56,
+    "counts": {
+      "resource_v2/retain": 16,
+      "resource_v2/recent_revoke": 16,
+      "resource_v2/distant_revoke": 16,
+      "resource_v2/reset": 16,
+      "resource_v2/exact_duplicate": 16,
+      "resource_v2/overwritten_noop": 16,
+      "resource_v2/mixed_two_event": 16
+    },
+    "causal_answers_verified": true,
+    "visible_parser_verified": true,
+    "counterfactual_twins_verified": true,
+    "phase_symbols_disjoint": true,
+    "oracle_actions_generated": false
+  },
+  "model_scored": false,
+  "development_generated": false,
+  "confirmation_generated": false,
+  "ood_generated": false
+}
