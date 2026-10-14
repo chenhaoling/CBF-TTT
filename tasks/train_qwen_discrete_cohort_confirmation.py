@@ -388,6 +388,11 @@ def run(args):
 
     root = Path(args.output)
     root.mkdir(parents=True, exist_ok=False)
+    progress_path = root / "progress.json"
+    write_json(
+        progress_path,
+        {"stage": "verify_inputs", "completed_seeds": [], "test_loaded": False},
+    )
     (
         data_manifest,
         config,
@@ -418,6 +423,10 @@ def run(args):
         args.batch_size,
     )
     extraction_seconds = time.perf_counter() - started
+    write_json(
+        progress_path,
+        {"stage": "development", "completed_seeds": [], "test_loaded": False},
+    )
 
     controllers_saved, training_meta, dev_seed, raw_hashes = {}, {}, {}, {}
     for offset, seed in enumerate(SEEDS):
@@ -437,6 +446,16 @@ def run(args):
         }
         dev_seed[str(seed)] = {}
         for policy in POLICIES:
+            write_json(
+                progress_path,
+                {
+                    "stage": "development",
+                    "completed_seeds": list(SEEDS[:offset]),
+                    "current_seed": seed,
+                    "current_policy": policy,
+                    "test_loaded": False,
+                },
+            )
             records = evaluate_policy(dev_pairs, policy, memory, controllers)
             dev_seed[str(seed)][policy] = aggregate(records)
             path = root / f"dev_seed{seed}_{policy}.jsonl"
@@ -444,23 +463,50 @@ def run(args):
             raw_hashes[path.name] = sha(path)
         del memory
         torch.cuda.empty_cache()
+        write_json(
+            progress_path,
+            {
+                "stage": "development",
+                "completed_seeds": list(SEEDS[: offset + 1]),
+                "test_loaded": False,
+            },
+        )
     dev = multi_seed_summary(dev_seed)
     dev_gate = development_gate(dev, training_meta)
 
     test_scored, test, test_release, test_embedding_meta = False, None, None, None
     if dev_gate["passed"]:
+        write_json(
+            progress_path,
+            {
+                "stage": "test_extraction",
+                "completed_seeds": list(SEEDS),
+                "test_loaded": True,
+            },
+        )
         test_pairs = load_split(args.data_root, "test")
         test_embeddings, test_hashes, test_extraction, _ = extract_embeddings(
             test_pairs, transforms, args.model, args.tokenizer, args.batch_size
         )
         test_seed = {}
-        for seed in SEEDS:
+        for test_offset, seed in enumerate(SEEDS):
             memory = move_embeddings(test_embeddings[str(seed)], "cuda")
             controllers = restore_controllers(
                 controllers_saved[str(seed)], len(FEATURE_NAMES)
             )
             test_seed[str(seed)] = {}
             for policy in POLICIES:
+                write_json(
+                    progress_path,
+                    {
+                        "stage": "test",
+                        "completed_seeds": list(SEEDS),
+                        "completed_test_seeds": list(SEEDS[:test_offset]),
+                        "current_seed": seed,
+                        "current_policy": policy,
+                        "test_loaded": True,
+                    },
+                )
                 records = evaluate_policy(test_pairs, policy, memory, controllers)
                 test_seed[str(seed)][policy] = aggregate(records)
                 path = root / f"test_seed{seed}_{policy}.jsonl"
@@ -542,6 +588,16 @@ def run(args):
     write_json(root / "training.json", training)
     write_json(root / "manifest.json", manifest)
     write_json(root / "summary.json", result)
+    write_json(
+        progress_path,
+        {
+            "stage": "complete",
+            "completed_seeds": list(SEEDS),
+            "test_loaded": test_scored,
+            "development_gate_passed": dev_gate["passed"],
+            "test_gate_passed": bool(test_release and test_release["passed"]),
+        },
+    )
     return result
 
 
