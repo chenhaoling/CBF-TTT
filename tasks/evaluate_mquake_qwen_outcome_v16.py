@@ -98,10 +98,17 @@ def encode_pair(tokenizer, prompt, answer):
 
 
 def score_query(model, tokenizer, memory, texts, spec):
-    from cbf_ttt.runtime import CBFSession
+    import torch
+    from cbf_ttt.runtime import _nll_from_hidden
+    from tasks.cbf_checkpoint_readout import PlainSession
 
     prompt = render_prompt(memory, texts, spec["statement"])
     prompt_ids = tokenizer.encode(prompt, add_special_tokens=False)
+    torch.cuda.synchronize()
+    torch.cuda.reset_peak_memory_stats()
+    start_allocated = torch.cuda.memory_allocated()
+    start_reserved = torch.cuda.memory_reserved()
+    started = time.perf_counter()
     scores, answer_lengths = {}, {}
     for answer in spec["candidates"]:
         prefix, answer_ids = encode_pair(tokenizer, prompt, answer)
@@ -110,10 +117,24 @@ def score_query(model, tokenizer, memory, texts, spec):
         total = len(prefix) + len(answer_ids)
         if total > model.config.max_position_embeddings:
             raise ValueError("prompt and answer exceed the checkpoint context limit")
-        value = CBFSession(model).score_answer(prefix, answer_ids)
+        session = PlainSession(model)
+        hidden = session._forward(prefix + answer_ids[:-1])
+        labels = torch.tensor(answer_ids, dtype=torch.long, device=session.device)
+        value = _nll_from_hidden(
+            model, hidden[:, len(prefix) - 1:len(prefix) - 1 + len(answer_ids)], labels)
         if not math.isfinite(value):
             raise RuntimeError("non-finite Qwen answer NLL")
         scores[answer] = value; answer_lengths[answer] = len(answer_ids)
+    torch.cuda.synchronize()
+    elapsed = time.perf_counter() - started
+    resources = {
+        "seconds": elapsed,
+        "candidate_scores": len(spec["candidates"]),
+        "gpu_start_allocated_gib": start_allocated / 2**30,
+        "gpu_start_reserved_gib": start_reserved / 2**30,
+        "gpu_peak_allocated_gib": torch.cuda.max_memory_allocated() / 2**30,
+        "gpu_peak_reserved_gib": torch.cuda.max_memory_reserved() / 2**30,
+    }
     prediction = min(spec["candidates"], key=lambda value: (scores[value], value))
     return {"kind": spec["kind"], "statement": spec["statement"],
             "answer": spec["answer"], "candidates": spec["candidates"],
@@ -121,7 +142,8 @@ def score_query(model, tokenizer, memory, texts, spec):
             "prediction": prediction, "correct": int(prediction == spec["answer"]),
             "answer_nll": scores[spec["answer"]], "prompt_tokens": len(prompt_ids),
             "total_tokens_max": len(prompt_ids) + max(answer_lengths.values()),
-            "prompt_sha256": __import__("hashlib").sha256(prompt.encode()).hexdigest()}
+            "prompt_sha256": __import__("hashlib").sha256(prompt.encode()).hexdigest(),
+            "resources": resources}
 
 
 def verify_v15(root):
@@ -142,7 +164,7 @@ def verify_v15(root):
 def collect(args):
     import torch
     from transformers import AutoTokenizer
-    from tasks.cbf_checkpoint_native import load_model
+    from tasks.cbf_checkpoint_readout import load_plain
 
     sample_root, output = Path(args.sample_root), Path(args.output)
     if output.exists():
@@ -158,8 +180,16 @@ def collect(args):
     episodes, texts = source_index(args.data_root)
     torch.manual_seed(1601); torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False; torch.cuda.reset_peak_memory_stats()
-    model, model_meta = load_model(args.model, "step81381_native")
+    model, model_meta = load_plain(args.model)
+    if model.config.ttt_mode or not model_meta["excluded_adapters"]:
+        raise ValueError("V16 requires the final slow weights with native TTT adapters disabled")
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True)
+    tokenizer_files = {
+        path.name: sha(path) for path in sorted(Path(args.tokenizer).iterdir())
+        if path.is_file() and path.suffix in {".json", ".model", ".txt", ".tiktoken"}
+    }
+    if not tokenizer_files:
+        raise ValueError("no tokenizer provenance files")
     started = time.perf_counter(); records = []
     with output.open("x") as sink:
         for index, sample in enumerate(samples):
@@ -179,15 +209,26 @@ def collect(args):
             sink.write(json.dumps(row, ensure_ascii=False) + "\n"); sink.flush(); records.append(row)
             print(json.dumps({"completed": index + 1, "total": len(samples),
                               "episode_id": sample["episode_id"]}), flush=True)
+    queries = [query for row in records for policy in POLICIES
+               for query in row["policies"][policy]["queries"]]
     audit = {"protocol": PROTOCOL, "shard": args.shard, "num_shards": args.num_shards,
              "rows": len(records), "rows_sha256": sha(output),
              "sample_manifest_sha256": sha(sample_root / "manifest.json"),
              "pilot_sha256": sample_manifest["pilot_sha256"], "v15_hashes": v15_hashes,
              "seconds": time.perf_counter() - started,
-             "gpu_peak_allocated_gib": torch.cuda.max_memory_allocated() / 2**30,
-             "gpu_peak_reserved_gib": torch.cuda.max_memory_reserved() / 2**30,
+             "query_measurements": len(queries),
+             "gpu_peak_allocated_gib": max(query["resources"]["gpu_peak_allocated_gib"]
+                                            for query in queries),
+             "gpu_peak_reserved_gib": max(query["resources"]["gpu_peak_reserved_gib"]
+                                           for query in queries),
              "model": args.model, "tokenizer": args.tokenizer,
              "loading_info": model_meta["loading_info"], "gpu": torch.cuda.get_device_name(),
+             "readout_mode": "plain_ttt_disabled_fresh_kv",
+             "model_provenance": {key: model_meta[key] for key in (
+                 "path", "class", "config_sha256", "attention", "parameter_count",
+                 "source_files_sha256", "excluded_adapters")}
+                 | {"ttt_mode": model_meta["config"]["ttt_mode"]},
+             "tokenizer_files_sha256": tokenizer_files,
              "torch": torch.__version__, "transformers": __import__("transformers").__version__,
              "policies": list(POLICIES), "external_sets_loaded": False}
     write_json(str(output) + ".audit.json", audit); return audit
@@ -197,11 +238,22 @@ def aggregate(rows):
     output = {}
     for policy in POLICIES:
         queries = [query for row in rows for query in row["policies"][policy]["queries"]]
+        latencies = sorted(row["resources"]["seconds"] for row in queries)
         output[policy] = {
             "queries": len(queries), "accuracy": statistics.fmean(row["correct"] for row in queries),
             "answer_nll": statistics.fmean(row["answer_nll"] for row in queries),
             "max_prompt_tokens": max(row["prompt_tokens"] for row in queries),
             "max_total_tokens": max(row["total_tokens_max"] for row in queries),
+            "resources": {
+                "mean_seconds_per_query": statistics.fmean(latencies),
+                "median_seconds_per_query": statistics.median(latencies),
+                "p95_seconds_per_query": latencies[math.ceil(.95 * len(latencies)) - 1],
+                "max_seconds_per_query": max(latencies),
+                "max_gpu_peak_allocated_gib": max(
+                    row["resources"]["gpu_peak_allocated_gib"] for row in queries),
+                "max_gpu_peak_reserved_gib": max(
+                    row["resources"]["gpu_peak_reserved_gib"] for row in queries),
+            },
             "by_kind": {kind: {"queries": sum(row["kind"] == kind for row in queries),
                                 "accuracy": statistics.fmean(row["correct"] for row in queries
                                                              if row["kind"] == kind),
@@ -217,7 +269,16 @@ def aggregate(rows):
               "all_rows_present": len(rows) == 40,
               "all_scores_finite": all(math.isfinite(query["answer_nll"])
                   for row in rows for policy in POLICIES for query in row["policies"][policy]["queries"]),
-              "all_within_context": max(value["max_total_tokens"] for value in output.values()) <= 40960}
+              "all_within_context": max(value["max_total_tokens"] for value in output.values()) <= 40960,
+              "per_query_resources_complete": all(
+                  query["resources"]["seconds"] > 0
+                  and query["resources"]["candidate_scores"] == len(query["candidates"])
+                  and query["resources"]["gpu_peak_allocated_gib"]
+                      >= query["resources"]["gpu_start_allocated_gib"]
+                  and query["resources"]["gpu_peak_reserved_gib"]
+                      >= query["resources"]["gpu_start_reserved_gib"]
+                  for row in rows for policy in POLICIES
+                  for query in row["policies"][policy]["queries"])}
     return {"policies": output, "oracle_primary_accuracy": oracle_primary,
             "pilot_gate": {"checks": checks, "passed": all(checks.values())}}
 

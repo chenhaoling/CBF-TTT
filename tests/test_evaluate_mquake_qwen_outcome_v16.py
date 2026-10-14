@@ -3,7 +3,7 @@
 import unittest
 
 from tasks.evaluate_mquake_qwen_outcome_v16 import (
-    encode_pair, policy_memory, query_specs, render_prompt,
+    aggregate, encode_pair, policy_memory, query_specs, render_prompt,
 )
 
 
@@ -54,6 +54,33 @@ class QwenOutcomePilotTest(unittest.TestCase):
         prompt, answer = encode_pair(Tokenizer(), "Answer:\n", "Alice")
         self.assertEqual(bytes(prompt).decode(), "Answer:\n")
         self.assertEqual(bytes(answer).decode(), "Alice")
+
+    def test_aggregate_reports_per_query_resources(self):
+        def query(kind, correct):
+            return {"kind": kind, "correct": correct, "answer_nll": 1.0,
+                    "prompt_tokens": 10, "total_tokens_max": 12,
+                    "candidates": ["A", "B"], "resources": {
+                        "seconds": .25, "candidate_scores": 2,
+                        "gpu_start_allocated_gib": 8.0,
+                        "gpu_start_reserved_gib": 8.5,
+                        "gpu_peak_allocated_gib": 9.0,
+                        "gpu_peak_reserved_gib": 9.5}}
+        rows = []
+        for _ in range(40):
+            rows.append({"policies": {
+                "no_memory": {"queries": [query(kind, 0) for kind in
+                                             ("primary_old_phrase", "primary_current_phrase",
+                                              "hard_retain", "unrelated")]},
+                "oracle": {"queries": [query(kind, 1) for kind in
+                                          ("primary_old_phrase", "primary_current_phrase",
+                                           "hard_retain", "unrelated")]},
+            }})
+        result = aggregate(rows)
+        self.assertTrue(result["pilot_gate"]["passed"])
+        self.assertEqual(result["policies"]["oracle"]["resources"]
+                         ["max_gpu_peak_reserved_gib"], 9.5)
+        self.assertEqual(result["policies"]["oracle"]["resources"]
+                         ["p95_seconds_per_query"], .25)
 
 
 if __name__ == "__main__":
