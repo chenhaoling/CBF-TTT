@@ -1,0 +1,152 @@
+{
+  "files_sha256": {
+    "outer_0.jsonl": "33809686262c968ebde39c13afb656fd45635f956254f93f0aba62076cc8e231",
+    "outer_1.jsonl": "a7de5a39e75401b69c96d5811508bf759e10f56998bdaa8f887369e0a9c9adb3",
+    "outer_2.jsonl": "8bf1d1bfc456cd0d48b6829c01f97c40c09df5c3e00f3c4d3952889c5078fef9",
+    "outer_3.jsonl": "7c977ae8e339645a7cb282a5fc67bff58c301824c4b26d45a796655d1831978b",
+    "outer_4.jsonl": "84a33b1f715a258dd4a92a2ccc4549a84a3731e4c1e83e9dcb6db4babcb0bc2d"
+  },
+  "fold_summaries": {
+    "0": {
+      "balance_weight_max": 25.65368338662913,
+      "balance_weight_min": 0.8362861776866878,
+      "checks": {
+        "effective_sample_size_fraction": 0.8644685459465361,
+        "inverse_sqrt_group_frequency_exact": true,
+        "maximum_row_weight": 25.65368338662913,
+        "mean_row_weight_one": true,
+        "resource_gate_passed": true,
+        "within_relation_source_group_equal": true
+      },
+      "effective_sample_size": 11803.453526354004,
+      "inner_fold": 1,
+      "train_folds": [
+        2,
+        3,
+        4
+      ],
+      "train_relations": 22,
+      "train_rows": 13654,
+      "train_source_rows": {
+        "counterfact": 13201,
+        "mquake": 453
+      },
+      "train_subjects": 13026
+    },
+    "1": {
+      "balance_weight_max": 25.809679579138262,
+      "balance_weight_min": 0.8440667789037605,
+      "checks": {
+        "effective_sample_size_fraction": 0.922001717181155,
+        "inverse_sqrt_group_frequency_exact": true,
+        "maximum_row_weight": 25.809679579138262,
+        "mean_row_weight_one": true,
+        "resource_gate_passed": true,
+        "within_relation_source_group_equal": true
+      },
+      "effective_sample_size": 12458.087202551766,
+      "inner_fold": 2,
+      "train_folds": [
+        0,
+        3,
+        4
+      ],
+      "train_relations": 21,
+      "train_rows": 13512,
+      "train_source_rows": {
+        "counterfact": 12276,
+        "mquake": 1236
+      },
+      "train_subjects": 12158
+    },
+    "2": {
+      "balance_weight_max": 25.59708780122301,
+      "balance_weight_min": 0.8335558653129268,
+      "checks": {
+        "effective_sample_size_fraction": 0.8211096561348139,
+        "inverse_sqrt_group_frequency_exact": true,
+        "maximum_row_weight": 25.59708780122301,
+        "mean_row_weight_one": true,
+        "resource_gate_passed": true,
+        "within_relation_source_group_equal": true
+      },
+      "effective_sample_size": 11043.924875013246,
+      "inner_fold": 3,
+      "train_folds": [
+        0,
+        1,
+        4
+      ],
+      "train_relations": 24,
+      "train_rows": 13450,
+      "train_source_rows": {
+        "counterfact": 12649,
+        "mquake": 801
+      },
+      "train_subjects": 11890
+    },
+    "3": {
+      "balance_weight_max": 25.292836122061903,
+      "balance_weight_min": 0.8236480674546122,
+      "checks": {
+        "effective_sample_size_fraction": 0.8035271487501041,
+        "inverse_sqrt_group_frequency_exact": true,
+        "maximum_row_weight": 25.292836122061903,
+        "mean_row_weight_one": true,
+        "resource_gate_passed": true,
+        "within_relation_source_group_equal": true
+      },
+      "effective_sample_size": 10739.140343045141,
+      "inner_fold": 4,
+      "train_folds": [
+        0,
+        1,
+        2
+      ],
+      "train_relations": 25,
+      "train_rows": 13365,
+      "train_source_rows": {
+        "counterfact": 12558,
+        "mquake": 807
+      },
+      "train_subjects": 11844
+    },
+    "4": {
+      "balance_weight_max": 25.421389947173306,
+      "balance_weight_min": 0.8278343559793913,
+      "checks": {
+        "effective_sample_size_fraction": 0.8038721205114578,
+        "inverse_sqrt_group_frequency_exact": true,
+        "maximum_row_weight": 25.421389947173306,
+        "mean_row_weight_one": true,
+        "resource_gate_passed": true,
+        "within_relation_source_group_equal": true
+      },
+      "effective_sample_size": 10857.900731748261,
+      "inner_fold": 0,
+      "train_folds": [
+        1,
+        2,
+        3
+      ],
+      "train_relations": 25,
+      "train_rows": 13507,
+      "train_source_rows": {
+        "counterfact": 13045,
+        "mquake": 462
+      },
+      "train_subjects": 12318
+    }
+  },
+  "folds": 5,
+  "inner_fold_rule": "(outer_fold + 1) mod 5",
+  "inventory_manifest_sha256": "df3002f4913663ef829b865b3d1502305b712f5a96c401568c413a9fa2862836",
+  "model_outcomes_loaded": false,
+  "protocol": "post_v20_semantic_controller_nested_balancing_v2",
+  "row_usage": "once_per_epoch_without_cross_fold_copying",
+  "sealed_benchmarks_loaded": false,
+  "seed": "post-v20-semantic-controller-balance-v2",
+  "semantic_rows_sha256": "222f7c51d384a9e26da93ecfd0dda91dd0add148c9901e5765f2fe4458614a99",
+  "temperature_exponent": 0.5,
+  "weighting": "inverse square-root relation-source group frequency"
+}

@@ -6,7 +6,9 @@
 
 本地及 hku-gpu2 四项测试通过。真实清单源哈希分别为 CounterFact `d0170561...fc6f`、MQuAKE-T `58500a1d...9f2`、ZsRE calibration `d19bb92c...ec6f`；23,413 条候选语义记录中保留 22,496 条，排除 917 条跨折主体冲突和全部 374 条 MQuAKE dev；ZsRE calibration 因主体重叠排除 7 条，保留 260 条。五折同时满足 relation-disjoint、subject-disjoint 和非空，独立重算审计全部通过，manifest SHA256 为 `df3002f4913663ef829b865b3d1502305b712f5a96c401568c413a9fa2862836`。小型记录位于 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/semantic_controller_source_inventory_v1/`，完整数据只保留服务器 `/home/ctj/cbf_ttt_semantic_controller_inventory_20261014`。
 
-清单同时揭示不可消除的来源失衡：MQuAKE train+tune 的 1,494 条记录中 P6=995、P35=481，其余五个关系合计18；五折 MQuAKE 行数为790/10/7/445/1。不能在保持关系隔离时伪造来源均衡，因此在结果揭示前补充固定：训练使用关系均衡批次，共享关系内等量来源采样；评测报告 micro、subject-macro、relation-macro 与分来源指标，不复制关系或样本。该清单不是效果证据，只有 V19/V20 前置门槛通过后才允许训练语义控制器；所有改动均为 opt-in 数据工具，不改变 baseline、原生 `ttt_proj/ttt_conv` 或默认推理。
+清单同时揭示不可消除的来源失衡：MQuAKE train+tune 的 1,494 条记录中 P6=995、P35=481，其余五个关系合计18；五折 MQuAKE 行数为790/10/7/445/1。不能在保持关系隔离时伪造来源均衡，因此在结果揭示前要求使用下述频次温度权重，并报告 micro、subject-macro、relation-macro 与分来源指标，不复制关系或样本。该清单不是效果证据，只有 V19/V20 前置门槛通过后才允许训练语义控制器；所有改动均为 opt-in 数据工具，不改变 baseline、原生 `ttt_proj/ttt_conv` 或默认推理。
+
+随后新增 `tasks/prepare_semantic_controller_balancing.py`、`scripts/audit_semantic_controller_balancing.py` 与 `tests/test_semantic_controller_balancing.py`，把五折 outer/inner/train 角色和频次权重固定为可复算工件。首次完全等关系/共享来源权重仅使用计数，但真实清单上将约13,500条训练记录的有效样本量降至239--1,534，最大单条权重560；因此在任何模型 outcome 可见前明确拒绝。最终 v2 使用 relation-source group 频次 `n^-0.5`、均值归一化、每行每epoch一次；五折有效样本量10,739--12,458（80.35%--92.20%），最大权重25.29--25.81，全部资源门槛和独立逐行重算审计通过，manifest SHA256 为 `9eed136cb71ba92df18252dc80232bf691a5e0337ae88208babef33f2c4d795c`。反序输入测试还发现普通浮点求和的约1e-15顺序差，现按row ID排序并用`math.fsum`消除，保证逐字节复现。完整权重保留服务器 `/home/ctj/cbf_ttt_semantic_controller_balancing_sqrt_20261014`，compact manifest/audit 已归档。
 
 ## 目标与方法理解
 
