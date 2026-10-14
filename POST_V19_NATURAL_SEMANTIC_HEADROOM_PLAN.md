@@ -65,7 +65,11 @@ The current update is always the last component and can never be deleted.
 Every episode includes two update queries on different surfaces, two retained
 fact queries and one self-contained locality query. Candidate answers contain
 the old value, current value and three donor values; free generation is also
-recorded.
+recorded. After data construction and before model scoring, the frozen rows
+contain only 1--10-token candidate values under the Qwen3 tokenizer; the
+scorer therefore fixes candidate support to 1--10 tokens and greedy generation
+to 16 tokens. The longest pilot retain-all prompt is 1,826 tokens, below the
+checkpoint context limit.
 
 ## Frozen causal arms
 

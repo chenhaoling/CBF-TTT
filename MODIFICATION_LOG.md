@@ -2975,3 +2975,22 @@ all 400 episodes and states, checks source hashes, five-fold balance,
 pilot/formal isolation, query candidates, current-update retention and both
 causal state definitions. This stage does not load Qwen outcomes or any sealed
 benchmark.
+
+The first construction attempt stopped before producing a manifest because a
+pilot relation had only one selected target and could not supply the required
+same-relation other-subject distractor. The deterministic selector now chooses
+targets in relation pairs inside each split; it does not relax the distractor
+requirement. A fresh retry produced 80 pilot and 320 formal rows with 16/64 per
+fold, equal length and mechanism counts, 36 relations, zero exact-surface
+deletions and 488/1,952 semantic deletions. All nine independent data checks
+pass. Manifest/audit SHA256 values are
+`d5cecdde72c2080c2c9eef0b3a52cb8cb23197ce2affde4372aa55205f903185`
+and `91fa2276adc31c95331d0fd6cdec579e0b2a7b277c0790f95f0deae4883bb3d0`.
+
+Added the variable-length Qwen scorer, outcome auditor, pilot runner and
+aggregation tests. The scorer accepts the observed 1--10-token natural values,
+uses 16-token free generation, deduplicates equivalent causal states and keeps
+formal scoring locked behind an audited passing pilot. The outcome auditor
+reconstructs prompt hashes, state sharing, predictions, resource counts,
+clustered intervals and the complete scientific gate. The longest pilot
+retain-all prompt is 1,826 tokens.
