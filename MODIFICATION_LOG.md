@@ -3408,3 +3408,15 @@ completion from logs or missing processes, requires its independent audit and
 one-time test gate to pass, records a separate release decision, and only then
 invokes the OOD runner plus auditor.  A failed confirmation leaves the formal
 OOD root uncreated.
+
+Before confirmation seed 2303, hidden test, or lifecycle OOD outcomes were
+available, froze `QWEN_DISCRETE_RESIDUAL_READOUT_PLAN.md`.  This conditional
+bridge uses a fresh seed-`202610155` corpus and applies the frozen discrete
+controller to an actual final-hidden-state Qwen low-rank residual read by the
+original LM head.  It begins with the requested eight-group resource pilot,
+full `{0,0.5,1}^3` labels and sparse boundaries, records per-label time and peak
+memory, and chooses only among predeclared 16/32/64-group formal sizes.  The
+protocol fixes content interventions, all policies, actual-Qwen counterfactual
+oracle, scales 4/8/16, source-group inference and ten release checks.  It
+explicitly preserves the negative native dense `ttt_conv`/`ttt_proj` result and
+cannot run unless both confirmation and lifecycle OOD audits pass.
