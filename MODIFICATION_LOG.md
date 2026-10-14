@@ -2317,3 +2317,13 @@ chain, exits cleanly when V15 is unsupported or the pilot gate fails, and only
 then runs the audited formal-state freezer followed by the two-GPU formal Qwen
 runner.  State/audit or runner failures produce distinct terminal markers; it
 never launches an external benchmark.
+
+Before V15 produced any terminal metric, added the conditional Branch-B state
+freezer `tasks/build_mquake_qwen_headroom_v17_states.py` and focused tests.  It
+can run only when V15 is terminal, independently audited, and explicitly
+unsupported.  For the frozen 40-row pilot and 272-row formal samples it records
+the five fixed arms and every causal single deletion of a visible historical
+session, excluding current and future sessions.  The exact oracle tie-break,
+cross-fold fixed comparator, resource-pilot prerequisite and five-point
+subject-macro headroom gate are now frozen in
+`POST_V15_PAPER_EXPERIMENT_PLAN.md`.  No Qwen row is scored by this builder.
