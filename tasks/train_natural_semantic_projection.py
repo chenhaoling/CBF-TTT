@@ -31,6 +31,12 @@ EMBEDDING_AUDIT_SHA256 = (
 RAW_BASELINE_SUMMARY_SHA256 = (
     "3d51630c668a692aa8ac1d822cfe001aa6e9d96c2261d3c42e860393d9344d37"
 )
+MULTIVIEW_AUDIT_SHA256 = (
+    "ea817bab098ce41446309fa79a76f5eb4cc6afa6037a78c481f775e8057f28fb"
+)
+MULTIVIEW_PAIR_SUMMARY_SHA256 = (
+    "f8e2ba5a21dd8343278f54627444c02be0d6e59a72a777451feaaf6aa9f4b999"
+)
 SEEDS = (22031, 22037, 22043)
 EPOCHS = (25, 50, 100)
 RANK = 16
@@ -197,14 +203,55 @@ def verify_dependencies(pair_root, embedding_root, raw_root):
     }, raw_summary
 
 
+def verify_multiview_dependencies(pair_root, embedding_root, raw_root):
+    from tasks.extract_natural_semantic_multiview_embeddings import VIEWS
+    pair_root, embedding_root, raw_root = map(Path, (
+        pair_root, embedding_root, raw_root))
+    audit = json.loads((embedding_root / "audit.json").read_text())
+    raw_summary = json.loads((raw_root / "results/summary.json").read_text())
+    checks = (
+        sha(pair_root / "manifest.json") == PAIR_MANIFEST_SHA256,
+        sha(pair_root / "pairs.jsonl") == PAIR_ROWS_SHA256,
+        sha(embedding_root / "audit.json") == MULTIVIEW_AUDIT_SHA256,
+        audit.get("audit_passed") is True,
+        audit.get("views") == list(VIEWS),
+        (embedding_root / "runner_exit_code.txt").read_text().strip() == "0",
+        sha(raw_root / "results/summary.json") == MULTIVIEW_PAIR_SUMMARY_SHA256,
+        raw_summary.get("terminal_status")
+            == "completed_natural_semantic_multiview_pair_diagnostic",
+        (raw_root / "runner_exit_code.txt").read_text().strip() == "0",
+    )
+    if not all(checks):
+        raise ValueError("multiview projection requires frozen audited dependencies")
+    return {
+        "pair_manifest_sha256": sha(pair_root / "manifest.json"),
+        "pairs_sha256": sha(pair_root / "pairs.jsonl"),
+        "multiview_audit_sha256": sha(embedding_root / "audit.json"),
+        "multiview_pair_summary_sha256": sha(raw_root / "results/summary.json"),
+    }, raw_summary
+
+
 def train(args):
     import torch
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=False)
-    dependencies, raw_summary = verify_dependencies(
-        args.pair_root, args.embedding_root, args.raw_root)
+    if args.embedding_view == "mean":
+        dependencies, raw_summary = verify_dependencies(
+            args.pair_root, args.embedding_root, args.raw_root)
+        surface_ids, embedding_cpu = load_embeddings(args.embedding_root)
+        raw_balanced = raw_summary["aggregate"]["balanced_accuracy"]
+        protocol = PROTOCOL
+    else:
+        from tasks.extract_natural_semantic_multiview_embeddings import (
+            load_multiview_embeddings,
+        )
+        dependencies, raw_summary = verify_multiview_dependencies(
+            args.pair_root, args.embedding_root, args.raw_root)
+        surface_ids, views = load_multiview_embeddings(args.embedding_root)
+        embedding_cpu = views[args.embedding_view]
+        raw_balanced = raw_summary["nested_selected_oof"]["balanced_accuracy"]
+        protocol = f"natural_semantic_rank16_{args.embedding_view}_projection_v2"
     pairs = load_jsonl(Path(args.pair_root) / "pairs.jsonl")
-    surface_ids, embedding_cpu = load_embeddings(args.embedding_root)
     surface_index = {value: index for index, value in enumerate(surface_ids)}
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     torch.manual_seed(2201)
@@ -325,7 +372,6 @@ def train(args):
         by_kind[kind] = binary_metrics(
             [row["same_relation"] for row in selected],
             [row["ensemble_prediction"] for row in selected])
-    raw_balanced = raw_summary["aggregate"]["balanced_accuracy"]
     checks = {
         "complete_nested_oof_coverage": (
             len(output_rows) == len(pairs)
@@ -351,11 +397,13 @@ def train(args):
             sink.write(json.dumps(row) + "\n")
     checkpoint_path = output / "projection_checkpoints.pt"
     torch.save({
-        "protocol": PROTOCOL, "rank": RANK, "seeds": SEEDS,
+        "protocol": protocol, "embedding_view": args.embedding_view,
+        "rank": RANK, "seeds": SEEDS,
         "embedding_dim": embeddings.shape[1], "folds": checkpoint_folds,
     }, checkpoint_path)
     result = {
-        "protocol": PROTOCOL,
+        "protocol": protocol,
+        "embedding_view": args.embedding_view,
         "rows": len(output_rows),
         "ensemble_oof": ensemble,
         "per_seed_oof": per_seed,
@@ -406,6 +454,9 @@ def main():
     parser.add_argument("--embedding-root", required=True)
     parser.add_argument("--raw-root", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--embedding-view", default="mean",
+                        choices=("mean", "last_token", "last8_mean",
+                                 "subject_context8_mean"))
     result = train(parser.parse_args())
     print(json.dumps(result, indent=2))
 
