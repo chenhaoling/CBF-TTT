@@ -31,6 +31,7 @@ class OutcomeBuildTest(unittest.TestCase):
         got = identity(row, 0, texts)
         self.assertEqual(got["old"]["unit_id"], "o")
         self.assertEqual(got["current"]["unit_id"], "n")
+        self.assertEqual(got["query_step"], 3)
         self.assertEqual(got["hard_retain"]["unit_id"], "h")
         self.assertTrue(got["hard_relation_matched"])
         self.assertEqual(got["unrelated"]["unit_id"], "d")
@@ -40,6 +41,15 @@ class OutcomeBuildTest(unittest.TestCase):
         texts = {key: f"Memory statement: {key}?\nValue: value-{key}" for key in "dohn"}
         got = identity(row, 0, texts)
         self.assertFalse(got["hard_relation_matched"])
+
+    def test_safety_units_are_visible_at_query_step(self):
+        row = episode("s", 0, 16, 0)
+        row["sessions"].append({"session_id": "future", "units": ["f"],
+                                "event_kind": "distractor", "desired": "retain",
+                                "target_session_id": None, "hard_relation_matched": None})
+        texts = {key: f"Memory statement: {key}?\nValue: value-{key}" for key in "dohnf"}
+        got = identity(row, 0, texts)
+        self.assertNotEqual(got["unrelated_session_id"], "future")
 
     def test_pilot_is_complete_and_deterministic(self):
         rows, folds = [], {}

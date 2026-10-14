@@ -46,10 +46,12 @@ def identity(episode: dict, fold: int, texts: dict[str, str]) -> dict:
     old, current = event(episode, "primary_old"), event(episode, "primary_update")
     if current["target_session_id"] != old["session_id"]:
         raise ValueError("primary update does not target the primary old session")
-    hard_all = [row for row in episode["sessions"] if row["event_kind"] == "hard_retain"]
+    current_position = episode["sessions"].index(current)
+    visible = episode["sessions"][:current_position]
+    hard_all = [row for row in visible if row["event_kind"] == "hard_retain"]
     hard_matched = [row for row in hard_all if row["hard_relation_matched"]]
     hard = hard_matched or hard_all
-    unrelated = [row for row in episode["sessions"] if row["event_kind"] == "distractor"]
+    unrelated = [row for row in visible if row["event_kind"] == "distractor"]
     if not hard or not unrelated:
         raise ValueError("episode lacks required safety sessions")
     # Corpus construction places the event anchor at units[0].  Sorting only
@@ -59,6 +61,7 @@ def identity(episode: dict, fold: int, texts: dict[str, str]) -> dict:
     result = {
         "episode_id": episode["episode_id"], "subject": episode["primary_subject_hash"],
         "fold": fold, "length": episode["length"], "source_split": episode["split"],
+        "query_step": current_position,
         "primary_old_session_id": old["session_id"],
         "primary_current_session_id": current["session_id"],
         "old": query_unit(old["units"][0], texts),
@@ -142,6 +145,7 @@ def build(data_root, output):
             for name in ("train.jsonl", "tune.jsonl", "texts.json")
         },
         "selection_hash": "sha256(protocol|episode_id)",
+        "query_time": "immediately after admitting primary_current at query_step",
         "pilot_rule": "two minimum-hash episodes per fold x length cell",
         "formal_rule": "one minimum-hash episode per subject x length cell",
         "folds": FOLDS, "lengths": list(LENGTHS), "fold_loads": fold_loads,

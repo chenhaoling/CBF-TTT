@@ -123,7 +123,9 @@ subject together.
 Replay every held-out subject episode with the exact contextual memory
 components.  At each event, the deployed cross-fitted V15 policy may remove
 only a component visible at that time.  The current component is then always
-admitted.  At the registered query points, retained sessions are serialized by
+admitted.  The registered query point is immediately after the primary-current
+session is admitted; no later session is visible or used as a safety query.
+At that point, retained sessions are serialized by
 the fixed realization above and every answer is scored from a fresh query KV
 cache so that no attention state leaks across arms.
 

@@ -2138,3 +2138,10 @@ fallback 为 20。三个 artifact SHA-256 分别为 manifest `6dbe6154...`, pilo
 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_qwen_outcome_v16/RUN_STATUS.md`
 及 `manifest.json`。本地同时保存两份有序 JSONL，使正式 episode 集合可独立核验。
 当前 `model_scored=false`，Qwen outcome pilot 未启动。
+
+在实现后续回放接口时发现首版清单的 unrelated safety unit 从整条 episode 选择，可能
+位于 primary update 之后，违反因果可见性。模型仍未评分且 V15 尚无 outer 指标时，
+将唯一查询时点固定为“primary current 提交后立即评分”，hard/unrelated 只能从
+`sessions[:query_step]` 选择，并在每行记录 `query_step`；新增未来 distractor 排除
+测试，构建测试共五项。首版成功清单在远程改名保留，修订版重新构建并产生新 hash，
+不得混用旧清单。
