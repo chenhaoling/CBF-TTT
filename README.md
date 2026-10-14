@@ -473,7 +473,7 @@ forgetting vote. External confirmation sets remain sealed.
 
 The result-conditional [post-V15 paper experiment plan](POST_V15_PAPER_EXPERIMENT_PLAN.md)
 locks the next decision before V15 fold results are available. A V15 pass proceeds to
-exact frozen-Qwen outcome replay on the readable contextual memory; a failure closes
+fresh-KV frozen-Qwen scoring of chronologically serialized retained evidence; a failure closes
 the scalar-threshold family and requires direct readout-utility supervision. The plan
 also keeps native `ttt_conv`/`ttt_proj` integration behind its previously failed
 content-binding prerequisite, so controller evidence cannot be misreported as a native
