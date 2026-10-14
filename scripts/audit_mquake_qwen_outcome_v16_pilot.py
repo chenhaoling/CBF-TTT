@@ -253,6 +253,8 @@ def audit(data_root, sample_root, v15_root, model, tokenizer, inputs, summary_pa
                 and resource.get("model_provenance", {}).get("source_files_sha256")
                     == model_hashes
                 and resource.get("readout_mode") == "plain_ttt_disabled_fresh_kv"
+                and resource.get("candidate_scoring")
+                    == "one_prompt_forward_with_independent_answer_cache_branches"
                 and resource.get("model_provenance", {}).get("ttt_mode") is False
                 and bool(resource.get("model_provenance", {}).get("excluded_adapters"))
                 and resource.get("tokenizer_files_sha256") == tokenizer_hashes

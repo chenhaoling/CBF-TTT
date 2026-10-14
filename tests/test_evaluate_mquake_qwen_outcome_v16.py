@@ -3,7 +3,7 @@
 import unittest
 
 from tasks.evaluate_mquake_qwen_outcome_v16 import (
-    aggregate, encode_pair, policy_memory, query_specs, render_prompt,
+    aggregate, encode_candidates, encode_pair, policy_memory, query_specs, render_prompt,
 )
 
 
@@ -54,6 +54,14 @@ class QwenOutcomePilotTest(unittest.TestCase):
         prompt, answer = encode_pair(Tokenizer(), "Answer:\n", "Alice")
         self.assertEqual(bytes(prompt).decode(), "Answer:\n")
         self.assertEqual(bytes(answer).decode(), "Alice")
+
+    def test_candidates_share_exact_prompt_prefix(self):
+        prompt, answers = encode_candidates(Tokenizer(), "Answer:\n", ["Alice", "Bob"])
+        self.assertEqual(bytes(prompt).decode(), "Answer:\n")
+        self.assertEqual(bytes(answers["Alice"]).decode(), "Alice")
+        self.assertEqual(bytes(answers["Bob"]).decode(), "Bob")
+        with self.assertRaises(ValueError):
+            encode_candidates(Tokenizer(), "Answer:\n", ["Alice", "Alice"])
 
     def test_aggregate_reports_per_query_resources(self):
         def query(kind, correct):
