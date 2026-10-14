@@ -49,15 +49,28 @@ audit passes every check; the manifest SHA256 is
 Fold row counts are 4,381/4,461/4,523/4,523/4,608.  MQuAKE rows per fold are
 790/10/7/445/1.  This source imbalance is structural: allowed MQuAKE train+tune
 contains P6=995 rows, P35=481 and only 18 rows across the other five relations.
-Balancing MQuAKE across five relation-disjoint folds is impossible.  Before
-training, the protocol therefore fixes relation-balanced batches, equal source
-sampling within shared relations, and micro, subject-macro, relation-macro and
-source-stratified reporting.  No row or relation is duplicated across folds.
+Balancing MQuAKE across five relation-disjoint folds is impossible.
+
+A count-only resource pilot first tried exact equal relation and equal
+within-relation source mass.  It reduced effective sample size from roughly
+13,500 rows to 239--1,534 and gave a maximum row weight of 560, so it was
+rejected before any model outcome was available.  The frozen replacement uses
+each train row once and weights relation-source group frequency `n` by
+`n^-0.5`, normalized to mean one.  Across outer folds its effective sample size
+is 10,739--12,458 (80.35%--92.20% of rows) and maximum weight is
+25.29--25.81.  All five resource gates and the exact reconstruction audit pass;
+the balancing manifest SHA256 is
+`9eed136cb71ba92df18252dc80232bf691a5e0337ae88208babef33f2c4d795c`.
+The formal evaluation must report micro, subject-macro, relation-macro and
+source-stratified results.  No row or relation is duplicated across folds.
 
 The complete data remain on hku-gpu2 at
 `/home/ctj/cbf_ttt_semantic_controller_inventory_20261014`; only `manifest.json`,
 `audit.json` and this report are versioned.  The semantic-row output hash is
 `222f7c51d384a9e26da93ecfd0dda91dd0add148c9901e5765f2fe4458614a99`.
+The full balancing rows remain at
+`/home/ctj/cbf_ttt_semantic_controller_balancing_sqrt_20261014`; compact
+`balancing_manifest.json` and `balancing_audit.json` are versioned here.
 
 ## Reproduction
 

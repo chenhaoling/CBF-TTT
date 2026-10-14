@@ -42,11 +42,18 @@ materialized calibration file; its dev and test files are not opened.
 The audited public-source inventory exposes an unavoidable MQuAKE-T imbalance:
 among the 1,494 allowed train+tune rows, P6 contributes 995, P35 contributes
 481, and the other five relations contribute 18 in total.  A five-fold split
-cannot be both relation-disjoint and source-balanced.  The fixed response is
-to use relation-balanced training batches, with equal source sampling inside a
-relation when both sources are present, and to report micro, subject-macro,
-relation-macro and source-stratified results.  Rows or relations are not copied
-across folds.  The gate continues to use the registered subject- and
+cannot be both relation-disjoint and source-balanced.  A count-only pilot found
+that exact equal-relation weighting reduced effective sample size to 239--1,534
+from roughly 13,500 rows and assigned a maximum row weight of 560; this rule was
+rejected before model outcomes were loaded.  The fixed response uses every
+outer-training row once per epoch and weights a row in relation-source group of
+size `n` by `n^-0.5`, normalized to mean one.  This square-root temperature
+keeps effective sample size above 80% and maximum weight below 32 in every
+outer split while reducing dominant-group influence.  The deterministic inner
+fold is `(outer + 1) mod 5`; neither outer nor inner rows receive a training
+weight.  Report micro, subject-macro, relation-macro and source-stratified
+results.  Rows or relations are not copied across folds.  The gate continues
+to use the registered subject- and
 relation-cluster intervals and every-fold condition; source imbalance cannot be
 hidden by a micro-only result.
 
