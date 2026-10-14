@@ -2667,3 +2667,14 @@ that gate fails. The registered alias claim requires a five-point gain over
 exact matching with positive subject/template interval lower bounds, at least
 90% update and retention, 97% locality, no negative fold or seed, and at least
 40% exact-to-semantic-oracle gap closure.
+
+A clearly marked `/tmp` integration smoke used a synthetic release marker only
+to exercise construction before the real gate. With the real formal/pilot
+corpora and Qwen3-4B tokenizer, all nine independent construction checks
+passed: 320 rows, 80 subjects, 20 template groups, balanced 64-row folds,
+five-token source-disjoint values, zero exact-rule deletions and 1,280 latent
+semantic-oracle deletions. Manifest/data/state SHA-256 values were
+`03047c86723ea27e92225a43b6e39f0bc12430e48a062c9e46ed2f3221dba9c3`,
+`e82d7923d048e5db63787bdf1e0084c303897955049941e05b289cad585d3f4a` and
+`e01f3c900c5387f4fec20af9dbb6717a9e66d2fac543ea740546779d1243e9b1`.
+This smoke root is not an official result and is not consumed by any chain.
