@@ -2,12 +2,18 @@ import unittest
 
 from tasks.evaluate_mquake_qwen_headroom_v17 import (
     FIXED_POLICIES, clustered_interval, select_fixed_by_outer_fold, select_oracle,
-    state_arms,
+    state_arms, summarize_rows,
 )
 
 
 def query(kind, correct, nll):
-    return {"kind": kind, "correct": correct, "answer_nll": nll}
+    return {"kind": kind, "correct": correct, "answer_nll": nll,
+            "candidates": ["a", "b"], "total_tokens_max": 100,
+            "resources": {"seconds": .1, "candidate_scores": 2,
+                          "gpu_start_allocated_gib": 8.0,
+                          "gpu_start_reserved_gib": 8.5,
+                          "gpu_peak_allocated_gib": 8.1,
+                          "gpu_peak_reserved_gib": 8.6}}
 
 
 def queries(primary_correct, primary_nll):
@@ -81,6 +87,26 @@ class HeadroomV17Test(unittest.TestCase):
         second = clustered_interval(records, "gain", draws=100, seed=7)
         self.assertEqual(first, second)
         self.assertEqual(first["mean"], .5)
+
+    def test_resource_summary_does_not_gate_on_descriptive_headroom(self):
+        rows = []
+        for index in range(40):
+            fixed = [arm(f"fixed:{policy}", correct=(0, 1), nll=(1, 1))
+                     for policy in FIXED_POLICIES]
+            deletion = arm(f"delete_one:s{index}", correct=(1, 1), nll=(.1, .1),
+                           kind="delete_one", deletion_index=0,
+                           deleted_session_id=f"s{index}")
+            rows.append({"episode_id": f"e{index}", "subject": f"subject{index}",
+                         "fold": index % 5, "arms": fixed + [deletion]})
+        resources = [
+            {"unique_memory_states_scored": 120, "seconds": 10.0},
+            {"unique_memory_states_scored": 120, "seconds": 11.0},
+        ]
+        result = summarize_rows(rows, resources, formal_unique_states=240)
+        self.assertTrue(result["pilot_gate"]["passed"])
+        self.assertTrue(result["pilot_headroom"]["descriptive_only_not_a_formal_gate"])
+        self.assertEqual(result["pilot_headroom"]["oracle_primary_accuracy"], 1.0)
+        self.assertEqual(result["pilot_headroom"]["selected_fixed_primary_accuracy"], .5)
 
 
 if __name__ == "__main__":
