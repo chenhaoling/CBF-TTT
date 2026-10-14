@@ -22,6 +22,11 @@ def read_jsonl(path):
     return [json.loads(line) for line in Path(path).read_text().splitlines() if line]
 
 
+def complete_fixed_keys(value):
+    """JSON object order is non-semantic; the manifest owns registered arm order."""
+    return len(value) == len(FIXED) and set(value) == set(FIXED)
+
+
 def reconstruct(episode, sample):
     step = sample["query_step"]
     visible = episode["sessions"][:step + 1]
@@ -61,7 +66,7 @@ def audit(data_root, sample_root, v15_root, state_root, output):
             identities_ok &= all(row[key] == sample[key] for key in
                 ("episode_id", "subject", "fold", "length", "query_step",
                  "hard_relation_matched"))
-            identities_ok &= tuple(row["fixed"]) == FIXED
+            identities_ok &= complete_fixed_keys(row["fixed"])
             episode = episode_index[row["episode_id"]]
             fixed, deletions = reconstruct(episode, sample)
             states_ok &= row["fixed"] == fixed and row["delete_one"] == deletions
