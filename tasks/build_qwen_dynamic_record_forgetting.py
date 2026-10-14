@@ -14,6 +14,7 @@ import hashlib
 import json
 from pathlib import Path
 import random
+import re
 
 from tasks.pack_cbf_event_warmup import sha
 
@@ -110,8 +111,13 @@ def parse_visible_block(text, split):
     template = TEMPLATES[split]
     header_prefix, header_suffix = template["header"].split("{record}")
     revoke_prefix, revoke_suffix = template["revoke"].split("{record}")
-    fact_prefix, fact_tail = template["fact"].split("{key}")
-    fact_middle, fact_suffix = fact_tail.split("{value}")
+    fact_pattern = re.compile(
+        "^"
+        + re.escape(template["fact"])
+        .replace(re.escape("{key}"), "(?P<key>.+?)")
+        .replace(re.escape("{value}"), "(?P<value>.+?)")
+        + "$"
+    )
     lines = text.splitlines()
     headers = [
         (index, line[len(header_prefix) : len(line) - len(header_suffix)])
@@ -135,12 +141,10 @@ def parse_visible_block(text, split):
             continue
         if index == header_index:
             continue
-        if not line.startswith(fact_prefix) or not line.endswith(fact_suffix):
+        match = fact_pattern.fullmatch(line)
+        if match is None:
             raise ValueError("unknown visible fact line")
-        body = line[len(fact_prefix) : len(line) - len(fact_suffix)]
-        if fact_middle not in body:
-            raise ValueError("ambiguous visible fact")
-        key, value = body.split(fact_middle, 1)
+        key, value = match.group("key"), match.group("value")
         if not key or not value or key in facts:
             raise ValueError("invalid visible fact")
         facts[key] = value
@@ -435,6 +439,24 @@ def load_corpus(root):
     return manifest, list(zip(inputs, targets))
 
 
+def load_split(root, split):
+    root = Path(root)
+    manifest = json.loads((root / "manifest.json").read_text())
+    if manifest.get("protocol") != PROTOCOL or split not in manifest.get("splits", []):
+        raise ValueError("dynamic-record split protocol mismatch")
+    paths = [root / f"{split}.{kind}.jsonl" for kind in ("inputs", "targets")]
+    for path in paths:
+        if sha(path) != manifest["files_sha256"].get(path.name):
+            raise ValueError("dynamic-record split hash mismatch")
+    inputs = [json.loads(line) for line in paths[0].read_text().splitlines() if line]
+    targets = [json.loads(line) for line in paths[1].read_text().splitlines() if line]
+    if len(inputs) != len(targets) or any(
+        inp["id"] != target["id"] for inp, target in zip(inputs, targets)
+    ):
+        raise ValueError("dynamic-record split alignment mismatch")
+    return list(zip(inputs, targets))
+
+
 def materialize_pilot(output, groups_per_family=8, seed=DATA_SEED):
     if groups_per_family != 8:
         raise ValueError("registered pilot requires exactly eight groups per family")
@@ -472,13 +494,80 @@ def materialize_pilot(output, groups_per_family=8, seed=DATA_SEED):
     return manifest
 
 
+def _formal_pairs(seed, split, groups):
+    return [
+        pair
+        for ordinal in range(groups)
+        for pair in generate_group(
+            seed,
+            split,
+            FAMILIES[ordinal % len(FAMILIES)],
+            ordinal // len(FAMILIES),
+        )
+    ]
+
+
+def materialize_development(output, train_groups=512, dev_groups=64, seed=DATA_SEED):
+    if (train_groups, dev_groups) != (512, 64):
+        raise ValueError("registered development corpus requires 512/64 groups")
+    output = Path(output)
+    if output.exists():
+        raise FileExistsError(output)
+    pairs = (
+        _formal_pairs(seed, "train", train_groups)
+        + _formal_pairs(seed, "dev", dev_groups)
+    )
+    audit = validate(pairs)
+    counts = Counter((inp["split"], inp["family"]) for inp, _ in pairs)
+    if len({inp["group_id"] for inp, _ in pairs if inp["split"] == "train"}) != train_groups:
+        raise ValueError("formal training source-group count mismatch")
+    if len({inp["group_id"] for inp, _ in pairs if inp["split"] == "dev"}) != dev_groups:
+        raise ValueError("formal development source-group count mismatch")
+    output.mkdir(parents=True)
+    manifest = {
+        "protocol": PROTOCOL,
+        "phase": "development",
+        "seed": seed,
+        "splits": ["train", "dev"],
+        "group_counts": {"train": train_groups, "dev": dev_groups},
+        "family_episode_counts": {
+            f"{split}/{family}": counts[split, family]
+            for split in ("train", "dev") for family in FAMILIES
+        },
+        "families": list(FAMILIES),
+        "templates_sha256": digest(TEMPLATES),
+        "audit": audit,
+        "files_sha256": {},
+        "training_status": "not_trained",
+        "oracle_status": "not_constructed",
+        "sealed_test_generated": False,
+        "external_ood_generated": False,
+    }
+    for split in ("train", "dev"):
+        selected = [(inp, target) for inp, target in pairs if inp["split"] == split]
+        for kind, rows in (
+            ("inputs", [inp for inp, _ in selected]),
+            ("targets", [target for _, target in selected]),
+        ):
+            path = output / f"{split}.{kind}.jsonl"
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows))
+            manifest["files_sha256"][path.name] = sha(path)
+    (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    return manifest
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True)
     parser.add_argument("--groups-per-family", type=int, default=8)
     parser.add_argument("--seed", type=int, default=DATA_SEED)
+    parser.add_argument("--phase", choices=("pilot", "development"), default="pilot")
     args = parser.parse_args()
-    manifest = materialize_pilot(args.output, args.groups_per_family, args.seed)
+    manifest = (
+        materialize_pilot(args.output, args.groups_per_family, args.seed)
+        if args.phase == "pilot"
+        else materialize_development(args.output, seed=args.seed)
+    )
     print(json.dumps(manifest, indent=2))
 
 

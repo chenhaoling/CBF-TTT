@@ -13,6 +13,8 @@ from tasks.build_qwen_dynamic_record_forgetting import (
     FAMILIES,
     generate_group,
     load_corpus,
+    load_split,
+    materialize_development,
     materialize_pilot,
     parse_visible_block,
     replay,
@@ -25,6 +27,12 @@ from tasks.pilot_qwen_dynamic_record_forgetting import (
     lexicographic_label,
     valid_actions,
     summarize,
+)
+from tasks.train_qwen_dynamic_record_forgetting import (
+    ACTIONS as TRAIN_ACTIONS,
+    FEATURE_DIM,
+    dynamic_features,
+    _set_model,
 )
 
 
@@ -56,6 +64,17 @@ class DynamicRecordCorpusTest(unittest.TestCase):
                 events.extend(semantic)
             self.assertIsInstance(replay(events), dict)
 
+    def test_every_registered_surface_template_round_trips(self):
+        for split in ("pilot", "train", "dev"):
+            for family in FAMILIES:
+                for inp, target in generate_group(DATA_SEED, split, family, 2):
+                    for block, semantic in zip(
+                        inp["blocks"], target["semantic_events"]
+                    ):
+                        parsed = parse_visible_block(block["text"], split)
+                        self.assertEqual(parsed["record"], semantic[-1]["record"])
+                        self.assertEqual(parsed["facts"], semantic[-1]["facts"])
+
     def test_registered_pilot_materialization_and_hash_loading(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "pilot"
@@ -73,6 +92,10 @@ class DynamicRecordCorpusTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaisesRegex(ValueError, "exactly eight"):
                 materialize_pilot(Path(directory) / "bad", groups_per_family=7)
+            with self.assertRaisesRegex(ValueError, "512/64"):
+                materialize_development(
+                    Path(directory) / "bad_formal", train_groups=16, dev_groups=7
+                )
 
     @unittest.skipIf(torch is None, "torch is exercised in the remote project environment")
     def test_dynamic_candidates_and_physical_masks(self):
@@ -128,6 +151,39 @@ class DynamicRecordCorpusTest(unittest.TestCase):
         self.assertEqual(summary["estimated_two_gpu_seconds"]["512"], 512.0)
         self.assertEqual(summary["selected_formal_train_groups"], 512)
         self.assertEqual(summary["overall_peak_allocated_gib"], 8.0)
+
+    @unittest.skipIf(torch is None, "torch is exercised in the remote project environment")
+    def test_dynamic_feature_and_set_model_shapes(self):
+        state = [
+            {"batch": "r0", "facts": {"unit_a": "v0"}, "delta": torch.eye(3),
+             "weight": 1.0, "block_index": 1},
+            {"batch": "r1", "facts": {"unit_b": "v1"}, "delta": torch.eye(3),
+             "weight": 1.0, "block_index": 2},
+        ]
+        assignment = {"batch": "r2", "facts": {"unit_a": "v2"},
+                      "old_refs": ["r0"], "reset": False}
+        values = dynamic_features(
+            state, assignment, torch.eye(3), 3, (0, 1), FakeEmbeddings()
+        )
+        self.assertEqual(len(values), FEATURE_DIM)
+        model = _set_model()
+        tensor = torch.tensor([values], dtype=torch.float32)
+        output = model(tensor)
+        self.assertEqual(tuple(output.shape), (1, len(TRAIN_ACTIONS)))
+        slot_width = len(values[12:]) // 3
+        permuted = tensor.clone()
+        first = tensor[:, 12 : 12 + slot_width].clone()
+        second = tensor[:, 12 + slot_width : 12 + 2 * slot_width].clone()
+        permuted[:, 12 : 12 + slot_width] = second
+        permuted[:, 12 + slot_width : 12 + 2 * slot_width] = first
+        permuted_output = model(permuted)
+        for index, action in enumerate(TRAIN_ACTIONS):
+            swapped = (action[0], (action[1][1], action[1][0], action[1][2]))
+            swapped_index = TRAIN_ACTIONS.index(swapped)
+            self.assertAlmostEqual(
+                float(output[0, index]), float(permuted_output[0, swapped_index]),
+                places=5,
+            )
 
 
 if __name__ == "__main__":

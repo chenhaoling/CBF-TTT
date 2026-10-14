@@ -3526,3 +3526,25 @@ estimate of 244.38 seconds. The resource rule therefore selected 512 formal
 training groups. Compact manifests, every per-label resource row, the excluded
 attempt summary, audit and report are archived under
 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_dynamic_record_resource_pilot_v1/`.
+
+Implemented the 512/64 train-development stage in
+`tasks/train_qwen_dynamic_record_forgetting.py`. It constructs accuracy-first
+counterfactual labels on the frozen Qwen geometry, exposes 12 global and 14
+shared per-record features, trains a constrained set controller, an
+unconstrained set ablation and a constrained flat slot MLP with the registered
+twin-consistency loss, and evaluates ten frozen policies. Test data are not
+generated or loaded. Added a two-GPU runner and a hash-checking merger that
+recomputes multi-seed aggregates, paired bootstrap comparisons and all 13
+development release checks before naming the next stage.
+
+Before execution, a code audit replaced the ordered slot-concatenation head
+with a genuinely record-equivariant action scorer: every record uses the same
+state head conditioned on pooled set context, and a joint action logit is the
+global-clear score plus the three shared record-state scores. A permutation
+test now verifies exact output-coordinate equivariance. Candidate-selection
+recall is computed against the pre-update state, and the runner verifies the
+old cohort comparator's passed audit, reader, seeds and checkpoint hash.
+The formal-corpus dry run also exposed that the development fact template puts
+`{value}` before `{key}`. The visible-text parser now derives a named regular
+expression from either placeholder order, with a round-trip test over every
+registered split and family.
