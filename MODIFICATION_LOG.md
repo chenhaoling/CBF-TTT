@@ -3401,3 +3401,10 @@ training/audit gate parity and independent endpoint/interior accounting.  The
 formal OOD corpus and result directory remain absent until confirmation passes,
 so the pre-registered conditional release remains intact.  These additions do
 not change baseline model, training or inference defaults.
+
+Added `scripts/chain_discrete_confirmation_to_ood.sh` for the live transition.
+It waits for the confirmation chain's EXIT-trap file rather than inferring
+completion from logs or missing processes, requires its independent audit and
+one-time test gate to pass, records a separate release decision, and only then
+invokes the OOD runner plus auditor.  A failed confirmation leaves the formal
+OOD root uncreated.

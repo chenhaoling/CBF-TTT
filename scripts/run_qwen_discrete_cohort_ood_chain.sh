@@ -10,7 +10,10 @@ CONFIRMATION_AUDIT=${CONFIRMATION_AUDIT:-$CONFIRMATION_ROOT/execution_audit.json
 
 trap 'code=$?; if [ -d "$ROOT" ]; then echo "$code" > "$ROOT/chain_exit_code.txt"; fi' EXIT
 cd "$REPO"
-bash scripts/run_qwen_discrete_cohort_ood.sh
+ROOT="$ROOT" REPO="$REPO" PYTHON_BIN="$PYTHON_BIN" \
+  GEOMETRY_ROOT="$GEOMETRY_ROOT" CONFIRMATION_ROOT="$CONFIRMATION_ROOT" \
+  CONFIRMATION_AUDIT="$CONFIRMATION_AUDIT" \
+  bash scripts/run_qwen_discrete_cohort_ood.sh
 "$PYTHON_BIN" -m scripts.audit_qwen_discrete_cohort_ood \
   --root "$ROOT" --data-root "$ROOT/data" \
   --confirmation-root "$CONFIRMATION_ROOT" \
