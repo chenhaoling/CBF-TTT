@@ -22,6 +22,10 @@ from tasks.pilot_qwen_causal_ledger_residual import (
     semantic_apply,
     visible_facts,
 )
+from tasks.diagnose_qwen_causal_ledger_context_scale import (
+    SCALES as CONTEXT_SCALES,
+    select_scale,
+)
 
 
 class CausalLedgerResidualCorpusTest(unittest.TestCase):
@@ -109,6 +113,19 @@ class CausalLedgerResidualCorpusTest(unittest.TestCase):
         index, action = lexicographic_label(outcomes, actions)
         self.assertEqual(index, 2)
         self.assertEqual(action, actions[2])
+
+    def test_context_scale_selection_uses_smallest_passing_scale(self):
+        table = {
+            str(scale): {
+                "free_exact": 0.90 if scale >= 32 else 0.80,
+                "teacher_sequence_exact": 0.97 if scale >= 24 else 0.90,
+            }
+            for scale in CONTEXT_SCALES
+        }
+        self.assertEqual(select_scale(table), 32.0)
+        for row in table.values():
+            row["free_exact"] = 0.80
+        self.assertIsNone(select_scale(table))
 
 
 if __name__ == "__main__":
