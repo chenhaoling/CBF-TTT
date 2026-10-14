@@ -73,6 +73,16 @@ class QwenSparseReaderTest(unittest.TestCase):
         self.assertEqual(used, 1)
         self.assertTrue(self.torch.allclose(output, self.torch.tensor([0.8, 0.0, 0.0])))
 
+    def test_topk_covering_all_components_matches_dense(self):
+        dense, dense_used = sparse_output(
+            self.state(), {"key": "q"}, self.embeddings, "dense_all"
+        )
+        sparse, sparse_used = sparse_output(
+            self.state(), {"key": "q"}, self.embeddings, "component_top16"
+        )
+        self.assertEqual(dense_used, sparse_used)
+        self.assertTrue(self.torch.allclose(dense, sparse, atol=1e-7))
+
     def test_zero_weight_components_are_inactive(self):
         state = self.state()
         state[0]["weight"] = 0.0
