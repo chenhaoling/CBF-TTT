@@ -2405,3 +2405,15 @@ outer folds, and apply the preregistered subject-macro gain >=5 points with
 subject-cluster 95% interval lower bound >0. A failed formal gate records
 `stop_controller_training_no_causal_headroom`; it cannot train another
 controller or open external benchmarks.
+
+Before reading any V17 formal outcome, added
+`POST_V17_INTERFERENCE_CORPUS_PLAN.md` in response to the unsealed pilot fixed
+arms. The pilot showed that the primary-only fixed selector chose
+`global_reset` at 100% primary accuracy while that arm retained only 65.0% of
+hard history and 52.5% of unrelated facts; `retain_all` was simultaneously at
+the candidate-accuracy ceiling. The new preregistered controlled corpus uses
+opaque unseen facts, balanced interference mechanisms, free generation and a
+joint update-plus-retention episode endpoint. Its 40-row construction gate,
+320-row source/template-disjoint formal gate, sparse `0/0.5/1` boundary study,
+cluster bootstrap, controller admission rule and external-data lock are frozen
+without access to the running 272-row V17 formal metrics.
