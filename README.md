@@ -471,6 +471,14 @@ calibration under unseen-subject score shift. The registered
 median margin and tests four independently calibrated inner models with a three-of-four
 forgetting vote. External confirmation sets remain sealed.
 
+The result-conditional [post-V15 paper experiment plan](POST_V15_PAPER_EXPERIMENT_PLAN.md)
+locks the next decision before V15 fold results are available. A V15 pass proceeds to
+exact frozen-Qwen outcome replay on the readable contextual memory; a failure closes
+the scalar-threshold family and requires direct readout-utility supervision. The plan
+also keeps native `ttt_conv`/`ttt_proj` integration behind its previously failed
+content-binding prerequisite, so controller evidence cannot be misreported as a native
+dense-writer result.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)

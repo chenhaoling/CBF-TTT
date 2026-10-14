@@ -2075,3 +2075,21 @@ inner 折上以非执行动作经验 FPR 0.05/0.1/0.25/0.5% 生成四个阈值�
 history size、threshold、vote count 与 3/4 删除规则。本地四项测试通过；服务器
 与 V13/V14 组合共 14 项真实 PyTorch 测试通过。所有改动为 opt-in，baseline 模型、
 训练、优化器、数据和评测默认路径不变。
+
+### V15 运行期间冻结后续论文实验分支
+
+在 V15 尚未产生任何 `inner_complete`/`outer_complete` 指标时新增
+`POST_V15_PAPER_EXPERIMENT_PLAN.md`，避免根据 V15 部分结果临时选择后续路线。计划
+明确 V15 使用的是已通过可读性门槛的 contextual additive Qwen memory；原论文
+`ttt_conv`/`ttt_proj` writer 的 Correct-vs-Wrong/Zero/Random 内容门此前已失败，
+因此不能把控制器通过直接表述为原生 dense fast-weight 成功。
+
+条件分支为：V15 通过后先做真实 Qwen answer accuracy/NLL 的精确因果回放，与
+no-memory、retain-all、global-reset、last-1/2、matched-random、V14 和 oracle
+同输入比较；只有 query-level 增益、三个安全切片、所有外折和独立审计同时通过，
+才一次性开放 MQuAKE-CF、LongMemEval-S、LoCoMo、MMLU、RULER。V15 失败则停止
+listwise score + scalar threshold/normalizer/quorum 搜索，先检验 query-level causal
+oracle 是否存在至少 5 点可控空间，再决定是否用真实 future-NLL 差构造训练标签。
+原生 writer 作为独立桥接分支，需先通过单组件与 2/4/8/16 多组件内容门，之后才可
+接入遗忘策略。新增内容仅为预注册文档与 README 链接，不改变正在运行的 V15、
+baseline 默认配置、模型、优化器、数据或评测入口。
