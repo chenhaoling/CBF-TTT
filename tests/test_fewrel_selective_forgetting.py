@@ -25,6 +25,7 @@ class FewRelSelectiveForgettingTest(unittest.TestCase):
         self.assertEqual([len(first[key]) for key in (
             "train", "development", "internal_test", "external_test")],
             [48, 8, 8, 16])
+        self.assertEqual(first["train"][0], "P59")
         self.assertEqual(len(set().union(*map(set, first.values()))), 80)
 
     def test_masked_surface_replaces_all_mentions(self):

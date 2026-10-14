@@ -10,7 +10,7 @@ from pathlib import Path
 from tasks.build_fewrel_selective_forgetting import (
     MIN_RELATION_ROWS, PARTITIONS, PROTOCOL, RELATION_CAP, SOURCE_COMMIT,
     SOURCE_HASHES, canonical_sha, corpus_counts, load_jsonl, masked_surface,
-    normalize, stable,
+    normalize, relation_partitions, stable,
 )
 from tasks.pack_cbf_event_warmup import sha
 from tasks.train_cbf_event_writer import write_json
@@ -62,8 +62,10 @@ def audit(data_root, source_root):
 
     partition_relations = {partition: set(relations)
                            for partition, relations in manifest["partitions"].items()}
+    reproduced_partitions = relation_partitions(train, external, manifest["seed"])
     relation_isolation = (
-        set().union(*partition_relations.values())
+        manifest["partitions"] == reproduced_partitions
+        and bool(set().union(*partition_relations.values()))
         and sum(map(len, partition_relations.values()))
             == len(set().union(*partition_relations.values())) == 80
         and all(row["relation_id"] in partition_relations[row["partition"]]

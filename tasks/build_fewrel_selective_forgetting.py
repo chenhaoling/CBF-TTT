@@ -47,7 +47,8 @@ def load_jsonl(path):
 def relation_partitions(train_relations, external_relations, seed=SEED):
     external_relations = tuple(external_relations)
     ordered = sorted(train_relations,
-                     key=lambda value: stable(seed, "relation", value))
+                     key=lambda value: hashlib.sha256(
+                         f"{seed}:relation:{value}".encode()).hexdigest())
     if len(ordered) != 64 or len(external_relations) != 16:
         raise ValueError("unexpected FewRel relation inventory")
     result = {
