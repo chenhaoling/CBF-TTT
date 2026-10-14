@@ -13,6 +13,7 @@ from tasks.evaluate_post_v19_natural_semantic_headroom import (
     MAX_ANSWER_TOKENS,
     MAX_NEW_TOKENS,
     PROTOCOL,
+    QUERY_KINDS,
     aggregate,
     data_audit_path,
     read_json,
