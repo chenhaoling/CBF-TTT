@@ -148,6 +148,15 @@ The primary comparison is V15 versus the strongest fixed arm selected without
 using the held-out outer fold.  V14 is an architecture ablation, not a tuning
 source.
 
+Before any formal Qwen score, a state-freezing pass reconstructs the retained
+session IDs for all nine arms at the registered query time and hashes the
+ordered 272-row matrix.  V14 and V15 states come only from their audited OOF
+decision traces; matched random comes from V15's exact deletion-count-matched
+OOF trace.  Fixed windows and the causal oracle are rebuilt directly from the
+source episode.  This pass is unlocked only by a passed and audited resource
+pilot and loads no model.  It makes memory selection auditable independently
+of the expensive Qwen readout.
+
 ### Primary outcomes and release gate
 
 - current-answer exact generation, current-versus-stale preference and answer
