@@ -2131,3 +2131,10 @@ subject×length cell 中 252 个有此类 episode、20 个没有。由于原 cor
 标为 hard fallback，修订为每格优先 same-relation、缺失时使用标记 fallback，并分层
 报告安全指标；pilot 仍只从 same-relation episode 抽取。该修订发生在任何 V15 outer
 指标、Qwen 分数或方法对照可见前。测试增加 fallback 身份记录，总数变为四项。
+
+修订后远程构建成功：pilot/formal 为 40/272 行，matched-hard 为 40/252，formal
+fallback 为 20。三个 artifact SHA-256 分别为 manifest `6dbe6154...`, pilot
+`e9a61d5f...`, formal `352c2cab...`；完整值归档于
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_qwen_outcome_v16/RUN_STATUS.md`
+及 `manifest.json`。本地同时保存两份有序 JSONL，使正式 episode 集合可独立核验。
+当前 `model_scored=false`，Qwen outcome pilot 未启动。
