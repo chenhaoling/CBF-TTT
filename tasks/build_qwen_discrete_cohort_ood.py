@@ -10,6 +10,8 @@ import json
 from pathlib import Path
 import random
 
+from tasks.pack_cbf_event_warmup import sha
+
 
 PROTOCOL = "qwen_discrete_cohort_ood_corpus_v1"
 SUITES = ("long_session", "distant_revoke", "mixed_lifecycle", "duplicate_noop")
@@ -80,6 +82,73 @@ def render(events):
                 for key, value in event["facts"].items()
             )
     return "\n".join(lines)
+
+
+def parse_visible_block(text, state=None):
+    """Recover only information explicitly rendered in the current block."""
+    del state  # Kept in the signature to match the baseline parser interface.
+    lines = text.splitlines()
+    header_prefix = "Activate lifecycle record "
+    revoke_prefix = "Remove lifecycle record "
+    revoke_suffix = " from active memory."
+    headers = [
+        (index, line[len(header_prefix) : -1])
+        for index, line in enumerate(lines)
+        if line.startswith(header_prefix) and line.endswith(":")
+    ]
+    if len(headers) != 1:
+        raise ValueError("visible block must contain one assignment header")
+    header_index, batch = headers[0]
+    old_refs, reset_lines, facts = [], 0, {}
+    for index, line in enumerate(lines):
+        if index >= header_index:
+            if line.startswith("Bind ") and line.endswith("."):
+                body = line[len("Bind ") : -1]
+                if " to " not in body:
+                    raise ValueError("ambiguous visible assignment")
+                key, value = body.split(" to ", 1)
+                if not key or not value or key in facts:
+                    raise ValueError("invalid visible assignment")
+                facts[key] = value
+            continue
+        if line == TEMPLATES["reset"]:
+            reset_lines += 1
+        elif line.startswith(revoke_prefix) and line.endswith(revoke_suffix):
+            old_refs.append(line[len(revoke_prefix) : -len(revoke_suffix)])
+        else:
+            raise ValueError("unknown visible prelude")
+    if not batch or not facts or len(old_refs) > 1 or reset_lines > 1:
+        raise ValueError("invalid visible lifecycle block")
+    if reset_lines and old_refs:
+        raise ValueError("reset and revoke cannot share a block")
+    return {
+        "batch": batch,
+        "facts": facts,
+        "old_refs": old_refs,
+        "prelude_lines": header_index,
+        "text": text,
+    }
+
+
+def load_corpus(root):
+    root = Path(root)
+    manifest = json.loads((root / "manifest.json").read_text())
+    if manifest.get("protocol") != PROTOCOL:
+        raise ValueError("unexpected lifecycle stress corpus protocol")
+    output = {}
+    for suite in SUITES:
+        paths = [root / f"{suite}.{kind}.jsonl" for kind in ("inputs", "targets")]
+        for path in paths:
+            if sha(path) != manifest["files_sha256"].get(path.name):
+                raise ValueError("lifecycle stress corpus hash mismatch")
+        inputs = [json.loads(line) for line in paths[0].read_text().splitlines() if line]
+        targets = [json.loads(line) for line in paths[1].read_text().splitlines() if line]
+        if len(inputs) != len(targets) or any(
+            inp["id"] != target["id"] for inp, target in zip(inputs, targets)
+        ):
+            raise ValueError("lifecycle stress corpus alignment mismatch")
+        output[suite] = list(zip(inputs, targets))
+    return manifest, output
 
 
 def _prelude(suite, block, record_ids):
@@ -234,6 +303,15 @@ def validate(pairs):
         for block, events in zip(inp["blocks"], target["semantic_events"]):
             if block["text"] != render(events):
                 raise ValueError("render mismatch")
+            parsed = parse_visible_block(block["text"])
+            assignment = events[-1]
+            if parsed["batch"] != assignment["batch"] or parsed["facts"] != assignment["facts"]:
+                raise ValueError("visible parser assignment mismatch")
+            expected_refs = [event["batch"] for event in events[:-1] if event["op"] == "revoke"]
+            if parsed["old_refs"] != expected_refs:
+                raise ValueError("visible parser reference mismatch")
+            if bool(parsed["prelude_lines"]) != (len(events) > 1):
+                raise ValueError("visible parser prelude mismatch")
             all_events.extend(events)
             for event in events:
                 if event["op"] == "assign":

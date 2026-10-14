@@ -3347,6 +3347,13 @@ suite-disjoint identifiers and values, query/render parity and absence of
 weight-oracle labels.  Formal materialization remains conditional on the
 confirmation audit and test gate.
 
+The builder also provides a hash-verifying loader and a strict visible-text
+parser with the baseline parser interface.  The parser reconstructs only the
+rendered new record, facts, reset prelude and at most one revoked-record
+reference; it ignores private state and is checked against every generated
+block.  Four tests now cover all suites, semantic no-ops, parser parity,
+deterministic materialization and hash-verified loading.
+
 At the time of this entry the predecessor formal run remains active on
 `hku-gpu2`: seed 2301 has completed all 12 development policies, seed 2302 is
 in progress, seed 2303 has not started and no test row exists.  The chained
