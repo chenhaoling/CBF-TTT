@@ -386,6 +386,14 @@ def aggregate(rows, split):
         row["joint_gain"] for row in records if row["source"] == source)
                  for source in sorted({row["source"] for row in records})}
     semantic = tables["semantic"]
+    comparison = {
+        "joint_gain_micro": (tables["semantic"]["joint_success"]
+                             - tables["exact"]["joint_success"]),
+        "joint_gain_subject_macro": subject,
+        "joint_gain_relation_macro": relation,
+        "by_fold_gain": by_fold,
+        "by_source_gain": by_source,
+    }
     if split == "pilot":
         checks = {
             "subject_macro_joint_gain_over_exact_at_least_5_points":
@@ -400,6 +408,17 @@ def aggregate(rows, split):
                 exact_identity and tables["exact"] == tables["retain_all"]),
         }
     else:
+        exact_gap = semantic["joint_success"] - tables["exact"]["joint_success"]
+        strongest_non_oracle = max(tables[arm]["joint_success"]
+                                   for arm in ("exact", "retain_all", "fixed"))
+        fraction_preserved = ((semantic["joint_success"] - strongest_non_oracle)
+                              / exact_gap if exact_gap > 0 else 0.0)
+        comparison.update({
+            "positive_exact_to_semantic_gap": exact_gap,
+            "strongest_non_oracle_joint_success": strongest_non_oracle,
+            "fraction_exact_to_semantic_gap_preserved_over_strongest_non_oracle":
+                fraction_preserved,
+        })
         checks = {
             "subject_macro_joint_gain_over_exact_at_least_10_points":
                 subject["mean"] >= .10,
@@ -412,6 +431,8 @@ def aggregate(rows, split):
                 semantic["locality_accuracy"] >= .97,
             "no_negative_fold": all(value >= 0 for value in by_fold.values()),
             "no_negative_source": all(value >= 0 for value in by_source.values()),
+            "at_least_40_percent_of_exact_to_semantic_gap_preserved_over_strongest_non_oracle":
+                exact_gap > 0 and fraction_preserved >= .40,
             "exact_surface_identical_to_retain_all": (
                 exact_identity and tables["exact"] == tables["retain_all"]),
         }
@@ -423,14 +444,7 @@ def aggregate(rows, split):
             "retain_all": tables["retain_all"],
             "outer_fold_fixed": tables["fixed"],
         },
-        "semantic_oracle_vs_exact_surface": {
-            "joint_gain_micro": (tables["semantic"]["joint_success"]
-                                 - tables["exact"]["joint_success"]),
-            "joint_gain_subject_macro": subject,
-            "joint_gain_relation_macro": relation,
-            "by_fold_gain": by_fold,
-            "by_source_gain": by_source,
-        },
+        "semantic_oracle_vs_exact_surface": comparison,
         f"{split}_gate": {"checks": checks, "passed": all(checks.values())},
     }
 

@@ -44,6 +44,17 @@ class NaturalSemanticEvaluationTest(unittest.TestCase):
         self.assertEqual(result["arm_metrics"]["semantic_oracle"]["joint_success"], 1.0)
         self.assertEqual(result["arm_metrics"]["exact_surface"]["joint_success"], 0.0)
 
+    def test_formal_aggregation_reports_registered_gap_fraction(self):
+        result = aggregate([row(index) for index in range(320)], "formal")
+        comparison = result["semantic_oracle_vs_exact_surface"]
+        self.assertEqual(comparison["positive_exact_to_semantic_gap"], 1.0)
+        self.assertEqual(
+            comparison[
+                "fraction_exact_to_semantic_gap_preserved_over_strongest_non_oracle"],
+            0.0,
+        )
+        self.assertFalse(result["formal_gate"]["passed"])
+
     def test_expected_counts_follow_episode_order(self):
         episodes = [{"episode_id": "e0"}, {"episode_id": "e1"}]
         states = [
