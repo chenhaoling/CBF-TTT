@@ -41,7 +41,12 @@ def run(args):
     if seeds != {2301, 2302, 2303}:
         raise ValueError("resource pilot must cover all three projection seeds")
     wall_seconds = max(summary["wall_seconds"] for summary in summaries)
-    merged = summarize(rows, wall_seconds)
+    merged = summarize(
+        rows,
+        wall_seconds,
+        max(summary["extraction_peak_allocated_gib"] for summary in summaries),
+        max(summary["extraction_peak_reserved_gib"] for summary in summaries),
+    )
     merged["two_gpu_shards"] = [str(path) for path in shards]
     merged["shard_wall_seconds"] = [summary["wall_seconds"] for summary in summaries]
     merged["all_label_rows_hashed"] = True

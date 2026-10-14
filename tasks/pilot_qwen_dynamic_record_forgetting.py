@@ -294,7 +294,8 @@ def construct_labels(pairs, embeddings, tokenizer, device):
     return rows
 
 
-def summarize(rows, wall_seconds):
+def summarize(rows, wall_seconds, extraction_peak_allocated_gib=0.0,
+              extraction_peak_reserved_gib=0.0):
     if not rows:
         raise ValueError("empty dynamic-record resource rows")
     groups = len({row["group_id"] for row in rows})
@@ -305,10 +306,14 @@ def summarize(rows, wall_seconds):
         # Formal choices are total source groups and retain the same three
         # projections, so group-linear extrapolation is the registered rule.
         estimates[str(choice)] = wall_seconds * choice / groups
+    label_peak_allocated = max(row["peak_allocated_gib"] for row in rows)
+    label_peak_reserved = max(row["peak_reserved_gib"] for row in rows)
+    overall_peak_allocated = max(label_peak_allocated, extraction_peak_allocated_gib)
+    overall_peak_reserved = max(label_peak_reserved, extraction_peak_reserved_gib)
     eligible = [
         choice
         for choice in FORMAL_CHOICES
-        if max(row["peak_allocated_gib"] for row in rows) < 24.0
+        if overall_peak_allocated < 24.0
         and estimates[str(choice)] <= 6 * 3600
     ]
     selected = max(eligible) if eligible else None
@@ -329,8 +334,12 @@ def summarize(rows, wall_seconds):
         "mean_seconds_per_action": statistics.fmean(
             row["seconds_per_action"] for row in rows
         ),
-        "peak_allocated_gib": max(row["peak_allocated_gib"] for row in rows),
-        "peak_reserved_gib": max(row["peak_reserved_gib"] for row in rows),
+        "label_peak_allocated_gib": label_peak_allocated,
+        "label_peak_reserved_gib": label_peak_reserved,
+        "extraction_peak_allocated_gib": extraction_peak_allocated_gib,
+        "extraction_peak_reserved_gib": extraction_peak_reserved_gib,
+        "overall_peak_allocated_gib": overall_peak_allocated,
+        "overall_peak_reserved_gib": overall_peak_reserved,
         "max_prompt_tokens": max(row["max_prompt_tokens"] for row in rows),
         "max_answer_tokens": max(row["max_answer_tokens"] for row in rows),
         "max_active_records": max(row["active_records"] for row in rows),
@@ -388,6 +397,8 @@ def run(args):
         args.tokenizer,
         args.batch_size,
     )
+    extraction_peak_allocated = torch.cuda.max_memory_allocated() / 2**30
+    extraction_peak_reserved = torch.cuda.max_memory_reserved() / 2**30
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer)
     all_rows, row_hashes = [], {}
     for seed in requested:
@@ -401,7 +412,12 @@ def run(args):
         del memory
         torch.cuda.empty_cache()
     wall_seconds = time.perf_counter() - started
-    summary = summarize(all_rows, wall_seconds)
+    summary = summarize(
+        all_rows,
+        wall_seconds,
+        extraction_peak_allocated,
+        extraction_peak_reserved,
+    )
     write_json(output / "summary.json", summary)
     run_manifest = {
         "protocol": PROTOCOL,

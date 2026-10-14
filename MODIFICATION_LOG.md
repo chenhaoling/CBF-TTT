@@ -3501,3 +3501,12 @@ tests cover all corpus families, deterministic materialization and hash
 failure, frozen pilot size, candidate/constraint behavior, lexicographic
 selection and the resource extrapolation rule; the one torch-specific test is
 also run by the remote runner.
+
+The first resource execution produced all 1,008 registered label rows but its
+summary reset CUDA peak counters at each label and therefore retained only the
+post-extraction 0.014-GiB label peak. It did not preserve the Qwen embedding
+extraction peak required by the resource rule. Formal size selection from this
+run is invalid and no formal corpus was generated. Updated the pilot and shard
+merger to report label, extraction and overall allocated/reserved peaks
+separately and to apply the 24-GiB gate to the overall peak. The corrected
+resource run must use the identical seed, groups, actions and label protocol.

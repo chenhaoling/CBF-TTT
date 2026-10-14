@@ -119,9 +119,15 @@ class DynamicRecordCorpusTest(unittest.TestCase):
                     "active_records": 12, "valid_action_count": 27,
                     "label": [0, [1.0, 1.0, 1.0]],
                 })
-        summary = summarize(rows, wall_seconds=56.0)
+        summary = summarize(
+            rows,
+            wall_seconds=56.0,
+            extraction_peak_allocated_gib=8.0,
+            extraction_peak_reserved_gib=9.0,
+        )
         self.assertEqual(summary["estimated_two_gpu_seconds"]["512"], 512.0)
         self.assertEqual(summary["selected_formal_train_groups"], 512)
+        self.assertEqual(summary["overall_peak_allocated_gib"], 8.0)
 
 
 if __name__ == "__main__":
