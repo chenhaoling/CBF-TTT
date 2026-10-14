@@ -1,0 +1,42 @@
+{
+  "protocol": "mquake_qwen_outcome_v16",
+  "source_protocol": "mquake_temporal_sessions_v1",
+  "data_manifest_sha256": "b4d898408ea3fb46270e66ed02023f5a5dbf5bca15c5947f6fa2fe07c1bfa9ab",
+  "source_files_sha256": {
+    "train.jsonl": "3b4bb98892baa617520c7d85f04d2e025bd172e4460ca6446333dc0d51e83c21",
+    "tune.jsonl": "def303923bb36ea5de17c6e9f5d13f0d35b3a15cc4b56274eecdccd517e0412c",
+    "texts.json": "41f146413e07d5624dc583795602ca18c38acb882ce8a82704f1fd570c21aa02"
+  },
+  "selection_hash": "sha256(protocol|episode_id)",
+  "pilot_rule": "two minimum-hash episodes per fold x length cell",
+  "formal_rule": "one minimum-hash episode per subject x length cell",
+  "folds": 5,
+  "lengths": [
+    16,
+    32,
+    48,
+    64
+  ],
+  "fold_loads": [
+    1196,
+    1196,
+    1196,
+    1196,
+    1192
+  ],
+  "subjects": 68,
+  "pilot_rows": 40,
+  "formal_rows": 272,
+  "pilot_relation_matched_hard": 40,
+  "formal_relation_matched_hard": 252,
+  "pilot_sha256": "e9a61d5f31227a828311a2fc739bf31ff65435275d228ad2d6cb6d213a0d0222",
+  "formal_sha256": "352c2cabef9f7ece3d879c3e65bf928674de9341e50a99ffbc738adec2e7748c",
+  "external_sets_loaded": false,
+  "model_scored": false,
+  "mquake_cf_used": false,
+  "longmemeval_used": false,
+  "locomo_used": false,
+  "mmlu_used": false,
+  "ruler_used": false,
+  "terminal_status": "frozen_pre_v15_outer_result"
+}
