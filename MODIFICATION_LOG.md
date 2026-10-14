@@ -3452,3 +3452,22 @@ The passing independent audit released the already frozen seed-`202610154`
 lifecycle OOD evaluation without retraining or calibration.  At this entry the
 formal OOD run is active on `hku-gpu2`; its metrics will be added only after the
 producer and independent audit reach terminal state.
+
+The lifecycle OOD producer then completed in 1,009.52 seconds and its
+independent auditor passed all 13 integrity checks.  The scientific gate
+failed: the frozen 27-class controller reached 69.2612% macro accuracy versus
+73.1289% for cohort physics, a -3.1901-point paired difference with
+source-group 95% CI `[-4.2643,-2.0797]`.  Exact referenced-record deletion
+reached 89.7955% and the registered NLL grid oracle 90.9578%.  Controller
+action agreement was only 5.165% over 6,912 decisions; historical and anchor
+accuracy fell to 44.88% and 62.91%.  All eleven scientific checks failed, so
+the exact fixed-cohort branch stops and the conditional residual-readout bridge
+remains locked.
+
+Archived the complete compact negative evidence and report under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_discrete_cohort_ood_v1/`.
+The report localizes the structural failure: fixed history/last-2/last-1
+actions cannot address arbitrary old records, duplicate/no-op events require
+identity-aware idempotence, and the NLL-only oracle can trade away primary
+accuracy.  The formal OOD corpus is now diagnostic-only and will never be used
+as held-out evidence for a successor.

@@ -111,6 +111,20 @@ under causal top-1 routing.  This is a controlled Qwen-geometry result; the
 fresh frozen-controller lifecycle OOD evaluation is now running and natural
 text, actual LM-head readout and native dense-writer claims remain open.
 
+The preregistered lifecycle OOD evaluation then rejected fixed positional
+cohorts as a general forgetting representation.  Without retraining, the
+27-class controller reached 69.26% macro accuracy versus 73.13% for cohort
+physics; the paired difference was -3.19 points with source-group 95% CI
+`[-4.26,-2.08]`.  Exact referenced-record deletion reached 89.80% and the NLL
+grid oracle 90.96%, leaving a 21.70-point oracle gap.  Controller action match
+collapsed to 5.16% across 6,912 decisions, with the largest failures on
+duplicate/no-op and mixed lifecycle sessions.  All 13 integrity checks passed
+and all 11 scientific gates failed.  This preserves the IID confirmation but
+limits its claim and blocks the residual-readout bridge.  The successor must
+address dynamically selected records rather than fixed history/last-2/last-1
+cohorts; the disclosed OOD corpus can serve only as diagnosis, never as its
+held-out test.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -154,3 +168,4 @@ Key reports:
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/natural_semantic_headroom_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_sparse_cohort_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_discrete_cohort_confirmation_v1/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_discrete_cohort_ood_v1/REPORT.md`

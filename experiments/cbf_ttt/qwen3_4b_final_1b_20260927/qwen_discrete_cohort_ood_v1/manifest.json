@@ -1,0 +1,57 @@
+{
+  "protocol": "qwen_discrete_cohort_ood_v1",
+  "confirmation_audit_sha256": "3fb154f7bc7392c417f2b880a046fc2a0579b45e97968c3ba707e1ccffada92d",
+  "confirmation_summary_sha256": "3649c879447260ada86af4a03d234ec983317bc96e6a8dd6083131a997cff659",
+  "confirmation_checkpoint_sha256": "15b42d85e3a9a5f648865f367b11113f8d0bc247376de1a3493f2df3517a6c65",
+  "data_manifest_sha256": "08027a78aecae145222a84a733b57ef6871c515e5bfb4c5837f00d6a434d5264",
+  "geometry_hashes": {
+    "summary.json": "4fa6e0aba9fa5ab335ee9650b31547379a7525cd4c52db3b02d49aa49fbd272c",
+    "training.json": "01ecc4e9e5875485750b1f5a6121826eb254d9d865442a2c45ba79456ebb170c",
+    "training_manifest.json": "d13cfa35397f65ed5231aace10d0338480482f08aba3f14f4e4f5b55c9347510",
+    "contextual_transforms.pt": "524d213a82f158fddadab8973a28770a687138f528e269659430490affe74ae5"
+  },
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "reader": "component_top1",
+  "projection_seeds": [
+    2301,
+    2302,
+    2303
+  ],
+  "suites": [
+    "long_session",
+    "distant_revoke",
+    "mixed_lifecycle",
+    "duplicate_noop"
+  ],
+  "groups_per_suite": 64,
+  "blocks": {
+    "long_session": 16,
+    "distant_revoke": 12,
+    "mixed_lifecycle": 12,
+    "duplicate_noop": 12
+  },
+  "policies": [
+    "fixed_retain",
+    "fixed_global_clear",
+    "fixed_global_half",
+    "fixed_window2",
+    "fixed_window3",
+    "deterministic_random",
+    "reference_blind",
+    "learned_snapped",
+    "grid_classifier",
+    "learned",
+    "physics_cohort",
+    "exact_reference",
+    "oracle_grid"
+  ],
+  "controller_retrained": false,
+  "calibration_performed": false
+}

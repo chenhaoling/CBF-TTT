@@ -1,0 +1,73 @@
+{
+  "protocol": "qwen_discrete_cohort_ood_corpus_v1",
+  "seed": 202610154,
+  "groups_per_suite": 64,
+  "suites": [
+    "long_session",
+    "distant_revoke",
+    "mixed_lifecycle",
+    "duplicate_noop"
+  ],
+  "blocks": {
+    "long_session": 16,
+    "distant_revoke": 12,
+    "mixed_lifecycle": 12,
+    "duplicate_noop": 12
+  },
+  "boundaries": {
+    "long_session": [
+      5,
+      7,
+      9,
+      12,
+      14,
+      16
+    ],
+    "distant_revoke": [
+      6,
+      8,
+      10,
+      12
+    ],
+    "mixed_lifecycle": [
+      4,
+      7,
+      9,
+      12
+    ],
+    "duplicate_noop": [
+      4,
+      6,
+      9,
+      12
+    ]
+  },
+  "audit": {
+    "episodes": 512,
+    "groups": 256,
+    "suite_episodes": {
+      "long_session": 128,
+      "distant_revoke": 128,
+      "mixed_lifecycle": 128,
+      "duplicate_noop": 128
+    },
+    "queries": 6912,
+    "causal_answers_verified": true,
+    "suite_identifiers_and_values_disjoint": true,
+    "complete_twins": true,
+    "oracle_actions_generated": false
+  },
+  "files_sha256": {
+    "long_session.inputs.jsonl": "a1f06bef2ae602c9cefd748fd22f821585fa84a38bd2ab1a9f4996ca27a5a922",
+    "long_session.targets.jsonl": "dec9360bbf97f801035f31c10ef9036ce55598b498b12cc29f76bbdaa2869057",
+    "distant_revoke.inputs.jsonl": "c79ca50cb35e4c7bbcc8eedbdd4fb8f952a329b5fdd2d7c2cc9def24087f3d82",
+    "distant_revoke.targets.jsonl": "d56dec24cbf5fa1ebb91ddd594bdf63eca0f54bc01aa9b5f285526285b86b56a",
+    "mixed_lifecycle.inputs.jsonl": "15232021108b7c5e4d571295b2bca0913e1f4e6b2dc40aa8850506984764d63c",
+    "mixed_lifecycle.targets.jsonl": "e20ac5c74257d56f3232dc53c11d0468ad6f2f464b18081f1683b9159b65079f",
+    "duplicate_noop.inputs.jsonl": "81ffc083f39dccff4f104c96e3a07d6d14ff817218933c76905b4cfe1efce6d7",
+    "duplicate_noop.targets.jsonl": "8b3f4f551b953bc720b33b5e894925a9c15f03eeaa0da98c675bf347ec7c9c78"
+  },
+  "templates_sha256": "2e1876a5d3211797a6a5cf0c3e00a17f20f0f2c67ff2dc72821f3ca1642f4187",
+  "training_status": "frozen_controller_evaluation_only",
+  "oracle_status": "not_generated_by_builder"
+}
