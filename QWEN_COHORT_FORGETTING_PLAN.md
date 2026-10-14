@@ -90,7 +90,7 @@ Evaluate identical sessions and queries under:
 - global half `(0.5,0.5,0.5)`;
 - window-2 `(0,0,1)`;
 - window-3 `(0,1,1)`;
-- deterministic matched random grid actions;
+- deterministic uniform random grid actions;
 - reference-blind learned regression;
 - 27-way grid classifier;
 - learned continuous cohort regression;
