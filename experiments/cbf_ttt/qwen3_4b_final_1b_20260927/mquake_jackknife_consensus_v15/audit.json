@@ -1,0 +1,34 @@
+{
+  "protocol": "mquake_jackknife_consensus_v15_audit",
+  "audit_passed": true,
+  "checks": {
+    "oof_metrics_cluster_candidate_comparison_and_gate": true,
+    "nested_inner_threshold_selection_and_checkpoint": true,
+    "subject_fold_assignment_and_identities": true,
+    "three_of_four_exact_causal_replay": true,
+    "matched_random_deletions": true,
+    "raw_output_hashes": true,
+    "source_v12_and_checkpoint_hashes": true,
+    "protocol_training_and_access_locks": true
+  },
+  "summary_sha256": "a4b10fcdc010c5b769f7885b24b12b2276e4cc773c9c13ac0f403267aa993aa4",
+  "training_sha256": "5c95f8a436b764ff0af818bda2d0398e4cdb2a5a42da4af6c4352f49ebc81a7f",
+  "training_manifest_sha256": "c1c4e8954cb1ec38f8f2180b900f45979f21d27a93381a789647b410a66163a9",
+  "recomputed_oof_gate": {
+    "checks": {
+      "shortlist_recall_at_least_99": true,
+      "candidate_top1_at_least_99": false,
+      "candidate_subject_macro_top1_at_least_97": true,
+      "current_retention_at_least_99": true,
+      "non_target_retention_at_least_97": true,
+      "hard_retain_at_least_97": true,
+      "cluster_safety_lcb_at_least_95": true,
+      "stale_deletion_at_least_90": false,
+      "pair_state_at_least_90": false,
+      "subject_macro_pair_at_least_85": false,
+      "minimum_fold_pair_at_least_85": false,
+      "random_gain_lower_bound_above_zero": true
+    },
+    "passed": false
+  }
+}
