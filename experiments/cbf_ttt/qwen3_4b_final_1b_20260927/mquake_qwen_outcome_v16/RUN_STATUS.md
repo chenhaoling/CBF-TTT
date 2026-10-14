@@ -23,10 +23,17 @@ original corpus builder's hard-retain marker and will be reported separately.
 - `manifest.json`: `9eea25d6aa253014d47553e0e45fb01107546a3ff14b86bc3881b6c60b208be1`
 - `pilot.jsonl`: `4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38`
 - `formal.jsonl`: `4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11`
+- `data_audit.json`: `9840a50489a3cd9fe1dd7a39071af535b078b2aa4d3f172cf1a58f1d1375d744`
 
 The source manifest and train/tune/text hashes are recorded inside
 `manifest.json`.  The manifest explicitly records `model_scored=false` and all
 external-access flags as false.
+
+The independent source reconstruction audit passed all 12 checks: source
+protocol and hashes, subject folds, ordered pilot/formal selection, sizes,
+relation counts, artifact hashes, causal query visibility, pre-model state and
+external benchmark seals.  This audit covers data only; Qwen outcomes still
+require a separate scoring and replay audit.
 
 ## Pre-model correction
 

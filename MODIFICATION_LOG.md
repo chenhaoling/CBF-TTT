@@ -2157,3 +2157,8 @@ formal `4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11`。
 有序 ID、query_step 可见性、old/current/hard/unrelated anchor 文本和值、matched-hard
 计数、来源/产物 hash 及所有外部访问锁。新增两项 helper 测试；与构建器合计七项
 本地通过。该 auditor 只验证预评分数据，不能替代后续 Qwen score/replay audit。
+
+服务器七项测试通过；独立数据审计的 12 项检查全部为 true，`audit_passed=true`。
+审计文件 SHA-256 为
+`9840a50489a3cd9fe1dd7a39071af535b078b2aa4d3f172cf1a58f1d1375d744`，已归档至
+V16 实验目录。审计再次确认 `model_scored=false`、`external_sets_loaded=false`。
