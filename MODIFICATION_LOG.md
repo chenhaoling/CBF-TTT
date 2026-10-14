@@ -2772,3 +2772,22 @@ remote code commit `ae99cfc7689cedb0210d5b3b8934edb363a4a480` and root
 loaded the frozen Qwen3-4B checkpoint, entered model scoring and wrote their
 first episode. Outcome aggregation, audit and any downstream release remain
 pending until both shards terminate successfully.
+
+### V19 causal-rule explanation frozen before outcome
+
+While both V19 shards were still running and before reading any arm outcome,
+added `POST_V19_CAUSAL_RULE_DIAGNOSTIC_PLAN.md`. The diagnostic asks whether a
+fully causal exact-conflict rule already explains the registered oracle gain.
+It freezes retain-all/reset/last-1/last-2, newest/oldest exact single deletion
+and whole-key exact deletion. These rules see only session content through the
+current update, never a query, answer, score or future event, and cannot delete
+the current update.
+
+Added `tasks/analyze_v19_causal_rules.py`, its independent auditor, runner and
+two tests. The decision rule is fixed: locality at least 97%, positive
+subject/template interval lower bounds, no negative fold and at least 90% of
+the positive 3%-budget oracle gap closed. Passing means that V19 demonstrates
+headroom but is too easy to justify controller learning, so the next study must
+remove exact key identity with a source-disjoint semantic-alias V20. Failing
+this explanation while V19 passes permits nested OOF controller training. The
+production and independent recomputations match exactly on a 320-row fixture.
