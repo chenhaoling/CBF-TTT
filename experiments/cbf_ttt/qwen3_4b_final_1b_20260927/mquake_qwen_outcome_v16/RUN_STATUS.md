@@ -61,6 +61,13 @@ uses a new standard `DynamicCache`.  This prevents prompts longer than the
 4,096-token native update interval from silently activating the failed native
 writer and keeps policy arms different only in serialized session text.
 
+A no-data loader smoke on remote GPU1 passed before any outcome score: the
+plain model has 4,022,468,096 parameters, `ttt_mode=false`, zero missing keys,
+and exactly 14 expected unexpected keys (one `ttt_conv` and one `ttt_proj` for
+each of the seven TTT layers).  Loading peaked at 7.545 GiB allocated and
+7.547 GiB reserved on an RTX 5090.  The smoke loaded no pilot row and leaves
+`model_scored=false`.
+
 ## Pre-model correction
 
 The first build stopped before writing a sample because it required every
