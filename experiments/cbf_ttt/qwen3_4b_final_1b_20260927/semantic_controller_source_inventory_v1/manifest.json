@@ -1,0 +1,122 @@
+{
+  "checks": {
+    "all_folds_nonempty": true,
+    "relation_disjoint": true,
+    "subject_disjoint": true
+  },
+  "counterfact_role": "already_observed_development_only",
+  "excluded_counts": {
+    "cross_fold_subject_conflict": 917,
+    "mquake_dev_reserved": 374,
+    "semantic_subject_overlap": 7
+  },
+  "files_sha256": {
+    "excluded_rows.jsonl": "4551ce6be9d4fd54b98c865a604a9cc7f63a637a19586e83a67852b57b372141",
+    "relation_folds.json": "5adc3f8cb98d209a4c4f38419de9c35c16ae38654c86aaa3d149a42694fa0909",
+    "semantic_rows.jsonl": "222f7c51d384a9e26da93ecfd0dda91dd0add148c9901e5765f2fe4458614a99",
+    "zsre_calibration.jsonl": "a5c38718c56ceefd3f05ee29631077c72aad18adb4e23b93635693e9ae7da140"
+  },
+  "fold_counts": {
+    "0": {
+      "counterfact_rows": 3591,
+      "mquake_rows": 790,
+      "relations": 7,
+      "rows": 4381,
+      "subjects": 3590
+    },
+    "1": {
+      "counterfact_rows": 4451,
+      "mquake_rows": 10,
+      "relations": 10,
+      "rows": 4461,
+      "subjects": 3796
+    },
+    "2": {
+      "counterfact_rows": 4516,
+      "mquake_rows": 7,
+      "relations": 8,
+      "rows": 4523,
+      "subjects": 4458
+    },
+    "3": {
+      "counterfact_rows": 4078,
+      "mquake_rows": 445,
+      "relations": 7,
+      "rows": 4523,
+      "subjects": 4064
+    },
+    "4": {
+      "counterfact_rows": 4607,
+      "mquake_rows": 1,
+      "relations": 7,
+      "rows": 4608,
+      "subjects": 4504
+    }
+  },
+  "fold_seed": "post-v20-semantic-controller-folds-v1",
+  "folds": 5,
+  "locomo_loaded": false,
+  "longmemeval_loaded": false,
+  "model_outcomes_loaded": false,
+  "mquake_dev_used": false,
+  "mquake_splits_used": [
+    "train",
+    "tune"
+  ],
+  "protocol": "post_v20_semantic_controller_source_inventory_v1",
+  "semantic_rows_before_subject_filter": 23413,
+  "semantic_rows_retained": 22496,
+  "source_relation_overlap_after_filter": {
+    "counterfact": {
+      "counterfact": 34,
+      "mquake": 2
+    },
+    "mquake": {
+      "counterfact": 2,
+      "mquake": 7
+    }
+  },
+  "source_relation_overlap_before_filter": {
+    "counterfact": {
+      "counterfact": 34,
+      "mquake": 2
+    },
+    "mquake": {
+      "counterfact": 2,
+      "mquake": 7
+    }
+  },
+  "source_rows": {
+    "counterfact": 21919,
+    "mquake": 1868,
+    "zsre_calibration": 267
+  },
+  "source_sha256": {
+    "counterfact": "d017056125178a13728594e66a801357a8db9ed7973a7425554bb4271de9fc6f",
+    "mquake": "58500a1d4aaf9e036c23a1d9dd6be2d73d693e35a695614842f211ea5aff59f2",
+    "zsre_calibration": "d19bb92ca6f487ce046e75a0a65e384b831a7bbc988e81436df68b3cd7beec6f"
+  },
+  "source_subject_overlap_after_filter": {
+    "counterfact": {
+      "counterfact": 20348,
+      "mquake": 1
+    },
+    "mquake": {
+      "counterfact": 1,
+      "mquake": 65
+    }
+  },
+  "source_subject_overlap_before_filter": {
+    "counterfact": {
+      "counterfact": 20391,
+      "mquake": 47
+    },
+    "mquake": {
+      "counterfact": 47,
+      "mquake": 68
+    }
+  },
+  "zsre_calibration_retained": 260,
+  "zsre_dev_or_test_loaded": false,
+  "zsre_role": "readout_calibration_only"
+}

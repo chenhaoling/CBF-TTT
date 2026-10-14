@@ -1,5 +1,13 @@
 # CBF-TTT 实现记录
 
+## 2026-10-14：Post-V20 跨来源语义控制器数据清单（前置准备）
+
+在 V19 正式复现写出 148/320 行、且尚未读取任何 arm 汇总、因果规则或 V19/V20 结果时，固定并实现跨来源语义控制器的数据清单与泄漏审计。新增 `tasks/build_semantic_controller_source_inventory.py`、`scripts/audit_semantic_controller_source_inventory.py`、`scripts/run_semantic_controller_source_inventory.sh` 和 `tests/test_semantic_controller_source_inventory.py`。构建器只使用已观察的 CounterFact、MQuAKE-T 固定 train+tune，以及已物化的 ZsRE calibration；明确不打开 ZsRE dev/test、MQuAKE-CF、LoCoMo、LongMemEval-S 或模型 outcome。关系先确定五折；同一规范化主体若跨折，只保留其记录最多的一折，并逐行保存排除原因。关系表面在编码前对精确主体和值做掩码。
+
+本地及 hku-gpu2 四项测试通过。真实清单源哈希分别为 CounterFact `d0170561...fc6f`、MQuAKE-T `58500a1d...9f2`、ZsRE calibration `d19bb92c...ec6f`；23,413 条候选语义记录中保留 22,496 条，排除 917 条跨折主体冲突和全部 374 条 MQuAKE dev；ZsRE calibration 因主体重叠排除 7 条，保留 260 条。五折同时满足 relation-disjoint、subject-disjoint 和非空，独立重算审计全部通过，manifest SHA256 为 `df3002f4913663ef829b865b3d1502305b712f5a96c401568c413a9fa2862836`。小型记录位于 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/semantic_controller_source_inventory_v1/`，完整数据只保留服务器 `/home/ctj/cbf_ttt_semantic_controller_inventory_20261014`。
+
+清单同时揭示不可消除的来源失衡：MQuAKE train+tune 的 1,494 条记录中 P6=995、P35=481，其余五个关系合计18；五折 MQuAKE 行数为790/10/7/445/1。不能在保持关系隔离时伪造来源均衡，因此在结果揭示前补充固定：训练使用关系均衡批次，共享关系内等量来源采样；评测报告 micro、subject-macro、relation-macro 与分来源指标，不复制关系或样本。该清单不是效果证据，只有 V19/V20 前置门槛通过后才允许训练语义控制器；所有改动均为 opt-in 数据工具，不改变 baseline、原生 `ttt_proj/ttt_conv` 或默认推理。
+
 ## 目标与方法理解
 
 本次实现依据工作区的 `../CBF_TTT_method.md`，在原版 In-Place TTT 推理模型之上加入**可选**的反事实收益驱动连续遗忘。基础 down-projection 权重、注意力权重和更新投影保持冻结；单次会话的快记忆为 `M`。对一个完整 chunk，先用 `W0 + M` 产生输出与原 TTT 候选 `ΔW`，再用共享的 `alpha` 提交 `M <- (1-alpha)M + ΔW`。`alpha=0` 为相同 chunk 协议下的标准累积更新。
