@@ -2459,3 +2459,11 @@ query answers/candidates, mechanism-specific roles, state reconstruction,
 hashes and access locks; focused tests exercise every mechanism, deterministic
 rebuild, complete counts and audit pass. The build runner records code and
 terminal provenance before any Qwen scoring.
+
+Before model scoring, a read-only Qwen tokenizer audit found that the first
+opaque hex format varied from 7 to 11 answer tokens. That root is preserved as
+an invalid construction attempt and is not scored. Replaced values with a
+spaced four-digit base-16 code (`Z A A A A` form); an exhaustive check of 400
+codes produced exactly five tokens for every value. The builder and independent
+auditor now freeze this format and the recovery uses a fresh
+`_tokmatch_retry1` root.

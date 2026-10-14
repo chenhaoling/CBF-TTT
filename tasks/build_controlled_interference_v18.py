@@ -27,6 +27,15 @@ def opaque(namespace, index, width=10):
     return f"Z{digest[:width]}"
 
 
+def opaque_value(index):
+    """A unique code whose spaced base-16 digits are five Qwen3 tokens."""
+    alphabet = "ABCDEFGHIJKLMNOP"
+    if not 0 <= index < 16 ** 4:
+        raise ValueError("opaque value index exceeds the registered four-digit space")
+    digits = [alphabet[(index // (16 ** power)) % 16] for power in range(4)]
+    return "Z " + " ".join(digits)
+
+
 def fact_statement(entity, key, value, template):
     if template == 0:
         return f"Archive subject {entity} has code {value} in slot {key}."
@@ -66,11 +75,10 @@ def build_episode(index, length, mechanism, seed=SEED):
     keys = [f"K{opaque(f'key-{index}', key_index, 7)}" for key_index in range(6)]
     if mechanism == "irrelevant_near_duplicate":
         keys[3] = keys[0] + "A"
-    initial = [opaque(f"pilot-value-{index}-{key_index}", 0)
-               for key_index in range(6)]
+    initial = [opaque_value(index * 8 + key_index) for key_index in range(6)]
     current = list(initial)
-    current[0] = opaque(f"pilot-value-{index}-0", 1)
-    locality_value = opaque(f"pilot-locality-{index}", 0)
+    current[0] = opaque_value(index * 8 + 6)
+    locality_value = opaque_value(index * 8 + 7)
 
     facts = [(key_index, initial[key_index], "initial") for key_index in range(6)]
     fillers = length - 7
@@ -175,6 +183,7 @@ def build(output, seed=SEED):
         "counts": counts, "pilot_sha256": sha(data_path),
         "pilot_states_sha256": sha(state_path),
         "opaque_value_namespace": "pilot-only; formal prefixes and pools remain ungenerated",
+        "opaque_value_format": "Z plus four spaced base-16 letters; exactly five Qwen3 tokens",
         "slow_parameter_answerable_by_design": False,
         "current_session_deletion_allowed": False,
         "model_scored": False, "formal_generated": False, "external_sets_loaded": False,
