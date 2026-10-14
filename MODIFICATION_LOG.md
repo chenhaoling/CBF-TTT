@@ -2678,3 +2678,25 @@ semantic-oracle deletions. Manifest/data/state SHA-256 values were
 `e82d7923d048e5db63787bdf1e0084c303897955049941e05b289cad585d3f4a` and
 `e01f3c900c5387f4fec20af9dbb6717a9e66d2fac543ea740546779d1243e9b1`.
 This smoke root is not an official result and is not consumed by any chain.
+
+### V18 formal outcome and locality-constrained diagnosis
+
+The 320-row V18 formal scorer completed with exit code 0 and passed all twelve
+independent audit checks. Retain-all was selected in every outer fold and
+reached 43.75% joint success, 56.72% update, 100% retention and 93.44%
+locality. The unconstrained exact deletion oracle reached 90.63% joint,
+94.84% update and 100% retention, with a 46.88-point joint gain and positive
+subject/template interval lower bounds in every fold. Its 91.88% locality
+failed the frozen absolute 97% gate, so the original V18 result remains failed
+and Stage B was correctly not created.
+
+Because the best fixed arm itself missed 97% locality, added the explicitly
+post-hoc V18-LC Pareto diagnostic without rescoring the model. Dynamic
+programming maximizes the registered endpoint under fixed 100/99/97/95/90%
+locality budgets. At the primary 97% budget it used seven of nine allowed
+failures and reached 90.63% joint, 100% update, 91.25% retention, 97.81%
+locality and 73.13% generation joint success. Joint gain over fixed remained
+46.88 points; subject/template 95% lower bounds were 41.56/41.25 points and all
+five fold gains were positive. All eight diagnostic checks passed. This is
+exploratory evidence for a safety-constrained objective and requires an
+independent V19 confirmation; it does not change V18 or release Stage B.
