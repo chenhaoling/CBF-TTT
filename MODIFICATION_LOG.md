@@ -2520,3 +2520,13 @@ row because the shell script created `result/` before invoking the builder,
 while the builder correctly requires a nonexistent output directory. The
 failed root is preserved. Removed the premature `mkdir`; recovery uses a new
 `_retry1` root with the unchanged seed and registered protocol.
+
+The `_retry1` formal construction completed with exit code 0 and passed all
+eleven independent audit checks. It froze 320 episodes, 80 subjects, 20
+template groups and five 64-row folds, balanced at 80 rows for each length and
+mechanism. The state matrix contains 9,280 single-session and 1,920 key-group
+deletions. Manifest, episode and state SHA-256 values are
+`8312c232a10e8e7f66cb069bd4738c99dbc2dcfe57dd01297f65c6e80a129de6`,
+`1975f8c5ca221d707f25665b8974cf1435eae63a62285a57ae8076efd0b365f2`
+and `87b4727324282e6f608e642674d9e5521924bae454a384633cf148959f940192`.
+The two-GPU formal scorer was then launched against this exact frozen root.

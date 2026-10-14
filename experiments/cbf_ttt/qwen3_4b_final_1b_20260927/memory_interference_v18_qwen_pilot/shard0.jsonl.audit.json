@@ -1,0 +1,88 @@
+{
+  "protocol": "controlled_memory_interference_v18_qwen_pilot",
+  "shard": 0,
+  "num_shards": 2,
+  "rows": 20,
+  "rows_sha256": "22c41f435610e33dfda2f75618048330af997eeb30fae1be5e699d64e94766af",
+  "dependencies": {
+    "manifest_sha256": "6c4ab7cf035426759bbbb240af89ff8b9fff917cab476b400a4b1cc7f3f29e7b",
+    "data_audit_sha256": "d8288954745ee0b035209d15de9b93510fdd19a0a047c07f7d2dea1f99bba6d5",
+    "pilot_sha256": "9c73acf8080d7fc01c2a7018203af539c87399902eb4e9792270e3b9c72d24e9",
+    "pilot_states_sha256": "caf818fc61b0b2067ad034245cd007977b8f9d35f6b7a703d36f5e9d3bd1d2a4"
+  },
+  "seconds": 1029.6068193968385,
+  "unique_memory_states_scored": 720,
+  "reused_arm_states": 80,
+  "query_measurements": 3600,
+  "gpu_peak_allocated_gib": 8.29874849319458,
+  "gpu_peak_reserved_gib": 8.67578125,
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [
+      "model.layers.0.mlp.ttt_conv.weight",
+      "model.layers.0.mlp.ttt_proj.weight",
+      "model.layers.12.mlp.ttt_conv.weight",
+      "model.layers.12.mlp.ttt_proj.weight",
+      "model.layers.18.mlp.ttt_conv.weight",
+      "model.layers.18.mlp.ttt_proj.weight",
+      "model.layers.24.mlp.ttt_conv.weight",
+      "model.layers.24.mlp.ttt_proj.weight",
+      "model.layers.30.mlp.ttt_conv.weight",
+      "model.layers.30.mlp.ttt_proj.weight",
+      "model.layers.35.mlp.ttt_conv.weight",
+      "model.layers.35.mlp.ttt_proj.weight",
+      "model.layers.6.mlp.ttt_conv.weight",
+      "model.layers.6.mlp.ttt_proj.weight"
+    ],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "readout_mode": "plain_ttt_disabled_fresh_kv",
+  "candidate_scoring": "one_prompt_forward_with_independent_answer_cache_branches",
+  "generation": "greedy_from_independent_shared_prompt_cache_13_tokens",
+  "model_provenance": {
+    "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+    "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+    "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+    "attention": "sdpa",
+    "parameter_count": 4022468096,
+    "source_files_sha256": {
+      "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+      "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+    },
+    "excluded_adapters": [
+      "model.layers.0.mlp.ttt_conv.weight",
+      "model.layers.0.mlp.ttt_proj.weight",
+      "model.layers.12.mlp.ttt_conv.weight",
+      "model.layers.12.mlp.ttt_proj.weight",
+      "model.layers.18.mlp.ttt_conv.weight",
+      "model.layers.18.mlp.ttt_proj.weight",
+      "model.layers.24.mlp.ttt_conv.weight",
+      "model.layers.24.mlp.ttt_proj.weight",
+      "model.layers.30.mlp.ttt_conv.weight",
+      "model.layers.30.mlp.ttt_proj.weight",
+      "model.layers.35.mlp.ttt_conv.weight",
+      "model.layers.35.mlp.ttt_proj.weight",
+      "model.layers.6.mlp.ttt_conv.weight",
+      "model.layers.6.mlp.ttt_proj.weight"
+    ],
+    "ttt_mode": false
+  },
+  "tokenizer_files_sha256": {
+    "config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "model.safetensors.index.json": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "opaque_answer_tokens": 5,
+  "torch": "2.9.1+cu130",
+  "transformers": "4.57.3",
+  "external_sets_loaded": false,
+  "formal_generated": false
+}
