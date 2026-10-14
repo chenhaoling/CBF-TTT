@@ -188,6 +188,11 @@ def audit(controller_root, pair_root, cross_root, zero_root):
     per_fold = {str(fold): complete_metrics(
         [row for row in rows if int(row["outer_fold"]) == fold])
         for fold in range(FOLDS)}
+    # The trainer names false-positive rate ``risk_violation`` in fold-level
+    # decision metrics.  Reconstruct it from row outcomes instead of copying it
+    # from the summary.
+    for metric in per_fold.values():
+        metric["risk_violation"] = 1.0 - metric["negative_specificity"]
     by_kind = {kind: complete_metrics([row for row in rows if row["kind"] == kind])
                for kind in sorted({row["kind"] for row in rows})}
     gate = recompute_gate(summary, rows, per_fold, by_kind)
