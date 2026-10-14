@@ -2626,3 +2626,18 @@ recomputes inner selection and all 320 OOF actions, and verifies that the
 current update is retained in every seed and episode. GPU training time and
 peak allocated/reserved memory are recorded. Model-level policy efficacy is
 still gated on the later Qwen rescoring stage.
+
+Added the model-level OOF policy evaluator, independent auditor, two-GPU runner
+and policy-to-evaluation release chain. The evaluator applies each seed's
+retained component IDs to the frozen low-rank Qwen fast memory, uses fresh KV,
+and scores candidate accuracy, answer NLL and independent greedy generation.
+It compares the three-seed mean with the outer-fold fixed arm, strongest
+physical rule, exact-match rule and exact oracle, including subject/template
+cluster intervals, every-fold gains and fixed-to-oracle gap closure.
+
+The controlled policy gate implements all registered exact-V18 criteria. The
+summary keeps `learned_policy_claim_supported=false` until a separately built
+semantic-alias set beats exact string matching; controlled-set success cannot
+silently satisfy that requirement. The auditor reconstructs all seed-specific
+memory states from the saved OOF policy artifact, rechecks every prompt, score,
+generation and resource record, and independently recomputes the full gate.
