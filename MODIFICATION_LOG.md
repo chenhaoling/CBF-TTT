@@ -2216,3 +2216,17 @@ allocated/reserved 为 7.545/7.547 GiB。该检查没有加载 pilot row、没�
 `jackknife_consensus_supported=true` 才调用 V16 Pilot runner。V15 正常结束但 gate
 不支持时写入 `v16_not_launched_v15_unsupported` 并停止，不创建 Pilot 结果目录、
 不加载模型。该 watcher 不改变 V15、V16 指标或阈值。
+
+### V16 formal 九臂状态冻结器（2026-10-14，V15/Pilot 终态前）
+
+在 V15 仅完成 outer-0/1、V16 尚未评分时实现
+`tasks/build_mquake_qwen_outcome_v16_formal_states.py`。它只有在 V15 supported 且
+独立 audit 通过、40 条 Pilot gate 与独立 audit 均通过后才运行；不加载 Qwen。
+对 frozen 272 条 formal sample，在 primary-current 后重建并哈希九臂 memory session
+IDs：no-memory、retain-all、global-reset、last-1、last-2、V15 deletion-count-matched
+random、V14 OOF、V15 OOF、primary-old deletion oracle。V14/V15/random 都从完整 OOF
+逐步 `deleted session_id` 因果回放，删除发生在当前 event admission 之前；任何未来
+session、非可见删除、trace identity/step/event mismatch、当前 session 丢失或来源 raw
+hash 变化都会拒绝。注册查询点下 global-reset 与 last-1 数学上相同，manifest 显式
+记录此重复基线而不隐瞒。新增四项纯 Python 测试，结合现有 V16 tests 共 20 项通过；
+正式状态尚未生成，`model_scored=false` 与外部集封存保持不变。
