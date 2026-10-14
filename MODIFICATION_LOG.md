@@ -2151,3 +2151,9 @@ fallback 为 20。三个 artifact SHA-256 分别为 manifest `6dbe6154...`, pilo
 pilot `4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38`、
 formal `4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11`。
 本地归档已覆盖为修订版，RUN_STATUS 明确旧远程目录只作失败/修订历史，不能评分。
+
+新增独立 `scripts/audit_mquake_qwen_outcome_v16_data.py`，不导入构建器选择函数，
+从 train/tune/texts 重新计算 V11--V15 subject folds、matched-first hash 选择、40/272
+有序 ID、query_step 可见性、old/current/hard/unrelated anchor 文本和值、matched-hard
+计数、来源/产物 hash 及所有外部访问锁。新增两项 helper 测试；与构建器合计七项
+本地通过。该 auditor 只验证预评分数据，不能替代后续 Qwen score/replay audit。
