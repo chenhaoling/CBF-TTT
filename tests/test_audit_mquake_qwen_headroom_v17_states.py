@@ -2,7 +2,7 @@
 
 import unittest
 
-from scripts.audit_mquake_qwen_headroom_v17_states import reconstruct
+from scripts.audit_mquake_qwen_headroom_v17_states import complete_fixed_keys, reconstruct
 
 
 class HeadroomStateAuditTest(unittest.TestCase):
@@ -24,6 +24,12 @@ class HeadroomStateAuditTest(unittest.TestCase):
                   "primary_current_session_id": "missing"}
         with self.assertRaises(ValueError):
             reconstruct(episode, sample)
+
+    def test_json_object_order_is_not_an_identity_field(self):
+        shuffled = {name: [] for name in
+                    ("last_2", "last_1", "retain_all", "no_memory", "global_reset")}
+        self.assertTrue(complete_fixed_keys(shuffled))
+        self.assertFalse(complete_fixed_keys(dict(shuffled, extra=[])))
 
 
 if __name__ == "__main__":

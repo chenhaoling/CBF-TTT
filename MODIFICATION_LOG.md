@@ -2333,3 +2333,16 @@ PID and terminal artifacts as the Branch-A watcher, exits without V17 work when
 V15 is supported, and launches only the model-free V17 state runner when V15 is
 audited and explicitly unsupported.  Missing/failed/invalid V15 states receive
 distinct terminal markers.
+
+V15 completed with a passed independent audit but failed the registered gate,
+so Branch A correctly remained locked and the conditional V17 state runner
+started.  Its builder wrote 40/272 rows with 1,200/8,160 exhaustive historical
+single-deletion states and stable hashes, but the first independent audit
+failed only `ordered_sample_coverage_and_identity`: it compared the iteration
+order of a JSON object to the registered fixed-arm order even though the
+builder deliberately uses `sort_keys=True`.  All state reconstructions, causal
+checks, counts, hashes, dependencies, V15 gate and access locks passed.  The
+failed root is preserved.  The auditor now treats JSON object order as
+non-semantic, requires the exact key set with no extras, and still verifies the
+registered order separately from the manifest.  A regression test covers
+shuffled and extra keys; recovery must use a fresh `_retry1` root.
