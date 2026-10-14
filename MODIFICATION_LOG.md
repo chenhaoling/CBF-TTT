@@ -2238,3 +2238,9 @@ sample、V14/V15/random 三份完整 OOF trace，逐 event 独立执行 delete-b
 raw OOF hash、完整 episode 覆盖、当前 session 保留、未来 session 排除、重复基线披露
 和外部访问锁。新增三项独立 helper 测试，V16 相关纯 Python 测试合计 23 项通过。
 Auditor 也只有在 formal states 实际生成后才运行；当前仍没有 formal 模型分数。
+
+新增 `scripts/run_mquake_qwen_outcome_v16_formal_states.sh`：在独立新目录依次执行
+builder/auditor 单测、272 条状态冻结、独立重建审计、exit/terminal/timestamp 记录。
+默认输入固定为当前 MQuAKE-T、V14 OOF、V15 OOF、V16 sample 与 V16 Pilot 路径；
+任何上游 gate/hash/audit 不符都会在写入完成终态前停止。该 runner 目前仅完成 shell
+语法验证，没有启动，因 V15 与 Pilot 尚未满足解锁条件。
