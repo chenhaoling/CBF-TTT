@@ -1,0 +1,73 @@
+{
+  "protocol": "qwen_dynamic_record_forgetting_corpus_v1",
+  "phase": "development",
+  "seed": 202610156,
+  "splits": [
+    "train",
+    "dev"
+  ],
+  "group_counts": {
+    "train": 512,
+    "dev": 64
+  },
+  "family_episode_counts": {
+    "train/retain": 148,
+    "train/recent_revoke": 146,
+    "train/distant_revoke": 146,
+    "train/reset": 146,
+    "train/exact_duplicate": 146,
+    "train/overwritten_noop": 146,
+    "train/mixed_two_event": 146,
+    "dev/retain": 20,
+    "dev/recent_revoke": 18,
+    "dev/distant_revoke": 18,
+    "dev/reset": 18,
+    "dev/exact_duplicate": 18,
+    "dev/overwritten_noop": 18,
+    "dev/mixed_two_event": 18
+  },
+  "families": [
+    "retain",
+    "recent_revoke",
+    "distant_revoke",
+    "reset",
+    "exact_duplicate",
+    "overwritten_noop",
+    "mixed_two_event"
+  ],
+  "templates_sha256": "b69915a421b4485886d2df7fa6f2bd84fc421d00a05db06e993a4f33b441ff21",
+  "audit": {
+    "episodes": 1152,
+    "groups": 576,
+    "counts": {
+      "train/retain": 148,
+      "train/recent_revoke": 146,
+      "train/distant_revoke": 146,
+      "train/reset": 146,
+      "train/exact_duplicate": 146,
+      "train/overwritten_noop": 146,
+      "train/mixed_two_event": 146,
+      "dev/retain": 20,
+      "dev/recent_revoke": 18,
+      "dev/distant_revoke": 18,
+      "dev/reset": 18,
+      "dev/exact_duplicate": 18,
+      "dev/overwritten_noop": 18,
+      "dev/mixed_two_event": 18
+    },
+    "causal_answers_verified": true,
+    "counterfactual_twins_verified": true,
+    "symbols_disjoint": true,
+    "oracle_actions_generated": false
+  },
+  "files_sha256": {
+    "train.inputs.jsonl": "1bfefa6397b5443ce775174a9439cea7c6db96afbbb55bb4fc6a6666b85d0c6b",
+    "train.targets.jsonl": "eb970e1f06cbb2df37dc8e9326f9f20cdc0b84de2ede977e2e2814c06fbb429a",
+    "dev.inputs.jsonl": "783b6be23f453d4ec5c15f2c5b97ff0c850f05e11549bfa4bfa577d1dbb82bc6",
+    "dev.targets.jsonl": "35cf036085935f3092190218a49e1dea5820945822155997c344c0f172a18e6b"
+  },
+  "training_status": "not_trained",
+  "oracle_status": "not_constructed",
+  "sealed_test_generated": false,
+  "external_ood_generated": false
+}

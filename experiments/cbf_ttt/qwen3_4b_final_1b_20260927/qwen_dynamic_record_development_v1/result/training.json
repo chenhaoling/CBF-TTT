@@ -1,0 +1,28 @@
+{
+  "two_gpu_critical_path_seconds": 391.23622627928853,
+  "overall_peak_allocated_gib": 7.911609172821045,
+  "overall_peak_reserved_gib": 8.37890625,
+  "shards": [
+    {
+      "path": "shard_gpu0",
+      "manifest_sha256": "8038b0112f4c8f535552c762846cadd4e1dfb8c3bb4d042dec40ac1be4c89184",
+      "training_sha256": "51b65c3110d814c4b78023c5255bf71d12d7dc2d7647ef3898fd5828f9662a7b",
+      "seed_results_sha256": "fa6416d779e019d2986abd126760561f015d3e9614163922ed33a94a16fd1caf",
+      "checkpoint_sha256": "79f7ffd1b83a4fa475b8ec32cb528da4f90d1ec8519ea87a28b3f8568b3a00dc",
+      "seconds": 391.23622627928853,
+      "overall_peak_allocated_gib": 7.911609172821045,
+      "overall_peak_reserved_gib": 8.37890625
+    },
+    {
+      "path": "shard_gpu1",
+      "manifest_sha256": "f5469d05330b0ea2e39cb13124f3282d1d7745c580ce15261fea1cd16d0f1409",
+      "training_sha256": "67eda8ac52503545b147a90d0af00cc80ff1a263ea7a610094044c31e9f5fe4a",
+      "seed_results_sha256": "9d4fbb91cd1321ae65e4b37435320e23888accd85d86d2e6d59d1791eedcec29",
+      "checkpoint_sha256": "6bb3fc999bd6e37507b0e9b24eb739dea6dade3f156c6080565de82a597b7b41",
+      "seconds": 221.61215332895517,
+      "overall_peak_allocated_gib": 7.911609172821045,
+      "overall_peak_reserved_gib": 8.37890625
+    }
+  ],
+  "checkpoint_sha256": "000f09397dfa5037ad5fc482d1cf42296523f52c1f0094b655bb7bfd4e16c53a"
+}

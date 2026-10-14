@@ -1,0 +1,28 @@
+{
+  "protocol": "qwen_dynamic_record_forgetting_development_v1",
+  "data_manifest_sha256": "bef137f42abaa1c63800a834bd4330679e52a41bcf622b501190363b82dd2a47",
+  "resource_audit_sha256": "1045f477b8c9a4ed88c6b698c58baa245449a4f2fa4cf3768faf5296ae90df4b",
+  "projection_seeds": [
+    2301,
+    2302,
+    2303
+  ],
+  "policies": [
+    "fixed_retain",
+    "deterministic_random",
+    "old_cohort",
+    "cohort_physics",
+    "exact_reference",
+    "dynamic_rules",
+    "slot_mlp",
+    "set_unconstrained",
+    "primary",
+    "oracle"
+  ],
+  "test_generated": false,
+  "test_scored": false,
+  "shards": [
+    "shard_gpu0",
+    "shard_gpu1"
+  ]
+}

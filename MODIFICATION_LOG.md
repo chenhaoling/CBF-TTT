@@ -3553,3 +3553,50 @@ Added `scripts/audit_qwen_dynamic_record_development.py` to reconstruct the
 development source view, all 30 raw policy files, per-seed and multi-seed
 aggregates, bootstrap gate, checkpoint structure, dependency hashes, resource
 accounting and sealed-split state independently of the producer result.
+
+The formal development run completed in 391.24 seconds at 7.912/8.379 GiB
+peak allocated/reserved memory. The primary constrained set controller reached
+98.1481% accuracy, 98.0903% minimum-seed accuracy, 100% candidate recall and
+zero constraint violations. It exactly tied both exact referenced-record
+deletion and the accuracy-first oracle, so its accuracy gain over the strongest
+non-oracle comparator was zero with CI `[0,0]`; its NLL-gain CI was
+`[-0.002150,0.000574]`. All three policies were 100% on six of seven families
+and 86.8313% on reset. A read-only error slice localized every reset error to
+an `unknown` historical answer, establishing a reader absence-detection ceiling
+rather than a forgetting-action error. The registered gain, family, NLL and
+interior-action checks failed, while the independent auditor passed all 13
+integrity checks and verified that matched test and external OOD were never
+generated. The learned branch stops. Complete 23-MiB evidence and a report are
+archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_dynamic_record_development_v1/`.
+
+After the complete audited failure was fixed and before any successor datum or
+score existed, froze `QWEN_CAUSAL_LEDGER_RESIDUAL_PLAN.md`. The successor drops
+the unsupported learned-controller claim and makes the exact addressable
+record ledger the method. It uses fresh seeds and value/template namespaces,
+requires an eight-group-per-family actual-Qwen resource/content pilot with the
+full `{0,0.5,1}` sparse-boundary grid, and evaluates five-token residual memory
+through the frozen Qwen LM head with fresh KV. The protocol registers
+Correct/Wrong/Zero/Random controls, null-value routing, fixed/window/single-rule
+comparators, semantic-state equality, development/matched/OOD sealing and
+strict utility/generation gates. Native dense-writer and natural benchmark
+claims remain excluded.
+
+Implemented the fresh causal-ledger pilot corpus in
+`tasks/build_qwen_causal_ledger_residual.py`. It introduces split-disjoint
+surface templates and five-token opaque-value pools, the registered seven
+lifecycle families, sparse boundaries, exact visible-text parsing, twin
+anchors, explicit null values and six-way candidate sets. Construction creates
+no action or model outcome and keeps development, confirmation and OOD absent.
+Four focused tests cover all phase/template orders and families, causal replay,
+candidate/null invariants, hash locking and the exact pilot size/seed.
+
+Added `tasks/pilot_qwen_causal_ledger_residual.py` and its two-GPU runner. The
+collector loads the final Qwen3-4B checkpoint, verifies every value is five
+tokens, computes fresh-KV candidate hidden states once, and batches full-vocab
+LM-head scoring over the complete valid `{0,0.5,1}` action grid at scales
+4/8/16. It records per-boundary label/action timing and GPU peaks plus
+Correct/Wrong/Zero/norm-matched-Random content controls and Correct greedy
+generation for every sparse query. The merger applies the frozen content gate
+and chooses only among 16/32/64 development groups per family under the
+24-GiB/six-hour resource rule.

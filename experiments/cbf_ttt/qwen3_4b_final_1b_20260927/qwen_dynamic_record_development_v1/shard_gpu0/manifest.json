@@ -1,0 +1,565 @@
+{
+  "protocol": "qwen_dynamic_record_forgetting_development_v1",
+  "data_manifest_sha256": "bef137f42abaa1c63800a834bd4330679e52a41bcf622b501190363b82dd2a47",
+  "resource_audit_sha256": "1045f477b8c9a4ed88c6b698c58baa245449a4f2fa4cf3768faf5296ae90df4b",
+  "geometry_hashes": {
+    "summary.json": "4fa6e0aba9fa5ab335ee9650b31547379a7525cd4c52db3b02d49aa49fbd272c",
+    "training.json": "01ecc4e9e5875485750b1f5a6121826eb254d9d865442a2c45ba79456ebb170c",
+    "training_manifest.json": "d13cfa35397f65ed5231aace10d0338480482f08aba3f14f4e4f5b55c9347510",
+    "contextual_transforms.pt": "524d213a82f158fddadab8973a28770a687138f528e269659430490affe74ae5"
+  },
+  "old_cohort_checkpoint_sha256": "15b42d85e3a9a5f648865f367b11113f8d0bc247376de1a3493f2df3517a6c65",
+  "projection_seeds": [
+    2301,
+    2303
+  ],
+  "controller_seeds": {
+    "2301": 5101,
+    "2302": 5102,
+    "2303": 5103
+  },
+  "epochs": 300,
+  "policies": [
+    "fixed_retain",
+    "deterministic_random",
+    "old_cohort",
+    "cohort_physics",
+    "exact_reference",
+    "dynamic_rules",
+    "slot_mlp",
+    "set_unconstrained",
+    "primary",
+    "oracle"
+  ],
+  "reader": "component_top1",
+  "actions": [
+    [
+      0,
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.0,
+        0.0,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.0,
+        0.5,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.0,
+        0.5,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        0.0,
+        0.5,
+        1.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.0,
+        1.0,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        0.0,
+        1.0,
+        1.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        0.0,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        0.5,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        0.5,
+        1.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        1.0,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        1.0,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        0.5,
+        1.0,
+        1.0
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        0.0,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        0.5,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        0.5,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        0.5,
+        1.0
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        1.0,
+        0.0
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        1.0,
+        0.5
+      ]
+    ],
+    [
+      0,
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        0.0,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        0.5,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        0.5,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        0.5,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        1.0,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        0.0,
+        1.0,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        0.0,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        0.5,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        0.5,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        1.0,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        1.0,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        0.5,
+        1.0,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        0.0,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        0.5,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        0.5,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        0.5,
+        1.0
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        1.0,
+        0.0
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        1.0,
+        0.5
+      ]
+    ],
+    [
+      1,
+      [
+        1.0,
+        1.0,
+        1.0
+      ]
+    ]
+  ],
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "test_generated": false,
+  "test_scored": false,
+  "data_audit": {
+    "episodes": 1152,
+    "groups": 576,
+    "counts": {
+      "train/retain": 148,
+      "train/recent_revoke": 146,
+      "train/distant_revoke": 146,
+      "train/reset": 146,
+      "train/exact_duplicate": 146,
+      "train/overwritten_noop": 146,
+      "train/mixed_two_event": 146,
+      "dev/retain": 20,
+      "dev/recent_revoke": 18,
+      "dev/distant_revoke": 18,
+      "dev/reset": 18,
+      "dev/exact_duplicate": 18,
+      "dev/overwritten_noop": 18,
+      "dev/mixed_two_event": 18
+    },
+    "causal_answers_verified": true,
+    "counterfactual_twins_verified": true,
+    "symbols_disjoint": true,
+    "oracle_actions_generated": false
+  },
+  "resource_gate": {
+    "rows": 1008,
+    "groups": 56,
+    "projection_seeds": [
+      2301,
+      2302,
+      2303
+    ],
+    "families": {
+      "retain": 144,
+      "recent_revoke": 144,
+      "distant_revoke": 144,
+      "reset": 144,
+      "exact_duplicate": 144,
+      "overwritten_noop": 144,
+      "mixed_two_event": 144
+    },
+    "wall_seconds": 26.728828893974423,
+    "mean_label_seconds": 0.02076485326942352,
+    "p95_label_seconds": 0.044714706018567085,
+    "mean_seconds_per_action": 0.0011918692455913373,
+    "label_peak_allocated_gib": 0.014079093933105469,
+    "label_peak_reserved_gib": 0.02734375,
+    "extraction_peak_allocated_gib": 7.911609172821045,
+    "extraction_peak_reserved_gib": 8.220703125,
+    "overall_peak_allocated_gib": 7.911609172821045,
+    "overall_peak_reserved_gib": 8.220703125,
+    "max_prompt_tokens": 1730,
+    "max_answer_tokens": 24,
+    "max_active_records": 15,
+    "valid_action_counts": {
+      "9": 552,
+      "27": 438,
+      "3": 18
+    },
+    "label_counts": {
+      "[1, [0.0, 0.0, 1.0]]": 144,
+      "[0, [1.0, 1.0, 1.0]]": 654,
+      "[0, [0.0, 0.5, 1.0]]": 12,
+      "[0, [0.0, 0.0, 1.0]]": 16,
+      "[0, [0.0, 1.0, 0.5]]": 10,
+      "[0, [1.0, 1.0, 0.0]]": 16,
+      "[0, [0.0, 1.0, 0.0]]": 2,
+      "[0, [1.0, 0.5, 0.0]]": 2,
+      "[0, [1.0, 0.0, 1.0]]": 28,
+      "[0, [0.0, 1.0, 1.0]]": 104,
+      "[0, [0.5, 1.0, 1.0]]": 4,
+      "[0, [0.0, 0.5, 0.0]]": 6,
+      "[0, [0.0, 0.0, 0.0]]": 2,
+      "[0, [1.0, 0.5, 1.0]]": 2,
+      "[0, [0.0, 0.0, 0.5]]": 2,
+      "[0, [0.5, 0.0, 1.0]]": 2,
+      "[0, [0.5, 1.0, 0.0]]": 2
+    },
+    "estimated_two_gpu_seconds": {
+      "128": 61.09446604337011,
+      "256": 122.18893208674022,
+      "512": 244.37786417348045
+    },
+    "selected_formal_train_groups": 512,
+    "resource_gate_passed": true
+  }
+}
