@@ -1,0 +1,39 @@
+{
+  "protocol": "mquake_qwen_causal_headroom_v17_states",
+  "fixed_policies": [
+    "no_memory",
+    "retain_all",
+    "global_reset",
+    "last_1",
+    "last_2"
+  ],
+  "intervention": "delete exactly one visible historical session before query or use a fixed arm",
+  "current_session_deletion_allowed": false,
+  "causal_oracle_tie_break": "primary accuracy, lower primary NLL, retain-all, chronological deletion order",
+  "counts": {
+    "pilot": {
+      "rows": 40,
+      "single_deletion_states": 1200,
+      "fixed_states": 200
+    },
+    "formal": {
+      "rows": 272,
+      "single_deletion_states": 8160,
+      "fixed_states": 1360
+    }
+  },
+  "state_sha256": {
+    "pilot_states.jsonl": "95b8d297b02cb0613503eeb1a0e82013896feda4e8c0a765e3092e70d02a0064",
+    "formal_states.jsonl": "d5ad7c91d01421cdea1d77b45dd4825f9dbd9fdaf55d90a45e4d1b406763340e"
+  },
+  "dependencies": {
+    "sample_manifest_sha256": "9eea25d6aa253014d47553e0e45fb01107546a3ff14b86bc3881b6c60b208be1",
+    "pilot_sample_sha256": "4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38",
+    "formal_sample_sha256": "4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11",
+    "v15_summary_sha256": "a4b10fcdc010c5b769f7885b24b12b2276e4cc773c9c13ac0f403267aa993aa4",
+    "v15_audit_sha256": "fbcb2ab4e9a09d55ab08518abd7c790b1dc7ea358fcc8c275c5f07eed9184ad5"
+  },
+  "model_scored": false,
+  "external_sets_loaded": false,
+  "terminal_status": "frozen_after_audited_unsupported_v15_before_headroom_scoring"
+}

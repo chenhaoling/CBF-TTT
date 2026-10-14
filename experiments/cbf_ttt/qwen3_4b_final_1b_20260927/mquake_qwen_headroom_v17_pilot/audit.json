@@ -1,0 +1,35 @@
+{
+  "protocol": "mquake_qwen_causal_headroom_v17_pilot_audit",
+  "audit_passed": true,
+  "checks": {
+    "frozen_sample_and_independently_audited_state_dependencies": true,
+    "complete_disjoint_ordered_two_shard_coverage": true,
+    "episode_sample_and_state_identities": true,
+    "fixed_and_exhaustive_single_deletion_arms": true,
+    "prompt_hash_candidate_scores_and_predictions": true,
+    "per_query_latency_and_peak_memory_records": true,
+    "shard_counts_resources_and_hashes": true,
+    "exact_model_tokenizer_and_loading_provenance": true,
+    "independent_oracle_fixed_headroom_and_resource_recomputation": true,
+    "terminal_and_access_locks": true
+  },
+  "summary_sha256": "41479b8c43ab77d9396a80e96ce34967db2a95b0a0137290d6131c44c5a0889f",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "d9dc06ddf1e84456821996693ded076c1e9f1b8bf32a353352652707d3c822e3",
+    "shard1.jsonl": "37cbc6046133786306a633a7a5b15e0e184b4e1dbf0d30b21f7ada168e108ab8"
+  },
+  "recomputed_pilot_gate": {
+    "checks": {
+      "all_40_rows_present": true,
+      "all_scores_finite": true,
+      "all_within_context": true,
+      "per_query_resources_complete": true,
+      "peak_reserved_memory_at_most_31_5_gib": true,
+      "projected_formal_two_gpu_time_at_most_48_hours": true
+    },
+    "passed": true
+  },
+  "model_scored": true,
+  "formal_scored": false,
+  "external_sets_loaded": false
+}

@@ -1,0 +1,93 @@
+{
+  "protocol": "mquake_qwen_causal_headroom_v17_pilot",
+  "shard": 1,
+  "num_shards": 2,
+  "rows": 20,
+  "rows_sha256": "37cbc6046133786306a633a7a5b15e0e184b4e1dbf0d30b21f7ada168e108ab8",
+  "dependencies": {
+    "state_manifest_sha256": "2c7e9eba8aa0aef5e7438a6ffd29f7fa41040403cb9b1942fafb6c14d1449b83",
+    "state_audit_sha256": "c9b8c6a4ebfb4029e863e50a8c36637b7ad3eeb5ea04664912d647f843772867",
+    "pilot_states_sha256": "95b8d297b02cb0613503eeb1a0e82013896feda4e8c0a765e3092e70d02a0064",
+    "pilot_sample_sha256": "4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38"
+  },
+  "seconds": 631.4102946147323,
+  "unique_memory_states_scored": 680,
+  "reused_arm_states": 20,
+  "query_measurements": 2720,
+  "gpu_peak_allocated_gib": 8.893449783325195,
+  "gpu_peak_reserved_gib": 9.46484375,
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [
+      "model.layers.0.mlp.ttt_conv.weight",
+      "model.layers.0.mlp.ttt_proj.weight",
+      "model.layers.12.mlp.ttt_conv.weight",
+      "model.layers.12.mlp.ttt_proj.weight",
+      "model.layers.18.mlp.ttt_conv.weight",
+      "model.layers.18.mlp.ttt_proj.weight",
+      "model.layers.24.mlp.ttt_conv.weight",
+      "model.layers.24.mlp.ttt_proj.weight",
+      "model.layers.30.mlp.ttt_conv.weight",
+      "model.layers.30.mlp.ttt_proj.weight",
+      "model.layers.35.mlp.ttt_conv.weight",
+      "model.layers.35.mlp.ttt_proj.weight",
+      "model.layers.6.mlp.ttt_conv.weight",
+      "model.layers.6.mlp.ttt_proj.weight"
+    ],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "readout_mode": "plain_ttt_disabled_fresh_kv",
+  "candidate_scoring": "one_prompt_forward_with_independent_answer_cache_branches",
+  "generation_scored": false,
+  "model_provenance": {
+    "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+    "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+    "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+    "attention": "sdpa",
+    "parameter_count": 4022468096,
+    "source_files_sha256": {
+      "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+      "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+    },
+    "excluded_adapters": [
+      "model.layers.0.mlp.ttt_conv.weight",
+      "model.layers.0.mlp.ttt_proj.weight",
+      "model.layers.12.mlp.ttt_conv.weight",
+      "model.layers.12.mlp.ttt_proj.weight",
+      "model.layers.18.mlp.ttt_conv.weight",
+      "model.layers.18.mlp.ttt_proj.weight",
+      "model.layers.24.mlp.ttt_conv.weight",
+      "model.layers.24.mlp.ttt_proj.weight",
+      "model.layers.30.mlp.ttt_conv.weight",
+      "model.layers.30.mlp.ttt_proj.weight",
+      "model.layers.35.mlp.ttt_conv.weight",
+      "model.layers.35.mlp.ttt_proj.weight",
+      "model.layers.6.mlp.ttt_conv.weight",
+      "model.layers.6.mlp.ttt_proj.weight"
+    ],
+    "ttt_mode": false
+  },
+  "tokenizer_files_sha256": {
+    "config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "model.safetensors.index.json": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "torch": "2.9.1+cu130",
+  "transformers": "4.57.3",
+  "fixed_policies": [
+    "no_memory",
+    "retain_all",
+    "global_reset",
+    "last_1",
+    "last_2"
+  ],
+  "external_sets_loaded": false
+}

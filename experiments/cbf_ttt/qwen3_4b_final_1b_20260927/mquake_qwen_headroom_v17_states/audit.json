@@ -1,0 +1,35 @@
+{
+  "protocol": "mquake_qwen_causal_headroom_v17_states_audit",
+  "audit_passed": true,
+  "checks": {
+    "protocol_terminal_and_registered_fixed_order": true,
+    "ordered_sample_coverage_and_identity": true,
+    "independent_fixed_and_all_single_deletion_reconstruction": true,
+    "causal_historical_only_deletion_and_current_retention": true,
+    "counts_and_state_hashes": true,
+    "frozen_sample_hashes_and_pre_model_lock": true,
+    "terminal_audited_unsupported_v15": true,
+    "dependency_hashes": true,
+    "registered_intervention_and_oracle_tie_break": true,
+    "no_model_or_external_access": true
+  },
+  "manifest_sha256": "2c7e9eba8aa0aef5e7438a6ffd29f7fa41040403cb9b1942fafb6c14d1449b83",
+  "state_sha256": {
+    "pilot_states.jsonl": "95b8d297b02cb0613503eeb1a0e82013896feda4e8c0a765e3092e70d02a0064",
+    "formal_states.jsonl": "d5ad7c91d01421cdea1d77b45dd4825f9dbd9fdaf55d90a45e4d1b406763340e"
+  },
+  "counts": {
+    "pilot": {
+      "rows": 40,
+      "single_deletion_states": 1200,
+      "fixed_states": 200
+    },
+    "formal": {
+      "rows": 272,
+      "single_deletion_states": 8160,
+      "fixed_states": 1360
+    }
+  },
+  "model_scored": false,
+  "external_sets_loaded": false
+}
