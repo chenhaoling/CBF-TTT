@@ -29,6 +29,27 @@ outcomes and all LoCoMo data are forbidden for fitting or selection.
 Before training, publish an inventory containing source hashes, relation and
 subject counts, fold assignments, overlap matrices and excluded records.
 
+### Source-inventory addendum frozen before V19 outcomes
+
+The inventory implementation and its allocation rule were frozen when the V19
+confirmation had written 148/320 rows and before any V19 aggregate, arm outcome
+or causal-rule result was read.  Relations are assigned deterministically to
+five folds.  When one normalized subject spans relations assigned to different
+folds, keep only the records in the subject's most frequent relation fold and
+publish every removed row hash and reason.  ZsRE is read only from the already
+materialized calibration file; its dev and test files are not opened.
+
+The audited public-source inventory exposes an unavoidable MQuAKE-T imbalance:
+among the 1,494 allowed train+tune rows, P6 contributes 995, P35 contributes
+481, and the other five relations contribute 18 in total.  A five-fold split
+cannot be both relation-disjoint and source-balanced.  The fixed response is
+to use relation-balanced training batches, with equal source sampling inside a
+relation when both sources are present, and to report micro, subject-macro,
+relation-macro and source-stratified results.  Rows or relations are not copied
+across folds.  The gate continues to use the registered subject- and
+relation-cluster intervals and every-fold condition; source imbalance cannot be
+hidden by a micro-only result.
+
 ## Frozen semantic representation
 
 Mask the subject span and value span before encoding a relation surface. Use
