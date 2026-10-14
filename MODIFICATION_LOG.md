@@ -3185,3 +3185,49 @@ specificity (69.33%/69.48%), so the failure is broad unseen-relation separation
 rather than a lexical-negative-only artifact. Same-subject negatives number
 only eight and cannot support a separate claim. Diagnostic SHA256 is
 `8e24b5b8c505dd1dd21fb9888c931633b2cbe8ddf515d59f41fed9030271ca0e`.
+
+### DocRED relation-description representation branch
+
+Added `DOCRED_RELATION_SPACE_PLAN.md` before any DocRED model feature was
+extracted. The official DocRED train/dev/relationship files are hash-pinned;
+all relations assigned to either FewRel test partition are excluded before
+eligibility. SHA256 assignment of 67 eligible relations creates 51
+representation-training, eight development and eight sealed source-test
+relations. Instances use evidence-only sentences with `[SUBJECT]`/`[VALUE]`
+masking. The first two build attempts are excluded: one exposed that 392
+overlapping entity mentions must be rejected as specified, and one exposed an
+implementation-only post-filter training floor absent from the frozen plan.
+Neither attempt wrote a manifest or any feature. The corrected release at
+`/home/ctj/cbf_ttt_docred_relation_space_data_20261015_retry2` has manifest
+SHA256 `cc6731d694a988fcf7e79af54dab89319436ccfa81181de85e5665c76a928cd0`
+and audit SHA256
+`ddfc013b4dc635057c5dafeecc397aaba4a476878140bbf4aa5f76b36feabeff`;
+all 18 data checks pass.
+
+The corpus contains 10,952/492/356 train/development/source-test instances and
+43,598/1,922/1,390 exactly balanced pairs. Only 51 training relation
+descriptions are published; instance rows contain no description field.
+Source-test features and scores remain absent. The build took 216 seconds.
+
+Added a two-GPU frozen-Qwen last-token extractor for train/development
+statements and training descriptions only. It produced 11,495 unit-normalized
+vectors (11,444 statements and 51 descriptions) in 54--55 seconds per RTX
+5090 shard, with peak allocated memory 8.28--8.29 GiB and token lengths 8--313.
+All 11 independent feature checks pass; fixed-sample same-batch reproduction
+has minimum cosine 0.99999970 and zero maximum absolute error. Feature-audit
+SHA256 is
+`8170b5908d6659565bb8a99e71e4f004dff7675f02af0771c8d499980d44a5bc`.
+
+Added the frozen three-seed rank-64 statement/description projection with
+relation-balanced symmetric InfoNCE, within-relation contrastive loss and a
+hard-negative margin. The 230-second development run improved balanced
+accuracy by 8.48 points over raw cosine (63.37% versus 54.89%) but reached only
+0.6564 AUROC; all three seed AUROCs are 0.6474--0.6563. P31 and P527 AUROCs are
+0.4666/0.4193, lexical-hard-negative specificity is 46.91%, and full/selective
+safety gates fail. The registered branch therefore stops without generating
+source-test or FewRel-test features. Independent reconstruction passes all 11
+checks. Summary/checkpoint/prediction/audit SHA256 values are
+`35114445a1f9994eeb67371d29c0cc7154afe57e1291561914d8fa4421e665d6`,
+`586398646e98744ed97e677098fcb60291ba1d053fa301d69507887aa01278e0`,
+`e8e3ac25e57b5d2e55b2e56b1c02a22afeaa65299e8e89b5331abb9e81f61652`
+and `89624d89f7822498af7e4594598b90931af6988c5c09b0c1d3da9f732c09ff77`.

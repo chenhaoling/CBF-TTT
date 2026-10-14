@@ -38,6 +38,22 @@ The learned semantic-residual development chain is informative but has not passe
 
 The source-disjoint FewRel study then tested conservative high-confidence deletion on new relations. Official FewRel was split into 48 training, eight development, eight internal-test and 16 official external-test relations, with subject entities and masked surfaces disjoint across roles. On 9,554 development pairs, the three-seed ensemble reached 70.76% balanced accuracy and 0.768 AUROC, improving substantially over the 55.59%/0.586 zero-shot margin but failing the full binary gate. At zero relation-bootstrap upper false-deletion bound, only 9/4,777 positives could be deleted, giving 0.19% recall versus the registered 25% floor. Random and lexical-hard-negative specificity were similarly weak, so threshold changes cannot repair the broad unseen-relation separation error. Independent audits passed; internal and external test features were never generated and the FewRel branch stopped as registered.
 
+A separately preregistered DocRED relation-description space did not repair this
+failure. After excluding every relation reserved by FewRel, the audited corpus
+contained 51 representation-training, eight development and eight sealed
+source-test relations, with 10,952/492/356 statement instances and no held-out
+relation descriptions released. Frozen Qwen3-4B last-token extraction covered
+11,444 train/development statements plus 51 training descriptions; all 11
+feature checks and exact-batch reproduction passed. A three-seed rank-64
+statement/description projection improved development balanced accuracy from
+54.89% raw cosine to 63.37%, but reached only 0.6564 AUROC. Two held-out
+relations were below chance (P31: 0.4666; P527: 0.4193), lexical-hard-negative
+specificity was 46.91%, and neither the full nor selective safety gate was
+feasible. An independent checkpoint reconstruction passed all 11 checks. The
+source test and both FewRel test partitions therefore remain sealed. This
+rejects relation-description metric learning as the missing bridge for safe
+natural forgetting under the current frozen representation.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
