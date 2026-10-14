@@ -2405,3 +2405,57 @@ outer folds, and apply the preregistered subject-macro gain >=5 points with
 subject-cluster 95% interval lower bound >0. A failed formal gate records
 `stop_controller_training_no_causal_headroom`; it cannot train another
 controller or open external benchmarks.
+
+Before reading any V17 formal outcome, added
+`POST_V17_INTERFERENCE_CORPUS_PLAN.md` in response to the unsealed pilot fixed
+arms. The pilot showed that the primary-only fixed selector chose
+`global_reset` at 100% primary accuracy while that arm retained only 65.0% of
+hard history and 52.5% of unrelated facts; `retain_all` was simultaneously at
+the candidate-accuracy ceiling. The new preregistered controlled corpus uses
+opaque unseen facts, balanced interference mechanisms, free generation and a
+joint update-plus-retention episode endpoint. Its 40-row construction gate,
+320-row source/template-disjoint formal gate, sparse `0/0.5/1` boundary study,
+cluster bootstrap, controller admission rule and external-data lock are frozen
+without access to the running 272-row V17 formal metrics.
+
+### V17 formal terminal result
+
+The 272-row formal exact-headroom run completed with exit code 0 and passed all
+eleven independent audit checks. It evaluated 9,248 unique memory states and
+36,992 query labels. The slower shard took 5,722.22 seconds; peak allocated and
+reserved memory was 8.96/9.94 GiB. The summary and audit SHA-256 values are
+`e96ab43c5e8e4ab4bd5bab5959784bd8bb1ab7d769747ffc0881ccadab346a20`
+and `80cb31a1dde5aa19fb62a048fe3e8149401a41106b03f60dc74c04f76abee3ce`.
+
+The registered subject-macro primary accuracy gain was exactly 0.0 points with
+95% interval `[0.0,0.0]`: exact oracle and outer-fold `global_reset` both
+achieved 100% primary candidate and pair accuracy in every fold. Oracle primary
+NLL was worse by 0.0746 on the subject-macro scale. Both formal headroom checks
+failed, so `causal_headroom_supported=false` and the current MQuAKE controller
+line stops. No new controller or external benchmark was launched.
+
+The complete matrix also quantified the endpoint defect anticipated from the
+pilot. Exact selective deletion retained 100% hard history and 98.53% unrelated
+facts, versus 70.59% and 55.15% for the primary-selected global reset. This is
+reported as a safety trade-off and does not override the registered negative
+primary result. Added the complete raw-shard archive, report and artifact hash
+list under `experiments/.../mquake_qwen_headroom_v17_formal`.
+
+### V18 controlled-interference pilot construction
+
+Added `tasks/build_controlled_interference_v18.py` to materialize only the
+preregistered 40-row pilot. It balances lengths 8/16/32/64 and clean update,
+stale repetition, irrelevant near duplicate and useful repetition mechanisms.
+Every episode uses pilot-only opaque entities, keys and values, six persistent
+keys, one final target update, two update phrasings, two retained-key queries
+and an inline-reference locality query. The formal prefix, value pool and
+templates remain ungenerated and inaccessible.
+
+The builder freezes no-memory, retain-all, global-reset, last-1 and last-2,
+every causal single historical-session deletion, and every historical key
+group deletion. Current-session deletion is prohibited. Added an independent
+model-free auditor for split, balance, opacity, uniqueness, content binding,
+query answers/candidates, mechanism-specific roles, state reconstruction,
+hashes and access locks; focused tests exercise every mechanism, deterministic
+rebuild, complete counts and audit pass. The build runner records code and
+terminal provenance before any Qwen scoring.
