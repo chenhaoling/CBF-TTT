@@ -3420,3 +3420,13 @@ protocol fixes content interventions, all policies, actual-Qwen counterfactual
 oracle, scales 4/8/16, source-group inference and ten release checks.  It
 explicitly preserves the negative native dense `ttt_conv`/`ttt_proj` result and
 cannot run unless both confirmation and lifecycle OOD audits pass.
+
+Before the formal OOD release, ran an implementation-only end-to-end smoke on
+GPU 0 with an unregistered seed, one group per suite and a temporary protocol
+copy of the already audited predecessor controller.  It loaded the final
+Qwen3-4B checkpoint, extracted all four suites, restored three projection
+controllers, evaluated all 13 policies and wrote the expected 156 raw files
+plus aggregates without error.  Its artifact explicitly records
+`scientific_evidence=false` and `formal_seed_used=false`; its metrics are not a
+pilot, are not used by any gate and cannot influence the registered formal
+run.
