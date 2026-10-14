@@ -16,7 +16,7 @@ def audit(formal_root, inputs, summary_path, output):
     formal_root, summary_path = Path(formal_root), Path(summary_path)
     formal_summary = json.loads((formal_root / "summary.json").read_text())
     formal_audit = json.loads((formal_root / "audit.json").read_text())
-    summary = json.loads(summary_path); rows, hashes = [], {}
+    summary = json.loads(summary_path.read_text()); rows, hashes = [], {}
     for value in inputs:
         path = Path(value); rows.extend(load_jsonl(path)); hashes[path.name] = sha(path)
     recomputed = aggregate(rows)
