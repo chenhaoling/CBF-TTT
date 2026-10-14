@@ -2700,3 +2700,59 @@ locality and 73.13% generation joint success. Joint gain over fixed remained
 five fold gains were positive. All eight diagnostic checks passed. This is
 exploratory evidence for a safety-constrained objective and requires an
 independent V19 confirmation; it does not change V18 or release Stage B.
+
+The repaired independent V18-LC auditor was rerun on `hku-gpu2`. All four
+source, coverage/hash, exact-DP recomputation and no-release-lock checks
+passed. The immutable summary and audit SHA-256 values are
+`54a87c57c65c3b36fc3fb13fef7b6c1c1e940cfc8765b5c507572c2f261ccc96`
+and `abe9b2078d31fee137a60f0ad648dfe8b5189e3b11b35b6196c3b47d89050677`.
+The completed diagnostic, logs, provenance and checksums are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/`.
+
+Five downstream V18 chain sessions had remained asleep while waiting for the
+bridge that the failed original V18 gate correctly refused to create. Each
+chain now has terminal status `stopped_upstream_formal_gate_failed`, exit code
+0, completion time and an explicit stop reason; the corresponding tmux
+sessions were closed. No model result or gate was changed.
+
+### Preregistered V19 independent confirmation
+
+Added `POST_V19_LOCALITY_CONFIRMATION_PLAN.md` before V19 model scoring. It
+freezes the post-hoc-to-confirmatory transition: 320 new episodes, 80 subjects,
+20 template groups, five outer folds, a sole primary 3% aggregate locality
+budget (at most nine failures), 20,000 subject/template cluster bootstrap
+draws, a ten-point minimum joint-success gain and the previously used
+90%/90%/97% update/retention/locality safeguards. Failure stops the synthetic
+claim and controller training; success releases only causal forgetting-example
+construction.
+
+Added `tasks/build_controlled_interference_v19.py`. Construction is hard-gated
+on the passing audited V18-LC artifact while preserving
+`stage_b_released=false`. V19 uses seed 1901, an unused opaque-value range
+starting at 8192, new entity/key namespaces and new fact/query surfaces. It
+reuses the causal state builder, keeps the current update undeletable and
+materializes fixed, single-session and whole-key deletion arms. Added
+`scripts/audit_controlled_interference_v19.py`, which independently checks the
+release chain, all 320 episode/state identities, balance, nested folds,
+mechanism semantics, action states, registered budget/gate and zero overlap
+with both V18 corpora.
+
+Added `tasks/evaluate_controlled_interference_v19.py` and the two-GPU runner.
+The scorer reuses the frozen Qwen3-4B candidate/generation readout and records
+per-query latency and peak memory. The primary exact dynamic program maximizes
+joint success over all causal actions while enforcing at most nine locality
+failures. Budgets 0/1/5/10% and the unconstrained oracle are diagnostic only.
+The fixed comparator is chosen without the held-out outer fold. Added
+`scripts/audit_controlled_interference_v19_outcome.py`, which independently
+reconstructs prompts, arms, scores, generation, resources, model/tokenizer
+provenance, the budgeted DP, cluster intervals and the complete gate.
+
+Six V19 unit tests pass, including exact agreement between the production and
+independent-audit DP tables. A real-dependency construction smoke using the
+audited V18-LC release and both archived V18 corpora passed all eleven corpus
+audit checks. Its deterministic manifest/data/state hashes are
+`e620e75f1e73d1ec3f09510c784785a53c09a4209ce80fb767b259d7b0abbb6b`,
+`384d94f24820bc11244d6d0c2525fc02887d456a066d68e0cbade0bcd7763cb9`
+and `2459ca4c48d2a341e277b875150cf532736d6fbf5ccd7a4e91c736ee9ec0bf3f`.
+This local smoke is not the official frozen remote result and is not used as
+model evidence.
