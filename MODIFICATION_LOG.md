@@ -2756,3 +2756,19 @@ audit checks. Its deterministic manifest/data/state hashes are
 and `2459ca4c48d2a341e277b875150cf532736d6fbf5ccd7a4e91c736ee9ec0bf3f`.
 This local smoke is not the official frozen remote result and is not used as
 model evidence.
+
+The first remote construction root exited with code 1 before producing data
+because its runner still named a legacy V18 formal-data directory. The path was
+corrected in a separate commit and the failed root was not reused. The official
+`_retry1` construction then passed all three build tests and all eleven
+independent corpus-audit checks. Its manifest/data/state hashes exactly match
+the preregistration smoke hashes above. The official data, states, manifest,
+audit, logs, provenance and checksums are archived in
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/memory_interference_v19_data`.
+
+The formal two-RTX-5090 scorer was launched only after that audit passed, using
+remote code commit `ae99cfc7689cedb0210d5b3b8934edb363a4a480` and root
+`/home/ctj/cbf_ttt_controlled_interference_v19_qwen_20261014`. Both shards
+loaded the frozen Qwen3-4B checkpoint, entered model scoring and wrote their
+first episode. Outcome aggregation, audit and any downstream release remain
+pending until both shards terminate successfully.

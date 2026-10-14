@@ -1,0 +1,50 @@
+{
+  "protocol": "controlled_memory_interference_v19_confirmation_audit",
+  "audit_passed": true,
+  "checks": {
+    "audited_passing_posthoc_v18_lc_release": true,
+    "protocol_hashes_dependencies_and_access_locks": true,
+    "complete_unique_ordered_episode_state_identities": true,
+    "balanced_lengths_mechanisms_subjects_templates_and_folds": true,
+    "subject_and_template_disjoint_outer_folds": true,
+    "v19_disjoint_from_all_v18_values_entities_and_templates": true,
+    "opaque_session_content_and_current_update": true,
+    "five_query_answers_and_candidate_membership": true,
+    "mechanism_specific_interference_invariants": true,
+    "fixed_single_and_key_deletion_causal_states": true,
+    "registered_primary_budget_and_success_gate": true
+  },
+  "manifest_sha256": "e620e75f1e73d1ec3f09510c784785a53c09a4209ce80fb767b259d7b0abbb6b",
+  "confirmation_sha256": "384d94f24820bc11244d6d0c2525fc02887d456a066d68e0cbade0bcd7763cb9",
+  "states_sha256": "2459ca4c48d2a341e277b875150cf532736d6fbf5ccd7a4e91c736ee9ec0bf3f",
+  "counts": {
+    "rows": 320,
+    "subjects": 80,
+    "template_groups": 20,
+    "folds": 5,
+    "by_length": {
+      "8": 80,
+      "16": 80,
+      "32": 80,
+      "64": 80
+    },
+    "by_mechanism": {
+      "clean_update": 80,
+      "stale_repetition": 80,
+      "irrelevant_near_duplicate": 80,
+      "useful_repetition": 80
+    },
+    "by_fold": {
+      "0": 64,
+      "1": 64,
+      "2": 64,
+      "3": 64,
+      "4": 64
+    },
+    "single_deletion_states": 9280,
+    "key_deletion_states": 1920,
+    "fixed_arm_entries": 1600
+  },
+  "model_scored": false,
+  "external_sets_loaded": false
+}
