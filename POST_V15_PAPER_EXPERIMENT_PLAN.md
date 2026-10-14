@@ -223,6 +223,18 @@ accuracy by at least five points over the strongest fixed arm, the corpus does
 not contain sufficient controllable forgetting headroom and controller
 training stops.
 
+This diagnostic uses the already frozen 40-row pilot and 272-row formal sample.
+At the registered query point it materializes no-memory, retain-all,
+global-reset, last-1 and last-2 plus one state for deleting each visible
+historical session; the current session is never a deletion candidate.  The
+per-episode oracle chooses by mean primary-query candidate accuracy, then lower
+primary answer NLL, then retain-all, then chronological deletion order.  The
+strongest fixed comparator uses the same leave-one-outer-fold-out rule as
+Branch A.  Formal scoring is allowed only after a resource pilot and a
+model-free independent reconstruction audit.  The five-point gate is applied
+to the subject-macro oracle-minus-fixed accuracy and its subject-cluster 95%
+interval is reported; this is explicitly a diagnostic upper bound.
+
 If the headroom gate passes, train a readout-utility policy with subject-level
 cross-fitting.  Its target is the actual downstream change
 
