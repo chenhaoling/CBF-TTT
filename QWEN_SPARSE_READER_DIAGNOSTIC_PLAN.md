@@ -23,7 +23,7 @@ Use the same artifacts as `QWEN_COHORT_FORGETTING_PLAN.md`:
 - audited `context_last_r0.01`, rank-256 contextual geometry;
 - fresh event-curriculum seed `202610151`;
 - train and development splits only;
-- projection seeds `2301/2307/2311`.
+- projection seeds `2301/2302/2303`.
 
 The diagnostic must verify the contextual-geometry hashes and the corpus
 manifest before loading any model or data.  No representation, temperature,

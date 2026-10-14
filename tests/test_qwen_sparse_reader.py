@@ -6,6 +6,7 @@ from tasks.diagnose_qwen_sparse_reader import (
     select_reader,
     sparse_output,
 )
+from tasks.train_cbf_qwen_lowrank_forgetting import SEEDS
 
 
 class FakeEmbeddings:
@@ -99,14 +100,12 @@ class QwenSparseReaderTest(unittest.TestCase):
         self.assertEqual([row["weight"] for row in output], [0.25, 0.5, 0.75, 1.0])
 
     def test_reader_selection_prefers_near_best_smaller_k(self):
-        seeds = (2301, 2307, 2311)
-
         def row(accuracy, historical=0.92):
             return {
                 "mean_accuracy": accuracy,
                 "roles": {"current": 0.99, "historical": historical, "anchor": 0.99},
                 "families": {"a": 0.9},
-                "per_seed": {str(seed): {"accuracy": accuracy} for seed in seeds},
+                "per_seed": {str(seed): {"accuracy": accuracy} for seed in SEEDS},
             }
 
         summary = {reader: {"oracle_grid": row(0.94)} for reader in READERS}
