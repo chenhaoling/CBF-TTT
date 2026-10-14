@@ -1,0 +1,34 @@
+{
+  "protocol": "mquake_online_margin_v14_audit",
+  "audit_passed": true,
+  "checks": {
+    "oof_metrics_cluster_candidate_comparison_and_gate": true,
+    "online_margin_threshold_selection": true,
+    "subject_fold_assignment_and_identities": true,
+    "matched_random_deletions": true,
+    "causal_history_sizes": true,
+    "raw_output_hashes": true,
+    "source_v12_and_checkpoint_hashes": true,
+    "protocol_training_online_and_access_locks": true
+  },
+  "summary_sha256": "0025ae6b70f1d99266da8742cc78d0e18a59b9630be54299ec0f08a74660b3b9",
+  "training_sha256": "6f5e308f06e9020ffd8d529151aeb61b1648acc55daaa43c93fa8564c4db13af",
+  "training_manifest_sha256": "a87cc852c4786f23f8e2c0d6f529925e093fb7d5cc02a62e90569250fe095722",
+  "recomputed_oof_gate": {
+    "checks": {
+      "shortlist_recall_at_least_99": true,
+      "candidate_top1_at_least_99": false,
+      "candidate_subject_macro_top1_at_least_97": true,
+      "current_retention_at_least_99": true,
+      "non_target_retention_at_least_97": true,
+      "hard_retain_at_least_97": true,
+      "cluster_safety_lcb_at_least_95": true,
+      "stale_deletion_at_least_90": false,
+      "pair_state_at_least_90": false,
+      "subject_macro_pair_at_least_85": false,
+      "minimum_fold_pair_at_least_85": false,
+      "random_gain_lower_bound_above_zero": true
+    },
+    "passed": false
+  }
+}

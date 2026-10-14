@@ -2037,3 +2037,41 @@ episode 重置、无 future/position/identity feature。20 点 margin 网格通�
 因果回放选择，使用原 cluster-risk 安全约束和 release gate。Mac 上 4 项通过、
 1 项因无 torch 跳过；hku-gpu2 真实 PyTorch listwise 拟合和精确在线回放共 5 项
 全部通过。所有功能仍为独立 opt-in 路径，baseline 不变。
+
+### MQuAKE-T V14 完成、失败归因与 V15 jackknife 共识
+
+V14 在 hku-gpu2 完成五折、匹配随机对照和独立八项审计，runner exit=0。正式
+计算耗时 7458.63 秒，峰值 CUDA allocated/reserved 为 7.867/8.115 GiB。5976
+个 OOF episode 上 strict pair/stale 为 49.866/50.000%，current/non-target/
+hard-retain 为 99.866/99.850/99.833%，主体宏 pair 为 51.490%，安全 LCB95 为
+97.301%。相对 matched-random 增益为 48.042 个百分点，主体 bootstrap 95% CI
+`[37.468,59.046]`。五折 pair 为 46.405/43.144/63.545/94.732/1.342%，因此
+完整 release gate 失败；外部集继续封存。
+
+新增 `scripts/analyze_mquake_online_margin_v14.py`。它只在 OOF 结束后用锁定的原始
+MQuAKE-T relation ID 做归因，不改变任何决策。7 个 relation 中约 99% episode 的
+relation 在 fit 已有 500+ episode；用其他折同 relation 表现预测当前折只有
+46.12% 准确率，否定 relation 稀缺解释。fold 4 update margin 中位数 3.011 而
+阈值为 4.0；fold 3 中位数 3.663 而阈值为 2.5，定位为跨主体校准漂移。
+
+新增 `scripts/screen_mquake_causal_normalizers_v14.py`，在不改变 V14 轨迹的前提下
+筛查 max-gap、MAD/IQR/mean z-score、upper-IQR、percentile 和原 median margin。
+MAD/IQR/mean 归一化显著降低安全召回；percentile 的非执行动作 FPR 约 4.8%。
+原 median margin 在跨折阈值下仍最好：校准 FPR 0.25% 时 pair proxy 73.41%、
+最差折 62.46%；FPR 0.5% 时 88.28%、最差折 81.80%。这些是固定轨迹架构筛查，
+不冒充精确因果结果。V14 紧凑归档包含报告、checkpoint、独立 audit、relation
+diagnostic 和 normalizer screen；原始 OOF JSONL 由 hash 锁定在服务器。
+
+新增 `MQUAKE_JACKKNIFE_CONSENSUS_V15_PLAN.md` 与
+`tasks/train_mquake_jackknife_consensus_v15.py`。每个 outer subject fold 内保留四个
+inner calibration fold；每个 inner 模型用其余三折训练三个 listwise seed，在未见
+inner 折上以非执行动作经验 FPR 0.05/0.1/0.25/0.5% 生成四个阈值，并通过完整
+因果回放及原 cluster safety 约束选定阈值。outer 推理部署这四个未 refit 模型，
+各自维护历史，至少 3/4 同意才删除共享候选。V15 不加入 relation、主体、位置、
+长度或未来分数，保持 V12 candidate 与 V14 gate feature/loss 冻结。
+
+新增 V15 独立 auditor、runner 与四项因果单测。审计将复算每个 inner 阈值、OOF/
+主体/candidate/随机指标、fold 身份、删除数、来源和 raw hash，并逐动作核对四路
+history size、threshold、vote count 与 3/4 删除规则。本地四项测试通过；服务器
+与 V13/V14 组合共 14 项真实 PyTorch 测试通过。所有改动为 opt-in，baseline 模型、
+训练、优化器、数据和评测默认路径不变。

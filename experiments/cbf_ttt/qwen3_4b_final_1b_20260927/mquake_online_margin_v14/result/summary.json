@@ -1,0 +1,723 @@
+{
+  "protocol": "mquake_online_margin_v14",
+  "intervention": "subject_equal_episode_listwise_gate_with_online_median_margin",
+  "oof": {
+    "episodes": 5976,
+    "actions": 239040,
+    "action_accuracy": 0.985985609103079,
+    "pair_state_accuracy": 0.49866131191432395,
+    "stale_deletion": 0.5,
+    "current_retention": 0.998661311914324,
+    "non_target_retention": 0.9985015285434352,
+    "memory_fraction": 0.9833753416443552,
+    "by_event_kind": {
+      "primary_old": {
+        "events": 5976,
+        "accuracy": 0.9981593038821954
+      },
+      "hard_retain": {
+        "events": 11952,
+        "accuracy": 0.9983266398929049
+      },
+      "distractor": {
+        "events": 215136,
+        "accuracy": 0.998517217016213
+      },
+      "primary_update": {
+        "events": 5976,
+        "accuracy": 0.4979919678714859
+      }
+    },
+    "by_length": {
+      "16": {
+        "episodes": 1494,
+        "pair_state_accuracy": 0.392904953145917,
+        "current_retention": 0.9953145917001339,
+        "non_target_retention": 0.9985178810480014
+      },
+      "32": {
+        "episodes": 1494,
+        "pair_state_accuracy": 0.5073627844712182,
+        "current_retention": 1.0,
+        "non_target_retention": 0.9986166889781348
+      },
+      "48": {
+        "episodes": 1494,
+        "pair_state_accuracy": 0.5314591700133868,
+        "current_retention": 0.999330655957162,
+        "non_target_retention": 0.998210232233281
+      },
+      "64": {
+        "episodes": 1494,
+        "pair_state_accuracy": 0.5629183400267738,
+        "current_retention": 1.0,
+        "non_target_retention": 0.998661311914324
+      }
+    }
+  },
+  "oof_cluster": {
+    "subjects": 68,
+    "pair_macro": 0.5149002666374776,
+    "pair_lcb95": 0.44081399294149753,
+    "safety_macro": 0.9857613765851878,
+    "safety_lcb95": 0.9730091620391564,
+    "minimum_subject_pair": 0.0,
+    "minimum_subject_safety": 0.5,
+    "subject_rows": {
+      "8d23a6e37e0a6431a8f1b43a91026dcff51170a89a6512ff098eaa56a4d5fb19": {
+        "episodes": 700,
+        "pair": 0.4471428571428571,
+        "safety": 0.9994443617559226
+      },
+      "ba2039a4cf69defd3f474495125904bb9286d1ec20651501c42c146b8c38b2f8": {
+        "episodes": 72,
+        "pair": 0.5277777777777778,
+        "safety": 0.9985630616591347
+      },
+      "f5273e236d498c359c7a91edb712e28728d902bf6dd4f60984dfbc9501a9bf4c": {
+        "episodes": 112,
+        "pair": 0.5714285714285714,
+        "safety": 0.9995178821879384
+      },
+      "de5008d194a73211f2ef2ae0b0457c812545c65559c8a3bcc2458d0485e29fc0": {
+        "episodes": 40,
+        "pair": 0.8,
+        "safety": 0.9994565217391305
+      },
+      "1081fdaaeceae9d9b76c9d3931d85438bffd0c75c2bb8f1784069a6ea121a37e": {
+        "episodes": 4,
+        "pair": 0.25,
+        "safety": 1.0
+      },
+      "f405b98d5ffcfb0519c1cdaa60216738c0adff1e60ad95191bb67633b55bdc6c": {
+        "episodes": 12,
+        "pair": 0.5,
+        "safety": 1.0
+      },
+      "a5f0d2d08eb0592087e3a3a2f9c1ba2c67cc30f2efd2bd4da04c2f5efc09ab1b": {
+        "episodes": 56,
+        "pair": 0.9107142857142857,
+        "safety": 0.9997119815668203
+      },
+      "4256e512fcfb03cad0ee741589ec9ea9d525dc2af0ebb1d5db1ffa9eb4cc3f49": {
+        "episodes": 8,
+        "pair": 0.875,
+        "safety": 0.9945652173913043
+      },
+      "f391a7cca9befba91d4a6fc05128f18354a950786cb76a9d7d056ed815b8d53a": {
+        "episodes": 4,
+        "pair": 0.0,
+        "safety": 0.875
+      },
+      "52235717290f5d209639646478dbd3645d651762f5b80af29e0ac2da10e29438": {
+        "episodes": 140,
+        "pair": 0.2571428571428571,
+        "safety": 1.0
+      },
+      "a246670dbf76f29a5a21311589135cff74c9d8c4b777b20d33a6f193505429db": {
+        "episodes": 28,
+        "pair": 0.10714285714285714,
+        "safety": 1.0
+      },
+      "8d8b1848556cf2a1c423e29a610c3159b5dc66c5164827019ca1053e7e7c30e4": {
+        "episodes": 20,
+        "pair": 0.2,
+        "safety": 1.0
+      },
+      "dbab41120f92e12716a999ebb41f891929c2b01b29c5822f96cb7d62a4f7c328": {
+        "episodes": 648,
+        "pair": 0.4367283950617284,
+        "safety": 0.9993084877883069
+      },
+      "e2567312ec53232b5353c2798f8054759ee21b03af967265dd22b4cb4284bc49": {
+        "episodes": 164,
+        "pair": 0.45121951219512196,
+        "safety": 0.9994674967787547
+      },
+      "c9cab0238debc6e55498e2c0963a1d8e25bd29c95ddd53a3fff841ee636b6bc5": {
+        "episodes": 132,
+        "pair": 0.6818181818181818,
+        "safety": 0.999505928853755
+      },
+      "3fc87c8b3dd1b72b3ca3e7117101f248b6df3177b9287dcdf7419d9140864986": {
+        "episodes": 4,
+        "pair": 0.75,
+        "safety": 0.9959677419354839
+      },
+      "56059e7fb4e9ddfa1470a50a43ac2f05509cb802757e68d35d9033232b097e58": {
+        "episodes": 24,
+        "pair": 0.8333333333333334,
+        "safety": 0.9990942028985508
+      },
+      "cb4b2b3f7a5f7c9c729ac76c22eb76f4ab7c89039b52ee46726f0375556da051": {
+        "episodes": 20,
+        "pair": 0.6,
+        "safety": 1.0
+      },
+      "2cbebc541f98c7a72472194f1987a1541fa278d9e27a97013c1c889bd26d5d1f": {
+        "episodes": 4,
+        "pair": 0.75,
+        "safety": 0.9959677419354839
+      },
+      "2eff4f44ad66473af31d43de9c230b52352f23895055f9fb54eb38e89d5e7ad7": {
+        "episodes": 4,
+        "pair": 0.25,
+        "safety": 0.875
+      },
+      "a06522bc4aab38ee55c831f2836c86646d5ff655e8ef5c10e98006d63584f4ba": {
+        "episodes": 96,
+        "pair": 0.15625,
+        "safety": 1.0
+      },
+      "d6f11805e14b50ac3e1d8e0e2cc851c53ed983ee6a453c4655dddf87104b85ad": {
+        "episodes": 44,
+        "pair": 0.022727272727272728,
+        "safety": 1.0
+      },
+      "81e884cb2e857fdd7b77ca8f2b83551f08d6f8f3b33ff426397e182346b62ec7": {
+        "episodes": 40,
+        "pair": 0.175,
+        "safety": 1.0
+      },
+      "2ca26c60fe0238a76ad5765f7e0d47b4b179007944a8da6b52931325b6993cbd": {
+        "episodes": 8,
+        "pair": 0.375,
+        "safety": 1.0
+      },
+      "b79b5f97bc67a30a68e4697c34300823a0d5df791673d4396891c2f845034caa": {
+        "episodes": 8,
+        "pair": 0.5,
+        "safety": 1.0
+      },
+      "853637136575897a73cba3c5fb085e8c8a2627df22983d2bbe9ff158d11351b4": {
+        "episodes": 144,
+        "pair": 0.8194444444444444,
+        "safety": 0.9930555555555556
+      },
+      "eee3bed8a15458f9aec29c064e9550ecea0dd0b396253e1830dee1928c7917c6": {
+        "episodes": 52,
+        "pair": 0.5384615384615384,
+        "safety": 0.9989409141583055
+      },
+      "c3782c86d8099f3fb5b755ebc970322567aa3894923de8c9c5fc97456133471c": {
+        "episodes": 176,
+        "pair": 0.5625,
+        "safety": 0.9988815094442725
+      },
+      "66b86bf0f04594746e886baa094d6038b92895c79526fd60a44395cb0c0854cc": {
+        "episodes": 72,
+        "pair": 0.9305555555555556,
+        "safety": 0.998261129291985
+      },
+      "1ed8c7e56c947bebc0cfcf88c4ea0f02c944568f71df893a99970e4f0c78cddc": {
+        "episodes": 40,
+        "pair": 0.0,
+        "safety": 1.0
+      },
+      "84ac9a6ee4b1ac7df6966826741fef5b869a4dbf8152404073bdfa7ea51e2a46": {
+        "episodes": 32,
+        "pair": 0.5625,
+        "safety": 0.9984543010752688
+      },
+      "764a8c04ad4520a7e1319b4e4e483017b4baf95f7e90e3ee11611f10bc15b6fd": {
+        "episodes": 4,
+        "pair": 1.0,
+        "safety": 1.0
+      },
+      "88f86eac74225f9f48ebd1565d196d5fde62d21b218938027d10bb549aefd05a": {
+        "episodes": 8,
+        "pair": 0.875,
+        "safety": 0.9375
+      },
+      "f29245398096de20de00b79fadf85d2a64e02ef81e00c36e0bcd9624d23cfbdc": {
+        "episodes": 16,
+        "pair": 0.375,
+        "safety": 0.997633239831697
+      },
+      "1c769ecb9e80202f43b5dfa8c2e8a76f1136f688292489308b07c22a66763376": {
+        "episodes": 324,
+        "pair": 0.558641975308642,
+        "safety": 1.0
+      },
+      "9c93ad439373b4ee35e70ba1318055a14d2ed222f69f9e2d069689e83829833d": {
+        "episodes": 196,
+        "pair": 0.826530612244898,
+        "safety": 1.0
+      },
+      "74e1891dc615b22fac103c74ab7133742dd1d95a604f6d4edb1a9403b7156506": {
+        "episodes": 112,
+        "pair": 0.5267857142857143,
+        "safety": 0.9992182356813694
+      },
+      "c3668f581289444ea84763daf6c7b76d7bf6b48ffed85aaee68b7662f504f6a5": {
+        "episodes": 16,
+        "pair": 0.4375,
+        "safety": 1.0
+      },
+      "10c3c2e2edc1f1f0696bf6f30af2fc80b4e1759ab4614b0d1331799b4ce35cca": {
+        "episodes": 4,
+        "pair": 1.0,
+        "safety": 1.0
+      },
+      "c0ea960b065c6aa6dd567a1a741fa21aee3972692096e158cebb4309a3b2a716": {
+        "episodes": 292,
+        "pair": 0.952054794520548,
+        "safety": 0.9946873321750841
+      },
+      "80db4ccdca106d37b920206331fcfe3e9e50a9e763d89b54ce3ad5ac8cf30f03": {
+        "episodes": 120,
+        "pair": 0.9,
+        "safety": 0.9947679155813798
+      },
+      "18d4e170765cc48842d847de1d0545a2e379e9c87b2af2a6f761681309939ce5": {
+        "episodes": 176,
+        "pair": 0.9261363636363636,
+        "safety": 0.9602272727272727
+      },
+      "07f8d1144a39d45664231d8f129214d7ba99ce146240e154f4c893e8e4e1c0d6": {
+        "episodes": 156,
+        "pair": 0.967948717948718,
+        "safety": 0.9936969450994696
+      },
+      "dad114b6ed7342bac65c79575f6c7ff761ec26b52c1f5f7a9110532973d05df2": {
+        "episodes": 64,
+        "pair": 0.90625,
+        "safety": 0.9937748363721365
+      },
+      "815eca977c7d75f72bd23bccc91bc6f9931a42fbf03451eb0d7db8d2a704d94f": {
+        "episodes": 24,
+        "pair": 0.6666666666666666,
+        "safety": 0.9909169839043611
+      },
+      "5c83a631bce2bffe885e5c3e62ebb7dcec455fc6cd99be22101d3f0fcb158c8a": {
+        "episodes": 40,
+        "pair": 1.0,
+        "safety": 0.9901723101582849
+      },
+      "b5f9221ae041a8f8fff31fcb6f43e6a57de061dd67b14ea8308fd2337200ea9a": {
+        "episodes": 24,
+        "pair": 1.0,
+        "safety": 0.9954106280193237
+      },
+      "e34dd616b94ba2545547b9ca26b9b2847593d7161c17245634c155e390208b1f": {
+        "episodes": 208,
+        "pair": 0.9807692307692307,
+        "safety": 0.9961306955083253
+      },
+      "bfb0c8d36f4aaa84129067675a722a877e0784a54edd5fc6ed1d86d7717eef9b": {
+        "episodes": 4,
+        "pair": 1.0,
+        "safety": 1.0
+      },
+      "538e6d145bf8521fde09ed3e4985021d50977e4a6572d9575ed527ca6f634b2b": {
+        "episodes": 4,
+        "pair": 0.75,
+        "safety": 0.9905329593267882
+      },
+      "6b367768943e8eb6312dbe7827dc9f407bae56cdafea45f5149db7100bfee4b0": {
+        "episodes": 8,
+        "pair": 1.0,
+        "safety": 0.5
+      },
+      "859534104ec14efd10a17e2a99e60c376064b904bb25f4995a7e04e78b882aeb": {
+        "episodes": 4,
+        "pair": 1.0,
+        "safety": 0.9945652173913043
+      },
+      "4a867424c728c2ce5af8f6445adf3383fead7f1c4e115fd7126fc59e4d31b050": {
+        "episodes": 8,
+        "pair": 1.0,
+        "safety": 1.0
+      },
+      "4dcbd74fcbd08192a287425acff97cfc3c8cf3dd46486d07669b2380d927cdcf": {
+        "episodes": 64,
+        "pair": 1.0,
+        "safety": 0.984375
+      },
+      "647294383b2cbc24b18f629498fc7c6f61d3819fb42a2287e93305aaa01b74e7": {
+        "episodes": 212,
+        "pair": 0.009433962264150943,
+        "safety": 1.0
+      },
+      "c1ef40ce0484c698eb4bd27fe56c1e7b68d74f9780ed674210d0e5013dae45e9": {
+        "episodes": 184,
+        "pair": 0.005434782608695652,
+        "safety": 1.0
+      },
+      "5a9cf672c8be6b5ab9546a2fb49b06dd81a4e364c86ed023898c49d9bb0605dc": {
+        "episodes": 136,
+        "pair": 0.022058823529411766,
+        "safety": 1.0
+      },
+      "c805bb1a3e10d5c7300945fb2aec48e52ba796b699b6ca0b10dc26739b82aebf": {
+        "episodes": 44,
+        "pair": 0.0,
+        "safety": 1.0
+      },
+      "611025cdde0afeeaae379492b36231ab70eb0f81ad6cb59f11cb807ad1ceb09f": {
+        "episodes": 32,
+        "pair": 0.0625,
+        "safety": 1.0
+      },
+      "bea54a349795017db7e863500429c8ba0c78b89855d73f9c82dfd92cb7c2d748": {
+        "episodes": 112,
+        "pair": 0.026785714285714284,
+        "safety": 1.0
+      },
+      "71e9eb10755c8232974d186a560f7658a1ccbdd3097877dfa1ad3436af90d46a": {
+        "episodes": 12,
+        "pair": 0.3333333333333333,
+        "safety": 1.0
+      },
+      "ac310fdaedb0e15faf230df32cd8ee77546f82713aa71f1613d01e976e1dca3a": {
+        "episodes": 48,
+        "pair": 0.0,
+        "safety": 1.0
+      },
+      "99a7c065a730fdac00718082c230850a5ae80dc98ba1b4e17609c56dec36b458": {
+        "episodes": 16,
+        "pair": 0.0625,
+        "safety": 1.0
+      },
+      "200da986b284ff8e3110dbead1fc6b3697a6ef0c5e049d92c4f0a72d92544cfd": {
+        "episodes": 4,
+        "pair": 0.0,
+        "safety": 1.0
+      },
+      "5a59ef2e40c5f89adb8c0c6ad0a8019b0e252fff530cf2ee822880eac13599c3": {
+        "episodes": 216,
+        "pair": 0.0,
+        "safety": 1.0
+      },
+      "2898e16d4e4ee2ae2fa8815d719efb385f0b40ca912e06fc2940658547c30237": {
+        "episodes": 164,
+        "pair": 0.0,
+        "safety": 1.0
+      },
+      "fe2403f25e8f398ea308d20d8cc98e63aecbb42218b1bf1805da008c0daea537": {
+        "episodes": 8,
+        "pair": 0.0,
+        "safety": 1.0
+      },
+      "8fdf1aae40c910a5bbccacb80bdb2beee21ead1a75a2fbeee3405dbfa6cf14ae": {
+        "episodes": 4,
+        "pair": 0.0,
+        "safety": 1.0
+      }
+    }
+  },
+  "oof_candidate": {
+    "positives": 5976,
+    "subjects": 68,
+    "shortlist_recall": 1.0,
+    "candidate_top1": 0.9892904953145917,
+    "subject_macro_shortlist": 1.0,
+    "subject_macro_top1": 0.9734344118218011,
+    "minimum_subject_shortlist": 1.0,
+    "minimum_subject_top1": 0.0
+  },
+  "oof_vs_random": {
+    "gain": 0.48042168674698793,
+    "subject_clusters": 68,
+    "bootstrap_95ci": [
+      0.37467866323907456,
+      0.5904552715654952
+    ]
+  },
+  "fold_metrics": {
+    "0": {
+      "episodes": 1196,
+      "actions": 47840,
+      "action_accuracy": 0.9860158862876254,
+      "pair_state_accuracy": 0.46404682274247494,
+      "stale_deletion": 0.46404682274247494,
+      "current_retention": 1.0,
+      "non_target_retention": 0.9993416745459553,
+      "memory_fraction": 0.9858338559085842,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1196,
+          "accuracy": 0.9983277591973244
+        },
+        "hard_retain": {
+          "events": 2392,
+          "accuracy": 0.9995819397993311
+        },
+        "distractor": {
+          "events": 43056,
+          "accuracy": 0.9994425863991081
+        },
+        "primary_update": {
+          "events": 1196,
+          "accuracy": 0.46321070234113715
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.3277591973244147,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9992833253702819
+        },
+        "32": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.45484949832775917,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9993311036789299
+        },
+        "48": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.5250836120401338,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9993456449033008
+        },
+        "64": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.5484949832775919,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9994066242313087
+        }
+      }
+    },
+    "1": {
+      "episodes": 1196,
+      "actions": 47840,
+      "action_accuracy": 0.9851588628762542,
+      "pair_state_accuracy": 0.431438127090301,
+      "stale_deletion": 0.431438127090301,
+      "current_retention": 1.0,
+      "non_target_retention": 0.9993650443708374,
+      "memory_fraction": 0.987201261148272,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1196,
+          "accuracy": 0.9991638795986622
+        },
+        "hard_retain": {
+          "events": 2392,
+          "accuracy": 0.9995819397993311
+        },
+        "distractor": {
+          "events": 43056,
+          "accuracy": 0.9993496841322929
+        },
+        "primary_update": {
+          "events": 1196,
+          "accuracy": 0.431438127090301
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.2608695652173913,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9995222169135212
+        },
+        "32": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.45484949832775917,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9993311036789299
+        },
+        "48": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.4816053511705686,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9992002326595899
+        },
+        "64": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.5284280936454849,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9994066242313087
+        }
+      }
+    },
+    "2": {
+      "episodes": 1196,
+      "actions": 47840,
+      "action_accuracy": 0.990321906354515,
+      "pair_state_accuracy": 0.6354515050167224,
+      "stale_deletion": 0.6362876254180602,
+      "current_retention": 0.9991638795986622,
+      "non_target_retention": 0.9993731470269674,
+      "memory_fraction": 0.9804339116499442,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1196,
+          "accuracy": 0.9983277591973244
+        },
+        "hard_retain": {
+          "events": 2392,
+          "accuracy": 0.9995819397993311
+        },
+        "distractor": {
+          "events": 43056,
+          "accuracy": 0.999465811965812
+        },
+        "primary_update": {
+          "events": 1196,
+          "accuracy": 0.6346153846153846
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.4782608695652174,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9990444338270426
+        },
+        "32": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.6521739130434783,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9994425863991081
+        },
+        "48": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.6688963210702341,
+          "current_retention": 0.9966555183946488,
+          "non_target_retention": 0.9994910571470117
+        },
+        "64": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.7424749163879598,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9995145107347071
+        }
+      }
+    },
+    "3": {
+      "episodes": 1196,
+      "actions": 47840,
+      "action_accuracy": 0.9930602006688963,
+      "pair_state_accuracy": 0.947324414715719,
+      "stale_deletion": 0.9531772575250836,
+      "current_retention": 0.9941471571906354,
+      "non_target_retention": 0.994432788383639,
+      "memory_fraction": 0.9638421474358974,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1196,
+          "accuracy": 0.9949832775919732
+        },
+        "hard_retain": {
+          "events": 2392,
+          "accuracy": 0.9928929765886287
+        },
+        "distractor": {
+          "events": 43056,
+          "accuracy": 0.9943329617242661
+        },
+        "primary_update": {
+          "events": 1196,
+          "accuracy": 0.9456521739130435
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.8896321070234113,
+          "current_retention": 0.9765886287625418,
+          "non_target_retention": 0.9947443860487339
+        },
+        "32": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.9531772575250836,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9949832775919732
+        },
+        "48": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.9698996655518395,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9930202123018759
+        },
+        "64": {
+          "episodes": 299,
+          "pair_state_accuracy": 0.9765886287625418,
+          "current_retention": 1.0,
+          "non_target_retention": 0.9949832775919732
+        }
+      }
+    },
+    "4": {
+      "episodes": 1192,
+      "actions": 47680,
+      "action_accuracy": 0.9753355704697987,
+      "pair_state_accuracy": 0.013422818791946308,
+      "stale_deletion": 0.013422818791946308,
+      "current_retention": 1.0,
+      "non_target_retention": 1.0,
+      "memory_fraction": 0.9996198615771812,
+      "by_event_kind": {
+        "primary_old": {
+          "events": 1192,
+          "accuracy": 1.0
+        },
+        "hard_retain": {
+          "events": 2384,
+          "accuracy": 1.0
+        },
+        "distractor": {
+          "events": 42912,
+          "accuracy": 1.0
+        },
+        "primary_update": {
+          "events": 1192,
+          "accuracy": 0.013422818791946308
+        }
+      },
+      "by_length": {
+        "16": {
+          "episodes": 298,
+          "pair_state_accuracy": 0.006711409395973154,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "32": {
+          "episodes": 298,
+          "pair_state_accuracy": 0.020134228187919462,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "48": {
+          "episodes": 298,
+          "pair_state_accuracy": 0.010067114093959731,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        },
+        "64": {
+          "episodes": 298,
+          "pair_state_accuracy": 0.016778523489932886,
+          "current_retention": 1.0,
+          "non_target_retention": 1.0
+        }
+      }
+    }
+  },
+  "oof_gate": {
+    "checks": {
+      "shortlist_recall_at_least_99": true,
+      "candidate_top1_at_least_99": false,
+      "candidate_subject_macro_top1_at_least_97": true,
+      "current_retention_at_least_99": true,
+      "non_target_retention_at_least_97": true,
+      "hard_retain_at_least_97": true,
+      "cluster_safety_lcb_at_least_95": true,
+      "stale_deletion_at_least_90": false,
+      "pair_state_at_least_90": false,
+      "subject_macro_pair_at_least_85": false,
+      "minimum_fold_pair_at_least_85": false,
+      "random_gain_lower_bound_above_zero": true
+    },
+    "passed": false
+  },
+  "relative_margin_hypothesis_supported": false,
+  "v10_development_loaded": false,
+  "mquake_cf_used": false,
+  "longmemeval_used": false,
+  "locomo_scored": false,
+  "next_stage": "stop_gate_feature_family_for_relation_abstention",
+  "terminal_status": "completed_mquake_online_margin_v14"
+}

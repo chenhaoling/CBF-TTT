@@ -461,6 +461,16 @@ V12 is implemented by `tasks/train_mquake_subject_risk_v12.py`, its independent
 auditor, runner, and focused tests. The five-fold formal run uses a separate output
 root and does not modify baseline training or inference defaults.
 
+[V14 online margin](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_online_margin_v14/REPORT.md)
+completed with an independent audit. It improved strict OOF pair state from V13's
+37.05% to 49.87% while retaining 99.87% of current and 99.85% of non-target memory,
+but fold pair state ranged from 1.34% to 94.73%. Post-hoc locked diagnostics reject
+relation scarcity and additional z-normalization; the failure is single-fold threshold
+calibration under unseen-subject score shift. The registered
+[V15 jackknife consensus](MQUAKE_JACKKNIFE_CONSENSUS_V15_PLAN.md) keeps the same causal
+median margin and tests four independently calibrated inner models with a three-of-four
+forgetting vote. External confirmation sets remain sealed.
+
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 
 ## About [ByteDance Seed Team](https://seed.bytedance.com/)
