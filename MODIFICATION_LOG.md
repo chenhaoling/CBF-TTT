@@ -2162,3 +2162,12 @@ formal `4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11`。
 审计文件 SHA-256 为
 `9840a50489a3cd9fe1dd7a39071af535b078b2aa4d3f172cf1a58f1d1375d744`，已归档至
 V16 实验目录。审计再次确认 `model_scored=false`、`external_sets_loaded=false`。
+
+新增 `tasks/evaluate_mquake_qwen_outcome_v16.py` 的 pilot-only 入口及五项测试。入口在
+加载模型前强制要求 V15 `jackknife_consensus_supported=true`、终态完成且独立 audit
+通过，因此 V15 失败时不能运行。Pilot 只暴露 `no_memory` 与 causal `oracle`，在
+primary-current 提交后用 chronological 原始 unit 文本构造 fresh-KV prompt；两个
+primary phrasing 比较 current/stale，hard/unrelated 各在 old/current/hard/unrelated
+四个候选中评分。每个答案验证 tokenizer 前缀不变、总长度不超过 checkpoint limit、
+NLL 有限；summary 只以 oracle primary preference≥80% 和完整性决定是否可进入
+formal，不读取 V15/fixed 方法效果。与数据构建/审计合计 12 项本地测试通过。
