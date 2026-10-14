@@ -2520,3 +2520,64 @@ row because the shell script created `result/` before invoking the builder,
 while the builder correctly requires a nonexistent output directory. The
 failed root is preserved. Removed the premature `mkdir`; recovery uses a new
 `_retry1` root with the unchanged seed and registered protocol.
+
+The `_retry1` formal construction completed with exit code 0 and passed all
+eleven independent audit checks. It froze 320 episodes, 80 subjects, 20
+template groups and five 64-row folds, balanced at 80 rows for each length and
+mechanism. The state matrix contains 9,280 single-session and 1,920 key-group
+deletions. Manifest, episode and state SHA-256 values are
+`8312c232a10e8e7f66cb069bd4738c99dbc2dcfe57dd01297f65c6e80a129de6`,
+`1975f8c5ca221d707f25665b8974cf1435eae63a62285a57ae8076efd0b365f2`
+and `87b4727324282e6f608e642674d9e5521924bae454a384633cf148959f940192`.
+The two-GPU formal scorer was then launched against this exact frozen root.
+
+While the formal scorer was running and before any formal outcome was read,
+added `POST_V18_FORGETTING_POLICY_PREREGISTRATION.md`. It separates the current
+explicit-text causal diagnosis from the required low-rank Qwen fast-parameter
+bridge, makes exact same-key conflict resolution a mandatory strong baseline,
+freezes the three controller seeds and training grid, and requires held-out
+semantic-alias improvement before natural benchmarks. This prevents a positive
+text-memory oracle result from being overstated as native dense-writer or
+learned-controller efficacy.
+
+Added the gated Stage-B implementation:
+`tasks/evaluate_v18_lowrank_fastmemory_bridge.py`, its independent auditor,
+two-GPU runner and focused tests. Each observed session becomes five
+position-specific Qwen rank-one key/value components, the query uses fresh KV,
+and causal interventions remove those fast-parameter components rather than
+editing prompt text. Scales 4/8/16 are scored together with scale 8 primary;
+correct/wrong/zero single-component controls distinguish content binding from
+a generic residual effect. Both collectors refuse to start unless the V18
+formal summary and independent audit pass the frozen headroom gate.
+
+Added `scripts/chain_v18_formal_to_lowrank_bridge.sh`. The detached watcher
+observes the formal runner's terminal exit file, independently checks the
+positive formal summary, audit hash and recomputed gate, and starts Stage B
+only when every release condition is true. Failed or unsupported formal runs
+produce terminal stop markers without creating a bridge result directory.
+
+### Preregistered Stage-C physical conflict rules
+
+While Stage A remained live and before reading its outcome, added
+`tasks/evaluate_v18_physical_conflict_rules.py`, an independent reconstruction
+auditor, a two-GPU runner and focused tests. This stage is hard-gated by the
+positive independently audited Stage-B low-rank bridge, so it cannot be used
+to rescue a failed causal-headroom or content-binding result.
+
+The implementation causally suppresses an older component only when its value
+disagrees with a newer component and either its literal entity-slot key matches
+or its frozen Qwen-key cosine crosses a registered threshold. Agreeing repeats
+are retained. A separate most-recent-same-key rule deliberately removes older
+agreeing repeats as an ablation. Every rule preserves the current update.
+Matched-random controls delete the same number of historical components using
+seeds 1901/1907/1913.
+
+The Qwen-cosine grid is frozen at 0.70/0.80/0.90/0.95/0.975/0.99. Threshold
+and rule-family selection happen only on the training side of each outer fold,
+using joint success, update, retention, locality and answer NLL in that order;
+higher thresholds win exact ties. Collection records every component state,
+pairwise key similarity, candidate score, independent greedy generation,
+latency and peak CUDA memory. The auditor reconstructs every rule and random
+state from the formal corpus, checks fresh-KV scores and bridge fixed/oracle
+references, and independently recomputes all outer-fold results. Nine focused
+tests currently pass together with the Stage-B tests.

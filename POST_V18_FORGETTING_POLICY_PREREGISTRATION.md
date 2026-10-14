@@ -70,6 +70,13 @@ Evaluate these frozen rules before fitting a learned policy:
 3. most-recent same-key component only;
 4. random deletion matched to each rule's deletion count.
 
+The frozen Qwen-cosine grid is `0.70/0.80/0.90/0.95/0.975/0.99`; exact ties
+prefer the higher threshold to conserve unrelated memory.  Matched-random
+controls use seeds `1901/1907/1913`, preserve the current update, and sample
+only historical components.  Rule-family and threshold selection use joint
+success, update accuracy, retained-key accuracy, locality, then answer NLL in
+that order, using only the training side of each outer fold.
+
 The exact-match rule is a required strong control because the controlled V18
 keys are explicit.  If it reaches the oracle, the controlled set validates the
 physical mechanism but cannot establish a learning advantage.  Learned-policy
