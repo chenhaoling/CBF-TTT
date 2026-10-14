@@ -107,27 +107,62 @@ def audit(args):
         for key in ("model", "tokenizer", "dependencies", "embedding_dim", "dtype")
     )
 
-    # Independently reload the frozen model and reproduce a fixed 32-surface sample.
+    # Independently reload the frozen model. Reproduce a fixed sample with the
+    # original batching for a strict test, then rebatch all sampled surfaces
+    # together to quantify expected BF16 shape sensitivity.
     sample_positions = select_audit_indices(len(surfaces), args.audit_sample_size)
     torch.manual_seed(2201)
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
     model, model_meta = load_plain(args.model)
-    sample_vectors, sample_ids, sample_lengths = encode_batch(
+    rebatch_vectors, rebatch_ids, rebatch_lengths = encode_batch(
         model, tokenizer, [surfaces[index]["text"] for index in sample_positions])
     expected_sample = merged_vectors[sample_positions]
-    cosine = torch.nn.functional.cosine_similarity(sample_vectors, expected_sample)
-    max_abs = (sample_vectors - expected_sample).abs().max(dim=1).values
+    rebatch_cosine = torch.nn.functional.cosine_similarity(
+        rebatch_vectors, expected_sample)
+    rebatch_max_abs = (rebatch_vectors - expected_sample).abs().max(dim=1).values
+
+    reproduced = {}
+    sample_set = set(sample_positions)
+    for shard in range(args.num_shards):
+        selected = partition_surfaces(surfaces, shard, args.num_shards)
+        starts = sorted({(local_index // args.extraction_batch_size)
+                         * args.extraction_batch_size
+                         for local_index, (global_index, _) in enumerate(selected)
+                         if global_index in sample_set})
+        for start in starts:
+            batch = selected[start:start + args.extraction_batch_size]
+            values, ids, lengths = encode_batch(
+                model, tokenizer, [row["text"] for _, row in batch])
+            for offset, (global_index, _) in enumerate(batch):
+                if global_index in sample_set:
+                    reproduced[global_index] = (values[offset], ids[offset],
+                                                lengths[offset])
+    strict_vectors = torch.stack([reproduced[index][0]
+                                  for index in sample_positions])
+    strict_ids = [reproduced[index][1] for index in sample_positions]
+    strict_lengths = [reproduced[index][2] for index in sample_positions]
+    strict_cosine = torch.nn.functional.cosine_similarity(
+        strict_vectors, expected_sample)
+    strict_max_abs = (strict_vectors - expected_sample).abs().max(dim=1).values
     sample_reproduced = all((
-        sample_lengths == [merged_rows[index]["token_length"]
+        strict_lengths == [merged_rows[index]["token_length"]
                            for index in sample_positions],
-        sample_ids == [merged_rows[index]["token_ids"]
+        strict_ids == [merged_rows[index]["token_ids"]
                        for index in sample_positions],
-        float(cosine.min()) >= 0.99999,
-        float(max_abs.max()) <= 0.002,
+        float(strict_cosine.min()) >= 0.999999,
+        float(strict_max_abs.max()) <= 1e-6,
         model_provenance(model_meta) == shard_audits[0]["model"],
         tokenizer_provenance(args.tokenizer, tokenizer)
             == shard_audits[0]["tokenizer"],
+    ))
+    rebatching_stable = all((
+        rebatch_lengths == [merged_rows[index]["token_length"]
+                            for index in sample_positions],
+        rebatch_ids == [merged_rows[index]["token_ids"]
+                        for index in sample_positions],
+        float(rebatch_cosine.min()) >= 0.9998,
+        float(rebatch_max_abs.max()) <= 0.01,
     ))
     checks = {
         "frozen_pair_dependencies": (
@@ -142,6 +177,7 @@ def audit(args):
         "finite_unit_normalized_fp32_vectors": finite_normalized,
         "identical_model_tokenizer_and_representation_provenance": provenance_equal,
         "independent_fixed_sample_reproduction": sample_reproduced,
+        "cross_padding_shape_bf16_stability": rebatching_stable,
         "no_length_exclusion_or_truncation": (
             max(row["token_length"] for row in merged_rows) <= MAX_TOKENS
             and sum(row["token_length"] > MAX_TOKENS for row in merged_rows) == 0),
@@ -162,8 +198,14 @@ def audit(args):
         "reproduction": {
             "sample_size": len(sample_positions),
             "positions": sample_positions,
-            "minimum_cosine": float(cosine.min()),
-            "maximum_absolute_error": float(max_abs.max()),
+            "original_batching": {
+                "minimum_cosine": float(strict_cosine.min()),
+                "maximum_absolute_error": float(strict_max_abs.max()),
+            },
+            "single_rebatched_sample_batch": {
+                "minimum_cosine": float(rebatch_cosine.min()),
+                "maximum_absolute_error": float(rebatch_max_abs.max()),
+            },
         },
         "resources": {
             "seconds": [value["seconds"] for value in shard_audits],
@@ -194,6 +236,7 @@ def main():
     parser.add_argument("--output", required=True)
     parser.add_argument("--num-shards", type=int, default=2)
     parser.add_argument("--audit-sample-size", type=int, default=32)
+    parser.add_argument("--extraction-batch-size", type=int, default=32)
     args = parser.parse_args()
     result = audit(args)
     print(json.dumps(result, indent=2))
