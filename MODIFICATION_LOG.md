@@ -2581,3 +2581,9 @@ latency and peak CUDA memory. The auditor reconstructs every rule and random
 state from the formal corpus, checks fresh-KV scores and bridge fixed/oracle
 references, and independently recomputes all outer-fold results. Nine focused
 tests currently pass together with the Stage-B tests.
+
+Added `scripts/chain_v18_bridge_to_physical_rules.sh`. It waits on the actual
+Stage-B runner exit handle, verifies the positive summary, independent audit,
+summary hash and terminal marker, and starts Stage C only after all release
+conditions pass. A failed or unsupported bridge produces an explicit terminal
+stop marker and never creates the physical-rule result root.
