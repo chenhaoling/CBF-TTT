@@ -148,6 +148,13 @@ The primary comparison is V15 versus the strongest fixed arm selected without
 using the held-out outer fold.  V14 is an architecture ablation, not a tuning
 source.
 
+The fixed-arm selection rule is frozen before outcome scoring: for outer fold
+`k`, select among no-memory, retain-all, global-reset, last-1 and last-2 using
+the other four folds, ordered by primary-query candidate accuracy, then lower
+answer NLL, then the registered arm order.  Apply that selected arm only to
+fold `k`.  Accuracy and NLL differences use subject-cluster bootstrap with
+20,000 draws and seeds 1611 and 1612, respectively.
+
 Before any formal Qwen score, a state-freezing pass reconstructs the retained
 session IDs for all nine arms at the registered query time and hashes the
 ordered 272-row matrix.  V14 and V15 states come only from their audited OOF
@@ -156,6 +163,15 @@ OOF trace.  Fixed windows and the causal oracle are rebuilt directly from the
 source episode.  This pass is unlocked only by a passed and audited resource
 pilot and loads no model.  It makes memory selection auditable independently
 of the expensive Qwen readout.
+
+Candidate NLL uses one prompt forward followed by independent answer-cache
+branches.  The same immutable prompt cache also starts an independent greedy
+decode, capped at the longest candidate token length plus eight tokens (and at
+most 64 tokens), stopping at EOS, newline or the cap.  Strict and conservative
+case/whitespace-normalized exact match are both reported.  Identical retained
+session-ID sequences within an episode are scored once and copied bit-for-bit
+to their duplicate arms; the first arm in the registered order is recorded as
+the score source and the auditor verifies every reuse.
 
 ### Primary outcomes and release gate
 

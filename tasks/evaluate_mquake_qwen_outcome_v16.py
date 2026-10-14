@@ -110,7 +110,42 @@ def encode_candidates(tokenizer, prompt, candidates):
     return prompt_ids, encoded
 
 
-def score_query(model, tokenizer, memory, texts, spec):
+def normalize_generation(value):
+    """Conservative whitespace/case normalization for an auxiliary EM metric."""
+    return " ".join(value.strip().casefold().split())
+
+
+def greedy_from_prefix(model, tokenizer, prefix_session, prefix_hidden, max_new_tokens):
+    """Greedily decode from a cloned prompt cache without mutating candidate branches."""
+    import torch
+
+    if max_new_tokens < 1:
+        raise ValueError("max_new_tokens must be positive")
+    branch = prefix_session.clone()
+    hidden = prefix_hidden[:, -1:]
+    token_ids = []
+    eos = tokenizer.eos_token_id
+    eos_ids = set(eos if isinstance(eos, (list, tuple)) else [eos]) if eos is not None else set()
+    stopped = "max_new_tokens"
+    for _ in range(max_new_tokens):
+        with torch.inference_mode():
+            token = int(model.lm_head(hidden).float()[0, -1].argmax())
+        if token in eos_ids:
+            stopped = "eos"
+            break
+        token_ids.append(token)
+        decoded = tokenizer.decode(token_ids, skip_special_tokens=True)
+        if "\n" in decoded or "\r" in decoded:
+            stopped = "newline"
+            break
+        hidden = branch._forward([token])
+    raw = tokenizer.decode(token_ids, skip_special_tokens=True)
+    text = raw.replace("\r", "\n").split("\n", 1)[0].strip()
+    return {"text": text, "raw_text": raw, "token_ids": token_ids,
+            "tokens": len(token_ids), "stop_reason": stopped}
+
+
+def score_query(model, tokenizer, memory, texts, spec, generate=False):
     import torch
     from cbf_ttt.runtime import _nll_from_hidden
     from tasks.cbf_checkpoint_readout import PlainSession
@@ -146,6 +181,17 @@ def score_query(model, tokenizer, memory, texts, spec):
         del hidden, labels
         if len(answer_ids) > 1:
             del branch, tail
+    generation = None
+    if generate:
+        max_new_tokens = min(64, max(answer_lengths.values()) + 8)
+        generation = greedy_from_prefix(
+            model, tokenizer, prefix_session, prefix_hidden, max_new_tokens)
+        generation.update({
+            "exact": int(generation["text"] == spec["answer"]),
+            "normalized_exact": int(normalize_generation(generation["text"])
+                                    == normalize_generation(spec["answer"])),
+            "max_new_tokens": max_new_tokens,
+        })
     if prefix_session.cache.get_seq_length() != prefix_cache_length:
         raise RuntimeError("candidate branch mutated the shared prompt cache")
     torch.cuda.synchronize()
@@ -159,7 +205,7 @@ def score_query(model, tokenizer, memory, texts, spec):
         "gpu_peak_reserved_gib": torch.cuda.max_memory_reserved() / 2**30,
     }
     prediction = min(spec["candidates"], key=lambda value: (scores[value], value))
-    return {"kind": spec["kind"], "statement": spec["statement"],
+    result = {"kind": spec["kind"], "statement": spec["statement"],
             "answer": spec["answer"], "candidates": spec["candidates"],
             "scores": scores, "answer_token_lengths": answer_lengths,
             "prediction": prediction, "correct": int(prediction == spec["answer"]),
@@ -167,6 +213,9 @@ def score_query(model, tokenizer, memory, texts, spec):
             "total_tokens_max": len(prompt_ids) + max(answer_lengths.values()),
             "prompt_sha256": __import__("hashlib").sha256(prompt.encode()).hexdigest(),
             "resources": resources}
+    if generation is not None:
+        result["generation"] = generation
+    return result
 
 
 def verify_v15(root):
