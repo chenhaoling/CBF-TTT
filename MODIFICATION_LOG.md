@@ -2539,3 +2539,13 @@ freezes the three controller seeds and training grid, and requires held-out
 semantic-alias improvement before natural benchmarks. This prevents a positive
 text-memory oracle result from being overstated as native dense-writer or
 learned-controller efficacy.
+
+Added the gated Stage-B implementation:
+`tasks/evaluate_v18_lowrank_fastmemory_bridge.py`, its independent auditor,
+two-GPU runner and focused tests. Each observed session becomes five
+position-specific Qwen rank-one key/value components, the query uses fresh KV,
+and causal interventions remove those fast-parameter components rather than
+editing prompt text. Scales 4/8/16 are scored together with scale 8 primary;
+correct/wrong/zero single-component controls distinguish content binding from
+a generic residual effect. Both collectors refuse to start unless the V18
+formal summary and independent audit pass the frozen headroom gate.
