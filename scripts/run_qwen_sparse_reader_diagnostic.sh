@@ -16,7 +16,8 @@ date --iso-8601=seconds > "$ROOT/started_at.txt"
 git -C "$REPO" rev-parse HEAD > "$ROOT/code_commit.txt"
 cd "$REPO"
 export PYTHONDONTWRITEBYTECODE=1
-CUDA_VISIBLE_DEVICES=0 "$PYTHON_BIN" -m tasks.diagnose_qwen_sparse_reader \
+CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0} \
+  "$PYTHON_BIN" -m tasks.diagnose_qwen_sparse_reader \
   --data-root "$DATA_ROOT" --geometry-root "$GEOMETRY_ROOT" \
   --output "$ROOT/result" --model "$MODEL" --tokenizer "$TOKENIZER" \
   --batch-size 128 > "$ROOT/run.log" 2>&1
