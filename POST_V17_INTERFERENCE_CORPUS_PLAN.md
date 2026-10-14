@@ -112,6 +112,29 @@ The formal headroom gate requires:
 Failure closes controller training on this corpus. It does not justify another
 threshold search.
 
+### Formal split freeze after pilot admission
+
+The audited 40-episode pilot passed all six construction gates before the
+formal split was generated.  The formal split is therefore frozen as 320
+episodes from 80 new subjects, with all four mechanisms represented once per
+subject.  It contains 20 formal-only template groups and five outer folds.
+Each subject belongs to exactly one template group and each subject/template
+group belongs to exactly one fold; every fold has 16 subjects, four template
+groups and 64 episodes.  Lengths 8, 16, 32 and 64 occur once per subject and
+80 times overall.  Formal values start at the registered opaque-code offset
+4096, so entity prefixes, all 2,560 answer values and every surface template
+are disjoint from the pilot.
+
+For each held-out fold, the strongest fixed arm is selected only on the other
+four folds.  The exact oracle remains restricted to retain-all, one historical
+component deletion, or one historical-key deletion.  The registered 20,000
+draw intervals are computed separately over 80 subject clusters and 20
+template clusters.  The formal gate requires both cluster-macro gains to be at
+least five points and both 95% lower bounds to exceed zero, in addition to the
+previous update, retention, locality and non-negative-fold requirements.
+Free-generation joint success is a frozen secondary endpoint and cannot
+replace a failed candidate-based primary gate.
+
 ## Stage 3: causal readout-utility policy
 
 Only after a passed headroom gate, train a subject/template-disjoint policy to

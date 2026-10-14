@@ -2485,3 +2485,32 @@ oracle-minus-fixed joint-success bounds from
 all prompts, arms, deduplicated score sources, predictions, generation flags,
 resources, model/tokenizer provenance and admission metrics. Focused tests
 cover a passing nontrivial corpus and reject a retain-all ceiling.
+
+### V18 controlled-interference Qwen pilot terminal result
+
+The two-GPU 40-episode pilot completed with exit code 0 and passed all twelve
+independent audit checks.  It evaluated 1,435 unique memory states and 7,175
+query measurements in 1,029.61 seconds on the slower RTX 5090 shard.  Peak
+allocated/reserved memory was 8.30/8.75 GiB and mean query latency was 0.2694
+seconds.  The summary and independent-audit SHA-256 values are
+`3487fdf2fef70a9aa65276ffd81e9495992f8385bb0127ec955b99679f6fa0d2`
+and `397b20382e4328c6f4bab0061cd2e5c495e302e4f6981419e24436c7162e2bf6`.
+
+All six preregistered corpus gates passed.  The best fixed policy was
+`retain_all`, with 75.0% candidate and free-generation joint success, 80.0%
+update accuracy, 100% retained-key accuracy and 100% locality.  The exact
+selective-deletion oracle reached 100% on joint success, free-generation joint
+success, update accuracy, retained-key accuracy and locality, for a 25-point
+joint gain.  `global_reset` reached 100% update accuracy but 0% retained-key
+and joint success, directly exposing the update/retention trade-off that V17's
+primary-only endpoint missed.
+
+After pilot admission and before generating any formal row, froze the formal
+design in `POST_V17_INTERFERENCE_CORPUS_PLAN.md`: 320 rows, 80 subjects, 20
+formal-only template groups, five subject/template-disjoint outer folds and
+20,000-draw subject and template cluster bootstraps.  Added the gated formal
+builder, independent construction auditor, two-GPU scorer, independent outcome
+auditor, runners and focused tests.  Formal code keeps native TTT adapters
+disabled for the causal-headroom study, records candidate NLL plus independent
+greedy generation and does not load external benchmarks.  Controller training
+remains locked until the formal headroom gate passes.
