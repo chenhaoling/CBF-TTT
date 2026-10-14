@@ -24,6 +24,7 @@ original corpus builder's hard-retain marker and will be reported separately.
 - `pilot.jsonl`: `4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38`
 - `formal.jsonl`: `4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11`
 - `data_audit.json`: `9840a50489a3cd9fe1dd7a39071af535b078b2aa4d3f172cf1a58f1d1375d744`
+- `prompt_tokenization_audit.json`: `9760a068c8e28e01d5a6c0b0ead8dd721c0d74754a322ad1fd0d6a8b5054ac72`
 
 The source manifest and train/tune/text hashes are recorded inside
 `manifest.json`.  The manifest explicitly records `model_scored=false` and all
@@ -34,6 +35,11 @@ protocol and hashes, subject folds, ordered pilot/formal selection, sizes,
 relation counts, artifact hashes, causal query visibility, pre-model state and
 external benchmark seals.  This audit covers data only; Qwen outcomes still
 require a separate scoring and replay audit.
+
+The real Qwen3 tokenizer also validated all 928 pilot candidate boundaries.
+The longest `oracle` prompt plus answer is 4,509 tokens and the longest
+`no_memory` input is 63 tokens, both below the checkpoint's 40,960-position
+limit.  This remains a tokenizer-only audit with `model_scored=false`.
 
 ## Pre-model correction
 

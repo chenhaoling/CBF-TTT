@@ -1,0 +1,20 @@
+{
+  "protocol": "mquake_qwen_outcome_v16_prompt_tokenization",
+  "rows": 40,
+  "policies": [
+    "no_memory",
+    "oracle"
+  ],
+  "tokenized_candidates": 928,
+  "max_total_tokens": 4509,
+  "max_total_tokens_by_policy": {
+    "no_memory": 63,
+    "oracle": 4509
+  },
+  "checkpoint_position_limit": 40960,
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "pilot_sha256": "4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38",
+  "model_scored": false,
+  "external_sets_loaded": false,
+  "passed": true
+}
