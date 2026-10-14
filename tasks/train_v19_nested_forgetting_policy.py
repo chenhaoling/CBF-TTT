@@ -192,6 +192,11 @@ def select_hyperparameters(grid):
             "metrics": grid[str(epoch)][str(threshold)][str(penalty)]}
 
 
+def nested_selection(grid, inner_fold):
+    """Attach the registered inner fold to the selected hyperparameters."""
+    return {"inner_fold": inner_fold, **select_hyperparameters(grid)}
+
+
 def policy_states(rows, predictions, threshold, penalty):
     grouped = {}
     for row, utility, risk in zip(rows, predictions["utility"], predictions["risk"]):
@@ -253,8 +258,8 @@ def run(examples_root, output):
             grid[str(epoch)] = {str(threshold): {str(penalty): selection_metrics(
                 inner_rows, utility, risk, threshold, penalty)
                 for penalty in RISK_PENALTIES} for threshold in THRESHOLDS}
-        selection = select_hyperparameters(grid)
-        selections[str(outer)] = {"inner_fold": inner, **selection, "grid": grid}
+        selection = nested_selection(grid, inner)
+        selections[str(outer)] = {**selection, "grid": grid}
         outer_train = [row for row in rows if row["fold"] != outer]
         outer_rows = [row for row in rows if row["fold"] == outer]
         checkpoints[str(outer)] = {}

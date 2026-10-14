@@ -7,7 +7,7 @@ except ImportError:
 
 from tasks.train_v19_nested_forgetting_policy import (
     EPOCHS, RISK_PENALTIES, THRESHOLDS, fit_snapshots, policy_states,
-    predict, select_hyperparameters, selection_metrics,
+    nested_selection, predict, select_hyperparameters, selection_metrics,
 )
 
 
@@ -52,6 +52,26 @@ class TrainV19NestedForgettingPolicyTest(unittest.TestCase):
         self.assertEqual((selected["epoch"], selected["threshold"],
                           selected["risk_penalty"]), (50, .6, 1.0))
         self.assertTrue(selected["constraints_satisfied"])
+
+    def test_nested_selection_attaches_inner_fold_for_state_serialization(self):
+        grid = {}
+        for epoch in EPOCHS:
+            grid[str(epoch)] = {}
+            for threshold in THRESHOLDS:
+                grid[str(epoch)][str(threshold)] = {}
+                for penalty in RISK_PENALTIES:
+                    grid[str(epoch)][str(threshold)][str(penalty)] = {
+                        "positive_recall": .9,
+                        "conservation_specificity": .98,
+                        "risk_violation_rate": 0,
+                        "balanced_utility_accuracy": .94,
+                        "action_accuracy": .9, "mse": .1,
+                        "delete_rate": .2, "rows": 4, "positive_rows": 2,
+                        "conservation_rows": 2, "locality_risk_rows": 0}
+        selected = nested_selection(grid, 3)
+        self.assertEqual(selected["inner_fold"], 3)
+        self.assertEqual(set(("inner_fold", "epoch", "threshold", "risk_penalty",
+                              "constraints_satisfied", "metrics")), set(selected))
 
     def test_policy_state_never_deletes_current_update(self):
         prediction = {"utility": [.9, .9, .1, .1], "risk": [0, 1, 0, 0]}
