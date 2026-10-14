@@ -2901,3 +2901,20 @@ generation, resource record, model/tokenizer provenance, comparator, interval
 and gate. Production and audit aggregation match exactly on a 320-row fixture.
 The fallback chain now proceeds through model rescoring only after both label
 and checkpoint audits pass.
+
+### Post-V20 semantic-controller protocol frozen before outcomes
+
+Added `POST_V20_SEMANTIC_CONTROLLER_NATURAL_TRANSFER_PLAN.md` while V19 was
+still scoring and before V20 construction. It explicitly limits V20 to a
+semantic-oracle headroom claim because its 20 alias families recur across
+folds. V20 rows and latent IDs cannot train the learned controller.
+
+The next learned stage uses already observed CounterFact/MQuAKE-T development
+sources with relation- and subject-disjoint outer folds, subject/value-masked
+frozen Qwen relation states, a rank-16 contrastive projection and a nested OOF
+utility-risk gate. The source inventory, overlap matrix, model grids,
+comparators and five-point/90%/97%/40%-gap release criteria are frozen. Only a
+passing independently audited development chain may open one-time LoCoMo,
+RULER/RULER-QA and MMLU confirmation. Observed LongMemEval-S remains diagnostic
+and cannot tune or release the stage. The native dense-writer negative result
+is preserved.
