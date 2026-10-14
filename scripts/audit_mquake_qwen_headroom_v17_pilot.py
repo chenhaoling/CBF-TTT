@@ -78,6 +78,16 @@ def expected_arms(state):
     return arms
 
 
+def expected_unique_states_by_shard(states, num_shards=2):
+    """Derive shard work from frozen states; episode history lengths are unequal."""
+    return {
+        shard: sum(len(state["delete_one"])
+                   + len({tuple(value) for value in state["fixed"].values()})
+                   for index, state in enumerate(states) if index % num_shards == shard)
+        for shard in range(num_shards)
+    }
+
+
 def qmap(arm):
     return {query["kind"]: query for query in arm["queries"]}
 
@@ -313,6 +323,7 @@ def audit(data_root, sample_root, state_root, model, tokenizer, inputs,
     expected_shards = {
         shard: [sample["episode_id"] for index, sample in enumerate(samples) if index % 2 == shard]
         for shard in (0, 1)}
+    expected_unique_states = expected_unique_states_by_shard(states)
     coverage_ok = (len(rows) == len({row["episode_id"] for row in rows}) == 40
                    and observed == expected_shards)
     state_dependency_ok = (
@@ -331,9 +342,12 @@ def audit(data_root, sample_root, state_root, model, tokenizer, inputs,
     shard_resources_ok = (
         len(resources) == 2 and {row.get("shard") for row in resources} == {0, 1}
         and all(row.get("protocol") == PROTOCOL and row.get("num_shards") == 2
-                and row.get("rows") == 20 and row.get("unique_memory_states_scored") == 680
+                and row.get("rows") == 20
+                and row.get("unique_memory_states_scored")
+                    == expected_unique_states[row["shard"]]
                 and row.get("reused_arm_states") == 20
-                and row.get("query_measurements") == 2720
+                and row.get("query_measurements")
+                    == 4 * expected_unique_states[row["shard"]]
                 and row.get("rows_sha256") == hashes[Path(path).name]
                 and row.get("dependencies", {}).get("state_manifest_sha256")
                     == sha(state_root / "manifest.json")
