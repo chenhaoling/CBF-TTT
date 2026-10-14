@@ -1,0 +1,59 @@
+{
+  "protocol": "controlled_memory_interference_v18_pilot",
+  "seed": 1801,
+  "split": "pilot",
+  "lengths": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "mechanisms": [
+    "clean_update",
+    "stale_repetition",
+    "irrelevant_near_duplicate",
+    "useful_repetition"
+  ],
+  "fixed_policies": [
+    "no_memory",
+    "retain_all",
+    "global_reset",
+    "last_1",
+    "last_2"
+  ],
+  "query_kinds": [
+    "update_old_surface",
+    "update_current_surface",
+    "retain_1",
+    "retain_2",
+    "locality"
+  ],
+  "counts": {
+    "rows": 40,
+    "by_length": {
+      "8": 10,
+      "16": 10,
+      "32": 10,
+      "64": 10
+    },
+    "by_mechanism": {
+      "clean_update": 10,
+      "stale_repetition": 10,
+      "irrelevant_near_duplicate": 10,
+      "useful_repetition": 10
+    },
+    "single_deletion_states": 1160,
+    "key_deletion_states": 240,
+    "fixed_arm_entries": 200
+  },
+  "pilot_sha256": "9c73acf8080d7fc01c2a7018203af539c87399902eb4e9792270e3b9c72d24e9",
+  "pilot_states_sha256": "caf818fc61b0b2067ad034245cd007977b8f9d35f6b7a703d36f5e9d3bd1d2a4",
+  "opaque_value_namespace": "pilot-only; formal prefixes and pools remain ungenerated",
+  "opaque_value_format": "Z plus four spaced base-16 letters; exactly five Qwen3 tokens",
+  "slow_parameter_answerable_by_design": false,
+  "current_session_deletion_allowed": false,
+  "model_scored": false,
+  "formal_generated": false,
+  "external_sets_loaded": false,
+  "terminal_status": "frozen_v18_pilot_before_model_scoring"
+}

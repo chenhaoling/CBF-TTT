@@ -1,0 +1,31 @@
+{
+  "protocol": "v18_locality_constrained_oracle_posthoc_v1_audit",
+  "audit_passed": true,
+  "checks": {
+    "audited_failed_original_v18_source": true,
+    "complete_unique_raw_coverage_and_hashes": true,
+    "independent_budget_dp_pareto_and_gate_recomputation": true,
+    "posthoc_status_and_no_release_lock": true
+  },
+  "summary_sha256": "54a87c57c65c3b36fc3fb13fef7b6c1c1e940cfc8765b5c507572c2f261ccc96",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "6348765c8435c118b422c9e0b73528ee6102e74f39d75fcecb407ee0ba4c675c",
+    "shard1.jsonl": "07b34491a622b3ba4588fd73044245505ff9e1fa440731c618456f4f8654171f"
+  },
+  "recomputed_diagnostic_gate": {
+    "checks": {
+      "subject_macro_joint_gain_at_least_5_points": true,
+      "subject_cluster_joint_gain_ci_lower_above_zero": true,
+      "template_macro_joint_gain_at_least_5_points": true,
+      "template_cluster_joint_gain_ci_lower_above_zero": true,
+      "oracle_update_accuracy_at_least_90": true,
+      "oracle_retained_key_accuracy_at_least_90": true,
+      "oracle_locality_accuracy_at_least_97": true,
+      "no_outer_fold_has_negative_joint_gain": true
+    },
+    "passed": true
+  },
+  "original_v18_status_unchanged": "formal_no_sufficient_headroom",
+  "stage_b_released": false,
+  "posthoc": true
+}
