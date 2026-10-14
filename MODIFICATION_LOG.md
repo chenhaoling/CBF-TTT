@@ -2301,3 +2301,12 @@ real-checkpoint preflight that exercises candidate scoring plus greedy decoding
 without loading any pilot/formal/external row.  The formal summary and auditor
 require its passed artifact and exact hash; the formal runner executes it on
 GPU 0 before launching the two scoring shards.
+
+Remote commit `8c40ee9` passed all 22 V16 evaluator/state/auditor tests.  The
+synthetic generation bridge then passed all eight checks on RTX 5090: greedy
+output `Paris`, EOS stop, strict/normalized EM 1, Paris/London NLL
+0.560188/7.685188, 0.43485 seconds, and 7.56597/7.58008 GiB peak
+allocated/reserved.  The bridge loaded zero experiment rows and no external
+set.  Its archived result is
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_qwen_outcome_v16/generation_scoring_bridge.json`
+with SHA-256 `f43dfb473789bfc999c1d72e40182320fd2455c3ce5aad2cc979cd68b63ec0d9`.

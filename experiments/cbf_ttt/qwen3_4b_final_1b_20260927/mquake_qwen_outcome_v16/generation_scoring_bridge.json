@@ -1,0 +1,45 @@
+{
+  "protocol": "mquake_qwen_outcome_v16_generation_bridge",
+  "checks": {
+    "ttt_disabled": true,
+    "expected_adapters_excluded": true,
+    "candidate_scores_complete": true,
+    "generation_ids_decode_exactly": true,
+    "bounded_generation": true,
+    "registered_stop_reason": true,
+    "exact_metrics_recomputed": true,
+    "resource_measurement_complete": true
+  },
+  "passed": true,
+  "generation": {
+    "text": "Paris",
+    "raw_text": "Paris",
+    "token_ids": [
+      59604
+    ],
+    "tokens": 1,
+    "stop_reason": "eos",
+    "exact": 1,
+    "normalized_exact": 1,
+    "max_new_tokens": 9
+  },
+  "candidate_prediction": "Paris",
+  "candidate_scores": {
+    "Paris": 0.5601884126663208,
+    "London": 7.685188293457031
+  },
+  "prompt_tokens": 42,
+  "resources": {
+    "seconds": 0.4348455462604761,
+    "candidate_scores": 2,
+    "gpu_start_allocated_gib": 7.545304775238037,
+    "gpu_start_reserved_gib": 7.546875,
+    "gpu_peak_allocated_gib": 7.565966606140137,
+    "gpu_peak_reserved_gib": 7.580078125
+  },
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "synthetic_only": true,
+  "experiment_rows_loaded": 0,
+  "external_sets_loaded": false
+}

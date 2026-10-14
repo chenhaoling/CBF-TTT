@@ -25,6 +25,7 @@ original corpus builder's hard-retain marker and will be reported separately.
 - `formal.jsonl`: `4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11`
 - `data_audit.json`: `9840a50489a3cd9fe1dd7a39071af535b078b2aa4d3f172cf1a58f1d1375d744`
 - `prompt_tokenization_audit.json`: `9760a068c8e28e01d5a6c0b0ead8dd721c0d74754a322ad1fd0d6a8b5054ac72`
+- `generation_scoring_bridge.json`: `f43dfb473789bfc999c1d72e40182320fd2455c3ce5aad2cc979cd68b63ec0d9`
 
 The source manifest and train/tune/text hashes are recorded inside
 `manifest.json`.  The manifest explicitly records `model_scored=false` and all
@@ -80,6 +81,29 @@ The first bridge invocation failed before model loading because its CLI names
 did not map to the Python function names; that directory is preserved remotely
 and the corrected run used a fresh `_retry1` directory.  No pilot row was
 loaded in either invocation.
+
+The optional greedy-generation path was then exercised on the same frozen
+Qwen checkpoint by a second synthetic-only bridge.  Starting from a cloned
+shared prompt cache, it generated the single token `Paris`, stopped at EOS,
+and obtained strict and normalized exact match 1.  Candidate NLL still favored
+Paris (0.5602 versus 7.6852 for London).  The measured query took 0.435 seconds
+and peaked at 7.566/7.580 GiB allocated/reserved.  All eight structural,
+loading, decoding, bound, metric and resource checks passed; no experiment or
+external row was loaded.
+
+## Formal outcome implementation
+
+The gated two-GPU nine-arm formal scorer, runner and independent auditor are
+implemented and tested but remain unlaunched.  They require passed V15, pilot
+and frozen-state audits.  Each outer fold selects its fixed comparator from the
+other four folds by primary candidate accuracy, lower answer NLL and registered
+arm order.  Headline accuracy and NLL differences use subject-cluster bootstrap
+with 20,000 draws and seeds 1611/1612.  The scorer reports candidate preference,
+answer NLL, strict/normalized greedy exact match, per-kind/fold/subject results,
+retained sessions, latency and GPU peaks.  It scores identical within-episode
+memory states once and records every reused arm.  The auditor independently
+reconstructs memory, prompts, tokenization, generation text, reuse provenance,
+fixed-arm selection, intervals and all release checks.
 
 ## Pre-model correction
 
