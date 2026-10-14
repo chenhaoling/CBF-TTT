@@ -82,6 +82,21 @@ passed. Under top-1 reading, physics reaches 92.90% while the oracle reaches
 99.33%, creating a clean 6.44-point target for the separately frozen
 fresh-corpus controller confirmation.
 
+The fresh top-1-reader predecessor then separated continuous approximation
+from exact physical state.  Across three projection seeds, its auxiliary
+27-class controller reached 98.93% development accuracy versus 93.14% for
+explicit cohort physics, a 5.79-point descriptive paired gain with source-group
+95% CI `[5.15,6.40]`; NLL improved by 0.0851, CI `[0.0724,0.0981]`.  Minimum
+seed accuracy was 98.86%, historical accuracy 96.82%, minimum family accuracy
+95.70%, and the oracle gap 0.44 points.  The registered continuous primary
+reached only 83.32% and failed its gate, so test remained unencoded.  All 16
+independent audit checks passed.  The separately frozen conditional
+prerequisites for a fresh exact-discrete confirmation all passed.  A post-hoc
+mechanism diagnostic localized residual error: endpoint actions reached 99.28%
+action accuracy, while the 24.46% of oracle decisions containing `0.5` reached
+69.34% action but 96.13% query accuracy.  These are development results; the
+fresh confirmation, now running, is required for a held-out claim.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -123,3 +138,4 @@ Key reports:
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/zsre_decomposed_scope_gate_v1/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/memory_interference_v19_final/REPORT.md`
 - `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/natural_semantic_headroom_v1/REPORT.md`
+- `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_sparse_cohort_v1/REPORT.md`

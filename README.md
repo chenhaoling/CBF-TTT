@@ -331,6 +331,15 @@ If you have any questions about this project, please feel free to contact us:
 
 ## CBF-TTT latest experiment
 
+The audited top-1-reader predecessor is now
+[complete](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_sparse_cohort_v1/REPORT.md).
+Its 27-class exact-state controller reached 98.93% development accuracy versus
+93.14% for explicit cohort physics and 99.36% for the oracle.  The registered
+continuous primary failed, so test remained sealed; all four separately frozen
+prerequisites passed and released a fresh exact-discrete confirmation.  That
+confirmation is the active experiment and must pass twelve development checks
+before one-time test extraction.
+
 The audited Qwen-grounded multi-component forgetting run completed on the final 1B-token Qwen3-4B checkpoint. Development accuracy was 27.73% for the full learned policy versus 32.20% for fixed global reset; the greedy oracle reached only 28.49%. The preregistered readability and policy gates failed, so test remained sealed. See the [complete report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_forgetting_v1/REPORT.md).
 
 The next experiment follows the [Qwen memory geometry and readability plan](QWEN_LOWRANK_GEOMETRY_PLAN.md): compare the current projection against 128/256-dimensional whitening under a perfect semantic state, quantify cross-talk, and retrain the forgetting controller only after a representation passes the fixed readability gate.

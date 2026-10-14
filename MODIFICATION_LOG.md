@@ -3344,3 +3344,15 @@ in progress, seed 2303 has not started and no test row exists.  The chained
 confirmation monitor is active but consumes no GPU while waiting.  Formal
 metrics and hashes will be added only after both producer and independent audit
 reach terminal state.
+
+The predecessor subsequently completed in 3,024.20 seconds with zero exit code
+and all 16 independent audit checks passing.  Its registered continuous primary
+failed and test remained unencoded.  The auxiliary exact 27-class controller
+reached 98.9258% development accuracy versus 93.1351% for physics and 99.3634%
+for the oracle; minimum seed, historical and minimum-family accuracy were
+98.8607/96.8207/95.7031%.  All four separately frozen conditional prerequisites
+passed, so the chain generated the fresh seed-`202610153` corpus and started the
+confirmation on GPU 1 with `test_loaded=false`.  Compact audited artifacts,
+controller checkpoint, action diagnostic, prerequisite decision and a complete
+report are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_sparse_cohort_v1/`.
