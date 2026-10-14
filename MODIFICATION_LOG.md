@@ -2641,3 +2641,29 @@ semantic-alias set beats exact string matching; controlled-set success cannot
 silently satisfy that requirement. The auditor reconstructs all seed-specific
 memory states from the saved OOF policy artifact, rechecks every prompt, score,
 generation and resource record, and independently recomputes the full gate.
+
+### Frozen Stage-E semantic-alias confirmation
+
+While Stage A was still running and before any controlled result was read,
+added `POST_V18_SEMANTIC_ALIAS_CONFIRMATION_PLAN.md` and froze a gated 320-row
+semantic-alias confirmation builder. Twenty latent-slot families each contain
+three fixed surface forms. The primary historical fact, current update and
+current query use different forms, so exact string matching cannot identify
+the conflict while the latent causal graph remains known. Alias-only entities,
+values, templates and folds are disjoint from pilot and formal V18.
+
+The builder preserves the four lengths and mechanisms, 80 subjects, 20
+template groups and five 64-row folds. It explicitly materializes retain-all,
+global reset, exact-conflict and latent semantic-oracle states; exact conflict
+deletes zero primary components by construction, while the oracle removes all
+stale components of the latent target slot and always retains the newest
+update. The independent auditor checks three-surface identities, query keys,
+mechanism roles, states, split balance, source disjointness and exhaustive
+five-token value encoding with the frozen Qwen tokenizer.
+
+Construction is hard-gated on a positive independently audited controlled
+policy evaluation. A sixth watcher stops without creating the alias root when
+that gate fails. The registered alias claim requires a five-point gain over
+exact matching with positive subject/template interval lower bounds, at least
+90% update and retention, 97% locality, no negative fold or seed, and at least
+40% exact-to-semantic-oracle gap closure.
