@@ -3510,3 +3510,9 @@ run is invalid and no formal corpus was generated. Updated the pilot and shard
 merger to report label, extraction and overall allocated/reserved peaks
 separately and to apply the 24-GiB gate to the overall peak. The corrected
 resource run must use the identical seed, groups, actions and label protocol.
+
+Added `scripts/audit_qwen_dynamic_record_resource_pilot.py`. The independent
+auditor reloads and hashes both GPU shards and the source corpus, strips only
+timing/memory fields to require exact label reproduction against the excluded
+first execution, recomputes every count and resource statistic, reapplies the
+24-GiB/six-hour size rule, and requires the formal root to remain absent.
