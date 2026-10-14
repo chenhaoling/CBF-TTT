@@ -2791,3 +2791,55 @@ headroom but is too easy to justify controller learning, so the next study must
 remove exact key identity with a source-disjoint semantic-alias V20. Failing
 this explanation while V19 passes permits nested OOF controller training. The
 production and independent recomputations match exactly on a 320-row fixture.
+
+### Preregistered V20 semantic-alias headroom experiment
+
+While the independent V19 scorer was still running and before reading any V19
+arm outcome, added `POST_V20_SEMANTIC_ALIAS_HEADROOM_PLAN.md` and froze V20.
+V20 is released only when the independently audited V19 causal-rule diagnostic
+shows that whole-key exact deletion closes at least 90% of the positive V19
+oracle gap. It then removes exact surface identity: historical facts use
+surface A, the current update uses surface B and both update/query readouts
+include a fresh surface C for the same latent slot. The primary comparison is
+the latent semantic oracle against exact-string conflict deletion. This study
+uses contextual evidence memory and makes no claim that the original dense
+`ttt_conv/ttt_proj` writer learned a readable content-bound representation.
+
+Added `tasks/build_controlled_interference_v20_alias.py` with 320 episodes, 80
+subjects, 20 template groups, five folds, the four registered lengths and
+mechanisms, seed 2003, and a fresh opaque-value range beginning at 16000. The
+builder materializes the five fixed arms, an exact-string arm that removes
+zero sessions by construction, and a latent semantic arm that removes every
+stale slot-0 session while retaining the current update. Added
+`scripts/audit_controlled_interference_v20_alias.py`, which independently
+checks the V19 release, hashes, folds, balance, V19 disjointness, three-surface
+identity, query semantics, causal states and the registered gate.
+
+Added `tasks/evaluate_controlled_interference_v20_alias.py`. The two-GPU
+scorer deduplicates identical memory states, verifies five-token opaque values,
+records candidate likelihood, independent greedy generation, latency and peak
+GPU memory, and selects the descriptive fixed comparator without its held-out
+outer fold. The sole registered gate compares semantic deletion with exact
+matching and requires a ten-point subject-macro joint gain, positive
+subject/template clustered 95% lower bounds, at least 90% update and
+retention, 97% locality, no negative fold, and exact matching to be bitwise
+identical to retain-all. It cannot select a controller or threshold.
+
+Added `scripts/audit_controlled_interference_v20_alias_outcome.py`, which
+independently reconstructs all states, prompts, scores, predictions,
+generation, resources, model/tokenizer provenance, outer-fold selection,
+cluster intervals and the full gate. The build, scoring and result-audit
+runners are connected by `scripts/chain_v19_rules_to_v20_alias.sh`; it stops
+without creating V20 data whenever the audited V19 exact-rule explanation
+gate does not pass. Six V20 tests pass, including exact equality between the
+production and independent 20,000-draw bootstrap tables. The full V19/V20
+14-test regression set passes. No V20 model result exists yet.
+
+A 320-row integration smoke against the archived official V19 corpus and a
+clearly synthetic upstream release marker passed all ten independent V20 data
+checks. It confirmed 1,280 semantic deletions, zero exact-string deletions and
+deterministic manifest/data/state hashes
+`726550b3e145c2d9cbd3e0f3df6d44ca2bb1f6dea0ba7dede6b8f233cba0a2a0`,
+`567cdcf69702bc02c51bc13d4266351393a28dbde6d16bb61af709507bee2787`
+and `85b8bbaf5f4a241ae08d623a2ab5b831816074220edcbf0119bd8a32b03b762e`.
+This smoke is not an experimental result and is not consumed by the chain.
