@@ -1,5 +1,6 @@
 import unittest
 
+from scripts.audit_mquake_qwen_headroom_v17_pilot import expected_unique_states_by_shard
 from tasks.evaluate_mquake_qwen_headroom_v17 import (
     FIXED_POLICIES, clustered_interval, select_fixed_by_outer_fold, select_oracle,
     state_arms, summarize_rows,
@@ -43,6 +44,19 @@ class HeadroomV17Test(unittest.TestCase):
                          [f"fixed:{policy}" for policy in FIXED_POLICIES])
         self.assertEqual([row["deleted_session_id"] for row in values[5:]], ["s0", "s1"])
         self.assertEqual([row["deletion_index"] for row in values[5:]], [0, 1])
+
+    def test_audit_derives_unequal_shard_work_from_frozen_states(self):
+        states = []
+        for deletion_count in (2, 5, 3, 7):
+            states.append({
+                "fixed": {"no_memory": [], "retain_all": ["a", "b", "c"],
+                          "global_reset": ["c"], "last_1": ["c"],
+                          "last_2": ["b", "c"]},
+                "delete_one": [{} for _ in range(deletion_count)],
+            })
+        # Shard 0 sees 2+3 deletions; shard 1 sees 5+7. Each row has four
+        # unique fixed states because global_reset and last_1 are identical.
+        self.assertEqual(expected_unique_states_by_shard(states), {0: 13, 1: 20})
 
     def test_oracle_uses_accuracy_then_nll_then_retain_then_chronology(self):
         fixed = [arm(f"fixed:{policy}", correct=(0, 1), nll=(1, 1))
