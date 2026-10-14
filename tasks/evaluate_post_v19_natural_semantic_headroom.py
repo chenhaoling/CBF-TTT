@@ -158,14 +158,22 @@ def score_query(model, tokenizer, memory, spec):
     scores = {}
     for answer, answer_ids in encoded.items():
         branch = prefix_session.clone()
-        tail = branch._forward(answer_ids[:-1])
-        hidden = torch.cat((prefix_hidden[:, -1:], tail), dim=1)
+        tail = None
+        if len(answer_ids) == 1:
+            # The prompt's last hidden state predicts the sole answer token.
+            # Calling PlainSession._forward([]) would construct a float tensor.
+            hidden = prefix_hidden[:, -1:]
+        else:
+            tail = branch._forward(answer_ids[:-1])
+            hidden = torch.cat((prefix_hidden[:, -1:], tail), dim=1)
         labels = torch.tensor(answer_ids, dtype=torch.long, device=prefix_session.device)
         value = _nll_from_hidden(model, hidden, labels)
         if not math.isfinite(value):
             raise RuntimeError("non-finite natural answer NLL")
         scores[answer] = value
-        del branch, tail, hidden, labels
+        del branch, hidden, labels
+        if tail is not None:
+            del tail
     generation = greedy_from_prefix(
         model, tokenizer, prefix_session, prefix_hidden, MAX_NEW_TOKENS)
     generation.update({
