@@ -3471,3 +3471,14 @@ actions cannot address arbitrary old records, duplicate/no-op events require
 identity-aware idempotence, and the NLL-only oracle can trade away primary
 accuracy.  The formal OOD corpus is now diagnostic-only and will never be used
 as held-out evidence for a successor.
+
+Added and froze `QWEN_DYNAMIC_RECORD_FORGETTING_PLAN.md` after the OOD audit and
+before any successor corpus or label exists. It replaces fixed positional
+cohorts with dynamic, individually addressable record candidates, a joint
+global-clear plus `{0,0.5,1}^3` action, a shared record encoder and hard
+locality/idempotence/monotone-removal/reset constraints. It also corrects the
+oracle objective to lexicographically maximize query accuracy before NLL. The
+plan registers fresh development, matched-test and external-OOD seeds, strict
+split sealing, an eight-group per-label time/VRAM pilot, fixed comparators,
+ablations, bootstrap units and release gates. The disclosed failed OOD corpus
+is diagnosis-only and cannot enter successor training or evaluation.
