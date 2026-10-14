@@ -2417,3 +2417,26 @@ joint update-plus-retention episode endpoint. Its 40-row construction gate,
 320-row source/template-disjoint formal gate, sparse `0/0.5/1` boundary study,
 cluster bootstrap, controller admission rule and external-data lock are frozen
 without access to the running 272-row V17 formal metrics.
+
+### V17 formal terminal result
+
+The 272-row formal exact-headroom run completed with exit code 0 and passed all
+eleven independent audit checks. It evaluated 9,248 unique memory states and
+36,992 query labels. The slower shard took 5,722.22 seconds; peak allocated and
+reserved memory was 8.96/9.94 GiB. The summary and audit SHA-256 values are
+`e96ab43c5e8e4ab4bd5bab5959784bd8bb1ab7d769747ffc0881ccadab346a20`
+and `80cb31a1dde5aa19fb62a048fe3e8149401a41106b03f60dc74c04f76abee3ce`.
+
+The registered subject-macro primary accuracy gain was exactly 0.0 points with
+95% interval `[0.0,0.0]`: exact oracle and outer-fold `global_reset` both
+achieved 100% primary candidate and pair accuracy in every fold. Oracle primary
+NLL was worse by 0.0746 on the subject-macro scale. Both formal headroom checks
+failed, so `causal_headroom_supported=false` and the current MQuAKE controller
+line stops. No new controller or external benchmark was launched.
+
+The complete matrix also quantified the endpoint defect anticipated from the
+pilot. Exact selective deletion retained 100% hard history and 98.53% unrelated
+facts, versus 70.59% and 55.15% for the primary-selected global reset. This is
+reported as a safety trade-off and does not override the registered negative
+primary result. Added the complete raw-shard archive, report and artifact hash
+list under `experiments/.../mquake_qwen_headroom_v17_formal`.

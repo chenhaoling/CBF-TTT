@@ -1,0 +1,32 @@
+{
+  "protocol": "mquake_qwen_causal_headroom_v17_formal_audit",
+  "audit_passed": true,
+  "checks": {
+    "frozen_sample_state_and_passed_pilot_dependencies": true,
+    "complete_disjoint_ordered_two_shard_coverage": true,
+    "episode_sample_and_state_identities": true,
+    "fixed_and_exhaustive_single_deletion_arms": true,
+    "prompt_hash_candidate_scores_and_predictions": true,
+    "per_query_latency_and_peak_memory_records": true,
+    "shard_counts_resources_dependencies_and_hashes": true,
+    "exact_model_tokenizer_and_loading_provenance": true,
+    "independent_oracle_fixed_headroom_recomputation": true,
+    "independent_resource_recomputation": true,
+    "terminal_and_access_locks": true
+  },
+  "summary_sha256": "e96ab43c5e8e4ab4bd5bab5959784bd8bb1ab7d769747ffc0881ccadab346a20",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "457dfbf6b0e620b6b7517e4aac372098489bd1494d2370b5e752fb7ce535502e",
+    "shard1.jsonl": "79d20964cc789e9ebcd8766a94793ede28b1752aae62f38d9d611b97cd130703"
+  },
+  "recomputed_headroom_gate": {
+    "checks": {
+      "subject_macro_primary_accuracy_gain_at_least_5_points": false,
+      "subject_cluster_accuracy_gain_ci_lower_above_zero": false
+    },
+    "passed": false
+  },
+  "model_scored": true,
+  "formal_scored": true,
+  "external_sets_loaded": false
+}
