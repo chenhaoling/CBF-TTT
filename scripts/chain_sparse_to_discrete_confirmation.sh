@@ -32,6 +32,11 @@ export PYTHONDONTWRITEBYTECODE=1
   --output "$PREDECESSOR_ROOT/execution_audit.json" \
   > "$CHAIN_ROOT/predecessor_audit.log" 2>&1
 
+"$PYTHON_BIN" -m scripts.summarize_qwen_sparse_action_diagnostic \
+  --root "$PREDECESSOR_ROOT/result" \
+  --output "$PREDECESSOR_ROOT/action_diagnostic.json" \
+  > "$CHAIN_ROOT/action_diagnostic.log" 2>&1
+
 # Recompute the frozen conditional prerequisite from the independent audit.
 "$PYTHON_BIN" - "$PREDECESSOR_ROOT/execution_audit.json" \
   > "$CHAIN_ROOT/prerequisite.json" <<'PY'

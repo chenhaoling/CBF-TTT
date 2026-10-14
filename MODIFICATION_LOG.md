@@ -3320,6 +3320,14 @@ data, optimizer, action, metric or release decision.  This operational marker
 lets long counterfactual-label phases be distinguished from a stopped process;
 the independent scientific audit deliberately ignores it.
 
+Added `scripts/summarize_qwen_sparse_action_diagnostic.py` and two focused
+tests.  After all predecessor seeds close, the chain now hashes and summarizes
+the complete grid-controller development rows by exact endpoint versus
+interior-oracle action, reporting action accuracy, query accuracy, retention
+MAE and label distributions.  The artifact is explicitly post-hoc and is
+generated after the integrity audit but before the conditional prerequisite;
+it is never read by either release gate.
+
 At the time of this entry the predecessor formal run remains active on
 `hku-gpu2`: seed 2301 has completed all 12 development policies, seed 2302 is
 in progress, seed 2303 has not started and no test row exists.  The chained
