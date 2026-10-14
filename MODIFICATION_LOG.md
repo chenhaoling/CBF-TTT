@@ -3426,7 +3426,9 @@ GPU 0 with an unregistered seed, one group per suite and a temporary protocol
 copy of the already audited predecessor controller.  It loaded the final
 Qwen3-4B checkpoint, extracted all four suites, restored three projection
 controllers, evaluated all 13 policies and wrote the expected 156 raw files
-plus aggregates without error.  Its artifact explicitly records
+plus aggregates without error.  The independent auditor then reloaded those
+156 files and exactly matched source structure, hashes, suite/macro aggregates,
+endpoint/interior diagnostics and the complete gate.  Its artifact explicitly records
 `scientific_evidence=false` and `formal_seed_used=false`; its metrics are not a
 pilot, are not used by any gate and cannot influence the registered formal
 run.
