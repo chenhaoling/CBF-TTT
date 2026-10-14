@@ -3328,6 +3328,16 @@ MAE and label distributions.  The artifact is explicitly post-hoc and is
 generated after the integrity audit but before the conditional prerequisite;
 it is never read by either release gate.
 
+Before the discrete confirmation corpus was generated, added the conditional
+`QWEN_DISCRETE_COHORT_OOD_PLAN.md`.  If and only if the confirmation's
+independently audited one-time test passes, it evaluates the frozen controller
+without retraining on four freshly generated lifecycle shifts: longer sessions,
+distant revocations, mixed reset/revoke streams and duplicate/no-op writes.
+The suites, 64-group sample sizes, comparisons, group bootstrap and eleven
+success checks are fixed in advance.  The plan explicitly limits its claim to
+observable application/session lifecycle events and keeps native dense writing
+and implicit natural contradiction discovery as separate required stages.
+
 At the time of this entry the predecessor formal run remains active on
 `hku-gpu2`: seed 2301 has completed all 12 development policies, seed 2302 is
 in progress, seed 2303 has not started and no test row exists.  The chained
