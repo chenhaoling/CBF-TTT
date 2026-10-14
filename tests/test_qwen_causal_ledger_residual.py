@@ -21,6 +21,11 @@ from tasks.build_qwen_causal_ledger_residual_v2 import (
     load as load_v2,
     materialize as materialize_v2,
 )
+from tasks.build_qwen_causal_ledger_development_v2 import (
+    GROUPS_PER_FAMILY as DEVELOPMENT_GROUPS_PER_FAMILY,
+    load as load_development_v2,
+    materialize as materialize_development_v2,
+)
 from tasks.pilot_qwen_causal_ledger_residual import (
     ACTIONS,
     apply_grid_action,
@@ -147,6 +152,17 @@ class CausalLedgerResidualCorpusTest(unittest.TestCase):
                 row["answer"].startswith("Y ")
                 for _, target in pairs for row in target["answers"]
             ))
+
+    def test_development_v2_size_seed_and_sealing(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "development"
+            manifest = materialize_development_v2(root)
+            loaded, pairs = load_development_v2(root)
+            self.assertEqual(manifest, loaded)
+            self.assertEqual(manifest["groups_per_family"], DEVELOPMENT_GROUPS_PER_FAMILY)
+            self.assertEqual(len(pairs), DEVELOPMENT_GROUPS_PER_FAMILY * len(FAMILIES) * 2)
+            self.assertFalse(manifest["confirmation_generated"])
+            self.assertFalse(manifest["ood_generated"])
 
 
 if __name__ == "__main__":
