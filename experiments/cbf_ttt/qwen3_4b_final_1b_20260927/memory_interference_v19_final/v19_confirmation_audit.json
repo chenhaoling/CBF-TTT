@@ -1,0 +1,38 @@
+{
+  "protocol": "controlled_memory_interference_v19_qwen_confirmation_audit",
+  "audit_passed": true,
+  "checks": {
+    "frozen_v19_and_audited_v18_lc_dependencies": true,
+    "complete_disjoint_ordered_two_shard_coverage": true,
+    "episode_state_and_split_identities": true,
+    "fixed_single_and_key_deletion_arms_with_dedup_sources": true,
+    "prompt_hash_scores_predictions_and_five_token_answers": true,
+    "free_generation_records": true,
+    "per_query_latency_and_peak_memory_records": true,
+    "shard_counts_dependencies_resources_and_hashes": true,
+    "exact_model_tokenizer_and_loading_provenance": true,
+    "independent_budget_dp_outer_fold_and_cluster_recomputation": true,
+    "independent_resource_recomputation": true,
+    "terminal_and_access_locks": true
+  },
+  "summary_sha256": "91df8a5db5e7b565494def2a86c80b24e0b2df09c0463a7071325c337c4478b6",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "8864bb3ccd3940dd0aeef5cd5e08235f2fd36371d4bae3ed6a8ce8056091d985",
+    "shard1.jsonl": "b047b15419b6ed3dc23083464f18f86dfd25500b971a23864eb81ef885458258"
+  },
+  "recomputed_confirmation_gate": {
+    "checks": {
+      "subject_macro_joint_gain_at_least_10_points": true,
+      "subject_cluster_joint_gain_ci_lower_above_zero": true,
+      "template_macro_joint_gain_at_least_10_points": true,
+      "template_cluster_joint_gain_ci_lower_above_zero": true,
+      "oracle_update_accuracy_at_least_90": true,
+      "oracle_retained_key_accuracy_at_least_90": true,
+      "oracle_locality_accuracy_at_least_97": true,
+      "no_outer_fold_has_negative_joint_gain": true
+    },
+    "passed": true
+  },
+  "model_scored": true,
+  "external_sets_loaded": false
+}

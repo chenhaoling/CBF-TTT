@@ -1,0 +1,2647 @@
+{
+  "protocol": "v19_nested_oof_forgetting_policy_v1",
+  "rows": 9280,
+  "episodes": 320,
+  "seeds": [
+    19031,
+    19037,
+    19043
+  ],
+  "epochs": [
+    25,
+    50,
+    100
+  ],
+  "thresholds": [
+    0.4,
+    0.5,
+    0.6
+  ],
+  "risk_penalties": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "feature_names": [
+    "newest_exact_key",
+    "newest_exact_value",
+    "newest_value_conflict",
+    "relative_age",
+    "later_exact_key_fraction",
+    "later_same_value_fraction",
+    "later_conflicting_value_fraction",
+    "same_key_group_fraction",
+    "same_value_group_fraction",
+    "newest_key_trigram_jaccard",
+    "newest_key_common_prefix",
+    "max_later_key_similarity",
+    "mean_later_key_similarity",
+    "max_conflicting_later_similarity",
+    "useful_repetition",
+    "near_duplicate_key",
+    "normalized_memory_length"
+  ],
+  "hidden": 64,
+  "loss_weights": {
+    "utility": 1.0,
+    "risk": 0.5,
+    "conservation": 0.25,
+    "ranking": 0.25
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "gradient_clip": 1.0
+  },
+  "selection": {
+    "0": {
+      "inner_fold": 1,
+      "epoch": 100,
+      "threshold": 0.4,
+      "risk_penalty": 2.0,
+      "constraints_satisfied": false,
+      "metrics": {
+        "positive_recall": 0.6521739130434783,
+        "conservation_specificity": 0.984778292521509,
+        "risk_violation_rate": 0.0,
+        "balanced_utility_accuracy": 0.8184761027824936,
+        "action_accuracy": 0.9229525862068966,
+        "mse": 0.15144272170787335,
+        "delete_rate": 0.1336206896551724,
+        "rows": 1856,
+        "positive_rows": 345,
+        "conservation_rows": 1511,
+        "locality_risk_rows": 0
+      },
+      "grid": {
+        "25": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.11879898786953345,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.14746684017385892,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.18128323229568097,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5768115942028985,
+              "conservation_specificity": 0.99933818663137,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7880748904171342,
+              "action_accuracy": 0.9207974137931034,
+              "mse": 0.26436163599181495,
+              "delete_rate": 0.10775862068965517,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.11879898786953345,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6405797101449275,
+              "conservation_specificity": 0.9821310390469887,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8113553745959581,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.14746684017385892,
+              "delete_rate": 0.1336206896551724,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.18128323229568097,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.15072463768115943,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.5753623188405798,
+              "action_accuracy": 0.8421336206896551,
+              "mse": 0.26436163599181495,
+              "delete_rate": 0.028017241379310345,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.11879898786953345,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5884057971014492,
+              "conservation_specificity": 0.99933818663137,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7938719918664097,
+              "action_accuracy": 0.9229525862068966,
+              "mse": 0.14746684017385892,
+              "delete_rate": 0.10991379310344827,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5333333333333333,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7666666666666666,
+              "action_accuracy": 0.9132543103448276,
+              "mse": 0.18128323229568097,
+              "delete_rate": 0.09913793103448276,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.0,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.5,
+              "action_accuracy": 0.8141163793103449,
+              "mse": 0.26436163599181495,
+              "delete_rate": 0.0,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "50": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.13865644043204894,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.14979064581796678,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.16175217904550476,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.18815722902544127,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.13865644043204894,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6347826086956522,
+              "conservation_specificity": 0.9887491727332892,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8117658907144707,
+              "action_accuracy": 0.9229525862068966,
+              "mse": 0.14979064581796678,
+              "delete_rate": 0.1271551724137931,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6173913043478261,
+              "conservation_specificity": 0.9953673064195897,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8063793053837078,
+              "action_accuracy": 0.9251077586206896,
+              "mse": 0.16175217904550476,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.18815722902544127,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.13865644043204894,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.14979064581796678,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.16175217904550476,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5884057971014492,
+              "conservation_specificity": 0.99933818663137,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7938719918664097,
+              "action_accuracy": 0.9229525862068966,
+              "mse": 0.18815722902544127,
+              "delete_rate": 0.10991379310344827,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "100": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9794837855724685,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8158288493079734,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.13599552500709303,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9801455989410987,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8161597559922884,
+              "action_accuracy": 0.9191810344827587,
+              "mse": 0.13967671278430274,
+              "delete_rate": 0.13739224137931033,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.9827928524156188,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8174833827295485,
+              "action_accuracy": 0.9213362068965517,
+              "mse": 0.14347830816016938,
+              "delete_rate": 0.13523706896551724,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.6521739130434783,
+              "conservation_specificity": 0.984778292521509,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8184761027824936,
+              "action_accuracy": 0.9229525862068966,
+              "mse": 0.15144272170787335,
+              "delete_rate": 0.1336206896551724,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.6173913043478261,
+              "conservation_specificity": 0.9953673064195897,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8063793053837078,
+              "action_accuracy": 0.9251077586206896,
+              "mse": 0.13599552500709303,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6173913043478261,
+              "conservation_specificity": 0.9953673064195897,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8063793053837078,
+              "action_accuracy": 0.9251077586206896,
+              "mse": 0.13967671278430274,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6173913043478261,
+              "conservation_specificity": 0.9953673064195897,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8063793053837078,
+              "action_accuracy": 0.9251077586206896,
+              "mse": 0.14347830816016938,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.6144927536231884,
+              "conservation_specificity": 0.9973527465254798,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8059227500743341,
+              "action_accuracy": 0.9261853448275862,
+              "mse": 0.15144272170787335,
+              "delete_rate": 0.11637931034482758,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.13599552500709303,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.13967671278430274,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.14347830816016938,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5971014492753624,
+              "conservation_specificity": 0.99867637326274,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7978889112690511,
+              "action_accuracy": 0.9240301724137931,
+              "mse": 0.15144272170787335,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 345,
+              "conservation_rows": 1511,
+              "locality_risk_rows": 0
+            }
+          }
+        }
+      }
+    },
+    "1": {
+      "inner_fold": 2,
+      "epoch": 100,
+      "threshold": 0.4,
+      "risk_penalty": 2.0,
+      "constraints_satisfied": false,
+      "metrics": {
+        "positive_recall": 0.7508417508417509,
+        "conservation_specificity": 0.9871712636305324,
+        "risk_violation_rate": 0.0,
+        "balanced_utility_accuracy": 0.8690065072361417,
+        "action_accuracy": 0.9493534482758621,
+        "mse": 0.14400122220553072,
+        "delete_rate": 0.13092672413793102,
+        "rows": 1856,
+        "positive_rows": 297,
+        "conservation_rows": 1559,
+        "locality_risk_rows": 0
+      },
+      "grid": {
+        "25": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9788325849903784,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8648371679160647,
+              "action_accuracy": 0.9423491379310345,
+              "mse": 0.111818863699751,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9788325849903784,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8648371679160647,
+              "action_accuracy": 0.9423491379310345,
+              "mse": 0.13639853251080886,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9788325849903784,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8648371679160647,
+              "action_accuracy": 0.9423491379310345,
+              "mse": 0.16467639657428101,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7171717171717171,
+              "conservation_specificity": 0.9955099422706863,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8563408297212017,
+              "action_accuracy": 0.9509698275862069,
+              "mse": 0.23232671045846837,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9788325849903784,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8648371679160647,
+              "action_accuracy": 0.9423491379310345,
+              "mse": 0.111818863699751,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9788325849903784,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8648371679160647,
+              "action_accuracy": 0.9423491379310345,
+              "mse": 0.13639853251080886,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7171717171717171,
+              "conservation_specificity": 0.9955099422706863,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8563408297212017,
+              "action_accuracy": 0.9509698275862069,
+              "mse": 0.16467639657428101,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.6868686868686869,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8434343434343434,
+              "action_accuracy": 0.9498922413793104,
+              "mse": 0.23232671045846837,
+              "delete_rate": 0.10991379310344827,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.7171717171717171,
+              "conservation_specificity": 0.9955099422706863,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8563408297212017,
+              "action_accuracy": 0.9509698275862069,
+              "mse": 0.111818863699751,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.13639853251080886,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6868686868686869,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8434343434343434,
+              "action_accuracy": 0.9498922413793104,
+              "mse": 0.16467639657428101,
+              "delete_rate": 0.10991379310344827,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.39057239057239057,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.6952861952861953,
+              "action_accuracy": 0.9024784482758621,
+              "mse": 0.23232671045846837,
+              "delete_rate": 0.0625,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "50": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9788325849903784,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8648371679160647,
+              "action_accuracy": 0.9423491379310345,
+              "mse": 0.12565673132810237,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9788325849903784,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8648371679160647,
+              "action_accuracy": 0.9423491379310345,
+              "mse": 0.13548199696142002,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9788325849903784,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8648371679160647,
+              "action_accuracy": 0.9423491379310345,
+              "mse": 0.1459112812371214,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.734006734006734,
+              "conservation_specificity": 0.9884541372674791,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8612304356371066,
+              "action_accuracy": 0.9477370689655172,
+              "mse": 0.16858190571567525,
+              "delete_rate": 0.1271551724137931,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.734006734006734,
+              "conservation_specificity": 0.9910198845413727,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8625133092740533,
+              "action_accuracy": 0.9498922413793104,
+              "mse": 0.12565673132810237,
+              "delete_rate": 0.125,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7171717171717171,
+              "conservation_specificity": 0.9955099422706863,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8563408297212017,
+              "action_accuracy": 0.9509698275862069,
+              "mse": 0.13548199696142002,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7171717171717171,
+              "conservation_specificity": 0.9955099422706863,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8563408297212017,
+              "action_accuracy": 0.9509698275862069,
+              "mse": 0.1459112812371214,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.16858190571567525,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.12565673132810237,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.13548199696142002,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.1459112812371214,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.16858190571567525,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "100": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9839640795381654,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8674029151899582,
+              "action_accuracy": 0.9466594827586207,
+              "mse": 0.12994752160051015,
+              "delete_rate": 0.1336206896551724,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9839640795381654,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8674029151899582,
+              "action_accuracy": 0.9466594827586207,
+              "mse": 0.13332812089966778,
+              "delete_rate": 0.1336206896551724,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9839640795381654,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8674029151899582,
+              "action_accuracy": 0.9466594827586207,
+              "mse": 0.1367972707668904,
+              "delete_rate": 0.1336206896551724,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7508417508417509,
+              "conservation_specificity": 0.9871712636305324,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8690065072361417,
+              "action_accuracy": 0.9493534482758621,
+              "mse": 0.14400122220553072,
+              "delete_rate": 0.13092672413793102,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.734006734006734,
+              "conservation_specificity": 0.9935856318152662,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8637961829110001,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.12994752160051015,
+              "delete_rate": 0.12284482758620689,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.734006734006734,
+              "conservation_specificity": 0.9935856318152662,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8637961829110001,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.13332812089966778,
+              "delete_rate": 0.12284482758620689,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7306397306397306,
+              "conservation_specificity": 0.9942270686337396,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.862433399636735,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.1367972707668904,
+              "delete_rate": 0.12176724137931035,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7171717171717171,
+              "conservation_specificity": 0.9980756895445798,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8576237033581484,
+              "action_accuracy": 0.953125,
+              "mse": 0.14400122220553072,
+              "delete_rate": 0.11637931034482758,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.12994752160051015,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.13332812089966778,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.1367972707668904,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7003367003367004,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8501683501683501,
+              "action_accuracy": 0.9520474137931034,
+              "mse": 0.14400122220553072,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 297,
+              "conservation_rows": 1559,
+              "locality_risk_rows": 0
+            }
+          }
+        }
+      }
+    },
+    "2": {
+      "inner_fold": 3,
+      "epoch": 25,
+      "threshold": 0.5,
+      "risk_penalty": 0.0,
+      "constraints_satisfied": false,
+      "metrics": {
+        "positive_recall": 0.6288951841359773,
+        "conservation_specificity": 0.9773785761809713,
+        "risk_violation_rate": 0.0,
+        "balanced_utility_accuracy": 0.8031368801584744,
+        "action_accuracy": 0.9110991379310345,
+        "mse": 0.10871606424139804,
+        "delete_rate": 0.13793103448275862,
+        "rows": 1856,
+        "positive_rows": 353,
+        "conservation_rows": 1503,
+        "locality_risk_rows": 0
+      },
+      "grid": {
+        "25": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.10871606424139804,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.14150746520767893,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.18020045726462935,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5580736543909348,
+              "conservation_specificity": 0.998003992015968,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7780388232034514,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.2752912146505391,
+              "delete_rate": 0.10775862068965517,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.10871606424139804,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5949008498583569,
+              "conservation_specificity": 0.9933466400532269,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7941237449557919,
+              "action_accuracy": 0.9175646551724138,
+              "mse": 0.14150746520767893,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5694050991501416,
+              "conservation_specificity": 0.998003992015968,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7837045455830548,
+              "action_accuracy": 0.9164870689655172,
+              "mse": 0.18020045726462935,
+              "delete_rate": 0.10991379310344827,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.47592067988668557,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7379603399433428,
+              "action_accuracy": 0.900323275862069,
+              "mse": 0.2752912146505391,
+              "delete_rate": 0.09051724137931035,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.10871606424139804,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5580736543909348,
+              "conservation_specificity": 0.998003992015968,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7780388232034514,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.14150746520767893,
+              "delete_rate": 0.10775862068965517,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5325779036827195,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7662889518413598,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.18020045726462935,
+              "delete_rate": 0.10129310344827586,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.0,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.5,
+              "action_accuracy": 0.8098060344827587,
+              "mse": 0.2752912146505391,
+              "delete_rate": 0.0,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "50": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.1456199438477513,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.15949781527870954,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.1744041646654766,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.207302297306437,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.1456199438477513,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.15949781527870954,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6005665722379604,
+              "conservation_specificity": 0.9866932801064537,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7936299261722071,
+              "action_accuracy": 0.9132543103448276,
+              "mse": 0.1744041646654766,
+              "delete_rate": 0.125,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.207302297306437,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.1456199438477513,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.15949781527870954,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.1744041646654766,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5694050991501416,
+              "conservation_specificity": 0.998003992015968,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7837045455830548,
+              "action_accuracy": 0.9164870689655172,
+              "mse": 0.207302297306437,
+              "delete_rate": 0.10991379310344827,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "100": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.15829827832584667,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.16307623171189614,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.16799087168552373,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.6288951841359773,
+              "conservation_specificity": 0.9773785761809713,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8031368801584744,
+              "action_accuracy": 0.9110991379310345,
+              "mse": 0.17823021139551337,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.6005665722379604,
+              "conservation_specificity": 0.9866932801064537,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7936299261722071,
+              "action_accuracy": 0.9132543103448276,
+              "mse": 0.15829827832584667,
+              "delete_rate": 0.125,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6005665722379604,
+              "conservation_specificity": 0.9866932801064537,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7936299261722071,
+              "action_accuracy": 0.9132543103448276,
+              "mse": 0.16307623171189614,
+              "delete_rate": 0.125,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6005665722379604,
+              "conservation_specificity": 0.9866932801064537,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7936299261722071,
+              "action_accuracy": 0.9132543103448276,
+              "mse": 0.16799087168552373,
+              "delete_rate": 0.125,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5949008498583569,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7954544169451465,
+              "action_accuracy": 0.9197198275862069,
+              "mse": 0.17823021139551337,
+              "delete_rate": 0.11637931034482758,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.15829827832584667,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.16307623171189614,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.16799087168552373,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5722379603399433,
+              "conservation_specificity": 0.9960079840319361,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7841229721859397,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.17823021139551337,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 353,
+              "conservation_rows": 1503,
+              "locality_risk_rows": 0
+            }
+          }
+        }
+      }
+    },
+    "3": {
+      "inner_fold": 4,
+      "epoch": 25,
+      "threshold": 0.5,
+      "risk_penalty": 0.0,
+      "constraints_satisfied": false,
+      "metrics": {
+        "positive_recall": 0.6350974930362117,
+        "conservation_specificity": 0.9812959251837008,
+        "risk_violation_rate": 0.0,
+        "balanced_utility_accuracy": 0.8081967091099562,
+        "action_accuracy": 0.9143318965517241,
+        "mse": 0.12865150379474857,
+        "delete_rate": 0.13793103448275862,
+        "rows": 1856,
+        "positive_rows": 359,
+        "conservation_rows": 1497,
+        "locality_risk_rows": 0
+      },
+      "grid": {
+        "25": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.12865150379474857,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.15817085218544893,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.19243786350427544,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.2752148749263069,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.12865150379474857,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6016713091922006,
+              "conservation_specificity": 0.9893119572478289,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7954916332200148,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.15817085218544893,
+              "delete_rate": 0.125,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.19243786350427544,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.49025069637883006,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.745125348189415,
+              "action_accuracy": 0.9014008620689655,
+              "mse": 0.2752148749263069,
+              "delete_rate": 0.09482758620689655,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5821727019498607,
+              "conservation_specificity": 0.9979959919839679,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7900843469669143,
+              "action_accuracy": 0.9175646551724138,
+              "mse": 0.12865150379474857,
+              "delete_rate": 0.11422413793103449,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.15817085218544893,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5236768802228412,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7618384401114207,
+              "action_accuracy": 0.9078663793103449,
+              "mse": 0.19243786350427544,
+              "delete_rate": 0.10129310344827586,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.0,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.5,
+              "action_accuracy": 0.806573275862069,
+              "mse": 0.2752148749263069,
+              "delete_rate": 0.0,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "50": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.15284060685456802,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.1649948176955271,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.1779599581067403,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.6100278551532033,
+              "conservation_specificity": 0.9859719438877755,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7979998995204894,
+              "action_accuracy": 0.9132543103448276,
+              "mse": 0.20632302763992902,
+              "delete_rate": 0.12931034482758622,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.6100278551532033,
+              "conservation_specificity": 0.9859719438877755,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7979998995204894,
+              "action_accuracy": 0.9132543103448276,
+              "mse": 0.15284060685456802,
+              "delete_rate": 0.12931034482758622,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6016713091922006,
+              "conservation_specificity": 0.9906479625918504,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7961596358920255,
+              "action_accuracy": 0.9154094827586207,
+              "mse": 0.1649948176955271,
+              "delete_rate": 0.12392241379310345,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5988857938718662,
+              "conservation_specificity": 0.9966599866399466,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7977728902559065,
+              "action_accuracy": 0.9197198275862069,
+              "mse": 0.1779599581067403,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.20632302763992902,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.15284060685456802,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.1649948176955271,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.1779599581067403,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.20632302763992902,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "100": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.15692786951255636,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.16139574678577168,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.16599110582607193,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.6350974930362117,
+              "conservation_specificity": 0.9812959251837008,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8081967091099562,
+              "action_accuracy": 0.9143318965517241,
+              "mse": 0.17556426920792714,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.5988857938718662,
+              "conservation_specificity": 0.9966599866399466,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7977728902559065,
+              "action_accuracy": 0.9197198275862069,
+              "mse": 0.15692786951255636,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5988857938718662,
+              "conservation_specificity": 0.9966599866399466,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7977728902559065,
+              "action_accuracy": 0.9197198275862069,
+              "mse": 0.16139574678577168,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5988857938718662,
+              "conservation_specificity": 0.9966599866399466,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7977728902559065,
+              "action_accuracy": 0.9197198275862069,
+              "mse": 0.16599110582607193,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5988857938718662,
+              "conservation_specificity": 0.9966599866399466,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7977728902559065,
+              "action_accuracy": 0.9197198275862069,
+              "mse": 0.17556426920792714,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.15692786951255636,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.16139574678577168,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.16599110582607193,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.5793871866295265,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.7896935933147633,
+              "action_accuracy": 0.9186422413793104,
+              "mse": 0.17556426920792714,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 359,
+              "conservation_rows": 1497,
+              "locality_risk_rows": 0
+            }
+          }
+        }
+      }
+    },
+    "4": {
+      "inner_fold": 0,
+      "epoch": 100,
+      "threshold": 0.4,
+      "risk_penalty": 2.0,
+      "constraints_satisfied": true,
+      "metrics": {
+        "positive_recall": 0.8333333333333334,
+        "conservation_specificity": 0.9899497487437185,
+        "risk_violation_rate": 0.0,
+        "balanced_utility_accuracy": 0.9116415410385259,
+        "action_accuracy": 0.9676724137931034,
+        "mse": 0.12770158288265673,
+        "delete_rate": 0.1271551724137931,
+        "rows": 1856,
+        "positive_rows": 264,
+        "conservation_rows": 1592,
+        "locality_risk_rows": 0
+      },
+      "grid": {
+        "25": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.8371212121212122,
+              "conservation_specificity": 0.9780150753768844,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9075681437490483,
+              "action_accuracy": 0.9579741379310345,
+              "mse": 0.09606433756129032,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.8371212121212122,
+              "conservation_specificity": 0.9780150753768844,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9075681437490483,
+              "action_accuracy": 0.9579741379310345,
+              "mse": 0.12250382271281217,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.8333333333333334,
+              "conservation_specificity": 0.9824120603015075,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9078726968174204,
+              "action_accuracy": 0.9612068965517241,
+              "mse": 0.15378801755219518,
+              "delete_rate": 0.1336206896551724,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7878787878787878,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8926831125323588,
+              "action_accuracy": 0.9676724137931034,
+              "mse": 0.23089053629454465,
+              "delete_rate": 0.11422413793103449,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.8371212121212122,
+              "conservation_specificity": 0.9780150753768844,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9075681437490483,
+              "action_accuracy": 0.9579741379310345,
+              "mse": 0.09606433756129032,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.8068181818181818,
+              "conservation_specificity": 0.9849246231155779,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8958714024668799,
+              "action_accuracy": 0.9595905172413793,
+              "mse": 0.12250382271281217,
+              "delete_rate": 0.12769396551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7878787878787878,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8926831125323588,
+              "action_accuracy": 0.9676724137931034,
+              "mse": 0.15378801755219518,
+              "delete_rate": 0.11422413793103449,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.23089053629454465,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.7992424242424242,
+              "conservation_specificity": 0.9943467336683417,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.896794578955383,
+              "action_accuracy": 0.9665948275862069,
+              "mse": 0.09606433756129032,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.12250382271281217,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.15378801755219518,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.015151515151515152,
+              "conservation_specificity": 1.0,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.5075757575757576,
+              "action_accuracy": 0.8599137931034483,
+              "mse": 0.23089053629454465,
+              "delete_rate": 0.0021551724137931034,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "50": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.8371212121212122,
+              "conservation_specificity": 0.9780150753768844,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9075681437490483,
+              "action_accuracy": 0.9579741379310345,
+              "mse": 0.11134747746712824,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.8371212121212122,
+              "conservation_specificity": 0.9780150753768844,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9075681437490483,
+              "action_accuracy": 0.9579741379310345,
+              "mse": 0.12180430651331561,
+              "delete_rate": 0.13793103448275862,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.8333333333333334,
+              "conservation_specificity": 0.9824120603015075,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9078726968174204,
+              "action_accuracy": 0.9612068965517241,
+              "mse": 0.13304211832465368,
+              "delete_rate": 0.1336206896551724,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.8106060606060606,
+              "conservation_specificity": 0.9861809045226131,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8983934825643368,
+              "action_accuracy": 0.9612068965517241,
+              "mse": 0.15786069024278188,
+              "delete_rate": 0.1271551724137931,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.7992424242424242,
+              "conservation_specificity": 0.9918341708542714,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8955382975483478,
+              "action_accuracy": 0.9644396551724138,
+              "mse": 0.11134747746712824,
+              "delete_rate": 0.1206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7992424242424242,
+              "conservation_specificity": 0.9918341708542714,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8955382975483478,
+              "action_accuracy": 0.9644396551724138,
+              "mse": 0.12180430651331561,
+              "delete_rate": 0.1206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7992424242424242,
+              "conservation_specificity": 0.9943467336683417,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.896794578955383,
+              "action_accuracy": 0.9665948275862069,
+              "mse": 0.13304211832465368,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.15786069024278188,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.11134747746712824,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.12180430651331561,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.13304211832465368,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.15786069024278188,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          }
+        },
+        "100": {
+          "0.4": {
+            "0.0": {
+              "positive_recall": 0.8371212121212122,
+              "conservation_specificity": 0.9830402010050251,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9100807065631187,
+              "action_accuracy": 0.9622844827586207,
+              "mse": 0.11253881660796257,
+              "delete_rate": 0.1336206896551724,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.8371212121212122,
+              "conservation_specificity": 0.9836683417085427,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9103947769148775,
+              "action_accuracy": 0.962823275862069,
+              "mse": 0.1161453670164301,
+              "delete_rate": 0.13308189655172414,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.8333333333333334,
+              "conservation_specificity": 0.9874371859296482,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9103852596314908,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.11987467819836833,
+              "delete_rate": 0.12931034482758622,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.8333333333333334,
+              "conservation_specificity": 0.9899497487437185,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.9116415410385259,
+              "action_accuracy": 0.9676724137931034,
+              "mse": 0.12770158288265673,
+              "delete_rate": 0.1271551724137931,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.5": {
+            "0.0": {
+              "positive_recall": 0.8068181818181818,
+              "conservation_specificity": 0.9912060301507538,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8990121059844678,
+              "action_accuracy": 0.9649784482758621,
+              "mse": 0.11253881660796257,
+              "delete_rate": 0.12230603448275862,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7992424242424242,
+              "conservation_specificity": 0.9943467336683417,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.896794578955383,
+              "action_accuracy": 0.9665948275862069,
+              "mse": 0.1161453670164301,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7992424242424242,
+              "conservation_specificity": 0.9943467336683417,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.896794578955383,
+              "action_accuracy": 0.9665948275862069,
+              "mse": 0.11987467819836833,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7992424242424242,
+              "conservation_specificity": 0.9943467336683417,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.896794578955383,
+              "action_accuracy": 0.9665948275862069,
+              "mse": 0.12770158288265673,
+              "delete_rate": 0.11853448275862069,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          },
+          "0.6": {
+            "0.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.11253881660796257,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "0.5": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.1161453670164301,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "1.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.11987467819836833,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            },
+            "2.0": {
+              "positive_recall": 0.7727272727272727,
+              "conservation_specificity": 0.9974874371859297,
+              "risk_violation_rate": 0.0,
+              "balanced_utility_accuracy": 0.8851073549566012,
+              "action_accuracy": 0.9655172413793104,
+              "mse": 0.12770158288265673,
+              "delete_rate": 0.11206896551724138,
+              "rows": 1856,
+              "positive_rows": 264,
+              "conservation_rows": 1592,
+              "locality_risk_rows": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "manifest_sha256": "a63a64bc6a828c97d46e0cfe544a1aa2306405006bb49f0839ab056203961668",
+    "audit_sha256": "2763f625beaf9998f25b7bdf358658ec99f8335e3c759a453de38672cf6899ed",
+    "examples_sha256": "721e22882f4f8f28aee52cd7c436b0ca9bbf0b1d2149002f0096369101713ac5"
+  },
+  "checkpoint_sha256": "4ba02ec7fdbda0830811c622e1ddbc3e7c0c09287a49616d0efc803b82e2c8eb",
+  "oof_policy_states_sha256": "8b0696f45399942ad8c93cfae5d84da32154f749c283b7ee3132383e8ad7230b",
+  "inner_selection_scores_sha256": "8faf4bb29140852ca89af96fc8aa218871a161327848039f33f724f9f3105553",
+  "training_seconds": 5.3092617858201265,
+  "device": "cuda",
+  "gpu_peak_allocated_gib": 0.031617164611816406,
+  "gpu_peak_reserved_gib": 0.044921875,
+  "query_features_used": false,
+  "answer_features_used": false,
+  "current_update_always_retained": true,
+  "external_sets_loaded": false,
+  "terminal_status": "trained_v19_nested_oof_forgetting_policy"
+}

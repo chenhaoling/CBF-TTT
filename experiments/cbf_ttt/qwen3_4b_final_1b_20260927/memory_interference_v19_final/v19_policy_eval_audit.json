@@ -1,0 +1,43 @@
+{
+  "protocol": "v19_nested_oof_forgetting_policy_qwen_eval_v1_audit",
+  "audit_passed": true,
+  "checks": {
+    "audited_fallback_chain_and_hash_dependencies": true,
+    "complete_ordered_two_shard_coverage": true,
+    "episode_policy_state_and_split_identities": true,
+    "three_seed_arms_current_retention_and_dedup_sources": true,
+    "prompt_hash_scores_predictions_and_five_token_answers": true,
+    "free_generation_records": true,
+    "latency_and_peak_memory_records": true,
+    "shard_counts_dependencies_and_resources": true,
+    "exact_model_and_tokenizer_provenance": true,
+    "independent_comparators_intervals_gap_and_gate_recomputation": true,
+    "independent_resource_recomputation": true,
+    "terminal_and_access_locks": true
+  },
+  "summary_sha256": "a5d7659ea585994ac8731742792bf4e4e324ab8523304c21e3f924abd012227d",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "ff83bda38b5570b73f27100a642688fb3d28b187e2ff0be2532f8995f85e5aae",
+    "shard1.jsonl": "8eeeaeba6e868e84a02b04baa4de5186ec739aea196ea648b714a1f946237628"
+  },
+  "recomputed_controlled_policy_gate": {
+    "checks": {
+      "subject_macro_joint_gain_over_fixed_at_least_5_points": true,
+      "subject_cluster_fixed_gain_ci_lower_above_zero": true,
+      "template_macro_joint_gain_over_fixed_at_least_5_points": true,
+      "template_cluster_fixed_gain_ci_lower_above_zero": true,
+      "no_outer_fold_has_negative_fixed_gain": true,
+      "no_seed_has_negative_fixed_gain": true,
+      "policy_update_accuracy_at_least_90": true,
+      "policy_retained_key_accuracy_at_least_90": true,
+      "policy_locality_accuracy_at_least_97": true,
+      "closes_at_least_40_percent_of_positive_oracle_gap": true,
+      "subject_macro_joint_gain_over_exact_at_least_2_points": false,
+      "subject_cluster_exact_gain_ci_lower_above_zero": false,
+      "all_inner_selection_constraints_satisfied": false
+    },
+    "passed": false
+  },
+  "model_scored": true,
+  "external_sets_loaded": false
+}

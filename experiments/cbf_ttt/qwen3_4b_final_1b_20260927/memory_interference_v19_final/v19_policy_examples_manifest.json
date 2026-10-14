@@ -1,0 +1,65 @@
+{
+  "protocol": "v19_nested_oof_policy_examples_v1",
+  "rows": 9280,
+  "episodes": 320,
+  "feature_names": [
+    "newest_exact_key",
+    "newest_exact_value",
+    "newest_value_conflict",
+    "relative_age",
+    "later_exact_key_fraction",
+    "later_same_value_fraction",
+    "later_conflicting_value_fraction",
+    "same_key_group_fraction",
+    "same_value_group_fraction",
+    "newest_key_trigram_jaccard",
+    "newest_key_common_prefix",
+    "max_later_key_similarity",
+    "mean_later_key_similarity",
+    "max_conflicting_later_similarity",
+    "useful_repetition",
+    "near_duplicate_key",
+    "normalized_memory_length"
+  ],
+  "feature_dim": 17,
+  "target_grid": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "target_counts": {
+    "0.0": 721,
+    "0.5": 6941,
+    "1.0": 1618
+  },
+  "locality_risk_rows": 0,
+  "conservation_rows": 7662,
+  "exact_conflict_rows": 1280,
+  "useful_repetition_rows": 7360,
+  "by_fold": {
+    "0": 1856,
+    "1": 1856,
+    "2": 1856,
+    "3": 1856,
+    "4": 1856
+  },
+  "examples_sha256": "721e22882f4f8f28aee52cd7c436b0ca9bbf0b1d2149002f0096369101713ac5",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "8864bb3ccd3940dd0aeef5cd5e08235f2fd36371d4bae3ed6a8ce8056091d985",
+    "shard1.jsonl": "b047b15419b6ed3dc23083464f18f86dfd25500b971a23864eb81ef885458258"
+  },
+  "dependencies": {
+    "data_manifest_sha256": "e620e75f1e73d1ec3f09510c784785a53c09a4209ce80fb767b259d7b0abbb6b",
+    "data_audit_sha256": "980ffd2b7cdac1ee2630f438472bd725366e5d840e03dd064d5017a4f5b939cf",
+    "data_sha256": "384d94f24820bc11244d6d0c2525fc02887d456a066d68e0cbade0bcd7763cb9",
+    "outcome_summary_sha256": "91df8a5db5e7b565494def2a86c80b24e0b2df09c0463a7071325c337c4478b6",
+    "outcome_audit_sha256": "8b534c634c5426d8a322996be4c512ba155743989036bcba7b2f65d6bdf409eb",
+    "rule_summary_sha256": "b7c32dbd3eb071dbcaa5a90a25c2d4041574ff67cf511331bc2e6f240a48ec40",
+    "rule_audit_sha256": "a2e5d54bdaec89d9f1697bcf1c7240a56b53e360f8eeca6c4e2c21ab848e73d5"
+  },
+  "query_features_used": false,
+  "answer_features_used": false,
+  "current_update_always_retained": true,
+  "external_sets_loaded": false,
+  "terminal_status": "frozen_v19_nested_policy_examples"
+}

@@ -1,0 +1,125 @@
+{
+  "protocol": "v19_causal_rule_explanation_v1",
+  "policies": {
+    "outer_fold_fixed": {
+      "joint_success": 0.39375,
+      "generation_joint_success": 0.14375,
+      "update_accuracy": 0.6625,
+      "retained_key_accuracy": 1.0,
+      "locality_accuracy": 1.0,
+      "joint_answer_nll": 0.39039749938063323
+    },
+    "retain_all": {
+      "joint_success": 0.39375,
+      "generation_joint_success": 0.14375,
+      "update_accuracy": 0.6625,
+      "retained_key_accuracy": 1.0,
+      "locality_accuracy": 1.0,
+      "joint_answer_nll": 0.39039749938063323
+    },
+    "global_reset": {
+      "joint_success": 0.0,
+      "generation_joint_success": 0.0,
+      "update_accuracy": 1.0,
+      "retained_key_accuracy": 0.0,
+      "locality_accuracy": 0.9625,
+      "joint_answer_nll": 1.3997912031970918
+    },
+    "last_1": {
+      "joint_success": 0.0,
+      "generation_joint_success": 0.0,
+      "update_accuracy": 1.0,
+      "retained_key_accuracy": 0.0,
+      "locality_accuracy": 0.9625,
+      "joint_answer_nll": 1.3997912031970918
+    },
+    "last_2": {
+      "joint_success": 0.0,
+      "generation_joint_success": 0.0,
+      "update_accuracy": 0.85625,
+      "retained_key_accuracy": 0.125,
+      "locality_accuracy": 1.0,
+      "joint_answer_nll": 1.1085811433475465
+    },
+    "delete_newest_exact": {
+      "joint_success": 0.634375,
+      "generation_joint_success": 0.296875,
+      "update_accuracy": 0.734375,
+      "retained_key_accuracy": 1.0,
+      "locality_accuracy": 1.0,
+      "joint_answer_nll": 0.35972899666056035
+    },
+    "delete_oldest_exact": {
+      "joint_success": 0.678125,
+      "generation_joint_success": 0.30625,
+      "update_accuracy": 0.7734375,
+      "retained_key_accuracy": 1.0,
+      "locality_accuracy": 1.0,
+      "joint_answer_nll": 0.3442958030663431
+    },
+    "delete_key_exact": {
+      "joint_success": 0.865625,
+      "generation_joint_success": 0.453125,
+      "update_accuracy": 0.896875,
+      "retained_key_accuracy": 1.0,
+      "locality_accuracy": 1.0,
+      "joint_answer_nll": 0.3049165574181825
+    }
+  },
+  "delete_key_exact_vs_fixed": {
+    "joint_gain_micro": 0.471875,
+    "joint_gain_subject_macro": {
+      "mean": 0.471875,
+      "lower_95": 0.425,
+      "upper_95": 0.51875,
+      "clusters": 80,
+      "draws": 20000,
+      "seed": 1927
+    },
+    "joint_gain_template_macro": {
+      "mean": 0.471875,
+      "lower_95": 0.41875,
+      "upper_95": 0.528125,
+      "clusters": 20,
+      "draws": 20000,
+      "seed": 1928
+    },
+    "by_fold_gain": {
+      "0": 0.453125,
+      "1": 0.46875,
+      "2": 0.421875,
+      "3": 0.5,
+      "4": 0.515625
+    },
+    "registered_oracle_joint_success": 0.9625,
+    "registered_oracle_gap": 0.5687500000000001,
+    "fraction_oracle_gap_closed": 0.8296703296703295
+  },
+  "explicit_key_explanation_gate": {
+    "checks": {
+      "exact_rule_locality_accuracy_at_least_97": true,
+      "subject_cluster_joint_gain_ci_lower_above_zero": true,
+      "template_cluster_joint_gain_ci_lower_above_zero": true,
+      "no_outer_fold_has_negative_joint_gain": true,
+      "exact_rule_closes_at_least_90_percent_of_positive_oracle_gap": false
+    },
+    "passed": false
+  },
+  "next_stage": "train_v19_nested_oof_causal_policy",
+  "rows": 320,
+  "raw_rows_sha256": {
+    "shard0.jsonl": "8864bb3ccd3940dd0aeef5cd5e08235f2fd36371d4bae3ed6a8ce8056091d985",
+    "shard1.jsonl": "b047b15419b6ed3dc23083464f18f86dfd25500b971a23864eb81ef885458258"
+  },
+  "dependencies": {
+    "data_manifest_sha256": "e620e75f1e73d1ec3f09510c784785a53c09a4209ce80fb767b259d7b0abbb6b",
+    "data_audit_sha256": "980ffd2b7cdac1ee2630f438472bd725366e5d840e03dd064d5017a4f5b939cf",
+    "data_sha256": "384d94f24820bc11244d6d0c2525fc02887d456a066d68e0cbade0bcd7763cb9",
+    "outcome_summary_sha256": "91df8a5db5e7b565494def2a86c80b24e0b2df09c0463a7071325c337c4478b6",
+    "outcome_audit_sha256": "8b534c634c5426d8a322996be4c512ba155743989036bcba7b2f65d6bdf409eb"
+  },
+  "query_or_answer_features_used": false,
+  "current_update_always_retained": true,
+  "model_rescored": false,
+  "terminal_status": "completed_v19_causal_rule_diagnostic"
+}

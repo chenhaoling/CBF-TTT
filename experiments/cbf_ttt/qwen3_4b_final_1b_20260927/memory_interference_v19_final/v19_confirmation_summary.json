@@ -1,0 +1,6976 @@
+{
+  "protocol": "controlled_memory_interference_v19_qwen_confirmation",
+  "fixed_selected_by_outer_fold": {
+    "0": "retain_all",
+    "1": "retain_all",
+    "2": "retain_all",
+    "3": "retain_all",
+    "4": "retain_all"
+  },
+  "outer_fold_fixed": {
+    "joint_success": 0.39375,
+    "update_accuracy": 0.6625,
+    "retained_key_accuracy": 1.0,
+    "locality_accuracy": 1.0,
+    "generation_joint_success": 0.14375,
+    "joint_answer_nll": 0.39039749938063323
+  },
+  "budgets": [
+    0.0,
+    0.01,
+    0.03,
+    0.05,
+    0.1
+  ],
+  "primary_budget": 0.03,
+  "pareto": {
+    "0.0": {
+      "budget_rate": 0.0,
+      "maximum_locality_failures": 0,
+      "observed_locality_failures": 0,
+      "metrics": {
+        "joint_success": 0.9625,
+        "update_accuracy": 1.0,
+        "retained_key_accuracy": 0.9671875,
+        "locality_accuracy": 1.0,
+        "generation_joint_success": 0.653125,
+        "joint_answer_nll": 0.30675977229140716
+      },
+      "joint_gain_micro": 0.5687500000000001,
+      "joint_gain_subject_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.528125,
+        "upper_95": 0.6125,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 1917
+      },
+      "joint_gain_template_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.51875,
+        "upper_95": 0.61875,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2017
+      },
+      "generation_joint_gain_subject_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.45,
+        "upper_95": 0.56875,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 2117
+      },
+      "generation_joint_gain_template_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.44375,
+        "upper_95": 0.575,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2217
+      },
+      "by_fold_gain": {
+        "0": 0.515625,
+        "1": 0.5625,
+        "2": 0.546875,
+        "3": 0.625,
+        "4": 0.59375
+      },
+      "action_counts": {
+        "retain_all": 11,
+        "other_fixed": 20,
+        "delete_one": 182,
+        "delete_key": 118
+      }
+    },
+    "0.01": {
+      "budget_rate": 0.01,
+      "maximum_locality_failures": 3,
+      "observed_locality_failures": 0,
+      "metrics": {
+        "joint_success": 0.9625,
+        "update_accuracy": 1.0,
+        "retained_key_accuracy": 0.9671875,
+        "locality_accuracy": 1.0,
+        "generation_joint_success": 0.653125,
+        "joint_answer_nll": 0.30675977229140716
+      },
+      "joint_gain_micro": 0.5687500000000001,
+      "joint_gain_subject_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.528125,
+        "upper_95": 0.6125,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 1918
+      },
+      "joint_gain_template_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.51875,
+        "upper_95": 0.61875,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2018
+      },
+      "generation_joint_gain_subject_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.45,
+        "upper_95": 0.56875,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 2118
+      },
+      "generation_joint_gain_template_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.44375,
+        "upper_95": 0.575,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2218
+      },
+      "by_fold_gain": {
+        "0": 0.515625,
+        "1": 0.5625,
+        "2": 0.546875,
+        "3": 0.625,
+        "4": 0.59375
+      },
+      "action_counts": {
+        "retain_all": 11,
+        "other_fixed": 20,
+        "delete_one": 182,
+        "delete_key": 118
+      }
+    },
+    "0.03": {
+      "budget_rate": 0.03,
+      "maximum_locality_failures": 9,
+      "observed_locality_failures": 0,
+      "metrics": {
+        "joint_success": 0.9625,
+        "update_accuracy": 1.0,
+        "retained_key_accuracy": 0.9671875,
+        "locality_accuracy": 1.0,
+        "generation_joint_success": 0.653125,
+        "joint_answer_nll": 0.30675977229140716
+      },
+      "joint_gain_micro": 0.5687500000000001,
+      "joint_gain_subject_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.528125,
+        "upper_95": 0.6125,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 1920
+      },
+      "joint_gain_template_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.521875,
+        "upper_95": 0.61875,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2020
+      },
+      "generation_joint_gain_subject_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.446875,
+        "upper_95": 0.56875,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 2120
+      },
+      "generation_joint_gain_template_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.44375,
+        "upper_95": 0.578125,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2220
+      },
+      "by_fold_gain": {
+        "0": 0.515625,
+        "1": 0.5625,
+        "2": 0.546875,
+        "3": 0.625,
+        "4": 0.59375
+      },
+      "action_counts": {
+        "retain_all": 11,
+        "other_fixed": 20,
+        "delete_one": 182,
+        "delete_key": 118
+      }
+    },
+    "0.05": {
+      "budget_rate": 0.05,
+      "maximum_locality_failures": 16,
+      "observed_locality_failures": 0,
+      "metrics": {
+        "joint_success": 0.9625,
+        "update_accuracy": 1.0,
+        "retained_key_accuracy": 0.9671875,
+        "locality_accuracy": 1.0,
+        "generation_joint_success": 0.653125,
+        "joint_answer_nll": 0.30675977229140716
+      },
+      "joint_gain_micro": 0.5687500000000001,
+      "joint_gain_subject_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.528125,
+        "upper_95": 0.6125,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 1922
+      },
+      "joint_gain_template_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.51875,
+        "upper_95": 0.615625,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2022
+      },
+      "generation_joint_gain_subject_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.45,
+        "upper_95": 0.56875,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 2122
+      },
+      "generation_joint_gain_template_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.440625,
+        "upper_95": 0.575,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2222
+      },
+      "by_fold_gain": {
+        "0": 0.515625,
+        "1": 0.5625,
+        "2": 0.546875,
+        "3": 0.625,
+        "4": 0.59375
+      },
+      "action_counts": {
+        "retain_all": 11,
+        "other_fixed": 20,
+        "delete_one": 182,
+        "delete_key": 118
+      }
+    },
+    "0.1": {
+      "budget_rate": 0.1,
+      "maximum_locality_failures": 32,
+      "observed_locality_failures": 0,
+      "metrics": {
+        "joint_success": 0.9625,
+        "update_accuracy": 1.0,
+        "retained_key_accuracy": 0.9671875,
+        "locality_accuracy": 1.0,
+        "generation_joint_success": 0.653125,
+        "joint_answer_nll": 0.30675977229140716
+      },
+      "joint_gain_micro": 0.5687500000000001,
+      "joint_gain_subject_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.528125,
+        "upper_95": 0.6125,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 1927
+      },
+      "joint_gain_template_macro": {
+        "mean": 0.56875,
+        "lower_95": 0.51875,
+        "upper_95": 0.61875,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2027
+      },
+      "generation_joint_gain_subject_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.45,
+        "upper_95": 0.56875,
+        "clusters": 80,
+        "draws": 20000,
+        "seed": 2127
+      },
+      "generation_joint_gain_template_macro": {
+        "mean": 0.509375,
+        "lower_95": 0.44375,
+        "upper_95": 0.578125,
+        "clusters": 20,
+        "draws": 20000,
+        "seed": 2227
+      },
+      "by_fold_gain": {
+        "0": 0.515625,
+        "1": 0.5625,
+        "2": 0.546875,
+        "3": 0.625,
+        "4": 0.59375
+      },
+      "action_counts": {
+        "retain_all": 11,
+        "other_fixed": 20,
+        "delete_one": 182,
+        "delete_key": 118
+      }
+    }
+  },
+  "selections": {
+    "0.0": [
+      {
+        "episode_id": "482a648b41dae3551751",
+        "arm_id": "delete_one:v19-000-s000"
+      },
+      {
+        "episode_id": "dd5cfb1098653a9af265",
+        "arm_id": "delete_one:v19-002-s000"
+      },
+      {
+        "episode_id": "f4f6d257609d978c6701",
+        "arm_id": "delete_one:v19-004-s000"
+      },
+      {
+        "episode_id": "98003b021661e4ff7728",
+        "arm_id": "delete_one:v19-006-s013"
+      },
+      {
+        "episode_id": "066c8a74938bad7f9b53",
+        "arm_id": "delete_one:v19-008-s017"
+      },
+      {
+        "episode_id": "491089932184c9a78e06",
+        "arm_id": "delete_key:QY6582423B"
+      },
+      {
+        "episode_id": "88ec3a52c27febba52db",
+        "arm_id": "delete_one:v19-012-s012"
+      },
+      {
+        "episode_id": "983ea9fe23ce5dbeacdc",
+        "arm_id": "delete_one:v19-014-s013"
+      },
+      {
+        "episode_id": "9e7a4eb38c37345735b7",
+        "arm_id": "delete_one:v19-016-s000"
+      },
+      {
+        "episode_id": "edcd8175572994af25a7",
+        "arm_id": "delete_one:v19-018-s005"
+      },
+      {
+        "episode_id": "ebb224093d1f7e01e759",
+        "arm_id": "delete_one:v19-020-s009"
+      },
+      {
+        "episode_id": "85eb002f432c7d7ca7a4",
+        "arm_id": "delete_key:QY59508FEB"
+      },
+      {
+        "episode_id": "fa0ed011c245d629a390",
+        "arm_id": "delete_one:v19-024-s029"
+      },
+      {
+        "episode_id": "c6e743a4aeedf28778e6",
+        "arm_id": "delete_one:v19-026-s002"
+      },
+      {
+        "episode_id": "ee8e975bf5d6c3904c87",
+        "arm_id": "delete_one:v19-028-s017"
+      },
+      {
+        "episode_id": "2752bb2601cf5774d21a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9c939247a125108cca1b",
+        "arm_id": "delete_one:v19-032-s000"
+      },
+      {
+        "episode_id": "99fcbcb7496daaebcb87",
+        "arm_id": "delete_one:v19-034-s000"
+      },
+      {
+        "episode_id": "6d6cf26e3984df77d87b",
+        "arm_id": "delete_one:v19-036-s000"
+      },
+      {
+        "episode_id": "4823b6a5b61a4bf15c5a",
+        "arm_id": "delete_one:v19-038-s000"
+      },
+      {
+        "episode_id": "5c6593e0bf98f2fdf01a",
+        "arm_id": "delete_one:v19-040-s000"
+      },
+      {
+        "episode_id": "f58b0a4274402d46b2ed",
+        "arm_id": "delete_one:v19-042-s000"
+      },
+      {
+        "episode_id": "e6163e607ccef7dcc545",
+        "arm_id": "delete_one:v19-044-s005"
+      },
+      {
+        "episode_id": "4226bbaf9d820fabc54e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "bb17cfa7c1fac12b2136",
+        "arm_id": "delete_one:v19-048-s000"
+      },
+      {
+        "episode_id": "6f0c8f264cc870d786cb",
+        "arm_id": "delete_one:v19-050-s000"
+      },
+      {
+        "episode_id": "14cf460e241bc54113e5",
+        "arm_id": "delete_one:v19-052-s000"
+      },
+      {
+        "episode_id": "5b78a4d5f829cd36bde6",
+        "arm_id": "delete_key:QY822A4B5B"
+      },
+      {
+        "episode_id": "a06e76ffbf5f2c25cabf",
+        "arm_id": "delete_one:v19-056-s000"
+      },
+      {
+        "episode_id": "94c66ce294a59f1f80b9",
+        "arm_id": "delete_one:v19-058-s000"
+      },
+      {
+        "episode_id": "3144a6670031304557a0",
+        "arm_id": "delete_key:QYFB7464F"
+      },
+      {
+        "episode_id": "c533b81ee8a64c6bb164",
+        "arm_id": "delete_one:v19-062-s010"
+      },
+      {
+        "episode_id": "f14df56a8efaf50f16ac",
+        "arm_id": "delete_one:v19-064-s000"
+      },
+      {
+        "episode_id": "4323c52ece89e9cd77d2",
+        "arm_id": "delete_one:v19-066-s011"
+      },
+      {
+        "episode_id": "5269faae9b4478c663d9",
+        "arm_id": "delete_one:v19-068-s000"
+      },
+      {
+        "episode_id": "7ba715f4db159763f9a6",
+        "arm_id": "delete_key:QYC8E1954B"
+      },
+      {
+        "episode_id": "3c9358144530f344a25c",
+        "arm_id": "delete_one:v19-072-s000"
+      },
+      {
+        "episode_id": "83b9b2e0feaa8911e731",
+        "arm_id": "delete_one:v19-074-s000"
+      },
+      {
+        "episode_id": "6c235342ce0552ce9901",
+        "arm_id": "delete_one:v19-076-s000"
+      },
+      {
+        "episode_id": "614c5385213efb8ad2ae",
+        "arm_id": "delete_one:v19-078-s006"
+      },
+      {
+        "episode_id": "408c861c8a0446ead4a6",
+        "arm_id": "delete_one:v19-080-s000"
+      },
+      {
+        "episode_id": "ee7d3edf5393d1e1ac6f",
+        "arm_id": "delete_key:QYA80A172B"
+      },
+      {
+        "episode_id": "3f9ad9f0205d8dd648d7",
+        "arm_id": "delete_one:v19-084-s000"
+      },
+      {
+        "episode_id": "da3eedbf65599d9986f5",
+        "arm_id": "delete_key:QYD5D3A86"
+      },
+      {
+        "episode_id": "d337689db58f527e883d",
+        "arm_id": "delete_one:v19-088-s011"
+      },
+      {
+        "episode_id": "f18d00eb6c6333621c26",
+        "arm_id": "delete_one:v19-090-s005"
+      },
+      {
+        "episode_id": "6ec92f3ff7f7764b893c",
+        "arm_id": "delete_one:v19-092-s000"
+      },
+      {
+        "episode_id": "421ce312374ea3eb2b98",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "d895f8ac101f4288a35a",
+        "arm_id": "delete_one:v19-096-s000"
+      },
+      {
+        "episode_id": "19efff2f8e198bcc16cf",
+        "arm_id": "delete_one:v19-098-s000"
+      },
+      {
+        "episode_id": "ace81dc8696248cb7f36",
+        "arm_id": "delete_one:v19-100-s000"
+      },
+      {
+        "episode_id": "4cb2debd9afb4fb4a54f",
+        "arm_id": "delete_key:QYE9365FDB"
+      },
+      {
+        "episode_id": "f1fd64dddcf9807c528c",
+        "arm_id": "delete_one:v19-104-s000"
+      },
+      {
+        "episode_id": "9c221a9a931156c77acb",
+        "arm_id": "delete_one:v19-106-s000"
+      },
+      {
+        "episode_id": "143e99058dfc0610ba5a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "6a5610feabd35bfcbffc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "2df5e40f466da99ed767",
+        "arm_id": "delete_one:v19-112-s000"
+      },
+      {
+        "episode_id": "d58bdc2064c4b10bbbab",
+        "arm_id": "delete_one:v19-114-s029"
+      },
+      {
+        "episode_id": "566f0809766d6638a5bb",
+        "arm_id": "delete_one:v19-116-s000"
+      },
+      {
+        "episode_id": "fe6e4852f6d99f9ace00",
+        "arm_id": "delete_one:v19-118-s000"
+      },
+      {
+        "episode_id": "16bba495f497cf79a6e0",
+        "arm_id": "delete_one:v19-120-s000"
+      },
+      {
+        "episode_id": "34197cdc39e8b0524ca4",
+        "arm_id": "delete_one:v19-122-s006"
+      },
+      {
+        "episode_id": "4624164317b0e6aac7ed",
+        "arm_id": "delete_one:v19-124-s000"
+      },
+      {
+        "episode_id": "6475bd4750760f6aa7d6",
+        "arm_id": "delete_one:v19-126-s003"
+      },
+      {
+        "episode_id": "d43aadfd69c4020d9c21",
+        "arm_id": "delete_one:v19-128-s000"
+      },
+      {
+        "episode_id": "719f15ea62cfb2d712e8",
+        "arm_id": "delete_one:v19-130-s009"
+      },
+      {
+        "episode_id": "7914193a229d94ab592d",
+        "arm_id": "delete_one:v19-132-s000"
+      },
+      {
+        "episode_id": "a7c1cf214b9a97a00d73",
+        "arm_id": "delete_key:QY9095FAFB"
+      },
+      {
+        "episode_id": "96679a34569e0d94917c",
+        "arm_id": "delete_one:v19-136-s000"
+      },
+      {
+        "episode_id": "86850d32cd0588ac5db1",
+        "arm_id": "delete_one:v19-138-s000"
+      },
+      {
+        "episode_id": "265834533a211e8f6ac5",
+        "arm_id": "delete_key:QY04A79A3"
+      },
+      {
+        "episode_id": "1ccf60f60595195e9672",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "dc7fc3afd0c4947385b0",
+        "arm_id": "delete_one:v19-144-s000"
+      },
+      {
+        "episode_id": "66e8bfb0424a03fcaeb6",
+        "arm_id": "delete_one:v19-146-s029"
+      },
+      {
+        "episode_id": "d86367c682a3946aa859",
+        "arm_id": "delete_one:v19-148-s007"
+      },
+      {
+        "episode_id": "d3f256826873de829ca2",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "037d1dae4b9087c99ca3",
+        "arm_id": "delete_one:v19-152-s000"
+      },
+      {
+        "episode_id": "d22d7aa06352f20a3ba9",
+        "arm_id": "delete_one:v19-154-s001"
+      },
+      {
+        "episode_id": "87dabdaef29bbaad51a7",
+        "arm_id": "delete_key:QY466DCBA"
+      },
+      {
+        "episode_id": "30207121be4eadeb1710",
+        "arm_id": "delete_key:QYD3933B2B"
+      },
+      {
+        "episode_id": "8e614c1eebcd3c7612df",
+        "arm_id": "delete_one:v19-160-s000"
+      },
+      {
+        "episode_id": "6032da3627310bfeb102",
+        "arm_id": "delete_one:v19-162-s006"
+      },
+      {
+        "episode_id": "b46e0a9e24348b808a0c",
+        "arm_id": "delete_one:v19-164-s000"
+      },
+      {
+        "episode_id": "c6b8fff544883386506b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "22fbc200cbeaf0760464",
+        "arm_id": "delete_key:QY2D14E87"
+      },
+      {
+        "episode_id": "ae74c76f865ef64d5cc4",
+        "arm_id": "delete_one:v19-170-s000"
+      },
+      {
+        "episode_id": "f5fb5f865a361f2387ee",
+        "arm_id": "delete_one:v19-172-s008"
+      },
+      {
+        "episode_id": "f79df725c98b0b4f4ab3",
+        "arm_id": "delete_key:QY6D40F37B"
+      },
+      {
+        "episode_id": "35130e9395ce4c8f8069",
+        "arm_id": "delete_one:v19-176-s000"
+      },
+      {
+        "episode_id": "1cea1d2d2d1d0b2f11ef",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "ba11d5d28e72b583e079",
+        "arm_id": "delete_one:v19-180-s000"
+      },
+      {
+        "episode_id": "269b64c913e19cd2ff92",
+        "arm_id": "delete_key:QY41233F4B"
+      },
+      {
+        "episode_id": "23d1d8fab4fd6cacb623",
+        "arm_id": "delete_one:v19-184-s000"
+      },
+      {
+        "episode_id": "9c39bcabd0b73f5ccbcc",
+        "arm_id": "delete_one:v19-186-s006"
+      },
+      {
+        "episode_id": "fb49f087ef499b61da5c",
+        "arm_id": "delete_one:v19-188-s000"
+      },
+      {
+        "episode_id": "b89e7808c2ca79dd58f4",
+        "arm_id": "delete_one:v19-190-s000"
+      },
+      {
+        "episode_id": "c072f2e193db095ca381",
+        "arm_id": "delete_one:v19-192-s000"
+      },
+      {
+        "episode_id": "5c3f49d74587801791f6",
+        "arm_id": "delete_one:v19-194-s000"
+      },
+      {
+        "episode_id": "98d415922e80effb8ab3",
+        "arm_id": "delete_one:v19-196-s000"
+      },
+      {
+        "episode_id": "e2cbda2aac7f6a3f3a1f",
+        "arm_id": "delete_key:QY313675EB"
+      },
+      {
+        "episode_id": "5bbb792fd287d0138f3d",
+        "arm_id": "delete_one:v19-200-s000"
+      },
+      {
+        "episode_id": "2bd356e9ea071bbf77ac",
+        "arm_id": "delete_one:v19-202-s000"
+      },
+      {
+        "episode_id": "05156d0a9259d19e60b6",
+        "arm_id": "delete_one:v19-204-s010"
+      },
+      {
+        "episode_id": "142dae8501bb0fd6058b",
+        "arm_id": "delete_one:v19-206-s005"
+      },
+      {
+        "episode_id": "b2c6686a91755f0255d0",
+        "arm_id": "delete_one:v19-208-s000"
+      },
+      {
+        "episode_id": "ba4d8546505cfc9f4fd0",
+        "arm_id": "delete_one:v19-210-s000"
+      },
+      {
+        "episode_id": "f7926533795a78c59ae5",
+        "arm_id": "delete_one:v19-212-s000"
+      },
+      {
+        "episode_id": "6b1d92407424d6988c8c",
+        "arm_id": "delete_one:v19-214-s055"
+      },
+      {
+        "episode_id": "8bc79a163993ccca6de0",
+        "arm_id": "delete_one:v19-216-s000"
+      },
+      {
+        "episode_id": "2192f23a46759465de33",
+        "arm_id": "delete_key:QYFC79FFFB"
+      },
+      {
+        "episode_id": "86233b9da5697a319d5a",
+        "arm_id": "delete_one:v19-220-s000"
+      },
+      {
+        "episode_id": "b3667744a8f360c7901c",
+        "arm_id": "delete_one:v19-222-s010"
+      },
+      {
+        "episode_id": "07b6e5e96cd6eeafc8fd",
+        "arm_id": "delete_one:v19-224-s000"
+      },
+      {
+        "episode_id": "4b764e33c3c41f4326de",
+        "arm_id": "delete_one:v19-226-s000"
+      },
+      {
+        "episode_id": "16ade3ccbe44b2a7c92d",
+        "arm_id": "delete_one:v19-228-s000"
+      },
+      {
+        "episode_id": "e6d8124ec3a730143f82",
+        "arm_id": "delete_key:QYE609E14B"
+      },
+      {
+        "episode_id": "aaec92399d06507c8436",
+        "arm_id": "delete_one:v19-232-s000"
+      },
+      {
+        "episode_id": "df61a4047b1c7b01baea",
+        "arm_id": "delete_key:QY1B3511AB"
+      },
+      {
+        "episode_id": "cced2ef6c5c0a8e7aa31",
+        "arm_id": "delete_one:v19-236-s005"
+      },
+      {
+        "episode_id": "23b4776c5ddc4117dee7",
+        "arm_id": "delete_one:v19-238-s012"
+      },
+      {
+        "episode_id": "8deea306dd76cc294dd1",
+        "arm_id": "delete_one:v19-240-s000"
+      },
+      {
+        "episode_id": "5ed5348e0ddc45b63cab",
+        "arm_id": "delete_one:v19-242-s003"
+      },
+      {
+        "episode_id": "a6d192307cbfdd787c1e",
+        "arm_id": "delete_one:v19-244-s000"
+      },
+      {
+        "episode_id": "6b24ff785fc08c898b9e",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f779c1a179615227ef4a",
+        "arm_id": "delete_key:QYEF8384F"
+      },
+      {
+        "episode_id": "8e819afd597540413961",
+        "arm_id": "delete_one:v19-250-s005"
+      },
+      {
+        "episode_id": "b9f8d0d82252d2134888",
+        "arm_id": "delete_one:v19-252-s023"
+      },
+      {
+        "episode_id": "f36c4706d4ccdbed102e",
+        "arm_id": "delete_key:QY505A6C7B"
+      },
+      {
+        "episode_id": "9f816504f9ed87e78f01",
+        "arm_id": "delete_one:v19-256-s000"
+      },
+      {
+        "episode_id": "af5474b86be2a203d116",
+        "arm_id": "delete_one:v19-258-s008"
+      },
+      {
+        "episode_id": "ac0ff93a5c8d4382dc48",
+        "arm_id": "delete_one:v19-260-s008"
+      },
+      {
+        "episode_id": "de8ab21665fa57e0e66b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f7b53c275080cab3554b",
+        "arm_id": "delete_one:v19-264-s000"
+      },
+      {
+        "episode_id": "1ecf75ce08b556851e8b",
+        "arm_id": "delete_key:QY332552AB"
+      },
+      {
+        "episode_id": "d4684e8521d0636a6689",
+        "arm_id": "delete_one:v19-268-s000"
+      },
+      {
+        "episode_id": "3c1471aa6628006219d3",
+        "arm_id": "delete_key:QY685F7ACB"
+      },
+      {
+        "episode_id": "566eaa778e64e7905c2b",
+        "arm_id": "delete_one:v19-272-s000"
+      },
+      {
+        "episode_id": "a85dce6790eeaf6c215b",
+        "arm_id": "delete_one:v19-274-s002"
+      },
+      {
+        "episode_id": "c6dd8f0e7a484c207462",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "62b8bbd21e2444513260",
+        "arm_id": "delete_key:QYCB022FB"
+      },
+      {
+        "episode_id": "373f934419e9462daa62",
+        "arm_id": "delete_one:v19-280-s000"
+      },
+      {
+        "episode_id": "8c0416459a58053d4d32",
+        "arm_id": "delete_key:QYE2A146EB"
+      },
+      {
+        "episode_id": "b2e554fccd707c46ef51",
+        "arm_id": "delete_one:v19-284-s009"
+      },
+      {
+        "episode_id": "63f1759f535923582067",
+        "arm_id": "delete_key:QY937D9CAB"
+      },
+      {
+        "episode_id": "ed4aa1a0aaf93834e8c9",
+        "arm_id": "delete_one:v19-288-s000"
+      },
+      {
+        "episode_id": "28844c4a531ce987373d",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "abcd1a76cd77b794a83b",
+        "arm_id": "delete_one:v19-292-s000"
+      },
+      {
+        "episode_id": "3b7ca131f51989901ada",
+        "arm_id": "delete_key:QYE7FBCC9B"
+      },
+      {
+        "episode_id": "3a739a23beea5e00ac44",
+        "arm_id": "delete_one:v19-296-s000"
+      },
+      {
+        "episode_id": "f1c570a6906a296e0830",
+        "arm_id": "delete_one:v19-298-s000"
+      },
+      {
+        "episode_id": "f8ca0a80e9a5fdfd7fea",
+        "arm_id": "delete_one:v19-300-s006"
+      },
+      {
+        "episode_id": "1e40987a58d89bd04c92",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "84006bedba0662ccccfc",
+        "arm_id": "delete_one:v19-304-s000"
+      },
+      {
+        "episode_id": "e7a2b2d27d9021a16ff0",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "4fe191159c39eb5b05b2",
+        "arm_id": "delete_one:v19-308-s000"
+      },
+      {
+        "episode_id": "b2fbdf8ad0e06bec1bdd",
+        "arm_id": "delete_key:QYD30E282B"
+      },
+      {
+        "episode_id": "dbf0328bc9e3aeb0ed9d",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9a1f119b01e1938f4179",
+        "arm_id": "delete_one:v19-314-s003"
+      },
+      {
+        "episode_id": "e3a16a5a2ceed8d6d296",
+        "arm_id": "delete_one:v19-316-s000"
+      },
+      {
+        "episode_id": "1b7b65cd377b8cb64a83",
+        "arm_id": "delete_key:QYD679C8FB"
+      },
+      {
+        "episode_id": "801e09c97836b9132938",
+        "arm_id": "delete_key:QYE1F4A9C"
+      },
+      {
+        "episode_id": "49831512d0d5bec38030",
+        "arm_id": "delete_key:QYFE21EB9"
+      },
+      {
+        "episode_id": "ae3ac529661b9e7ff063",
+        "arm_id": "delete_key:QY6231126"
+      },
+      {
+        "episode_id": "2f96941b0f8fc4d526e2",
+        "arm_id": "delete_one:v19-007-s000"
+      },
+      {
+        "episode_id": "5b82bb3b6a17a97f94f1",
+        "arm_id": "delete_key:QYBDFF279"
+      },
+      {
+        "episode_id": "277eef55ecf4d194b097",
+        "arm_id": "delete_one:v19-011-s000"
+      },
+      {
+        "episode_id": "7823914964ee11954f24",
+        "arm_id": "delete_key:QYB74619A"
+      },
+      {
+        "episode_id": "fd6a4ca3f5c87a0e62fe",
+        "arm_id": "delete_one:v19-015-s004"
+      },
+      {
+        "episode_id": "2863cd3138dbff665a37",
+        "arm_id": "delete_key:QY0CF64BD"
+      },
+      {
+        "episode_id": "8d3ab9a7b11c3ff254c8",
+        "arm_id": "delete_key:QY29ED092"
+      },
+      {
+        "episode_id": "6d86fef9adbfc091c98e",
+        "arm_id": "delete_key:QY95AC235"
+      },
+      {
+        "episode_id": "37b7cb657098520dd4eb",
+        "arm_id": "delete_one:v19-023-s006"
+      },
+      {
+        "episode_id": "e4f63c78ea35f3b553bc",
+        "arm_id": "delete_key:QY68B8E4F"
+      },
+      {
+        "episode_id": "8d319f99a96e62f62ed4",
+        "arm_id": "delete_one:v19-027-s000"
+      },
+      {
+        "episode_id": "574feb639d25fbc2091d",
+        "arm_id": "delete_key:QYA531C0B"
+      },
+      {
+        "episode_id": "4b6fc6050da55b53b1f9",
+        "arm_id": "delete_key:QYCE021A0"
+      },
+      {
+        "episode_id": "13c94450b346c8e0f261",
+        "arm_id": "delete_key:QYADF1B1E"
+      },
+      {
+        "episode_id": "67c55a7efd667452ae24",
+        "arm_id": "delete_one:v19-035-s003"
+      },
+      {
+        "episode_id": "11f5b6c854cbe5331c8a",
+        "arm_id": "delete_key:QY3BD5CB4"
+      },
+      {
+        "episode_id": "8c7f133860306a101206",
+        "arm_id": "delete_one:v19-039-s000"
+      },
+      {
+        "episode_id": "caadce621880d1a9e169",
+        "arm_id": "delete_key:QYF8AE036"
+      },
+      {
+        "episode_id": "5fd7fcb05d667a3e2dd3",
+        "arm_id": "delete_one:v19-043-s000"
+      },
+      {
+        "episode_id": "e77026bfdb28d279deac",
+        "arm_id": "delete_key:QYD0B26A5"
+      },
+      {
+        "episode_id": "196cbf162c6e0683948a",
+        "arm_id": "delete_one:v19-047-s000"
+      },
+      {
+        "episode_id": "667ad0cb94605f9c8d78",
+        "arm_id": "delete_key:QYD2D02BB"
+      },
+      {
+        "episode_id": "c7267db11984de996a27",
+        "arm_id": "delete_key:QY68FD8AE"
+      },
+      {
+        "episode_id": "a00035978e2dda0f80a6",
+        "arm_id": "delete_key:QYBCB302D"
+      },
+      {
+        "episode_id": "5e09a00150281d73a194",
+        "arm_id": "delete_one:v19-055-s000"
+      },
+      {
+        "episode_id": "4feea10cdf272965b6f9",
+        "arm_id": "delete_key:QYE6501FA"
+      },
+      {
+        "episode_id": "784df3106708a11083d0",
+        "arm_id": "delete_one:v19-059-s000"
+      },
+      {
+        "episode_id": "f34ce1e14c56b6c31e21",
+        "arm_id": "delete_key:QY59BA610"
+      },
+      {
+        "episode_id": "edc266f4c18ba9fb75a6",
+        "arm_id": "delete_one:v19-063-s000"
+      },
+      {
+        "episode_id": "520c469f747cb4d095e6",
+        "arm_id": "delete_key:QY9696CE6"
+      },
+      {
+        "episode_id": "2e1c96e08c1adb6ef7f6",
+        "arm_id": "delete_key:QYFE465DE"
+      },
+      {
+        "episode_id": "fe5e5716263cbff62d6c",
+        "arm_id": "delete_key:QYB86A2A3"
+      },
+      {
+        "episode_id": "648a679175c35fa10403",
+        "arm_id": "delete_one:v19-071-s000"
+      },
+      {
+        "episode_id": "1866bd06b6d5722c3905",
+        "arm_id": "delete_key:QY27355BB"
+      },
+      {
+        "episode_id": "af96e0320dc0904575e4",
+        "arm_id": "delete_one:v19-075-s000"
+      },
+      {
+        "episode_id": "41ae57a43ef0b5004470",
+        "arm_id": "delete_key:QYA9B987D"
+      },
+      {
+        "episode_id": "580134023c58ab47c955",
+        "arm_id": "delete_one:v19-079-s000"
+      },
+      {
+        "episode_id": "2bef707acbe5e8d9e2aa",
+        "arm_id": "delete_key:QY6247E4B"
+      },
+      {
+        "episode_id": "988974c0814c9c96418c",
+        "arm_id": "delete_one:v19-083-s000"
+      },
+      {
+        "episode_id": "9e10dfc7ffd5655df566",
+        "arm_id": "delete_key:QY8C17DE6"
+      },
+      {
+        "episode_id": "f8ac5ff5101ca39e9d3d",
+        "arm_id": "delete_one:v19-087-s000"
+      },
+      {
+        "episode_id": "13d4fde580faef06756e",
+        "arm_id": "delete_key:QY3DC0BFD"
+      },
+      {
+        "episode_id": "1056254df6c9321d2791",
+        "arm_id": "delete_one:v19-091-s000"
+      },
+      {
+        "episode_id": "51d3bc46e52b9e886061",
+        "arm_id": "delete_key:QYFE3DAB9"
+      },
+      {
+        "episode_id": "d70e855ee528d3d959e6",
+        "arm_id": "delete_one:v19-095-s000"
+      },
+      {
+        "episode_id": "1db6ae1d278b4d1756e1",
+        "arm_id": "delete_key:QYDC32049"
+      },
+      {
+        "episode_id": "ebafa0809c9786972b0b",
+        "arm_id": "delete_key:QY6B8FD19"
+      },
+      {
+        "episode_id": "744be4cad8d60028c3df",
+        "arm_id": "delete_key:QY181DAEA"
+      },
+      {
+        "episode_id": "5717b078981f6f3cbe03",
+        "arm_id": "delete_one:v19-103-s000"
+      },
+      {
+        "episode_id": "ef56da7d3487fa440177",
+        "arm_id": "delete_key:QY35A41F7"
+      },
+      {
+        "episode_id": "74375721ee000134cd73",
+        "arm_id": "delete_one:v19-107-s000"
+      },
+      {
+        "episode_id": "4100f478b14dd4f58d7c",
+        "arm_id": "delete_key:QYE9668A0"
+      },
+      {
+        "episode_id": "e61f644d9f5cb9c41040",
+        "arm_id": "delete_one:v19-111-s000"
+      },
+      {
+        "episode_id": "f57c32367d617264fd65",
+        "arm_id": "delete_key:QY16A9CE6"
+      },
+      {
+        "episode_id": "11c176eba889c996e574",
+        "arm_id": "delete_one:v19-115-s054"
+      },
+      {
+        "episode_id": "826ed11a04190086eb11",
+        "arm_id": "delete_key:QY90D2674"
+      },
+      {
+        "episode_id": "4da298582cbe97e81965",
+        "arm_id": "delete_one:v19-119-s003"
+      },
+      {
+        "episode_id": "e1e5dc8e2a01c427d892",
+        "arm_id": "delete_key:QYEA84542"
+      },
+      {
+        "episode_id": "bb391569346084cd53c8",
+        "arm_id": "delete_one:v19-123-s000"
+      },
+      {
+        "episode_id": "cb83cbaff19e36cdfc5f",
+        "arm_id": "delete_key:QYB81FDC9"
+      },
+      {
+        "episode_id": "8ada664e9fa75d233aed",
+        "arm_id": "delete_one:v19-127-s000"
+      },
+      {
+        "episode_id": "60188da120eb4230e988",
+        "arm_id": "delete_key:QY5598823"
+      },
+      {
+        "episode_id": "b4114a81943d23dd9480",
+        "arm_id": "delete_one:v19-131-s000"
+      },
+      {
+        "episode_id": "964aa768bedb4d259b71",
+        "arm_id": "delete_key:QY856E67B"
+      },
+      {
+        "episode_id": "e4963c9cbe998db6e8b1",
+        "arm_id": "delete_one:v19-135-s000"
+      },
+      {
+        "episode_id": "83880b6eeddcc45c5d19",
+        "arm_id": "delete_key:QYA8C6BD7"
+      },
+      {
+        "episode_id": "ace018121c020c9bbf1c",
+        "arm_id": "delete_one:v19-139-s000"
+      },
+      {
+        "episode_id": "81e1cc44f1f9fe641fb4",
+        "arm_id": "delete_key:QY743278E"
+      },
+      {
+        "episode_id": "199e7f41461755fd7a9d",
+        "arm_id": "delete_one:v19-143-s000"
+      },
+      {
+        "episode_id": "b645cb2edab8d8f31656",
+        "arm_id": "delete_key:QY7CAC82E"
+      },
+      {
+        "episode_id": "c76446f0d9c49016b640",
+        "arm_id": "delete_one:v19-147-s000"
+      },
+      {
+        "episode_id": "f6c9c16cc2a73f4863bc",
+        "arm_id": "delete_key:QY660D627"
+      },
+      {
+        "episode_id": "2303aeadaec778b78b27",
+        "arm_id": "delete_one:v19-151-s000"
+      },
+      {
+        "episode_id": "bae9750d01c4e2197934",
+        "arm_id": "delete_key:QYA8A10A0"
+      },
+      {
+        "episode_id": "86c163aa5331ac1860dc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "07335768b680c8c7be9a",
+        "arm_id": "delete_key:QYA853DDB"
+      },
+      {
+        "episode_id": "ee12aa43cc61b6904884",
+        "arm_id": "delete_one:v19-159-s015"
+      },
+      {
+        "episode_id": "7ffce577034aeb756ad3",
+        "arm_id": "delete_key:QY747768A"
+      },
+      {
+        "episode_id": "6da6c1a53595243908a1",
+        "arm_id": "delete_key:QYB35B99D"
+      },
+      {
+        "episode_id": "8f5010f470fb309f07b6",
+        "arm_id": "delete_key:QY7C65221"
+      },
+      {
+        "episode_id": "11779ea8f58694037045",
+        "arm_id": "delete_one:v19-167-s000"
+      },
+      {
+        "episode_id": "d2b6a3d5896d1258c89b",
+        "arm_id": "delete_key:QY00C8E59"
+      },
+      {
+        "episode_id": "5eb1380863b55976dca0",
+        "arm_id": "delete_one:v19-171-s000"
+      },
+      {
+        "episode_id": "224edaa09d0c0f223537",
+        "arm_id": "delete_key:QY1C3F6E2"
+      },
+      {
+        "episode_id": "612ab6c15e71aabfa87f",
+        "arm_id": "delete_one:v19-175-s000"
+      },
+      {
+        "episode_id": "8ef958eb2e5121d219ed",
+        "arm_id": "delete_key:QYD2031FD"
+      },
+      {
+        "episode_id": "e7b832128840dd113910",
+        "arm_id": "delete_one:v19-179-s006"
+      },
+      {
+        "episode_id": "ecdf9590857b19337dc7",
+        "arm_id": "delete_key:QYB38719F"
+      },
+      {
+        "episode_id": "ea6a078cac787ef3be99",
+        "arm_id": "delete_one:v19-183-s006"
+      },
+      {
+        "episode_id": "f3fa18c82039df9a5e13",
+        "arm_id": "delete_key:QY964CAAD"
+      },
+      {
+        "episode_id": "5684484109b2eed67aa6",
+        "arm_id": "delete_one:v19-187-s000"
+      },
+      {
+        "episode_id": "7c391274af9cd1ea374a",
+        "arm_id": "delete_key:QYBF881B5"
+      },
+      {
+        "episode_id": "a6b73f43ef3a228cdac6",
+        "arm_id": "delete_one:v19-191-s001"
+      },
+      {
+        "episode_id": "5432f2457847be8eb050",
+        "arm_id": "delete_key:QY9CD04E7"
+      },
+      {
+        "episode_id": "40928661360054e9957f",
+        "arm_id": "delete_key:QY6202F16"
+      },
+      {
+        "episode_id": "3a2c76230dc4faef94e9",
+        "arm_id": "delete_key:QY3BEAFD3"
+      },
+      {
+        "episode_id": "0a1b2810bf6ec5fb9e57",
+        "arm_id": "delete_one:v19-199-s000"
+      },
+      {
+        "episode_id": "35f4a3aacfb05b827843",
+        "arm_id": "delete_key:QY1B88E67"
+      },
+      {
+        "episode_id": "945df62f461bd69216ef",
+        "arm_id": "delete_one:v19-203-s000"
+      },
+      {
+        "episode_id": "69b580f2b1958a24d0e9",
+        "arm_id": "delete_key:QYD064D3F"
+      },
+      {
+        "episode_id": "577bf0b62aeac7e103b1",
+        "arm_id": "delete_one:v19-207-s000"
+      },
+      {
+        "episode_id": "ff552e6ee9abd2402b92",
+        "arm_id": "delete_key:QYC0167DB"
+      },
+      {
+        "episode_id": "bb483fdc6921d5ddc6a5",
+        "arm_id": "delete_one:v19-211-s001"
+      },
+      {
+        "episode_id": "de5a0866983d976832f8",
+        "arm_id": "delete_key:QY99D48DD"
+      },
+      {
+        "episode_id": "3effa39d91fe18a73a0e",
+        "arm_id": "delete_one:v19-215-s000"
+      },
+      {
+        "episode_id": "ad3784b93a585fd3a764",
+        "arm_id": "delete_key:QY5F74895"
+      },
+      {
+        "episode_id": "57176674d0ea5945fef7",
+        "arm_id": "delete_one:v19-219-s000"
+      },
+      {
+        "episode_id": "d2cb192aa4a9ba0a2fe5",
+        "arm_id": "delete_key:QY5EBCE91"
+      },
+      {
+        "episode_id": "90f98551e1daef206887",
+        "arm_id": "delete_one:v19-223-s000"
+      },
+      {
+        "episode_id": "724cf52d4072c7f02c19",
+        "arm_id": "delete_key:QYB87FC56"
+      },
+      {
+        "episode_id": "3de12732d1691dbbdd9e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "27a41c589322e1847172",
+        "arm_id": "delete_key:QY0095620"
+      },
+      {
+        "episode_id": "9fdbb2aae5d6f7e95276",
+        "arm_id": "delete_one:v19-231-s000"
+      },
+      {
+        "episode_id": "552146d862343f7e5b86",
+        "arm_id": "delete_key:QY4612EBF"
+      },
+      {
+        "episode_id": "a17afe859f3d0f64b7fb",
+        "arm_id": "delete_one:v19-235-s000"
+      },
+      {
+        "episode_id": "9bc0284c1b4792c7ee64",
+        "arm_id": "delete_key:QY4F1CD29"
+      },
+      {
+        "episode_id": "30b76e9872e590c3652c",
+        "arm_id": "delete_one:v19-239-s000"
+      },
+      {
+        "episode_id": "0c45c7e549a7c4d058e5",
+        "arm_id": "delete_key:QY3D528D2"
+      },
+      {
+        "episode_id": "42c633c290bdf9fe54fd",
+        "arm_id": "delete_key:QY5A5D431"
+      },
+      {
+        "episode_id": "8e67f0ebdf186d69f205",
+        "arm_id": "delete_key:QY1AFB651"
+      },
+      {
+        "episode_id": "c9d40ff9cc2c67d80d71",
+        "arm_id": "delete_one:v19-247-s000"
+      },
+      {
+        "episode_id": "e98839fab978cba79554",
+        "arm_id": "delete_key:QY7E6DAFC"
+      },
+      {
+        "episode_id": "f46587576421ab2d8db1",
+        "arm_id": "delete_one:v19-251-s000"
+      },
+      {
+        "episode_id": "b761e40b35b9515b8460",
+        "arm_id": "delete_key:QY67A47E6"
+      },
+      {
+        "episode_id": "02d9b76af93b042612de",
+        "arm_id": "delete_one:v19-255-s000"
+      },
+      {
+        "episode_id": "304ea9dd150a92733b98",
+        "arm_id": "delete_key:QY2383521"
+      },
+      {
+        "episode_id": "93820a501681b0bed550",
+        "arm_id": "delete_one:v19-259-s001"
+      },
+      {
+        "episode_id": "ac908e727c1ec51082dc",
+        "arm_id": "delete_key:QY8B58E13"
+      },
+      {
+        "episode_id": "08459bc462b9f6f79b21",
+        "arm_id": "delete_one:v19-263-s000"
+      },
+      {
+        "episode_id": "c0671f99c1c897382023",
+        "arm_id": "delete_key:QYB7F32B5"
+      },
+      {
+        "episode_id": "9524dff327ae4cce5c44",
+        "arm_id": "delete_one:v19-267-s000"
+      },
+      {
+        "episode_id": "c65a68741f99444c8216",
+        "arm_id": "delete_key:QY9CD4096"
+      },
+      {
+        "episode_id": "c67464aeba2edfd98a29",
+        "arm_id": "delete_one:v19-271-s000"
+      },
+      {
+        "episode_id": "8ab947aa7bb5fa4eef47",
+        "arm_id": "delete_key:QYEB9A2DD"
+      },
+      {
+        "episode_id": "08d9427925fbc4178772",
+        "arm_id": "delete_one:v19-275-s001"
+      },
+      {
+        "episode_id": "1204871e968892d1cf74",
+        "arm_id": "delete_key:QYCA5AE27"
+      },
+      {
+        "episode_id": "cc79e5e76fe3c8edc9c7",
+        "arm_id": "delete_one:v19-279-s006"
+      },
+      {
+        "episode_id": "49d1ad65175183b5c610",
+        "arm_id": "delete_key:QYEF1FF65"
+      },
+      {
+        "episode_id": "50d1a9f744074196ff14",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "235fa4e84c7c77f5faae",
+        "arm_id": "delete_key:QY0668254"
+      },
+      {
+        "episode_id": "0f44f322e9a724fef5d0",
+        "arm_id": "delete_one:v19-287-s000"
+      },
+      {
+        "episode_id": "58800cbd1d49d54e1e4f",
+        "arm_id": "delete_key:QY3DD571D"
+      },
+      {
+        "episode_id": "7c786230edbdca59a618",
+        "arm_id": "delete_one:v19-291-s059"
+      },
+      {
+        "episode_id": "b78cce75830f0c4ea419",
+        "arm_id": "delete_key:QY1079A2E"
+      },
+      {
+        "episode_id": "7d2555c283228c08ec3b",
+        "arm_id": "delete_one:v19-295-s000"
+      },
+      {
+        "episode_id": "1fe2f7068c71dac4e90b",
+        "arm_id": "delete_key:QYD27F05E"
+      },
+      {
+        "episode_id": "31f68a59909152a06d7f",
+        "arm_id": "delete_one:v19-299-s001"
+      },
+      {
+        "episode_id": "bb56083ef64fdf1c1b75",
+        "arm_id": "delete_key:QYEA9B0DF"
+      },
+      {
+        "episode_id": "8a455e3111f71304e142",
+        "arm_id": "delete_one:v19-303-s000"
+      },
+      {
+        "episode_id": "d926d7abad5650fa372b",
+        "arm_id": "delete_key:QY223393E"
+      },
+      {
+        "episode_id": "de13e212beb7b71e22dd",
+        "arm_id": "delete_one:v19-307-s000"
+      },
+      {
+        "episode_id": "00b1df6fdcd1dd99cb5f",
+        "arm_id": "delete_key:QYCD1F867"
+      },
+      {
+        "episode_id": "5db2a16150f10d77e702",
+        "arm_id": "delete_one:v19-311-s000"
+      },
+      {
+        "episode_id": "2963c3bc6c11e73e1d7b",
+        "arm_id": "delete_key:QY05F8C11"
+      },
+      {
+        "episode_id": "434dd56a938659410f3f",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "328d9b65f621ca979917",
+        "arm_id": "delete_key:QYC17E502"
+      },
+      {
+        "episode_id": "eff3ace3f1849516b20e",
+        "arm_id": "delete_one:v19-319-s000"
+      }
+    ],
+    "0.01": [
+      {
+        "episode_id": "482a648b41dae3551751",
+        "arm_id": "delete_one:v19-000-s000"
+      },
+      {
+        "episode_id": "dd5cfb1098653a9af265",
+        "arm_id": "delete_one:v19-002-s000"
+      },
+      {
+        "episode_id": "f4f6d257609d978c6701",
+        "arm_id": "delete_one:v19-004-s000"
+      },
+      {
+        "episode_id": "98003b021661e4ff7728",
+        "arm_id": "delete_one:v19-006-s013"
+      },
+      {
+        "episode_id": "066c8a74938bad7f9b53",
+        "arm_id": "delete_one:v19-008-s017"
+      },
+      {
+        "episode_id": "491089932184c9a78e06",
+        "arm_id": "delete_key:QY6582423B"
+      },
+      {
+        "episode_id": "88ec3a52c27febba52db",
+        "arm_id": "delete_one:v19-012-s012"
+      },
+      {
+        "episode_id": "983ea9fe23ce5dbeacdc",
+        "arm_id": "delete_one:v19-014-s013"
+      },
+      {
+        "episode_id": "9e7a4eb38c37345735b7",
+        "arm_id": "delete_one:v19-016-s000"
+      },
+      {
+        "episode_id": "edcd8175572994af25a7",
+        "arm_id": "delete_one:v19-018-s005"
+      },
+      {
+        "episode_id": "ebb224093d1f7e01e759",
+        "arm_id": "delete_one:v19-020-s009"
+      },
+      {
+        "episode_id": "85eb002f432c7d7ca7a4",
+        "arm_id": "delete_key:QY59508FEB"
+      },
+      {
+        "episode_id": "fa0ed011c245d629a390",
+        "arm_id": "delete_one:v19-024-s029"
+      },
+      {
+        "episode_id": "c6e743a4aeedf28778e6",
+        "arm_id": "delete_one:v19-026-s002"
+      },
+      {
+        "episode_id": "ee8e975bf5d6c3904c87",
+        "arm_id": "delete_one:v19-028-s017"
+      },
+      {
+        "episode_id": "2752bb2601cf5774d21a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9c939247a125108cca1b",
+        "arm_id": "delete_one:v19-032-s000"
+      },
+      {
+        "episode_id": "99fcbcb7496daaebcb87",
+        "arm_id": "delete_one:v19-034-s000"
+      },
+      {
+        "episode_id": "6d6cf26e3984df77d87b",
+        "arm_id": "delete_one:v19-036-s000"
+      },
+      {
+        "episode_id": "4823b6a5b61a4bf15c5a",
+        "arm_id": "delete_one:v19-038-s000"
+      },
+      {
+        "episode_id": "5c6593e0bf98f2fdf01a",
+        "arm_id": "delete_one:v19-040-s000"
+      },
+      {
+        "episode_id": "f58b0a4274402d46b2ed",
+        "arm_id": "delete_one:v19-042-s000"
+      },
+      {
+        "episode_id": "e6163e607ccef7dcc545",
+        "arm_id": "delete_one:v19-044-s005"
+      },
+      {
+        "episode_id": "4226bbaf9d820fabc54e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "bb17cfa7c1fac12b2136",
+        "arm_id": "delete_one:v19-048-s000"
+      },
+      {
+        "episode_id": "6f0c8f264cc870d786cb",
+        "arm_id": "delete_one:v19-050-s000"
+      },
+      {
+        "episode_id": "14cf460e241bc54113e5",
+        "arm_id": "delete_one:v19-052-s000"
+      },
+      {
+        "episode_id": "5b78a4d5f829cd36bde6",
+        "arm_id": "delete_key:QY822A4B5B"
+      },
+      {
+        "episode_id": "a06e76ffbf5f2c25cabf",
+        "arm_id": "delete_one:v19-056-s000"
+      },
+      {
+        "episode_id": "94c66ce294a59f1f80b9",
+        "arm_id": "delete_one:v19-058-s000"
+      },
+      {
+        "episode_id": "3144a6670031304557a0",
+        "arm_id": "delete_key:QYFB7464F"
+      },
+      {
+        "episode_id": "c533b81ee8a64c6bb164",
+        "arm_id": "delete_one:v19-062-s010"
+      },
+      {
+        "episode_id": "f14df56a8efaf50f16ac",
+        "arm_id": "delete_one:v19-064-s000"
+      },
+      {
+        "episode_id": "4323c52ece89e9cd77d2",
+        "arm_id": "delete_one:v19-066-s011"
+      },
+      {
+        "episode_id": "5269faae9b4478c663d9",
+        "arm_id": "delete_one:v19-068-s000"
+      },
+      {
+        "episode_id": "7ba715f4db159763f9a6",
+        "arm_id": "delete_key:QYC8E1954B"
+      },
+      {
+        "episode_id": "3c9358144530f344a25c",
+        "arm_id": "delete_one:v19-072-s000"
+      },
+      {
+        "episode_id": "83b9b2e0feaa8911e731",
+        "arm_id": "delete_one:v19-074-s000"
+      },
+      {
+        "episode_id": "6c235342ce0552ce9901",
+        "arm_id": "delete_one:v19-076-s000"
+      },
+      {
+        "episode_id": "614c5385213efb8ad2ae",
+        "arm_id": "delete_one:v19-078-s006"
+      },
+      {
+        "episode_id": "408c861c8a0446ead4a6",
+        "arm_id": "delete_one:v19-080-s000"
+      },
+      {
+        "episode_id": "ee7d3edf5393d1e1ac6f",
+        "arm_id": "delete_key:QYA80A172B"
+      },
+      {
+        "episode_id": "3f9ad9f0205d8dd648d7",
+        "arm_id": "delete_one:v19-084-s000"
+      },
+      {
+        "episode_id": "da3eedbf65599d9986f5",
+        "arm_id": "delete_key:QYD5D3A86"
+      },
+      {
+        "episode_id": "d337689db58f527e883d",
+        "arm_id": "delete_one:v19-088-s011"
+      },
+      {
+        "episode_id": "f18d00eb6c6333621c26",
+        "arm_id": "delete_one:v19-090-s005"
+      },
+      {
+        "episode_id": "6ec92f3ff7f7764b893c",
+        "arm_id": "delete_one:v19-092-s000"
+      },
+      {
+        "episode_id": "421ce312374ea3eb2b98",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "d895f8ac101f4288a35a",
+        "arm_id": "delete_one:v19-096-s000"
+      },
+      {
+        "episode_id": "19efff2f8e198bcc16cf",
+        "arm_id": "delete_one:v19-098-s000"
+      },
+      {
+        "episode_id": "ace81dc8696248cb7f36",
+        "arm_id": "delete_one:v19-100-s000"
+      },
+      {
+        "episode_id": "4cb2debd9afb4fb4a54f",
+        "arm_id": "delete_key:QYE9365FDB"
+      },
+      {
+        "episode_id": "f1fd64dddcf9807c528c",
+        "arm_id": "delete_one:v19-104-s000"
+      },
+      {
+        "episode_id": "9c221a9a931156c77acb",
+        "arm_id": "delete_one:v19-106-s000"
+      },
+      {
+        "episode_id": "143e99058dfc0610ba5a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "6a5610feabd35bfcbffc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "2df5e40f466da99ed767",
+        "arm_id": "delete_one:v19-112-s000"
+      },
+      {
+        "episode_id": "d58bdc2064c4b10bbbab",
+        "arm_id": "delete_one:v19-114-s029"
+      },
+      {
+        "episode_id": "566f0809766d6638a5bb",
+        "arm_id": "delete_one:v19-116-s000"
+      },
+      {
+        "episode_id": "fe6e4852f6d99f9ace00",
+        "arm_id": "delete_one:v19-118-s000"
+      },
+      {
+        "episode_id": "16bba495f497cf79a6e0",
+        "arm_id": "delete_one:v19-120-s000"
+      },
+      {
+        "episode_id": "34197cdc39e8b0524ca4",
+        "arm_id": "delete_one:v19-122-s006"
+      },
+      {
+        "episode_id": "4624164317b0e6aac7ed",
+        "arm_id": "delete_one:v19-124-s000"
+      },
+      {
+        "episode_id": "6475bd4750760f6aa7d6",
+        "arm_id": "delete_one:v19-126-s003"
+      },
+      {
+        "episode_id": "d43aadfd69c4020d9c21",
+        "arm_id": "delete_one:v19-128-s000"
+      },
+      {
+        "episode_id": "719f15ea62cfb2d712e8",
+        "arm_id": "delete_one:v19-130-s009"
+      },
+      {
+        "episode_id": "7914193a229d94ab592d",
+        "arm_id": "delete_one:v19-132-s000"
+      },
+      {
+        "episode_id": "a7c1cf214b9a97a00d73",
+        "arm_id": "delete_key:QY9095FAFB"
+      },
+      {
+        "episode_id": "96679a34569e0d94917c",
+        "arm_id": "delete_one:v19-136-s000"
+      },
+      {
+        "episode_id": "86850d32cd0588ac5db1",
+        "arm_id": "delete_one:v19-138-s000"
+      },
+      {
+        "episode_id": "265834533a211e8f6ac5",
+        "arm_id": "delete_key:QY04A79A3"
+      },
+      {
+        "episode_id": "1ccf60f60595195e9672",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "dc7fc3afd0c4947385b0",
+        "arm_id": "delete_one:v19-144-s000"
+      },
+      {
+        "episode_id": "66e8bfb0424a03fcaeb6",
+        "arm_id": "delete_one:v19-146-s029"
+      },
+      {
+        "episode_id": "d86367c682a3946aa859",
+        "arm_id": "delete_one:v19-148-s007"
+      },
+      {
+        "episode_id": "d3f256826873de829ca2",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "037d1dae4b9087c99ca3",
+        "arm_id": "delete_one:v19-152-s000"
+      },
+      {
+        "episode_id": "d22d7aa06352f20a3ba9",
+        "arm_id": "delete_one:v19-154-s001"
+      },
+      {
+        "episode_id": "87dabdaef29bbaad51a7",
+        "arm_id": "delete_key:QY466DCBA"
+      },
+      {
+        "episode_id": "30207121be4eadeb1710",
+        "arm_id": "delete_key:QYD3933B2B"
+      },
+      {
+        "episode_id": "8e614c1eebcd3c7612df",
+        "arm_id": "delete_one:v19-160-s000"
+      },
+      {
+        "episode_id": "6032da3627310bfeb102",
+        "arm_id": "delete_one:v19-162-s006"
+      },
+      {
+        "episode_id": "b46e0a9e24348b808a0c",
+        "arm_id": "delete_one:v19-164-s000"
+      },
+      {
+        "episode_id": "c6b8fff544883386506b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "22fbc200cbeaf0760464",
+        "arm_id": "delete_key:QY2D14E87"
+      },
+      {
+        "episode_id": "ae74c76f865ef64d5cc4",
+        "arm_id": "delete_one:v19-170-s000"
+      },
+      {
+        "episode_id": "f5fb5f865a361f2387ee",
+        "arm_id": "delete_one:v19-172-s008"
+      },
+      {
+        "episode_id": "f79df725c98b0b4f4ab3",
+        "arm_id": "delete_key:QY6D40F37B"
+      },
+      {
+        "episode_id": "35130e9395ce4c8f8069",
+        "arm_id": "delete_one:v19-176-s000"
+      },
+      {
+        "episode_id": "1cea1d2d2d1d0b2f11ef",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "ba11d5d28e72b583e079",
+        "arm_id": "delete_one:v19-180-s000"
+      },
+      {
+        "episode_id": "269b64c913e19cd2ff92",
+        "arm_id": "delete_key:QY41233F4B"
+      },
+      {
+        "episode_id": "23d1d8fab4fd6cacb623",
+        "arm_id": "delete_one:v19-184-s000"
+      },
+      {
+        "episode_id": "9c39bcabd0b73f5ccbcc",
+        "arm_id": "delete_one:v19-186-s006"
+      },
+      {
+        "episode_id": "fb49f087ef499b61da5c",
+        "arm_id": "delete_one:v19-188-s000"
+      },
+      {
+        "episode_id": "b89e7808c2ca79dd58f4",
+        "arm_id": "delete_one:v19-190-s000"
+      },
+      {
+        "episode_id": "c072f2e193db095ca381",
+        "arm_id": "delete_one:v19-192-s000"
+      },
+      {
+        "episode_id": "5c3f49d74587801791f6",
+        "arm_id": "delete_one:v19-194-s000"
+      },
+      {
+        "episode_id": "98d415922e80effb8ab3",
+        "arm_id": "delete_one:v19-196-s000"
+      },
+      {
+        "episode_id": "e2cbda2aac7f6a3f3a1f",
+        "arm_id": "delete_key:QY313675EB"
+      },
+      {
+        "episode_id": "5bbb792fd287d0138f3d",
+        "arm_id": "delete_one:v19-200-s000"
+      },
+      {
+        "episode_id": "2bd356e9ea071bbf77ac",
+        "arm_id": "delete_one:v19-202-s000"
+      },
+      {
+        "episode_id": "05156d0a9259d19e60b6",
+        "arm_id": "delete_one:v19-204-s010"
+      },
+      {
+        "episode_id": "142dae8501bb0fd6058b",
+        "arm_id": "delete_one:v19-206-s005"
+      },
+      {
+        "episode_id": "b2c6686a91755f0255d0",
+        "arm_id": "delete_one:v19-208-s000"
+      },
+      {
+        "episode_id": "ba4d8546505cfc9f4fd0",
+        "arm_id": "delete_one:v19-210-s000"
+      },
+      {
+        "episode_id": "f7926533795a78c59ae5",
+        "arm_id": "delete_one:v19-212-s000"
+      },
+      {
+        "episode_id": "6b1d92407424d6988c8c",
+        "arm_id": "delete_one:v19-214-s055"
+      },
+      {
+        "episode_id": "8bc79a163993ccca6de0",
+        "arm_id": "delete_one:v19-216-s000"
+      },
+      {
+        "episode_id": "2192f23a46759465de33",
+        "arm_id": "delete_key:QYFC79FFFB"
+      },
+      {
+        "episode_id": "86233b9da5697a319d5a",
+        "arm_id": "delete_one:v19-220-s000"
+      },
+      {
+        "episode_id": "b3667744a8f360c7901c",
+        "arm_id": "delete_one:v19-222-s010"
+      },
+      {
+        "episode_id": "07b6e5e96cd6eeafc8fd",
+        "arm_id": "delete_one:v19-224-s000"
+      },
+      {
+        "episode_id": "4b764e33c3c41f4326de",
+        "arm_id": "delete_one:v19-226-s000"
+      },
+      {
+        "episode_id": "16ade3ccbe44b2a7c92d",
+        "arm_id": "delete_one:v19-228-s000"
+      },
+      {
+        "episode_id": "e6d8124ec3a730143f82",
+        "arm_id": "delete_key:QYE609E14B"
+      },
+      {
+        "episode_id": "aaec92399d06507c8436",
+        "arm_id": "delete_one:v19-232-s000"
+      },
+      {
+        "episode_id": "df61a4047b1c7b01baea",
+        "arm_id": "delete_key:QY1B3511AB"
+      },
+      {
+        "episode_id": "cced2ef6c5c0a8e7aa31",
+        "arm_id": "delete_one:v19-236-s005"
+      },
+      {
+        "episode_id": "23b4776c5ddc4117dee7",
+        "arm_id": "delete_one:v19-238-s012"
+      },
+      {
+        "episode_id": "8deea306dd76cc294dd1",
+        "arm_id": "delete_one:v19-240-s000"
+      },
+      {
+        "episode_id": "5ed5348e0ddc45b63cab",
+        "arm_id": "delete_one:v19-242-s003"
+      },
+      {
+        "episode_id": "a6d192307cbfdd787c1e",
+        "arm_id": "delete_one:v19-244-s000"
+      },
+      {
+        "episode_id": "6b24ff785fc08c898b9e",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f779c1a179615227ef4a",
+        "arm_id": "delete_key:QYEF8384F"
+      },
+      {
+        "episode_id": "8e819afd597540413961",
+        "arm_id": "delete_one:v19-250-s005"
+      },
+      {
+        "episode_id": "b9f8d0d82252d2134888",
+        "arm_id": "delete_one:v19-252-s023"
+      },
+      {
+        "episode_id": "f36c4706d4ccdbed102e",
+        "arm_id": "delete_key:QY505A6C7B"
+      },
+      {
+        "episode_id": "9f816504f9ed87e78f01",
+        "arm_id": "delete_one:v19-256-s000"
+      },
+      {
+        "episode_id": "af5474b86be2a203d116",
+        "arm_id": "delete_one:v19-258-s008"
+      },
+      {
+        "episode_id": "ac0ff93a5c8d4382dc48",
+        "arm_id": "delete_one:v19-260-s008"
+      },
+      {
+        "episode_id": "de8ab21665fa57e0e66b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f7b53c275080cab3554b",
+        "arm_id": "delete_one:v19-264-s000"
+      },
+      {
+        "episode_id": "1ecf75ce08b556851e8b",
+        "arm_id": "delete_key:QY332552AB"
+      },
+      {
+        "episode_id": "d4684e8521d0636a6689",
+        "arm_id": "delete_one:v19-268-s000"
+      },
+      {
+        "episode_id": "3c1471aa6628006219d3",
+        "arm_id": "delete_key:QY685F7ACB"
+      },
+      {
+        "episode_id": "566eaa778e64e7905c2b",
+        "arm_id": "delete_one:v19-272-s000"
+      },
+      {
+        "episode_id": "a85dce6790eeaf6c215b",
+        "arm_id": "delete_one:v19-274-s002"
+      },
+      {
+        "episode_id": "c6dd8f0e7a484c207462",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "62b8bbd21e2444513260",
+        "arm_id": "delete_key:QYCB022FB"
+      },
+      {
+        "episode_id": "373f934419e9462daa62",
+        "arm_id": "delete_one:v19-280-s000"
+      },
+      {
+        "episode_id": "8c0416459a58053d4d32",
+        "arm_id": "delete_key:QYE2A146EB"
+      },
+      {
+        "episode_id": "b2e554fccd707c46ef51",
+        "arm_id": "delete_one:v19-284-s009"
+      },
+      {
+        "episode_id": "63f1759f535923582067",
+        "arm_id": "delete_key:QY937D9CAB"
+      },
+      {
+        "episode_id": "ed4aa1a0aaf93834e8c9",
+        "arm_id": "delete_one:v19-288-s000"
+      },
+      {
+        "episode_id": "28844c4a531ce987373d",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "abcd1a76cd77b794a83b",
+        "arm_id": "delete_one:v19-292-s000"
+      },
+      {
+        "episode_id": "3b7ca131f51989901ada",
+        "arm_id": "delete_key:QYE7FBCC9B"
+      },
+      {
+        "episode_id": "3a739a23beea5e00ac44",
+        "arm_id": "delete_one:v19-296-s000"
+      },
+      {
+        "episode_id": "f1c570a6906a296e0830",
+        "arm_id": "delete_one:v19-298-s000"
+      },
+      {
+        "episode_id": "f8ca0a80e9a5fdfd7fea",
+        "arm_id": "delete_one:v19-300-s006"
+      },
+      {
+        "episode_id": "1e40987a58d89bd04c92",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "84006bedba0662ccccfc",
+        "arm_id": "delete_one:v19-304-s000"
+      },
+      {
+        "episode_id": "e7a2b2d27d9021a16ff0",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "4fe191159c39eb5b05b2",
+        "arm_id": "delete_one:v19-308-s000"
+      },
+      {
+        "episode_id": "b2fbdf8ad0e06bec1bdd",
+        "arm_id": "delete_key:QYD30E282B"
+      },
+      {
+        "episode_id": "dbf0328bc9e3aeb0ed9d",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9a1f119b01e1938f4179",
+        "arm_id": "delete_one:v19-314-s003"
+      },
+      {
+        "episode_id": "e3a16a5a2ceed8d6d296",
+        "arm_id": "delete_one:v19-316-s000"
+      },
+      {
+        "episode_id": "1b7b65cd377b8cb64a83",
+        "arm_id": "delete_key:QYD679C8FB"
+      },
+      {
+        "episode_id": "801e09c97836b9132938",
+        "arm_id": "delete_key:QYE1F4A9C"
+      },
+      {
+        "episode_id": "49831512d0d5bec38030",
+        "arm_id": "delete_key:QYFE21EB9"
+      },
+      {
+        "episode_id": "ae3ac529661b9e7ff063",
+        "arm_id": "delete_key:QY6231126"
+      },
+      {
+        "episode_id": "2f96941b0f8fc4d526e2",
+        "arm_id": "delete_one:v19-007-s000"
+      },
+      {
+        "episode_id": "5b82bb3b6a17a97f94f1",
+        "arm_id": "delete_key:QYBDFF279"
+      },
+      {
+        "episode_id": "277eef55ecf4d194b097",
+        "arm_id": "delete_one:v19-011-s000"
+      },
+      {
+        "episode_id": "7823914964ee11954f24",
+        "arm_id": "delete_key:QYB74619A"
+      },
+      {
+        "episode_id": "fd6a4ca3f5c87a0e62fe",
+        "arm_id": "delete_one:v19-015-s004"
+      },
+      {
+        "episode_id": "2863cd3138dbff665a37",
+        "arm_id": "delete_key:QY0CF64BD"
+      },
+      {
+        "episode_id": "8d3ab9a7b11c3ff254c8",
+        "arm_id": "delete_key:QY29ED092"
+      },
+      {
+        "episode_id": "6d86fef9adbfc091c98e",
+        "arm_id": "delete_key:QY95AC235"
+      },
+      {
+        "episode_id": "37b7cb657098520dd4eb",
+        "arm_id": "delete_one:v19-023-s006"
+      },
+      {
+        "episode_id": "e4f63c78ea35f3b553bc",
+        "arm_id": "delete_key:QY68B8E4F"
+      },
+      {
+        "episode_id": "8d319f99a96e62f62ed4",
+        "arm_id": "delete_one:v19-027-s000"
+      },
+      {
+        "episode_id": "574feb639d25fbc2091d",
+        "arm_id": "delete_key:QYA531C0B"
+      },
+      {
+        "episode_id": "4b6fc6050da55b53b1f9",
+        "arm_id": "delete_key:QYCE021A0"
+      },
+      {
+        "episode_id": "13c94450b346c8e0f261",
+        "arm_id": "delete_key:QYADF1B1E"
+      },
+      {
+        "episode_id": "67c55a7efd667452ae24",
+        "arm_id": "delete_one:v19-035-s003"
+      },
+      {
+        "episode_id": "11f5b6c854cbe5331c8a",
+        "arm_id": "delete_key:QY3BD5CB4"
+      },
+      {
+        "episode_id": "8c7f133860306a101206",
+        "arm_id": "delete_one:v19-039-s000"
+      },
+      {
+        "episode_id": "caadce621880d1a9e169",
+        "arm_id": "delete_key:QYF8AE036"
+      },
+      {
+        "episode_id": "5fd7fcb05d667a3e2dd3",
+        "arm_id": "delete_one:v19-043-s000"
+      },
+      {
+        "episode_id": "e77026bfdb28d279deac",
+        "arm_id": "delete_key:QYD0B26A5"
+      },
+      {
+        "episode_id": "196cbf162c6e0683948a",
+        "arm_id": "delete_one:v19-047-s000"
+      },
+      {
+        "episode_id": "667ad0cb94605f9c8d78",
+        "arm_id": "delete_key:QYD2D02BB"
+      },
+      {
+        "episode_id": "c7267db11984de996a27",
+        "arm_id": "delete_key:QY68FD8AE"
+      },
+      {
+        "episode_id": "a00035978e2dda0f80a6",
+        "arm_id": "delete_key:QYBCB302D"
+      },
+      {
+        "episode_id": "5e09a00150281d73a194",
+        "arm_id": "delete_one:v19-055-s000"
+      },
+      {
+        "episode_id": "4feea10cdf272965b6f9",
+        "arm_id": "delete_key:QYE6501FA"
+      },
+      {
+        "episode_id": "784df3106708a11083d0",
+        "arm_id": "delete_one:v19-059-s000"
+      },
+      {
+        "episode_id": "f34ce1e14c56b6c31e21",
+        "arm_id": "delete_key:QY59BA610"
+      },
+      {
+        "episode_id": "edc266f4c18ba9fb75a6",
+        "arm_id": "delete_one:v19-063-s000"
+      },
+      {
+        "episode_id": "520c469f747cb4d095e6",
+        "arm_id": "delete_key:QY9696CE6"
+      },
+      {
+        "episode_id": "2e1c96e08c1adb6ef7f6",
+        "arm_id": "delete_key:QYFE465DE"
+      },
+      {
+        "episode_id": "fe5e5716263cbff62d6c",
+        "arm_id": "delete_key:QYB86A2A3"
+      },
+      {
+        "episode_id": "648a679175c35fa10403",
+        "arm_id": "delete_one:v19-071-s000"
+      },
+      {
+        "episode_id": "1866bd06b6d5722c3905",
+        "arm_id": "delete_key:QY27355BB"
+      },
+      {
+        "episode_id": "af96e0320dc0904575e4",
+        "arm_id": "delete_one:v19-075-s000"
+      },
+      {
+        "episode_id": "41ae57a43ef0b5004470",
+        "arm_id": "delete_key:QYA9B987D"
+      },
+      {
+        "episode_id": "580134023c58ab47c955",
+        "arm_id": "delete_one:v19-079-s000"
+      },
+      {
+        "episode_id": "2bef707acbe5e8d9e2aa",
+        "arm_id": "delete_key:QY6247E4B"
+      },
+      {
+        "episode_id": "988974c0814c9c96418c",
+        "arm_id": "delete_one:v19-083-s000"
+      },
+      {
+        "episode_id": "9e10dfc7ffd5655df566",
+        "arm_id": "delete_key:QY8C17DE6"
+      },
+      {
+        "episode_id": "f8ac5ff5101ca39e9d3d",
+        "arm_id": "delete_one:v19-087-s000"
+      },
+      {
+        "episode_id": "13d4fde580faef06756e",
+        "arm_id": "delete_key:QY3DC0BFD"
+      },
+      {
+        "episode_id": "1056254df6c9321d2791",
+        "arm_id": "delete_one:v19-091-s000"
+      },
+      {
+        "episode_id": "51d3bc46e52b9e886061",
+        "arm_id": "delete_key:QYFE3DAB9"
+      },
+      {
+        "episode_id": "d70e855ee528d3d959e6",
+        "arm_id": "delete_one:v19-095-s000"
+      },
+      {
+        "episode_id": "1db6ae1d278b4d1756e1",
+        "arm_id": "delete_key:QYDC32049"
+      },
+      {
+        "episode_id": "ebafa0809c9786972b0b",
+        "arm_id": "delete_key:QY6B8FD19"
+      },
+      {
+        "episode_id": "744be4cad8d60028c3df",
+        "arm_id": "delete_key:QY181DAEA"
+      },
+      {
+        "episode_id": "5717b078981f6f3cbe03",
+        "arm_id": "delete_one:v19-103-s000"
+      },
+      {
+        "episode_id": "ef56da7d3487fa440177",
+        "arm_id": "delete_key:QY35A41F7"
+      },
+      {
+        "episode_id": "74375721ee000134cd73",
+        "arm_id": "delete_one:v19-107-s000"
+      },
+      {
+        "episode_id": "4100f478b14dd4f58d7c",
+        "arm_id": "delete_key:QYE9668A0"
+      },
+      {
+        "episode_id": "e61f644d9f5cb9c41040",
+        "arm_id": "delete_one:v19-111-s000"
+      },
+      {
+        "episode_id": "f57c32367d617264fd65",
+        "arm_id": "delete_key:QY16A9CE6"
+      },
+      {
+        "episode_id": "11c176eba889c996e574",
+        "arm_id": "delete_one:v19-115-s054"
+      },
+      {
+        "episode_id": "826ed11a04190086eb11",
+        "arm_id": "delete_key:QY90D2674"
+      },
+      {
+        "episode_id": "4da298582cbe97e81965",
+        "arm_id": "delete_one:v19-119-s003"
+      },
+      {
+        "episode_id": "e1e5dc8e2a01c427d892",
+        "arm_id": "delete_key:QYEA84542"
+      },
+      {
+        "episode_id": "bb391569346084cd53c8",
+        "arm_id": "delete_one:v19-123-s000"
+      },
+      {
+        "episode_id": "cb83cbaff19e36cdfc5f",
+        "arm_id": "delete_key:QYB81FDC9"
+      },
+      {
+        "episode_id": "8ada664e9fa75d233aed",
+        "arm_id": "delete_one:v19-127-s000"
+      },
+      {
+        "episode_id": "60188da120eb4230e988",
+        "arm_id": "delete_key:QY5598823"
+      },
+      {
+        "episode_id": "b4114a81943d23dd9480",
+        "arm_id": "delete_one:v19-131-s000"
+      },
+      {
+        "episode_id": "964aa768bedb4d259b71",
+        "arm_id": "delete_key:QY856E67B"
+      },
+      {
+        "episode_id": "e4963c9cbe998db6e8b1",
+        "arm_id": "delete_one:v19-135-s000"
+      },
+      {
+        "episode_id": "83880b6eeddcc45c5d19",
+        "arm_id": "delete_key:QYA8C6BD7"
+      },
+      {
+        "episode_id": "ace018121c020c9bbf1c",
+        "arm_id": "delete_one:v19-139-s000"
+      },
+      {
+        "episode_id": "81e1cc44f1f9fe641fb4",
+        "arm_id": "delete_key:QY743278E"
+      },
+      {
+        "episode_id": "199e7f41461755fd7a9d",
+        "arm_id": "delete_one:v19-143-s000"
+      },
+      {
+        "episode_id": "b645cb2edab8d8f31656",
+        "arm_id": "delete_key:QY7CAC82E"
+      },
+      {
+        "episode_id": "c76446f0d9c49016b640",
+        "arm_id": "delete_one:v19-147-s000"
+      },
+      {
+        "episode_id": "f6c9c16cc2a73f4863bc",
+        "arm_id": "delete_key:QY660D627"
+      },
+      {
+        "episode_id": "2303aeadaec778b78b27",
+        "arm_id": "delete_one:v19-151-s000"
+      },
+      {
+        "episode_id": "bae9750d01c4e2197934",
+        "arm_id": "delete_key:QYA8A10A0"
+      },
+      {
+        "episode_id": "86c163aa5331ac1860dc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "07335768b680c8c7be9a",
+        "arm_id": "delete_key:QYA853DDB"
+      },
+      {
+        "episode_id": "ee12aa43cc61b6904884",
+        "arm_id": "delete_one:v19-159-s015"
+      },
+      {
+        "episode_id": "7ffce577034aeb756ad3",
+        "arm_id": "delete_key:QY747768A"
+      },
+      {
+        "episode_id": "6da6c1a53595243908a1",
+        "arm_id": "delete_key:QYB35B99D"
+      },
+      {
+        "episode_id": "8f5010f470fb309f07b6",
+        "arm_id": "delete_key:QY7C65221"
+      },
+      {
+        "episode_id": "11779ea8f58694037045",
+        "arm_id": "delete_one:v19-167-s000"
+      },
+      {
+        "episode_id": "d2b6a3d5896d1258c89b",
+        "arm_id": "delete_key:QY00C8E59"
+      },
+      {
+        "episode_id": "5eb1380863b55976dca0",
+        "arm_id": "delete_one:v19-171-s000"
+      },
+      {
+        "episode_id": "224edaa09d0c0f223537",
+        "arm_id": "delete_key:QY1C3F6E2"
+      },
+      {
+        "episode_id": "612ab6c15e71aabfa87f",
+        "arm_id": "delete_one:v19-175-s000"
+      },
+      {
+        "episode_id": "8ef958eb2e5121d219ed",
+        "arm_id": "delete_key:QYD2031FD"
+      },
+      {
+        "episode_id": "e7b832128840dd113910",
+        "arm_id": "delete_one:v19-179-s006"
+      },
+      {
+        "episode_id": "ecdf9590857b19337dc7",
+        "arm_id": "delete_key:QYB38719F"
+      },
+      {
+        "episode_id": "ea6a078cac787ef3be99",
+        "arm_id": "delete_one:v19-183-s006"
+      },
+      {
+        "episode_id": "f3fa18c82039df9a5e13",
+        "arm_id": "delete_key:QY964CAAD"
+      },
+      {
+        "episode_id": "5684484109b2eed67aa6",
+        "arm_id": "delete_one:v19-187-s000"
+      },
+      {
+        "episode_id": "7c391274af9cd1ea374a",
+        "arm_id": "delete_key:QYBF881B5"
+      },
+      {
+        "episode_id": "a6b73f43ef3a228cdac6",
+        "arm_id": "delete_one:v19-191-s001"
+      },
+      {
+        "episode_id": "5432f2457847be8eb050",
+        "arm_id": "delete_key:QY9CD04E7"
+      },
+      {
+        "episode_id": "40928661360054e9957f",
+        "arm_id": "delete_key:QY6202F16"
+      },
+      {
+        "episode_id": "3a2c76230dc4faef94e9",
+        "arm_id": "delete_key:QY3BEAFD3"
+      },
+      {
+        "episode_id": "0a1b2810bf6ec5fb9e57",
+        "arm_id": "delete_one:v19-199-s000"
+      },
+      {
+        "episode_id": "35f4a3aacfb05b827843",
+        "arm_id": "delete_key:QY1B88E67"
+      },
+      {
+        "episode_id": "945df62f461bd69216ef",
+        "arm_id": "delete_one:v19-203-s000"
+      },
+      {
+        "episode_id": "69b580f2b1958a24d0e9",
+        "arm_id": "delete_key:QYD064D3F"
+      },
+      {
+        "episode_id": "577bf0b62aeac7e103b1",
+        "arm_id": "delete_one:v19-207-s000"
+      },
+      {
+        "episode_id": "ff552e6ee9abd2402b92",
+        "arm_id": "delete_key:QYC0167DB"
+      },
+      {
+        "episode_id": "bb483fdc6921d5ddc6a5",
+        "arm_id": "delete_one:v19-211-s001"
+      },
+      {
+        "episode_id": "de5a0866983d976832f8",
+        "arm_id": "delete_key:QY99D48DD"
+      },
+      {
+        "episode_id": "3effa39d91fe18a73a0e",
+        "arm_id": "delete_one:v19-215-s000"
+      },
+      {
+        "episode_id": "ad3784b93a585fd3a764",
+        "arm_id": "delete_key:QY5F74895"
+      },
+      {
+        "episode_id": "57176674d0ea5945fef7",
+        "arm_id": "delete_one:v19-219-s000"
+      },
+      {
+        "episode_id": "d2cb192aa4a9ba0a2fe5",
+        "arm_id": "delete_key:QY5EBCE91"
+      },
+      {
+        "episode_id": "90f98551e1daef206887",
+        "arm_id": "delete_one:v19-223-s000"
+      },
+      {
+        "episode_id": "724cf52d4072c7f02c19",
+        "arm_id": "delete_key:QYB87FC56"
+      },
+      {
+        "episode_id": "3de12732d1691dbbdd9e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "27a41c589322e1847172",
+        "arm_id": "delete_key:QY0095620"
+      },
+      {
+        "episode_id": "9fdbb2aae5d6f7e95276",
+        "arm_id": "delete_one:v19-231-s000"
+      },
+      {
+        "episode_id": "552146d862343f7e5b86",
+        "arm_id": "delete_key:QY4612EBF"
+      },
+      {
+        "episode_id": "a17afe859f3d0f64b7fb",
+        "arm_id": "delete_one:v19-235-s000"
+      },
+      {
+        "episode_id": "9bc0284c1b4792c7ee64",
+        "arm_id": "delete_key:QY4F1CD29"
+      },
+      {
+        "episode_id": "30b76e9872e590c3652c",
+        "arm_id": "delete_one:v19-239-s000"
+      },
+      {
+        "episode_id": "0c45c7e549a7c4d058e5",
+        "arm_id": "delete_key:QY3D528D2"
+      },
+      {
+        "episode_id": "42c633c290bdf9fe54fd",
+        "arm_id": "delete_key:QY5A5D431"
+      },
+      {
+        "episode_id": "8e67f0ebdf186d69f205",
+        "arm_id": "delete_key:QY1AFB651"
+      },
+      {
+        "episode_id": "c9d40ff9cc2c67d80d71",
+        "arm_id": "delete_one:v19-247-s000"
+      },
+      {
+        "episode_id": "e98839fab978cba79554",
+        "arm_id": "delete_key:QY7E6DAFC"
+      },
+      {
+        "episode_id": "f46587576421ab2d8db1",
+        "arm_id": "delete_one:v19-251-s000"
+      },
+      {
+        "episode_id": "b761e40b35b9515b8460",
+        "arm_id": "delete_key:QY67A47E6"
+      },
+      {
+        "episode_id": "02d9b76af93b042612de",
+        "arm_id": "delete_one:v19-255-s000"
+      },
+      {
+        "episode_id": "304ea9dd150a92733b98",
+        "arm_id": "delete_key:QY2383521"
+      },
+      {
+        "episode_id": "93820a501681b0bed550",
+        "arm_id": "delete_one:v19-259-s001"
+      },
+      {
+        "episode_id": "ac908e727c1ec51082dc",
+        "arm_id": "delete_key:QY8B58E13"
+      },
+      {
+        "episode_id": "08459bc462b9f6f79b21",
+        "arm_id": "delete_one:v19-263-s000"
+      },
+      {
+        "episode_id": "c0671f99c1c897382023",
+        "arm_id": "delete_key:QYB7F32B5"
+      },
+      {
+        "episode_id": "9524dff327ae4cce5c44",
+        "arm_id": "delete_one:v19-267-s000"
+      },
+      {
+        "episode_id": "c65a68741f99444c8216",
+        "arm_id": "delete_key:QY9CD4096"
+      },
+      {
+        "episode_id": "c67464aeba2edfd98a29",
+        "arm_id": "delete_one:v19-271-s000"
+      },
+      {
+        "episode_id": "8ab947aa7bb5fa4eef47",
+        "arm_id": "delete_key:QYEB9A2DD"
+      },
+      {
+        "episode_id": "08d9427925fbc4178772",
+        "arm_id": "delete_one:v19-275-s001"
+      },
+      {
+        "episode_id": "1204871e968892d1cf74",
+        "arm_id": "delete_key:QYCA5AE27"
+      },
+      {
+        "episode_id": "cc79e5e76fe3c8edc9c7",
+        "arm_id": "delete_one:v19-279-s006"
+      },
+      {
+        "episode_id": "49d1ad65175183b5c610",
+        "arm_id": "delete_key:QYEF1FF65"
+      },
+      {
+        "episode_id": "50d1a9f744074196ff14",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "235fa4e84c7c77f5faae",
+        "arm_id": "delete_key:QY0668254"
+      },
+      {
+        "episode_id": "0f44f322e9a724fef5d0",
+        "arm_id": "delete_one:v19-287-s000"
+      },
+      {
+        "episode_id": "58800cbd1d49d54e1e4f",
+        "arm_id": "delete_key:QY3DD571D"
+      },
+      {
+        "episode_id": "7c786230edbdca59a618",
+        "arm_id": "delete_one:v19-291-s059"
+      },
+      {
+        "episode_id": "b78cce75830f0c4ea419",
+        "arm_id": "delete_key:QY1079A2E"
+      },
+      {
+        "episode_id": "7d2555c283228c08ec3b",
+        "arm_id": "delete_one:v19-295-s000"
+      },
+      {
+        "episode_id": "1fe2f7068c71dac4e90b",
+        "arm_id": "delete_key:QYD27F05E"
+      },
+      {
+        "episode_id": "31f68a59909152a06d7f",
+        "arm_id": "delete_one:v19-299-s001"
+      },
+      {
+        "episode_id": "bb56083ef64fdf1c1b75",
+        "arm_id": "delete_key:QYEA9B0DF"
+      },
+      {
+        "episode_id": "8a455e3111f71304e142",
+        "arm_id": "delete_one:v19-303-s000"
+      },
+      {
+        "episode_id": "d926d7abad5650fa372b",
+        "arm_id": "delete_key:QY223393E"
+      },
+      {
+        "episode_id": "de13e212beb7b71e22dd",
+        "arm_id": "delete_one:v19-307-s000"
+      },
+      {
+        "episode_id": "00b1df6fdcd1dd99cb5f",
+        "arm_id": "delete_key:QYCD1F867"
+      },
+      {
+        "episode_id": "5db2a16150f10d77e702",
+        "arm_id": "delete_one:v19-311-s000"
+      },
+      {
+        "episode_id": "2963c3bc6c11e73e1d7b",
+        "arm_id": "delete_key:QY05F8C11"
+      },
+      {
+        "episode_id": "434dd56a938659410f3f",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "328d9b65f621ca979917",
+        "arm_id": "delete_key:QYC17E502"
+      },
+      {
+        "episode_id": "eff3ace3f1849516b20e",
+        "arm_id": "delete_one:v19-319-s000"
+      }
+    ],
+    "0.03": [
+      {
+        "episode_id": "482a648b41dae3551751",
+        "arm_id": "delete_one:v19-000-s000"
+      },
+      {
+        "episode_id": "dd5cfb1098653a9af265",
+        "arm_id": "delete_one:v19-002-s000"
+      },
+      {
+        "episode_id": "f4f6d257609d978c6701",
+        "arm_id": "delete_one:v19-004-s000"
+      },
+      {
+        "episode_id": "98003b021661e4ff7728",
+        "arm_id": "delete_one:v19-006-s013"
+      },
+      {
+        "episode_id": "066c8a74938bad7f9b53",
+        "arm_id": "delete_one:v19-008-s017"
+      },
+      {
+        "episode_id": "491089932184c9a78e06",
+        "arm_id": "delete_key:QY6582423B"
+      },
+      {
+        "episode_id": "88ec3a52c27febba52db",
+        "arm_id": "delete_one:v19-012-s012"
+      },
+      {
+        "episode_id": "983ea9fe23ce5dbeacdc",
+        "arm_id": "delete_one:v19-014-s013"
+      },
+      {
+        "episode_id": "9e7a4eb38c37345735b7",
+        "arm_id": "delete_one:v19-016-s000"
+      },
+      {
+        "episode_id": "edcd8175572994af25a7",
+        "arm_id": "delete_one:v19-018-s005"
+      },
+      {
+        "episode_id": "ebb224093d1f7e01e759",
+        "arm_id": "delete_one:v19-020-s009"
+      },
+      {
+        "episode_id": "85eb002f432c7d7ca7a4",
+        "arm_id": "delete_key:QY59508FEB"
+      },
+      {
+        "episode_id": "fa0ed011c245d629a390",
+        "arm_id": "delete_one:v19-024-s029"
+      },
+      {
+        "episode_id": "c6e743a4aeedf28778e6",
+        "arm_id": "delete_one:v19-026-s002"
+      },
+      {
+        "episode_id": "ee8e975bf5d6c3904c87",
+        "arm_id": "delete_one:v19-028-s017"
+      },
+      {
+        "episode_id": "2752bb2601cf5774d21a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9c939247a125108cca1b",
+        "arm_id": "delete_one:v19-032-s000"
+      },
+      {
+        "episode_id": "99fcbcb7496daaebcb87",
+        "arm_id": "delete_one:v19-034-s000"
+      },
+      {
+        "episode_id": "6d6cf26e3984df77d87b",
+        "arm_id": "delete_one:v19-036-s000"
+      },
+      {
+        "episode_id": "4823b6a5b61a4bf15c5a",
+        "arm_id": "delete_one:v19-038-s000"
+      },
+      {
+        "episode_id": "5c6593e0bf98f2fdf01a",
+        "arm_id": "delete_one:v19-040-s000"
+      },
+      {
+        "episode_id": "f58b0a4274402d46b2ed",
+        "arm_id": "delete_one:v19-042-s000"
+      },
+      {
+        "episode_id": "e6163e607ccef7dcc545",
+        "arm_id": "delete_one:v19-044-s005"
+      },
+      {
+        "episode_id": "4226bbaf9d820fabc54e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "bb17cfa7c1fac12b2136",
+        "arm_id": "delete_one:v19-048-s000"
+      },
+      {
+        "episode_id": "6f0c8f264cc870d786cb",
+        "arm_id": "delete_one:v19-050-s000"
+      },
+      {
+        "episode_id": "14cf460e241bc54113e5",
+        "arm_id": "delete_one:v19-052-s000"
+      },
+      {
+        "episode_id": "5b78a4d5f829cd36bde6",
+        "arm_id": "delete_key:QY822A4B5B"
+      },
+      {
+        "episode_id": "a06e76ffbf5f2c25cabf",
+        "arm_id": "delete_one:v19-056-s000"
+      },
+      {
+        "episode_id": "94c66ce294a59f1f80b9",
+        "arm_id": "delete_one:v19-058-s000"
+      },
+      {
+        "episode_id": "3144a6670031304557a0",
+        "arm_id": "delete_key:QYFB7464F"
+      },
+      {
+        "episode_id": "c533b81ee8a64c6bb164",
+        "arm_id": "delete_one:v19-062-s010"
+      },
+      {
+        "episode_id": "f14df56a8efaf50f16ac",
+        "arm_id": "delete_one:v19-064-s000"
+      },
+      {
+        "episode_id": "4323c52ece89e9cd77d2",
+        "arm_id": "delete_one:v19-066-s011"
+      },
+      {
+        "episode_id": "5269faae9b4478c663d9",
+        "arm_id": "delete_one:v19-068-s000"
+      },
+      {
+        "episode_id": "7ba715f4db159763f9a6",
+        "arm_id": "delete_key:QYC8E1954B"
+      },
+      {
+        "episode_id": "3c9358144530f344a25c",
+        "arm_id": "delete_one:v19-072-s000"
+      },
+      {
+        "episode_id": "83b9b2e0feaa8911e731",
+        "arm_id": "delete_one:v19-074-s000"
+      },
+      {
+        "episode_id": "6c235342ce0552ce9901",
+        "arm_id": "delete_one:v19-076-s000"
+      },
+      {
+        "episode_id": "614c5385213efb8ad2ae",
+        "arm_id": "delete_one:v19-078-s006"
+      },
+      {
+        "episode_id": "408c861c8a0446ead4a6",
+        "arm_id": "delete_one:v19-080-s000"
+      },
+      {
+        "episode_id": "ee7d3edf5393d1e1ac6f",
+        "arm_id": "delete_key:QYA80A172B"
+      },
+      {
+        "episode_id": "3f9ad9f0205d8dd648d7",
+        "arm_id": "delete_one:v19-084-s000"
+      },
+      {
+        "episode_id": "da3eedbf65599d9986f5",
+        "arm_id": "delete_key:QYD5D3A86"
+      },
+      {
+        "episode_id": "d337689db58f527e883d",
+        "arm_id": "delete_one:v19-088-s011"
+      },
+      {
+        "episode_id": "f18d00eb6c6333621c26",
+        "arm_id": "delete_one:v19-090-s005"
+      },
+      {
+        "episode_id": "6ec92f3ff7f7764b893c",
+        "arm_id": "delete_one:v19-092-s000"
+      },
+      {
+        "episode_id": "421ce312374ea3eb2b98",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "d895f8ac101f4288a35a",
+        "arm_id": "delete_one:v19-096-s000"
+      },
+      {
+        "episode_id": "19efff2f8e198bcc16cf",
+        "arm_id": "delete_one:v19-098-s000"
+      },
+      {
+        "episode_id": "ace81dc8696248cb7f36",
+        "arm_id": "delete_one:v19-100-s000"
+      },
+      {
+        "episode_id": "4cb2debd9afb4fb4a54f",
+        "arm_id": "delete_key:QYE9365FDB"
+      },
+      {
+        "episode_id": "f1fd64dddcf9807c528c",
+        "arm_id": "delete_one:v19-104-s000"
+      },
+      {
+        "episode_id": "9c221a9a931156c77acb",
+        "arm_id": "delete_one:v19-106-s000"
+      },
+      {
+        "episode_id": "143e99058dfc0610ba5a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "6a5610feabd35bfcbffc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "2df5e40f466da99ed767",
+        "arm_id": "delete_one:v19-112-s000"
+      },
+      {
+        "episode_id": "d58bdc2064c4b10bbbab",
+        "arm_id": "delete_one:v19-114-s029"
+      },
+      {
+        "episode_id": "566f0809766d6638a5bb",
+        "arm_id": "delete_one:v19-116-s000"
+      },
+      {
+        "episode_id": "fe6e4852f6d99f9ace00",
+        "arm_id": "delete_one:v19-118-s000"
+      },
+      {
+        "episode_id": "16bba495f497cf79a6e0",
+        "arm_id": "delete_one:v19-120-s000"
+      },
+      {
+        "episode_id": "34197cdc39e8b0524ca4",
+        "arm_id": "delete_one:v19-122-s006"
+      },
+      {
+        "episode_id": "4624164317b0e6aac7ed",
+        "arm_id": "delete_one:v19-124-s000"
+      },
+      {
+        "episode_id": "6475bd4750760f6aa7d6",
+        "arm_id": "delete_one:v19-126-s003"
+      },
+      {
+        "episode_id": "d43aadfd69c4020d9c21",
+        "arm_id": "delete_one:v19-128-s000"
+      },
+      {
+        "episode_id": "719f15ea62cfb2d712e8",
+        "arm_id": "delete_one:v19-130-s009"
+      },
+      {
+        "episode_id": "7914193a229d94ab592d",
+        "arm_id": "delete_one:v19-132-s000"
+      },
+      {
+        "episode_id": "a7c1cf214b9a97a00d73",
+        "arm_id": "delete_key:QY9095FAFB"
+      },
+      {
+        "episode_id": "96679a34569e0d94917c",
+        "arm_id": "delete_one:v19-136-s000"
+      },
+      {
+        "episode_id": "86850d32cd0588ac5db1",
+        "arm_id": "delete_one:v19-138-s000"
+      },
+      {
+        "episode_id": "265834533a211e8f6ac5",
+        "arm_id": "delete_key:QY04A79A3"
+      },
+      {
+        "episode_id": "1ccf60f60595195e9672",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "dc7fc3afd0c4947385b0",
+        "arm_id": "delete_one:v19-144-s000"
+      },
+      {
+        "episode_id": "66e8bfb0424a03fcaeb6",
+        "arm_id": "delete_one:v19-146-s029"
+      },
+      {
+        "episode_id": "d86367c682a3946aa859",
+        "arm_id": "delete_one:v19-148-s007"
+      },
+      {
+        "episode_id": "d3f256826873de829ca2",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "037d1dae4b9087c99ca3",
+        "arm_id": "delete_one:v19-152-s000"
+      },
+      {
+        "episode_id": "d22d7aa06352f20a3ba9",
+        "arm_id": "delete_one:v19-154-s001"
+      },
+      {
+        "episode_id": "87dabdaef29bbaad51a7",
+        "arm_id": "delete_key:QY466DCBA"
+      },
+      {
+        "episode_id": "30207121be4eadeb1710",
+        "arm_id": "delete_key:QYD3933B2B"
+      },
+      {
+        "episode_id": "8e614c1eebcd3c7612df",
+        "arm_id": "delete_one:v19-160-s000"
+      },
+      {
+        "episode_id": "6032da3627310bfeb102",
+        "arm_id": "delete_one:v19-162-s006"
+      },
+      {
+        "episode_id": "b46e0a9e24348b808a0c",
+        "arm_id": "delete_one:v19-164-s000"
+      },
+      {
+        "episode_id": "c6b8fff544883386506b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "22fbc200cbeaf0760464",
+        "arm_id": "delete_key:QY2D14E87"
+      },
+      {
+        "episode_id": "ae74c76f865ef64d5cc4",
+        "arm_id": "delete_one:v19-170-s000"
+      },
+      {
+        "episode_id": "f5fb5f865a361f2387ee",
+        "arm_id": "delete_one:v19-172-s008"
+      },
+      {
+        "episode_id": "f79df725c98b0b4f4ab3",
+        "arm_id": "delete_key:QY6D40F37B"
+      },
+      {
+        "episode_id": "35130e9395ce4c8f8069",
+        "arm_id": "delete_one:v19-176-s000"
+      },
+      {
+        "episode_id": "1cea1d2d2d1d0b2f11ef",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "ba11d5d28e72b583e079",
+        "arm_id": "delete_one:v19-180-s000"
+      },
+      {
+        "episode_id": "269b64c913e19cd2ff92",
+        "arm_id": "delete_key:QY41233F4B"
+      },
+      {
+        "episode_id": "23d1d8fab4fd6cacb623",
+        "arm_id": "delete_one:v19-184-s000"
+      },
+      {
+        "episode_id": "9c39bcabd0b73f5ccbcc",
+        "arm_id": "delete_one:v19-186-s006"
+      },
+      {
+        "episode_id": "fb49f087ef499b61da5c",
+        "arm_id": "delete_one:v19-188-s000"
+      },
+      {
+        "episode_id": "b89e7808c2ca79dd58f4",
+        "arm_id": "delete_one:v19-190-s000"
+      },
+      {
+        "episode_id": "c072f2e193db095ca381",
+        "arm_id": "delete_one:v19-192-s000"
+      },
+      {
+        "episode_id": "5c3f49d74587801791f6",
+        "arm_id": "delete_one:v19-194-s000"
+      },
+      {
+        "episode_id": "98d415922e80effb8ab3",
+        "arm_id": "delete_one:v19-196-s000"
+      },
+      {
+        "episode_id": "e2cbda2aac7f6a3f3a1f",
+        "arm_id": "delete_key:QY313675EB"
+      },
+      {
+        "episode_id": "5bbb792fd287d0138f3d",
+        "arm_id": "delete_one:v19-200-s000"
+      },
+      {
+        "episode_id": "2bd356e9ea071bbf77ac",
+        "arm_id": "delete_one:v19-202-s000"
+      },
+      {
+        "episode_id": "05156d0a9259d19e60b6",
+        "arm_id": "delete_one:v19-204-s010"
+      },
+      {
+        "episode_id": "142dae8501bb0fd6058b",
+        "arm_id": "delete_one:v19-206-s005"
+      },
+      {
+        "episode_id": "b2c6686a91755f0255d0",
+        "arm_id": "delete_one:v19-208-s000"
+      },
+      {
+        "episode_id": "ba4d8546505cfc9f4fd0",
+        "arm_id": "delete_one:v19-210-s000"
+      },
+      {
+        "episode_id": "f7926533795a78c59ae5",
+        "arm_id": "delete_one:v19-212-s000"
+      },
+      {
+        "episode_id": "6b1d92407424d6988c8c",
+        "arm_id": "delete_one:v19-214-s055"
+      },
+      {
+        "episode_id": "8bc79a163993ccca6de0",
+        "arm_id": "delete_one:v19-216-s000"
+      },
+      {
+        "episode_id": "2192f23a46759465de33",
+        "arm_id": "delete_key:QYFC79FFFB"
+      },
+      {
+        "episode_id": "86233b9da5697a319d5a",
+        "arm_id": "delete_one:v19-220-s000"
+      },
+      {
+        "episode_id": "b3667744a8f360c7901c",
+        "arm_id": "delete_one:v19-222-s010"
+      },
+      {
+        "episode_id": "07b6e5e96cd6eeafc8fd",
+        "arm_id": "delete_one:v19-224-s000"
+      },
+      {
+        "episode_id": "4b764e33c3c41f4326de",
+        "arm_id": "delete_one:v19-226-s000"
+      },
+      {
+        "episode_id": "16ade3ccbe44b2a7c92d",
+        "arm_id": "delete_one:v19-228-s000"
+      },
+      {
+        "episode_id": "e6d8124ec3a730143f82",
+        "arm_id": "delete_key:QYE609E14B"
+      },
+      {
+        "episode_id": "aaec92399d06507c8436",
+        "arm_id": "delete_one:v19-232-s000"
+      },
+      {
+        "episode_id": "df61a4047b1c7b01baea",
+        "arm_id": "delete_key:QY1B3511AB"
+      },
+      {
+        "episode_id": "cced2ef6c5c0a8e7aa31",
+        "arm_id": "delete_one:v19-236-s005"
+      },
+      {
+        "episode_id": "23b4776c5ddc4117dee7",
+        "arm_id": "delete_one:v19-238-s012"
+      },
+      {
+        "episode_id": "8deea306dd76cc294dd1",
+        "arm_id": "delete_one:v19-240-s000"
+      },
+      {
+        "episode_id": "5ed5348e0ddc45b63cab",
+        "arm_id": "delete_one:v19-242-s003"
+      },
+      {
+        "episode_id": "a6d192307cbfdd787c1e",
+        "arm_id": "delete_one:v19-244-s000"
+      },
+      {
+        "episode_id": "6b24ff785fc08c898b9e",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f779c1a179615227ef4a",
+        "arm_id": "delete_key:QYEF8384F"
+      },
+      {
+        "episode_id": "8e819afd597540413961",
+        "arm_id": "delete_one:v19-250-s005"
+      },
+      {
+        "episode_id": "b9f8d0d82252d2134888",
+        "arm_id": "delete_one:v19-252-s023"
+      },
+      {
+        "episode_id": "f36c4706d4ccdbed102e",
+        "arm_id": "delete_key:QY505A6C7B"
+      },
+      {
+        "episode_id": "9f816504f9ed87e78f01",
+        "arm_id": "delete_one:v19-256-s000"
+      },
+      {
+        "episode_id": "af5474b86be2a203d116",
+        "arm_id": "delete_one:v19-258-s008"
+      },
+      {
+        "episode_id": "ac0ff93a5c8d4382dc48",
+        "arm_id": "delete_one:v19-260-s008"
+      },
+      {
+        "episode_id": "de8ab21665fa57e0e66b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f7b53c275080cab3554b",
+        "arm_id": "delete_one:v19-264-s000"
+      },
+      {
+        "episode_id": "1ecf75ce08b556851e8b",
+        "arm_id": "delete_key:QY332552AB"
+      },
+      {
+        "episode_id": "d4684e8521d0636a6689",
+        "arm_id": "delete_one:v19-268-s000"
+      },
+      {
+        "episode_id": "3c1471aa6628006219d3",
+        "arm_id": "delete_key:QY685F7ACB"
+      },
+      {
+        "episode_id": "566eaa778e64e7905c2b",
+        "arm_id": "delete_one:v19-272-s000"
+      },
+      {
+        "episode_id": "a85dce6790eeaf6c215b",
+        "arm_id": "delete_one:v19-274-s002"
+      },
+      {
+        "episode_id": "c6dd8f0e7a484c207462",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "62b8bbd21e2444513260",
+        "arm_id": "delete_key:QYCB022FB"
+      },
+      {
+        "episode_id": "373f934419e9462daa62",
+        "arm_id": "delete_one:v19-280-s000"
+      },
+      {
+        "episode_id": "8c0416459a58053d4d32",
+        "arm_id": "delete_key:QYE2A146EB"
+      },
+      {
+        "episode_id": "b2e554fccd707c46ef51",
+        "arm_id": "delete_one:v19-284-s009"
+      },
+      {
+        "episode_id": "63f1759f535923582067",
+        "arm_id": "delete_key:QY937D9CAB"
+      },
+      {
+        "episode_id": "ed4aa1a0aaf93834e8c9",
+        "arm_id": "delete_one:v19-288-s000"
+      },
+      {
+        "episode_id": "28844c4a531ce987373d",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "abcd1a76cd77b794a83b",
+        "arm_id": "delete_one:v19-292-s000"
+      },
+      {
+        "episode_id": "3b7ca131f51989901ada",
+        "arm_id": "delete_key:QYE7FBCC9B"
+      },
+      {
+        "episode_id": "3a739a23beea5e00ac44",
+        "arm_id": "delete_one:v19-296-s000"
+      },
+      {
+        "episode_id": "f1c570a6906a296e0830",
+        "arm_id": "delete_one:v19-298-s000"
+      },
+      {
+        "episode_id": "f8ca0a80e9a5fdfd7fea",
+        "arm_id": "delete_one:v19-300-s006"
+      },
+      {
+        "episode_id": "1e40987a58d89bd04c92",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "84006bedba0662ccccfc",
+        "arm_id": "delete_one:v19-304-s000"
+      },
+      {
+        "episode_id": "e7a2b2d27d9021a16ff0",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "4fe191159c39eb5b05b2",
+        "arm_id": "delete_one:v19-308-s000"
+      },
+      {
+        "episode_id": "b2fbdf8ad0e06bec1bdd",
+        "arm_id": "delete_key:QYD30E282B"
+      },
+      {
+        "episode_id": "dbf0328bc9e3aeb0ed9d",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9a1f119b01e1938f4179",
+        "arm_id": "delete_one:v19-314-s003"
+      },
+      {
+        "episode_id": "e3a16a5a2ceed8d6d296",
+        "arm_id": "delete_one:v19-316-s000"
+      },
+      {
+        "episode_id": "1b7b65cd377b8cb64a83",
+        "arm_id": "delete_key:QYD679C8FB"
+      },
+      {
+        "episode_id": "801e09c97836b9132938",
+        "arm_id": "delete_key:QYE1F4A9C"
+      },
+      {
+        "episode_id": "49831512d0d5bec38030",
+        "arm_id": "delete_key:QYFE21EB9"
+      },
+      {
+        "episode_id": "ae3ac529661b9e7ff063",
+        "arm_id": "delete_key:QY6231126"
+      },
+      {
+        "episode_id": "2f96941b0f8fc4d526e2",
+        "arm_id": "delete_one:v19-007-s000"
+      },
+      {
+        "episode_id": "5b82bb3b6a17a97f94f1",
+        "arm_id": "delete_key:QYBDFF279"
+      },
+      {
+        "episode_id": "277eef55ecf4d194b097",
+        "arm_id": "delete_one:v19-011-s000"
+      },
+      {
+        "episode_id": "7823914964ee11954f24",
+        "arm_id": "delete_key:QYB74619A"
+      },
+      {
+        "episode_id": "fd6a4ca3f5c87a0e62fe",
+        "arm_id": "delete_one:v19-015-s004"
+      },
+      {
+        "episode_id": "2863cd3138dbff665a37",
+        "arm_id": "delete_key:QY0CF64BD"
+      },
+      {
+        "episode_id": "8d3ab9a7b11c3ff254c8",
+        "arm_id": "delete_key:QY29ED092"
+      },
+      {
+        "episode_id": "6d86fef9adbfc091c98e",
+        "arm_id": "delete_key:QY95AC235"
+      },
+      {
+        "episode_id": "37b7cb657098520dd4eb",
+        "arm_id": "delete_one:v19-023-s006"
+      },
+      {
+        "episode_id": "e4f63c78ea35f3b553bc",
+        "arm_id": "delete_key:QY68B8E4F"
+      },
+      {
+        "episode_id": "8d319f99a96e62f62ed4",
+        "arm_id": "delete_one:v19-027-s000"
+      },
+      {
+        "episode_id": "574feb639d25fbc2091d",
+        "arm_id": "delete_key:QYA531C0B"
+      },
+      {
+        "episode_id": "4b6fc6050da55b53b1f9",
+        "arm_id": "delete_key:QYCE021A0"
+      },
+      {
+        "episode_id": "13c94450b346c8e0f261",
+        "arm_id": "delete_key:QYADF1B1E"
+      },
+      {
+        "episode_id": "67c55a7efd667452ae24",
+        "arm_id": "delete_one:v19-035-s003"
+      },
+      {
+        "episode_id": "11f5b6c854cbe5331c8a",
+        "arm_id": "delete_key:QY3BD5CB4"
+      },
+      {
+        "episode_id": "8c7f133860306a101206",
+        "arm_id": "delete_one:v19-039-s000"
+      },
+      {
+        "episode_id": "caadce621880d1a9e169",
+        "arm_id": "delete_key:QYF8AE036"
+      },
+      {
+        "episode_id": "5fd7fcb05d667a3e2dd3",
+        "arm_id": "delete_one:v19-043-s000"
+      },
+      {
+        "episode_id": "e77026bfdb28d279deac",
+        "arm_id": "delete_key:QYD0B26A5"
+      },
+      {
+        "episode_id": "196cbf162c6e0683948a",
+        "arm_id": "delete_one:v19-047-s000"
+      },
+      {
+        "episode_id": "667ad0cb94605f9c8d78",
+        "arm_id": "delete_key:QYD2D02BB"
+      },
+      {
+        "episode_id": "c7267db11984de996a27",
+        "arm_id": "delete_key:QY68FD8AE"
+      },
+      {
+        "episode_id": "a00035978e2dda0f80a6",
+        "arm_id": "delete_key:QYBCB302D"
+      },
+      {
+        "episode_id": "5e09a00150281d73a194",
+        "arm_id": "delete_one:v19-055-s000"
+      },
+      {
+        "episode_id": "4feea10cdf272965b6f9",
+        "arm_id": "delete_key:QYE6501FA"
+      },
+      {
+        "episode_id": "784df3106708a11083d0",
+        "arm_id": "delete_one:v19-059-s000"
+      },
+      {
+        "episode_id": "f34ce1e14c56b6c31e21",
+        "arm_id": "delete_key:QY59BA610"
+      },
+      {
+        "episode_id": "edc266f4c18ba9fb75a6",
+        "arm_id": "delete_one:v19-063-s000"
+      },
+      {
+        "episode_id": "520c469f747cb4d095e6",
+        "arm_id": "delete_key:QY9696CE6"
+      },
+      {
+        "episode_id": "2e1c96e08c1adb6ef7f6",
+        "arm_id": "delete_key:QYFE465DE"
+      },
+      {
+        "episode_id": "fe5e5716263cbff62d6c",
+        "arm_id": "delete_key:QYB86A2A3"
+      },
+      {
+        "episode_id": "648a679175c35fa10403",
+        "arm_id": "delete_one:v19-071-s000"
+      },
+      {
+        "episode_id": "1866bd06b6d5722c3905",
+        "arm_id": "delete_key:QY27355BB"
+      },
+      {
+        "episode_id": "af96e0320dc0904575e4",
+        "arm_id": "delete_one:v19-075-s000"
+      },
+      {
+        "episode_id": "41ae57a43ef0b5004470",
+        "arm_id": "delete_key:QYA9B987D"
+      },
+      {
+        "episode_id": "580134023c58ab47c955",
+        "arm_id": "delete_one:v19-079-s000"
+      },
+      {
+        "episode_id": "2bef707acbe5e8d9e2aa",
+        "arm_id": "delete_key:QY6247E4B"
+      },
+      {
+        "episode_id": "988974c0814c9c96418c",
+        "arm_id": "delete_one:v19-083-s000"
+      },
+      {
+        "episode_id": "9e10dfc7ffd5655df566",
+        "arm_id": "delete_key:QY8C17DE6"
+      },
+      {
+        "episode_id": "f8ac5ff5101ca39e9d3d",
+        "arm_id": "delete_one:v19-087-s000"
+      },
+      {
+        "episode_id": "13d4fde580faef06756e",
+        "arm_id": "delete_key:QY3DC0BFD"
+      },
+      {
+        "episode_id": "1056254df6c9321d2791",
+        "arm_id": "delete_one:v19-091-s000"
+      },
+      {
+        "episode_id": "51d3bc46e52b9e886061",
+        "arm_id": "delete_key:QYFE3DAB9"
+      },
+      {
+        "episode_id": "d70e855ee528d3d959e6",
+        "arm_id": "delete_one:v19-095-s000"
+      },
+      {
+        "episode_id": "1db6ae1d278b4d1756e1",
+        "arm_id": "delete_key:QYDC32049"
+      },
+      {
+        "episode_id": "ebafa0809c9786972b0b",
+        "arm_id": "delete_key:QY6B8FD19"
+      },
+      {
+        "episode_id": "744be4cad8d60028c3df",
+        "arm_id": "delete_key:QY181DAEA"
+      },
+      {
+        "episode_id": "5717b078981f6f3cbe03",
+        "arm_id": "delete_one:v19-103-s000"
+      },
+      {
+        "episode_id": "ef56da7d3487fa440177",
+        "arm_id": "delete_key:QY35A41F7"
+      },
+      {
+        "episode_id": "74375721ee000134cd73",
+        "arm_id": "delete_one:v19-107-s000"
+      },
+      {
+        "episode_id": "4100f478b14dd4f58d7c",
+        "arm_id": "delete_key:QYE9668A0"
+      },
+      {
+        "episode_id": "e61f644d9f5cb9c41040",
+        "arm_id": "delete_one:v19-111-s000"
+      },
+      {
+        "episode_id": "f57c32367d617264fd65",
+        "arm_id": "delete_key:QY16A9CE6"
+      },
+      {
+        "episode_id": "11c176eba889c996e574",
+        "arm_id": "delete_one:v19-115-s054"
+      },
+      {
+        "episode_id": "826ed11a04190086eb11",
+        "arm_id": "delete_key:QY90D2674"
+      },
+      {
+        "episode_id": "4da298582cbe97e81965",
+        "arm_id": "delete_one:v19-119-s003"
+      },
+      {
+        "episode_id": "e1e5dc8e2a01c427d892",
+        "arm_id": "delete_key:QYEA84542"
+      },
+      {
+        "episode_id": "bb391569346084cd53c8",
+        "arm_id": "delete_one:v19-123-s000"
+      },
+      {
+        "episode_id": "cb83cbaff19e36cdfc5f",
+        "arm_id": "delete_key:QYB81FDC9"
+      },
+      {
+        "episode_id": "8ada664e9fa75d233aed",
+        "arm_id": "delete_one:v19-127-s000"
+      },
+      {
+        "episode_id": "60188da120eb4230e988",
+        "arm_id": "delete_key:QY5598823"
+      },
+      {
+        "episode_id": "b4114a81943d23dd9480",
+        "arm_id": "delete_one:v19-131-s000"
+      },
+      {
+        "episode_id": "964aa768bedb4d259b71",
+        "arm_id": "delete_key:QY856E67B"
+      },
+      {
+        "episode_id": "e4963c9cbe998db6e8b1",
+        "arm_id": "delete_one:v19-135-s000"
+      },
+      {
+        "episode_id": "83880b6eeddcc45c5d19",
+        "arm_id": "delete_key:QYA8C6BD7"
+      },
+      {
+        "episode_id": "ace018121c020c9bbf1c",
+        "arm_id": "delete_one:v19-139-s000"
+      },
+      {
+        "episode_id": "81e1cc44f1f9fe641fb4",
+        "arm_id": "delete_key:QY743278E"
+      },
+      {
+        "episode_id": "199e7f41461755fd7a9d",
+        "arm_id": "delete_one:v19-143-s000"
+      },
+      {
+        "episode_id": "b645cb2edab8d8f31656",
+        "arm_id": "delete_key:QY7CAC82E"
+      },
+      {
+        "episode_id": "c76446f0d9c49016b640",
+        "arm_id": "delete_one:v19-147-s000"
+      },
+      {
+        "episode_id": "f6c9c16cc2a73f4863bc",
+        "arm_id": "delete_key:QY660D627"
+      },
+      {
+        "episode_id": "2303aeadaec778b78b27",
+        "arm_id": "delete_one:v19-151-s000"
+      },
+      {
+        "episode_id": "bae9750d01c4e2197934",
+        "arm_id": "delete_key:QYA8A10A0"
+      },
+      {
+        "episode_id": "86c163aa5331ac1860dc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "07335768b680c8c7be9a",
+        "arm_id": "delete_key:QYA853DDB"
+      },
+      {
+        "episode_id": "ee12aa43cc61b6904884",
+        "arm_id": "delete_one:v19-159-s015"
+      },
+      {
+        "episode_id": "7ffce577034aeb756ad3",
+        "arm_id": "delete_key:QY747768A"
+      },
+      {
+        "episode_id": "6da6c1a53595243908a1",
+        "arm_id": "delete_key:QYB35B99D"
+      },
+      {
+        "episode_id": "8f5010f470fb309f07b6",
+        "arm_id": "delete_key:QY7C65221"
+      },
+      {
+        "episode_id": "11779ea8f58694037045",
+        "arm_id": "delete_one:v19-167-s000"
+      },
+      {
+        "episode_id": "d2b6a3d5896d1258c89b",
+        "arm_id": "delete_key:QY00C8E59"
+      },
+      {
+        "episode_id": "5eb1380863b55976dca0",
+        "arm_id": "delete_one:v19-171-s000"
+      },
+      {
+        "episode_id": "224edaa09d0c0f223537",
+        "arm_id": "delete_key:QY1C3F6E2"
+      },
+      {
+        "episode_id": "612ab6c15e71aabfa87f",
+        "arm_id": "delete_one:v19-175-s000"
+      },
+      {
+        "episode_id": "8ef958eb2e5121d219ed",
+        "arm_id": "delete_key:QYD2031FD"
+      },
+      {
+        "episode_id": "e7b832128840dd113910",
+        "arm_id": "delete_one:v19-179-s006"
+      },
+      {
+        "episode_id": "ecdf9590857b19337dc7",
+        "arm_id": "delete_key:QYB38719F"
+      },
+      {
+        "episode_id": "ea6a078cac787ef3be99",
+        "arm_id": "delete_one:v19-183-s006"
+      },
+      {
+        "episode_id": "f3fa18c82039df9a5e13",
+        "arm_id": "delete_key:QY964CAAD"
+      },
+      {
+        "episode_id": "5684484109b2eed67aa6",
+        "arm_id": "delete_one:v19-187-s000"
+      },
+      {
+        "episode_id": "7c391274af9cd1ea374a",
+        "arm_id": "delete_key:QYBF881B5"
+      },
+      {
+        "episode_id": "a6b73f43ef3a228cdac6",
+        "arm_id": "delete_one:v19-191-s001"
+      },
+      {
+        "episode_id": "5432f2457847be8eb050",
+        "arm_id": "delete_key:QY9CD04E7"
+      },
+      {
+        "episode_id": "40928661360054e9957f",
+        "arm_id": "delete_key:QY6202F16"
+      },
+      {
+        "episode_id": "3a2c76230dc4faef94e9",
+        "arm_id": "delete_key:QY3BEAFD3"
+      },
+      {
+        "episode_id": "0a1b2810bf6ec5fb9e57",
+        "arm_id": "delete_one:v19-199-s000"
+      },
+      {
+        "episode_id": "35f4a3aacfb05b827843",
+        "arm_id": "delete_key:QY1B88E67"
+      },
+      {
+        "episode_id": "945df62f461bd69216ef",
+        "arm_id": "delete_one:v19-203-s000"
+      },
+      {
+        "episode_id": "69b580f2b1958a24d0e9",
+        "arm_id": "delete_key:QYD064D3F"
+      },
+      {
+        "episode_id": "577bf0b62aeac7e103b1",
+        "arm_id": "delete_one:v19-207-s000"
+      },
+      {
+        "episode_id": "ff552e6ee9abd2402b92",
+        "arm_id": "delete_key:QYC0167DB"
+      },
+      {
+        "episode_id": "bb483fdc6921d5ddc6a5",
+        "arm_id": "delete_one:v19-211-s001"
+      },
+      {
+        "episode_id": "de5a0866983d976832f8",
+        "arm_id": "delete_key:QY99D48DD"
+      },
+      {
+        "episode_id": "3effa39d91fe18a73a0e",
+        "arm_id": "delete_one:v19-215-s000"
+      },
+      {
+        "episode_id": "ad3784b93a585fd3a764",
+        "arm_id": "delete_key:QY5F74895"
+      },
+      {
+        "episode_id": "57176674d0ea5945fef7",
+        "arm_id": "delete_one:v19-219-s000"
+      },
+      {
+        "episode_id": "d2cb192aa4a9ba0a2fe5",
+        "arm_id": "delete_key:QY5EBCE91"
+      },
+      {
+        "episode_id": "90f98551e1daef206887",
+        "arm_id": "delete_one:v19-223-s000"
+      },
+      {
+        "episode_id": "724cf52d4072c7f02c19",
+        "arm_id": "delete_key:QYB87FC56"
+      },
+      {
+        "episode_id": "3de12732d1691dbbdd9e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "27a41c589322e1847172",
+        "arm_id": "delete_key:QY0095620"
+      },
+      {
+        "episode_id": "9fdbb2aae5d6f7e95276",
+        "arm_id": "delete_one:v19-231-s000"
+      },
+      {
+        "episode_id": "552146d862343f7e5b86",
+        "arm_id": "delete_key:QY4612EBF"
+      },
+      {
+        "episode_id": "a17afe859f3d0f64b7fb",
+        "arm_id": "delete_one:v19-235-s000"
+      },
+      {
+        "episode_id": "9bc0284c1b4792c7ee64",
+        "arm_id": "delete_key:QY4F1CD29"
+      },
+      {
+        "episode_id": "30b76e9872e590c3652c",
+        "arm_id": "delete_one:v19-239-s000"
+      },
+      {
+        "episode_id": "0c45c7e549a7c4d058e5",
+        "arm_id": "delete_key:QY3D528D2"
+      },
+      {
+        "episode_id": "42c633c290bdf9fe54fd",
+        "arm_id": "delete_key:QY5A5D431"
+      },
+      {
+        "episode_id": "8e67f0ebdf186d69f205",
+        "arm_id": "delete_key:QY1AFB651"
+      },
+      {
+        "episode_id": "c9d40ff9cc2c67d80d71",
+        "arm_id": "delete_one:v19-247-s000"
+      },
+      {
+        "episode_id": "e98839fab978cba79554",
+        "arm_id": "delete_key:QY7E6DAFC"
+      },
+      {
+        "episode_id": "f46587576421ab2d8db1",
+        "arm_id": "delete_one:v19-251-s000"
+      },
+      {
+        "episode_id": "b761e40b35b9515b8460",
+        "arm_id": "delete_key:QY67A47E6"
+      },
+      {
+        "episode_id": "02d9b76af93b042612de",
+        "arm_id": "delete_one:v19-255-s000"
+      },
+      {
+        "episode_id": "304ea9dd150a92733b98",
+        "arm_id": "delete_key:QY2383521"
+      },
+      {
+        "episode_id": "93820a501681b0bed550",
+        "arm_id": "delete_one:v19-259-s001"
+      },
+      {
+        "episode_id": "ac908e727c1ec51082dc",
+        "arm_id": "delete_key:QY8B58E13"
+      },
+      {
+        "episode_id": "08459bc462b9f6f79b21",
+        "arm_id": "delete_one:v19-263-s000"
+      },
+      {
+        "episode_id": "c0671f99c1c897382023",
+        "arm_id": "delete_key:QYB7F32B5"
+      },
+      {
+        "episode_id": "9524dff327ae4cce5c44",
+        "arm_id": "delete_one:v19-267-s000"
+      },
+      {
+        "episode_id": "c65a68741f99444c8216",
+        "arm_id": "delete_key:QY9CD4096"
+      },
+      {
+        "episode_id": "c67464aeba2edfd98a29",
+        "arm_id": "delete_one:v19-271-s000"
+      },
+      {
+        "episode_id": "8ab947aa7bb5fa4eef47",
+        "arm_id": "delete_key:QYEB9A2DD"
+      },
+      {
+        "episode_id": "08d9427925fbc4178772",
+        "arm_id": "delete_one:v19-275-s001"
+      },
+      {
+        "episode_id": "1204871e968892d1cf74",
+        "arm_id": "delete_key:QYCA5AE27"
+      },
+      {
+        "episode_id": "cc79e5e76fe3c8edc9c7",
+        "arm_id": "delete_one:v19-279-s006"
+      },
+      {
+        "episode_id": "49d1ad65175183b5c610",
+        "arm_id": "delete_key:QYEF1FF65"
+      },
+      {
+        "episode_id": "50d1a9f744074196ff14",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "235fa4e84c7c77f5faae",
+        "arm_id": "delete_key:QY0668254"
+      },
+      {
+        "episode_id": "0f44f322e9a724fef5d0",
+        "arm_id": "delete_one:v19-287-s000"
+      },
+      {
+        "episode_id": "58800cbd1d49d54e1e4f",
+        "arm_id": "delete_key:QY3DD571D"
+      },
+      {
+        "episode_id": "7c786230edbdca59a618",
+        "arm_id": "delete_one:v19-291-s059"
+      },
+      {
+        "episode_id": "b78cce75830f0c4ea419",
+        "arm_id": "delete_key:QY1079A2E"
+      },
+      {
+        "episode_id": "7d2555c283228c08ec3b",
+        "arm_id": "delete_one:v19-295-s000"
+      },
+      {
+        "episode_id": "1fe2f7068c71dac4e90b",
+        "arm_id": "delete_key:QYD27F05E"
+      },
+      {
+        "episode_id": "31f68a59909152a06d7f",
+        "arm_id": "delete_one:v19-299-s001"
+      },
+      {
+        "episode_id": "bb56083ef64fdf1c1b75",
+        "arm_id": "delete_key:QYEA9B0DF"
+      },
+      {
+        "episode_id": "8a455e3111f71304e142",
+        "arm_id": "delete_one:v19-303-s000"
+      },
+      {
+        "episode_id": "d926d7abad5650fa372b",
+        "arm_id": "delete_key:QY223393E"
+      },
+      {
+        "episode_id": "de13e212beb7b71e22dd",
+        "arm_id": "delete_one:v19-307-s000"
+      },
+      {
+        "episode_id": "00b1df6fdcd1dd99cb5f",
+        "arm_id": "delete_key:QYCD1F867"
+      },
+      {
+        "episode_id": "5db2a16150f10d77e702",
+        "arm_id": "delete_one:v19-311-s000"
+      },
+      {
+        "episode_id": "2963c3bc6c11e73e1d7b",
+        "arm_id": "delete_key:QY05F8C11"
+      },
+      {
+        "episode_id": "434dd56a938659410f3f",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "328d9b65f621ca979917",
+        "arm_id": "delete_key:QYC17E502"
+      },
+      {
+        "episode_id": "eff3ace3f1849516b20e",
+        "arm_id": "delete_one:v19-319-s000"
+      }
+    ],
+    "0.05": [
+      {
+        "episode_id": "482a648b41dae3551751",
+        "arm_id": "delete_one:v19-000-s000"
+      },
+      {
+        "episode_id": "dd5cfb1098653a9af265",
+        "arm_id": "delete_one:v19-002-s000"
+      },
+      {
+        "episode_id": "f4f6d257609d978c6701",
+        "arm_id": "delete_one:v19-004-s000"
+      },
+      {
+        "episode_id": "98003b021661e4ff7728",
+        "arm_id": "delete_one:v19-006-s013"
+      },
+      {
+        "episode_id": "066c8a74938bad7f9b53",
+        "arm_id": "delete_one:v19-008-s017"
+      },
+      {
+        "episode_id": "491089932184c9a78e06",
+        "arm_id": "delete_key:QY6582423B"
+      },
+      {
+        "episode_id": "88ec3a52c27febba52db",
+        "arm_id": "delete_one:v19-012-s012"
+      },
+      {
+        "episode_id": "983ea9fe23ce5dbeacdc",
+        "arm_id": "delete_one:v19-014-s013"
+      },
+      {
+        "episode_id": "9e7a4eb38c37345735b7",
+        "arm_id": "delete_one:v19-016-s000"
+      },
+      {
+        "episode_id": "edcd8175572994af25a7",
+        "arm_id": "delete_one:v19-018-s005"
+      },
+      {
+        "episode_id": "ebb224093d1f7e01e759",
+        "arm_id": "delete_one:v19-020-s009"
+      },
+      {
+        "episode_id": "85eb002f432c7d7ca7a4",
+        "arm_id": "delete_key:QY59508FEB"
+      },
+      {
+        "episode_id": "fa0ed011c245d629a390",
+        "arm_id": "delete_one:v19-024-s029"
+      },
+      {
+        "episode_id": "c6e743a4aeedf28778e6",
+        "arm_id": "delete_one:v19-026-s002"
+      },
+      {
+        "episode_id": "ee8e975bf5d6c3904c87",
+        "arm_id": "delete_one:v19-028-s017"
+      },
+      {
+        "episode_id": "2752bb2601cf5774d21a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9c939247a125108cca1b",
+        "arm_id": "delete_one:v19-032-s000"
+      },
+      {
+        "episode_id": "99fcbcb7496daaebcb87",
+        "arm_id": "delete_one:v19-034-s000"
+      },
+      {
+        "episode_id": "6d6cf26e3984df77d87b",
+        "arm_id": "delete_one:v19-036-s000"
+      },
+      {
+        "episode_id": "4823b6a5b61a4bf15c5a",
+        "arm_id": "delete_one:v19-038-s000"
+      },
+      {
+        "episode_id": "5c6593e0bf98f2fdf01a",
+        "arm_id": "delete_one:v19-040-s000"
+      },
+      {
+        "episode_id": "f58b0a4274402d46b2ed",
+        "arm_id": "delete_one:v19-042-s000"
+      },
+      {
+        "episode_id": "e6163e607ccef7dcc545",
+        "arm_id": "delete_one:v19-044-s005"
+      },
+      {
+        "episode_id": "4226bbaf9d820fabc54e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "bb17cfa7c1fac12b2136",
+        "arm_id": "delete_one:v19-048-s000"
+      },
+      {
+        "episode_id": "6f0c8f264cc870d786cb",
+        "arm_id": "delete_one:v19-050-s000"
+      },
+      {
+        "episode_id": "14cf460e241bc54113e5",
+        "arm_id": "delete_one:v19-052-s000"
+      },
+      {
+        "episode_id": "5b78a4d5f829cd36bde6",
+        "arm_id": "delete_key:QY822A4B5B"
+      },
+      {
+        "episode_id": "a06e76ffbf5f2c25cabf",
+        "arm_id": "delete_one:v19-056-s000"
+      },
+      {
+        "episode_id": "94c66ce294a59f1f80b9",
+        "arm_id": "delete_one:v19-058-s000"
+      },
+      {
+        "episode_id": "3144a6670031304557a0",
+        "arm_id": "delete_key:QYFB7464F"
+      },
+      {
+        "episode_id": "c533b81ee8a64c6bb164",
+        "arm_id": "delete_one:v19-062-s010"
+      },
+      {
+        "episode_id": "f14df56a8efaf50f16ac",
+        "arm_id": "delete_one:v19-064-s000"
+      },
+      {
+        "episode_id": "4323c52ece89e9cd77d2",
+        "arm_id": "delete_one:v19-066-s011"
+      },
+      {
+        "episode_id": "5269faae9b4478c663d9",
+        "arm_id": "delete_one:v19-068-s000"
+      },
+      {
+        "episode_id": "7ba715f4db159763f9a6",
+        "arm_id": "delete_key:QYC8E1954B"
+      },
+      {
+        "episode_id": "3c9358144530f344a25c",
+        "arm_id": "delete_one:v19-072-s000"
+      },
+      {
+        "episode_id": "83b9b2e0feaa8911e731",
+        "arm_id": "delete_one:v19-074-s000"
+      },
+      {
+        "episode_id": "6c235342ce0552ce9901",
+        "arm_id": "delete_one:v19-076-s000"
+      },
+      {
+        "episode_id": "614c5385213efb8ad2ae",
+        "arm_id": "delete_one:v19-078-s006"
+      },
+      {
+        "episode_id": "408c861c8a0446ead4a6",
+        "arm_id": "delete_one:v19-080-s000"
+      },
+      {
+        "episode_id": "ee7d3edf5393d1e1ac6f",
+        "arm_id": "delete_key:QYA80A172B"
+      },
+      {
+        "episode_id": "3f9ad9f0205d8dd648d7",
+        "arm_id": "delete_one:v19-084-s000"
+      },
+      {
+        "episode_id": "da3eedbf65599d9986f5",
+        "arm_id": "delete_key:QYD5D3A86"
+      },
+      {
+        "episode_id": "d337689db58f527e883d",
+        "arm_id": "delete_one:v19-088-s011"
+      },
+      {
+        "episode_id": "f18d00eb6c6333621c26",
+        "arm_id": "delete_one:v19-090-s005"
+      },
+      {
+        "episode_id": "6ec92f3ff7f7764b893c",
+        "arm_id": "delete_one:v19-092-s000"
+      },
+      {
+        "episode_id": "421ce312374ea3eb2b98",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "d895f8ac101f4288a35a",
+        "arm_id": "delete_one:v19-096-s000"
+      },
+      {
+        "episode_id": "19efff2f8e198bcc16cf",
+        "arm_id": "delete_one:v19-098-s000"
+      },
+      {
+        "episode_id": "ace81dc8696248cb7f36",
+        "arm_id": "delete_one:v19-100-s000"
+      },
+      {
+        "episode_id": "4cb2debd9afb4fb4a54f",
+        "arm_id": "delete_key:QYE9365FDB"
+      },
+      {
+        "episode_id": "f1fd64dddcf9807c528c",
+        "arm_id": "delete_one:v19-104-s000"
+      },
+      {
+        "episode_id": "9c221a9a931156c77acb",
+        "arm_id": "delete_one:v19-106-s000"
+      },
+      {
+        "episode_id": "143e99058dfc0610ba5a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "6a5610feabd35bfcbffc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "2df5e40f466da99ed767",
+        "arm_id": "delete_one:v19-112-s000"
+      },
+      {
+        "episode_id": "d58bdc2064c4b10bbbab",
+        "arm_id": "delete_one:v19-114-s029"
+      },
+      {
+        "episode_id": "566f0809766d6638a5bb",
+        "arm_id": "delete_one:v19-116-s000"
+      },
+      {
+        "episode_id": "fe6e4852f6d99f9ace00",
+        "arm_id": "delete_one:v19-118-s000"
+      },
+      {
+        "episode_id": "16bba495f497cf79a6e0",
+        "arm_id": "delete_one:v19-120-s000"
+      },
+      {
+        "episode_id": "34197cdc39e8b0524ca4",
+        "arm_id": "delete_one:v19-122-s006"
+      },
+      {
+        "episode_id": "4624164317b0e6aac7ed",
+        "arm_id": "delete_one:v19-124-s000"
+      },
+      {
+        "episode_id": "6475bd4750760f6aa7d6",
+        "arm_id": "delete_one:v19-126-s003"
+      },
+      {
+        "episode_id": "d43aadfd69c4020d9c21",
+        "arm_id": "delete_one:v19-128-s000"
+      },
+      {
+        "episode_id": "719f15ea62cfb2d712e8",
+        "arm_id": "delete_one:v19-130-s009"
+      },
+      {
+        "episode_id": "7914193a229d94ab592d",
+        "arm_id": "delete_one:v19-132-s000"
+      },
+      {
+        "episode_id": "a7c1cf214b9a97a00d73",
+        "arm_id": "delete_key:QY9095FAFB"
+      },
+      {
+        "episode_id": "96679a34569e0d94917c",
+        "arm_id": "delete_one:v19-136-s000"
+      },
+      {
+        "episode_id": "86850d32cd0588ac5db1",
+        "arm_id": "delete_one:v19-138-s000"
+      },
+      {
+        "episode_id": "265834533a211e8f6ac5",
+        "arm_id": "delete_key:QY04A79A3"
+      },
+      {
+        "episode_id": "1ccf60f60595195e9672",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "dc7fc3afd0c4947385b0",
+        "arm_id": "delete_one:v19-144-s000"
+      },
+      {
+        "episode_id": "66e8bfb0424a03fcaeb6",
+        "arm_id": "delete_one:v19-146-s029"
+      },
+      {
+        "episode_id": "d86367c682a3946aa859",
+        "arm_id": "delete_one:v19-148-s007"
+      },
+      {
+        "episode_id": "d3f256826873de829ca2",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "037d1dae4b9087c99ca3",
+        "arm_id": "delete_one:v19-152-s000"
+      },
+      {
+        "episode_id": "d22d7aa06352f20a3ba9",
+        "arm_id": "delete_one:v19-154-s001"
+      },
+      {
+        "episode_id": "87dabdaef29bbaad51a7",
+        "arm_id": "delete_key:QY466DCBA"
+      },
+      {
+        "episode_id": "30207121be4eadeb1710",
+        "arm_id": "delete_key:QYD3933B2B"
+      },
+      {
+        "episode_id": "8e614c1eebcd3c7612df",
+        "arm_id": "delete_one:v19-160-s000"
+      },
+      {
+        "episode_id": "6032da3627310bfeb102",
+        "arm_id": "delete_one:v19-162-s006"
+      },
+      {
+        "episode_id": "b46e0a9e24348b808a0c",
+        "arm_id": "delete_one:v19-164-s000"
+      },
+      {
+        "episode_id": "c6b8fff544883386506b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "22fbc200cbeaf0760464",
+        "arm_id": "delete_key:QY2D14E87"
+      },
+      {
+        "episode_id": "ae74c76f865ef64d5cc4",
+        "arm_id": "delete_one:v19-170-s000"
+      },
+      {
+        "episode_id": "f5fb5f865a361f2387ee",
+        "arm_id": "delete_one:v19-172-s008"
+      },
+      {
+        "episode_id": "f79df725c98b0b4f4ab3",
+        "arm_id": "delete_key:QY6D40F37B"
+      },
+      {
+        "episode_id": "35130e9395ce4c8f8069",
+        "arm_id": "delete_one:v19-176-s000"
+      },
+      {
+        "episode_id": "1cea1d2d2d1d0b2f11ef",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "ba11d5d28e72b583e079",
+        "arm_id": "delete_one:v19-180-s000"
+      },
+      {
+        "episode_id": "269b64c913e19cd2ff92",
+        "arm_id": "delete_key:QY41233F4B"
+      },
+      {
+        "episode_id": "23d1d8fab4fd6cacb623",
+        "arm_id": "delete_one:v19-184-s000"
+      },
+      {
+        "episode_id": "9c39bcabd0b73f5ccbcc",
+        "arm_id": "delete_one:v19-186-s006"
+      },
+      {
+        "episode_id": "fb49f087ef499b61da5c",
+        "arm_id": "delete_one:v19-188-s000"
+      },
+      {
+        "episode_id": "b89e7808c2ca79dd58f4",
+        "arm_id": "delete_one:v19-190-s000"
+      },
+      {
+        "episode_id": "c072f2e193db095ca381",
+        "arm_id": "delete_one:v19-192-s000"
+      },
+      {
+        "episode_id": "5c3f49d74587801791f6",
+        "arm_id": "delete_one:v19-194-s000"
+      },
+      {
+        "episode_id": "98d415922e80effb8ab3",
+        "arm_id": "delete_one:v19-196-s000"
+      },
+      {
+        "episode_id": "e2cbda2aac7f6a3f3a1f",
+        "arm_id": "delete_key:QY313675EB"
+      },
+      {
+        "episode_id": "5bbb792fd287d0138f3d",
+        "arm_id": "delete_one:v19-200-s000"
+      },
+      {
+        "episode_id": "2bd356e9ea071bbf77ac",
+        "arm_id": "delete_one:v19-202-s000"
+      },
+      {
+        "episode_id": "05156d0a9259d19e60b6",
+        "arm_id": "delete_one:v19-204-s010"
+      },
+      {
+        "episode_id": "142dae8501bb0fd6058b",
+        "arm_id": "delete_one:v19-206-s005"
+      },
+      {
+        "episode_id": "b2c6686a91755f0255d0",
+        "arm_id": "delete_one:v19-208-s000"
+      },
+      {
+        "episode_id": "ba4d8546505cfc9f4fd0",
+        "arm_id": "delete_one:v19-210-s000"
+      },
+      {
+        "episode_id": "f7926533795a78c59ae5",
+        "arm_id": "delete_one:v19-212-s000"
+      },
+      {
+        "episode_id": "6b1d92407424d6988c8c",
+        "arm_id": "delete_one:v19-214-s055"
+      },
+      {
+        "episode_id": "8bc79a163993ccca6de0",
+        "arm_id": "delete_one:v19-216-s000"
+      },
+      {
+        "episode_id": "2192f23a46759465de33",
+        "arm_id": "delete_key:QYFC79FFFB"
+      },
+      {
+        "episode_id": "86233b9da5697a319d5a",
+        "arm_id": "delete_one:v19-220-s000"
+      },
+      {
+        "episode_id": "b3667744a8f360c7901c",
+        "arm_id": "delete_one:v19-222-s010"
+      },
+      {
+        "episode_id": "07b6e5e96cd6eeafc8fd",
+        "arm_id": "delete_one:v19-224-s000"
+      },
+      {
+        "episode_id": "4b764e33c3c41f4326de",
+        "arm_id": "delete_one:v19-226-s000"
+      },
+      {
+        "episode_id": "16ade3ccbe44b2a7c92d",
+        "arm_id": "delete_one:v19-228-s000"
+      },
+      {
+        "episode_id": "e6d8124ec3a730143f82",
+        "arm_id": "delete_key:QYE609E14B"
+      },
+      {
+        "episode_id": "aaec92399d06507c8436",
+        "arm_id": "delete_one:v19-232-s000"
+      },
+      {
+        "episode_id": "df61a4047b1c7b01baea",
+        "arm_id": "delete_key:QY1B3511AB"
+      },
+      {
+        "episode_id": "cced2ef6c5c0a8e7aa31",
+        "arm_id": "delete_one:v19-236-s005"
+      },
+      {
+        "episode_id": "23b4776c5ddc4117dee7",
+        "arm_id": "delete_one:v19-238-s012"
+      },
+      {
+        "episode_id": "8deea306dd76cc294dd1",
+        "arm_id": "delete_one:v19-240-s000"
+      },
+      {
+        "episode_id": "5ed5348e0ddc45b63cab",
+        "arm_id": "delete_one:v19-242-s003"
+      },
+      {
+        "episode_id": "a6d192307cbfdd787c1e",
+        "arm_id": "delete_one:v19-244-s000"
+      },
+      {
+        "episode_id": "6b24ff785fc08c898b9e",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f779c1a179615227ef4a",
+        "arm_id": "delete_key:QYEF8384F"
+      },
+      {
+        "episode_id": "8e819afd597540413961",
+        "arm_id": "delete_one:v19-250-s005"
+      },
+      {
+        "episode_id": "b9f8d0d82252d2134888",
+        "arm_id": "delete_one:v19-252-s023"
+      },
+      {
+        "episode_id": "f36c4706d4ccdbed102e",
+        "arm_id": "delete_key:QY505A6C7B"
+      },
+      {
+        "episode_id": "9f816504f9ed87e78f01",
+        "arm_id": "delete_one:v19-256-s000"
+      },
+      {
+        "episode_id": "af5474b86be2a203d116",
+        "arm_id": "delete_one:v19-258-s008"
+      },
+      {
+        "episode_id": "ac0ff93a5c8d4382dc48",
+        "arm_id": "delete_one:v19-260-s008"
+      },
+      {
+        "episode_id": "de8ab21665fa57e0e66b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f7b53c275080cab3554b",
+        "arm_id": "delete_one:v19-264-s000"
+      },
+      {
+        "episode_id": "1ecf75ce08b556851e8b",
+        "arm_id": "delete_key:QY332552AB"
+      },
+      {
+        "episode_id": "d4684e8521d0636a6689",
+        "arm_id": "delete_one:v19-268-s000"
+      },
+      {
+        "episode_id": "3c1471aa6628006219d3",
+        "arm_id": "delete_key:QY685F7ACB"
+      },
+      {
+        "episode_id": "566eaa778e64e7905c2b",
+        "arm_id": "delete_one:v19-272-s000"
+      },
+      {
+        "episode_id": "a85dce6790eeaf6c215b",
+        "arm_id": "delete_one:v19-274-s002"
+      },
+      {
+        "episode_id": "c6dd8f0e7a484c207462",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "62b8bbd21e2444513260",
+        "arm_id": "delete_key:QYCB022FB"
+      },
+      {
+        "episode_id": "373f934419e9462daa62",
+        "arm_id": "delete_one:v19-280-s000"
+      },
+      {
+        "episode_id": "8c0416459a58053d4d32",
+        "arm_id": "delete_key:QYE2A146EB"
+      },
+      {
+        "episode_id": "b2e554fccd707c46ef51",
+        "arm_id": "delete_one:v19-284-s009"
+      },
+      {
+        "episode_id": "63f1759f535923582067",
+        "arm_id": "delete_key:QY937D9CAB"
+      },
+      {
+        "episode_id": "ed4aa1a0aaf93834e8c9",
+        "arm_id": "delete_one:v19-288-s000"
+      },
+      {
+        "episode_id": "28844c4a531ce987373d",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "abcd1a76cd77b794a83b",
+        "arm_id": "delete_one:v19-292-s000"
+      },
+      {
+        "episode_id": "3b7ca131f51989901ada",
+        "arm_id": "delete_key:QYE7FBCC9B"
+      },
+      {
+        "episode_id": "3a739a23beea5e00ac44",
+        "arm_id": "delete_one:v19-296-s000"
+      },
+      {
+        "episode_id": "f1c570a6906a296e0830",
+        "arm_id": "delete_one:v19-298-s000"
+      },
+      {
+        "episode_id": "f8ca0a80e9a5fdfd7fea",
+        "arm_id": "delete_one:v19-300-s006"
+      },
+      {
+        "episode_id": "1e40987a58d89bd04c92",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "84006bedba0662ccccfc",
+        "arm_id": "delete_one:v19-304-s000"
+      },
+      {
+        "episode_id": "e7a2b2d27d9021a16ff0",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "4fe191159c39eb5b05b2",
+        "arm_id": "delete_one:v19-308-s000"
+      },
+      {
+        "episode_id": "b2fbdf8ad0e06bec1bdd",
+        "arm_id": "delete_key:QYD30E282B"
+      },
+      {
+        "episode_id": "dbf0328bc9e3aeb0ed9d",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9a1f119b01e1938f4179",
+        "arm_id": "delete_one:v19-314-s003"
+      },
+      {
+        "episode_id": "e3a16a5a2ceed8d6d296",
+        "arm_id": "delete_one:v19-316-s000"
+      },
+      {
+        "episode_id": "1b7b65cd377b8cb64a83",
+        "arm_id": "delete_key:QYD679C8FB"
+      },
+      {
+        "episode_id": "801e09c97836b9132938",
+        "arm_id": "delete_key:QYE1F4A9C"
+      },
+      {
+        "episode_id": "49831512d0d5bec38030",
+        "arm_id": "delete_key:QYFE21EB9"
+      },
+      {
+        "episode_id": "ae3ac529661b9e7ff063",
+        "arm_id": "delete_key:QY6231126"
+      },
+      {
+        "episode_id": "2f96941b0f8fc4d526e2",
+        "arm_id": "delete_one:v19-007-s000"
+      },
+      {
+        "episode_id": "5b82bb3b6a17a97f94f1",
+        "arm_id": "delete_key:QYBDFF279"
+      },
+      {
+        "episode_id": "277eef55ecf4d194b097",
+        "arm_id": "delete_one:v19-011-s000"
+      },
+      {
+        "episode_id": "7823914964ee11954f24",
+        "arm_id": "delete_key:QYB74619A"
+      },
+      {
+        "episode_id": "fd6a4ca3f5c87a0e62fe",
+        "arm_id": "delete_one:v19-015-s004"
+      },
+      {
+        "episode_id": "2863cd3138dbff665a37",
+        "arm_id": "delete_key:QY0CF64BD"
+      },
+      {
+        "episode_id": "8d3ab9a7b11c3ff254c8",
+        "arm_id": "delete_key:QY29ED092"
+      },
+      {
+        "episode_id": "6d86fef9adbfc091c98e",
+        "arm_id": "delete_key:QY95AC235"
+      },
+      {
+        "episode_id": "37b7cb657098520dd4eb",
+        "arm_id": "delete_one:v19-023-s006"
+      },
+      {
+        "episode_id": "e4f63c78ea35f3b553bc",
+        "arm_id": "delete_key:QY68B8E4F"
+      },
+      {
+        "episode_id": "8d319f99a96e62f62ed4",
+        "arm_id": "delete_one:v19-027-s000"
+      },
+      {
+        "episode_id": "574feb639d25fbc2091d",
+        "arm_id": "delete_key:QYA531C0B"
+      },
+      {
+        "episode_id": "4b6fc6050da55b53b1f9",
+        "arm_id": "delete_key:QYCE021A0"
+      },
+      {
+        "episode_id": "13c94450b346c8e0f261",
+        "arm_id": "delete_key:QYADF1B1E"
+      },
+      {
+        "episode_id": "67c55a7efd667452ae24",
+        "arm_id": "delete_one:v19-035-s003"
+      },
+      {
+        "episode_id": "11f5b6c854cbe5331c8a",
+        "arm_id": "delete_key:QY3BD5CB4"
+      },
+      {
+        "episode_id": "8c7f133860306a101206",
+        "arm_id": "delete_one:v19-039-s000"
+      },
+      {
+        "episode_id": "caadce621880d1a9e169",
+        "arm_id": "delete_key:QYF8AE036"
+      },
+      {
+        "episode_id": "5fd7fcb05d667a3e2dd3",
+        "arm_id": "delete_one:v19-043-s000"
+      },
+      {
+        "episode_id": "e77026bfdb28d279deac",
+        "arm_id": "delete_key:QYD0B26A5"
+      },
+      {
+        "episode_id": "196cbf162c6e0683948a",
+        "arm_id": "delete_one:v19-047-s000"
+      },
+      {
+        "episode_id": "667ad0cb94605f9c8d78",
+        "arm_id": "delete_key:QYD2D02BB"
+      },
+      {
+        "episode_id": "c7267db11984de996a27",
+        "arm_id": "delete_key:QY68FD8AE"
+      },
+      {
+        "episode_id": "a00035978e2dda0f80a6",
+        "arm_id": "delete_key:QYBCB302D"
+      },
+      {
+        "episode_id": "5e09a00150281d73a194",
+        "arm_id": "delete_one:v19-055-s000"
+      },
+      {
+        "episode_id": "4feea10cdf272965b6f9",
+        "arm_id": "delete_key:QYE6501FA"
+      },
+      {
+        "episode_id": "784df3106708a11083d0",
+        "arm_id": "delete_one:v19-059-s000"
+      },
+      {
+        "episode_id": "f34ce1e14c56b6c31e21",
+        "arm_id": "delete_key:QY59BA610"
+      },
+      {
+        "episode_id": "edc266f4c18ba9fb75a6",
+        "arm_id": "delete_one:v19-063-s000"
+      },
+      {
+        "episode_id": "520c469f747cb4d095e6",
+        "arm_id": "delete_key:QY9696CE6"
+      },
+      {
+        "episode_id": "2e1c96e08c1adb6ef7f6",
+        "arm_id": "delete_key:QYFE465DE"
+      },
+      {
+        "episode_id": "fe5e5716263cbff62d6c",
+        "arm_id": "delete_key:QYB86A2A3"
+      },
+      {
+        "episode_id": "648a679175c35fa10403",
+        "arm_id": "delete_one:v19-071-s000"
+      },
+      {
+        "episode_id": "1866bd06b6d5722c3905",
+        "arm_id": "delete_key:QY27355BB"
+      },
+      {
+        "episode_id": "af96e0320dc0904575e4",
+        "arm_id": "delete_one:v19-075-s000"
+      },
+      {
+        "episode_id": "41ae57a43ef0b5004470",
+        "arm_id": "delete_key:QYA9B987D"
+      },
+      {
+        "episode_id": "580134023c58ab47c955",
+        "arm_id": "delete_one:v19-079-s000"
+      },
+      {
+        "episode_id": "2bef707acbe5e8d9e2aa",
+        "arm_id": "delete_key:QY6247E4B"
+      },
+      {
+        "episode_id": "988974c0814c9c96418c",
+        "arm_id": "delete_one:v19-083-s000"
+      },
+      {
+        "episode_id": "9e10dfc7ffd5655df566",
+        "arm_id": "delete_key:QY8C17DE6"
+      },
+      {
+        "episode_id": "f8ac5ff5101ca39e9d3d",
+        "arm_id": "delete_one:v19-087-s000"
+      },
+      {
+        "episode_id": "13d4fde580faef06756e",
+        "arm_id": "delete_key:QY3DC0BFD"
+      },
+      {
+        "episode_id": "1056254df6c9321d2791",
+        "arm_id": "delete_one:v19-091-s000"
+      },
+      {
+        "episode_id": "51d3bc46e52b9e886061",
+        "arm_id": "delete_key:QYFE3DAB9"
+      },
+      {
+        "episode_id": "d70e855ee528d3d959e6",
+        "arm_id": "delete_one:v19-095-s000"
+      },
+      {
+        "episode_id": "1db6ae1d278b4d1756e1",
+        "arm_id": "delete_key:QYDC32049"
+      },
+      {
+        "episode_id": "ebafa0809c9786972b0b",
+        "arm_id": "delete_key:QY6B8FD19"
+      },
+      {
+        "episode_id": "744be4cad8d60028c3df",
+        "arm_id": "delete_key:QY181DAEA"
+      },
+      {
+        "episode_id": "5717b078981f6f3cbe03",
+        "arm_id": "delete_one:v19-103-s000"
+      },
+      {
+        "episode_id": "ef56da7d3487fa440177",
+        "arm_id": "delete_key:QY35A41F7"
+      },
+      {
+        "episode_id": "74375721ee000134cd73",
+        "arm_id": "delete_one:v19-107-s000"
+      },
+      {
+        "episode_id": "4100f478b14dd4f58d7c",
+        "arm_id": "delete_key:QYE9668A0"
+      },
+      {
+        "episode_id": "e61f644d9f5cb9c41040",
+        "arm_id": "delete_one:v19-111-s000"
+      },
+      {
+        "episode_id": "f57c32367d617264fd65",
+        "arm_id": "delete_key:QY16A9CE6"
+      },
+      {
+        "episode_id": "11c176eba889c996e574",
+        "arm_id": "delete_one:v19-115-s054"
+      },
+      {
+        "episode_id": "826ed11a04190086eb11",
+        "arm_id": "delete_key:QY90D2674"
+      },
+      {
+        "episode_id": "4da298582cbe97e81965",
+        "arm_id": "delete_one:v19-119-s003"
+      },
+      {
+        "episode_id": "e1e5dc8e2a01c427d892",
+        "arm_id": "delete_key:QYEA84542"
+      },
+      {
+        "episode_id": "bb391569346084cd53c8",
+        "arm_id": "delete_one:v19-123-s000"
+      },
+      {
+        "episode_id": "cb83cbaff19e36cdfc5f",
+        "arm_id": "delete_key:QYB81FDC9"
+      },
+      {
+        "episode_id": "8ada664e9fa75d233aed",
+        "arm_id": "delete_one:v19-127-s000"
+      },
+      {
+        "episode_id": "60188da120eb4230e988",
+        "arm_id": "delete_key:QY5598823"
+      },
+      {
+        "episode_id": "b4114a81943d23dd9480",
+        "arm_id": "delete_one:v19-131-s000"
+      },
+      {
+        "episode_id": "964aa768bedb4d259b71",
+        "arm_id": "delete_key:QY856E67B"
+      },
+      {
+        "episode_id": "e4963c9cbe998db6e8b1",
+        "arm_id": "delete_one:v19-135-s000"
+      },
+      {
+        "episode_id": "83880b6eeddcc45c5d19",
+        "arm_id": "delete_key:QYA8C6BD7"
+      },
+      {
+        "episode_id": "ace018121c020c9bbf1c",
+        "arm_id": "delete_one:v19-139-s000"
+      },
+      {
+        "episode_id": "81e1cc44f1f9fe641fb4",
+        "arm_id": "delete_key:QY743278E"
+      },
+      {
+        "episode_id": "199e7f41461755fd7a9d",
+        "arm_id": "delete_one:v19-143-s000"
+      },
+      {
+        "episode_id": "b645cb2edab8d8f31656",
+        "arm_id": "delete_key:QY7CAC82E"
+      },
+      {
+        "episode_id": "c76446f0d9c49016b640",
+        "arm_id": "delete_one:v19-147-s000"
+      },
+      {
+        "episode_id": "f6c9c16cc2a73f4863bc",
+        "arm_id": "delete_key:QY660D627"
+      },
+      {
+        "episode_id": "2303aeadaec778b78b27",
+        "arm_id": "delete_one:v19-151-s000"
+      },
+      {
+        "episode_id": "bae9750d01c4e2197934",
+        "arm_id": "delete_key:QYA8A10A0"
+      },
+      {
+        "episode_id": "86c163aa5331ac1860dc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "07335768b680c8c7be9a",
+        "arm_id": "delete_key:QYA853DDB"
+      },
+      {
+        "episode_id": "ee12aa43cc61b6904884",
+        "arm_id": "delete_one:v19-159-s015"
+      },
+      {
+        "episode_id": "7ffce577034aeb756ad3",
+        "arm_id": "delete_key:QY747768A"
+      },
+      {
+        "episode_id": "6da6c1a53595243908a1",
+        "arm_id": "delete_key:QYB35B99D"
+      },
+      {
+        "episode_id": "8f5010f470fb309f07b6",
+        "arm_id": "delete_key:QY7C65221"
+      },
+      {
+        "episode_id": "11779ea8f58694037045",
+        "arm_id": "delete_one:v19-167-s000"
+      },
+      {
+        "episode_id": "d2b6a3d5896d1258c89b",
+        "arm_id": "delete_key:QY00C8E59"
+      },
+      {
+        "episode_id": "5eb1380863b55976dca0",
+        "arm_id": "delete_one:v19-171-s000"
+      },
+      {
+        "episode_id": "224edaa09d0c0f223537",
+        "arm_id": "delete_key:QY1C3F6E2"
+      },
+      {
+        "episode_id": "612ab6c15e71aabfa87f",
+        "arm_id": "delete_one:v19-175-s000"
+      },
+      {
+        "episode_id": "8ef958eb2e5121d219ed",
+        "arm_id": "delete_key:QYD2031FD"
+      },
+      {
+        "episode_id": "e7b832128840dd113910",
+        "arm_id": "delete_one:v19-179-s006"
+      },
+      {
+        "episode_id": "ecdf9590857b19337dc7",
+        "arm_id": "delete_key:QYB38719F"
+      },
+      {
+        "episode_id": "ea6a078cac787ef3be99",
+        "arm_id": "delete_one:v19-183-s006"
+      },
+      {
+        "episode_id": "f3fa18c82039df9a5e13",
+        "arm_id": "delete_key:QY964CAAD"
+      },
+      {
+        "episode_id": "5684484109b2eed67aa6",
+        "arm_id": "delete_one:v19-187-s000"
+      },
+      {
+        "episode_id": "7c391274af9cd1ea374a",
+        "arm_id": "delete_key:QYBF881B5"
+      },
+      {
+        "episode_id": "a6b73f43ef3a228cdac6",
+        "arm_id": "delete_one:v19-191-s001"
+      },
+      {
+        "episode_id": "5432f2457847be8eb050",
+        "arm_id": "delete_key:QY9CD04E7"
+      },
+      {
+        "episode_id": "40928661360054e9957f",
+        "arm_id": "delete_key:QY6202F16"
+      },
+      {
+        "episode_id": "3a2c76230dc4faef94e9",
+        "arm_id": "delete_key:QY3BEAFD3"
+      },
+      {
+        "episode_id": "0a1b2810bf6ec5fb9e57",
+        "arm_id": "delete_one:v19-199-s000"
+      },
+      {
+        "episode_id": "35f4a3aacfb05b827843",
+        "arm_id": "delete_key:QY1B88E67"
+      },
+      {
+        "episode_id": "945df62f461bd69216ef",
+        "arm_id": "delete_one:v19-203-s000"
+      },
+      {
+        "episode_id": "69b580f2b1958a24d0e9",
+        "arm_id": "delete_key:QYD064D3F"
+      },
+      {
+        "episode_id": "577bf0b62aeac7e103b1",
+        "arm_id": "delete_one:v19-207-s000"
+      },
+      {
+        "episode_id": "ff552e6ee9abd2402b92",
+        "arm_id": "delete_key:QYC0167DB"
+      },
+      {
+        "episode_id": "bb483fdc6921d5ddc6a5",
+        "arm_id": "delete_one:v19-211-s001"
+      },
+      {
+        "episode_id": "de5a0866983d976832f8",
+        "arm_id": "delete_key:QY99D48DD"
+      },
+      {
+        "episode_id": "3effa39d91fe18a73a0e",
+        "arm_id": "delete_one:v19-215-s000"
+      },
+      {
+        "episode_id": "ad3784b93a585fd3a764",
+        "arm_id": "delete_key:QY5F74895"
+      },
+      {
+        "episode_id": "57176674d0ea5945fef7",
+        "arm_id": "delete_one:v19-219-s000"
+      },
+      {
+        "episode_id": "d2cb192aa4a9ba0a2fe5",
+        "arm_id": "delete_key:QY5EBCE91"
+      },
+      {
+        "episode_id": "90f98551e1daef206887",
+        "arm_id": "delete_one:v19-223-s000"
+      },
+      {
+        "episode_id": "724cf52d4072c7f02c19",
+        "arm_id": "delete_key:QYB87FC56"
+      },
+      {
+        "episode_id": "3de12732d1691dbbdd9e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "27a41c589322e1847172",
+        "arm_id": "delete_key:QY0095620"
+      },
+      {
+        "episode_id": "9fdbb2aae5d6f7e95276",
+        "arm_id": "delete_one:v19-231-s000"
+      },
+      {
+        "episode_id": "552146d862343f7e5b86",
+        "arm_id": "delete_key:QY4612EBF"
+      },
+      {
+        "episode_id": "a17afe859f3d0f64b7fb",
+        "arm_id": "delete_one:v19-235-s000"
+      },
+      {
+        "episode_id": "9bc0284c1b4792c7ee64",
+        "arm_id": "delete_key:QY4F1CD29"
+      },
+      {
+        "episode_id": "30b76e9872e590c3652c",
+        "arm_id": "delete_one:v19-239-s000"
+      },
+      {
+        "episode_id": "0c45c7e549a7c4d058e5",
+        "arm_id": "delete_key:QY3D528D2"
+      },
+      {
+        "episode_id": "42c633c290bdf9fe54fd",
+        "arm_id": "delete_key:QY5A5D431"
+      },
+      {
+        "episode_id": "8e67f0ebdf186d69f205",
+        "arm_id": "delete_key:QY1AFB651"
+      },
+      {
+        "episode_id": "c9d40ff9cc2c67d80d71",
+        "arm_id": "delete_one:v19-247-s000"
+      },
+      {
+        "episode_id": "e98839fab978cba79554",
+        "arm_id": "delete_key:QY7E6DAFC"
+      },
+      {
+        "episode_id": "f46587576421ab2d8db1",
+        "arm_id": "delete_one:v19-251-s000"
+      },
+      {
+        "episode_id": "b761e40b35b9515b8460",
+        "arm_id": "delete_key:QY67A47E6"
+      },
+      {
+        "episode_id": "02d9b76af93b042612de",
+        "arm_id": "delete_one:v19-255-s000"
+      },
+      {
+        "episode_id": "304ea9dd150a92733b98",
+        "arm_id": "delete_key:QY2383521"
+      },
+      {
+        "episode_id": "93820a501681b0bed550",
+        "arm_id": "delete_one:v19-259-s001"
+      },
+      {
+        "episode_id": "ac908e727c1ec51082dc",
+        "arm_id": "delete_key:QY8B58E13"
+      },
+      {
+        "episode_id": "08459bc462b9f6f79b21",
+        "arm_id": "delete_one:v19-263-s000"
+      },
+      {
+        "episode_id": "c0671f99c1c897382023",
+        "arm_id": "delete_key:QYB7F32B5"
+      },
+      {
+        "episode_id": "9524dff327ae4cce5c44",
+        "arm_id": "delete_one:v19-267-s000"
+      },
+      {
+        "episode_id": "c65a68741f99444c8216",
+        "arm_id": "delete_key:QY9CD4096"
+      },
+      {
+        "episode_id": "c67464aeba2edfd98a29",
+        "arm_id": "delete_one:v19-271-s000"
+      },
+      {
+        "episode_id": "8ab947aa7bb5fa4eef47",
+        "arm_id": "delete_key:QYEB9A2DD"
+      },
+      {
+        "episode_id": "08d9427925fbc4178772",
+        "arm_id": "delete_one:v19-275-s001"
+      },
+      {
+        "episode_id": "1204871e968892d1cf74",
+        "arm_id": "delete_key:QYCA5AE27"
+      },
+      {
+        "episode_id": "cc79e5e76fe3c8edc9c7",
+        "arm_id": "delete_one:v19-279-s006"
+      },
+      {
+        "episode_id": "49d1ad65175183b5c610",
+        "arm_id": "delete_key:QYEF1FF65"
+      },
+      {
+        "episode_id": "50d1a9f744074196ff14",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "235fa4e84c7c77f5faae",
+        "arm_id": "delete_key:QY0668254"
+      },
+      {
+        "episode_id": "0f44f322e9a724fef5d0",
+        "arm_id": "delete_one:v19-287-s000"
+      },
+      {
+        "episode_id": "58800cbd1d49d54e1e4f",
+        "arm_id": "delete_key:QY3DD571D"
+      },
+      {
+        "episode_id": "7c786230edbdca59a618",
+        "arm_id": "delete_one:v19-291-s059"
+      },
+      {
+        "episode_id": "b78cce75830f0c4ea419",
+        "arm_id": "delete_key:QY1079A2E"
+      },
+      {
+        "episode_id": "7d2555c283228c08ec3b",
+        "arm_id": "delete_one:v19-295-s000"
+      },
+      {
+        "episode_id": "1fe2f7068c71dac4e90b",
+        "arm_id": "delete_key:QYD27F05E"
+      },
+      {
+        "episode_id": "31f68a59909152a06d7f",
+        "arm_id": "delete_one:v19-299-s001"
+      },
+      {
+        "episode_id": "bb56083ef64fdf1c1b75",
+        "arm_id": "delete_key:QYEA9B0DF"
+      },
+      {
+        "episode_id": "8a455e3111f71304e142",
+        "arm_id": "delete_one:v19-303-s000"
+      },
+      {
+        "episode_id": "d926d7abad5650fa372b",
+        "arm_id": "delete_key:QY223393E"
+      },
+      {
+        "episode_id": "de13e212beb7b71e22dd",
+        "arm_id": "delete_one:v19-307-s000"
+      },
+      {
+        "episode_id": "00b1df6fdcd1dd99cb5f",
+        "arm_id": "delete_key:QYCD1F867"
+      },
+      {
+        "episode_id": "5db2a16150f10d77e702",
+        "arm_id": "delete_one:v19-311-s000"
+      },
+      {
+        "episode_id": "2963c3bc6c11e73e1d7b",
+        "arm_id": "delete_key:QY05F8C11"
+      },
+      {
+        "episode_id": "434dd56a938659410f3f",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "328d9b65f621ca979917",
+        "arm_id": "delete_key:QYC17E502"
+      },
+      {
+        "episode_id": "eff3ace3f1849516b20e",
+        "arm_id": "delete_one:v19-319-s000"
+      }
+    ],
+    "0.1": [
+      {
+        "episode_id": "482a648b41dae3551751",
+        "arm_id": "delete_one:v19-000-s000"
+      },
+      {
+        "episode_id": "dd5cfb1098653a9af265",
+        "arm_id": "delete_one:v19-002-s000"
+      },
+      {
+        "episode_id": "f4f6d257609d978c6701",
+        "arm_id": "delete_one:v19-004-s000"
+      },
+      {
+        "episode_id": "98003b021661e4ff7728",
+        "arm_id": "delete_one:v19-006-s013"
+      },
+      {
+        "episode_id": "066c8a74938bad7f9b53",
+        "arm_id": "delete_one:v19-008-s017"
+      },
+      {
+        "episode_id": "491089932184c9a78e06",
+        "arm_id": "delete_key:QY6582423B"
+      },
+      {
+        "episode_id": "88ec3a52c27febba52db",
+        "arm_id": "delete_one:v19-012-s012"
+      },
+      {
+        "episode_id": "983ea9fe23ce5dbeacdc",
+        "arm_id": "delete_one:v19-014-s013"
+      },
+      {
+        "episode_id": "9e7a4eb38c37345735b7",
+        "arm_id": "delete_one:v19-016-s000"
+      },
+      {
+        "episode_id": "edcd8175572994af25a7",
+        "arm_id": "delete_one:v19-018-s005"
+      },
+      {
+        "episode_id": "ebb224093d1f7e01e759",
+        "arm_id": "delete_one:v19-020-s009"
+      },
+      {
+        "episode_id": "85eb002f432c7d7ca7a4",
+        "arm_id": "delete_key:QY59508FEB"
+      },
+      {
+        "episode_id": "fa0ed011c245d629a390",
+        "arm_id": "delete_one:v19-024-s029"
+      },
+      {
+        "episode_id": "c6e743a4aeedf28778e6",
+        "arm_id": "delete_one:v19-026-s002"
+      },
+      {
+        "episode_id": "ee8e975bf5d6c3904c87",
+        "arm_id": "delete_one:v19-028-s017"
+      },
+      {
+        "episode_id": "2752bb2601cf5774d21a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9c939247a125108cca1b",
+        "arm_id": "delete_one:v19-032-s000"
+      },
+      {
+        "episode_id": "99fcbcb7496daaebcb87",
+        "arm_id": "delete_one:v19-034-s000"
+      },
+      {
+        "episode_id": "6d6cf26e3984df77d87b",
+        "arm_id": "delete_one:v19-036-s000"
+      },
+      {
+        "episode_id": "4823b6a5b61a4bf15c5a",
+        "arm_id": "delete_one:v19-038-s000"
+      },
+      {
+        "episode_id": "5c6593e0bf98f2fdf01a",
+        "arm_id": "delete_one:v19-040-s000"
+      },
+      {
+        "episode_id": "f58b0a4274402d46b2ed",
+        "arm_id": "delete_one:v19-042-s000"
+      },
+      {
+        "episode_id": "e6163e607ccef7dcc545",
+        "arm_id": "delete_one:v19-044-s005"
+      },
+      {
+        "episode_id": "4226bbaf9d820fabc54e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "bb17cfa7c1fac12b2136",
+        "arm_id": "delete_one:v19-048-s000"
+      },
+      {
+        "episode_id": "6f0c8f264cc870d786cb",
+        "arm_id": "delete_one:v19-050-s000"
+      },
+      {
+        "episode_id": "14cf460e241bc54113e5",
+        "arm_id": "delete_one:v19-052-s000"
+      },
+      {
+        "episode_id": "5b78a4d5f829cd36bde6",
+        "arm_id": "delete_key:QY822A4B5B"
+      },
+      {
+        "episode_id": "a06e76ffbf5f2c25cabf",
+        "arm_id": "delete_one:v19-056-s000"
+      },
+      {
+        "episode_id": "94c66ce294a59f1f80b9",
+        "arm_id": "delete_one:v19-058-s000"
+      },
+      {
+        "episode_id": "3144a6670031304557a0",
+        "arm_id": "delete_key:QYFB7464F"
+      },
+      {
+        "episode_id": "c533b81ee8a64c6bb164",
+        "arm_id": "delete_one:v19-062-s010"
+      },
+      {
+        "episode_id": "f14df56a8efaf50f16ac",
+        "arm_id": "delete_one:v19-064-s000"
+      },
+      {
+        "episode_id": "4323c52ece89e9cd77d2",
+        "arm_id": "delete_one:v19-066-s011"
+      },
+      {
+        "episode_id": "5269faae9b4478c663d9",
+        "arm_id": "delete_one:v19-068-s000"
+      },
+      {
+        "episode_id": "7ba715f4db159763f9a6",
+        "arm_id": "delete_key:QYC8E1954B"
+      },
+      {
+        "episode_id": "3c9358144530f344a25c",
+        "arm_id": "delete_one:v19-072-s000"
+      },
+      {
+        "episode_id": "83b9b2e0feaa8911e731",
+        "arm_id": "delete_one:v19-074-s000"
+      },
+      {
+        "episode_id": "6c235342ce0552ce9901",
+        "arm_id": "delete_one:v19-076-s000"
+      },
+      {
+        "episode_id": "614c5385213efb8ad2ae",
+        "arm_id": "delete_one:v19-078-s006"
+      },
+      {
+        "episode_id": "408c861c8a0446ead4a6",
+        "arm_id": "delete_one:v19-080-s000"
+      },
+      {
+        "episode_id": "ee7d3edf5393d1e1ac6f",
+        "arm_id": "delete_key:QYA80A172B"
+      },
+      {
+        "episode_id": "3f9ad9f0205d8dd648d7",
+        "arm_id": "delete_one:v19-084-s000"
+      },
+      {
+        "episode_id": "da3eedbf65599d9986f5",
+        "arm_id": "delete_key:QYD5D3A86"
+      },
+      {
+        "episode_id": "d337689db58f527e883d",
+        "arm_id": "delete_one:v19-088-s011"
+      },
+      {
+        "episode_id": "f18d00eb6c6333621c26",
+        "arm_id": "delete_one:v19-090-s005"
+      },
+      {
+        "episode_id": "6ec92f3ff7f7764b893c",
+        "arm_id": "delete_one:v19-092-s000"
+      },
+      {
+        "episode_id": "421ce312374ea3eb2b98",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "d895f8ac101f4288a35a",
+        "arm_id": "delete_one:v19-096-s000"
+      },
+      {
+        "episode_id": "19efff2f8e198bcc16cf",
+        "arm_id": "delete_one:v19-098-s000"
+      },
+      {
+        "episode_id": "ace81dc8696248cb7f36",
+        "arm_id": "delete_one:v19-100-s000"
+      },
+      {
+        "episode_id": "4cb2debd9afb4fb4a54f",
+        "arm_id": "delete_key:QYE9365FDB"
+      },
+      {
+        "episode_id": "f1fd64dddcf9807c528c",
+        "arm_id": "delete_one:v19-104-s000"
+      },
+      {
+        "episode_id": "9c221a9a931156c77acb",
+        "arm_id": "delete_one:v19-106-s000"
+      },
+      {
+        "episode_id": "143e99058dfc0610ba5a",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "6a5610feabd35bfcbffc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "2df5e40f466da99ed767",
+        "arm_id": "delete_one:v19-112-s000"
+      },
+      {
+        "episode_id": "d58bdc2064c4b10bbbab",
+        "arm_id": "delete_one:v19-114-s029"
+      },
+      {
+        "episode_id": "566f0809766d6638a5bb",
+        "arm_id": "delete_one:v19-116-s000"
+      },
+      {
+        "episode_id": "fe6e4852f6d99f9ace00",
+        "arm_id": "delete_one:v19-118-s000"
+      },
+      {
+        "episode_id": "16bba495f497cf79a6e0",
+        "arm_id": "delete_one:v19-120-s000"
+      },
+      {
+        "episode_id": "34197cdc39e8b0524ca4",
+        "arm_id": "delete_one:v19-122-s006"
+      },
+      {
+        "episode_id": "4624164317b0e6aac7ed",
+        "arm_id": "delete_one:v19-124-s000"
+      },
+      {
+        "episode_id": "6475bd4750760f6aa7d6",
+        "arm_id": "delete_one:v19-126-s003"
+      },
+      {
+        "episode_id": "d43aadfd69c4020d9c21",
+        "arm_id": "delete_one:v19-128-s000"
+      },
+      {
+        "episode_id": "719f15ea62cfb2d712e8",
+        "arm_id": "delete_one:v19-130-s009"
+      },
+      {
+        "episode_id": "7914193a229d94ab592d",
+        "arm_id": "delete_one:v19-132-s000"
+      },
+      {
+        "episode_id": "a7c1cf214b9a97a00d73",
+        "arm_id": "delete_key:QY9095FAFB"
+      },
+      {
+        "episode_id": "96679a34569e0d94917c",
+        "arm_id": "delete_one:v19-136-s000"
+      },
+      {
+        "episode_id": "86850d32cd0588ac5db1",
+        "arm_id": "delete_one:v19-138-s000"
+      },
+      {
+        "episode_id": "265834533a211e8f6ac5",
+        "arm_id": "delete_key:QY04A79A3"
+      },
+      {
+        "episode_id": "1ccf60f60595195e9672",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "dc7fc3afd0c4947385b0",
+        "arm_id": "delete_one:v19-144-s000"
+      },
+      {
+        "episode_id": "66e8bfb0424a03fcaeb6",
+        "arm_id": "delete_one:v19-146-s029"
+      },
+      {
+        "episode_id": "d86367c682a3946aa859",
+        "arm_id": "delete_one:v19-148-s007"
+      },
+      {
+        "episode_id": "d3f256826873de829ca2",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "037d1dae4b9087c99ca3",
+        "arm_id": "delete_one:v19-152-s000"
+      },
+      {
+        "episode_id": "d22d7aa06352f20a3ba9",
+        "arm_id": "delete_one:v19-154-s001"
+      },
+      {
+        "episode_id": "87dabdaef29bbaad51a7",
+        "arm_id": "delete_key:QY466DCBA"
+      },
+      {
+        "episode_id": "30207121be4eadeb1710",
+        "arm_id": "delete_key:QYD3933B2B"
+      },
+      {
+        "episode_id": "8e614c1eebcd3c7612df",
+        "arm_id": "delete_one:v19-160-s000"
+      },
+      {
+        "episode_id": "6032da3627310bfeb102",
+        "arm_id": "delete_one:v19-162-s006"
+      },
+      {
+        "episode_id": "b46e0a9e24348b808a0c",
+        "arm_id": "delete_one:v19-164-s000"
+      },
+      {
+        "episode_id": "c6b8fff544883386506b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "22fbc200cbeaf0760464",
+        "arm_id": "delete_key:QY2D14E87"
+      },
+      {
+        "episode_id": "ae74c76f865ef64d5cc4",
+        "arm_id": "delete_one:v19-170-s000"
+      },
+      {
+        "episode_id": "f5fb5f865a361f2387ee",
+        "arm_id": "delete_one:v19-172-s008"
+      },
+      {
+        "episode_id": "f79df725c98b0b4f4ab3",
+        "arm_id": "delete_key:QY6D40F37B"
+      },
+      {
+        "episode_id": "35130e9395ce4c8f8069",
+        "arm_id": "delete_one:v19-176-s000"
+      },
+      {
+        "episode_id": "1cea1d2d2d1d0b2f11ef",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "ba11d5d28e72b583e079",
+        "arm_id": "delete_one:v19-180-s000"
+      },
+      {
+        "episode_id": "269b64c913e19cd2ff92",
+        "arm_id": "delete_key:QY41233F4B"
+      },
+      {
+        "episode_id": "23d1d8fab4fd6cacb623",
+        "arm_id": "delete_one:v19-184-s000"
+      },
+      {
+        "episode_id": "9c39bcabd0b73f5ccbcc",
+        "arm_id": "delete_one:v19-186-s006"
+      },
+      {
+        "episode_id": "fb49f087ef499b61da5c",
+        "arm_id": "delete_one:v19-188-s000"
+      },
+      {
+        "episode_id": "b89e7808c2ca79dd58f4",
+        "arm_id": "delete_one:v19-190-s000"
+      },
+      {
+        "episode_id": "c072f2e193db095ca381",
+        "arm_id": "delete_one:v19-192-s000"
+      },
+      {
+        "episode_id": "5c3f49d74587801791f6",
+        "arm_id": "delete_one:v19-194-s000"
+      },
+      {
+        "episode_id": "98d415922e80effb8ab3",
+        "arm_id": "delete_one:v19-196-s000"
+      },
+      {
+        "episode_id": "e2cbda2aac7f6a3f3a1f",
+        "arm_id": "delete_key:QY313675EB"
+      },
+      {
+        "episode_id": "5bbb792fd287d0138f3d",
+        "arm_id": "delete_one:v19-200-s000"
+      },
+      {
+        "episode_id": "2bd356e9ea071bbf77ac",
+        "arm_id": "delete_one:v19-202-s000"
+      },
+      {
+        "episode_id": "05156d0a9259d19e60b6",
+        "arm_id": "delete_one:v19-204-s010"
+      },
+      {
+        "episode_id": "142dae8501bb0fd6058b",
+        "arm_id": "delete_one:v19-206-s005"
+      },
+      {
+        "episode_id": "b2c6686a91755f0255d0",
+        "arm_id": "delete_one:v19-208-s000"
+      },
+      {
+        "episode_id": "ba4d8546505cfc9f4fd0",
+        "arm_id": "delete_one:v19-210-s000"
+      },
+      {
+        "episode_id": "f7926533795a78c59ae5",
+        "arm_id": "delete_one:v19-212-s000"
+      },
+      {
+        "episode_id": "6b1d92407424d6988c8c",
+        "arm_id": "delete_one:v19-214-s055"
+      },
+      {
+        "episode_id": "8bc79a163993ccca6de0",
+        "arm_id": "delete_one:v19-216-s000"
+      },
+      {
+        "episode_id": "2192f23a46759465de33",
+        "arm_id": "delete_key:QYFC79FFFB"
+      },
+      {
+        "episode_id": "86233b9da5697a319d5a",
+        "arm_id": "delete_one:v19-220-s000"
+      },
+      {
+        "episode_id": "b3667744a8f360c7901c",
+        "arm_id": "delete_one:v19-222-s010"
+      },
+      {
+        "episode_id": "07b6e5e96cd6eeafc8fd",
+        "arm_id": "delete_one:v19-224-s000"
+      },
+      {
+        "episode_id": "4b764e33c3c41f4326de",
+        "arm_id": "delete_one:v19-226-s000"
+      },
+      {
+        "episode_id": "16ade3ccbe44b2a7c92d",
+        "arm_id": "delete_one:v19-228-s000"
+      },
+      {
+        "episode_id": "e6d8124ec3a730143f82",
+        "arm_id": "delete_key:QYE609E14B"
+      },
+      {
+        "episode_id": "aaec92399d06507c8436",
+        "arm_id": "delete_one:v19-232-s000"
+      },
+      {
+        "episode_id": "df61a4047b1c7b01baea",
+        "arm_id": "delete_key:QY1B3511AB"
+      },
+      {
+        "episode_id": "cced2ef6c5c0a8e7aa31",
+        "arm_id": "delete_one:v19-236-s005"
+      },
+      {
+        "episode_id": "23b4776c5ddc4117dee7",
+        "arm_id": "delete_one:v19-238-s012"
+      },
+      {
+        "episode_id": "8deea306dd76cc294dd1",
+        "arm_id": "delete_one:v19-240-s000"
+      },
+      {
+        "episode_id": "5ed5348e0ddc45b63cab",
+        "arm_id": "delete_one:v19-242-s003"
+      },
+      {
+        "episode_id": "a6d192307cbfdd787c1e",
+        "arm_id": "delete_one:v19-244-s000"
+      },
+      {
+        "episode_id": "6b24ff785fc08c898b9e",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f779c1a179615227ef4a",
+        "arm_id": "delete_key:QYEF8384F"
+      },
+      {
+        "episode_id": "8e819afd597540413961",
+        "arm_id": "delete_one:v19-250-s005"
+      },
+      {
+        "episode_id": "b9f8d0d82252d2134888",
+        "arm_id": "delete_one:v19-252-s023"
+      },
+      {
+        "episode_id": "f36c4706d4ccdbed102e",
+        "arm_id": "delete_key:QY505A6C7B"
+      },
+      {
+        "episode_id": "9f816504f9ed87e78f01",
+        "arm_id": "delete_one:v19-256-s000"
+      },
+      {
+        "episode_id": "af5474b86be2a203d116",
+        "arm_id": "delete_one:v19-258-s008"
+      },
+      {
+        "episode_id": "ac0ff93a5c8d4382dc48",
+        "arm_id": "delete_one:v19-260-s008"
+      },
+      {
+        "episode_id": "de8ab21665fa57e0e66b",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "f7b53c275080cab3554b",
+        "arm_id": "delete_one:v19-264-s000"
+      },
+      {
+        "episode_id": "1ecf75ce08b556851e8b",
+        "arm_id": "delete_key:QY332552AB"
+      },
+      {
+        "episode_id": "d4684e8521d0636a6689",
+        "arm_id": "delete_one:v19-268-s000"
+      },
+      {
+        "episode_id": "3c1471aa6628006219d3",
+        "arm_id": "delete_key:QY685F7ACB"
+      },
+      {
+        "episode_id": "566eaa778e64e7905c2b",
+        "arm_id": "delete_one:v19-272-s000"
+      },
+      {
+        "episode_id": "a85dce6790eeaf6c215b",
+        "arm_id": "delete_one:v19-274-s002"
+      },
+      {
+        "episode_id": "c6dd8f0e7a484c207462",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "62b8bbd21e2444513260",
+        "arm_id": "delete_key:QYCB022FB"
+      },
+      {
+        "episode_id": "373f934419e9462daa62",
+        "arm_id": "delete_one:v19-280-s000"
+      },
+      {
+        "episode_id": "8c0416459a58053d4d32",
+        "arm_id": "delete_key:QYE2A146EB"
+      },
+      {
+        "episode_id": "b2e554fccd707c46ef51",
+        "arm_id": "delete_one:v19-284-s009"
+      },
+      {
+        "episode_id": "63f1759f535923582067",
+        "arm_id": "delete_key:QY937D9CAB"
+      },
+      {
+        "episode_id": "ed4aa1a0aaf93834e8c9",
+        "arm_id": "delete_one:v19-288-s000"
+      },
+      {
+        "episode_id": "28844c4a531ce987373d",
+        "arm_id": "fixed:last_2"
+      },
+      {
+        "episode_id": "abcd1a76cd77b794a83b",
+        "arm_id": "delete_one:v19-292-s000"
+      },
+      {
+        "episode_id": "3b7ca131f51989901ada",
+        "arm_id": "delete_key:QYE7FBCC9B"
+      },
+      {
+        "episode_id": "3a739a23beea5e00ac44",
+        "arm_id": "delete_one:v19-296-s000"
+      },
+      {
+        "episode_id": "f1c570a6906a296e0830",
+        "arm_id": "delete_one:v19-298-s000"
+      },
+      {
+        "episode_id": "f8ca0a80e9a5fdfd7fea",
+        "arm_id": "delete_one:v19-300-s006"
+      },
+      {
+        "episode_id": "1e40987a58d89bd04c92",
+        "arm_id": "fixed:global_reset"
+      },
+      {
+        "episode_id": "84006bedba0662ccccfc",
+        "arm_id": "delete_one:v19-304-s000"
+      },
+      {
+        "episode_id": "e7a2b2d27d9021a16ff0",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "4fe191159c39eb5b05b2",
+        "arm_id": "delete_one:v19-308-s000"
+      },
+      {
+        "episode_id": "b2fbdf8ad0e06bec1bdd",
+        "arm_id": "delete_key:QYD30E282B"
+      },
+      {
+        "episode_id": "dbf0328bc9e3aeb0ed9d",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "9a1f119b01e1938f4179",
+        "arm_id": "delete_one:v19-314-s003"
+      },
+      {
+        "episode_id": "e3a16a5a2ceed8d6d296",
+        "arm_id": "delete_one:v19-316-s000"
+      },
+      {
+        "episode_id": "1b7b65cd377b8cb64a83",
+        "arm_id": "delete_key:QYD679C8FB"
+      },
+      {
+        "episode_id": "801e09c97836b9132938",
+        "arm_id": "delete_key:QYE1F4A9C"
+      },
+      {
+        "episode_id": "49831512d0d5bec38030",
+        "arm_id": "delete_key:QYFE21EB9"
+      },
+      {
+        "episode_id": "ae3ac529661b9e7ff063",
+        "arm_id": "delete_key:QY6231126"
+      },
+      {
+        "episode_id": "2f96941b0f8fc4d526e2",
+        "arm_id": "delete_one:v19-007-s000"
+      },
+      {
+        "episode_id": "5b82bb3b6a17a97f94f1",
+        "arm_id": "delete_key:QYBDFF279"
+      },
+      {
+        "episode_id": "277eef55ecf4d194b097",
+        "arm_id": "delete_one:v19-011-s000"
+      },
+      {
+        "episode_id": "7823914964ee11954f24",
+        "arm_id": "delete_key:QYB74619A"
+      },
+      {
+        "episode_id": "fd6a4ca3f5c87a0e62fe",
+        "arm_id": "delete_one:v19-015-s004"
+      },
+      {
+        "episode_id": "2863cd3138dbff665a37",
+        "arm_id": "delete_key:QY0CF64BD"
+      },
+      {
+        "episode_id": "8d3ab9a7b11c3ff254c8",
+        "arm_id": "delete_key:QY29ED092"
+      },
+      {
+        "episode_id": "6d86fef9adbfc091c98e",
+        "arm_id": "delete_key:QY95AC235"
+      },
+      {
+        "episode_id": "37b7cb657098520dd4eb",
+        "arm_id": "delete_one:v19-023-s006"
+      },
+      {
+        "episode_id": "e4f63c78ea35f3b553bc",
+        "arm_id": "delete_key:QY68B8E4F"
+      },
+      {
+        "episode_id": "8d319f99a96e62f62ed4",
+        "arm_id": "delete_one:v19-027-s000"
+      },
+      {
+        "episode_id": "574feb639d25fbc2091d",
+        "arm_id": "delete_key:QYA531C0B"
+      },
+      {
+        "episode_id": "4b6fc6050da55b53b1f9",
+        "arm_id": "delete_key:QYCE021A0"
+      },
+      {
+        "episode_id": "13c94450b346c8e0f261",
+        "arm_id": "delete_key:QYADF1B1E"
+      },
+      {
+        "episode_id": "67c55a7efd667452ae24",
+        "arm_id": "delete_one:v19-035-s003"
+      },
+      {
+        "episode_id": "11f5b6c854cbe5331c8a",
+        "arm_id": "delete_key:QY3BD5CB4"
+      },
+      {
+        "episode_id": "8c7f133860306a101206",
+        "arm_id": "delete_one:v19-039-s000"
+      },
+      {
+        "episode_id": "caadce621880d1a9e169",
+        "arm_id": "delete_key:QYF8AE036"
+      },
+      {
+        "episode_id": "5fd7fcb05d667a3e2dd3",
+        "arm_id": "delete_one:v19-043-s000"
+      },
+      {
+        "episode_id": "e77026bfdb28d279deac",
+        "arm_id": "delete_key:QYD0B26A5"
+      },
+      {
+        "episode_id": "196cbf162c6e0683948a",
+        "arm_id": "delete_one:v19-047-s000"
+      },
+      {
+        "episode_id": "667ad0cb94605f9c8d78",
+        "arm_id": "delete_key:QYD2D02BB"
+      },
+      {
+        "episode_id": "c7267db11984de996a27",
+        "arm_id": "delete_key:QY68FD8AE"
+      },
+      {
+        "episode_id": "a00035978e2dda0f80a6",
+        "arm_id": "delete_key:QYBCB302D"
+      },
+      {
+        "episode_id": "5e09a00150281d73a194",
+        "arm_id": "delete_one:v19-055-s000"
+      },
+      {
+        "episode_id": "4feea10cdf272965b6f9",
+        "arm_id": "delete_key:QYE6501FA"
+      },
+      {
+        "episode_id": "784df3106708a11083d0",
+        "arm_id": "delete_one:v19-059-s000"
+      },
+      {
+        "episode_id": "f34ce1e14c56b6c31e21",
+        "arm_id": "delete_key:QY59BA610"
+      },
+      {
+        "episode_id": "edc266f4c18ba9fb75a6",
+        "arm_id": "delete_one:v19-063-s000"
+      },
+      {
+        "episode_id": "520c469f747cb4d095e6",
+        "arm_id": "delete_key:QY9696CE6"
+      },
+      {
+        "episode_id": "2e1c96e08c1adb6ef7f6",
+        "arm_id": "delete_key:QYFE465DE"
+      },
+      {
+        "episode_id": "fe5e5716263cbff62d6c",
+        "arm_id": "delete_key:QYB86A2A3"
+      },
+      {
+        "episode_id": "648a679175c35fa10403",
+        "arm_id": "delete_one:v19-071-s000"
+      },
+      {
+        "episode_id": "1866bd06b6d5722c3905",
+        "arm_id": "delete_key:QY27355BB"
+      },
+      {
+        "episode_id": "af96e0320dc0904575e4",
+        "arm_id": "delete_one:v19-075-s000"
+      },
+      {
+        "episode_id": "41ae57a43ef0b5004470",
+        "arm_id": "delete_key:QYA9B987D"
+      },
+      {
+        "episode_id": "580134023c58ab47c955",
+        "arm_id": "delete_one:v19-079-s000"
+      },
+      {
+        "episode_id": "2bef707acbe5e8d9e2aa",
+        "arm_id": "delete_key:QY6247E4B"
+      },
+      {
+        "episode_id": "988974c0814c9c96418c",
+        "arm_id": "delete_one:v19-083-s000"
+      },
+      {
+        "episode_id": "9e10dfc7ffd5655df566",
+        "arm_id": "delete_key:QY8C17DE6"
+      },
+      {
+        "episode_id": "f8ac5ff5101ca39e9d3d",
+        "arm_id": "delete_one:v19-087-s000"
+      },
+      {
+        "episode_id": "13d4fde580faef06756e",
+        "arm_id": "delete_key:QY3DC0BFD"
+      },
+      {
+        "episode_id": "1056254df6c9321d2791",
+        "arm_id": "delete_one:v19-091-s000"
+      },
+      {
+        "episode_id": "51d3bc46e52b9e886061",
+        "arm_id": "delete_key:QYFE3DAB9"
+      },
+      {
+        "episode_id": "d70e855ee528d3d959e6",
+        "arm_id": "delete_one:v19-095-s000"
+      },
+      {
+        "episode_id": "1db6ae1d278b4d1756e1",
+        "arm_id": "delete_key:QYDC32049"
+      },
+      {
+        "episode_id": "ebafa0809c9786972b0b",
+        "arm_id": "delete_key:QY6B8FD19"
+      },
+      {
+        "episode_id": "744be4cad8d60028c3df",
+        "arm_id": "delete_key:QY181DAEA"
+      },
+      {
+        "episode_id": "5717b078981f6f3cbe03",
+        "arm_id": "delete_one:v19-103-s000"
+      },
+      {
+        "episode_id": "ef56da7d3487fa440177",
+        "arm_id": "delete_key:QY35A41F7"
+      },
+      {
+        "episode_id": "74375721ee000134cd73",
+        "arm_id": "delete_one:v19-107-s000"
+      },
+      {
+        "episode_id": "4100f478b14dd4f58d7c",
+        "arm_id": "delete_key:QYE9668A0"
+      },
+      {
+        "episode_id": "e61f644d9f5cb9c41040",
+        "arm_id": "delete_one:v19-111-s000"
+      },
+      {
+        "episode_id": "f57c32367d617264fd65",
+        "arm_id": "delete_key:QY16A9CE6"
+      },
+      {
+        "episode_id": "11c176eba889c996e574",
+        "arm_id": "delete_one:v19-115-s054"
+      },
+      {
+        "episode_id": "826ed11a04190086eb11",
+        "arm_id": "delete_key:QY90D2674"
+      },
+      {
+        "episode_id": "4da298582cbe97e81965",
+        "arm_id": "delete_one:v19-119-s003"
+      },
+      {
+        "episode_id": "e1e5dc8e2a01c427d892",
+        "arm_id": "delete_key:QYEA84542"
+      },
+      {
+        "episode_id": "bb391569346084cd53c8",
+        "arm_id": "delete_one:v19-123-s000"
+      },
+      {
+        "episode_id": "cb83cbaff19e36cdfc5f",
+        "arm_id": "delete_key:QYB81FDC9"
+      },
+      {
+        "episode_id": "8ada664e9fa75d233aed",
+        "arm_id": "delete_one:v19-127-s000"
+      },
+      {
+        "episode_id": "60188da120eb4230e988",
+        "arm_id": "delete_key:QY5598823"
+      },
+      {
+        "episode_id": "b4114a81943d23dd9480",
+        "arm_id": "delete_one:v19-131-s000"
+      },
+      {
+        "episode_id": "964aa768bedb4d259b71",
+        "arm_id": "delete_key:QY856E67B"
+      },
+      {
+        "episode_id": "e4963c9cbe998db6e8b1",
+        "arm_id": "delete_one:v19-135-s000"
+      },
+      {
+        "episode_id": "83880b6eeddcc45c5d19",
+        "arm_id": "delete_key:QYA8C6BD7"
+      },
+      {
+        "episode_id": "ace018121c020c9bbf1c",
+        "arm_id": "delete_one:v19-139-s000"
+      },
+      {
+        "episode_id": "81e1cc44f1f9fe641fb4",
+        "arm_id": "delete_key:QY743278E"
+      },
+      {
+        "episode_id": "199e7f41461755fd7a9d",
+        "arm_id": "delete_one:v19-143-s000"
+      },
+      {
+        "episode_id": "b645cb2edab8d8f31656",
+        "arm_id": "delete_key:QY7CAC82E"
+      },
+      {
+        "episode_id": "c76446f0d9c49016b640",
+        "arm_id": "delete_one:v19-147-s000"
+      },
+      {
+        "episode_id": "f6c9c16cc2a73f4863bc",
+        "arm_id": "delete_key:QY660D627"
+      },
+      {
+        "episode_id": "2303aeadaec778b78b27",
+        "arm_id": "delete_one:v19-151-s000"
+      },
+      {
+        "episode_id": "bae9750d01c4e2197934",
+        "arm_id": "delete_key:QYA8A10A0"
+      },
+      {
+        "episode_id": "86c163aa5331ac1860dc",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "07335768b680c8c7be9a",
+        "arm_id": "delete_key:QYA853DDB"
+      },
+      {
+        "episode_id": "ee12aa43cc61b6904884",
+        "arm_id": "delete_one:v19-159-s015"
+      },
+      {
+        "episode_id": "7ffce577034aeb756ad3",
+        "arm_id": "delete_key:QY747768A"
+      },
+      {
+        "episode_id": "6da6c1a53595243908a1",
+        "arm_id": "delete_key:QYB35B99D"
+      },
+      {
+        "episode_id": "8f5010f470fb309f07b6",
+        "arm_id": "delete_key:QY7C65221"
+      },
+      {
+        "episode_id": "11779ea8f58694037045",
+        "arm_id": "delete_one:v19-167-s000"
+      },
+      {
+        "episode_id": "d2b6a3d5896d1258c89b",
+        "arm_id": "delete_key:QY00C8E59"
+      },
+      {
+        "episode_id": "5eb1380863b55976dca0",
+        "arm_id": "delete_one:v19-171-s000"
+      },
+      {
+        "episode_id": "224edaa09d0c0f223537",
+        "arm_id": "delete_key:QY1C3F6E2"
+      },
+      {
+        "episode_id": "612ab6c15e71aabfa87f",
+        "arm_id": "delete_one:v19-175-s000"
+      },
+      {
+        "episode_id": "8ef958eb2e5121d219ed",
+        "arm_id": "delete_key:QYD2031FD"
+      },
+      {
+        "episode_id": "e7b832128840dd113910",
+        "arm_id": "delete_one:v19-179-s006"
+      },
+      {
+        "episode_id": "ecdf9590857b19337dc7",
+        "arm_id": "delete_key:QYB38719F"
+      },
+      {
+        "episode_id": "ea6a078cac787ef3be99",
+        "arm_id": "delete_one:v19-183-s006"
+      },
+      {
+        "episode_id": "f3fa18c82039df9a5e13",
+        "arm_id": "delete_key:QY964CAAD"
+      },
+      {
+        "episode_id": "5684484109b2eed67aa6",
+        "arm_id": "delete_one:v19-187-s000"
+      },
+      {
+        "episode_id": "7c391274af9cd1ea374a",
+        "arm_id": "delete_key:QYBF881B5"
+      },
+      {
+        "episode_id": "a6b73f43ef3a228cdac6",
+        "arm_id": "delete_one:v19-191-s001"
+      },
+      {
+        "episode_id": "5432f2457847be8eb050",
+        "arm_id": "delete_key:QY9CD04E7"
+      },
+      {
+        "episode_id": "40928661360054e9957f",
+        "arm_id": "delete_key:QY6202F16"
+      },
+      {
+        "episode_id": "3a2c76230dc4faef94e9",
+        "arm_id": "delete_key:QY3BEAFD3"
+      },
+      {
+        "episode_id": "0a1b2810bf6ec5fb9e57",
+        "arm_id": "delete_one:v19-199-s000"
+      },
+      {
+        "episode_id": "35f4a3aacfb05b827843",
+        "arm_id": "delete_key:QY1B88E67"
+      },
+      {
+        "episode_id": "945df62f461bd69216ef",
+        "arm_id": "delete_one:v19-203-s000"
+      },
+      {
+        "episode_id": "69b580f2b1958a24d0e9",
+        "arm_id": "delete_key:QYD064D3F"
+      },
+      {
+        "episode_id": "577bf0b62aeac7e103b1",
+        "arm_id": "delete_one:v19-207-s000"
+      },
+      {
+        "episode_id": "ff552e6ee9abd2402b92",
+        "arm_id": "delete_key:QYC0167DB"
+      },
+      {
+        "episode_id": "bb483fdc6921d5ddc6a5",
+        "arm_id": "delete_one:v19-211-s001"
+      },
+      {
+        "episode_id": "de5a0866983d976832f8",
+        "arm_id": "delete_key:QY99D48DD"
+      },
+      {
+        "episode_id": "3effa39d91fe18a73a0e",
+        "arm_id": "delete_one:v19-215-s000"
+      },
+      {
+        "episode_id": "ad3784b93a585fd3a764",
+        "arm_id": "delete_key:QY5F74895"
+      },
+      {
+        "episode_id": "57176674d0ea5945fef7",
+        "arm_id": "delete_one:v19-219-s000"
+      },
+      {
+        "episode_id": "d2cb192aa4a9ba0a2fe5",
+        "arm_id": "delete_key:QY5EBCE91"
+      },
+      {
+        "episode_id": "90f98551e1daef206887",
+        "arm_id": "delete_one:v19-223-s000"
+      },
+      {
+        "episode_id": "724cf52d4072c7f02c19",
+        "arm_id": "delete_key:QYB87FC56"
+      },
+      {
+        "episode_id": "3de12732d1691dbbdd9e",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "27a41c589322e1847172",
+        "arm_id": "delete_key:QY0095620"
+      },
+      {
+        "episode_id": "9fdbb2aae5d6f7e95276",
+        "arm_id": "delete_one:v19-231-s000"
+      },
+      {
+        "episode_id": "552146d862343f7e5b86",
+        "arm_id": "delete_key:QY4612EBF"
+      },
+      {
+        "episode_id": "a17afe859f3d0f64b7fb",
+        "arm_id": "delete_one:v19-235-s000"
+      },
+      {
+        "episode_id": "9bc0284c1b4792c7ee64",
+        "arm_id": "delete_key:QY4F1CD29"
+      },
+      {
+        "episode_id": "30b76e9872e590c3652c",
+        "arm_id": "delete_one:v19-239-s000"
+      },
+      {
+        "episode_id": "0c45c7e549a7c4d058e5",
+        "arm_id": "delete_key:QY3D528D2"
+      },
+      {
+        "episode_id": "42c633c290bdf9fe54fd",
+        "arm_id": "delete_key:QY5A5D431"
+      },
+      {
+        "episode_id": "8e67f0ebdf186d69f205",
+        "arm_id": "delete_key:QY1AFB651"
+      },
+      {
+        "episode_id": "c9d40ff9cc2c67d80d71",
+        "arm_id": "delete_one:v19-247-s000"
+      },
+      {
+        "episode_id": "e98839fab978cba79554",
+        "arm_id": "delete_key:QY7E6DAFC"
+      },
+      {
+        "episode_id": "f46587576421ab2d8db1",
+        "arm_id": "delete_one:v19-251-s000"
+      },
+      {
+        "episode_id": "b761e40b35b9515b8460",
+        "arm_id": "delete_key:QY67A47E6"
+      },
+      {
+        "episode_id": "02d9b76af93b042612de",
+        "arm_id": "delete_one:v19-255-s000"
+      },
+      {
+        "episode_id": "304ea9dd150a92733b98",
+        "arm_id": "delete_key:QY2383521"
+      },
+      {
+        "episode_id": "93820a501681b0bed550",
+        "arm_id": "delete_one:v19-259-s001"
+      },
+      {
+        "episode_id": "ac908e727c1ec51082dc",
+        "arm_id": "delete_key:QY8B58E13"
+      },
+      {
+        "episode_id": "08459bc462b9f6f79b21",
+        "arm_id": "delete_one:v19-263-s000"
+      },
+      {
+        "episode_id": "c0671f99c1c897382023",
+        "arm_id": "delete_key:QYB7F32B5"
+      },
+      {
+        "episode_id": "9524dff327ae4cce5c44",
+        "arm_id": "delete_one:v19-267-s000"
+      },
+      {
+        "episode_id": "c65a68741f99444c8216",
+        "arm_id": "delete_key:QY9CD4096"
+      },
+      {
+        "episode_id": "c67464aeba2edfd98a29",
+        "arm_id": "delete_one:v19-271-s000"
+      },
+      {
+        "episode_id": "8ab947aa7bb5fa4eef47",
+        "arm_id": "delete_key:QYEB9A2DD"
+      },
+      {
+        "episode_id": "08d9427925fbc4178772",
+        "arm_id": "delete_one:v19-275-s001"
+      },
+      {
+        "episode_id": "1204871e968892d1cf74",
+        "arm_id": "delete_key:QYCA5AE27"
+      },
+      {
+        "episode_id": "cc79e5e76fe3c8edc9c7",
+        "arm_id": "delete_one:v19-279-s006"
+      },
+      {
+        "episode_id": "49d1ad65175183b5c610",
+        "arm_id": "delete_key:QYEF1FF65"
+      },
+      {
+        "episode_id": "50d1a9f744074196ff14",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "235fa4e84c7c77f5faae",
+        "arm_id": "delete_key:QY0668254"
+      },
+      {
+        "episode_id": "0f44f322e9a724fef5d0",
+        "arm_id": "delete_one:v19-287-s000"
+      },
+      {
+        "episode_id": "58800cbd1d49d54e1e4f",
+        "arm_id": "delete_key:QY3DD571D"
+      },
+      {
+        "episode_id": "7c786230edbdca59a618",
+        "arm_id": "delete_one:v19-291-s059"
+      },
+      {
+        "episode_id": "b78cce75830f0c4ea419",
+        "arm_id": "delete_key:QY1079A2E"
+      },
+      {
+        "episode_id": "7d2555c283228c08ec3b",
+        "arm_id": "delete_one:v19-295-s000"
+      },
+      {
+        "episode_id": "1fe2f7068c71dac4e90b",
+        "arm_id": "delete_key:QYD27F05E"
+      },
+      {
+        "episode_id": "31f68a59909152a06d7f",
+        "arm_id": "delete_one:v19-299-s001"
+      },
+      {
+        "episode_id": "bb56083ef64fdf1c1b75",
+        "arm_id": "delete_key:QYEA9B0DF"
+      },
+      {
+        "episode_id": "8a455e3111f71304e142",
+        "arm_id": "delete_one:v19-303-s000"
+      },
+      {
+        "episode_id": "d926d7abad5650fa372b",
+        "arm_id": "delete_key:QY223393E"
+      },
+      {
+        "episode_id": "de13e212beb7b71e22dd",
+        "arm_id": "delete_one:v19-307-s000"
+      },
+      {
+        "episode_id": "00b1df6fdcd1dd99cb5f",
+        "arm_id": "delete_key:QYCD1F867"
+      },
+      {
+        "episode_id": "5db2a16150f10d77e702",
+        "arm_id": "delete_one:v19-311-s000"
+      },
+      {
+        "episode_id": "2963c3bc6c11e73e1d7b",
+        "arm_id": "delete_key:QY05F8C11"
+      },
+      {
+        "episode_id": "434dd56a938659410f3f",
+        "arm_id": "fixed:retain_all"
+      },
+      {
+        "episode_id": "328d9b65f621ca979917",
+        "arm_id": "delete_key:QYC17E502"
+      },
+      {
+        "episode_id": "eff3ace3f1849516b20e",
+        "arm_id": "delete_one:v19-319-s000"
+      }
+    ]
+  },
+  "unconstrained_oracle": {
+    "observed_locality_failures": 0,
+    "metrics": {
+      "joint_success": 0.9625,
+      "update_accuracy": 1.0,
+      "retained_key_accuracy": 0.9671875,
+      "locality_accuracy": 1.0,
+      "generation_joint_success": 0.653125,
+      "joint_answer_nll": 0.30675977229140716
+    },
+    "action_counts": {
+      "retain_all": 11,
+      "other_fixed": 20,
+      "delete_one": 182,
+      "delete_key": 118
+    }
+  },
+  "confirmation_gate": {
+    "checks": {
+      "subject_macro_joint_gain_at_least_10_points": true,
+      "subject_cluster_joint_gain_ci_lower_above_zero": true,
+      "template_macro_joint_gain_at_least_10_points": true,
+      "template_cluster_joint_gain_ci_lower_above_zero": true,
+      "oracle_update_accuracy_at_least_90": true,
+      "oracle_retained_key_accuracy_at_least_90": true,
+      "oracle_locality_accuracy_at_least_97": true,
+      "no_outer_fold_has_negative_joint_gain": true
+    },
+    "passed": true
+  },
+  "causal_headroom_confirmed": true,
+  "next_stage": "build_v19_causal_forgetting_examples",
+  "rows": 320,
+  "raw_rows_sha256": {
+    "shard0.jsonl": "8864bb3ccd3940dd0aeef5cd5e08235f2fd36371d4bae3ed6a8ce8056091d985",
+    "shard1.jsonl": "b047b15419b6ed3dc23083464f18f86dfd25500b971a23864eb81ef885458258"
+  },
+  "shard_resources": [
+    {
+      "protocol": "controlled_memory_interference_v19_qwen_confirmation",
+      "shard": 0,
+      "num_shards": 2,
+      "rows": 160,
+      "rows_sha256": "8864bb3ccd3940dd0aeef5cd5e08235f2fd36371d4bae3ed6a8ce8056091d985",
+      "dependencies": {
+        "manifest_sha256": "e620e75f1e73d1ec3f09510c784785a53c09a4209ce80fb767b259d7b0abbb6b",
+        "data_audit_sha256": "980ffd2b7cdac1ee2630f438472bd725366e5d840e03dd064d5017a4f5b939cf",
+        "confirmation_sha256": "384d94f24820bc11244d6d0c2525fc02887d456a066d68e0cbade0bcd7763cb9",
+        "states_sha256": "2459ca4c48d2a341e277b875150cf532736d6fbf5ccd7a4e91c736ee9ec0bf3f",
+        "release_summary_sha256": "54a87c57c65c3b36fc3fb13fef7b6c1c1e940cfc8765b5c507572c2f261ccc96",
+        "release_audit_sha256": "abe9b2078d31fee137a60f0ad648dfe8b5189e3b11b35b6196c3b47d89050677"
+      },
+      "seconds": 8235.590105649084,
+      "unique_memory_states_scored": 5680,
+      "reused_arm_states": 720,
+      "query_measurements": 28400,
+      "gpu_peak_allocated_gib": 8.360584259033203,
+      "gpu_peak_reserved_gib": 8.9375,
+      "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+      "tokenizer": "/home/ctj/models/Qwen3-4B",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "loading_info": {
+        "missing_keys": [],
+        "unexpected_keys": [
+          "model.layers.0.mlp.ttt_conv.weight",
+          "model.layers.0.mlp.ttt_proj.weight",
+          "model.layers.12.mlp.ttt_conv.weight",
+          "model.layers.12.mlp.ttt_proj.weight",
+          "model.layers.18.mlp.ttt_conv.weight",
+          "model.layers.18.mlp.ttt_proj.weight",
+          "model.layers.24.mlp.ttt_conv.weight",
+          "model.layers.24.mlp.ttt_proj.weight",
+          "model.layers.30.mlp.ttt_conv.weight",
+          "model.layers.30.mlp.ttt_proj.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_proj.weight",
+          "model.layers.6.mlp.ttt_conv.weight",
+          "model.layers.6.mlp.ttt_proj.weight"
+        ],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "readout_mode": "plain_ttt_disabled_fresh_kv",
+      "candidate_scoring": "one_prompt_forward_with_independent_answer_cache_branches",
+      "generation": "greedy_from_independent_shared_prompt_cache_13_tokens",
+      "model_provenance": {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4022468096,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "excluded_adapters": [
+          "model.layers.0.mlp.ttt_conv.weight",
+          "model.layers.0.mlp.ttt_proj.weight",
+          "model.layers.12.mlp.ttt_conv.weight",
+          "model.layers.12.mlp.ttt_proj.weight",
+          "model.layers.18.mlp.ttt_conv.weight",
+          "model.layers.18.mlp.ttt_proj.weight",
+          "model.layers.24.mlp.ttt_conv.weight",
+          "model.layers.24.mlp.ttt_proj.weight",
+          "model.layers.30.mlp.ttt_conv.weight",
+          "model.layers.30.mlp.ttt_proj.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_proj.weight",
+          "model.layers.6.mlp.ttt_conv.weight",
+          "model.layers.6.mlp.ttt_proj.weight"
+        ],
+        "ttt_mode": false
+      },
+      "tokenizer_files_sha256": {
+        "config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors.index.json": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "opaque_answer_tokens": 5,
+      "torch": "2.9.1+cu130",
+      "transformers": "4.57.3",
+      "model_scored": true,
+      "external_sets_loaded": false
+    },
+    {
+      "protocol": "controlled_memory_interference_v19_qwen_confirmation",
+      "shard": 1,
+      "num_shards": 2,
+      "rows": 160,
+      "rows_sha256": "b047b15419b6ed3dc23083464f18f86dfd25500b971a23864eb81ef885458258",
+      "dependencies": {
+        "manifest_sha256": "e620e75f1e73d1ec3f09510c784785a53c09a4209ce80fb767b259d7b0abbb6b",
+        "data_audit_sha256": "980ffd2b7cdac1ee2630f438472bd725366e5d840e03dd064d5017a4f5b939cf",
+        "confirmation_sha256": "384d94f24820bc11244d6d0c2525fc02887d456a066d68e0cbade0bcd7763cb9",
+        "states_sha256": "2459ca4c48d2a341e277b875150cf532736d6fbf5ccd7a4e91c736ee9ec0bf3f",
+        "release_summary_sha256": "54a87c57c65c3b36fc3fb13fef7b6c1c1e940cfc8765b5c507572c2f261ccc96",
+        "release_audit_sha256": "abe9b2078d31fee137a60f0ad648dfe8b5189e3b11b35b6196c3b47d89050677"
+      },
+      "seconds": 8363.835377883166,
+      "unique_memory_states_scored": 5800,
+      "reused_arm_states": 600,
+      "query_measurements": 29000,
+      "gpu_peak_allocated_gib": 8.345821380615234,
+      "gpu_peak_reserved_gib": 8.8828125,
+      "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+      "tokenizer": "/home/ctj/models/Qwen3-4B",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "loading_info": {
+        "missing_keys": [],
+        "unexpected_keys": [
+          "model.layers.0.mlp.ttt_conv.weight",
+          "model.layers.0.mlp.ttt_proj.weight",
+          "model.layers.12.mlp.ttt_conv.weight",
+          "model.layers.12.mlp.ttt_proj.weight",
+          "model.layers.18.mlp.ttt_conv.weight",
+          "model.layers.18.mlp.ttt_proj.weight",
+          "model.layers.24.mlp.ttt_conv.weight",
+          "model.layers.24.mlp.ttt_proj.weight",
+          "model.layers.30.mlp.ttt_conv.weight",
+          "model.layers.30.mlp.ttt_proj.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_proj.weight",
+          "model.layers.6.mlp.ttt_conv.weight",
+          "model.layers.6.mlp.ttt_proj.weight"
+        ],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "readout_mode": "plain_ttt_disabled_fresh_kv",
+      "candidate_scoring": "one_prompt_forward_with_independent_answer_cache_branches",
+      "generation": "greedy_from_independent_shared_prompt_cache_13_tokens",
+      "model_provenance": {
+        "path": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+        "config_sha256": "9ffb7420c132c9ea7de55e221baac89594699f942bc14f2327fc5014e038e672",
+        "attention": "sdpa",
+        "parameter_count": 4022468096,
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "excluded_adapters": [
+          "model.layers.0.mlp.ttt_conv.weight",
+          "model.layers.0.mlp.ttt_proj.weight",
+          "model.layers.12.mlp.ttt_conv.weight",
+          "model.layers.12.mlp.ttt_proj.weight",
+          "model.layers.18.mlp.ttt_conv.weight",
+          "model.layers.18.mlp.ttt_proj.weight",
+          "model.layers.24.mlp.ttt_conv.weight",
+          "model.layers.24.mlp.ttt_proj.weight",
+          "model.layers.30.mlp.ttt_conv.weight",
+          "model.layers.30.mlp.ttt_proj.weight",
+          "model.layers.35.mlp.ttt_conv.weight",
+          "model.layers.35.mlp.ttt_proj.weight",
+          "model.layers.6.mlp.ttt_conv.weight",
+          "model.layers.6.mlp.ttt_proj.weight"
+        ],
+        "ttt_mode": false
+      },
+      "tokenizer_files_sha256": {
+        "config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors.index.json": "6dc0981b8829fead746441f68f38f24c5ca4a3a66351f652c26c6df0efc43ab2",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "opaque_answer_tokens": 5,
+      "torch": "2.9.1+cu130",
+      "transformers": "4.57.3",
+      "model_scored": true,
+      "external_sets_loaded": false
+    }
+  ],
+  "dependencies": {
+    "manifest_sha256": "e620e75f1e73d1ec3f09510c784785a53c09a4209ce80fb767b259d7b0abbb6b",
+    "data_audit_sha256": "980ffd2b7cdac1ee2630f438472bd725366e5d840e03dd064d5017a4f5b939cf",
+    "confirmation_sha256": "384d94f24820bc11244d6d0c2525fc02887d456a066d68e0cbade0bcd7763cb9",
+    "states_sha256": "2459ca4c48d2a341e277b875150cf532736d6fbf5ccd7a4e91c736ee9ec0bf3f",
+    "release_summary_sha256": "54a87c57c65c3b36fc3fb13fef7b6c1c1e940cfc8765b5c507572c2f261ccc96",
+    "release_audit_sha256": "abe9b2078d31fee137a60f0ad648dfe8b5189e3b11b35b6196c3b47d89050677"
+  },
+  "resources": {
+    "unique_memory_states": 11480,
+    "query_measurements": 57400,
+    "wall_seconds_slower_shard": 8363.835377883166,
+    "mean_seconds_per_query": 0.2734253440504303,
+    "median_seconds_per_query": 0.25923455134034157,
+    "p95_seconds_per_query": 0.34575839154422283,
+    "max_seconds_per_query": 0.7098080422729254,
+    "max_gpu_peak_allocated_gib": 8.360584259033203,
+    "max_gpu_peak_reserved_gib": 8.9375
+  },
+  "model_scored": true,
+  "external_sets_loaded": false,
+  "terminal_status": "v19_locality_safe_headroom_confirmed"
+}

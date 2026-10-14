@@ -1,0 +1,33 @@
+{
+  "protocol": "v19_nested_oof_policy_examples_v1_audit",
+  "audit_passed": true,
+  "checks": {
+    "audited_v19_fallback_release": true,
+    "complete_unique_source_and_example_coverage": true,
+    "independent_features_labels_and_label_arm_recomputation": true,
+    "finite_write_time_feature_vectors": true,
+    "manifest_counts_hashes_and_access_locks": true
+  },
+  "manifest_sha256": "a63a64bc6a828c97d46e0cfe544a1aa2306405006bb49f0839ab056203961668",
+  "examples_sha256": "721e22882f4f8f28aee52cd7c436b0ca9bbf0b1d2149002f0096369101713ac5",
+  "rows": 9280,
+  "counts": {
+    "target_counts": {
+      "0.0": 721,
+      "0.5": 6941,
+      "1.0": 1618
+    },
+    "locality_risk_rows": 0,
+    "conservation_rows": 7662,
+    "exact_conflict_rows": 1280,
+    "useful_repetition_rows": 7360,
+    "by_fold": {
+      "0": 1856,
+      "1": 1856,
+      "2": 1856,
+      "3": 1856,
+      "4": 1856
+    }
+  },
+  "external_sets_loaded": false
+}

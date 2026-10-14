@@ -2928,3 +2928,50 @@ passing independently audited development chain may open one-time LoCoMo,
 RULER/RULER-QA and MMLU confirmation. Observed LongMemEval-S remains diagnostic
 and cannot tune or release the stage. The native dense-writer negative result
 is preserved.
+
+### V19 final archive, audit recovery and post-V19 decision
+
+Archived the complete terminal V19 evidence in
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/memory_interference_v19_final`.
+The archive contains independently audited confirmation, exact-rule,
+causal-label, nested-policy-training and model-evaluation summaries. Its
+`REPORT.md` records the causal headroom result (96.25% oracle versus 39.38%
+fixed), the exact-rule result (86.56%, 82.97% oracle-gap closure) and the
+negative learned-over-exact result (86.67%, +0.10 points, subject-cluster 95%
+CI [-1.56, 1.88]).
+
+Fixed `scripts/audit_v19_nested_forgetting_policy_outcome.py` so shard resource
+counts join policy states to immutable collection order by `episode_id`.
+Policy states are serialized by outer fold and therefore cannot be counted by
+their file position. Added an order-permutation regression test and
+`scripts/finalize_v19_policy_eval_after_audit_order_fix.sh`. Local tests pass;
+all six corresponding server tests pass with real PyTorch. The recovery did
+not rescore Qwen. The scientific summary hash remains
+`a5d7659ea585994ac8731742792bf4e4e324ab8523304c21e3f924abd012227d`,
+the corrected independent audit passes all twelve checks, and the recovery
+runner exits zero.
+
+Frozen `POST_V19_NATURAL_SEMANTIC_HEADROOM_PLAN.md` before constructing or
+scoring its data. It stops V19 tuning, preserves the audited negative native
+dense-writer conclusion, and introduces a new relation/subject-disjoint
+CounterFact/MQuAKE pilot plus sealed confirmation. The first gate tests a
+relation-aware semantic deletion oracle against exact surface deletion. Only
+a passing audited headroom result can release an exact-rule residual
+controller; LoCoMo, RULER/RULER-QA and MMLU remain conditional one-time tests.
+
+Implemented the data-only first stage in
+`tasks/build_post_v19_natural_semantic_headroom.py`. It verifies the immutable
+inventory hashes, filters malformed natural rows, selects 16 pilot and 64
+formal targets per registered fold without subject/source-row overlap, and
+constructs length 8/16/32/64 episodes covering single conflicts, stale
+repetition, useful repetition and same-relation other-subject distractors.
+Each episode preserves the current update and materializes fixed, exact-surface
+and relation-aware semantic-oracle states. Exact matching is intentionally
+relation-ID free and removes no paraphrased stale component.
+
+Added `scripts/audit_post_v19_natural_semantic_headroom.py`, the corresponding
+data runner and four focused tests. The auditor deterministically regenerates
+all 400 episodes and states, checks source hashes, five-fold balance,
+pilot/formal isolation, query candidates, current-update retention and both
+causal state definitions. This stage does not load Qwen outcomes or any sealed
+benchmark.

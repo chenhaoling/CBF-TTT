@@ -1,0 +1,26 @@
+{
+  "protocol": "v19_causal_rule_explanation_v1_audit",
+  "audit_passed": true,
+  "checks": {
+    "audited_terminal_v19_dependencies": true,
+    "complete_unique_source_coverage_and_hashes": true,
+    "independent_rules_metrics_intervals_and_gate_recomputation": true,
+    "causal_access_and_terminal_locks": true
+  },
+  "summary_sha256": "b7c32dbd3eb071dbcaa5a90a25c2d4041574ff67cf511331bc2e6f240a48ec40",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "8864bb3ccd3940dd0aeef5cd5e08235f2fd36371d4bae3ed6a8ce8056091d985",
+    "shard1.jsonl": "b047b15419b6ed3dc23083464f18f86dfd25500b971a23864eb81ef885458258"
+  },
+  "recomputed_explanation_gate": {
+    "checks": {
+      "exact_rule_locality_accuracy_at_least_97": true,
+      "subject_cluster_joint_gain_ci_lower_above_zero": true,
+      "template_cluster_joint_gain_ci_lower_above_zero": true,
+      "no_outer_fold_has_negative_joint_gain": true,
+      "exact_rule_closes_at_least_90_percent_of_positive_oracle_gap": false
+    },
+    "passed": false
+  },
+  "model_rescored": false
+}
