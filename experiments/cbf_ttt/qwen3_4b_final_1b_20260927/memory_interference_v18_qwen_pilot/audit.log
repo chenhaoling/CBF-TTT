@@ -1,0 +1,37 @@
+{
+  "protocol": "controlled_memory_interference_v18_qwen_pilot_audit",
+  "audit_passed": true,
+  "checks": {
+    "frozen_audited_pilot_dependency_and_access_locks": true,
+    "complete_disjoint_ordered_shard_coverage": true,
+    "episode_and_state_identities": true,
+    "fixed_single_and_key_deletion_arms_with_dedup_sources": true,
+    "prompt_hash_scores_predictions_and_five_token_answers": true,
+    "free_generation_records": true,
+    "per_query_latency_and_peak_memory_records": true,
+    "shard_counts_dependencies_and_hashes": true,
+    "exact_model_tokenizer_and_loading_provenance": true,
+    "independent_corpus_admission_recomputation": true,
+    "independent_resource_recomputation": true,
+    "terminal_and_access_locks": true
+  },
+  "summary_sha256": "3487fdf2fef70a9aa65276ffd81e9495992f8385bb0127ec955b99679f6fa0d2",
+  "raw_rows_sha256": {
+    "shard0.jsonl": "22c41f435610e33dfda2f75618048330af997eeb30fae1be5e699d64e94766af",
+    "shard1.jsonl": "634afd8bb89207ab17ae4755abec8fc366870113f079f850b648931921468b03"
+  },
+  "recomputed_corpus_admission_gate": {
+    "checks": {
+      "no_memory_joint_success_at_most_70": true,
+      "retain_all_joint_success_between_20_and_90": true,
+      "global_reset_retained_key_accuracy_below_80": true,
+      "oracle_update_accuracy_at_least_90": true,
+      "oracle_retained_key_accuracy_at_least_90": true,
+      "oracle_joint_gain_over_best_fixed_at_least_10": true
+    },
+    "passed": true
+  },
+  "model_scored": true,
+  "formal_generated": false,
+  "external_sets_loaded": false
+}

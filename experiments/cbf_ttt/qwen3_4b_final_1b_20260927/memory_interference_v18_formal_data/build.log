@@ -1,0 +1,87 @@
+{
+  "protocol": "controlled_memory_interference_v18_formal",
+  "seed": 1811,
+  "split": "formal",
+  "lengths": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "mechanisms": [
+    "clean_update",
+    "stale_repetition",
+    "irrelevant_near_duplicate",
+    "useful_repetition"
+  ],
+  "fixed_policies": [
+    "no_memory",
+    "retain_all",
+    "global_reset",
+    "last_1",
+    "last_2"
+  ],
+  "query_kinds": [
+    "update_old_surface",
+    "update_current_surface",
+    "retain_1",
+    "retain_2",
+    "locality"
+  ],
+  "counts": {
+    "rows": 320,
+    "subjects": 80,
+    "template_groups": 20,
+    "folds": 5,
+    "by_length": {
+      "8": 80,
+      "16": 80,
+      "32": 80,
+      "64": 80
+    },
+    "by_mechanism": {
+      "clean_update": 80,
+      "stale_repetition": 80,
+      "irrelevant_near_duplicate": 80,
+      "useful_repetition": 80
+    },
+    "by_fold": {
+      "0": 64,
+      "1": 64,
+      "2": 64,
+      "3": 64,
+      "4": 64
+    },
+    "single_deletion_states": 9280,
+    "key_deletion_states": 1920,
+    "fixed_arm_entries": 1600
+  },
+  "formal_sha256": "1975f8c5ca221d707f25665b8974cf1435eae63a62285a57ae8076efd0b365f2",
+  "formal_states_sha256": "87b4727324282e6f608e642674d9e5521924bae454a384633cf148959f940192",
+  "dependencies": {
+    "pilot_summary_sha256": "3487fdf2fef70a9aa65276ffd81e9495992f8385bb0127ec955b99679f6fa0d2",
+    "pilot_audit_sha256": "397b20382e4328c6f4bab0061cd2e5c495e302e4f6981419e24436c7162e2bf6",
+    "pilot_raw_rows_sha256": {
+      "shard0.jsonl": "22c41f435610e33dfda2f75618048330af997eeb30fae1be5e699d64e94766af",
+      "shard1.jsonl": "634afd8bb89207ab17ae4755abec8fc366870113f079f850b648931921468b03"
+    },
+    "pilot_data_manifest_sha256": "6c4ab7cf035426759bbbb240af89ff8b9fff917cab476b400a4b1cc7f3f29e7b",
+    "pilot_data_audit_sha256": "d8288954745ee0b035209d15de9b93510fdd19a0a047c07f7d2dea1f99bba6d5",
+    "pilot_data_sha256": "9c73acf8080d7fc01c2a7018203af539c87399902eb4e9792270e3b9c72d24e9",
+    "pilot_states_sha256": "caf818fc61b0b2067ad034245cd007977b8f9d35f6b7a703d36f5e9d3bd1d2a4"
+  },
+  "split_design": {
+    "episodes_per_subject": 4,
+    "subjects_per_template_group": 4,
+    "template_groups_per_fold": 4,
+    "subject_and_template_group_each_nested_in_one_fold": true,
+    "pilot_entity_value_and_template_overlap": false
+  },
+  "opaque_value_namespace": "formal-only offset 4096; disjoint from pilot values",
+  "opaque_value_format": "Z plus four spaced base-16 letters; exactly five Qwen3 tokens",
+  "current_session_deletion_allowed": false,
+  "model_scored": false,
+  "formal_generated": true,
+  "external_sets_loaded": false,
+  "terminal_status": "frozen_v18_formal_before_model_scoring"
+}
