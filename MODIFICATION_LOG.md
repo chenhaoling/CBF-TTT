@@ -2440,3 +2440,22 @@ facts, versus 70.59% and 55.15% for the primary-selected global reset. This is
 reported as a safety trade-off and does not override the registered negative
 primary result. Added the complete raw-shard archive, report and artifact hash
 list under `experiments/.../mquake_qwen_headroom_v17_formal`.
+
+### V18 controlled-interference pilot construction
+
+Added `tasks/build_controlled_interference_v18.py` to materialize only the
+preregistered 40-row pilot. It balances lengths 8/16/32/64 and clean update,
+stale repetition, irrelevant near duplicate and useful repetition mechanisms.
+Every episode uses pilot-only opaque entities, keys and values, six persistent
+keys, one final target update, two update phrasings, two retained-key queries
+and an inline-reference locality query. The formal prefix, value pool and
+templates remain ungenerated and inaccessible.
+
+The builder freezes no-memory, retain-all, global-reset, last-1 and last-2,
+every causal single historical-session deletion, and every historical key
+group deletion. Current-session deletion is prohibited. Added an independent
+model-free auditor for split, balance, opacity, uniqueness, content binding,
+query answers/candidates, mechanism-specific roles, state reconstruction,
+hashes and access locks; focused tests exercise every mechanism, deterministic
+rebuild, complete counts and audit pass. The build runner records code and
+terminal provenance before any Qwen scoring.
