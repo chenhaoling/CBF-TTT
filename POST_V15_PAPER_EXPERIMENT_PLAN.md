@@ -1,0 +1,198 @@
+# Post-V15 paper experiment plan
+
+## Status and evidence boundary
+
+This plan was frozen while the formal V15 run was still computing its first
+outer fold and before any V15 `inner_complete` or `outer_complete` result was
+available.  It therefore defines a result-conditional next step rather than
+selecting a method after seeing V15 outcomes.
+
+V15 operates on the audited contextual additive Qwen memory, not on a proven
+native dense In-Place TTT memory.  The distinction is material:
+
+- `ttt_conv` and `ttt_proj` are the original In-Place TTT writer modules;
+- the final-checkpoint native writer failed the source-disjoint Correct versus
+  Wrong/Zero/Random content-binding gate;
+- several direct writer-training variants also failed to generalize random
+  entity--value binding;
+- the frozen contextual Qwen key/value substrate passed its own readability
+  gate and is the memory representation used by the natural forgetting line.
+
+Consequently, a successful V15 result supports a forgetting policy on a
+readable additive memory.  It does not by itself authorize a claim that the
+native `ttt_conv`/`ttt_proj` fast weights store readable facts.  The V15
+`real_fast_weight_memory_integration` terminal label denotes entry into the
+integration track, whose first experiment is the causal Qwen readout below.
+
+## Research question
+
+Can a causal, history-conditioned policy delete stale components from a
+readable Qwen-grounded session memory and improve actual frozen-Qwen answer
+likelihood and accuracy over every fixed forgetting schedule, without harming
+current or unrelated memories?
+
+The paper method fixes admission of the current update to one.  It learns only
+retention/deletion of historical session memory:
+
+\[
+M_t = \sum_{i < t} \alpha_{t,i}\,\Delta_i + \Delta_t,\qquad g_t=1.
+\]
+
+`alpha` acts only on session-local fast memory.  Slow model parameters and
+pretrained knowledge are never deleted.
+
+## Stage 0: adjudicate V15 exactly as registered
+
+V15 is accepted only if its independent audit passes and all registered pair
+and safety checks pass:
+
+- stale deletion and pair state at least 90%;
+- subject-macro pair at least 85%;
+- minimum outer-fold pair at least 85%;
+- current retention at least 99%;
+- non-target and hard-retain at least 97%;
+- subject-cluster safety LCB95 at least 95%;
+- matched-random improvement CI lower bound above zero.
+
+The frozen candidate resolver's approximately 98.93% top-1 is reported as a
+separate known ceiling.  It must not be hidden by a controller-only pass.
+
+## Branch A: V15 passes -- exact Qwen outcome experiment
+
+### Intervention
+
+Replay every held-out subject episode with the exact contextual memory
+components and frozen Qwen readout.  At each event, the deployed cross-fitted
+V15 policy may remove only a component visible at that time.  The current
+component is then always admitted.  Every answer is scored from a fresh query
+KV cache so that the measured effect comes from session memory rather than
+attention-cache leakage.
+
+### Fixed arms
+
+All arms use identical episodes, component values, frozen Qwen weights,
+candidate resolver, queries and answer tokens:
+
+1. no session memory;
+2. retain all components;
+3. global reset before every new component;
+4. last-1 fixed window;
+5. last-2 fixed window;
+6. matched-random deletion count;
+7. V14 single-calibration policy;
+8. V15 jackknife-consensus policy;
+9. causal oracle component deletion, reported only as an upper bound.
+
+The primary comparison is V15 versus the strongest fixed arm selected without
+using the held-out outer fold.  V14 is an architecture ablation, not a tuning
+source.
+
+### Primary outcomes and release gate
+
+- current-answer exact/candidate accuracy and answer NLL;
+- stale-answer suppression and old/current pair accuracy;
+- non-target and hard-retain query accuracy;
+- subject-macro values and the minimum outer-fold value;
+- matched subject-cluster bootstrap intervals;
+- deletion count, retained-memory size, latency and peak GPU memory.
+
+The stage passes only when all of the following hold:
+
+1. V15 improves query accuracy over the strongest fixed arm and the clustered
+   95% CI lower bound is above zero;
+2. V15 reduces answer NLL over the strongest fixed arm and the clustered 95%
+   CI lower bound for fixed-minus-V15 NLL is above zero;
+3. current, non-target and hard-retain query accuracy are at least 97%;
+4. no outer fold has a negative V15-minus-strongest-fixed accuracy difference;
+5. the independent audit reconstructs every memory state, Qwen score,
+   cross-fit identity, paired comparison and artifact hash.
+
+Action-label accuracy remains secondary.  A controller that predicts symbolic
+deletions but does not improve Qwen answers does not pass.
+
+### External confirmation
+
+Only a passed Qwen-outcome stage releases one-time evaluation in this order:
+
+1. MQuAKE-CF for independently sourced temporal conflicts;
+2. LongMemEval-S and LoCoMo for natural long-session memory;
+3. MMLU and RULER/RULER-QA for slow-knowledge and long-context preservation.
+
+No external set is used for threshold, feature, epoch or architecture choice.
+The paper reports each domain separately and uses domain-specific clustered
+confidence intervals rather than pooling incompatible query metrics.
+
+## Branch B: V15 fails -- stop scalar-threshold calibration
+
+A V15 pair or safety failure closes the current listwise-score plus scalar
+threshold family.  There is no V16 threshold grid, normalizer or voting-quorum
+search.
+
+The replacement experiment first measures causal headroom.  For each visible
+candidate historical component, exact replay evaluates retain versus delete
+under identical future queries.  If the causal oracle does not improve query
+accuracy by at least five points over the strongest fixed arm, the corpus does
+not contain sufficient controllable forgetting headroom and controller
+training stops.
+
+If the headroom gate passes, train a readout-utility policy with subject-level
+cross-fitting.  Its target is the actual downstream change
+
+\[
+U_i = L_{future}(M_t-\Delta_i)-L_{future}(M_t),
+\]
+
+while its inputs remain causal: current query/event representation, candidate
+component readout, component interactions and past scores.  Future losses,
+truth labels, subject ID, absolute position and episode length are unavailable
+to the deployed policy.  The same Branch-A fixed arms and Qwen-outcome gate are
+used; only the training target changes.
+
+## Native In-Place TTT writer bridge
+
+Native dense integration is a separate prerequisite, not an automatic sequel
+to a controller pass.  Before the forgetting policy can be advertised as an
+end-to-end improvement to the original In-Place TTT writer, a source-disjoint
+writer experiment must establish both single-component and multi-component
+content binding.
+
+The next admissible writer study distils the already readable contextual
+key/value component into the existing `ttt_conv`/`ttt_proj` path while freezing
+the Qwen backbone.  It compares the original writer with a writer trained by:
+
+- answer-token likelihood;
+- Correct-versus-Wrong component contrast;
+- contextual-memory logit/readout distillation;
+- an explicit per-layer delta-norm constraint.
+
+Admission requires Correct to beat Wrong, Zero and norm-matched Random on new
+sources with clustered CI lower bounds above zero, followed by a registered
+2/4/8/16-component load test.  Until both gates pass, native dense results stay
+a negative boundary result and are not mixed with the contextual-memory main
+table.
+
+## Statistical and reporting requirements
+
+- subject-disjoint cross-fitting and no test refit;
+- at least three controller seeds for a final positive result;
+- subject/source-cluster bootstrap with fixed seeds and at least 20,000 draws;
+- per-fold values, macro values and worst-fold values;
+- exact denominators and confidence intervals for every headline difference;
+- complete negative and stopped-stage reporting;
+- independent aggregation and replay auditor;
+- source, checkpoint, raw-output and code hashes;
+- wall time, peak allocated/reserved memory and per-query latency;
+- explicit separation of controlled forgetting evidence, Qwen contextual
+  memory evidence and native dense writer evidence.
+
+## Stop rules
+
+- Do not open external confirmation sets after a failed internal Qwen-outcome
+  gate.
+- Do not tune native writer or controller architecture on MQuAKE-CF,
+  LongMemEval-S, LoCoMo, MMLU or RULER.
+- Do not claim end-to-end native In-Place TTT benefit before the writer content
+  and multi-component gates pass.
+- Do not train a new deletion controller when the exact causal oracle lacks
+  sufficient query-level headroom.
+

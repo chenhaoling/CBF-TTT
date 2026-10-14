@@ -47,6 +47,10 @@ In-Place TTT is a drop-in test-time training method for Transformer LLMs. This r
 - Low-rank Qwen memory bridge: [pre-registered protocol](QWEN_LOWRANK_BRIDGE_PLAN.md).
 - Low-rank Qwen bridge result: [audited Q/V report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_lowrank_bridge_v1/REPORT.md).
 - Qwen-grounded multi-component forgetting: [pre-registered protocol](QWEN_LOWRANK_FORGETTING_PLAN.md).
+- MQuAKE subject-risk result: [V12 report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_subject_risk_v12/REPORT.md).
+- Final raw-ensemble calibration: [V13 pre-registered protocol](MQUAKE_ENSEMBLE_CALIBRATION_V13_PLAN.md).
+- Final raw-ensemble result: [V13 audited report](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_ensemble_calibration_v13/REPORT.md).
+- Session-relative forgetting: [V14 pre-registered protocol](MQUAKE_ONLINE_MARGIN_V14_PLAN.md).
 
 [2026/03] The codebase is open-sourced.
 <br>
@@ -442,6 +446,38 @@ V11 is implemented by `tasks/train_mquake_robust_calibration_v11.py` and
 `scripts/run_mquake_robust_calibration_v11.sh`. Its independent auditor recomputes
 fold assignments, every calibrated threshold, pooled and per-fold metrics, the exact
 deletion-count random comparison, artifact hashes, and benchmark-access locks.
+
+[V11 completed](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_robust_calibration_v11/REPORT.md)
+with an independently audited negative release result. OOF current/non-target/
+hard-retain reached 100.00/99.05/99.51%, while stale deletion and strict pair state
+were 83.08%; fold pair state ranged from 69.88% to 96.91%. Read-only attribution found
+13.92% correct-candidate threshold rejections and candidate failure concentrated in
+one 700-episode subject. The next registered experiment is
+[V12 subject-balanced risk control](MQUAKE_SUBJECT_RISK_V12_PLAN.md): nested candidate
+training, a fixed anchor-16 shortlist, subject-equal losses, and cluster-level safety
+calibration. External MQuAKE-CF and LoCoMo remain sealed.
+
+V12 is implemented by `tasks/train_mquake_subject_risk_v12.py`, its independent
+auditor, runner, and focused tests. The five-fold formal run uses a separate output
+root and does not modify baseline training or inference defaults.
+
+[V14 online margin](experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_online_margin_v14/REPORT.md)
+completed with an independent audit. It improved strict OOF pair state from V13's
+37.05% to 49.87% while retaining 99.87% of current and 99.85% of non-target memory,
+but fold pair state ranged from 1.34% to 94.73%. Post-hoc locked diagnostics reject
+relation scarcity and additional z-normalization; the failure is single-fold threshold
+calibration under unseen-subject score shift. The registered
+[V15 jackknife consensus](MQUAKE_JACKKNIFE_CONSENSUS_V15_PLAN.md) keeps the same causal
+median margin and tests four independently calibrated inner models with a three-of-four
+forgetting vote. External confirmation sets remain sealed.
+
+The result-conditional [post-V15 paper experiment plan](POST_V15_PAPER_EXPERIMENT_PLAN.md)
+locks the next decision before V15 fold results are available. A V15 pass proceeds to
+exact frozen-Qwen outcome replay on the readable contextual memory; a failure closes
+the scalar-threshold family and requires direct readout-utility supervision. The plan
+also keeps native `ttt_conv`/`ttt_proj` integration behind its previously failed
+content-binding prerequisite, so controller evidence cannot be misreported as a native
+dense-writer result.
 
 [Entity-fusion V10](ENTITY_FUSION_SCOPE_V10_PLAN.md) is that final registered fusion. It reuses frozen fold-specific V9 entity heads, appends entity probability/logit to V8's features, and retains the same nested five-fold/three-seed protocol. A failure permanently ends CounterFact score fusion; a pass freezes the resolver for causal forgetting.
 

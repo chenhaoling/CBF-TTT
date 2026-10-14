@@ -1948,3 +1948,148 @@ per-fold metrics and thresholds, clustered paired intervals, runtime, GPU peak, 
 and a cross-fit checkpoint. The auditor independently reconstructs fold membership,
 threshold selection, metrics, gate decisions, matched deletion counts, and the absence
 of V10 dev, MQuAKE-CF, LongMemEval-S, and LoCoMo access.
+
+### MQuAKE-T V11 鲁棒校准完成与 V12 预注册
+
+V11 在 hku-gpu2 完成五个主体互斥外折、每折三个种子训练、内层校准、完整因果回放和独立审计。总耗时 2784.49 秒，峰值 CUDA allocated/reserved 为 7.867/8.115 GiB；5976 个 OOF episode、239040 个动作，控制器与匹配随机各删除 6954 次。独立审计的指标重算、阈值选择、主体划分、删除数、原始输出哈希、来源 checkpoint 哈希和数据访问锁七项全部通过。
+
+OOF candidate top-1 为 96.82%，current/non-target/hard-retain 为 100.00/99.05/99.51%，stale deletion 与 strict pair 均为 83.08%；五折 pair 为 83.28/85.62/79.68/96.91/69.88%。相对匹配随机的增益为 79.53 个百分点，主体聚类 95% CI `[72.69,86.49]`。安全门槛和随机对照通过，candidate、删除、pair 与最差折门槛失败；MQuAKE-CF、LongMemEval、LoCoMo 未访问。
+
+新增 `scripts/analyze_mquake_robust_calibration_v11.py`，只读分析终态 OOF 轨迹，不调用模型、不选择阈值。5976 次 primary update 中：4912 次正确删除（82.20%）、832 次候选正确但阈值拒绝（13.92%）、61 次错误候选被删除（1.02%）、171 次错误候选被拒绝（2.86%）。oracle-memory candidate 只有 3/68 主体不完美；其中一个 700-episode 主体的 anchor-4 shortlist/top-1 均为 73.71%，主导 fold-0 失败。这证明 episode 频率不平衡与跨主体分数漂移是下一轮应处理的两个具体问题，不能将结果概括成候选或遗忘机制整体无效。
+
+新增完整归档 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_robust_calibration_v11/`，包含 REPORT、summary、training、manifest、cross-fit checkpoint、audit、diagnostic、日志、时间戳和终态；约 122 MiB 的原始 OOF JSONL 保留服务器并由 training.json 哈希锁定。新增 `MQUAKE_SUBJECT_RISK_V12_PLAN.md`：继续只用 MQuAKE-T train+tune，固定 anchor-16，在每个外折内部训练候选器，候选和 gate 均做主体等权优化；阈值通过主体聚类安全下界选择。V12 通过 OOF 门后才运行消融并一次性开放 MQuAKE-CF。
+
+实现 V12：`tasks/train_mquake_subject_risk_v12.py` 在每个外折内部以三个 fit 折训练三种候选 seed，固定 anchor-16，再以主体总权重完全相等的 BCE 训练三个 gate seed。校准逐点完整因果回放 0.05–0.95、0.975、0.99、0.995，并以每主体 current/non-target/hard-retain 三者最小值计算宏平均和单侧 95% 正态下界；只在聚合安全≥97%、主体宏安全≥98.5%、下界≥97%的可行集合中最大化主体宏 pair。输出增加主体宏 candidate、pair、安全下界、每折指标、匹配随机、完整 checkpoint 与访问锁。
+
+新增 `scripts/audit_mquake_subject_risk_v12.py`，独立重算 OOF/主体聚类/candidate/随机对照/门槛，复原每个阈值选择、主体折和身份覆盖，并核对删除数、原始行、来源、checkpoint、任务源文件 hash 与 benchmark 锁。新增 runner 和 3 项聚焦测试；与 V11 测试合计 5 项本地及服务器均通过，远程真实 PyTorch ranker/gate 小规模训练 smoke 通过。警告中的 requires-grad 张量转标量改为显式 detach，不改变 loss。
+
+由于自动审批认为 GitHub 仓库公开范围未确认，包含实验结果和 checkpoint 的提交推送被拒绝；未绕过审核。V11 归档与 V12 计划已本地提交 `81b336e`，V12 源文件经 SSH 直接同步用于已授权远程实验。正式运行于 2026-10-13 13:32:15 +08:00 在 tmux `cbf_mquake_v12` 启动，root `/home/ctj/cbf_ttt_mquake_subject_risk_v12`，PID 995204；启动测试通过、Qwen 特征提取完成，MQuAKE-CF/LongMemEval/LoCoMo 未访问。
+
+首版 V12 运行 32 分 54 秒仍未完成 fold 0，进程持续约 31 核计算、无 OOM。静态分析确认 anchor-16 的单个校准折约产生 75 万个唯一 pair，超过 `PairEvidence` 原 40 万 LRU 上限；22 阈值×3 seed 的顺序回放会反复驱逐并重算相同的确定性特征。该运行通过 tmux `C-c` 安全停止，完整保留为 `/home/ctj/cbf_ttt_mquake_subject_risk_v12_slow_incomplete_20261013`，未产生或冒充正式指标。
+
+`PairEvidence` 新增可选 `cache_limit`，默认仍为 400000，所有旧调用和 baseline 数值/内存行为保持不变；V12 显式使用 1000000，并在 manifest、training 与独立审计中记录/核验 limit、entries、hits、misses、evictions。新增真实多-unit 数值等价测试，服务器 6 项测试通过，证明小/大缓存的 scope/payload feature 逐值相同，只改变 eviction。加速正式重跑于 2026-10-13 14:14:38 +08:00 启动，tmux `cbf_mquake_v12`、PID 997567；外部确认集仍封存。
+
+### MQuAKE-T V12 完成与 V13 最终集成校准
+
+V12 加速重跑在 hku-gpu2 完成并通过独立七项审计。5976 个主体互斥 OOF
+episode 上，anchor-16 shortlist recall、candidate top-1 和主体宏 top-1 分别为
+100.00%、98.93% 和 97.34%；current/non-target/hard-retain 为
+99.82/99.51/99.72%。然而 stale deletion/strict pair 只有 37.18/37.01%，主体宏
+pair 44.66%，五折 pair 为 13.38/20.32/46.15/93.06/12.08%。相对精确匹配删除
+数的随机策略提升 34.84 个百分点，主体聚类 95% CI `[23.19,49.46]`。总耗时
+10366.71 秒，峰值 CUDA allocated/reserved 7.867/8.115 GiB。
+
+新增只读 `scripts/analyze_mquake_subject_risk_v12.py`。它确认 61.96% 更新已
+选中正确旧记忆却被最终阈值拒绝，仅 0.35% 更新错误删除；部署分数 pooled
+AUROC 0.9898，各折 0.9871--0.9968。primary-update 中位概率 0.346，而
+hard-retain 中位数/90 分位仅 0.0021/0.0186。结果支持“最终阈值组合过度保守”
+这一具体诊断，不支持将 V12 概括为表征没有学到遗忘。
+
+新增 `MQUAKE_ENSEMBLE_CALIBRATION_V13_PLAN.md` 并锁定 V12 四个来源哈希。新增
+`tasks/evaluate_mquake_ensemble_calibration_v13.py`：冻结每折 anchor-16 候选器和
+三个 Gate，忽略旧的成员阈值，先对原始 Gate logit 取中位数，再在独立
+calibration fold 上通过完整因果回放选择一次最终阈值。22 点低阈值扩展网格、
+主体宏安全 98.5%、单侧 LCB 97% 和原 V12 release gate 均在运行前锁定；V10
+dev、MQuAKE-CF、LongMemEval-S、LoCoMo 继续封存。
+
+新增 `scripts/audit_mquake_ensemble_calibration_v13.py`，独立复算阈值选择、折划分、
+OOF/主体指标、匹配随机区间、来源/checkpoint/原始输出哈希与数据访问锁；新增
+runner 和四项纯 Python 测试，覆盖原始 logit 中位数、可行/不可行阈值选择以及
+V12 来源哈希锁。所有改动是独立 opt-in 实验路径，不修改 baseline 的模型、
+训练、优化器、数据或评测入口。
+
+### MQuAKE-T V13 完成与 V14 在线相对 margin
+
+V13 在 hku-gpu2 完成全部五折、matched-random 对照和独立审计，runner exit=0。
+训练/评测耗时 4015.68 秒，完整 runner 从 17:43:34 到 18:50:47 +08:00；峰值
+CUDA allocated/reserved 为 7.867/8.115 GiB。独立审计的指标、单次最终阈值、
+主体折、身份、删除数、原始输出、V12 来源/checkpoint 哈希和访问锁七项全部通过。
+
+V13 strict pair/stale 为 37.048/37.216%，current/non-target/hard-retain 为
+99.799/99.493/99.699%，主体宏 pair 44.724%。五折阈值为
+0.975/0.95/0.95/0.60/0.95，validation pair 为
+13.21/20.32/46.15/93.39/12.08%。完整 release gate 失败，MQuAKE-CF、V10 dev、
+LongMemEval-S、LoCoMo 均未访问。
+
+新增 `scripts/analyze_mquake_ensemble_calibration_v13.py` 做只读 V12→V13 配对归因。
+5976 个 episode 中仅 4 个 pair 从错变对、2 个从对变错，净增 2 个；V13 相对
+V12 为 +0.033 个百分点，主体聚类 95% CI `[-0.050,0.145]`。primary update 正确
+删除仅从 2191 增至 2192，安全动作略有回退。该结果否定“成员阈值组合是主要
+瓶颈”的假设。
+
+V13 raw-logit pooled AUROC 仍为 0.9933，各折 0.9871--0.9969。只读架构筛选显示，
+减去同一 episode 历史分数中位数后，各折 AUROC 为 0.9875--0.9978，在 0.5%
+经验 retain FPR 下 update recall 相对 raw score 在所有折提高，但现有 BCE Gate
+仍只有 53.0--92.4%，因此不能把静态筛选冒充因果成功。完整 V13 归档和报告保存于
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_ensemble_calibration_v13/`；
+大体积 OOF JSONL 留在服务器并由 training hash 锁定。
+
+新增 `MQUAKE_ONLINE_MARGIN_V14_PLAN.md`。V14 冻结 V12 fold-specific anchor-16
+候选器，在每个外折的三个 fit 折训练三种 subject-equal episode-listwise rank-16
+Gate；每个 episode 的唯一 update 与全部 retain 动作共同进入 listwise CE。成员
+用 fit score 中位数/IQR 对齐尺度，部署分数减去当前 episode 全部历史动作分数的
+中位数，只在 margin 超过已校准阈值时删除。规则不输入位置、长度、主体、未来
+分数或正确性，首个 scored action 不能删除。
+
+实现 `tasks/train_mquake_online_margin_v14.py`、独立审计、runner 和五项测试。审计
+额外逐动作验证 `history_size == max(0, step-1)`，锁定历史仅含过去分数、每
+episode 重置、无 future/position/identity feature。20 点 margin 网格通过完整
+因果回放选择，使用原 cluster-risk 安全约束和 release gate。Mac 上 4 项通过、
+1 项因无 torch 跳过；hku-gpu2 真实 PyTorch listwise 拟合和精确在线回放共 5 项
+全部通过。所有功能仍为独立 opt-in 路径，baseline 不变。
+
+### MQuAKE-T V14 完成、失败归因与 V15 jackknife 共识
+
+V14 在 hku-gpu2 完成五折、匹配随机对照和独立八项审计，runner exit=0。正式
+计算耗时 7458.63 秒，峰值 CUDA allocated/reserved 为 7.867/8.115 GiB。5976
+个 OOF episode 上 strict pair/stale 为 49.866/50.000%，current/non-target/
+hard-retain 为 99.866/99.850/99.833%，主体宏 pair 为 51.490%，安全 LCB95 为
+97.301%。相对 matched-random 增益为 48.042 个百分点，主体 bootstrap 95% CI
+`[37.468,59.046]`。五折 pair 为 46.405/43.144/63.545/94.732/1.342%，因此
+完整 release gate 失败；外部集继续封存。
+
+新增 `scripts/analyze_mquake_online_margin_v14.py`。它只在 OOF 结束后用锁定的原始
+MQuAKE-T relation ID 做归因，不改变任何决策。7 个 relation 中约 99% episode 的
+relation 在 fit 已有 500+ episode；用其他折同 relation 表现预测当前折只有
+46.12% 准确率，否定 relation 稀缺解释。fold 4 update margin 中位数 3.011 而
+阈值为 4.0；fold 3 中位数 3.663 而阈值为 2.5，定位为跨主体校准漂移。
+
+新增 `scripts/screen_mquake_causal_normalizers_v14.py`，在不改变 V14 轨迹的前提下
+筛查 max-gap、MAD/IQR/mean z-score、upper-IQR、percentile 和原 median margin。
+MAD/IQR/mean 归一化显著降低安全召回；percentile 的非执行动作 FPR 约 4.8%。
+原 median margin 在跨折阈值下仍最好：校准 FPR 0.25% 时 pair proxy 73.41%、
+最差折 62.46%；FPR 0.5% 时 88.28%、最差折 81.80%。这些是固定轨迹架构筛查，
+不冒充精确因果结果。V14 紧凑归档包含报告、checkpoint、独立 audit、relation
+diagnostic 和 normalizer screen；原始 OOF JSONL 由 hash 锁定在服务器。
+
+新增 `MQUAKE_JACKKNIFE_CONSENSUS_V15_PLAN.md` 与
+`tasks/train_mquake_jackknife_consensus_v15.py`。每个 outer subject fold 内保留四个
+inner calibration fold；每个 inner 模型用其余三折训练三个 listwise seed，在未见
+inner 折上以非执行动作经验 FPR 0.05/0.1/0.25/0.5% 生成四个阈值，并通过完整
+因果回放及原 cluster safety 约束选定阈值。outer 推理部署这四个未 refit 模型，
+各自维护历史，至少 3/4 同意才删除共享候选。V15 不加入 relation、主体、位置、
+长度或未来分数，保持 V12 candidate 与 V14 gate feature/loss 冻结。
+
+新增 V15 独立 auditor、runner 与四项因果单测。审计将复算每个 inner 阈值、OOF/
+主体/candidate/随机指标、fold 身份、删除数、来源和 raw hash，并逐动作核对四路
+history size、threshold、vote count 与 3/4 删除规则。本地四项测试通过；服务器
+与 V13/V14 组合共 14 项真实 PyTorch 测试通过。所有改动为 opt-in，baseline 模型、
+训练、优化器、数据和评测默认路径不变。
+
+### V15 运行期间冻结后续论文实验分支
+
+在 V15 尚未产生任何 `inner_complete`/`outer_complete` 指标时新增
+`POST_V15_PAPER_EXPERIMENT_PLAN.md`，避免根据 V15 部分结果临时选择后续路线。计划
+明确 V15 使用的是已通过可读性门槛的 contextual additive Qwen memory；原论文
+`ttt_conv`/`ttt_proj` writer 的 Correct-vs-Wrong/Zero/Random 内容门此前已失败，
+因此不能把控制器通过直接表述为原生 dense fast-weight 成功。
+
+条件分支为：V15 通过后先做真实 Qwen answer accuracy/NLL 的精确因果回放，与
+no-memory、retain-all、global-reset、last-1/2、matched-random、V14 和 oracle
+同输入比较；只有 query-level 增益、三个安全切片、所有外折和独立审计同时通过，
+才一次性开放 MQuAKE-CF、LongMemEval-S、LoCoMo、MMLU、RULER。V15 失败则停止
+listwise score + scalar threshold/normalizer/quorum 搜索，先检验 query-level causal
+oracle 是否存在至少 5 点可控空间，再决定是否用真实 future-NLL 差构造训练标签。
+原生 writer 作为独立桥接分支，需先通过单组件与 2/4/8/16 多组件内容门，之后才可
+接入遗忘策略。新增内容仅为预注册文档与 README 链接，不改变正在运行的 V15、
+baseline 默认配置、模型、优化器、数据或评测入口。
