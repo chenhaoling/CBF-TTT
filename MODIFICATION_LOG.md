@@ -2176,3 +2176,30 @@ formal，不读取 V15/fixed 方法效果。与数据构建/审计合计 12 项�
 四类 query 的 928 个候选逐一验证 prompt-prefix 边界；最大总长度为 oracle 4,509、
 no-memory 63 tokens，均低于 40,960。结果归档为
 `prompt_tokenization_audit.json`，明确 `model_scored=false`，不能当作 Qwen 效果。
+
+### V16 双卡资源 Pilot runner 与独立结果审计（2026-10-14，模型评分前）
+
+V15 运行至 outer-1 期间补齐 `scripts/run_mquake_qwen_outcome_v16_pilot.sh` 与
+`scripts/audit_mquake_qwen_outcome_v16_pilot.py`，未启动 Qwen 评分。Runner 只有在
+V15 终态、独立 audit 通过且 `jackknife_consensus_supported=true` 时才允许双卡各跑
+20 条；否则在加载模型前停止。Formal 272 条和所有外部数据集不在该入口中。
+
+`tasks/evaluate_mquake_qwen_outcome_v16.py` 现为每个 policy-query 标签单独记录耗时、
+候选评分数、起始/峰值 allocated 与 reserved 显存；40×2×4 共 320 条资源记录，汇总
+mean/median/p95/max latency 和两类峰值显存。独立 auditor 不调用 scorer 的聚合函数，
+从 frozen sample、train/tune/texts 和 raw shard 重建因果可见 memory session、prompt
+SHA-256、query/candidates、预测、正确性、answer NLL、token 上限、两卡奇偶 shard
+覆盖、V15 依赖 hash、资源记录、汇总和外部集锁。新增三项审计 helper 测试；与现有
+scorer/data tests 合计 15 项本地通过，Python 编译、shell 语法与 diff whitespace
+检查通过。当前状态仍为 `model_scored=false`；这些改动只提高即将运行 Pilot 的
+可审计性，不构成实验效果证据。
+
+运行前代码复核发现需要显式锁住 4,096-token 边界：oracle prompt 最长 4,509，若走
+默认原生 TTT cache，长 prompt 可能触发一次 native writer，而 no-memory prompt 不会。
+实际 `CBFSession` 空 memory 读路径虽然不会 commit delta，但为消除实现解释歧义，
+Pilot 改用仓库已验证的 `load_plain + PlainSession`：保留最终 checkpoint 的 slow Qwen
+权重，将 `config.ttt_mode=false`，严格核验并排除 `ttt_conv/ttt_proj` adapter，每个
+答案候选新建标准 DynamicCache。Shard audit 保存完整 slow-weight safetensors、config、
+排除 adapter 和 tokenizer 文件 hash；独立 auditor 重新哈希并要求两卡 provenance
+完全一致。测试总数更新为 16 项且全部通过。由此两臂唯一实验变量是序列化的 session
+文本，不能将结果归因于 native fast-weight 更新。
