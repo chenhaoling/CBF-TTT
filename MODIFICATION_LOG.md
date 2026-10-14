@@ -2310,3 +2310,10 @@ allocated/reserved.  The bridge loaded zero experiment rows and no external
 set.  Its archived result is
 `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/mquake_qwen_outcome_v16/generation_scoring_bridge.json`
 with SHA-256 `f43dfb473789bfc999c1d72e40182320fd2455c3ce5aad2cc979cd68b63ec0d9`.
+
+Added `scripts/chain_mquake_v16_pilot_to_formal.sh` to make the registered
+gates operational rather than manual.  It waits for the existing V15-to-pilot
+chain, exits cleanly when V15 is unsupported or the pilot gate fails, and only
+then runs the audited formal-state freezer followed by the two-GPU formal Qwen
+runner.  State/audit or runner failures produce distinct terminal markers; it
+never launches an external benchmark.
