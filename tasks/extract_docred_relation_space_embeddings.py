@@ -251,6 +251,32 @@ def extract(args):
     return metadata
 
 
+def load_embeddings(root):
+    """Load and restore the globally registered item order from two shards."""
+    import torch
+
+    root = Path(root)
+    values = []
+    for shard in range(2):
+        bundle = torch.load(root / "embeddings" / f"shard_{shard}.pt",
+                            map_location="cpu", weights_only=True)
+        values.extend((
+            int(index), item_id, item_type, partition, relation_id,
+            bundle["embeddings"][position].float(),
+        ) for position, (index, item_id, item_type, partition, relation_id)
+                      in enumerate(zip(
+                          bundle["item_indices"], bundle["item_ids"],
+                          bundle["item_types"], bundle["partitions"],
+                          bundle["relation_ids"])))
+    values.sort(key=lambda row: row[0])
+    if [row[0] for row in values] != list(range(len(values))):
+        raise ValueError("DocRED embedding indices are incomplete")
+    records = [{"item_id": row[1], "item_type": row[2],
+                "partition": row[3], "relation_id": row[4]}
+               for row in values]
+    return records, torch.stack([row[5] for row in values])
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", required=True)

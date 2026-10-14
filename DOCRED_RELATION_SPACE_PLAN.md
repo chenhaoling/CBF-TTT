@@ -98,7 +98,11 @@ FewRel test partition before their gate opens.
 Train rank-64 bias-free statement and description projections on the 51
 training relations.  Use relation-balanced symmetric InfoNCE at temperature
 0.07 plus a within-relation statement contrastive term and a 0.2
-hard-negative margin.  Fixed seeds are `23531/23537/23543`; checkpoints are
+hard-negative margin.  Use eight statements per relation and 64 optimizer
+steps per epoch, AdamW with learning rate `0.002` and weight decay `0.0001`,
+and loss weights `1.0/0.5/0.2/0.5` for statement-to-description,
+description-to-statement, within-relation contrastive and hard-negative
+margin losses.  Fixed seeds are `23531/23537/23543`; checkpoints are
 25/50/100 epochs.  Select epoch and deletion thresholds only on the eight
 held-out `relation_development` relations.
 
