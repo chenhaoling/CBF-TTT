@@ -3313,6 +3313,13 @@ pass; the confirmation is independently audited after completion.  The chain
 records each exit code and cannot relax a failed prerequisite.  Baseline
 training and inference defaults remain unchanged.
 
+Before the confirmation corpus was generated, the task also gained an atomic
+`result/progress.json`.  It records completed projection seeds, the current
+policy, test-loading state and terminal gate state without changing any model,
+data, optimizer, action, metric or release decision.  This operational marker
+lets long counterfactual-label phases be distinguished from a stopped process;
+the independent scientific audit deliberately ignores it.
+
 At the time of this entry the predecessor formal run remains active on
 `hku-gpu2`: seed 2301 has completed all 12 development policies, seed 2302 is
 in progress, seed 2303 has not started and no test row exists.  The chained
