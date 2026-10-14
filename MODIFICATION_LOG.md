@@ -2230,3 +2230,11 @@ session、非可见删除、trace identity/step/event mismatch、当前 session 
 hash 变化都会拒绝。注册查询点下 global-reset 与 last-1 数学上相同，manifest 显式
 记录此重复基线而不隐瞒。新增四项纯 Python 测试，结合现有 V16 tests 共 20 项通过；
 正式状态尚未生成，`model_scored=false` 与外部集封存保持不变。
+
+新增完全分离的 `scripts/audit_mquake_qwen_outcome_v16_formal_states.py`，不导入状态
+builder 的 replay/policy 函数。它重新加载 5,976 条 train+tune episode、272 条 frozen
+sample、V14/V15/random 三份完整 OOF trace，逐 event 独立执行 delete-before-admit，
+并逐行逐策略比较有序 session IDs；同时检查 V14/V15/Pilot 终态和 audit、所有依赖与
+raw OOF hash、完整 episode 覆盖、当前 session 保留、未来 session 排除、重复基线披露
+和外部访问锁。新增三项独立 helper 测试，V16 相关纯 Python 测试合计 23 项通过。
+Auditor 也只有在 formal states 实际生成后才运行；当前仍没有 formal 模型分数。
