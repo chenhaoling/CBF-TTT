@@ -75,7 +75,8 @@ def main():
     parser.add_argument("--model", required=True)
     parser.add_argument("--tokenizer", required=True)
     parser.add_argument("--output", required=True)
-    print(json.dumps(run(**vars(parser.parse_args())), indent=2))
+    args = parser.parse_args()
+    print(json.dumps(run(args.model, args.tokenizer, args.output), indent=2))
 
 
 if __name__ == "__main__":
