@@ -2555,3 +2555,29 @@ observes the formal runner's terminal exit file, independently checks the
 positive formal summary, audit hash and recomputed gate, and starts Stage B
 only when every release condition is true. Failed or unsupported formal runs
 produce terminal stop markers without creating a bridge result directory.
+
+### Preregistered Stage-C physical conflict rules
+
+While Stage A remained live and before reading its outcome, added
+`tasks/evaluate_v18_physical_conflict_rules.py`, an independent reconstruction
+auditor, a two-GPU runner and focused tests. This stage is hard-gated by the
+positive independently audited Stage-B low-rank bridge, so it cannot be used
+to rescue a failed causal-headroom or content-binding result.
+
+The implementation causally suppresses an older component only when its value
+disagrees with a newer component and either its literal entity-slot key matches
+or its frozen Qwen-key cosine crosses a registered threshold. Agreeing repeats
+are retained. A separate most-recent-same-key rule deliberately removes older
+agreeing repeats as an ablation. Every rule preserves the current update.
+Matched-random controls delete the same number of historical components using
+seeds 1901/1907/1913.
+
+The Qwen-cosine grid is frozen at 0.70/0.80/0.90/0.95/0.975/0.99. Threshold
+and rule-family selection happen only on the training side of each outer fold,
+using joint success, update, retention, locality and answer NLL in that order;
+higher thresholds win exact ties. Collection records every component state,
+pairwise key similarity, candidate score, independent greedy generation,
+latency and peak CUDA memory. The auditor reconstructs every rule and random
+state from the formal corpus, checks fresh-KV scores and bridge fixed/oracle
+references, and independently recomputes all outer-fold results. Nine focused
+tests currently pass together with the Stage-B tests.
