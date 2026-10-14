@@ -3019,3 +3019,12 @@ were 56.86/38.10 points. Update, retention and locality were
 95.31%/99.22%/100%. All ten scientific and eight independent audit checks
 passed. `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/natural_semantic_headroom_v1`
 archives the data, pilot and formal terminal summaries plus a full report.
+
+Frozen `POST_NATURAL_HEADROOM_SEMANTIC_RESIDUAL_PLAN.md` after the audited
+headroom release and before learned-stage embedding extraction. It defines a
+relation/subject-disjoint pair corpus, frozen-Qwen masked-surface embeddings,
+rank-16 contrastive projection, nested three-seed utility/risk controller,
+exact-rule residual inference and a model-level release gate. Relation IDs are
+training labels only and are forbidden at inference. Failed inner constraints
+or a failure to exceed projected cosine stops the branch before natural
+benchmarks.
