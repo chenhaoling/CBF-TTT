@@ -424,11 +424,12 @@ def run(args):
         map_location="cpu",
         weights_only=False,
     )
+    train_pairs = load_split(args.data_root, "train")
     dev_pairs = load_split(args.data_root, "dev")
     torch.cuda.reset_peak_memory_stats()
     started = time.perf_counter()
     embeddings, embedding_hashes, extraction, model_meta = extract_embeddings(
-        dev_pairs,
+        train_pairs + dev_pairs,
         transform_artifact["transforms"],
         args.model,
         args.tokenizer,
@@ -480,7 +481,7 @@ def run(args):
         "eligible_readers": ELIGIBLE,
         "policies": POLICIES,
         "projection_seeds": SEEDS,
-        "split_loaded": "dev",
+        "splits_loaded": ["train", "dev"],
         "test_loaded": False,
         "test_scored": False,
         "source_group_count": data_manifest["group_counts"]["dev"],

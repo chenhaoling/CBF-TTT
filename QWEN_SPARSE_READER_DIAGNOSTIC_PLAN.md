@@ -25,6 +25,11 @@ Use the same artifacts as `QWEN_COHORT_FORGETTING_PLAN.md`:
 - train and development splits only;
 - projection seeds `2301/2302/2303`.
 
+Extract train and development identifiers together, in the same sorted order
+and batching path as the registered cohort experiment, then score development
+episodes only.  This preserves the exact frozen embedding table while keeping
+test identifiers unloaded.
+
 The diagnostic must verify the contextual-geometry hashes and the corpus
 manifest before loading any model or data.  No representation, temperature,
 unknown score, retention action, or query target may be fitted.

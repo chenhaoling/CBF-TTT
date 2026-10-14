@@ -294,7 +294,7 @@ def audit(args):
                 tuple(manifest["eligible_readers"]) == ELIGIBLE,
                 tuple(manifest["policies"]) == POLICIES,
                 tuple(manifest["projection_seeds"]) == SEEDS,
-                manifest["split_loaded"] == "dev",
+                manifest["splits_loaded"] == ["train", "dev"],
                 manifest["source_group_count"] == 32,
             )
         ),
