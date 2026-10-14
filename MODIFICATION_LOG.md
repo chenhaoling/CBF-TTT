@@ -3028,3 +3028,79 @@ exact-rule residual inference and a model-level release gate. Relation IDs are
 training labels only and are forbidden at inference. Failed inner constraints
 or a failure to exceed projected cosine stops the branch before natural
 benchmarks.
+
+### Learned natural-semantic residual: pair corpus and representation stages
+
+Added `tasks/build_natural_semantic_relation_pairs.py`, its independent audit,
+runner and tests. The frozen CounterFact/MQuAKE inventory yields 63,782
+balanced relation pairs over 15,198 unique masked surfaces: within-row and
+cross-row positives plus lexical-hard and random negatives. Relations remain
+isolated across five folds and relation IDs are training labels only. The
+audited release contains 31,886 positives, 31,896 negatives and at least 500
+examples of each class in every fold. The pair manifest and audit SHA256 values
+are `66b21a27d437f250d66f0b3daee6dc3869c89954c1f211d5093c600c06162d01`
+and `09f63610747dddf23b9aae0ba1a86d9cebc9e7971f6270ac9bec2e900164eb1a`.
+
+Added two-GPU frozen-Qwen surface extraction in
+`tasks/extract_natural_semantic_surface_embeddings.py`, a full artifact audit
+with fixed-sample model re-encoding, and recovery logic that distinguishes
+strict same-batch reproduction from BF16 padding-shape stability. All 15,198
+surfaces fit the registered 256-token limit; the maximum is 164 tokens. The
+two RTX 5090 shards each took about 20 seconds and peaked at 7.73/7.94 GiB
+allocated memory. Every vector is finite, FP32 and unit normalized. Same-batch
+re-encoding has zero maximum absolute error; a deliberately different padding
+shape has minimum cosine 0.99992. All eight audit checks pass; the audit SHA256
+is `4ff61768ac749b6479f9209acb39b04463fb25b6e48a7d3aa811ca223e981649`.
+
+Added a nested-OOF raw-cosine baseline and an efficient exact threshold search.
+Mean-pooled Qwen embeddings are strongly anisotropic for this task: OOF AUROC
+is 0.3933, balanced accuracy 54.10% and positive recall 11.97%; no inner fold
+satisfies the registered recall/specificity constraints. A rank-16 symmetric
+InfoNCE projection with the registered hard-negative margin improves AUROC to
+0.6643 and balanced accuracy to 63.33%, but lexical-hard-negative specificity
+is only 34.45%. It therefore fails the frozen projection diagnostic and is not
+treated as a learned-controller result.
+
+Added a leakage-safe geometry diagnostic. It discovered that 19/15,198 masked
+surface strings occur in more than one relation fold, then restricted all
+normalization statistics to surfaces whose complete fold ownership is within
+the three training folds. Train-only centering improves balanced accuracy by
+only 0.14 points and diagonal standardization does not help. The overlap rate
+is 0.125%, so neither anisotropy correction nor cross-fold duplicate strings
+explain the projection failure.
+
+Added audited multiview extraction for global mean, last token, last-eight-token
+mean and an eight-token subject-context window. Two source surfaces lack the
+registered `[SUBJECT]` marker; they use an explicit last-eight-token fallback
+and affect only five pairs. The independent audit registers exactly these two
+fallbacks, reproduces all four views with zero maximum absolute error, and
+passes all eight checks. Extraction takes about 22 seconds per RTX 5090 shard;
+the audit SHA256 is
+`ea817bab098ce41446309fa79a76f5eb4cc6afa6037a78c481f775e8057f28fb`.
+
+Nested inner-fold view selection chooses last-token in all five folds. Its raw
+OOF balanced accuracy/AUROC are 61.15%/0.6596; excluding the five marker-fallback
+pairs changes balanced accuracy by 0.0015 points. Training the unchanged
+rank-16 projection on last-token features raises these to 69.94%/0.7754, with
+all three seeds above 0.75 AUROC. The result remains below the registered
+constraint because lexical-hard-negative specificity is 50.71% and folds 1
+and 4 are weak.
+
+Added `tasks/train_natural_semantic_residual_controller.py`, which implements
+the registered shared 64-unit utility/risk heads with five-fold nested
+selection, three seeds and the fixed threshold/risk-penalty grid. Inputs are
+four inference-safe cosine views, projected last-token cosine and character
+trigram similarity. It reads no model outcome or sealed benchmark. The
+controller improves OOF balanced accuracy/AUROC to 74.08%/0.8112, and all
+three seeds exceed 73% balanced accuracy. It still fails the safety constraint:
+negative specificity is 73.55% overall and 61.20% on lexical hard negatives;
+no inner fold reaches 80% recall together with 95% specificity and at most 3%
+risk violation. The 320 model-level outcomes remain unopened for controller
+selection.
+
+The next registered diagnostic uses a symmetric frozen-Qwen pair cross-encoder
+to address the remaining hard-negative interaction error. The extractor
+encodes both statement orders, averages their normalized last-token states and
+records a one-token zero-shot yes-minus-no margin. It remains TTT-disabled,
+label-free during extraction and relation-disjoint during subsequent head
+training. External LoCoMo, RULER/RULER-QA and MMLU confirmation remains sealed.

@@ -34,6 +34,8 @@ The independent V19 confirmation directly established that causal benefit on a n
 
 The disjoint natural-paraphrase headroom study then supplied that missing case. On 320 sealed CounterFact/MQuAKE episodes, relation-aware deletion reached 92.19% joint success versus 36.56% for exact surface deletion, a 55.63-point gain with subject-cluster 95% CI [50.00, 61.25] and relation-cluster CI [49.17, 61.74]. Every fold was positive; CounterFact and MQuAKE gains were 56.86 and 38.10 points. Update, retention and locality were 95.31%, 99.22% and 100%. All registered gates and independent audits passed. This is an oracle relation-ID result: it establishes semantic forgetting headroom and releases learned residual training, but does not yet establish an inference-time semantic controller.
 
+The first learned semantic-residual development chain is informative but has not yet passed its release gate. On 63,782 relation- and subject-disjoint pairs, mean-pooled Qwen cosine reached only 54.10% balanced accuracy and 0.393 AUROC. Switching to the causal last-token state and applying the registered rank-16 contrastive projection raised these to 69.94% and 0.775. A nested five-fold, three-seed 64-unit utility/risk controller further reached 74.08% and 0.811; all seeds exceeded 73% balanced accuracy. However, lexical-hard-negative specificity remained 61.20%, and no inner fold met the frozen 80% recall/95% specificity/3% risk-violation constraint. The result supports causal pair representation and nonlinear control as complementary, while rejecting the current independent-embedding controller as ready for model-level release. The 320 model outcomes and external benchmarks remain unused for controller tuning; the next development stage tests a symmetric frozen-Qwen pair cross-encoder.
+
 ## Mechanistic interpretation
 
 - Low conflict or already strong current writes favor retaining old memory or the alpha=0 endpoint.
@@ -50,6 +52,7 @@ The disjoint natural-paraphrase headroom study then supplied that missing case. 
 - The ZsRE result establishes structured retrieve/defer scope accuracy, not official generative knowledge-editing accuracy. Improvements on MMLU, RULER, LongMemEval-S, LoCoMo, and native dense TTT remain unestablished.
 - Clean semantic conflict/duplicate ratios are available in the constructed environment; a real deployment must estimate them from activations or retrieved session state.
 - The five-point label oracle is discrete; a continuous optimum was not exhaustively computed.
+- The current independent-embedding natural semantic controller does not meet its registered deletion-safety constraint, despite improving pair AUROC to 0.811. Its model-level benefit is therefore unestablished.
 
 ## Recommended manuscript positioning
 
