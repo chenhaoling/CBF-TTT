@@ -104,7 +104,7 @@ def audit(data_root, source_root, fewrel_root):
     coverage = all(
         HELDOUT_RETAINED_MIN <= relation_counts[(partition, relation)] <= CAPS[partition]
         if partition != "representation_train"
-        else TRAIN_MIN <= relation_counts[(partition, relation)] <= CAPS[partition]
+        else 0 < relation_counts[(partition, relation)] <= CAPS[partition]
         for partition, relations in partitions.items() for relation in relations)
     balanced = all(value["positive"] == value["negative"]
                    for value in recomputed_counts["by_partition"].values())

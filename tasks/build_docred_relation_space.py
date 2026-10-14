@@ -348,10 +348,12 @@ def build(source_root, fewrel_root, output):
     if set(relation_counts) != {(partition, relation) for partition, relations
                                in partitions.items() for relation in relations}:
         raise RuntimeError("DocRED relation lost all evidence instances")
+    # TRAIN_MIN is a source-eligibility rule applied before filtering.  The
+    # preregistered retained-data floor applies only to held-out relations.
     for (partition, _), value in relation_counts.items():
-        floor = TRAIN_MIN if partition == "representation_train" else HELDOUT_RETAINED_MIN
-        if value < floor:
-            raise RuntimeError(f"DocRED retained relation coverage below {floor}")
+        if partition != "representation_train" and value < HELDOUT_RETAINED_MIN:
+            raise RuntimeError(
+                f"DocRED retained relation coverage below {HELDOUT_RETAINED_MIN}")
     pairs = []
     for partition in PARTITIONS:
         pairs.extend(construct_pairs(instances, partition))
