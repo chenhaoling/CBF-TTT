@@ -2203,3 +2203,9 @@ Pilot 改用仓库已验证的 `load_plain + PlainSession`：保留最终 checkp
 排除 adapter 和 tokenizer 文件 hash；独立 auditor 重新哈希并要求两卡 provenance
 完全一致。测试总数更新为 16 项且全部通过。由此两臂唯一实验变量是序列化的 session
 文本，不能将结果归因于 native fast-weight 更新。
+
+远程 GPU1 随后完成不读取数据的 loader smoke：最终 checkpoint 以 plain 路径得到
+4,022,468,096 个参数、`ttt_mode=false`、0 missing keys，且严格只有七层各一组
+`ttt_conv/ttt_proj` 共 14 个预期 excluded/unexpected keys；RTX 5090 峰值
+allocated/reserved 为 7.545/7.547 GiB。该检查没有加载 pilot row、没有计算答案 NLL，
+所以 `model_scored=false` 保持不变。
