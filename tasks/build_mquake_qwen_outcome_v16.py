@@ -32,6 +32,11 @@ def event(episode: dict, kind: str) -> dict:
     return rows[0]
 
 
+def has_relation_matched_hard(episode: dict) -> bool:
+    return any(row["event_kind"] == "hard_retain" and row["hard_relation_matched"]
+               for row in episode["sessions"])
+
+
 def query_unit(identifier: str, texts: dict[str, str]) -> dict:
     text = texts[identifier]
     return {"unit_id": identifier, "statement": scope_key(text), "value": payload(text)}
@@ -41,8 +46,9 @@ def identity(episode: dict, fold: int, texts: dict[str, str]) -> dict:
     old, current = event(episode, "primary_old"), event(episode, "primary_update")
     if current["target_session_id"] != old["session_id"]:
         raise ValueError("primary update does not target the primary old session")
-    hard = [row for row in episode["sessions"]
-            if row["event_kind"] == "hard_retain" and row["hard_relation_matched"]]
+    hard_all = [row for row in episode["sessions"] if row["event_kind"] == "hard_retain"]
+    hard_matched = [row for row in hard_all if row["hard_relation_matched"]]
+    hard = hard_matched or hard_all
     unrelated = [row for row in episode["sessions"] if row["event_kind"] == "distractor"]
     if not hard or not unrelated:
         raise ValueError("episode lacks required safety sessions")
@@ -58,6 +64,7 @@ def identity(episode: dict, fold: int, texts: dict[str, str]) -> dict:
         "old": query_unit(old["units"][0], texts),
         "current": query_unit(current["units"][0], texts),
         "hard_retain_session_id": hard_row["session_id"],
+        "hard_relation_matched": bool(hard_row["hard_relation_matched"]),
         "hard_retain": query_unit(hard_row["units"][0], texts),
         "unrelated_session_id": unrelated_row["session_id"],
         "unrelated": query_unit(unrelated_row["units"][0], texts),
@@ -70,7 +77,8 @@ def identity(episode: dict, fold: int, texts: dict[str, str]) -> dict:
 def select_pilot(episodes: list[dict], folds: dict[str, int]) -> list[dict]:
     cells = defaultdict(list)
     for row in episodes:
-        cells[folds[row["primary_subject_hash"]], row["length"]].append(row)
+        if has_relation_matched_hard(row):
+            cells[folds[row["primary_subject_hash"]], row["length"]].append(row)
     expected = {(fold, length) for fold in range(FOLDS) for length in LENGTHS}
     if set(cells) != expected or any(len(rows) < PILOT_PER_CELL for rows in cells.values()):
         raise ValueError("pilot fold/length cells are incomplete")
@@ -89,8 +97,13 @@ def select_formal(episodes: list[dict]) -> list[dict]:
     expected = {(subject, length) for subject in subjects for length in LENGTHS}
     if set(cells) != expected:
         raise ValueError("formal subject/length cells are incomplete")
-    return [min(cells[cell], key=lambda row: order_key(row["episode_id"]))
-            for cell in sorted(expected)]
+    selected = []
+    for cell in sorted(expected):
+        matched = [row for row in cells[cell] if has_relation_matched_hard(row)]
+        # Preserve all subjects and lengths. Only a cell with no matched hard
+        # episode uses the corpus builder's explicitly marked hard fallback.
+        selected.append(min(matched or cells[cell], key=lambda row: order_key(row["episode_id"])))
+    return selected
 
 
 def write_jsonl(path: Path, rows: list[dict]) -> None:
@@ -133,6 +146,8 @@ def build(data_root, output):
         "formal_rule": "one minimum-hash episode per subject x length cell",
         "folds": FOLDS, "lengths": list(LENGTHS), "fold_loads": fold_loads,
         "subjects": len(subjects), "pilot_rows": len(pilot), "formal_rows": len(formal),
+        "pilot_relation_matched_hard": sum(row["hard_relation_matched"] for row in pilot),
+        "formal_relation_matched_hard": sum(row["hard_relation_matched"] for row in formal),
         "pilot_sha256": sha(pilot_path), "formal_sha256": sha(formal_path),
         "external_sets_loaded": False, "model_scored": False,
         "mquake_cf_used": False, "longmemeval_used": False,
