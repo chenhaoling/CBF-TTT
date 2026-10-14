@@ -18,6 +18,8 @@ selection.  Its joint 27-class controller remains the primary method.
 - corpus seed `202610154`;
 - 64 source groups per suite, with identifiers, values and templates disjoint
   from every earlier corpus;
+- exactly two episodes per source group; the twins share every event and query
+  except one initial anchor value;
 - final 1B-token Qwen3-4B checkpoint;
 - frozen audited `context_last_r0.01` geometry;
 - frozen audited `component_top1` reader;
@@ -28,13 +30,14 @@ selection.  Its joint 27-class controller remains the primary method.
 Generate all suites only after the dependency check succeeds:
 
 1. `long_session`: 16 blocks and four to six decision boundaries, with valid
-   assignments extending beyond the training horizon;
+   assignments extending beyond the training horizon (six boundaries);
 2. `distant_revoke`: 12 blocks and explicit revocations at lags three through
-   six, forcing selective changes to the history cohort;
+   six, forcing selective changes to the history cohort (four boundaries);
 3. `mixed_lifecycle`: 12 blocks containing both session resets and later valid
-   batch revocations, with protected post-reset anchors;
+   batch revocations, with protected post-reset anchors (four boundaries);
 4. `duplicate_noop`: 12 blocks with repeated identical values, overlapping
-   distractor keys and explicit revocations whose semantic effect may be empty.
+   distractor keys and explicit revocations whose semantic effect may be empty
+   (four boundaries).
 
 Every decision asks one current, one historical and one protected-anchor
 query.  Semantic answers are computed by replaying the event stream before any

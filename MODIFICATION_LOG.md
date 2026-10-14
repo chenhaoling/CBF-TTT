@@ -3338,6 +3338,15 @@ success checks are fixed in advance.  The plan explicitly limits its claim to
 observable application/session lifecycle events and keeps native dense writing
 and implicit natural contradiction discovery as separate required stages.
 
+Added `tasks/build_qwen_discrete_cohort_ood.py` and three pure-Python tests,
+without generating the formal corpus.  The deterministic builder implements
+the four frozen block/boundary schedules, two single-anchor twins per group,
+causal replay, template rendering, explicit semantic no-op revocations and
+hash manifests.  Validation requires exact causal answers, complete twins,
+suite-disjoint identifiers and values, query/render parity and absence of
+weight-oracle labels.  Formal materialization remains conditional on the
+confirmation audit and test gate.
+
 At the time of this entry the predecessor formal run remains active on
 `hku-gpu2`: seed 2301 has completed all 12 development policies, seed 2302 is
 in progress, seed 2303 has not started and no test row exists.  The chained
