@@ -93,8 +93,12 @@ identified by the corpus.  Their matched unit pair supplies two query
 phrasings, the old and current `Memory statement`, and two candidate answers,
 the stale and current `Value`.  The primary metric averages both phrasings and
 requires the current answer to outrank the stale answer.  One deterministic
-same-relation hard-retain unit and one deterministic unrelated unit provide
-the two safety queries; their own serialized values remain the targets.
+hard-retain unit and one deterministic unrelated unit provide the two safety
+queries; their own serialized values remain the targets.  The sampler prefers
+a same-relation hard-retain episode in every `subject x length` cell and uses
+the corpus builder's explicitly marked hard fallback only when that cell has
+no same-relation example.  Matched and fallback safety results are reported
+separately.
 
 The resource pilot uses 40 episodes: two hash-minimal episode IDs in each of
 the five subject folds and four registered lengths.  It reports only runtime,
@@ -105,11 +109,14 @@ queries, every prompt is within the checkpoint limit and no row fails or
 produces a non-finite score.
 
 The formal internal set uses one hash-minimal episode for every available
-`subject x length` cell across train+tune.  The current corpus has 68 subjects
-and four lengths, so the expected size is 272 episodes, subject-balanced by
-construction.  The exact ordered episode IDs are written and hashed before
-formal model scoring.  Confidence intervals resample subjects, keeping the
-four lengths and all query types for a sampled subject together.
+`subject x length` cell across train+tune, after preferring same-relation hard
+episodes as described above.  The current corpus has 68 subjects and four
+lengths, so the expected size is 272 episodes, subject-balanced by
+construction.  A source-only audit found 252 cells with a same-relation hard
+episode and 20 cells requiring the marked fallback.  The exact ordered episode
+IDs are written and hashed before formal model scoring.  Confidence intervals
+resample subjects, keeping the four lengths and all query types for a sampled
+subject together.
 
 ### Intervention
 

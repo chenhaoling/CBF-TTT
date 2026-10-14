@@ -7,7 +7,7 @@ from tasks.build_mquake_qwen_outcome_v16 import (
 )
 
 
-def episode(subject, fold, length, index):
+def episode(subject, fold, length, index, relation_matched=True):
     prefix = f"{fold}-{length}-{index}"
     sessions = [
         {"session_id": f"{prefix}-d", "units": ["d"], "event_kind": "distractor",
@@ -15,7 +15,8 @@ def episode(subject, fold, length, index):
         {"session_id": f"{prefix}-o", "units": ["o"], "event_kind": "primary_old",
          "desired": "retain", "target_session_id": None, "hard_relation_matched": None},
         {"session_id": f"{prefix}-h", "units": ["h"], "event_kind": "hard_retain",
-         "desired": "retain", "target_session_id": None, "hard_relation_matched": True},
+         "desired": "retain", "target_session_id": None,
+         "hard_relation_matched": relation_matched},
         {"session_id": f"{prefix}-n", "units": ["n"], "event_kind": "primary_update",
          "desired": "local", "target_session_id": f"{prefix}-o", "hard_relation_matched": None},
     ]
@@ -31,7 +32,14 @@ class OutcomeBuildTest(unittest.TestCase):
         self.assertEqual(got["old"]["unit_id"], "o")
         self.assertEqual(got["current"]["unit_id"], "n")
         self.assertEqual(got["hard_retain"]["unit_id"], "h")
+        self.assertTrue(got["hard_relation_matched"])
         self.assertEqual(got["unrelated"]["unit_id"], "d")
+
+    def test_identity_records_relation_fallback(self):
+        row = episode("s", 0, 16, 0, relation_matched=False)
+        texts = {key: f"Memory statement: {key}?\nValue: value-{key}" for key in "dohn"}
+        got = identity(row, 0, texts)
+        self.assertFalse(got["hard_relation_matched"])
 
     def test_pilot_is_complete_and_deterministic(self):
         rows, folds = [], {}

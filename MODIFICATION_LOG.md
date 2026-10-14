@@ -2122,3 +2122,12 @@ value 及 session 身份，并核验 update 指向 old。manifest 锁定来源�
 选择规则、行数和输出 hash，同时声明所有外部集未加载、模型未评分。本地三项测试
 通过，覆盖 anchor 抽取、40 行 fold×length pilot 完整性/输入顺序不变性和每个
 subject×length 唯一 formal 行。
+
+首次远程构建在写出清单或模型评分前因少数 episode 没有 same-relation hard-retain
+而停止，失败目录保留为
+`/home/ctj/cbf_ttt_mquake_qwen_outcome_v16_failed_ineligible_safety_20261014`。只读
+审计显示 5,976 条中 5,928 条至少有一个 same-relation hard，68×4=272 个
+subject×length cell 中 252 个有此类 episode、20 个没有。由于原 corpus 明确将后者
+标为 hard fallback，修订为每格优先 same-relation、缺失时使用标记 fallback，并分层
+报告安全指标；pilot 仍只从 same-relation episode 抽取。该修订发生在任何 V15 outer
+指标、Qwen 分数或方法对照可见前。测试增加 fallback 身份记录，总数变为四项。
