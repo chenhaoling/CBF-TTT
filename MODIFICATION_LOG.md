@@ -2171,3 +2171,8 @@ primary phrasing 比较 current/stale，hard/unrelated 各在 old/current/hard/u
 四个候选中评分。每个答案验证 tokenizer 前缀不变、总长度不超过 checkpoint limit、
 NLL 有限；summary 只以 oracle primary preference≥80% 和完整性决定是否可进入
 formal，不读取 V15/fixed 方法效果。与数据构建/审计合计 12 项本地测试通过。
+
+服务器 12 项测试通过。使用真实 Qwen3 tokenizer 对 40 条 pilot、两种可读性臂和
+四类 query 的 928 个候选逐一验证 prompt-prefix 边界；最大总长度为 oracle 4,509、
+no-memory 63 tokens，均低于 40,960。结果归档为
+`prompt_tokenization_audit.json`，明确 `model_scored=false`，不能当作 Qwen 效果。
