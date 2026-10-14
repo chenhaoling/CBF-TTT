@@ -277,7 +277,8 @@ def train(args):
 
     device = torch.device(args.device)
     if device.type == "cuda":
-        torch.cuda.reset_peak_memory_stats(device)
+        torch.cuda.set_device(device.index or 0)
+        torch.cuda.reset_peak_memory_stats()
         torch.backends.cuda.matmul.allow_tf32 = False
     started = time.perf_counter()
     seed_summaries, seed_checkpoints, selected_scores = {}, {}, []
@@ -381,7 +382,7 @@ def train(args):
         "files_sha256": {"development_predictions.jsonl": sha(predictions_path),
                          "projection_checkpoints.pt": sha(checkpoint_path)},
         "seconds": time.perf_counter() - started,
-        "peak_allocated_gib": (torch.cuda.max_memory_allocated(device) / 2**30
+        "peak_allocated_gib": (torch.cuda.max_memory_allocated() / 2**30
                                if device.type == "cuda" else 0.0),
         "relation_source_test_feature_extracted": False,
         "fewrel_internal_test_loaded": False, "fewrel_external_test_loaded": False,
