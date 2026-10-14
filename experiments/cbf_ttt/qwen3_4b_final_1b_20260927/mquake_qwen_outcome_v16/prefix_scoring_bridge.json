@@ -1,0 +1,35 @@
+{
+  "protocol": "mquake_qwen_outcome_v16_shared_prompt_bridge",
+  "checks": {
+    "ttt_disabled": true,
+    "expected_adapters_excluded": true,
+    "finite_scores": true,
+    "max_nll_error_at_most_2e_5": true,
+    "prediction_identical": true,
+    "shared_prompt_cache_recorded": true
+  },
+  "passed": true,
+  "tolerance": 2e-05,
+  "candidate_nll_error": {
+    "Paris": 0.0,
+    "London": 0.0
+  },
+  "max_nll_error": 0.0,
+  "shared_prediction": "Paris",
+  "reference_prediction": "Paris",
+  "prompt_tokens": 42,
+  "resources": {
+    "seconds": 0.3283847998827696,
+    "candidate_scores": 2,
+    "gpu_start_allocated_gib": 7.545304775238037,
+    "gpu_start_reserved_gib": 7.546875,
+    "gpu_peak_allocated_gib": 7.562112331390381,
+    "gpu_peak_reserved_gib": 7.576171875
+  },
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "synthetic_only": true,
+  "pilot_rows_loaded": 0,
+  "model_scored_on_experiment": false,
+  "external_sets_loaded": false
+}
