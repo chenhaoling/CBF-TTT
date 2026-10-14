@@ -2209,3 +2209,10 @@ Pilot 改用仓库已验证的 `load_plain + PlainSession`：保留最终 checkp
 `ttt_conv/ttt_proj` 共 14 个预期 excluded/unexpected keys；RTX 5090 峰值
 allocated/reserved 为 7.545/7.547 GiB。该检查没有加载 pilot row、没有计算答案 NLL，
 所以 `model_scored=false` 保持不变。
+
+新增 `scripts/chain_mquake_v15_to_v16_pilot.sh` 作为一次性 tmux 衔接器。它每 30 秒
+只检查 V15 的终态、runner exit、固定 PID、summary 与独立 audit；进程连续三次缺失
+且无终态会报错。只有 protocol/terminal/audit 均正确且
+`jackknife_consensus_supported=true` 才调用 V16 Pilot runner。V15 正常结束但 gate
+不支持时写入 `v16_not_launched_v15_unsupported` 并停止，不创建 Pilot 结果目录、
+不加载模型。该 watcher 不改变 V15、V16 指标或阈值。
