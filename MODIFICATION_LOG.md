@@ -2549,3 +2549,9 @@ editing prompt text. Scales 4/8/16 are scored together with scale 8 primary;
 correct/wrong/zero single-component controls distinguish content binding from
 a generic residual effect. Both collectors refuse to start unless the V18
 formal summary and independent audit pass the frozen headroom gate.
+
+Added `scripts/chain_v18_formal_to_lowrank_bridge.sh`. The detached watcher
+observes the formal runner's terminal exit file, independently checks the
+positive formal summary, audit hash and recomputed gate, and starts Stage B
+only when every release condition is true. Failed or unsupported formal runs
+produce terminal stop markers without creating a bridge result directory.
