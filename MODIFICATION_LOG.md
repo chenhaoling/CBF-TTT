@@ -2346,3 +2346,32 @@ failed root is preserved.  The auditor now treats JSON object order as
 non-semantic, requires the exact key set with no extras, and still verifies the
 registered order separately from the manifest.  A regression test covers
 shuffled and extra keys; recovery must use a fresh `_retry1` root.
+
+### MQuAKE-T V17 causal-headroom resource pilot
+
+Added `tasks/evaluate_mquake_qwen_headroom_v17.py` to score the frozen 40-row
+V17 pilot on two GPUs. For every episode it evaluates the five registered
+fixed arms and all 30 causal single-session deletions. Identical fixed-memory
+states are scored once and copied with an auditable source-arm identity. All
+four registered query kinds use the final Qwen3-4B slow checkpoint with native
+TTT adapters disabled, a fresh KV cache, and independent candidate-answer
+branches. Each query records latency and CUDA start/peak allocated and
+reserved memory.
+
+The pilot constructs its exact per-episode oracle from `retain_all` plus every
+single deletion, ordered by primary candidate accuracy, lower primary NLL,
+retain-all, and chronological deletion order. The fixed comparator is selected
+inside each outer fold using only the other folds. Pilot headroom remains
+descriptive: only complete finite scoring, the 40,960-token limit, complete
+resource records, peak reserved memory no greater than 31.5 GiB, a projected
+two-GPU formal time no greater than 48 hours, and a passed independent audit
+can release formal scoring. These thresholds were added to
+`POST_V15_PAPER_EXPERIMENT_PLAN.md` before model scoring.
+
+Added `scripts/audit_mquake_qwen_headroom_v17_pilot.py` to reconstruct sample,
+state, arm, prompt, prediction, resource, model, tokenizer, shard and summary
+identities independently. Added
+`scripts/run_mquake_qwen_headroom_v17_pilot.sh` and focused unit tests for arm
+ordering, the registered oracle tie-break, outer-fold fixed selection and
+deterministic subject-cluster bootstrap. External benchmarks and the 272-row
+formal set remain locked until this resource pilot completes and passes.

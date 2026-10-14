@@ -235,6 +235,20 @@ model-free independent reconstruction audit.  The five-point gate is applied
 to the subject-macro oracle-minus-fixed accuracy and its subject-cluster 95%
 interval is reported; this is explicitly a diagnostic upper bound.
 
+The frozen 40-row resource pilot scores all four registered query kinds for
+every unique fixed or single-deletion state with the final Qwen3-4B slow
+checkpoint and native TTT adapters disabled. Duplicate fixed states are
+evaluated once and copied with an explicit source-arm identity. Candidate NLL
+uses one prompt forward followed by independent answer-cache branches; no
+generation result enters oracle selection. Each query records wall time and
+CUDA start/peak allocated and reserved memory. The pilot releases formal
+scoring only if all 40 rows and scores are finite and within the 40,960-token
+context, every resource record is complete, peak reserved memory is at most
+31.5 GiB, the two-GPU formal-time projection is at most 48 hours, and the
+independent audit passes. Pilot headroom is descriptive and cannot block or
+release formal scoring. The time projection scales the slower pilot shard by
+the registered formal-to-pilot unique-state ratio.
+
 If the headroom gate passes, train a readout-utility policy with subject-level
 cross-fitting.  Its target is the actual downstream change
 
