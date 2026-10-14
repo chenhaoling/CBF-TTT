@@ -2113,3 +2113,12 @@ same-relation hard-retain 单元与一个无关单元检查安全性。资源 pi
 有限且不越界才开放 formal。Formal 预定每个 `subject x length` 取 hash 最小 episode；
 现有 train+tune 为 68 subjects × 4 lengths，预计 272 条，并按 subject 聚类 bootstrap。
 episode ID 顺序需在首次 formal 模型评分前落盘并哈希。
+
+实现 `tasks/build_mquake_qwen_outcome_v16.py` 与三项纯 Python 测试。构建器只加载
+MQuAKE-T train+tune 和已哈希 `texts.json`，复用 V11--V15 完全相同的 subject-fold
+分配；按冻结 hash 规则生成 `pilot.jsonl` 与 `formal.jsonl`。每行显式记录 primary
+old/current、same-relation hard-retain、unrelated 四个 anchor unit 的原始 statement/
+value 及 session 身份，并核验 update 指向 old。manifest 锁定来源文件、fold loads、
+选择规则、行数和输出 hash，同时声明所有外部集未加载、模型未评分。本地三项测试
+通过，覆盖 anchor 抽取、40 行 fold×length pilot 完整性/输入顺序不变性和每个
+subject×length 唯一 formal 行。
