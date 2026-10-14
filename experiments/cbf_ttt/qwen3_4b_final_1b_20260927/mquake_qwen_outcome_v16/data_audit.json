@@ -1,0 +1,35 @@
+{
+  "protocol": "mquake_qwen_outcome_v16",
+  "audit_passed": true,
+  "checks": {
+    "protocol": true,
+    "source_protocol": true,
+    "source_manifest_hash": true,
+    "source_file_hashes": true,
+    "fold_loads": true,
+    "pilot_selection": true,
+    "formal_selection": true,
+    "sizes": true,
+    "relation_counts": true,
+    "artifact_hashes": true,
+    "pre_model_state": true,
+    "external_sealed": true
+  },
+  "pilot_rows": 40,
+  "formal_rows": 272,
+  "subjects": 68,
+  "fold_loads": [
+    1196,
+    1196,
+    1196,
+    1196,
+    1192
+  ],
+  "sample_hashes": {
+    "manifest.json": "9eea25d6aa253014d47553e0e45fb01107546a3ff14b86bc3881b6c60b208be1",
+    "pilot.jsonl": "4a66ff3e2adbc1c22466f876149855d62fbf2863a124ea8d292e2861359bbe38",
+    "formal.jsonl": "4c184db9568ad93e04c88f343bd3372d2cb3796d4035e4834938db9bbbaa9a11"
+  },
+  "model_scored": false,
+  "external_sets_loaded": false
+}
