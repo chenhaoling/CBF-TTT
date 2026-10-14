@@ -2244,3 +2244,21 @@ builder/auditor 单测、272 条状态冻结、独立重建审计、exit/termina
 默认输入固定为当前 MQuAKE-T、V14 OOF、V15 OOF、V16 sample 与 V16 Pilot 路径；
 任何上游 gate/hash/audit 不符都会在写入完成终态前停止。该 runner 目前仅完成 shell
 语法验证，没有启动，因 V15 与 Pilot 尚未满足解锁条件。
+
+### V16 候选评分共享只读 prompt KV（2026-10-14，Pilot 前）
+
+审查发现原 scorer 会为同一 query 的每个答案候选重复完整 1--4.5K-token prompt
+前向，资源 Pilot 因而会高估 formal 成本。改为每个 policy-query 只前向一次 prompt，
+随后为各 answer 克隆独立标准 DynamicCache branch：第一个答案 token 使用同一只读
+prompt-last hidden，后续 tokens 只在各自 branch 前向；父 cache 长度前后必须相同。
+每个不同 query/policy 仍从全新 cache 开始，不跨臂共享。Auditor 要求 shard metadata
+明确记录此模式；新增候选前缀/重复候选测试，V16 tests 合计 24 项本地和远程通过。
+
+新增固定容差 `scripts/check_mquake_qwen_outcome_v16_prefix.py`，只用合成问句和
+Paris/London 两候选比较共享-prefix 与原逐候选 full-forward。首次远程调用因 CLI
+`model/tokenizer` 名称未显式映射到函数参数而在加载模型前报错，失败目录保留；修复
+CLI help/compile 后在全新 `_retry1` 目录运行。两候选 NLL 误差均为 0，预测一致，
+通过预设 `2e-5` 门槛；耗时 0.328s、峰值 allocated/reserved 7.562/7.576 GiB。
+归档 `prefix_scoring_bridge.json`，SHA-256
+`a81c98a535ea6bd961395357d0b98df7a8055b209cc92ef0c948b74952ec6a49`。
+脚本与结果均声明 `pilot_rows_loaded=0`、实验 `model_scored=false`、外部集未加载。

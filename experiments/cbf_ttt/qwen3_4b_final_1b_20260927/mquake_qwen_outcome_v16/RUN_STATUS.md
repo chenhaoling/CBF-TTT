@@ -68,6 +68,19 @@ each of the seven TTT layers).  Loading peaked at 7.545 GiB allocated and
 7.547 GiB reserved on an RTX 5090.  The smoke loaded no pilot row and leaves
 `model_scored=false`.
 
+The scorer now evaluates each policy-query prompt once and clones its immutable
+KV cache into independent answer branches.  A fixed-tolerance synthetic bridge
+compared this implementation with the original full prompt-plus-answer forward
+for `Paris` and `London`: both candidate NLL errors were exactly zero under the
+pre-registered `2e-5` tolerance and the prediction was identical.  The
+synthetic query took 0.328 seconds and peaked at 7.562/7.576 GiB
+allocated/reserved.  Result SHA-256 is
+`a81c98a535ea6bd961395357d0b98df7a8055b209cc92ef0c948b74952ec6a49`.
+The first bridge invocation failed before model loading because its CLI names
+did not map to the Python function names; that directory is preserved remotely
+and the corrected run used a fresh `_retry1` directory.  No pilot row was
+loaded in either invocation.
+
 ## Pre-model correction
 
 The first build stopped before writing a sample because it required every
