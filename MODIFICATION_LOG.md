@@ -2104,3 +2104,12 @@ train+tune 全部 5,976 个 episode：完整未过滤文本为 1,202--6,137 toke
 最大 6,137；checkpoint `max_position_embeddings=40960`、无 sliding window，因此
 协议可不截断地评分所有 retained units。正式入口仍需逐行检查加上 prompt/answer 后
 不越界，并由 auditor 重建 prompt 和 token 长度。
+
+同样在 V15 首个 outer 指标出现前锁定 Qwen outcome 的采样与查询：primary old/current
+匹配单元提供两个固定 query phrasing 和 stale/current 候选；另取一个确定性的
+same-relation hard-retain 单元与一个无关单元检查安全性。资源 pilot 为 5 folds ×
+4 lengths × 每格 2 个 hash 最小 episode，共 40 条，只公开 oracle/no-memory 可读性、
+耗时、显存和长度，V15-vs-fixed 指标保持遮蔽；oracle current-over-stale ≥80%、全行
+有限且不越界才开放 formal。Formal 预定每个 `subject x length` 取 hash 最小 episode；
+现有 train+tune 为 68 subjects × 4 lengths，预计 272 条，并按 subject 聚类 bootstrap。
+episode ID 顺序需在首次 formal 模型评分前落盘并哈希。

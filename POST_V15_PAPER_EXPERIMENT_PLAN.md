@@ -86,6 +86,31 @@ actual frozen-Qwen use of retained textual evidence.  It is a downstream
 utility bridge for the contextual memory and is reported as such; it is not a
 native dense-fast-weight result.
 
+### Queries and fixed sampling
+
+For every episode, the primary-old and primary-current sessions are already
+identified by the corpus.  Their matched unit pair supplies two query
+phrasings, the old and current `Memory statement`, and two candidate answers,
+the stale and current `Value`.  The primary metric averages both phrasings and
+requires the current answer to outrank the stale answer.  One deterministic
+same-relation hard-retain unit and one deterministic unrelated unit provide
+the two safety queries; their own serialized values remain the targets.
+
+The resource pilot uses 40 episodes: two hash-minimal episode IDs in each of
+the five subject folds and four registered lengths.  It reports only runtime,
+peak memory, token lengths and the oracle/no-memory readability controls; V15
+versus fixed-policy outcomes remain masked.  Formal scoring is unlocked only
+if the oracle arm prefers the current answer on at least 80% of primary
+queries, every prompt is within the checkpoint limit and no row fails or
+produces a non-finite score.
+
+The formal internal set uses one hash-minimal episode for every available
+`subject x length` cell across train+tune.  The current corpus has 68 subjects
+and four lengths, so the expected size is 272 episodes, subject-balanced by
+construction.  The exact ordered episode IDs are written and hashed before
+formal model scoring.  Confidence intervals resample subjects, keeping the
+four lengths and all query types for a sampled subject together.
+
 ### Intervention
 
 Replay every held-out subject episode with the exact contextual memory
