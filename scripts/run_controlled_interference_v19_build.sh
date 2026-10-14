@@ -5,7 +5,7 @@ ROOT=${ROOT:-/home/ctj/cbf_ttt_controlled_interference_v19_data}
 REPO=${REPO:-/home/ctj/cbf_ttt_joint_exp_20260927}
 PYTHON=${PYTHON:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python}
 RELEASE_ROOT=${RELEASE_ROOT:-/home/ctj/cbf_ttt_v18_locality_constrained_diagnostic_20261014}
-V18_DATA=${V18_DATA:-/home/ctj/cbf_ttt_controlled_interference_v18_formal_data/result}
+V18_DATA=${V18_DATA:-/home/ctj/cbf_ttt_controlled_interference_v18_formal_data_20261014_retry1/result}
 V18_PILOT_DATA=${V18_PILOT_DATA:-/home/ctj/cbf_ttt_controlled_interference_v18_pilot_data_tokmatch_retry1/result}
 
 cd "$REPO"
