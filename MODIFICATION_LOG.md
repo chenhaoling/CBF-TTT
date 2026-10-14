@@ -2530,3 +2530,12 @@ deletions. Manifest, episode and state SHA-256 values are
 `1975f8c5ca221d707f25665b8974cf1435eae63a62285a57ae8076efd0b365f2`
 and `87b4727324282e6f608e642674d9e5521924bae454a384633cf148959f940192`.
 The two-GPU formal scorer was then launched against this exact frozen root.
+
+While the formal scorer was running and before any formal outcome was read,
+added `POST_V18_FORGETTING_POLICY_PREREGISTRATION.md`. It separates the current
+explicit-text causal diagnosis from the required low-rank Qwen fast-parameter
+bridge, makes exact same-key conflict resolution a mandatory strong baseline,
+freezes the three controller seeds and training grid, and requires held-out
+semantic-alias improvement before natural benchmarks. This prevents a positive
+text-memory oracle result from being overstated as native dense-writer or
+learned-controller efficacy.
