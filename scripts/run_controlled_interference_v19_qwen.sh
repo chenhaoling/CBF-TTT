@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT=${ROOT:-/home/ctj/cbf_ttt_controlled_interference_v19_qwen}
 REPO=${REPO:-/home/ctj/cbf_ttt_joint_exp_20260927}
 PYTHON=${PYTHON:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python}
-DATA=${DATA:-/home/ctj/cbf_ttt_controlled_interference_v19_data/result}
+DATA=${DATA:-/home/ctj/cbf_ttt_controlled_interference_v19_data_20261014_retry1/result}
 RELEASE_ROOT=${RELEASE_ROOT:-/home/ctj/cbf_ttt_v18_locality_constrained_diagnostic_20261014}
 MODEL=${MODEL:-/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt}
 TOKENIZER=${TOKENIZER:-/home/ctj/models/Qwen3-4B}
