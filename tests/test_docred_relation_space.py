@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 
 from tasks.build_docred_relation_space import (
-    construct_pairs, masked_evidence, selected_sentences,
+    construct_pairs, masked_evidence, raw_candidates, selected_sentences,
 )
 
 
@@ -57,6 +57,16 @@ class DocredRelationSpaceTest(unittest.TestCase):
         source = Path(__file__).parents[1] / "tasks" / "build_docred_relation_space.py"
         builder = source.read_text()
         self.assertNotIn('"relation_description": relation_info[relation]', builder)
+
+    def test_overlapping_mentions_are_excluded_without_aborting_build(self):
+        doc = document()
+        doc["vertexSet"][1][0]["pos"] = [0, 1]
+        rows, exclusions = raw_candidates(
+            [doc], [], {"representation_train": ["P1"],
+                        "relation_development": [], "relation_source_test": []},
+            {"P1": "example"})
+        self.assertEqual(rows, [])
+        self.assertEqual(exclusions[0]["reason"], "invalid_masked_evidence")
 
 
 if __name__ == "__main__":

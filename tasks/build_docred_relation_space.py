@@ -155,7 +155,11 @@ def raw_candidates(train, dev, partitions, relation_info):
                 if allowed_partition is None and document_owners[document_index] != {partition}:
                     exclusions.append({**identity, "reason": "heldout_document_cross_partition"})
                     continue
-                surface, sentence_ids = masked_evidence(document, label)
+                try:
+                    surface, sentence_ids = masked_evidence(document, label)
+                except ValueError:
+                    exclusions.append({**identity, "reason": "invalid_masked_evidence"})
+                    continue
                 output.append({
                     **identity, "document_id": stable(
                         SEED, source_file, document_index, document.get("title", ""))[:24],
