@@ -30,8 +30,13 @@ WINDOW = 8
 
 
 def subject_context_indices(offsets, text, window=WINDOW):
-    if text.count(MARKER) != 1:
-        raise ValueError("surface must contain exactly one subject marker")
+    marker_count = text.count(MARKER)
+    if marker_count == 0:
+        # Two audited source rows fail to expose the original subject string to
+        # the inventory masker. Preserve coverage with a causal local fallback.
+        return list(range(max(0, len(offsets) - window), len(offsets)))
+    if marker_count != 1:
+        raise ValueError("surface contains duplicate subject markers")
     marker_start = text.index(MARKER)
     marker_end = marker_start + len(MARKER)
     marker_tokens = [index for index, (start, end) in enumerate(offsets)
@@ -139,6 +144,7 @@ def extract(args):
             rows.append({
                 "surface_id": surface["surface_id"], "surface_index": global_index,
                 "text": surface["text"], "token_ids": ids, "token_length": length,
+                "subject_marker_count": surface["text"].count(MARKER),
                 "token_ids_sha256": token_ids_sha256(ids),
                 "vector_sha256": {view: tensor_sha256(vector)
                                   for view, vector in vectors.items()},
@@ -170,6 +176,11 @@ def extract(args):
         "embedding_dim": next(iter(matrices.values())).shape[1],
         "dtype": str(next(iter(matrices.values())).dtype),
         "max_tokens": MAX_TOKENS, "subject_window": WINDOW,
+        "subject_marker_counts": {
+            "present_once": sum(row["subject_marker_count"] == 1 for row in rows),
+            "missing_fallback_last8": sum(row["subject_marker_count"] == 0 for row in rows),
+            "duplicate": sum(row["subject_marker_count"] > 1 for row in rows),
+        },
         "model": model_meta, "tokenizer": tokenizer_provenance(args.tokenizer, tokenizer),
         "dependencies": {"pair_manifest_sha256": sha(manifest_path),
                          "surfaces_sha256": sha(surfaces_path)},

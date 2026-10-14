@@ -54,6 +54,7 @@ def audit(args):
                 row["surface_id"] == source["surface_id"],
                 row["surface_index"] == global_index, row["text"] == source["text"],
                 row["token_ids"] == ids, row["token_length"] == len(ids),
+                row["subject_marker_count"] == source["text"].count("[SUBJECT]"),
                 0 < len(ids) <= MAX_TOKENS,
                 row["token_ids_sha256"] == token_ids_sha256(ids),
             ))
@@ -107,6 +108,11 @@ def audit(args):
         reproduction[view] = {"minimum_cosine": float(cosine.min()),
                               "maximum_absolute_error": float(error)}
         reproduced &= float(cosine.min()) >= .999999 and float(error) <= 1e-6
+    marker_counts = {
+        "present_once": sum(row["subject_marker_count"] == 1 for row in records),
+        "missing_fallback_last8": sum(row["subject_marker_count"] == 0 for row in records),
+        "duplicate": sum(row["subject_marker_count"] > 1 for row in records),
+    }
     checks = {
         "frozen_dependencies": (
             sha(pair_root / "manifest.json") == PAIR_MANIFEST_SHA256
@@ -116,6 +122,9 @@ def audit(args):
         "all_views_finite_unit_normalized": valid_vectors,
         "identical_shard_provenance": provenance,
         "independent_original_batch_reproduction": reproduced,
+        "exactly_two_registered_missing_marker_fallbacks": (
+            marker_counts == {"present_once": 15196,
+                              "missing_fallback_last8": 2, "duplicate": 0}),
         "model_and_tokenizer_provenance_reproduced": (
             model_provenance(raw_meta) == audits[0]["model"]
             and tokenizer_provenance(args.tokenizer, tokenizer) == audits[0]["tokenizer"]),
@@ -127,6 +136,7 @@ def audit(args):
         "embedding_dim": next(iter(merged.values())).shape[1],
         "token_lengths": {"min": min(row["token_length"] for row in records),
                           "max": max(row["token_length"] for row in records)},
+        "subject_marker_counts": marker_counts,
         "reproduction": reproduction,
         "resources": {"seconds": [value["seconds"] for value in audits],
                       "peak_allocated_gib": [value["peak_allocated_gib"] for value in audits],
