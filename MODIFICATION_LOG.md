@@ -2608,3 +2608,21 @@ The independent auditor separately reconstructs every feature, three-point
 target, group credit, NLL tie evidence, fold count, identity and source hash.
 The physical-to-example chain creates this dataset only after the physical
 summary and independent audit pass.
+
+Added the nested-OOF Stage-D trainer, independent audit, runner and release
+chain. For each outer fold, the next fold is a fixed inner validation fold;
+25/50/100 epochs and thresholds 0.4/0.5/0.6 are selected from ensemble
+predictions of seeds 18031/18037/18043. Models are two-layer 64-unit GELU MLPs
+with layer normalization. AdamW, learning rate 1e-3, weight decay 1e-4 and
+gradient clipping at 1 follow the frozen protocol. The loss combines Huber
+utility regression, causal positive-versus-conservation ranking, unrelated
+memory conservation and useful-repetition consistency at weights
+1.0/0.5/0.25/0.25.
+
+The trainer saves all inner-fold ensemble scores, selection grids, three-seed
+outer-fold checkpoints, learning curves and per-episode OOF retained/deleted
+component states. Its auditor reloads every checkpoint, independently
+recomputes inner selection and all 320 OOF actions, and verifies that the
+current update is retained in every seed and episode. GPU training time and
+peak allocated/reserved memory are recorded. Model-level policy efficacy is
+still gated on the later Qwen rescoring stage.
