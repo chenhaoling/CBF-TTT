@@ -1,0 +1,516 @@
+{
+  "protocol": "qwen_causal_ledger_generation_prefix_diagnostic_v1",
+  "source_protocol": "qwen_causal_ledger_residual_pilot_v1",
+  "posthoc_diagnostic": true,
+  "changes_registered_gate": false,
+  "rows": 1008,
+  "answer_tokens": 5,
+  "content_sha256": {
+    "content_shard0.jsonl": "4ccf46df74b64bbdbdfa003b3f3de00bafef0fb56b5600921a4a6396255ca1f2",
+    "content_shard1.jsonl": "cd996c74675f759856b025abffaccd6c25a56810f73427875e7a99b7e5a94764"
+  },
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "by_scale": {
+    "4.0": {
+      "five_token_exact": 0.0,
+      "five_text_exact": 0.0,
+      "errors": 1008,
+      "examples": [
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b4_current",
+          "target": "Z G A J C",
+          "generated": "00000",
+          "target_ids": [
+            57,
+            479,
+            362,
+            619,
+            356
+          ],
+          "generated_ids": [
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b4_historical",
+          "target": "Z H B O A",
+          "generated": "00000",
+          "target_ids": [
+            57,
+            472,
+            425,
+            506,
+            362
+          ],
+          "generated_ids": [
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b4_anchor",
+          "target": "Z L L M B",
+          "generated": "0.0.1",
+          "target_ids": [
+            57,
+            444,
+            444,
+            386,
+            425
+          ],
+          "generated_ids": [
+            15,
+            13,
+            15,
+            13,
+            16
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_current",
+          "target": "Z C M F A",
+          "generated": "00000",
+          "target_ids": [
+            57,
+            356,
+            386,
+            434,
+            362
+          ],
+          "generated_ids": [
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_historical",
+          "target": "Z C B L C",
+          "generated": "00000",
+          "target_ids": [
+            57,
+            356,
+            425,
+            444,
+            356
+          ],
+          "generated_ids": [
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_anchor",
+          "target": "Z L L M B",
+          "generated": "0.0.1",
+          "target_ids": [
+            57,
+            444,
+            444,
+            386,
+            425
+          ],
+          "generated_ids": [
+            15,
+            13,
+            15,
+            13,
+            16
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b8_current",
+          "target": "Z I B J C",
+          "generated": "00000",
+          "target_ids": [
+            57,
+            358,
+            425,
+            619,
+            356
+          ],
+          "generated_ids": [
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b8_historical",
+          "target": "Z C M F A",
+          "generated": "00000",
+          "target_ids": [
+            57,
+            356,
+            386,
+            434,
+            362
+          ],
+          "generated_ids": [
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    "8.0": {
+      "five_token_exact": 0.0,
+      "five_text_exact": 0.0,
+      "errors": 1008,
+      "examples": [
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b4_current",
+          "target": "Z G A J C",
+          "generated": "ZG1Jc",
+          "target_ids": [
+            57,
+            479,
+            362,
+            619,
+            356
+          ],
+          "generated_ids": [
+            57,
+            38,
+            16,
+            41,
+            66
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b4_historical",
+          "target": "Z H B O A",
+          "generated": "ZH B O A",
+          "target_ids": [
+            57,
+            472,
+            425,
+            506,
+            362
+          ],
+          "generated_ids": [
+            57,
+            39,
+            425,
+            506,
+            362
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b4_anchor",
+          "target": "Z L L M B",
+          "generated": "ZL1M2",
+          "target_ids": [
+            57,
+            444,
+            444,
+            386,
+            425
+          ],
+          "generated_ids": [
+            57,
+            43,
+            16,
+            44,
+            17
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_current",
+          "target": "Z C M F A",
+          "generated": "ZC1F1",
+          "target_ids": [
+            57,
+            356,
+            386,
+            434,
+            362
+          ],
+          "generated_ids": [
+            57,
+            34,
+            16,
+            37,
+            16
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_historical",
+          "target": "Z C B L C",
+          "generated": "ZC1L1",
+          "target_ids": [
+            57,
+            356,
+            425,
+            444,
+            356
+          ],
+          "generated_ids": [
+            57,
+            34,
+            16,
+            43,
+            16
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_anchor",
+          "target": "Z L L M B",
+          "generated": "ZL1M2",
+          "target_ids": [
+            57,
+            444,
+            444,
+            386,
+            425
+          ],
+          "generated_ids": [
+            57,
+            43,
+            16,
+            44,
+            17
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b8_current",
+          "target": "Z I B J C",
+          "generated": "ZI B J C",
+          "target_ids": [
+            57,
+            358,
+            425,
+            619,
+            356
+          ],
+          "generated_ids": [
+            57,
+            40,
+            425,
+            619,
+            356
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b8_historical",
+          "target": "Z C M F A",
+          "generated": "ZC1F1",
+          "target_ids": [
+            57,
+            356,
+            386,
+            434,
+            362
+          ],
+          "generated_ids": [
+            57,
+            34,
+            16,
+            37,
+            16
+          ]
+        }
+      ]
+    },
+    "16.0": {
+      "five_token_exact": 0.2708333333333333,
+      "five_text_exact": 0.2708333333333333,
+      "errors": 735,
+      "examples": [
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b4_current",
+          "target": "Z G A J C",
+          "generated": "ZG A J C",
+          "target_ids": [
+            57,
+            479,
+            362,
+            619,
+            356
+          ],
+          "generated_ids": [
+            57,
+            38,
+            362,
+            619,
+            356
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b4_anchor",
+          "target": "Z L L M B",
+          "generated": "ZL L M B",
+          "target_ids": [
+            57,
+            444,
+            444,
+            386,
+            425
+          ],
+          "generated_ids": [
+            57,
+            43,
+            444,
+            386,
+            425
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_current",
+          "target": "Z C M F A",
+          "generated": "ZC M F A",
+          "target_ids": [
+            57,
+            356,
+            386,
+            434,
+            362
+          ],
+          "generated_ids": [
+            57,
+            34,
+            386,
+            434,
+            362
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_historical",
+          "target": "Z C B L C",
+          "generated": "ZC B L C",
+          "target_ids": [
+            57,
+            356,
+            425,
+            444,
+            356
+          ],
+          "generated_ids": [
+            57,
+            34,
+            425,
+            444,
+            356
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b6_anchor",
+          "target": "Z L L M B",
+          "generated": "ZL L M B",
+          "target_ids": [
+            57,
+            444,
+            444,
+            386,
+            425
+          ],
+          "generated_ids": [
+            57,
+            43,
+            444,
+            386,
+            425
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b8_current",
+          "target": "Z I B J C",
+          "generated": "ZI B J C",
+          "target_ids": [
+            57,
+            358,
+            425,
+            619,
+            356
+          ],
+          "generated_ids": [
+            57,
+            40,
+            425,
+            619,
+            356
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b8_historical",
+          "target": "Z C M F A",
+          "generated": "ZC M F A",
+          "target_ids": [
+            57,
+            356,
+            386,
+            434,
+            362
+          ],
+          "generated_ids": [
+            57,
+            34,
+            386,
+            434,
+            362
+          ]
+        },
+        {
+          "episode_id": "b8c131838f374cbb.retain.0",
+          "query_id": "b8_anchor",
+          "target": "Z L L M B",
+          "generated": "ZL L M B",
+          "target_ids": [
+            57,
+            444,
+            444,
+            386,
+            425
+          ],
+          "generated_ids": [
+            57,
+            43,
+            444,
+            386,
+            425
+          ]
+        }
+      ]
+    }
+  }
+}

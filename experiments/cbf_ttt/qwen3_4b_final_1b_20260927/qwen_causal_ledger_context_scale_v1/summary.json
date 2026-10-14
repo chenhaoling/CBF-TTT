@@ -1,0 +1,274 @@
+{
+  "protocol": "qwen_causal_ledger_context_scale_diagnostic_v1",
+  "rows": 1008,
+  "scales": [
+    16.0,
+    20.0,
+    24.0,
+    32.0,
+    48.0,
+    64.0
+  ],
+  "table": {
+    "16.0": {
+      "free_exact": 0.2708333333333333,
+      "free_text_exact": 0.2708333333333333,
+      "free_token_accuracy": 0.8450396825396826,
+      "free_position_accuracy": [
+        1.0,
+        0.2708333333333333,
+        0.9623015873015873,
+        0.9920634920634921,
+        1.0
+      ],
+      "teacher_sequence_exact": 0.2708333333333333,
+      "teacher_position_accuracy": [
+        1.0,
+        0.2708333333333333,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "answer_nll": 0.37881612312048674,
+      "family_free_exact": {
+        "distant_revoke": 0.20833333333333334,
+        "exact_duplicate": 0.2847222222222222,
+        "mixed_two_event": 0.3333333333333333,
+        "overwritten_noop": 0.2777777777777778,
+        "recent_revoke": 0.3680555555555556,
+        "reset": 0.2222222222222222,
+        "retain": 0.2013888888888889
+      }
+    },
+    "20.0": {
+      "free_exact": 0.3611111111111111,
+      "free_text_exact": 0.3611111111111111,
+      "free_token_accuracy": 0.8656746031746032,
+      "free_position_accuracy": [
+        1.0,
+        0.3611111111111111,
+        0.9702380952380952,
+        0.9970238095238095,
+        1.0
+      ],
+      "teacher_sequence_exact": 0.3611111111111111,
+      "teacher_position_accuracy": [
+        1.0,
+        0.3611111111111111,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "answer_nll": 0.22474244861246367,
+      "family_free_exact": {
+        "distant_revoke": 0.2569444444444444,
+        "exact_duplicate": 0.4166666666666667,
+        "mixed_two_event": 0.3333333333333333,
+        "overwritten_noop": 0.3888888888888889,
+        "recent_revoke": 0.5,
+        "reset": 0.3194444444444444,
+        "retain": 0.3125
+      }
+    },
+    "24.0": {
+      "free_exact": 0.5505952380952381,
+      "free_text_exact": 0.5505952380952381,
+      "free_token_accuracy": 0.9081349206349206,
+      "free_position_accuracy": [
+        1.0,
+        0.5505952380952381,
+        0.9900793650793651,
+        1.0,
+        1.0
+      ],
+      "teacher_sequence_exact": 0.558531746031746,
+      "teacher_position_accuracy": [
+        1.0,
+        0.558531746031746,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "answer_nll": 0.12011804353050326,
+      "family_free_exact": {
+        "distant_revoke": 0.4930555555555556,
+        "exact_duplicate": 0.6597222222222222,
+        "mixed_two_event": 0.4583333333333333,
+        "overwritten_noop": 0.6180555555555556,
+        "recent_revoke": 0.5902777777777778,
+        "reset": 0.4861111111111111,
+        "retain": 0.5486111111111112
+      }
+    },
+    "32.0": {
+      "free_exact": 0.9970238095238095,
+      "free_text_exact": 0.9970238095238095,
+      "free_token_accuracy": 0.9994047619047619,
+      "free_position_accuracy": [
+        1.0,
+        0.9970238095238095,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "teacher_sequence_exact": 0.9970238095238095,
+      "teacher_position_accuracy": [
+        1.0,
+        0.9970238095238095,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "answer_nll": 0.023188158496215316,
+      "family_free_exact": {
+        "distant_revoke": 1.0,
+        "exact_duplicate": 1.0,
+        "mixed_two_event": 1.0,
+        "overwritten_noop": 1.0,
+        "recent_revoke": 0.9791666666666666,
+        "reset": 1.0,
+        "retain": 1.0
+      }
+    },
+    "48.0": {
+      "free_exact": 1.0,
+      "free_text_exact": 1.0,
+      "free_token_accuracy": 1.0,
+      "free_position_accuracy": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "teacher_sequence_exact": 1.0,
+      "teacher_position_accuracy": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "answer_nll": 0.00039922381541525884,
+      "family_free_exact": {
+        "distant_revoke": 1.0,
+        "exact_duplicate": 1.0,
+        "mixed_two_event": 1.0,
+        "overwritten_noop": 1.0,
+        "recent_revoke": 1.0,
+        "reset": 1.0,
+        "retain": 1.0
+      }
+    },
+    "64.0": {
+      "free_exact": 1.0,
+      "free_text_exact": 1.0,
+      "free_token_accuracy": 1.0,
+      "free_position_accuracy": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "teacher_sequence_exact": 1.0,
+      "teacher_position_accuracy": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "answer_nll": 6.447354428731768e-06,
+      "family_free_exact": {
+        "distant_revoke": 1.0,
+        "exact_duplicate": 1.0,
+        "mixed_two_event": 1.0,
+        "overwritten_noop": 1.0,
+        "recent_revoke": 1.0,
+        "reset": 1.0,
+        "retain": 1.0
+      }
+    }
+  },
+  "selection_rule": "smallest scale with free exact >=0.85 and teacher sequence exact >=0.95",
+  "selected_scale": 32.0,
+  "passed": true,
+  "resources": {
+    "two_gpu_critical_path_seconds": 271.3970706406981,
+    "peak_allocated_gib": 7.669643878936768,
+    "peak_reserved_gib": 7.693359375,
+    "shards": [
+      {
+        "protocol": "qwen_causal_ledger_context_scale_diagnostic_v1",
+        "shard": 0,
+        "num_shards": 2,
+        "episodes": 56,
+        "rows": 504,
+        "seconds": 271.3970706406981,
+        "peak_allocated_gib": 7.669643878936768,
+        "peak_reserved_gib": 7.693359375,
+        "rows_sha256": "460a004a755e106d047fb95542748784107d671422f9d683e8d6d5fc72ac55df",
+        "data_manifest_sha256": "9d05a1f2977294b488210eb2307d62980b622292d7eed7807d6c2b0d3d716246",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "scales": [
+          16.0,
+          20.0,
+          24.0,
+          32.0,
+          48.0,
+          64.0
+        ],
+        "pilot_seed": 202610159,
+        "development_generated": false,
+        "confirmation_generated": false,
+        "ood_generated": false
+      },
+      {
+        "protocol": "qwen_causal_ledger_context_scale_diagnostic_v1",
+        "shard": 1,
+        "num_shards": 2,
+        "episodes": 56,
+        "rows": 504,
+        "seconds": 264.60552212782204,
+        "peak_allocated_gib": 7.669596195220947,
+        "peak_reserved_gib": 7.693359375,
+        "rows_sha256": "e5931faf95c53bcd61723f6be201e8ccd8c3157b5545a5432d628202e1b15375",
+        "data_manifest_sha256": "9d05a1f2977294b488210eb2307d62980b622292d7eed7807d6c2b0d3d716246",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "scales": [
+          16.0,
+          20.0,
+          24.0,
+          32.0,
+          48.0,
+          64.0
+        ],
+        "pilot_seed": 202610159,
+        "development_generated": false,
+        "confirmation_generated": false,
+        "ood_generated": false
+      }
+    ]
+  },
+  "development_generated": false,
+  "confirmation_generated": false,
+  "ood_generated": false,
+  "next_stage": "versioned_content_revalidation"
+}

@@ -1,0 +1,22 @@
+{
+  "protocol": "qwen_causal_ledger_context_scale_audit_v1",
+  "passed": true,
+  "checks": {
+    "terminal_status_and_exit": true,
+    "source_and_merged_coverage": true,
+    "shard_hashes_and_resources": true,
+    "row_level_token_recomputation": true,
+    "independent_aggregates_and_selection": true,
+    "downstream_splits_sealed": true
+  },
+  "hashes": {
+    "scale_shard0.jsonl": "460a004a755e106d047fb95542748784107d671422f9d683e8d6d5fc72ac55df",
+    "scale_resource_shard0.json": "39b65f51a2273523f7540a446daf110af062a9b2b4e1cbebe8bee1b472c96e93",
+    "scale_shard1.jsonl": "e5931faf95c53bcd61723f6be201e8ccd8c3157b5545a5432d628202e1b15375",
+    "scale_resource_shard1.json": "7c2f06eafa8a7146c9d48e38170b52d3d07539867eaf7580b457cfe4988d191f"
+  },
+  "source_manifest_sha256": "9d05a1f2977294b488210eb2307d62980b622292d7eed7807d6c2b0d3d716246",
+  "summary_sha256": "5263e7ae581edfcd0ba7f9fecd5ed23d41a14584e87cd7a69fdc087bf8bb2607",
+  "recomputed_selected_scale": 32.0,
+  "pilot_seed": 202610159
+}

@@ -3600,3 +3600,55 @@ Correct/Wrong/Zero/norm-matched-Random content controls and Correct greedy
 generation for every sparse query. The merger applies the frozen content gate
 and chooses only among 16/32/64 development groups per family under the
 24-GiB/six-hour resource rule.
+
+The causal-ledger pilot completed 112 episodes, 336 sparse-boundary labels and
+1,008 content queries in a 369.53-second two-GPU critical path. Mean/P95 label
+time was 0.0460/0.0840 seconds, mean time per valid action was 0.00282 seconds,
+and peak allocated/reserved memory was 7.970/8.363 GiB. Correct six-candidate
+accuracy was 100% at scales 4/8/16 and in every lifecycle family; at scale 8
+the correct answer NLL was 1.2121 versus 5.1971/5.8774/5.8901 for
+Wrong/Zero/Random, with all three group-bootstrap gain lower bounds above
+3.93. Registered greedy exact match was zero, so the content gate failed only
+its generation check and selected no development size. The independent audit
+passed all seven construction, hash, action, content, aggregate, terminal and
+sealing checks. Development, confirmation and OOD remained absent.
+
+A post-failure review found that the collector inherited a 13-token
+EOS/newline stopping rule although this protocol fixes answers to five tokens.
+`scripts/recompute_qwen_causal_ledger_generation_prefix.py` recomputed from the
+saved token IDs without rescoring: five-token exact remained 0/0/27.08% at
+scales 4/8/16, so the gate failure is not an artifact of the suffix alone. The
+pilot also used a deterministic wrong candidate instead of guaranteeing the
+paired-twin answer. Both deviations are documented in the archived report and
+must be corrected by any successor; neither changes the failed decision.
+
+Froze `QWEN_CAUSAL_LEDGER_CODEBOOK_DIAGNOSTIC_PLAN.md` and added
+`scripts/diagnose_qwen_causal_ledger_codebook.py`. All 17 answer-token unit-row
+directions ranked their own token first over the real full vocabulary. Scale-16
+rollout position accuracy was `[1.0,0.2708,0.9623,0.9921,1.0]`, and 735/1,008
+sequences first failed at the second token by replacing a space-prefixed token
+such as `" G"` with `"G"`. The residual-only target margins were about
+0.25--0.32, localizing the failure to contextual logit interference rather
+than an invalid LM-head code direction.
+
+Before any scale above 16 was scored, froze
+`QWEN_CAUSAL_LEDGER_CONTEXT_SCALE_PLAN.md`. The two-GPU diagnostic evaluates
+exactly `{16,20,24,32,48,64}` on all 1,008 failed-pilot queries, generates
+exactly five tokens, and reports teacher-forced/free full-vocabulary accuracy,
+NLL, position errors, runtime and memory. It may nominate only the smallest
+scale with at least 85% free exact and 95% teacher-forced sequence accuracy;
+even a pass must undergo a new versioned Correct/Wrong/Zero/Random and
+ledger-state validation before development construction. Added a hash- and
+token-recomputing independent auditor plus a selection-rule unit test.
+
+The contextual scale diagnostic completed all 1,008 rows in 271.40 seconds at
+7.670/7.693 GiB peak allocated/reserved memory and passed all six independent
+audit checks. Free/teacher sequence exact accuracy rose from 27.08/27.08% at
+scale 16 and 55.06/55.85% at scale 24 to 99.70/99.70% at scale 32; scales 48
+and 64 reached 100%. The registered minimum satisfying both thresholds is
+therefore 32. Its per-position free accuracy was
+`[1.0,0.9970,1.0,1.0,1.0]` and its minimum family exact accuracy was 97.92%.
+This selects a value for a new versioned content validation only. It neither
+repairs the failed V1 gate nor releases development; the next stage must test
+the complete multi-record ledger, fixed five-token generation, corrected
+wrong/twin controls, role and absent-value floors.

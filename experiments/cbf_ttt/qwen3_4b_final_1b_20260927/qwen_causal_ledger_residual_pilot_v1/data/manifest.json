@@ -1,0 +1,47 @@
+{
+  "protocol": "qwen_causal_ledger_residual_corpus_v1",
+  "phase": "pilot",
+  "seed": 202610159,
+  "groups_per_family": 8,
+  "families": [
+    "retain",
+    "recent_revoke",
+    "distant_revoke",
+    "reset",
+    "exact_duplicate",
+    "overwritten_noop",
+    "mixed_two_event"
+  ],
+  "templates_sha256": "246d5ce43d22c9cfd844b4af8260398097707724bc4c6f166c80df2262a1cfcc",
+  "value_pool": {
+    "offset": 0,
+    "size": 16384,
+    "null": "Z P P P D"
+  },
+  "files_sha256": {
+    "pilot.inputs.jsonl": "d03803c9e60caf0c44eb7c02694471b4ce9b74d50f82ed51d6429c525f43030b",
+    "pilot.targets.jsonl": "18840d994181d15c1893f569c331f43ee3aaaf96c8bf4037836ee12f4f1a87ef"
+  },
+  "audit": {
+    "episodes": 112,
+    "groups": 56,
+    "counts": {
+      "pilot/retain": 16,
+      "pilot/recent_revoke": 16,
+      "pilot/distant_revoke": 16,
+      "pilot/reset": 16,
+      "pilot/exact_duplicate": 16,
+      "pilot/overwritten_noop": 16,
+      "pilot/mixed_two_event": 16
+    },
+    "causal_answers_verified": true,
+    "visible_parser_verified": true,
+    "counterfactual_twins_verified": true,
+    "phase_symbols_disjoint": true,
+    "oracle_actions_generated": false
+  },
+  "model_scored": false,
+  "development_generated": false,
+  "confirmation_generated": false,
+  "ood_generated": false
+}

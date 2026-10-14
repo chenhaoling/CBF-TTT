@@ -1,0 +1,36 @@
+{
+  "protocol": "qwen_causal_ledger_residual_pilot_v1",
+  "shard": 1,
+  "num_shards": 2,
+  "pairs": 56,
+  "labels": 168,
+  "content_rows": 504,
+  "seconds": 366.9340409077704,
+  "labels_sha256": "ffe600459caf947d75b6b8566482f837bce8a748f80bf0f87651598dac58299e",
+  "content_sha256": "cd996c74675f759856b025abffaccd6c25a56810f73427875e7a99b7e5a94764",
+  "data_manifest_sha256": "9d05a1f2977294b488210eb2307d62980b622292d7eed7807d6c2b0d3d716246",
+  "extraction_peak_allocated_gib": 7.630920886993408,
+  "extraction_peak_reserved_gib": 7.642578125,
+  "label_peak_allocated_gib": 7.970376968383789,
+  "label_peak_reserved_gib": 8.36328125,
+  "overall_peak_allocated_gib": 7.970376968383789,
+  "overall_peak_reserved_gib": 8.36328125,
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "scales": [
+    4.0,
+    8.0,
+    16.0
+  ],
+  "primary_scale": 8.0,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "development_generated": false,
+  "confirmation_generated": false,
+  "ood_generated": false
+}

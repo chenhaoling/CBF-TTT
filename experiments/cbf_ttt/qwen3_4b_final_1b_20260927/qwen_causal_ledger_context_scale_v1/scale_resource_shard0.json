@@ -1,0 +1,33 @@
+{
+  "protocol": "qwen_causal_ledger_context_scale_diagnostic_v1",
+  "shard": 0,
+  "num_shards": 2,
+  "episodes": 56,
+  "rows": 504,
+  "seconds": 271.3970706406981,
+  "peak_allocated_gib": 7.669643878936768,
+  "peak_reserved_gib": 7.693359375,
+  "rows_sha256": "460a004a755e106d047fb95542748784107d671422f9d683e8d6d5fc72ac55df",
+  "data_manifest_sha256": "9d05a1f2977294b488210eb2307d62980b622292d7eed7807d6c2b0d3d716246",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "scales": [
+    16.0,
+    20.0,
+    24.0,
+    32.0,
+    48.0,
+    64.0
+  ],
+  "pilot_seed": 202610159,
+  "development_generated": false,
+  "confirmation_generated": false,
+  "ood_generated": false
+}

@@ -1,0 +1,241 @@
+{
+  "protocol": "qwen_causal_ledger_residual_pilot_v1",
+  "content": {
+    "4.0": {
+      "correct": {
+        "candidate_accuracy": 1.0,
+        "answer_nll": 2.9058013430663516,
+        "greedy_exact": 0.0,
+        "eos_rate": 0.022817460317460316
+      },
+      "wrong": {
+        "candidate_accuracy": 0.0,
+        "answer_nll": 4.899460706682432
+      },
+      "zero": {
+        "candidate_accuracy": 0.15178571428571427,
+        "answer_nll": 5.877437773204985
+      },
+      "random": {
+        "candidate_accuracy": 0.1498015873015873,
+        "answer_nll": 5.881251497874184
+      }
+    },
+    "8.0": {
+      "correct": {
+        "candidate_accuracy": 1.0,
+        "answer_nll": 1.2121252109488798,
+        "greedy_exact": 0.0,
+        "eos_rate": 0.0
+      },
+      "wrong": {
+        "candidate_accuracy": 0.0,
+        "answer_nll": 5.197120268193502
+      },
+      "zero": {
+        "candidate_accuracy": 0.15178571428571427,
+        "answer_nll": 5.877437773204985
+      },
+      "random": {
+        "candidate_accuracy": 0.16071428571428573,
+        "answer_nll": 5.890084839529461
+      }
+    },
+    "16.0": {
+      "correct": {
+        "candidate_accuracy": 1.0,
+        "answer_nll": 0.37881612312048674,
+        "greedy_exact": 0.0,
+        "eos_rate": 0.0
+      },
+      "wrong": {
+        "candidate_accuracy": 0.0,
+        "answer_nll": 8.36995066300271
+      },
+      "zero": {
+        "candidate_accuracy": 0.15178571428571427,
+        "answer_nll": 5.877437773204985
+      },
+      "random": {
+        "candidate_accuracy": 0.18253968253968253,
+        "answer_nll": 5.926777723762724
+      }
+    }
+  },
+  "nll_gain_intervals": {
+    "wrong": {
+      "mean": 3.9849950572446224,
+      "bootstrap_95ci": [
+        3.9381618742786704,
+        4.030229558429075
+      ]
+    },
+    "zero": {
+      "mean": 4.665312562256105,
+      "bootstrap_95ci": [
+        4.641315821617368,
+        4.688373364094231
+      ]
+    },
+    "random": {
+      "mean": 4.677959628580582,
+      "bootstrap_95ci": [
+        4.653441888649786,
+        4.701306555479292
+      ]
+    }
+  },
+  "family_correct_accuracy": {
+    "retain": 1.0,
+    "recent_revoke": 1.0,
+    "distant_revoke": 1.0,
+    "reset": 1.0,
+    "exact_duplicate": 1.0,
+    "overwritten_noop": 1.0,
+    "mixed_two_event": 1.0
+  },
+  "content_gate": {
+    "checks": {
+      "correct_candidate_at_least_point_95": true,
+      "correct_greedy_at_least_point_85": false,
+      "wrong_candidate_at_most_point_10": true,
+      "zero_candidate_at_most_point_30": true,
+      "all_nll_gain_ci_lowers_above_zero": true,
+      "every_family_correct_at_least_point_90": true,
+      "scale_sensitivity_within_five_points": true
+    },
+    "passed": false
+  },
+  "labels": {
+    "rows": 336,
+    "mean_seconds": 0.04597203750052445,
+    "p95_seconds": 0.08396251127123833,
+    "mean_seconds_per_action": 0.002820470480197413,
+    "valid_action_counts": {
+      "3": 6,
+      "9": 184,
+      "27": 146
+    },
+    "label_counts": {
+      "[0, [0.0, 1.0, 1.0]]": 24,
+      "[0, [0.5, 0.0, 1.0]]": 19,
+      "[0, [0.0, 0.0, 1.0]]": 39,
+      "[0, [1.0, 0.0, 1.0]]": 32,
+      "[0, [1.0, 1.0, 1.0]]": 19,
+      "[0, [0.5, 1.0, 1.0]]": 13,
+      "[0, [0.0, 0.5, 1.0]]": 24,
+      "[0, [0.0, 0.5, 0.0]]": 8,
+      "[0, [1.0, 1.0, 0.5]]": 1,
+      "[0, [1.0, 0.5, 1.0]]": 5,
+      "[0, [0.5, 0.0, 0.0]]": 4,
+      "[0, [0.0, 0.0, 0.0]]": 12,
+      "[0, [0.0, 0.0, 0.5]]": 18,
+      "[0, [0.0, 1.0, 0.5]]": 11,
+      "[0, [0.0, 0.5, 0.5]]": 5,
+      "[0, [0.0, 1.0, 0.0]]": 10,
+      "[0, [1.0, 0.5, 0.0]]": 5,
+      "[0, [0.5, 1.0, 0.0]]": 3,
+      "[0, [0.5, 0.0, 0.5]]": 3,
+      "[0, [0.5, 0.5, 1.0]]": 10,
+      "[0, [0.5, 0.5, 0.5]]": 2,
+      "[0, [0.5, 0.5, 0.0]]": 3,
+      "[1, [1.0, 1.0, 1.0]]": 48,
+      "[0, [1.0, 0.5, 0.5]]": 2,
+      "[0, [1.0, 1.0, 0.0]]": 3,
+      "[0, [1.0, 0.0, 0.0]]": 8,
+      "[0, [1.0, 0.0, 0.5]]": 3,
+      "[0, [0.5, 1.0, 0.5]]": 2
+    }
+  },
+  "resources": {
+    "two_gpu_critical_path_seconds": 369.52844881638885,
+    "overall_peak_allocated_gib": 7.970424652099609,
+    "overall_peak_reserved_gib": 8.36328125,
+    "estimated_development_seconds": {
+      "16": 739.0568976327777,
+      "32": 1478.1137952655554,
+      "64": 2956.2275905311108
+    },
+    "selected_groups_per_family": null,
+    "resource_gate_passed": false,
+    "shards": [
+      {
+        "protocol": "qwen_causal_ledger_residual_pilot_v1",
+        "shard": 0,
+        "num_shards": 2,
+        "pairs": 56,
+        "labels": 168,
+        "content_rows": 504,
+        "seconds": 369.52844881638885,
+        "labels_sha256": "34b48f88020af7482592c704e89a756eb57bc634111ac50781695ce7ad0a3ac9",
+        "content_sha256": "4ccf46df74b64bbdbdfa003b3f3de00bafef0fb56b5600921a4a6396255ca1f2",
+        "data_manifest_sha256": "9d05a1f2977294b488210eb2307d62980b622292d7eed7807d6c2b0d3d716246",
+        "extraction_peak_allocated_gib": 7.630920886993408,
+        "extraction_peak_reserved_gib": 7.642578125,
+        "label_peak_allocated_gib": 7.970424652099609,
+        "label_peak_reserved_gib": 8.36328125,
+        "overall_peak_allocated_gib": 7.970424652099609,
+        "overall_peak_reserved_gib": 8.36328125,
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "scales": [
+          4.0,
+          8.0,
+          16.0
+        ],
+        "primary_scale": 8.0,
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "development_generated": false,
+        "confirmation_generated": false,
+        "ood_generated": false
+      },
+      {
+        "protocol": "qwen_causal_ledger_residual_pilot_v1",
+        "shard": 1,
+        "num_shards": 2,
+        "pairs": 56,
+        "labels": 168,
+        "content_rows": 504,
+        "seconds": 366.9340409077704,
+        "labels_sha256": "ffe600459caf947d75b6b8566482f837bce8a748f80bf0f87651598dac58299e",
+        "content_sha256": "cd996c74675f759856b025abffaccd6c25a56810f73427875e7a99b7e5a94764",
+        "data_manifest_sha256": "9d05a1f2977294b488210eb2307d62980b622292d7eed7807d6c2b0d3d716246",
+        "extraction_peak_allocated_gib": 7.630920886993408,
+        "extraction_peak_reserved_gib": 7.642578125,
+        "label_peak_allocated_gib": 7.970376968383789,
+        "label_peak_reserved_gib": 8.36328125,
+        "overall_peak_allocated_gib": 7.970376968383789,
+        "overall_peak_reserved_gib": 8.36328125,
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "scales": [
+          4.0,
+          8.0,
+          16.0
+        ],
+        "primary_scale": 8.0,
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "development_generated": false,
+        "confirmation_generated": false,
+        "ood_generated": false
+      }
+    ]
+  },
+  "development_generated": false,
+  "confirmation_generated": false,
+  "ood_generated": false,
+  "next_stage": "stop_causal_ledger_residual_branch",
+  "terminal_status": "completed_qwen_causal_ledger_residual_pilot"
+}

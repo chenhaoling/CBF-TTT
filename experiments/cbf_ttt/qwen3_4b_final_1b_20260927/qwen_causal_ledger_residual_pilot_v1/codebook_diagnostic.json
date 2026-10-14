@@ -1,0 +1,848 @@
+{
+  "protocol": "qwen_causal_ledger_codebook_diagnostic_v1",
+  "source_protocol": "qwen_causal_ledger_residual_pilot_v1",
+  "posthoc_diagnostic": true,
+  "changes_registered_gate": false,
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "rows": 1008,
+  "episodes": 112,
+  "unique_tokens": 17,
+  "unit_row_target_top1_rate": 1.0,
+  "cosine_output_target_top1_rate": 1.0,
+  "geometry": [
+    {
+      "token_id": 57,
+      "text": "Z",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.984375,
+      "top_competitor_id": 1863,
+      "top_competitor_text": " Z",
+      "top_competitor_score": 0.7265625,
+      "competitor_minus_target": -0.2578125,
+      "target_row_norm": 0.9847237467765808,
+      "competitor_row_norm": 0.9662132859230042,
+      "target_competitor_cosine": 0.7526499032974243,
+      "top5": [
+        {
+          "id": 57,
+          "text": "Z",
+          "score": 0.984375
+        },
+        {
+          "id": 1863,
+          "text": " Z",
+          "score": 0.7265625
+        },
+        {
+          "id": 13476,
+          "text": ".Z",
+          "score": 0.47265625
+        },
+        {
+          "id": 35853,
+          "text": "\tZ",
+          "score": 0.466796875
+        },
+        {
+          "id": 12302,
+          "text": "_Z",
+          "score": 0.4609375
+        }
+      ]
+    },
+    {
+      "token_id": 356,
+      "text": " C",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.984375,
+      "top_competitor_id": 34,
+      "top_competitor_text": "C",
+      "top_competitor_score": 0.71484375,
+      "competitor_minus_target": -0.26953125,
+      "target_row_norm": 0.9841156601905823,
+      "competitor_row_norm": 1.060630440711975,
+      "target_competitor_cosine": 0.6724636554718018,
+      "top5": [
+        {
+          "id": 356,
+          "text": " C",
+          "score": 0.984375
+        },
+        {
+          "id": 34,
+          "text": "C",
+          "score": 0.71484375
+        },
+        {
+          "id": 920,
+          "text": "_C",
+          "score": 0.462890625
+        },
+        {
+          "id": 727,
+          "text": ".C",
+          "score": 0.4609375
+        },
+        {
+          "id": 666,
+          "text": "_c",
+          "score": 0.419921875
+        }
+      ]
+    },
+    {
+      "token_id": 358,
+      "text": " I",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.9765625,
+      "top_competitor_id": 40,
+      "top_competitor_text": "I",
+      "top_competitor_score": 0.67578125,
+      "competitor_minus_target": -0.30078125,
+      "target_row_norm": 0.978903591632843,
+      "competitor_row_norm": 1.0579845905303955,
+      "target_competitor_cosine": 0.6397683620452881,
+      "top5": [
+        {
+          "id": 358,
+          "text": " I",
+          "score": 0.9765625
+        },
+        {
+          "id": 40,
+          "text": "I",
+          "score": 0.67578125
+        },
+        {
+          "id": 2447,
+          "text": ".I",
+          "score": 0.455078125
+        },
+        {
+          "id": 8972,
+          "text": "(I",
+          "score": 0.421875
+        },
+        {
+          "id": 7959,
+          "text": "_I",
+          "score": 0.419921875
+        }
+      ]
+    },
+    {
+      "token_id": 362,
+      "text": " A",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.953125,
+      "top_competitor_id": 32,
+      "top_competitor_text": "A",
+      "top_competitor_score": 0.703125,
+      "competitor_minus_target": -0.25,
+      "target_row_norm": 0.956292450428009,
+      "competitor_row_norm": 1.0615025758743286,
+      "target_competitor_cosine": 0.6625815629959106,
+      "top5": [
+        {
+          "id": 362,
+          "text": " A",
+          "score": 0.953125
+        },
+        {
+          "id": 32,
+          "text": "A",
+          "score": 0.703125
+        },
+        {
+          "id": 875,
+          "text": ".A",
+          "score": 0.447265625
+        },
+        {
+          "id": 1566,
+          "text": "_A",
+          "score": 0.447265625
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "score": 0.3984375
+        }
+      ]
+    },
+    {
+      "token_id": 386,
+      "text": " M",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.984375,
+      "top_competitor_id": 44,
+      "top_competitor_text": "M",
+      "top_competitor_score": 0.671875,
+      "competitor_minus_target": -0.3125,
+      "target_row_norm": 0.9872729182243347,
+      "competitor_row_norm": 1.0539159774780273,
+      "target_competitor_cosine": 0.6368552446365356,
+      "top5": [
+        {
+          "id": 386,
+          "text": " M",
+          "score": 0.984375
+        },
+        {
+          "id": 44,
+          "text": "M",
+          "score": 0.671875
+        },
+        {
+          "id": 100351,
+          "text": "\u5218",
+          "score": 0.59375
+        },
+        {
+          "id": 1321,
+          "text": ".M",
+          "score": 0.4609375
+        },
+        {
+          "id": 1245,
+          "text": "_M",
+          "score": 0.419921875
+        }
+      ]
+    },
+    {
+      "token_id": 393,
+      "text": " P",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.9765625,
+      "top_competitor_id": 47,
+      "top_competitor_text": "P",
+      "top_competitor_score": 0.70703125,
+      "competitor_minus_target": -0.26953125,
+      "target_row_norm": 0.9750940203666687,
+      "competitor_row_norm": 1.0432664155960083,
+      "target_competitor_cosine": 0.6766060590744019,
+      "top5": [
+        {
+          "id": 393,
+          "text": " P",
+          "score": 0.9765625
+        },
+        {
+          "id": 47,
+          "text": "P",
+          "score": 0.70703125
+        },
+        {
+          "id": 105027,
+          "text": "\u6f58",
+          "score": 0.482421875
+        },
+        {
+          "id": 1088,
+          "text": "_P",
+          "score": 0.455078125
+        },
+        {
+          "id": 1069,
+          "text": ".P",
+          "score": 0.443359375
+        }
+      ]
+    },
+    {
+      "token_id": 422,
+      "text": " D",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.97265625,
+      "top_competitor_id": 35,
+      "top_competitor_text": "D",
+      "top_competitor_score": 0.68359375,
+      "competitor_minus_target": -0.2890625,
+      "target_row_norm": 0.9744630455970764,
+      "competitor_row_norm": 1.0443406105041504,
+      "target_competitor_cosine": 0.6561158895492554,
+      "top5": [
+        {
+          "id": 422,
+          "text": " D",
+          "score": 0.97265625
+        },
+        {
+          "id": 35,
+          "text": "D",
+          "score": 0.68359375
+        },
+        {
+          "id": 101058,
+          "text": "\u6768",
+          "score": 0.54296875
+        },
+        {
+          "id": 1557,
+          "text": "_D",
+          "score": 0.47265625
+        },
+        {
+          "id": 909,
+          "text": ".D",
+          "score": 0.4453125
+        }
+      ]
+    },
+    {
+      "token_id": 425,
+      "text": " B",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 1.0,
+      "top_competitor_id": 33,
+      "top_competitor_text": "B",
+      "top_competitor_score": 0.68359375,
+      "competitor_minus_target": -0.31640625,
+      "target_row_norm": 1.0003968477249146,
+      "competitor_row_norm": 1.047011137008667,
+      "target_competitor_cosine": 0.6531493067741394,
+      "top5": [
+        {
+          "id": 425,
+          "text": " B",
+          "score": 1.0
+        },
+        {
+          "id": 33,
+          "text": "B",
+          "score": 0.68359375
+        },
+        {
+          "id": 99445,
+          "text": "\u738b",
+          "score": 0.61328125
+        },
+        {
+          "id": 1668,
+          "text": "_B",
+          "score": 0.478515625
+        },
+        {
+          "id": 1785,
+          "text": ".B",
+          "score": 0.455078125
+        }
+      ]
+    },
+    {
+      "token_id": 434,
+      "text": " F",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.96875,
+      "top_competitor_id": 37,
+      "top_competitor_text": "F",
+      "top_competitor_score": 0.66796875,
+      "competitor_minus_target": -0.30078125,
+      "target_row_norm": 0.9688801765441895,
+      "competitor_row_norm": 1.041337251663208,
+      "target_competitor_cosine": 0.6403427720069885,
+      "top5": [
+        {
+          "id": 434,
+          "text": " F",
+          "score": 0.96875
+        },
+        {
+          "id": 37,
+          "text": "F",
+          "score": 0.66796875
+        },
+        {
+          "id": 1400,
+          "text": "_F",
+          "score": 0.48828125
+        },
+        {
+          "id": 104450,
+          "text": "\u9b4f",
+          "score": 0.478515625
+        },
+        {
+          "id": 991,
+          "text": ".F",
+          "score": 0.45703125
+        }
+      ]
+    },
+    {
+      "token_id": 444,
+      "text": " L",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.9765625,
+      "top_competitor_id": 43,
+      "top_competitor_text": "L",
+      "top_competitor_score": 0.7109375,
+      "competitor_minus_target": -0.265625,
+      "target_row_norm": 0.9750416278839111,
+      "competitor_row_norm": 1.0584036111831665,
+      "target_competitor_cosine": 0.6729761958122253,
+      "top5": [
+        {
+          "id": 444,
+          "text": " L",
+          "score": 0.9765625
+        },
+        {
+          "id": 43,
+          "text": "L",
+          "score": 0.7109375
+        },
+        {
+          "id": 103948,
+          "text": "\u5434",
+          "score": 0.62890625
+        },
+        {
+          "id": 2351,
+          "text": "_L",
+          "score": 0.498046875
+        },
+        {
+          "id": 1214,
+          "text": ".L",
+          "score": 0.46484375
+        }
+      ]
+    },
+    {
+      "token_id": 451,
+      "text": " N",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.98828125,
+      "top_competitor_id": 45,
+      "top_competitor_text": "N",
+      "top_competitor_score": 0.734375,
+      "competitor_minus_target": -0.25390625,
+      "target_row_norm": 0.987972617149353,
+      "competitor_row_norm": 1.0321320295333862,
+      "target_competitor_cosine": 0.7094697952270508,
+      "top5": [
+        {
+          "id": 451,
+          "text": " N",
+          "score": 0.98828125
+        },
+        {
+          "id": 45,
+          "text": "N",
+          "score": 0.734375
+        },
+        {
+          "id": 1604,
+          "text": "_N",
+          "score": 0.51171875
+        },
+        {
+          "id": 2067,
+          "text": ".N",
+          "score": 0.478515625
+        },
+        {
+          "id": 18317,
+          "text": "\tN",
+          "score": 0.451171875
+        }
+      ]
+    },
+    {
+      "token_id": 468,
+      "text": " E",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 1.0078125,
+      "top_competitor_id": 36,
+      "top_competitor_text": "E",
+      "top_competitor_score": 0.72265625,
+      "competitor_minus_target": -0.28515625,
+      "target_row_norm": 1.006173849105835,
+      "competitor_row_norm": 1.0927940607070923,
+      "target_competitor_cosine": 0.6619137525558472,
+      "top5": [
+        {
+          "id": 468,
+          "text": " E",
+          "score": 1.0078125
+        },
+        {
+          "id": 36,
+          "text": "E",
+          "score": 0.72265625
+        },
+        {
+          "id": 5142,
+          "text": ".E",
+          "score": 0.49609375
+        },
+        {
+          "id": 2089,
+          "text": "_E",
+          "score": 0.494140625
+        },
+        {
+          "id": 22784,
+          "text": "\tE",
+          "score": 0.46484375
+        }
+      ]
+    },
+    {
+      "token_id": 472,
+      "text": " H",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.97265625,
+      "top_competitor_id": 39,
+      "top_competitor_text": "H",
+      "top_competitor_score": 0.68359375,
+      "competitor_minus_target": -0.2890625,
+      "target_row_norm": 0.9725959300994873,
+      "competitor_row_norm": 1.0304036140441895,
+      "target_competitor_cosine": 0.6637258529663086,
+      "top5": [
+        {
+          "id": 472,
+          "text": " H",
+          "score": 0.97265625
+        },
+        {
+          "id": 39,
+          "text": "H",
+          "score": 0.68359375
+        },
+        {
+          "id": 103959,
+          "text": "\u8d75",
+          "score": 0.62109375
+        },
+        {
+          "id": 2039,
+          "text": "_H",
+          "score": 0.474609375
+        },
+        {
+          "id": 116381,
+          "text": "\u8d99",
+          "score": 0.466796875
+        }
+      ]
+    },
+    {
+      "token_id": 479,
+      "text": " G",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.984375,
+      "top_competitor_id": 38,
+      "top_competitor_text": "G",
+      "top_competitor_score": 0.73046875,
+      "competitor_minus_target": -0.25390625,
+      "target_row_norm": 0.9845041036605835,
+      "competitor_row_norm": 1.0087391138076782,
+      "target_competitor_cosine": 0.7231457233428955,
+      "top5": [
+        {
+          "id": 479,
+          "text": " G",
+          "score": 0.984375
+        },
+        {
+          "id": 38,
+          "text": "G",
+          "score": 0.73046875
+        },
+        {
+          "id": 102263,
+          "text": "\u66f9",
+          "score": 0.6171875
+        },
+        {
+          "id": 2646,
+          "text": "_G",
+          "score": 0.4765625
+        },
+        {
+          "id": 1224,
+          "text": ".G",
+          "score": 0.4765625
+        }
+      ]
+    },
+    {
+      "token_id": 506,
+      "text": " O",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.9921875,
+      "top_competitor_id": 46,
+      "top_competitor_text": "O",
+      "top_competitor_score": 0.6953125,
+      "competitor_minus_target": -0.296875,
+      "target_row_norm": 0.9928816556930542,
+      "competitor_row_norm": 1.0908135175704956,
+      "target_competitor_cosine": 0.6368074417114258,
+      "top5": [
+        {
+          "id": 506,
+          "text": " O",
+          "score": 0.9921875
+        },
+        {
+          "id": 46,
+          "text": "O",
+          "score": 0.6953125
+        },
+        {
+          "id": 100348,
+          "text": "\u9648",
+          "score": 0.6484375
+        },
+        {
+          "id": 48049,
+          "text": "\tO",
+          "score": 0.515625
+        },
+        {
+          "id": 8382,
+          "text": ".O",
+          "score": 0.5078125
+        }
+      ]
+    },
+    {
+      "token_id": 619,
+      "text": " J",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.9453125,
+      "top_competitor_id": 41,
+      "top_competitor_text": "J",
+      "top_competitor_score": 0.6953125,
+      "competitor_minus_target": -0.25,
+      "target_row_norm": 0.94598788022995,
+      "competitor_row_norm": 0.9672181010246277,
+      "target_competitor_cosine": 0.7195662260055542,
+      "top5": [
+        {
+          "id": 619,
+          "text": " J",
+          "score": 0.9453125
+        },
+        {
+          "id": 41,
+          "text": "J",
+          "score": 0.6953125
+        },
+        {
+          "id": 104780,
+          "text": "\u8d3e",
+          "score": 0.57421875
+        },
+        {
+          "id": 3503,
+          "text": ".J",
+          "score": 0.490234375
+        },
+        {
+          "id": 10598,
+          "text": "_J",
+          "score": 0.474609375
+        }
+      ]
+    },
+    {
+      "token_id": 730,
+      "text": " K",
+      "full_vocab_rank": 1,
+      "cosine_output_rank": 1,
+      "target_score": 0.96484375,
+      "top_competitor_id": 42,
+      "top_competitor_text": "K",
+      "top_competitor_score": 0.7109375,
+      "competitor_minus_target": -0.25390625,
+      "target_row_norm": 0.9646975994110107,
+      "competitor_row_norm": 0.9837607145309448,
+      "target_competitor_cosine": 0.720909595489502,
+      "top5": [
+        {
+          "id": 730,
+          "text": " K",
+          "score": 0.96484375
+        },
+        {
+          "id": 42,
+          "text": "K",
+          "score": 0.7109375
+        },
+        {
+          "id": 100339,
+          "text": "\u674e",
+          "score": 0.59765625
+        },
+        {
+          "id": 10102,
+          "text": "_K",
+          "score": 0.51171875
+        },
+        {
+          "id": 11352,
+          "text": ".K",
+          "score": 0.5078125
+        }
+      ]
+    }
+  ],
+  "scale16_rollout": {
+    "position_accuracy": {
+      "0": 1.0,
+      "1": 0.2708333333333333,
+      "2": 0.9623015873015873,
+      "3": 0.9920634920634921,
+      "4": 1.0
+    },
+    "first_error_position": {
+      "1": 735,
+      "none": 273
+    },
+    "confusions": [
+      {
+        "target_id": 479,
+        "target_text": " G",
+        "generated_id": 38,
+        "generated_text": "G",
+        "count": 62
+      },
+      {
+        "target_id": 444,
+        "target_text": " L",
+        "generated_id": 43,
+        "generated_text": "L",
+        "count": 58
+      },
+      {
+        "target_id": 356,
+        "target_text": " C",
+        "generated_id": 34,
+        "generated_text": "C",
+        "count": 66
+      },
+      {
+        "target_id": 358,
+        "target_text": " I",
+        "generated_id": 40,
+        "generated_text": "I",
+        "count": 42
+      },
+      {
+        "target_id": 619,
+        "target_text": " J",
+        "generated_id": 41,
+        "generated_text": "J",
+        "count": 77
+      },
+      {
+        "target_id": 730,
+        "target_text": " K",
+        "generated_id": 42,
+        "generated_text": "K",
+        "count": 70
+      },
+      {
+        "target_id": 422,
+        "target_text": " D",
+        "generated_id": 35,
+        "generated_text": "D",
+        "count": 59
+      },
+      {
+        "target_id": 393,
+        "target_text": " P",
+        "generated_id": 47,
+        "generated_text": "P",
+        "count": 143
+      },
+      {
+        "target_id": 451,
+        "target_text": " N",
+        "generated_id": 45,
+        "generated_text": "N",
+        "count": 43
+      },
+      {
+        "target_id": 425,
+        "target_text": " B",
+        "generated_id": 33,
+        "generated_text": "B",
+        "count": 67
+      },
+      {
+        "target_id": 386,
+        "target_text": " M",
+        "generated_id": 44,
+        "generated_text": "M",
+        "count": 62
+      },
+      {
+        "target_id": 472,
+        "target_text": " H",
+        "generated_id": 39,
+        "generated_text": "H",
+        "count": 16
+      },
+      {
+        "target_id": 434,
+        "target_text": " F",
+        "generated_id": 37,
+        "generated_text": "F",
+        "count": 5
+      },
+      {
+        "target_id": 362,
+        "target_text": " A",
+        "generated_id": 32,
+        "generated_text": "A",
+        "count": 5
+      },
+      {
+        "target_id": 468,
+        "target_text": " E",
+        "generated_id": 36,
+        "generated_text": "E",
+        "count": 6
+      }
+    ]
+  },
+  "hashes": {
+    "data_manifest": "9d05a1f2977294b488210eb2307d62980b622292d7eed7807d6c2b0d3d716246",
+    "content_shard0.jsonl": "4ccf46df74b64bbdbdfa003b3f3de00bafef0fb56b5600921a4a6396255ca1f2",
+    "content_shard1.jsonl": "cd996c74675f759856b025abffaccd6c25a56810f73427875e7a99b7e5a94764"
+  },
+  "pilot_seed": 202610159,
+  "development_generated": false,
+  "confirmation_generated": false,
+  "ood_generated": false
+}
