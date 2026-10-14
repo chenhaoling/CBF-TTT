@@ -2375,3 +2375,33 @@ identities independently. Added
 ordering, the registered oracle tie-break, outer-fold fixed selection and
 deterministic subject-cluster bootstrap. External benchmarks and the 272-row
 formal set remain locked until this resource pilot completes and passes.
+
+The V17 resource pilot completed on two RTX 5090 GPUs with runner exit code 0
+and passed all ten independent audit checks. It scored 1,360 unique memory
+states and 5,440 query labels. The two shards took 646.86 and 631.41 seconds;
+mean/median/p95 query latency was 0.2160/0.2155/0.3401 seconds. Peak allocated
+and reserved memory was 8.91/9.46 GiB, and the registered two-GPU formal
+projection was 1.22 hours. All resource-gate checks passed. The frozen pilot's
+descriptive oracle and outer-fold fixed comparator both achieved 100% primary
+candidate accuracy, so the accuracy headroom estimate was 0.0 points (subject
+cluster 95% interval `[0.0, 0.0]`). This is a ceiling-effect warning, not a
+pilot efficacy stop, because the preregistered pilot releases formal scoring
+solely on resources and integrity.
+
+During the live pilot, row logs showed that episode history lengths differ.
+The first independent auditor version incorrectly expected exactly 680 unique
+states in each shard even though only the total 1,360 was registered. The
+scorer was unaffected. The auditor was corrected before aggregation to derive
+each shard's exact work from `pilot_states.jsonl`; a regression test covers
+unequal shard workloads. The corrected audit passed.
+
+Added `tasks/evaluate_mquake_qwen_headroom_v17_formal.py`, its independent
+auditor, two-GPU runner and focused tests for the frozen 272-row formal stage.
+Formal release requires the passed pilot terminal marker, runner code, summary
+hash and independent audit plus the frozen formal-state and sample hashes. It
+will score all 8,160 single deletions and fixed arms, select the exact causal
+oracle by the registered tie-break, select fixed comparators using only other
+outer folds, and apply the preregistered subject-macro gain >=5 points with
+subject-cluster 95% interval lower bound >0. A failed formal gate records
+`stop_controller_training_no_causal_headroom`; it cannot train another
+controller or open external benchmarks.
