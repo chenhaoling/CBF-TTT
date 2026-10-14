@@ -2514,3 +2514,9 @@ auditor, runners and focused tests.  Formal code keeps native TTT adapters
 disabled for the causal-headroom study, records candidate NLL plus independent
 greedy generation and does not load external benchmarks.  Controller training
 remains locked until the formal headroom gate passes.
+
+The first formal-construction runner attempt exited before writing any corpus
+row because the shell script created `result/` before invoking the builder,
+while the builder correctly requires a nonexistent output directory. The
+failed root is preserved. Removed the premature `mkdir`; recovery uses a new
+`_retry1` root with the unchanged seed and registered protocol.

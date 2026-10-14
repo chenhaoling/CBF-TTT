@@ -15,7 +15,6 @@ date --iso-8601=seconds > "$ROOT/started_at.txt"
 git rev-parse HEAD > "$ROOT/code_commit.txt"
 export PYTHONDONTWRITEBYTECODE=1
 "$PYTHON" -m unittest tests.test_build_controlled_interference_v18_formal
-mkdir "$ROOT/result"
 "$PYTHON" -m tasks.build_controlled_interference_v18_formal \
   --output "$ROOT/result" --pilot-root "$PILOT_ROOT" --pilot-data-root "$PILOT_DATA" \
   > "$ROOT/build.log" 2>&1
