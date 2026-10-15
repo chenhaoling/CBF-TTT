@@ -3987,3 +3987,13 @@ recovery canonicalizes case/whitespace-equivalent source targets to their one
 registered session candidate surface before tokenization, records the number
 of such mappings, and adds a focused regression test. Policies, facts, scale,
 queries, metrics, thresholds and release gates are unchanged.
+
+The recovery runner completed all 5,144 calibration rows and stopped
+development because the frozen scientific gate did not pass. Its first
+independent audit reproduced rows, scores, aggregates and gates but failed the
+state-transition check when a retain error left two versions with the same
+public chain ID. The trace records a deleted chain ID rather than its private
+version, so the auditor could not know which duplicate record to carry forward.
+The audit repair validates the public ID transition, every full snapshot
+record and the newly appended causal record, then carries the recorded full
+snapshot into the next step. It does not alter or rerun model scores.

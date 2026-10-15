@@ -139,7 +139,9 @@ def expected_rows(session):
 
 def audit_state(state, session):
     chains = {chain["id"]: chain for chain in session["chains"]}
-    memories = {policy: [] for policy in STATE_POLICIES}; snapshots = {}
+    memories = {policy: [] for policy in STATE_POLICIES}
+    recorded_snapshots = {row["phase"]: row for row in state["snapshots"]}
+    seen_phases = set()
     for step, event in enumerate(session["events"]):
         chain = chains[event["chain_id"]]; version = chain["versions"][event["version"]]
         for policy in STATE_POLICIES:
@@ -162,14 +164,33 @@ def audit_state(state, session):
                 return False
         phase = checkpoint_label(step, session)
         if phase is not None:
-            snapshots[phase] = {policy: list(memory) for policy, memory in memories.items()}
-    if len(state["snapshots"]) != len(snapshots):
-        return False
-    for snapshot in state["snapshots"]:
-        phase = snapshot["phase"]
-        if phase not in snapshots or snapshot["states"] != snapshots[phase]:
-            return False
-    return True
+            if phase not in recorded_snapshots:
+                return False
+            snapshot = recorded_snapshots[phase]; seen_phases.add(phase)
+            for policy in STATE_POLICIES:
+                recorded = snapshot["states"][policy]
+                # A retain error can leave two versions with the same chain ID.
+                # Decisions intentionally record only public chain IDs, so the
+                # exact deleted version is ambiguous. Validate the ID-level
+                # transition, every full record and the newly appended record,
+                # then carry the recorded full state into the next step.
+                if [row["chain_id"] for row in recorded] != decision_after(
+                        state["decisions"][policy][step]):
+                    return False
+                valid = all(
+                    any(row == record_for(chain, version)
+                        for chain in session["chains"]
+                        for version in chain["versions"])
+                    for row in recorded
+                )
+                if not valid or not recorded or recorded[-1] != record_for(chain, version):
+                    return False
+                memories[policy] = list(recorded)
+    return seen_phases == set(recorded_snapshots)
+
+
+def decision_after(decision):
+    return decision["after"]
 
 
 def audit_row(row, episode, snapshot, tokenizer):
