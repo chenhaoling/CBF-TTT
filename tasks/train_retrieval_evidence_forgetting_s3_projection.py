@@ -297,6 +297,7 @@ def train(args) -> None:
     torch.cuda.reset_peak_memory_stats()
     started = time.perf_counter()
     summaries, best_summary, best_state = [], None, None
+    best_by_pretraining = {False: (None, None), True: (None, None)}
     for use_pubmed in (False, True):
         for dimension in DIMENSIONS:
             for temperature in TEMPERATURES:
@@ -366,6 +367,13 @@ def train(args) -> None:
                                 best_summary = copy.deepcopy(summary)
                                 best_state = {name: value.detach().cpu().clone()
                                               for name, value in head.state_dict().items()}
+                            arm_summary, _ = best_by_pretraining[use_pubmed]
+                            if arm_summary is None or selection_key(summary) > selection_key(arm_summary):
+                                best_by_pretraining[use_pubmed] = (
+                                    copy.deepcopy(summary),
+                                    {name: value.detach().cpu().clone()
+                                     for name, value in head.state_dict().items()},
+                                )
                             print(json.dumps({
                                 "completed_configs": len(summaries),
                                 "config": summary["config"],
@@ -384,6 +392,13 @@ def train(args) -> None:
         "config": best_summary["config"],
         "input_dimension": int(input_dimension),
         "state_dict": best_state,
+        "pretraining_ablation": {
+            str(key).lower(): {
+                "config": summary["config"],
+                "state_dict": state,
+            }
+            for key, (summary, state) in best_by_pretraining.items()
+        },
     }, weights)
 
     # Resource and retrieval pilot: 872 independent calibration queries plus
@@ -405,6 +420,10 @@ def train(args) -> None:
     result = {
         "protocol": PROTOCOL,
         "selected": best_summary,
+        "best_by_pubmed_pretraining": {
+            str(key).lower(): summary
+            for key, (summary, _) in best_by_pretraining.items()
+        },
         "summaries": summaries,
         "grid_size": len(summaries),
         "selection_order": [

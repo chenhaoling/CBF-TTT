@@ -40,6 +40,14 @@ class RetrievalEvidenceForgettingS3ProjectionTests(unittest.TestCase):
         self.assertGreater(selection_key(better), selection_key(base))
         self.assertGreater(selection_key(smaller), selection_key(base))
 
+    def test_selection_prefers_no_pubmed_only_after_primary_ties(self):
+        common = {"retrieval": {"recall_at_16": .8}, "direct_pair_roc_auc": .7}
+        without = {**common, "config": {"dimension": 256, "epoch": 10,
+                   "pubmed_pretraining": False, "temperature": .05, "margin": .1}}
+        with_pretraining = {**common, "config": {"dimension": 256, "epoch": 10,
+                            "pubmed_pretraining": True, "temperature": .05, "margin": .1}}
+        self.assertGreater(selection_key(without), selection_key(with_pretraining))
+
 
 if __name__ == "__main__":
     unittest.main()
