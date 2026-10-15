@@ -46,6 +46,7 @@ class TestDiagnoseUtilityRecordControllerV4Residual(unittest.TestCase):
         self.assertEqual(result["pair_or_higher_only_gain"], 1)
         self.assertEqual(result["additional_correct_from_best_safe"], 1)
         self.assertEqual(result["safe_residual_headroom"], .2)
+        self.assertEqual(result["safe_single_residual_headroom"], 0.0)
 
     def test_rule_argument_changes_candidate_support(self):
         actions = dict(

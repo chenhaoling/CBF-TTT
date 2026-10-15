@@ -40,6 +40,7 @@ def analyze(labels: list[dict], feature_rows: list[dict], rule: str = RULE) -> d
     total_queries = 0
     physics_correct = 0
     best_safe_correct = 0
+    best_safe_single_correct = 0
     for row in labels:
         identity = (row["episode_id"], row["boundary_index"])
         feature = features[identity]
@@ -57,6 +58,7 @@ def analyze(labels: list[dict], feature_rows: list[dict], rule: str = RULE) -> d
             target["boundaries"] += 1
         if baseline_name == "global_clear":
             best_safe_correct += baseline["correct"]
+            best_safe_single_correct += baseline["correct"]
             for target in category_rows:
                 target["global_clear_boundaries"] += 1
             continue
@@ -74,6 +76,7 @@ def analyze(labels: list[dict], feature_rows: list[dict], rule: str = RULE) -> d
             target["boundaries_with_eligible"] += int(bool(optional))
         single_positive = False
         best = baseline
+        best_single = baseline
         best_extra = 0
         for size in range(1, len(optional) + 1):
             for subset in itertools.combinations(optional, size):
@@ -105,12 +108,20 @@ def analyze(labels: list[dict], feature_rows: list[dict], rule: str = RULE) -> d
                             safe and correct_gain > 0
                         )
                     single_positive |= safe and correct_gain > 0
+                    if safe and (
+                        candidate["correct"], -candidate["total_answer_nll"]
+                    ) > (
+                        best_single["correct"],
+                        -best_single["total_answer_nll"],
+                    ):
+                        best_single = candidate
                 if safe and (
                     candidate["correct"], -candidate["total_answer_nll"]
                 ) > (best["correct"], -best["total_answer_nll"]):
                     best = candidate
                     best_extra = size
         best_safe_correct += best["correct"]
+        best_safe_single_correct += best_single["correct"]
         gain = best["correct"] - baseline["correct"]
         for target in category_rows:
             target["boundaries_with_safe_accuracy_gain"] += int(gain > 0)
@@ -145,6 +156,10 @@ def analyze(labels: list[dict], feature_rows: list[dict], rule: str = RULE) -> d
         "best_safe_residual_accuracy": best_safe_correct / total_queries,
         "safe_residual_headroom": (
             best_safe_correct - physics_correct
+        ) / total_queries,
+        "best_safe_single_accuracy": best_safe_single_correct / total_queries,
+        "safe_single_residual_headroom": (
+            best_safe_single_correct - physics_correct
         ) / total_queries,
         "per_mechanism": {
             key: finalize(value) for key, value in sorted(per_mechanism.items())
