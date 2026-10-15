@@ -4626,3 +4626,15 @@ precision, independently measures relation-macro accuracy, computes retrieval
 recall@4/8/16 and freezes the smallest k reaching 95%. Six selector/embedding
 tests pass. Four calibration scoring arms started with the same cache-shared
 two-candidate kernel; PubMed model outputs and SemEval test remain unopened.
+
+All calibration arms completed in about 54--61 seconds per GPU shard. The
+frozen selector chose the 0.50-epoch adapter at relation-score threshold
+`0.46428704261779785`. At 99.07% scenario deletion precision it retains only
+2.98% recall, versus 0.43% zero-shot, 0.037% trigram and 0.019% frozen-Qwen
+cosine. Frozen retrieval reaches 65.36/77.75/87.82% recall@4/8/16, so k=16 is
+selected but misses the 95% target. A calibration-only diagnostic shows the
+0.50-epoch score has ROC-AUC 78.77% and 70.34% zero-threshold accuracy: S2
+learns cross-relation signal, but its high-precision tail is not separated.
+Added an independent selection auditor that reconstructs every arm, threshold,
+scenario action, retrieval metric, selected checkpoint and k before PubMed
+model evaluation is allowed.
