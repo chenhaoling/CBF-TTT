@@ -5731,3 +5731,21 @@ features.  The final utility/risk controller and V6 fact-key safety projection
 remain unchanged.  Release additionally requires at least a 0.5-point LAMA
 gain over V7 and a 0.03 LAMA benefit-AP improvement, while preserving the
 dual-domain effect, closure and zero-collateral gates.
+
+Implemented the V8 frozen-representation extractor in
+`tasks/extract_qwen_utility_record_controller_v8_relation_posterior_features.py`.
+It verifies the four V7 data/feature audits, renders and deduplicates train/dev
+relation-slot texts, extracts FP16 frozen-Qwen vectors with native TTT disabled,
+excludes ambiguous train-only text labels, fits the three registered linear
+relation heads, and appends the eight registered ensemble compatibility
+features without exposing relation IDs at inference.  It saves ordered raw
+embeddings, head states, two-shard augmented feature files, hashes, token
+lengths, time and GPU peaks.  Added focused tests for ambiguity exclusion,
+feature dimension and posterior rank/margin construction.
+
+Added an independent V8 feature auditor that reloads the four upstream
+domains, embedding and head artifacts; verifies ordered normalized vectors,
+training-support reconstruction and artifact hashes; recomputes every appended
+feature from the saved states; and checks exact base-feature preservation,
+registered counts, resources and held-out seals.  Added a non-overwriting GPU
+runner for extraction followed by CPU reconstruction audit.
