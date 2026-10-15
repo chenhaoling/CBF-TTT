@@ -5016,3 +5016,15 @@ metadata outside numeric tensors. The auditor independently reconstructs all
 teachers, risk labels and deterministic feature components, verifies context
 pooling, model/input hashes, class support, one-to-one boundary coverage and
 held-out seals before controller training.
+
+Added `tasks/train_qwen_utility_record_controller_v1.py`, focused tests, a
+non-overwriting runner and
+`scripts/audit_qwen_utility_record_controller_v1_training.py`. Training uses
+the frozen 128/64 shared MLP, utility cross entropy plus collateral-risk BCE,
+inverse class weights, clipped utility-margin weights, AdamW and checkpoints at
+25/50/100 epochs. Three registered seeds rotate relation-disjoint validation
+folds; a checkpoint is selectable only when it produces zero unsafe validation
+deletions, after which that seed is retrained on all 17 training relations.
+The independent auditor reconstructs fold and checkpoint selection, loads each
+checkpoint strictly, verifies tensor finiteness, feature hashes, fixed
+hyperparameters and held-out seals before development construction.
