@@ -5134,3 +5134,34 @@ deletions, after which that seed is retrained on all 17 training relations.
 The independent auditor reconstructs fold and checkpoint selection, loads each
 checkpoint strictly, verifies tensor finiteness, feature hashes, fixed
 hyperparameters and held-out seals before development construction.
+
+Added the frozen V1 development diagnostic evaluator, focused tests, a
+non-overwriting runner and
+`scripts/audit_qwen_utility_record_controller_v1_development.py`.  It hashes
+the 64 source groups into disjoint 32/32 calibration/evaluation halves, selects
+the strongest zero-collateral deterministic comparator, evaluates the complete
+registered three-seed controller grid, reports 20,000-draw group-bootstrap
+intervals and independently reruns the exact result while checking every
+upstream artifact hash and held-out seal.
+
+The diagnostic completed remotely with exit code zero and passed all nine
+independent audit checks.  Explicit lifecycle physics was the strongest safe
+deterministic baseline at 81.823% evaluation accuracy.  The three frozen
+controllers reached 84.635%, 85.052% and 84.948%, gains of 2.812, 3.229 and
+3.125 points; their group-bootstrap 95% lower bounds were 1.094, 1.302 and
+1.250 points.  All added-error counts were zero and oracle-gap closure was
+61.4--70.5%.  The gain concentrated in semantic overwrite and stale repetition,
+while the registered V1 release remained false solely because the earlier
+full-development oracle-headroom result was below ten points.  Confirmation and
+external benchmarks remained sealed.  Full result and audit files are archived
+under `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/utility_semantic_record_gate_v1/development_diagnostic`.
+
+Added `QWEN_UTILITY_RECORD_CONTROLLER_V2_CROSS_SOURCE_PLAN.md` before acquiring
+or parsing its new source.  It freezes the successful hybrid controller and
+all three selected V1 deployment settings, registers official TempLAMA as an
+independent temporal-fact replication, preserves the failed V1 gate, defines a
+small ternary resource pilot followed by binary 256-group validation/test
+stages, and requires a cross-source pass before opening the original sealed
+LAMA/ParaRel confirmation.  It explicitly limits any positive claim to the
+audited addressable Qwen residual memory because the original dense
+`ttt_conv`/`ttt_proj` writer previously failed content binding.

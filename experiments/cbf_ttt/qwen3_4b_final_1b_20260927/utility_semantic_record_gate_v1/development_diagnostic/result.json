@@ -1,0 +1,2754 @@
+{
+  "baselines_calibration": {
+    "exact_string_delete": {
+      "accuracy": 0.7078125,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.0,
+      "correct": 1359,
+      "deletion_fraction": 0.013888888888888888,
+      "mean_answer_nll": 3.300797740938151,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 1.0,
+        "explicit_reset_revoke": 0.3619047619047619,
+        "mixed_lifecycle": 0.5,
+        "same_subject_different_relation": 0.9,
+        "semantic_duplicate": 0.98,
+        "semantic_overwrite": 0.7071428571428572,
+        "stale_repetition": 0.8333333333333334
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8020833333333334
+    },
+    "exact_subject_conflict": {
+      "accuracy": 0.7744791666666667,
+      "added_unrelated_errors": 12,
+      "binary_teacher_action_agreement": 0.14583333333333334,
+      "correct": 1487,
+      "deletion_fraction": 0.4375,
+      "mean_answer_nll": 2.774116140687435,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 1.0,
+        "explicit_reset_revoke": 0.4857142857142857,
+        "mixed_lifecycle": 0.6,
+        "same_subject_different_relation": 0.85,
+        "semantic_duplicate": 0.98,
+        "semantic_overwrite": 0.8452380952380952,
+        "stale_repetition": 0.8833333333333333
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.7916666666666666
+    },
+    "explicit_lifecycle_physics": {
+      "accuracy": 0.7692708333333333,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.14583333333333334,
+      "correct": 1477,
+      "deletion_fraction": 0.22569444444444445,
+      "mean_answer_nll": 2.500305039616175,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 1.0,
+        "explicit_reset_revoke": 0.580952380952381,
+        "mixed_lifecycle": 0.6083333333333333,
+        "same_subject_different_relation": 0.9,
+        "semantic_duplicate": 0.98,
+        "semantic_overwrite": 0.7071428571428572,
+        "stale_repetition": 0.8333333333333334
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8489583333333334
+    },
+    "frozen_cosine_delete_0.98": {
+      "accuracy": 0.7322916666666667,
+      "added_unrelated_errors": 68,
+      "binary_teacher_action_agreement": 0.3333333333333333,
+      "correct": 1406,
+      "deletion_fraction": 0.84375,
+      "mean_answer_nll": 3.0893741787841082,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.8944444444444445,
+        "explicit_reset_revoke": 0.4714285714285714,
+        "mixed_lifecycle": 0.5916666666666667,
+        "same_subject_different_relation": 0.8083333333333333,
+        "semantic_duplicate": 0.97,
+        "semantic_overwrite": 0.75,
+        "stale_repetition": 0.875
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.75
+    },
+    "frozen_cosine_delete_0.99": {
+      "accuracy": 0.7359375,
+      "added_unrelated_errors": 23,
+      "binary_teacher_action_agreement": 0.2552083333333333,
+      "correct": 1413,
+      "deletion_fraction": 0.5347222222222222,
+      "mean_answer_nll": 3.1097780868052647,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9666666666666667,
+        "explicit_reset_revoke": 0.4380952380952381,
+        "mixed_lifecycle": 0.5666666666666667,
+        "same_subject_different_relation": 0.8666666666666667,
+        "semantic_duplicate": 0.98,
+        "semantic_overwrite": 0.75,
+        "stale_repetition": 0.85
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.7838541666666666
+    },
+    "frozen_cosine_delete_0.995": {
+      "accuracy": 0.73125,
+      "added_unrelated_errors": 6,
+      "binary_teacher_action_agreement": 0.09375,
+      "correct": 1404,
+      "deletion_fraction": 0.20833333333333334,
+      "mean_answer_nll": 3.1316838573553922,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9666666666666667,
+        "explicit_reset_revoke": 0.4,
+        "mixed_lifecycle": 0.5583333333333333,
+        "same_subject_different_relation": 0.9083333333333333,
+        "semantic_duplicate": 0.98,
+        "semantic_overwrite": 0.7523809523809524,
+        "stale_repetition": 0.8333333333333334
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.7986111111111112
+    },
+    "global_clear": {
+      "accuracy": 0.6776041666666667,
+      "added_unrelated_errors": 266,
+      "binary_teacher_action_agreement": 0.22916666666666666,
+      "correct": 1301,
+      "deletion_fraction": 1.0,
+      "mean_answer_nll": 3.0636138131687707,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.7833333333333333,
+        "explicit_reset_revoke": 0.569047619047619,
+        "mixed_lifecycle": 0.6291666666666667,
+        "same_subject_different_relation": 0.7,
+        "semantic_duplicate": 0.83,
+        "semantic_overwrite": 0.6238095238095238,
+        "stale_repetition": 0.7583333333333333
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.6302083333333334
+    },
+    "last_1": {
+      "accuracy": 0.7098958333333333,
+      "added_unrelated_errors": 77,
+      "binary_teacher_action_agreement": 0.0,
+      "correct": 1363,
+      "deletion_fraction": 0.6666666666666666,
+      "mean_answer_nll": 3.2834281148081343,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.8944444444444445,
+        "explicit_reset_revoke": 0.44285714285714284,
+        "mixed_lifecycle": 0.55,
+        "same_subject_different_relation": 0.8166666666666667,
+        "semantic_duplicate": 0.95,
+        "semantic_overwrite": 0.7238095238095238,
+        "stale_repetition": 0.825
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.7421875
+    },
+    "last_2": {
+      "accuracy": 0.7088541666666667,
+      "added_unrelated_errors": 22,
+      "binary_teacher_action_agreement": 0.0,
+      "correct": 1361,
+      "deletion_fraction": 0.3333333333333333,
+      "mean_answer_nll": 3.3214036665114537,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9444444444444444,
+        "explicit_reset_revoke": 0.37142857142857144,
+        "mixed_lifecycle": 0.55,
+        "same_subject_different_relation": 0.85,
+        "semantic_duplicate": 0.98,
+        "semantic_overwrite": 0.7261904761904762,
+        "stale_repetition": 0.8333333333333334
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.7829861111111112
+    },
+    "retain_all": {
+      "accuracy": 0.7078125,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.0,
+      "correct": 1359,
+      "deletion_fraction": 0.0,
+      "mean_answer_nll": 3.300797740938151,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 1.0,
+        "explicit_reset_revoke": 0.3619047619047619,
+        "mixed_lifecycle": 0.5,
+        "same_subject_different_relation": 0.9,
+        "semantic_duplicate": 0.98,
+        "semantic_overwrite": 0.7071428571428572,
+        "stale_repetition": 0.8333333333333334
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8020833333333334
+    }
+  },
+  "baselines_evaluation": {
+    "exact_string_delete": {
+      "accuracy": 0.7875,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.0,
+      "correct": 1512,
+      "deletion_fraction": 0.017361111111111112,
+      "mean_answer_nll": 2.4586164868609406,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9833333333333333,
+        "explicit_reset_revoke": 0.36666666666666664,
+        "mixed_lifecycle": 0.44,
+        "same_subject_different_relation": 0.97,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.7,
+        "stale_repetition": 0.7738095238095238
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8645833333333334
+    },
+    "exact_subject_conflict": {
+      "accuracy": 0.83125,
+      "added_unrelated_errors": 12,
+      "binary_teacher_action_agreement": 0.125,
+      "correct": 1596,
+      "deletion_fraction": 0.3645833333333333,
+      "mean_answer_nll": 2.0685144258286075,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9833333333333333,
+        "explicit_reset_revoke": 0.43333333333333335,
+        "mixed_lifecycle": 0.5433333333333333,
+        "same_subject_different_relation": 0.94,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.8833333333333333,
+        "stale_repetition": 0.8238095238095238
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8541666666666666
+    },
+    "explicit_lifecycle_physics": {
+      "accuracy": 0.8182291666666667,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.08333333333333333,
+      "correct": 1571,
+      "deletion_fraction": 0.11805555555555555,
+      "mean_answer_nll": 1.9782530351966823,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9833333333333333,
+        "explicit_reset_revoke": 0.5583333333333333,
+        "mixed_lifecycle": 0.56,
+        "same_subject_different_relation": 0.97,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.7,
+        "stale_repetition": 0.7738095238095238
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8923611111111112
+    },
+    "frozen_cosine_delete_0.98": {
+      "accuracy": 0.79375,
+      "added_unrelated_errors": 76,
+      "binary_teacher_action_agreement": 0.4010416666666667,
+      "correct": 1524,
+      "deletion_fraction": 0.8402777777777778,
+      "mean_answer_nll": 2.4235013632761366,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9305555555555556,
+        "explicit_reset_revoke": 0.39166666666666666,
+        "mixed_lifecycle": 0.5333333333333333,
+        "same_subject_different_relation": 0.9066666666666666,
+        "semantic_duplicate": 0.975,
+        "semantic_overwrite": 0.8388888888888889,
+        "stale_repetition": 0.7738095238095238
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.7994791666666666
+    },
+    "frozen_cosine_delete_0.99": {
+      "accuracy": 0.80625,
+      "added_unrelated_errors": 15,
+      "binary_teacher_action_agreement": 0.3385416666666667,
+      "correct": 1548,
+      "deletion_fraction": 0.6006944444444444,
+      "mean_answer_nll": 2.2957261411873637,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9666666666666667,
+        "explicit_reset_revoke": 0.375,
+        "mixed_lifecycle": 0.5066666666666667,
+        "same_subject_different_relation": 0.95,
+        "semantic_duplicate": 0.9875,
+        "semantic_overwrite": 0.7944444444444444,
+        "stale_repetition": 0.8047619047619048
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8524305555555556
+    },
+    "frozen_cosine_delete_0.995": {
+      "accuracy": 0.8020833333333334,
+      "added_unrelated_errors": 6,
+      "binary_teacher_action_agreement": 0.16666666666666666,
+      "correct": 1540,
+      "deletion_fraction": 0.3090277777777778,
+      "mean_answer_nll": 2.31413986631419,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9666666666666667,
+        "explicit_reset_revoke": 0.36666666666666664,
+        "mixed_lifecycle": 0.5066666666666667,
+        "same_subject_different_relation": 0.9666666666666667,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.7166666666666667,
+        "stale_repetition": 0.8023809523809524
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.859375
+    },
+    "global_clear": {
+      "accuracy": 0.709375,
+      "added_unrelated_errors": 299,
+      "binary_teacher_action_agreement": 0.14583333333333334,
+      "correct": 1362,
+      "deletion_fraction": 1.0,
+      "mean_answer_nll": 2.825952670093026,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.8083333333333333,
+        "explicit_reset_revoke": 0.6083333333333333,
+        "mixed_lifecycle": 0.58,
+        "same_subject_different_relation": 0.8,
+        "semantic_duplicate": 0.775,
+        "semantic_overwrite": 0.6833333333333333,
+        "stale_repetition": 0.6547619047619048
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.6475694444444444
+    },
+    "last_1": {
+      "accuracy": 0.765625,
+      "added_unrelated_errors": 82,
+      "binary_teacher_action_agreement": 0.0,
+      "correct": 1470,
+      "deletion_fraction": 0.6666666666666666,
+      "mean_answer_nll": 2.5974362064351983,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9222222222222223,
+        "explicit_reset_revoke": 0.39166666666666666,
+        "mixed_lifecycle": 0.48,
+        "same_subject_different_relation": 0.9066666666666666,
+        "semantic_duplicate": 0.975,
+        "semantic_overwrite": 0.7111111111111111,
+        "stale_repetition": 0.7452380952380953
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.7942708333333334
+    },
+    "last_2": {
+      "accuracy": 0.7880208333333333,
+      "added_unrelated_errors": 22,
+      "binary_teacher_action_agreement": 0.0,
+      "correct": 1513,
+      "deletion_fraction": 0.3333333333333333,
+      "mean_answer_nll": 2.4807671673460088,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9555555555555556,
+        "explicit_reset_revoke": 0.36666666666666664,
+        "mixed_lifecycle": 0.48,
+        "same_subject_different_relation": 0.94,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.7,
+        "stale_repetition": 0.7928571428571428
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8454861111111112
+    },
+    "retain_all": {
+      "accuracy": 0.7875,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.0,
+      "correct": 1512,
+      "deletion_fraction": 0.0,
+      "mean_answer_nll": 2.4586164868609406,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9833333333333333,
+        "explicit_reset_revoke": 0.36666666666666664,
+        "mixed_lifecycle": 0.44,
+        "same_subject_different_relation": 0.97,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.7,
+        "stale_repetition": 0.7738095238095238
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.8645833333333334
+    }
+  },
+  "calibration_groups": [
+    "usr-v1-development-g000",
+    "usr-v1-development-g001",
+    "usr-v1-development-g002",
+    "usr-v1-development-g007",
+    "usr-v1-development-g010",
+    "usr-v1-development-g011",
+    "usr-v1-development-g014",
+    "usr-v1-development-g015",
+    "usr-v1-development-g016",
+    "usr-v1-development-g017",
+    "usr-v1-development-g019",
+    "usr-v1-development-g026",
+    "usr-v1-development-g027",
+    "usr-v1-development-g028",
+    "usr-v1-development-g029",
+    "usr-v1-development-g033",
+    "usr-v1-development-g034",
+    "usr-v1-development-g035",
+    "usr-v1-development-g039",
+    "usr-v1-development-g040",
+    "usr-v1-development-g041",
+    "usr-v1-development-g042",
+    "usr-v1-development-g044",
+    "usr-v1-development-g047",
+    "usr-v1-development-g050",
+    "usr-v1-development-g054",
+    "usr-v1-development-g055",
+    "usr-v1-development-g057",
+    "usr-v1-development-g058",
+    "usr-v1-development-g059",
+    "usr-v1-development-g061",
+    "usr-v1-development-g063"
+  ],
+  "confirmation_loaded": false,
+  "controllers": {
+    "2610161": {
+      "calibration_grid": {
+        "u0.4_p0.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.5_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.5_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.5_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p1.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p1.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p1.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p2.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p2.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p2.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7638888888888888,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.5_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.5_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.5_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p1.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p1.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p1.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p2.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p2.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p2.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.5_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.5_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.5_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p1.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p1.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p1.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p2.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p2.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p2.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.7083333333333334,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        }
+      },
+      "conformal_risk_thresholds": {
+        "0.01": 0.004751834087073803,
+        "0.03": 0.004868066404014826,
+        "0.05": 0.004868066404014826
+      },
+      "evaluation": {
+        "accuracy": 0.8463541666666666,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.7447916666666666,
+        "correct": 1625,
+        "deletion_fraction": 0.7291666666666666,
+        "mean_answer_nll": 1.7592839794852353,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9833333333333333,
+          "explicit_reset_revoke": 0.5583333333333333,
+          "mixed_lifecycle": 0.5733333333333334,
+          "same_subject_different_relation": 0.97,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.8388888888888889,
+          "stale_repetition": 0.8333333333333334
+        },
+        "queries": 1920,
+        "unrelated_accuracy": 0.8923611111111112
+      },
+      "gain_over_strongest_baseline": 0.028124999999999956,
+      "gain_over_strongest_baseline_group_bootstrap_95ci": [
+        0.0109375,
+        0.0484375
+      ],
+      "selected": "u0.6_p2.0_c0.05",
+      "selected_calibration": {
+        "accuracy": 0.7973958333333333,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.7083333333333334,
+        "correct": 1531,
+        "deletion_fraction": 0.7604166666666666,
+        "mean_answer_nll": 2.305268646289778,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 1.0,
+          "explicit_reset_revoke": 0.580952380952381,
+          "mixed_lifecycle": 0.625,
+          "same_subject_different_relation": 0.8916666666666667,
+          "semantic_duplicate": 0.98,
+          "semantic_overwrite": 0.8166666666666667,
+          "stale_repetition": 0.8833333333333333
+        },
+        "queries": 1920,
+        "unrelated_accuracy": 0.8489583333333334
+      },
+      "selected_config": {
+        "conformal_level": 0.05,
+        "risk_penalty": 2.0,
+        "utility_threshold": 0.6
+      },
+      "terminal_status": "controller_configuration_evaluated"
+    },
+    "2610162": {
+      "calibration_grid": {
+        "u0.4_p0.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.5_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.5_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p0.5_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p1.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p1.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p1.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p2.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p2.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.4_p2.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.5_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.5_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p0.5_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p1.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p1.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p1.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p2.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p2.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.5_p2.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.5_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.5_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.5_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p1.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p1.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p1.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p2.0_c0.01": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p2.0_c0.03": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p2.0_c0.05": {
+          "accuracy": 0.7973958333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6979166666666666,
+          "correct": 1531,
+          "deletion_fraction": 0.7604166666666666,
+          "mean_answer_nll": 2.305268646289778,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8166666666666667,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        }
+      },
+      "conformal_risk_thresholds": {
+        "0.01": 0.0030810825992375612,
+        "0.03": 0.0043726456351578236,
+        "0.05": 0.0043726456351578236
+      },
+      "evaluation": {
+        "accuracy": 0.8505208333333333,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.75,
+        "correct": 1633,
+        "deletion_fraction": 0.7361111111111112,
+        "mean_answer_nll": 1.7388629260179944,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9833333333333333,
+          "explicit_reset_revoke": 0.5583333333333333,
+          "mixed_lifecycle": 0.5733333333333334,
+          "same_subject_different_relation": 0.97,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.8833333333333333,
+          "stale_repetition": 0.8333333333333334
+        },
+        "queries": 1920,
+        "unrelated_accuracy": 0.8923611111111112
+      },
+      "gain_over_strongest_baseline": 0.03229166666666661,
+      "gain_over_strongest_baseline_group_bootstrap_95ci": [
+        0.013020833333333332,
+        0.05520833333333334
+      ],
+      "selected": "u0.6_p2.0_c0.05",
+      "selected_calibration": {
+        "accuracy": 0.7973958333333333,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.6979166666666666,
+        "correct": 1531,
+        "deletion_fraction": 0.7604166666666666,
+        "mean_answer_nll": 2.305268646289778,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 1.0,
+          "explicit_reset_revoke": 0.580952380952381,
+          "mixed_lifecycle": 0.625,
+          "same_subject_different_relation": 0.8916666666666667,
+          "semantic_duplicate": 0.98,
+          "semantic_overwrite": 0.8166666666666667,
+          "stale_repetition": 0.8833333333333333
+        },
+        "queries": 1920,
+        "unrelated_accuracy": 0.8489583333333334
+      },
+      "selected_config": {
+        "conformal_level": 0.05,
+        "risk_penalty": 2.0,
+        "utility_threshold": 0.6
+      },
+      "terminal_status": "controller_configuration_evaluated"
+    },
+    "2610163": {
+      "calibration_grid": {
+        "u0.4_p0.0_c0.01": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6302083333333334,
+          "correct": 1528,
+          "deletion_fraction": 0.71875,
+          "mean_answer_nll": 2.322581055345275,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8515625
+        },
+        "u0.4_p0.0_c0.03": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.6354166666666666,
+          "correct": 1528,
+          "deletion_fraction": 0.7239583333333334,
+          "mean_answer_nll": 2.320576376177011,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.4_p0.0_c0.05": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.6354166666666666,
+          "correct": 1528,
+          "deletion_fraction": 0.7239583333333334,
+          "mean_answer_nll": 2.320576376177011,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.4_p0.5_c0.01": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6302083333333334,
+          "correct": 1528,
+          "deletion_fraction": 0.71875,
+          "mean_answer_nll": 2.322581055345275,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8515625
+        },
+        "u0.4_p0.5_c0.03": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.6354166666666666,
+          "correct": 1528,
+          "deletion_fraction": 0.7239583333333334,
+          "mean_answer_nll": 2.320576376177011,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.4_p0.5_c0.05": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.6354166666666666,
+          "correct": 1528,
+          "deletion_fraction": 0.7239583333333334,
+          "mean_answer_nll": 2.320576376177011,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.4_p1.0_c0.01": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6302083333333334,
+          "correct": 1528,
+          "deletion_fraction": 0.71875,
+          "mean_answer_nll": 2.322581055345275,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8515625
+        },
+        "u0.4_p1.0_c0.03": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.6354166666666666,
+          "correct": 1528,
+          "deletion_fraction": 0.7239583333333334,
+          "mean_answer_nll": 2.320576376177011,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.4_p1.0_c0.05": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.6354166666666666,
+          "correct": 1528,
+          "deletion_fraction": 0.7239583333333334,
+          "mean_answer_nll": 2.320576376177011,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.4_p2.0_c0.01": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6302083333333334,
+          "correct": 1528,
+          "deletion_fraction": 0.71875,
+          "mean_answer_nll": 2.322581055345275,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8515625
+        },
+        "u0.4_p2.0_c0.03": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.6354166666666666,
+          "correct": 1528,
+          "deletion_fraction": 0.7239583333333334,
+          "mean_answer_nll": 2.320576376177011,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.4_p2.0_c0.05": {
+          "accuracy": 0.7958333333333333,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.6354166666666666,
+          "correct": 1528,
+          "deletion_fraction": 0.7239583333333334,
+          "mean_answer_nll": 2.320576376177011,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8875,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.5_p0.0_c0.01": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6197916666666666,
+          "correct": 1526,
+          "deletion_fraction": 0.7152777777777778,
+          "mean_answer_nll": 2.32868111300448,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.5_p0.0_c0.03": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1526,
+          "deletion_fraction": 0.7204861111111112,
+          "mean_answer_nll": 2.3266764338362163,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8480902777777778
+        },
+        "u0.5_p0.0_c0.05": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1526,
+          "deletion_fraction": 0.7204861111111112,
+          "mean_answer_nll": 2.3266764338362163,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8480902777777778
+        },
+        "u0.5_p0.5_c0.01": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6197916666666666,
+          "correct": 1526,
+          "deletion_fraction": 0.7152777777777778,
+          "mean_answer_nll": 2.32868111300448,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.5_p0.5_c0.03": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1526,
+          "deletion_fraction": 0.7204861111111112,
+          "mean_answer_nll": 2.3266764338362163,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8480902777777778
+        },
+        "u0.5_p0.5_c0.05": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1526,
+          "deletion_fraction": 0.7204861111111112,
+          "mean_answer_nll": 2.3266764338362163,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8480902777777778
+        },
+        "u0.5_p1.0_c0.01": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6197916666666666,
+          "correct": 1526,
+          "deletion_fraction": 0.7152777777777778,
+          "mean_answer_nll": 2.32868111300448,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.5_p1.0_c0.03": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1526,
+          "deletion_fraction": 0.7204861111111112,
+          "mean_answer_nll": 2.3266764338362163,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8480902777777778
+        },
+        "u0.5_p1.0_c0.05": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1526,
+          "deletion_fraction": 0.7204861111111112,
+          "mean_answer_nll": 2.3266764338362163,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8480902777777778
+        },
+        "u0.5_p2.0_c0.01": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6197916666666666,
+          "correct": 1526,
+          "deletion_fraction": 0.7152777777777778,
+          "mean_answer_nll": 2.32868111300448,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8498263888888888
+        },
+        "u0.5_p2.0_c0.03": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1526,
+          "deletion_fraction": 0.7204861111111112,
+          "mean_answer_nll": 2.3266764338362163,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8480902777777778
+        },
+        "u0.5_p2.0_c0.05": {
+          "accuracy": 0.7947916666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1526,
+          "deletion_fraction": 0.7204861111111112,
+          "mean_answer_nll": 2.3266764338362163,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8791666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8480902777777778
+        },
+        "u0.6_p0.0_c0.01": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6197916666666666,
+          "correct": 1529,
+          "deletion_fraction": 0.7118055555555556,
+          "mean_answer_nll": 2.315700501337521,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.0_c0.03": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1529,
+          "deletion_fraction": 0.7170138888888888,
+          "mean_answer_nll": 2.3136958221692567,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8472222222222222
+        },
+        "u0.6_p0.0_c0.05": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1529,
+          "deletion_fraction": 0.7170138888888888,
+          "mean_answer_nll": 2.3136958221692567,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8472222222222222
+        },
+        "u0.6_p0.5_c0.01": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6197916666666666,
+          "correct": 1529,
+          "deletion_fraction": 0.7118055555555556,
+          "mean_answer_nll": 2.315700501337521,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p0.5_c0.03": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1529,
+          "deletion_fraction": 0.7170138888888888,
+          "mean_answer_nll": 2.3136958221692567,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8472222222222222
+        },
+        "u0.6_p0.5_c0.05": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1529,
+          "deletion_fraction": 0.7170138888888888,
+          "mean_answer_nll": 2.3136958221692567,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8472222222222222
+        },
+        "u0.6_p1.0_c0.01": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6197916666666666,
+          "correct": 1529,
+          "deletion_fraction": 0.7118055555555556,
+          "mean_answer_nll": 2.315700501337521,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p1.0_c0.03": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1529,
+          "deletion_fraction": 0.7170138888888888,
+          "mean_answer_nll": 2.3136958221692567,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8472222222222222
+        },
+        "u0.6_p1.0_c0.05": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1529,
+          "deletion_fraction": 0.7170138888888888,
+          "mean_answer_nll": 2.3136958221692567,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8472222222222222
+        },
+        "u0.6_p2.0_c0.01": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.6197916666666666,
+          "correct": 1529,
+          "deletion_fraction": 0.7118055555555556,
+          "mean_answer_nll": 2.315700501337521,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8489583333333334
+        },
+        "u0.6_p2.0_c0.03": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1529,
+          "deletion_fraction": 0.7170138888888888,
+          "mean_answer_nll": 2.3136958221692567,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8472222222222222
+        },
+        "u0.6_p2.0_c0.05": {
+          "accuracy": 0.7963541666666667,
+          "added_unrelated_errors": 2,
+          "binary_teacher_action_agreement": 0.625,
+          "correct": 1529,
+          "deletion_fraction": 0.7170138888888888,
+          "mean_answer_nll": 2.3136958221692567,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 1.0,
+            "explicit_reset_revoke": 0.580952380952381,
+            "mixed_lifecycle": 0.625,
+            "same_subject_different_relation": 0.8916666666666667,
+            "semantic_duplicate": 0.98,
+            "semantic_overwrite": 0.8119047619047619,
+            "stale_repetition": 0.8833333333333333
+          },
+          "queries": 1920,
+          "unrelated_accuracy": 0.8472222222222222
+        }
+      },
+      "conformal_risk_thresholds": {
+        "0.01": 1.1618091377840756e-08,
+        "0.03": 2.0015688662056164e-08,
+        "0.05": 2.0015688662056164e-08
+      },
+      "evaluation": {
+        "accuracy": 0.8494791666666667,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.6197916666666666,
+        "correct": 1631,
+        "deletion_fraction": 0.6684027777777778,
+        "mean_answer_nll": 1.7464295357521982,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9833333333333333,
+          "explicit_reset_revoke": 0.5583333333333333,
+          "mixed_lifecycle": 0.5733333333333334,
+          "same_subject_different_relation": 0.97,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.8722222222222222,
+          "stale_repetition": 0.8333333333333334
+        },
+        "queries": 1920,
+        "unrelated_accuracy": 0.8923611111111112
+      },
+      "gain_over_strongest_baseline": 0.03125,
+      "gain_over_strongest_baseline_group_bootstrap_95ci": [
+        0.0125,
+        0.05364583333333334
+      ],
+      "selected": "u0.6_p2.0_c0.01",
+      "selected_calibration": {
+        "accuracy": 0.7963541666666667,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.6197916666666666,
+        "correct": 1529,
+        "deletion_fraction": 0.7118055555555556,
+        "mean_answer_nll": 2.315700501337521,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 1.0,
+          "explicit_reset_revoke": 0.580952380952381,
+          "mixed_lifecycle": 0.625,
+          "same_subject_different_relation": 0.8916666666666667,
+          "semantic_duplicate": 0.98,
+          "semantic_overwrite": 0.8119047619047619,
+          "stale_repetition": 0.8833333333333333
+        },
+        "queries": 1920,
+        "unrelated_accuracy": 0.8489583333333334
+      },
+      "selected_config": {
+        "conformal_level": 0.01,
+        "risk_penalty": 2.0,
+        "utility_threshold": 0.6
+      },
+      "terminal_status": "controller_configuration_evaluated"
+    }
+  },
+  "diagnostic_checks": {
+    "all_seed_cluster_ci_lower_positive": true,
+    "all_seeds_have_safe_configuration": true,
+    "all_seeds_improve_strongest_baseline": true,
+    "all_seeds_zero_added_unrelated_errors": true,
+    "confirmation_and_external_sealed": true
+  },
+  "evaluation_groups": [
+    "usr-v1-development-g003",
+    "usr-v1-development-g004",
+    "usr-v1-development-g005",
+    "usr-v1-development-g006",
+    "usr-v1-development-g008",
+    "usr-v1-development-g009",
+    "usr-v1-development-g012",
+    "usr-v1-development-g013",
+    "usr-v1-development-g018",
+    "usr-v1-development-g020",
+    "usr-v1-development-g021",
+    "usr-v1-development-g022",
+    "usr-v1-development-g023",
+    "usr-v1-development-g024",
+    "usr-v1-development-g025",
+    "usr-v1-development-g030",
+    "usr-v1-development-g031",
+    "usr-v1-development-g032",
+    "usr-v1-development-g036",
+    "usr-v1-development-g037",
+    "usr-v1-development-g038",
+    "usr-v1-development-g043",
+    "usr-v1-development-g045",
+    "usr-v1-development-g046",
+    "usr-v1-development-g048",
+    "usr-v1-development-g049",
+    "usr-v1-development-g051",
+    "usr-v1-development-g052",
+    "usr-v1-development-g053",
+    "usr-v1-development-g056",
+    "usr-v1-development-g060",
+    "usr-v1-development-g062"
+  ],
+  "external_benchmarks_loaded": false,
+  "feature_audit_sha256": "d20cad6f701def7715170c0790b37d7bfac2e20b18fa10bee805fd89351deebc",
+  "formal_development_oracle_gain": 0.09375,
+  "label_summary_sha256": "98e9ace375d4dbdcc2384e8ec6e7b1c16925a9993432a9f2d92a04e764bded2a",
+  "next_stage": "prospective_v2",
+  "oracles_evaluation": {
+    "binary": {
+      "accuracy": 0.8635416666666667,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 1.0,
+      "correct": 1658,
+      "deletion_fraction": 0.8072916666666666,
+      "mean_answer_nll": 1.4920962339218629,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9833333333333333,
+        "explicit_reset_revoke": 0.6583333333333333,
+        "mixed_lifecycle": 0.6166666666666667,
+        "same_subject_different_relation": 0.97,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.8833333333333333,
+        "stale_repetition": 0.8333333333333334
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.9071180555555556
+    },
+    "full": {
+      "accuracy": 0.8640625,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.9947916666666666,
+      "correct": 1659,
+      "deletion_fraction": 0.8072916666666666,
+      "mean_answer_nll": 1.4940266257316883,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9833333333333333,
+        "explicit_reset_revoke": 0.6583333333333333,
+        "mixed_lifecycle": 0.6166666666666667,
+        "same_subject_different_relation": 0.9733333333333334,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.8833333333333333,
+        "stale_repetition": 0.8333333333333334
+      },
+      "queries": 1920,
+      "unrelated_accuracy": 0.9071180555555556
+    }
+  },
+  "partition": "development",
+  "protocol": "qwen_utility_record_controller_v1_development_diagnostic",
+  "release_gate": {
+    "checks": {
+      "all_seed_cluster_ci_lower_positive": true,
+      "all_seeds_have_safe_configuration": true,
+      "all_seeds_improve_strongest_baseline": true,
+      "all_seeds_zero_added_unrelated_errors": true,
+      "confirmation_and_external_sealed": true,
+      "oracle_headroom_at_least_point_10": false
+    },
+    "passed": false
+  },
+  "strongest_safe_deterministic_baseline": "explicit_lifecycle_physics",
+  "terminal_status": "controller_v1_development_diagnostic_completed",
+  "training_audit_sha256": "4260e090d6ebae309d0f0c0e39637de8691b9bea3fdb044ba40d244fa09e8d07"
+}
