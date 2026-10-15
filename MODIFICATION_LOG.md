@@ -5098,6 +5098,21 @@ auditor reconstructs every action and label, aggregate and clustered interval,
 unrelated barrier, model hashes and confirmation/external seals before any
 controller threshold evaluation.
 
+Development labeling completed all 384 boundaries and passed all eight
+independent label-audit checks. Retain-all future accuracy was 74.77% and the
+safe oracle reached 84.14%, a 9.375-point gain with source-group bootstrap 95%
+CI `[6.74, 12.19]` points. It added zero unrelated errors and improved 122
+unrelated outcomes. Two-GPU critical time was 78.19 seconds with 7.69 GiB peak
+reserved memory.
+
+The first registered development gate is already false: the safe-oracle
+headroom over retain-all is 9.375 points, so its headroom over the strongest
+non-oracle deterministic baseline cannot reach the required ten points. This
+does not invalidate the positive oracle effect or permit lowering the frozen
+threshold. Controller and baseline evaluation on development remains useful
+as a diagnostic, but V1 cannot open the sealed confirmation relations unless
+a new, prospectively registered branch supplies an independent release path.
+
 Added `tasks/train_qwen_utility_record_controller_v1.py`, focused tests, a
 non-overwriting runner and
 `scripts/audit_qwen_utility_record_controller_v1_training.py`. Training uses
