@@ -5502,3 +5502,28 @@ the independently audited V2--V4 summaries and retains the registered V5
 release gates.  Compilation, seven focused training/evaluation tests, runner
 syntax and whitespace checks pass locally; TempLAMA test remains sealed until
 the new development result and its independent audit satisfy every gate.
+
+The full 256-group V5 development evaluation and independent exact-rerun audit
+completed successfully, but the release gate failed and TempLAMA test remains
+sealed.  Explicit lifecycle physics scored 84.707%; the three V5 seeds scored
+88.073%/87.982%/88.210%, for gains of 3.366/3.275/3.503 points.  Mean gain was
+3.381 points with target-group 95% CI `[2.552, 4.290]`, relation-cluster CI
+`[1.656, 5.356]`, and 73.6% closure of the 4.596-point safe single-action
+Oracle gap.  All nine relation gains were nonnegative and overwrite/stale
+gains were positive.  V5 nevertheless added 6/14/21 unrelated-answer errors;
+this was the only failed preregistered gate.
+
+Registered `QWEN_UTILITY_RECORD_CONTROLLER_V6_FACT_KEY_SAFETY_PLAN.md` after
+the audited V5 failure and before scoring a V6 action.  V6 freezes the same
+three checkpoints and thresholds and adds one deterministic safety projection:
+the residual deletion is retained only when candidate and incoming records
+share the immutable semantic key `(normalized subject, relation id)`.
+Implemented its full-development evaluator, semantic-key reconstruction,
+fact-key safe Oracle, V5 collateral localization, physics-preserving matched
+random controls, independent exact-rerun audit, tests and non-overwriting
+runner.  The controller still sees only the original inference-safe features;
+the projection uses record metadata available at memory insertion and never
+uses query answers or counterfactual labels.  Local compilation, six focused
+V5/V6 evaluation tests, shell syntax and whitespace checks pass.  V6 must pass
+the unchanged utility, uncertainty, collateral, mechanism, relation and audit
+gates before official test construction is allowed.
