@@ -5851,6 +5851,15 @@ model or sealed benchmark was opened.  Added a non-overwriting remote runner
 and focused tests for natural slot extraction, overlap filtering and allocator
 disjointness.
 
+The first remote model-free construction stopped before writing a corpus when
+it encountered an official FewRel sentence containing repeated head or tail
+mentions.  The strict slot extractor correctly rejected the ambiguous row but
+the corpus loop had treated this expected source condition as fatal.  Before
+any capacity result or model execution, changed the loop to record such rows
+as `multiple_or_invalid_entity_mentions` exclusions and continue.  Their
+source hashes remain accounted for, and all eligibility thresholds are applied
+after this exclusion.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented

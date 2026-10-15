@@ -361,11 +361,23 @@ def build_corpus(source_root: Path, development_paths: list[Path], seed: int = S
     relations = sorted(partitions["train"])
     if len(relations) != EXPECTED_TRAIN_RELATIONS:
         raise ValueError("unexpected V10 FewRel train relation count")
-    raw = [row_from_source(relation, index, source)
-           for relation in relations
-           for index, source in enumerate(train[relation])]
+    raw, source_removed = [], []
+    raw_source_rows = 0
+    for relation in relations:
+        for index, source in enumerate(train[relation]):
+            raw_source_rows += 1
+            try:
+                raw.append(row_from_source(relation, index, source))
+            except ValueError:
+                source_removed.append({
+                    "relation_id": relation,
+                    "source_index": index,
+                    "source_row_sha256": canonical_sha(source),
+                    "reason": "multiple_or_invalid_entity_mentions",
+                })
     dev_keys, dev_summary = development_exclusions(development_paths)
     retained, removed = filter_rows(raw, dev_keys)
+    removed = source_removed + removed
     capacities = capacity(retained, relations)
     if not all(value["eligible"] for value in capacities.values()):
         failed = [key for key, value in capacities.items() if not value["eligible"]]
@@ -392,7 +404,8 @@ def build_corpus(source_root: Path, development_paths: list[Path], seed: int = S
         "capacity": capacities,
         "pilot_relations": sorted(pilot_relation_set),
         "counts": {
-            "raw_rows": len(raw), "retained_rows": len(retained),
+            "raw_rows": raw_source_rows, "parsed_rows": len(raw),
+            "retained_rows": len(retained),
             "exclusions": len(removed),
             "exclusions_by_reason": dict(sorted(Counter(
                 row["reason"] for row in removed).items())),
