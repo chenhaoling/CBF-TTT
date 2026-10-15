@@ -4964,8 +4964,9 @@ verifies frozen plain-Qwen provenance and all input hashes before releasing
 controller feature construction. Focused tests cover source allocation
 disjointness, formal identity and design balancing. Twelve related unit tests,
 Python compilation, shell syntax checks and `git diff --check` pass locally.
-Remote pilot audit, formal corpus construction and Qwen labeling are pending
-execution; no formal outcome is claimed by this implementation entry.
+At this implementation checkpoint, remote pilot audit, formal corpus
+construction and Qwen labeling were pending; later entries record their
+execution. No formal outcome is claimed by this implementation entry.
 
 The first remote formal build stopped before writing a corpus at group 371.
 The allocator had conservatively reserved the original subjects of value-only
@@ -5016,6 +5017,39 @@ metadata outside numeric tensors. The auditor independently reconstructs all
 teachers, risk labels and deterministic feature components, verifies context
 pooling, model/input hashes, class support, one-to-one boundary coverage and
 held-out seals before controller training.
+
+The episode-scoped-cache retry completed all 3,072 formal labels with exit
+code zero and passed all 11 independent label-audit checks. Retain-all future
+accuracy was 73.86%; the safe oracle reached 85.90%, a 12.04-point gain with
+source-group bootstrap 95% CI `[10.90, 13.24]` points. It added zero unrelated
+errors and improved 1,136 unrelated outcomes. Half strength was uniquely useful
+on 2.05% of labels, corroborating the frozen binary primary action space.
+Two-GPU critical time was 678.14 seconds and peak reserved memory was 7.69 GiB.
+Development, confirmation and external benchmarks remained sealed.
+
+Controller feature extraction completed for all 3,072 boundaries and 9,216
+candidate-record examples. The final tensor has 66 scalars per record. Delete
+targets comprise 83.57% of records and collateral-risk positives comprise
+7.17%; both classes are present. All nine independent feature-audit checks
+passed. Two-GPU critical time was 93.22 seconds and peak reserved memory was
+7.70 GiB.
+
+The first three-seed controller training run was retained as a failed artifact.
+At epoch 25 its relation-disjoint record accuracy was 89.76%/92.84%/90.93% and
+boundary action accuracy was 74.93%/83.20%/79.07%, but the implementation's
+unregistered temporary risk threshold of 0.5 still permitted 7/4/3 risky
+single-record deletions. No checkpoint was released and development remained
+ungenerated.
+
+Added `QWEN_UTILITY_RECORD_CONTROLLER_V1_INNER_SAFETY_CLARIFICATION.md` before
+any development data is constructed. The parent specification required zero
+inner-fold collateral errors but did not define the temporary checkpoint
+comparison threshold. The clarified deterministic rule uses the minimum risk
+probability among utility-predicted risk positives and permits deletion only
+strictly below it, guaranteeing zero empirical inner-fold risky deletions.
+This value is never deployed; development alone retains authority to select
+the registered utility/risk/conformal deployment grid. The original failed
+training root remains immutable and the clarification retry uses a new root.
 
 Added `tasks/train_qwen_utility_record_controller_v1.py`, focused tests, a
 non-overwriting runner and

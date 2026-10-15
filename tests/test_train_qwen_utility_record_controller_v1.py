@@ -4,6 +4,7 @@ from tasks.train_qwen_utility_record_controller_v1 import (
     class_weights,
     relation_folds,
     select_checkpoint,
+    zero_empirical_risk_threshold,
 )
 
 
@@ -40,6 +41,15 @@ class TestTrainUtilityRecordControllerV1(unittest.TestCase):
         self.assertGreater(weights["utility"][1], weights["utility"][0])
         with self.assertRaises(ValueError):
             class_weights([{"delete_target": 0, "risk_target": 0}])
+
+    def test_zero_empirical_risk_threshold_is_strict(self):
+        threshold = zero_empirical_risk_threshold(
+            [True, True, False, True], [.2, .7, .1, .5], [0, 1, 1, 1]
+        )
+        self.assertEqual(threshold, .5)
+        predicted = [delete and risk < threshold
+                     for delete, risk in zip([True, True, False, True], [.2, .7, .1, .5])]
+        self.assertEqual(predicted, [True, False, False, False])
 
 
 if __name__ == "__main__":

@@ -59,6 +59,15 @@ def select_checkpoint(metrics: dict[int, dict]) -> int | None:
     ))
 
 
+def zero_empirical_risk_threshold(
+    utility_delete: list[bool], risk_probability: list[float], risk_target: list[int]
+) -> float:
+    unsafe = [probability for delete, probability, target
+              in zip(utility_delete, risk_probability, risk_target)
+              if delete and target == 1]
+    return min(unsafe) if unsafe else 1.0
+
+
 def load_rows(feature_root: Path) -> list[dict]:
     rows = []
     for shard in (0, 1):
@@ -155,7 +164,12 @@ def evaluate(model, examples, means, stds, device) -> dict:
         utility_logits, risk_logits = model(x)
         delete_probability = utility_logits.softmax(-1)[:, 1]
         risk_probability = risk_logits.sigmoid()
-    predicted_delete = (delete_probability >= .5) & (risk_probability < .5)
+    utility_delete = delete_probability >= .5
+    inner_risk_threshold = zero_empirical_risk_threshold(
+        utility_delete.cpu().tolist(), risk_probability.cpu().tolist(),
+        risk.long().cpu().tolist(),
+    )
+    predicted_delete = utility_delete & (risk_probability < inner_risk_threshold)
     boundaries = defaultdict(list)
     for index, row in enumerate(examples):
         boundaries[row["boundary_identity"]].append(index)
@@ -174,6 +188,10 @@ def evaluate(model, examples, means, stds, device) -> dict:
         ),
         "boundary_action_accuracy": boundary_correct / len(boundaries),
         "unsafe_deletions": int((predicted_delete & (risk == 1)).sum().item()),
+        "raw_half_risk_unsafe_deletions": int(
+            (utility_delete & (risk_probability < .5) & (risk == 1)).sum().item()
+        ),
+        "inner_zero_risk_threshold": inner_risk_threshold,
         "risk_recall": risk_detected / risk_positive if risk_positive else 1.0,
         "mean_delete_probability": float(delete_probability.mean().item()),
         "mean_risk_probability": float(risk_probability.mean().item()),
