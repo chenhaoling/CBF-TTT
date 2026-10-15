@@ -1,0 +1,48 @@
+{
+  "checks": {
+    "all_augmented_features_reconstructed": true,
+    "embedding_hash_order_and_norms_valid": true,
+    "feature_hashes_reconstructed": true,
+    "finite_resources": true,
+    "heldout_sources_sealed": true,
+    "protocol_plan_and_summary_passed": true,
+    "registered_counts_and_dimension": true,
+    "relation_heads_hash_and_training_support_valid": true,
+    "upstream_audit_hashes_reconstructed": true
+  },
+  "embedding_sha256": "0910a4540768214efd0ef9ee934ec893c358074f81d855ac7eee2540dc89ad8b",
+  "feature_sha256": {
+    "lama_dev_shard0": "1b76df5ac9c90cb3c83e8a035ee3528509f0cecaeab0d99cf7a6741c4ce7d56b",
+    "lama_dev_shard1": "0e93a9774d8f317430e3bc0c72f03dba2fdedee111d23e47278212d10a0d9785",
+    "lama_train_shard0": "ce894480c1371f535a99640555fdde5b3cef30c7d546081cf69992d968b3958b",
+    "lama_train_shard1": "ea30487d09316844a0ad303f7d1e7238a31769dc93adca278a125c2b64c8d354",
+    "templama_dev_shard0": "86b6102851696e307dad217e0252d0f8825c884e043d361e7c9647121c9f6a72",
+    "templama_dev_shard1": "8bc5cfe27b28c5d3ae61b4f6848172395b2c40d8100d3e2a8df91086f71a857d",
+    "templama_train_shard0": "7c1ac46c716ce6cf4afef6622d491982876a51f162e6f1cd99e355f7deb31763",
+    "templama_train_shard1": "83c66435f02311304079aa501b555f7ec50b6860e06fff3da687c91f9d45a905"
+  },
+  "next_stage": "v8_relation_posterior_controller_training",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v8_relation_posterior_features_audit",
+  "relation_heads_sha256": "f4e124fa0ac3642d49ae5b600309c4bdc05f55c63fe5791e3087dac2c88d0eec",
+  "row_counts": {
+    "lama_dev": {
+      "candidates": 1152,
+      "rows": 384
+    },
+    "lama_train": {
+      "candidates": 9216,
+      "rows": 3072
+    },
+    "templama_dev": {
+      "candidates": 4608,
+      "rows": 1536
+    },
+    "templama_train": {
+      "candidates": 9216,
+      "rows": 3072
+    }
+  },
+  "summary_sha256": "f8fabff6adbdbd5308e499486a0124748c8a7b1d7653e6dda2e0b5ec84a30e8a",
+  "terminal_status": "v8_relation_posterior_feature_audit_passed"
+}

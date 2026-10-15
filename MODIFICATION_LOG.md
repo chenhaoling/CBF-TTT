@@ -5804,3 +5804,8 @@ checkpoints, reconstructs probability/ranking and fact-key-projected policy
 metrics, numerically verifies risk logits are invariant to pair tensors, and
 rebuilds the complete release gate and hashes.  Added a non-overwriting runner
 that keeps every held-out source sealed.
+
+Archived the compact V8 feature/training summaries, both independent audits,
+hash manifest and result interpretation under
+`experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
+feature and checkpoint artifacts remain hash-locked on `hku-gpu2`.

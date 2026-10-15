@@ -1,0 +1,43 @@
+{
+  "checkpoint_sha256": {
+    "26101651": "07af017823a34db9a675546969c8fb7128b832a25bf15d447700e77a6e883507",
+    "26101652": "2754ee55216e4b81c36c0e64d39e71d09e1061d5500fe204106f28b2d0acde4d",
+    "26101653": "208f3143b49046e8a429646eb284b0d0763d1c0d17dd9067ca785fd624499bad"
+  },
+  "checks": {
+    "all_checkpoint_hashes_and_states_locked": true,
+    "development_gate_reconstructed": true,
+    "finite_selected_metrics": true,
+    "heldout_sources_sealed": true,
+    "protocol_plan_and_summary_passed": true,
+    "selected_metrics_and_head_diagnostics_reconstructed": true,
+    "upstream_hashes_reconstructed": true
+  },
+  "development_checks": {
+    "every_seed_positive_each_domain": true,
+    "lama_benefit_ap_over_v7_at_least_point_03": true,
+    "lama_gain_over_v7_at_least_point_005": false,
+    "mean_gain_at_least_point_015_each_domain": false,
+    "mean_oracle_closure_at_least_point_50_each_domain": true,
+    "oracle_headroom_at_least_point_015_each_domain": true,
+    "overwrite_and_stale_nonnegative_each_domain": true,
+    "upstream_audits_passed": true,
+    "zero_collateral_every_seed_domain": true
+  },
+  "development_release_passed": false,
+  "lama_benefit_average_precision_gain": 0.09209761655004392,
+  "lama_gain_over_v7": 0.003298611111111108,
+  "mean_gain": {
+    "lama": 0.011892361111111138,
+    "templama": 0.04214409722222223
+  },
+  "mean_oracle_gap_closure": {
+    "lama": 0.617117117117118,
+    "templama": 0.977844914400806
+  },
+  "next_stage": "stop_v8_relation_posterior_iteration",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v8_relation_posterior_training_audit",
+  "summary_sha256": "51c8245e4fe80aa7f23730c03d17b2f2c25bec2448cc41dcd1df08d68a709399",
+  "terminal_status": "v8_relation_posterior_audit_passed_gate_failed"
+}
