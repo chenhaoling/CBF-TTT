@@ -3955,3 +3955,26 @@ global reset, lifecycle oracle, scope oracle, dense aggregation and zero
 memory. It fixes 12-way candidates, fixed-length final generation,
 subject-group bootstrap gates and an explicit failure localization tree while
 keeping ZsRE test and all external long-memory benchmarks unopened.
+
+### Frozen natural causal-memory implementation
+
+- Added `tasks/build_qwen_natural_causal_memory_v1.py` to reconstruct only the
+  hash-locked calibration/development counterfactual sequences and create one
+  deterministic, model-free 12-way natural-answer candidate set per session.
+  It validates primary/auxiliary pairing, event order, versions, counts and
+  subject/group isolation without reading the source test file.
+- Added `tasks/evaluate_qwen_natural_causal_memory_v1.py`. It replays learned,
+  cosine, retain, global and oracle lifecycle states; uses the same frozen
+  automatic scope gate for every automatic arm; scores all eight registered
+  policies with fresh Qwen KV state; and records candidate NLL at every
+  checkpoint plus fixed-length generation at the final checkpoint.
+- Added a refusal-to-overwrite two-GPU runner with frozen dependency hashes,
+  release-evidence checks, full tokenizer preflight and conditional development
+  release. Added an independent auditor that reconstructs the corpus,
+  tokenization and checkpoint coverage; replays every recorded memory-state
+  transition; verifies selections, predictions, resources and hashes; and
+  independently recomputes metrics, subject bootstrap intervals and gates.
+- Added four focused tests for candidate determinism, partial-session checkpoint
+  scheduling, oracle local deletion and clean-gate aggregation. The protocol
+  explicitly retains the two-pair calibration remainder with its corresponding
+  three checkpoints rather than silently dropping it.

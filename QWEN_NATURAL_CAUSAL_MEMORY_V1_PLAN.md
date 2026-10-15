@@ -44,13 +44,15 @@ then applies four counterfactual updates, one per primary fact. The current fact
 is always written. A forgetting policy decides only which old session-memory
 record, if any, is deleted.
 
-Score five registered checkpoints: after the eight initial writes and after
-each of the four counterfactual updates. At every checkpoint, query the exact
-and rephrased surface of every active primary and auxiliary chain. The same two
-primary query surfaces therefore require the original value before their update
-and the counterfactual value after it. This directly measures replacement and
-collateral retention. Calibration has 65 sessions; development has 64
-subject-disjoint sessions.
+Score five registered checkpoints in every full-width session: after the eight
+initial writes and after each of the four counterfactual updates. The final
+two-pair calibration remainder has the corresponding three checkpoints after
+four initial writes and two updates; it is retained rather than dropped. At
+every checkpoint, query the exact and rephrased surface of every active primary
+and auxiliary chain. The same two primary query surfaces therefore require the
+original value before their update and the counterfactual value after it. This
+directly measures replacement and collateral retention. Calibration has 65
+sessions; development has 64 subject-disjoint sessions.
 
 Every session receives one deterministic 12-way natural-answer candidate set:
 all distinct original, updated and auxiliary targets in the session, filled if
