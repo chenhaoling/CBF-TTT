@@ -6,6 +6,7 @@ from tasks.build_qwen_utility_semantic_record_gate_v1 import (
     normalize,
     semantic_key,
 )
+import unittest
 
 
 def fake_row(relation, subject, value, index):
@@ -73,3 +74,14 @@ def test_reset_queries_keep_original_surfaces_and_return_unknown():
     assert all(row["answer"] == "unknown" for row in [*retained, anchor])
     current_subject = reset["queries"][0]["input"]["subject"]
     assert all(row["input"]["subject"] != current_subject for row in [*retained, anchor])
+
+
+class TestUtilitySemanticRecordPilotData(unittest.TestCase):
+    def test_mechanisms(self):
+        test_every_mechanism_has_exact_sparse_boundaries_and_queries()
+
+    def test_twins(self):
+        test_twins_change_only_protected_anchor_value()
+
+    def test_reset_absence(self):
+        test_reset_queries_keep_original_surfaces_and_return_unknown()

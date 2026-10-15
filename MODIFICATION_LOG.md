@@ -4888,3 +4888,14 @@ hash-locked public sources, compares exact rows and file hashes, checks relation
 isolation, twin structure, input/audit separation, reset causality, registered
 counts and all sealed/model-free flags. Its result is required before any Qwen
 feature extraction or counterfactual label scoring.
+
+Added `tasks/pilot_qwen_utility_semantic_record_gate_v1.py`, its two-GPU runner
+and focused pure-Python tests. The collector extracts frozen-Qwen masked
+relation vectors, selects at most three addressable historical records without
+relation IDs, enumerates the complete ternary grid plus global clear, appends
+the current record at unit strength and evaluates every remaining sparse
+boundary through the frozen LM-head value residual. Labels enforce the
+unrelated-chain barrier before future correctness, NLL and retained-mass tie
+breakers. Per-label time, cache behavior and CUDA peaks are retained. The
+summarizer applies the frozen pilot gate, diagnoses whether half-strength is a
+real physical state and selects only among 128/256/512 formal group counts.

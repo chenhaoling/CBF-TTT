@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 import zipfile
+import unittest
 
 from scripts.inspect_lama_pararel_utility_source import (
     load_patterns,
@@ -58,3 +59,13 @@ def test_pattern_and_trex_filters(tmp_path: Path):
         "identical_subject_value": 1,
         "relation_path_mismatch": 1,
     }
+
+
+class TestLamaPararelSourceInspection(unittest.TestCase):
+    def test_deterministic_split(self):
+        test_normalize_and_split_are_deterministic()
+
+    def test_filters(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            test_pattern_and_trex_filters(Path(directory))

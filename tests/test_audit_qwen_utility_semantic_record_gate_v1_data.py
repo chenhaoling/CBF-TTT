@@ -5,6 +5,7 @@ from scripts.audit_qwen_utility_semantic_record_gate_v1_data import (
 )
 from tests.test_qwen_utility_semantic_record_gate_v1 import material
 from tasks.build_qwen_utility_semantic_record_gate_v1 import build_episode
+import unittest
 
 
 def episodes():
@@ -28,3 +29,11 @@ def test_audit_helpers_reject_leak_and_bad_twin():
     rows = episodes()
     rows[1]["events"][2]["record"]["input"]["value"] = "unexpected"
     assert not twin_structure_is_valid(rows)
+
+
+class TestUtilitySemanticRecordDataAudit(unittest.TestCase):
+    def test_valid_rows(self):
+        test_audit_helpers_accept_valid_rows()
+
+    def test_rejections(self):
+        test_audit_helpers_reject_leak_and_bad_twin()
