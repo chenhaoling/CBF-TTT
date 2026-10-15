@@ -5411,3 +5411,33 @@ The calibration boundary also locks the independently passed V2 validation
 data audit and its manifest hash before deriving group IDs, preventing a
 different validation corpus from being paired with the frozen feature/label
 artifacts while retaining the same 128/128 selection rule.
+
+V4 formal binary labeling completed 3,072 boundaries and 30,720 registered
+future queries in 933.49 seconds of two-GPU critical time at 7.70 GiB peak
+reserved memory.  The independent audit passed: retain-all scored 81.699%, the
+safe Oracle scored 90.267%, and the +8.568-point group-bootstrap interval was
+`[7.549, 9.593]` points with zero added unrelated errors.  Feature extraction
+then produced 9,216 examples at 66 dimensions in 93.29 seconds; delete/risk
+positives were 82.18%/10.37% and its audit passed.  Three-seed controller
+training completed in 15.77 seconds, selected epochs 50/100/50 and passed all
+split, finite-trace, zero-inner-risk and checkpoint-integrity checks.
+
+The 128-group calibration selected zero-collateral `conflict_cosine_099`
+configurations for every seed and passed exact-rerun audit.  The untouched
+128-group evaluation then passed its result audit but failed the preregistered
+release gate, so TempLAMA test remains sealed.  Explicit lifecycle physics
+scored 83.776%.  V4 seed gains were +0.885/+0.664/+0.846 points with 2/2/0
+added unrelated errors.  Mean gain was +0.799 points with pooled group 95% CI
+`[0.339, 1.419]`, mean Oracle-gap closure 15.4%, all nine relations
+nonnegative, and overwrite/stale gains nonnegative.  The mean-gain, per-seed,
+zero-collateral and 40%-closure gates failed; no test row was loaded.
+
+Added a hash-locked post-hoc V4 residual-support diagnostic and pure unit test.
+It compares every locality-eligible extra deletion and all of their subsets
+against explicit lifecycle physics, separately on formal train and the frozen
+calibration/evaluation halves.  It reports collateral rate, safe single-record
+accuracy gains, pair-or-higher-only gains and attainable safe residual
+headroom by relation/mechanism.  This diagnostic is explicitly downstream of
+the failed V4 evaluation and cannot alter or release that result; it is used
+only to choose between a V5 local residual classifier and structured action
+ranker.  TempLAMA test remains unopened.
