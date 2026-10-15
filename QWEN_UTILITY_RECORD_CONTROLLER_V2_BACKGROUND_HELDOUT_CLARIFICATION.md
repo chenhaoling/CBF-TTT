@@ -41,6 +41,16 @@ group per relation and that every one of its rendered background identities
 occurs exactly once in the entire development corpus.  A retry that cannot
 satisfy these invariants stops before any model execution.
 
+The first reserved-background attempt (`retry1`) stopped before writing a
+corpus because hash-only selection consumed a relation with little remaining
+background supply at held-out group 4.  The immutable runner log records
+`no background candidate ... stable-3`; no model was loaded.  Retry2 preserves
+the same targets and constraints but, for the nine held-out groups only,
+selects each stable relation by largest currently available subject supply,
+with the frozen SHA256 rank and relation ID as ties.  The other 247 groups keep
+the original hash-only background-relation selection.  This deterministic
+feasibility rule observes source capacity only and cannot use model outcomes.
+
 ## Statistical use
 
 Primary release authority remains the 256 target-group clustered interval.

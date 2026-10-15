@@ -5253,6 +5253,14 @@ The original data root remains immutable and cannot release evaluation.  The
 retry runner uses a new root and its audit must prove one held-out group per
 relation and exactly one corpus occurrence for every reserved background.
 
+The first reserved-background retry stopped before writing data at held-out
+group 4 because hash-only stable-relation selection exhausted a scarce source
+relation.  It loaded no model and remains immutable.  Retry2 keeps every target
+and registered constraint, but allocates stable relations in the nine held-out
+groups by greatest remaining subject supply with frozen hash/ID ties.  The 247
+ordinary groups retain their original hash-only relation selection.  This is a
+source-capacity feasibility repair made before any validation model outcome.
+
 Added the frozen V2 TempLAMA development evaluator, focused policy tests,
 non-overwriting runner and deterministic independent result audit.  It uses the
 three V1 checkpoints and their exact registered utility, risk-penalty,

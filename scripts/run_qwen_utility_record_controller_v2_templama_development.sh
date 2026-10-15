@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v2_templama_development_evaluation_20261016}
-DATA_ROOT=${DATA_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v2_templama_development_data_20261016_retry1}
+DATA_ROOT=${DATA_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v2_templama_development_data_20261016_retry2}
 LABEL_ROOT=${LABEL_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v2_templama_development_labels_20261016}
 FEATURE_ROOT=${FEATURE_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v2_templama_development_features_20261016}
 TRAINING_ROOT=${TRAINING_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v1_training_20261016_retry1}

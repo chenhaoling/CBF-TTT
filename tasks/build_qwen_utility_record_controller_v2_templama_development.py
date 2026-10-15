@@ -136,20 +136,67 @@ def choose_materials(trajectories: dict) -> tuple[list[tuple[int, dict]], dict]:
         used_subjects.add(same_key[0]); used_values.add(same_other["value_norm"])
         background_ids.append(same_key[0])
 
-        other_relations = sorted(
-            (relation for relation in PARAPHRASES if relation != target_relation),
-            key=lambda relation: (
-                stable_rank(SEED, "background-relation", group_index, relation), relation
-            ),
-        )[:5]
         stable = []
-        for index, relation in enumerate(other_relations):
-            chosen_key, row = choose_background(
-                [key for key in allowed_background_keys if key[1] == relation],
-                eligible, group_index, f"stable-{index}", used_subjects, used_values,
-            )
-            stable.append(row); background_ids.append(chosen_key[0])
-            used_subjects.add(chosen_key[0]); used_values.add(row["value_norm"])
+        if background_heldout:
+            selected_relations = set()
+            for index in range(5):
+                relation_choices = []
+                for relation in PARAPHRASES:
+                    if relation == target_relation or relation in selected_relations:
+                        continue
+                    candidates = [
+                        key for key in allowed_background_keys
+                        if key[1] == relation and key[0] not in used_subjects
+                    ]
+                    try:
+                        chosen_key, row = choose_background(
+                            candidates, eligible, group_index, f"stable-{index}",
+                            used_subjects, used_values,
+                        )
+                    except ValueError:
+                        continue
+                    relation_choices.append((
+                        relation, chosen_key, row, len(candidates)
+                    ))
+                if not relation_choices:
+                    raise ValueError(f"no stable relation for {group_index}:{index}")
+                # Globally unique held-out allocation consumes abundant
+                # relations first, preserving scarce same-relation supply for
+                # the later one-per-relation groups.
+                relation, chosen_key, row, _ = min(
+                    relation_choices,
+                    key=lambda value: (
+                        -value[3],
+                        stable_rank(
+                            SEED, "heldout-background-relation", group_index,
+                            index, value[0],
+                        ),
+                        value[0],
+                    ),
+                )
+                stable.append(row); background_ids.append(chosen_key[0])
+                used_subjects.add(chosen_key[0]); used_values.add(row["value_norm"])
+                selected_relations.add(relation)
+        else:
+            other_relations = sorted(
+                (relation for relation in PARAPHRASES
+                 if relation != target_relation),
+                key=lambda relation: (
+                    stable_rank(
+                        SEED, "background-relation", group_index, relation
+                    ),
+                    relation,
+                ),
+            )[:5]
+            for index, relation in enumerate(other_relations):
+                chosen_key, row = choose_background(
+                    [key for key in allowed_background_keys
+                     if key[1] == relation],
+                    eligible, group_index, f"stable-{index}",
+                    used_subjects, used_values,
+                )
+                stable.append(row); background_ids.append(chosen_key[0])
+                used_subjects.add(chosen_key[0]); used_values.add(row["value_norm"])
 
         anchor_relation = stable[0]["relation_id"]
         anchor_alternate = None; anchor_source = None
