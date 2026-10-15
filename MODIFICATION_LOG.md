@@ -5323,3 +5323,38 @@ selection ties and inherited evaluation policies.  Python compilation, ten
 related tests, shell syntax and whitespace checks pass locally.  No train-pilot
 feature, selected V3 configuration or V3 validation outcome was observed at
 this implementation checkpoint.
+
+The complete V3 branch subsequently passed its feature, selection and exact
+result audits but failed the frozen release gate, leaving TempLAMA test sealed.
+Train-only locality projection reduced added unrelated future-query errors to
+6/4/6 for the three seeds, versus 83/28/87 in V2, while mean gain over explicit
+lifecycle physics fell from 1.810 to 1.070 points and mean Oracle-gap closure
+fell from 35.2% to 20.8%.  The pooled group-bootstrap interval remained
+positive at `[0.697, 1.478]` points.  This establishes a real safety/utility
+tradeoff: hard locality constraints repair most collateral damage but discard
+too many beneficial deletions.
+
+Registered `QWEN_UTILITY_RECORD_CONTROLLER_V4_DOMAIN_TRAINING_PLAN.md` after
+the audited V3 stop and before constructing or labeling a larger TempLAMA
+train corpus.  V4 keeps the dense Qwen writer and the current-write gate fixed,
+and trains only the session-memory forgetting controller.  The frozen design
+uses 512 unique official TempLAMA train targets, minimum-16 Hamilton relation
+allocation, two twins, four lengths, seven mechanisms, three sparse boundaries
+and five immediate queries per boundary.  It later trains the unchanged
+66-dimensional MLP under relation-stratified group splits and performs
+threshold/locality selection on a calibration half before one evaluation-half
+score.  TempLAMA test remains sealed behind the unchanged utility, uncertainty,
+collateral, mechanism and relation gates.
+
+Implemented the model-free V4 formal-train builder, focused quota tests,
+non-overwriting runner and independent exact-reconstruction auditor.  The
+builder consumes only the decontaminated TempLAMA train inventory plus passed
+source/pilot audits and the audited V3 branch decision.  It verifies the exact
+512-group quota, unique real temporal targets, target/background isolation,
+balanced lengths/mechanisms and query contracts while recording immutable
+input and output hashes.  The auditor independently rebuilds every episode,
+checks all upstream hashes, action-space registration and validation/test/V1/
+external seals, and alone releases binary label collection.  Local Python
+compilation, two focused tests, runner syntax and whitespace checks pass.  No
+V4 train episode or model outcome had been observed at this implementation
+checkpoint.
