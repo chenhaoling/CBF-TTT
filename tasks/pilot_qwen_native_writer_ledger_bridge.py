@@ -119,6 +119,8 @@ def writer_session(model, ids):
 
 
 def score_session(model, tokenizer, session, query, answer_ids):
+    import torch
+
     query_ids = tokenizer.encode(render_query(query["text"]), add_special_tokens=False)
     read = session.clone_memory_only()
     started = time.perf_counter()
@@ -129,7 +131,18 @@ def score_session(model, tokenizer, session, query, answer_ids):
         for candidate in query["candidates"]
     }
     prediction = min(scores, key=lambda value: (scores[value], value))
-    generated = read.clone_memory_only().generate(query_ids, 5)
+    generation = read.clone_memory_only()
+    hidden = generation._forward(query_ids)
+    generated = []
+    # The registered bridge trace always has five steps, including after EOS.
+    # This matches the controlled residual protocol and prevents arm-dependent
+    # early stopping from being miscounted as a content error.
+    for index in range(5):
+        with torch.inference_mode():
+            next_id = int(model.lm_head(hidden[:, -1:]).argmax(dim=-1).item())
+        generated.append(next_id)
+        if index < 4:
+            hidden = generation._forward([next_id])
     return {
         "scores": scores,
         "prediction": prediction,

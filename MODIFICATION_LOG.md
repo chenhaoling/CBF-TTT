@@ -3803,3 +3803,9 @@ auditor independently reconstructs all 4,096-token chunks, rows, aggregates,
 bootstrap intervals, gates, dependency hashes and terminal state. Thirteen
 local unit tests, Python compilation, shell syntax validation and
 `git diff --check` passed.
+
+The first one-row smoke was excluded before inspecting arm outcomes because the
+generic session generator stopped early on EOS, violating the registered fixed
+five-step trace. Candidate scores, seven-layer memories and resources were
+finite. Added a bridge-local fixed five-step generator that continues after EOS;
+the formal output root remains uncreated.
