@@ -443,11 +443,16 @@ def load_pubmed_unsupervised(root: str | Path, seed: int = SEED) -> tuple[list[d
     raw = json.loads(path.read_text())
     if not isinstance(raw, list) or len(raw) != 2500:
         raise ValueError("unexpected PubMed-unsupervised schema")
-    rows = []
+    rows, seen = [], set()
+    duplicates = 0
     for index, row in enumerate(raw):
         head, tail = primary_span(row["h"]), primary_span(row["t"])
         masked = mask_token_spans(row["tokens"], head, tail)
         row_id = source_hash("pubmed-unsupervised", canonical_sha(row))
+        if row_id in seen:
+            duplicates += 1
+            continue
+        seen.add(row_id)
         view = deterministic_dropout(masked, row_id, seed)
         if "[ARG1]" not in view or "[ARG2]" not in view:
             raise RuntimeError("entity-preserving dropout removed a marker")
@@ -459,7 +464,13 @@ def load_pubmed_unsupervised(root: str | Path, seed: int = SEED) -> tuple[list[d
             "dropout_rate": UNSUPERVISED_DROPOUT,
             "relation_label_loaded": False,
         })
-    return rows, {"bytes": expected_size, "sha256": expected_sha, "rows": len(rows)}
+    return rows, {
+        "bytes": expected_size,
+        "sha256": expected_sha,
+        "source_rows": len(raw),
+        "unique_rows": len(rows),
+        "duplicate_rows_excluded": duplicates,
+    }
 
 
 def write_jsonl(path: Path, rows: list[dict]) -> str:

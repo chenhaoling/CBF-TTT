@@ -35,6 +35,11 @@ class RetrievalEvidenceForgettingS3BuilderTests(unittest.TestCase):
         self.assertIn("[ARG2]", first)
         self.assertNotEqual(first, "")
 
+    def test_source_identity_is_content_based(self):
+        from tasks.build_retrieval_evidence_forgetting_s3 import source_hash
+        self.assertEqual(source_hash("row", "same"), source_hash("row", "same"))
+        self.assertNotEqual(source_hash("row", "same"), source_hash("row", "other"))
+
     def test_negative_compatibility_rejects_multilabel_overlap(self):
         anchor = {"source": "dialogre", "type_pair": "PER:PER",
                   "all_relations_audit": ["dialogre:a", "dialogre:b"]}

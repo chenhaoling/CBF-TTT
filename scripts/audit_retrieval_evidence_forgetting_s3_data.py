@@ -365,7 +365,11 @@ def audit(data_root: str | Path, fewrel_root: str | Path,
         full = mask_spans(row["tokens"], span(row["h"]), span(row["t"]))
         row_id = source_hash("pubmed-unsupervised", canonical_sha(row))
         expected_views[row_id] = (full, dropout(full, row_id))
-    views_valid = len(views) == len(expected_views) == 2500
+    views_valid = (len(views) == len(expected_views)
+                   == manifest["pubmed_unsupervised"]["unique_rows"]
+                   and manifest["pubmed_unsupervised"]["source_rows"] == 2500
+                   and manifest["pubmed_unsupervised"]["duplicate_rows_excluded"]
+                   == 2500 - len(expected_views))
     for row in views:
         expected = expected_views.get(row["row_id"])
         views_valid &= expected is not None
