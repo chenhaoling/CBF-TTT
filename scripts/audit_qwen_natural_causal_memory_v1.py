@@ -151,13 +151,19 @@ def audit_state(state, session):
                     or decision["version"] != event["version"] \
                     or decision["event_kind"] != event["kind"]:
                 return False
-            work = list(memories[policy])
-            for identifier in decision["deleted"]:
-                matches = [index for index, row in enumerate(work)
-                           if row["chain_id"] == identifier]
-                if not matches:
-                    return False
-                work.pop(matches[0])
+            old = list(memories[policy])
+            remaining_ids = decision["after"][:-1]
+            keep, cursor = [], 0
+            for index, row in enumerate(old):
+                if cursor < len(remaining_ids) \
+                        and row["chain_id"] == remaining_ids[cursor]:
+                    keep.append(index); cursor += 1
+            if cursor != len(remaining_ids):
+                return False
+            removed = [row["chain_id"] for index, row in enumerate(old) if index not in set(keep)]
+            if removed != decision["deleted"]:
+                return False
+            work = [old[index] for index in keep]
             work.append(record_for(chain, version)); memories[policy] = work
             if decision["after"] != [row["chain_id"] for row in work] \
                     or decision["correct"] != int(action_correct(event, decision["deleted"])):
