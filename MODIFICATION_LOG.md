@@ -4581,3 +4581,25 @@ assumption: the hash-pinned file contains 10 relations with 100 mentions each,
 not the 25 relations stated from a domain-level FewRel summary. The correction
 was recorded before pair construction or S2 model execution; no method,
 threshold or gate changed.
+
+Added `tasks/build_natural_relation_reranker_s2.py`, an independent data
+auditor and seven focused tests. The builder creates one distinct natural
+same-relation pair and one different-relation pair in the same 0.05-wide
+masked-trigram bin for each anchor, then expands their ledger equality bits
+into the five registered physical scenarios. It produced 19,200/10,722/2,000
+balanced train/calibration/development relation pairs and
+48,000/26,805/5,000 scenarios. No anchor was excluded. The independent auditor
+verified 111,727 rows, all source/output hashes, pair IDs, similarity values,
+matched bins, complete scenario groups, split isolation and sealing. The
+pre-model shortcut gate passed: exact masked-text positive coverage is zero;
+the calibration-fitted trigram rule has zero relation and deletion recall on
+PubMed at 100% precision. Manifest SHA256 is
+`28b67effc911da68eec9fd74bfd964f9f9a9193b28b19755ed73cc473212584f`.
+
+Added the S2 binary LoRA trainer and cached two-candidate scorer. The model sees
+only the two masked natural mentions and emits `{"same_relation":true|false}`;
+the signed false-versus-true NLL difference is its relation score. The trainer
+keeps the registered Qwen3-4B backbone frozen, updates rank-16 attention LoRA
+weights only, and saves 0.25/0.5/1.0-epoch checkpoints. Twelve combined S2
+builder, auditor, trainer and scorer tests pass locally. Formal model execution
+has not started at this record point.
