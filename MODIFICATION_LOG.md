@@ -5710,3 +5710,24 @@ TempLAMA-only and LAMA-only diagnostic models for a two-by-two transfer
 matrix, and measures centroid source separability plus the ten largest feature
 shifts.  Its fixed rule emits exactly one V8 method class; no diagnostic model
 is saved or released.
+
+The formal diagnostic completed in 55.37 seconds and the independent full
+recomputation audit passed all five checks.  It classified V7 as
+`representation_ranking_limited`: the joint LAMA domain-specific ceiling
+remained +0.859 points / 44.59% closure, while a LAMA-only model fell to
++0.495 points / 25.68%.  LAMA benefit AUROC was 0.788--0.819 and AP
+0.209--0.293 at 6.29% prevalence, whereas risk AUROC was 0.973--0.986.  A
+centroid source score reached 0.836 AUROC, with the largest shifts in masked
+and full-statement cosine features.  Archived the complete 80 KiB diagnostic,
+audit and human-readable conclusion under
+`experiments/v7_failure_diagnostic_20261016/`.
+
+Registered `QWEN_UTILITY_RECORD_CONTROLLER_V8_RELATION_POSTERIOR_PLAN.md`
+before extracting any new representation.  V8 keeps the audited V7
+train/development boundary and frozen Qwen3-4B backbone, learns three linear
+relation heads only from combined training relation IDs, and appends eight
+posterior-compatibility statistics to the existing 66 inference-safe
+features.  The final utility/risk controller and V6 fact-key safety projection
+remain unchanged.  Release additionally requires at least a 0.5-point LAMA
+gain over V7 and a 0.03 LAMA benefit-AP improvement, while preserving the
+dual-domain effect, closure and zero-collateral gates.

@@ -1,0 +1,2135 @@
+{
+  "checks": {
+    "all_transfer_cells_zero_collateral": true,
+    "checkpoint_hashes_locked": true,
+    "finite_diagnostics": true,
+    "heldout_sources_sealed": true,
+    "registered_support_loaded": true,
+    "v7_integrity_audit_passed_gate_failed": true
+  },
+  "covariate_shift": {
+    "development_source_auroc": 0.8360301924762645,
+    "per_domain": {
+      "lama": {
+        "examples": 588,
+        "mean_source_score": 7.6536057638344
+      },
+      "templama": {
+        "examples": 2204,
+        "mean_source_score": -8.619814141772082
+      }
+    },
+    "top_feature_shifts": [
+      {
+        "absolute_standardized_mean_difference": 1.232347033653815,
+        "feature": "context_mean_subject_masked_cosine",
+        "standardized_mean_difference": 1.232347033653815
+      },
+      {
+        "absolute_standardized_mean_difference": 0.9732312128468519,
+        "feature": "subject_masked_cosine",
+        "standardized_mean_difference": 0.9732312128468519
+      },
+      {
+        "absolute_standardized_mean_difference": 0.8053589565761003,
+        "feature": "context_max_subject_masked_cosine",
+        "standardized_mean_difference": 0.8053589565761003
+      },
+      {
+        "absolute_standardized_mean_difference": 0.7784909860658769,
+        "feature": "full_statement_cosine",
+        "standardized_mean_difference": 0.7784909860658769
+      },
+      {
+        "absolute_standardized_mean_difference": 0.6936304102607654,
+        "feature": "context_max_pair_yes_no_margin",
+        "standardized_mean_difference": -0.6936304102607654
+      },
+      {
+        "absolute_standardized_mean_difference": 0.6864631650947328,
+        "feature": "value_masked_cosine",
+        "standardized_mean_difference": 0.6864631650947328
+      },
+      {
+        "absolute_standardized_mean_difference": 0.6189557026855264,
+        "feature": "context_mean_full_statement_cosine",
+        "standardized_mean_difference": 0.6189557026855264
+      },
+      {
+        "absolute_standardized_mean_difference": 0.571025795381142,
+        "feature": "context_max_full_statement_cosine",
+        "standardized_mean_difference": 0.571025795381142
+      },
+      {
+        "absolute_standardized_mean_difference": 0.5439885489960601,
+        "feature": "relation_masked_cosine",
+        "standardized_mean_difference": 0.5439885489960601
+      },
+      {
+        "absolute_standardized_mean_difference": 0.5307534340931712,
+        "feature": "context_max_exact_value",
+        "standardized_mean_difference": -0.5307534340931712
+      }
+    ]
+  },
+  "diagnosis": "representation_ranking_limited",
+  "diagnosis_evidence": {
+    "joint_lama_domain_specific_ceiling": {
+      "mean_gain": 0.00859375000000003,
+      "mean_oracle_gap_closure": 0.44594594594594716,
+      "zero_collateral_all_seeds": true
+    },
+    "lama_only_lama_domain_specific_ceiling": {
+      "mean_gain": 0.0049479166666667185,
+      "mean_oracle_gap_closure": 0.25675675675675924,
+      "zero_collateral_all_seeds": true
+    },
+    "negative_transfer_condition": false,
+    "selection_calibration_condition": false
+  },
+  "domain_specific_policy_ceiling": {
+    "26101651": {
+      "lama": {
+        "config": {
+          "conformal_level": 0.05,
+          "epoch": 50,
+          "locality_rule": "exact_subject",
+          "maximum_extra_deletions": 1,
+          "risk_penalty": 2.0,
+          "risk_threshold": 0.002180658048018813,
+          "risk_threshold_rule": "minimum_across_development_domains",
+          "utility_threshold": 0.5
+        },
+        "feasible_candidates": 60,
+        "metric": {
+          "accuracy": 0.8041666666666667,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.11458333333333333,
+          "correct": 3088,
+          "deletion_fraction": 0.2743055555555556,
+          "filtered_cross_fact_deletions": 0,
+          "gain_over_lifecycle_physics": 0.01041666666666674,
+          "mean_answer_nll": 2.1924362163243285,
+          "oracle_gap_closure": 0.540540540540544,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 0.9888888888888889,
+            "explicit_reset_revoke": 0.575925925925926,
+            "mixed_lifecycle": 0.6111111111111112,
+            "same_subject_different_relation": 0.9388888888888889,
+            "semantic_duplicate": 0.9888888888888889,
+            "semantic_overwrite": 0.7316666666666667,
+            "stale_repetition": 0.8018518518518518
+          },
+          "per_mechanism_gain": {
+            "different_subject_same_relation": 0.0,
+            "explicit_reset_revoke": 0.0,
+            "mixed_lifecycle": 0.029629629629629672,
+            "same_subject_different_relation": 0.0,
+            "semantic_duplicate": 0.0,
+            "semantic_overwrite": 0.026666666666666727,
+            "stale_repetition": 0.014814814814814725
+          },
+          "queries": 3840,
+          "residual_deletion_fraction": 0.20068027210884354,
+          "residual_deletion_precision": 0.1864406779661017,
+          "residual_deletions": 118,
+          "unrelated_accuracy": 0.8706597222222222
+        },
+        "selected": "e50_u0.5_p2.0_c0.05"
+      },
+      "templama": {
+        "config": {
+          "conformal_level": 0.05,
+          "epoch": 50,
+          "locality_rule": "exact_subject",
+          "maximum_extra_deletions": 1,
+          "risk_penalty": 2.0,
+          "risk_threshold": 0.002180658048018813,
+          "risk_threshold_rule": "minimum_across_development_domains",
+          "utility_threshold": 0.5
+        },
+        "feasible_candidates": 60,
+        "metric": {
+          "accuracy": 0.8732421875,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.14778645833333334,
+          "binary_teacher_record_agreement": 0.4568142361111111,
+          "correct": 13413,
+          "deletion_fraction": 0.2836371527777778,
+          "deletion_precision": 0.9954093343534812,
+          "filtered_cross_fact_deletions": 2,
+          "gain_over_lifecycle_physics": 0.026171875000000067,
+          "mean_answer_nll": 1.3948806816182318,
+          "oracle_gap_closure": 0.6072507552870107,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 0.9918918918918919,
+            "explicit_reset_revoke": 0.687962962962963,
+            "mixed_lifecycle": 0.6541666666666667,
+            "same_subject_different_relation": 0.8324324324324325,
+            "semantic_duplicate": 0.9972972972972973,
+            "semantic_overwrite": 0.9540540540540541,
+            "stale_repetition": 0.987037037037037
+          },
+          "per_mechanism_gain": {
+            "different_subject_same_relation": 0.0,
+            "explicit_reset_revoke": 0.0,
+            "mixed_lifecycle": 0.04629629629629628,
+            "same_subject_different_relation": 0.007207207207207245,
+            "semantic_duplicate": 0.0,
+            "semantic_overwrite": 0.01441441441441449,
+            "stale_repetition": 0.11759259259259258
+          },
+          "per_query_role": {
+            "anchor": {
+              "accuracy": 0.8193359375,
+              "mean_answer_nll": 2.311164636306785,
+              "queries": 3072
+            },
+            "current_exact": {
+              "accuracy": 0.9098307291666666,
+              "mean_answer_nll": 0.718769128233968,
+              "queries": 3072
+            },
+            "current_rephrase": {
+              "accuracy": 0.923828125,
+              "mean_answer_nll": 0.6641208562959188,
+              "queries": 3072
+            },
+            "retained_1": {
+              "accuracy": 0.8294270833333334,
+              "mean_answer_nll": 1.7651121579098497,
+              "queries": 3072
+            },
+            "retained_2": {
+              "accuracy": 0.8837890625,
+              "mean_answer_nll": 1.5152366293446373,
+              "queries": 3072
+            }
+          },
+          "per_relation_accuracy": {
+            "P102": 0.8838709677419355,
+            "P108": 0.8743589743589744,
+            "P127": 0.9235294117647059,
+            "P286": 0.8706896551724138,
+            "P39": 0.8561111111111112,
+            "P488": 0.8453333333333334,
+            "P54": 0.9273148148148148,
+            "P6": 0.8028985507246377,
+            "P69": 0.8512820512820513
+          },
+          "queries": 15360,
+          "residual_deletion_fraction": 0.16651542649727769,
+          "residual_deletion_precision": 0.5340599455040872,
+          "residual_deletions": 367,
+          "unrelated_accuracy": 0.8441840277777778
+        },
+        "selected": "e50_u0.5_p2.0_c0.05"
+      }
+    },
+    "26101652": {
+      "lama": {
+        "config": {
+          "conformal_level": 0.05,
+          "epoch": 25,
+          "locality_rule": "exact_subject",
+          "maximum_extra_deletions": 1,
+          "risk_penalty": 1.0,
+          "risk_threshold": 0.1444946676492691,
+          "risk_threshold_rule": "minimum_across_development_domains",
+          "utility_threshold": 0.8
+        },
+        "feasible_candidates": 60,
+        "metric": {
+          "accuracy": 0.8015625,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.11458333333333333,
+          "correct": 3078,
+          "deletion_fraction": 0.24305555555555555,
+          "filtered_cross_fact_deletions": 0,
+          "gain_over_lifecycle_physics": 0.0078125,
+          "mean_answer_nll": 2.1873121238419873,
+          "oracle_gap_closure": 0.4054054054054051,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 0.9888888888888889,
+            "explicit_reset_revoke": 0.575925925925926,
+            "mixed_lifecycle": 0.6111111111111112,
+            "same_subject_different_relation": 0.9388888888888889,
+            "semantic_duplicate": 0.9888888888888889,
+            "semantic_overwrite": 0.715,
+            "stale_repetition": 0.8018518518518518
+          },
+          "per_mechanism_gain": {
+            "different_subject_same_relation": 0.0,
+            "explicit_reset_revoke": 0.0,
+            "mixed_lifecycle": 0.029629629629629672,
+            "same_subject_different_relation": 0.0,
+            "semantic_duplicate": 0.0,
+            "semantic_overwrite": 0.010000000000000009,
+            "stale_repetition": 0.014814814814814725
+          },
+          "queries": 3840,
+          "residual_deletion_fraction": 0.13945578231292516,
+          "residual_deletion_precision": 0.17073170731707318,
+          "residual_deletions": 82,
+          "unrelated_accuracy": 0.8706597222222222
+        },
+        "selected": "e25_u0.8_p1.0_c0.05"
+      },
+      "templama": {
+        "config": {
+          "conformal_level": 0.05,
+          "epoch": 25,
+          "locality_rule": "exact_subject",
+          "maximum_extra_deletions": 1,
+          "risk_penalty": 2.0,
+          "risk_threshold": 0.1444946676492691,
+          "risk_threshold_rule": "minimum_across_development_domains",
+          "utility_threshold": 0.5
+        },
+        "feasible_candidates": 60,
+        "metric": {
+          "accuracy": 0.87421875,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.14908854166666666,
+          "binary_teacher_record_agreement": 0.4611545138888889,
+          "correct": 13428,
+          "deletion_fraction": 0.287109375,
+          "deletion_precision": 0.9969765684051398,
+          "filtered_cross_fact_deletions": 0,
+          "gain_over_lifecycle_physics": 0.027148437500000067,
+          "mean_answer_nll": 1.3881487389925724,
+          "oracle_gap_closure": 0.6299093655589141,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 0.9918918918918919,
+            "explicit_reset_revoke": 0.687962962962963,
+            "mixed_lifecycle": 0.6569444444444444,
+            "same_subject_different_relation": 0.8342342342342343,
+            "semantic_duplicate": 0.9972972972972973,
+            "semantic_overwrite": 0.9572072072072072,
+            "stale_repetition": 0.9861111111111112
+          },
+          "per_mechanism_gain": {
+            "different_subject_same_relation": 0.0,
+            "explicit_reset_revoke": 0.0,
+            "mixed_lifecycle": 0.04907407407407405,
+            "same_subject_different_relation": 0.009009009009009028,
+            "semantic_duplicate": 0.0,
+            "semantic_overwrite": 0.01756756756756761,
+            "stale_repetition": 0.1166666666666667
+          },
+          "per_query_role": {
+            "anchor": {
+              "accuracy": 0.8193359375,
+              "mean_answer_nll": 2.311164636306785,
+              "queries": 3072
+            },
+            "current_exact": {
+              "accuracy": 0.912109375,
+              "mean_answer_nll": 0.7015455416083872,
+              "queries": 3072
+            },
+            "current_rephrase": {
+              "accuracy": 0.92578125,
+              "mean_answer_nll": 0.6499346730214862,
+              "queries": 3072
+            },
+            "retained_1": {
+              "accuracy": 0.830078125,
+              "mean_answer_nll": 1.7628622146815662,
+              "queries": 3072
+            },
+            "retained_2": {
+              "accuracy": 0.8837890625,
+              "mean_answer_nll": 1.5152366293446373,
+              "queries": 3072
+            }
+          },
+          "per_relation_accuracy": {
+            "P102": 0.886021505376344,
+            "P108": 0.8743589743589744,
+            "P127": 0.9235294117647059,
+            "P286": 0.8724137931034482,
+            "P39": 0.8561111111111112,
+            "P488": 0.8473333333333334,
+            "P54": 0.9282407407407407,
+            "P6": 0.803623188405797,
+            "P69": 0.8538461538461538
+          },
+          "queries": 15360,
+          "residual_deletion_fraction": 0.17377495462794917,
+          "residual_deletion_precision": 0.5352480417754569,
+          "residual_deletions": 383,
+          "unrelated_accuracy": 0.8444010416666666
+        },
+        "selected": "e25_u0.5_p2.0_c0.05"
+      }
+    },
+    "26101653": {
+      "lama": {
+        "config": {
+          "conformal_level": 0.05,
+          "epoch": 100,
+          "locality_rule": "exact_subject",
+          "maximum_extra_deletions": 1,
+          "risk_penalty": 2.0,
+          "risk_threshold": 6.53039421649737e-07,
+          "risk_threshold_rule": "minimum_across_development_domains",
+          "utility_threshold": 0.5
+        },
+        "feasible_candidates": 60,
+        "metric": {
+          "accuracy": 0.8013020833333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.11458333333333333,
+          "correct": 3077,
+          "deletion_fraction": 0.2708333333333333,
+          "filtered_cross_fact_deletions": 0,
+          "gain_over_lifecycle_physics": 0.007552083333333348,
+          "mean_answer_nll": 2.201864296678059,
+          "oracle_gap_closure": 0.3918918918918924,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 0.9888888888888889,
+            "explicit_reset_revoke": 0.575925925925926,
+            "mixed_lifecycle": 0.5962962962962963,
+            "same_subject_different_relation": 0.9388888888888889,
+            "semantic_duplicate": 0.9888888888888889,
+            "semantic_overwrite": 0.7266666666666667,
+            "stale_repetition": 0.8018518518518518
+          },
+          "per_mechanism_gain": {
+            "different_subject_same_relation": 0.0,
+            "explicit_reset_revoke": 0.0,
+            "mixed_lifecycle": 0.014814814814814836,
+            "same_subject_different_relation": 0.0,
+            "semantic_duplicate": 0.0,
+            "semantic_overwrite": 0.021666666666666723,
+            "stale_repetition": 0.014814814814814725
+          },
+          "queries": 3840,
+          "residual_deletion_fraction": 0.19387755102040816,
+          "residual_deletion_precision": 0.15789473684210525,
+          "residual_deletions": 114,
+          "unrelated_accuracy": 0.8706597222222222
+        },
+        "selected": "e100_u0.5_p2.0_c0.05"
+      },
+      "templama": {
+        "config": {
+          "conformal_level": 0.05,
+          "epoch": 100,
+          "locality_rule": "exact_subject",
+          "maximum_extra_deletions": 1,
+          "risk_penalty": 2.0,
+          "risk_threshold": 6.53039421649737e-07,
+          "risk_threshold_rule": "minimum_across_development_domains",
+          "utility_threshold": 0.5
+        },
+        "feasible_candidates": 60,
+        "metric": {
+          "accuracy": 0.8708333333333333,
+          "added_unrelated_errors": 0,
+          "binary_teacher_action_agreement": 0.14713541666666666,
+          "binary_teacher_record_agreement": 0.4513888888888889,
+          "correct": 13376,
+          "deletion_fraction": 0.2782118055555556,
+          "deletion_precision": 0.9953198127925117,
+          "filtered_cross_fact_deletions": 2,
+          "gain_over_lifecycle_physics": 0.02376302083333337,
+          "mean_answer_nll": 1.4044517043248788,
+          "oracle_gap_closure": 0.5513595166163151,
+          "per_mechanism_accuracy": {
+            "different_subject_same_relation": 0.9918918918918919,
+            "explicit_reset_revoke": 0.687962962962963,
+            "mixed_lifecycle": 0.6486111111111111,
+            "same_subject_different_relation": 0.8328828828828829,
+            "semantic_duplicate": 0.9972972972972973,
+            "semantic_overwrite": 0.9531531531531532,
+            "stale_repetition": 0.975925925925926
+          },
+          "per_mechanism_gain": {
+            "different_subject_same_relation": 0.0,
+            "explicit_reset_revoke": 0.0,
+            "mixed_lifecycle": 0.040740740740740744,
+            "same_subject_different_relation": 0.0076576576576576905,
+            "semantic_duplicate": 0.0,
+            "semantic_overwrite": 0.013513513513513598,
+            "stale_repetition": 0.10648148148148151
+          },
+          "per_query_role": {
+            "anchor": {
+              "accuracy": 0.8193359375,
+              "mean_answer_nll": 2.311164636306785,
+              "queries": 3072
+            },
+            "current_exact": {
+              "accuracy": 0.9010416666666666,
+              "mean_answer_nll": 0.7537852855912206,
+              "queries": 3072
+            },
+            "current_rephrase": {
+              "accuracy": 0.9195963541666666,
+              "mean_answer_nll": 0.6810436431411139,
+              "queries": 3072
+            },
+            "retained_1": {
+              "accuracy": 0.8304036458333334,
+              "mean_answer_nll": 1.7610283272406377,
+              "queries": 3072
+            },
+            "retained_2": {
+              "accuracy": 0.8837890625,
+              "mean_answer_nll": 1.5152366293446373,
+              "queries": 3072
+            }
+          },
+          "per_relation_accuracy": {
+            "P102": 0.875268817204301,
+            "P108": 0.8708333333333333,
+            "P127": 0.9235294117647059,
+            "P286": 0.8672413793103448,
+            "P39": 0.8505555555555555,
+            "P488": 0.8473333333333334,
+            "P54": 0.9282407407407407,
+            "P6": 0.803623188405797,
+            "P69": 0.8512820512820513
+          },
+          "queries": 15360,
+          "residual_deletion_fraction": 0.15517241379310345,
+          "residual_deletion_precision": 0.5263157894736842,
+          "residual_deletions": 342,
+          "unrelated_accuracy": 0.8445095486111112
+        },
+        "selected": "e100_u0.5_p2.0_c0.05"
+      }
+    }
+  },
+  "lama_confirmation_loaded": false,
+  "locomo_loaded": false,
+  "longmemeval_loaded": false,
+  "next_stage": "register_v8_representation_ranking_limited",
+  "passed": true,
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V7_FAILURE_DIAGNOSTIC_PLAN.md",
+  "protocol": "qwen_utility_record_controller_v7_failure_diagnostic",
+  "ranking_and_calibration": {
+    "26101651": {
+      "lama": {
+        "benefit": {
+          "overall": {
+            "auroc": 0.8166723892676706,
+            "average_precision": 0.29327278112762445,
+            "brier": 0.17200779811390948,
+            "ece_10": 0.2191632644743194,
+            "examples": 588,
+            "positives": 37,
+            "prevalence": 0.06292517006802721
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 2.573085837663293e-07,
+              "ece_10": 0.0001816024242133275,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "auroc": 0.7678571428571429,
+              "average_precision": 0.5564393939393939,
+              "brier": 0.526616339166766,
+              "ece_10": 0.6123290161291759,
+              "examples": 36,
+              "positives": 8,
+              "prevalence": 0.2222222222222222
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.2783018867924528,
+              "average_precision": 0.01889750783957749,
+              "brier": 0.14615520540958166,
+              "ece_10": 0.23448295174079314,
+              "examples": 108,
+              "positives": 2,
+              "prevalence": 0.018518518518518517
+            },
+            "semantic_duplicate": {
+              "brier": 0.08059346424712409,
+              "ece_10": 0.11371819363379702,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "auroc": 0.7022263450834879,
+              "average_precision": 0.36918989842365846,
+              "brier": 0.2543968057170962,
+              "ece_10": 0.30971925949828194,
+              "examples": 120,
+              "positives": 22,
+              "prevalence": 0.18333333333333332
+            },
+            "stale_repetition": {
+              "auroc": 0.7737864077669903,
+              "average_precision": 0.46430716430716434,
+              "brier": 0.251536076691411,
+              "ece_10": 0.3507647948735553,
+              "examples": 108,
+              "positives": 5,
+              "prevalence": 0.046296296296296294
+            }
+          }
+        },
+        "risk": {
+          "overall": {
+            "auroc": 0.9809027777777778,
+            "average_precision": 0.4667341430499325,
+            "brier": 0.055000632394584754,
+            "ece_10": 0.06514204570645118,
+            "examples": 588,
+            "positives": 12,
+            "prevalence": 0.02040816326530612
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 2.734254612722549e-15,
+              "ece_10": 1.0675000689413003e-08,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "brier": 0.018517241474018366,
+              "ece_10": 0.036458403971921974,
+              "examples": 36,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.8958333333333334,
+              "average_precision": 0.48005050505050495,
+              "brier": 0.26058732832091924,
+              "ece_10": 0.29665402357382004,
+              "examples": 108,
+              "positives": 12,
+              "prevalence": 0.1111111111111111
+            },
+            "semantic_duplicate": {
+              "brier": 1.3932285805590405e-08,
+              "ece_10": 1.612211699110461e-05,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "brier": 0.02941931822250495,
+              "ece_10": 0.041254320842576214,
+              "examples": 120,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "stale_repetition": {
+              "brier": 4.540870339106917e-11,
+              "ece_10": 1.1568869193262114e-06,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            }
+          }
+        }
+      },
+      "templama": {
+        "benefit": {
+          "overall": {
+            "auroc": 0.9455623753658094,
+            "average_precision": 0.6529114944860199,
+            "brier": 0.09788105771292135,
+            "ece_10": 0.10556737061471708,
+            "examples": 2204,
+            "positives": 305,
+            "prevalence": 0.1383847549909256
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 5.840311887849492e-06,
+              "ece_10": 0.0003262318238368003,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "auroc": 0.6617283950617284,
+              "average_precision": 0.7161281392024847,
+              "brier": 0.28275567272477076,
+              "ece_10": 0.27741274755034184,
+              "examples": 144,
+              "positives": 90,
+              "prevalence": 0.625
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.8169887278582931,
+              "average_precision": 0.28384190852677743,
+              "brier": 0.11990550179056268,
+              "ece_10": 0.16274551214800195,
+              "examples": 444,
+              "positives": 30,
+              "prevalence": 0.06756756756756757
+            },
+            "semantic_duplicate": {
+              "brier": 0.11250683373386298,
+              "ece_10": 0.14979966226596403,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "auroc": 0.9479631945685189,
+              "average_precision": 0.5830485722424452,
+              "brier": 0.08887943282825371,
+              "ece_10": 0.10354365375349177,
+              "examples": 444,
+              "positives": 58,
+              "prevalence": 0.13063063063063063
+            },
+            "stale_repetition": {
+              "auroc": 0.9345036788434232,
+              "average_precision": 0.7893265022039975,
+              "brier": 0.09417322675747544,
+              "ece_10": 0.06517204949111506,
+              "examples": 432,
+              "positives": 127,
+              "prevalence": 0.29398148148148145
+            }
+          }
+        },
+        "risk": {
+          "overall": {
+            "auroc": 0.9483972033659422,
+            "average_precision": 0.36911281913725297,
+            "brier": 0.07147619531635882,
+            "ece_10": 0.0759200355927146,
+            "examples": 2204,
+            "positives": 103,
+            "prevalence": 0.04673321234119782
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 3.6069408101609844e-17,
+              "ece_10": 3.3271137696473377e-10,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "brier": 0.20348236496418912,
+              "ece_10": 0.26503077636775235,
+              "examples": 144,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.8100390057796886,
+              "average_precision": 0.43564344321224385,
+              "brier": 0.23259709237635517,
+              "ece_10": 0.22470576384363503,
+              "examples": 444,
+              "positives": 103,
+              "prevalence": 0.23198198198198197
+            },
+            "semantic_duplicate": {
+              "brier": 1.3747708828345613e-10,
+              "ece_10": 1.0735451693626817e-06,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "brier": 0.056209252105000135,
+              "ece_10": 0.08429340781113281,
+              "examples": 444,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "stale_repetition": {
+              "brier": 4.761393109549651e-06,
+              "ece_10": 0.00030294940944545416,
+              "examples": 432,
+              "positives": 0,
+              "prevalence": 0.0
+            }
+          }
+        }
+      }
+    },
+    "26101652": {
+      "lama": {
+        "benefit": {
+          "overall": {
+            "auroc": 0.7880757345367145,
+            "average_precision": 0.20925081778948296,
+            "brier": 0.20673199867498285,
+            "ece_10": 0.2502165810891445,
+            "examples": 588,
+            "positives": 37,
+            "prevalence": 0.06292517006802721
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 2.9501129149073872e-05,
+              "ece_10": 0.002189596441675471,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "auroc": 0.5535714285714286,
+              "average_precision": 0.2652848467322152,
+              "brier": 0.615315934274693,
+              "ece_10": 0.6707693719201618,
+              "examples": 36,
+              "positives": 8,
+              "prevalence": 0.2222222222222222
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.18867924528301888,
+              "average_precision": 0.01689366160293347,
+              "brier": 0.1744347398336323,
+              "ece_10": 0.2658077857963184,
+              "examples": 108,
+              "positives": 2,
+              "prevalence": 0.018518518518518517
+            },
+            "semantic_duplicate": {
+              "brier": 0.10149216346575622,
+              "ece_10": 0.12950933967003642,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "auroc": 0.5853432282003711,
+              "average_precision": 0.2683991164710378,
+              "brier": 0.32205977135360647,
+              "ece_10": 0.33957472701052516,
+              "examples": 120,
+              "positives": 22,
+              "prevalence": 0.18333333333333332
+            },
+            "stale_repetition": {
+              "auroc": 0.7582524271844661,
+              "average_precision": 0.23363101938711697,
+              "brier": 0.2866349754285752,
+              "ece_10": 0.396514604979462,
+              "examples": 108,
+              "positives": 5,
+              "prevalence": 0.046296296296296294
+            }
+          }
+        },
+        "risk": {
+          "overall": {
+            "auroc": 0.9728009259259259,
+            "average_precision": 0.45027195027195027,
+            "brier": 0.06829856381010121,
+            "ece_10": 0.08153787420536696,
+            "examples": 588,
+            "positives": 12,
+            "prevalence": 0.02040816326530612
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 1.997483545539389e-10,
+              "ece_10": 4.153374715045565e-06,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "brier": 0.03706090713531942,
+              "ece_10": 0.09255928138250348,
+              "examples": 36,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.84375,
+              "average_precision": 0.4538872962786006,
+              "brier": 0.3040329714193862,
+              "ece_10": 0.3314931362711795,
+              "examples": 108,
+              "positives": 12,
+              "prevalence": 0.1111111111111111
+            },
+            "semantic_duplicate": {
+              "brier": 2.1687972950666136e-06,
+              "ece_10": 0.0002082895781306278,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "brier": 0.04991207555617067,
+              "ece_10": 0.0730190964689788,
+              "examples": 120,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "stale_repetition": {
+              "brier": 1.0984421587250672e-06,
+              "ece_10": 0.00023742380105063688,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            }
+          }
+        }
+      },
+      "templama": {
+        "benefit": {
+          "overall": {
+            "auroc": 0.9392432600419548,
+            "average_precision": 0.6468913112523094,
+            "brier": 0.10432705612691706,
+            "ece_10": 0.12216389770082653,
+            "examples": 2204,
+            "positives": 305,
+            "prevalence": 0.1383847549909256
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 9.989952638606992e-05,
+              "ece_10": 0.002379609062841697,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "auroc": 0.6621399176954732,
+              "average_precision": 0.7319362822087225,
+              "brier": 0.2898442300769951,
+              "ece_10": 0.2658706758585241,
+              "examples": 144,
+              "positives": 90,
+              "prevalence": 0.625
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.7655394524959742,
+              "average_precision": 0.2014519363467125,
+              "brier": 0.12979679840990063,
+              "ece_10": 0.18191877237666892,
+              "examples": 444,
+              "positives": 30,
+              "prevalence": 0.06756756756756757
+            },
+            "semantic_duplicate": {
+              "brier": 0.12080204396184573,
+              "ece_10": 0.15659198973178026,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "auroc": 0.9446131856351617,
+              "average_precision": 0.5763598435800333,
+              "brier": 0.09773140463497804,
+              "ece_10": 0.1329936160055441,
+              "examples": 444,
+              "positives": 58,
+              "prevalence": 0.13063063063063063
+            },
+            "stale_repetition": {
+              "auroc": 0.9312766232089841,
+              "average_precision": 0.7810223123162257,
+              "brier": 0.09824773456033797,
+              "ece_10": 0.09136481748585,
+              "examples": 432,
+              "positives": 127,
+              "prevalence": 0.29398148148148145
+            }
+          }
+        },
+        "risk": {
+          "overall": {
+            "auroc": 0.9484387924381824,
+            "average_precision": 0.3398568017703377,
+            "brier": 0.08327948576963401,
+            "ece_10": 0.08873237061729211,
+            "examples": 2204,
+            "positives": 103,
+            "prevalence": 0.04673321234119782
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 1.6557193562482382e-12,
+              "ece_10": 1.179598205602745e-07,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "brier": 0.28298047481415256,
+              "ece_10": 0.35259751657740723,
+              "examples": 144,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.8006719243800359,
+              "average_precision": 0.4062521404962763,
+              "brier": 0.23307120359165773,
+              "ece_10": 0.22719990751827424,
+              "examples": 444,
+              "positives": 103,
+              "prevalence": 0.23198198198198197
+            },
+            "semantic_duplicate": {
+              "brier": 8.060927177991245e-09,
+              "ece_10": 1.1667949794672575e-05,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "brier": 0.08853635420610441,
+              "ece_10": 0.1305899625913473,
+              "examples": 444,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "stale_repetition": {
+              "brier": 1.1665781651192898e-05,
+              "ece_10": 0.000988388608537194,
+              "examples": 432,
+              "positives": 0,
+              "prevalence": 0.0
+            }
+          }
+        }
+      }
+    },
+    "26101653": {
+      "lama": {
+        "benefit": {
+          "overall": {
+            "auroc": 0.8192230342865552,
+            "average_precision": 0.23548592292194087,
+            "brier": 0.17186197793627198,
+            "ece_10": 0.2022698647189981,
+            "examples": 588,
+            "positives": 37,
+            "prevalence": 0.06292517006802721
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 6.235329127480671e-09,
+              "ece_10": 2.8055847008081943e-05,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "auroc": 0.8035714285714286,
+              "average_precision": 0.4871240601503759,
+              "brier": 0.4922116847619818,
+              "ece_10": 0.5853463287154833,
+              "examples": 36,
+              "positives": 8,
+              "prevalence": 0.2222222222222222
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.38207547169811323,
+              "average_precision": 0.02175894281157439,
+              "brier": 0.15077413020657418,
+              "ece_10": 0.20954660919897516,
+              "examples": 108,
+              "positives": 2,
+              "prevalence": 0.018518518518518517
+            },
+            "semantic_duplicate": {
+              "brier": 0.07046035760996554,
+              "ece_10": 0.10558263540523796,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "auroc": 0.6771799628942486,
+              "average_precision": 0.3244304174024939,
+              "brier": 0.25965544983880817,
+              "ece_10": 0.24763557893775026,
+              "examples": 120,
+              "positives": 22,
+              "prevalence": 0.18333333333333332
+            },
+            "stale_repetition": {
+              "auroc": 0.8009708737864077,
+              "average_precision": 0.4703942307692308,
+              "brier": 0.26188187997072,
+              "ece_10": 0.34465609992744334,
+              "examples": 108,
+              "positives": 5,
+              "prevalence": 0.046296296296296294
+            }
+          }
+        },
+        "risk": {
+          "overall": {
+            "auroc": 0.9858217592592593,
+            "average_precision": 0.47034447034447036,
+            "brier": 0.04572150319555529,
+            "ece_10": 0.053300527047244736,
+            "examples": 588,
+            "positives": 12,
+            "prevalence": 0.02040816326530612
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 3.094643075201636e-31,
+              "ece_10": 1.3178068309904694e-16,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "brier": 4.8565406344556874e-06,
+              "ece_10": 0.0005340378102033992,
+              "examples": 36,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.9149305555555556,
+              "average_precision": 0.47034447034447036,
+              "brier": 0.2373716271960607,
+              "ece_10": 0.272328646132847,
+              "examples": 108,
+              "positives": 12,
+              "prevalence": 0.1111111111111111
+            },
+            "semantic_duplicate": {
+              "brier": 2.780293514646799e-15,
+              "ece_10": 7.1754388311165674e-09,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "brier": 0.010399444219573338,
+              "ece_10": 0.015916581690415325,
+              "examples": 120,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "stale_repetition": {
+              "brier": 1.048599848696282e-16,
+              "ece_10": 1.6895172245622278e-09,
+              "examples": 108,
+              "positives": 0,
+              "prevalence": 0.0
+            }
+          }
+        }
+      },
+      "templama": {
+        "benefit": {
+          "overall": {
+            "auroc": 0.9440879151235767,
+            "average_precision": 0.6543665630665321,
+            "brier": 0.09876377554243837,
+            "ece_10": 0.09817095988722141,
+            "examples": 2204,
+            "positives": 305,
+            "prevalence": 0.1383847549909256
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 1.612916625469966e-08,
+              "ece_10": 1.912390647059429e-05,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "auroc": 0.6930041152263374,
+              "average_precision": 0.7549557595567855,
+              "brier": 0.2851119963860781,
+              "ece_10": 0.2819774566839139,
+              "examples": 144,
+              "positives": 90,
+              "prevalence": 0.625
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.8272141706924315,
+              "average_precision": 0.3597226900293966,
+              "brier": 0.12268531165697436,
+              "ece_10": 0.1446562200512186,
+              "examples": 444,
+              "positives": 30,
+              "prevalence": 0.06756756756756757
+            },
+            "semantic_duplicate": {
+              "brier": 0.10671839091719869,
+              "ece_10": 0.14347956677721047,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "auroc": 0.9399678399142398,
+              "average_precision": 0.5573644748781286,
+              "brier": 0.09379721571568392,
+              "ece_10": 0.10022790708062643,
+              "examples": 444,
+              "positives": 58,
+              "prevalence": 0.13063063063063063
+            },
+            "stale_repetition": {
+              "auroc": 0.9355879695365948,
+              "average_precision": 0.7970975628987899,
+              "brier": 0.0949425487391751,
+              "ece_10": 0.06756115706343058,
+              "examples": 432,
+              "positives": 127,
+              "prevalence": 0.29398148148148145
+            }
+          }
+        },
+        "risk": {
+          "overall": {
+            "auroc": 0.9470663530542552,
+            "average_precision": 0.41316893692359624,
+            "brier": 0.060152346715013766,
+            "ece_10": 0.06171394896649599,
+            "examples": 2204,
+            "positives": 103,
+            "prevalence": 0.04673321234119782
+          },
+          "per_mechanism": {
+            "different_subject_same_relation": {
+              "brier": 3.085449582485234e-36,
+              "ece_10": 1.209935934442999e-19,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "mixed_lifecycle": {
+              "brier": 0.1536519210053987,
+              "ece_10": 0.1940257231126475,
+              "examples": 144,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "same_subject_different_relation": {
+              "auroc": 0.8254135466788145,
+              "average_precision": 0.502620825202951,
+              "brier": 0.22061434274254252,
+              "ece_10": 0.2224265485161958,
+              "examples": 444,
+              "positives": 103,
+              "prevalence": 0.23198198198198197
+            },
+            "semantic_duplicate": {
+              "brier": 3.825418102441389e-22,
+              "ece_10": 1.243629331858613e-12,
+              "examples": 370,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "semantic_overwrite": {
+              "brier": 0.02814668276922848,
+              "ece_10": 0.044510057732276787,
+              "examples": 444,
+              "positives": 0,
+              "prevalence": 0.0
+            },
+            "stale_repetition": {
+              "brier": 4.812189440143825e-10,
+              "ece_10": 3.0840093123733907e-06,
+              "examples": 432,
+              "positives": 0,
+              "prevalence": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "seconds": 55.36696978844702,
+  "source_transfer_aggregate": {
+    "lama": {
+      "lama": {
+        "mean_gain": 0.0049479166666667185,
+        "mean_oracle_gap_closure": 0.25675675675675924,
+        "zero_collateral_all_seeds": true
+      },
+      "templama": {
+        "mean_gain": 0.009939236111111138,
+        "mean_oracle_gap_closure": 0.2306143001007056,
+        "zero_collateral_all_seeds": true
+      }
+    },
+    "templama": {
+      "lama": {
+        "mean_gain": 0.007465277777777797,
+        "mean_oracle_gap_closure": 0.38738738738738815,
+        "zero_collateral_all_seeds": true
+      },
+      "templama": {
+        "mean_gain": 0.026996527777777796,
+        "mean_oracle_gap_closure": 0.6263846928499502,
+        "zero_collateral_all_seeds": true
+      }
+    }
+  },
+  "source_transfer_matrix": {
+    "lama": {
+      "26101651": {
+        "lama": {
+          "config": {
+            "conformal_level": 0.01,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.0020232920069247484,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.7
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.7984375,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.11458333333333333,
+            "correct": 3066,
+            "deletion_fraction": 0.2361111111111111,
+            "filtered_cross_fact_deletions": 0,
+            "gain_over_lifecycle_physics": 0.004687500000000067,
+            "mean_answer_nll": 2.2040301550053147,
+            "oracle_gap_closure": 0.2432432432432465,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9888888888888889,
+              "explicit_reset_revoke": 0.575925925925926,
+              "mixed_lifecycle": 0.5962962962962963,
+              "same_subject_different_relation": 0.9388888888888889,
+              "semantic_duplicate": 0.9888888888888889,
+              "semantic_overwrite": 0.7083333333333334,
+              "stale_repetition": 0.8018518518518518
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.014814814814814836,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.0033333333333334103,
+              "stale_repetition": 0.014814814814814725
+            },
+            "queries": 3840,
+            "residual_deletion_fraction": 0.12585034013605442,
+            "residual_deletion_precision": 0.13513513513513514,
+            "residual_deletions": 74,
+            "unrelated_accuracy": 0.8706597222222222
+          },
+          "selected": "e25_u0.7_p2.0_c0.01"
+        },
+        "templama": {
+          "config": {
+            "conformal_level": 0.05,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.015304693952202797,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.4
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.8616536458333334,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.13541666666666666,
+            "binary_teacher_record_agreement": 0.4322916666666667,
+            "correct": 13235,
+            "deletion_fraction": 0.2565104166666667,
+            "deletion_precision": 1.0,
+            "filtered_cross_fact_deletions": 4,
+            "gain_over_lifecycle_physics": 0.014583333333333393,
+            "mean_answer_nll": 1.4467163446644236,
+            "oracle_gap_closure": 0.3383685800604244,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9918918918918919,
+              "explicit_reset_revoke": 0.687962962962963,
+              "mixed_lifecycle": 0.6486111111111111,
+              "same_subject_different_relation": 0.8252252252252252,
+              "semantic_duplicate": 0.9972972972972973,
+              "semantic_overwrite": 0.94009009009009,
+              "stale_repetition": 0.9319444444444445
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.040740740740740744,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.00045045045045044585,
+              "stale_repetition": 0.0625
+            },
+            "per_query_role": {
+              "anchor": {
+                "accuracy": 0.8193359375,
+                "mean_answer_nll": 2.311164636306785,
+                "queries": 3072
+              },
+              "current_exact": {
+                "accuracy": 0.8792317708333334,
+                "mean_answer_nll": 0.8552795451931464,
+                "queries": 3072
+              },
+              "current_rephrase": {
+                "accuracy": 0.90234375,
+                "mean_answer_nll": 0.7653509870675256,
+                "queries": 3072
+              },
+              "retained_1": {
+                "accuracy": 0.8235677083333334,
+                "mean_answer_nll": 1.7865499254100239,
+                "queries": 3072
+              },
+              "retained_2": {
+                "accuracy": 0.8837890625,
+                "mean_answer_nll": 1.5152366293446373,
+                "queries": 3072
+              }
+            },
+            "per_relation_accuracy": {
+              "P102": 0.8505376344086022,
+              "P108": 0.8695512820512821,
+              "P127": 0.9235294117647059,
+              "P286": 0.8482758620689655,
+              "P39": 0.8405555555555555,
+              "P488": 0.838,
+              "P54": 0.9226851851851852,
+              "P6": 0.7963768115942029,
+              "P69": 0.8461538461538461
+            },
+            "queries": 15360,
+            "residual_deletion_fraction": 0.10980036297640654,
+            "residual_deletion_precision": 0.4214876033057851,
+            "residual_deletions": 242,
+            "unrelated_accuracy": 0.8422309027777778
+          },
+          "selected": "e25_u0.4_p2.0_c0.05"
+        }
+      },
+      "26101652": {
+        "lama": {
+          "config": {
+            "conformal_level": 0.03,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.0002668783417902887,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.4
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.7986979166666667,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.11458333333333333,
+            "correct": 3067,
+            "deletion_fraction": 0.25,
+            "filtered_cross_fact_deletions": 0,
+            "gain_over_lifecycle_physics": 0.0049479166666667185,
+            "mean_answer_nll": 2.214713103625839,
+            "oracle_gap_closure": 0.25675675675675924,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9888888888888889,
+              "explicit_reset_revoke": 0.575925925925926,
+              "mixed_lifecycle": 0.5888888888888889,
+              "same_subject_different_relation": 0.9388888888888889,
+              "semantic_duplicate": 0.9888888888888889,
+              "semantic_overwrite": 0.7166666666666667,
+              "stale_repetition": 0.8018518518518518
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.007407407407407418,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.011666666666666714,
+              "stale_repetition": 0.014814814814814725
+            },
+            "queries": 3840,
+            "residual_deletion_fraction": 0.15306122448979592,
+            "residual_deletion_precision": 0.13333333333333333,
+            "residual_deletions": 90,
+            "unrelated_accuracy": 0.8706597222222222
+          },
+          "selected": "e25_u0.4_p2.0_c0.03"
+        },
+        "templama": {
+          "config": {
+            "conformal_level": 0.03,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.0002668783417902887,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.4
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.8536458333333333,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.12369791666666667,
+            "binary_teacher_record_agreement": 0.4021267361111111,
+            "correct": 13112,
+            "deletion_fraction": 0.2263454861111111,
+            "deletion_precision": 1.0,
+            "filtered_cross_fact_deletions": 4,
+            "gain_over_lifecycle_physics": 0.006575520833333348,
+            "mean_answer_nll": 1.4830585292135388,
+            "oracle_gap_closure": 0.15256797583081608,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9918918918918919,
+              "explicit_reset_revoke": 0.687962962962963,
+              "mixed_lifecycle": 0.6208333333333333,
+              "same_subject_different_relation": 0.8252252252252252,
+              "semantic_duplicate": 0.9972972972972973,
+              "semantic_overwrite": 0.9405405405405406,
+              "stale_repetition": 0.9023148148148148
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.012962962962962954,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.0009009009009010027,
+              "stale_repetition": 0.03287037037037033
+            },
+            "per_query_role": {
+              "anchor": {
+                "accuracy": 0.8193359375,
+                "mean_answer_nll": 2.311164636306785,
+                "queries": 3072
+              },
+              "current_exact": {
+                "accuracy": 0.8502604166666666,
+                "mean_answer_nll": 0.9832788913198177,
+                "queries": 3072
+              },
+              "current_rephrase": {
+                "accuracy": 0.8912760416666666,
+                "mean_answer_nll": 0.8190625636864297,
+                "queries": 3072
+              },
+              "retained_1": {
+                "accuracy": 0.8235677083333334,
+                "mean_answer_nll": 1.7865499254100239,
+                "queries": 3072
+              },
+              "retained_2": {
+                "accuracy": 0.8837890625,
+                "mean_answer_nll": 1.5152366293446373,
+                "queries": 3072
+              }
+            },
+            "per_relation_accuracy": {
+              "P102": 0.8419354838709677,
+              "P108": 0.8660256410256411,
+              "P127": 0.9235294117647059,
+              "P286": 0.8408045977011495,
+              "P39": 0.8238888888888889,
+              "P488": 0.8333333333333334,
+              "P54": 0.9226851851851852,
+              "P6": 0.7702898550724637,
+              "P69": 0.8333333333333334
+            },
+            "queries": 15360,
+            "residual_deletion_fraction": 0.04673321234119782,
+            "residual_deletion_precision": 0.39805825242718446,
+            "residual_deletions": 103,
+            "unrelated_accuracy": 0.8422309027777778
+          },
+          "selected": "e25_u0.4_p2.0_c0.03"
+        }
+      },
+      "26101653": {
+        "lama": {
+          "config": {
+            "conformal_level": 0.03,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.0008235901477746665,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.5
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.7989583333333333,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.11458333333333333,
+            "correct": 3068,
+            "deletion_fraction": 0.2482638888888889,
+            "filtered_cross_fact_deletions": 0,
+            "gain_over_lifecycle_physics": 0.00520833333333337,
+            "mean_answer_nll": 2.2061371463845263,
+            "oracle_gap_closure": 0.270270270270272,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9888888888888889,
+              "explicit_reset_revoke": 0.575925925925926,
+              "mixed_lifecycle": 0.5962962962962963,
+              "same_subject_different_relation": 0.9388888888888889,
+              "semantic_duplicate": 0.9888888888888889,
+              "semantic_overwrite": 0.7116666666666667,
+              "stale_repetition": 0.8018518518518518
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.014814814814814836,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.00666666666666671,
+              "stale_repetition": 0.014814814814814725
+            },
+            "queries": 3840,
+            "residual_deletion_fraction": 0.14965986394557823,
+            "residual_deletion_precision": 0.13636363636363635,
+            "residual_deletions": 88,
+            "unrelated_accuracy": 0.8706597222222222
+          },
+          "selected": "e25_u0.5_p2.0_c0.03"
+        },
+        "templama": {
+          "config": {
+            "conformal_level": 0.05,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.0024974464904516935,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.4
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.8557291666666667,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.12630208333333334,
+            "binary_teacher_record_agreement": 0.4144965277777778,
+            "correct": 13144,
+            "deletion_fraction": 0.2387152777777778,
+            "deletion_precision": 1.0,
+            "filtered_cross_fact_deletions": 4,
+            "gain_over_lifecycle_physics": 0.008658854166666674,
+            "mean_answer_nll": 1.4722359304143462,
+            "oracle_gap_closure": 0.20090634441087635,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9918918918918919,
+              "explicit_reset_revoke": 0.687962962962963,
+              "mixed_lifecycle": 0.6273148148148148,
+              "same_subject_different_relation": 0.8252252252252252,
+              "semantic_duplicate": 0.9972972972972973,
+              "semantic_overwrite": 0.9405405405405406,
+              "stale_repetition": 0.9106481481481481
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.019444444444444375,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.0009009009009010027,
+              "stale_repetition": 0.04120370370370363
+            },
+            "per_query_role": {
+              "anchor": {
+                "accuracy": 0.8193359375,
+                "mean_answer_nll": 2.311164636306785,
+                "queries": 3072
+              },
+              "current_exact": {
+                "accuracy": 0.8577473958333334,
+                "mean_answer_nll": 0.945692330538653,
+                "queries": 3072
+              },
+              "current_rephrase": {
+                "accuracy": 0.8942057291666666,
+                "mean_answer_nll": 0.8025361304716322,
+                "queries": 3072
+              },
+              "retained_1": {
+                "accuracy": 0.8235677083333334,
+                "mean_answer_nll": 1.7865499254100239,
+                "queries": 3072
+              },
+              "retained_2": {
+                "accuracy": 0.8837890625,
+                "mean_answer_nll": 1.5152366293446373,
+                "queries": 3072
+              }
+            },
+            "per_relation_accuracy": {
+              "P102": 0.8483870967741935,
+              "P108": 0.8666666666666667,
+              "P127": 0.9235294117647059,
+              "P286": 0.8419540229885057,
+              "P39": 0.8261111111111111,
+              "P488": 0.8333333333333334,
+              "P54": 0.9226851851851852,
+              "P6": 0.777536231884058,
+              "P69": 0.8358974358974359
+            },
+            "queries": 15360,
+            "residual_deletion_fraction": 0.07259528130671507,
+            "residual_deletion_precision": 0.35,
+            "residual_deletions": 160,
+            "unrelated_accuracy": 0.8422309027777778
+          },
+          "selected": "e25_u0.4_p2.0_c0.05"
+        }
+      }
+    },
+    "templama": {
+      "26101651": {
+        "lama": {
+          "config": {
+            "conformal_level": 0.03,
+            "epoch": 100,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 7.939999022710253e-07,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.4
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.8015625,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.11458333333333333,
+            "correct": 3078,
+            "deletion_fraction": 0.23958333333333334,
+            "filtered_cross_fact_deletions": 6,
+            "gain_over_lifecycle_physics": 0.0078125,
+            "mean_answer_nll": 2.1783019153507515,
+            "oracle_gap_closure": 0.4054054054054051,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9888888888888889,
+              "explicit_reset_revoke": 0.575925925925926,
+              "mixed_lifecycle": 0.6111111111111112,
+              "same_subject_different_relation": 0.9388888888888889,
+              "semantic_duplicate": 0.9888888888888889,
+              "semantic_overwrite": 0.715,
+              "stale_repetition": 0.8018518518518518
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.029629629629629672,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.010000000000000009,
+              "stale_repetition": 0.014814814814814725
+            },
+            "queries": 3840,
+            "residual_deletion_fraction": 0.1326530612244898,
+            "residual_deletion_precision": 0.1794871794871795,
+            "residual_deletions": 78,
+            "unrelated_accuracy": 0.8706597222222222
+          },
+          "selected": "e100_u0.4_p2.0_c0.03"
+        },
+        "templama": {
+          "config": {
+            "conformal_level": 0.01,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.04567360505461693,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.4
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.8744140625,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.14908854166666666,
+            "binary_teacher_record_agreement": 0.4663628472222222,
+            "correct": 13431,
+            "deletion_fraction": 0.2923177083333333,
+            "deletion_precision": 0.9970304380103935,
+            "filtered_cross_fact_deletions": 0,
+            "gain_over_lifecycle_physics": 0.02734375,
+            "mean_answer_nll": 1.385799955781196,
+            "oracle_gap_closure": 0.6344410876132932,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9918918918918919,
+              "explicit_reset_revoke": 0.687962962962963,
+              "mixed_lifecycle": 0.6597222222222222,
+              "same_subject_different_relation": 0.831981981981982,
+              "semantic_duplicate": 0.9972972972972973,
+              "semantic_overwrite": 0.9554054054054054,
+              "stale_repetition": 0.9888888888888889
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.051851851851851816,
+              "same_subject_different_relation": 0.006756756756756799,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.015765765765765827,
+              "stale_repetition": 0.11944444444444446
+            },
+            "per_query_role": {
+              "anchor": {
+                "accuracy": 0.8193359375,
+                "mean_answer_nll": 2.311164636306785,
+                "queries": 3072
+              },
+              "current_exact": {
+                "accuracy": 0.9143880208333334,
+                "mean_answer_nll": 0.6866228247884768,
+                "queries": 3072
+              },
+              "current_rephrase": {
+                "accuracy": 0.9248046875,
+                "mean_answer_nll": 0.6526974179971603,
+                "queries": 3072
+              },
+              "retained_1": {
+                "accuracy": 0.8297526041666666,
+                "mean_answer_nll": 1.763278270468921,
+                "queries": 3072
+              },
+              "retained_2": {
+                "accuracy": 0.8837890625,
+                "mean_answer_nll": 1.5152366293446373,
+                "queries": 3072
+              }
+            },
+            "per_relation_accuracy": {
+              "P102": 0.878494623655914,
+              "P108": 0.8727564102564103,
+              "P127": 0.9235294117647059,
+              "P286": 0.8758620689655172,
+              "P39": 0.8561111111111112,
+              "P488": 0.8473333333333334,
+              "P54": 0.9282407407407407,
+              "P6": 0.8181159420289855,
+              "P69": 0.8487179487179487
+            },
+            "queries": 15360,
+            "residual_deletion_fraction": 0.18466424682395643,
+            "residual_deletion_precision": 0.5036855036855037,
+            "residual_deletions": 407,
+            "unrelated_accuracy": 0.8442925347222222
+          },
+          "selected": "e25_u0.4_p2.0_c0.01"
+        }
+      },
+      "26101652": {
+        "lama": {
+          "config": {
+            "conformal_level": 0.05,
+            "epoch": 100,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 1.437301648365974e-06,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.4
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.8026041666666667,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.11458333333333333,
+            "correct": 3082,
+            "deletion_fraction": 0.2282986111111111,
+            "filtered_cross_fact_deletions": 8,
+            "gain_over_lifecycle_physics": 0.008854166666666718,
+            "mean_answer_nll": 2.1695131740639075,
+            "oracle_gap_closure": 0.4594594594594618,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9888888888888889,
+              "explicit_reset_revoke": 0.575925925925926,
+              "mixed_lifecycle": 0.6111111111111112,
+              "same_subject_different_relation": 0.9388888888888889,
+              "semantic_duplicate": 0.9888888888888889,
+              "semantic_overwrite": 0.7216666666666667,
+              "stale_repetition": 0.8018518518518518
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.029629629629629672,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.01666666666666672,
+              "stale_repetition": 0.014814814814814725
+            },
+            "queries": 3840,
+            "residual_deletion_fraction": 0.11054421768707483,
+            "residual_deletion_precision": 0.24615384615384617,
+            "residual_deletions": 65,
+            "unrelated_accuracy": 0.8706597222222222
+          },
+          "selected": "e100_u0.4_p2.0_c0.05"
+        },
+        "templama": {
+          "config": {
+            "conformal_level": 0.01,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.04770427942276001,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.5
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.87421875,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.1484375,
+            "binary_teacher_record_agreement": 0.4613715277777778,
+            "correct": 13428,
+            "deletion_fraction": 0.2873263888888889,
+            "deletion_precision": 0.9969788519637462,
+            "filtered_cross_fact_deletions": 0,
+            "gain_over_lifecycle_physics": 0.027148437500000067,
+            "mean_answer_nll": 1.3886739622016573,
+            "oracle_gap_closure": 0.6299093655589141,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9918918918918919,
+              "explicit_reset_revoke": 0.687962962962963,
+              "mixed_lifecycle": 0.6606481481481481,
+              "same_subject_different_relation": 0.8333333333333334,
+              "semantic_duplicate": 0.9972972972972973,
+              "semantic_overwrite": 0.9563063063063063,
+              "stale_repetition": 0.9842592592592593
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.0527777777777777,
+              "same_subject_different_relation": 0.008108108108108136,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.01666666666666672,
+              "stale_repetition": 0.11481481481481481
+            },
+            "per_query_role": {
+              "anchor": {
+                "accuracy": 0.8193359375,
+                "mean_answer_nll": 2.311164636306785,
+                "queries": 3072
+              },
+              "current_exact": {
+                "accuracy": 0.916015625,
+                "mean_answer_nll": 0.6864733254678868,
+                "queries": 3072
+              },
+              "current_rephrase": {
+                "accuracy": 0.9225260416666666,
+                "mean_answer_nll": 0.6653830619791279,
+                "queries": 3072
+              },
+              "retained_1": {
+                "accuracy": 0.8294270833333334,
+                "mean_answer_nll": 1.7651121579098497,
+                "queries": 3072
+              },
+              "retained_2": {
+                "accuracy": 0.8837890625,
+                "mean_answer_nll": 1.5152366293446373,
+                "queries": 3072
+              }
+            },
+            "per_relation_accuracy": {
+              "P102": 0.878494623655914,
+              "P108": 0.8743589743589744,
+              "P127": 0.9235294117647059,
+              "P286": 0.871264367816092,
+              "P39": 0.855,
+              "P488": 0.8466666666666667,
+              "P54": 0.9282407407407407,
+              "P6": 0.8202898550724638,
+              "P69": 0.8487179487179487
+            },
+            "queries": 15360,
+            "residual_deletion_fraction": 0.17422867513611615,
+            "residual_deletion_precision": 0.5286458333333334,
+            "residual_deletions": 384,
+            "unrelated_accuracy": 0.8441840277777778
+          },
+          "selected": "e25_u0.5_p2.0_c0.01"
+        }
+      },
+      "26101653": {
+        "lama": {
+          "config": {
+            "conformal_level": 0.01,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.04523211717605591,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.7
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.7994791666666666,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.11458333333333333,
+            "correct": 3070,
+            "deletion_fraction": 0.24131944444444445,
+            "filtered_cross_fact_deletions": 0,
+            "gain_over_lifecycle_physics": 0.005729166666666674,
+            "mean_answer_nll": 2.195126597904361,
+            "oracle_gap_closure": 0.2972972972972975,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9888888888888889,
+              "explicit_reset_revoke": 0.575925925925926,
+              "mixed_lifecycle": 0.5962962962962963,
+              "same_subject_different_relation": 0.9388888888888889,
+              "semantic_duplicate": 0.9888888888888889,
+              "semantic_overwrite": 0.715,
+              "stale_repetition": 0.8018518518518518
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.014814814814814836,
+              "same_subject_different_relation": 0.0,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.010000000000000009,
+              "stale_repetition": 0.014814814814814725
+            },
+            "queries": 3840,
+            "residual_deletion_fraction": 0.1360544217687075,
+            "residual_deletion_precision": 0.15,
+            "residual_deletions": 80,
+            "unrelated_accuracy": 0.8706597222222222
+          },
+          "selected": "e25_u0.7_p2.0_c0.01"
+        },
+        "templama": {
+          "config": {
+            "conformal_level": 0.01,
+            "epoch": 25,
+            "locality_rule": "exact_subject",
+            "maximum_extra_deletions": 1,
+            "risk_penalty": 2.0,
+            "risk_threshold": 0.04523211717605591,
+            "risk_threshold_rule": "minimum_across_development_domains",
+            "utility_threshold": 0.4
+          },
+          "feasible_candidates": 180,
+          "metric": {
+            "accuracy": 0.8735677083333333,
+            "added_unrelated_errors": 0,
+            "binary_teacher_action_agreement": 0.14583333333333334,
+            "binary_teacher_record_agreement": 0.4624565972222222,
+            "correct": 13418,
+            "deletion_fraction": 0.2884114583333333,
+            "deletion_precision": 0.9969902182091799,
+            "filtered_cross_fact_deletions": 0,
+            "gain_over_lifecycle_physics": 0.026497395833333326,
+            "mean_answer_nll": 1.3925752159788545,
+            "oracle_gap_closure": 0.6148036253776434,
+            "per_mechanism_accuracy": {
+              "different_subject_same_relation": 0.9918918918918919,
+              "explicit_reset_revoke": 0.687962962962963,
+              "mixed_lifecycle": 0.6583333333333333,
+              "same_subject_different_relation": 0.831081081081081,
+              "semantic_duplicate": 0.9972972972972973,
+              "semantic_overwrite": 0.9554054054054054,
+              "stale_repetition": 0.9851851851851852
+            },
+            "per_mechanism_gain": {
+              "different_subject_same_relation": 0.0,
+              "explicit_reset_revoke": 0.0,
+              "mixed_lifecycle": 0.05046296296296293,
+              "same_subject_different_relation": 0.005855855855855796,
+              "semantic_duplicate": 0.0,
+              "semantic_overwrite": 0.015765765765765827,
+              "stale_repetition": 0.1157407407407407
+            },
+            "per_query_role": {
+              "anchor": {
+                "accuracy": 0.8193359375,
+                "mean_answer_nll": 2.311164636306785,
+                "queries": 3072
+              },
+              "current_exact": {
+                "accuracy": 0.9130859375,
+                "mean_answer_nll": 0.7016001597263918,
+                "queries": 3072
+              },
+              "current_rephrase": {
+                "accuracy": 0.9225260416666666,
+                "mean_answer_nll": 0.6698535016893553,
+                "queries": 3072
+              },
+              "retained_1": {
+                "accuracy": 0.8291015625,
+                "mean_answer_nll": 1.765021152827103,
+                "queries": 3072
+              },
+              "retained_2": {
+                "accuracy": 0.8837890625,
+                "mean_answer_nll": 1.5152366293446373,
+                "queries": 3072
+              }
+            },
+            "per_relation_accuracy": {
+              "P102": 0.878494623655914,
+              "P108": 0.8727564102564103,
+              "P127": 0.9235294117647059,
+              "P286": 0.8695402298850575,
+              "P39": 0.855,
+              "P488": 0.8473333333333334,
+              "P54": 0.9273148148148148,
+              "P6": 0.8181159420289855,
+              "P69": 0.8512820512820513
+            },
+            "queries": 15360,
+            "residual_deletion_fraction": 0.176497277676951,
+            "residual_deletion_precision": 0.5089974293059126,
+            "residual_deletions": 389,
+            "unrelated_accuracy": 0.8440755208333334
+          },
+          "selected": "e25_u0.4_p2.0_c0.01"
+        }
+      }
+    }
+  },
+  "templama_test_loaded": false,
+  "terminal_status": "v7_failure_diagnostic_completed",
+  "upstream_audit_hashes": {
+    "lama_dev_data": "e42ae50224057ea2465c4b4116f164e127e020c8d38bfa38c48e3bda39bf2599",
+    "lama_dev_features": "d20cad6f701def7715170c0790b37d7bfac2e20b18fa10bee805fd89351deebc",
+    "lama_dev_labels": "f4b2ff0eefe83d805341b04bf54f0731d71d39cea86c2142f004bd25fecd5258",
+    "lama_train_features": "86f2cb7c0c8e9b0c494315bcac14edc4a138fdc639dcfecf1d6e2344f0e4bc28",
+    "lama_train_labels": "9b1011d072e9d75b79a04cdd724cf647760d0a862f1bf9d4f8028f02ac312b26",
+    "templama_dev_data": "3c10a69106972c761b42f63f55c0c93ab0f9acd6cb8ca4f257f90162c60ed5c8",
+    "templama_dev_features": "f71228fdb66b54e86fc3de104aac8a0599f956d9f091b7db7e10e0696a72e3ec",
+    "templama_dev_labels": "c15a19f882441c6367f0039da4f2ea77e8c70e8b268035c911f42bf34b45dc86",
+    "templama_train_features": "4c5cf134329ec49c19c7ccd9b97ede05a36dcee2baa13521e5ee4a3548f7905d",
+    "templama_train_labels": "9a8162de20523a3335abae79907b335d5605e533245304a969e67a2c00577341"
+  },
+  "v7_audit_sha256": "3e38f92a2947b7889a5bcb4d8ba08b7f4fc84b397c717dc1a4169f855cbcf05e",
+  "v7_checkpoint_sha256": {
+    "26101651": "ae819b9da4f6466e7c9476f97efa2004ce0d92bfa8c00edcc5e8cdc0bea8c9de",
+    "26101652": "15354ae847b88ab5abe622a1ecc86f93f9e1a372a3e9fb6602d65039890d7877",
+    "26101653": "a04704bc62689d0f4e828d27a383c469122595429fb9af27d0817d4186e987f4"
+  },
+  "v7_summary_sha256": "482111f12057df273a6b3b3185c5a19e9a62af49058fe2d00e70650f4a922394"
+}
