@@ -442,6 +442,20 @@ def bootstrap_group_gain(rows: list[dict]) -> list[float]:
     return [percentile(draws, .025), percentile(draws, .975)]
 
 
+def unrelated_effects(rows: list[dict]) -> dict[str, int | bool]:
+    deltas = [
+        row["actions"][row["safe_oracle_action"]]["unrelated_correct"]
+        - row["actions"][row["retain_action"]]["unrelated_correct"]
+        for row in rows
+    ]
+    return {
+        "added_errors": sum(max(0, -delta) for delta in deltas),
+        "additional_correct": sum(max(0, delta) for delta in deltas),
+        "net_correct_gain": sum(deltas),
+        "rowwise_barrier_passed": all(delta >= 0 for delta in deltas),
+    }
+
+
 def summarize(args) -> dict:
     root = Path(args.root); rows, resources = [], []
     for shard in range(args.num_shards):
@@ -495,11 +509,7 @@ def summarize(args) -> dict:
                 and projections[str(choice)]["output_gib"] < 50]
     selected_size = max(feasible) if feasible else None
     label_times = [row["label_seconds"] for row in rows]
-    added_unrelated_errors = sum(
-        row["actions"][row["retain_action"]]["unrelated_correct"]
-        - row["actions"][row["safe_oracle_action"]]["unrelated_correct"]
-        for row in rows
-    )
+    unrelated = unrelated_effects(rows)
     interval = bootstrap_group_gain(rows)
     checks = {
         "finite_complete_rows": len(rows) == 336 and all(
@@ -507,7 +517,9 @@ def summarize(args) -> dict:
         ),
         "oracle_gain_at_least_point_05": oracle_accuracy - retain_accuracy >= .05,
         "oracle_gain_ci_lower_above_zero": interval[0] > 0,
-        "zero_added_unrelated_errors": added_unrelated_errors == 0,
+        "zero_added_unrelated_errors": (
+            unrelated["added_errors"] == 0 and unrelated["rowwise_barrier_passed"]
+        ),
         "every_mechanism_has_two_actions": all(
             value["optimal_actions"] >= 2 for value in per_mechanism.values()
         ),
@@ -530,7 +542,10 @@ def summarize(args) -> dict:
         "retain_all_accuracy": retain_accuracy,
         "safe_oracle_gain": oracle_accuracy - retain_accuracy,
         "safe_oracle_gain_group_bootstrap_95ci": interval,
-        "added_unrelated_errors": added_unrelated_errors,
+        "added_unrelated_errors": unrelated["added_errors"],
+        "additional_unrelated_correct": unrelated["additional_correct"],
+        "net_unrelated_correct_gain": unrelated["net_correct_gain"],
+        "unrelated_barrier_rowwise_passed": unrelated["rowwise_barrier_passed"],
         "safe_oracle_actions": dict(Counter(row["safe_oracle_action"] for row in rows)),
         "per_mechanism": per_mechanism,
         "half_strength": {

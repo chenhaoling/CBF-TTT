@@ -4899,3 +4899,13 @@ unrelated-chain barrier before future correctness, NLL and retained-mass tie
 breakers. Per-label time, cache behavior and CUDA peaks are retained. The
 summarizer applies the frozen pilot gate, diagnoses whether half-strength is a
 real physical state and selects only among 128/256/512 formal group counts.
+
+The two-GPU pilot completed all 336 labels before independent outcome audit.
+Its initial summary marked the unrelated-error gate false because it summed
+`retain_correct - oracle_correct` and required the signed value to equal zero;
+the safe oracle had improved 134 unrelated outcomes, producing `-134`. The raw
+row barrier already required oracle unrelated correctness to be no lower than
+retain-all. The corrected aggregation clips only negative oracle-minus-retain
+deltas as added errors, separately reports improvements and verifies the
+barrier row by row. This is a summary-only repair; Qwen rows are not rescored
+and the original summary/terminal state remains retained.
