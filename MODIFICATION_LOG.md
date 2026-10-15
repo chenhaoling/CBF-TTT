@@ -4417,3 +4417,20 @@ wrong-relation deletions. Under the physically corrected state-equivalence
 target, the unchanged V7 OOF actions have 611 TP, three FP, 161 FN and 1,457 TN
 (99.51% precision, 79.15% recall). This is diagnostic only. A new preregistered
 cross-fit experiment is required before any online replay or test access.
+
+## 2026-10-15: state-equivalent safe-delete V10 registration
+
+Added `QWEN_NATURAL_FORGETTING_STATE_EQUIVALENT_V10_PLAN.md` before V10 fitting.
+It corrects the physical label rather than changing the controller: deletion is
+safe for an already validated lifecycle replacement or for an idempotent
+duplicate whose source-row hash and exact target value match the reader-top
+record. The latter covers paraphrased duplicate representations with different
+constructed chain IDs. Source hash, target, chain and event metadata construct
+labels only and remain unavailable at inference.
+
+Added `tasks/train_qwen_natural_forgetting_state_equivalent_v10.py`, three pure
+unit tests, a gated runner and an independent auditor. V10 keeps V7's exact
+15-feature family, folds, nested search, three seeds, head family, optimizer,
+thresholds and optional entity barrier. Its unchanged safety/recall release may
+authorize only a new on-policy calibration replay; source test and external
+benchmarks remain sealed.
