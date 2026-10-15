@@ -4610,3 +4610,10 @@ one-epoch run then started in tmux `cbf_s2_train_20261015` at committed code
 state `069578d5`. Added a separate training auditor that pins 75/150/300-step
 checkpoints, optimizer and batch settings, data/code hashes, LoRA-only tensor
 keys, both rank logs, memory limits and all unopened evaluation flags.
+
+Added `tasks/extract_natural_relation_reranker_s2_embeddings.py` and three pure
+tests for the retrieval branch. It deduplicates source mentions by audited row
+hash, extracts the final frozen-Qwen hidden state without the LM head, mean
+pools non-padding tokens, L2 normalizes vectors and writes two shard-safe NPZ
+files with hashes and resource profiles. Development extraction requires a
+frozen S2 calibration selection; test input is rejected.
