@@ -4378,3 +4378,24 @@ paraphrases or reliably reject a different relation about the same subject. The
 next iteration must replace lexical relation features with a frozen semantic
 representation and retain the independent CounterFact gate. ZsRE test and
 external benchmarks remain sealed.
+
+## 2026-10-15: frozen-Qwen semantic fact-key V9 registration
+
+Added `QWEN_NATURAL_FORGETTING_SEMANTIC_FACT_KEY_V9_PLAN.md` after the audited
+V8 representation failure and before V9 execution. V9 keeps V8's exact pair
+corpus and five-way subject split. It reuses V11's validated token-span
+architecture and fixed epoch/threshold, but refits every span ensemble after
+excluding the evaluated fold's subjects; no V11 predictions or relation scores
+are reused.
+
+Added `tasks/train_qwen_natural_forgetting_semantic_fact_key_v9.py`, focused
+unit tests, a gated runner and two-stage independent auditor. The final 1B-token
+Qwen3-4B checkpoint stays frozen. Its text-only predicted subject span is masked
+before a fixed 256-dimensional semantic projection. Registered scalar features
+combine entity anchors, predicted-span compatibility, lexical overlap and
+full/relation semantic distances; a finite vector arm additionally exposes the
+symmetric masked-relation absolute difference and product. Folds 0--2 train,
+fold 3 selects the registered finite grid and fold 4 remains untouched until
+one validation. Only a passing audited CounterFact result may trigger frozen,
+zero-parameter transfer to V7 ZsRE calibration. Test and external benchmarks
+remain sealed.
