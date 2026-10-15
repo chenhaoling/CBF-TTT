@@ -4486,3 +4486,16 @@ without at least two distinct subjects and values in every split. This removes
 one development row; all other calibration/development and FewRel training
 relations satisfy the same eligibility rule. A sixth regression test covers
 the exclusion.
+
+The corrected build produced 48,000 FewRel training pairs, 26,805 SemEval
+calibration pairs and 6,140 one-shot development pairs. Every anchor has all
+five registered kinds; duplicate/update/retain account for 20/20/60 percent.
+Added `scripts/audit_structured_fact_comparator_s1_data.py` and two focused
+tests. The independent audit recomputed all 80,945 pair IDs, field and
+operation labels, relation agreement, tags, five-kind groups, split counts,
+file/source hashes, exact FewRel relation assignment and source disjointness.
+All checks pass with manifest SHA256
+`a11f6cde216a627d4a011284d5793872cc84633b629a91b6f816e7c62a51677b`;
+the auditor parsed zero test rows. The remote experiment environment now pins
+`peft==0.18.0` and `accelerate==1.11.0` alongside Transformers 4.57.3 and
+PyTorch 2.9.1+cu130.

@@ -105,7 +105,9 @@ single-line JSON with keys in this order:
 
 The pilot uses seed `24117`, BF16, maximum length 384, effective batch size 64,
 AdamW, learning rate `2e-4`, and checkpoints after 0.25, 0.5, 1.0, and 2.0
-epochs.  Only the SemEval calibration split may select checkpoint and a minimum
+epochs.  Use weight decay 0.01, three-percent linear warmup followed by cosine
+decay, gradient clipping at 1.0, per-GPU batch four on two GPUs, and eight-way
+gradient accumulation.  Only the SemEval calibration split may select checkpoint and a minimum
 generation-confidence threshold.  Below that threshold the policy defers to
 `retain`.  Architecture, prompt, rank, optimizer, and field definitions may
 not be changed after observing development.
