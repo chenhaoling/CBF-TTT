@@ -51,8 +51,18 @@ validation set.
 DialogRE train is divided by dialogue ID into five deterministic groups with
 seed `35117`.  Four groups fit weights and the fifth selects checkpoint,
 fusion regularization, and a safety threshold.  Group assignments are fixed
-before model execution and no dialogue, entity pair, or exact masked text may
-cross groups.
+before model execution and no dialogue, source annotation instance, or exact
+masked text may cross groups.  Repeated semantic entity pairs are reported but
+are allowed across groups.
+
+A train-only connectivity inspection before pair construction showed why the
+initial stronger entity-pair condition is unusable: enforcing both dialogue
+and normalized entity-pair disjointness creates one component containing 970
+of the 1,073 dialogues, plus only 102 small components.  This is caused by the
+recurring Friends cast and generic speaker aliases.  The protocol correction
+to dialogue-disjoint folds is frozen here before any pair, embedding, or model
+score is produced.  Entity-pair overlap remains an explicit diagnostic and no
+entity string is a model feature.
 
 Official DialogRE v2 English dev is a one-shot development split.  It may be
 opened only after the complete training/calibration selection and independent
@@ -87,7 +97,8 @@ An independent auditor must verify:
 
 - source repository commit and all file hashes;
 - zero DialogRE test rows parsed;
-- dialogue-, argument-pair-, and exact-text-disjoint folds;
+- dialogue-, source-instance-, and exact-text-disjoint folds, with normalized
+  entity-pair overlap counted and reported;
 - distinct natural texts for every positive pair;
 - relation labels and multi-label expansion against the raw train source;
 - equal positive/negative counts within occupied similarity bins;

@@ -4703,3 +4703,13 @@ self-supervised arm is schema-eligible. Before constructing a pair or running
 a model, the plan now fixes a 200-anchor cap per source/split/relation and
 deterministic entity-preserving 15% token-dropout views. DialogRE dev and test
 were not parsed during this inspection.
+
+A second train-only structural check found that jointly enforcing dialogue
+and normalized entity-pair disjointness is impossible for a useful five-fold
+split: recurring Friends characters and generic speaker aliases connect 970
+of 1,073 dialogues into one component. Before pair construction or model
+execution, the S3 plan therefore corrects the split invariant to dialogue,
+source-instance and exact-masked-text disjointness. Semantic entity-pair
+overlap is retained as a reported diagnostic, and entity strings remain
+excluded from model features. This correction uses no dev/test record or
+model score.
