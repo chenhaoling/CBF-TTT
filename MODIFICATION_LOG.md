@@ -4989,3 +4989,30 @@ relation folds, optimizer, loss, checkpoint rule, finite development threshold
 grid and required feature/training audits before the formal label summary can
 be observed. This prevents formal outcomes from changing the controller
 definition.
+
+The corrected formal model-free build completed remotely. It produced 512
+source groups, 1,024 twin episodes, 3,072 sparse boundaries and 15,360
+immediate queries. Lengths are exactly balanced at 256 episodes each;
+mechanisms have 146 episodes each except semantic overwrite with 148; the 17
+training relations have 30 or 31 source groups each. All 12 independent data
+audit checks passed. Development and confirmation episodes were not generated.
+
+The first formal Qwen label run was stopped and retained as a failed artifact
+after 192/194 episodes per shard because GPU memory had grown to approximately
+23.4 GiB. `OutcomeCache` contained episode-qualified identities, so keeping it
+for the entire shard could not create cross-episode hits and retained obsolete
+KV/prepared states. Formal collection now creates and releases one cache per
+episode, aggregates only scalar hit/miss counts and empties released CUDA
+blocks. The retry uses a new output root; no partial label is reused or
+overwritten, and the action grid, outcomes and oracle rule are unchanged.
+
+Added `tasks/extract_qwen_utility_record_controller_v1_features.py`, its
+two-GPU runner, focused tests and
+`scripts/audit_qwen_utility_record_controller_v1_features.py`. The extractor
+implements the frozen 22 base features plus per-feature candidate mean and max
+context (66 scalars per record), reconstructs a safe binary endpoint teacher,
+constructs single-delete collateral-risk targets and keeps split/mechanism
+metadata outside numeric tensors. The auditor independently reconstructs all
+teachers, risk labels and deterministic feature components, verifies context
+pooling, model/input hashes, class support, one-to-one boundary coverage and
+held-out seals before controller training.
