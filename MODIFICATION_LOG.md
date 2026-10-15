@@ -5699,3 +5699,14 @@ calibration audit, domain-specific policy ceiling, source-only transfer matrix
 and centroid covariate-shift measurement.  A deterministic rule maps the
 result to selection/calibration, negative-transfer or representation/ranking
 limited; the diagnostic cannot release a model or reopen any held-out source.
+
+Implemented the registered diagnostic in
+`tasks/diagnose_qwen_utility_record_controller_v7_cross_source.py`, with a
+non-overwriting runner, full recomputation auditor and focused metric,
+zero-collateral-selection and decision-rule tests.  The task hash-locks the
+three V7 checkpoints, measures record-level AUROC/AP/Brier/ECE overall and by
+mechanism, recomputes domain-specific policy ceilings, fits unchanged
+TempLAMA-only and LAMA-only diagnostic models for a two-by-two transfer
+matrix, and measures centroid source separability plus the ten largest feature
+shifts.  Its fixed rule emits exactly one V8 method class; no diagnostic model
+is saved or released.
