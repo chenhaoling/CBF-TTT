@@ -4051,3 +4051,35 @@ was 89.03% against a 90% threshold and the oracle gap was 6.77 points against a
 six-point maximum. No held-out split was loaded. Per the failure rule, the next
 iteration must repair key ranking on calibration while retaining no-match
 specificity; thresholds and release gates must not be relaxed.
+
+## 2026-10-15: natural reader V3--V5 iterations
+
+V3 preregistered and implemented a shared linear nine-class key/defer ranker
+over every memory record. It used five session folds, six equally weighted
+strata and explicit no-match controls. No configuration met both the 92%
+no-match and 98% exact-selection constraints; the best safe model reduced
+exact/rephrase selection to 90.59/56.18%. The runner stopped before new Qwen
+outcome scoring. This negative control showed that the pair head must not
+replace the 96%-accurate cosine ranker.
+
+V4 preserved cosine rank one and added a zero-initialized nonlinear residual
+to the frozen gate logit. Added its preregistered plan, training task, focused
+test and refusal-to-overwrite runner. V4 reached 94.58% candidate accuracy,
+90.55% rephrase accuracy and 77.62% final generation exact, improving over V2
+by 3.02 points with 95% CI `[2.07, 4.03]`. It stopped because the selected
+threshold's balanced accuracy was 91.899% versus a frozen 92% gate.
+
+The immutable V4 search contained eleven configurations satisfying all four
+decision gates. V5 preregistered a protocol correction that constrains every
+release metric before applying the unchanged V4 preference order. It adds no
+model, feature, hyperparameter or relaxed threshold. V5 selected threshold
+0.30, reached 94.34% candidate accuracy, a 3.97-point oracle gap, 93.22% final
+candidate accuracy and 77.03% final generation exact. Its 2.79-point gain over
+V2 had 95% CI `[1.90, 3.76]`; all nine gates and all eight independent audit
+checks passed.
+
+Added a separate preregistered one-time natural-development protocol,
+evaluator, unit test, runner and independent auditor. It evaluates the frozen
+V5 checkpoint against V1, oracle and zero arms on 64 subject-disjoint sessions
+and 640 in-fold no-match controls. It trains or selects no parameter and keeps
+test and external benchmarks sealed.
