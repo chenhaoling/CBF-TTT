@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v6_original_confirmation_evaluation_20261016}
+ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v6_original_confirmation_evaluation_20261016_retry1}
 DATA_ROOT=${DATA_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v6_original_confirmation_data_20261016}
 LABEL_ROOT=${LABEL_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v6_original_confirmation_labels_20261016}
 FEATURE_ROOT=${FEATURE_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v6_original_confirmation_features_20261016}

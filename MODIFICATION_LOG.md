@@ -5623,3 +5623,12 @@ per confirmation relation.  It excludes only P530 and retains six relations;
 the unchanged 64 groups are balanced across them.  The builder and independent
 audit record and recompute every included/excluded subject count.  No query,
 mechanism, action, checkpoint, threshold, endpoint or result gate changed.
+
+The first frozen evaluation root stopped before producing a result because the
+generic V1 label rows do not duplicate `target_relation` at top level, whereas
+the TempLAMA metric helper expects that audit stratum.  Labels, outcomes,
+features and actions were already complete and audited.  The evaluator now
+reconstructs only this reporting field from each immutable episode's
+`audit.target_relation` before aggregation; it never enters a feature or
+policy decision.  A focused test covers exact reconstruction, and the result
+retry uses a new non-overwriting root.

@@ -12,6 +12,9 @@ from tasks.build_qwen_utility_semantic_record_gate_v1_formal import (
     input_source_rows,
     material_rows,
 )
+from tasks.evaluate_qwen_utility_record_controller_v6_original_confirmation import (
+    attach_target_relations,
+)
 
 
 def fact(relation, index):
@@ -26,6 +29,15 @@ def fact(relation, index):
 
 
 class TestV6OriginalSourceConfirmation(unittest.TestCase):
+    def test_relation_strata_are_reconstructed_from_episode_audit(self):
+        labels = [{"episode_id": "episode-1"}]
+        episodes = [{
+            "episode_id": "episode-1",
+            "audit": {"target_relation": "P27"},
+        }]
+        attach_target_relations(labels, episodes)
+        self.assertEqual(labels[0]["target_relation"], "P27")
+
     def test_seven_relation_material_and_identity(self):
         relations = [f"P{index}" for index in range(7)]
         facts = {

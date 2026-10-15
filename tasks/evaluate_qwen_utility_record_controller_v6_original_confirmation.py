@@ -62,6 +62,18 @@ AUDIT_PROTOCOL = (
 )
 
 
+def attach_target_relations(labels: list[dict], episodes: list[dict]) -> None:
+    """Attach audit-only relation strata without changing any action outcome."""
+    episode_by_id = {row["episode_id"]: row for row in episodes}
+    if len(episode_by_id) != len(episodes):
+        raise ValueError("duplicate original-source episode identity")
+    for row in labels:
+        episode = episode_by_id.get(row["episode_id"])
+        if episode is None:
+            raise ValueError("label references a missing original-source episode")
+        row["target_relation"] = episode["audit"]["target_relation"]
+
+
 def evaluate(args) -> dict:
     data_root = Path(args.data_root)
     feature_root = Path(args.feature_root)
@@ -99,6 +111,7 @@ def evaluate(args) -> dict:
         labels.extend(load_jsonl(label_root / f"labels_shard{shard}.jsonl"))
         feature_rows.extend(load_jsonl(feature_root / f"features_shard{shard}.jsonl"))
     episodes = load_jsonl(data_root / "confirmation_episodes.jsonl")
+    attach_target_relations(labels, episodes)
     features = {
         (row["episode_id"], row["boundary_index"]): row
         for row in feature_rows
