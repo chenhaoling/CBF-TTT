@@ -77,16 +77,23 @@ def collect(args) -> dict:
     extraction_allocated = torch.cuda.max_memory_allocated() / 2**30
     extraction_reserved = torch.cuda.max_memory_reserved() / 2**30
 
-    cache = OutcomeCache(model, tokenizer)
     started = time.perf_counter(); rows = []
+    total_cache_hits = 0; total_cache_misses = 0
     with output.open("x") as sink, torch.inference_mode():
         for episode_index, episode in enumerate(selected):
+            # Cache identities are episode-scoped, so retaining KV/prepared
+            # states across episodes only grows VRAM without creating hits.
+            cache = OutcomeCache(model, tokenizer)
             for boundary_offset in range(len(episode["boundaries"])):
                 row = build_label(episode, boundary_offset, embeddings, cache, True)
                 row["protocol"] = PROTOCOL
                 row["partition"] = "train"
                 row["shard"] = args.shard
                 sink.write(json.dumps(row) + "\n"); sink.flush(); rows.append(row)
+            total_cache_hits += cache.hits
+            total_cache_misses += cache.misses
+            del cache
+            torch.cuda.empty_cache()
             print(json.dumps({"shard": args.shard, "completed": episode_index + 1,
                               "total": len(selected)}), flush=True)
     label_seconds = time.perf_counter() - started
@@ -114,8 +121,8 @@ def collect(args) -> dict:
             extraction_reserved, max(row["peak_reserved_gib"] for row in rows)
         ),
         "mean_label_seconds": statistics.fmean(row["label_seconds"] for row in rows),
-        "cache_hits": cache.hits,
-        "cache_misses": cache.misses,
+        "cache_hits": total_cache_hits,
+        "cache_misses": total_cache_misses,
         "rows_sha256": sha256(output),
         "data_manifest_sha256": sha256(manifest_path),
         "data_audit_sha256": sha256(audit_path),
