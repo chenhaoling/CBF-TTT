@@ -1,0 +1,73 @@
+{
+  "protocol": "qwen_natural_forgetting_state_equivalent_v10",
+  "checks": {
+    "state_equivalent_corpus_reconstruction_exact": true,
+    "feature_and_target_tensors_exact": true,
+    "label_components_exact": true,
+    "no_train_validation_session_overlap": true,
+    "checkpoint_probabilities_match": true,
+    "checkpoint_barrier_actions_match": true,
+    "aggregate_metrics_match": true,
+    "artifact_hashes_match": true,
+    "label_only_metadata_excluded": true,
+    "heldout_sources_remained_sealed": true
+  },
+  "passed": true,
+  "rows": 2232,
+  "max_probability_error": 0.0,
+  "action_mismatches": 0,
+  "session_leaks": 0,
+  "recomputed_metrics": {
+    "rows": 2232,
+    "true_positives": 598,
+    "false_positives": 6,
+    "false_negatives": 174,
+    "true_negatives": 1454,
+    "precision": 0.9900662251655629,
+    "recall": 0.7746113989637305,
+    "delete_rate": 0.27060931899641577,
+    "by_outer_fold": {
+      "0": {
+        "rows": 553,
+        "true_positives": 160,
+        "false_positives": 0,
+        "false_negatives": 43,
+        "precision": 1.0,
+        "recall": 0.7881773399014779
+      },
+      "1": {
+        "rows": 515,
+        "true_positives": 132,
+        "false_positives": 0,
+        "false_negatives": 34,
+        "precision": 1.0,
+        "recall": 0.7951807228915663
+      },
+      "2": {
+        "rows": 441,
+        "true_positives": 109,
+        "false_positives": 0,
+        "false_negatives": 36,
+        "precision": 1.0,
+        "recall": 0.7517241379310344
+      },
+      "3": {
+        "rows": 387,
+        "true_positives": 109,
+        "false_positives": 4,
+        "false_negatives": 28,
+        "precision": 0.9646017699115044,
+        "recall": 0.7956204379562044
+      },
+      "4": {
+        "rows": 336,
+        "true_positives": 88,
+        "false_positives": 2,
+        "false_negatives": 33,
+        "precision": 0.9777777777777777,
+        "recall": 0.7272727272727273
+      }
+    }
+  },
+  "summary_sha256": "22bffa3fece5e8be5727166f10167520fcf70afe0d8c012782a2021db1c3b8d0"
+}

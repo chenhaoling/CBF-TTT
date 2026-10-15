@@ -4434,3 +4434,19 @@ unit tests, a gated runner and an independent auditor. V10 keeps V7's exact
 thresholds and optional entity barrier. Its unchanged safety/recall release may
 authorize only a new on-policy calibration replay; source test and external
 benchmarks remain sealed.
+
+V10 completed in 113.43 seconds. The corrected corpus contains 678 lifecycle
+positives and 94 duplicate-only positives, for 772 safe states total. Formal
+five-fold retraining produced 598 TP, six FP, 174 FN and 1,454 TN: 99.01%
+precision, 77.46% recall and 27.06% delete rate. Fold precision was 100%, 100%,
+100%, 96.46% and 97.78%. All inner selections were feasible but disabled the
+entity barrier; the six outer-fold false deletes exceeded the unchanged
+absolute maximum of four. The independent audit passed all ten checks with
+zero probability/action mismatch and zero session leakage. V10 stopped before
+online replay and test.
+
+This distinguishes physical-label correctness from controller generalization.
+Duplicate replacement should not be counted as a state-changing error, but
+retraining on the broader label changes model selection and does not yield a
+safe enough deployment rule. The preregistered stop now closes further
+threshold/controller iteration on this natural-memory calibration source.
