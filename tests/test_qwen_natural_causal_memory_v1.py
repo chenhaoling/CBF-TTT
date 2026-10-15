@@ -1,6 +1,9 @@
 import unittest
 
-from tasks.build_qwen_natural_causal_memory_v1 import session_candidates
+from tasks.build_qwen_natural_causal_memory_v1 import (
+    canonicalize_targets,
+    session_candidates,
+)
 from tasks.evaluate_qwen_natural_causal_memory_v1 import (
     ARMS,
     STATE_POLICIES,
@@ -73,6 +76,16 @@ class NaturalCausalMemoryTest(unittest.TestCase):
             [checkpoint_label(index, session) for index in range(6)],
             [None, None, None, "initial", "update_1", "update_2"],
         )
+
+    def test_equivalent_target_surfaces_use_registered_candidate(self):
+        session = partial_session()
+        session["chains"][0]["versions"][1]["target"] = "VULNERABLE"
+        session["chains"][1]["versions"][0]["target"] = "vulnerable"
+        candidates = session_candidates(session, [f"pool {index}" for index in range(30)])
+        chains, changes = canonicalize_targets(session, candidates)
+        targets = [version["target"] for row in chains for version in row["versions"]]
+        self.assertTrue(set(targets) <= set(candidates))
+        self.assertEqual(changes, 1)
 
     def test_oracle_local_update_removes_only_old_chain(self):
         session = partial_session(); chains = {row["id"]: row for row in session["chains"]}

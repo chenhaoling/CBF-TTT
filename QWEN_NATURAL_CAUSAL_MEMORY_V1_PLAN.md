@@ -57,7 +57,10 @@ sessions; development has 64 subject-disjoint sessions.
 Every session receives one deterministic 12-way natural-answer candidate set:
 all distinct original, updated and auxiliary targets in the session, filled if
 needed with hash-selected split-local targets. Candidate construction cannot
-use model scores. No session fact is included in the Qwen query prompt.
+use model scores. Case/whitespace-equivalent target surfaces map to the single
+registered session candidate representative before tokenization; this prevents
+semantically duplicate answer classes while preserving their factual value. No
+session fact is included in the Qwen query prompt.
 
 ## Frozen memory and policy arms
 

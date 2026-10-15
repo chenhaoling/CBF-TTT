@@ -3978,3 +3978,12 @@ keeping ZsRE test and all external long-memory benchmarks unopened.
   scheduling, oracle local deletion and clean-gate aggregation. The protocol
   explicitly retains the two-pair calibration remainder with its corresponding
   three checkpoints rather than silently dropping it.
+
+The first composition launch stopped after 1,440/5,144 calibration rows when a
+case-equivalent auxiliary target used a source surface absent from the
+normalized-unique candidate dictionary. No summary or development artifact was
+created and no arm outcome was inspected. The failed root is retained. The
+recovery canonicalizes case/whitespace-equivalent source targets to their one
+registered session candidate surface before tokenization, records the number
+of such mappings, and adds a focused regression test. Policies, facts, scale,
+queries, metrics, thresholds and release gates are unchanged.

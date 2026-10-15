@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -78,18 +79,35 @@ def session_candidates(session, pool):
     return values
 
 
+def canonicalize_targets(session, candidates):
+    """Map case/whitespace-equivalent source surfaces to one candidate key."""
+    chains = copy.deepcopy(session["chains"])
+    representatives = {normalize(value): value for value in candidates}
+    changes = 0
+    for chain in chains:
+        for version in chain["versions"]:
+            target = str(version["target"]).strip()
+            replacement = representatives[normalize(target)]
+            changes += int(target != replacement)
+            version["target"] = replacement
+    return chains, changes
+
+
 def materialize_split(source_root, split):
     _, sessions = load_source(source_root, split)
     pool = all_targets(sessions)
     output = []
     for session in sessions:
+        candidates = session_candidates(session, pool)
+        chains, canonicalizations = canonicalize_targets(session, candidates)
         output.append({
             "protocol": PROTOCOL,
             "id": session["id"],
             "split": split,
-            "chains": session["chains"],
+            "chains": chains,
             "events": session["events"],
-            "candidates": session_candidates(session, pool),
+            "candidates": candidates,
+            "target_surface_canonicalizations": canonicalizations,
             "candidate_construction_used_model_scores": False,
         })
     return output
@@ -121,9 +139,9 @@ def validate_split(rows, split):
         if len(row["candidates"]) != CANDIDATES \
                 or len({normalize(value) for value in row["candidates"]}) != CANDIDATES:
             raise ValueError("natural candidate cardinality changed")
-        targets = {normalize(version["target"]) for chain in row["chains"]
+        targets = {version["target"] for chain in row["chains"]
                    for version in chain["versions"]}
-        if not targets <= {normalize(value) for value in row["candidates"]} \
+        if not targets <= set(row["candidates"]) \
                 or row["candidate_construction_used_model_scores"]:
             raise ValueError("natural candidates omit a causal target")
         subjects.update(chain["subject"] for chain in primary)
@@ -163,6 +181,10 @@ def materialize(source_root, output):
                             if key in ("sessions", "subjects", "events")}
                    for split in SPLITS},
         "candidate_count": CANDIDATES,
+        "target_surface_canonicalizations": {
+            split: sum(row["target_surface_canonicalizations"] for row in rows[split])
+            for split in SPLITS
+        },
         "candidate_construction_used_model_scores": False,
         "session_id_overlap": 0,
         "subject_overlap": 0,
