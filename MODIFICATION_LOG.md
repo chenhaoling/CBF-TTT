@@ -3923,3 +3923,22 @@ development remained unopened. The failed root is retained. The recovery
 changes only the prompt boundary to the already established `"Answer:\n"`
 form and adds an all-row tokenizer preflight; scientific arms, data, scales,
 metrics, thresholds and selection rules are unchanged.
+
+### Natural-value bridge result
+
+The recovery preflight verified all 1,028 exact/rephrased queries and 6,168
+candidate tokenizations before loading the checkpoint. Scale 8 was the smallest
+calibration scale passing every frozen check. On the subject-disjoint
+development split, Correct reached 97.66% six-way candidate accuracy and
+83.59% fixed-length autoregressive token exact match. Wrong reached 0% updated
+accuracy and 100% injected-old accuracy, while Zero and norm-matched Random
+reached 27.15% and 28.32%. Correct's updated-answer NLL gains over Wrong, Zero
+and Random had bootstrap 95% lower bounds 3.8639, 2.9044 and 2.9187.
+
+All nine development checks and all eight independent integrity checks passed.
+The calibration/development two-GPU critical paths were 117.28/49.64 seconds
+with 7.665/7.705 GiB peak allocated/reserved memory. The full corpus, raw rows,
+logs, resources, summaries, recovery evidence, audit and interpretation report
+are archived under `qwen_natural_value_bridge_v1/`. The result releases the
+registered natural-answer causal-ledger sequence stage; held-out ZsRE test and
+all external benchmarks remain sealed.

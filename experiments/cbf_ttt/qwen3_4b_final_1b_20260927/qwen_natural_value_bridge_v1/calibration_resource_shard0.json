@@ -1,0 +1,35 @@
+{
+  "protocol": "qwen_natural_value_bridge_v1",
+  "stage": "calibration",
+  "shard": 0,
+  "num_shards": 2,
+  "episodes": 129,
+  "rows": 258,
+  "seconds": 113.58032402582467,
+  "mean_row_seconds": 0.31184337566816067,
+  "peak_allocated_gib": 7.6650471687316895,
+  "peak_reserved_gib": 7.701171875,
+  "rows_sha256": "cf1b7c0e699b3bd3f14574ee194e5428195b18998373edf8ac176078f5a3366c",
+  "data_manifest_sha256": "37dacafda7aca26f64a4ede3eda7eb3465e864b7a54eb06c81db53b439ca61a4",
+  "scales": [
+    4.0,
+    8.0,
+    16.0,
+    32.0,
+    48.0
+  ],
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "calibration_scored": true,
+  "development_scored": false,
+  "test_loaded": false,
+  "test_scored": false,
+  "external_benchmarks_loaded": false
+}

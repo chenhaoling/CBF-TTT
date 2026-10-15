@@ -1,0 +1,161 @@
+{
+  "metrics": {
+    "correct": {
+      "candidate_accuracy": 0.9765625,
+      "answer_nll": 0.2990725161090495,
+      "by_query_type": {
+        "exact": 0.9765625,
+        "rephrase": 0.9765625
+      },
+      "generation_token_exact": 0.8359375,
+      "generation_by_query_type": {
+        "exact": 0.8359375,
+        "rephrase": 0.8359375
+      }
+    },
+    "wrong": {
+      "candidate_accuracy": 0.0,
+      "answer_nll": 4.44629898108542,
+      "by_query_type": {
+        "exact": 0.0,
+        "rephrase": 0.0
+      },
+      "injected_wrong_accuracy": 1.0
+    },
+    "zero": {
+      "candidate_accuracy": 0.271484375,
+      "answer_nll": 3.411267201649025,
+      "by_query_type": {
+        "exact": 0.2734375,
+        "rephrase": 0.26953125
+      }
+    },
+    "random": {
+      "candidate_accuracy": 0.283203125,
+      "answer_nll": 3.4265040550380945,
+      "by_query_type": {
+        "exact": 0.2734375,
+        "rephrase": 0.29296875
+      }
+    }
+  },
+  "comparisons": {
+    "wrong": {
+      "nll_gain": 4.14722646497637,
+      "bootstrap_95ci": [
+        3.863944709216298,
+        4.438049368388533
+      ]
+    },
+    "zero": {
+      "nll_gain": 3.1121946855399756,
+      "bootstrap_95ci": [
+        2.904368041307862,
+        3.3276252391888193
+      ]
+    },
+    "random": {
+      "nll_gain": 3.127431538929045,
+      "bootstrap_95ci": [
+        2.918687546791375,
+        3.3446182552863775
+      ]
+    }
+  },
+  "strongest_control": "random",
+  "query_type_candidate_gains": {
+    "exact": 0.703125,
+    "rephrase": 0.68359375
+  },
+  "gate": {
+    "checks": {
+      "correct_candidate_at_least_point_90": true,
+      "correct_each_query_candidate_at_least_point_85": true,
+      "correct_generation_at_least_point_70": true,
+      "correct_each_query_generation_at_least_point_65": true,
+      "wrong_truth_at_most_point_20": true,
+      "wrong_injected_at_least_point_70": true,
+      "zero_truth_at_most_point_35": true,
+      "all_nll_gain_ci_lower_above_zero": true,
+      "no_negative_query_type_candidate_gain": true
+    },
+    "passed": true
+  },
+  "protocol": "qwen_natural_value_bridge_v1",
+  "stage": "development",
+  "selected_scale": 8.0,
+  "rows": 512,
+  "resources": {
+    "two_gpu_critical_path_seconds": 49.63845921307802,
+    "peak_allocated_gib": 7.659453392028809,
+    "peak_reserved_gib": 7.69921875,
+    "shards": [
+      {
+        "protocol": "qwen_natural_value_bridge_v1",
+        "stage": "dev",
+        "shard": 0,
+        "num_shards": 2,
+        "episodes": 128,
+        "rows": 256,
+        "seconds": 49.63845921307802,
+        "mean_row_seconds": 0.06342615366156679,
+        "peak_allocated_gib": 7.659453392028809,
+        "peak_reserved_gib": 7.69921875,
+        "rows_sha256": "fe62197846c8bd711dff143e1352fc98f02bf2a919c63f786c595830c2f75b78",
+        "data_manifest_sha256": "37dacafda7aca26f64a4ede3eda7eb3465e864b7a54eb06c81db53b439ca61a4",
+        "scales": [
+          8.0
+        ],
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "calibration_scored": true,
+        "development_scored": true,
+        "test_loaded": false,
+        "test_scored": false,
+        "external_benchmarks_loaded": false
+      },
+      {
+        "protocol": "qwen_natural_value_bridge_v1",
+        "stage": "dev",
+        "shard": 1,
+        "num_shards": 2,
+        "episodes": 128,
+        "rows": 256,
+        "seconds": 48.256388794630766,
+        "mean_row_seconds": 0.06078242637886433,
+        "peak_allocated_gib": 7.658965587615967,
+        "peak_reserved_gib": 7.697265625,
+        "rows_sha256": "76b2f283c28c8f0c369e75124cce5864cb6f9d5c92c5a04b80f4d14cc482a6e6",
+        "data_manifest_sha256": "37dacafda7aca26f64a4ede3eda7eb3465e864b7a54eb06c81db53b439ca61a4",
+        "scales": [
+          8.0
+        ],
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "calibration_scored": true,
+        "development_scored": true,
+        "test_loaded": false,
+        "test_scored": false,
+        "external_benchmarks_loaded": false
+      }
+    ]
+  },
+  "development_scored": true,
+  "test_loaded": false,
+  "test_scored": false,
+  "next_stage": "natural_answer_causal_ledger_sequences"
+}

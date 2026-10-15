@@ -1,0 +1,36 @@
+{
+  "protocol": "qwen_natural_value_bridge_v1_corpus",
+  "source_protocol": "zsre_contextual_readout_v1",
+  "source_root": "/home/ctj/cbf_ttt_zsre_contextual_readout_v1/data",
+  "source_manifest_sha256": "34d95490f326d3b5f57bb4ab4d7e208c6eada246a92510264d20a38996f68b21",
+  "source_sha256": "0e0214dda853a906ef02bef58c7ce2978af5a962e91fc4a10827e0125459905c",
+  "source_split_sha256": {
+    "calibration": "d19bb92ca6f487ce046e75a0a65e384b831a7bbc988e81436df68b3cd7beec6f",
+    "dev": "352f4e5162eec2133707bcd45ff998ab44774536a426e27c311d2cd6c482a65f"
+  },
+  "files_sha256": {
+    "calibration.jsonl": "f61c30cc7108ecb08de9557bf5084d0106a3005bfc9549006da2d9f9573ecd97",
+    "dev.jsonl": "0dd6e6415ad4a03159befdd1a85d96fe049985742c12527388b089196c61972b"
+  },
+  "counts": {
+    "calibration": 258,
+    "dev": 256
+  },
+  "audit": {
+    "counts": {
+      "calibration": 258,
+      "dev": 256
+    },
+    "id_overlap": 0,
+    "subject_overlap": 0,
+    "source_row_overlap": 0,
+    "causal_updated_values_verified": true,
+    "model_free_candidates_verified": true,
+    "test_file_loaded": false
+  },
+  "calibration_scored": false,
+  "development_scored": false,
+  "test_loaded": false,
+  "test_scored": false,
+  "external_benchmarks_loaded": false
+}

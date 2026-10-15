@@ -1,0 +1,516 @@
+{
+  "protocol": "qwen_natural_value_bridge_v1",
+  "stage": "calibration",
+  "tables": {
+    "4.0": {
+      "metrics": {
+        "correct": {
+          "candidate_accuracy": 0.7732558139534884,
+          "answer_nll": 1.366103364161916,
+          "by_query_type": {
+            "exact": 0.7674418604651163,
+            "rephrase": 0.7790697674418605
+          },
+          "generation_token_exact": 0.3081395348837209,
+          "generation_by_query_type": {
+            "exact": 0.3062015503875969,
+            "rephrase": 0.31007751937984496
+          }
+        },
+        "wrong": {
+          "candidate_accuracy": 0.031007751937984496,
+          "answer_nll": 3.590742529593697,
+          "by_query_type": {
+            "exact": 0.03488372093023256,
+            "rephrase": 0.027131782945736434
+          },
+          "injected_wrong_accuracy": 0.9437984496124031
+        },
+        "zero": {
+          "candidate_accuracy": 0.30426356589147285,
+          "answer_nll": 3.4750912181975306,
+          "by_query_type": {
+            "exact": 0.31007751937984496,
+            "rephrase": 0.29844961240310075
+          }
+        },
+        "random": {
+          "candidate_accuracy": 0.29457364341085274,
+          "answer_nll": 3.4755925111068313,
+          "by_query_type": {
+            "exact": 0.3023255813953488,
+            "rephrase": 0.2868217054263566
+          }
+        }
+      },
+      "comparisons": {
+        "wrong": {
+          "nll_gain": 2.224639165431781,
+          "bootstrap_95ci": [
+            2.071899160656125,
+            2.3812984253907965
+          ]
+        },
+        "zero": {
+          "nll_gain": 2.1089878540356146,
+          "bootstrap_95ci": [
+            1.9837113074351882,
+            2.236042095102774
+          ]
+        },
+        "random": {
+          "nll_gain": 2.1094891469449153,
+          "bootstrap_95ci": [
+            1.988066428463704,
+            2.241012224956423
+          ]
+        }
+      },
+      "strongest_control": "zero",
+      "query_type_candidate_gains": {
+        "exact": 0.45736434108527135,
+        "rephrase": 0.48062015503875977
+      },
+      "gate": {
+        "checks": {
+          "correct_candidate_at_least_point_90": false,
+          "correct_each_query_candidate_at_least_point_85": false,
+          "correct_generation_at_least_point_70": false,
+          "correct_each_query_generation_at_least_point_65": false,
+          "wrong_truth_at_most_point_20": true,
+          "wrong_injected_at_least_point_70": true,
+          "zero_truth_at_most_point_35": true,
+          "all_nll_gain_ci_lower_above_zero": true
+        },
+        "passed": false
+      }
+    },
+    "8.0": {
+      "metrics": {
+        "correct": {
+          "candidate_accuracy": 0.9709302325581395,
+          "answer_nll": 0.3450997534875583,
+          "by_query_type": {
+            "exact": 0.9689922480620154,
+            "rephrase": 0.9728682170542635
+          },
+          "generation_token_exact": 0.7810077519379846,
+          "generation_by_query_type": {
+            "exact": 0.7945736434108527,
+            "rephrase": 0.7674418604651163
+          }
+        },
+        "wrong": {
+          "candidate_accuracy": 0.0,
+          "answer_nll": 4.435566801202389,
+          "by_query_type": {
+            "exact": 0.0,
+            "rephrase": 0.0
+          },
+          "injected_wrong_accuracy": 1.0
+        },
+        "zero": {
+          "candidate_accuracy": 0.30426356589147285,
+          "answer_nll": 3.4750912181975306,
+          "by_query_type": {
+            "exact": 0.31007751937984496,
+            "rephrase": 0.29844961240310075
+          }
+        },
+        "random": {
+          "candidate_accuracy": 0.3023255813953488,
+          "answer_nll": 3.481674505238847,
+          "by_query_type": {
+            "exact": 0.3062015503875969,
+            "rephrase": 0.29844961240310075
+          }
+        }
+      },
+      "comparisons": {
+        "wrong": {
+          "nll_gain": 4.0904670477148315,
+          "bootstrap_95ci": [
+            3.7831712441391208,
+            4.416195288690145
+          ]
+        },
+        "zero": {
+          "nll_gain": 3.1299914647099722,
+          "bootstrap_95ci": [
+            2.9177300832265907,
+            3.3551944793870243
+          ]
+        },
+        "random": {
+          "nll_gain": 3.1365747517512887,
+          "bootstrap_95ci": [
+            2.925786219821528,
+            3.3650257894552724
+          ]
+        }
+      },
+      "strongest_control": "zero",
+      "query_type_candidate_gains": {
+        "exact": 0.6589147286821705,
+        "rephrase": 0.6744186046511628
+      },
+      "gate": {
+        "checks": {
+          "correct_candidate_at_least_point_90": true,
+          "correct_each_query_candidate_at_least_point_85": true,
+          "correct_generation_at_least_point_70": true,
+          "correct_each_query_generation_at_least_point_65": true,
+          "wrong_truth_at_most_point_20": true,
+          "wrong_injected_at_least_point_70": true,
+          "zero_truth_at_most_point_35": true,
+          "all_nll_gain_ci_lower_above_zero": true
+        },
+        "passed": true
+      }
+    },
+    "16.0": {
+      "metrics": {
+        "correct": {
+          "candidate_accuracy": 0.9961240310077519,
+          "answer_nll": 0.014353110624850693,
+          "by_query_type": {
+            "exact": 0.9961240310077519,
+            "rephrase": 0.9961240310077519
+          },
+          "generation_token_exact": 0.9864341085271318,
+          "generation_by_query_type": {
+            "exact": 0.9883720930232558,
+            "rephrase": 0.9844961240310077
+          }
+        },
+        "wrong": {
+          "candidate_accuracy": 0.0,
+          "answer_nll": 8.565080340518508,
+          "by_query_type": {
+            "exact": 0.0,
+            "rephrase": 0.0
+          },
+          "injected_wrong_accuracy": 1.0
+        },
+        "zero": {
+          "candidate_accuracy": 0.30426356589147285,
+          "answer_nll": 3.4750912181975306,
+          "by_query_type": {
+            "exact": 0.31007751937984496,
+            "rephrase": 0.29844961240310075
+          }
+        },
+        "random": {
+          "candidate_accuracy": 0.3081395348837209,
+          "answer_nll": 3.509531777496486,
+          "by_query_type": {
+            "exact": 0.31007751937984496,
+            "rephrase": 0.3062015503875969
+          }
+        }
+      },
+      "comparisons": {
+        "wrong": {
+          "nll_gain": 8.550727229893656,
+          "bootstrap_95ci": [
+            8.02085548680055,
+            9.09888600014962
+          ]
+        },
+        "zero": {
+          "nll_gain": 3.4607381075726797,
+          "bootstrap_95ci": [
+            3.209607183967599,
+            3.727073222999388
+          ]
+        },
+        "random": {
+          "nll_gain": 3.495178666871635,
+          "bootstrap_95ci": [
+            3.24300001847795,
+            3.7662473513929178
+          ]
+        }
+      },
+      "strongest_control": "random",
+      "query_type_candidate_gains": {
+        "exact": 0.686046511627907,
+        "rephrase": 0.689922480620155
+      },
+      "gate": {
+        "checks": {
+          "correct_candidate_at_least_point_90": true,
+          "correct_each_query_candidate_at_least_point_85": true,
+          "correct_generation_at_least_point_70": true,
+          "correct_each_query_generation_at_least_point_65": true,
+          "wrong_truth_at_most_point_20": true,
+          "wrong_injected_at_least_point_70": true,
+          "zero_truth_at_most_point_35": true,
+          "all_nll_gain_ci_lower_above_zero": true
+        },
+        "passed": true
+      }
+    },
+    "32.0": {
+      "metrics": {
+        "correct": {
+          "candidate_accuracy": 0.9961240310077519,
+          "answer_nll": 0.0002957653914488367,
+          "by_query_type": {
+            "exact": 0.9961240310077519,
+            "rephrase": 0.9961240310077519
+          },
+          "generation_token_exact": 1.0,
+          "generation_by_query_type": {
+            "exact": 1.0,
+            "rephrase": 1.0
+          }
+        },
+        "wrong": {
+          "candidate_accuracy": 0.0,
+          "answer_nll": 21.14293713971626,
+          "by_query_type": {
+            "exact": 0.0,
+            "rephrase": 0.0
+          },
+          "injected_wrong_accuracy": 1.0
+        },
+        "zero": {
+          "candidate_accuracy": 0.30426356589147285,
+          "answer_nll": 3.4750912181975306,
+          "by_query_type": {
+            "exact": 0.31007751937984496,
+            "rephrase": 0.29844961240310075
+          }
+        },
+        "random": {
+          "candidate_accuracy": 0.31007751937984496,
+          "answer_nll": 3.6255401942965597,
+          "by_query_type": {
+            "exact": 0.29844961240310075,
+            "rephrase": 0.32170542635658916
+          }
+        }
+      },
+      "comparisons": {
+        "wrong": {
+          "nll_gain": 21.14264137432481,
+          "bootstrap_95ci": [
+            20.101222978725634,
+            22.175268584538397
+          ]
+        },
+        "zero": {
+          "nll_gain": 3.474795452806082,
+          "bootstrap_95ci": [
+            3.223942948572766,
+            3.7415204402033058
+          ]
+        },
+        "random": {
+          "nll_gain": 3.625244428905111,
+          "bootstrap_95ci": [
+            3.36518238558588,
+            3.899825289483066
+          ]
+        }
+      },
+      "strongest_control": "random",
+      "query_type_candidate_gains": {
+        "exact": 0.6976744186046512,
+        "rephrase": 0.6744186046511628
+      },
+      "gate": {
+        "checks": {
+          "correct_candidate_at_least_point_90": true,
+          "correct_each_query_candidate_at_least_point_85": true,
+          "correct_generation_at_least_point_70": true,
+          "correct_each_query_generation_at_least_point_65": true,
+          "wrong_truth_at_most_point_20": true,
+          "wrong_injected_at_least_point_70": true,
+          "zero_truth_at_most_point_35": true,
+          "all_nll_gain_ci_lower_above_zero": true
+        },
+        "passed": true
+      }
+    },
+    "48.0": {
+      "metrics": {
+        "correct": {
+          "candidate_accuracy": 0.9961240310077519,
+          "answer_nll": 9.29909389221794e-06,
+          "by_query_type": {
+            "exact": 0.9961240310077519,
+            "rephrase": 0.9961240310077519
+          },
+          "generation_token_exact": 1.0,
+          "generation_by_query_type": {
+            "exact": 1.0,
+            "rephrase": 1.0
+          }
+        },
+        "wrong": {
+          "candidate_accuracy": 0.0,
+          "answer_nll": 34.09581674392833,
+          "by_query_type": {
+            "exact": 0.0,
+            "rephrase": 0.0
+          },
+          "injected_wrong_accuracy": 1.0
+        },
+        "zero": {
+          "candidate_accuracy": 0.30426356589147285,
+          "answer_nll": 3.4750912181975306,
+          "by_query_type": {
+            "exact": 0.31007751937984496,
+            "rephrase": 0.29844961240310075
+          }
+        },
+        "random": {
+          "candidate_accuracy": 0.31007751937984496,
+          "answer_nll": 3.8237851578597875,
+          "by_query_type": {
+            "exact": 0.29844961240310075,
+            "rephrase": 0.32170542635658916
+          }
+        }
+      },
+      "comparisons": {
+        "wrong": {
+          "nll_gain": 34.09580744483444,
+          "bootstrap_95ci": [
+            32.45917048567483,
+            35.71802889237921
+          ]
+        },
+        "zero": {
+          "nll_gain": 3.4750819191036384,
+          "bootstrap_95ci": [
+            3.224243070573255,
+            3.7417724984249534
+          ]
+        },
+        "random": {
+          "nll_gain": 3.823775858765895,
+          "bootstrap_95ci": [
+            3.554362769257288,
+            4.107326972472301
+          ]
+        }
+      },
+      "strongest_control": "random",
+      "query_type_candidate_gains": {
+        "exact": 0.6976744186046512,
+        "rephrase": 0.6744186046511628
+      },
+      "gate": {
+        "checks": {
+          "correct_candidate_at_least_point_90": true,
+          "correct_each_query_candidate_at_least_point_85": true,
+          "correct_generation_at_least_point_70": true,
+          "correct_each_query_generation_at_least_point_65": true,
+          "wrong_truth_at_most_point_20": true,
+          "wrong_injected_at_least_point_70": true,
+          "zero_truth_at_most_point_35": true,
+          "all_nll_gain_ci_lower_above_zero": true
+        },
+        "passed": true
+      }
+    }
+  },
+  "selected_scale": 8.0,
+  "selection_rule": "smallest scale passing every frozen content gate",
+  "gate": {
+    "passed": true,
+    "checks": {
+      "correct_candidate_at_least_point_90": true,
+      "correct_each_query_candidate_at_least_point_85": true,
+      "correct_generation_at_least_point_70": true,
+      "correct_each_query_generation_at_least_point_65": true,
+      "wrong_truth_at_most_point_20": true,
+      "wrong_injected_at_least_point_70": true,
+      "zero_truth_at_most_point_35": true,
+      "all_nll_gain_ci_lower_above_zero": true
+    }
+  },
+  "resources": {
+    "two_gpu_critical_path_seconds": 117.28285907022655,
+    "peak_allocated_gib": 7.6650471687316895,
+    "peak_reserved_gib": 7.705078125,
+    "shards": [
+      {
+        "protocol": "qwen_natural_value_bridge_v1",
+        "stage": "calibration",
+        "shard": 0,
+        "num_shards": 2,
+        "episodes": 129,
+        "rows": 258,
+        "seconds": 113.58032402582467,
+        "mean_row_seconds": 0.31184337566816067,
+        "peak_allocated_gib": 7.6650471687316895,
+        "peak_reserved_gib": 7.701171875,
+        "rows_sha256": "cf1b7c0e699b3bd3f14574ee194e5428195b18998373edf8ac176078f5a3366c",
+        "data_manifest_sha256": "37dacafda7aca26f64a4ede3eda7eb3465e864b7a54eb06c81db53b439ca61a4",
+        "scales": [
+          4.0,
+          8.0,
+          16.0,
+          32.0,
+          48.0
+        ],
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "calibration_scored": true,
+        "development_scored": false,
+        "test_loaded": false,
+        "test_scored": false,
+        "external_benchmarks_loaded": false
+      },
+      {
+        "protocol": "qwen_natural_value_bridge_v1",
+        "stage": "calibration",
+        "shard": 1,
+        "num_shards": 2,
+        "episodes": 129,
+        "rows": 258,
+        "seconds": 117.28285907022655,
+        "mean_row_seconds": 0.3222703214648158,
+        "peak_allocated_gib": 7.664426803588867,
+        "peak_reserved_gib": 7.705078125,
+        "rows_sha256": "992721b8d592acf7996113357538ced4cdf9b21bdd0aecb6de3761a160455641",
+        "data_manifest_sha256": "37dacafda7aca26f64a4ede3eda7eb3465e864b7a54eb06c81db53b439ca61a4",
+        "scales": [
+          4.0,
+          8.0,
+          16.0,
+          32.0,
+          48.0
+        ],
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "calibration_scored": true,
+        "development_scored": false,
+        "test_loaded": false,
+        "test_scored": false,
+        "external_benchmarks_loaded": false
+      }
+    ]
+  },
+  "development_scored": false,
+  "test_loaded": false,
+  "test_scored": false
+}
