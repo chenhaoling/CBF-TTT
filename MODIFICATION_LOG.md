@@ -5051,6 +5051,26 @@ This value is never deployed; development alone retains authority to select
 the registered utility/risk/conformal deployment grid. The original failed
 training root remains immutable and the clarification retry uses a new root.
 
+The clarified training retry completed all three seeds and passed all eight
+independent training-audit checks. Seeds 2610161/2610162/2610163 selected
+epochs 50/50/100. Their relation-disjoint inner-fold boundary action accuracy
+was 69.97%/75.76%/77.41% and record action accuracy was
+86.69%/88.57%/91.48% after zero-risk projection; projected unsafe deletions
+were zero for every seed. The temporary inner thresholds were not promoted to
+deployment parameters. Total training and all-seed retraining took 15.67
+seconds.
+
+Added `tasks/build_qwen_utility_record_controller_v1_development.py`, a
+non-overwriting runner, focused tests and
+`scripts/audit_qwen_utility_record_controller_v1_development_data.py`. The
+builder is gated on the passed training audit and constructs exactly 64 source
+groups from only the five untouched development relations, with balanced
+lengths, near-balanced mechanisms and target relations, two twins and three
+sparse boundaries. It records all provenance, keeps source subjects unique
+across development groups and leaves the seven confirmation relations
+ungenerated. The auditor independently reconstructs every row and verifies
+hashes, relation isolation, provenance, causal queries, twins and seals.
+
 Added `tasks/train_qwen_utility_record_controller_v1.py`, focused tests, a
 non-overwriting runner and
 `scripts/audit_qwen_utility_record_controller_v1_training.py`. Training uses
