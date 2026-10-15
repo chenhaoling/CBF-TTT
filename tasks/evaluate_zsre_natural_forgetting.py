@@ -66,7 +66,8 @@ class FrozenScopeScorer:
             head = BinaryGate(pair_dim + 4, seed); head.load_state_dict(gate_artifact["heads"][str(seed)])
             self.heads[str(seed)] = head
 
-    def score(self, query, keys, gate_seed):
+    def encode(self, query, keys, gate_seed):
+        """Return the frozen reader result and its pre-logit feature vector."""
         import torch
 
         if not keys: return None
@@ -86,10 +87,18 @@ class FrozenScopeScorer:
         pair = self.pair_features[PAIR_TEMPLATE.format(key=keys[top], query=query)]
         feature = torch.cat((pair, standardized)).unsqueeze(0)
         with torch.no_grad(): probability = float(self.heads[str(gate_seed)](feature).sigmoid()[0])
-        return {"top": top, "mean_scores": mean, "top_score": float(mean[top]),
-                "retrieve_probability": probability,
-                "retrieve": probability >= self.gate_thresholds[str(gate_seed)],
-                "cosine_retrieve": float(mean[top]) >= self.control_threshold}
+        result = {"top": top, "mean_scores": mean, "top_score": float(mean[top]),
+                  "retrieve_probability": probability,
+                  "retrieve": probability >= self.gate_thresholds[str(gate_seed)],
+                  "cosine_retrieve": float(mean[top]) >= self.control_threshold}
+        return result, feature.squeeze(0)
+
+    def score(self, query, keys, gate_seed):
+        encoded = self.encode(query, keys, gate_seed)
+        if encoded is None:
+            return None
+        result, _ = encoded
+        return result
 
 
 def apply_update(policy, memory, event, version, scorer, gate_seed):
