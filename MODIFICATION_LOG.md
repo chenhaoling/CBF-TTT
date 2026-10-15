@@ -3914,3 +3914,12 @@ and a one-time development stop rule.
   construction, normalization, prompt boundaries and frozen-gate aggregation.
   Four focused tests, Python compilation, shell syntax validation and
   `git diff --check` passed before any natural-value model score was produced.
+
+The first remote launch stopped on both shards before writing a score row:
+Qwen tokenization of the initial `"Answer: "` suffix merged the trailing space
+with the first answer token and failed the mandatory prefix-preservation
+check. Both shard files were zero bytes, no calibration summary existed and
+development remained unopened. The failed root is retained. The recovery
+changes only the prompt boundary to the already established `"Answer:\n"`
+form and adds an all-row tokenizer preflight; scientific arms, data, scales,
+metrics, thresholds and selection rules are unchanged.

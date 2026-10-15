@@ -40,6 +40,41 @@ output.write_text(json.dumps({str(path):hashlib.sha256(path.read_bytes()).hexdig
 PY
 "$PYTHON_BIN" -m tasks.build_qwen_natural_value_bridge_v1 \
   --source-root "$SOURCE_ROOT" --output "$ROOT/data" > "$ROOT/build.log" 2>&1
+"$PYTHON_BIN" - "$ROOT/data" "$TOKENIZER" > "$ROOT/tokenization_preflight.log" <<'PY'
+import json
+import sys
+
+from transformers import AutoTokenizer
+
+from tasks.build_qwen_natural_value_bridge_v1 import load
+from tasks.evaluate_mquake_qwen_outcome_v16 import encode_candidates
+from tasks.evaluate_qwen_natural_value_bridge_v1 import QUERY_TYPES, render_query
+
+data_root, tokenizer_path = sys.argv[1:]
+tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, use_fast=True)
+counts = {}
+lengths = []
+for split in ("calibration", "dev"):
+    _, episodes = load(data_root, split)
+    count = 0
+    for episode in episodes:
+        for query_type in QUERY_TYPES:
+            _, encoded = encode_candidates(
+                tokenizer,
+                render_query(episode["queries"][query_type]),
+                episode["candidates"],
+            )
+            lengths.extend(len(ids) for ids in encoded.values())
+            count += 1
+    counts[split] = count
+print(json.dumps({
+    "passed": True,
+    "query_counts": counts,
+    "candidate_tokenizations": len(lengths),
+    "minimum_answer_tokens": min(lengths),
+    "maximum_answer_tokens": max(lengths),
+}, indent=2))
+PY
 
 declare -a pids
 for shard in 0 1; do

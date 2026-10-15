@@ -29,7 +29,9 @@ HEADER = "Use the selected session memory and answer with only the requested val
 
 
 def render_query(text):
-    return f"{HEADER}\n\nQuery: {text}\nAnswer: "
+    # A newline is a stable tokenizer boundary for Qwen. A trailing space can
+    # merge with the first answer token and invalidate prefix-cache reuse.
+    return f"{HEADER}\n\nQuery: {text}\nAnswer:\n"
 
 
 def randomize_rows(value, identity):

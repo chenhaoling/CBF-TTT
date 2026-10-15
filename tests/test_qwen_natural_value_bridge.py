@@ -45,7 +45,7 @@ class NaturalValueBridgeTest(unittest.TestCase):
     def test_rendered_prompt_has_answer_boundary(self):
         prompt = render_query("Who made the item?")
         self.assertIn("Query: Who made the item?", prompt)
-        self.assertTrue(prompt.endswith("Answer: "))
+        self.assertTrue(prompt.endswith("Answer:\n"))
 
     def test_frozen_gate_aggregation_passes_clean_content_separation(self):
         rows = []
