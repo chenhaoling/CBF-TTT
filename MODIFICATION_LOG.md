@@ -4979,3 +4979,13 @@ and distinct inside a group but can be reused across formal groups. Formal
 audit metadata separately records all 12 provenance rows and the seven input
 source rows. This repair changes no mechanism, split, query, label objective or
 registered group count.
+
+Added `QWEN_UTILITY_RECORD_CONTROLLER_V1_SPEC.md` after the formal model-free
+data audit passed and while formal Qwen labels were still running. It freezes
+the safe binary endpoint teacher, single-deletion collateral-risk target, 22
+inference-safe record features, pooled permutation-equivariant context, pair
+yes/no frozen-Qwen margin, 128/64 shared MLP, physical projection, three-seed
+relation folds, optimizer, loss, checkpoint rule, finite development threshold
+grid and required feature/training audits before the formal label summary can
+be observed. This prevents formal outcomes from changing the controller
+definition.
