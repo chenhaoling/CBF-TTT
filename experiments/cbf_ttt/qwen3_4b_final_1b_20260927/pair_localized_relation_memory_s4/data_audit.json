@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "candidate_schema_and_gold_isolation": true,
+    "counts": true,
+    "hashes": true,
+    "identifiers": true,
+    "no_model_outputs": true,
+    "protocol": true,
+    "row_reconstruction": true,
+    "s3_provenance": true,
+    "sealed": true,
+    "source_inspection": true
+  },
+  "counts": {
+    "calibration": {
+      "candidates": 12918,
+      "deterministic_full_dialogue_fallback_mentions": 24,
+      "dialogre_trigger_supervised_mentions": 452,
+      "mentions": 872,
+      "sources": {
+        "dialogre": 872
+      }
+    },
+    "train": {
+      "candidates": 49226,
+      "deterministic_full_dialogue_fallback_mentions": 19,
+      "dialogre_trigger_supervised_mentions": 1567,
+      "mentions": 12203,
+      "sources": {
+        "dialogre": 2603,
+        "fewrel": 9600
+      }
+    }
+  },
+  "dialogre_dev_rows_parsed": 0,
+  "dialogre_test_rows_parsed": 0,
+  "files_sha256": {
+    "calibration_localized_mentions.jsonl": "4370044503f1fcc565dc4b6a14de172f4ed31d98d8063715d3d537b35574fd4a",
+    "train_localized_mentions.jsonl": "a77925cd6a487cd26ecc455bcbd65a18bed6e9f95be7945f1323a25a9c369ba6"
+  },
+  "manifest_sha256": "53f6506bcb01c4b6c8cf914ae6d0f61c3dfd73420be455f42874e7755a322826",
+  "passed": true,
+  "protocol": "qwen_pair_localized_relation_memory_s4_data_audit_v1"
+}

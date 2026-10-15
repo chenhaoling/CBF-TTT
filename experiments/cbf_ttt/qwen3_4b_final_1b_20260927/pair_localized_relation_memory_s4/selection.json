@@ -1,0 +1,180 @@
+{
+  "controls": {
+    "deterministic_r0": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5251546341804793,
+      "direct_pair_score_mean_negative": 0.8590436483065657,
+      "direct_pair_score_mean_positive": 0.8667500052955477,
+      "retrieval": {
+        "mrr_at_16": 0.2491793931730858,
+        "queries": 872,
+        "recall_at_16": 0.6903669724770642,
+        "recall_at_4": 0.356651376146789,
+        "recall_at_8": 0.536697247706422
+      }
+    },
+    "deterministic_r1": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5200418817728156,
+      "direct_pair_score_mean_negative": 0.8906870527914671,
+      "direct_pair_score_mean_positive": 0.8939133036164286,
+      "retrieval": {
+        "mrr_at_16": 0.24177022486942204,
+        "queries": 872,
+        "recall_at_16": 0.7029816513761468,
+        "recall_at_4": 0.3291284403669725,
+        "recall_at_8": 0.5057339449541285
+      }
+    },
+    "deterministic_r2": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5209731859755277,
+      "direct_pair_score_mean_negative": 0.8862322084864995,
+      "direct_pair_score_mean_positive": 0.8914695807371781,
+      "retrieval": {
+        "mrr_at_16": 0.2469548624795183,
+        "queries": 872,
+        "recall_at_16": 0.698394495412844,
+        "recall_at_4": 0.3463302752293578,
+        "recall_at_8": 0.5172018348623854
+      }
+    },
+    "full_dialogue": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5164539381247948,
+      "direct_pair_score_mean_negative": 0.888549468011148,
+      "direct_pair_score_mean_positive": 0.8931078841680717,
+      "retrieval": {
+        "mrr_at_16": 0.30190237260191366,
+        "queries": 872,
+        "recall_at_16": 0.7178899082568807,
+        "recall_at_4": 0.4243119266055046,
+        "recall_at_8": 0.5837155963302753
+      }
+    },
+    "random_window": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5156235700712205,
+      "direct_pair_score_mean_negative": 0.8845447462976946,
+      "direct_pair_score_mean_positive": 0.8891688287949617,
+      "retrieval": {
+        "mrr_at_16": 0.20609387904399382,
+        "queries": 872,
+        "recall_at_16": 0.6376146788990825,
+        "recall_at_4": 0.29243119266055045,
+        "recall_at_8": 0.4415137614678899
+      }
+    }
+  },
+  "dialogre_dev_loaded": false,
+  "dialogre_test_loaded": false,
+  "embedding_shard_outputs_sha256": [
+    "d69dd4d5764ea5978ea7884f416fb58ef479474f689cdc70fc9a30b3f4a9712b",
+    "cb7b34fe27e74f103f79fc745a2226564796ac6d28e7f21b323df388be869f17",
+    "0310a1f5530d2ae2b7b018a9d785098022627c95ba67227eba9234c6d93da348",
+    "f98f0ae4e932a2abc7fb70517f0d0f5726949bfb678dce1bacde73c5c759dc9e",
+    "3665fc6dec24646214e2a412c8d538d032199d78658395215c819cd7ca64c4ec",
+    "bed0dfbf0f72a07da5db6911b1af026fcd7c5e3abcf287586304512118f568f6",
+    "1f6f6b51002d46ad7c90cbb4e82e0b18cd141bcdd5f3a3375e04da36e298b353",
+    "29d200880c889fc5fcf80f4aabff5b2e2a9135790c113c929438f333b91f63d8"
+  ],
+  "input_audit_sha256": {
+    "data": "e2234a3cf2479926cf8d3223c3d2da817044e3b4e2491cd97cb5cb2c0fe34d9a",
+    "embeddings": "12cdf8a4227f622d23fe1e7a5f3ae873476c2bccbb3f5788f95d06e045cf84a1"
+  },
+  "oracle_calibration_mentions": 452,
+  "oracle_registered_negative_pairs": 1159,
+  "oracle_summaries": [
+    {
+      "direct_pair_negative": 279,
+      "direct_pair_pairs": 652,
+      "direct_pair_positive": 373,
+      "direct_pair_roc_auc": 0.5580443368214708,
+      "direct_pair_score_mean_negative": 0.7352089901124278,
+      "direct_pair_score_mean_positive": 0.7587754115981646,
+      "epoch": 10,
+      "last_training_loss": 1.8533028364181519,
+      "retrieval": {
+        "mrr_at_16": 0.3946527476947831,
+        "queries": 452,
+        "recall_at_16": 0.7168141592920354,
+        "recall_at_4": 0.5066371681415929,
+        "recall_at_8": 0.5907079646017699
+      }
+    },
+    {
+      "direct_pair_negative": 279,
+      "direct_pair_pairs": 652,
+      "direct_pair_positive": 373,
+      "direct_pair_roc_auc": 0.5491366139121912,
+      "direct_pair_score_mean_negative": 0.6808804621566154,
+      "direct_pair_score_mean_positive": 0.7076718001039674,
+      "epoch": 25,
+      "last_training_loss": 1.803472638130188,
+      "retrieval": {
+        "mrr_at_16": 0.38249462251121535,
+        "queries": 452,
+        "recall_at_16": 0.6238938053097345,
+        "recall_at_4": 0.4756637168141593,
+        "recall_at_8": 0.5553097345132744
+      }
+    },
+    {
+      "direct_pair_negative": 279,
+      "direct_pair_pairs": 652,
+      "direct_pair_positive": 373,
+      "direct_pair_roc_auc": 0.5815580347276273,
+      "direct_pair_score_mean_negative": 0.6295727489509463,
+      "direct_pair_score_mean_positive": 0.6847713502578378,
+      "epoch": 50,
+      "last_training_loss": 1.510736346244812,
+      "retrieval": {
+        "mrr_at_16": 0.36652567258208857,
+        "queries": 452,
+        "recall_at_16": 0.5752212389380531,
+        "recall_at_4": 0.4690265486725664,
+        "recall_at_8": 0.5287610619469026
+      }
+    }
+  ],
+  "oracle_train_mentions": 1567,
+  "protocol": "qwen_pair_localized_relation_memory_s4_oracle_v1",
+  "pubmed_validation_loaded": false,
+  "resource": {
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "peak_allocated_gib": 0.11304998397827148,
+    "peak_reserved_gib": 0.138671875,
+    "seconds": 7.814299438148737,
+    "torch": "2.9.1+cu130"
+  },
+  "selected_oracle": {
+    "direct_pair_negative": 279,
+    "direct_pair_pairs": 652,
+    "direct_pair_positive": 373,
+    "direct_pair_roc_auc": 0.5580443368214708,
+    "direct_pair_score_mean_negative": 0.7352089901124278,
+    "direct_pair_score_mean_positive": 0.7587754115981646,
+    "epoch": 10,
+    "last_training_loss": 1.8533028364181519,
+    "retrieval": {
+      "mrr_at_16": 0.3946527476947831,
+      "queries": 452,
+      "recall_at_16": 0.7168141592920354,
+      "recall_at_4": 0.5066371681415929,
+      "recall_at_8": 0.5907079646017699
+    }
+  },
+  "selection_rule": "recall@16, direct pair ROC-AUC, earlier epoch",
+  "terminal_status": "oracle_feasibility_scored_before_learned_localizer",
+  "weights_sha256": "6dcef22955942caed2da860a0680c8354e1be8bce887db0353ce76737e241bcf"
+}

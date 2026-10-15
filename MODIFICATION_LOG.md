@@ -4786,3 +4786,60 @@ oracle controls, calibration stop gates, one-shot DialogRE-dev gates, resource
 limits and the conditional alpha-only session experiment. The Qwen3-4B
 backbone remains frozen, native `ttt_proj`/`ttt_conv` remains a named baseline,
 and the current-write gate remains fixed to `g=1`.
+
+### S4 execution, independent audit and stop decision
+
+The S4 data builder produced 12,203 training mentions with 49,226 candidate
+windows and 872 calibration mentions with 12,918 candidates. DialogRE supplied
+1,567/452 trigger-supervised train/calibration mentions. The independent data
+audit passed all ten checks; DialogRE development and test parsed-row counts
+remained zero. Manifest SHA256 is
+`53f6506bcb01c4b6c8cf914ae6d0f61c3dfd73420be455f42874e7755a322826`.
+
+Two-GPU frozen-Qwen extraction completed all candidate and control rows with no
+truncation. Maximum token length was 630 under the fixed 1,024-token limit.
+The slowest shard took 158.38 seconds and the maximum reserved memory was
+10.38 GiB. The independent embedding auditor passed all completeness,
+normalization, finite-value, provenance, resource and sealed-source checks.
+
+The registered gold-trigger upper bound selected epoch 10 by recall@16, then
+ROC-AUC and earlier epoch. It reached 50.66/59.07/71.68% recall@4/8/16 and
+55.80% direct-pair ROC-AUC on 652 calibration pairs. Full-dialogue control
+reached 71.79% recall@16 and 51.65% ROC-AUC. The oracle failed the frozen 0.75
+ROC-AUC gate, so terminal status is
+`stopped_localized_representation_failure`; the learned localizer, fusion and
+DialogRE development/test were not opened. The independent oracle audit passed
+all nine checks and verified selected weight SHA256
+`6dcef22955942caed2da860a0680c8354e1be8bce887db0353ce76737e241bcf`.
+
+Compact manifests, resources, selections, logs, audits and the complete report
+are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/pair_localized_relation_memory_s4/`.
+This closes the full-dialogue/local-window relation-classification line. The
+next registered method must supervise forgetting from downstream future
+utility rather than continuing to tune relation equivalence on these rows.
+
+## 2026-10-16: utility-supervised semantic record gate V1 registration
+
+Added `QWEN_UTILITY_SUPERVISED_SEMANTIC_RECORD_GATE_V1_PLAN.md` after the S4
+oracle stop and before acquiring or parsing a new source. The protocol moves
+the target from pairwise relation equivalence to downstream counterfactual
+future utility and collateral risk for individually addressable records. The
+current write remains fixed at `g=1`; historical coefficients use the complete
+`{0,0.5,1}` grid at three sparse boundaries per episode.
+
+The new source is the official LAMA/T-REx fact collection plus official
+ParaRel relation paraphrases. Relations, subjects and rendered surfaces are
+partition-isolated. CounterFact, MQuAKE, ZsRE, FewRel, DocRED, DialogRE and all
+external benchmark outcomes are forbidden for V1 fitting and selection. The
+plan fixes seven lifecycle mechanisms, two counterfactual twins, 8/16/32/64
+lengths, safe future-utility labels, a resource-driven 128/256/512 formal size,
+a shared record-equivariant utility/risk controller, physical constraints,
+three seeds, finite threshold grids, clustered intervals and strict
+development/confirmation gates.
+
+Added `scripts/download_lama_pararel_official.sh`. It refuses overwrite,
+clones only the two official repositories, downloads the official LAMA archive,
+records commits and SHA256 inventories, and writes a manifest explicitly
+marking source content unparsed. No data row or model result was inspected at
+this registration point.

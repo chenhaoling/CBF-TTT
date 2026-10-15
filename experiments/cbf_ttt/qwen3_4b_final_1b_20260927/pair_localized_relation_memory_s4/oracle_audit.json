@@ -1,0 +1,119 @@
+{
+  "checks": {
+    "controls": true,
+    "counts": true,
+    "oracle": true,
+    "protocol": true,
+    "provenance": true,
+    "resource": true,
+    "sealed": true,
+    "selection": true,
+    "weights": true
+  },
+  "controls": {
+    "deterministic_r0": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5251546341804793,
+      "direct_pair_score_mean_negative": 0.8590436483065657,
+      "direct_pair_score_mean_positive": 0.8667500052955477,
+      "retrieval": {
+        "mrr_at_16": 0.2491793931730858,
+        "queries": 872,
+        "recall_at_16": 0.6903669724770642,
+        "recall_at_4": 0.356651376146789,
+        "recall_at_8": 0.536697247706422
+      }
+    },
+    "deterministic_r1": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5200418817728156,
+      "direct_pair_score_mean_negative": 0.8906870527914671,
+      "direct_pair_score_mean_positive": 0.8939133036164286,
+      "retrieval": {
+        "mrr_at_16": 0.24177022486942204,
+        "queries": 872,
+        "recall_at_16": 0.7029816513761468,
+        "recall_at_4": 0.3291284403669725,
+        "recall_at_8": 0.5057339449541285
+      }
+    },
+    "deterministic_r2": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5209731859755277,
+      "direct_pair_score_mean_negative": 0.8862322084864995,
+      "direct_pair_score_mean_positive": 0.8914695807371781,
+      "retrieval": {
+        "mrr_at_16": 0.2469548624795183,
+        "queries": 872,
+        "recall_at_16": 0.698394495412844,
+        "recall_at_4": 0.3463302752293578,
+        "recall_at_8": 0.5172018348623854
+      }
+    },
+    "full_dialogue": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5164539381247948,
+      "direct_pair_score_mean_negative": 0.888549468011148,
+      "direct_pair_score_mean_positive": 0.8931078841680717,
+      "retrieval": {
+        "mrr_at_16": 0.30190237260191366,
+        "queries": 872,
+        "recall_at_16": 0.7178899082568807,
+        "recall_at_4": 0.4243119266055046,
+        "recall_at_8": 0.5837155963302753
+      }
+    },
+    "random_window": {
+      "direct_pair_negative": 862,
+      "direct_pair_pairs": 1724,
+      "direct_pair_positive": 862,
+      "direct_pair_roc_auc": 0.5156235700712205,
+      "direct_pair_score_mean_negative": 0.8845447462976946,
+      "direct_pair_score_mean_positive": 0.8891688287949617,
+      "retrieval": {
+        "mrr_at_16": 0.20609387904399382,
+        "queries": 872,
+        "recall_at_16": 0.6376146788990825,
+        "recall_at_4": 0.29243119266055045,
+        "recall_at_8": 0.4415137614678899
+      }
+    }
+  },
+  "dialogre_dev_rows_parsed": 0,
+  "dialogre_test_rows_parsed": 0,
+  "passed": true,
+  "protocol": "qwen_pair_localized_relation_memory_s4_oracle_audit_v1",
+  "registered_gates": {
+    "oracle_direct_pair_roc_auc_at_least_075": false,
+    "oracle_has_both_pair_classes": true
+  },
+  "release_learned_localizer": false,
+  "selected_oracle": {
+    "direct_pair_negative": 279,
+    "direct_pair_pairs": 652,
+    "direct_pair_positive": 373,
+    "direct_pair_roc_auc": 0.5580443368214708,
+    "direct_pair_score_mean_negative": 0.7352089901124278,
+    "direct_pair_score_mean_positive": 0.7587754115981646,
+    "epoch": 10,
+    "last_training_loss": 1.8533028364181519,
+    "retrieval": {
+      "mrr_at_16": 0.3946527476947831,
+      "queries": 452,
+      "recall_at_16": 0.7168141592920354,
+      "recall_at_4": 0.5066371681415929,
+      "recall_at_8": 0.5907079646017699
+    }
+  },
+  "selection_sha256": "cd85b53e817b9fdae882d01148692c888c3ea56ea63a4590a1e47c7ff1b8be02",
+  "terminal_status": "stopped_localized_representation_failure",
+  "weights_sha256": "6dcef22955942caed2da860a0680c8354e1be8bce887db0353ce76737e241bcf"
+}

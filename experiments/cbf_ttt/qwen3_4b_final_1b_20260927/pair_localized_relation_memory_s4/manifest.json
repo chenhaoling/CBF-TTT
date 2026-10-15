@@ -1,0 +1,57 @@
+{
+  "candidate_radius": 1,
+  "counts": {
+    "calibration": {
+      "candidates": 12918,
+      "deterministic_full_dialogue_fallback_mentions": 24,
+      "dialogre_trigger_supervised_mentions": 452,
+      "mentions": 872,
+      "sources": {
+        "dialogre": 872
+      }
+    },
+    "train": {
+      "candidates": 49226,
+      "deterministic_full_dialogue_fallback_mentions": 19,
+      "dialogre_trigger_supervised_mentions": 1567,
+      "mentions": 12203,
+      "sources": {
+        "dialogre": 2603,
+        "fewrel": 9600
+      }
+    }
+  },
+  "dialogre_dev_parsed": false,
+  "dialogre_test_parsed": false,
+  "files_sha256": {
+    "calibration_localized_mentions.jsonl": "4370044503f1fcc565dc4b6a14de172f4ed31d98d8063715d3d537b35574fd4a",
+    "train_localized_mentions.jsonl": "a77925cd6a487cd26ecc455bcbd65a18bed6e9f95be7945f1323a25a9c369ba6"
+  },
+  "model_outputs_loaded": false,
+  "protocol": "qwen_pair_localized_relation_memory_s4_data_v1",
+  "pubmed_validation_parsed": false,
+  "source": {
+    "dialogre": {
+      "files": {
+        "dev.json": {
+          "bytes": 751932,
+          "sha256": "3e0036a1853f33dd8fab1f008ff3c3b351f0b53e9084a6f6bce7b4c95d0f0472"
+        },
+        "test.json": {
+          "bytes": 725696,
+          "sha256": "180e766323d2b5ae4763c77b2db280eeb49c909ab48c7393fbc309b7890061af"
+        },
+        "train.json": {
+          "bytes": 2338606,
+          "sha256": "94b5799642107f9afecc5c46655d6d9612f41969893deff291b15a66298c08a0"
+        }
+      },
+      "head_reference": "ref: refs/heads/master",
+      "repository_commit": "b23e6cd7d811a68cf0aafa40e299143b857964e2"
+    },
+    "s3_audit_sha256": "442ccc5635b6609edc52a645ea465938f0bead30f306e5c92d32eaf3b0bf09ed",
+    "s3_manifest_sha256": "0ed003c7e153ced83291e5654bd51217295b474970912c57315906bf70885078",
+    "source_inspection_sha256": "53ab901dc398c75dbf3c006fc68abf442f64468399042c232672ccd78148dd8b"
+  },
+  "terminal_status": "data_built_pending_independent_audit"
+}

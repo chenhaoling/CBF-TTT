@@ -1,0 +1,72 @@
+{
+  "datasets": {
+    "calibration_candidates": {
+      "data": {
+        "audit_sha256": "e2234a3cf2479926cf8d3223c3d2da817044e3b4e2491cd97cb5cb2c0fe34d9a",
+        "manifest_sha256": "53f6506bcb01c4b6c8cf914ae6d0f61c3dfd73420be455f42874e7755a322826",
+        "source_file": "calibration_localized_mentions.jsonl",
+        "source_sha256": "4370044503f1fcc565dc4b6a14de172f4ed31d98d8063715d3d537b35574fd4a"
+      },
+      "max": 228,
+      "median": 74,
+      "min": 33,
+      "p90": 114,
+      "p95": 128,
+      "p99": 163,
+      "rows": 12918
+    },
+    "calibration_controls": {
+      "data": {
+        "audit_sha256": "e2234a3cf2479926cf8d3223c3d2da817044e3b4e2491cd97cb5cb2c0fe34d9a",
+        "manifest_sha256": "53f6506bcb01c4b6c8cf914ae6d0f61c3dfd73420be455f42874e7755a322826",
+        "source_file": "calibration_localized_mentions.jsonl",
+        "source_sha256": "4370044503f1fcc565dc4b6a14de172f4ed31d98d8063715d3d537b35574fd4a"
+      },
+      "max": 630,
+      "median": 94,
+      "min": 26,
+      "p90": 175,
+      "p95": 206,
+      "p99": 558,
+      "rows": 3068
+    },
+    "train_candidates": {
+      "data": {
+        "audit_sha256": "e2234a3cf2479926cf8d3223c3d2da817044e3b4e2491cd97cb5cb2c0fe34d9a",
+        "manifest_sha256": "53f6506bcb01c4b6c8cf914ae6d0f61c3dfd73420be455f42874e7755a322826",
+        "source_file": "train_localized_mentions.jsonl",
+        "source_sha256": "a77925cd6a487cd26ecc455bcbd65a18bed6e9f95be7945f1323a25a9c369ba6"
+      },
+      "max": 271,
+      "median": 68,
+      "min": 9,
+      "p90": 109,
+      "p95": 123,
+      "p99": 159,
+      "rows": 49226
+    },
+    "train_controls": {
+      "data": {
+        "audit_sha256": "e2234a3cf2479926cf8d3223c3d2da817044e3b4e2491cd97cb5cb2c0fe34d9a",
+        "manifest_sha256": "53f6506bcb01c4b6c8cf914ae6d0f61c3dfd73420be455f42874e7755a322826",
+        "source_file": "train_localized_mentions.jsonl",
+        "source_sha256": "a77925cd6a487cd26ecc455bcbd65a18bed6e9f95be7945f1323a25a9c369ba6"
+      },
+      "max": 555,
+      "median": 38,
+      "min": 9,
+      "p90": 107,
+      "p95": 142,
+      "p99": 234,
+      "rows": 38176
+    }
+  },
+  "dialogre_dev_loaded": false,
+  "dialogre_test_loaded": false,
+  "global_max": 630,
+  "model_forward_passes": 0,
+  "protocol": "qwen_pair_localized_relation_memory_s4_token_lengths_v1",
+  "recommended_max_length": 1024,
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "tokenizer_config_sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+}
