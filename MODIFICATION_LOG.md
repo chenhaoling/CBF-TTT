@@ -4240,3 +4240,21 @@ by at least five points with a positive session-bootstrap lower bound, add at
 most four collateral errors, have non-negative gain in all five outer folds,
 retain 5--50% deletion rate and preserve final generation before test can be
 opened.
+
+The V4 run completed all 5,144 calibration queries and its independent audit
+passed all nine checks. No candidate was feasible, so test remained sealed.
+Retain-all reached 82.21% and the privileged source-action rule 94.28%. The
+best useful learned candidate, engineered plus no-schedule intersection
+`x_n_b50_r200`, reached 86.22%; its +4.00-point gain had 95% CI
+`[2.15, 5.85]`, but it added 178 collateral errors and lost 4.33 points in
+outer fold 2. More conservative intersections still added 142--173 errors and
+had no significant overall gain. Several standalone no-schedule and voting
+rules collapsed in fold 2. This activates the preregistered failure branch:
+train a dedicated safe-delete head from policy-induced calibration states
+rather than search more thresholds over retain-prefix utility heads.
+
+Added a gated V4 test-corpus materializer and release-boundary test. It refuses
+to read the existing source `test.jsonl` unless the consensus summary selects a
+candidate, the independent audit passes and the terminal status explicitly
+authorizes test. Because V4 stopped, this code did not load or materialize the
+129-session test.

@@ -1,0 +1,60 @@
+{
+  "protocol": "qwen_natural_forgetting_consensus_v4",
+  "stage": "crossfit_online_calibration",
+  "shard": 1,
+  "num_shards": 2,
+  "sessions": 32,
+  "rows": 2560,
+  "seconds": 708.6041848752648,
+  "peak_allocated_gib": 8.280349254608154,
+  "peak_reserved_gib": 10.96484375,
+  "rows_sha256": "57d7e823f5fb95082c47a47668168f42081691a87f2ce31f3f527a548ba728cd",
+  "decisions_sha256": "19c34d7d533dfe391bd8fecff9855da29148948af3bc0c7ab3478f6b6cbecb57",
+  "frozen_inputs": {
+    "crossfit_checkpoint": "cc52d02791ae61ec683734faa759dde9c496a7d7d7bc27718992467c4b0dadca",
+    "crossfit_summary": "14789ff97622fb1bf738da596e64919ed178c949d6ffa04a07ccdc81a38f6af3",
+    "crossfit_audit": "6606d29256a13e879abb457d5bc9e5266d0721019ccd4bc794cfee787a1693ef",
+    "data_manifest": "ceb2c85ae2a01fd6de7ef08d68004e58e43b8ae424708bea4fa313344d1a7ba7",
+    "v5_checkpoint": "3a0ba5a83ece4850dd3824fc2277dc2e0dfdb04902e361dbff764e1b630abadc",
+    "context_transforms": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+    "scope_artifact": "0ed4dab8b77fd0fb91fdd49720c783261ab2fd5c64cd705ebe36346d99615619"
+  },
+  "feature_meta": {
+    "unique_texts": 512,
+    "unique_pairs": 6144,
+    "embedding_hashes": {
+      "5101": "312bbe95a6a82804d51c34f4b56da39c4035309a6af71ea90518a8921907b316",
+      "5102": "d44d0c28566b6b65510b270c662921f6cf3470c67e5e680a581d238b314f74f5",
+      "5103": "45b21e7b461942a16fc76a491e1e4bf26affb7068d70836b107f3b881ee1b443"
+    },
+    "pair_features_sha256": "b4af82157531bf7bcca670946708e1d6406fcf473d6a6546d70748619210d2f1"
+  },
+  "reader_selected": {
+    "hidden": 32,
+    "penalty": 1.0,
+    "learning_rate": 0.005,
+    "epochs": 50,
+    "threshold": 0.3,
+    "correct_top_recall": 0.9525348544120789,
+    "natural_correct_top_examples": 4951,
+    "natural_wrong_top_specificity": 0.8860103487968445,
+    "natural_wrong_top_examples": 193,
+    "no_match_specificity": 0.9458204507827759,
+    "no_match_examples": 646,
+    "balanced_accuracy": 0.9281218846638998
+  },
+  "reader_threshold": 0.3,
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "calibration_scored": true,
+  "development_loaded": false,
+  "test_loaded": false,
+  "external_benchmarks_loaded": false
+}
