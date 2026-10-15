@@ -1,0 +1,86 @@
+{
+  "checks": {
+    "calibration_mentions": {
+      "cap": true,
+      "count": true,
+      "hash": true,
+      "valid": true
+    },
+    "calibration_pairs": {
+      "balanced": true,
+      "complete_groups": true,
+      "counts": true,
+      "hashes": true,
+      "matched_bins": true,
+      "scenario_rule": true,
+      "valid": true
+    },
+    "configuration": true,
+    "dialogre_sources": true,
+    "fewrel_sources": true,
+    "model_free": true,
+    "protocol": true,
+    "pubmed_unsupervised": {
+      "hash": true,
+      "valid": true
+    },
+    "sealed": true,
+    "shortcut_gate": {
+      "bm25_recall_at_most_20": true,
+      "exact_positive_coverage_zero": true,
+      "trigram_recall_at_most_20": true
+    },
+    "split_isolation": {
+      "dialogues": true,
+      "entity_overlap_reported": true,
+      "instances": true,
+      "masked_texts": true
+    },
+    "train_mentions": {
+      "cap": true,
+      "count": true,
+      "hash": true,
+      "valid": true
+    },
+    "train_pairs": {
+      "balanced": true,
+      "complete_groups": true,
+      "counts": true,
+      "hashes": true,
+      "matched_bins": true,
+      "scenario_rule": true,
+      "valid": true
+    }
+  },
+  "dialogre_dev_rows_parsed": 0,
+  "dialogre_test_rows_parsed": 0,
+  "dialogre_train_parsed": true,
+  "manifest_sha256": "0ed003c7e153ced83291e5654bd51217295b474970912c57315906bf70885078",
+  "passed": true,
+  "protocol": "qwen_retrieval_evidence_forgetting_s3_data_audit_v1",
+  "pubmed_validation_rows_parsed": 0,
+  "rows_audited": 41527,
+  "shortcut": {
+    "bm25_at_95_specificity": {
+      "fn": 806,
+      "fp": 41,
+      "precision": 0.5773195876288659,
+      "recall": 0.06496519721577726,
+      "specificity": 0.9524361948955916,
+      "threshold": 47.610007453976394,
+      "tn": 821,
+      "tp": 56
+    },
+    "exact_positive_coverage": 0,
+    "trigram_at_95_specificity": {
+      "fn": 817,
+      "fp": 43,
+      "precision": 0.5113636363636364,
+      "recall": 0.052204176334106726,
+      "specificity": 0.9501160092807425,
+      "threshold": 0.352165725047081,
+      "tn": 819,
+      "tp": 45
+    }
+  }
+}

@@ -4713,3 +4713,23 @@ source-instance and exact-masked-text disjointness. Semantic entity-pair
 overlap is retained as a reported diagnostic, and entity strings remain
 excluded from model features. This correction uses no dev/test record or
 model score.
+
+Added the model-free S3 builder, independent auditor and nine focused tests.
+The first build exposed six exact duplicate rows among the 2,500
+PubMed-unsupervised records. The independent auditor rejected the view table
+while every other integrity and shortcut check passed. The corrected builder
+deduplicates by content hash, preserves the rejected first root, and writes a
+new `retry1` root. Its independent audit passes every source, sealing, split,
+mention, pair, scenario, hash, balance and shortcut check over 41,527 rows.
+The final corpus has 12,203 train mentions, 24,234 balanced train pairs and
+60,585 physical scenarios; calibration has 872 mentions, 1,724 balanced pairs
+and 4,310 scenarios; self-supervision has 2,494 unique PubMed rows. At 95%
+specificity, trigram and BM25 recall are only 5.22% and 6.50%, so the
+pre-model shortcut gate passes. Manifest SHA256 is
+`0ed003c7e153ced83291e5654bd51217295b474970912c57315906bf70885078`.
+DialogRE dev/test and PubMed validation remain unparsed.
+
+Tokenizer-only measurement over all 13,075 train/calibration mentions gives
+Qwen token length min/median/p90/p95/p99/max of 9/38/388/492/629/881. Before
+any embedding forward pass, S3 therefore freezes max length 1024, no
+truncation and batch size eight per RTX 5090 shard.

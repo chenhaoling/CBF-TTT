@@ -116,6 +116,11 @@ failure stops S3 before GPU training and requires a new construction plan.
 
 Use the final 1B-token Qwen3-4B checkpoint with native TTT disabled.  Mean-pool
 the final non-padding hidden states of every masked mention and L2 normalize.
+The audited train/calibration corpus contains 13,075 mentions; Qwen token
+lengths have min/median/p90/p95/p99/max values
+`9/38/388/492/629/881`.  Embedding extraction therefore fixes maximum length
+1024 with no truncation and batch size 8 per RTX 5090 shard.  Any mention over
+1024 tokens is a hard error rather than silently truncated.
 The support bank contains only the current outer training groups.  For each
 query mention retrieve the top 16 supports, excluding its dialogue and paired
 mention.  Report recall@4/8/16 and MRR, but retrieval alone never authorizes
