@@ -5582,3 +5582,16 @@ errors on the same official test, independently confirming that the semantic
 fact-key projection supplies the observed safety rather than merely fitting
 the validation partition.  The result audit releases original-source
 confirmation and external evaluation without permitting any test repair.
+
+## 2026-10-16: V6 original-source confirmation registration
+
+After the audited V6 TempLAMA test passed and before generating any held-out
+LAMA/ParaRel confirmation episode, added
+`QWEN_UTILITY_RECORD_CONTROLLER_V6_ORIGINAL_SOURCE_CONFIRMATION_PLAN.md`.
+The protocol freezes all three TempLAMA-trained V5 checkpoints, normalization
+statistics, thresholds, the V6 `(normalized subject, relation id)` safety
+projection, the original 64-group LAMA/ParaRel confirmation corpus grammar,
+comparators, clustered uncertainty and seven release conditions.  The seven
+relations fixed by the original source inspection remain ungenerated and
+unscored at this registration point.  No original-source outcome may tune or
+repair V6.
