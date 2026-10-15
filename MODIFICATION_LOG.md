@@ -5454,3 +5454,20 @@ most one additional deletion.  Group-stratified inner selection must have zero
 collateral; the already-observed TempLAMA validation becomes development
 evidence, and the still-sealed official test remains the only claim-bearing
 confirmation.
+
+Implemented the preregistered V5 train-only residual-controller stage before
+observing any V5 model outcome.  It reconstructs the 4,392 exact-subject
+single-deletion candidates from the audited V4 counterfactual labels, assigns
+separate accuracy-benefit and unrelated-answer-risk targets, and trains the
+frozen `66 -> 128 -> 64` two-head MLP for seeds `26101651/52/53`.  Complete
+target groups are relation-stratified into leak-free 80/20 inner splits;
+selection searches the registered 180 policy configurations per seed, permits
+at most one extra deletion beyond explicit lifecycle physics, and requires
+zero added collateral.  The selected inner checkpoint is preserved without a
+full-data refit so that its thresholds remain calibrated on unseen groups.
+Added an independent auditor that reconstructs examples and splits, reloads
+each checkpoint, reruns normalization, class weighting and policy selection,
+and verifies hashes plus validation/test seals.  The non-overwriting runner,
+Python compilation, shell syntax, whitespace checks and all nine focused
+V4/V5 training tests pass locally.  No V5 model or development-evaluation
+outcome had been observed at this implementation checkpoint.
