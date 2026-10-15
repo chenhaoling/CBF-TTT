@@ -4843,3 +4843,17 @@ clones only the two official repositories, downloads the official LAMA archive,
 records commits and SHA256 inventories, and writes a manifest explicitly
 marking source content unparsed. No data row or model result was inspected at
 this registration point.
+
+The acquisition completed on `hku-gpu2` with exit code zero. It pinned LAMA at
+commit `5cba81b6e55d4c596ce62b0166b1acd429a47f28`, ParaRel at commit
+`cb5554678457beb5ac163d888f1ce8cf174b3f0b`, and the 74,619,466-byte official
+LAMA archive at SHA256
+`70f8e520b9beafc5a05261c022c81d38c0e8a8f3594850872e5349bcdd2caf92`.
+The acquisition manifest records `content_parsed=false`.
+
+Added `scripts/inspect_lama_pararel_utility_source.py` and focused tests. The
+inspector independently verifies acquisition hashes, parses T-REx facts and
+ParaRel patterns, applies the exact registered eligibility and relation hash
+split, measures cross-partition subject removal, and writes aggregate counts
+only. It never serializes a fact surface, loads an earlier experimental source
+or produces a model feature.
