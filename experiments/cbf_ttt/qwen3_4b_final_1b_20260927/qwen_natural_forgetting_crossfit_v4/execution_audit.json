@@ -1,0 +1,23 @@
+{
+  "protocol": "qwen_natural_forgetting_crossfit_v4_audit",
+  "checks": {
+    "terminal_status_and_exit": true,
+    "protocol_features_and_folds": true,
+    "checkpoint_probability_and_action_reproduction": true,
+    "gate_reconstruction": true,
+    "artifact_hashes": true,
+    "heldout_seals": true
+  },
+  "passed": true,
+  "recomputed": {
+    "maximum_probability_error": 0.0,
+    "action_mismatches": 0,
+    "reproduced_predictions": 4644,
+    "gate": {
+      "all_774_rows_reproduced_per_view_seed": true,
+      "maximum_probability_error_at_most_1e_6": true,
+      "zero_action_mismatches": true,
+      "development_test_external_sealed": true
+    }
+  }
+}
