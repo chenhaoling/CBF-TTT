@@ -4134,3 +4134,58 @@ features to predict per-action future gain, NLL benefit and unrelated-memory
 risk. It compares risk-constrained Q selection with gain-only and direct
 classification ablations while keeping natural development sealed behind a
 strict calibration release gate.
+
+Barrier-Q passed its ten-check independent audit but failed the registered
+calibration release. Its three-seed mean accuracy was 80.95%, only 0.08 points
+above retain-all and 0.64 points below the strongest fixed action, while adding
+120 unrelated errors. Every outer-fold search was infeasible. The gain-only
+ablation added more than 1,200 errors, and the direct classifier reached about
+81.66% but added 418--492 errors. This localizes the failure to fitting an
+11-action utility surface from only 774 states with 2,564 raw reader
+coordinates rather than to an absence of forgetting headroom.
+
+## 2026-10-15: low-dimensional Factor Gate V2
+
+Added `QWEN_NATURAL_FORGETTING_FACTOR_GATE_V2_PLAN.md` before the V2 run. It
+restricts deployment to retain versus exact scope-top deletion, factorizes the
+target into benefit and collateral risk, excludes every raw `reader_*`
+coordinate and uses exactly 13 inference-visible geometry, lexical and
+schedule variables. It registers five outer session folds, four inner folds,
+three seeds, a linear/MLP grid, risk/benefit threshold search, a no-schedule
+ablation and strict release gates against retain-all, fixed deletion and both
+V1 controllers.
+
+Added `tasks/train_qwen_natural_forgetting_factor_gate_v2.py`, focused tests,
+a refusal-to-overwrite runner and an independent auditor. The audit
+reconstructs targets, feature exclusion, nested group isolation, inner
+selection, every OOF probability/action, policy metrics, paired bootstraps,
+checkpoints, hashes and held-out seals.
+
+V2 passed all 13 release checks and all 10 audit checks. Mean OOF accuracy was
+82.03%, improving over retain-all by 1.17 points with session-bootstrap 95% CI
+`[0.99, 1.35]`, and over fixed scope-top deletion by 0.48 points with CI
+`[0.17, 0.80]`. It added two unrelated errors, versus 35 for benefit-only and
+855 for fixed deletion, and captured 41.97% of full safe-oracle headroom. All
+three seeds improved both baselines and four of five outer folds were
+feasible. The frozen primary configuration is a linear model with benefit
+threshold 0.8 and risk threshold 0.1. Full artifacts and a report are archived
+under `qwen_natural_forgetting_factor_gate_v2/`.
+
+## 2026-10-15: on-policy sequential natural forgetting V3
+
+Added `QWEN_NATURAL_FORGETTING_ONLINE_V3_PLAN.md` before opening controller
+development results. The protocol tests the frozen V2 ensemble on the memory
+states created by its own prior decisions, rather than replaying isolated
+interventions from retain-all prefixes. It registers retain-all, fixed local
+deletion, privileged source action, three seed members, the factor ensemble,
+benefit-only and no-schedule arms. It records candidate/generation outcomes,
+state size, deletions, stale/wrong/defer reads, paired recovered and added
+errors, and collateral errors on chains unrelated to the most recent write.
+
+Added the two-GPU evaluator, release-manifest seals, four focused tests,
+refusal-to-overwrite runner and an independent full-trajectory auditor. The
+auditor reconstructs all policy states, features, checkpoint probabilities,
+actions, query identities, generation consistency, artifact hashes,
+aggregates and session bootstrap intervals. Factor Gate V2's successful
+terminal status and independent audit are hard prerequisites. ZsRE test and
+external benchmarks remain sealed until V3 passes.

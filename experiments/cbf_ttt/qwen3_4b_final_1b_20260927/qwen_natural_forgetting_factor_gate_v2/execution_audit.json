@@ -1,0 +1,269 @@
+{
+  "protocol": "qwen_natural_forgetting_factor_gate_v2_audit",
+  "checks": {
+    "terminal_status_and_exit": true,
+    "low_dimensional_features_and_targets": true,
+    "complete_probability_and_action_oof": true,
+    "nested_group_isolation_and_selection": true,
+    "policy_metrics": true,
+    "baselines_and_binary_oracles": true,
+    "paired_bootstrap": true,
+    "means_and_gate": true,
+    "checkpoint_and_hashes": true,
+    "heldout_seals": true
+  },
+  "passed": true,
+  "recomputed": {
+    "metrics": {
+      "engineered": {
+        "factor_gate": {
+          "9401": {
+            "candidate_accuracy": 0.8202065471551052,
+            "mean_answer_nll": 0.9714997241598734,
+            "unrelated_errors_added": 2,
+            "action_distribution": {
+              "retain_all": 553,
+              "scope_top1_a0": 221
+            },
+            "queries": 51320,
+            "correct": 42093
+          },
+          "9402": {
+            "candidate_accuracy": 0.8207131722525332,
+            "mean_answer_nll": 0.9701143560508446,
+            "unrelated_errors_added": 2,
+            "action_distribution": {
+              "retain_all": 545,
+              "scope_top1_a0": 229
+            },
+            "queries": 51320,
+            "correct": 42119
+          },
+          "9403": {
+            "candidate_accuracy": 0.8200896336710835,
+            "mean_answer_nll": 0.9722192633029452,
+            "unrelated_errors_added": 2,
+            "action_distribution": {
+              "retain_all": 556,
+              "scope_top1_a0": 218
+            },
+            "queries": 51320,
+            "correct": 42087
+          }
+        },
+        "benefit_only": {
+          "9401": {
+            "candidate_accuracy": 0.8232852689010133,
+            "mean_answer_nll": 0.9561551830419833,
+            "unrelated_errors_added": 28,
+            "action_distribution": {
+              "retain_all": 467,
+              "scope_top1_a0": 307
+            },
+            "queries": 51320,
+            "correct": 42251
+          },
+          "9402": {
+            "candidate_accuracy": 0.8236360093530787,
+            "mean_answer_nll": 0.95454765236175,
+            "unrelated_errors_added": 45,
+            "action_distribution": {
+              "retain_all": 449,
+              "scope_top1_a0": 325
+            },
+            "queries": 51320,
+            "correct": 42269
+          },
+          "9403": {
+            "candidate_accuracy": 0.8234996102883866,
+            "mean_answer_nll": 0.9553107920475998,
+            "unrelated_errors_added": 32,
+            "action_distribution": {
+              "retain_all": 461,
+              "scope_top1_a0": 313
+            },
+            "queries": 51320,
+            "correct": 42262
+          }
+        }
+      },
+      "no_schedule": {
+        "factor_gate": {
+          "9401": {
+            "candidate_accuracy": 0.8169719407638347,
+            "mean_answer_nll": 0.9838442394816205,
+            "unrelated_errors_added": 9,
+            "action_distribution": {
+              "retain_all": 599,
+              "scope_top1_a0": 175
+            },
+            "queries": 51320,
+            "correct": 41927
+          },
+          "9402": {
+            "candidate_accuracy": 0.8168160561184723,
+            "mean_answer_nll": 0.9847483436214858,
+            "unrelated_errors_added": 10,
+            "action_distribution": {
+              "retain_all": 605,
+              "scope_top1_a0": 169
+            },
+            "queries": 51320,
+            "correct": 41919
+          },
+          "9403": {
+            "candidate_accuracy": 0.814614185502728,
+            "mean_answer_nll": 0.9968033296206862,
+            "unrelated_errors_added": 8,
+            "action_distribution": {
+              "retain_all": 653,
+              "scope_top1_a0": 121
+            },
+            "queries": 51320,
+            "correct": 41806
+          }
+        },
+        "benefit_only": {
+          "9401": {
+            "candidate_accuracy": 0.8190958690568979,
+            "mean_answer_nll": 0.9676516320125992,
+            "unrelated_errors_added": 239,
+            "action_distribution": {
+              "retain_all": 409,
+              "scope_top1_a0": 365
+            },
+            "queries": 51320,
+            "correct": 42036
+          },
+          "9402": {
+            "candidate_accuracy": 0.8192712392829307,
+            "mean_answer_nll": 0.9649361801578556,
+            "unrelated_errors_added": 305,
+            "action_distribution": {
+              "retain_all": 360,
+              "scope_top1_a0": 414
+            },
+            "queries": 51320,
+            "correct": 42045
+          },
+          "9403": {
+            "candidate_accuracy": 0.818394388152767,
+            "mean_answer_nll": 0.9708318992704432,
+            "unrelated_errors_added": 264,
+            "action_distribution": {
+              "retain_all": 406,
+              "scope_top1_a0": 368
+            },
+            "queries": 51320,
+            "correct": 42000
+          }
+        }
+      }
+    },
+    "baselines": {
+      "retain_all": {
+        "candidate_accuracy": 0.8086905689789555,
+        "mean_answer_nll": 1.0233633068569474,
+        "unrelated_errors_added": 0,
+        "action_distribution": {
+          "retain_all": 774
+        },
+        "queries": 51320,
+        "correct": 41502
+      },
+      "always_scope_top1_a0": {
+        "candidate_accuracy": 0.8156469212782541,
+        "mean_answer_nll": 0.9888827133524726,
+        "unrelated_errors_added": 855,
+        "action_distribution": {
+          "scope_top1_a0": 774
+        },
+        "queries": 51320,
+        "correct": 41859
+      },
+      "source_action_rule": {
+        "candidate_accuracy": 0.8207911145752144,
+        "mean_answer_nll": 0.9705705995021152,
+        "unrelated_errors_added": 4,
+        "action_distribution": {
+          "retain_all": 516,
+          "scope_top1_a0": 258
+        },
+        "queries": 51320,
+        "correct": 42123
+      },
+      "safe_binary_oracle": {
+        "candidate_accuracy": 0.8319758378799689,
+        "mean_answer_nll": 0.9278856939458293,
+        "unrelated_errors_added": 0,
+        "action_distribution": {
+          "retain_all": 305,
+          "scope_top1_a0": 469
+        },
+        "queries": 51320,
+        "correct": 42697
+      },
+      "full_safe_oracle": {
+        "candidate_accuracy": 0.8364380358534684,
+        "mean_answer_nll": 0.9336153840646874,
+        "unrelated_errors_added": 0,
+        "action_distribution": {
+          "global_a0": 119,
+          "global_a05": 21,
+          "hybrid_a0": 9,
+          "last1_a0": 50,
+          "last1_a05": 20,
+          "last2_a0": 16,
+          "last2_a05": 2,
+          "retain_all": 204,
+          "scope_top1_a0": 325,
+          "scope_top1_a05": 8
+        },
+        "queries": 51320,
+        "correct": 42926
+      }
+    },
+    "comparisons": {
+      "retain": {
+        "gain": 0.01171153846153843,
+        "bootstrap_95ci": [
+          0.009948717948717925,
+          0.013538461538461503
+        ],
+        "sessions": 65
+      },
+      "fixed": {
+        "gain": 0.004846153846153849,
+        "bootstrap_95ci": [
+          0.0016858974358974416,
+          0.00801923076923077
+        ],
+        "sessions": 65
+      }
+    },
+    "mean": {
+      "factor_candidate_accuracy": 0.8203364510262405,
+      "benefit_only_candidate_accuracy": 0.8234736295141595,
+      "factor_unrelated_errors": 2.0,
+      "benefit_only_unrelated_errors": 35.0,
+      "full_oracle_headroom_captured": 0.41970973782771454,
+      "v1_barrier_accuracy": 0.8094764873993245,
+      "v1_direct_accuracy": 0.8166341906988829
+    },
+    "gate": {
+      "gain_over_retain_at_least_point_0075": true,
+      "retain_gain_ci_lower_above_zero": true,
+      "gain_over_fixed_at_least_point_0025": true,
+      "fixed_gain_ci_lower_above_zero": true,
+      "captures_at_least_point_30_full_oracle_headroom": true,
+      "unrelated_errors_no_more_than_source_rule": true,
+      "risk_gate_reduces_benefit_only_errors": true,
+      "risk_gate_within_point_005_of_benefit_only": true,
+      "beats_v1_barrier_q": true,
+      "beats_v1_direct_classification": true,
+      "at_least_four_feasible_outer_folds": true,
+      "all_seeds_improve_retain": true,
+      "all_seeds_beat_fixed": true
+    }
+  }
+}
