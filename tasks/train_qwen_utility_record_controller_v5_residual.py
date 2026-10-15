@@ -67,6 +67,53 @@ def load_labels(root: Path) -> list[dict]:
     return rows
 
 
+def residual_inference_candidates(labels: list[dict],
+                                  feature_rows: list[dict]) -> list[dict]:
+    """Enumerate V5 candidates without reading counterfactual outcomes."""
+    features = {
+        (row["episode_id"], row["boundary_index"]): row
+        for row in feature_rows
+    }
+    if len(features) != len(feature_rows):
+        raise ValueError("duplicate V5 feature identity")
+    physics = fixed_policy_actions(
+        labels, features, "explicit_lifecycle_physics"
+    )
+    candidates = []
+    for row in labels:
+        identity = (row["episode_id"], row["boundary_index"])
+        feature = features[identity]
+        baseline_name = physics[identity]
+        if baseline_name == "global_clear":
+            continue
+        base_alphas = [
+            int(value)
+            for value in row["actions"][baseline_name]["spec"]["alphas"]
+        ]
+        for slot, (alpha, values) in enumerate(zip(
+            base_alphas, feature["features"]
+        )):
+            if alpha != 1 or not locality_allows(values, LOCALITY_RULE):
+                continue
+            candidate_alphas = list(base_alphas)
+            candidate_alphas[slot] = 0
+            candidate_name = grid_action(candidate_alphas)
+            if candidate_name not in row["actions"]:
+                raise ValueError(f"missing V5 residual action {candidate_name}")
+            candidates.append({
+                "features": values,
+                "episode_id": row["episode_id"],
+                "boundary_index": row["boundary_index"],
+                "slot": slot,
+                "source_group": row["source_group"],
+                "relation": row["target_relation"],
+                "mechanism": row["mechanism"],
+                "physics_action": baseline_name,
+                "candidate_action": candidate_name,
+            })
+    return candidates
+
+
 def residual_examples(labels: list[dict], feature_rows: list[dict]) -> list[dict]:
     features = {
         (row["episode_id"], row["boundary_index"]): row
@@ -263,7 +310,14 @@ def predict_state(state: dict, examples: list[dict], means: list[float],
     model = make_model(len(FEATURE_NAMES))
     model.load_state_dict(state, strict=True)
     model.eval()
-    x, _, _ = tensors(examples, means, stds, torch.device("cpu"))
+    # Evaluation candidates intentionally carry no counterfactual targets.
+    # Build the inference tensor directly so prediction cannot depend on label
+    # fields through a shared training helper.
+    x = torch.tensor([
+        [(value - mean) / std
+         for value, mean, std in zip(row["features"], means, stds)]
+        for row in examples
+    ], dtype=torch.float32)
     with torch.inference_mode():
         benefit, risk = model(x)
         benefit = benefit.sigmoid().tolist()

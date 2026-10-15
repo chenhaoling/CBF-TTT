@@ -5471,3 +5471,34 @@ and verifies hashes plus validation/test seals.  The non-overwriting runner,
 Python compilation, shell syntax, whitespace checks and all nine focused
 V4/V5 training tests pass locally.  No V5 model or development-evaluation
 outcome had been observed at this implementation checkpoint.
+
+The V5 model-free single-action prerequisite passed on the frozen V4
+evaluation half.  Explicit lifecycle physics scored 83.776%, while the safe
+exact-subject Oracle restricted to at most one extra deletion scored 88.385%,
+leaving 4.609 points of headroom above the registered three-point minimum.
+This equals the unrestricted safe residual-subset Oracle on that partition,
+and no boundary requires a pair-or-higher deletion for an accuracy gain.
+
+V5 residual training then completed in 8.45 seconds and its independent audit
+passed.  It reconstructed 4,392 candidates from all 512 formal-train groups,
+with 685 benefit and 201 risk positives.  Seeds `26101651/52/53` selected
+`e25_u0.4_p1.0_c0.01`, `e100_u0.4_p2.0_c0.01` and
+`e100_u0.4_p2.0_c0.01`; inner-validation accuracies were
+89.592%/87.761%/87.337%, all with zero added unrelated errors.  Their residual
+deletion precisions were 54.31%/60.80%/56.52%.  Checkpoint integrity,
+relation-stratified group separation, the complete registered policy grid and
+all held-out seals passed audit.
+
+Implemented the full 256-group V5 TempLAMA development evaluator, independent
+exact-rerun result audit, focused tests and non-overwriting runner.  The
+controller inference path now constructs tensors directly from 66-dimensional
+features and enumerates target-free exact-subject candidates, so benefit/risk
+counterfactual labels cannot enter prediction.  Evaluation starts from the
+unchanged lifecycle-physics action, permits at most one residual deletion,
+reports a matching safe single-action Oracle, three seeds, majority policy,
+20 physics-preserving residual-deletion-matched random controls, mechanism/
+relation/background diagnostics and group/cluster uncertainty.  It also locks
+the independently audited V2--V4 summaries and retains the registered V5
+release gates.  Compilation, seven focused training/evaluation tests, runner
+syntax and whitespace checks pass locally; TempLAMA test remains sealed until
+the new development result and its independent audit satisfy every gate.
