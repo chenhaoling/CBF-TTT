@@ -43,15 +43,18 @@ def audit(data_root: str | Path, embedding_root: str | Path) -> dict:
                        and shard_audit.get("dialogre_test_loaded") is False
                        and shard_audit.get("pubmed_validation_loaded") is False)
             with np.load(path) as arrays:
-                for index in range(len(arrays["indices"])):
-                    values.append((
-                        int(arrays["indices"][index]), str(arrays["view_ids"][index]),
-                        str(arrays["source_ids"][index]), str(arrays["relations"][index]),
-                        str(arrays["sources"][index]), str(arrays["dialogue_ids"][index]),
-                        str(arrays["views"][index]), int(arrays["center_turns"][index]),
-                        arrays["side_features"][index].astype("float32"),
-                        arrays["embeddings"][index].astype("float32"),
-                    ))
+                # NPZ members are compressed independently.  Read each member
+                # once; repeated ``arrays[key][index]`` access would decompress
+                # the complete member once per row.
+                values.extend(zip(
+                    arrays["indices"].astype("int64").tolist(),
+                    arrays["view_ids"].tolist(), arrays["source_ids"].tolist(),
+                    arrays["relations"].tolist(), arrays["sources"].tolist(),
+                    arrays["dialogue_ids"].tolist(), arrays["views"].tolist(),
+                    arrays["center_turns"].astype("int64").tolist(),
+                    arrays["side_features"].astype("float32"),
+                    arrays["embeddings"].astype("float32"),
+                ))
             shard_audits.append(shard_audit)
             shard_hashes[str(shard)] = sha(path)
         values.sort(key=lambda row: row[0])
