@@ -245,6 +245,95 @@ def selection_key(summary: dict) -> tuple:
     )
 
 
+def resource_pilot(args) -> None:
+    import torch
+
+    data_root, embedding_root = Path(args.data_root), Path(args.embedding_root)
+    manifest = json.loads((data_root / "manifest.json").read_text())
+    data_audit = json.loads((data_root / "data_audit.json").read_text())
+    if (manifest.get("protocol") != DATA_PROTOCOL
+            or data_audit.get("protocol") != AUDIT_PROTOCOL
+            or data_audit.get("passed") is not True):
+        raise ValueError("S3 projection pilot requires audited data")
+    output = Path(args.output)
+    if output.exists():
+        raise FileExistsError(output)
+    train_set, _ = load_embedding_set(
+        embedding_root, "train", manifest["counts"]["train"]["mentions"]
+    )
+    calibration_set, _ = load_embedding_set(
+        embedding_root, "calibration", manifest["counts"]["calibration"]["mentions"]
+    )
+    pairs = load_jsonl(data_root / "train_relation_pairs.jsonl")
+    index = {value: position for position, value in enumerate(train_set["ids"])}
+    negative_pairs = [(index[row["left_source_row_sha256"]],
+                       index[row["right_source_row_sha256"]])
+                      for row in pairs if not row["same_relation"]]
+    relation_names = sorted(set(train_set["relations"]))
+    relation_id = {name: position for position, name in enumerate(relation_names)}
+    labels = torch.tensor([relation_id[value] for value in train_set["relations"]])
+    matrix = torch.as_tensor(train_set["matrix"], dtype=torch.float32)
+    torch.cuda.set_device(0)
+    torch.manual_seed(SEED)
+    torch.cuda.reset_peak_memory_stats()
+    head = ProjectionHead.create(matrix.shape[1], max(DIMENSIONS)).to("cuda")
+    optimizer = torch.optim.AdamW(head.parameters(), lr=1e-3, weight_decay=1e-4)
+    generator = torch.Generator().manual_seed(SEED)
+    batches = relation_batches(train_set["relations"], generator, steps=2)
+    losses, started = [], time.perf_counter()
+    for batch_indices in batches:
+        batch = torch.tensor(batch_indices)
+        projected = head(matrix[batch].to("cuda"))
+        contrastive = supervised_contrastive_loss(projected, labels[batch].to("cuda"), .10)
+        choice = torch.randint(len(negative_pairs), (HARD_NEGATIVE_BATCH,), generator=generator)
+        chosen = [negative_pairs[value] for value in choice.tolist()]
+        left = head(matrix[torch.tensor([value[0] for value in chosen])].to("cuda"))
+        right = head(matrix[torch.tensor([value[1] for value in chosen])].to("cuda"))
+        margin_loss = torch.relu((left * right).sum(-1) - .20).mean()
+        loss = contrastive + MARGIN_WEIGHT * margin_loss
+        optimizer.zero_grad(set_to_none=True)
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(head.parameters(), 1.0)
+        optimizer.step()
+        losses.append(float(loss.detach()))
+    train_projected = project_matrix(head, train_set["matrix"])
+    calibration_projected = project_matrix(head, calibration_set["matrix"])
+    query_started = time.perf_counter()
+    bank = torch.as_tensor(train_projected, device="cuda")
+    calibration_query = torch.as_tensor(calibration_projected, device="cuda")
+    _ = torch.topk(calibration_query @ bank.T, k=16, dim=1).indices
+    train_query = bank[:128]
+    train_scores = train_query @ bank.T
+    train_scores[torch.arange(128, device="cuda"), torch.arange(128, device="cuda")] = -torch.inf
+    _ = torch.topk(train_scores, k=16, dim=1).indices
+    torch.cuda.synchronize()
+    query_seconds = time.perf_counter() - query_started
+    result = {
+        "protocol": "qwen_retrieval_evidence_forgetting_s3_projection_pilot_v1",
+        "steps": 2,
+        "losses": losses,
+        "finite_losses": all(math.isfinite(value) for value in losses),
+        "dimension": max(DIMENSIONS),
+        "support_queries": 1000,
+        "support_query_seconds": query_seconds,
+        "support_queries_per_second": 1000 / query_seconds,
+        "seconds": time.perf_counter() - started,
+        "peak_allocated_gib": torch.cuda.max_memory_allocated() / 2**30,
+        "peak_reserved_gib": torch.cuda.max_memory_reserved() / 2**30,
+        "gpu": torch.cuda.get_device_name(),
+        "torch": torch.__version__,
+        "data_manifest_sha256": sha(data_root / "manifest.json"),
+        "data_audit_sha256": sha(data_root / "data_audit.json"),
+        "dialogre_dev_loaded": False,
+        "dialogre_test_loaded": False,
+        "pubmed_validation_loaded": False,
+        "passed": all(math.isfinite(value) for value in losses)
+            and torch.cuda.max_memory_reserved() / 2**30 < 28,
+    }
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps(result, indent=2, sort_keys=True))
+
+
 def train(args) -> None:
     import numpy as np
     import torch
@@ -480,11 +569,18 @@ def train(args) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--mode", choices=("pilot", "train"), default="train")
     parser.add_argument("--data-root", required=True)
     parser.add_argument("--embedding-root", required=True)
     parser.add_argument("--output", required=True)
-    parser.add_argument("--weights", required=True)
-    train(parser.parse_args())
+    parser.add_argument("--weights")
+    args = parser.parse_args()
+    if args.mode == "pilot":
+        resource_pilot(args)
+    else:
+        if not args.weights:
+            parser.error("--weights is required in train mode")
+        train(args)
 
 
 if __name__ == "__main__":
