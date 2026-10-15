@@ -47,6 +47,32 @@ class TestDiagnoseUtilityRecordControllerV4Residual(unittest.TestCase):
         self.assertEqual(result["additional_correct_from_best_safe"], 1)
         self.assertEqual(result["safe_residual_headroom"], .2)
 
+    def test_rule_argument_changes_candidate_support(self):
+        actions = dict(
+            make_action(values, 3 + int(values == (0,)), 3, 5.0)
+            for values in ((0,), (1,))
+        )
+        label = {
+            "episode_id": "e", "boundary_index": 0, "source_group": "g",
+            "retain_action": "grid_1", "candidate_count": 1,
+            "mechanism": "semantic_overwrite", "target_relation": "P1",
+            "actions": actions,
+        }
+        values = [0.0] * 66
+        values[0] = 1.0; values[2] = 1.0; values[4] = .9
+        feature = {"episode_id": "e", "boundary_index": 0,
+                   "features": [values]}
+        self.assertEqual(
+            analyze([label], [feature], "conflict_cosine_099")[
+                "eligible_records"
+            ],
+            0,
+        )
+        self.assertEqual(
+            analyze([label], [feature], "exact_subject")["eligible_records"],
+            1,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

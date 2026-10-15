@@ -14,14 +14,17 @@ from tasks.evaluate_qwen_utility_record_controller_v1_development import (
     grid_action,
 )
 from tasks.pilot_qwen_utility_semantic_record_gate_v1 import load_jsonl
-from tasks.select_qwen_utility_record_controller_v4_templama import locality_allows
+from tasks.select_qwen_utility_record_controller_v4_templama import (
+    LOCALITY_RULES,
+    locality_allows,
+)
 
 
 PROTOCOL = "qwen_utility_record_controller_v4_residual_diagnostic"
 RULE = "conflict_cosine_099"
 
 
-def analyze(labels: list[dict], feature_rows: list[dict]) -> dict:
+def analyze(labels: list[dict], feature_rows: list[dict], rule: str = RULE) -> dict:
     features = {
         (row["episode_id"], row["boundary_index"]): row
         for row in feature_rows
@@ -64,7 +67,7 @@ def analyze(labels: list[dict], feature_rows: list[dict]) -> dict:
             slot for slot, (alpha, values) in enumerate(zip(
                 base_alphas, feature["features"]
             ))
-            if alpha == 1 and locality_allows(values, RULE)
+            if alpha == 1 and locality_allows(values, rule)
         ]
         for target in category_rows:
             target["eligible_records"] += len(optional)
@@ -176,22 +179,33 @@ def main() -> None:
         args.validation_feature_root, args.validation_label_root
     )
     selection = json.loads((args.selection_root / "result.json").read_text())
-    parts = {}
+    partition_inputs = {"train": (train_labels, train_features)}
     for name, group_key in (
         ("calibration", "calibration_groups"),
         ("evaluation", "evaluation_groups"),
     ):
         groups = set(selection[group_key])
-        parts[name] = analyze(
+        partition_inputs[name] = (
             [row for row in validation_labels if row["source_group"] in groups],
             [row for row in validation_features if row["source_group"] in groups],
         )
+    rule_sweep = {
+        partition: {
+            rule: analyze(labels, features, rule)
+            for rule in LOCALITY_RULES
+        }
+        for partition, (labels, features) in partition_inputs.items()
+    }
     result = {
         "protocol": PROTOCOL,
         "post_hoc_after_v4_evaluation": True,
         "locality_rule": RULE,
-        "train": analyze(train_labels, train_features),
-        **parts,
+        "registered_locality_rules": list(LOCALITY_RULES),
+        "rule_sweep": rule_sweep,
+        **{
+            partition: rows[RULE]
+            for partition, rows in rule_sweep.items()
+        },
         "input_sha256": {
             "train_feature_summary": sha256(args.train_feature_root / "summary.json"),
             "train_label_summary": sha256(args.train_label_root / "summary.json"),
