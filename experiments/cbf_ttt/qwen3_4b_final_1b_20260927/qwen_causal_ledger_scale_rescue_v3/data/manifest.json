@@ -1,0 +1,42 @@
+{
+  "protocol": "qwen_causal_ledger_development_v2_corpus_v1",
+  "phase": "development",
+  "seed": 202610160,
+  "groups_per_family": 64,
+  "families": [
+    "retain",
+    "recent_revoke",
+    "distant_revoke",
+    "reset",
+    "exact_duplicate",
+    "overwritten_noop",
+    "mixed_two_event"
+  ],
+  "template_sha256": "6d673e784244a19c5142452fd2f55a000685b36640aa93bd9d1e37da85e7cb98",
+  "null": "Z P P P H",
+  "files_sha256": {
+    "development.inputs.jsonl": "32a3f4f21e76557df789906b17bb9d3c179a4e7df7b07129bbe5c5104a0a43fc",
+    "development.targets.jsonl": "260b9bd9fc015ea1a4b416a5edc7f49b6176ce7f50af07ab76ece849648ca2b3"
+  },
+  "audit": {
+    "episodes": 896,
+    "groups": 448,
+    "counts": {
+      "development/retain": 128,
+      "development/recent_revoke": 128,
+      "development/distant_revoke": 128,
+      "development/reset": 128,
+      "development/exact_duplicate": 128,
+      "development/overwritten_noop": 128,
+      "development/mixed_two_event": 128
+    },
+    "causal_answers_verified": true,
+    "visible_parser_verified": true,
+    "counterfactual_twins_verified": true,
+    "phase_symbols_disjoint": true,
+    "oracle_actions_generated": false
+  },
+  "model_scored": false,
+  "confirmation_generated": false,
+  "ood_generated": false
+}

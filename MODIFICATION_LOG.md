@@ -3727,3 +3727,41 @@ confirmation can be generated.
 - Extended `tests/test_qwen_causal_ledger_residual.py` to lock V3 to the single
   preregistered scale 48 and protocol. Eleven local unit tests, Python syntax
   compilation, shell syntax validation and `git diff --check` passed.
+
+### Scale-48 formal result
+
+The two-RTX5090 replay completed 8,064 rows in a 1,388.89-second critical path
+with 7.666/7.693 GiB peak allocated/reserved memory. `full_ledger` and the
+semantic oracle both reached 100% candidate and exact five-token accuracy on
+every role, family, length and absent/null subset. The strongest non-oracle
+policy was `retain_latest` at 89.91% exact. The ledger gain was 10.09 points
+with 95% source-group bootstrap interval 8.83--11.36 points; the NLL-gain
+interval was 2.0736--2.6821. All eleven preregistered gates passed.
+
+The launcher's first audit call used a file path and failed at import time
+before opening results. Model rows and summary were not rerun. Reinvoking the
+unchanged auditor with `python -m` passed all eight integrity checks, including
+byte-identical V2 data, row/state/generation reconstruction, hashes, bootstrap,
+gate recomputation and sealed confirmation/OOD flags. Both the failed launcher
+call and successful audit retry are retained in the V3 archive. The passing
+result releases exactly one matched scale-48 confirmation.
+
+## 2026-10-15: one-time causal-ledger confirmation implementation
+
+- Added `tasks/build_qwen_causal_ledger_confirmation_v3.py` for the reserved
+  seed `202610161`, unseen confirmation templates and a disjoint value/record
+  namespace. It fixes 64 groups per each of seven lifecycle families, two twins
+  per group and lengths 8/12/16; the manifest marks confirmation generated and
+  keeps OOD sealed.
+- Generalized the already audited development evaluator/auditor through
+  explicit loader, phase and split-state arguments while preserving all V2/V3
+  defaults. Added the frozen scale-48 confirmation entry point and a dedicated
+  audit that requires the passing scale-rescue hashes, reconstructs every row
+  under the confirmation parser, verifies zero development-ID overlap and
+  independently recomputes the unchanged gate.
+- Added a two-RTX5090 runner that refuses overwrite and cannot construct the
+  confirmation corpus until both the scale-rescue summary and audit pass. The
+  residual V2 content dependency remains mandatory. No OOD builder or scorer
+  is invoked.
+- Added a focused confirmation test covering registered size, loader/hash
+  round-trip, split markers and disjoint development/confirmation episode IDs.

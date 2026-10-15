@@ -26,6 +26,11 @@ from tasks.build_qwen_causal_ledger_development_v2 import (
     load as load_development_v2,
     materialize as materialize_development_v2,
 )
+from tasks.build_qwen_causal_ledger_confirmation_v3 import (
+    GROUPS_PER_FAMILY as CONFIRMATION_GROUPS_PER_FAMILY,
+    load as load_confirmation_v3,
+    materialize as materialize_confirmation_v3,
+)
 from tasks.pilot_qwen_causal_ledger_residual import (
     ACTIONS,
     apply_grid_action,
@@ -171,6 +176,25 @@ class CausalLedgerResidualCorpusTest(unittest.TestCase):
             self.assertEqual(len(pairs), DEVELOPMENT_GROUPS_PER_FAMILY * len(FAMILIES) * 2)
             self.assertFalse(manifest["confirmation_generated"])
             self.assertFalse(manifest["ood_generated"])
+
+    def test_confirmation_v3_is_fresh_registered_and_ood_sealed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            development_root = Path(directory) / "development"
+            confirmation_root = Path(directory) / "confirmation"
+            materialize_development_v2(development_root)
+            manifest = materialize_confirmation_v3(confirmation_root)
+            _, development = load_development_v2(development_root)
+            loaded, confirmation = load_confirmation_v3(confirmation_root)
+            self.assertEqual(manifest, loaded)
+            self.assertEqual(
+                len(confirmation), CONFIRMATION_GROUPS_PER_FAMILY * len(FAMILIES) * 2
+            )
+            self.assertTrue(manifest["confirmation_generated"])
+            self.assertFalse(manifest["ood_generated"])
+            self.assertFalse(
+                {inp["id"] for inp, _ in development}
+                & {inp["id"] for inp, _ in confirmation}
+            )
 
 
 if __name__ == "__main__":

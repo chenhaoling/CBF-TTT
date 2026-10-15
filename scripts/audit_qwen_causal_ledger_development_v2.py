@@ -119,7 +119,7 @@ def aggregate(rows):
     }
 
 
-def expected_rows(pairs):
+def expected_rows(pairs, phase=PHASE):
     output, order = {}, {}
     for index, (inp, target) in enumerate(pairs):
         order[inp["id"]] = index
@@ -130,7 +130,7 @@ def expected_rows(pairs):
         states = {name: [] for name in ("full_ledger", "retain_latest", "global_boundary_clear", "last1", "last2")}
         boundaries = set(inp["decision_boundaries"])
         for block in inp["blocks"]:
-            event = assignment(parse_visible_block(block["text"], PHASE))
+            event = assignment(parse_visible_block(block["text"], phase))
             states["full_ledger"] = semantic_apply(states["full_ledger"], event, block["index"])
             states["retain_latest"] = append_record(states["retain_latest"], event, block["index"])
             global_state = [] if block["index"] in boundaries else states["global_boundary_clear"]
@@ -163,6 +163,10 @@ def run(
     expected_scale=SCALE,
     expected_terminal="completed_qwen_causal_ledger_development_v2",
     audit_protocol="qwen_causal_ledger_development_v2_audit_v1",
+    loader=load,
+    phase=PHASE,
+    expected_confirmation_generated=False,
+    expected_ood_generated=False,
 ):
     from transformers import AutoTokenizer
 
@@ -170,8 +174,8 @@ def run(
     if output.exists():
         raise FileExistsError(output)
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True)
-    manifest, pairs = load(root / "data")
-    expected, order = expected_rows(pairs)
+    manifest, pairs = loader(root / "data")
+    expected, order = expected_rows(pairs, phase=phase)
     rows, resources, hashes = [], [], {}
     shard_ok = True
     for shard in (0, 1):
@@ -190,8 +194,8 @@ def run(
             not resource["loading_info"]["missing_keys"],
             not resource["loading_info"]["unexpected_keys"],
             not resource["loading_info"]["mismatched_keys"],
-            not resource["confirmation_generated"],
-            not resource["ood_generated"],
+            resource["confirmation_generated"] == expected_confirmation_generated,
+            resource["ood_generated"] == expected_ood_generated,
         ))
         rows.extend(part); resources.append(resource)
     coverage = len(rows) == 8064 and len({(row["episode_id"], row["query_id"]) for row in rows}) == 8064 and set(expected) == {(row["episode_id"], row["query_id"]) for row in rows}
@@ -236,7 +240,12 @@ def run(
         dependency["audit_sha256"] == sha(v2_audit),
     ))
     terminal = (root / "terminal_status.txt").read_text().strip() == expected_terminal and (root / "runner_exit_code.txt").read_text().strip() == "0"
-    sealed = not summary["confirmation_generated"] and not summary["ood_generated"] and not manifest["confirmation_generated"] and not manifest["ood_generated"]
+    sealed = all((
+        summary["confirmation_generated"] == expected_confirmation_generated,
+        summary["ood_generated"] == expected_ood_generated,
+        manifest["confirmation_generated"] == expected_confirmation_generated,
+        manifest["ood_generated"] == expected_ood_generated,
+    ))
     checks = {
         "terminal_status_and_exit": terminal,
         "passing_v2_dependency_hashes": dependency_ok,

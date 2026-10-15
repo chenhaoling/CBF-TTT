@@ -1,0 +1,311 @@
+{
+  "protocol": "qwen_causal_ledger_scale_rescue_v3_v1",
+  "scale": 48.0,
+  "rows": 8064,
+  "metrics": {
+    "no_memory": {
+      "candidate_accuracy": 0.08010912698412699,
+      "exact": 0.08010912698412699,
+      "nll": 21.864232118640903,
+      "roles": {
+        "current": 0.0,
+        "historical": 0.09523809523809523,
+        "anchor": 0.14508928571428573
+      },
+      "families": {
+        "retain": 0.0,
+        "recent_revoke": 0.0,
+        "distant_revoke": 0.11458333333333333,
+        "reset": 0.2222222222222222,
+        "exact_duplicate": 0.0,
+        "overwritten_noop": 0.0,
+        "mixed_two_event": 0.22395833333333334
+      },
+      "lengths": {
+        "8": 0.12698412698412698,
+        "12": 0.07936507936507936,
+        "16": 0.031746031746031744
+      },
+      "absent": 1.0
+    },
+    "retain_latest": {
+      "candidate_accuracy": 0.9252232142857143,
+      "exact": 0.8990575396825397,
+      "nll": 2.376685991995868,
+      "roles": {
+        "current": 1.0,
+        "historical": 0.8422619047619048,
+        "anchor": 0.8549107142857143
+      },
+      "families": {
+        "retain": 1.0,
+        "recent_revoke": 0.9270833333333334,
+        "distant_revoke": 0.8854166666666666,
+        "reset": 0.7777777777777778,
+        "exact_duplicate": 1.0,
+        "overwritten_noop": 1.0,
+        "mixed_two_event": 0.703125
+      },
+      "lengths": {
+        "8": 0.873015873015873,
+        "12": 0.8888888888888888,
+        "16": 0.9365079365079365
+      },
+      "absent": 0.0
+    },
+    "global_boundary_clear": {
+      "candidate_accuracy": 0.47693452380952384,
+      "exact": 0.47693452380952384,
+      "nll": 12.34447526184041,
+      "roles": {
+        "current": 1.0,
+        "historical": 0.14285714285714285,
+        "anchor": 0.28794642857142855
+      },
+      "families": {
+        "retain": 0.3333333333333333,
+        "recent_revoke": 0.3333333333333333,
+        "distant_revoke": 0.4479166666666667,
+        "reset": 1.0,
+        "exact_duplicate": 0.3333333333333333,
+        "overwritten_noop": 0.3333333333333333,
+        "mixed_two_event": 0.5572916666666666
+      },
+      "lengths": {
+        "8": 0.5238095238095238,
+        "12": 0.47619047619047616,
+        "16": 0.42857142857142855
+      },
+      "absent": 1.0
+    },
+    "last1": {
+      "candidate_accuracy": 0.47693452380952384,
+      "exact": 0.47693452380952384,
+      "nll": 12.34447526184041,
+      "roles": {
+        "current": 1.0,
+        "historical": 0.14285714285714285,
+        "anchor": 0.28794642857142855
+      },
+      "families": {
+        "retain": 0.3333333333333333,
+        "recent_revoke": 0.3333333333333333,
+        "distant_revoke": 0.4479166666666667,
+        "reset": 1.0,
+        "exact_duplicate": 0.3333333333333333,
+        "overwritten_noop": 0.3333333333333333,
+        "mixed_two_event": 0.5572916666666666
+      },
+      "lengths": {
+        "8": 0.5238095238095238,
+        "12": 0.47619047619047616,
+        "16": 0.42857142857142855
+      },
+      "absent": 1.0
+    },
+    "last2": {
+      "candidate_accuracy": 0.5055803571428571,
+      "exact": 0.49776785714285715,
+      "nll": 11.81889560398176,
+      "roles": {
+        "current": 1.0,
+        "historical": 0.20535714285714285,
+        "anchor": 0.28794642857142855
+      },
+      "families": {
+        "retain": 0.40625,
+        "recent_revoke": 0.3333333333333333,
+        "distant_revoke": 0.5208333333333334,
+        "reset": 0.9270833333333334,
+        "exact_duplicate": 0.3333333333333333,
+        "overwritten_noop": 0.40625,
+        "mixed_two_event": 0.5572916666666666
+      },
+      "lengths": {
+        "8": 0.5238095238095238,
+        "12": 0.5079365079365079,
+        "16": 0.4603174603174603
+      },
+      "absent": 0.8699690402476781
+    },
+    "dense_full": {
+      "candidate_accuracy": 0.6407490079365079,
+      "exact": 0.07142857142857142,
+      "nll": 21.019965072726908,
+      "roles": {
+        "current": 0.07142857142857142,
+        "historical": 0.05580357142857143,
+        "anchor": 0.08705357142857142
+      },
+      "families": {
+        "retain": 0.006076388888888889,
+        "recent_revoke": 0.0078125,
+        "distant_revoke": 0.013020833333333334,
+        "reset": 0.4253472222222222,
+        "exact_duplicate": 0.015625,
+        "overwritten_noop": 0.004340277777777778,
+        "mixed_two_event": 0.027777777777777776
+      },
+      "lengths": {
+        "8": 0.07864357864357864,
+        "12": 0.07142857142857142,
+        "16": 0.06386999244142101
+      },
+      "absent": 0.10835913312693499
+    },
+    "full_ledger": {
+      "candidate_accuracy": 1.0,
+      "exact": 1.0,
+      "nll": 0.0008829255866567832,
+      "roles": {
+        "current": 1.0,
+        "historical": 1.0,
+        "anchor": 1.0
+      },
+      "families": {
+        "retain": 1.0,
+        "recent_revoke": 1.0,
+        "distant_revoke": 1.0,
+        "reset": 1.0,
+        "exact_duplicate": 1.0,
+        "overwritten_noop": 1.0,
+        "mixed_two_event": 1.0
+      },
+      "lengths": {
+        "8": 1.0,
+        "12": 1.0,
+        "16": 1.0
+      },
+      "absent": 1.0
+    },
+    "semantic_oracle": {
+      "candidate_accuracy": 1.0,
+      "exact": 1.0,
+      "nll": 0.0008829255866567832,
+      "roles": {
+        "current": 1.0,
+        "historical": 1.0,
+        "anchor": 1.0
+      },
+      "families": {
+        "retain": 1.0,
+        "recent_revoke": 1.0,
+        "distant_revoke": 1.0,
+        "reset": 1.0,
+        "exact_duplicate": 1.0,
+        "overwritten_noop": 1.0,
+        "mixed_two_event": 1.0
+      },
+      "lengths": {
+        "8": 1.0,
+        "12": 1.0,
+        "16": 1.0
+      },
+      "absent": 1.0
+    }
+  },
+  "strongest_non_oracle_comparator": "retain_latest",
+  "comparison": {
+    "exact_gain": 0.10094246031746033,
+    "exact_bootstrap_95ci": [
+      0.0882936507936508,
+      0.11359126984126985
+    ],
+    "nll_gain": 2.3758030664092114,
+    "nll_bootstrap_95ci": [
+      2.0736189243476315,
+      2.682058925630664
+    ]
+  },
+  "family_gains": {
+    "retain": 0.0,
+    "recent_revoke": 0.07291666666666663,
+    "distant_revoke": 0.11458333333333337,
+    "reset": 0.2222222222222222,
+    "exact_duplicate": 0.0,
+    "overwritten_noop": 0.0,
+    "mixed_two_event": 0.296875
+  },
+  "length_gains": {
+    "8": 0.12698412698412698,
+    "12": 0.11111111111111116,
+    "16": 0.06349206349206349
+  },
+  "oracle_agreement": 1.0,
+  "gate": {
+    "checks": {
+      "primary_candidate_at_least_point_95": true,
+      "primary_exact_at_least_point_85": true,
+      "current_anchor_at_least_point_95": true,
+      "historical_at_least_point_85": true,
+      "absent_at_least_point_90": true,
+      "every_family_at_least_point_85": true,
+      "gain_at_least_point_05": true,
+      "gain_ci_lower_above_point_02": true,
+      "nll_gain_ci_lower_above_zero": true,
+      "no_negative_family_or_length_gain": true,
+      "exact_oracle_agreement": true
+    },
+    "passed": true
+  },
+  "resources": {
+    "two_gpu_critical_path_seconds": 1388.889878500253,
+    "peak_allocated_gib": 7.666443824768066,
+    "peak_reserved_gib": 7.693359375,
+    "shards": [
+      {
+        "protocol": "qwen_causal_ledger_scale_rescue_v3_v1",
+        "shard": 0,
+        "num_shards": 2,
+        "episodes": 448,
+        "rows": 4032,
+        "seconds": 1386.1926662623882,
+        "peak_allocated_gib": 7.666396141052246,
+        "peak_reserved_gib": 7.693359375,
+        "rows_sha256": "78ff6805da3a381ff321f1a374e4ddcfd015d6ddf5befa3612d3b3817e585ce9",
+        "data_manifest_sha256": "e8378f154cca764548c56e5b5b97554b31f34e353bf45aeda4ccc8349e7fdf1a",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "scale": 48.0,
+        "seed": 202610160,
+        "confirmation_generated": false,
+        "ood_generated": false
+      },
+      {
+        "protocol": "qwen_causal_ledger_scale_rescue_v3_v1",
+        "shard": 1,
+        "num_shards": 2,
+        "episodes": 448,
+        "rows": 4032,
+        "seconds": 1388.889878500253,
+        "peak_allocated_gib": 7.666443824768066,
+        "peak_reserved_gib": 7.693359375,
+        "rows_sha256": "2f5299eaae942adf9fc60dd80e70db97c1c729f3bd3010f8f09d806cf0c17766",
+        "data_manifest_sha256": "e8378f154cca764548c56e5b5b97554b31f34e353bf45aeda4ccc8349e7fdf1a",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "scale": 48.0,
+        "seed": 202610160,
+        "confirmation_generated": false,
+        "ood_generated": false
+      }
+    ]
+  },
+  "confirmation_generated": false,
+  "ood_generated": false,
+  "next_stage": "independent_development_audit_before_confirmation"
+}

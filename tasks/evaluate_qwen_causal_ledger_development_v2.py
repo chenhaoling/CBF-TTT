@@ -86,7 +86,15 @@ def bootstrap_comparison(primary_groups, comparator_groups):
     }
 
 
-def collect(args, scale=SCALE, protocol=PROTOCOL):
+def collect(
+    args,
+    scale=SCALE,
+    protocol=PROTOCOL,
+    loader=load,
+    phase=PHASE,
+    confirmation_generated=False,
+    ood_generated=False,
+):
     import torch
     from transformers import AutoTokenizer
     from tasks.cbf_checkpoint_native import load_model
@@ -94,7 +102,7 @@ def collect(args, scale=SCALE, protocol=PROTOCOL):
     data_root, output, resource_output = Path(args.data_root), Path(args.output), Path(args.resource_output)
     if output.exists() or resource_output.exists():
         raise FileExistsError("development V2 shard output exists")
-    manifest, pairs = load(data_root)
+    manifest, pairs = loader(data_root)
     selected = [pair for index, pair in enumerate(pairs) if index % args.num_shards == args.shard]
     torch.manual_seed(202610160)
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -112,7 +120,7 @@ def collect(args, scale=SCALE, protocol=PROTOCOL):
             states = {name: [] for name in ("full_ledger", "retain_latest", "global_boundary_clear", "last1", "last2")}
             boundaries = set(inp["decision_boundaries"])
             for block in inp["blocks"]:
-                event = assignment(parse_visible_block(block["text"], PHASE))
+                event = assignment(parse_visible_block(block["text"], phase))
                 states["full_ledger"] = semantic_apply(states["full_ledger"], event, block["index"])
                 states["retain_latest"] = append_record(states["retain_latest"], event, block["index"])
                 global_state = [] if block["index"] in boundaries else states["global_boundary_clear"]
@@ -197,14 +205,22 @@ def collect(args, scale=SCALE, protocol=PROTOCOL):
         "gpu": torch.cuda.get_device_name(),
         "scale": float(scale),
         "seed": manifest["seed"],
-        "confirmation_generated": False,
-        "ood_generated": False,
+        "confirmation_generated": bool(confirmation_generated),
+        "ood_generated": bool(ood_generated),
     }
     write_json(resource_output, resource)
     return resource
 
 
-def summarize(args, scale=SCALE, protocol=PROTOCOL):
+def summarize(
+    args,
+    scale=SCALE,
+    protocol=PROTOCOL,
+    confirmation_generated=False,
+    ood_generated=False,
+    passing_next_stage="independent_development_audit_before_confirmation",
+    failure_next_stage="stop_before_confirmation",
+):
     root, output = Path(args.root), Path(args.output)
     if output.exists():
         raise FileExistsError(output)
@@ -278,9 +294,9 @@ def summarize(args, scale=SCALE, protocol=PROTOCOL):
             "peak_reserved_gib": max(row["peak_reserved_gib"] for row in resources),
             "shards": resources,
         },
-        "confirmation_generated": False,
-        "ood_generated": False,
-        "next_stage": "independent_development_audit_before_confirmation" if all(checks.values()) else "stop_before_confirmation",
+        "confirmation_generated": bool(confirmation_generated),
+        "ood_generated": bool(ood_generated),
+        "next_stage": passing_next_stage if all(checks.values()) else failure_next_stage,
     }
     write_json(output, result)
     return result
