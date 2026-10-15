@@ -1,0 +1,131 @@
+{
+  "protocol": "qwen_native_writer_ledger_bridge_v1",
+  "rows": 14,
+  "metrics": {
+    "zero": {
+      "candidate_accuracy": 0.07142857142857142,
+      "exact": 0.0,
+      "answer_nll": 6.4356452669416155
+    },
+    "correct_writer": {
+      "candidate_accuracy": 0.14285714285714285,
+      "exact": 0.0,
+      "answer_nll": 6.408192362104144
+    },
+    "wrong_writer": {
+      "candidate_accuracy": 0.14285714285714285,
+      "exact": 0.0,
+      "answer_nll": 6.413297189985003,
+      "injected_wrong_accuracy": 0.2857142857142857
+    },
+    "external_residual": {
+      "candidate_accuracy": 1.0,
+      "exact": 1.0,
+      "answer_nll": 4.016216418481885e-05
+    }
+  },
+  "correct_nll_gain_bootstrap_95ci": {
+    "wrong_writer": [
+      -0.009674889700753284,
+      0.01929825374058325
+    ],
+    "zero": [
+      -0.04746134621756415,
+      0.10508243015834269
+    ]
+  },
+  "gate": {
+    "checks": {
+      "correct_candidate_at_least_point_80": false,
+      "correct_exact_at_least_point_60": false,
+      "wrong_truth_at_most_point_20": true,
+      "wrong_injected_at_least_point_80": false,
+      "zero_truth_at_most_point_30": true,
+      "correct_nll_lower_bounds_positive": false,
+      "external_candidate_at_least_point_95": true,
+      "external_exact_at_least_point_85": true
+    },
+    "passed": false
+  },
+  "resources": {
+    "two_gpu_critical_path_seconds": 9.058088071644306,
+    "peak_allocated_gib": 10.135880947113037,
+    "peak_reserved_gib": 10.68359375,
+    "shards": [
+      {
+        "protocol": "qwen_native_writer_ledger_bridge_v1",
+        "shard": 0,
+        "num_shards": 2,
+        "rows": 7,
+        "seconds": 9.058088071644306,
+        "peak_allocated_gib": 10.135377407073975,
+        "peak_reserved_gib": 10.68359375,
+        "rows_sha256": "639492315fe04a76982bfae032a79f970b13981bfab06862fb2a5c422e2e7289",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "chunk_size": 4096,
+        "ttt_layers": [
+          0,
+          6,
+          12,
+          18,
+          24,
+          30,
+          35
+        ],
+        "ttt_lr": 0.3,
+        "confirmation_scored": false,
+        "natural_benchmark_scored": false
+      },
+      {
+        "protocol": "qwen_native_writer_ledger_bridge_v1",
+        "shard": 1,
+        "num_shards": 2,
+        "rows": 7,
+        "seconds": 8.988393554463983,
+        "peak_allocated_gib": 10.135880947113037,
+        "peak_reserved_gib": 10.68359375,
+        "rows_sha256": "c5bbf05a5355eddac68a7335d897c4d6c155a3e1595bb10db622a195ba1b240f",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "source_files_sha256": {
+          "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+          "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+        },
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "chunk_size": 4096,
+        "ttt_layers": [
+          0,
+          6,
+          12,
+          18,
+          24,
+          30,
+          35
+        ],
+        "ttt_lr": 0.3,
+        "confirmation_scored": false,
+        "natural_benchmark_scored": false
+      }
+    ]
+  },
+  "confirmation_scored": false,
+  "natural_benchmark_scored": false
+}

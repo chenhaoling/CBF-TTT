@@ -1,0 +1,67 @@
+{
+  "protocol": "qwen_native_writer_ledger_bridge_audit_v1",
+  "passed": true,
+  "checks": {
+    "terminal_status_and_exit": true,
+    "passing_confirmation_dependency": true,
+    "source_coverage_and_chunk_reconstruction": true,
+    "shard_hashes_model_and_resources": true,
+    "independent_aggregates_bootstrap_and_gate": true,
+    "confirmation_and_natural_benchmarks_unscored": true
+  },
+  "hashes": {
+    "bridge_shard0.jsonl": "639492315fe04a76982bfae032a79f970b13981bfab06862fb2a5c422e2e7289",
+    "bridge_resource_shard0.json": "3b68ac25f9d06244d3dd88cc86ec78fade2e64dd6579417a7ef95fff8b85a0f4",
+    "bridge_shard1.jsonl": "c5bbf05a5355eddac68a7335d897c4d6c155a3e1595bb10db622a195ba1b240f",
+    "bridge_resource_shard1.json": "ce830653d49bf6e4aa0c04b7383bba8631924fe33c17c8e590c9bea627cbea32"
+  },
+  "summary_sha256": "0367168809c197cf1bdd953ce5b7119b9be375f5bdf1085f028247314fa21097",
+  "recomputed": {
+    "metrics": {
+      "zero": {
+        "candidate_accuracy": 0.07142857142857142,
+        "exact": 0.0,
+        "answer_nll": 6.4356452669416155
+      },
+      "correct_writer": {
+        "candidate_accuracy": 0.14285714285714285,
+        "exact": 0.0,
+        "answer_nll": 6.408192362104144
+      },
+      "wrong_writer": {
+        "candidate_accuracy": 0.14285714285714285,
+        "exact": 0.0,
+        "answer_nll": 6.413297189985003,
+        "injected_wrong_accuracy": 0.2857142857142857
+      },
+      "external_residual": {
+        "candidate_accuracy": 1.0,
+        "exact": 1.0,
+        "answer_nll": 4.016216418481885e-05
+      }
+    },
+    "correct_nll_gain_bootstrap_95ci": {
+      "wrong_writer": [
+        -0.009674889700753284,
+        0.01929825374058325
+      ],
+      "zero": [
+        -0.04746134621756415,
+        0.10508243015834269
+      ]
+    },
+    "gate": {
+      "checks": {
+        "correct_candidate_at_least_point_80": false,
+        "correct_exact_at_least_point_60": false,
+        "wrong_truth_at_most_point_20": true,
+        "wrong_injected_at_least_point_80": false,
+        "zero_truth_at_most_point_30": true,
+        "correct_nll_lower_bounds_positive": false,
+        "external_candidate_at_least_point_95": true,
+        "external_exact_at_least_point_85": true
+      },
+      "passed": false
+    }
+  }
+}

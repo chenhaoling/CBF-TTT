@@ -3809,3 +3809,22 @@ generic session generator stopped early on EOS, violating the registered fixed
 five-step trace. Candidate scores, seven-layer memories and resources were
 finite. Added a bridge-local fixed five-step generator that continues after EOS;
 the formal output root remains uncreated.
+
+### Native-writer bridge result and branch decision
+
+The corrected smoke satisfied the fixed-trace contract, after which the formal
+14-group pilot ran once on two RTX 5090 cards. All six independent audit checks
+and all thirteen focused tests passed. The unchanged native writer reached only
+14.29% six-way candidate accuracy and 0% exact five-token generation for a
+correct repeated mapping. A wrong mapping produced the same truth accuracy and
+selected its injected wrong value in only 28.57% of rows. The Correct-over-Wrong
+and Correct-over-Zero NLL confidence intervals both crossed zero. The structured
+external residual positive control reached 100% candidate and exact accuracy.
+
+The preregistered gate therefore failed and stops further scale, controller or
+multi-record tuning of the unmodified `ttt_conv`/`ttt_proj` writer. The result
+localizes the end-to-end gap to factual content binding rather than causal state
+transitions or fresh-KV readout. Raw rows, resources, dependency hashes, logs,
+summary, audit and the interpretation report are archived under
+`qwen_native_writer_ledger_bridge_v1/`. The next registered experiment is the
+still-sealed lifecycle OOD evaluation of the confirmed structured ledger.

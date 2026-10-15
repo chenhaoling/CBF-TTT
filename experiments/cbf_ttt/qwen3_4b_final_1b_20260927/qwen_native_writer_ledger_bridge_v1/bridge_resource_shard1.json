@@ -1,0 +1,36 @@
+{
+  "protocol": "qwen_native_writer_ledger_bridge_v1",
+  "shard": 1,
+  "num_shards": 2,
+  "rows": 7,
+  "seconds": 8.988393554463983,
+  "peak_allocated_gib": 10.135880947113037,
+  "peak_reserved_gib": 10.68359375,
+  "rows_sha256": "c5bbf05a5355eddac68a7335d897c4d6c155a3e1595bb10db622a195ba1b240f",
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "source_files_sha256": {
+    "model-00001-of-00002.safetensors": "c9d217e4f471c28e86eefd7fc68910a118f6a731636eda15a326af8ea56ea0d5",
+    "model-00002-of-00002.safetensors": "4c7f5abfda4d1de6d41d282de9ee9fb0e694578d7d4b59c928239660f5afc55f"
+  },
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "chunk_size": 4096,
+  "ttt_layers": [
+    0,
+    6,
+    12,
+    18,
+    24,
+    30,
+    35
+  ],
+  "ttt_lr": 0.3,
+  "confirmation_scored": false,
+  "natural_benchmark_scored": false
+}
