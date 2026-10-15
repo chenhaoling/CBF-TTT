@@ -4399,3 +4399,21 @@ fold 3 selects the registered finite grid and fold 4 remains untouched until
 one validation. Only a passing audited CounterFact result may trigger frozen,
 zero-parameter transfer to V7 ZsRE calibration. Test and external benchmarks
 remain sealed.
+
+V9 completed in 692.78 seconds with peak allocated/reserved GPU memory of
+8.04/8.54 GiB. The selected linear relation-vector arm reached 69.00% precision,
+88.52% recall, 94.68% different-subject specificity and 65.55% same-subject/
+different-relation specificity. Compared with V8, semantic vectors repaired
+most paraphrase false negatives but made relation-confusion false positives
+worse. The independent auditor passed all ten checks with zero probability or
+action mismatch. V9 stopped before loading ZsRE.
+
+A fixed exact-template diagnostic had only 0.15% recall, confirming that safe
+updates are naturally paraphrased. A separate label audit then reconstructed
+all five V7 false deletes. Two Angora rows are different chain IDs for the same
+source fact and the same target value `Ankara`; delete-then-write leaves the
+memory content invariant. The other three rows are genuine wrong-entity or
+wrong-relation deletions. Under the physically corrected state-equivalence
+target, the unchanged V7 OOF actions have 611 TP, three FP, 161 FN and 1,457 TN
+(99.51% precision, 79.15% recall). This is diagnostic only. A new preregistered
+cross-fit experiment is required before any online replay or test access.

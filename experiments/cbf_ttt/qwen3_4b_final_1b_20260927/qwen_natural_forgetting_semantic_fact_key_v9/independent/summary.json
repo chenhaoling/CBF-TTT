@@ -1,0 +1,235 @@
+{
+  "protocol": "qwen_natural_forgetting_semantic_fact_key_v9",
+  "stage": "counterfact_semantic_validation",
+  "pairs": 5238,
+  "excluded": {
+    "missing_same_subject_different_relation": 20173
+  },
+  "pair_distribution": {
+    "negative_same_relation_different_subject": 1746,
+    "negative_same_subject_different_relation": 1746,
+    "positive_same_fact_key": 1746
+  },
+  "fold_distribution": {
+    "0": 1062,
+    "1": 918,
+    "2": 1077,
+    "3": 1110,
+    "4": 1071
+  },
+  "selected": {
+    "arm": "relation_vector",
+    "config_index": 0,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 322,
+      "false_positives": 179,
+      "false_negatives": 48,
+      "true_negatives": 561,
+      "precision": 0.6427145708582834,
+      "recall": 0.8702702702702703,
+      "accuracy": 0.7954954954954955,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 50,
+          "accuracy": 0.8648648648648649,
+          "specificity": 0.8648648648648649
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 129,
+          "accuracy": 0.6513513513513514,
+          "specificity": 0.6513513513513514
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 322,
+          "accuracy": 0.8702702702702703,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  "validation": {
+    "examples": 1071,
+    "true_positives": 316,
+    "false_positives": 142,
+    "false_negatives": 41,
+    "true_negatives": 572,
+    "precision": 0.6899563318777293,
+    "recall": 0.8851540616246498,
+    "accuracy": 0.8291316526610645,
+    "by_type": {
+      "negative_same_relation_different_subject": {
+        "examples": 357,
+        "accepted": 19,
+        "accuracy": 0.9467787114845938,
+        "specificity": 0.9467787114845938
+      },
+      "negative_same_subject_different_relation": {
+        "examples": 357,
+        "accepted": 123,
+        "accuracy": 0.6554621848739496,
+        "specificity": 0.6554621848739496
+      },
+      "positive_same_fact_key": {
+        "examples": 357,
+        "accepted": 316,
+        "accuracy": 0.8851540616246498,
+        "specificity": null
+      }
+    }
+  },
+  "span_training": {
+    "0": {
+      "excluded_subjects": 197,
+      "counts": {
+        "19101": {
+          "examples": 65431,
+          "tokens": 1028318,
+          "positive_tokens": 249172
+        },
+        "19102": {
+          "examples": 65431,
+          "tokens": 1028318,
+          "positive_tokens": 249172
+        },
+        "19103": {
+          "examples": 65431,
+          "tokens": 1028318,
+          "positive_tokens": 249172
+        }
+      }
+    },
+    "1": {
+      "excluded_subjects": 176,
+      "counts": {
+        "19101": {
+          "examples": 65431,
+          "tokens": 1028318,
+          "positive_tokens": 249172
+        },
+        "19102": {
+          "examples": 65431,
+          "tokens": 1028318,
+          "positive_tokens": 249172
+        },
+        "19103": {
+          "examples": 65431,
+          "tokens": 1028318,
+          "positive_tokens": 249172
+        }
+      }
+    },
+    "2": {
+      "excluded_subjects": 182,
+      "counts": {
+        "19101": {
+          "examples": 65425,
+          "tokens": 1028230,
+          "positive_tokens": 249160
+        },
+        "19102": {
+          "examples": 65425,
+          "tokens": 1028230,
+          "positive_tokens": 249160
+        },
+        "19103": {
+          "examples": 65425,
+          "tokens": 1028230,
+          "positive_tokens": 249160
+        }
+      }
+    },
+    "3": {
+      "excluded_subjects": 200,
+      "counts": {
+        "19101": {
+          "examples": 65425,
+          "tokens": 1028210,
+          "positive_tokens": 249154
+        },
+        "19102": {
+          "examples": 65425,
+          "tokens": 1028210,
+          "positive_tokens": 249154
+        },
+        "19103": {
+          "examples": 65425,
+          "tokens": 1028210,
+          "positive_tokens": 249154
+        }
+      }
+    },
+    "4": {
+      "excluded_subjects": 197,
+      "counts": {
+        "19101": {
+          "examples": 65425,
+          "tokens": 1028237,
+          "positive_tokens": 249160
+        },
+        "19102": {
+          "examples": 65425,
+          "tokens": 1028237,
+          "positive_tokens": 249160
+        },
+        "19103": {
+          "examples": 65425,
+          "tokens": 1028237,
+          "positive_tokens": 249160
+        }
+      }
+    }
+  },
+  "gate": {
+    "checks": {
+      "validation_precision_at_least_point_99": false,
+      "validation_recall_at_least_point_90": false,
+      "both_negative_specificities_at_least_point_98": false,
+      "at_least_100_validation_examples_per_type": true,
+      "subject_folds_disjoint": true,
+      "span_heads_excluded_target_fold_subjects": true,
+      "qwen_frozen": true,
+      "tune_selected_without_validation": true,
+      "zsre_sources_not_loaded": true
+    },
+    "counterfact_validation_passed": false,
+    "zsre_transfer_authorized": false
+  },
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "semantic_projection_seed": 29001,
+  "semantic_dim": 256,
+  "hashes": {
+    "plan": "25bf52a2d029cf8bbd288bb851eb2d446acc38f192a97e77f22b52db7aa3ae59",
+    "counterfact_source": "d017056125178a13728594e66a801357a8db9ed7973a7425554bb4271de9fc6f",
+    "corpus": "94a910bc4525bfc5c3a831c971f0c3ae0c00ba4738f2e87573df9410bba5fdb9",
+    "features": "79d09a26756bc44b67170ce42621d96c82b8af1679f134f6bf321cdf49dbb7d0",
+    "checkpoint": "a8b373ee84a6a9e71247c204a5127626ed5272cb2c53ca78240fae09f2518b1a",
+    "span_heads": "92a1b2528d33f5895b73405c95d2bcd3a88c8bfe313875924a2fba4fd54eed95",
+    "tune_search": "da134e27e4eb1554d0d1578f30d2494091117ce576b4a261269b8d2095f17864",
+    "validation_predictions": "7c328ba6da350cce729b77cbd524d45e74519e4b14b762eb6da34c89547211c3"
+  },
+  "seconds": 692.7781678084284,
+  "gpu_peak_allocated_gib": 8.035292148590088,
+  "gpu_peak_reserved_gib": 8.537109375,
+  "counterfact_loaded": true,
+  "zsre_calibration_loaded": false,
+  "zsre_test_loaded": false,
+  "external_benchmarks_loaded": false
+}

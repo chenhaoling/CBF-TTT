@@ -1,0 +1,50 @@
+{
+  "protocol": "qwen_natural_forgetting_semantic_fact_key_v9",
+  "stage": "counterfact_validation_audit",
+  "checks": {
+    "corpus_reconstruction_exact": true,
+    "feature_manifest_exact": true,
+    "span_checkpoint_registered": true,
+    "checkpoint_validation_probabilities_match": true,
+    "checkpoint_validation_actions_match": true,
+    "validation_metrics_match": true,
+    "subject_folds_disjoint": true,
+    "artifact_hashes_match": true,
+    "frozen_semantic_registration_match": true,
+    "zsre_sources_remained_unloaded": true
+  },
+  "passed": true,
+  "pairs": 5238,
+  "max_probability_error": 0.0,
+  "action_mismatches": 0,
+  "recomputed_validation": {
+    "examples": 1071,
+    "true_positives": 316,
+    "false_positives": 142,
+    "false_negatives": 41,
+    "true_negatives": 572,
+    "precision": 0.6899563318777293,
+    "recall": 0.8851540616246498,
+    "accuracy": 0.8291316526610645,
+    "by_type": {
+      "negative_same_relation_different_subject": {
+        "examples": 357,
+        "accepted": 19,
+        "accuracy": 0.9467787114845938,
+        "specificity": 0.9467787114845938
+      },
+      "negative_same_subject_different_relation": {
+        "examples": 357,
+        "accepted": 123,
+        "accuracy": 0.6554621848739496,
+        "specificity": 0.6554621848739496
+      },
+      "positive_same_fact_key": {
+        "examples": 357,
+        "accepted": 316,
+        "accuracy": 0.8851540616246498,
+        "specificity": null
+      }
+    }
+  }
+}
