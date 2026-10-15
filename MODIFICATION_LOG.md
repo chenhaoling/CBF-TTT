@@ -4115,3 +4115,22 @@ builder/runner after the audited pilot release. The formal protocol covers all
 65 sealed calibration sessions and all 774 events, retains the complete action
 grid and keeps development, test and external benchmarks unopened. Its gate
 must pass before grouped out-of-fold controller training.
+
+The formal corpus completed in 751.98 seconds on two RTX 5090 GPUs and passed
+all twelve gates. Safe-oracle accuracy was 83.64%, versus 80.87% for retain
+all, a 2.77-point gain with session-bootstrap 95% CI `[2.54, 3.01]` and zero
+additional unrelated errors. Its independent audit passed all eight checks.
+Added a score-free diagnosis that evaluates every fixed action, the
+non-deployable source-event rule, safe/unconstrained oracles, event strata,
+memory sizes, action support, barrier binding and utility margins. The
+strongest fixed action reached 81.56% but added 855 unrelated errors; the
+source-event control reached 82.08% with four errors.
+
+Added and preregistered `QWEN_NATURAL_FORGETTING_BARRIER_Q_V1_PLAN.md` after
+the formal release. Added the grouped nested OOF training implementation,
+focused tests, refusal-to-overwrite runner and independent auditor. Barrier-Q
+uses inference-visible frozen reader, cosine, recency, memory-size and lexical
+features to predict per-action future gain, NLL benefit and unrelated-memory
+risk. It compares risk-constrained Q selection with gain-only and direct
+classification ablations while keeping natural development sealed behind a
+strict calibration release gate.

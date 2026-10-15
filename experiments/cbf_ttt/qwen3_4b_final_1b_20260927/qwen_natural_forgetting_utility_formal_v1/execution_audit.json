@@ -1,0 +1,52 @@
+{
+  "protocol": "qwen_natural_forgetting_utility_formal_v1_audit",
+  "checks": {
+    "terminal_status_and_exit": true,
+    "complete_calibration_sampling": true,
+    "shard_hashes_and_seals": true,
+    "raw_action_and_oracle_consistency": true,
+    "independent_aggregate_and_gate": true,
+    "sealed_input_hashes": true,
+    "plan_hash": true,
+    "no_heldout_release": true
+  },
+  "passed": true,
+  "recomputed": {
+    "labels": 774,
+    "sessions": 65,
+    "label_distribution": {
+      "global_a0": 119,
+      "global_a05": 21,
+      "hybrid_a0": 9,
+      "last1_a0": 50,
+      "last1_a05": 20,
+      "last2_a0": 16,
+      "last2_a05": 2,
+      "retain_all": 204,
+      "scope_top1_a0": 325,
+      "scope_top1_a05": 8
+    },
+    "retain_candidate_accuracy": 0.8086905689789555,
+    "safe_oracle_candidate_accuracy": 0.8364380358534684,
+    "safe_oracle_gain": 0.02774746687451286,
+    "bootstrap_95ci": [
+      0.025423076923076923,
+      0.030115384615384617
+    ],
+    "added_unrelated_errors": 0,
+    "aggregate_checks": {
+      "exactly_65_sessions": true,
+      "exactly_774_unique_labels": true,
+      "complete_unique_and_registered_grid": true,
+      "safe_oracle_gain_ci_lower_above_zero": true,
+      "nonretain_rate_at_least_point_10": true,
+      "retain_all_at_least_50_labels": true,
+      "scope_top1_a0_at_least_50_labels": true,
+      "at_least_five_selected_actions": true,
+      "no_action_above_point_90": true,
+      "zero_added_unrelated_errors": true,
+      "median_label_seconds_at_most_120": true,
+      "peak_allocated_gib_at_most_28": true
+    }
+  }
+}
