@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "confirmation_gate_independently_reconstructed": true,
+    "deterministic_exact_rerun": true,
+    "metrics_and_uncertainty_finite": true,
+    "one_action_and_matched_random_controls": true,
+    "original_confirmation_open_external_sealed": true,
+    "protocol_plan_and_partition": true,
+    "upstream_hashes_locked": true
+  },
+  "confirmation_checks": {
+    "every_mechanism_nonnegative": true,
+    "every_seed_gain_above_zero": true,
+    "every_seed_zero_added_unrelated_errors": true,
+    "mean_oracle_gap_closure_at_least_point_30": true,
+    "mean_seed_gain_at_least_point_02": false,
+    "pooled_group_bootstrap_lower_above_zero": true,
+    "relation_cluster_bootstrap_lower_above_zero": true,
+    "upstream_audits_passed": true
+  },
+  "confirmation_passed": false,
+  "mean_controller_gain": 0.015364583333333312,
+  "mean_oracle_gap_closure": 0.6555555555555547,
+  "next_stage": "stop_v6_original_source_without_repair",
+  "passed": true,
+  "pooled_group_bootstrap_95ci": [
+    0.0067708333333333336,
+    0.025520833333333333
+  ],
+  "protocol": "qwen_utility_record_controller_v6_original_source_confirmation_audit",
+  "result_sha256": "195033f8396ef60ccb996cbc2085d744b2a4fe5f2ef384e595dd5f075d2c04ff",
+  "terminal_status": "v6_original_source_result_audit_passed_confirmation_failed"
+}

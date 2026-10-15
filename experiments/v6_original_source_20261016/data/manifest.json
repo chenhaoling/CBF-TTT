@@ -1,0 +1,116 @@
+{
+  "alpha_grid": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "confirmation_episodes_generated": true,
+  "confirmation_relation_eligibility": {
+    "excluded_relations": [
+      "P530"
+    ],
+    "included_relations": [
+      "P937",
+      "P27",
+      "P136",
+      "P407",
+      "P106",
+      "P495"
+    ],
+    "minimum_unique_subjects": 128,
+    "subject_counts": {
+      "P106": 918,
+      "P136": 829,
+      "P27": 925,
+      "P407": 794,
+      "P495": 873,
+      "P530": 4,
+      "P937": 818
+    }
+  },
+  "counts": {
+    "boundaries": 384,
+    "cross_partition_subjects_removed": 768,
+    "episodes": 128,
+    "input_source_facts": 448,
+    "input_source_subjects": 448,
+    "lengths": {
+      "16": 32,
+      "32": 32,
+      "64": 32,
+      "8": 32
+    },
+    "mechanisms": {
+      "different_subject_same_relation": 18,
+      "explicit_reset_revoke": 18,
+      "mixed_lifecycle": 18,
+      "same_subject_different_relation": 18,
+      "semantic_duplicate": 18,
+      "semantic_overwrite": 20,
+      "stale_repetition": 18
+    },
+    "queries": 1920,
+    "source_groups": 64,
+    "target_relations": {
+      "P106": 10,
+      "P136": 11,
+      "P27": 11,
+      "P407": 11,
+      "P495": 10,
+      "P937": 11
+    }
+  },
+  "current_write_gate": 1.0,
+  "development_episodes_generated": false,
+  "files_sha256": {
+    "confirmation_episodes.jsonl": "bb393e5ad144a8d3b33d969162d8b1411c70007333b0070e250d15907de3bcf4"
+  },
+  "forbidden_sources_loaded": false,
+  "model_outputs_loaded": false,
+  "partition": "lama_pararel_confirmation",
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V6_ORIGINAL_SOURCE_CONFIRMATION_PLAN.md",
+  "primary_action_space": "binary_with_half_ablation",
+  "protocol": "qwen_utility_record_controller_v6_original_confirmation_data",
+  "release_audit_sha256": "d9a14c9f6bcb9dde1e2d38062cfbe7dfe1c6d581b1486bec83a8e97db75afb52",
+  "release_result_sha256": "58ea580a19cbb585366483acf6ad1ba22016de837955fa0b8183d91d44a833df",
+  "source_inspection_sha256": "c30fd05d4aa9ca29862874208eaa2da7f99c6ca5b23df06703b8b067c1fb25c2",
+  "source_manifest_sha256": "1d81e702e6e0165e67e15597bee1376c68cd8546078c1f40dcc0a7bbe0b9d124",
+  "splits": {
+    "confirmation": [
+      "P937",
+      "P27",
+      "P136",
+      "P407",
+      "P106",
+      "P530",
+      "P495"
+    ],
+    "development": [
+      "P103",
+      "P30",
+      "P39",
+      "P159",
+      "P1412"
+    ],
+    "train": [
+      "P178",
+      "P413",
+      "P449",
+      "P36",
+      "P20",
+      "P37",
+      "P19",
+      "P740",
+      "P101",
+      "P1303",
+      "P176",
+      "P47",
+      "P138",
+      "P364",
+      "P190",
+      "P279",
+      "P127"
+    ]
+  },
+  "terminal_status": "original_confirmation_data_built_pending_independent_audit"
+}

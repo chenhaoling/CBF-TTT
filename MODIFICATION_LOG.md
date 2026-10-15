@@ -5632,3 +5632,16 @@ reconstructs only this reporting field from each immutable episode's
 `audit.target_relation` before aggregation; it never enters a feature or
 policy decision.  A focused test covers exact reconstruction, and the result
 retry uses a new non-overwriting root.
+
+The retry completed with exit code zero, and its independent exact-rerun audit
+passed all seven integrity checks.  Lifecycle physics scored 81.615%; the
+three frozen V6 seeds scored 83.203%/82.891%/83.359%, giving a 1.536-point mean
+gain with source-group 95% CI `[0.677, 2.552]` and relation-cluster CI
+`[0.202, 3.126]`.  Every seed added zero unrelated errors, while the
+subject-only ablation added 9/15/15.  All six relations and seven mechanisms
+were nonnegative, and mean closure of the 2.344-point fact-key Oracle gap was
+65.56%.  The preregistered confirmation nevertheless failed solely because
+the mean gain was below the required two points.  The threshold is not
+reinterpreted or lowered.  Compact evidence and a full report are archived at
+`experiments/v6_original_source_20261016/`; this confirmation set is closed to
+further V6 tuning.

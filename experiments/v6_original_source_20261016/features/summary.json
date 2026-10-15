@@ -1,0 +1,36 @@
+{
+  "boundaries": 384,
+  "checks": {
+    "binary_class_support": true,
+    "complete_unique_boundaries": true,
+    "confirmation_opened_external_sealed": true,
+    "finite_features": true,
+    "fixed_feature_schema": true,
+    "locked_inputs": true
+  },
+  "confirmation_loaded": true,
+  "delete_fraction": 0.8315972222222222,
+  "external_benchmarks_loaded": false,
+  "feature_dimension": 66,
+  "next_stage": "original_confirmation_feature_audit",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v6_original_confirmation_features",
+  "record_examples": 1152,
+  "resource": {
+    "peak_allocated_gib": 7.591799736022949,
+    "peak_reserved_gib": 7.630859375,
+    "two_gpu_critical_seconds": 12.231786269694567
+  },
+  "risk_fraction": 0.07725694444444445,
+  "safe_binary_actions": {
+    "global_clear": 76,
+    "grid_0_0_0": 156,
+    "grid_0_0_1": 89,
+    "grid_0_1_0": 22,
+    "grid_0_1_1": 14,
+    "grid_1_0_0": 5,
+    "grid_1_0_1": 8,
+    "grid_1_1_0": 8,
+    "grid_1_1_1": 6
+  }
+}

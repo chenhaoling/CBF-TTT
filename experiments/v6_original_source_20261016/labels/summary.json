@@ -1,0 +1,95 @@
+{
+  "added_unrelated_errors": 0,
+  "additional_unrelated_correct": 152,
+  "confirmation_loaded": true,
+  "episodes": 128,
+  "external_benchmarks_loaded": false,
+  "future_queries": 3840,
+  "gate": {
+    "checks": {
+      "complete_unique_rows": true,
+      "confirmation_data_locked": true,
+      "confirmation_opened_external_sealed": true,
+      "finite_rows": true,
+      "frozen_plain_qwen": true,
+      "oracle_gain_ci_lower_above_zero": true,
+      "zero_added_unrelated_errors": true
+    },
+    "passed": true
+  },
+  "label_time_seconds": {
+    "max": 1.7456367760896683,
+    "mean": 0.39439259938565857,
+    "median": 0.03966384567320347,
+    "p90": 1.2880384158343077,
+    "p95": 1.4199427608400583
+  },
+  "labels": 384,
+  "next_stage": "original_confirmation_label_audit",
+  "partition": "lama_pararel_confirmation",
+  "passed": true,
+  "per_mechanism": {
+    "different_subject_same_relation": {
+      "labels": 54,
+      "retain_all_accuracy": 0.9888888888888889,
+      "safe_oracle_accuracy": 0.9888888888888889
+    },
+    "explicit_reset_revoke": {
+      "labels": 54,
+      "retain_all_accuracy": 0.3685185185185185,
+      "safe_oracle_accuracy": 0.7277777777777777
+    },
+    "mixed_lifecycle": {
+      "labels": 54,
+      "retain_all_accuracy": 0.5166666666666667,
+      "safe_oracle_accuracy": 0.7
+    },
+    "same_subject_different_relation": {
+      "labels": 54,
+      "retain_all_accuracy": 0.924074074074074,
+      "safe_oracle_accuracy": 0.924074074074074
+    },
+    "semantic_duplicate": {
+      "labels": 54,
+      "retain_all_accuracy": 1.0,
+      "safe_oracle_accuracy": 1.0
+    },
+    "semantic_overwrite": {
+      "labels": 60,
+      "retain_all_accuracy": 0.725,
+      "safe_oracle_accuracy": 0.8616666666666667
+    },
+    "stale_repetition": {
+      "labels": 54,
+      "retain_all_accuracy": 0.7962962962962963,
+      "safe_oracle_accuracy": 0.8944444444444445
+    }
+  },
+  "protocol": "qwen_utility_record_controller_v6_original_confirmation_labels",
+  "resource": {
+    "peak_allocated_gib": 7.639153480529785,
+    "peak_reserved_gib": 7.6953125,
+    "two_gpu_critical_seconds": 77.9566772505641
+  },
+  "retain_all_accuracy": 0.759375,
+  "safe_oracle_accuracy": 0.8708333333333333,
+  "safe_oracle_actions": {
+    "global_clear": 76,
+    "grid_05_0_0": 1,
+    "grid_0_0_0": 156,
+    "grid_0_0_05": 3,
+    "grid_0_0_1": 86,
+    "grid_0_1_0": 22,
+    "grid_0_1_1": 14,
+    "grid_1_0_0": 4,
+    "grid_1_0_1": 8,
+    "grid_1_1_0": 8,
+    "grid_1_1_1": 6
+  },
+  "safe_oracle_gain": 0.11145833333333333,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.0796875,
+    0.14635416666666667
+  ],
+  "source_groups": 64
+}

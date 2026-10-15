@@ -1,0 +1,1479 @@
+{
+  "baselines": {
+    "exact_string_delete": {
+      "accuracy": 0.759375,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.015625,
+      "binary_teacher_record_agreement": 0.1840277777777778,
+      "correct": 2916,
+      "deletion_fraction": 0.015625,
+      "deletion_precision": 1.0,
+      "mean_answer_nll": 2.980559368090432,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9888888888888889,
+        "explicit_reset_revoke": 0.3685185185185185,
+        "mixed_lifecycle": 0.5166666666666667,
+        "same_subject_different_relation": 0.924074074074074,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.725,
+        "stale_repetition": 0.7962962962962963
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.796875,
+          "mean_answer_nll": 3.3934071199362656,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.6263020833333334,
+          "mean_answer_nll": 3.896562650629979,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.65625,
+          "mean_answer_nll": 3.0636539695969986,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.84765625,
+          "mean_answer_nll": 2.3646831392419094,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.8697916666666666,
+          "mean_answer_nll": 2.1844899610470065,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.7883333333333333,
+        "P136": 0.7954545454545454,
+        "P27": 0.7090909090909091,
+        "P407": 0.8166666666666667,
+        "P495": 0.74,
+        "P937": 0.7075757575757575
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.8381076388888888
+    },
+    "exact_subject_conflict": {
+      "accuracy": 0.8216145833333334,
+      "added_unrelated_errors": 27,
+      "binary_teacher_action_agreement": 0.109375,
+      "binary_teacher_record_agreement": 0.4878472222222222,
+      "correct": 3155,
+      "deletion_fraction": 0.4010416666666667,
+      "deletion_precision": 0.8982683982683982,
+      "mean_answer_nll": 2.3710410574021656,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9888888888888889,
+        "explicit_reset_revoke": 0.5351851851851852,
+        "mixed_lifecycle": 0.6092592592592593,
+        "same_subject_different_relation": 0.8777777777777778,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.8616666666666667,
+        "stale_repetition": 0.8740740740740741
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.796875,
+          "mean_answer_nll": 3.3934071199362656,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.82421875,
+          "mean_answer_nll": 1.8518687219257117,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.8046875,
+          "mean_answer_nll": 1.7909254896834075,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.8125,
+          "mean_answer_nll": 2.634513994418436,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.8697916666666666,
+          "mean_answer_nll": 2.1844899610470065,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.8383333333333334,
+        "P136": 0.8803030303030303,
+        "P27": 0.7818181818181819,
+        "P407": 0.8469696969696969,
+        "P495": 0.8383333333333334,
+        "P937": 0.746969696969697
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.8263888888888888
+    },
+    "explicit_lifecycle_physics": {
+      "accuracy": 0.8161458333333333,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.1171875,
+      "binary_teacher_record_agreement": 0.3385416666666667,
+      "correct": 3134,
+      "deletion_fraction": 0.171875,
+      "deletion_precision": 0.9949494949494949,
+      "mean_answer_nll": 2.284582514273507,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9888888888888889,
+        "explicit_reset_revoke": 0.6518518518518519,
+        "mixed_lifecycle": 0.6370370370370371,
+        "same_subject_different_relation": 0.924074074074074,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.725,
+        "stale_repetition": 0.7962962962962963
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.8489583333333334,
+          "mean_answer_nll": 2.548426229073622,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.70703125,
+          "mean_answer_nll": 3.1109450707105375,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.7239583333333334,
+          "mean_answer_nll": 2.5385736645384895,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.890625,
+          "mean_answer_nll": 1.721520326825157,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.91015625,
+          "mean_answer_nll": 1.5034472802197267,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.8416666666666667,
+        "P136": 0.8545454545454545,
+        "P27": 0.7878787878787878,
+        "P407": 0.843939393939394,
+        "P495": 0.8166666666666667,
+        "P937": 0.7545454545454545
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.8832465277777778
+    },
+    "frozen_cosine_delete_0.98": {
+      "accuracy": 0.7903645833333334,
+      "added_unrelated_errors": 157,
+      "binary_teacher_action_agreement": 0.34375,
+      "binary_teacher_record_agreement": 0.7621527777777778,
+      "correct": 3035,
+      "deletion_fraction": 0.8541666666666666,
+      "deletion_precision": 0.8475609756097561,
+      "mean_answer_nll": 2.575449931556538,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.8814814814814815,
+        "explicit_reset_revoke": 0.5444444444444444,
+        "mixed_lifecycle": 0.5962962962962963,
+        "same_subject_different_relation": 0.8462962962962963,
+        "semantic_duplicate": 0.9703703703703703,
+        "semantic_overwrite": 0.8316666666666667,
+        "stale_repetition": 0.8574074074074074
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.73046875,
+          "mean_answer_nll": 3.837618491100443,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.8294270833333334,
+          "mean_answer_nll": 1.8081077549613838,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.7955729166666666,
+          "mean_answer_nll": 1.854501692891669,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.7330729166666666,
+          "mean_answer_nll": 3.05199107136256,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.86328125,
+          "mean_answer_nll": 2.325030647466633,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.76,
+        "P136": 0.8545454545454545,
+        "P27": 0.7772727272727272,
+        "P407": 0.8181818181818182,
+        "P495": 0.8116666666666666,
+        "P937": 0.7196969696969697
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.7756076388888888
+    },
+    "frozen_cosine_delete_0.99": {
+      "accuracy": 0.79140625,
+      "added_unrelated_errors": 100,
+      "binary_teacher_action_agreement": 0.3619791666666667,
+      "binary_teacher_record_agreement": 0.7326388888888888,
+      "correct": 3039,
+      "deletion_fraction": 0.7222222222222222,
+      "deletion_precision": 0.890625,
+      "mean_answer_nll": 2.580550454969443,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.8981481481481481,
+        "explicit_reset_revoke": 0.5111111111111111,
+        "mixed_lifecycle": 0.5833333333333334,
+        "same_subject_different_relation": 0.8888888888888888,
+        "semantic_duplicate": 0.9796296296296296,
+        "semantic_overwrite": 0.8066666666666666,
+        "stale_repetition": 0.8703703703703703
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.7721354166666666,
+          "mean_answer_nll": 3.5270199942883287,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.8059895833333334,
+          "mean_answer_nll": 1.998372782993253,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.7565104166666666,
+          "mean_answer_nll": 2.1259933461484857,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.7591145833333334,
+          "mean_answer_nll": 2.9266217061231146,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.86328125,
+          "mean_answer_nll": 2.324744445294035,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.805,
+        "P136": 0.85,
+        "P27": 0.7287878787878788,
+        "P407": 0.8212121212121212,
+        "P495": 0.8116666666666666,
+        "P937": 0.7348484848484849
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.7981770833333334
+    },
+    "frozen_cosine_delete_0.995": {
+      "accuracy": 0.76953125,
+      "added_unrelated_errors": 33,
+      "binary_teacher_action_agreement": 0.20572916666666666,
+      "binary_teacher_record_agreement": 0.5260416666666666,
+      "correct": 2955,
+      "deletion_fraction": 0.3871527777777778,
+      "deletion_precision": 0.9618834080717489,
+      "mean_answer_nll": 2.839454397988311,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9277777777777778,
+        "explicit_reset_revoke": 0.4111111111111111,
+        "mixed_lifecycle": 0.5481481481481482,
+        "same_subject_different_relation": 0.924074074074074,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.7416666666666667,
+        "stale_repetition": 0.837037037037037
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.796875,
+          "mean_answer_nll": 3.3934071199362656,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.69140625,
+          "mean_answer_nll": 3.1025993815953066,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.6848958333333334,
+          "mean_answer_nll": 2.8732180470960884,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.8046875,
+          "mean_answer_nll": 2.6435574802668875,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.8697916666666666,
+          "mean_answer_nll": 2.1844899610470065,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.805,
+        "P136": 0.7954545454545454,
+        "P27": 0.7166666666666667,
+        "P407": 0.8287878787878787,
+        "P495": 0.7733333333333333,
+        "P937": 0.7015151515151515
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.8237847222222222
+    },
+    "global_clear": {
+      "accuracy": 0.7020833333333333,
+      "added_unrelated_errors": 649,
+      "binary_teacher_action_agreement": 0.19791666666666666,
+      "binary_teacher_record_agreement": 0.8315972222222222,
+      "correct": 2696,
+      "deletion_fraction": 1.0,
+      "deletion_precision": 0.8315972222222222,
+      "mean_answer_nll": 2.9262498137115283,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.7222222222222222,
+        "explicit_reset_revoke": 0.7018518518518518,
+        "mixed_lifecycle": 0.6444444444444445,
+        "same_subject_different_relation": 0.6944444444444444,
+        "semantic_duplicate": 0.7388888888888889,
+        "semantic_overwrite": 0.7216666666666667,
+        "stale_repetition": 0.6888888888888889
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.4127604166666667,
+          "mean_answer_nll": 4.927950757400443,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.8372395833333334,
+          "mean_answer_nll": 1.7638758394641627,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.8059895833333334,
+          "mean_answer_nll": 1.7772018405988395,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.6575520833333334,
+          "mean_answer_nll": 3.617611988379091,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.796875,
+          "mean_answer_nll": 2.5446086427151045,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.6716666666666666,
+        "P136": 0.7742424242424243,
+        "P27": 0.7318181818181818,
+        "P407": 0.703030303030303,
+        "P495": 0.72,
+        "P937": 0.6106060606060606
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.6223958333333334
+    },
+    "last_1": {
+      "accuracy": 0.7533854166666667,
+      "added_unrelated_errors": 179,
+      "binary_teacher_action_agreement": 0.0,
+      "binary_teacher_record_agreement": 0.5086805555555556,
+      "correct": 2893,
+      "deletion_fraction": 0.6666666666666666,
+      "deletion_precision": 0.7552083333333334,
+      "mean_answer_nll": 2.885653702617295,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.8814814814814815,
+        "explicit_reset_revoke": 0.4703703703703704,
+        "mixed_lifecycle": 0.5537037037037037,
+        "same_subject_different_relation": 0.8277777777777777,
+        "semantic_duplicate": 0.9592592592592593,
+        "semantic_overwrite": 0.775,
+        "stale_repetition": 0.8037037037037037
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.7096354166666666,
+          "mean_answer_nll": 4.04511068258076,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.76171875,
+          "mean_answer_nll": 2.335407923813667,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.70703125,
+          "mean_answer_nll": 2.4903410337507617,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.7291666666666666,
+          "mean_answer_nll": 3.203840704856399,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.859375,
+          "mean_answer_nll": 2.353568168084886,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.7016666666666667,
+        "P136": 0.8393939393939394,
+        "P27": 0.7287878787878788,
+        "P407": 0.7984848484848485,
+        "P495": 0.79,
+        "P937": 0.6606060606060606
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.7660590277777778
+    },
+    "last_2": {
+      "accuracy": 0.76640625,
+      "added_unrelated_errors": 76,
+      "binary_teacher_action_agreement": 0.0,
+      "binary_teacher_record_agreement": 0.3715277777777778,
+      "correct": 2943,
+      "deletion_fraction": 0.3333333333333333,
+      "deletion_precision": 0.8046875,
+      "mean_answer_nll": 2.7747469043339605,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.8981481481481481,
+        "explicit_reset_revoke": 0.4203703703703704,
+        "mixed_lifecycle": 0.5666666666666667,
+        "same_subject_different_relation": 0.8777777777777778,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.7583333333333333,
+        "stale_repetition": 0.8444444444444444
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.796875,
+          "mean_answer_nll": 3.3934071199362656,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.7473958333333334,
+          "mean_answer_nll": 2.470131138285069,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.6692708333333334,
+          "mean_answer_nll": 2.7720148264810027,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.7486979166666666,
+          "mean_answer_nll": 3.053691475920459,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.8697916666666666,
+          "mean_answer_nll": 2.1844899610470065,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.755,
+        "P136": 0.8560606060606061,
+        "P27": 0.703030303030303,
+        "P407": 0.8166666666666667,
+        "P495": 0.795,
+        "P937": 0.6742424242424242
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.8051215277777778
+    },
+    "retain_all": {
+      "accuracy": 0.759375,
+      "added_unrelated_errors": 0,
+      "binary_teacher_action_agreement": 0.015625,
+      "binary_teacher_record_agreement": 0.1684027777777778,
+      "correct": 2916,
+      "deletion_fraction": 0.0,
+      "deletion_precision": 1.0,
+      "mean_answer_nll": 2.980559368090432,
+      "per_mechanism_accuracy": {
+        "different_subject_same_relation": 0.9888888888888889,
+        "explicit_reset_revoke": 0.3685185185185185,
+        "mixed_lifecycle": 0.5166666666666667,
+        "same_subject_different_relation": 0.924074074074074,
+        "semantic_duplicate": 1.0,
+        "semantic_overwrite": 0.725,
+        "stale_repetition": 0.7962962962962963
+      },
+      "per_query_role": {
+        "anchor": {
+          "accuracy": 0.796875,
+          "mean_answer_nll": 3.3934071199362656,
+          "queries": 768
+        },
+        "current_exact": {
+          "accuracy": 0.6263020833333334,
+          "mean_answer_nll": 3.896562650629979,
+          "queries": 768
+        },
+        "current_rephrase": {
+          "accuracy": 0.65625,
+          "mean_answer_nll": 3.0636539695969986,
+          "queries": 768
+        },
+        "retained_1": {
+          "accuracy": 0.84765625,
+          "mean_answer_nll": 2.3646831392419094,
+          "queries": 768
+        },
+        "retained_2": {
+          "accuracy": 0.8697916666666666,
+          "mean_answer_nll": 2.1844899610470065,
+          "queries": 768
+        }
+      },
+      "per_relation_accuracy": {
+        "P106": 0.7883333333333333,
+        "P136": 0.7954545454545454,
+        "P27": 0.7090909090909091,
+        "P407": 0.8166666666666667,
+        "P495": 0.74,
+        "P937": 0.7075757575757575
+      },
+      "queries": 3840,
+      "unrelated_accuracy": 0.8381076388888888
+    }
+  },
+  "collateral_localization": {
+    "fact_key": {
+      "26101651": [],
+      "26101652": [],
+      "26101653": []
+    },
+    "subject_only": {
+      "26101651": [
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g044-t0",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P136",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g044"
+        },
+        {
+          "added_unrelated_errors": 1,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g058-t0",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P106",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g058"
+        },
+        {
+          "added_unrelated_errors": 1,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g023-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P495",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g023"
+        },
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g037-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P27",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g037"
+        },
+        {
+          "added_unrelated_errors": 1,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g058-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P106",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g058"
+        }
+      ],
+      "26101652": [
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g030-t0",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P937",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g030"
+        },
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g044-t0",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P136",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g044"
+        },
+        {
+          "added_unrelated_errors": 1,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g023-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P495",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g023"
+        },
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g030-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P937",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g030"
+        },
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g037-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P27",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g037"
+        },
+        {
+          "added_unrelated_errors": 2,
+          "boundary_index": 1,
+          "episode_id": "usr-v6-original-confirmation-g037-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P27",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            1
+          ],
+          "source_group": "usr-v6-original-confirmation-g037"
+        }
+      ],
+      "26101653": [
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g030-t0",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P937",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g030"
+        },
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g044-t0",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P136",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g044"
+        },
+        {
+          "added_unrelated_errors": 1,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g023-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P495",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g023"
+        },
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g030-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P937",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g030"
+        },
+        {
+          "added_unrelated_errors": 3,
+          "boundary_index": 0,
+          "episode_id": "usr-v6-original-confirmation-g037-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P27",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            0
+          ],
+          "source_group": "usr-v6-original-confirmation-g037"
+        },
+        {
+          "added_unrelated_errors": 2,
+          "boundary_index": 1,
+          "episode_id": "usr-v6-original-confirmation-g037-t1",
+          "mechanism": "same_subject_different_relation",
+          "relation": "P27",
+          "residual_same_fact_key": [
+            false
+          ],
+          "residual_slots": [
+            1
+          ],
+          "source_group": "usr-v6-original-confirmation-g037"
+        }
+      ]
+    }
+  },
+  "controllers": {
+    "26101651": {
+      "checkpoint_sha256": "94f797fb25460194b3afdd45e3eb70fdf989544c744920f51337bade02ee4e44",
+      "evaluation": {
+        "accuracy": 0.83203125,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.1171875,
+        "binary_teacher_record_agreement": 0.4375,
+        "correct": 3195,
+        "deletion_fraction": 0.2708333333333333,
+        "deletion_precision": 0.9967948717948718,
+        "mean_answer_nll": 2.0915674505188844,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9888888888888889,
+          "explicit_reset_revoke": 0.6518518518518519,
+          "mixed_lifecycle": 0.6814814814814815,
+          "same_subject_different_relation": 0.924074074074074,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.75,
+          "stale_repetition": 0.837037037037037
+        },
+        "per_query_role": {
+          "anchor": {
+            "accuracy": 0.8489583333333334,
+            "mean_answer_nll": 2.548426229073622,
+            "queries": 768
+          },
+          "current_exact": {
+            "accuracy": 0.7734375,
+            "mean_answer_nll": 2.2856672000986387,
+            "queries": 768
+          },
+          "current_rephrase": {
+            "accuracy": 0.7369791666666666,
+            "mean_answer_nll": 2.3987762163772763,
+            "queries": 768
+          },
+          "retained_1": {
+            "accuracy": 0.890625,
+            "mean_answer_nll": 1.721520326825157,
+            "queries": 768
+          },
+          "retained_2": {
+            "accuracy": 0.91015625,
+            "mean_answer_nll": 1.5034472802197267,
+            "queries": 768
+          }
+        },
+        "per_relation_accuracy": {
+          "P106": 0.8416666666666667,
+          "P136": 0.9,
+          "P27": 0.796969696969697,
+          "P407": 0.843939393939394,
+          "P495": 0.855,
+          "P937": 0.7575757575757576
+        },
+        "queries": 3840,
+        "residual_deletion_fraction": 0.19387755102040816,
+        "residual_deletion_precision": 0.3333333333333333,
+        "residual_deletions": 114,
+        "unrelated_accuracy": 0.8832465277777778
+      },
+      "fact_key_deletion_matched_random": {
+        "accuracy_max": 0.8330729166666667,
+        "accuracy_mean": 0.8314192708333333,
+        "accuracy_min": 0.8296875,
+        "added_unrelated_errors_mean": 0.0,
+        "draws": 20
+      },
+      "filtered_cross_fact_deletions": 16,
+      "gain_over_lifecycle_physics": 0.015885416666666652,
+      "gain_over_lifecycle_physics_group_bootstrap_95ci": [
+        0.007291666666666667,
+        0.026041666666666668
+      ],
+      "macro_relation_gain": 0.015984848484848508,
+      "oracle_gap_closure": 0.6777777777777771,
+      "per_mechanism_gain": {
+        "different_subject_same_relation": 0.0,
+        "explicit_reset_revoke": 0.0,
+        "mixed_lifecycle": 0.0444444444444444,
+        "same_subject_different_relation": 0.0,
+        "semantic_duplicate": 0.0,
+        "semantic_overwrite": 0.025000000000000022,
+        "stale_repetition": 0.040740740740740744
+      },
+      "per_relation_gain": {
+        "P106": 0.0,
+        "P136": 0.045454545454545525,
+        "P27": 0.00909090909090915,
+        "P407": 0.0,
+        "P495": 0.03833333333333333,
+        "P937": 0.00303030303030305
+      },
+      "selected_train_config": {
+        "conformal_level": 0.01,
+        "epoch": 25,
+        "locality_rule": "exact_subject",
+        "maximum_extra_deletions": 1,
+        "risk_penalty": 1.0,
+        "risk_threshold": 0.5453510284423828,
+        "utility_threshold": 0.4
+      },
+      "subject_only_ablation": {
+        "accuracy": 0.8302083333333333,
+        "added_unrelated_errors": 9,
+        "binary_teacher_action_agreement": 0.10677083333333333,
+        "binary_teacher_record_agreement": 0.4236111111111111,
+        "correct": 3188,
+        "deletion_fraction": 0.2847222222222222,
+        "deletion_precision": 0.948170731707317,
+        "mean_answer_nll": 2.1074784320486137,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9888888888888889,
+          "explicit_reset_revoke": 0.6518518518518519,
+          "mixed_lifecycle": 0.6814814814814815,
+          "same_subject_different_relation": 0.9111111111111111,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.75,
+          "stale_repetition": 0.837037037037037
+        },
+        "per_query_role": {
+          "anchor": {
+            "accuracy": 0.8489583333333334,
+            "mean_answer_nll": 2.548426229073622,
+            "queries": 768
+          },
+          "current_exact": {
+            "accuracy": 0.7734375,
+            "mean_answer_nll": 2.2856672000986387,
+            "queries": 768
+          },
+          "current_rephrase": {
+            "accuracy": 0.7395833333333334,
+            "mean_answer_nll": 2.3815826199940298,
+            "queries": 768
+          },
+          "retained_1": {
+            "accuracy": 0.87890625,
+            "mean_answer_nll": 1.8182688308570505,
+            "queries": 768
+          },
+          "retained_2": {
+            "accuracy": 0.91015625,
+            "mean_answer_nll": 1.5034472802197267,
+            "queries": 768
+          }
+        },
+        "per_relation_accuracy": {
+          "P106": 0.8416666666666667,
+          "P136": 0.8954545454545455,
+          "P27": 0.7924242424242425,
+          "P407": 0.843939393939394,
+          "P495": 0.8533333333333334,
+          "P937": 0.7575757575757576
+        },
+        "queries": 3840,
+        "unrelated_accuracy": 0.8793402777777778
+      }
+    },
+    "26101652": {
+      "checkpoint_sha256": "6f7a207365301382cbdd29e7357937d58fc8710cea1df7dcde51b70a73bc095f",
+      "evaluation": {
+        "accuracy": 0.82890625,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.1171875,
+        "binary_teacher_record_agreement": 0.4201388888888889,
+        "correct": 3183,
+        "deletion_fraction": 0.2534722222222222,
+        "deletion_precision": 0.9965753424657534,
+        "mean_answer_nll": 2.1161199495207104,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9888888888888889,
+          "explicit_reset_revoke": 0.6518518518518519,
+          "mixed_lifecycle": 0.6814814814814815,
+          "same_subject_different_relation": 0.924074074074074,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.7583333333333333,
+          "stale_repetition": 0.8055555555555556
+        },
+        "per_query_role": {
+          "anchor": {
+            "accuracy": 0.8489583333333334,
+            "mean_answer_nll": 2.548426229073622,
+            "queries": 768
+          },
+          "current_exact": {
+            "accuracy": 0.7604166666666666,
+            "mean_answer_nll": 2.3809823969386343,
+            "queries": 768
+          },
+          "current_rephrase": {
+            "accuracy": 0.734375,
+            "mean_answer_nll": 2.4262235145464124,
+            "queries": 768
+          },
+          "retained_1": {
+            "accuracy": 0.890625,
+            "mean_answer_nll": 1.721520326825157,
+            "queries": 768
+          },
+          "retained_2": {
+            "accuracy": 0.91015625,
+            "mean_answer_nll": 1.5034472802197267,
+            "queries": 768
+          }
+        },
+        "per_relation_accuracy": {
+          "P106": 0.8416666666666667,
+          "P136": 0.8924242424242425,
+          "P27": 0.7954545454545454,
+          "P407": 0.843939393939394,
+          "P495": 0.845,
+          "P937": 0.7575757575757576
+        },
+        "queries": 3840,
+        "residual_deletion_fraction": 0.1598639455782313,
+        "residual_deletion_precision": 0.3617021276595745,
+        "residual_deletions": 94,
+        "unrelated_accuracy": 0.8832465277777778
+      },
+      "fact_key_deletion_matched_random": {
+        "accuracy_max": 0.8296875,
+        "accuracy_mean": 0.8281901041666666,
+        "accuracy_min": 0.82734375,
+        "added_unrelated_errors_mean": 0.0,
+        "draws": 20
+      },
+      "filtered_cross_fact_deletions": 16,
+      "gain_over_lifecycle_physics": 0.012760416666666607,
+      "gain_over_lifecycle_physics_group_bootstrap_95ci": [
+        0.005208333333333333,
+        0.021875
+      ],
+      "macro_relation_gain": 0.012803030303030316,
+      "oracle_gap_closure": 0.544444444444442,
+      "per_mechanism_gain": {
+        "different_subject_same_relation": 0.0,
+        "explicit_reset_revoke": 0.0,
+        "mixed_lifecycle": 0.0444444444444444,
+        "same_subject_different_relation": 0.0,
+        "semantic_duplicate": 0.0,
+        "semantic_overwrite": 0.033333333333333326,
+        "stale_repetition": 0.0092592592592593
+      },
+      "per_relation_gain": {
+        "P106": 0.0,
+        "P136": 0.037878787878787956,
+        "P27": 0.007575757575757569,
+        "P407": 0.0,
+        "P495": 0.02833333333333332,
+        "P937": 0.00303030303030305
+      },
+      "selected_train_config": {
+        "conformal_level": 0.01,
+        "epoch": 100,
+        "locality_rule": "exact_subject",
+        "maximum_extra_deletions": 1,
+        "risk_penalty": 2.0,
+        "risk_threshold": 0.2571820318698883,
+        "utility_threshold": 0.4
+      },
+      "subject_only_ablation": {
+        "accuracy": 0.825,
+        "added_unrelated_errors": 15,
+        "binary_teacher_action_agreement": 0.1171875,
+        "binary_teacher_record_agreement": 0.40625,
+        "correct": 3168,
+        "deletion_fraction": 0.2673611111111111,
+        "deletion_precision": 0.9448051948051948,
+        "mean_answer_nll": 2.1351076843588546,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9888888888888889,
+          "explicit_reset_revoke": 0.6518518518518519,
+          "mixed_lifecycle": 0.6814814814814815,
+          "same_subject_different_relation": 0.8962962962962963,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.7583333333333333,
+          "stale_repetition": 0.8055555555555556
+        },
+        "per_query_role": {
+          "anchor": {
+            "accuracy": 0.8489583333333334,
+            "mean_answer_nll": 2.548426229073622,
+            "queries": 768
+          },
+          "current_exact": {
+            "accuracy": 0.7604166666666666,
+            "mean_answer_nll": 2.3809823969386343,
+            "queries": 768
+          },
+          "current_rephrase": {
+            "accuracy": 0.734375,
+            "mean_answer_nll": 2.3868705131493093,
+            "queries": 768
+          },
+          "retained_1": {
+            "accuracy": 0.87109375,
+            "mean_answer_nll": 1.8558120024129796,
+            "queries": 768
+          },
+          "retained_2": {
+            "accuracy": 0.91015625,
+            "mean_answer_nll": 1.5034472802197267,
+            "queries": 768
+          }
+        },
+        "per_relation_accuracy": {
+          "P106": 0.8416666666666667,
+          "P136": 0.8878787878787879,
+          "P27": 0.7878787878787878,
+          "P407": 0.843939393939394,
+          "P495": 0.8433333333333334,
+          "P937": 0.7484848484848485
+        },
+        "queries": 3840,
+        "unrelated_accuracy": 0.8767361111111112
+      }
+    },
+    "26101653": {
+      "checkpoint_sha256": "78a42bbd22e48f82626db77ea2dc3c4a4d00f4a3a7808b921f413558fd61062f",
+      "evaluation": {
+        "accuracy": 0.83359375,
+        "added_unrelated_errors": 0,
+        "binary_teacher_action_agreement": 0.1171875,
+        "binary_teacher_record_agreement": 0.4375,
+        "correct": 3201,
+        "deletion_fraction": 0.2708333333333333,
+        "deletion_precision": 0.9967948717948718,
+        "mean_answer_nll": 2.075900813757577,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9888888888888889,
+          "explicit_reset_revoke": 0.6518518518518519,
+          "mixed_lifecycle": 0.6851851851851852,
+          "same_subject_different_relation": 0.924074074074074,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.76,
+          "stale_repetition": 0.8333333333333334
+        },
+        "per_query_role": {
+          "anchor": {
+            "accuracy": 0.8489583333333334,
+            "mean_answer_nll": 2.548426229073622,
+            "queries": 768
+          },
+          "current_exact": {
+            "accuracy": 0.7825520833333334,
+            "mean_answer_nll": 2.2233883157581054,
+            "queries": 768
+          },
+          "current_rephrase": {
+            "accuracy": 0.7356770833333334,
+            "mean_answer_nll": 2.3827219169112746,
+            "queries": 768
+          },
+          "retained_1": {
+            "accuracy": 0.890625,
+            "mean_answer_nll": 1.721520326825157,
+            "queries": 768
+          },
+          "retained_2": {
+            "accuracy": 0.91015625,
+            "mean_answer_nll": 1.5034472802197267,
+            "queries": 768
+          }
+        },
+        "per_relation_accuracy": {
+          "P106": 0.8416666666666667,
+          "P136": 0.906060606060606,
+          "P27": 0.796969696969697,
+          "P407": 0.843939393939394,
+          "P495": 0.8583333333333333,
+          "P937": 0.7575757575757576
+        },
+        "queries": 3840,
+        "residual_deletion_fraction": 0.19387755102040816,
+        "residual_deletion_precision": 0.39473684210526316,
+        "residual_deletions": 114,
+        "unrelated_accuracy": 0.8832465277777778
+      },
+      "fact_key_deletion_matched_random": {
+        "accuracy_max": 0.8333333333333334,
+        "accuracy_mean": 0.8312890625,
+        "accuracy_min": 0.8291666666666667,
+        "added_unrelated_errors_mean": 0.0,
+        "draws": 20
+      },
+      "filtered_cross_fact_deletions": 14,
+      "gain_over_lifecycle_physics": 0.017447916666666674,
+      "gain_over_lifecycle_physics_group_bootstrap_95ci": [
+        0.008072916666666666,
+        0.028645833333333332
+      ],
+      "macro_relation_gain": 0.017550505050505056,
+      "oracle_gap_closure": 0.7444444444444448,
+      "per_mechanism_gain": {
+        "different_subject_same_relation": 0.0,
+        "explicit_reset_revoke": 0.0,
+        "mixed_lifecycle": 0.04814814814814816,
+        "same_subject_different_relation": 0.0,
+        "semantic_duplicate": 0.0,
+        "semantic_overwrite": 0.03500000000000003,
+        "stale_repetition": 0.03703703703703709
+      },
+      "per_relation_gain": {
+        "P106": 0.0,
+        "P136": 0.051515151515151514,
+        "P27": 0.00909090909090915,
+        "P407": 0.0,
+        "P495": 0.04166666666666663,
+        "P937": 0.00303030303030305
+      },
+      "selected_train_config": {
+        "conformal_level": 0.01,
+        "epoch": 100,
+        "locality_rule": "exact_subject",
+        "maximum_extra_deletions": 1,
+        "risk_penalty": 2.0,
+        "risk_threshold": 0.10971000790596008,
+        "utility_threshold": 0.4
+      },
+      "subject_only_ablation": {
+        "accuracy": 0.8296875,
+        "added_unrelated_errors": 15,
+        "binary_teacher_action_agreement": 0.1171875,
+        "binary_teacher_record_agreement": 0.4253472222222222,
+        "correct": 3186,
+        "deletion_fraction": 0.2829861111111111,
+        "deletion_precision": 0.9539877300613497,
+        "mean_answer_nll": 2.093892188862128,
+        "per_mechanism_accuracy": {
+          "different_subject_same_relation": 0.9888888888888889,
+          "explicit_reset_revoke": 0.6518518518518519,
+          "mixed_lifecycle": 0.6851851851851852,
+          "same_subject_different_relation": 0.8962962962962963,
+          "semantic_duplicate": 1.0,
+          "semantic_overwrite": 0.76,
+          "stale_repetition": 0.8333333333333334
+        },
+        "per_query_role": {
+          "anchor": {
+            "accuracy": 0.8489583333333334,
+            "mean_answer_nll": 2.548426229073622,
+            "queries": 768
+          },
+          "current_exact": {
+            "accuracy": 0.7825520833333334,
+            "mean_answer_nll": 2.2233883157581054,
+            "queries": 768
+          },
+          "current_rephrase": {
+            "accuracy": 0.7356770833333334,
+            "mean_answer_nll": 2.3433689155141715,
+            "queries": 768
+          },
+          "retained_1": {
+            "accuracy": 0.87109375,
+            "mean_answer_nll": 1.8508302037450146,
+            "queries": 768
+          },
+          "retained_2": {
+            "accuracy": 0.91015625,
+            "mean_answer_nll": 1.5034472802197267,
+            "queries": 768
+          }
+        },
+        "per_relation_accuracy": {
+          "P106": 0.8416666666666667,
+          "P136": 0.9015151515151515,
+          "P27": 0.7893939393939394,
+          "P407": 0.843939393939394,
+          "P495": 0.8566666666666667,
+          "P937": 0.7484848484848485
+        },
+        "queries": 3840,
+        "unrelated_accuracy": 0.8767361111111112
+      }
+    }
+  },
+  "counterfactual_targets_available_to_controller": false,
+  "data_audit_sha256": "25357e4174fc49d70922999534b9946e1994288b783529f80fdcff5b0ca36200",
+  "external_benchmarks_loaded": false,
+  "feature_audit_sha256": "e4f42a7fa6a1d01d115e43251156c68c4afe8dc42e1cf79deee039f77e466209",
+  "groups": 64,
+  "label_audit_sha256": "197b98f58935bf4bdcc618a221e65b3c14ac4971f2736d87ba845d8191fb54a6",
+  "majority_controller": {
+    "accuracy": 0.8072916666666666,
+    "added_unrelated_errors": 0,
+    "binary_teacher_action_agreement": 0.026041666666666668,
+    "binary_teacher_record_agreement": 0.4357638888888889,
+    "correct": 3100,
+    "deletion_fraction": 0.2690972222222222,
+    "deletion_precision": 0.9967741935483871,
+    "mean_answer_nll": 2.5040848472265833,
+    "per_mechanism_accuracy": {
+      "different_subject_same_relation": 0.9888888888888889,
+      "explicit_reset_revoke": 0.55,
+      "mixed_lifecycle": 0.6055555555555555,
+      "same_subject_different_relation": 0.924074074074074,
+      "semantic_duplicate": 1.0,
+      "semantic_overwrite": 0.755,
+      "stale_repetition": 0.8333333333333334
+    },
+    "per_query_role": {
+      "anchor": {
+        "accuracy": 0.8072916666666666,
+        "mean_answer_nll": 3.275524057325242,
+        "queries": 768
+      },
+      "current_exact": {
+        "accuracy": 0.7760416666666666,
+        "mean_answer_nll": 2.283227213056913,
+        "queries": 768
+      },
+      "current_rephrase": {
+        "accuracy": 0.7356770833333334,
+        "mean_answer_nll": 2.4124998654618444,
+        "queries": 768
+      },
+      "retained_1": {
+        "accuracy": 0.84765625,
+        "mean_answer_nll": 2.3646831392419094,
+        "queries": 768
+      },
+      "retained_2": {
+        "accuracy": 0.8697916666666666,
+        "mean_answer_nll": 2.1844899610470065,
+        "queries": 768
+      }
+    },
+    "per_relation_accuracy": {
+      "P106": 0.815,
+      "P136": 0.8696969696969697,
+      "P27": 0.7712121212121212,
+      "P407": 0.8272727272727273,
+      "P495": 0.8316666666666667,
+      "P937": 0.7318181818181818
+    },
+    "queries": 3840,
+    "unrelated_accuracy": 0.8415798611111112
+  },
+  "next_stage": "independent_v6_original_source_result_audit",
+  "original_source_confirmation_gate": {
+    "checks": {
+      "every_mechanism_nonnegative": true,
+      "every_seed_gain_above_zero": true,
+      "every_seed_zero_added_unrelated_errors": true,
+      "mean_oracle_gap_closure_at_least_point_30": true,
+      "mean_seed_gain_at_least_point_02": false,
+      "pooled_group_bootstrap_lower_above_zero": true,
+      "relation_cluster_bootstrap_lower_above_zero": true,
+      "upstream_audits_passed": true
+    },
+    "passed_pending_independent_audit": false
+  },
+  "parameters_frozen_before_original_source_outcomes": true,
+  "partition": "lama_pararel_original_source_confirmation",
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V6_ORIGINAL_SOURCE_CONFIRMATION_PLAN.md",
+  "pooled_three_seed": {
+    "group_bootstrap_95ci": [
+      0.0067708333333333336,
+      0.025520833333333333
+    ],
+    "macro_relation_gain": 0.01544612794612796,
+    "mean_gain": 0.015364583333333312,
+    "mean_oracle_gap_closure": 0.6555555555555547,
+    "mean_per_mechanism_gain": {
+      "different_subject_same_relation": 0.0,
+      "explicit_reset_revoke": 0.0,
+      "mixed_lifecycle": 0.04567901234567898,
+      "same_subject_different_relation": 0.0,
+      "semantic_duplicate": 0.0,
+      "semantic_overwrite": 0.031111111111111128,
+      "stale_repetition": 0.02901234567901238
+    },
+    "mean_per_relation_gain": {
+      "P106": 0.0,
+      "P136": 0.044949494949494996,
+      "P27": 0.008585858585858622,
+      "P407": 0.0,
+      "P495": 0.036111111111111094,
+      "P937": 0.00303030303030305
+    },
+    "nonnegative_relations": 6,
+    "relation_cluster_bootstrap_95ci": [
+      0.0020202020202020206,
+      0.03126262626262626
+    ],
+    "worst_relation_gain": 0.0
+  },
+  "protocol": "qwen_utility_record_controller_v6_original_source_confirmation",
+  "release_baseline": "explicit_lifecycle_physics",
+  "resource": {
+    "feature_peak_reserved_gib": 7.630859375,
+    "feature_two_gpu_critical_seconds": 12.231786269694567,
+    "label_peak_reserved_gib": 7.6953125,
+    "label_two_gpu_critical_seconds": 77.9566772505641
+  },
+  "safe_single_fact_key_oracle": {
+    "accuracy": 0.8395833333333333,
+    "added_unrelated_errors": 0,
+    "binary_teacher_action_agreement": 0.1171875,
+    "binary_teacher_record_agreement": 0.4184027777777778,
+    "correct": 3224,
+    "deletion_fraction": 0.2517361111111111,
+    "deletion_precision": 0.996551724137931,
+    "mean_answer_nll": 2.046258048678389,
+    "per_mechanism_accuracy": {
+      "different_subject_same_relation": 0.9888888888888889,
+      "explicit_reset_revoke": 0.6518518518518519,
+      "mixed_lifecycle": 0.6851851851851852,
+      "same_subject_different_relation": 0.924074074074074,
+      "semantic_duplicate": 1.0,
+      "semantic_overwrite": 0.7866666666666666,
+      "stale_repetition": 0.8462962962962963
+    },
+    "per_query_role": {
+      "anchor": {
+        "accuracy": 0.8489583333333334,
+        "mean_answer_nll": 2.548426229073622,
+        "queries": 768
+      },
+      "current_exact": {
+        "accuracy": 0.796875,
+        "mean_answer_nll": 2.1361251012264497,
+        "queries": 768
+      },
+      "current_rephrase": {
+        "accuracy": 0.7513020833333334,
+        "mean_answer_nll": 2.3217713060469882,
+        "queries": 768
+      },
+      "retained_1": {
+        "accuracy": 0.890625,
+        "mean_answer_nll": 1.721520326825157,
+        "queries": 768
+      },
+      "retained_2": {
+        "accuracy": 0.91015625,
+        "mean_answer_nll": 1.5034472802197267,
+        "queries": 768
+      }
+    },
+    "per_relation_accuracy": {
+      "P106": 0.845,
+      "P136": 0.9166666666666666,
+      "P27": 0.8075757575757576,
+      "P407": 0.8484848484848485,
+      "P495": 0.8616666666666667,
+      "P937": 0.7606060606060606
+    },
+    "queries": 3840,
+    "unrelated_accuracy": 0.8832465277777778
+  },
+  "safe_single_fact_key_oracle_headroom": 0.0234375,
+  "strongest_safe_deterministic_baseline": "explicit_lifecycle_physics",
+  "templama_release_audit_sha256": "d9a14c9f6bcb9dde1e2d38062cfbe7dfe1c6d581b1486bec83a8e97db75afb52",
+  "templama_release_result_sha256": "58ea580a19cbb585366483acf6ad1ba22016de837955fa0b8183d91d44a833df",
+  "templama_test_loaded": true,
+  "terminal_status": "v6_original_source_confirmation_completed",
+  "training_audit_sha256": "2b8fd552c5e1a46c33ad21bdcef902fda5905f31d6a6f7e5083ef23373813aca",
+  "v1_confirmation_loaded": true
+}

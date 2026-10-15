@@ -1,0 +1,30 @@
+{
+  "added_unrelated_errors": 0,
+  "additional_unrelated_correct": 152,
+  "checks": {
+    "actions_and_metrics": true,
+    "aggregate_reconstruction": true,
+    "barrier_reconstruction": true,
+    "complete_unique_rows": true,
+    "confirmation_data_locked": true,
+    "frozen_plain_qwen": true,
+    "gate_and_sealing": true,
+    "independent_safe_labels": true
+  },
+  "data_audit_sha256": "25357e4174fc49d70922999534b9946e1994288b783529f80fdcff5b0ca36200",
+  "data_manifest_sha256": "0234d48eca33d420882137820d45576d11bbc1f4a4cb9b2a393507ad25c535f4",
+  "future_queries": 3840,
+  "next_stage": "original_confirmation_feature_construction",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v6_original_confirmation_labels_audit",
+  "retain_all_accuracy": 0.759375,
+  "rows": 384,
+  "safe_oracle_accuracy": 0.8708333333333333,
+  "safe_oracle_gain": 0.11145833333333333,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.0796875,
+    0.14635416666666667
+  ],
+  "summary_sha256": "76fb6f045e476d9c1d4a7a54ce9416d44bbab8458d4d77ae472a22b8e53abafd",
+  "terminal_status": "original_confirmation_labels_audit_passed"
+}
