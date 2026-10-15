@@ -55,7 +55,9 @@ def audit(root: str | Path, data_root: str | Path) -> dict:
             and manifest["semeval_test_loaded"] is False,
         "profiles": len(manifest["profiles"]) == 2
             and {profile["rank"] for profile in manifest["profiles"]} == {0, 1}
-            and all(profile["peak_allocated_gib"] < 32 for profile in manifest["profiles"]),
+            and all(profile["peak_allocated_gib"] < 32
+                    and profile["peak_reserved_gib"] < 32
+                    for profile in manifest["profiles"]),
     }
     checkpoint_checks, files = {}, {}
     for name, step in CHECKPOINTS.items():
