@@ -403,8 +403,10 @@ def fit(args) -> None:
             or projection.get("dialogre_dev_loaded") is not False
             or projection.get("dialogre_test_loaded") is not False):
         raise ValueError("S3 fusion requires sealed audited inputs")
-    output, weights_output = Path(args.output), Path(args.weights_output)
-    if output.exists() or weights_output.exists():
+    output, weights_output, scores_output = (
+        Path(args.output), Path(args.weights_output), Path(args.scores_output)
+    )
+    if output.exists() or weights_output.exists() or scores_output.exists():
         raise FileExistsError(output)
     train_set, _ = load_embedding_set(
         embedding_root, "train", manifest["counts"]["train"]["mentions"]
@@ -486,6 +488,7 @@ def fit(args) -> None:
         )
         summaries[name]["last_training_loss"] = loss
         summaries[name]["features"] = list(FEATURE_NAMES)
+        calibration_scores[name] = scores
         artifacts[name] = {
             "kind": kind, "columns": columns, "mean": mean, "std": std,
             "state_dict": {key: value.detach().cpu() for key, value in head.state_dict().items()},
@@ -512,6 +515,7 @@ def fit(args) -> None:
     )
     summaries["monotone_opposite_pubmed_pretraining"]["last_training_loss"] = loss
     summaries["monotone_opposite_pubmed_pretraining"]["projection_config"] = opposite["config"]
+    calibration_scores["monotone_opposite_pubmed_pretraining"] = scores
 
     # Non-learned and no-conformal controls use the same frozen calibration rows.
     baseline_scores = {
@@ -526,6 +530,7 @@ def fit(args) -> None:
         summaries[name] = summarize_scores(
             calibration_pairs, calibration_scenarios, scores, use_conformal=True
         )
+        calibration_scores[name] = scores
     eligible = ["monotone_full", "mlp_full"]
     selected_name = max(eligible, key=lambda name: (
         summaries[name]["delete"]["recall"],
@@ -536,6 +541,17 @@ def fit(args) -> None:
         calibration_pairs, calibration_scenarios, calibration_scores[selected_name],
         use_conformal=False,
     )
+    calibration_scores[f"{selected_name}_no_conformal"] = calibration_scores[selected_name]
+    with scores_output.open("x") as sink:
+        for index, row in enumerate(calibration_pairs):
+            sink.write(json.dumps({
+                "index": index,
+                "pair_id": row["pair_id"],
+                "gold_same_relation": bool(row["same_relation"]),
+                "left_dialogue_sha256": row["left_dialogue_sha256"],
+                "scores": {name: values[index]
+                           for name, values in sorted(calibration_scores.items())},
+            }, sort_keys=True) + "\n")
     torch.save({
         "protocol": PROTOCOL,
         "feature_names": FEATURE_NAMES,
@@ -572,6 +588,7 @@ def fit(args) -> None:
                             for shard in range(2)],
         },
         "weights_sha256": sha(weights_output),
+        "calibration_scores_sha256": sha(scores_output),
         "dialogre_dev_loaded": False,
         "dialogre_test_loaded": False,
         "pubmed_validation_loaded": False,
@@ -595,6 +612,7 @@ def main() -> None:
     parser.add_argument("--projection-weights", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--weights-output", required=True)
+    parser.add_argument("--scores-output", required=True)
     fit(parser.parse_args())
 
 
