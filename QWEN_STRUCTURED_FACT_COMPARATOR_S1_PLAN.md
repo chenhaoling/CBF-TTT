@@ -112,6 +112,19 @@ generation-confidence threshold.  Below that threshold the policy defers to
 `retain`.  Architecture, prompt, rank, optimizer, and field definitions may
 not be changed after observing development.
 
+Before calibration scoring, freeze the structured decoder as eight candidate
+JSON strings, one for each Boolean `(E,R,V)` state with its operation fixed by
+the physical rule. Select the minimum mean target-token NLL; confidence is the
+NLL gap between the best and second candidate. This prevents arbitrary text
+parsing from contaminating field metrics. Calibration selects the checkpoint
+and minimum confidence at 99% deletion precision. On development, additionally
+run unconstrained greedy generation over every example (`max_new_tokens=80`)
+and compute JSON validity with exact key order, Boolean types and physical
+operation consistency. Candidate likelihood supplies semantic and action
+metrics; unconstrained generation supplies the registered format-validity
+metric. The zero-shot baseline uses the identical candidate decoder and its own
+calibration-only threshold.
+
 If the pilot development gate passes, repeat the frozen configuration with
 seeds `24117/24119/24121`.  The external test is opened once only after all
 three runs pass the confirmation-development gate.

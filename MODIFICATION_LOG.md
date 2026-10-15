@@ -4499,3 +4499,19 @@ All checks pass with manifest SHA256
 the auditor parsed zero test rows. The remote experiment environment now pins
 `peft==0.18.0` and `accelerate==1.11.0` alongside Transformers 4.57.3 and
 PyTorch 2.9.1+cu130.
+
+Added the two-GPU LoRA trainer and candidate-likelihood/free-generation scorer.
+The trainer masks prompt tokens from the causal loss, freezes every backbone
+parameter, updates rank-16 attention adapters only, and saves the registered
+0.25/0.5/1/2-epoch checkpoints. A two-step DDP smoke completed in 4.20 seconds;
+peak allocated/reserved memory was 9.78/14.97 GiB on GPU0 and 9.68/13.34 GiB
+on GPU1. It loaded no calibration or development rows. Formal training then
+started in tmux `cbf_s1_train_20261015` at commit `21a34a73`.
+
+Before calibration scoring, the S1 plan now freezes an eight-candidate JSON
+decoder. Mean target-token NLL chooses one physically consistent field state;
+the best-versus-second NLL gap is the calibrated safety confidence. Full
+unconstrained generation on the once-opened development split separately
+measures true JSON validity. Added shard-safe scoring, calibration-only
+checkpoint/threshold selection and five focused tests; no development result
+has been observed at registration time.
