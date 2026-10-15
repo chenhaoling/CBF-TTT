@@ -5789,3 +5789,18 @@ within-boundary counterfactual-benefit ranking loss.  Its risk network is
 isolated to the original 66 scalar features.  Two fixed ablations separate
 pair representation from ranking loss; the release gate retains all safety,
 dual-domain and mechanism requirements and requires at least 1.5 LAMA points.
+
+Implemented `tasks/train_qwen_utility_record_controller_v9_pairwise_utility.py`.
+It hash-locks and maps the V8 frozen embeddings back to every residual
+candidate, groups batches by complete boundary, trains the registered main and
+two ablation arms for all three seeds, structurally isolates risk from pair
+vectors, and evaluates the unchanged zero-collateral/fact-key policy grid.
+Outputs include probability and within-boundary ranking metrics, arm-specific
+checkpoints and the V8-relative release gate.  Added tests for group integrity,
+boundary-local ranking and the extended V9 gate.
+
+Added an independent V9 auditor that reloads all nine main/ablation
+checkpoints, reconstructs probability/ranking and fact-key-projected policy
+metrics, numerically verifies risk logits are invariant to pair tensors, and
+rebuilds the complete release gate and hashes.  Added a non-overwriting runner
+that keeps every held-out source sealed.
