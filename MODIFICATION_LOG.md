@@ -4450,3 +4450,29 @@ Duplicate replacement should not be counted as a state-changing error, but
 retraining on the broader label changes model selection and does not yield a
 safe enough deployment rule. The preregistered stop now closes further
 threshold/controller iteration on this natural-memory calibration source.
+
+## 2026-10-15: structured fact comparator S1 registration
+
+Added `QWEN_STRUCTURED_FACT_COMPARATOR_S1_PLAN.md` before constructing S1
+examples or executing an S1 Qwen forward pass. V10's state-equivalent labels
+remain the physical target, but the learned object changes from another small
+deletion head to a Qwen3-4B LoRA structured comparator. It predicts
+same-entity, same-relation and same-value fields; a fixed rule maps the fields
+to duplicate, update or retain. This directly targets the repeated V8--V10
+failure on paraphrased relation slots while preserving the closed development
+sources and the negative native dense-writer result.
+
+The new protocol uses only the 48 registered FewRel training relations for
+weight updates. Independent calibration/development moves to the previously
+unused THUNLP OpenNRE SemEval train/validation files (6,507/1,493 rows); its
+2,717-row test file is hash-pinned and must not be parsed until the complete
+development and three-seed confirmation gates pass. Added
+`tasks/build_structured_fact_comparator_s1.py` to construct five deterministic
+fact-pair kinds per anchor: duplicate, same-slot update, same relation with a
+different entity, same entity with a lexically hard different relation, and an
+unrelated pair. The builder writes only train/calibration/development JSONL,
+records explicit sealed flags, excludes heterogeneous `Other` anchors, and
+never loads a model output. `tests/test_structured_fact_comparator_s1.py`
+covers both entity orders, FewRel span conversion, the physical action rule,
+all five pair kinds, and a hard exception on test parsing. Five local tests
+pass. No baseline entry point, `ttt_proj`, or `ttt_conv` is changed.
