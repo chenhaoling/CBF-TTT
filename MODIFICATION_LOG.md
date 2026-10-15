@@ -5548,3 +5548,23 @@ and locks the passed V6 development release audit.  Test records are not
 paired with validation examples or model outcomes during construction.  Local
 compilation, shared allocation tests, runner syntax and whitespace checks pass;
 labels and features remain to be generated from the audited test corpus.
+
+The official TempLAMA test corpus construction and independent audit passed:
+it contains 256 unique test targets, 512 twin episodes, 1,536 boundaries and
+7,680 future queries, with all nine relation quotas satisfied and exact
+builder reconstruction.  Added test-specific two-GPU binary-label and feature
+collection pipelines plus independent row/action/teacher/feature audits.  The
+collectors record per-label latency, peak memory and immutable data/model
+hashes while marking the official test as opened and keeping original-source
+confirmation and external benchmarks sealed.
+
+Before any test label summary was available, implemented and syntax-checked
+the one-time frozen V6 test evaluator and independent exact-rerun auditor.  It
+loads the unchanged V5 checkpoints/configurations, applies the V6 fact-key
+projection, and freezes the registered confirmation gates: every seed positive,
+mean gain at least 1.5 points, pooled group-bootstrap lower bound above zero,
+zero added collateral for every seed, at least 30% Oracle-gap closure and no
+mechanism below minus two points.  It also reports the subject-only ablation,
+fact-key Oracle, deterministic baselines, matched random controls, relation/
+mechanism/background diagnostics and label/feature resource usage.  No test
+outcome-dependent repair is permitted after this freeze point.
