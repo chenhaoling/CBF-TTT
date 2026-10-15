@@ -4638,3 +4638,11 @@ learns cross-relation signal, but its high-precision tail is not separated.
 Added an independent selection auditor that reconstructs every arm, threshold,
 scenario action, retrieval metric, selected checkpoint and k before PubMed
 model evaluation is allowed.
+
+The independent selector audit passed all six checks and reproduced selection
+SHA256 `84ecc481aef35501d7a8c704501d849dcb4cd83f59a7c8881e013a2adaa8285d`.
+Added the one-shot PubMed evaluator, its separate auditor and three gate tests.
+The evaluator applies every calibration threshold unchanged to the selected
+LoRA, zero-shot, trigram and frozen-cosine arms; recomputes retrieval; and
+requires all ten registered safety, semantic, retrieval and gain checks. This
+implementation was frozen before producing any PubMed model score.
