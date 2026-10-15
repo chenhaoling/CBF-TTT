@@ -45,6 +45,25 @@ class TestUtilityRecordControllerDevelopment(unittest.TestCase):
         self.assertEqual(episode["source_group"], "usr-v1-development-g000")
         self.assertEqual(GROUPS, 64)
 
+    def test_low_value_cardinality_relaxes_only_other_subject_value(self):
+        relations = [f"P{index}" for index in range(5)]
+        facts = {relation: [fact(relation, index) for index in range(100)]
+                 for relation in relations}
+        for index, row in enumerate(facts["P0"]):
+            row["value"] = f"Limited {index % 5}"
+            row["value_norm"] = normalize(row["value"])
+        patterns = {relation: [
+            "[X] links to [Y] .", "[Y] is linked from [X] .",
+            "For [X], [Y] applies .", "[X] has [Y] .",
+        ] for relation in relations}
+        with self.assertRaises(ValueError):
+            choose_formal_material(0, relations, facts, patterns, set(), set())
+        material = choose_formal_material(
+            0, relations, facts, patterns, set(), set(),
+            strict_same_relation_value=False,
+        )
+        self.assertEqual(len(material_rows(material)), 11)
+
 
 if __name__ == "__main__":
     unittest.main()

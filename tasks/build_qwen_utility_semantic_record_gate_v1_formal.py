@@ -95,6 +95,7 @@ def choose_formal_material(
     patterns: dict[str, list[str]],
     forbidden_fact_hashes: set[str],
     forbidden_subjects: set[str],
+    strict_same_relation_value: bool = True,
 ) -> dict:
     """Select one group and mutate the two forbidden sets after success."""
 
@@ -124,7 +125,10 @@ def choose_formal_material(
         versions.append(row)
         used_values.add(row["value_norm"])
     same_relation_other = take(
-        target_relation, "same-relation-other", used_values, reserve_input=True
+        target_relation,
+        "same-relation-other",
+        used_values if strict_same_relation_value else {target["value_norm"]},
+        reserve_input=True,
     )
     used_values.add(same_relation_other["value_norm"])
 

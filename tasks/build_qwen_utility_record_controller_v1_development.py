@@ -77,6 +77,7 @@ def build(
         material = choose_formal_material(
             group_index, development_relations, facts, patterns,
             forbidden_hashes, forbidden_subjects,
+            strict_same_relation_value=False,
         )
         provenance = material_rows(material)
         input_provenance = input_source_rows(material)

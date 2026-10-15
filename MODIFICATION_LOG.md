@@ -5071,6 +5071,18 @@ across development groups and leaves the seven confirmation relations
 ungenerated. The auditor independently reconstructs every row and verifies
 hashes, relation isolation, provenance, causal queries, twins and seals.
 
+The first development build stopped before writing data at group 31. Relation
+`P30` has 841 cleaned subjects but only six distinct values; the shared formal
+allocator required the other-subject same-relation value to differ from the
+target and all four update values, and earlier stable-row allocation consumed
+the only remaining value. The formal-training default remains unchanged.
+Development now relaxes only this incidental value-diversity constraint: the
+other-subject record must still have a distinct input subject and source fact
+and cannot reuse the target value, but it may share a value with an update
+donor. Relation isolation, source-subject uniqueness, episode mechanisms,
+candidate count and queries are unchanged. A low-cardinality regression test
+covers the repair, and the retry uses a fresh root.
+
 Added `tasks/train_qwen_utility_record_controller_v1.py`, focused tests, a
 non-overwriting runner and
 `scripts/audit_qwen_utility_record_controller_v1_training.py`. Training uses
