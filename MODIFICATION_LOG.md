@@ -4603,3 +4603,10 @@ keeps the registered Qwen3-4B backbone frozen, updates rank-16 attention LoRA
 weights only, and saves 0.25/0.5/1.0-epoch checkpoints. Twelve combined S2
 builder, auditor, trainer and scorer tests pass locally. Formal model execution
 has not started at this record point.
+
+The two-GPU S2 smoke completed two steps in 3.77 seconds. Peak allocated memory
+was 9.10/9.09 GiB and peak reserved memory was 11.47/10.78 GiB. The formal
+one-epoch run then started in tmux `cbf_s2_train_20261015` at committed code
+state `069578d5`. Added a separate training auditor that pins 75/150/300-step
+checkpoints, optimizer and batch settings, data/code hashes, LoRA-only tensor
+keys, both rank logs, memory limits and all unopened evaluation flags.
