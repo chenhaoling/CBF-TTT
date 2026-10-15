@@ -5749,3 +5749,12 @@ training-support reconstruction and artifact hashes; recomputes every appended
 feature from the saved states; and checks exact base-feature preservation,
 registered counts, resources and held-out seals.  Added a non-overwriting GPU
 runner for extraction followed by CPU reconstruction audit.
+
+The first V8 extraction wrote its artifacts but exited before audit because
+the capacity assertion confused exact-subject residual counts with the
+pre-filter feature-shard counts.  Before any utility-controller fit or
+development outcome, amended the extraction support to the observed source
+capacity: 3,072 boundaries / 9,216 candidates per training domain, 1,536 /
+4,608 for TempLAMA development and 384 / 1,152 for LAMA development.  The
+downstream residual filter remains locked at 4,392/4,684/2,204/588 examples.
+No feature, label, model setting or gate changed; the retry uses a new root.

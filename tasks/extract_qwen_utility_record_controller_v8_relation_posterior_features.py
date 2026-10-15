@@ -435,14 +435,14 @@ def extract(args) -> dict:
             for head in heads for epoch in head["trace"]
         ),
         "all_feature_rows_written": counts == {
-            "templama_train": {"rows": 1536, "candidates": 4392,
-                                "shard_rows": {"0": 768, "1": 768}},
-            "lama_train": {"rows": 1536, "candidates": 4684,
-                            "shard_rows": {"0": 768, "1": 768}},
-            "templama_dev": {"rows": 768, "candidates": 2204,
-                              "shard_rows": {"0": 384, "1": 384}},
-            "lama_dev": {"rows": 192, "candidates": 588,
-                          "shard_rows": {"0": 96, "1": 96}},
+            "templama_train": {"rows": 3072, "candidates": 9216,
+                                "shard_rows": {"0": 1536, "1": 1536}},
+            "lama_train": {"rows": 3072, "candidates": 9216,
+                            "shard_rows": {"0": 1536, "1": 1536}},
+            "templama_dev": {"rows": 1536, "candidates": 4608,
+                              "shard_rows": {"0": 768, "1": 768}},
+            "lama_dev": {"rows": 384, "candidates": 1152,
+                          "shard_rows": {"0": 192, "1": 192}},
         },
         "heldout_sources_sealed": True,
     }

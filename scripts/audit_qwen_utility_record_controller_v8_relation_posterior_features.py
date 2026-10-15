@@ -125,10 +125,10 @@ def audit(args) -> dict:
         ),
         "registered_counts_and_dimension": (
             row_counts == {
-                "templama_train": {"rows": 1536, "candidates": 4392},
-                "lama_train": {"rows": 1536, "candidates": 4684},
-                "templama_dev": {"rows": 768, "candidates": 2204},
-                "lama_dev": {"rows": 192, "candidates": 588},
+                "templama_train": {"rows": 3072, "candidates": 9216},
+                "lama_train": {"rows": 3072, "candidates": 9216},
+                "templama_dev": {"rows": 1536, "candidates": 4608},
+                "lama_dev": {"rows": 384, "candidates": 1152},
             }
             and tuple(summary.get("feature_names", ())) == FEATURE_NAMES
         ),

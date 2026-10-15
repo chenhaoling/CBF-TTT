@@ -74,6 +74,16 @@ relation-head states, ordered identities and augmented feature rows so an
 independent auditor can reconstruct all eight values.  Record extraction time,
 token lengths and peak allocated/reserved memory per GPU shard.
 
+The first extraction stopped on its output-capacity assertion before feature
+audit or utility-controller training.  The registered 4,392/4,684 and
+2,204/588 counts are residual candidates after the exact-subject filter,
+whereas the source feature shards intentionally retain every pre-filter
+candidate.  The corrected extraction support is 3,072 boundaries / 9,216
+candidates in each training domain, 1,536 / 4,608 in TempLAMA development and
+384 / 1,152 in LAMA development.  This capacity correction changes no row,
+feature, target, filter, hyperparameter or release gate.  The stopped output
+is retained and the audited retry uses a new directory.
+
 ## Controller and selection
 
 Retain V7's 128/64 MLP, benefit/risk heads, optimizer, batch size, dropout,

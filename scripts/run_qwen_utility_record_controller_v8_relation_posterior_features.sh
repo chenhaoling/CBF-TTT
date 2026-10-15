@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v8_relation_posterior_features_20261016}
+ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v8_relation_posterior_features_20261016_retry1}
 PYTHON_BIN=${PYTHON_BIN:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python}
 MODEL=${MODEL:-/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt}
 TOKENIZER=${TOKENIZER:-/home/ctj/models/Qwen3-4B}
