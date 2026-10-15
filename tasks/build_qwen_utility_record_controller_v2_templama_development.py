@@ -36,6 +36,7 @@ PROTOCOL = "qwen_utility_record_controller_v2_templama_development_data"
 AUDIT_PROTOCOL = "qwen_utility_record_controller_v2_templama_development_data_audit"
 GROUPS = 256
 MINIMUM_PER_RELATION = 8
+BACKGROUND_HELDOUT_GROUPS = len(PARAPHRASES)
 SEED = 202610171
 GROUP_PREFIX = "usr-v2-templama-development"
 
@@ -116,15 +117,20 @@ def choose_materials(trajectories: dict) -> tuple[list[tuple[int, dict]], dict]:
     if len(target_subjects) != GROUPS:
         raise ValueError("development target subjects are not unique")
 
-    materials = []
-    for group_index, target_key in enumerate(target_keys):
+    heldout_group_indices = {
+        next(index for index, key in enumerate(target_keys) if key[1] == relation)
+        for relation in sorted(quotas)
+    }
+
+    def construct_material(group_index, target_key, allowed_background_keys,
+                           background_heldout):
         target_relation = target_key[1]
         old, current = temporal_transition(eligible[target_key])
         used_subjects = {target_key[0]}
         used_values = {old["value_norm"], current["value_norm"]}
         background_ids = []
         same_key, same_other = choose_background(
-            [key for key in background_keys if key[1] == target_relation],
+            [key for key in allowed_background_keys if key[1] == target_relation],
             eligible, group_index, "same-relation", used_subjects, used_values,
         )
         used_subjects.add(same_key[0]); used_values.add(same_other["value_norm"])
@@ -139,7 +145,7 @@ def choose_materials(trajectories: dict) -> tuple[list[tuple[int, dict]], dict]:
         stable = []
         for index, relation in enumerate(other_relations):
             chosen_key, row = choose_background(
-                [key for key in background_keys if key[1] == relation],
+                [key for key in allowed_background_keys if key[1] == relation],
                 eligible, group_index, f"stable-{index}", used_subjects, used_values,
             )
             stable.append(row); background_ids.append(chosen_key[0])
@@ -148,7 +154,7 @@ def choose_materials(trajectories: dict) -> tuple[list[tuple[int, dict]], dict]:
         anchor_relation = stable[0]["relation_id"]
         anchor_alternate = None; anchor_source = None
         for key in development_ordered_keys(
-            [key for key in background_keys if key[1] == anchor_relation],
+            [key for key in allowed_background_keys if key[1] == anchor_relation],
             "development", group_index, "anchor-alternate",
         ):
             for _, row in eligible[key]:
@@ -178,8 +184,33 @@ def choose_materials(trajectories: dict) -> tuple[list[tuple[int, dict]], dict]:
             },
             "background_subject_ids": sorted(background_ids),
             "anchor_alternate_subject_id": anchor_source,
+            "background_heldout": background_heldout,
         }
-        materials.append((group_index, material))
+        return material
+
+    # Reserve one target group per relation with six background subjects that
+    # never occur in any other group.  This makes the preregistered
+    # background-held-out sensitivity estimable rather than empty.
+    materials_by_index = {}
+    reserved_heldout_subjects = set()
+    for group_index in sorted(heldout_group_indices):
+        target_key = target_keys[group_index]
+        allowed = [key for key in background_keys
+                   if key[0] not in reserved_heldout_subjects]
+        material = construct_material(group_index, target_key, allowed, True)
+        materials_by_index[group_index] = material
+        reserved_heldout_subjects.update(material["background_subject_ids"])
+    regular_background_keys = [
+        key for key in background_keys
+        if key[0] not in reserved_heldout_subjects
+    ]
+    for group_index, target_key in enumerate(target_keys):
+        if group_index in heldout_group_indices:
+            continue
+        materials_by_index[group_index] = construct_material(
+            group_index, target_key, regular_background_keys, False
+        )
+    materials = [(index, materials_by_index[index]) for index in range(GROUPS)]
     return materials, quotas
 
 
@@ -219,11 +250,15 @@ def build(source_root: Path, inspection_path: Path, pilot_root: Path) -> tuple[l
             episode["audit"]["anchor_alternate_subject_id"] = (
                 material["anchor_alternate_subject_id"]
             )
+            episode["audit"]["background_heldout"] = material["background_heldout"]
             episodes.append(episode)
     manifest = {
         "protocol": PROTOCOL,
         "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V2_CROSS_SOURCE_PLAN.md",
         "clarification": "QWEN_UTILITY_RECORD_CONTROLLER_V2_CAPACITY_CLARIFICATION.md",
+        "background_heldout_clarification": (
+            "QWEN_UTILITY_RECORD_CONTROLLER_V2_BACKGROUND_HELDOUT_CLARIFICATION.md"
+        ),
         "source_manifest_sha256": sha256(source_root / "metadata" / "manifest.json"),
         "source_inspection_sha256": sha256(inspection_path),
         "pilot_summary_sha256": sha256(pilot_summary_path),
@@ -250,6 +285,10 @@ def build(source_root: Path, inspection_path: Path, pilot_root: Path) -> tuple[l
                 subject for row in episodes if row["twin"] == 0
                 for subject in row["audit"]["background_subject_ids"]
             }),
+            "background_heldout_groups": sum(
+                row["audit"]["background_heldout"]
+                for row in episodes if row["twin"] == 0
+            ),
         },
         "primary_action_space": "binary_endpoints_plus_global_clear",
         "current_write_gate": 1.0,
@@ -294,6 +333,22 @@ def validate(episodes: list[dict], manifest: dict) -> None:
         and not (set(row["audit"]["background_subject_ids"]) & target_subjects)
         and row["audit"]["source_partition"] == "val"
         for row in episodes
+    )
+    target_rows = [row for row in episodes if row["twin"] == 0]
+    background_counts = Counter(
+        subject for row in target_rows
+        for subject in row["audit"]["background_subject_ids"]
+    )
+    heldout_rows = [row for row in target_rows
+                    if row["audit"]["background_heldout"]]
+    assert manifest["counts"]["background_heldout_groups"] == BACKGROUND_HELDOUT_GROUPS
+    assert len(heldout_rows) == BACKGROUND_HELDOUT_GROUPS
+    assert (len({row["audit"]["target_relation"] for row in heldout_rows})
+            == BACKGROUND_HELDOUT_GROUPS)
+    assert all(
+        all(background_counts[subject] == 1
+            for subject in row["audit"]["background_subject_ids"])
+        for row in heldout_rows
     )
     assert not manifest["model_outputs_loaded"]
     assert not manifest["test_episodes_generated"]

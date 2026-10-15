@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v2_templama_development_data_20261016}
+ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v2_templama_development_data_20261016_retry1}
 SOURCE_ROOT=${SOURCE_ROOT:-/home/ctj/cbf_ttt_templama_sources_20261016}
 INSPECTION=${INSPECTION:-$SOURCE_ROOT/metadata/source_inspection_retry1.json}
 PILOT_ROOT=${PILOT_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v2_templama_pilot_20261016}

@@ -5238,3 +5238,17 @@ the observed delete/risk target support without requiring both target classes
 on this evaluation-only split.  Local compilation, existing feature tests,
 shell syntax and whitespace checks pass; remote feature values remain
 unobserved at this implementation checkpoint.
+
+The first model-free TempLAMA validation build produced the registered 256
+groups, 512 twins, 1,536 boundaries and 7,680 queries and passed its original
+exact reconstruction checks, but its newly reported background-bank statistic
+showed that all 115 available background subjects were reused and the
+background-held-out subset was empty.  No Qwen label or controller outcome had
+been produced.  Added
+`QWEN_UTILITY_RECORD_CONTROLLER_V2_BACKGROUND_HELDOUT_CLARIFICATION.md` and
+strengthened the builder/auditor before model execution: retry1 reserves one
+group per relation, gives those nine groups 54 globally unique rendered
+background subjects, and forbids those subjects from every remaining group.
+The original data root remains immutable and cannot release evaluation.  The
+retry runner uses a new root and its audit must prove one held-out group per
+relation and exactly one corpus occurrence for every reserved background.

@@ -10,6 +10,7 @@ from pathlib import Path
 from scripts.inspect_lama_pararel_utility_source import sha256
 from tasks.build_qwen_utility_record_controller_v2_templama_development import (
     AUDIT_PROTOCOL,
+    BACKGROUND_HELDOUT_GROUPS,
     GROUPS,
     PROTOCOL,
     build,
@@ -47,6 +48,9 @@ def audit(data_root: Path, source_root: Path, inspection_path: Path,
         subject for row in target_rows
         for subject in row["audit"]["background_subject_ids"]
     )
+    background_heldout_rows = [
+        row for row in target_rows if row["audit"]["background_heldout"]
+    ]
     target_relations = Counter(
         row["audit"]["target_relation"] for row in target_rows
     )
@@ -107,6 +111,17 @@ def audit(data_root: Path, source_root: Path, inspection_path: Path,
             and row["audit"]["anchor_alternate_subject_id"]
             not in target_subjects
             for row in target_rows
+        ),
+        "nonempty_relation_balanced_background_heldout": (
+            len(background_heldout_rows) == BACKGROUND_HELDOUT_GROUPS
+            and len({row["audit"]["target_relation"]
+                     for row in background_heldout_rows})
+            == BACKGROUND_HELDOUT_GROUPS
+            and all(
+                all(background_occurrences[subject] == 1
+                    for subject in row["audit"]["background_subject_ids"])
+                for row in background_heldout_rows
+            )
         ),
         "query_contract": all(
             len(boundary["queries"]) == 5
