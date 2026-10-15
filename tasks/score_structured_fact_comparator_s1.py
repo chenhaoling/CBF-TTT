@@ -117,6 +117,55 @@ def candidate_nll(model, input_ids, labels, attention_mask):
     return ((losses * mask).sum(1) / mask.sum(1)).cpu()
 
 
+def cached_candidate_nll(model, rows, tokenizer, max_length):
+    """Score eight suffixes after one shared prompt forward per fact pair."""
+    import torch
+    import torch.nn.functional as functional
+
+    choices = candidates()
+    prompts = [prompt(row) for row in rows]
+    old_padding = tokenizer.padding_side
+    tokenizer.padding_side = "left"
+    encoded = tokenizer(prompts, return_tensors="pt", padding=True,
+                        add_special_tokens=True).to("cuda")
+    tokenizer.padding_side = old_padding
+    targets = []
+    for _ in rows:
+        targets.extend(tokenizer(canonical_answer(choice) + tokenizer.eos_token,
+                                 add_special_tokens=False)["input_ids"]
+                       for choice in choices)
+    if max(encoded.input_ids.shape[1] + len(value) for value in targets) > max_length:
+        raise ValueError("S1 cached candidate exceeds registered maximum length")
+    width = max(len(value) for value in targets)
+    target_ids = torch.tensor([value + [tokenizer.pad_token_id] * (width - len(value))
+                               for value in targets], dtype=torch.long, device="cuda")
+    target_mask = torch.tensor([[1] * len(value) + [0] * (width - len(value))
+                                for value in targets], dtype=torch.long, device="cuda")
+    with torch.inference_mode():
+        prefix = model(**encoded, use_cache=True)
+        first_logits = prefix.logits[:, -1].float().repeat_interleave(len(choices), dim=0)
+        first_loss = functional.cross_entropy(first_logits, target_ids[:, 0], reduction="none")
+        cache = prefix.past_key_values
+        del first_logits, prefix
+        cache.batch_repeat_interleave(len(choices))
+        repeated_mask = encoded.attention_mask.repeat_interleave(len(choices), dim=0)
+        continuation_mask = torch.cat((repeated_mask, target_mask[:, :-1]), dim=1)
+        continuation = model(input_ids=target_ids[:, :-1], attention_mask=continuation_mask,
+                             past_key_values=cache, use_cache=False)
+        logits = continuation.logits
+        expected = target_ids[:, 1:]
+        mask = target_mask[:, 1:].bool()
+        selected_logits = logits[mask].float()
+        selected_targets = expected[mask]
+        later_loss = functional.cross_entropy(selected_logits, selected_targets, reduction="none")
+        row_ids = torch.arange(len(targets), device="cuda").unsqueeze(1).expand_as(mask)[mask]
+        totals = first_loss.clone()
+        totals.scatter_add_(0, row_ids, later_loss)
+        counts = target_mask.sum(1)
+        result = (totals / counts).cpu()
+    return result
+
+
 def load_model(model_path: str, adapter: str | None):
     model, metadata = load_plain(model_path)
     if adapter:
@@ -132,12 +181,16 @@ def score_candidates(args, selected, model, tokenizer):
     choices, records = candidates(), []
     for start in range(0, len(selected), args.pair_batch):
         batch = selected[start:start + args.pair_batch]
-        ids, labels, masks = encode_candidate_batch(
-            [row for _, row in batch], tokenizer, args.max_length)
-        ids = torch.tensor(ids, dtype=torch.long, device="cuda")
-        labels = torch.tensor(labels, dtype=torch.long, device="cuda")
-        masks = torch.tensor(masks, dtype=torch.long, device="cuda")
-        values = candidate_nll(model, ids, labels, masks).reshape(len(batch), len(choices))
+        batch_rows = [row for _, row in batch]
+        if args.kernel == "cached":
+            values = cached_candidate_nll(
+                model, batch_rows, tokenizer, args.max_length).reshape(len(batch), len(choices))
+        else:
+            ids, labels, masks = encode_candidate_batch(batch_rows, tokenizer, args.max_length)
+            ids = torch.tensor(ids, dtype=torch.long, device="cuda")
+            labels = torch.tensor(labels, dtype=torch.long, device="cuda")
+            masks = torch.tensor(masks, dtype=torch.long, device="cuda")
+            values = candidate_nll(model, ids, labels, masks).reshape(len(batch), len(choices))
         for (index, row), scores in zip(batch, values):
             order = scores.argsort().tolist()
             prediction = choices[order[0]]
@@ -216,6 +269,7 @@ def score(args):
             sink.write(json.dumps(row, sort_keys=True, ensure_ascii=False) + "\n")
     audit = {
         "protocol": PROTOCOL, "mode": args.mode, "split": args.split,
+        "candidate_kernel": args.kernel if args.mode == "candidate" else None,
         "shard": args.shard, "num_shards": args.num_shards, "rows": len(records),
         "indices_sha256": __import__("hashlib").sha256(json.dumps(
             [row["index"] for row in records]).encode()).hexdigest(),
@@ -247,6 +301,7 @@ def main():
     parser.add_argument("--shard", type=int, required=True)
     parser.add_argument("--num-shards", type=int, default=2)
     parser.add_argument("--pair-batch", type=int, default=4)
+    parser.add_argument("--kernel", choices=("cached", "full"), default="cached")
     parser.add_argument("--max-length", type=int, default=384)
     score(parser.parse_args())
 

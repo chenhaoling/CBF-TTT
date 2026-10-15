@@ -34,13 +34,13 @@ run_shards() {
   CUDA_VISIBLE_DEVICES=0 "$PY" -m tasks.score_structured_fact_comparator_s1 \
     --data-root "$DATA" --model "$MODEL" --tokenizer "$TOKENIZER" \
     --split development --mode "$mode" --selection "$CALIBRATION/selection.json" \
-    --shard 0 --num-shards 2 --pair-batch 4 --output "$directory/shard_0.jsonl" \
+    --shard 0 --num-shards 2 --pair-batch 16 --output "$directory/shard_0.jsonl" \
     "${extra[@]}" > "$directory/shard_0.log" 2>&1 &
   local pid0=$!
   CUDA_VISIBLE_DEVICES=1 "$PY" -m tasks.score_structured_fact_comparator_s1 \
     --data-root "$DATA" --model "$MODEL" --tokenizer "$TOKENIZER" \
     --split development --mode "$mode" --selection "$CALIBRATION/selection.json" \
-    --shard 1 --num-shards 2 --pair-batch 4 --output "$directory/shard_1.jsonl" \
+    --shard 1 --num-shards 2 --pair-batch 16 --output "$directory/shard_1.jsonl" \
     "${extra[@]}" > "$directory/shard_1.log" 2>&1 &
   local pid1=$!
   wait "$pid0"; wait "$pid1"

@@ -32,13 +32,13 @@ run_arm() {
   fi
   CUDA_VISIBLE_DEVICES=0 "$PY" -m tasks.score_structured_fact_comparator_s1 \
     --data-root "$DATA" --model "$MODEL" --tokenizer "$TOKENIZER" \
-    --split calibration --mode candidate --shard 0 --num-shards 2 --pair-batch 4 \
+    --split calibration --mode candidate --shard 0 --num-shards 2 --pair-batch 16 \
     --output "$directory/shard_0.jsonl" "${extra[@]}" \
     > "$directory/shard_0.log" 2>&1 &
   local pid0=$!
   CUDA_VISIBLE_DEVICES=1 "$PY" -m tasks.score_structured_fact_comparator_s1 \
     --data-root "$DATA" --model "$MODEL" --tokenizer "$TOKENIZER" \
-    --split calibration --mode candidate --shard 1 --num-shards 2 --pair-batch 4 \
+    --split calibration --mode candidate --shard 1 --num-shards 2 --pair-batch 16 \
     --output "$directory/shard_1.jsonl" "${extra[@]}" \
     > "$directory/shard_1.log" 2>&1 &
   local pid1=$!
