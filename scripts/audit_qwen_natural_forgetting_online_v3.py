@@ -74,17 +74,29 @@ def audit(args):
     source_summary = json.loads((context_root / "summary.json").read_text())
     transforms = torch.load(context_root / "transforms.pt", map_location="cpu", weights_only=False)
     scope_artifact = torch.load(scope_root / "scope_gates.pt", map_location="cpu", weights_only=False)
-    scorer, _ = build_scorer(
-        scope_examples(sessions), model, tokenizer, transforms["transforms"],
-        source_summary["selected_config"]["regularizer"], scope_artifact, args.batch_size)
+    # Recreate the registered two-shard embedding batches exactly.  Building a
+    # single 64-session table changes the sorted pair batches and can move
+    # nearly tied cosine values at floating point precision, even though the
+    # model and inputs are unchanged.
+    scorers = {}
+    scorer_meta = {}
+    for shard in range(args.num_shards):
+        selected = [row for index, row in enumerate(sessions)
+                    if index % args.num_shards == shard]
+        scorers[shard], scorer_meta[shard] = build_scorer(
+            scope_examples(selected), model, tokenizer, transforms["transforms"],
+            source_summary["selected_config"]["regularizer"], scope_artifact,
+            args.batch_size)
     v5_path = v5_root / "result" / "constrained_scope_gate.pt"
     v5_gate, v5_threshold, _ = load_v5_gate(v5_path, scope_artifact["heads"]["7301"])
 
     transition_checks = True
-    feature_checks = True
+    feature_checks = all(scorer_meta[shard] == resources[shard]["feature_meta"]
+                         for shard in range(args.num_shards))
     probability_checks = True
     expected_identity = []
-    for session in sessions:
+    for session_index, session in enumerate(sessions):
+        scorer = scorers[session_index % args.num_shards]
         trace = decisions_by_id[session["id"]]
         chains = chain_map(session); states = {arm: [] for arm in ARMS}; active = {}
         if set(trace["decisions"]) != set(ARMS):
@@ -95,16 +107,11 @@ def audit(args):
                 observed = trace["decisions"][arm][step]; memory = states[arm]
                 features, top, probability = engineered_features(
                     version["prompt"], memory, step, len(session["events"]), scorer, v5_gate)
-                # The collector embeds 32 sessions per GPU while the auditor
-                # embeds all 64 together.  Keep representation replay
-                # independent, with tolerance only for batch-dependent GPU
-                # floating point accumulation.  Checkpoint replay below uses
-                # the stored feature exactly and remains at 1e-6.
                 feature_checks &= len(features) == len(observed["features"]) and all(
-                    close(left, right, 1e-4)
+                    close(left, right)
                     for left, right in zip(features, observed["features"]))
                 feature_checks &= observed["top"] == top and close(
-                    observed["v5_probability"], probability, 1e-4)
+                    observed["v5_probability"], probability)
                 predicted = {}; expected_delete = False
                 if arm == "always_scope_top1":
                     expected_delete = bool(memory)
