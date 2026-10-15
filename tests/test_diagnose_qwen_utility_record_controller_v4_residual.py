@@ -7,7 +7,10 @@ from scripts.diagnose_qwen_utility_record_controller_v4_residual import analyze
 def make_action(values, correct, unrelated, nll):
     name = "grid_" + "_".join(map(str, values))
     return name, {
-        "spec": {"name": name, "kind": "grid", "alphas": list(values)},
+        "spec": {
+            "name": name, "kind": "grid",
+            "alphas": [float(value) for value in values],
+        },
         "queries": 5, "correct": correct, "unrelated_correct": unrelated,
         "total_answer_nll": nll,
     }

@@ -57,7 +57,9 @@ def analyze(labels: list[dict], feature_rows: list[dict]) -> dict:
             for target in category_rows:
                 target["global_clear_boundaries"] += 1
             continue
-        base_alphas = list(baseline["spec"]["alphas"])
+        # Stored label specs use JSON floats while registered action names use
+        # integer endpoints.  Canonicalize before constructing subset names.
+        base_alphas = [int(value) for value in baseline["spec"]["alphas"]]
         optional = [
             slot for slot, (alpha, values) in enumerate(zip(
                 base_alphas, feature["features"]
