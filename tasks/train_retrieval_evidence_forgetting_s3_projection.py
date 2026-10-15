@@ -67,13 +67,15 @@ def load_embedding_set(root: str | Path, dataset: str, expected_rows: int):
     values.sort(key=lambda row: row[0])
     if len(values) != expected_rows or [row[0] for row in values] != list(range(expected_rows)):
         raise ValueError(f"incomplete S3 embedding dataset: {dataset}")
+    matrix = np.stack([row[6] for row in values])
+    matrix /= np.maximum(np.linalg.norm(matrix, axis=1, keepdims=True), 1e-12)
     return {
         "ids": [row[1] for row in values],
         "relations": [row[2] for row in values],
         "sources": [row[3] for row in values],
         "dialogues": [row[4] for row in values],
         "types": [row[5] for row in values],
-        "matrix": np.stack([row[6] for row in values]),
+        "matrix": matrix,
     }, audits
 
 
