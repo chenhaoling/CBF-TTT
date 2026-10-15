@@ -26,7 +26,7 @@ fi
 "$PYTHON" -m tasks.train_qwen_natural_forgetting_safe_delete_v5 \
   --source-root "$SOURCE_ROOT" --output "$ROOT/result" \
   > "$ROOT/train.log" 2>&1
-"$PYTHON" scripts/audit_qwen_natural_forgetting_safe_delete_v5.py \
+"$PYTHON" -m scripts.audit_qwen_natural_forgetting_safe_delete_v5 \
   --root "$ROOT/result" --source-root "$SOURCE_ROOT" \
   --output "$ROOT/execution_audit.json" > "$ROOT/audit.log" 2>&1
 
