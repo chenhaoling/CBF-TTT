@@ -48,6 +48,20 @@ def material_rows(material: dict) -> list[dict]:
     ]
 
 
+def input_source_rows(material: dict) -> list[dict]:
+    """Rows whose subjects are rendered in the episode input.
+
+    Version and anchor-alternate rows donate values to another subject and are
+    therefore provenance rows rather than independent input subjects.
+    """
+
+    return [
+        material["target"],
+        material["same_relation_other"],
+        *material["stable"],
+    ]
+
+
 def ordered_candidates(rows: list[dict], namespace: str) -> list[dict]:
     return sorted(rows, key=lambda row: (
         stable_rank(FORMAL_SEED, namespace, row["source_fact_hash"]),
@@ -88,8 +102,9 @@ def choose_formal_material(
     local_hashes = set(forbidden_fact_hashes)
     local_subjects = set(forbidden_subjects)
     chosen: list[dict] = []
+    reserved: list[dict] = []
 
-    def take(relation: str, role: str, forbidden_values=()) -> dict:
+    def take(relation: str, role: str, forbidden_values=(), reserve_input=False) -> dict:
         row = first_eligible(
             facts[relation], f"formal:{group_index}:{role}:{relation}",
             local_hashes, local_subjects, set(forbidden_values),
@@ -97,16 +112,20 @@ def choose_formal_material(
         chosen.append(row)
         local_hashes.add(row["source_fact_hash"])
         local_subjects.add(row["subject_norm"])
+        if reserve_input:
+            reserved.append(row)
         return row
 
-    target = take(target_relation, "target")
+    target = take(target_relation, "target", reserve_input=True)
     versions = []
     used_values = {target["value_norm"]}
     for index in range(4):
         row = take(target_relation, f"version-{index}", used_values)
         versions.append(row)
         used_values.add(row["value_norm"])
-    same_relation_other = take(target_relation, "same-relation-other", used_values)
+    same_relation_other = take(
+        target_relation, "same-relation-other", used_values, reserve_input=True
+    )
     used_values.add(same_relation_other["value_norm"])
 
     other_relations = sorted(
@@ -117,15 +136,15 @@ def choose_formal_material(
     )[:5]
     stable = []
     for index, relation in enumerate(other_relations):
-        row = take(relation, f"stable-{index}", used_values)
+        row = take(relation, f"stable-{index}", used_values, reserve_input=True)
         stable.append(row)
         used_values.add(row["value_norm"])
     anchor_alternate = take(
         stable[0]["relation_id"], "anchor-alternate", used_values
     )
 
-    forbidden_fact_hashes.update(row["source_fact_hash"] for row in chosen)
-    forbidden_subjects.update(row["subject_norm"] for row in chosen)
+    forbidden_fact_hashes.update(row["source_fact_hash"] for row in reserved)
+    forbidden_subjects.update(row["subject_norm"] for row in reserved)
     return {
         "target": target,
         "versions": versions,
@@ -231,6 +250,7 @@ def build(
             forbidden_hashes, forbidden_subjects,
         )
         provenance = material_rows(material)
+        input_provenance = input_source_rows(material)
         for twin in range(TWINS):
             episode = build_episode(
                 group_index, mechanism, length, twin, material,
@@ -242,6 +262,12 @@ def build(
             episode["audit"]["material_source_subject_norms"] = sorted(
                 row["subject_norm"] for row in provenance
             )
+            episode["audit"]["input_source_fact_hashes"] = sorted(
+                row["source_fact_hash"] for row in input_provenance
+            )
+            episode["audit"]["input_source_subject_norms"] = sorted(
+                row["subject_norm"] for row in input_provenance
+            )
             episodes.append(episode)
 
     formal_hashes = {
@@ -251,6 +277,14 @@ def build(
     formal_subjects = {
         value for episode in episodes
         for value in episode["audit"]["material_source_subject_norms"]
+    }
+    input_hashes = {
+        value for episode in episodes
+        for value in episode["audit"]["input_source_fact_hashes"]
+    }
+    input_subjects = {
+        value for episode in episodes
+        for value in episode["audit"]["input_source_subject_norms"]
     }
     manifest = {
         "protocol": PROTOCOL,
@@ -276,6 +310,8 @@ def build(
             )),
             "material_source_facts": len(formal_hashes),
             "material_source_subjects": len(formal_subjects),
+            "input_source_facts": len(input_hashes),
+            "input_source_subjects": len(input_subjects),
             "pilot_source_facts_excluded": len(pilot_forbidden_hashes),
             "pilot_subjects_excluded": len(pilot_forbidden_subjects),
             "cross_partition_subjects_removed": len(removed_subjects),
@@ -310,8 +346,8 @@ def validate(episodes: list[dict], manifest: dict) -> None:
     assert max(manifest["counts"]["target_relations"].values()) - min(
         manifest["counts"]["target_relations"].values()
     ) <= 1
-    assert manifest["counts"]["material_source_facts"] == FORMAL_GROUPS * 12
-    assert manifest["counts"]["material_source_subjects"] == FORMAL_GROUPS * 12
+    assert manifest["counts"]["input_source_facts"] == FORMAL_GROUPS * 7
+    assert manifest["counts"]["input_source_subjects"] == FORMAL_GROUPS * 7
     assert manifest["pilot_overlap"] == {"source_fact_hashes": 0, "subjects": 0}
     assert all(len(row["events"]) == row["length"] for row in episodes)
     assert all(len(row["boundaries"]) == BOUNDARIES for row in episodes)

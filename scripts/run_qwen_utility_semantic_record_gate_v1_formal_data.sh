@@ -11,16 +11,22 @@ PYTHON_BIN=${PYTHON_BIN:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/pytho
 PILOT_AUDIT=${PILOT_AUDIT:-$PILOT_RECOVERY_ROOT/pilot_audit.json}
 WORK_ROOT="${DATA_ROOT}.building"
 
-if [[ -e "$DATA_ROOT" || -e "$WORK_ROOT" || -e "$PILOT_AUDIT" ]]; then
-  echo "Refusing to overwrite a formal-data or pilot-audit artifact" >&2
+if [[ -e "$DATA_ROOT" || -e "$WORK_ROOT" ]]; then
+  echo "Refusing to overwrite a formal-data artifact" >&2
   exit 2
 fi
 
-"$PYTHON_BIN" -m scripts.audit_qwen_utility_semantic_record_gate_v1_pilot \
-  --original-root "$PILOT_LABEL_ROOT" \
-  --recovery-root "$PILOT_RECOVERY_ROOT" \
-  --data-root "$PILOT_DATA_ROOT" \
-  --output "$PILOT_AUDIT"
+if [[ -e "$PILOT_AUDIT" ]]; then
+  "$PYTHON_BIN" -c \
+    'import json,sys; d=json.load(open(sys.argv[1])); assert d["passed"] and d["next_stage"] == "formal_label_construction"' \
+    "$PILOT_AUDIT"
+else
+  "$PYTHON_BIN" -m scripts.audit_qwen_utility_semantic_record_gate_v1_pilot \
+    --original-root "$PILOT_LABEL_ROOT" \
+    --recovery-root "$PILOT_RECOVERY_ROOT" \
+    --data-root "$PILOT_DATA_ROOT" \
+    --output "$PILOT_AUDIT"
+fi
 
 "$PYTHON_BIN" -m tasks.build_qwen_utility_semantic_record_gate_v1_formal \
   --source-root "$SOURCE_ROOT" --inspection "$INSPECTION" \

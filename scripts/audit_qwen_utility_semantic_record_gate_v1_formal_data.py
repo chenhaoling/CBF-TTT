@@ -37,12 +37,17 @@ def provenance_is_disjoint(episodes: list[dict], pilot_episodes: list[dict]) -> 
         groups[episode["source_group"]].append(episode)
     seen_hashes, seen_subjects = set(), set()
     for rows in groups.values():
-        hashes = set(rows[0]["audit"]["material_source_fact_hashes"])
-        subjects = set(rows[0]["audit"]["material_source_subject_norms"])
-        if len(hashes) != 12 or len(subjects) != 12:
+        material_hashes = set(rows[0]["audit"]["material_source_fact_hashes"])
+        material_subjects = set(rows[0]["audit"]["material_source_subject_norms"])
+        hashes = set(rows[0]["audit"]["input_source_fact_hashes"])
+        subjects = set(rows[0]["audit"]["input_source_subject_norms"])
+        if (len(material_hashes) != 12 or len(material_subjects) != 12
+                or len(hashes) != 7 or len(subjects) != 7):
             return False
-        if any(set(row["audit"]["material_source_fact_hashes"]) != hashes
-               or set(row["audit"]["material_source_subject_norms"]) != subjects
+        if any(set(row["audit"]["material_source_fact_hashes"]) != material_hashes
+               or set(row["audit"]["material_source_subject_norms"]) != material_subjects
+               or set(row["audit"]["input_source_fact_hashes"]) != hashes
+               or set(row["audit"]["input_source_subject_norms"]) != subjects
                for row in rows[1:]):
             return False
         if hashes & seen_hashes or subjects & seen_subjects:

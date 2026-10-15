@@ -4926,9 +4926,12 @@ before it can construct data. It deterministically creates the registered 512
 training source groups, two counterfactual twins per group, three sparse
 boundaries, balanced 8/16/32/64 lengths and near-balanced coverage of all seven
 mechanisms. Only training-partition relations are used. Every source fact and
-normalized source subject is unique across formal groups and is disjoint from
-the resource pilot, including value-donor facts reconstructed from the locked
-pilot procedure. Development and confirmation episodes remain ungenerated.
+normalized subject that supplies an episode input subject is unique across
+formal groups. All material, including reusable value donors, is disjoint from
+the resource pilot reconstructed by the locked pilot procedure. Value-donor
+subjects do not enter episode inputs and may be reused across formal groups;
+the rendered fact remains unique because each target or anchor subject is
+group-unique. Development and confirmation episodes remain ungenerated.
 
 The existing episode builder now accepts an optional group prefix; its default
 is unchanged, preserving exact reconstruction of the already audited pilot.
@@ -4963,3 +4966,16 @@ disjointness, formal identity and design balancing. Twelve related unit tests,
 Python compilation, shell syntax checks and `git diff --check` pass locally.
 Remote pilot audit, formal corpus construction and Qwen labeling are pending
 execution; no formal outcome is claimed by this implementation entry.
+
+The first remote formal build stopped before writing a corpus at group 371.
+The allocator had conservatively reserved the original subjects of value-only
+donor rows, although those subjects are never rendered in an episode. `P190`
+has 896 cleaned facts but only 298 unique subjects; reserving four version
+donors and one anchor-value donor per group unnecessarily exhausted that
+subject pool. The allocator now reserves global uniqueness for the seven
+source rows whose subjects actually enter an episode (target,
+same-relation-other and five stable facts). Value donors remain pilot-disjoint
+and distinct inside a group but can be reused across formal groups. Formal
+audit metadata separately records all 12 provenance rows and the seven input
+source rows. This repair changes no mechanism, split, query, label objective or
+registered group count.

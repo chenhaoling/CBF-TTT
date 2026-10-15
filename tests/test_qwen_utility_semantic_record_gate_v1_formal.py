@@ -10,6 +10,7 @@ from tasks.build_qwen_utility_semantic_record_gate_v1_formal import (
     FORMAL_GROUPS,
     GROUP_PREFIX,
     choose_formal_material,
+    input_source_rows,
     material_rows,
 )
 
@@ -46,15 +47,16 @@ class TestUtilitySemanticRecordFormalData(unittest.TestCase):
         left = choose_formal_material(
             0, relations, facts, patterns, hashes, subjects
         )
-        left_hashes = {row["source_fact_hash"] for row in material_rows(left)}
-        left_subjects = {row["subject_norm"] for row in material_rows(left)}
+        left_hashes = {row["source_fact_hash"] for row in input_source_rows(left)}
+        left_subjects = {row["subject_norm"] for row in input_source_rows(left)}
         right = choose_formal_material(
             1, relations, facts, patterns, hashes, subjects
         )
-        right_hashes = {row["source_fact_hash"] for row in material_rows(right)}
-        right_subjects = {row["subject_norm"] for row in material_rows(right)}
-        self.assertEqual(len(left_hashes), 12)
-        self.assertEqual(len(left_subjects), 12)
+        right_hashes = {row["source_fact_hash"] for row in input_source_rows(right)}
+        right_subjects = {row["subject_norm"] for row in input_source_rows(right)}
+        self.assertEqual(len(material_rows(left)), 12)
+        self.assertEqual(len(left_hashes), 7)
+        self.assertEqual(len(left_subjects), 7)
         self.assertFalse(left_hashes & right_hashes)
         self.assertFalse(left_subjects & right_subjects)
 
