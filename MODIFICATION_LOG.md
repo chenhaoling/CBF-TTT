@@ -5595,3 +5595,21 @@ comparators, clustered uncertainty and seven release conditions.  The seven
 relations fixed by the original source inspection remain ungenerated and
 unscored at this registration point.  No original-source outcome may tune or
 repair V6.
+
+Implemented the complete confirmation chain in
+`tasks/build_qwen_utility_record_controller_v6_original_confirmation.py`,
+`tasks/label_qwen_utility_record_controller_v6_original_confirmation.py`,
+`tasks/extract_qwen_utility_record_controller_v6_original_confirmation_features.py`
+and `tasks/evaluate_qwen_utility_record_controller_v6_original_confirmation.py`,
+with four non-overwriting runners and independent data, label, feature and
+exact-result auditors.  The builder consumes only the seven sealed relations,
+constructs 64 balanced source groups with two twins, three boundaries and five
+queries per boundary, and requires the passed TempLAMA test audit before
+materialization.  Labeling retains the full ternary counterfactual grid and
+records per-boundary time and peak memory; inference uses the unchanged
+66-dimensional tensor, three V5 checkpoints and V6 fact-key projection.  The
+result audit independently reruns all actions, baselines, random controls,
+clustered intervals and the preregistered seven-condition gate.  Five focused
+V5/V6 tests, Python compilation, shell syntax and whitespace checks pass
+locally; no held-out LAMA/ParaRel outcome had been generated when this code was
+written.
