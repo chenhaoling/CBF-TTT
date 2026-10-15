@@ -46,6 +46,11 @@ from tasks.evaluate_qwen_causal_ledger_scale_rescue_v3 import (
     PROTOCOL as SCALE_RESCUE_PROTOCOL,
     SCALE as SCALE_RESCUE_SCALE,
 )
+from tasks.pilot_qwen_native_writer_ledger_bridge import (
+    CHUNK_SIZE as NATIVE_WRITER_CHUNK_SIZE,
+    fill_chunk as fill_native_writer_chunk,
+    select_samples as select_native_writer_samples,
+)
 
 
 class CausalLedgerResidualCorpusTest(unittest.TestCase):
@@ -150,6 +155,21 @@ class CausalLedgerResidualCorpusTest(unittest.TestCase):
     def test_scale_rescue_v3_is_single_frozen_registered_point(self):
         self.assertEqual(SCALE_RESCUE_SCALE, 48.0)
         self.assertEqual(SCALE_RESCUE_PROTOCOL, "qwen_causal_ledger_scale_rescue_v3_v1")
+
+    def test_native_writer_bridge_samples_and_exact_chunk(self):
+        samples = select_native_writer_samples()
+        self.assertEqual(len(samples), 2 * len(FAMILIES))
+        self.assertEqual(len({row["group_id"] for row in samples}), len(samples))
+        self.assertTrue(all(row["answer"] != row["wrong"] for row in samples))
+
+        class Tokenizer:
+            @staticmethod
+            def encode(text, add_special_tokens=False):
+                assert not add_special_tokens
+                return list(text.encode())
+
+        chunk = fill_native_writer_chunk(Tokenizer(), "key", "Y A B C D")
+        self.assertEqual(len(chunk), NATIVE_WRITER_CHUNK_SIZE)
 
     def test_v2_resource_namespace_is_fresh_and_hash_locked(self):
         self.assertTrue(code_value("resource_v2", 0).startswith("Y "))

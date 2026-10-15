@@ -3783,3 +3783,23 @@ independent integrity checks passed; development/confirmation episode overlap
 was zero, runner/formal exit codes were zero, and OOD remained ungenerated.
 The complete raw rows, logs, summary, resources, dependency hashes and audit are
 archived under `qwen_causal_ledger_confirmation_v3/`.
+
+## 2026-10-15: native-writer causal-ledger bridge preregistration
+
+Added `QWEN_NATIVE_WRITER_LEDGER_BRIDGE_PLAN.md` after the confirmation gate and
+audit passed, before scoring any native-writer bridge row. The pilot fixes 14
+development-only single-record scenes, exact 4,096-token repeated mapping
+chunks, Correct/Wrong/Zero writer controls, the previously validated external
+residual positive control and an explicit content gate. It uses the checkpoint's
+unchanged trained `ttt_conv`/`ttt_proj` and fresh-KV readout. Failure stops the
+native writer branch before any multi-record controller training.
+
+Implemented the frozen pilot in
+`tasks/pilot_qwen_native_writer_ledger_bridge.py` with a two-GPU runner and an
+independent auditor. Each writer arm uses the final checkpoint's unchanged
+seven TTT layers and records per-layer delta/base norms, Correct/Wrong write
+time, fresh-KV candidate NLL, fixed five-token generation and resources. The
+auditor independently reconstructs all 4,096-token chunks, rows, aggregates,
+bootstrap intervals, gates, dependency hashes and terminal state. Thirteen
+local unit tests, Python compilation, shell syntax validation and
+`git diff --check` passed.
