@@ -55,14 +55,14 @@ def dot(left, right) -> float:
     return float((left * right).sum())
 
 
-def action_grid(size: int) -> list[dict]:
+def action_grid(size: int, alphas=ALPHAS) -> list[dict]:
     if not 0 <= size <= 3:
         raise ValueError("candidate slot count must be at most three")
     rows = [
         {"name": "grid_" + "_".join("05" if value == .5 else str(int(value))
                                       for value in values),
          "kind": "grid", "alphas": list(values)}
-        for values in itertools.product(ALPHAS, repeat=size)
+        for values in itertools.product(alphas, repeat=size)
     ]
     rows.append({"name": "global_clear", "kind": "global_clear", "alphas": []})
     return rows
@@ -221,7 +221,8 @@ def choose_safe_oracle(outcomes: dict[str, dict], actions: list[dict], retain_na
     ))["name"]
 
 
-def build_label(episode: dict, boundary_offset: int, embeddings, cache, use_cuda: bool) -> dict:
+def build_label(episode: dict, boundary_offset: int, embeddings, cache, use_cuda: bool,
+                alphas=ALPHAS) -> dict:
     import torch
 
     boundary = episode["boundaries"][boundary_offset]
@@ -229,7 +230,7 @@ def build_label(episode: dict, boundary_offset: int, embeddings, cache, use_cuda
     incoming = episode["events"][event_index]["record"]
     state = state_before(episode, event_index)
     slots = candidate_indices(state, incoming, embeddings)
-    actions = action_grid(len(slots))
+    actions = action_grid(len(slots), alphas=alphas)
     retain_name = retain_action_name(len(slots))
     if use_cuda:
         torch.cuda.synchronize(); torch.cuda.reset_peak_memory_stats()

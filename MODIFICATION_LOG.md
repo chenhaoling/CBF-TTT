@@ -5213,3 +5213,16 @@ also records background reuse statistics needed by the later clustered
 sensitivity analysis.  Local compilation, focused tests and whitespace checks
 pass; the remote build and independent data-audit result are recorded in a
 subsequent entry after execution.
+
+Added the two-GPU TempLAMA validation label collector, binary-action runner,
+focused tests and an independent row-level auditor.  The shared V1 label core
+now accepts an optional action alphabet while retaining its original ternary
+default; V2 supplies exactly `{0,1}` and still evaluates global clear without
+outcome-dependent pruning.  Collection keeps an episode-scoped model cache,
+records time and peak memory for every label, and leaves TempLAMA test, original
+V1 confirmation and external benchmarks sealed.  The auditor independently
+reconstructs the complete binary action set, safe collateral barrier, Oracle
+labels, aggregate accuracy, group-bootstrap interval and relation provenance.
+Local compilation, original-grid regression tests, new binary-grid tests and
+shell syntax checks pass.  Remote outcomes remain unobserved at this
+implementation checkpoint.
