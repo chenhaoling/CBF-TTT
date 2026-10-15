@@ -22,7 +22,7 @@ DEVELOPMENT_SEED = 202610160
 CONFIRMATION_SEED = 202610161
 OOD_SEED = 202610162
 RESOURCE_V2_SEED = 202610163
-PHASES = ("pilot", "development", "confirmation", "resource_v2")
+PHASES = ("pilot", "development", "confirmation", "ood", "resource_v2")
 PHASE_VALUE_OFFSETS = {
     "pilot": 0,
     "development": 16**4 // 4,
@@ -52,6 +52,13 @@ TEMPLATES = {
         "revoke": "Invalidate ledger slip {record}.",
         "reset": "Close the old ledger epoch and invalidate its slips.",
         "query": "Which code is now valid for {key}? Output only that code.",
+    },
+    "ood": {
+        "header": "Commit archive leaf {record}.",
+        "fact": "Bind marker {key} to token {value}.",
+        "revoke": "Void archive leaf {record}.",
+        "reset": "Seal the archive epoch and void every earlier leaf.",
+        "query": "Report the live token for marker {key}, with no extra text.",
     },
     "resource_v2": {
         "header": "Log state capsule {record}.",

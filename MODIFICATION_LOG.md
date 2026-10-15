@@ -3828,3 +3828,34 @@ transitions or fresh-KV readout. Raw rows, resources, dependency hashes, logs,
 summary, audit and the interpretation report are archived under
 `qwen_native_writer_ledger_bridge_v1/`. The next registered experiment is the
 still-sealed lifecycle OOD evaluation of the confirmed structured ledger.
+
+## 2026-10-15: one-time causal-ledger lifecycle OOD implementation
+
+Added `QWEN_CAUSAL_LEDGER_OOD_V1_PLAN.md` before constructing any OOD row. It
+completes the already reserved seed-`202610162` stage by fixing 64 groups per
+suite, two twins, three decision boundaries, scale 48, all comparators and ten
+release checks. The five suites cover length 24/32, simultaneous distant
+revocations, older-value restoration, reset plus idempotent duplicates and an
+unseen reset/revoke/overwrite composition.
+
+Added a split-isolated builder with a fresh template, record/key namespace and
+the reserved fourth-quarter five-token value pool. The builder derives every
+answer by causal event replay, parses the visible lifecycle text independently,
+checks counterfactual twins, enforces scenario/null coverage, locks file hashes
+and marks this as the one-time OOD generation. It produces 320 source groups,
+640 episodes and 5,760 queries.
+
+Added a scale-48 evaluator that reuses the audited fresh-KV Qwen scoring path
+and reports candidate accuracy, fixed five-token generation, NLL, roles,
+suites, lengths and absent values for all eight frozen policies. Its OOD gate
+implements the preregistered macro, per-suite, role, null, comparator-gain,
+bootstrap and oracle-agreement thresholds. A separate auditor reconstructs
+every event state, prompt, policy return and generation; independently
+recomputes aggregates and bootstrap; verifies checkpoint loading, resources,
+hashes, terminal state and zero earlier-split ID/symbol overlap.
+
+The refusal-to-overwrite two-GPU runner requires a passing, independently
+audited confirmation whose OOD flag remains sealed before it can materialize
+the corpus. Fourteen focused corpus tests, Python AST parsing, shell syntax and
+diff checks pass locally. No OOD model score has been generated at this freeze
+point.

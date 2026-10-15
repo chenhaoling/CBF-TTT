@@ -31,6 +31,12 @@ from tasks.build_qwen_causal_ledger_confirmation_v3 import (
     load as load_confirmation_v3,
     materialize as materialize_confirmation_v3,
 )
+from tasks.build_qwen_causal_ledger_ood_v1 import (
+    GROUPS_PER_SUITE as OOD_GROUPS_PER_SUITE,
+    SUITES as OOD_SUITES,
+    load as load_ood_v1,
+    materialize as materialize_ood_v1,
+)
 from tasks.pilot_qwen_causal_ledger_residual import (
     ACTIONS,
     apply_grid_action,
@@ -214,6 +220,31 @@ class CausalLedgerResidualCorpusTest(unittest.TestCase):
             self.assertFalse(
                 {inp["id"] for inp, _ in development}
                 & {inp["id"] for inp, _ in confirmation}
+            )
+
+    def test_ood_v1_size_lifecycle_and_split_isolation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            confirmation_root = Path(directory) / "confirmation"
+            ood_root = Path(directory) / "ood"
+            materialize_confirmation_v3(confirmation_root)
+            manifest = materialize_ood_v1(ood_root)
+            _, confirmation = load_confirmation_v3(confirmation_root)
+            loaded, ood = load_ood_v1(ood_root)
+            self.assertEqual(manifest, loaded)
+            self.assertEqual(
+                len(ood), OOD_GROUPS_PER_SUITE * len(OOD_SUITES) * 2
+            )
+            self.assertTrue(manifest["confirmation_generated"])
+            self.assertTrue(manifest["ood_generated"])
+            self.assertTrue(all(
+                manifest["audit"]["absent_queries"][suite] > 0
+                for suite in (
+                    "two_distant_revokes", "reset_then_duplicate", "mixed_unseen"
+                )
+            ))
+            self.assertFalse(
+                {inp["id"] for inp, _ in confirmation}
+                & {inp["id"] for inp, _ in ood}
             )
 
 
