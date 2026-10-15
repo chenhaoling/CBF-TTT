@@ -142,6 +142,11 @@ The same calibration rows evaluate:
 
 The oracle is never eligible for deployment or fusion selection. It estimates
 whether local evidence can be represented by the frozen Qwen checkpoint.
+Its projection starts from the selected S3 PubMed-pretrained weights, trains
+with the same supervised contrastive and matched-negative objectives, and is
+evaluated at epochs 10/25/50. The oracle checkpoint is selected by eligible
+calibration recall@16, then direct-pair ROC-AUC, then earlier epoch. This rule
+is frozen before extracting or scoring any oracle representation.
 
 ## Calibration metrics and stop gates
 
