@@ -5441,3 +5441,16 @@ headroom by relation/mechanism.  This diagnostic is explicitly downstream of
 the failed V4 evaluation and cannot alter or release that result; it is used
 only to choose between a V5 local residual classifier and structured action
 ranker.  TempLAMA test remains unopened.
+
+The registered locality sweep selected `exact_subject` as the V5 support.
+Formal train/calibration/evaluation contain 4,392/1,124/1,080 optional records;
+their single-action collateral rates are 4.58%/4.45%/4.91% and safe residual
+headroom is 5.57/4.58/4.61 points.  No registered rule has a boundary whose
+gain exists only for a pair-or-higher residual action.  Added
+`QWEN_UTILITY_RECORD_CONTROLLER_V5_EXACT_SUBJECT_RESIDUAL_PLAN.md` before any
+V5 prediction.  It freezes a train-only two-head residual MLP that starts from
+explicit lifecycle physics, considers exact-subject records and permits at
+most one additional deletion.  Group-stratified inner selection must have zero
+collateral; the already-observed TempLAMA validation becomes development
+evidence, and the still-sealed official test remains the only claim-bearing
+confirmation.
