@@ -5226,3 +5226,15 @@ labels, aggregate accuracy, group-bootstrap interval and relation provenance.
 Local compilation, original-grid regression tests, new binary-grid tests and
 shell syntax checks pass.  Remote outcomes remain unobserved at this
 implementation checkpoint.
+
+Added the TempLAMA validation counterpart of the frozen 66-dimensional V1
+feature extractor, its two-GPU runner and an independent feature auditor.  It
+reuses the registered 22 record features plus candidate mean/max context,
+constructs the same safe binary utility and collateral-risk targets, and does
+not fit a new representation, normalization or controller parameter.  The
+auditor independently rebuilds teachers and deterministic features, verifies
+one-to-one label coverage, model/input hashes and held-out seals, and reports
+the observed delete/risk target support without requiring both target classes
+on this evaluation-only split.  Local compilation, existing feature tests,
+shell syntax and whitespace checks pass; remote feature values remain
+unobserved at this implementation checkpoint.
