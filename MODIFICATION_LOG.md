@@ -5358,3 +5358,27 @@ external seals, and alone releases binary label collection.  Local Python
 compilation, two focused tests, runner syntax and whitespace checks pass.  No
 V4 train episode or model outcome had been observed at this implementation
 checkpoint.
+
+Implemented the gated V4 model stage that follows a passing formal-train data
+audit.  The two-GPU binary label collector enumerates every `{0,1}` record
+action plus global clear, preserves the retain-all unrelated-query barrier,
+records per-label latency/cache/resource metrics and supplies a complete
+independent row/action/query-role/bootstrap audit.  The feature stage rebuilds
+the unchanged inference-safe 66-dimensional representation and binary utility/
+risk teachers, with one-to-one label coverage and deterministic-feature audit.
+Both stages explicitly record that TempLAMA validation/test, V1 confirmation
+and external benchmarks were not loaded.
+
+Added the V4 domain-controller trainer, independent checkpoint audit, focused
+tests and a non-overwriting runner.  It preserves the V1 66-to-128-to-64
+utility/risk MLP and registered optimizer settings, but uses new seeds
+`26101641/42/43` and deterministic 80/20 source-group splits inside each of the
+nine TempLAMA relations.  Twins, boundaries and record candidates from one
+target group cannot cross the split.  Checkpoints at 25/50/100 epochs require
+the empirical zero-risk projection and are selected by boundary accuracy,
+record accuracy, risk recall and earlier epoch, then refit on all 512 groups.
+The auditor independently reconstructs every split and selected epoch, reloads
+each state dict, verifies hashes, normalization and finite traces, and alone
+releases validation calibration.  Local compilation, nine original/new
+training tests, label-grid tests, runner syntax and whitespace checks pass; no
+V4 model outcome had been observed at this implementation checkpoint.
