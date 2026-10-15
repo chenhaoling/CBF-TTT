@@ -24,16 +24,24 @@ counterfactual forgetting labels or train an `alpha` controller.
 1. Retain the 48 registered FewRel training relations and all S2 source hashes.
 2. Add official DialogRE v2 English train from
    `https://github.com/nlpdata/dialogre`, path
-   `data_v2/en/data/train.json`.
+   `data_v2/en/data/train.json`.  Before parsing, the acquired repository was
+   pinned at commit `b23e6cd7d811a68cf0aafa40e299143b857964e2` and the
+   source files were measured as:
+
+   | file | bytes | SHA256 |
+   |---|---:|---|
+   | train | 2,338,606 | `94b5799642107f9afecc5c46655d6d9612f41969893deff291b15a66298c08a0` |
+   | dev | 751,932 | `3e0036a1853f33dd8fab1f008ff3c3b351f0b53e9084a6f6bce7b4c95d0f0472` |
+   | test | 725,696 | `180e766323d2b5ae4763c77b2db280eeb49c909ab48c7393fbc309b7890061af` |
 3. Use the already downloaded but unparsed official FewRel 2.0
    `pubmed_unsupervised.json` only for a registered self-supervised arm.  Its
    SHA256 is
    `fa3555941364024c2ac1b1857396515ecc65a515bc742e9da0502568fad5dd1f`
    and its byte size is 1,093,301.
 
-The DialogRE repository commit and train/dev/test file hashes must be recorded
-before parsing any JSON.  DialogRE test may be hashed but never parsed during
-S3.  If the unsupervised PubMed schema does not expose two entity spans or a
+The DialogRE repository commit and train/dev/test file hashes above were
+recorded before parsing any JSON.  DialogRE test may be hashed but never parsed
+during S3.  If the unsupervised PubMed schema does not expose two entity spans or a
 stable row identifier, the builder must record the arm as unavailable and
 stop that arm; it may not silently synthesize labels from the observed PubMed
 validation set.

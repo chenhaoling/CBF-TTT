@@ -4683,3 +4683,13 @@ then an alpha-only session experiment with `g=1` and the counterfactual grid
 `{0, 0.5, 1}`. Native `ttt_proj`/`ttt_conv` is retained as a named ablation due
 to its previously failed content-readability gates. No baseline model path or
 configuration is modified by this registration.
+
+After the registration commit, the official DialogRE repository was acquired
+on hku-gpu2 without parsing JSON and pinned at commit
+`b23e6cd7d811a68cf0aafa40e299143b857964e2`. The v2 English train/dev/test
+files contain 2,338,606/751,932/725,696 bytes and have SHA256 values
+`94b5799642107f9afecc5c46655d6d9612f41969893deff291b15a66298c08a0`,
+`3e0036a1853f33dd8fab1f008ff3c3b351f0b53e9084a6f6bce7b4c95d0f0472`,
+and `180e766323d2b5ae4763c77b2db280eeb49c909ab48c7393fbc309b7890061af`.
+Only repository metadata, hashes and byte counts were read; test JSON remains
+unparsed.
