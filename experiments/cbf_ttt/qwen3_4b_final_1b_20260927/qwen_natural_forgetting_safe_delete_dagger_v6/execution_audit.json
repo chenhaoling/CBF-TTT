@@ -1,0 +1,72 @@
+{
+  "protocol": "qwen_natural_forgetting_safe_delete_dagger_v6",
+  "stage": "offline_crossfit_audit",
+  "checks": {
+    "merged_corpus_reconstruction_exact": true,
+    "feature_and_target_tensors_exact": true,
+    "no_train_validation_session_overlap": true,
+    "checkpoint_probabilities_match": true,
+    "checkpoint_actions_match": true,
+    "aggregate_metrics_match": true,
+    "artifact_hashes_match": true,
+    "same_registered_features": true,
+    "heldout_sources_remained_sealed": true
+  },
+  "passed": true,
+  "rows": 2232,
+  "max_probability_error": 0.0,
+  "action_mismatches": 0,
+  "session_leaks": 0,
+  "recomputed_metrics": {
+    "rows": 2232,
+    "true_positives": 551,
+    "false_positives": 6,
+    "false_negatives": 127,
+    "true_negatives": 1548,
+    "precision": 0.9892280071813285,
+    "recall": 0.8126843657817109,
+    "delete_rate": 0.24955197132616488,
+    "by_outer_fold": {
+      "0": {
+        "rows": 553,
+        "true_positives": 143,
+        "false_positives": 0,
+        "false_negatives": 26,
+        "precision": 1.0,
+        "recall": 0.8461538461538461
+      },
+      "1": {
+        "rows": 515,
+        "true_positives": 123,
+        "false_positives": 0,
+        "false_negatives": 33,
+        "precision": 1.0,
+        "recall": 0.7884615384615384
+      },
+      "2": {
+        "rows": 441,
+        "true_positives": 102,
+        "false_positives": 0,
+        "false_negatives": 24,
+        "precision": 1.0,
+        "recall": 0.8095238095238095
+      },
+      "3": {
+        "rows": 387,
+        "true_positives": 105,
+        "false_positives": 4,
+        "false_negatives": 15,
+        "precision": 0.963302752293578,
+        "recall": 0.875
+      },
+      "4": {
+        "rows": 336,
+        "true_positives": 78,
+        "false_positives": 2,
+        "false_negatives": 29,
+        "precision": 0.975,
+        "recall": 0.7289719626168224
+      }
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "protocol": "qwen_natural_forgetting_safe_delete_dagger_v6",
+  "stage": "dagger_collect",
+  "rows": 774,
+  "sessions": 65,
+  "overlap_with_v5_corpus": 755,
+  "new_states": 19,
+  "label_distribution": {
+    "0": 517,
+    "1": 257
+  },
+  "action_distribution": {
+    "retain_all": 562,
+    "scope_top1_a0": 212
+  },
+  "resources": [
+    {
+      "protocol": "qwen_natural_forgetting_safe_delete_dagger_v6",
+      "stage": "dagger_collect",
+      "shard": 0,
+      "num_shards": 2,
+      "sessions": 33,
+      "rows": 390,
+      "seconds": 22.095761666074395,
+      "peak_allocated_gib": 8.52954626083374,
+      "peak_reserved_gib": 10.48046875,
+      "rows_sha256": "ce72eb7cb1988144d0a0f43fb69313a60dd8987148ff6af474622a6556ed331a",
+      "frozen_inputs": {
+        "safe_delete_summary": "3622c2c694d0cc5e2c2d403aff286ee24af4f05144ac2c267c74e78c940295aa",
+        "safe_delete_audit": "b13895dd9d6ff56d304640925c4c465faa55e1b3f8f0d97034f451033f2cf73f",
+        "safe_delete_checkpoint": "05707d7a21752d8db32ff1e8dbcef12ee70e112fbca638ef02aa3f6ac418e04a",
+        "data_manifest": "ceb2c85ae2a01fd6de7ef08d68004e58e43b8ae424708bea4fa313344d1a7ba7",
+        "reader_checkpoint": "3a0ba5a83ece4850dd3824fc2277dc2e0dfdb04902e361dbff764e1b630abadc",
+        "context_transforms": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+        "scope_artifact": "0ed4dab8b77fd0fb91fdd49720c783261ab2fd5c64cd705ebe36346d99615619"
+      },
+      "feature_meta": {
+        "unique_texts": 520,
+        "unique_pairs": 6192,
+        "embedding_hashes": {
+          "5101": "2977e6a0b88749a1732a8852d171fb68c5cc1fe86d29ca5fb17312c4268290ca",
+          "5102": "02a7b4690c0e592fe2a5882bf503a1aa7dea3679ef07a49c5a110857bda82f37",
+          "5103": "feb165b60ec13dc850b29bc8ac91d4eb27eed7ffb6895d24b04d18a455022a16"
+        },
+        "pair_features_sha256": "c93b31da122988c9cfce63aa8148cd192174a893e0959f0eb2bb38c404148b73"
+      },
+      "reader_selected": {
+        "hidden": 32,
+        "penalty": 1.0,
+        "learning_rate": 0.005,
+        "epochs": 50,
+        "threshold": 0.3,
+        "correct_top_recall": 0.9525348544120789,
+        "natural_correct_top_examples": 4951,
+        "natural_wrong_top_specificity": 0.8860103487968445,
+        "natural_wrong_top_examples": 193,
+        "no_match_specificity": 0.9458204507827759,
+        "no_match_examples": 646,
+        "balanced_accuracy": 0.9281218846638998
+      },
+      "reader_threshold": 0.3,
+      "loading_info": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "v5_gate_passed": false,
+      "v5_false_positives": 6,
+      "calibration_loaded": true,
+      "development_loaded": false,
+      "test_loaded": false,
+      "external_benchmarks_loaded": false
+    },
+    {
+      "protocol": "qwen_natural_forgetting_safe_delete_dagger_v6",
+      "stage": "dagger_collect",
+      "shard": 1,
+      "num_shards": 2,
+      "sessions": 32,
+      "rows": 384,
+      "seconds": 21.15162505954504,
+      "peak_allocated_gib": 8.280349254608154,
+      "peak_reserved_gib": 10.486328125,
+      "rows_sha256": "9453dd6b80b9699fed1393ec1caf05db10be1c6fb44ded064716812e3829a804",
+      "frozen_inputs": {
+        "safe_delete_summary": "3622c2c694d0cc5e2c2d403aff286ee24af4f05144ac2c267c74e78c940295aa",
+        "safe_delete_audit": "b13895dd9d6ff56d304640925c4c465faa55e1b3f8f0d97034f451033f2cf73f",
+        "safe_delete_checkpoint": "05707d7a21752d8db32ff1e8dbcef12ee70e112fbca638ef02aa3f6ac418e04a",
+        "data_manifest": "ceb2c85ae2a01fd6de7ef08d68004e58e43b8ae424708bea4fa313344d1a7ba7",
+        "reader_checkpoint": "3a0ba5a83ece4850dd3824fc2277dc2e0dfdb04902e361dbff764e1b630abadc",
+        "context_transforms": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+        "scope_artifact": "0ed4dab8b77fd0fb91fdd49720c783261ab2fd5c64cd705ebe36346d99615619"
+      },
+      "feature_meta": {
+        "unique_texts": 512,
+        "unique_pairs": 6144,
+        "embedding_hashes": {
+          "5101": "312bbe95a6a82804d51c34f4b56da39c4035309a6af71ea90518a8921907b316",
+          "5102": "d44d0c28566b6b65510b270c662921f6cf3470c67e5e680a581d238b314f74f5",
+          "5103": "45b21e7b461942a16fc76a491e1e4bf26affb7068d70836b107f3b881ee1b443"
+        },
+        "pair_features_sha256": "b4af82157531bf7bcca670946708e1d6406fcf473d6a6546d70748619210d2f1"
+      },
+      "reader_selected": {
+        "hidden": 32,
+        "penalty": 1.0,
+        "learning_rate": 0.005,
+        "epochs": 50,
+        "threshold": 0.3,
+        "correct_top_recall": 0.9525348544120789,
+        "natural_correct_top_examples": 4951,
+        "natural_wrong_top_specificity": 0.8860103487968445,
+        "natural_wrong_top_examples": 193,
+        "no_match_specificity": 0.9458204507827759,
+        "no_match_examples": 646,
+        "balanced_accuracy": 0.9281218846638998
+      },
+      "reader_threshold": 0.3,
+      "loading_info": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "v5_gate_passed": false,
+      "v5_false_positives": 6,
+      "calibration_loaded": true,
+      "development_loaded": false,
+      "test_loaded": false,
+      "external_benchmarks_loaded": false
+    }
+  ],
+  "checks": {
+    "all_65_sessions_collected": true,
+    "all_774_events_collected": true,
+    "one_state_per_session_step": true,
+    "feature_width_is_ten": true,
+    "heldout_sources_sealed": true
+  },
+  "training_authorized": true,
+  "rows_sha256": {
+    "dagger_rows_shard0.jsonl": "ce72eb7cb1988144d0a0f43fb69313a60dd8987148ff6af474622a6556ed331a",
+    "dagger_rows_shard1.jsonl": "9453dd6b80b9699fed1393ec1caf05db10be1c6fb44ded064716812e3829a804"
+  },
+  "plan_sha256": "3af368e6ff42232e3200c9a6a69d735cea9418602c6664154853b0c37f155b86",
+  "calibration_loaded": true,
+  "development_loaded": false,
+  "test_loaded": false,
+  "external_benchmarks_loaded": false
+}

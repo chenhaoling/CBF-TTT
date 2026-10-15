@@ -1,0 +1,18 @@
+{
+  "protocol": "qwen_natural_forgetting_safe_delete_dagger_v6",
+  "stage": "dagger_collect_audit",
+  "checks": {
+    "complete_65_session_774_event_rollout": true,
+    "state_transitions_reconstruct": true,
+    "physical_labels_reconstruct": true,
+    "state_identities_reconstruct": true,
+    "v5_probabilities_and_actions_replay": true,
+    "each_behavior_controller_excludes_its_session": true,
+    "frozen_input_and_shard_hashes_match": true,
+    "collection_summary_checks_pass": true,
+    "heldout_sources_remained_sealed": true
+  },
+  "passed": true,
+  "rows": 774,
+  "sessions": 65
+}

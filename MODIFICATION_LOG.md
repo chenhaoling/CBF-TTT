@@ -4317,3 +4317,29 @@ false-positive, per-fold and deletion-rate gates. If it fails, the registered
 next branch is an inference-visible entity-key feature rather than a second
 DAgger iteration or post-hoc threshold change. Development, test and external
 benchmarks remain sealed.
+
+V6 collection passed all nine audit checks. Only 19 of its 774 event states
+were new, yielding 2,232 merged states. Retraining produced 551 true-positive,
+six false-positive and 127 false-negative deletes: 98.92% precision, 81.27%
+recall and 24.96% delete rate. The training audit also passed all nine checks
+with zero mismatch. The unchanged six errors show that additional on-policy
+coverage does not address the same-relation/different-subject ambiguity, so
+V6 stopped and activated its registered entity-key branch.
+
+## 2026-10-15: prompt entity-key safe-delete V7
+
+Added `QWEN_NATURAL_FORGETTING_ENTITY_KEY_V7_PLAN.md` before fitting V7. It
+defines a deterministic Unicode prompt tokenizer and fixed query-word removal
+list, then extracts capitalized or numeric entity anchors from the incoming
+and inferred-top prompts. Five prompt-only overlap features are appended to
+the unchanged no-schedule view. Dataset subject metadata, chain identity,
+source action and future outcomes remain forbidden inputs.
+
+Added `tasks/train_qwen_natural_forgetting_entity_key_v7.py`, focused tests,
+runner and independent auditor. The registered finite family contains an
+augmented learned head and the same head conjoined with a physical entity-key
+barrier requiring nonempty anchor containment. Both use the unchanged nested
+five-fold search and the unchanged safety release. The auditor reconstructs
+every prompt-derived feature from the source calibration prompts, fold models,
+barrier action, aggregate and artifact hash. V7 may authorize only an
+on-policy calibration replay; test and external benchmarks remain sealed.
