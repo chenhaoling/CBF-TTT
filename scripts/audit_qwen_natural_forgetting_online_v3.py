@@ -95,17 +95,23 @@ def audit(args):
                 observed = trace["decisions"][arm][step]; memory = states[arm]
                 features, top, probability = engineered_features(
                     version["prompt"], memory, step, len(session["events"]), scorer, v5_gate)
+                # The collector embeds 32 sessions per GPU while the auditor
+                # embeds all 64 together.  Keep representation replay
+                # independent, with tolerance only for batch-dependent GPU
+                # floating point accumulation.  Checkpoint replay below uses
+                # the stored feature exactly and remains at 1e-6.
                 feature_checks &= len(features) == len(observed["features"]) and all(
-                    close(left, right) for left, right in zip(features, observed["features"]))
+                    close(left, right, 1e-4)
+                    for left, right in zip(features, observed["features"]))
                 feature_checks &= observed["top"] == top and close(
-                    observed["v5_probability"], probability)
+                    observed["v5_probability"], probability, 1e-4)
                 predicted = {}; expected_delete = False
                 if arm == "always_scope_top1":
                     expected_delete = bool(memory)
                 elif arm == "source_action_rule":
                     expected_delete = bool(memory) and event["action"] == "local"
                 elif arm.startswith("factor_seed_"):
-                    predicted = factor.probabilities(features)
+                    predicted = factor.probabilities(observed["features"])
                     seed = int(arm.rsplit("_", 1)[1]); config = factor.configs["engineered"]
                     expected_delete = bool(memory) \
                         and predicted[seed][0] >= config["benefit_threshold"] \
@@ -114,7 +120,7 @@ def audit(args):
                              "no_schedule_ensemble"):
                     feature_set = ("no_schedule" if arm == "no_schedule_ensemble"
                                    else "engineered")
-                    predicted = factor.probabilities(features, feature_set)
+                    predicted = factor.probabilities(observed["features"], feature_set)
                     benefit = sum(value[0] for value in predicted.values()) / len(predicted)
                     risk = sum(value[1] for value in predicted.values()) / len(predicted)
                     config = factor.configs[feature_set]
