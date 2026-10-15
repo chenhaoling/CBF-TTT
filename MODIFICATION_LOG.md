@@ -5758,3 +5758,18 @@ capacity: 3,072 boundaries / 9,216 candidates per training domain, 1,536 /
 4,608 for TempLAMA development and 384 / 1,152 for LAMA development.  The
 downstream residual filter remains locked at 4,392/4,684/2,204/588 examples.
 No feature, label, model setting or gate changed; the retry uses a new root.
+
+Implemented `tasks/train_qwen_utility_record_controller_v8_relation_posterior.py`.
+It loads only independently audited V8 features, preserves V7's architecture,
+optimizer, three seeds, grid, dual-domain zero-collateral selection and V6
+fact-key projection, and records benefit/risk rank plus calibration metrics at
+each selected checkpoint.  The extended gate reconstructs every V7 condition
+and adds the registered LAMA gain and benefit-AP improvements against the
+hash-locked V7 diagnostic.  Added a focused test for the two extra release
+conditions.
+
+Added the V8 training auditor and non-overwriting runner.  The auditor reloads
+all three 74-feature checkpoints, reconstructs predictions, fact-key-projected
+actions, policy metrics, benefit/risk probability diagnostics and the complete
+extended release gate, while verifying hashes and held-out seals.  Only an
+integrity-audited gate pass can authorize a later LoCoMo protocol.
