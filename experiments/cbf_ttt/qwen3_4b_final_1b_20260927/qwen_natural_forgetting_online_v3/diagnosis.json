@@ -1,0 +1,413 @@
+{
+  "protocol": "qwen_natural_forgetting_online_v3_diagnosis",
+  "decision_metrics": {
+    "factor_ensemble": {
+      "classes": {
+        "local_correct_delete": 166,
+        "local_missed_delete": 74,
+        "local_wrong_top_delete": 16,
+        "retain_false_delete": 42,
+        "retain_true_negative": 470
+      },
+      "by_event_kind": {
+        "hard_retain": {
+          "retain_false_delete": 41,
+          "retain_true_negative": 215
+        },
+        "primary_initial": {
+          "retain_false_delete": 1,
+          "retain_true_negative": 255
+        },
+        "primary_update": {
+          "local_correct_delete": 166,
+          "local_missed_delete": 74,
+          "local_wrong_top_delete": 16
+        }
+      },
+      "probability_by_desired_action": {
+        "local": {
+          "events": 256,
+          "mean_benefit": 0.9493354834849015,
+          "mean_risk": 0.0878972486643761,
+          "mean_action": 0.7109375
+        },
+        "retain": {
+          "events": 512,
+          "mean_benefit": 0.4729378904691354,
+          "mean_risk": 0.4685027271116269,
+          "mean_action": 0.08203125
+        }
+      }
+    },
+    "no_schedule_ensemble": {
+      "classes": {
+        "local_correct_delete": 161,
+        "local_missed_delete": 95,
+        "retain_false_delete": 29,
+        "retain_true_negative": 483
+      },
+      "by_event_kind": {
+        "hard_retain": {
+          "retain_false_delete": 29,
+          "retain_true_negative": 227
+        },
+        "primary_initial": {
+          "retain_true_negative": 256
+        },
+        "primary_update": {
+          "local_correct_delete": 161,
+          "local_missed_delete": 95
+        }
+      },
+      "probability_by_desired_action": {
+        "local": {
+          "events": 256,
+          "mean_benefit": 0.8458965921308845,
+          "mean_risk": 0.2108371406114505,
+          "mean_action": 0.62890625
+        },
+        "retain": {
+          "events": 512,
+          "mean_benefit": 0.4189841934906629,
+          "mean_risk": 0.49710901030994137,
+          "mean_action": 0.056640625
+        }
+      }
+    },
+    "benefit_only_ensemble": {
+      "classes": {
+        "local_correct_delete": 186,
+        "local_missed_delete": 26,
+        "local_wrong_top_delete": 44,
+        "retain_false_delete": 85,
+        "retain_true_negative": 427
+      },
+      "by_event_kind": {
+        "hard_retain": {
+          "retain_false_delete": 74,
+          "retain_true_negative": 182
+        },
+        "primary_initial": {
+          "retain_false_delete": 11,
+          "retain_true_negative": 245
+        },
+        "primary_update": {
+          "local_correct_delete": 186,
+          "local_missed_delete": 26,
+          "local_wrong_top_delete": 44
+        }
+      },
+      "probability_by_desired_action": {
+        "local": {
+          "events": 256,
+          "mean_benefit": 0.9130782630721418,
+          "mean_risk": 0.12737055456091184,
+          "mean_action": 0.8984375
+        },
+        "retain": {
+          "events": 512,
+          "mean_benefit": 0.48893455023062415,
+          "mean_risk": 0.43788735911948606,
+          "mean_action": 0.166015625
+        }
+      }
+    },
+    "factor_seed_9401": {
+      "classes": {
+        "local_correct_delete": 154,
+        "local_missed_delete": 83,
+        "local_wrong_top_delete": 19,
+        "retain_false_delete": 58,
+        "retain_true_negative": 454
+      },
+      "by_event_kind": {
+        "hard_retain": {
+          "retain_false_delete": 52,
+          "retain_true_negative": 204
+        },
+        "primary_initial": {
+          "retain_false_delete": 6,
+          "retain_true_negative": 250
+        },
+        "primary_update": {
+          "local_correct_delete": 154,
+          "local_missed_delete": 83,
+          "local_wrong_top_delete": 19
+        }
+      },
+      "probability_by_desired_action": {
+        "local": {
+          "events": 256,
+          "mean_benefit": 0.9335006582938755,
+          "mean_risk": 0.10894318538339576,
+          "mean_action": 0.67578125
+        },
+        "retain": {
+          "events": 512,
+          "mean_benefit": 0.4807773539941991,
+          "mean_risk": 0.45400464311872685,
+          "mean_action": 0.11328125
+        }
+      }
+    },
+    "factor_seed_9402": {
+      "classes": {
+        "local_correct_delete": 185,
+        "local_missed_delete": 50,
+        "local_wrong_top_delete": 21,
+        "retain_false_delete": 40,
+        "retain_true_negative": 472
+      },
+      "by_event_kind": {
+        "hard_retain": {
+          "retain_false_delete": 36,
+          "retain_true_negative": 220
+        },
+        "primary_initial": {
+          "retain_false_delete": 4,
+          "retain_true_negative": 252
+        },
+        "primary_update": {
+          "local_correct_delete": 185,
+          "local_missed_delete": 50,
+          "local_wrong_top_delete": 21
+        }
+      },
+      "probability_by_desired_action": {
+        "local": {
+          "events": 256,
+          "mean_benefit": 0.9445930842969877,
+          "mean_risk": 0.09199114806203094,
+          "mean_action": 0.8046875
+        },
+        "retain": {
+          "events": 512,
+          "mean_benefit": 0.47400298483747366,
+          "mean_risk": 0.46908339500805596,
+          "mean_action": 0.078125
+        }
+      }
+    },
+    "factor_seed_9403": {
+      "classes": {
+        "local_correct_delete": 156,
+        "local_missed_delete": 90,
+        "local_wrong_top_delete": 10,
+        "retain_false_delete": 34,
+        "retain_true_negative": 478
+      },
+      "by_event_kind": {
+        "hard_retain": {
+          "retain_false_delete": 33,
+          "retain_true_negative": 223
+        },
+        "primary_initial": {
+          "retain_false_delete": 1,
+          "retain_true_negative": 255
+        },
+        "primary_update": {
+          "local_correct_delete": 156,
+          "local_missed_delete": 90,
+          "local_wrong_top_delete": 10
+        }
+      },
+      "probability_by_desired_action": {
+        "local": {
+          "events": 256,
+          "mean_benefit": 0.9516216021729633,
+          "mean_risk": 0.08523658785876857,
+          "mean_action": 0.6484375
+        },
+        "retain": {
+          "events": 512,
+          "mean_benefit": 0.47165511435014196,
+          "mean_risk": 0.4738358190928314,
+          "mean_action": 0.06640625
+        }
+      }
+    }
+  },
+  "paired_error_metrics": {
+    "factor_ensemble": {
+      "added": 113,
+      "recovered": 548,
+      "net": 435,
+      "added_strata": {
+        "cause:active_record_missing": 113,
+        "chain_kind:auxiliary": 68,
+        "chain_kind:primary": 45,
+        "phase:initial": 45,
+        "phase:update_1": 17,
+        "phase:update_2": 17,
+        "phase:update_3": 17,
+        "phase:update_4": 17,
+        "surface:exact": 66,
+        "surface:rephrase": 47
+      },
+      "recovered_strata": {
+        "chain_kind:auxiliary": 2,
+        "chain_kind:primary": 546,
+        "phase:initial": 2,
+        "phase:update_1": 62,
+        "phase:update_2": 119,
+        "phase:update_3": 164,
+        "phase:update_4": 201,
+        "surface:rephrase": 548
+      }
+    },
+    "no_schedule_ensemble": {
+      "added": 27,
+      "recovered": 473,
+      "net": 446,
+      "added_strata": {
+        "cause:active_record_missing": 27,
+        "chain_kind:primary": 27,
+        "phase:initial": 27,
+        "surface:exact": 13,
+        "surface:rephrase": 14
+      },
+      "recovered_strata": {
+        "chain_kind:auxiliary": 2,
+        "chain_kind:primary": 471,
+        "phase:initial": 2,
+        "phase:update_1": 51,
+        "phase:update_2": 100,
+        "phase:update_3": 136,
+        "phase:update_4": 184,
+        "surface:rephrase": 473
+      }
+    },
+    "benefit_only_ensemble": {
+      "added": 305,
+      "recovered": 624,
+      "net": 319,
+      "added_strata": {
+        "cause:active_record_missing": 305,
+        "chain_kind:auxiliary": 218,
+        "chain_kind:primary": 87,
+        "phase:initial": 84,
+        "phase:update_1": 56,
+        "phase:update_2": 53,
+        "phase:update_3": 56,
+        "phase:update_4": 56,
+        "surface:exact": 170,
+        "surface:rephrase": 135
+      },
+      "recovered_strata": {
+        "chain_kind:auxiliary": 4,
+        "chain_kind:primary": 620,
+        "phase:initial": 4,
+        "phase:update_1": 62,
+        "phase:update_2": 124,
+        "phase:update_3": 185,
+        "phase:update_4": 249,
+        "surface:rephrase": 624
+      }
+    },
+    "factor_seed_9401": {
+      "added": 166,
+      "recovered": 546,
+      "net": 380,
+      "added_strata": {
+        "cause:active_record_missing": 166,
+        "chain_kind:auxiliary": 100,
+        "chain_kind:primary": 66,
+        "phase:initial": 64,
+        "phase:update_1": 27,
+        "phase:update_2": 25,
+        "phase:update_3": 25,
+        "phase:update_4": 25,
+        "surface:exact": 96,
+        "surface:rephrase": 70
+      },
+      "recovered_strata": {
+        "chain_kind:auxiliary": 3,
+        "chain_kind:primary": 543,
+        "phase:initial": 3,
+        "phase:update_1": 62,
+        "phase:update_2": 119,
+        "phase:update_3": 162,
+        "phase:update_4": 200,
+        "surface:rephrase": 546
+      }
+    },
+    "factor_seed_9402": {
+      "added": 151,
+      "recovered": 566,
+      "net": 415,
+      "added_strata": {
+        "cause:active_record_missing": 151,
+        "chain_kind:auxiliary": 116,
+        "chain_kind:primary": 35,
+        "phase:initial": 39,
+        "phase:update_1": 25,
+        "phase:update_2": 29,
+        "phase:update_3": 29,
+        "phase:update_4": 29,
+        "surface:exact": 89,
+        "surface:rephrase": 62
+      },
+      "recovered_strata": {
+        "chain_kind:auxiliary": 2,
+        "chain_kind:primary": 564,
+        "phase:initial": 2,
+        "phase:update_1": 60,
+        "phase:update_2": 119,
+        "phase:update_3": 170,
+        "phase:update_4": 215,
+        "surface:rephrase": 566
+      }
+    },
+    "factor_seed_9403": {
+      "added": 75,
+      "recovered": 506,
+      "net": 431,
+      "added_strata": {
+        "cause:active_record_missing": 75,
+        "chain_kind:auxiliary": 44,
+        "chain_kind:primary": 31,
+        "phase:initial": 31,
+        "phase:update_1": 11,
+        "phase:update_2": 11,
+        "phase:update_3": 11,
+        "phase:update_4": 11,
+        "surface:exact": 43,
+        "surface:rephrase": 32
+      },
+      "recovered_strata": {
+        "chain_kind:auxiliary": 2,
+        "chain_kind:primary": 504,
+        "phase:initial": 2,
+        "phase:update_1": 59,
+        "phase:update_2": 113,
+        "phase:update_3": 149,
+        "phase:update_4": 183,
+        "surface:rephrase": 506
+      }
+    }
+  },
+  "agreement": {
+    "factor_vs_no_schedule": {
+      "retain_all|retain_all": 524,
+      "retain_all|scope_top1_a0": 20,
+      "scope_top1_a0|retain_all": 54,
+      "scope_top1_a0|scope_top1_a0": 170
+    },
+    "factor_vs_source": {
+      "retain_all|retain_all": 470,
+      "retain_all|scope_top1_a0": 74,
+      "scope_top1_a0|retain_all": 42,
+      "scope_top1_a0|scope_top1_a0": 182
+    },
+    "no_schedule_vs_source": {
+      "retain_all|retain_all": 483,
+      "retain_all|scope_top1_a0": 95,
+      "scope_top1_a0|retain_all": 29,
+      "scope_top1_a0|scope_top1_a0": 161
+    }
+  },
+  "summary_sha256": "888e1ae75de97c0d67562e5a2ee2224084bfeec9668d977b02b66f5b471a714c",
+  "development_only_exploratory": true,
+  "test_loaded": false,
+  "external_benchmarks_loaded": false
+}

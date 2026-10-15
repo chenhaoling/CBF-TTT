@@ -1,0 +1,50 @@
+{
+  "protocol": "qwen_natural_forgetting_online_v3",
+  "stage": "development",
+  "shard": 0,
+  "num_shards": 2,
+  "sessions": 32,
+  "rows": 2560,
+  "seconds": 740.9467850830406,
+  "peak_allocated_gib": 8.231909275054932,
+  "peak_reserved_gib": 11.5703125,
+  "rows_sha256": "7518746aa4fd392143620671dc347e0c9c090ba1ab2a56920cafcd581fb5e3f2",
+  "decisions_sha256": "06cac1fa4899db6f4ed60b14aeb5f24c09c6154c039da7b0ca7c43ac43340a62",
+  "feature_meta": {
+    "unique_texts": 512,
+    "unique_pairs": 6144,
+    "embedding_hashes": {
+      "5101": "31e7d96e12d097e7f9c7901c9491bb750353e13100f82e77138db8d66d4e9b4c",
+      "5102": "c7115fdda7db2b369cc448307b54ed868a8c19f0907181a3cdd28f2e49fd48c7",
+      "5103": "d8360b16731ba25bdf23493e9f24ce6f289068a0f0bcb8df67c54177031a9a9f"
+    },
+    "pair_features_sha256": "61b36db5f7098b908e41bbf15341b7d34ffb74bddcd925eb8250240c3027408e"
+  },
+  "v5_selected": {
+    "hidden": 32,
+    "penalty": 1.0,
+    "learning_rate": 0.005,
+    "epochs": 50,
+    "threshold": 0.3,
+    "correct_top_recall": 0.9525348544120789,
+    "natural_correct_top_examples": 4951,
+    "natural_wrong_top_specificity": 0.8860103487968445,
+    "natural_wrong_top_examples": 193,
+    "no_match_specificity": 0.9458204507827759,
+    "no_match_examples": 646,
+    "balanced_accuracy": 0.9281218846638998
+  },
+  "v5_threshold": 0.3,
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "development_scored": true,
+  "test_loaded": false,
+  "external_benchmarks_loaded": false
+}

@@ -1,0 +1,410 @@
+{
+  "metrics": {
+    "retain_all": {
+      "candidate_accuracy": 0.8482421875,
+      "answer_nll": 0.8703938027090871,
+      "final_candidate_accuracy": 0.71875,
+      "final_generation_exact": 0.607421875,
+      "by_surface": {
+        "exact": 0.98984375,
+        "rephrase": 0.706640625
+      },
+      "stale_reads": 640,
+      "wrong_chain_reads": 7,
+      "defers": 294,
+      "mean_memory_size": 10.0,
+      "max_memory_size": 12,
+      "delete_rate": 0.0,
+      "action_distribution": {
+        "retain_all": 768
+      },
+      "queries": 5120,
+      "correct": 4343
+    },
+    "always_scope_top1": {
+      "candidate_accuracy": 0.2888671875,
+      "answer_nll": 3.060398128175185,
+      "final_candidate_accuracy": 0.275390625,
+      "final_generation_exact": 0.173828125,
+      "by_surface": {
+        "exact": 0.28828125,
+        "rephrase": 0.289453125
+      },
+      "stale_reads": 0,
+      "wrong_chain_reads": 3807,
+      "defers": 673,
+      "mean_memory_size": 1.0,
+      "max_memory_size": 1,
+      "delete_rate": 0.9166666666666666,
+      "action_distribution": {
+        "retain_all": 64,
+        "scope_top1_a0": 704
+      },
+      "queries": 5120,
+      "correct": 1479
+    },
+    "source_action_rule": {
+      "candidate_accuracy": 0.9693359375,
+      "answer_nll": 0.35817555943141743,
+      "final_candidate_accuracy": 0.9619140625,
+      "final_generation_exact": null,
+      "by_surface": {
+        "exact": 0.98984375,
+        "rephrase": 0.948828125
+      },
+      "stale_reads": 0,
+      "wrong_chain_reads": 15,
+      "defers": 262,
+      "mean_memory_size": 8.0,
+      "max_memory_size": 8,
+      "delete_rate": 0.3333333333333333,
+      "action_distribution": {
+        "retain_all": 512,
+        "scope_top1_a0": 256
+      },
+      "queries": 5120,
+      "correct": 4963
+    },
+    "factor_ensemble": {
+      "candidate_accuracy": 0.933203125,
+      "answer_nll": 0.5107845394810269,
+      "final_candidate_accuracy": 0.8984375,
+      "final_generation_exact": 0.7578125,
+      "by_surface": {
+        "exact": 0.9640625,
+        "rephrase": 0.90234375
+      },
+      "stale_reads": 74,
+      "wrong_chain_reads": 168,
+      "defers": 304,
+      "mean_memory_size": 7.9,
+      "max_memory_size": 11,
+      "delete_rate": 0.2916666666666667,
+      "action_distribution": {
+        "retain_all": 544,
+        "scope_top1_a0": 224
+      },
+      "queries": 5120,
+      "correct": 4778
+    },
+    "factor_seed_9401": {
+      "candidate_accuracy": 0.9224609375,
+      "answer_nll": 0.5567137000953224,
+      "final_candidate_accuracy": 0.8896484375,
+      "final_generation_exact": null,
+      "by_surface": {
+        "exact": 0.95234375,
+        "rephrase": 0.892578125
+      },
+      "stale_reads": 77,
+      "wrong_chain_reads": 183,
+      "defers": 385,
+      "mean_memory_size": 7.75625,
+      "max_memory_size": 11,
+      "delete_rate": 0.30078125,
+      "action_distribution": {
+        "retain_all": 537,
+        "scope_top1_a0": 231
+      },
+      "queries": 5120,
+      "correct": 4723
+    },
+    "factor_seed_9402": {
+      "candidate_accuracy": 0.929296875,
+      "answer_nll": 0.5330988790507789,
+      "final_candidate_accuracy": 0.900390625,
+      "final_generation_exact": null,
+      "by_surface": {
+        "exact": 0.955078125,
+        "rephrase": 0.903515625
+      },
+      "stale_reads": 56,
+      "wrong_chain_reads": 169,
+      "defers": 359,
+      "mean_memory_size": 7.75,
+      "max_memory_size": 11,
+      "delete_rate": 0.3203125,
+      "action_distribution": {
+        "retain_all": 522,
+        "scope_top1_a0": 246
+      },
+      "queries": 5120,
+      "correct": 4758
+    },
+    "factor_seed_9403": {
+      "candidate_accuracy": 0.932421875,
+      "answer_nll": 0.5149316977550242,
+      "final_candidate_accuracy": 0.88671875,
+      "final_generation_exact": null,
+      "by_surface": {
+        "exact": 0.973046875,
+        "rephrase": 0.891796875
+      },
+      "stale_reads": 116,
+      "wrong_chain_reads": 126,
+      "defers": 290,
+      "mean_memory_size": 8.13125,
+      "max_memory_size": 11,
+      "delete_rate": 0.2604166666666667,
+      "action_distribution": {
+        "retain_all": 568,
+        "scope_top1_a0": 200
+      },
+      "queries": 5120,
+      "correct": 4774
+    },
+    "benefit_only_ensemble": {
+      "candidate_accuracy": 0.910546875,
+      "answer_nll": 0.6182970233934313,
+      "final_candidate_accuracy": 0.9072265625,
+      "final_generation_exact": null,
+      "by_surface": {
+        "exact": 0.9234375,
+        "rephrase": 0.89765625
+      },
+      "stale_reads": 0,
+      "wrong_chain_reads": 280,
+      "defers": 574,
+      "mean_memory_size": 6.984375,
+      "max_memory_size": 8,
+      "delete_rate": 0.41015625,
+      "action_distribution": {
+        "retain_all": 453,
+        "scope_top1_a0": 315
+      },
+      "queries": 5120,
+      "correct": 4662
+    },
+    "no_schedule_ensemble": {
+      "candidate_accuracy": 0.9353515625,
+      "answer_nll": 0.49794885422485746,
+      "final_candidate_accuracy": 0.8984375,
+      "final_generation_exact": null,
+      "by_surface": {
+        "exact": 0.984765625,
+        "rephrase": 0.8859375
+      },
+      "stale_reads": 152,
+      "wrong_chain_reads": 73,
+      "defers": 264,
+      "mean_memory_size": 8.384375,
+      "max_memory_size": 11,
+      "delete_rate": 0.24739583333333334,
+      "action_distribution": {
+        "retain_all": 578,
+        "scope_top1_a0": 190
+      },
+      "queries": 5120,
+      "correct": 4789
+    }
+  },
+  "paired_accounting": {
+    "always_scope_top1": {
+      "added_errors": 3144,
+      "recovered_errors": 280,
+      "collateral_added_errors": 3144
+    },
+    "source_action_rule": {
+      "added_errors": 0,
+      "recovered_errors": 620,
+      "collateral_added_errors": 0
+    },
+    "factor_ensemble": {
+      "added_errors": 113,
+      "recovered_errors": 548,
+      "collateral_added_errors": 113
+    },
+    "factor_seed_9401": {
+      "added_errors": 166,
+      "recovered_errors": 546,
+      "collateral_added_errors": 166
+    },
+    "factor_seed_9402": {
+      "added_errors": 151,
+      "recovered_errors": 566,
+      "collateral_added_errors": 151
+    },
+    "factor_seed_9403": {
+      "added_errors": 75,
+      "recovered_errors": 506,
+      "collateral_added_errors": 75
+    },
+    "benefit_only_ensemble": {
+      "added_errors": 305,
+      "recovered_errors": 624,
+      "collateral_added_errors": 305
+    },
+    "no_schedule_ensemble": {
+      "added_errors": 27,
+      "recovered_errors": 473,
+      "collateral_added_errors": 27
+    }
+  },
+  "comparisons": {
+    "retain_all": {
+      "gain": 0.0849609375,
+      "bootstrap_95ci": [
+        0.0748046875,
+        0.094140625
+      ],
+      "sessions": 64
+    },
+    "always_scope_top1": {
+      "gain": 0.6443359375,
+      "bootstrap_95ci": [
+        0.622265625,
+        0.666015625
+      ],
+      "sessions": 64
+    }
+  },
+  "gate": {
+    "checks": {
+      "gain_over_retain_at_least_point_0075": true,
+      "retain_gain_ci_lower_above_zero": true,
+      "gain_over_fixed_at_least_point_0025": true,
+      "fixed_gain_ci_lower_above_zero": true,
+      "collateral_errors_no_more_than_source_rule": false,
+      "risk_gate_reduces_benefit_only_collateral": true,
+      "risk_gate_within_point_005_of_benefit_only": true,
+      "generation_not_below_retain_by_point_005": true,
+      "all_seed_members_improve_retain": true,
+      "delete_rate_between_point_05_and_point_60": true
+    },
+    "passed": false
+  },
+  "protocol": "qwen_natural_forgetting_online_v3",
+  "stage": "development",
+  "sessions": 64,
+  "rows": 5120,
+  "arms": [
+    "retain_all",
+    "always_scope_top1",
+    "source_action_rule",
+    "factor_ensemble",
+    "factor_seed_9401",
+    "factor_seed_9402",
+    "factor_seed_9403",
+    "benefit_only_ensemble",
+    "no_schedule_ensemble"
+  ],
+  "generative_arms": [
+    "retain_all",
+    "always_scope_top1",
+    "factor_ensemble"
+  ],
+  "release_manifest_sha256": "e50e297b20dfa982b47091d874edf526953ee4de0cf1cb160cc00dce857cc675",
+  "rows_sha256": {
+    "rows_shard0.jsonl": "7518746aa4fd392143620671dc347e0c9c090ba1ab2a56920cafcd581fb5e3f2",
+    "rows_shard1.jsonl": "eaf7d393f0af1f385b3c4c4a41d182a25a762b040ab8eb819b4aa6c00ce16606"
+  },
+  "decisions_sha256": {
+    "decisions_shard0.jsonl": "06cac1fa4899db6f4ed60b14aeb5f24c09c6154c039da7b0ca7c43ac43340a62",
+    "decisions_shard1.jsonl": "8fc34732b016eaf4cf2880fe719b3f4c9fec8afae1b2942973a9f2beabb16390"
+  },
+  "resources": [
+    {
+      "protocol": "qwen_natural_forgetting_online_v3",
+      "stage": "development",
+      "shard": 0,
+      "num_shards": 2,
+      "sessions": 32,
+      "rows": 2560,
+      "seconds": 740.9467850830406,
+      "peak_allocated_gib": 8.231909275054932,
+      "peak_reserved_gib": 11.5703125,
+      "rows_sha256": "7518746aa4fd392143620671dc347e0c9c090ba1ab2a56920cafcd581fb5e3f2",
+      "decisions_sha256": "06cac1fa4899db6f4ed60b14aeb5f24c09c6154c039da7b0ca7c43ac43340a62",
+      "feature_meta": {
+        "unique_texts": 512,
+        "unique_pairs": 6144,
+        "embedding_hashes": {
+          "5101": "31e7d96e12d097e7f9c7901c9491bb750353e13100f82e77138db8d66d4e9b4c",
+          "5102": "c7115fdda7db2b369cc448307b54ed868a8c19f0907181a3cdd28f2e49fd48c7",
+          "5103": "d8360b16731ba25bdf23493e9f24ce6f289068a0f0bcb8df67c54177031a9a9f"
+        },
+        "pair_features_sha256": "61b36db5f7098b908e41bbf15341b7d34ffb74bddcd925eb8250240c3027408e"
+      },
+      "v5_selected": {
+        "hidden": 32,
+        "penalty": 1.0,
+        "learning_rate": 0.005,
+        "epochs": 50,
+        "threshold": 0.3,
+        "correct_top_recall": 0.9525348544120789,
+        "natural_correct_top_examples": 4951,
+        "natural_wrong_top_specificity": 0.8860103487968445,
+        "natural_wrong_top_examples": 193,
+        "no_match_specificity": 0.9458204507827759,
+        "no_match_examples": 646,
+        "balanced_accuracy": 0.9281218846638998
+      },
+      "v5_threshold": 0.3,
+      "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+      "tokenizer": "/home/ctj/models/Qwen3-4B",
+      "loading_info": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "development_scored": true,
+      "test_loaded": false,
+      "external_benchmarks_loaded": false
+    },
+    {
+      "protocol": "qwen_natural_forgetting_online_v3",
+      "stage": "development",
+      "shard": 1,
+      "num_shards": 2,
+      "sessions": 32,
+      "rows": 2560,
+      "seconds": 683.8396499343216,
+      "peak_allocated_gib": 8.173956394195557,
+      "peak_reserved_gib": 9.74609375,
+      "rows_sha256": "eaf7d393f0af1f385b3c4c4a41d182a25a762b040ab8eb819b4aa6c00ce16606",
+      "decisions_sha256": "8fc34732b016eaf4cf2880fe719b3f4c9fec8afae1b2942973a9f2beabb16390",
+      "feature_meta": {
+        "unique_texts": 512,
+        "unique_pairs": 6144,
+        "embedding_hashes": {
+          "5101": "9772f08f7be04d8ba0238ac4a69ceb93c2911a5d498b32a0ce1e44ccd6b5c5ee",
+          "5102": "339536def136b10c5d40d846d3be93dfba7ba686438406687d1cd686ebfd3b53",
+          "5103": "e19455a06f8ef8f67597c9d85ce06256e69c59accc5daafc0e8a650bf21fcfdb"
+        },
+        "pair_features_sha256": "9e955cf3ecaaa7fc79396aa45405584878e5575054aa51c277c6a72ad03c852e"
+      },
+      "v5_selected": {
+        "hidden": 32,
+        "penalty": 1.0,
+        "learning_rate": 0.005,
+        "epochs": 50,
+        "threshold": 0.3,
+        "correct_top_recall": 0.9525348544120789,
+        "natural_correct_top_examples": 4951,
+        "natural_wrong_top_specificity": 0.8860103487968445,
+        "natural_wrong_top_examples": 193,
+        "no_match_specificity": 0.9458204507827759,
+        "no_match_examples": 646,
+        "balanced_accuracy": 0.9281218846638998
+      },
+      "v5_threshold": 0.3,
+      "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+      "tokenizer": "/home/ctj/models/Qwen3-4B",
+      "loading_info": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "development_scored": true,
+      "test_loaded": false,
+      "external_benchmarks_loaded": false
+    }
+  ],
+  "development_scored": true,
+  "test_loaded": false,
+  "external_benchmarks_loaded": false
+}

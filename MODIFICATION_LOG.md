@@ -4189,3 +4189,29 @@ actions, query identities, generation consistency, artifact hashes,
 aggregates and session bootstrap intervals. Factor Gate V2's successful
 terminal status and independent audit are hard prerequisites. ZsRE test and
 external benchmarks remain sealed until V3 passes.
+
+V3 improved candidate accuracy from 84.82% for retain-all to 93.32%, an
+8.50-point paired gain with session-bootstrap 95% CI `[7.48, 9.41]`. Final
+candidate and generation exact reached 89.84% and 75.78%, versus 71.88% and
+60.74% for retain-all. The controller recovered 548 errors and introduced 113.
+Nine of ten registered checks passed; the scientific gate stopped because the
+privileged source-action rule introduced zero collateral errors. The
+registered no-schedule ablation reached 93.54% with 27 added errors, but is not
+substituted post hoc for the primary.
+
+The first two audit attempts correctly preserved the numerical result but
+failed feature/state replay because they built one combined 64-session
+embedding table rather than the two registered 32-session GPU batches. Added a
+reproducible audit-recovery runner and retained both failed audit files. The
+repaired audit recreates each shard, checks its feature metadata and changes no
+score, policy, threshold, summary or gate. It passed all ten checks.
+
+Added a score-free failure-localization task and focused test. All 113 primary
+added errors were caused by actual deletion of the active record. The primary
+made 42 false deletions on retain events, 41 on hard-retain inputs, plus 16
+wrong-top deletions during local updates. No-schedule made no wrong-top local
+deletion and 29 retain false deletions; its 27 downstream errors were confined
+to the initial checkpoint. The next stage therefore targets on-policy risk
+calibration and cross-view action consensus while keeping the reader and
+writer frozen. The source manifest exposes an unopened 129-session,
+516-subject test split for later confirmation.

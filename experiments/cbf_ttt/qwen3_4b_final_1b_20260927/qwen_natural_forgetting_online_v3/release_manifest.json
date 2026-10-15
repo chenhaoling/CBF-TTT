@@ -1,0 +1,39 @@
+{
+  "protocol": "qwen_natural_forgetting_online_v3",
+  "stage": "development_release",
+  "hashes": {
+    "plan": "67c4a061924c2e58a364d234864ef8c473151885dec56d6fe65dd30fa7657e23",
+    "factor_summary": "06e1a1a928846512e7b938ab262ba142b3e0b24eb2a2ff45b745be44a44e9566",
+    "factor_audit": "48a4be6d9661038b7b4a779b964efce28972f5013b3919e562329107afffe4df",
+    "factor_checkpoint": "3a0f2ff062d458640fd516b75521d72ba1af5d3ad06e7cffd127ebc410e8e691",
+    "data_manifest": "ceb2c85ae2a01fd6de7ef08d68004e58e43b8ae424708bea4fa313344d1a7ba7",
+    "v5_checkpoint": "3a0ba5a83ece4850dd3824fc2277dc2e0dfdb04902e361dbff764e1b630abadc",
+    "context_transforms": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+    "scope_artifact": "0ed4dab8b77fd0fb91fdd49720c783261ab2fd5c64cd705ebe36346d99615619"
+  },
+  "factor_protocol": "qwen_natural_forgetting_factor_gate_v2",
+  "factor_config": {
+    "engineered": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0,
+      "benefit_threshold": 0.8,
+      "risk_threshold": 0.1
+    },
+    "no_schedule": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0,
+      "benefit_threshold": 0.5,
+      "risk_threshold": 0.2
+    }
+  },
+  "factor_seeds": [
+    9401,
+    9402,
+    9403
+  ],
+  "development_loaded": false,
+  "test_loaded": false,
+  "external_benchmarks_loaded": false
+}
