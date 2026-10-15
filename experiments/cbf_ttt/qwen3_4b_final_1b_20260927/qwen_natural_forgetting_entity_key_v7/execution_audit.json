@@ -1,0 +1,72 @@
+{
+  "protocol": "qwen_natural_forgetting_entity_key_v7",
+  "checks": {
+    "prompt_feature_corpus_reconstruction_exact": true,
+    "feature_and_target_tensors_exact": true,
+    "no_train_validation_session_overlap": true,
+    "checkpoint_probabilities_match": true,
+    "checkpoint_barrier_actions_match": true,
+    "aggregate_metrics_match": true,
+    "artifact_hashes_match": true,
+    "privileged_fields_excluded": true,
+    "heldout_sources_remained_sealed": true
+  },
+  "passed": true,
+  "rows": 2232,
+  "max_probability_error": 0.0,
+  "action_mismatches": 0,
+  "session_leaks": 0,
+  "recomputed_metrics": {
+    "rows": 2232,
+    "true_positives": 609,
+    "false_positives": 5,
+    "false_negatives": 69,
+    "true_negatives": 1549,
+    "precision": 0.99185667752443,
+    "recall": 0.8982300884955752,
+    "delete_rate": 0.27508960573476704,
+    "by_outer_fold": {
+      "0": {
+        "rows": 553,
+        "true_positives": 165,
+        "false_positives": 3,
+        "false_negatives": 4,
+        "precision": 0.9821428571428571,
+        "recall": 0.9763313609467456
+      },
+      "1": {
+        "rows": 515,
+        "true_positives": 135,
+        "false_positives": 0,
+        "false_negatives": 21,
+        "precision": 1.0,
+        "recall": 0.8653846153846154
+      },
+      "2": {
+        "rows": 441,
+        "true_positives": 111,
+        "false_positives": 0,
+        "false_negatives": 15,
+        "precision": 1.0,
+        "recall": 0.8809523809523809
+      },
+      "3": {
+        "rows": 387,
+        "true_positives": 106,
+        "false_positives": 2,
+        "false_negatives": 14,
+        "precision": 0.9814814814814815,
+        "recall": 0.8833333333333333
+      },
+      "4": {
+        "rows": 336,
+        "true_positives": 92,
+        "false_positives": 0,
+        "false_negatives": 15,
+        "precision": 1.0,
+        "recall": 0.8598130841121495
+      }
+    }
+  },
+  "summary_sha256": "92748320bc6d1fa0661718ad6e4df971c963d0ad08807016b2d976afb31d2a19"
+}
