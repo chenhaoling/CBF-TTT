@@ -3889,3 +3889,28 @@ It fixes 258/256 non-noop counterfactual facts, exact and rephrase queries,
 variable-length per-position LM-head value residuals, Correct/Wrong/Zero/Random
 controls, scales 4/8/16/32/48, the smallest-passing-scale rule, bootstrap gates
 and a one-time development stop rule.
+
+### Frozen implementation before natural-value scoring
+
+- Added `tasks/build_qwen_natural_value_bridge_v1.py`. It reads only the
+  hash-locked contextual-readout calibration and development files, filters
+  no-op edits, builds six deterministic model-free candidates per fact and
+  enforces identifier, source-row and subject isolation. Its manifest records
+  that ZsRE test and all external benchmarks remain unopened.
+- Added `tasks/evaluate_qwen_natural_value_bridge_v1.py`. For every exact and
+  rephrased query it creates a fresh Qwen KV cache, scores variable-length
+  candidates with mean token NLL, and runs fixed-correct-length autoregressive
+  generation. The Correct, Wrong, Zero and deterministic norm-preserving
+  Random arms share prompts and candidates. Calibration evaluates only the
+  five registered scales; development can run only with the smallest passing
+  calibration scale.
+- Added `scripts/run_qwen_natural_value_bridge_v1.sh`, which refuses to
+  overwrite an output root, verifies the audited lifecycle-OOD dependency and
+  sealed ZsRE source hashes, runs two deterministic GPU shards, and conditionally
+  releases development. Added `scripts/audit_qwen_natural_value_bridge_v1.py`
+  to reconstruct the corpus, prompts, tokenization, rows, predictions,
+  bootstrap intervals, gates, resources and split-release state independently.
+- Added `tests/test_qwen_natural_value_bridge.py` for deterministic candidate
+  construction, normalization, prompt boundaries and frozen-gate aggregation.
+  Four focused tests, Python compilation, shell syntax validation and
+  `git diff --check` passed before any natural-value model score was produced.
