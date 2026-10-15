@@ -12,7 +12,7 @@ mkdir -p "$ROOT"
 git rev-parse HEAD > "$ROOT/code_commit.txt"
 
 set +e
-"$PYTHON" -m pytest -q tests/test_qwen_natural_forgetting_safe_delete_v5.py \
+"$PYTHON" -m unittest -v tests.test_qwen_natural_forgetting_safe_delete_v5 \
   > "$ROOT/tests.log" 2>&1
 test_code=$?
 set -e
