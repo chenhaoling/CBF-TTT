@@ -4693,3 +4693,13 @@ files contain 2,338,606/751,932/725,696 bytes and have SHA256 values
 and `180e766323d2b5ae4763c77b2db280eeb49c909ab48c7393fbc309b7890061af`.
 Only repository metadata, hashes and byte counts were read; test JSON remains
 unparsed.
+
+The first registered train-only schema inspection found 1,073 DialogRE train
+dialogues, 5,997 argument-pair annotations, 6,290 relation assignments, 35
+labels and substantial class imbalance; `unanswerable` has 1,298 assignments
+and is treated as no-relation. The separately registered PubMed-unsupervised
+file contains 2,500 rows with token lists and head/tail entity spans, so its
+self-supervised arm is schema-eligible. Before constructing a pair or running
+a model, the plan now fixes a 200-anchor cap per source/split/relation and
+deterministic entity-preserving 15% token-dropout views. DialogRE dev and test
+were not parsed during this inspection.

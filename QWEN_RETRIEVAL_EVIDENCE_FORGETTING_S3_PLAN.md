@@ -66,6 +66,21 @@ matched to the positive by 0.05 masked character-trigram bins and argument
 type compatibility when types are present.  Argument strings are replaced by
 `[ARG1]` and `[ARG2]` before any model or lexical baseline sees the text.
 
+The source-only schema inspection found 1,073 train dialogues, 5,997 annotated
+argument pairs, 6,290 relation assignments, 35 labels, and strong class
+imbalance (the two largest labels each exceed 1,000 assignments).  Before pair
+construction, S3 therefore fixes a deterministic maximum of 200 anchor
+mentions per `(source, split, relation)` and requires at least two distinct
+dialogues or source rows for a relation.  Sampling uses only source hashes and
+seed `35117`; relation frequency or later model scores cannot change the cap.
+The `unanswerable` label is excluded as the registered no-relation class.
+
+The PubMed-unsupervised schema inspection found 2,500 rows with token lists,
+head/tail identifiers, and entity positions.  The registered self-supervised
+views are therefore: the fully masked original text and a deterministic 15%
+dropout of non-placeholder tokens.  Both placeholders are always retained and
+no relation label is inferred.
+
 ## Pre-model integrity and shortcut gate
 
 An independent auditor must verify:
