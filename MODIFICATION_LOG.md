@@ -4917,3 +4917,49 @@ group-bootstrap gains, validates the rowwise unrelated barrier, half-strength
 decision, resource size selection, frozen plain-Qwen provenance, recovery
 input hashes and all held-out seals. Formal label construction requires this
 audit to pass.
+
+## 2026-10-16: formal utility-label construction implementation
+
+Added `tasks/build_qwen_utility_semantic_record_gate_v1_formal.py`. The builder
+requires the passed pilot data audit and the independent pilot outcome audit
+before it can construct data. It deterministically creates the registered 512
+training source groups, two counterfactual twins per group, three sparse
+boundaries, balanced 8/16/32/64 lengths and near-balanced coverage of all seven
+mechanisms. Only training-partition relations are used. Every source fact and
+normalized source subject is unique across formal groups and is disjoint from
+the resource pilot, including value-donor facts reconstructed from the locked
+pilot procedure. Development and confirmation episodes remain ungenerated.
+
+The existing episode builder now accepts an optional group prefix; its default
+is unchanged, preserving exact reconstruction of the already audited pilot.
+Formal episodes use the separate `usr-v1-formal` namespace and retain source
+fact hashes only inside audit metadata. No source identifiers enter record or
+query input fields.
+
+Added `scripts/audit_qwen_utility_semantic_record_gate_v1_formal_data.py`. It
+independently rebuilds the complete formal corpus, verifies exact rows and
+hashes, checks pilot and inter-group disjointness, relation partition
+isolation, mechanism/length/relation balance, causal reset queries, twin
+structure, input/audit separation and held-out seals. The corresponding runner
+first executes the pilot outcome audit, then builds and audits the formal
+corpus through a non-overwriting staging directory.
+
+Added `tasks/label_qwen_utility_semantic_record_gate_v1_formal.py` and the
+two-GPU runner. The collector reuses the frozen-Qwen counterfactual scoring
+mechanism without changing the registered value scale or action grid. It
+labels all 3,072 formal boundaries over the full `{0,0.5,1}` grid, keeps the
+pilot-selected binary primary action space fixed, records per-label timing and
+CUDA peaks, and keeps development, confirmation and external benchmarks
+sealed. The summary requires complete unique rows, at least five points of
+safe-oracle headroom, positive clustered lower confidence bound and zero added
+unrelated errors.
+
+Added `scripts/audit_qwen_utility_semantic_record_gate_v1_formal_labels.py`.
+It independently reconstructs the action set and safe label for every formal
+row, recomputes accuracy, group bootstrap interval and unrelated effects, and
+verifies frozen plain-Qwen provenance and all input hashes before releasing
+controller feature construction. Focused tests cover source allocation
+disjointness, formal identity and design balancing. Twelve related unit tests,
+Python compilation, shell syntax checks and `git diff --check` pass locally.
+Remote pilot audit, formal corpus construction and Qwen labeling are pending
+execution; no formal outcome is claimed by this implementation entry.

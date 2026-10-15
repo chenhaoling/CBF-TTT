@@ -309,8 +309,15 @@ def replay(
     return boundaries
 
 
-def build_episode(group_index: int, mechanism: str, length: int, twin: int, material: dict) -> dict:
-    group_id = f"usr-v1-g{group_index:03d}-t{twin}"
+def build_episode(
+    group_index: int,
+    mechanism: str,
+    length: int,
+    twin: int,
+    material: dict,
+    group_prefix: str = "usr-v1",
+) -> dict:
+    group_id = f"{group_prefix}-g{group_index:03d}-t{twin}"
     target, versions = material["target"], material["versions"]
     same_other, stable = material["same_relation_other"], material["stable"]
     patterns = material["patterns"]
@@ -437,7 +444,7 @@ def build_episode(group_index: int, mechanism: str, length: int, twin: int, mate
         raise AssertionError("boundary count mismatch")
     return {
         "episode_id": group_id,
-        "source_group": f"usr-v1-g{group_index:03d}",
+        "source_group": f"{group_prefix}-g{group_index:03d}",
         "twin": twin,
         "mechanism": mechanism,
         "length": length,
