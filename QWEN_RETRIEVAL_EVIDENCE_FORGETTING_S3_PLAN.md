@@ -135,6 +135,17 @@ margin loss on the registered trigram-matched negatives.  Candidate dimensions
 are `{256, 512}` and margin values `{0.10, 0.20}`.  This finite grid is selected
 on the held-out DialogRE-train group only.
 
+The head is a bias-free input projection plus a layer-normalized
+linear-GELU-linear residual branch, followed by L2 normalization.  Use AdamW,
+learning rate `1e-3`, weight decay `1e-4`, 16 relations x 4 mentions per
+supervised batch, 64 deterministic batches per epoch, 50 epochs, gradient norm
+1.0, and hard-negative margin weight 0.25.  Save epochs 10/25/50.  When enabled,
+PubMed two-view InfoNCE pretraining uses batch 256 for ten epochs before the
+same supervised fit.  Select the finite `(self-supervision, dimension,
+temperature, margin, epoch)` grid by calibration retrieval recall@16, then
+direct-pair ROC-AUC, then smaller dimension, earlier epoch, and the no-PubMed
+arm.  This selection does not use the physical deletion threshold.
+
 The PubMed-unsupervised arm, if schema-eligible, applies two deterministic
 entity-preserving views of the same row and InfoNCE before supervised fitting.
 The paired ablation skips this stage.  PubMed validation labels and S2 scores
@@ -160,6 +171,23 @@ ties use relation macro balanced accuracy, then the smaller head.  A conformal
 lower confidence bound over dialogue groups supplies the deployed safe-delete
 score.  No entity name, relation ID, gold trigger, or split identifier is a
 model feature.
+
+Both fusion heads use AdamW (`lr=1e-3`, weight decay `1e-4`), batch 512, 100
+epochs and seed 35117.  The MLP has one 64-unit GELU hidden layer and dropout
+0.1.  The monotone head orients every input so larger values support relation
+equivalence and constrains its weights with `softplus`.  Its feature set is the
+registered direct, support, posterior, margin, entropy, agreement,
+cross-support, type and frozen-S2 evidence.  The deployed threshold is the
+maximum of the empirical 99%-deletion-precision threshold and the finite-sample
+99th percentile of per-dialogue maximum negative scores.  Ablations are fitted
+with the same optimizer after removing S2, support, projection, or conformal
+components.
+
+The frozen S2 prior is scored only on S3 train/calibration pairs.  Tokenizer
+inspection gives prompt length median/p90/p95/p99/max of
+`131/922/1078/1276/1619` over 25,958 pairs; its cached candidate scorer
+therefore fixes maximum length 2048, no truncation and pair batch four per GPU.
+DialogRE dev remains unavailable to this scorer.
 
 ## Physical forgetting interface
 

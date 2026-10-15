@@ -4733,3 +4733,20 @@ Tokenizer-only measurement over all 13,075 train/calibration mentions gives
 Qwen token length min/median/p90/p95/p99/max of 9/38/388/492/629/881. Before
 any embedding forward pass, S3 therefore freezes max length 1024, no
 truncation and batch size eight per RTX 5090 shard.
+
+The first embedding pilot failed before model loading because invoking a file
+under `tasks/` placed `tasks/cbf_ttt.py` ahead of the package and shadowed
+`cbf_ttt.runtime`; both shards exited 1 and produced no model output. The same
+committed extractor was relaunched with `python -m`. Both complete calibration
+shards then exited 0, processed 436 rows in 13.10/12.67 seconds, and used
+8.49/8.61 GiB peak reserved memory. Formal two-GPU extraction completed all
+12,203 train mentions in 112.67/113.67 seconds and 2,494 rows for each PubMed
+view in under eight seconds per shard. Maximum peak reserved memory was 9.79
+GiB. Every audit records `ttt_mode=false`, all 14 native `ttt_proj/ttt_conv`
+weights excluded, no truncation, and no sealed source loaded.
+
+Before S2-prior scoring or projection training, the complete finite optimizer,
+checkpoint, selection and fusion grids are now frozen in the S3 plan. Pair
+prompt tokenizer lengths over all 25,958 train/calibration pairs have
+median/p90/p95/p99/max `131/922/1078/1276/1619`, so the frozen S2-prior scorer
+uses maximum length 2048, pair batch four and no development/test access.
