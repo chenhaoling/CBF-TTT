@@ -5613,3 +5613,13 @@ clustered intervals and the preregistered seven-condition gate.  Five focused
 V5/V6 tests, Python compilation, shell syntax and whitespace checks pass
 locally; no held-out LAMA/ParaRel outcome had been generated when this code was
 written.
+
+The first model-free confirmation build stopped before creating an output root
+because P530 retained only seven facts from four subjects after the already
+registered cross-partition filter, while globally unique 64-group allocation
+requires many more input subjects.  Before any label, feature or model output,
+the plan now freezes a capacity rule requiring 128 unique normalized subjects
+per confirmation relation.  It excludes only P530 and retains six relations;
+the unchanged 64 groups are balanced across them.  The builder and independent
+audit record and recompute every included/excluded subject count.  No query,
+mechanism, action, checkpoint, threshold, endpoint or result gate changed.

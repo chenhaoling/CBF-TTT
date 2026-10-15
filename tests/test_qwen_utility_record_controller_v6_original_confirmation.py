@@ -4,6 +4,7 @@ from scripts.inspect_lama_pararel_utility_source import normalize
 from tasks.build_qwen_utility_record_controller_v6_original_confirmation import (
     GROUP_PREFIX,
     GROUPS,
+    MIN_RELATION_SUBJECTS,
 )
 from tasks.build_qwen_utility_semantic_record_gate_v1 import build_episode
 from tasks.build_qwen_utility_semantic_record_gate_v1_formal import (
@@ -54,6 +55,7 @@ class TestV6OriginalSourceConfirmation(unittest.TestCase):
             episode["source_group"], "usr-v6-original-confirmation-g000"
         )
         self.assertEqual(GROUPS, 64)
+        self.assertEqual(MIN_RELATION_SUBJECTS, 128)
 
     def test_low_value_cardinality_confirmation_allocation(self):
         relations = [f"P{index}" for index in range(7)]

@@ -17,6 +17,7 @@ from scripts.inspect_lama_pararel_utility_source import sha256
 from tasks.build_qwen_utility_record_controller_v6_original_confirmation import (
     AUDIT_PROTOCOL,
     GROUPS,
+    MIN_RELATION_SUBJECTS,
     PROTOCOL,
     build,
     validate,
@@ -81,6 +82,8 @@ def audit(source_root: Path, inspection_path: Path, release_root: Path,
         )),
     }
     relation_sets = {name: set(values) for name, values in manifest["splits"].items()}
+    eligibility = manifest["confirmation_relation_eligibility"]
+    included_relations = set(eligibility["included_relations"])
     mechanism_counts = list(counts["mechanisms"].values())
     target_counts = list(counts["target_relations"].values())
     checks = {
@@ -113,8 +116,21 @@ def audit(source_root: Path, inspection_path: Path, release_root: Path,
         "relation_partition_isolation": (
             not (relation_sets["confirmation"] & relation_sets["train"])
             and not (relation_sets["confirmation"] & relation_sets["development"])
-            and all(set(row["audit"]["relation_ids"]) <= relation_sets["confirmation"]
+            and all(set(row["audit"]["relation_ids"]) <= included_relations
                     for row in episodes)
+        ),
+        "capacity_eligibility_reconstructed": (
+            included_relations == set(counts["target_relations"])
+            and len(included_relations) == 6
+            and eligibility["excluded_relations"] == ["P530"]
+            and all(
+                eligibility["subject_counts"][relation] >= MIN_RELATION_SUBJECTS
+                for relation in included_relations
+            )
+            and all(
+                eligibility["subject_counts"][relation] < MIN_RELATION_SUBJECTS
+                for relation in eligibility["excluded_relations"]
+            )
         ),
         "group_provenance_unique": provenance_is_unique(episodes),
         "input_audit_separation": input_fields_are_clean(episodes),

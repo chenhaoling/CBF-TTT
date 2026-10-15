@@ -91,3 +91,22 @@ evaluation.  A failure is reported without threshold repair or a second use of
 these confirmation relations.  Method iteration after failure must use a new
 training/development source and a new independent confirmation source.
 
+## Model-free feasibility amendment
+
+The first builder invocation stopped before writing a corpus or loading a
+model: after the registered cross-partition subject filter, confirmation
+relation P530 retained only seven facts from four subjects.  It cannot supply
+globally unique target and background subjects for a 64-group corpus.  This is
+a source-capacity failure, not an outcome, feature, label, or model result.
+
+Before retrying construction, freeze the following deterministic eligibility
+rule.  A confirmation relation must retain at least 128 unique normalized
+subjects after the original cross-partition removal.  The threshold is twice
+the registered group count and conservatively supports both target and
+same-relation records while stable backgrounds remain group-unique.  Apply it
+once to all seven registered confirmation relations.  This excludes P530 and
+retains P937, P27, P136, P407, P106 and P495.  Allocate the unchanged 64
+groups as evenly as possible across these six relations.  Require at least
+four eligible relations, keep every other protocol element and gate unchanged,
+and record all retained/excluded subject counts in the manifest and audit.
+

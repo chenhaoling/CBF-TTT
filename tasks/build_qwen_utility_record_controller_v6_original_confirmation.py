@@ -36,6 +36,7 @@ AUDIT_PROTOCOL = "qwen_utility_record_controller_v6_original_confirmation_data_a
 INSPECTION_PROTOCOL = "qwen_utility_semantic_record_source_inspection_v1"
 GROUPS = 64
 GROUP_PREFIX = "usr-v6-original-confirmation"
+MIN_RELATION_SUBJECTS = GROUPS * 2
 
 
 def build(
@@ -68,7 +69,20 @@ def build(
         relation: [row for row in rows if row["subject_norm"] not in removed_subjects]
         for relation, rows in facts.items()
     }
-    confirmation_relations = splits["confirmation"]
+    confirmation_subject_counts = {
+        relation: len({row["subject_norm"] for row in facts[relation]})
+        for relation in splits["confirmation"]
+    }
+    confirmation_relations = [
+        relation for relation in splits["confirmation"]
+        if confirmation_subject_counts[relation] >= MIN_RELATION_SUBJECTS
+    ]
+    excluded_relations = [
+        relation for relation in splits["confirmation"]
+        if relation not in confirmation_relations
+    ]
+    if len(confirmation_relations) < 4:
+        raise ValueError("fewer than four capacity-eligible confirmation relations")
     forbidden_hashes: set[str] = set()
     forbidden_subjects: set[str] = set()
     episodes = []
@@ -128,6 +142,12 @@ def build(
             "cross_partition_subjects_removed": len(removed_subjects),
         },
         "splits": splits,
+        "confirmation_relation_eligibility": {
+            "minimum_unique_subjects": MIN_RELATION_SUBJECTS,
+            "subject_counts": confirmation_subject_counts,
+            "included_relations": confirmation_relations,
+            "excluded_relations": excluded_relations,
+        },
         "partition": "lama_pararel_confirmation",
         "alpha_grid": [0.0, 0.5, 1.0],
         "primary_action_space": "binary_with_half_ablation",
@@ -153,11 +173,27 @@ def validate(episodes: list[dict], manifest: dict) -> None:
     assert max(manifest["counts"]["target_relations"].values()) - min(
         manifest["counts"]["target_relations"].values()
     ) <= 1
-    # Seven confirmation relations yield five stable other-relation rows, so
+    eligibility = manifest["confirmation_relation_eligibility"]
+    assert len(eligibility["included_relations"]) == 6
+    assert eligibility["excluded_relations"] == ["P530"]
+    assert set(manifest["counts"]["target_relations"]) == set(
+        eligibility["included_relations"]
+    )
+    assert all(
+        eligibility["subject_counts"][relation] >= MIN_RELATION_SUBJECTS
+        for relation in eligibility["included_relations"]
+    )
+    assert all(
+        eligibility["subject_counts"][relation] < MIN_RELATION_SUBJECTS
+        for relation in eligibility["excluded_relations"]
+    )
+    # Six eligible relations yield five stable other-relation rows, so
     # seven unique source subjects enter each group.
     assert manifest["counts"]["input_source_facts"] == GROUPS * 7
     assert manifest["counts"]["input_source_subjects"] == GROUPS * 7
-    assert all(set(row["audit"]["relation_ids"]) <= set(manifest["splits"]["confirmation"])
+    assert all(set(row["audit"]["relation_ids"]) <= set(
+        eligibility["included_relations"]
+    )
                for row in episodes)
     groups = defaultdict(list)
     for episode in episodes:
