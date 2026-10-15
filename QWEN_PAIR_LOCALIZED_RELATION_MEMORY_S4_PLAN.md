@@ -46,6 +46,10 @@ For each DialogRE source annotation, the builder emits:
 4. trigger-bearing turn indices in an audit/label field only;
 5. the relation and physical-action rows already registered by S3.
 
+If either argument has no exact turn match, the deterministic nearest-entity
+control falls back to the full dialogue and records the fallback. Learned
+candidate attention still receives every turn and requires no such fallback.
+
 Argument strings are replaced with `[ARG1]` and `[ARG2]` before model input.
 The relation name, trigger string, source split, dialogue ID, entity string,
 and gold trigger indices are prohibited from all inference-visible features.
@@ -69,8 +73,8 @@ An independent builder auditor must verify:
 - candidate completeness and turn-index bounds;
 - relation caps, pair balance, scenario completeness, and source-instance
   disjointness inherited from S3;
-- deterministic entity-window coverage equal to the registered source
-  inspection;
+- an exact independent rerun of the registered raw-source entity-window
+  coverage, plus separately reported coverage on the capped S3 subset;
 - no S2/S3 model score in constructed data.
 
 Any failure permits only a construction repair and a new output root. It may
