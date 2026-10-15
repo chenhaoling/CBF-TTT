@@ -3686,3 +3686,24 @@ strongest non-oracle comparator with bootstrap lower bound above two points,
 positive NLL lower bound, role/family/absence floors, nonnegative family and
 length gains, exact oracle agreement and a passing independent audit before
 confirmation can be generated.
+
+# 2026-10-15: causal-ledger scale-rescue V3 preregistration
+
+- Added `QWEN_CAUSAL_LEDGER_SCALE_RESCUE_V3_PLAN.md` after the independently
+  audited development V2 run. The run passed all integrity checks and ten of
+  eleven method gates; it failed only the 95% current/anchor generation gate at
+  scale 32.
+- Frozen a single development replay at scale 48. The corpus, model, policies,
+  comparator rule, bootstrap, exact five-token decoder and all original gates
+  remain unchanged. Confirmation and OOD stay sealed until this replay passes
+  an independent audit.
+- Recorded the subsequent release path: one-time confirmation, integration
+  with the baseline `ttt_proj`/`ttt_conv` writer, and natural-data evaluation on
+  ZsRE, LongMemEval-S, LoCoMo, RULER/RULER-QA and MMLU.
+- Archived the complete 26 MB development V2 run under
+  `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/qwen_causal_ledger_development_v2/`
+  with its raw rows, inputs/targets, logs, resources, terminal markers, summary
+  and independent audit. The primary method obtained 100% candidate accuracy,
+  91.34% five-token exact and a 9.92-point exact gain over `retain_latest`
+  (95% group-bootstrap interval 8.68--11.19 points). Ten of eleven gates passed;
+  the current/anchor 95% exact gate failed, so confirmation/OOD remain sealed.
