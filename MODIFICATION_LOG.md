@@ -4279,3 +4279,21 @@ most four false-positive deletes, at least 95% precision in every active outer
 fold and complete held-out/source isolation. Only a passing audited result may
 run a new cross-fit online calibration; development, test and external
 benchmarks remain sealed.
+
+V5 reconstructed 15,480 raw decisions into 2,213 distinct states with 659
+safe-delete labels. Five-fold OOF predictions produced 537 true positives, six
+false positives and 122 false negatives: 98.90% precision, 81.49% recall and
+24.54% delete rate. Fold precision was 100%, 100%, 100%, 96.26% and 97.33%.
+The independent audit passed all nine checks with zero probability/action
+mismatch. Seven of eight scientific checks passed, but six false positives
+exceeded the preregistered absolute maximum of four, so online outcome scoring
+and test stayed sealed.
+
+All six errors correspond to two memory states for each of three hard-retain
+events. The incoming and retrieved prompts express the same relation for
+different subjects, revealing that the current semantic/lexical features
+confuse relation agreement with fact-key agreement. The preregistered DAgger
+branch is activated before considering an inference-visible entity-key
+feature. Two packaging failures (missing remote pytest and an auditor invoked
+by file path) occurred outside training; both were fixed without changing the
+result, and the audit recovery is preserved in the archived experiment.

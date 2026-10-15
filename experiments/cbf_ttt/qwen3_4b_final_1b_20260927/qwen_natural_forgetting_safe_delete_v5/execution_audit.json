@@ -1,0 +1,76 @@
+{
+  "protocol": "qwen_natural_forgetting_safe_delete_v5",
+  "checks": {
+    "source_and_corpus_reconstruction_exact": true,
+    "feature_and_target_tensors_exact": true,
+    "no_train_validation_session_overlap": true,
+    "checkpoint_probabilities_match": true,
+    "checkpoint_actions_match": true,
+    "aggregate_metrics_match": true,
+    "privileged_fields_excluded": true,
+    "artifact_hashes_match": true,
+    "held_out_sources_remained_sealed": true
+  },
+  "passed": true,
+  "rows": 2213,
+  "label_distribution": {
+    "0": 1554,
+    "1": 659
+  },
+  "max_probability_error": 0.0,
+  "action_mismatches": 0,
+  "session_leaks": 0,
+  "recomputed_metrics": {
+    "rows": 2213,
+    "true_positives": 537,
+    "false_positives": 6,
+    "false_negatives": 122,
+    "true_negatives": 1548,
+    "precision": 0.988950276243094,
+    "recall": 0.8148710166919575,
+    "delete_rate": 0.24536827835517397,
+    "by_outer_fold": {
+      "0": {
+        "rows": 548,
+        "true_positives": 138,
+        "false_positives": 0,
+        "false_negatives": 26,
+        "precision": 1.0,
+        "recall": 0.8414634146341463
+      },
+      "1": {
+        "rows": 514,
+        "true_positives": 123,
+        "false_positives": 0,
+        "false_negatives": 32,
+        "precision": 1.0,
+        "recall": 0.7935483870967742
+      },
+      "2": {
+        "rows": 437,
+        "true_positives": 100,
+        "false_positives": 0,
+        "false_negatives": 22,
+        "precision": 1.0,
+        "recall": 0.819672131147541
+      },
+      "3": {
+        "rows": 385,
+        "true_positives": 103,
+        "false_positives": 4,
+        "false_negatives": 15,
+        "precision": 0.9626168224299065,
+        "recall": 0.8728813559322034
+      },
+      "4": {
+        "rows": 329,
+        "true_positives": 73,
+        "false_positives": 2,
+        "false_negatives": 27,
+        "precision": 0.9733333333333334,
+        "recall": 0.73
+      }
+    }
+  },
+  "summary_sha256": "3622c2c694d0cc5e2c2d403aff286ee24af4f05144ac2c267c74e78c940295aa"
+}
