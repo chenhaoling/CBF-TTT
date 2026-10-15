@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter, defaultdict
 import csv
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -16,6 +17,7 @@ PROTOCOL = "qwen_utility_record_controller_v2_templama_source_inspection"
 SOURCE_PROTOCOL = "qwen_utility_record_controller_v2_templama_sources"
 IDENTITY = re.compile(r"^(Q[0-9]+)_(P[0-9]+)_([0-9]{4})$")
 SPLITS = ("train", "val", "test")
+OWNER_NAMESPACE = "261016:templama-subject-owner"
 
 
 def load_templates(path: Path) -> dict[str, dict[str, str]]:
@@ -89,6 +91,14 @@ def load_rows(path: Path) -> list[dict]:
     return rows
 
 
+def choose_owner(subject: str, owners: set[str]) -> str:
+    ordered = sorted(owners)
+    if not ordered:
+        raise ValueError("subject has no source partition")
+    digest = hashlib.sha256(f"{OWNER_NAMESPACE}:{subject}".encode()).hexdigest()
+    return ordered[int(digest[:16], 16) % len(ordered)]
+
+
 def inspect(source_root: Path) -> dict:
     manifest_path = source_root / "metadata" / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
@@ -107,7 +117,9 @@ def inspect(source_root: Path) -> dict:
     split_results = {}
     subjects_by_split = {}
     surfaces_by_split = {}
+    surfaces_by_subject_by_split = {}
     eligible_by_split = {}
+    eligible_keys_by_split = {}
     rejection_totals = Counter()
     for split in SPLITS:
         path = source_root / "downloads" / f"{split}.json"
@@ -117,6 +129,7 @@ def inspect(source_root: Path) -> dict:
         rows = load_rows(path)
         trajectories = defaultdict(dict)
         subjects = set(); surfaces = set(); rejected = Counter()
+        surfaces_by_subject = defaultdict(set)
         row_relations = Counter()
         structurally_valid_rows = 0
         for row in rows:
@@ -154,7 +167,8 @@ def inspect(source_root: Path) -> dict:
                 "answer_name": answer_name,
                 "query": query,
             }
-            surfaces.add(normalize(query.replace("_X_", answer_name)))
+            surface = normalize(query.replace("_X_", answer_name))
+            surfaces.add(surface); surfaces_by_subject[subject_id].add(surface)
 
         eligible = {}
         relation_eligible = Counter(); transitions = 0
@@ -174,7 +188,9 @@ def inspect(source_root: Path) -> dict:
         eligible_subjects = {subject for subject, _ in eligible}
         subjects_by_split[split] = subjects
         surfaces_by_split[split] = surfaces
+        surfaces_by_subject_by_split[split] = dict(surfaces_by_subject)
         eligible_by_split[split] = eligible_subjects
+        eligible_keys_by_split[split] = set(eligible)
         split_results[split] = {
             "bytes": path.stat().st_size,
             "sha256": sha256(path),
@@ -207,6 +223,87 @@ def inspect(source_root: Path) -> dict:
             )
             surface_overlaps[name] = len(surfaces_by_split[left] & surfaces_by_split[right])
 
+    source_owners = defaultdict(set)
+    for split in SPLITS:
+        for subject in subjects_by_split[split]:
+            source_owners[subject].add(split)
+    assigned_owner = {
+        subject: choose_owner(subject, owners)
+        for subject, owners in source_owners.items()
+    }
+    owned_subjects = {
+        split: {subject for subject in subjects_by_split[split]
+                if assigned_owner[subject] == split}
+        for split in SPLITS
+    }
+    owned_eligible_keys = {
+        split: {key for key in eligible_keys_by_split[split]
+                if assigned_owner[key[0]] == split}
+        for split in SPLITS
+    }
+    owned_surfaces = {
+        split: {
+            surface
+            for subject, values in surfaces_by_subject_by_split[split].items()
+            if assigned_owner[subject] == split
+            for surface in values
+        }
+        for split in SPLITS
+    }
+    colliding_surfaces = set()
+    for left_index, left in enumerate(SPLITS):
+        for right in SPLITS[left_index + 1:]:
+            colliding_surfaces.update(owned_surfaces[left] & owned_surfaces[right])
+    collision_subjects = {
+        split: {
+            subject
+            for subject, values in surfaces_by_subject_by_split[split].items()
+            if assigned_owner[subject] == split and set(values) & colliding_surfaces
+        }
+        for split in SPLITS
+    }
+    filtered_subjects = {
+        split: owned_subjects[split] - collision_subjects[split] for split in SPLITS
+    }
+    filtered_eligible_keys = {
+        split: {key for key in owned_eligible_keys[split]
+                if key[0] in filtered_subjects[split]}
+        for split in SPLITS
+    }
+    filtered_surfaces = {
+        split: owned_surfaces[split] - colliding_surfaces for split in SPLITS
+    }
+    post_subject_overlaps = {}
+    post_eligible_subject_overlaps = {}
+    post_surface_overlaps = {}
+    for left_index, left in enumerate(SPLITS):
+        for right in SPLITS[left_index + 1:]:
+            name = f"{left}_{right}"
+            post_subject_overlaps[name] = len(
+                filtered_subjects[left] & filtered_subjects[right]
+            )
+            post_eligible_subject_overlaps[name] = len(
+                {key[0] for key in filtered_eligible_keys[left]}
+                & {key[0] for key in filtered_eligible_keys[right]}
+            )
+            post_surface_overlaps[name] = len(
+                filtered_surfaces[left] & filtered_surfaces[right]
+            )
+    post_decontamination = {}
+    for split in SPLITS:
+        relation_counts = Counter(key[1] for key in filtered_eligible_keys[split])
+        post_decontamination[split] = {
+            "subjects": len(filtered_subjects[split]),
+            "removed_cross_split_subjects": (
+                len(subjects_by_split[split] - owned_subjects[split])
+            ),
+            "removed_surface_collision_subjects": len(collision_subjects[split]),
+            "eligible_trajectories": len(filtered_eligible_keys[split]),
+            "eligible_relations": len(relation_counts),
+            "eligible_by_relation": dict(sorted(relation_counts.items())),
+            "rendered_surfaces": len(filtered_surfaces[split]),
+        }
+
     checks = {
         "official_nine_templates": len(templates) == 9,
         "all_download_hashes_locked": all(
@@ -219,23 +316,23 @@ def inspect(source_root: Path) -> dict:
             == split_results[split]["rows"]
             for split in SPLITS
         ),
-        "official_subject_partitions_disjoint": all(
-            count == 0 for count in subject_overlaps.values()
+        "deterministic_subject_ownership_disjoint": all(
+            count == 0 for count in post_subject_overlaps.values()
         ),
-        "eligible_subject_partitions_disjoint": all(
-            count == 0 for count in eligible_subject_overlaps.values()
+        "eligible_subject_ownership_disjoint": all(
+            count == 0 for count in post_eligible_subject_overlaps.values()
         ),
-        "rendered_surfaces_disjoint": all(
-            count == 0 for count in surface_overlaps.values()
+        "rendered_surface_decontamination": all(
+            count == 0 for count in post_surface_overlaps.values()
         ),
         "formal_partition_capacity": all(
-            split_results[split]["eligible_trajectories"] >= 128
-            and split_results[split]["eligible_relations"] >= 6
+            post_decontamination[split]["eligible_trajectories"] >= 128
+            and post_decontamination[split]["eligible_relations"] >= 6
             for split in ("val", "test")
         ),
         "resource_pilot_capacity": (
-            split_results["train"]["eligible_trajectories"] >= 72
-            and split_results["train"]["eligible_relations"] == 9
+            post_decontamination["train"]["eligible_trajectories"] >= 72
+            and post_decontamination["train"]["eligible_relations"] == 9
         ),
         "v1_confirmation_and_forbidden_sources_sealed": (
             manifest.get("v1_confirmation_loaded") is False
@@ -253,6 +350,16 @@ def inspect(source_root: Path) -> dict:
         "cross_split_subject_overlaps": subject_overlaps,
         "cross_split_eligible_subject_overlaps": eligible_subject_overlaps,
         "cross_split_rendered_surface_overlaps": surface_overlaps,
+        "subject_owner_namespace": OWNER_NAMESPACE,
+        "cross_split_subject_overlaps_after_decontamination": post_subject_overlaps,
+        "cross_split_eligible_subject_overlaps_after_decontamination": (
+            post_eligible_subject_overlaps
+        ),
+        "cross_split_rendered_surface_overlaps_after_decontamination": (
+            post_surface_overlaps
+        ),
+        "colliding_rendered_surfaces_removed_from_all_splits": len(colliding_surfaces),
+        "post_decontamination": post_decontamination,
         "rejected_total": dict(rejection_totals),
         "checks": checks,
         "passed": passed,

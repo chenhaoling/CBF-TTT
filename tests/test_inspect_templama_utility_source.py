@@ -1,6 +1,7 @@
 import unittest
 
 from scripts.inspect_templama_utility_source import (
+    choose_owner,
     extract_subject,
     singleton_answer,
     template_regex,
@@ -24,6 +25,12 @@ class TestInspectTempLamaUtilitySource(unittest.TestCase):
         self.assertEqual(singleton_answer(row), ("Q1", "alpha"))
         row["answer"].append({"wikidata_id": "Q2", "name": "Beta"})
         self.assertIsNone(singleton_answer(row))
+
+    def test_overlap_owner_is_deterministic_and_observed(self):
+        owners = {"train", "test"}
+        selected = choose_owner("Q123", owners)
+        self.assertIn(selected, owners)
+        self.assertEqual(selected, choose_owner("Q123", set(reversed(sorted(owners)))))
 
 
 if __name__ == "__main__":
