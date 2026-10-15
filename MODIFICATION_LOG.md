@@ -5681,3 +5681,21 @@ explicit schema-compatible aggregator: role-annotated domains retain the
 newer metric, while legacy rows use the original V1 metric.  Query-role output
 does not enter the controller, selection tuple or release gate.  Added a
 regression test and moved the unchanged fit to a new non-overwriting root.
+
+### V7 cross-source outcome and failure diagnostic registration
+
+The retry completed in 29.37 seconds and its independent audit reconstructed
+all three checkpoint states, selected domain metrics, upstream hashes and the
+release gate.  TempLAMA gained 2.569 points and closed 59.62% of safe
+fact-key-oracle headroom.  LAMA/ParaRel gained 0.859 points and closed 44.59%.
+Every seed improved both domains, all selected policies added zero unrelated
+errors, and overwrite/stale mechanisms were nonnegative.  V7 therefore failed
+only the preregistered LAMA effect-size and closure gates and is not authorized
+for LoCoMo.
+
+Added `QWEN_UTILITY_RECORD_CONTROLLER_V7_FAILURE_DIAGNOSTIC_PLAN.md` before
+running any follow-up analysis.  It locks a development-only ranking and
+calibration audit, domain-specific policy ceiling, source-only transfer matrix
+and centroid covariate-shift measurement.  A deterministic rule maps the
+result to selection/calibration, negative-transfer or representation/ranking
+limited; the diagnostic cannot release a model or reopen any held-out source.
