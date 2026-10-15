@@ -4343,3 +4343,38 @@ five-fold search and the unchanged safety release. The auditor reconstructs
 every prompt-derived feature from the source calibration prompts, fold models,
 barrier action, aggregate and artifact hash. V7 may authorize only an
 on-policy calibration replay; test and external benchmarks remain sealed.
+
+V7 completed with 609 true positives, five false positives, 69 false negatives
+and 1,549 true negatives: 99.19% precision, 89.82% recall and 27.51% delete
+rate. The independent audit passed all nine checks, but the absolute maximum of
+four false deletes failed by one, so online calibration and test stayed sealed.
+The five rows collapse to three events spanning both same-relation/different-
+entity and same-entity/different-relation ambiguity. This motivates a complete
+entity-plus-relation fact key rather than further entity-only threshold tuning.
+
+## 2026-10-15: independent lexical fact-key barrier V8
+
+Added `QWEN_NATURAL_FORGETTING_FACT_KEY_V8_PLAN.md` before fitting V8. It builds
+a subject-disjoint CounterFact pair corpus with a same-fact paraphrase positive,
+a same-relation/different-subject negative and a same-subject/different-relation
+negative for every eligible source row. Folds 0--2 train, fold 3 selects the
+finite head/threshold grid and fold 4 is untouched independent validation. ZsRE
+is loaded only if the independent 99% precision, 90% recall and 98% specificity
+floors pass.
+
+Added `tasks/train_qwen_natural_forgetting_fact_key_v8.py`, focused tests, a
+two-stage runner and independent auditor. Eleven inference-visible features
+combine V7 entity anchors with whole-prompt and entity-masked lexical overlap.
+The 5,238-pair corpus has 357 validation examples of each type and exact
+subject separation. V8 obtained 67.69% precision, 49.30% recall, 100% specificity
+for different-subject negatives and 76.47% specificity for same-subject/
+different-relation negatives. The eight-check audit passed with zero action
+mismatch after documenting a `2e-7` float32 reconstruction tolerance; the
+largest probability deviation was `1.19e-7`.
+
+V8 therefore stopped before ZsRE transfer. Its asymmetric failure localizes the
+bottleneck: entity anchors work, while lexical relation comparison cannot align
+paraphrases or reliably reject a different relation about the same subject. The
+next iteration must replace lexical relation features with a frozen semantic
+representation and retain the independent CounterFact gate. ZsRE test and
+external benchmarks remain sealed.

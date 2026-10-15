@@ -1,0 +1,48 @@
+{
+  "protocol": "qwen_natural_forgetting_fact_key_v8",
+  "stage": "independent_validation_audit",
+  "checks": {
+    "corpus_reconstruction_exact": true,
+    "feature_tensor_reconstruction_exact": true,
+    "checkpoint_validation_probabilities_match": true,
+    "checkpoint_validation_actions_match": true,
+    "validation_metrics_match": true,
+    "subject_folds_disjoint": true,
+    "artifact_hashes_match": true,
+    "zsre_sources_remained_unloaded": true
+  },
+  "passed": true,
+  "pairs": 5238,
+  "max_probability_error": 1.1920928955078125e-07,
+  "action_mismatches": 0,
+  "recomputed_validation": {
+    "examples": 1071,
+    "true_positives": 176,
+    "false_positives": 84,
+    "false_negatives": 181,
+    "true_negatives": 630,
+    "precision": 0.676923076923077,
+    "recall": 0.49299719887955185,
+    "accuracy": 0.7525676937441643,
+    "by_type": {
+      "negative_same_relation_different_subject": {
+        "examples": 357,
+        "accepted": 0,
+        "accuracy": 1.0,
+        "specificity": 1.0
+      },
+      "negative_same_subject_different_relation": {
+        "examples": 357,
+        "accepted": 84,
+        "accuracy": 0.7647058823529411,
+        "specificity": 0.7647058823529411
+      },
+      "positive_same_fact_key": {
+        "examples": 357,
+        "accepted": 176,
+        "accuracy": 0.49299719887955185,
+        "specificity": null
+      }
+    }
+  }
+}

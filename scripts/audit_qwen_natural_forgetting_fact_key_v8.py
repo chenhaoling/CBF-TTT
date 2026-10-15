@@ -22,6 +22,13 @@ from tasks.train_qwen_natural_forgetting_fact_key_v8 import (
 )
 
 
+# CPU reconstruction of three independently trained float32 heads can differ by
+# one ULP across PyTorch builds.  This tolerance is still far below the margin
+# required to change any registered threshold decision; actions are audited
+# separately below.
+PROBABILITY_TOLERANCE = 2e-7
+
+
 def audit_train(args):
     import torch
 
@@ -66,7 +73,8 @@ def audit_train(args):
             tuple(FEATURE_NAMES) and torch.equal(features["features"], torch.tensor(
                 [pair_features(row["left"], row["right"]) for row in rebuilt],
                 dtype=torch.float32)),
-        "checkpoint_validation_probabilities_match": max_error <= 1e-7,
+        "checkpoint_validation_probabilities_match":
+            max_error <= PROBABILITY_TOLERANCE,
         "checkpoint_validation_actions_match": action_mismatches == 0,
         "validation_metrics_match": recomputed == summary["validation"],
         "subject_folds_disjoint": disjoint,
@@ -125,7 +133,7 @@ def audit_transfer(args):
     checks = {
         "complete_v7_identity_alignment": len(pairs) == len(v7_oof) == len(observed)
             and [row[0]["state_id"] for row in pairs] == [row["state_id"] for row in observed],
-        "fact_key_probabilities_match": max_error <= 1e-7,
+        "fact_key_probabilities_match": max_error <= PROBABILITY_TOLERANCE,
         "intersection_actions_match": action_mismatches == 0,
         "aggregate_metrics_match": metrics == summary["metrics"],
         "artifact_hashes_match": hashes_ok,

@@ -1,0 +1,3362 @@
+[
+  {
+    "config_index": 0,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 280,
+      "false_positives": 238,
+      "false_negatives": 90,
+      "true_negatives": 502,
+      "precision": 0.5405405405405406,
+      "recall": 0.7567567567567568,
+      "accuracy": 0.7045045045045045,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 16,
+          "accuracy": 0.9567567567567568,
+          "specificity": 0.9567567567567568
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 222,
+          "accuracy": 0.4,
+          "specificity": 0.4
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 280,
+          "accuracy": 0.7567567567567568,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 0,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 16,
+      "false_positives": 4,
+      "false_negatives": 354,
+      "true_negatives": 736,
+      "precision": 0.8,
+      "recall": 0.043243243243243246,
+      "accuracy": 0.6774774774774774,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 16,
+          "accuracy": 0.043243243243243246,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 0,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 0,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 0,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 0,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 0,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 1,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 280,
+      "false_positives": 238,
+      "false_negatives": 90,
+      "true_negatives": 502,
+      "precision": 0.5405405405405406,
+      "recall": 0.7567567567567568,
+      "accuracy": 0.7045045045045045,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 16,
+          "accuracy": 0.9567567567567568,
+          "specificity": 0.9567567567567568
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 222,
+          "accuracy": 0.4,
+          "specificity": 0.4
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 280,
+          "accuracy": 0.7567567567567568,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 1,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 16,
+      "false_positives": 4,
+      "false_negatives": 354,
+      "true_negatives": 736,
+      "precision": 0.8,
+      "recall": 0.043243243243243246,
+      "accuracy": 0.6774774774774774,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 16,
+          "accuracy": 0.043243243243243246,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 1,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 1,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 1,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 1,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 1,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 2,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 315,
+      "false_positives": 283,
+      "false_negatives": 55,
+      "true_negatives": 457,
+      "precision": 0.5267558528428093,
+      "recall": 0.8513513513513513,
+      "accuracy": 0.6954954954954955,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 279,
+          "accuracy": 0.24594594594594596,
+          "specificity": 0.245945945945946
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 315,
+          "accuracy": 0.8513513513513513,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 2,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 154,
+      "false_positives": 83,
+      "false_negatives": 216,
+      "true_negatives": 657,
+      "precision": 0.6497890295358649,
+      "recall": 0.41621621621621624,
+      "accuracy": 0.7306306306306306,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 83,
+          "accuracy": 0.7756756756756756,
+          "specificity": 0.7756756756756756
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 154,
+          "accuracy": 0.41621621621621624,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 2,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 64,
+      "false_positives": 15,
+      "false_negatives": 306,
+      "true_negatives": 725,
+      "precision": 0.810126582278481,
+      "recall": 0.17297297297297298,
+      "accuracy": 0.7108108108108108,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 15,
+          "accuracy": 0.9594594594594594,
+          "specificity": 0.9594594594594594
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 64,
+          "accuracy": 0.17297297297297298,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 2,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 4,
+      "false_positives": 0,
+      "false_negatives": 366,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.010810810810810811,
+      "accuracy": 0.6702702702702703,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.010810810810810811,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 2,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 2,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 2,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 3,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 315,
+      "false_positives": 283,
+      "false_negatives": 55,
+      "true_negatives": 457,
+      "precision": 0.5267558528428093,
+      "recall": 0.8513513513513513,
+      "accuracy": 0.6954954954954955,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 279,
+          "accuracy": 0.24594594594594596,
+          "specificity": 0.245945945945946
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 315,
+          "accuracy": 0.8513513513513513,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 3,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 154,
+      "false_positives": 83,
+      "false_negatives": 216,
+      "true_negatives": 657,
+      "precision": 0.6497890295358649,
+      "recall": 0.41621621621621624,
+      "accuracy": 0.7306306306306306,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 83,
+          "accuracy": 0.7756756756756756,
+          "specificity": 0.7756756756756756
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 154,
+          "accuracy": 0.41621621621621624,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 3,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 64,
+      "false_positives": 15,
+      "false_negatives": 306,
+      "true_negatives": 725,
+      "precision": 0.810126582278481,
+      "recall": 0.17297297297297298,
+      "accuracy": 0.7108108108108108,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 15,
+          "accuracy": 0.9594594594594594,
+          "specificity": 0.9594594594594594
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 64,
+          "accuracy": 0.17297297297297298,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 3,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 4,
+      "false_positives": 0,
+      "false_negatives": 366,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.010810810810810811,
+      "accuracy": 0.6702702702702703,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.010810810810810811,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 3,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 3,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 3,
+    "config": {
+      "hidden": 0,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 4,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 303,
+      "false_positives": 263,
+      "false_negatives": 67,
+      "true_negatives": 477,
+      "precision": 0.5353356890459364,
+      "recall": 0.8189189189189189,
+      "accuracy": 0.7027027027027027,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 259,
+          "accuracy": 0.3,
+          "specificity": 0.30000000000000004
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 303,
+          "accuracy": 0.8189189189189189,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 4,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 164,
+      "false_positives": 85,
+      "false_negatives": 206,
+      "true_negatives": 655,
+      "precision": 0.6586345381526104,
+      "recall": 0.44324324324324327,
+      "accuracy": 0.7378378378378379,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 85,
+          "accuracy": 0.7702702702702703,
+          "specificity": 0.7702702702702703
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 164,
+          "accuracy": 0.44324324324324327,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 4,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 86,
+      "false_positives": 25,
+      "false_negatives": 284,
+      "true_negatives": 715,
+      "precision": 0.7747747747747747,
+      "recall": 0.23243243243243245,
+      "accuracy": 0.7216216216216216,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 25,
+          "accuracy": 0.9324324324324325,
+          "specificity": 0.9324324324324325
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 86,
+          "accuracy": 0.23243243243243245,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 4,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 17,
+      "false_positives": 2,
+      "false_negatives": 353,
+      "true_negatives": 738,
+      "precision": 0.8947368421052632,
+      "recall": 0.04594594594594595,
+      "accuracy": 0.6801801801801802,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 2,
+          "accuracy": 0.9945945945945946,
+          "specificity": 0.9945945945945946
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 17,
+          "accuracy": 0.04594594594594595,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 4,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 369,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.002702702702702703,
+      "accuracy": 0.6675675675675675,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 1,
+          "accuracy": 0.002702702702702703,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 4,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 4,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 5,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 303,
+      "false_positives": 264,
+      "false_negatives": 67,
+      "true_negatives": 476,
+      "precision": 0.5343915343915344,
+      "recall": 0.8189189189189189,
+      "accuracy": 0.7018018018018019,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 260,
+          "accuracy": 0.2972972972972973,
+          "specificity": 0.29729729729729726
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 303,
+          "accuracy": 0.8189189189189189,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 5,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 165,
+      "false_positives": 85,
+      "false_negatives": 205,
+      "true_negatives": 655,
+      "precision": 0.66,
+      "recall": 0.44594594594594594,
+      "accuracy": 0.7387387387387387,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 85,
+          "accuracy": 0.7702702702702703,
+          "specificity": 0.7702702702702703
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 165,
+          "accuracy": 0.44594594594594594,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 5,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 86,
+      "false_positives": 25,
+      "false_negatives": 284,
+      "true_negatives": 715,
+      "precision": 0.7747747747747747,
+      "recall": 0.23243243243243245,
+      "accuracy": 0.7216216216216216,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 25,
+          "accuracy": 0.9324324324324325,
+          "specificity": 0.9324324324324325
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 86,
+          "accuracy": 0.23243243243243245,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 5,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 17,
+      "false_positives": 2,
+      "false_negatives": 353,
+      "true_negatives": 738,
+      "precision": 0.8947368421052632,
+      "recall": 0.04594594594594595,
+      "accuracy": 0.6801801801801802,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 2,
+          "accuracy": 0.9945945945945946,
+          "specificity": 0.9945945945945946
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 17,
+          "accuracy": 0.04594594594594595,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 5,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 369,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.002702702702702703,
+      "accuracy": 0.6675675675675675,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 1,
+          "accuracy": 0.002702702702702703,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 5,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 5,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 6,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 303,
+      "false_positives": 245,
+      "false_negatives": 67,
+      "true_negatives": 495,
+      "precision": 0.5529197080291971,
+      "recall": 0.8189189189189189,
+      "accuracy": 0.7189189189189189,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 241,
+          "accuracy": 0.34864864864864864,
+          "specificity": 0.34864864864864864
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 303,
+          "accuracy": 0.8189189189189189,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 6,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 160,
+      "false_positives": 85,
+      "false_negatives": 210,
+      "true_negatives": 655,
+      "precision": 0.6530612244897959,
+      "recall": 0.43243243243243246,
+      "accuracy": 0.7342342342342343,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 81,
+          "accuracy": 0.7810810810810811,
+          "specificity": 0.7810810810810811
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 160,
+          "accuracy": 0.43243243243243246,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 6,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 94,
+      "false_positives": 29,
+      "false_negatives": 276,
+      "true_negatives": 711,
+      "precision": 0.7642276422764228,
+      "recall": 0.25405405405405407,
+      "accuracy": 0.7252252252252253,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 3,
+          "accuracy": 0.9918918918918919,
+          "specificity": 0.9918918918918919
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 26,
+          "accuracy": 0.9297297297297298,
+          "specificity": 0.9297297297297298
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 94,
+          "accuracy": 0.25405405405405407,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 6,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 27,
+      "false_positives": 4,
+      "false_negatives": 343,
+      "true_negatives": 736,
+      "precision": 0.8709677419354839,
+      "recall": 0.07297297297297298,
+      "accuracy": 0.6873873873873874,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 27,
+          "accuracy": 0.07297297297297298,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 6,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 6,
+      "false_positives": 0,
+      "false_negatives": 364,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.016216216216216217,
+      "accuracy": 0.6720720720720721,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 6,
+          "accuracy": 0.016216216216216217,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 6,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 6,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 7,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 304,
+      "false_positives": 244,
+      "false_negatives": 66,
+      "true_negatives": 496,
+      "precision": 0.5547445255474452,
+      "recall": 0.8216216216216217,
+      "accuracy": 0.7207207207207207,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 240,
+          "accuracy": 0.35135135135135137,
+          "specificity": 0.3513513513513513
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 304,
+          "accuracy": 0.8216216216216217,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 7,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 157,
+      "false_positives": 84,
+      "false_negatives": 213,
+      "true_negatives": 656,
+      "precision": 0.6514522821576764,
+      "recall": 0.4243243243243243,
+      "accuracy": 0.7324324324324324,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 80,
+          "accuracy": 0.7837837837837838,
+          "specificity": 0.7837837837837838
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 157,
+          "accuracy": 0.4243243243243243,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 7,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 93,
+      "false_positives": 29,
+      "false_negatives": 277,
+      "true_negatives": 711,
+      "precision": 0.7622950819672131,
+      "recall": 0.25135135135135134,
+      "accuracy": 0.7243243243243244,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 3,
+          "accuracy": 0.9918918918918919,
+          "specificity": 0.9918918918918919
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 26,
+          "accuracy": 0.9297297297297298,
+          "specificity": 0.9297297297297298
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 93,
+          "accuracy": 0.25135135135135134,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 7,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 27,
+      "false_positives": 4,
+      "false_negatives": 343,
+      "true_negatives": 736,
+      "precision": 0.8709677419354839,
+      "recall": 0.07297297297297298,
+      "accuracy": 0.6873873873873874,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 27,
+          "accuracy": 0.07297297297297298,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 7,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 6,
+      "false_positives": 0,
+      "false_negatives": 364,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.016216216216216217,
+      "accuracy": 0.6720720720720721,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 6,
+          "accuracy": 0.016216216216216217,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 7,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 7,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 8,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 306,
+      "false_positives": 266,
+      "false_negatives": 64,
+      "true_negatives": 474,
+      "precision": 0.534965034965035,
+      "recall": 0.827027027027027,
+      "accuracy": 0.7027027027027027,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 262,
+          "accuracy": 0.2918918918918919,
+          "specificity": 0.2918918918918919
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 306,
+          "accuracy": 0.827027027027027,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 8,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 166,
+      "false_positives": 86,
+      "false_negatives": 204,
+      "true_negatives": 654,
+      "precision": 0.6587301587301587,
+      "recall": 0.4486486486486487,
+      "accuracy": 0.7387387387387387,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 1,
+          "accuracy": 0.9972972972972973,
+          "specificity": 0.9972972972972973
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 85,
+          "accuracy": 0.7702702702702703,
+          "specificity": 0.7702702702702703
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 166,
+          "accuracy": 0.4486486486486487,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 8,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 87,
+      "false_positives": 27,
+      "false_negatives": 283,
+      "true_negatives": 713,
+      "precision": 0.7631578947368421,
+      "recall": 0.23513513513513515,
+      "accuracy": 0.7207207207207207,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 27,
+          "accuracy": 0.927027027027027,
+          "specificity": 0.927027027027027
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 87,
+          "accuracy": 0.23513513513513515,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 8,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 23,
+      "false_positives": 3,
+      "false_negatives": 347,
+      "true_negatives": 737,
+      "precision": 0.8846153846153846,
+      "recall": 0.062162162162162166,
+      "accuracy": 0.6846846846846847,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 3,
+          "accuracy": 0.9918918918918919,
+          "specificity": 0.9918918918918919
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 23,
+          "accuracy": 0.062162162162162166,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 8,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 369,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.002702702702702703,
+      "accuracy": 0.6675675675675675,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 1,
+          "accuracy": 0.002702702702702703,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 8,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 8,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 9,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 307,
+      "false_positives": 267,
+      "false_negatives": 63,
+      "true_negatives": 473,
+      "precision": 0.5348432055749129,
+      "recall": 0.8297297297297297,
+      "accuracy": 0.7027027027027027,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 263,
+          "accuracy": 0.2891891891891892,
+          "specificity": 0.28918918918918923
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 307,
+          "accuracy": 0.8297297297297297,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 9,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 166,
+      "false_positives": 86,
+      "false_negatives": 204,
+      "true_negatives": 654,
+      "precision": 0.6587301587301587,
+      "recall": 0.4486486486486487,
+      "accuracy": 0.7387387387387387,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 1,
+          "accuracy": 0.9972972972972973,
+          "specificity": 0.9972972972972973
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 85,
+          "accuracy": 0.7702702702702703,
+          "specificity": 0.7702702702702703
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 166,
+          "accuracy": 0.4486486486486487,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 9,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 87,
+      "false_positives": 27,
+      "false_negatives": 283,
+      "true_negatives": 713,
+      "precision": 0.7631578947368421,
+      "recall": 0.23513513513513515,
+      "accuracy": 0.7207207207207207,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 27,
+          "accuracy": 0.927027027027027,
+          "specificity": 0.927027027027027
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 87,
+          "accuracy": 0.23513513513513515,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 9,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 23,
+      "false_positives": 3,
+      "false_negatives": 347,
+      "true_negatives": 737,
+      "precision": 0.8846153846153846,
+      "recall": 0.062162162162162166,
+      "accuracy": 0.6846846846846847,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 3,
+          "accuracy": 0.9918918918918919,
+          "specificity": 0.9918918918918919
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 23,
+          "accuracy": 0.062162162162162166,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 9,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 1,
+      "false_positives": 0,
+      "false_negatives": 369,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.002702702702702703,
+      "accuracy": 0.6675675675675675,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 1,
+          "accuracy": 0.002702702702702703,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 9,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 9,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 10,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 298,
+      "false_positives": 245,
+      "false_negatives": 72,
+      "true_negatives": 495,
+      "precision": 0.5488029465930019,
+      "recall": 0.8054054054054054,
+      "accuracy": 0.7144144144144144,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 241,
+          "accuracy": 0.34864864864864864,
+          "specificity": 0.34864864864864864
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 298,
+          "accuracy": 0.8054054054054054,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 10,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 167,
+      "false_positives": 90,
+      "false_negatives": 203,
+      "true_negatives": 650,
+      "precision": 0.6498054474708171,
+      "recall": 0.45135135135135135,
+      "accuracy": 0.7360360360360361,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 86,
+          "accuracy": 0.7675675675675676,
+          "specificity": 0.7675675675675675
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 167,
+          "accuracy": 0.45135135135135135,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 10,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 102,
+      "false_positives": 34,
+      "false_negatives": 268,
+      "true_negatives": 706,
+      "precision": 0.75,
+      "recall": 0.2756756756756757,
+      "accuracy": 0.7279279279279279,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 2,
+          "accuracy": 0.9945945945945946,
+          "specificity": 0.9945945945945946
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 32,
+          "accuracy": 0.9135135135135135,
+          "specificity": 0.9135135135135135
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 102,
+          "accuracy": 0.2756756756756757,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 10,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 33,
+      "false_positives": 7,
+      "false_negatives": 337,
+      "true_negatives": 733,
+      "precision": 0.825,
+      "recall": 0.0891891891891892,
+      "accuracy": 0.69009009009009,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 1,
+          "accuracy": 0.9972972972972973,
+          "specificity": 0.9972972972972973
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 6,
+          "accuracy": 0.9837837837837838,
+          "specificity": 0.9837837837837837
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 33,
+          "accuracy": 0.0891891891891892,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 10,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 4,
+      "false_positives": 0,
+      "false_negatives": 366,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.010810810810810811,
+      "accuracy": 0.6702702702702703,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.010810810810810811,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 10,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 10,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.0
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 11,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.5,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 295,
+      "false_positives": 239,
+      "false_negatives": 75,
+      "true_negatives": 501,
+      "precision": 0.552434456928839,
+      "recall": 0.7972972972972973,
+      "accuracy": 0.7171171171171171,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 235,
+          "accuracy": 0.36486486486486486,
+          "specificity": 0.3648648648648649
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 295,
+          "accuracy": 0.7972972972972973,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 11,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 167,
+      "false_positives": 90,
+      "false_negatives": 203,
+      "true_negatives": 650,
+      "precision": 0.6498054474708171,
+      "recall": 0.45135135135135135,
+      "accuracy": 0.7360360360360361,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.9891891891891892,
+          "specificity": 0.9891891891891892
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 86,
+          "accuracy": 0.7675675675675676,
+          "specificity": 0.7675675675675675
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 167,
+          "accuracy": 0.45135135135135135,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 11,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.8,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 102,
+      "false_positives": 33,
+      "false_negatives": 268,
+      "true_negatives": 707,
+      "precision": 0.7555555555555555,
+      "recall": 0.2756756756756757,
+      "accuracy": 0.7288288288288288,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 2,
+          "accuracy": 0.9945945945945946,
+          "specificity": 0.9945945945945946
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 31,
+          "accuracy": 0.9162162162162162,
+          "specificity": 0.9162162162162162
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 102,
+          "accuracy": 0.2756756756756757,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 11,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.9,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 32,
+      "false_positives": 8,
+      "false_negatives": 338,
+      "true_negatives": 732,
+      "precision": 0.8,
+      "recall": 0.08648648648648649,
+      "accuracy": 0.6882882882882883,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 1,
+          "accuracy": 0.9972972972972973,
+          "specificity": 0.9972972972972973
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 7,
+          "accuracy": 0.981081081081081,
+          "specificity": 0.981081081081081
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 32,
+          "accuracy": 0.08648648648648649,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 11,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.95,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 4,
+      "false_positives": 0,
+      "false_negatives": 366,
+      "true_negatives": 740,
+      "precision": 1.0,
+      "recall": 0.010810810810810811,
+      "accuracy": 0.6702702702702703,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 4,
+          "accuracy": 0.010810810810810811,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 11,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.98,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  {
+    "config_index": 11,
+    "config": {
+      "hidden": 32,
+      "learning_rate": 0.005,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.99,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 370,
+      "true_negatives": 740,
+      "precision": 0.0,
+      "recall": 0.0,
+      "accuracy": 0.6666666666666666,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 0.0,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  }
+]

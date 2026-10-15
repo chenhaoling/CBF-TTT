@@ -1,0 +1,137 @@
+{
+  "protocol": "qwen_natural_forgetting_fact_key_v8",
+  "stage": "independent_counterfact_validation",
+  "pairs": 5238,
+  "excluded": {
+    "missing_same_subject_different_relation": 20173
+  },
+  "pair_distribution": {
+    "negative_same_relation_different_subject": 1746,
+    "negative_same_subject_different_relation": 1746,
+    "positive_same_fact_key": 1746
+  },
+  "fold_distribution": {
+    "0": 1062,
+    "1": 918,
+    "2": 1077,
+    "3": 1110,
+    "4": 1071
+  },
+  "fold_subject_hashes": {
+    "0": "d45c448ba077206e88f39a0d80a0651749c3c69b5787e178504e9f5d1d89e976",
+    "1": "5049c7fda3ba9026337e6948fc0760805f46316eedc901fc252b4f7f8b3e561b",
+    "2": "79cd1b18db248ebd159397a8c3720a04ad151e76db5233cc61009d0b5a2a55c8",
+    "3": "7cac6899169e3e9d7618ed438b6e9e8c9f13156620a07dc1ddd0115e07258dd0",
+    "4": "a6afc7235dc1cddb209148aa5a6dea30093f0fa74b4d398263e604c181f4aeca"
+  },
+  "feature_names": [
+    "entity_anchor_both_nonempty",
+    "entity_anchor_jaccard",
+    "entity_anchor_containment",
+    "entity_anchor_exact",
+    "entity_anchor_count_ratio",
+    "full_lexical_jaccard",
+    "full_lexical_containment",
+    "full_length_ratio",
+    "relation_lexical_jaccard",
+    "relation_lexical_containment",
+    "relation_length_ratio"
+  ],
+  "selection": {
+    "config_index": 5,
+    "config": {
+      "hidden": 16,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    },
+    "threshold": 0.7,
+    "metrics": {
+      "examples": 1110,
+      "true_positives": 165,
+      "false_positives": 85,
+      "false_negatives": 205,
+      "true_negatives": 655,
+      "precision": 0.66,
+      "recall": 0.44594594594594594,
+      "accuracy": 0.7387387387387387,
+      "by_type": {
+        "negative_same_relation_different_subject": {
+          "examples": 370,
+          "accepted": 0,
+          "accuracy": 1.0,
+          "specificity": 1.0
+        },
+        "negative_same_subject_different_relation": {
+          "examples": 370,
+          "accepted": 85,
+          "accuracy": 0.7702702702702703,
+          "specificity": 0.7702702702702703
+        },
+        "positive_same_fact_key": {
+          "examples": 370,
+          "accepted": 165,
+          "accuracy": 0.44594594594594594,
+          "specificity": null
+        }
+      }
+    },
+    "feasible": false
+  },
+  "validation": {
+    "examples": 1071,
+    "true_positives": 176,
+    "false_positives": 84,
+    "false_negatives": 181,
+    "true_negatives": 630,
+    "precision": 0.676923076923077,
+    "recall": 0.49299719887955185,
+    "accuracy": 0.7525676937441643,
+    "by_type": {
+      "negative_same_relation_different_subject": {
+        "examples": 357,
+        "accepted": 0,
+        "accuracy": 1.0,
+        "specificity": 1.0
+      },
+      "negative_same_subject_different_relation": {
+        "examples": 357,
+        "accepted": 84,
+        "accuracy": 0.7647058823529411,
+        "specificity": 0.7647058823529411
+      },
+      "positive_same_fact_key": {
+        "examples": 357,
+        "accepted": 176,
+        "accuracy": 0.49299719887955185,
+        "specificity": null
+      }
+    }
+  },
+  "gate": {
+    "checks": {
+      "validation_precision_at_least_point_99": false,
+      "validation_recall_at_least_point_90": false,
+      "both_negative_specificities_at_least_point_98": false,
+      "at_least_100_validation_examples_per_type": true,
+      "subject_folds_disjoint": true,
+      "tune_selected_without_validation": true,
+      "zsre_sources_not_loaded": true
+    },
+    "independent_validation_passed": false,
+    "zsre_transfer_authorized": false
+  },
+  "hashes": {
+    "plan": "a0c81c0bd4daf008a3c09a5bdbc5e08f30dd17ae971a7e3e6a10c260e5636723",
+    "counterfact_source": "d017056125178a13728594e66a801357a8db9ed7973a7425554bb4271de9fc6f",
+    "corpus": "94a910bc4525bfc5c3a831c971f0c3ae0c00ba4738f2e87573df9410bba5fdb9",
+    "features": "2ab4ad9a4f8008e1870ac523f5b0f310b9781f178e2cdd3025e42419555e8c24",
+    "checkpoint": "dfa219c6431c377e90b871f47fdc9ae1cae6b8a6dbd4b16c104e2e7949d15093",
+    "tune_search": "ecf31f0b525939496093c5833f007a7f6c82514f8fce570d96847d1e588c76e8",
+    "validation_predictions": "51bf206a54b3f11a99e5f8c262af22fb95c411a1405a659c4b139510c4896a5b"
+  },
+  "seconds": 12.419455420225859,
+  "counterfact_loaded": true,
+  "zsre_calibration_loaded": false,
+  "zsre_test_loaded": false,
+  "external_benchmarks_loaded": false
+}
