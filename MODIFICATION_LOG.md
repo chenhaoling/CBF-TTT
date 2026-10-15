@@ -4881,3 +4881,10 @@ instead of the erased record's surface. The corrected builder separates
 queries the registered retained/anchor keys after reset. A regression test
 requires those answers to be `unknown` on their original subjects. The first
 root remains immutable; retry1 is the only candidate for scientific use.
+
+Added `scripts/audit_qwen_utility_semantic_record_gate_v1_data.py` and focused
+auditor tests. The auditor independently rebuilds every episode from the
+hash-locked public sources, compares exact rows and file hashes, checks relation
+isolation, twin structure, input/audit separation, reset causality, registered
+counts and all sealed/model-free flags. Its result is required before any Qwen
+feature extraction or counterfactual label scoring.
