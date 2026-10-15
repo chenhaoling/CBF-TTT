@@ -55,7 +55,11 @@ not discard rare safe-oracle classes.
 
 The primary `barrier_q` model shares a state encoder and emits per-action gain,
 NLL-benefit and risk logits.  Optimize Huber loss for the two continuous heads
-and weighted binary cross entropy for risk.  At inference:
+and weighted binary cross entropy for risk.  Sum the two mean Huber losses and
+the registered risk-weight multiple of mean BCE.  Compute each action's BCE
+positive weight from outer-training negatives/positives, clipped to `[1, 20]`;
+retain's all-negative risk head uses weight one.  The direct classifier uses
+inverse-frequency class weights computed on its training fold.  At inference:
 
 1. discard actions whose predicted risk exceeds the selected barrier
    probability;
