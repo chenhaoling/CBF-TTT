@@ -1,0 +1,284 @@
+{
+  "protocol": "qwen_natural_forgetting_utility_pilot_v1",
+  "stage": "calibration_pilot",
+  "sessions": 16,
+  "labels": 94,
+  "registered_grid": [
+    {
+      "scope": "global",
+      "alpha": 0.0,
+      "canonical": "global_a0"
+    },
+    {
+      "scope": "global",
+      "alpha": 0.5,
+      "canonical": "global_a05"
+    },
+    {
+      "scope": "global",
+      "alpha": 1.0,
+      "canonical": "retain_all"
+    },
+    {
+      "scope": "last1",
+      "alpha": 0.0,
+      "canonical": "last1_a0"
+    },
+    {
+      "scope": "last1",
+      "alpha": 0.5,
+      "canonical": "last1_a05"
+    },
+    {
+      "scope": "last1",
+      "alpha": 1.0,
+      "canonical": "retain_all"
+    },
+    {
+      "scope": "last2",
+      "alpha": 0.0,
+      "canonical": "last2_a0"
+    },
+    {
+      "scope": "last2",
+      "alpha": 0.5,
+      "canonical": "last2_a05"
+    },
+    {
+      "scope": "last2",
+      "alpha": 1.0,
+      "canonical": "retain_all"
+    },
+    {
+      "scope": "scope_top1",
+      "alpha": 0.0,
+      "canonical": "scope_top1_a0"
+    },
+    {
+      "scope": "scope_top1",
+      "alpha": 0.5,
+      "canonical": "scope_top1_a05"
+    },
+    {
+      "scope": "scope_top1",
+      "alpha": 1.0,
+      "canonical": "retain_all"
+    },
+    {
+      "scope": "hybrid",
+      "alpha": 0.0,
+      "canonical": "hybrid_a0"
+    },
+    {
+      "scope": "hybrid",
+      "alpha": 0.5,
+      "canonical": "hybrid_a05"
+    },
+    {
+      "scope": "hybrid",
+      "alpha": 1.0,
+      "canonical": "retain_all"
+    }
+  ],
+  "unique_actions": [
+    "retain_all",
+    "global_a0",
+    "global_a05",
+    "last1_a0",
+    "last1_a05",
+    "last2_a0",
+    "last2_a05",
+    "scope_top1_a0",
+    "scope_top1_a05",
+    "hybrid_a0",
+    "hybrid_a05"
+  ],
+  "label_distribution": {
+    "global_a0": 8,
+    "global_a05": 2,
+    "hybrid_a0": 2,
+    "last1_a0": 3,
+    "last1_a05": 1,
+    "last2_a0": 1,
+    "retain_all": 15,
+    "scope_top1_a0": 62
+  },
+  "safe_oracle_nonretain_rate": 0.8404255319148937,
+  "retain_candidate_accuracy": 0.7832512315270936,
+  "safe_oracle_candidate_accuracy": 0.8243021346469622,
+  "safe_oracle_gain": 0.041050903119868636,
+  "safe_oracle_gain_session_bootstrap_95ci": [
+    0.035416666666666666,
+    0.0474609375
+  ],
+  "session_gains": {
+    "27ec592a66272b53": 0.03125,
+    "3d64b681ea681c51": 0.04375,
+    "47337ce8114f9263": 0.03125,
+    "6779231d3341b57c": 0.03125,
+    "7bf71753a47ff1d8": 0.021875,
+    "8629a6b86aebe7c8": 0.041666666666666664,
+    "8dd243b318c5f7e4": 0.040625,
+    "a47453d0c7d6b572": 0.0375,
+    "b1fbf77e5b68cfe5": 0.040625,
+    "bd112b50e8f9b100": 0.065625,
+    "c3f16f748df19f8d": 0.071875,
+    "d684a7f09e68683c": 0.0375,
+    "ed46a2a54d04e552": 0.03125,
+    "f1096d5782f6cf43": 0.040625,
+    "f63fdb1390194d81": 0.05,
+    "fe3089ee79b7f846": 0.040625
+  },
+  "added_unrelated_errors": 0,
+  "resources": {
+    "median_label_seconds": 0.2535930434241891,
+    "p90_label_seconds": 18.207801105454564,
+    "max_label_seconds": 21.28963283263147,
+    "peak_allocated_gib": 8.058304786682129,
+    "peak_reserved_gib": 10.861328125,
+    "two_gpu_critical_path_seconds": 173.63480019010603,
+    "shards": [
+      {
+        "protocol": "qwen_natural_forgetting_utility_pilot_v1",
+        "stage": "calibration_pilot",
+        "shard": 0,
+        "num_shards": 2,
+        "sessions": 8,
+        "labels": 48,
+        "seconds": 173.63480019010603,
+        "peak_allocated_gib": 7.994431495666504,
+        "peak_reserved_gib": 9.349609375,
+        "labels_sha256": "df978dab5ad8fa7d8405a69278e373fdeecf5120a18370ea316a8b3494853e92",
+        "sealed_inputs": {
+          "data_manifest": "ceb2c85ae2a01fd6de7ef08d68004e58e43b8ae424708bea4fa313344d1a7ba7",
+          "v5_checkpoint": "3a0ba5a83ece4850dd3824fc2277dc2e0dfdb04902e361dbff764e1b630abadc",
+          "transforms": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+          "scope": "0ed4dab8b77fd0fb91fdd49720c783261ab2fd5c64cd705ebe36346d99615619"
+        },
+        "plan_sha256": "ce0c2c5a7901188611576f710a578c447ed37b7b68ff1afe890233bc93a179f3",
+        "feature_meta": {
+          "unique_texts": 128,
+          "unique_pairs": 1536,
+          "embedding_hashes": {
+            "5101": "e12161659da6c13252f14a836f11dc0d38a1157dfc4af90f64c8c3479f49dc50",
+            "5102": "23294f513ff9a26c5b84b3a0aa7b0fd20b3469a7e63aa0eb289ca1ca40c44f87",
+            "5103": "94c440c3762e53239d06ae36dda582b05558c340899c4ee95426b27af1db100c"
+          },
+          "pair_features_sha256": "0d5ba13ffacf4b4d95b38905489a665648ea316f49317e507ba861d33780e0d2"
+        },
+        "reader_selected": {
+          "hidden": 32,
+          "penalty": 1.0,
+          "learning_rate": 0.005,
+          "epochs": 50,
+          "threshold": 0.3,
+          "correct_top_recall": 0.9525348544120789,
+          "natural_correct_top_examples": 4951,
+          "natural_wrong_top_specificity": 0.8860103487968445,
+          "natural_wrong_top_examples": 193,
+          "no_match_specificity": 0.9458204507827759,
+          "no_match_examples": 646,
+          "balanced_accuracy": 0.9281218846638998
+        },
+        "reader_threshold": 0.3,
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "development_loaded": false,
+        "test_loaded": false,
+        "external_benchmarks_loaded": false
+      },
+      {
+        "protocol": "qwen_natural_forgetting_utility_pilot_v1",
+        "stage": "calibration_pilot",
+        "shard": 1,
+        "num_shards": 2,
+        "sessions": 8,
+        "labels": 46,
+        "seconds": 163.98194047808647,
+        "peak_allocated_gib": 7.985865592956543,
+        "peak_reserved_gib": 10.861328125,
+        "labels_sha256": "d77f2fdbead4e9c299fb18425200b007eedba868db0c57e560c21ae44fc2a3be",
+        "sealed_inputs": {
+          "data_manifest": "ceb2c85ae2a01fd6de7ef08d68004e58e43b8ae424708bea4fa313344d1a7ba7",
+          "v5_checkpoint": "3a0ba5a83ece4850dd3824fc2277dc2e0dfdb04902e361dbff764e1b630abadc",
+          "transforms": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+          "scope": "0ed4dab8b77fd0fb91fdd49720c783261ab2fd5c64cd705ebe36346d99615619"
+        },
+        "plan_sha256": "ce0c2c5a7901188611576f710a578c447ed37b7b68ff1afe890233bc93a179f3",
+        "feature_meta": {
+          "unique_texts": 120,
+          "unique_pairs": 1392,
+          "embedding_hashes": {
+            "5101": "cb5cf9bbc3650e69b46fd32837858bc54150f4123502d8625bf9ce8d5de37aef",
+            "5102": "602b271eeb88e4a21b2b531ca7dff634980c995f4e4d2cf04b3a684a4e43a465",
+            "5103": "dbc819d31c4ebe16123f4b85caf5c07dc60522658d7e5eb1e48b94ee4b1c3882"
+          },
+          "pair_features_sha256": "ecb5da18c752df592e31e84cdc1edc9304a2332935b4f2db6e899e8603bf5e2c"
+        },
+        "reader_selected": {
+          "hidden": 32,
+          "penalty": 1.0,
+          "learning_rate": 0.005,
+          "epochs": 50,
+          "threshold": 0.3,
+          "correct_top_recall": 0.9525348544120789,
+          "natural_correct_top_examples": 4951,
+          "natural_wrong_top_specificity": 0.8860103487968445,
+          "natural_wrong_top_examples": 193,
+          "no_match_specificity": 0.9458204507827759,
+          "no_match_examples": 646,
+          "balanced_accuracy": 0.9281218846638998
+        },
+        "reader_threshold": 0.3,
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "development_loaded": false,
+        "test_loaded": false,
+        "external_benchmarks_loaded": false
+      }
+    ]
+  },
+  "gate": {
+    "checks": {
+      "at_least_90_labels": true,
+      "complete_unique_and_registered_grid": true,
+      "nonretain_rate_at_least_point_10": true,
+      "safe_oracle_gain_at_least_point_01": true,
+      "zero_added_unrelated_errors": true,
+      "at_least_three_selected_actions": true,
+      "median_label_seconds_at_most_120": true,
+      "peak_allocated_gib_at_most_28": true
+    },
+    "scale_to_formal": true,
+    "pilot_evidence_ready": true
+  },
+  "calibration_scored": true,
+  "development_loaded": false,
+  "test_loaded": false,
+  "external_benchmarks_loaded": false,
+  "label_files_sha256": {
+    "labels_shard0.jsonl": "df978dab5ad8fa7d8405a69278e373fdeecf5120a18370ea316a8b3494853e92",
+    "labels_shard1.jsonl": "d77f2fdbead4e9c299fb18425200b007eedba868db0c57e560c21ae44fc2a3be"
+  },
+  "plan_sha256": "ce0c2c5a7901188611576f710a578c447ed37b7b68ff1afe890233bc93a179f3",
+  "sealed_inputs": {
+    "data_manifest": "ceb2c85ae2a01fd6de7ef08d68004e58e43b8ae424708bea4fa313344d1a7ba7",
+    "v5_checkpoint": "3a0ba5a83ece4850dd3824fc2277dc2e0dfdb04902e361dbff764e1b630abadc",
+    "transforms": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+    "scope": "0ed4dab8b77fd0fb91fdd49720c783261ab2fd5c64cd705ebe36346d99615619"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "protocol": "qwen_natural_forgetting_utility_pilot_v1",
+  "stage": "calibration_pilot",
+  "shard": 0,
+  "num_shards": 2,
+  "sessions": 8,
+  "labels": 48,
+  "seconds": 173.63480019010603,
+  "peak_allocated_gib": 7.994431495666504,
+  "peak_reserved_gib": 9.349609375,
+  "labels_sha256": "df978dab5ad8fa7d8405a69278e373fdeecf5120a18370ea316a8b3494853e92",
+  "sealed_inputs": {
+    "data_manifest": "ceb2c85ae2a01fd6de7ef08d68004e58e43b8ae424708bea4fa313344d1a7ba7",
+    "v5_checkpoint": "3a0ba5a83ece4850dd3824fc2277dc2e0dfdb04902e361dbff764e1b630abadc",
+    "transforms": "6f6a696005185d80d6b8f468fa6442146dc8d9683e232e7a591676ba9515c378",
+    "scope": "0ed4dab8b77fd0fb91fdd49720c783261ab2fd5c64cd705ebe36346d99615619"
+  },
+  "plan_sha256": "ce0c2c5a7901188611576f710a578c447ed37b7b68ff1afe890233bc93a179f3",
+  "feature_meta": {
+    "unique_texts": 128,
+    "unique_pairs": 1536,
+    "embedding_hashes": {
+      "5101": "e12161659da6c13252f14a836f11dc0d38a1157dfc4af90f64c8c3479f49dc50",
+      "5102": "23294f513ff9a26c5b84b3a0aa7b0fd20b3469a7e63aa0eb289ca1ca40c44f87",
+      "5103": "94c440c3762e53239d06ae36dda582b05558c340899c4ee95426b27af1db100c"
+    },
+    "pair_features_sha256": "0d5ba13ffacf4b4d95b38905489a665648ea316f49317e507ba861d33780e0d2"
+  },
+  "reader_selected": {
+    "hidden": 32,
+    "penalty": 1.0,
+    "learning_rate": 0.005,
+    "epochs": 50,
+    "threshold": 0.3,
+    "correct_top_recall": 0.9525348544120789,
+    "natural_correct_top_examples": 4951,
+    "natural_wrong_top_specificity": 0.8860103487968445,
+    "natural_wrong_top_examples": 193,
+    "no_match_specificity": 0.9458204507827759,
+    "no_match_examples": 646,
+    "balanced_accuracy": 0.9281218846638998
+  },
+  "reader_threshold": 0.3,
+  "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "development_loaded": false,
+  "test_loaded": false,
+  "external_benchmarks_loaded": false
+}

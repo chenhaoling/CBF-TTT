@@ -4083,3 +4083,35 @@ evaluator, unit test, runner and independent auditor. It evaluates the frozen
 V5 checkpoint against V1, oracle and zero arms on 64 subject-disjoint sessions
 and 640 in-fold no-match controls. It trains or selects no parameter and keeps
 test and external benchmarks sealed.
+
+The frozen development release passed all seven gates and its independent
+audit passed all seven checks. V5 reached 97.01% candidate accuracy, 96.19%
+final candidate accuracy, 82.23% final generation exact and 95.04% on
+rephrased queries. It improved over V1 by 9.80 points with 95% CI
+`[8.32, 11.29]`, and remained 1.89 points below the oracle reader. The V5
+reader is therefore frozen as infrastructure for forgetting-policy work.
+
+## 2026-10-15: counterfactual forgetting-utility labels
+
+Added `QWEN_NATURAL_FORGETTING_UTILITY_PILOT_V1_PLAN.md` before scoring. It
+registers a calibration-only, single-intervention future replay over global,
+last-1, last-2, frozen-scope-top and hybrid ranges with the requested
+`{0, 0.5, 1}` strength grid. Alpha-one aliases are executed once, giving 15
+registered grid points and 11 unique states. Labels maximize future candidate
+correctness under a control-barrier constraint that forbids additional errors
+on unrelated chains; NLL and memory mass are tie breakers.
+
+Added the label builder, two-GPU refusal-to-overwrite runner, five focused unit
+tests and an independent auditor. The 16-session pilot produced 94 labels and
+passed all eight scaling gates. Safe oracle selection improved future accuracy
+from 78.33% to 82.43%, a 4.11-point gain with session-bootstrap 95% CI
+`[3.54, 4.75]`, while adding zero unrelated errors. The audit passed all eight
+checks. Median/p90 label time was 0.254/18.21 seconds and peak allocated memory
+was 8.06 GiB. Full raw results and a readable report are archived under
+`qwen_natural_forgetting_utility_pilot_v1/`.
+
+Added `QWEN_NATURAL_FORGETTING_UTILITY_FORMAL_V1_PLAN.md` and the formal corpus
+builder/runner after the audited pilot release. The formal protocol covers all
+65 sealed calibration sessions and all 774 events, retains the complete action
+grid and keeps development, test and external benchmarks unopened. Its gate
+must pass before grouped out-of-fold controller training.
