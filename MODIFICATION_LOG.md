@@ -5773,3 +5773,19 @@ all three 74-feature checkpoints, reconstructs predictions, fact-key-projected
 actions, policy metrics, benefit/risk probability diagnostics and the complete
 extended release gate, while verifying hashes and held-out seals.  Only an
 integrity-audited gate pass can authorize a later LoCoMo protocol.
+
+V8 training completed in 29.26 seconds and its independent auditor
+reconstructed all checkpoints, probability diagnostics, actions and gates.
+TempLAMA gained 4.214 points with 97.78% oracle-gap closure; LAMA gained 1.189
+points with 61.71% closure.  All seeds/domains improved with zero collateral,
+and LAMA benefit AP rose by 0.0921 to 0.3381.  Release failed because LAMA
+remained below 1.5 points and the gain over V7 was 0.330 rather than the
+registered 0.5 point.  The posterior-feature iteration is closed.
+
+Registered `QWEN_UTILITY_RECORD_CONTROLLER_V9_PAIRWISE_UTILITY_PLAN.md` before
+any V9 fit.  V9 uses the audited frozen candidate/incoming relation-slot
+vectors directly through a shared 128-dimensional projection and optimizes a
+within-boundary counterfactual-benefit ranking loss.  Its risk network is
+isolated to the original 66 scalar features.  Two fixed ablations separate
+pair representation from ranking loss; the release gate retains all safety,
+dual-domain and mechanism requirements and requires at least 1.5 LAMA points.
