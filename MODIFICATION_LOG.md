@@ -5113,6 +5113,16 @@ threshold. Controller and baseline evaluation on development remains useful
 as a diagnostic, but V1 cannot open the sealed confirmation relations unless
 a new, prospectively registered branch supplies an independent release path.
 
+Added the development counterpart
+`tasks/extract_qwen_utility_record_controller_v1_development_features.py`, its
+two-GPU runner and
+`scripts/audit_qwen_utility_record_controller_v1_development_features.py`.
+It applies the already frozen 66-dimensional feature tensor and safe-binary
+teacher reconstruction without fitting normalization or changing a feature.
+The independent auditor reconstructs all deterministic components and targets,
+checks exact boundary coverage, frozen-model/input hashes and confirmation
+seals before diagnostic controller evaluation.
+
 Added `tasks/train_qwen_utility_record_controller_v1.py`, focused tests, a
 non-overwriting runner and
 `scripts/audit_qwen_utility_record_controller_v1_training.py`. Training uses
