@@ -21,7 +21,10 @@ test/external data remain sealed.
 
 Require the audited V2 feature SHA256
 `1d3f89ee7db51208b1d1934d7229a6b1c5d3e302cc2ebc6a67b8c6c09535a140`
-and the immutable V4 search.  Admit only V4 records satisfying all of:
+and V4 search/summary SHA256
+`bc75b7bcfec1117113734d53ac744edbe3aeb2e2e0fdd1ddb8ecdea9a8296f33` /
+`2b7217a295bfb56b029120760b7bd4cbf47d63aa0f8330bd626ae94bfe24167e`.
+Admit only V4 records satisfying all of:
 
 - correct-top recall at least 92%;
 - natural wrong-top specificity at least 85%;
