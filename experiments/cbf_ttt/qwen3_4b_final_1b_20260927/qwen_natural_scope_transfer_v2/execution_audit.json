@@ -1,0 +1,48 @@
+{
+  "protocol": "qwen_natural_scope_transfer_v2_audit",
+  "checks": {
+    "terminal_status_and_exit": true,
+    "protocol_and_seals": true,
+    "artifact_hashes": true,
+    "feature_shapes_and_strata": true,
+    "search_selection": true,
+    "oof_coverage": true,
+    "independent_aggregate": true,
+    "independent_gate": true
+  },
+  "passed": true,
+  "recomputed": {
+    "candidate_accuracy": 0.9154354587869362,
+    "answer_nll": 0.585047611998727,
+    "oracle_oracle_candidate_accuracy": 0.9830870917573873,
+    "final_candidate_accuracy": 0.9060077519379846,
+    "final_generation_exact": 0.7248062015503876,
+    "gain_over_v1_oracle_auto": 0.045155038759689924,
+    "gain_bootstrap_95ci": [
+      0.033139534883720935,
+      0.05755813953488372
+    ],
+    "subject_groups": 258,
+    "score_sources": {
+      "new_wrong_top": 11,
+      "oracle_oracle": 4408,
+      "zero": 725
+    },
+    "by_surface": {
+      "exact": 0.9860031104199067,
+      "rephrase": 0.8448678071539658
+    },
+    "oracle_gap": 0.06765163297045107
+  },
+  "recomputed_gate": {
+    "oof_correct_top_recall_at_least_point_90": false,
+    "oof_no_match_specificity_at_least_point_92": true,
+    "oof_wrong_top_specificity_at_least_point_85": true,
+    "oof_balanced_accuracy_at_least_point_91": true,
+    "candidate_accuracy_at_least_point_90": true,
+    "oracle_gap_at_most_point_06": false,
+    "final_candidate_accuracy_at_least_point_88": true,
+    "final_generation_exact_at_least_point_70": true,
+    "gain_ci_lower_above_zero": true
+  }
+}

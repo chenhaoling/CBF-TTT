@@ -3997,3 +3997,57 @@ version, so the auditor could not know which duplicate record to carry forward.
 The audit repair validates the public ID transition, every full snapshot
 record and the newly appended causal record, then carries the recorded full
 snapshot into the next step. It does not alter or rerun model scores.
+
+### Natural causal-memory result and localization
+
+The repaired audit passed all ten checks. Oracle lifecycle plus oracle reader
+reached 98.31% candidate accuracy and 97.19% at the final checkpoint, proving
+that the natural-value and lifecycle substrate works. Learned forgetting
+reached 85.83%, versus 75.39% for retain all, but improved over cosine by only
+0.54 points with bootstrap 95% CI `[-0.29, 1.45]`. The calibration release gate
+therefore stopped development.
+
+Added `tasks/analyze_qwen_natural_causal_memory_v1.py` and a focused unit test.
+The score-free analysis reconstructs the frozen reader's top record behind
+defer decisions and decomposes reader errors, learned/cosine disagreements and
+action/downstream correlation. It found 96.09% top-one accuracy but only 74.30%
+retrieval, including 1,121 correct tops rejected by the gate. The failure is
+concentrated in rephrased auxiliary facts. The full audited run and a readable
+report are archived under `qwen_natural_causal_memory_v1/`.
+
+## 2026-10-15: natural scope-transfer repair V2
+
+Added `QWEN_NATURAL_SCOPE_TRANSFER_V2_PLAN.md` after the V1 diagnostic and
+before generating a V2 score. It registers five-fold session OOF training,
+three equally weighted strata, deterministic in-fold no-match controls, the
+linear-head search, strict specificity/recall/end-to-end gates and conditional
+development release.
+
+### Implementation
+
+- Extended `FrozenScopeScorer` with a non-mutating `encode` method that exposes
+  the exact pre-logit pair-plus-geometry feature while preserving the existing
+  `score` interface.
+- Added `tasks/train_qwen_natural_scope_transfer_v2.py`. It reconstructs
+  natural calibration examples and oracle memory snapshots, builds
+  subject/target-disjoint no-match controls, extracts frozen Qwen features,
+  emits five-fold OOF decisions, performs the registered anchored-linear
+  search, explicitly scores every selected wrong-top residual, trains a final
+  all-calibration checkpoint and conditionally evaluates its release gate.
+- Added a refusal-to-overwrite tmux runner, two focused unit tests and
+  `scripts/audit_qwen_natural_scope_transfer_v2.py`. The auditor independently
+  verifies hashes, feature strata, search selection, OOF coverage, aggregates,
+  bootstrap intervals, gate logic and held-out seals.
+
+### Result and next decision
+
+V2 improved candidate accuracy from 87.05% to 91.54%, with a 4.52-point gain
+and bootstrap 95% CI `[3.31, 5.76]`. Final candidate and generation exact rose
+to 90.60% and 72.48%. No-match and natural wrong-top specificity were 96.59%
+and 94.30%. The independent audit passed all eight checks.
+
+The registered calibration gate still stopped development: correct-top recall
+was 89.03% against a 90% threshold and the oracle gap was 6.77 points against a
+six-point maximum. No held-out split was loaded. Per the failure rule, the next
+iteration must repair key ranking on calibration while retaining no-match
+specificity; thresholds and release gates must not be relaxed.
