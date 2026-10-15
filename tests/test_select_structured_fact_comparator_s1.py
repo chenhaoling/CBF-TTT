@@ -1,6 +1,8 @@
 import unittest
 
-from tasks.select_structured_fact_comparator_s1 import select_threshold, summarize
+from tasks.select_structured_fact_comparator_s1 import (
+    baseline_row, relation_surface, select_threshold, summarize, trigram_similarity,
+)
 
 
 def record(gold, prediction, margin, relation="r", kind="k"):
@@ -26,6 +28,18 @@ class StructuredFactComparatorS1SelectionTests(unittest.TestCase):
         result = summarize(rows)
         self.assertEqual(result["exact_four_field_accuracy"], 1.)
         self.assertEqual(result["same_relation"]["specificity"], 1.)
+
+    def test_model_free_baseline_extracts_fields_without_metadata(self):
+        row = {"pair_id": "p", "kind": "update", "left_relation_audit": "r",
+               "left_text": "[SUBJECT] Alice [/SUBJECT] works at [VALUE] X [/VALUE]",
+               "right_text": "[SUBJECT] Alice [/SUBJECT] works at [VALUE] Y [/VALUE]",
+               "same_entity": 1, "same_relation": 1, "same_value": 0,
+               "operation": "update"}
+        scored = baseline_row(row, True, .8)
+        self.assertEqual(scored["prediction"]["operation"], "update")
+        self.assertEqual(relation_surface(row["left_text"]),
+                         "[subject] works at [value]")
+        self.assertGreater(trigram_similarity(row["left_text"], row["right_text"]), .99)
 
 
 if __name__ == "__main__":

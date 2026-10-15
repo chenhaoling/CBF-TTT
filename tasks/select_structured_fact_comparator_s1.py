@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
+import re
 import statistics
 from collections import defaultdict
 from pathlib import Path
@@ -15,6 +15,8 @@ from tasks.pack_cbf_event_warmup import sha
 PROTOCOL = "qwen_structured_fact_comparator_s1_selection_v1"
 SCORE_PROTOCOL = "qwen_structured_fact_comparator_s1_scores_v1"
 FIELDS = ("same_entity", "same_relation", "same_value", "operation")
+TAG_PATTERNS = {name: re.compile(rf"\[{name}\](.*?)\[/{name}\]")
+                for name in ("SUBJECT", "VALUE")}
 
 
 def load_arm(root: str | Path, name: str, expected_rows: int = 26805) -> tuple[list[dict], list[dict]]:
@@ -55,7 +57,8 @@ def select_threshold(rows: list[dict], minimum_precision: float = .99) -> dict:
     ordered = sorted(((row["margin"], index) for index, row in enumerate(rows)
                       if row["prediction"]["operation"] != "retain"), reverse=True)
     prediction = [False] * len(rows)
-    candidates = [(math.inf, binary_counts(gold, prediction))]
+    initial_threshold = ordered[0][0] + 1.0 if ordered else 1.0
+    candidates = [(initial_threshold, binary_counts(gold, prediction))]
     cursor = 0
     while cursor < len(ordered):
         margin = ordered[cursor][0]
@@ -69,6 +72,75 @@ def select_threshold(rows: list[dict], minimum_precision: float = .99) -> dict:
         item[1]["recall"], item[1]["precision"], item[0]))
     return {"threshold": threshold, **metrics,
             "feasible": metrics["precision"] >= minimum_precision}
+
+
+def normalize(text: str) -> str:
+    return " ".join(text.casefold().split())
+
+
+def tag_value(text: str, name: str) -> str:
+    values = TAG_PATTERNS[name].findall(text)
+    if len(values) != 1:
+        raise ValueError(f"invalid {name} tags")
+    return normalize(values[0])
+
+
+def relation_surface(text: str) -> str:
+    for name, pattern in TAG_PATTERNS.items():
+        text = pattern.sub(f"[{name}]", text)
+    return normalize(text)
+
+
+def trigram_similarity(left: str, right: str) -> float:
+    def grams(value):
+        value = f"  {value}  "
+        return {value[index:index + 3] for index in range(max(1, len(value) - 2))}
+    a, b = grams(relation_surface(left)), grams(relation_surface(right))
+    return len(a & b) / max(1, len(a | b))
+
+
+def baseline_row(row: dict, relation_same: bool, margin: float) -> dict:
+    entity = tag_value(row["left_text"], "SUBJECT") == tag_value(row["right_text"], "SUBJECT")
+    value = tag_value(row["left_text"], "VALUE") == tag_value(row["right_text"], "VALUE")
+    operation = ("duplicate" if entity and relation_same and value else
+                 "update" if entity and relation_same else "retain")
+    return {"pair_id": row["pair_id"], "kind": row["kind"],
+            "relation": row["left_relation_audit"],
+            "gold": {field: bool(row[field]) for field in FIELDS[:-1]}
+                    | {"operation": row["operation"]},
+            "prediction": {"same_entity": entity, "same_relation": relation_same,
+                           "same_value": value, "operation": operation},
+            "margin": margin}
+
+
+def fixed_delete_metrics(rows: list[dict], threshold: float = 0.0) -> dict:
+    gold = [row["gold"]["operation"] != "retain" for row in rows]
+    prediction = [row["prediction"]["operation"] != "retain" and row["margin"] >= threshold
+                  for row in rows]
+    return {"threshold": threshold, **binary_counts(gold, prediction), "feasible": True}
+
+
+def calibrate_model_free(rows: list[dict]) -> dict:
+    scored = [(row, trigram_similarity(row["left_text"], row["right_text"])) for row in rows]
+    candidates_for_threshold = []
+    for row, similarity in scored:
+        # Expose every exact-subject item as a potential deletion; the threshold
+        # alone decides whether its relation is compatible.
+        same_entity = tag_value(row["left_text"], "SUBJECT") == tag_value(
+            row["right_text"], "SUBJECT")
+        candidate = baseline_row(row, same_entity, similarity)
+        candidates_for_threshold.append(candidate)
+    selected = select_threshold(candidates_for_threshold)
+    trigram_rows = [baseline_row(row, similarity >= selected["threshold"], similarity)
+                    for row, similarity in scored]
+    trigram_summary = summarize(trigram_rows)
+    trigram_summary["delete"] = fixed_delete_metrics(trigram_rows, selected["threshold"])
+    exact_rows = [baseline_row(row, relation_surface(row["left_text"])
+                              == relation_surface(row["right_text"]), similarity)
+                  for row, similarity in scored]
+    exact_summary = summarize(exact_rows)
+    exact_summary["delete"] = fixed_delete_metrics(exact_rows)
+    return {"exact_lexical": exact_summary, "trigram": trigram_summary}
 
 
 def relation_macro(rows: list[dict]) -> float:
@@ -112,6 +184,17 @@ def select(args):
         pair_ids = ids
         summaries[name] = summarize(rows)
         audits[name] = arm_audits
+    data_root = Path(args.data_root)
+    data_manifest = json.loads((data_root / "manifest.json").read_text())
+    calibration_path = data_root / "calibration.jsonl"
+    if (sha(data_root / "manifest.json") != audits["zero_shot"][0]["data"]["manifest_sha256"]
+            or sha(calibration_path) != data_manifest["files_sha256"]["calibration.jsonl"]):
+        raise ValueError("S1 model-free calibration data changed")
+    calibration_rows = [json.loads(line) for line in calibration_path.read_text().splitlines()
+                        if line]
+    if [row["pair_id"] for row in calibration_rows] != pair_ids:
+        raise ValueError("S1 model-free calibration rows are not aligned")
+    summaries.update(calibrate_model_free(calibration_rows))
     adapter_names = [name for name in names if name != "zero_shot"]
     selected_name = max(adapter_names, key=lambda name: (
         summaries[name]["delete"]["feasible"], summaries[name]["delete"]["recall"],
@@ -141,6 +224,7 @@ def select(args):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--score-root", required=True)
+    parser.add_argument("--data-root", required=True)
     parser.add_argument("--arms", required=True)
     parser.add_argument("--output", required=True)
     select(parser.parse_args())
