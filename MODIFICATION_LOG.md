@@ -5645,3 +5645,16 @@ the mean gain was below the required two points.  The threshold is not
 reinterpreted or lowered.  Compact evidence and a full report are archived at
 `experiments/v6_original_source_20261016/`; this confirmation set is closed to
 further V6 tuning.
+
+Registered `QWEN_UTILITY_RECORD_CONTROLLER_V7_CROSS_SOURCE_PLAN.md` after the
+V6 original-source confirmation gate failed and before fitting any joint
+controller.  V7 combines only the two audited 512-group training sources
+(4,392 TempLAMA and 4,684 LAMA/ParaRel residual candidates), uses each example
+once without a domain feature, and selects on the already observed
+TempLAMA-validation and LAMA-development partitions.  It freezes the V5 model
+family/grid, uses the more conservative per-domain conformal threshold, applies
+the V6 fact-key projection before every selection metric, and selects by
+worst-domain Oracle-gap closure.  The opened TempLAMA test, 64-group original
+confirmation, LongMemEval-S and LoCoMo are prohibited inputs.  Only a passing
+dual-domain development gate may authorize a separately preregistered LoCoMo
+stage.
