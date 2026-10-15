@@ -20,7 +20,8 @@ finish() {
 }
 trap finish EXIT
 
-"$PYTHON_BIN" -m unittest -v tests.test_qwen_natural_forgetting_state_equivalent_v10 \
+"$PYTHON_BIN" -m unittest discover -v -s tests \
+  -p 'test_qwen_natural_forgetting_state_equivalent_v10.py' \
   > "$ROOT/tests.log" 2>&1
 "$PYTHON_BIN" -m tasks.train_qwen_natural_forgetting_state_equivalent_v10 \
   --source-root "$SOURCE_ROOT" --data-root "$DATA_ROOT" \
