@@ -5527,3 +5527,24 @@ uses query answers or counterfactual labels.  Local compilation, six focused
 V5/V6 evaluation tests, shell syntax and whitespace checks pass.  V6 must pass
 the unchanged utility, uncertainty, collateral, mechanism, relation and audit
 gates before official test construction is allowed.
+
+The frozen V6 fact-key projection passed every development gate and its
+independent exact-rerun audit.  Its three seed accuracies were
+88.079%/88.027%/88.255% versus 84.707% lifecycle physics, giving a 3.414-point
+mean gain with target-group 95% CI `[2.585, 4.316]` and relation-cluster CI
+`[1.683, 5.375]`.  Mean safe fact-key Oracle-gap closure was 79.2%; all nine
+relations were nonnegative and all three seeds added zero unrelated errors.
+The audit localized every V5 collateral boundary to a cross-fact-key deletion;
+V6 filtered 4/10/16 such actions.  All registered utility, safety, mechanism,
+relation, uncertainty and audit checks passed, formally releasing one-time
+TempLAMA test construction.
+
+Implemented the released V6 TempLAMA test data builder, independent exact
+reconstruction auditor and non-overwriting runner.  It applies the frozen V2
+episode grammar and Hamilton allocator only to the independently owned,
+surface-decontaminated official `test` inventory, constructs 256 unique target
+groups with two twins, three sparse boundaries and five queries per boundary,
+and locks the passed V6 development release audit.  Test records are not
+paired with validation examples or model outcomes during construction.  Local
+compilation, shared allocation tests, runner syntax and whitespace checks pass;
+labels and features remain to be generated from the audited test corpus.
