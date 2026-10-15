@@ -4476,3 +4476,13 @@ never loads a model output. `tests/test_structured_fact_comparator_s1.py`
 covers both entity orders, FewRel span conversion, the physical action rule,
 all five pair kinds, and a hard exception on test parsing. Five local tests
 pass. No baseline entry point, `ttt_proj`, or `ttt_conv` is changed.
+
+The first model-free remote build passed all five tests and verified every
+source hash, then stopped before creating an output directory: SemEval
+validation has only one `Entity-Destination(e2,e1)` example, so a natural
+different-subject positive is mathematically unavailable. Before any S1 model
+execution, the frozen plan and builder now exclude and record relation classes
+without at least two distinct subjects and values in every split. This removes
+one development row; all other calibration/development and FewRel training
+relations satisfy the same eligibility rule. A sixth regression test covers
+the exclusion.

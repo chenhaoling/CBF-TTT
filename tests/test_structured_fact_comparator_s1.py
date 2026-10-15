@@ -4,7 +4,8 @@ import unittest
 from pathlib import Path
 
 from tasks.build_structured_fact_comparator_s1 import (
-    KINDS, construct_pairs, load_semeval, operation, primary_span, render,
+    KINDS, construct_pairs, filter_eligible_relations, load_semeval, operation,
+    primary_span, render,
 )
 
 
@@ -52,6 +53,14 @@ class StructuredFactComparatorS1Tests(unittest.TestCase):
         hard = [item for item in pairs if item["kind"] == "same_entity_other_relation"]
         self.assertTrue(all(item["same_entity"] and not item["same_relation"]
                             and item["operation"] == "retain" for item in hard))
+
+    def test_undercovered_relation_is_excluded_before_pairing(self):
+        rows = [row(1, "singleton", "a", "x"),
+                row(2, "covered", "b", "y"), row(3, "covered", "c", "z")]
+        kept, excluded = filter_eligible_relations(rows)
+        self.assertEqual({item["relation"] for item in kept}, {"covered"})
+        self.assertEqual(len(excluded), 1)
+        self.assertEqual(excluded[0]["reason"], "undercovered_relation_for_structured_pair")
 
     def test_sealed_test_cannot_be_parsed(self):
         with tempfile.TemporaryDirectory() as directory:

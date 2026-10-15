@@ -152,6 +152,26 @@ def load_semeval(root: str | Path, filename: str, split: str) -> list[dict]:
     return rows
 
 
+def filter_eligible_relations(rows: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Remove classes that cannot support both natural positive donor types."""
+    by_relation = defaultdict(list)
+    for row in rows:
+        by_relation[row["relation"]].append(row)
+    eligible, excluded = [], []
+    for relation, values in sorted(by_relation.items()):
+        heads = {normalize(row["head_text"]) for row in values}
+        tails = {normalize(row["tail_text"]) for row in values}
+        if len(heads) >= 2 and len(tails) >= 2:
+            eligible.extend(values)
+        else:
+            excluded.extend({"source": row["source"], "source_split": row["source_split"],
+                             "relation": relation,
+                             "source_row_sha256": row["source_row_sha256"],
+                             "reason": "undercovered_relation_for_structured_pair"}
+                            for row in values)
+    return eligible, excluded
+
+
 def _different(values: list[dict], anchor: dict, field: str, salt: str, seed: int) -> dict:
     candidates = [row for row in values if normalize(row[field]) != normalize(anchor[field])]
     if not candidates:
@@ -279,6 +299,12 @@ def build(fewrel_root: str | Path, semeval_root: str | Path, output: str | Path,
     train_instances, fewrel_meta = load_fewrel_train(fewrel_root, fewrel_cap, seed)
     calibration_instances = load_semeval(semeval_root, "semeval_train.txt", "calibration")
     development_instances = load_semeval(semeval_root, "semeval_val.txt", "development")
+    exclusions = {}
+    train_instances, exclusions["train"] = filter_eligible_relations(train_instances)
+    calibration_instances, exclusions["calibration"] = filter_eligible_relations(
+        calibration_instances)
+    development_instances, exclusions["development"] = filter_eligible_relations(
+        development_instances)
     split_pairs = {
         "train": construct_pairs(train_instances, "train", seed),
         "calibration": construct_pairs(calibration_instances, "calibration", seed),
@@ -296,6 +322,9 @@ def build(fewrel_root: str | Path, semeval_root: str | Path, output: str | Path,
         "semeval_source_sha256": SEMEVAL_HASHES,
         "semeval_source_rows": semeval_counts,
         "counts": {split: summarize(rows) for split, rows in split_pairs.items()},
+        "eligibility_exclusions": {split: values for split, values in exclusions.items()},
+        "eligibility_exclusion_counts": {split: len(values)
+                                         for split, values in exclusions.items()},
         "files_sha256": files, "kinds": KINDS,
         "fixed_operation_rule": True,
         "semeval_test_parsed": False, "semeval_test_examples_written": False,

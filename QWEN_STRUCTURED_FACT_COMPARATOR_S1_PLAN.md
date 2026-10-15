@@ -52,6 +52,16 @@ row or write a derived test example.  S1 development failure leaves it sealed.
 `Other` is heterogeneous and is excluded from positive/anchor construction;
 it may not be treated as one semantic relation.
 
+The first model-free build stopped before creating its output directory because
+SemEval validation contains a single `Entity-Destination(e2,e1)` row, so the
+registered different-subject positive cannot exist.  Before any S1 model
+execution, the eligibility rule is clarified uniformly for every split:
+exclude a relation class unless it has at least two distinct subjects and two
+distinct values.  Record every excluded source row and reason in the manifest.
+This removes the one validation singleton rather than fabricating a positive;
+all remaining SemEval calibration/development relations and every FewRel
+training relation satisfy the rule.
+
 ## Structured example construction
 
 Render each source sentence with explicit `[SUBJECT]...[/SUBJECT]` and
