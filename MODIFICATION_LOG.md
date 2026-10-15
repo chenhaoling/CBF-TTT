@@ -4297,3 +4297,23 @@ branch is activated before considering an inference-visible entity-key
 feature. Two packaging failures (missing remote pytest and an auditor invoked
 by file path) occurred outside training; both were fixed without changing the
 result, and the audit recovery is preserved in the archived experiment.
+
+## 2026-10-15: cross-fit safe-delete DAgger V6
+
+Added `QWEN_NATURAL_FORGETTING_SAFE_DELETE_DAGGER_V6_PLAN.md` before collecting
+any new policy state. V6 performs the single DAgger iteration registered by
+V5. Each calibration session is rolled out with its frozen outer-fold V5
+ensemble, which was trained without that session. The collector records the
+actual induced memory, reader top, ten unchanged no-schedule features, frozen
+probability/action and physical lifecycle label at every event.
+
+Added `tasks/train_qwen_natural_forgetting_safe_delete_dagger_v6.py`, its
+focused tests, two-GPU runner and two-stage independent auditor. The task
+merges the 774 DAgger events with the audited 2,213-row V5 corpus, rejects any
+overlapping state disagreement, deduplicates by the registered state ID and
+repeats the exact V5 nested grouped model/threshold search. Collection and
+training have separate release audits. V6 retains the same precision, recall,
+false-positive, per-fold and deletion-rate gates. If it fails, the registered
+next branch is an inference-visible entity-key feature rather than a second
+DAgger iteration or post-hoc threshold change. Development, test and external
+benchmarks remain sealed.
