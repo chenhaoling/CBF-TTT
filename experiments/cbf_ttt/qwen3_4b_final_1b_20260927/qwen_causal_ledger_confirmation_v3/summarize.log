@@ -1,0 +1,311 @@
+{
+  "protocol": "qwen_causal_ledger_confirmation_v3_v1",
+  "scale": 48.0,
+  "rows": 8064,
+  "metrics": {
+    "no_memory": {
+      "candidate_accuracy": 0.08010912698412699,
+      "exact": 0.08010912698412699,
+      "nll": 22.31199089468858,
+      "roles": {
+        "current": 0.0,
+        "historical": 0.09523809523809523,
+        "anchor": 0.14508928571428573
+      },
+      "families": {
+        "retain": 0.0,
+        "recent_revoke": 0.0,
+        "distant_revoke": 0.11458333333333333,
+        "reset": 0.2222222222222222,
+        "exact_duplicate": 0.0,
+        "overwritten_noop": 0.0,
+        "mixed_two_event": 0.22395833333333334
+      },
+      "lengths": {
+        "8": 0.12698412698412698,
+        "12": 0.07936507936507936,
+        "16": 0.031746031746031744
+      },
+      "absent": 1.0
+    },
+    "retain_latest": {
+      "candidate_accuracy": 0.9244791666666666,
+      "exact": 0.8990575396825397,
+      "nll": 2.4251911953746084,
+      "roles": {
+        "current": 1.0,
+        "historical": 0.8422619047619048,
+        "anchor": 0.8549107142857143
+      },
+      "families": {
+        "retain": 1.0,
+        "recent_revoke": 0.9270833333333334,
+        "distant_revoke": 0.8854166666666666,
+        "reset": 0.7777777777777778,
+        "exact_duplicate": 1.0,
+        "overwritten_noop": 1.0,
+        "mixed_two_event": 0.703125
+      },
+      "lengths": {
+        "8": 0.873015873015873,
+        "12": 0.8888888888888888,
+        "16": 0.9365079365079365
+      },
+      "absent": 0.0
+    },
+    "global_boundary_clear": {
+      "candidate_accuracy": 0.47693452380952384,
+      "exact": 0.47693452380952384,
+      "nll": 12.727786171772246,
+      "roles": {
+        "current": 1.0,
+        "historical": 0.14285714285714285,
+        "anchor": 0.28794642857142855
+      },
+      "families": {
+        "retain": 0.3333333333333333,
+        "recent_revoke": 0.3333333333333333,
+        "distant_revoke": 0.4479166666666667,
+        "reset": 1.0,
+        "exact_duplicate": 0.3333333333333333,
+        "overwritten_noop": 0.3333333333333333,
+        "mixed_two_event": 0.5572916666666666
+      },
+      "lengths": {
+        "8": 0.5238095238095238,
+        "12": 0.47619047619047616,
+        "16": 0.42857142857142855
+      },
+      "absent": 1.0
+    },
+    "last1": {
+      "candidate_accuracy": 0.47693452380952384,
+      "exact": 0.47693452380952384,
+      "nll": 12.727786171772246,
+      "roles": {
+        "current": 1.0,
+        "historical": 0.14285714285714285,
+        "anchor": 0.28794642857142855
+      },
+      "families": {
+        "retain": 0.3333333333333333,
+        "recent_revoke": 0.3333333333333333,
+        "distant_revoke": 0.4479166666666667,
+        "reset": 1.0,
+        "exact_duplicate": 0.3333333333333333,
+        "overwritten_noop": 0.3333333333333333,
+        "mixed_two_event": 0.5572916666666666
+      },
+      "lengths": {
+        "8": 0.5238095238095238,
+        "12": 0.47619047619047616,
+        "16": 0.42857142857142855
+      },
+      "absent": 1.0
+    },
+    "last2": {
+      "candidate_accuracy": 0.503844246031746,
+      "exact": 0.49776785714285715,
+      "nll": 12.219413128699772,
+      "roles": {
+        "current": 1.0,
+        "historical": 0.20535714285714285,
+        "anchor": 0.28794642857142855
+      },
+      "families": {
+        "retain": 0.40625,
+        "recent_revoke": 0.3333333333333333,
+        "distant_revoke": 0.5208333333333334,
+        "reset": 0.9270833333333334,
+        "exact_duplicate": 0.3333333333333333,
+        "overwritten_noop": 0.40625,
+        "mixed_two_event": 0.5572916666666666
+      },
+      "lengths": {
+        "8": 0.5238095238095238,
+        "12": 0.5079365079365079,
+        "16": 0.4603174603174603
+      },
+      "absent": 0.8699690402476781
+    },
+    "dense_full": {
+      "candidate_accuracy": 0.6192956349206349,
+      "exact": 0.06398809523809523,
+      "nll": 22.081287003130775,
+      "roles": {
+        "current": 0.05803571428571429,
+        "historical": 0.041294642857142856,
+        "anchor": 0.09263392857142858
+      },
+      "families": {
+        "retain": 0.006076388888888889,
+        "recent_revoke": 0.006076388888888889,
+        "distant_revoke": 0.015625,
+        "reset": 0.3715277777777778,
+        "exact_duplicate": 0.0078125,
+        "overwritten_noop": 0.0078125,
+        "mixed_two_event": 0.03298611111111111
+      },
+      "lengths": {
+        "8": 0.0707070707070707,
+        "12": 0.06084656084656084,
+        "16": 0.060090702947845805
+      },
+      "absent": 0.13003095975232198
+    },
+    "full_ledger": {
+      "candidate_accuracy": 1.0,
+      "exact": 1.0,
+      "nll": 0.0008066783261549107,
+      "roles": {
+        "current": 1.0,
+        "historical": 1.0,
+        "anchor": 1.0
+      },
+      "families": {
+        "retain": 1.0,
+        "recent_revoke": 1.0,
+        "distant_revoke": 1.0,
+        "reset": 1.0,
+        "exact_duplicate": 1.0,
+        "overwritten_noop": 1.0,
+        "mixed_two_event": 1.0
+      },
+      "lengths": {
+        "8": 1.0,
+        "12": 1.0,
+        "16": 1.0
+      },
+      "absent": 1.0
+    },
+    "semantic_oracle": {
+      "candidate_accuracy": 1.0,
+      "exact": 1.0,
+      "nll": 0.0008066783261549107,
+      "roles": {
+        "current": 1.0,
+        "historical": 1.0,
+        "anchor": 1.0
+      },
+      "families": {
+        "retain": 1.0,
+        "recent_revoke": 1.0,
+        "distant_revoke": 1.0,
+        "reset": 1.0,
+        "exact_duplicate": 1.0,
+        "overwritten_noop": 1.0,
+        "mixed_two_event": 1.0
+      },
+      "lengths": {
+        "8": 1.0,
+        "12": 1.0,
+        "16": 1.0
+      },
+      "absent": 1.0
+    }
+  },
+  "strongest_non_oracle_comparator": "retain_latest",
+  "comparison": {
+    "exact_gain": 0.10094246031746033,
+    "exact_bootstrap_95ci": [
+      0.08854166666666667,
+      0.11383928571428573
+    ],
+    "nll_gain": 2.4243845170484533,
+    "nll_bootstrap_95ci": [
+      2.126882397452379,
+      2.7389011976623756
+    ]
+  },
+  "family_gains": {
+    "retain": 0.0,
+    "recent_revoke": 0.07291666666666663,
+    "distant_revoke": 0.11458333333333337,
+    "reset": 0.2222222222222222,
+    "exact_duplicate": 0.0,
+    "overwritten_noop": 0.0,
+    "mixed_two_event": 0.296875
+  },
+  "length_gains": {
+    "8": 0.12698412698412698,
+    "12": 0.11111111111111116,
+    "16": 0.06349206349206349
+  },
+  "oracle_agreement": 1.0,
+  "gate": {
+    "checks": {
+      "primary_candidate_at_least_point_95": true,
+      "primary_exact_at_least_point_85": true,
+      "current_anchor_at_least_point_95": true,
+      "historical_at_least_point_85": true,
+      "absent_at_least_point_90": true,
+      "every_family_at_least_point_85": true,
+      "gain_at_least_point_05": true,
+      "gain_ci_lower_above_point_02": true,
+      "nll_gain_ci_lower_above_zero": true,
+      "no_negative_family_or_length_gain": true,
+      "exact_oracle_agreement": true
+    },
+    "passed": true
+  },
+  "resources": {
+    "two_gpu_critical_path_seconds": 1411.3804911691695,
+    "peak_allocated_gib": 7.666396141052246,
+    "peak_reserved_gib": 7.693359375,
+    "shards": [
+      {
+        "protocol": "qwen_causal_ledger_confirmation_v3_v1",
+        "shard": 0,
+        "num_shards": 2,
+        "episodes": 448,
+        "rows": 4032,
+        "seconds": 1406.7533677481115,
+        "peak_allocated_gib": 7.666396141052246,
+        "peak_reserved_gib": 7.693359375,
+        "rows_sha256": "9757d54f3ffc7d947385dba1bef78ee196b4c6618498d4cfe81af7e12c59d241",
+        "data_manifest_sha256": "f911a54c4624d7e75d82493c6dfca3904c15c7982f59233d5cf8527bb31cd0a9",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "scale": 48.0,
+        "seed": 202610161,
+        "confirmation_generated": true,
+        "ood_generated": false
+      },
+      {
+        "protocol": "qwen_causal_ledger_confirmation_v3_v1",
+        "shard": 1,
+        "num_shards": 2,
+        "episodes": 448,
+        "rows": 4032,
+        "seconds": 1411.3804911691695,
+        "peak_allocated_gib": 7.666396141052246,
+        "peak_reserved_gib": 7.693359375,
+        "rows_sha256": "9db8a5970ef9e3c401c8a500cd4622f01b0403bb9192f30825b8728f519aed7a",
+        "data_manifest_sha256": "f911a54c4624d7e75d82493c6dfca3904c15c7982f59233d5cf8527bb31cd0a9",
+        "model": "/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt",
+        "tokenizer": "/home/ctj/models/Qwen3-4B",
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "scale": 48.0,
+        "seed": 202610161,
+        "confirmation_generated": true,
+        "ood_generated": false
+      }
+    ]
+  },
+  "confirmation_generated": true,
+  "ood_generated": false,
+  "next_stage": "independent_confirmation_audit_before_native_bridge"
+}

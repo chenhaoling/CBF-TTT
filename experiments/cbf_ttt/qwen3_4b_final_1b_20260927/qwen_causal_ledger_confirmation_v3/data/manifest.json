@@ -1,0 +1,42 @@
+{
+  "protocol": "qwen_causal_ledger_confirmation_v3_corpus_v1",
+  "phase": "confirmation",
+  "seed": 202610161,
+  "groups_per_family": 64,
+  "families": [
+    "retain",
+    "recent_revoke",
+    "distant_revoke",
+    "reset",
+    "exact_duplicate",
+    "overwritten_noop",
+    "mixed_two_event"
+  ],
+  "template_sha256": "a6e8e54682655672caba1dec5d375f8d0d717c907a78235287d12b7252c27648",
+  "null": "Z P P P L",
+  "files_sha256": {
+    "confirmation.inputs.jsonl": "77bba7da36fb2e008f34d36ea3bf081f9e0b112480cd8a3dc39329f9a2edcbde",
+    "confirmation.targets.jsonl": "c139a7aea8fe7d9097219820ec1f225c0ce3d48be8c7e8146c7c6dae315a73d2"
+  },
+  "audit": {
+    "episodes": 896,
+    "groups": 448,
+    "counts": {
+      "confirmation/retain": 128,
+      "confirmation/recent_revoke": 128,
+      "confirmation/distant_revoke": 128,
+      "confirmation/reset": 128,
+      "confirmation/exact_duplicate": 128,
+      "confirmation/overwritten_noop": 128,
+      "confirmation/mixed_two_event": 128
+    },
+    "causal_answers_verified": true,
+    "visible_parser_verified": true,
+    "counterfactual_twins_verified": true,
+    "phase_symbols_disjoint": true,
+    "oracle_actions_generated": false
+  },
+  "model_scored": false,
+  "confirmation_generated": true,
+  "ood_generated": false
+}

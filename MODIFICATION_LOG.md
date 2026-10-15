@@ -3765,3 +3765,21 @@ result releases exactly one matched scale-48 confirmation.
   is invoked.
 - Added a focused confirmation test covering registered size, loader/hash
   round-trip, split markers and disjoint development/confirmation episode IDs.
+
+### One-time confirmation result
+
+After the scale-rescue V3 summary and independent audit passed, the runner
+generated the reserved seed-`202610161` corpus once. Across 8,064 queries,
+`full_ledger` and `semantic_oracle` obtained 100% candidate and exact five-token
+accuracy on every role, family, length and absent subset. `retain_latest` was
+the strongest non-oracle comparator at 89.91% exact; the paired ledger gain was
+10.09 points with 95% group-bootstrap interval 8.85--11.38 points. The NLL gain
+was 2.4244 with interval 2.1269--2.7389. Dense full aggregation reached only
+6.40% exact.
+
+The two-RTX5090 critical path was 1,411.38 seconds with 7.666/7.693 GiB peak
+allocated/reserved memory. All eleven frozen scientific checks and all eight
+independent integrity checks passed; development/confirmation episode overlap
+was zero, runner/formal exit codes were zero, and OOD remained ungenerated.
+The complete raw rows, logs, summary, resources, dependency hashes and audit are
+archived under `qwen_causal_ledger_confirmation_v3/`.
