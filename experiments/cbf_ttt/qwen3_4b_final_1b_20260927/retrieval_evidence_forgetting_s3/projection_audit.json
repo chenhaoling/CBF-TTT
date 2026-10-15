@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "finite": true,
+    "grid": true,
+    "metric_bounds": true,
+    "pilot": true,
+    "pretraining_ablation": true,
+    "protocol": true,
+    "resource": true,
+    "sealed": true,
+    "selection": true,
+    "weights": true
+  },
+  "dialogre_dev_rows_parsed": 0,
+  "dialogre_test_rows_parsed": 0,
+  "passed": true,
+  "pilot_sha256": "eb59c584b6efe714bab653b0c856b25638f9389bfa00c6310bb3f79b52cfd2e9",
+  "protocol": "qwen_retrieval_evidence_forgetting_s3_projection_audit_v1",
+  "selected": {
+    "config": {
+      "dimension": 512,
+      "epoch": 25,
+      "margin": 0.2,
+      "pubmed_pretraining": true,
+      "temperature": 0.05
+    },
+    "direct_pair_roc_auc": 0.5164539381247948,
+    "direct_pair_score_mean_negative": 0.888549468011148,
+    "direct_pair_score_mean_positive": 0.8931078841680717,
+    "last_training_loss": 2.186875820159912,
+    "retrieval": {
+      "mrr_at_16": 0.30190237260191366,
+      "queries": 872,
+      "recall_at_16": 0.7178899082568807,
+      "recall_at_4": 0.4243119266055046,
+      "recall_at_8": 0.5837155963302753
+    }
+  },
+  "selection_sha256": "440270278cc560117538799d2f60442579b69833a14e2370a96bbb5ce38337fb",
+  "weights_sha256": "b8589ce97dfd29459da61a7424cacbb8e54e192169c7282e95abb23086da2054"
+}

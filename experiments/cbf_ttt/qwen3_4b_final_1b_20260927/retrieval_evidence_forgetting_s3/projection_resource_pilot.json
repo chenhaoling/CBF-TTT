@@ -1,0 +1,24 @@
+{
+  "data_audit_sha256": "442ccc5635b6609edc52a645ea465938f0bead30f306e5c92d32eaf3b0bf09ed",
+  "data_manifest_sha256": "0ed003c7e153ced83291e5654bd51217295b474970912c57315906bf70885078",
+  "dialogre_dev_loaded": false,
+  "dialogre_test_loaded": false,
+  "dimension": 512,
+  "finite_losses": true,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "losses": [
+    3.801753520965576,
+    3.546102523803711
+  ],
+  "passed": true,
+  "peak_allocated_gib": 0.125213623046875,
+  "peak_reserved_gib": 0.173828125,
+  "protocol": "qwen_retrieval_evidence_forgetting_s3_projection_pilot_v1",
+  "pubmed_validation_loaded": false,
+  "seconds": 0.5041526407003403,
+  "steps": 2,
+  "support_queries": 1000,
+  "support_queries_per_second": 17309.607600983447,
+  "support_query_seconds": 0.057771384716033936,
+  "torch": "2.9.1+cu130"
+}

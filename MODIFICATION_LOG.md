@@ -4750,3 +4750,39 @@ checkpoint, selection and fusion grids are now frozen in the S3 plan. Pair
 prompt tokenizer lengths over all 25,958 train/calibration pairs have
 median/p90/p95/p99/max `131/922/1078/1276/1619`, so the frozen S2-prior scorer
 uses maximum length 2048, pair batch four and no development/test access.
+
+## 2026-10-16: S3 independent closeout and S4 pair localization registration
+
+Added independent projection and fusion auditors. The projection auditor
+reconstructed the complete 48-arm grid, selected checkpoint, PubMed
+pretraining ablation, weight hash, resource pilot and sealing flags. The fusion
+auditor reconstructed all 1,724 raw calibration scores, both thresholds,
+relation and physical-action confusion matrices, macro metric, arm selection,
+provenance and output hashes. Both audits passed; DialogRE dev/test parsed-row
+counts remain zero.
+
+The audited S3 projection reached 71.79% recall@16 and 51.65% direct-pair
+ROC-AUC. The selected monotone fusion obtained 100% deletion precision but
+only 0.812% recall, 53.02% relation ROC-AUC and 50.35% macro balanced accuracy.
+S3 therefore stops before DialogRE dev with retrieval coverage/entity-pair
+localization as the registered failure cause. Compact results, 1,724 per-pair
+raw scores, both audits and the full report are archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/retrieval_evidence_forgetting_s3/`.
+
+Added `scripts/inspect_pair_localization_s4_source.py` and focused tests. The
+script verifies registered source hashes, parses DialogRE train only, and
+reports aggregate trigger, fold and deterministic entity-window coverage
+without writing dialogue, entity or trigger text. Of 4,699 positive
+annotations, 2,233 (47.52%) have locatable nonblank triggers; train/calibration
+contain 1,815/418 such annotations. A radius-two nearest-entity interval covers
+any annotated trigger in 65.34% of eligible examples. This establishes that
+S4 needs relation-level multiple-instance learning in addition to explicit
+trigger supervision.
+
+Added `QWEN_PAIR_LOCALIZED_RELATION_MEMORY_S4_PLAN.md` before constructing S4
+data or running a model. It freezes source reuse, candidate windows, prohibited
+features, independent audits, a 12-arm localization grid, deterministic and
+oracle controls, calibration stop gates, one-shot DialogRE-dev gates, resource
+limits and the conditional alpha-only session experiment. The Qwen3-4B
+backbone remains frozen, native `ttt_proj`/`ttt_conv` remains a named baseline,
+and the current-write gate remains fixed to `g=1`.

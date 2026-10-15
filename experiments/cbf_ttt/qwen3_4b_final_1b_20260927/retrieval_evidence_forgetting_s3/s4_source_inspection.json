@@ -1,0 +1,91 @@
+{
+  "counts": {
+    "argument_missing_annotations": 2,
+    "both_arguments_found_annotations": 2231,
+    "calibration_dialogues": 195,
+    "calibration_positive_annotations": 877,
+    "calibration_positive_relation_mentions": 922,
+    "calibration_trigger_found_annotations": 418,
+    "dialogues": 1073,
+    "empty_trigger_annotations": 2449,
+    "no_relation_annotations": 1298,
+    "nonempty_trigger_annotations": 2250,
+    "positive_annotations": 4699,
+    "positive_relation_mentions": 4992,
+    "radius_0_all_trigger_turns_covered": 686,
+    "radius_0_any_trigger_covered": 980,
+    "radius_1_all_trigger_turns_covered": 895,
+    "radius_1_any_trigger_covered": 1214,
+    "radius_2_all_trigger_turns_covered": 1121,
+    "radius_2_any_trigger_covered": 1459,
+    "train_dialogues": 878,
+    "train_positive_annotations": 3822,
+    "train_positive_relation_mentions": 4070,
+    "train_trigger_found_annotations": 1815,
+    "trigger_found_annotations": 2233,
+    "trigger_not_found_annotations": 17,
+    "turns": 14024
+  },
+  "coverage": {
+    "nonempty_trigger_fraction": 0.4788252819748883,
+    "radius_0_all_trigger_turns_recall": 0.3072100313479624,
+    "radius_0_any_trigger_recall": 0.438871473354232,
+    "radius_1_all_trigger_turns_recall": 0.40080609046126286,
+    "radius_1_any_trigger_recall": 0.5436632333184057,
+    "radius_2_all_trigger_turns_recall": 0.5020152261531572,
+    "radius_2_any_trigger_recall": 0.6533811016569637,
+    "trigger_found_fraction": 0.47520749095552245
+  },
+  "dialogre_dev_rows_parsed": 0,
+  "dialogre_test_rows_parsed": 0,
+  "protocol": "qwen_pair_localized_relation_memory_s4_source_inspection_v2",
+  "source": {
+    "dev_sha256_only": "3e0036a1853f33dd8fab1f008ff3c3b351f0b53e9084a6f6bce7b4c95d0f0472",
+    "dialogre_commit": "b23e6cd7d811a68cf0aafa40e299143b857964e2",
+    "test_sha256_only": "180e766323d2b5ae4763c77b2db280eeb49c909ab48c7393fbc309b7890061af",
+    "train_sha256": "94b5799642107f9afecc5c46655d6d9612f41969893deff291b15a66298c08a0"
+  },
+  "trigger_count_histogram": {
+    "0": 2449,
+    "1": 2064,
+    "2": 177,
+    "3": 9
+  },
+  "trigger_relation_coverage": {
+    "calibration": {
+      "max": 85,
+      "median": 6.0,
+      "min": 1,
+      "relations": 30,
+      "relations_with_at_least_10": 10,
+      "relations_with_at_least_2": 27,
+      "relations_with_at_least_5": 20
+    },
+    "calibration_only_relations": 3,
+    "shared_relations": 27,
+    "train": {
+      "max": 352,
+      "median": 21,
+      "min": 1,
+      "relations": 29,
+      "relations_with_at_least_10": 23,
+      "relations_with_at_least_2": 27,
+      "relations_with_at_least_5": 27
+    },
+    "train_only_relations": 2
+  },
+  "window_turn_count": {
+    "0": {
+      "max": 17,
+      "mean": 1.8732646663681147
+    },
+    "1": {
+      "max": 19,
+      "mean": 3.5253022839229735
+    },
+    "2": {
+      "max": 20,
+      "mean": 5.041200179131214
+    }
+  }
+}
