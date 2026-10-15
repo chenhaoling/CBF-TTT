@@ -4215,3 +4215,28 @@ to the initial checkpoint. The next stage therefore targets on-policy risk
 calibration and cross-view action consensus while keeping the reader and
 writer frozen. The source manifest exposes an unopened 129-session,
 516-subject test split for later confirmation.
+
+## 2026-10-15: cross-fit on-policy consensus V4
+
+Added `QWEN_NATURAL_FORGETTING_ONPOLICY_CONSENSUS_V4_PLAN.md` after the audited
+V3 stop and before scoring a V4 calibration trajectory. V4 uses development
+only to define a finite safety candidate family. Policy selection uses only
+five-fold held-out calibration trajectories, and the 129-session source test
+remains unopened behind a new release gate.
+
+Added `tasks/build_qwen_natural_forgetting_crossfit_v4.py`, its focused test,
+runner and independent auditor. The builder reconstructs engineered and
+no-schedule benefit/risk checkpoints for every V2 outer fold and seed using
+only outer-training sessions. It reproduced all 4,644 saved V2 OOF
+view/seed/row predictions with maximum probability error 0 and zero action
+mismatches. All four reconstruction gates and all six audit checks passed.
+
+Added the V4 online evaluator, policy tests, two-GPU runner and full-trajectory
+auditor. The registered family contains the frozen engineered and no-schedule
+rules, a 3x3 no-schedule benefit/risk threshold grid, five engineered plus
+no-schedule intersections, and majority/unanimity seed voting. Each arm
+maintains its own policy-induced memory. A candidate must improve retain-all
+by at least five points with a positive session-bootstrap lower bound, add at
+most four collateral errors, have non-negative gain in all five outer folds,
+retain 5--50% deletion rate and preserve final generation before test can be
+opened.
