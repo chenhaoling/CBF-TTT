@@ -5199,3 +5199,17 @@ registers a validation-only reusable background bank because globally unique
 seven-record backgrounds exceed the 532-subject partition.  Target subjects
 remain unique; macro-relation and shared-background sensitivity intervals are
 mandatory and cannot select parameters.
+
+Added the model-free TempLAMA V2 validation-development builder, focused
+Hamilton-allocation tests, a non-overwriting runner and an exact reconstruction
+auditor.  The builder uses only the decontaminated official validation split,
+selects 256 unique target subjects with the frozen relation quotas, constructs
+two twins and three sparse decision boundaries per target, and permits only
+validation-background reuse registered by the capacity clarification.  The
+auditor verifies upstream source and pilot hashes, every reconstructed episode,
+real temporal transitions, target/background isolation, query contracts,
+binary action registration and all test/V1-confirmation/external seals.  It
+also records background reuse statistics needed by the later clustered
+sensitivity analysis.  Local compilation, focused tests and whitespace checks
+pass; the remote build and independent data-audit result are recorded in a
+subsequent entry after execution.
