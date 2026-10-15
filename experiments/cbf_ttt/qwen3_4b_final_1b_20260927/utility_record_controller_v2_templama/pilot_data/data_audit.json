@@ -1,0 +1,25 @@
+{
+  "boundaries": 432,
+  "checks": {
+    "builder_invariants": true,
+    "exact_builder_reconstruction": true,
+    "heldouts_and_forbidden_sources_sealed": true,
+    "manifest_and_file_hashes": true,
+    "query_contract": true,
+    "real_temporal_transition_per_group": true,
+    "registered_size_and_balance": true,
+    "source_and_inspection_locked": true,
+    "ternary_grid_and_incoming_write_frozen": true,
+    "twins_and_sparse_boundaries": true
+  },
+  "episodes": 144,
+  "episodes_sha256": "f1543ab8872a79492f8653f1c0c2a304cf02b726765db81f36963b0465d1d858",
+  "manifest_sha256": "2ea5e7d2ad5e95fa81145e78e69a84ba0ac3192891418eeb778c1d79ad5484ba",
+  "next_stage": "templama_resource_pilot_labels",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v2_templama_pilot_data_audit",
+  "queries": 2160,
+  "source_groups": 72,
+  "source_inspection_sha256": "e4655306a148908091e43932abb97fdb447f5677881fa05ca6cc7b58eda07d24",
+  "terminal_status": "templama_pilot_data_audit_passed"
+}

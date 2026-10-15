@@ -5165,3 +5165,37 @@ stages, and requires a cross-source pass before opening the original sealed
 LAMA/ParaRel confirmation.  It explicitly limits any positive claim to the
 audited addressable Qwen residual memory because the original dense
 `ttt_conv`/`ttt_proj` writer previously failed content binding.
+
+Added an immutable official TempLAMA acquisition script and aggregate source
+inspector.  The source repository is locked at commit
+`865fae65f63ef7e6b2989d4ff8b47f61750415a8`; train/validation/test contain
+10,693/4,654/34,963 rows.  The first inspection correctly stopped because the
+official files contain small cross-split subject and rendered-surface overlap.
+The preregistered deterministic subject-owner rule and all-split removal of two
+colliding surfaces were then implemented without model scores.  Retry1 passed
+all nine checks, leaving 884/371/2,945 eligible temporal trajectories and all
+nine relations in train/validation/test respectively.
+
+Added the TempLAMA resource-pilot builder, exact reconstruction audit, focused
+tests and non-overwriting runner.  It constructed 72 real-transition source
+groups (eight per relation), 144 twin episodes, 432 sparse boundaries and 2,160
+immediate queries.  All 10 data-audit checks passed; lengths are exactly
+balanced, mechanisms differ by at most one group and no validation/test or V1
+confirmation episode was generated.
+
+Added the two-GPU ternary label pilot and independent row/aggregate audit.  All
+432 labels and 4,320 registered future queries completed in 135.07 seconds of
+two-GPU critical time with 7.69 GiB peak reserved memory.  Retain-all accuracy
+was 83.87%; the safe oracle reached 91.18%, a 7.31-point gain with source-group
+95% CI `[4.98, 9.93]` points, zero added unrelated errors and 93 additional
+correct unrelated outcomes.  Half strength had a unique NLL margin on 2.08% of
+labels and changed no prediction, releasing the binary formal branch.  A
+256-group formal run is projected at 480 seconds and 0.012 GiB output.
+
+Added `QWEN_UTILITY_RECORD_CONTROLLER_V2_CAPACITY_CLARIFICATION.md` before any
+validation episode was constructed.  It resolves unequal per-relation source
+capacity by a fixed minimum-eight Hamilton allocation totaling 256 groups and
+registers a validation-only reusable background bank because globally unique
+seven-record backgrounds exceed the 532-subject partition.  Target subjects
+remain unique; macro-relation and shared-background sensitivity intervals are
+mandatory and cannot select parameters.

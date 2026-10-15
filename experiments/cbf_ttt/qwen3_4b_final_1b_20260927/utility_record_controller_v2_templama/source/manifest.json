@@ -1,0 +1,32 @@
+{
+  "content_parsed": false,
+  "forbidden_sources_loaded": false,
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V2_CROSS_SOURCE_PLAN.md",
+  "protocol": "qwen_utility_record_controller_v2_templama_sources",
+  "sources": {
+    "downloads": {
+      "test": {
+        "bytes": 13109340,
+        "sha256": "bf3b424a2b5061300a4889439af14ec0c0c025c235c9ba799c34ddd3796020ba",
+        "url": "https://storage.googleapis.com/gresearch/templama/test.json"
+      },
+      "train": {
+        "bytes": 4001517,
+        "sha256": "00f4028e0f0367317d6ad801e48529f48cd322a328d0b32138a63c1669fb6d74",
+        "url": "https://storage.googleapis.com/gresearch/templama/train.json"
+      },
+      "val": {
+        "bytes": 1759185,
+        "sha256": "c226b8995bc6299724ad5ffc78eca2d63ce36724321e95a167181ca5abd31426",
+        "url": "https://storage.googleapis.com/gresearch/templama/val.json"
+      }
+    },
+    "repository": {
+      "commit": "865fae65f63ef7e6b2989d4ff8b47f61750415a8",
+      "subdirectory": "language/templama",
+      "url": "https://github.com/google-research/language.git"
+    }
+  },
+  "terminal_status": "templama_sources_acquired_unparsed",
+  "v1_confirmation_loaded": false
+}

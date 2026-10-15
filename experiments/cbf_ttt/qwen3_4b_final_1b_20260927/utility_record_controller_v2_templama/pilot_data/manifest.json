@@ -1,0 +1,58 @@
+{
+  "alpha_grid": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "counts": {
+    "boundaries": 432,
+    "episodes": 144,
+    "lengths": {
+      "16": 36,
+      "32": 36,
+      "64": 36,
+      "8": 36
+    },
+    "mechanisms": {
+      "different_subject_same_relation": 20,
+      "explicit_reset_revoke": 20,
+      "mixed_lifecycle": 20,
+      "same_subject_different_relation": 20,
+      "semantic_duplicate": 22,
+      "semantic_overwrite": 22,
+      "stale_repetition": 20
+    },
+    "queries": 2160,
+    "relations": 9,
+    "source_groups": 72,
+    "target_relations": {
+      "P102": 8,
+      "P108": 8,
+      "P127": 8,
+      "P286": 8,
+      "P39": 8,
+      "P488": 8,
+      "P54": 8,
+      "P6": 8,
+      "P69": 8
+    }
+  },
+  "current_write_gate": 1.0,
+  "development_episodes_generated": false,
+  "files_sha256": {
+    "pilot_episodes.jsonl": "f1543ab8872a79492f8653f1c0c2a304cf02b726765db81f36963b0465d1d858"
+  },
+  "forbidden_sources_loaded": false,
+  "model_outputs_loaded": false,
+  "nontrain_content_used_only_for_decontamination": true,
+  "partition": "train_resource_pilot",
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V2_CROSS_SOURCE_PLAN.md",
+  "protocol": "qwen_utility_record_controller_v2_templama_pilot_data",
+  "seed": 202610169,
+  "source_inspection_sha256": "e4655306a148908091e43932abb97fdb447f5677881fa05ca6cc7b58eda07d24",
+  "source_manifest_sha256": "d94af17fe9090eb9932d8e490d5336cc8519c2654f84fd49f7d70fdd37875848",
+  "source_repository_commit": "865fae65f63ef7e6b2989d4ff8b47f61750415a8",
+  "terminal_status": "templama_pilot_data_built_pending_independent_audit",
+  "test_episodes_generated": false,
+  "v1_confirmation_loaded": false
+}

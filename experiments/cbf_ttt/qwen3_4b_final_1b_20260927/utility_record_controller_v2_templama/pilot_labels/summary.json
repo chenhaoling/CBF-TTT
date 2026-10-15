@@ -1,0 +1,116 @@
+{
+  "added_unrelated_errors": 0,
+  "additional_unrelated_correct": 93,
+  "development_loaded": false,
+  "episodes": 144,
+  "external_benchmarks_loaded": false,
+  "future_queries": 4320,
+  "gate": {
+    "checks": {
+      "every_mechanism_has_two_actions": true,
+      "finite_complete_rows": true,
+      "formal_projection_below_two_hours_and_50_gib": true,
+      "heldouts_sealed": true,
+      "oracle_gain_at_least_point_03": true,
+      "oracle_gain_ci_lower_above_zero": true,
+      "peak_reserved_below_24_gib": true,
+      "zero_added_unrelated_errors": true
+    },
+    "passed": true
+  },
+  "half_strength": {
+    "changes_prediction": false,
+    "primary_action_space": "binary",
+    "requires_separate_soft_v2": false,
+    "selected_labels": 9,
+    "unique_fraction": 0.020833333333333332,
+    "unique_margin_labels": 9
+  },
+  "label_time_seconds": {
+    "max": 2.0421282332390547,
+    "mean": 0.6195387830311019,
+    "median": 0.029545174911618233,
+    "p90": 1.9485601037740707,
+    "p95": 2.00035516358912
+  },
+  "labels": 432,
+  "next_stage": "templama_replication_development_construction",
+  "per_mechanism": {
+    "different_subject_same_relation": {
+      "labels": 60,
+      "optimal_actions": 4,
+      "retain_all_accuracy": 1.0,
+      "safe_oracle_accuracy": 1.0
+    },
+    "explicit_reset_revoke": {
+      "labels": 60,
+      "optimal_actions": 6,
+      "retain_all_accuracy": 0.555,
+      "safe_oracle_accuracy": 0.71
+    },
+    "mixed_lifecycle": {
+      "labels": 60,
+      "optimal_actions": 6,
+      "retain_all_accuracy": 0.58,
+      "safe_oracle_accuracy": 0.745
+    },
+    "same_subject_different_relation": {
+      "labels": 60,
+      "optimal_actions": 8,
+      "retain_all_accuracy": 0.89,
+      "safe_oracle_accuracy": 0.91
+    },
+    "semantic_duplicate": {
+      "labels": 66,
+      "optimal_actions": 4,
+      "retain_all_accuracy": 1.0,
+      "safe_oracle_accuracy": 1.0
+    },
+    "semantic_overwrite": {
+      "labels": 66,
+      "optimal_actions": 4,
+      "retain_all_accuracy": 0.9212121212121213,
+      "safe_oracle_accuracy": 1.0
+    },
+    "stale_repetition": {
+      "labels": 60,
+      "optimal_actions": 4,
+      "retain_all_accuracy": 0.9,
+      "safe_oracle_accuracy": 1.0
+    }
+  },
+  "protocol": "qwen_utility_record_controller_v2_templama_resource_pilot",
+  "resource": {
+    "formal_projection": {
+      "groups": 256,
+      "output_gib": 0.01188232832484775,
+      "two_gpu_seconds": 480.2393362522125
+    },
+    "peak_allocated_gib": 7.65317964553833,
+    "peak_reserved_gib": 7.693359375,
+    "two_gpu_critical_seconds": 135.06731332093477
+  },
+  "retain_all_accuracy": 0.8386574074074075,
+  "safe_oracle_accuracy": 0.9118055555555555,
+  "safe_oracle_actions": {
+    "global_clear": 61,
+    "grid_0_05_0": 2,
+    "grid_0_0_0": 179,
+    "grid_0_0_05": 7,
+    "grid_0_0_1": 82,
+    "grid_0_1_0": 42,
+    "grid_0_1_1": 27,
+    "grid_1_0_0": 10,
+    "grid_1_0_1": 6,
+    "grid_1_1_0": 4,
+    "grid_1_1_1": 12
+  },
+  "safe_oracle_gain": 0.07314814814814807,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.04976851851851852,
+    0.09930555555555556
+  ],
+  "source_groups": 72,
+  "test_loaded": false,
+  "v1_confirmation_loaded": false
+}

@@ -1,0 +1,202 @@
+{
+  "checks": {
+    "all_download_hashes_locked": true,
+    "all_rows_parse_against_templates": true,
+    "eligible_subject_partitions_disjoint": false,
+    "formal_partition_capacity": true,
+    "official_nine_templates": true,
+    "official_subject_partitions_disjoint": false,
+    "rendered_surfaces_disjoint": false,
+    "resource_pilot_capacity": true,
+    "v1_confirmation_and_forbidden_sources_sealed": true
+  },
+  "content_written": false,
+  "cross_split_eligible_subject_overlaps": {
+    "train_test": 10,
+    "train_val": 0,
+    "val_test": 6
+  },
+  "cross_split_rendered_surface_overlaps": {
+    "train_test": 2,
+    "train_val": 0,
+    "val_test": 0
+  },
+  "cross_split_subject_overlaps": {
+    "train_test": 26,
+    "train_val": 1,
+    "val_test": 14
+  },
+  "forbidden_sources_loaded": false,
+  "next_stage": "stop",
+  "passed": false,
+  "protocol": "qwen_utility_record_controller_v2_templama_source_inspection",
+  "rejected_total": {
+    "ambiguous_or_missing_answer": 12727,
+    "no_value_transition": 5130
+  },
+  "repository_commit": "865fae65f63ef7e6b2989d4ff8b47f61750415a8",
+  "source_manifest_sha256": "d94af17fe9090eb9932d8e490d5336cc8519c2654f84fd49f7d70fdd37875848",
+  "splits": {
+    "test": {
+      "bytes": 13109340,
+      "eligible_by_relation": {
+        "P102": 462,
+        "P108": 479,
+        "P127": 123,
+        "P286": 458,
+        "P39": 394,
+        "P488": 274,
+        "P54": 404,
+        "P6": 255,
+        "P69": 110
+      },
+      "eligible_relations": 9,
+      "eligible_subjects": 2942,
+      "eligible_trajectories": 2959,
+      "rejected": {
+        "ambiguous_or_missing_answer": 8723,
+        "no_value_transition": 3480
+      },
+      "relations": 9,
+      "row_relations": {
+        "P102": 5275,
+        "P108": 6066,
+        "P127": 1759,
+        "P286": 3644,
+        "P39": 5126,
+        "P488": 2920,
+        "P54": 6268,
+        "P6": 2739,
+        "P69": 1166
+      },
+      "rows": 34963,
+      "sha256": "bf3b424a2b5061300a4889439af14ec0c0c025c235c9ba799c34ddd3796020ba",
+      "structurally_valid_rows": 34963,
+      "subjects": 4028,
+      "trajectories": 3817,
+      "usable_single_answer_rows": 26240,
+      "value_transitions": 3622
+    },
+    "train": {
+      "bytes": 4001517,
+      "eligible_by_relation": {
+        "P102": 134,
+        "P108": 161,
+        "P127": 47,
+        "P286": 106,
+        "P39": 114,
+        "P488": 79,
+        "P54": 125,
+        "P6": 93,
+        "P69": 35
+      },
+      "eligible_relations": 9,
+      "eligible_subjects": 892,
+      "eligible_trajectories": 894,
+      "rejected": {
+        "ambiguous_or_missing_answer": 2722,
+        "no_value_transition": 1159
+      },
+      "relations": 9,
+      "row_relations": {
+        "P102": 1530,
+        "P108": 2024,
+        "P127": 610,
+        "P286": 907,
+        "P39": 1498,
+        "P488": 882,
+        "P54": 1856,
+        "P6": 1043,
+        "P69": 343
+      },
+      "rows": 10693,
+      "sha256": "00f4028e0f0367317d6ad801e48529f48cd322a328d0b32138a63c1669fb6d74",
+      "structurally_valid_rows": 10693,
+      "subjects": 1241,
+      "trajectories": 1170,
+      "usable_single_answer_rows": 7971,
+      "value_transitions": 1130
+    },
+    "val": {
+      "bytes": 1759185,
+      "eligible_by_relation": {
+        "P102": 45,
+        "P108": 79,
+        "P127": 22,
+        "P286": 42,
+        "P39": 47,
+        "P488": 36,
+        "P54": 54,
+        "P6": 33,
+        "P69": 16
+      },
+      "eligible_relations": 9,
+      "eligible_subjects": 374,
+      "eligible_trajectories": 374,
+      "rejected": {
+        "ambiguous_or_missing_answer": 1282,
+        "no_value_transition": 491
+      },
+      "relations": 9,
+      "row_relations": {
+        "P102": 519,
+        "P108": 959,
+        "P127": 319,
+        "P286": 335,
+        "P39": 719,
+        "P488": 388,
+        "P54": 909,
+        "P6": 343,
+        "P69": 163
+      },
+      "rows": 4654,
+      "sha256": "c226b8995bc6299724ad5ffc78eca2d63ce36724321e95a167181ca5abd31426",
+      "structurally_valid_rows": 4654,
+      "subjects": 539,
+      "trajectories": 492,
+      "usable_single_answer_rows": 3372,
+      "value_transitions": 472
+    }
+  },
+  "template_sha256": "231732e34a139b3b28274ed61a8ffaf59499ff730659d441d4c9f6cff66152e6",
+  "templates": {
+    "P102": {
+      "name": "political party",
+      "template": "<subject> is a member of the <object>."
+    },
+    "P108": {
+      "name": "employer",
+      "template": "<subject> works for <object>."
+    },
+    "P127": {
+      "name": "owned by",
+      "template": "<subject> is owned by <object>."
+    },
+    "P286": {
+      "name": "head coach",
+      "template": "<object> is the head coach of <subject>."
+    },
+    "P39": {
+      "name": "position held",
+      "template": "<subject> holds the position of <object>."
+    },
+    "P488": {
+      "name": "chairperson",
+      "template": "<object> is the chair of <subject>."
+    },
+    "P54": {
+      "name": "member of sports team",
+      "template": "<subject> plays for <object>."
+    },
+    "P6": {
+      "name": "head of government",
+      "template": "<object> is the head of the government of <subject>."
+    },
+    "P69": {
+      "name": "educated at",
+      "template": "<subject> attended <object>."
+    }
+  },
+  "terminal_status": "templama_source_inspection_failed",
+  "v1_confirmation_loaded": false
+}

@@ -1,0 +1,33 @@
+{
+  "added_unrelated_errors": 0,
+  "checks": {
+    "actions_metrics_and_safe_labels": true,
+    "aggregate_accuracy_and_interval": true,
+    "barrier_reconstruction": true,
+    "complete_unique_rows": true,
+    "data_audit_and_provenance": true,
+    "frozen_plain_qwen": true,
+    "half_strength_decision": true,
+    "heldouts_sealed": true,
+    "mechanism_action_support_reconstructed": true,
+    "resource_accounting": true
+  },
+  "data_audit_sha256": "19e18ff5d10de416df0d294357bd46e561d879614905b1878ae51e46c50065e8",
+  "data_manifest_sha256": "2ea5e7d2ad5e95fa81145e78e69a84ba0ac3192891418eeb778c1d79ad5484ba",
+  "decision": "templama_replication_development_construction",
+  "future_queries": 4320,
+  "next_stage": "templama_replication_development_construction",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v2_templama_resource_pilot_audit",
+  "retain_all_accuracy": 0.8386574074074075,
+  "rows": 432,
+  "safe_oracle_accuracy": 0.9118055555555555,
+  "safe_oracle_gain": 0.07314814814814807,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.04976851851851852,
+    0.09930555555555556
+  ],
+  "scientific_gate_passed": true,
+  "summary_sha256": "86aa84d3e210d9feb285a75e7e62950be29efdfe96186af63d07160d064ae989",
+  "terminal_status": "templama_resource_pilot_audit_passed"
+}
