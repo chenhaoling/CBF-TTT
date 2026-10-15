@@ -1,0 +1,48 @@
+{
+  "protocol": "qwen_causal_ledger_ood_v1_corpus_v1",
+  "phase": "ood",
+  "seed": 202610162,
+  "groups_per_suite": 64,
+  "suites": [
+    "long_context",
+    "two_distant_revokes",
+    "restore_older",
+    "reset_then_duplicate",
+    "mixed_unseen"
+  ],
+  "suite_spec_sha256": "e6169caa12276869cadc71e1d8cd4eecf1f51edfa4b6fe37e1fe96d2e859eb6d",
+  "value_pool": {
+    "offset": 49152,
+    "size": 16384,
+    "null": "Z P P P P"
+  },
+  "files_sha256": {
+    "ood.inputs.jsonl": "3e685dcb5e1517af26861c43218e2403521b9bf07ce4b44800b3582fd1be23c8",
+    "ood.targets.jsonl": "a7dbc7bb08ce88e621e117ef8e3120eec50e2001a815e75924882e7facb9566b"
+  },
+  "audit": {
+    "episodes": 640,
+    "groups": 320,
+    "counts": {
+      "long_context": 128,
+      "two_distant_revokes": 128,
+      "restore_older": 128,
+      "reset_then_duplicate": 128,
+      "mixed_unseen": 128
+    },
+    "absent_queries": {
+      "long_context": 0,
+      "two_distant_revokes": 640,
+      "restore_older": 0,
+      "reset_then_duplicate": 128,
+      "mixed_unseen": 128
+    },
+    "causal_answers_verified": true,
+    "visible_parser_verified": true,
+    "counterfactual_twins_verified": true,
+    "oracle_actions_generated": false
+  },
+  "model_scored": false,
+  "confirmation_generated": true,
+  "ood_generated": true
+}

@@ -3859,3 +3859,22 @@ audited confirmation whose OOD flag remains sealed before it can materialize
 the corpus. Fourteen focused corpus tests, Python AST parsing, shell syntax and
 diff checks pass locally. No OOD model score has been generated at this freeze
 point.
+
+### One-time lifecycle OOD result
+
+The reserved seed-`202610162` corpus was generated once after the passing
+confirmation hashes were verified. Across 5,760 queries, `full_ledger` and the
+semantic oracle reached 100% candidate and exact five-token accuracy for every
+suite, role, length and absent/null subset. `retain_latest` was the strongest
+non-oracle comparator at 77.78% exact. The ledger's exact gain was 22.22 points
+with source-group bootstrap interval 20.07--24.41 points; the NLL-gain interval
+was 4.6647--5.6838. Dense aggregation reached only 4.44% exact.
+
+All ten preregistered scientific checks and all seven independent audit checks
+passed. Earlier/OOD identifier and symbol overlap were both zero. The two-RTX
+5090 critical path was 1,019.32 seconds with 7.669/7.695 GiB peak
+allocated/reserved memory. Raw corpus, row traces, logs, resources, dependency
+hashes, summary, audit and the result report are archived under
+`qwen_causal_ledger_ood_v1/`. This completes the controlled development,
+matched-confirmation and lifecycle-OOD chain and releases natural-text scope
+and lifecycle transfer on the structured substrate.

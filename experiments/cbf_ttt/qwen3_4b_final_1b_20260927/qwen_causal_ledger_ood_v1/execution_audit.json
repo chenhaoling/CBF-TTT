@@ -1,0 +1,408 @@
+{
+  "protocol": "qwen_causal_ledger_ood_v1_audit_v1",
+  "passed": true,
+  "checks": {
+    "terminal_status_and_exit": true,
+    "passing_confirmation_dependency_and_fresh_ood": true,
+    "fresh_corpus_and_coverage": true,
+    "shard_hashes_model_and_resources": true,
+    "row_prompt_state_policy_and_generation": true,
+    "independent_aggregates_bootstrap_and_gate": true,
+    "one_time_ood_markers": true
+  },
+  "hashes": {
+    "ood_shard0.jsonl": "3224c3fabc74fd253fa153e7860c728a030bcef778c5a3925a62929e504da081",
+    "ood_resource_shard0.json": "16abb7df757edb1ef9bbb6a50162820f8122fc3e8cc3b30e09bcdd2972eb268a",
+    "ood_shard1.jsonl": "ebe6c2a7860ac0473ab2e1491891fd681116e388aa6f50c579e98093fc433a66",
+    "ood_resource_shard1.json": "e06140d15d4e40f2dfd6a86caff75717cd15e5e76f6db7bf020ff4dfa7dce88a"
+  },
+  "data_manifest_sha256": "e875eca8da7977d5527e3a416a60bb6452666bd23fe52deda1ddc0ed2ebc0509",
+  "summary_sha256": "8aae52c6da41713d4ef636b3bf385f4e015ac66ac7a99148c93ac47e020ca321",
+  "confirmation_dependency": {
+    "registered_hashes": {
+      "summary.json": "cf5a33ebccd6f40edd334186b72e112c18730bdbffaf0dbe15ab70b0411759bd",
+      "execution_audit.json": "f11e8baed67c0e3f6e27baeaaf277e28b5691d47170abbaffadfb76e8f2be519"
+    },
+    "ood_seed": 202610162,
+    "ood_episodes": 640,
+    "earlier_ood_id_overlap": 0,
+    "earlier_ood_symbol_overlap": 0
+  },
+  "recomputed": {
+    "metrics": {
+      "no_memory": {
+        "candidate_accuracy": 0.15555555555555556,
+        "exact": 0.15555555555555556,
+        "nll": 20.137643304109144,
+        "roles": {
+          "current": 0.0,
+          "historical": 0.26666666666666666,
+          "anchor": 0.2
+        },
+        "suites": {
+          "long_context": {
+            "candidate_accuracy": 0.0,
+            "exact": 0.0,
+            "nll": 23.768140750626724
+          },
+          "two_distant_revokes": {
+            "candidate_accuracy": 0.5555555555555556,
+            "exact": 0.5555555555555556,
+            "nll": 10.607753501781795
+          },
+          "restore_older": {
+            "candidate_accuracy": 0.0,
+            "exact": 0.0,
+            "nll": 24.067468172146214
+          },
+          "reset_then_duplicate": {
+            "candidate_accuracy": 0.1111111111111111,
+            "exact": 0.1111111111111111,
+            "nll": 21.20009293954
+          },
+          "mixed_unseen": {
+            "candidate_accuracy": 0.1111111111111111,
+            "exact": 0.1111111111111111,
+            "nll": 21.04476115645098
+          }
+        },
+        "lengths": {
+          "16": 0.19444444444444445,
+          "24": 0.0,
+          "32": 0.0
+        },
+        "absent": 1.0
+      },
+      "retain_latest": {
+        "candidate_accuracy": 0.8376736111111112,
+        "exact": 0.7777777777777778,
+        "nll": 5.170024916008014,
+        "roles": {
+          "current": 1.0,
+          "historical": 0.5333333333333333,
+          "anchor": 0.8
+        },
+        "suites": {
+          "long_context": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.00046406192308949085
+          },
+          "two_distant_revokes": {
+            "candidate_accuracy": 0.6319444444444444,
+            "exact": 0.4444444444444444,
+            "nll": 12.745203867366927
+          },
+          "restore_older": {
+            "candidate_accuracy": 0.7048611111111112,
+            "exact": 0.6666666666666666,
+            "nll": 8.105225181265247
+          },
+          "reset_then_duplicate": {
+            "candidate_accuracy": 0.9270833333333334,
+            "exact": 0.8888888888888888,
+            "nll": 2.507551214452241
+          },
+          "mixed_unseen": {
+            "candidate_accuracy": 0.9244791666666666,
+            "exact": 0.8888888888888888,
+            "nll": 2.4916802550325645
+          }
+        },
+        "lengths": {
+          "16": 0.7222222222222222,
+          "24": 1.0,
+          "32": 1.0
+        },
+        "absent": 0.0
+      },
+      "global_boundary_clear": {
+        "candidate_accuracy": 0.5555555555555556,
+        "exact": 0.5555555555555556,
+        "nll": 10.604995511255407,
+        "roles": {
+          "current": 1.0,
+          "historical": 0.3333333333333333,
+          "anchor": 0.3333333333333333
+        },
+        "suites": {
+          "long_context": {
+            "candidate_accuracy": 0.3333333333333333,
+            "exact": 0.3333333333333333,
+            "nll": 15.936535725819637
+          },
+          "two_distant_revokes": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0005104305942775037
+          },
+          "restore_older": {
+            "candidate_accuracy": 0.3333333333333333,
+            "exact": 0.3333333333333333,
+            "nll": 16.06464950216921
+          },
+          "reset_then_duplicate": {
+            "candidate_accuracy": 0.5555555555555556,
+            "exact": 0.5555555555555556,
+            "nll": 10.600827521538344
+          },
+          "mixed_unseen": {
+            "candidate_accuracy": 0.5555555555555556,
+            "exact": 0.5555555555555556,
+            "nll": 10.422454376155565
+          }
+        },
+        "lengths": {
+          "16": 0.6111111111111112,
+          "24": 0.3333333333333333,
+          "32": 0.3333333333333333
+        },
+        "absent": 1.0
+      },
+      "last1": {
+        "candidate_accuracy": 0.5555555555555556,
+        "exact": 0.5555555555555556,
+        "nll": 10.604995511255407,
+        "roles": {
+          "current": 1.0,
+          "historical": 0.3333333333333333,
+          "anchor": 0.3333333333333333
+        },
+        "suites": {
+          "long_context": {
+            "candidate_accuracy": 0.3333333333333333,
+            "exact": 0.3333333333333333,
+            "nll": 15.936535725819637
+          },
+          "two_distant_revokes": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0005104305942775037
+          },
+          "restore_older": {
+            "candidate_accuracy": 0.3333333333333333,
+            "exact": 0.3333333333333333,
+            "nll": 16.06464950216921
+          },
+          "reset_then_duplicate": {
+            "candidate_accuracy": 0.5555555555555556,
+            "exact": 0.5555555555555556,
+            "nll": 10.600827521538344
+          },
+          "mixed_unseen": {
+            "candidate_accuracy": 0.5555555555555556,
+            "exact": 0.5555555555555556,
+            "nll": 10.422454376155565
+          }
+        },
+        "lengths": {
+          "16": 0.6111111111111112,
+          "24": 0.3333333333333333,
+          "32": 0.3333333333333333
+        },
+        "absent": 1.0
+      },
+      "last2": {
+        "candidate_accuracy": 0.5666666666666667,
+        "exact": 0.5666666666666667,
+        "nll": 10.345861151254798,
+        "roles": {
+          "current": 1.0,
+          "historical": 0.36666666666666664,
+          "anchor": 0.3333333333333333
+        },
+        "suites": {
+          "long_context": {
+            "candidate_accuracy": 0.3888888888888889,
+            "exact": 0.3888888888888889,
+            "nll": 14.640863925816594
+          },
+          "two_distant_revokes": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0005104305942775037
+          },
+          "restore_older": {
+            "candidate_accuracy": 0.3333333333333333,
+            "exact": 0.3333333333333333,
+            "nll": 16.06464950216921
+          },
+          "reset_then_duplicate": {
+            "candidate_accuracy": 0.5555555555555556,
+            "exact": 0.5555555555555556,
+            "nll": 10.600827521538344
+          },
+          "mixed_unseen": {
+            "candidate_accuracy": 0.5555555555555556,
+            "exact": 0.5555555555555556,
+            "nll": 10.422454376155565
+          }
+        },
+        "lengths": {
+          "16": 0.6111111111111112,
+          "24": 0.4444444444444444,
+          "32": 0.3333333333333333
+        },
+        "absent": 1.0
+      },
+      "dense_full": {
+        "candidate_accuracy": 0.6008680555555556,
+        "exact": 0.044444444444444446,
+        "nll": 28.976644430667356,
+        "roles": {
+          "current": 0.050520833333333334,
+          "historical": 0.022395833333333334,
+          "anchor": 0.06041666666666667
+        },
+        "suites": {
+          "long_context": {
+            "candidate_accuracy": 0.3559027777777778,
+            "exact": 0.0026041666666666665,
+            "nll": 51.771050655894214
+          },
+          "two_distant_revokes": {
+            "candidate_accuracy": 0.6085069444444444,
+            "exact": 0.0,
+            "nll": 28.749983748007153
+          },
+          "restore_older": {
+            "candidate_accuracy": 0.4852430555555556,
+            "exact": 0.0026041666666666665,
+            "nll": 35.480984350288054
+          },
+          "reset_then_duplicate": {
+            "candidate_accuracy": 0.7378472222222222,
+            "exact": 0.10243055555555555,
+            "nll": 16.987966758818605
+          },
+          "mixed_unseen": {
+            "candidate_accuracy": 0.8168402777777778,
+            "exact": 0.11458333333333333,
+            "nll": 11.893236640328745
+          }
+        },
+        "lengths": {
+          "16": 0.05490451388888889,
+          "24": 0.003472222222222222,
+          "32": 0.001736111111111111
+        },
+        "absent": 0.046875
+      },
+      "full_ledger": {
+        "candidate_accuracy": 1.0,
+        "exact": 1.0,
+        "nll": 0.0005000297722770479,
+        "roles": {
+          "current": 1.0,
+          "historical": 1.0,
+          "anchor": 1.0
+        },
+        "suites": {
+          "long_context": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.00046406192308949085
+          },
+          "two_distant_revokes": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0005104305942775037
+          },
+          "restore_older": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0005688243707232408
+          },
+          "reset_then_duplicate": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0004808714256417564
+          },
+          "mixed_unseen": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0004759605476532474
+          }
+        },
+        "lengths": {
+          "16": 1.0,
+          "24": 1.0,
+          "32": 1.0
+        },
+        "absent": 1.0
+      },
+      "semantic_oracle": {
+        "candidate_accuracy": 1.0,
+        "exact": 1.0,
+        "nll": 0.0005000297722770479,
+        "roles": {
+          "current": 1.0,
+          "historical": 1.0,
+          "anchor": 1.0
+        },
+        "suites": {
+          "long_context": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.00046406192308949085
+          },
+          "two_distant_revokes": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0005104305942775037
+          },
+          "restore_older": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0005688243707232408
+          },
+          "reset_then_duplicate": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0004808714256417564
+          },
+          "mixed_unseen": {
+            "candidate_accuracy": 1.0,
+            "exact": 1.0,
+            "nll": 0.0004759605476532474
+          }
+        },
+        "lengths": {
+          "16": 1.0,
+          "24": 1.0,
+          "32": 1.0
+        },
+        "absent": 1.0
+      }
+    },
+    "strongest_non_oracle_comparator": "retain_latest",
+    "comparison": {
+      "exact_gain": 0.22222222222222224,
+      "exact_bootstrap_95ci": [
+        0.20069444444444445,
+        0.24409722222222224
+      ],
+      "nll_gain": 5.169524886235737,
+      "nll_bootstrap_95ci": [
+        4.664716302666482,
+        5.683782301420709
+      ]
+    },
+    "oracle_agreement": 1.0,
+    "gate": {
+      "checks": {
+        "primary_macro_candidate_at_least_point_85": true,
+        "every_suite_candidate_at_least_point_75": true,
+        "primary_exact_at_least_point_80": true,
+        "current_anchor_at_least_point_90": true,
+        "historical_at_least_point_80": true,
+        "absent_at_least_point_85": true,
+        "gain_at_least_point_03": true,
+        "gain_ci_lower_above_zero": true,
+        "nll_gain_ci_lower_above_zero": true,
+        "exact_oracle_agreement": true
+      },
+      "passed": true
+    }
+  }
+}
