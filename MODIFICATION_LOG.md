@@ -5860,6 +5860,29 @@ as `multiple_or_invalid_entity_mentions` exclusions and continue.  Their
 source hashes remain accounted for, and all eligibility thresholds are applied
 after this exclusion.
 
+The V10 retry completed and its independent reconstruction audit passed all 15
+checks.  All 48 registered training relations remained eligible after 1,717
+exclusions (1,314 ambiguous multi-mention rows and 403 duplicate relation
+statements).  The release contains 672 groups, 1,344 twin episodes, 4,032
+boundaries and 20,160 queries.  Its 24,192 selected material rows and entity
+pairs are globally group-disjoint.  The deterministic pilot contains 28
+groups, 56 episodes and 168 boundaries.  Archived the compact manifest, audit,
+hashes and interpretation under `experiments/v10_fewrel_corpus_20261016/`.
+
+Implemented `tasks/pilot_qwen_utility_record_controller_v10_fewrel.py` for the
+registered two-RTX-5090 pilot.  It locks the audited data dependency and final
+1B-token Qwen3-4B checkpoint, evaluates the full `{0, 0.5, 1}` grid, records
+per-label latency and GPU peaks, measures answer-token coverage, single-record
+safe-benefit prevalence and safe-oracle headroom, and projects formal runtime.
+The hard pilot gate exactly implements the registered 28 GiB, 95%, 5% and
+1.5-point thresholds.
+
+Added an independent pilot auditor that reconstructs all identities, ternary
+action grids, safe-oracle choices, per-candidate benefit targets, summary and
+gate; verifies shard hashes, the plain final Qwen checkpoint and two RTX 5090
+resources; and keeps all development labels/scores and held-out benchmarks
+sealed.  Added a non-overwriting two-GPU runner and focused gate/benefit tests.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
