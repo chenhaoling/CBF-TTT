@@ -4617,3 +4617,12 @@ hash, extracts the final frozen-Qwen hidden state without the LM head, mean
 pools non-padding tokens, L2 normalizes vectors and writes two shard-safe NPZ
 files with hashes and resource profiles. Development extraction requires a
 frozen S2 calibration selection; test input is rejected.
+
+Calibration embedding extraction completed 5,361 distinct SemEval mentions in
+about eight seconds per GPU shard. Added the calibration selector for four
+binary candidate arms, masked trigram and frozen-Qwen cosine controls. It
+selects the maximum-recall checkpoint under 99% scenario-level deletion
+precision, independently measures relation-macro accuracy, computes retrieval
+recall@4/8/16 and freezes the smallest k reaching 95%. Six selector/embedding
+tests pass. Four calibration scoring arms started with the same cache-shared
+two-candidate kernel; PubMed model outputs and SemEval test remain unopened.
