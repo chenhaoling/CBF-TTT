@@ -37,6 +37,10 @@ from tasks.diagnose_qwen_causal_ledger_context_scale import (
     SCALES as CONTEXT_SCALES,
     select_scale,
 )
+from tasks.evaluate_qwen_causal_ledger_scale_rescue_v3 import (
+    PROTOCOL as SCALE_RESCUE_PROTOCOL,
+    SCALE as SCALE_RESCUE_SCALE,
+)
 
 
 class CausalLedgerResidualCorpusTest(unittest.TestCase):
@@ -137,6 +141,10 @@ class CausalLedgerResidualCorpusTest(unittest.TestCase):
         for row in table.values():
             row["free_exact"] = 0.80
         self.assertIsNone(select_scale(table))
+
+    def test_scale_rescue_v3_is_single_frozen_registered_point(self):
+        self.assertEqual(SCALE_RESCUE_SCALE, 48.0)
+        self.assertEqual(SCALE_RESCUE_PROTOCOL, "qwen_causal_ledger_scale_rescue_v3_v1")
 
     def test_v2_resource_namespace_is_fresh_and_hash_locked(self):
         self.assertTrue(code_value("resource_v2", 0).startswith("Y "))

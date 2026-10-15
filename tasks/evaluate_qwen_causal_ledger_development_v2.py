@@ -86,7 +86,7 @@ def bootstrap_comparison(primary_groups, comparator_groups):
     }
 
 
-def collect(args):
+def collect(args, scale=SCALE, protocol=PROTOCOL):
     import torch
     from transformers import AutoTokenizer
     from tasks.cbf_checkpoint_native import load_model
@@ -142,9 +142,9 @@ def collect(args):
                         cache_key = "__dense__" if policy == "dense_full" else returned[policy]
                         if cache_key not in cached:
                             residual = dense if policy == "dense_full" else factors["values"][returned[policy]]
-                            scored = score_candidates(model, prepared, residual)
+                            scored = score_candidates(model, prepared, residual, scale=scale)
                             generation = generate_with_residual(
-                                model, tokenizer, prepared, residual, SCALE, max_new_tokens=5,
+                                model, tokenizer, prepared, residual, scale, max_new_tokens=5,
                                 stop_on_eos_or_newline=False,
                             )
                             cached[cache_key] = {
@@ -162,7 +162,7 @@ def collect(args):
                             "exact": int(value["generation"]["ids"] == factors["token_ids"][answer["answer"]]),
                         }
                     row = {
-                        "protocol": PROTOCOL,
+                        "protocol": protocol,
                         "shard": args.shard,
                         "episode_id": inp["id"],
                         "group_id": inp["group_id"],
@@ -181,7 +181,7 @@ def collect(args):
                     sink.write(json.dumps(row) + "\n"); sink.flush(); rows.append(row)
             print(json.dumps({"completed": pair_index + 1, "total": len(selected), "episode": inp["id"]}), flush=True)
     resource = {
-        "protocol": PROTOCOL,
+        "protocol": protocol,
         "shard": args.shard,
         "num_shards": args.num_shards,
         "episodes": len(selected),
@@ -195,7 +195,7 @@ def collect(args):
         "tokenizer": args.tokenizer,
         "loading_info": model_meta["loading_info"],
         "gpu": torch.cuda.get_device_name(),
-        "scale": SCALE,
+        "scale": float(scale),
         "seed": manifest["seed"],
         "confirmation_generated": False,
         "ood_generated": False,
@@ -204,7 +204,7 @@ def collect(args):
     return resource
 
 
-def summarize(args):
+def summarize(args, scale=SCALE, protocol=PROTOCOL):
     root, output = Path(args.root), Path(args.output)
     if output.exists():
         raise FileExistsError(output)
@@ -262,8 +262,8 @@ def summarize(args):
         "exact_oracle_agreement": oracle_agreement == 1.0,
     }
     result = {
-        "protocol": PROTOCOL,
-        "scale": SCALE,
+        "protocol": protocol,
+        "scale": float(scale),
         "rows": len(rows),
         "metrics": metrics,
         "strongest_non_oracle_comparator": strongest,

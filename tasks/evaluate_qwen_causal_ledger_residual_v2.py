@@ -67,13 +67,13 @@ def addressable_top1(state, query_key, factors, null_code):
     return similarity * factors["values"][best["value"]]
 
 
-def score_candidates(model, prepared, residual):
+def score_candidates(model, prepared, residual, scale=SCALE):
     import torch
     import torch.nn.functional as F
 
     scores = {}
     for candidate, hidden in prepared["hidden"].items():
-        adjusted = hidden.to(residual.device) + SCALE * residual
+        adjusted = hidden.to(residual.device) + float(scale) * residual
         logits = model.lm_head(adjusted.to(model.lm_head.weight.dtype)).float()
         labels = torch.tensor(prepared["encoded"][candidate], dtype=torch.long, device=logits.device)
         scores[candidate] = float(F.cross_entropy(logits, labels, reduction="mean"))

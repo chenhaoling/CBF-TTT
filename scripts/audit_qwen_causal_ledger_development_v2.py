@@ -157,7 +157,13 @@ def expected_rows(pairs):
     return output, order
 
 
-def run(args):
+def run(
+    args,
+    expected_protocol=PROTOCOL,
+    expected_scale=SCALE,
+    expected_terminal="completed_qwen_causal_ledger_development_v2",
+    audit_protocol="qwen_causal_ledger_development_v2_audit_v1",
+):
     from transformers import AutoTokenizer
 
     root, v2_root, output = Path(args.root), Path(args.v2_root), Path(args.output)
@@ -175,12 +181,12 @@ def run(args):
         hashes[row_path.name], hashes[resource_path.name] = sha(row_path), sha(resource_path)
         shard_ok &= all(row["shard"] == shard and order[row["episode_id"]] % 2 == shard for row in part)
         shard_ok &= all((
-            resource["protocol"] == PROTOCOL,
+            resource["protocol"] == expected_protocol,
             resource["episodes"] == 448,
             resource["rows"] == len(part) == 4032,
             resource["rows_sha256"] == hashes[row_path.name],
             resource["data_manifest_sha256"] == sha(root / "data/manifest.json"),
-            resource["scale"] == SCALE,
+            resource["scale"] == expected_scale,
             not resource["loading_info"]["missing_keys"],
             not resource["loading_info"]["unexpected_keys"],
             not resource["loading_info"]["mismatched_keys"],
@@ -195,7 +201,7 @@ def run(args):
         answer_ids = tokenizer.encode(source["answer"]["answer"], add_special_tokens=False)
         prompt_hash = hashlib.sha256(render_query(source["query"]["text"]).encode()).hexdigest()
         row_ok &= all((
-            row["protocol"] == PROTOCOL,
+            row["protocol"] == expected_protocol,
             row["group_id"] == source["inp"]["group_id"],
             row["family"] == source["target"]["family"],
             row["length"] == source["target"]["length"],
@@ -229,7 +235,7 @@ def run(args):
         dependency["summary_sha256"] == sha(v2_summary),
         dependency["audit_sha256"] == sha(v2_audit),
     ))
-    terminal = (root / "terminal_status.txt").read_text().strip() == "completed_qwen_causal_ledger_development_v2" and (root / "runner_exit_code.txt").read_text().strip() == "0"
+    terminal = (root / "terminal_status.txt").read_text().strip() == expected_terminal and (root / "runner_exit_code.txt").read_text().strip() == "0"
     sealed = not summary["confirmation_generated"] and not summary["ood_generated"] and not manifest["confirmation_generated"] and not manifest["ood_generated"]
     checks = {
         "terminal_status_and_exit": terminal,
@@ -241,7 +247,7 @@ def run(args):
         "confirmation_and_ood_sealed": sealed,
     }
     result = {
-        "protocol": "qwen_causal_ledger_development_v2_audit_v1",
+        "protocol": audit_protocol,
         "passed": all(checks.values()),
         "checks": checks,
         "hashes": hashes,

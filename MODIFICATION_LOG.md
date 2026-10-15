@@ -3707,3 +3707,23 @@ confirmation can be generated.
   91.34% five-token exact and a 9.92-point exact gain over `retain_latest`
   (95% group-bootstrap interval 8.68--11.19 points). Ten of eleven gates passed;
   the current/anchor 95% exact gate failed, so confirmation/OOD remain sealed.
+
+## 2026-10-15: scale-48 development replay implementation
+
+- Added `tasks/evaluate_qwen_causal_ledger_scale_rescue_v3.py` as a distinct
+  scale-48/protocol entry point. The development evaluator and candidate scorer
+  now accept explicit scale/protocol arguments while retaining the original
+  V2 scale-32 defaults, so prior commands remain compatible.
+- Added `scripts/run_qwen_causal_ledger_scale_rescue_v3.sh`. It refuses to
+  overwrite an output root, verifies the audited one-check V2 failure and the
+  passing residual-V2 dependency before evaluation, rebuilds the deterministic
+  development corpus, launches one shard per RTX 5090, and records terminal and
+  resource metadata.
+- Added `scripts/audit_qwen_causal_ledger_scale_rescue_v3.py`. It reuses the
+  independent row/state/bootstrap recomputation with the frozen V3 protocol and
+  additionally verifies that the newly materialized corpus is byte-identical
+  to the audited V2 corpus. Confirmation and OOD markers remain mandatory
+  false.
+- Extended `tests/test_qwen_causal_ledger_residual.py` to lock V3 to the single
+  preregistered scale 48 and protocol. Eleven local unit tests, Python syntax
+  compilation, shell syntax validation and `git diff --check` passed.
