@@ -195,6 +195,14 @@ def score_action(episode: dict, boundary_offset: int, slots: tuple[int, ...], ac
             outcomes.append({**result, "related": related,
                              "query_role": query["role"], "event_index": index})
     unrelated = [row for row in outcomes if not row["related"]]
+    per_query_role = {}
+    for role in sorted({row["query_role"] for row in outcomes}):
+        values = [row for row in outcomes if row["query_role"] == role]
+        per_query_role[role] = {
+            "queries": len(values),
+            "correct": sum(row["correct"] for row in values),
+            "total_answer_nll": sum(row["answer_nll"] for row in values),
+        }
     return {
         "queries": len(outcomes),
         "correct": sum(row["correct"] for row in outcomes),
@@ -203,6 +211,7 @@ def score_action(episode: dict, boundary_offset: int, slots: tuple[int, ...], ac
         "unrelated_correct": sum(row["correct"] for row in unrelated),
         "mean_memory_mass": statistics.fmean(masses),
         "selected_null": sum(row["selected_record_id"] is None for row in outcomes),
+        "per_query_role": per_query_role,
     }
 
 

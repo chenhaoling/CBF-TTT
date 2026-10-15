@@ -120,6 +120,7 @@ def audit(label_root: Path, data_root: Path) -> dict:
     labels_valid = True
     finite = True
     relations_valid = True
+    query_roles_valid = True
     for row in rows:
         expected = expected_actions(row["candidate_count"])
         actions_valid &= set(row["actions"]) == set(expected)
@@ -131,6 +132,19 @@ def audit(label_root: Path, data_root: Path) -> dict:
                 "queries", "correct", "total_answer_nll", "unrelated_queries",
                 "unrelated_correct", "mean_memory_mass", "selected_null",
             ))
+            roles = action.get("per_query_role", {})
+            query_roles_valid &= set(roles) == {
+                "anchor", "current_exact", "current_rephrase",
+                "retained_1", "retained_2",
+            }
+            query_roles_valid &= (
+                sum(value["queries"] for value in roles.values())
+                == action["queries"]
+                and sum(value["correct"] for value in roles.values())
+                == action["correct"]
+                and abs(sum(value["total_answer_nll"] for value in roles.values())
+                        - action["total_answer_nll"]) <= 1e-9
+            )
         labels_valid &= independent_label(row) == row["safe_oracle_action"]
         labels_valid &= not row["safe_oracle_contains_half"]
         relations_valid &= (
@@ -172,6 +186,7 @@ def audit(label_root: Path, data_root: Path) -> dict:
             and len({row["source_group"] for row in rows}) == GROUPS
         ),
         "binary_actions_and_finite_metrics": actions_valid and finite,
+        "query_role_aggregates": query_roles_valid,
         "independent_safe_labels": labels_valid,
         "relation_provenance": relations_valid,
         "aggregate_reconstruction": (

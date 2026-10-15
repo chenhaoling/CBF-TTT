@@ -5252,3 +5252,20 @@ background subjects, and forbids those subjects from every remaining group.
 The original data root remains immutable and cannot release evaluation.  The
 retry runner uses a new root and its audit must prove one held-out group per
 relation and exactly one corpus occurrence for every reserved background.
+
+Added the frozen V2 TempLAMA development evaluator, focused policy tests,
+non-overwriting runner and deterministic independent result audit.  It uses the
+three V1 checkpoints and their exact registered utility, risk-penalty,
+conformal-level and absolute risk thresholds without validation fitting.  It
+reports all deterministic baselines, 20 deletion-matched random draws per
+controller, majority action, safe binary Oracle, query-role accuracy, relation
+and mechanism gains, deletion precision, group and relation-cluster intervals,
+a two-way target/background Bayesian bootstrap and the nine-group independent
+background diagnostic.  The pooled release candidate implements every frozen
+V2 development gate; the separate auditor reruns all deterministic values,
+reconstructs the gates and alone decides whether TempLAMA test construction may
+open.  Label outcomes now additionally retain additive per-query-role counters;
+the original aggregate fields and default ternary action grid are unchanged.
+Local compilation, original evaluator regression tests, new policy tests,
+shell syntax and whitespace checks pass.  No TempLAMA validation model outcome
+had been observed when this evaluator was frozen.
