@@ -1,0 +1,44 @@
+{
+  "background_bank": {
+    "groups_without_reused_background": 9,
+    "maximum_group_occurrences": 82,
+    "reused_subjects": 61,
+    "unique_subjects": 115
+  },
+  "boundaries": 1536,
+  "checks": {
+    "binary_action_and_incoming_write_frozen": true,
+    "builder_invariants": true,
+    "exact_builder_reconstruction": true,
+    "heldouts_and_model_outputs_sealed": true,
+    "manifest_and_file_hashes": true,
+    "nonempty_relation_balanced_background_heldout": true,
+    "query_contract": true,
+    "registered_size_and_allocation": true,
+    "registered_validation_background_bank": true,
+    "source_pilot_and_inspection_locked": true,
+    "twins_mechanisms_lengths_and_sparse_boundaries": true,
+    "unique_real_validation_targets": true
+  },
+  "episodes": 512,
+  "episodes_sha256": "f4ed2cc56971324300b6bc260f3bb23c4fc07b3f792f9e4a8772c2ed9d0401ee",
+  "manifest_sha256": "e87269d31890d619bc8f69b4bd6c20330ab06d35d7bb887a5ef26b73048af66c",
+  "next_stage": "templama_development_binary_labels",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v2_templama_development_data_audit",
+  "queries": 7680,
+  "relation_quotas": {
+    "P102": 31,
+    "P108": 52,
+    "P127": 17,
+    "P286": 29,
+    "P39": 30,
+    "P488": 25,
+    "P54": 36,
+    "P6": 23,
+    "P69": 13
+  },
+  "source_groups": 256,
+  "source_inspection_sha256": "e4655306a148908091e43932abb97fdb447f5677881fa05ca6cc7b58eda07d24",
+  "terminal_status": "templama_development_data_audit_passed"
+}

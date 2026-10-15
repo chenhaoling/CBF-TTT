@@ -1,0 +1,68 @@
+{
+  "background_heldout_clarification": "QWEN_UTILITY_RECORD_CONTROLLER_V2_BACKGROUND_HELDOUT_CLARIFICATION.md",
+  "clarification": "QWEN_UTILITY_RECORD_CONTROLLER_V2_CAPACITY_CLARIFICATION.md",
+  "counts": {
+    "background_heldout_groups": 9,
+    "background_subjects": 115,
+    "boundaries": 1536,
+    "episodes": 512,
+    "lengths": {
+      "16": 128,
+      "32": 128,
+      "64": 128,
+      "8": 128
+    },
+    "mechanisms": {
+      "different_subject_same_relation": 74,
+      "explicit_reset_revoke": 72,
+      "mixed_lifecycle": 72,
+      "same_subject_different_relation": 74,
+      "semantic_duplicate": 74,
+      "semantic_overwrite": 74,
+      "stale_repetition": 72
+    },
+    "queries": 7680,
+    "source_groups": 256,
+    "target_relations": {
+      "P102": 31,
+      "P108": 52,
+      "P127": 17,
+      "P286": 29,
+      "P39": 30,
+      "P488": 25,
+      "P54": 36,
+      "P6": 23,
+      "P69": 13
+    },
+    "target_subjects": 256
+  },
+  "current_write_gate": 1.0,
+  "external_benchmarks_loaded": false,
+  "files_sha256": {
+    "development_episodes.jsonl": "f4ed2cc56971324300b6bc260f3bb23c4fc07b3f792f9e4a8772c2ed9d0401ee"
+  },
+  "model_outputs_loaded": false,
+  "partition": "validation_development",
+  "pilot_audit_sha256": "c0b5838af15ef9be89c9d1a7ca0382aba9401cbe179cc1a806c7272a16431fca",
+  "pilot_summary_sha256": "86aa84d3e210d9feb285a75e7e62950be29efdfe96186af63d07160d064ae989",
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V2_CROSS_SOURCE_PLAN.md",
+  "primary_action_space": "binary_endpoints_plus_global_clear",
+  "protocol": "qwen_utility_record_controller_v2_templama_development_data",
+  "relation_quotas": {
+    "P102": 31,
+    "P108": 52,
+    "P127": 17,
+    "P286": 29,
+    "P39": 30,
+    "P488": 25,
+    "P54": 36,
+    "P6": 23,
+    "P69": 13
+  },
+  "seed": 202610171,
+  "source_inspection_sha256": "e4655306a148908091e43932abb97fdb447f5677881fa05ca6cc7b58eda07d24",
+  "source_manifest_sha256": "d94af17fe9090eb9932d8e490d5336cc8519c2654f84fd49f7d70fdd37875848",
+  "terminal_status": "templama_development_data_built_pending_independent_audit",
+  "test_episodes_generated": false,
+  "v1_confirmation_loaded": false
+}

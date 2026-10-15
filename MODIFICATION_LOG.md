@@ -5277,3 +5277,49 @@ the original aggregate fields and default ternary action grid are unchanged.
 Local compilation, original evaluator regression tests, new policy tests,
 shell syntax and whitespace checks pass.  No TempLAMA validation model outcome
 had been observed when this evaluator was frozen.
+
+The corrected TempLAMA validation construction retry2 completed 256 groups,
+512 twin episodes, 1,536 boundaries and 7,680 immediate queries.  All 12 data
+audit checks passed.  Exactly nine groups, one per relation, have six rendered
+background identities that occur nowhere else; the other 247 groups use the
+registered reusable bank.  TempLAMA test, V1 confirmation and external data
+remained sealed.
+
+Binary labeling completed all 1,536 validation boundaries and passed all ten
+independent label-audit checks.  Retain-all accuracy was 82.50%; the safe binary
+Oracle reached 89.84%, a 7.34-point gain with source-group 95% CI
+`[6.13, 8.61]` points, zero added unrelated errors and 272 additional correct
+unrelated outcomes.  Two-GPU critical time was 466.24 seconds and peak reserved
+memory was 7.69 GiB.  Frozen feature extraction then produced 4,608 candidate
+examples at 66 dimensions in 45.87 seconds; delete and risk positives were
+82.42% and 9.22%, and all eight feature-audit checks passed.
+
+The independently rerun frozen V2 evaluation failed its release gate without
+opening TempLAMA test.  Explicit lifecycle physics scored 84.707%.  The three
+controllers gained 1.543, 2.201 and 1.686 points with positive individual and
+pooled group intervals; pooled mean gain was 1.810 points, 95% CI
+`[1.126, 2.539]`, and mean Oracle-gap closure was 35.2%.  They nevertheless
+introduced 83/28/87 unrelated future-query errors, mean semantic-overwrite
+gain was -0.165 points, only seven of nine relations were nonnegative, and the
+registered two-point/40% thresholds were missed.  The result audit passed but
+reported `release_passed=false`.
+
+Added `QWEN_UTILITY_RECORD_CONTROLLER_V3_LOCALITY_CALIBRATION_PLAN.md` before
+extracting any TempLAMA train-pilot controller feature or prediction.  It
+registers a train-only complete grid over the existing controller thresholds
+and inference-safe semantic-locality projections, requires zero pilot
+collateral errors for selection, keeps the original V2 validation gates, and
+retains TempLAMA test as the only claim-bearing confirmation.
+
+Implemented the complete V3 train-only calibration path: a TempLAMA pilot
+feature extractor and independent auditor, a full-grid locality selector and
+exact rerun audit, and a validation evaluator with the same baselines,
+uncertainty analyses and unchanged V2 release gates.  The three V1 checkpoints
+remain frozen.  Selection can observe only the 72-group train resource pilot;
+the validation evaluator verifies the audited selected configurations before
+loading validation labels, and its independent audit alone can release test
+construction.  Focused tests cover locality-rule semantics, collateral-aware
+selection ties and inherited evaluation policies.  Python compilation, ten
+related tests, shell syntax and whitespace checks pass locally.  No train-pilot
+feature, selected V3 configuration or V3 validation outcome was observed at
+this implementation checkpoint.
