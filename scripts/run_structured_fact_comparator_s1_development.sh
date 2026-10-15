@@ -55,7 +55,7 @@ run_shards "$OUTPUT/generation" generation "$SELECTED_ADAPTER"
   --selected-root "$OUTPUT/selected" --zero-shot-root "$OUTPUT/zero_shot" \
   --generation-root "$OUTPUT/generation" --output "$OUTPUT/result.json" \
   > "$OUTPUT/result.log" 2>&1
-"$PY" scripts/audit_structured_fact_comparator_s1_development.py \
+"$PY" -m scripts.audit_structured_fact_comparator_s1_development \
   --data-root "$DATA" --selection "$CALIBRATION/selection.json" \
   --selected-root "$OUTPUT/selected" --zero-shot-root "$OUTPUT/zero_shot" \
   --generation-root "$OUTPUT/generation" --result "$OUTPUT/result.json" \

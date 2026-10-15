@@ -15,7 +15,7 @@ cd "$REPO"
   tests.test_select_structured_fact_comparator_s1 \
   tests.test_audit_structured_fact_comparator_s1_training \
   tests.test_audit_structured_fact_comparator_s1_selection -v
-"$PY" scripts/audit_structured_fact_comparator_s1_training.py \
+"$PY" -m scripts.audit_structured_fact_comparator_s1_training \
   --root "$TRAIN" --data-root "$DATA" --output "$TRAIN/training_audit.json"
 test ! -e "$OUTPUT"
 mkdir -p "$OUTPUT"
@@ -56,7 +56,7 @@ run_arm epoch_2_00 "$TRAIN/checkpoint_epoch_2.00"
   --score-root "$OUTPUT" --data-root "$DATA" \
   --arms zero_shot,epoch_0_25,epoch_0_50,epoch_1_00,epoch_2_00 \
   --output "$OUTPUT/selection.json" > "$OUTPUT/selection.log" 2>&1
-"$PY" scripts/audit_structured_fact_comparator_s1_selection.py \
+"$PY" -m scripts.audit_structured_fact_comparator_s1_selection \
   --score-root "$OUTPUT" --data-root "$DATA" \
   --output "$OUTPUT/selection_audit.json" > "$OUTPUT/selection_audit.log" 2>&1
 date -Iseconds > "$OUTPUT/completed_at.txt"
