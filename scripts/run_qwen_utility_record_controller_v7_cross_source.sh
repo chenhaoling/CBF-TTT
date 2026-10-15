@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v7_cross_source_training_20261016}
+ROOT=${ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v7_cross_source_training_20261016_retry1}
 PYTHON_BIN=${PYTHON_BIN:-/home/ctj/miniconda3/envs/cbf_ttt_train_py311/bin/python}
 TT_TRAIN_LABEL=${TT_TRAIN_LABEL:-/home/ctj/cbf_ttt_utility_record_controller_v4_templama_train_labels_20261016}
 TT_TRAIN_FEATURE=${TT_TRAIN_FEATURE:-/home/ctj/cbf_ttt_utility_record_controller_v4_templama_train_features_20261016}

@@ -5672,3 +5672,12 @@ worst-domain Oracle-gap closure.  The auditor reloads every checkpoint,
 recomputes every selected action and domain metric, verifies hashes and
 reconstructs the complete seven-condition release gate.  Test/test,
 original-confirmation, LongMemEval-S and LoCoMo artifacts are never loaded.
+
+The first V7 runner stopped before fitting because the older LAMA formal-label
+schema predates the `per_query_role` field required by the newer TempLAMA
+metric helper.  Every aggregate correctness, NLL, unrelated, action and
+mechanism field is present.  Before any V7 checkpoint existed, added an
+explicit schema-compatible aggregator: role-annotated domains retain the
+newer metric, while legacy rows use the original V1 metric.  Query-role output
+does not enter the controller, selection tuple or release gate.  Added a
+regression test and moved the unchanged fit to a new non-overwriting root.

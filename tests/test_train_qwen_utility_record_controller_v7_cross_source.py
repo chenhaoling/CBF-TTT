@@ -1,6 +1,8 @@
 import unittest
 
+from tests.test_train_qwen_utility_record_controller_v5_residual import fixture
 from tasks.train_qwen_utility_record_controller_v7_cross_source import (
+    compatible_metric,
     development_gate,
     select_config,
 )
@@ -21,6 +23,16 @@ def domain(gain, closure, errors=0, precision=1.0, fraction=.1):
 
 
 class TestV7CrossSourceController(unittest.TestCase):
+    def test_legacy_metric_does_not_require_query_roles(self):
+        row, feature = fixture()
+        for action in row["actions"].values():
+            action.pop("per_query_role")
+        value = compatible_metric(
+            [row], {("e", 0): row["retain_action"]}, {("e", 0): feature}
+        )
+        self.assertEqual(value["accuracy"], .6)
+        self.assertNotIn("per_query_role", value)
+
     def test_selection_prioritizes_worst_domain_closure_and_safety(self):
         config = {
             "epoch": 25, "utility_threshold": .4, "risk_penalty": 1.0,

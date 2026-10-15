@@ -13,6 +13,7 @@ import time
 from scripts.inspect_lama_pararel_utility_source import sha256
 from tasks.evaluate_qwen_utility_record_controller_v1_development import (
     fixed_policy_actions,
+    metric as legacy_metric,
 )
 from tasks.evaluate_qwen_utility_record_controller_v2_templama_development import (
     metric,
@@ -91,6 +92,21 @@ def attach_relations(labels: list[dict], feature_rows: list[dict]) -> None:
         row["target_relation"] = relation
 
 
+def compatible_metric(labels: list[dict], actions: dict,
+                      feature_map: dict) -> dict:
+    """Aggregate both legacy LAMA and newer role-annotated label schemas."""
+    has_roles = all(
+        "per_query_role" in row["actions"][actions[
+            (row["episode_id"], row["boundary_index"])
+        ]]
+        for row in labels
+    )
+    return (
+        metric(labels, actions, feature_map)
+        if has_roles else legacy_metric(labels, actions)
+    )
+
+
 def load_training_domain(label_root: Path, feature_root: Path) -> dict:
     labels = load_labels(label_root)
     features = load_feature_rows(feature_root)
@@ -114,8 +130,8 @@ def load_development_domain(label_root: Path, feature_root: Path,
     oracle_actions = safe_fact_key_oracle_actions(
         value["labels"], value["features"], matches
     )
-    physics = metric(value["labels"], physics_actions, feature_map)
-    oracle = metric(value["labels"], oracle_actions, feature_map)
+    physics = compatible_metric(value["labels"], physics_actions, feature_map)
+    oracle = compatible_metric(value["labels"], oracle_actions, feature_map)
     value.update({
         "episodes": episodes,
         "matches": matches,
@@ -138,7 +154,9 @@ def domain_metric(domain: dict, predictions: dict, config: dict) -> dict:
     actions = fact_key_projected_actions(
         domain["labels"], domain["features"], raw, domain["matches"]
     )
-    value = metric(domain["labels"], actions, domain["feature_map"])
+    value = compatible_metric(
+        domain["labels"], actions, domain["feature_map"]
+    )
     precision, fraction, selected = residual_precision(
         domain["examples"], actions, domain["labels"]
     )
