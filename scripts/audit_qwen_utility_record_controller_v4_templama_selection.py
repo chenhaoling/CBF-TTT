@@ -15,6 +15,9 @@ from scripts.audit_qwen_utility_record_controller_v2_templama_development_featur
     AUDIT_PROTOCOL as FEATURE_AUDIT_PROTOCOL,
 )
 from scripts.inspect_lama_pararel_utility_source import sha256
+from tasks.build_qwen_utility_record_controller_v2_templama_development import (
+    AUDIT_PROTOCOL as DATA_AUDIT_PROTOCOL,
+)
 from tasks.evaluate_qwen_utility_record_controller_v1_development import (
     CONFORMAL_LEVELS,
     RISK_PENALTIES,
@@ -55,8 +58,10 @@ def audit(result_path: Path, data_root: Path, feature_root: Path,
     result = json.loads(result_path.read_text())
     feature_audit_path = feature_root / "development_feature_audit.json"
     training_audit_path = training_root / "training_audit.json"
+    data_audit_path = data_root / "data_audit.json"
     feature_audit = json.loads(feature_audit_path.read_text())
     training_audit = json.loads(training_audit_path.read_text())
+    data_audit = json.loads(data_audit_path.read_text())
     calibration, evaluation, allocation = validation_group_split(
         load_jsonl(data_root / "development_episodes.jsonl")
     )
@@ -106,12 +111,15 @@ def audit(result_path: Path, data_root: Path, feature_root: Path,
             and feature_audit.get("passed") is True
             and training_audit.get("protocol") == TRAINING_AUDIT_PROTOCOL
             and training_audit.get("passed") is True
+            and data_audit.get("protocol") == DATA_AUDIT_PROTOCOL
+            and data_audit.get("passed") is True
             and result["feature_audit_sha256"] == sha256(feature_audit_path)
             and result["label_summary_sha256"]
             == sha256(label_root / "summary.json")
             and result["training_audit_sha256"] == sha256(training_audit_path)
             and result["data_manifest_sha256"]
             == sha256(data_root / "manifest.json")
+            and result["data_audit_sha256"] == sha256(data_audit_path)
         ),
         "complete_registered_grid": grid_valid,
         "finite_candidate_metrics": metrics_valid,

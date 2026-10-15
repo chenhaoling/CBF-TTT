@@ -5406,3 +5406,8 @@ exact-rerun audit alone can authorize TempLAMA test construction.  Compilation,
 eight selection/evaluation regression tests, runner syntax and whitespace
 checks pass locally; no V4 validation outcome had been observed at this
 implementation checkpoint.
+
+The calibration boundary also locks the independently passed V2 validation
+data audit and its manifest hash before deriving group IDs, preventing a
+different validation corpus from being paired with the frozen feature/label
+artifacts while retaining the same 128/128 selection rule.

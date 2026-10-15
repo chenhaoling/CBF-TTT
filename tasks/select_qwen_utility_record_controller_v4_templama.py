@@ -14,6 +14,9 @@ from scripts.audit_qwen_utility_record_controller_v2_templama_development_featur
     AUDIT_PROTOCOL as FEATURE_AUDIT_PROTOCOL,
 )
 from scripts.inspect_lama_pararel_utility_source import sha256
+from tasks.build_qwen_utility_record_controller_v2_templama_development import (
+    AUDIT_PROTOCOL as DATA_AUDIT_PROTOCOL,
+)
 from tasks.evaluate_qwen_utility_record_controller_v1_development import (
     CONFORMAL_LEVELS,
     RISK_PENALTIES,
@@ -195,14 +198,21 @@ def select(args) -> dict:
     training_root = Path(args.training_root)
     feature_audit_path = feature_root / "development_feature_audit.json"
     training_audit_path = training_root / "training_audit.json"
+    data_audit_path = data_root / "data_audit.json"
     feature_audit = json.loads(feature_audit_path.read_text())
     training_audit = json.loads(training_audit_path.read_text())
+    data_audit = json.loads(data_audit_path.read_text())
     if (feature_audit.get("protocol") != FEATURE_AUDIT_PROTOCOL
             or not feature_audit.get("passed")):
         raise ValueError("TempLAMA validation feature audit did not pass")
     if (training_audit.get("protocol") != TRAINING_AUDIT_PROTOCOL
             or not training_audit.get("passed")):
         raise ValueError("V4 controller training audit mismatch")
+    if (data_audit.get("protocol") != DATA_AUDIT_PROTOCOL
+            or not data_audit.get("passed")
+            or data_audit.get("manifest_sha256")
+            != sha256(data_root / "manifest.json")):
+        raise ValueError("TempLAMA validation data audit mismatch")
     labels, feature_rows = [], []
     for shard in (0, 1):
         labels.extend(load_jsonl(label_root / f"labels_shard{shard}.jsonl"))
@@ -309,6 +319,7 @@ def select(args) -> dict:
         "label_summary_sha256": sha256(label_root / "summary.json"),
         "training_audit_sha256": sha256(training_audit_path),
         "data_manifest_sha256": sha256(data_root / "manifest.json"),
+        "data_audit_sha256": sha256(data_audit_path),
         "evaluation_outcomes_scored": False,
         "templama_test_loaded": False,
         "v1_confirmation_loaded": False,
