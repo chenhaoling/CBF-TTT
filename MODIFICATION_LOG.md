@@ -3878,3 +3878,14 @@ hashes, summary, audit and the result report are archived under
 `qwen_causal_ledger_ood_v1/`. This completes the controlled development,
 matched-confirmation and lifecycle-OOD chain and releases natural-text scope
 and lifecycle transfer on the structured substrate.
+
+## 2026-10-15: natural multi-token value bridge preregistration
+
+Added `QWEN_NATURAL_VALUE_BRIDGE_V1_PLAN.md` after the audited lifecycle OOD
+pass and before producing any natural-value residual score. The content-only
+bridge uses the already observed, subject-disjoint ZsRE calibration/development
+facts while keeping ZsRE test and every external long-memory benchmark sealed.
+It fixes 258/256 non-noop counterfactual facts, exact and rephrase queries,
+variable-length per-position LM-head value residuals, Correct/Wrong/Zero/Random
+controls, scales 4/8/16/32/48, the smallest-passing-scale rule, bootstrap gates
+and a one-time development stop rule.
