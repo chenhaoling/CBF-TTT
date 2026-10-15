@@ -4534,3 +4534,50 @@ the optimization is explicitly not treated as bitwise equivalence. All formal
 arms are frozen to the cached kernel. It reaches 21.96 pairs/s at batch 16 with
 15.12/18.81 GiB allocated/reserved memory. The formal calibration restarts in
 a new `retry1` root; the stopped root retains only logs and `started_at.txt`.
+
+The cached retry completed all five arms. The independent calibration audit
+reconstructed all 26,805 rows and passed. The selector chose the 0.25-epoch
+adapter at confidence threshold `0.20833873748779297`. On calibration it had
+99.63% deletion precision, 100% recall and 82.07% exact four-field accuracy.
+However, exact lexical and trigram controls both obtained 100% deletion
+precision and recall. This exposed a construction shortcut: duplicate and
+update examples preserve the anchor relation template after entity/value
+masking, whereas different-relation examples do not.
+
+The preregistered one-shot SemEval development run then completed all 6,140
+rows. The selected adapter obtained 99.84% deletion precision, 99.96% recall,
+82.44% exact four-field accuracy, 98.05% relation recall and only 59.04%
+relation specificity. Unconstrained JSON validity was 100%. Four of nine gates
+failed: exact accuracy, relation specificity, relation-macro balanced accuracy
+and the ten-point recall gain over a safe baseline. The independent auditor
+reconstructed every metric and gate and passed all seven checks. Terminal
+status is `stopped_by_development`; SemEval test remains unopened. Compact
+selection, result, audit and status artifacts plus a full failure report are
+archived under
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/structured_fact_comparator_s1/`.
+
+## 2026-10-15: natural relation retriever/reranker S2 registration
+
+Added `QWEN_NATURAL_RELATION_RERANKER_S2_PLAN.md` after the audited S1 stop and
+before parsing the fresh FewRel PubMed development source. S2 removes the S1
+template shortcut by comparing two distinct natural mentions after replacing
+their entity and value spans with placeholders. It learns only relation
+equivalence; an explicit session ledger supplies entity/value equality and the
+unchanged physical rule supplies the action.
+
+S2 uses the same 48 FewRel train relations for LoRA weight updates and the
+already observed SemEval train split for calibration. Official FewRel 2.0
+`val_pubmed.json` is the new one-shot development source. At registration only
+its SHA256 (`fc0f13b534f6664fe0d8aec231d7590313bc6510d00dbc1b6746147f6a2b46e6`)
+and 432,600-byte size were read; its JSON content remains unparsed. The plan
+freezes similarity-bin matching, a pre-model shortcut gate, frozen-Qwen
+retrieval at k=4/8/16, a binary LoRA cross-encoder, calibration-only checkpoint
+and threshold selection, PubMed release gates, three confirmation seeds and a
+conditional one-shot SemEval-test release. Native dense fast weights remain a
+separate downstream ablation.
+
+The first registered PubMed schema read corrected one source-cardinality
+assumption: the hash-pinned file contains 10 relations with 100 mentions each,
+not the 25 relations stated from a domain-level FewRel summary. The correction
+was recorded before pair construction or S2 model execution; no method,
+threshold or gate changed.

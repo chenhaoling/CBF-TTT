@@ -1,0 +1,179 @@
+{
+  "baselines": {
+    "exact_lexical": {
+      "by_kind_operation_accuracy": {
+        "duplicate": 1.0,
+        "same_entity_other_relation": 1.0,
+        "same_relation_other_entity": 1.0,
+        "unrelated": 1.0,
+        "update": 1.0
+      },
+      "delete": {
+        "feasible": true,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "specificity": 1.0,
+        "threshold": 0.0,
+        "tn": 3684,
+        "tp": 2456
+      },
+      "exact_four_field_accuracy": 0.8,
+      "relation_macro_balanced_accuracy": 0.8333333333333333,
+      "rows": 6140,
+      "same_entity_other_relation_specificity": 1.0,
+      "same_relation": {
+        "fn": 1228,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "specificity": 1.0,
+        "tn": 2456,
+        "tp": 2456
+      }
+    },
+    "trigram": {
+      "by_kind_operation_accuracy": {
+        "duplicate": 1.0,
+        "same_entity_other_relation": 1.0,
+        "same_relation_other_entity": 1.0,
+        "unrelated": 1.0,
+        "update": 1.0
+      },
+      "delete": {
+        "feasible": true,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "specificity": 1.0,
+        "threshold": 1.0,
+        "tn": 3684,
+        "tp": 2456
+      },
+      "exact_four_field_accuracy": 0.8,
+      "relation_macro_balanced_accuracy": 0.8333333333333333,
+      "rows": 6140,
+      "same_entity_other_relation_specificity": 1.0,
+      "same_relation": {
+        "fn": 1228,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "specificity": 1.0,
+        "tn": 2456,
+        "tp": 2456
+      }
+    },
+    "zero_shot": {
+      "by_kind_operation_accuracy": {
+        "duplicate": 1.0,
+        "same_entity_other_relation": 0.7768729641693811,
+        "same_relation_other_entity": 0.9845276872964169,
+        "unrelated": 0.99185667752443,
+        "update": 0.993485342019544
+      },
+      "delete": {
+        "feasible": true,
+        "fn": 68,
+        "fp": 22,
+        "precision": 0.9908713692946058,
+        "recall": 0.9723127035830619,
+        "specificity": 0.994028230184582,
+        "threshold": 0.061202406883239746,
+        "tn": 3662,
+        "tp": 2388
+      },
+      "exact_four_field_accuracy": 0.604885993485342,
+      "relation_macro_balanced_accuracy": 0.7745752419146028,
+      "rows": 6140,
+      "same_entity_other_relation_specificity": 0.9820846905537459,
+      "same_relation": {
+        "fn": 1216,
+        "fp": 285,
+        "precision": 0.8964765710134399,
+        "recall": 0.6699239956568946,
+        "specificity": 0.883957654723127,
+        "tn": 2171,
+        "tp": 2468
+      }
+    }
+  },
+  "development_loaded_once": true,
+  "gate": {
+    "best_nonadapted_delete_recall_at_99_precision": 1.0,
+    "checks": {
+      "delete_precision_at_least_99": true,
+      "delete_recall_at_least_25": true,
+      "delete_recall_gain_at_least_10_points": false,
+      "exact_four_field_at_least_85": false,
+      "hard_relation_specificity_at_least_98": true,
+      "json_validity_at_least_99_5": true,
+      "relation_macro_balanced_accuracy_at_least_85": false,
+      "same_relation_recall_at_least_80": true,
+      "same_relation_specificity_at_least_95": false
+    },
+    "passed": false,
+    "selected_delete_recall_gain": -0.0004071661237784463
+  },
+  "generation": {
+    "exact_four_field_accuracy": 0.8221498371335505,
+    "rows": 6140,
+    "validity": 1.0
+  },
+  "protocol": "qwen_structured_fact_comparator_s1_development_v1",
+  "score_audit_sha256": {
+    "generation": [
+      "44e1dde4e49406319c558aeda044db7b3a0171d349d05fec5550db070734ac07",
+      "1af4f61aa8cd8e1246e947ffed81ebc6fbc7c27d9facce5a5eb98719c6e44a14"
+    ],
+    "selected": [
+      "eacb9e5f646dab557324b1a4498e57087f6cfe9409f9747d0922e77ff0c0e775",
+      "32b80e32199673ef8a9c71f5be7e6518e6f9c3a89a60238af673324a3ab94016"
+    ],
+    "zero_shot": [
+      "c798272408918b16ce14ef78c3a7efd3dfc1548a48de7ee06ca46745b5f97427",
+      "de7e6285f603909aeecae0aca02c282b07fc4250b43240a533d0e6b35d150490"
+    ]
+  },
+  "selected": {
+    "by_kind_operation_accuracy": {
+      "duplicate": 1.0,
+      "same_entity_other_relation": 0.9079804560260586,
+      "same_relation_other_entity": 1.0,
+      "unrelated": 1.0,
+      "update": 1.0
+    },
+    "delete": {
+      "feasible": true,
+      "fn": 1,
+      "fp": 4,
+      "precision": 0.9983733224888166,
+      "recall": 0.9995928338762216,
+      "specificity": 0.998914223669924,
+      "threshold": 0.20833873748779297,
+      "tn": 3680,
+      "tp": 2455
+    },
+    "exact_four_field_accuracy": 0.8244299674267102,
+    "relation_macro_balanced_accuracy": 0.7927343560510235,
+    "rows": 6140,
+    "same_entity_other_relation_specificity": 0.996742671009772,
+    "same_relation": {
+      "fn": 72,
+      "fp": 1006,
+      "precision": 0.7821567778258987,
+      "recall": 0.9804560260586319,
+      "specificity": 0.5903908794788274,
+      "tn": 1450,
+      "tp": 3612
+    }
+  },
+  "selected_adapter": "/home/ctj/cbf_ttt_structured_fact_comparator_s1_train_20261015/checkpoint_epoch_0.25",
+  "selected_arm": "epoch_0_25",
+  "selected_threshold": 0.20833873748779297,
+  "selection_sha256": "50b590a6eeb89f02157210e82ccafbcb8a3b50c00fa044750d191191e783198d",
+  "semeval_test_loaded": false,
+  "terminal_status": "stopped_by_development"
+}
