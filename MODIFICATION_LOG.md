@@ -5382,3 +5382,27 @@ each state dict, verifies hashes, normalization and finite traces, and alone
 releases validation calibration.  Local compilation, nine original/new
 training tests, label-grid tests, runner syntax and whitespace checks pass; no
 V4 model outcome had been observed at this implementation checkpoint.
+
+The V4 model-free formal-train construction completed on `hku-gpu2` and its
+independent exact-reconstruction audit passed.  It contains the registered 512
+unique train targets, 1,024 twin episodes, 3,072 decision boundaries and
+15,360 immediate queries; all nine Hamilton relation quotas exactly match the
+frozen plan.  The audit released binary labeling without opening validation
+outcomes or TempLAMA test.  Two RTX 5090 GPUs were idle before the label runner
+was launched in the detached `cbf_v4_labels` tmux session.
+
+Implemented the V4 validation calibration and evaluation-half path while label
+generation runs.  A deterministic model-free splitter keeps both twins and all
+boundaries of a target together, divides each relation as evenly as possible,
+and assigns the three required odd-relation extras by a frozen hash to obtain
+exactly 128 calibration and 128 evaluation groups.  Calibration searches the
+registered utility/risk/conformal grid and ten locality rules separately for
+each V4 seed, admitting only zero-collateral configurations.  Its independent
+auditor reconstructs the split, full grid, selection order and exact rerun.
+The evaluator then filters to the untouched 128-group half, reports all V2
+baselines, matched random controls, query-role/mechanism/relation diagnostics
+and clustered uncertainty, and retains every original release gate.  A second
+exact-rerun audit alone can authorize TempLAMA test construction.  Compilation,
+eight selection/evaluation regression tests, runner syntax and whitespace
+checks pass locally; no V4 validation outcome had been observed at this
+implementation checkpoint.
