@@ -99,6 +99,11 @@ Registered policy grid:
 - minimum predicted gain `{0, 0.005, 0.01, 0.02}`;
 - gain-tie tolerance `{0, 0.005, 0.01}`.
 
+For `direct_classification`, use retain-all when the maximum class probability
+is below confidence `{0, 0.5, 0.7}`; zero denotes plain argmax. Select its
+confidence on the same inner OOF rows by maximum candidate accuracy, then
+minimum unrelated errors and the more conservative confidence.
+
 On inner OOF predictions, first retain configurations whose unrelated-error
 count is no greater than the non-deployable source-action rule on the same
 rows and whose candidate accuracy exceeds retain-all by at least 0.5 points.
