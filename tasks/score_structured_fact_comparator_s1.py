@@ -125,7 +125,7 @@ def cached_candidate_nll(model, rows, tokenizer, max_length):
     choices = candidates()
     prompts = [prompt(row) for row in rows]
     old_padding = tokenizer.padding_side
-    tokenizer.padding_side = "left"
+    tokenizer.padding_side = "right"
     encoded = tokenizer(prompts, return_tensors="pt", padding=True,
                         add_special_tokens=True).to("cuda")
     tokenizer.padding_side = old_padding
@@ -143,14 +143,21 @@ def cached_candidate_nll(model, rows, tokenizer, max_length):
                                 for value in targets], dtype=torch.long, device="cuda")
     with torch.inference_mode():
         prefix = model(**encoded, use_cache=True)
-        first_logits = prefix.logits[:, -1].float().repeat_interleave(len(choices), dim=0)
+        prompt_lengths = encoded.attention_mask.sum(1)
+        last_indices = prompt_lengths - 1
+        first_logits = prefix.logits[
+            torch.arange(len(rows), device="cuda"), last_indices
+        ].float().repeat_interleave(len(choices), dim=0)
         first_loss = functional.cross_entropy(first_logits, target_ids[:, 0], reduction="none")
         cache = prefix.past_key_values
         del first_logits, prefix
         cache.batch_repeat_interleave(len(choices))
         repeated_mask = encoded.attention_mask.repeat_interleave(len(choices), dim=0)
         continuation_mask = torch.cat((repeated_mask, target_mask[:, :-1]), dim=1)
+        continuation_positions = (prompt_lengths.repeat_interleave(len(choices)).unsqueeze(1)
+                                  + torch.arange(width - 1, device="cuda").unsqueeze(0))
         continuation = model(input_ids=target_ids[:, :-1], attention_mask=continuation_mask,
+                             position_ids=continuation_positions,
                              past_key_values=cache, use_cache=False)
         logits = continuation.logits
         expected = target_ids[:, 1:]

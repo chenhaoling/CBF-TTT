@@ -7,7 +7,7 @@ DATA=${DATA:-/home/ctj/cbf_ttt_structured_fact_comparator_s1_data_20261015}
 TRAIN=${TRAIN:-/home/ctj/cbf_ttt_structured_fact_comparator_s1_train_20261015}
 MODEL=${MODEL:-/home/ctj/cbf_ttt_pretrain_qwen3_4b_1b/checkpoints/global_step_81381/hf_ckpt}
 TOKENIZER=${TOKENIZER:-/home/ctj/models/Qwen3-4B}
-OUTPUT=${OUTPUT:-/home/ctj/cbf_ttt_structured_fact_comparator_s1_calibration_20261015}
+OUTPUT=${OUTPUT:-/home/ctj/cbf_ttt_structured_fact_comparator_s1_calibration_20261015_retry1}
 
 cd "$REPO"
 "$PY" -m unittest \

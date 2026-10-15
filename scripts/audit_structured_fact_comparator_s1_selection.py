@@ -144,7 +144,8 @@ def load_arm(root, name):
     for shard in range(2):
         path = root / name / f"shard_{shard}.jsonl"
         audit = json.loads(path.with_suffix(".audit.json").read_text())
-        if audit["split"] != "calibration" or audit["semeval_test_loaded"] is not False:
+        if (audit["split"] != "calibration" or audit["semeval_test_loaded"] is not False
+                or audit.get("candidate_kernel") != "cached"):
             raise ValueError("invalid calibration audit")
         rows.extend(json.loads(line) for line in path.read_text().splitlines() if line)
     rows.sort(key=lambda row: row["index"])

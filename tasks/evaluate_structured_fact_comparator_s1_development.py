@@ -27,6 +27,7 @@ def load_shards(root: str | Path, mode: str, expected_rows: int = 6140):
         audit = json.loads(audit_path.read_text())
         if (audit["protocol"] != SCORE_PROTOCOL or audit["split"] != "development"
                 or audit["mode"] != mode or audit["shard"] != shard
+                or (mode == "candidate" and audit.get("candidate_kernel") != "cached")
                 or audit["num_shards"] != 2 or audit["semeval_test_loaded"] is not False
                 or sha(path) != audit["output_sha256"]):
             raise ValueError(f"invalid S1 development {mode} shard {shard}")

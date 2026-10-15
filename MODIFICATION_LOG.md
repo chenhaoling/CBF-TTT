@@ -4515,3 +4515,22 @@ unconstrained generation on the once-opened development split separately
 measures true JSON validity. Added shard-safe scoring, calibration-only
 checkpoint/threshold selection and five focused tests; no development result
 has been observed at registration time.
+
+Formal LoRA training completed all 1,500 steps in 2,434.62 seconds. Peak
+allocated memory was 10.25 GiB on both GPUs and peak reserved memory was
+28.87/30.07 GiB. The independent training audit passed every check: each of
+the four 46-MiB checkpoints contains exactly 288 LoRA tensors and no backbone
+tensor; both rank logs reach step 1,500; calibration, development and test
+flags remain false. Training-manifest SHA256 is
+`9879f55ad40de593e73d9535e3f570ee3cd833cd657f13017fd5f1c25e3dcb1c`.
+
+The first calibration scoring attempt was stopped before a prediction JSONL
+was written because the full-sequence eight-candidate kernel achieved only
+about 200 pairs/minute/shard. Added a cache-shared candidate kernel that runs
+the common prompt once and scores the eight short JSON suffixes. A diagnostic
+on 64 FewRel training pairs found 62/64 top-1 agreement with the mathematically
+equivalent full BF16 kernel (maximum/mean NLL differences 0.02033/0.00459), so
+the optimization is explicitly not treated as bitwise equivalence. All formal
+arms are frozen to the cached kernel. It reaches 21.96 pairs/s at batch 16 with
+15.12/18.81 GiB allocated/reserved memory. The formal calibration restarts in
+a new `retry1` root; the stopped root retains only logs and `started_at.txt`.

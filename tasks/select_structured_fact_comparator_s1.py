@@ -28,6 +28,7 @@ def load_arm(root: str | Path, name: str, expected_rows: int = 26805) -> tuple[l
         audit = json.loads(audit_path.read_text())
         if (audit["protocol"] != SCORE_PROTOCOL or audit["split"] != "calibration"
                 or audit["mode"] != "candidate" or audit["shard"] != shard
+                or audit.get("candidate_kernel") != "cached"
                 or audit["num_shards"] != 2 or audit["semeval_test_loaded"] is not False
                 or sha(path) != audit["output_sha256"]):
             raise ValueError(f"invalid S1 calibration shard: {name}/{shard}")

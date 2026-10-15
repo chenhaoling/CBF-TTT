@@ -125,6 +125,18 @@ metrics; unconstrained generation supplies the registered format-validity
 metric. The zero-shot baseline uses the identical candidate decoder and its own
 calibration-only threshold.
 
+The first calibration launcher was manually stopped before either shard wrote
+a prediction JSONL: the full-sequence implementation recomputed the same long
+prompt eight times and projected to require roughly five hours for five arms.
+The formal retry freezes a cache-shared kernel: run each prompt once, repeat its
+KV cache eight ways, and score only the JSON suffixes. This computes the same
+mean target-token NLL objective, but is not claimed to be bitwise equivalent in
+BF16. On 64 untouched FewRel training pairs, full and cached kernels agreed on
+62/64 top-1 states; maximum/mean NLL differences were 0.02033/0.00459. All
+formal arms, thresholds and baselines therefore use the cached kernel
+consistently; no full-kernel score enters selection. A 16-pair cached batch
+processed 21.96 pairs/s with 15.12/18.81 GiB peak allocated/reserved memory.
+
 If the pilot development gate passes, repeat the frozen configuration with
 seeds `24117/24119/24121`.  The external test is opened once only after all
 three runs pass the confirmation-development gate.

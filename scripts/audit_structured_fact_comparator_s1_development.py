@@ -20,6 +20,7 @@ def load(root, mode):
         audit = json.loads(path.with_suffix(".audit.json").read_text())
         if (audit["split"] != "development" or audit["mode"] != mode
                 or audit["semeval_test_loaded"] is not False
+                or (mode == "candidate" and audit.get("candidate_kernel") != "cached")
                 or sha(path) != audit["output_sha256"]):
             raise ValueError("invalid development shard")
         rows.extend(json.loads(line) for line in path.read_text().splitlines() if line)
