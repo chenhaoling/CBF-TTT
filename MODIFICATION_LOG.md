@@ -4909,3 +4909,11 @@ retain-all. The corrected aggregation clips only negative oracle-minus-retain
 deltas as added errors, separately reports improvements and verifies the
 barrier row by row. This is a summary-only repair; Qwen rows are not rescored
 and the original summary/terminal state remains retained.
+
+Added `scripts/audit_qwen_utility_semantic_record_gate_v1_pilot.py` and focused
+tests. The auditor independently reconstructs every action set and safe label,
+checks all 336 raw rows against the audited corpus, recomputes aggregate and
+group-bootstrap gains, validates the rowwise unrelated barrier, half-strength
+decision, resource size selection, frozen plain-Qwen provenance, recovery
+input hashes and all held-out seals. Formal label construction requires this
+audit to pass.
