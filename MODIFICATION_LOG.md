@@ -5568,3 +5568,17 @@ mechanism below minus two points.  It also reports the subject-only ablation,
 fact-key Oracle, deterministic baselines, matched random controls, relation/
 mechanism/background diagnostics and label/feature resource usage.  No test
 outcome-dependent repair is permitted after this freeze point.
+
+The two-GPU test label and feature pipelines completed and their independent
+audits passed.  The once-only frozen V6 TempLAMA test evaluation then passed
+every confirmation gate and its independent exact-rerun audit.  Lifecycle
+physics scored 84.583%; seeds `26101651/52/53` scored
+88.665%/88.691%/88.848%, giving a 4.151-point mean gain with target-group 95%
+CI `[3.164, 5.208]` and relation-cluster CI `[1.710, 6.018]`.  Mean closure of
+the 4.922-point safe fact-key Oracle gap was 84.35%.  All three seeds added
+zero unrelated errors, every mechanism was nonnegative, and all nine relation
+gains were nonnegative.  The subject-only ablation added 5/9/16 unrelated
+errors on the same official test, independently confirming that the semantic
+fact-key projection supplies the observed safety rather than merely fitting
+the validation partition.  The result audit releases original-source
+confirmation and external evaluation without permitting any test repair.
