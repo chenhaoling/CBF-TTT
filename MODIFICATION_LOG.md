@@ -5658,3 +5658,17 @@ worst-domain Oracle-gap closure.  The opened TempLAMA test, 64-group original
 confirmation, LongMemEval-S and LoCoMo are prohibited inputs.  Only a passing
 dual-domain development gate may authorize a separately preregistered LoCoMo
 stage.
+
+Implemented V7 in
+`tasks/train_qwen_utility_record_controller_v7_cross_source.py`, with a
+non-overwriting GPU runner, independent checkpoint/result auditor and focused
+selection/gate tests.  The task locks all ten upstream audits, reconstructs
+missing LAMA relation strata from paired feature audit metadata, verifies the
+registered 9,076 training and 2,792 development candidates, trains the
+unchanged three-seed V5 network on both training domains, chooses the minimum
+per-domain conformal risk threshold, applies V6 fact-key projection before
+selection, and ranks only dual-domain zero-collateral configurations by
+worst-domain Oracle-gap closure.  The auditor reloads every checkpoint,
+recomputes every selected action and domain metric, verifies hashes and
+reconstructs the complete seven-condition release gate.  Test/test,
+original-confirmation, LongMemEval-S and LoCoMo artifacts are never loaded.
