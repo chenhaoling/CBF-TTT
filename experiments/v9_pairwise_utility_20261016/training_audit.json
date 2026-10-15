@@ -1,0 +1,55 @@
+{
+  "checkpoint_sha256": {
+    "base_rank": {
+      "26101651": "2f9f747b339fb7589e486686dd18fb1f645035d98d2e878255dec308b62b6323",
+      "26101652": "8296c49659fc3e4d65bd4229d73a8b497e706a986c7960eb9b976410250026c2",
+      "26101653": "e5d9000be2c6abc9ca74315dd99fe7cc4b817874c844c07f0f42538c88aeb464"
+    },
+    "pair_no_rank": {
+      "26101651": "9ff76b12cfe8d6272a9bd0ed7438ac43514eccfc96d9b18ac7f5fadc19cdc851",
+      "26101652": "6f8861b175d3d15001f297227ebe17598cf9d439446264225147fe726b272a96",
+      "26101653": "5b06d9b219be5c50c80cc0fb17e8572512453d983b58164030816a86be16a118"
+    },
+    "pair_rank": {
+      "26101651": "fcbddc10d54353f36b5711d883ea5e18cfa044668412858d0e000286131f07cf",
+      "26101652": "76f41e8c55421d920ae42e60511ef35acc9245bfcfa65015b97701d8522c1ae2",
+      "26101653": "483abc237e13e16cc26b06f04e044f6872b0ef2524796c57f433a2d3120cd446"
+    }
+  },
+  "checks": {
+    "all_arm_checkpoint_hashes_and_states_locked": true,
+    "all_metrics_reconstructed": true,
+    "development_gate_reconstructed": true,
+    "finite_selected_metrics": true,
+    "heldout_sources_sealed": true,
+    "protocol_plan_and_summary_passed": true,
+    "risk_numerically_pair_isolated": true,
+    "upstream_hashes_reconstructed": true
+  },
+  "development_checks": {
+    "every_seed_positive_each_domain": true,
+    "lama_gain_over_v8_at_least_point_003": false,
+    "mean_gain_at_least_point_015_each_domain": false,
+    "mean_oracle_closure_at_least_point_50_each_domain": true,
+    "oracle_headroom_at_least_point_015_each_domain": true,
+    "overwrite_and_stale_nonnegative_each_domain": true,
+    "templama_mean_gain_at_least_point_035": false,
+    "upstream_audits_passed": true,
+    "zero_collateral_every_seed_domain": true
+  },
+  "development_release_passed": false,
+  "lama_gain_over_v8": 0.0,
+  "mean_gain": {
+    "lama": 0.011892361111111138,
+    "templama": 0.02606336805555561
+  },
+  "mean_oracle_gap_closure": {
+    "lama": 0.617117117117118,
+    "templama": 0.6047331319234656
+  },
+  "next_stage": "stop_v9_pairwise_controller_iteration",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v9_pairwise_utility_training_audit",
+  "summary_sha256": "5c7775265ed0e245890a092ece904e4e91584f1944ffc1702e8b69e92e471365",
+  "terminal_status": "v9_pairwise_utility_audit_passed_gate_failed"
+}

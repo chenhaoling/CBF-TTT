@@ -5805,6 +5805,52 @@ metrics, numerically verifies risk logits are invariant to pair tensors, and
 rebuilds the complete release gate and hashes.  Added a non-overwriting runner
 that keeps every held-out source sealed.
 
+V9 completed all nine main/ablation fits in 281.38 seconds.  The independent
+audit reconstructed every checkpoint and metric and confirmed numerical risk
+isolation.  The primary pair-plus-rank arm gained 2.606 TempLAMA points and
+1.189 LAMA points; pair-no-rank gained 2.595/1.155 and base-plus-rank gained
+2.480/1.137.  LAMA within-boundary ranking reached 90.91%, but the primary
+policy exactly matched V8's LAMA gain and regressed on TempLAMA.  All arms
+remained zero-collateral.  The learned pair-controller branch is closed.
+
+Registered `QWEN_UTILITY_RECORD_CONTROLLER_V10_FEWREL_CORPUS_PLAN.md`.  It
+constructs a 48-relation, natural-sentence, train-only FewRel counterfactual
+corpus after strict development-overlap exclusions, first runs the requested
+28-group resource/headroom pilot, then conditionally scales to 14 groups per
+eligible relation.  Formal training returns to the locked 66-feature V7
+architecture with equal per-domain loss, isolating data diversity as the only
+new cause.  Release requires dual-domain effects, zero collateral, a V8 LAMA
+gain and a positive FewRel-removal ablation.
+
+Implemented the V10 model-free construction stage in
+`tasks/build_qwen_utility_record_controller_v10_fewrel_corpus.py`.  It verifies
+the official FewRel commit and hashes, uses only the fixed 48-relation training
+partition, converts the two locked development episode files into exclusion
+hashes/templates without loading labels or scores, enforces the registered
+row/subject/value/template capacity requirements, and allocates 14 lifecycle
+groups per eligible relation.  Every factual or template donor row and every
+entity pair is used in only one group.  The builder emits the full corpus and
+the deterministic two-relation/28-group resource pilot with the unchanged
+three-action alpha grid and three-record candidate cap.
+
+Before inspecting source capacity or running a model, clarified an inconsistent
+V10 construction sentence: a lifecycle overwrite cannot preserve every
+FewRel sentence verbatim because FewRel does not provide controlled alternate
+values for one subject.  Statements now instantiate a natural template derived
+from an official source row with the counterfactual subject/value.  Exact
+queries blank that instantiated statement and rephrases use a different
+same-relation source template.  All donor rows remain hash traceable and
+group-disjoint; mechanisms, sample counts, model and gates are unchanged.
+
+Added `scripts/audit_qwen_utility_record_controller_v10_fewrel_corpus.py`,
+which independently reconstructs all materials and episodes, recomputes file
+hashes and counts, checks train-partition isolation, development exclusions,
+relation/mechanism balance, twin/boundary/query structure, natural exact versus
+rephrased queries, global donor-row/entity-pair disjointness, and confirms no
+model or sealed benchmark was opened.  Added a non-overwriting remote runner
+and focused tests for natural slot extraction, overlap filtering and allocator
+disjointness.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
