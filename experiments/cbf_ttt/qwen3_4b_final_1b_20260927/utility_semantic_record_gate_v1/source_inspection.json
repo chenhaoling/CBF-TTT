@@ -1,0 +1,291 @@
+{
+  "content_written": false,
+  "counts": {
+    "cross_partition_subjects": 768,
+    "eligible_facts": 25920,
+    "eligible_patterns": 274,
+    "eligible_relations": 29,
+    "intersection_relations": 39,
+    "pararel_relations": 39,
+    "post_subject_filter_facts": 22923,
+    "trex_relations": 41
+  },
+  "forbidden_sources_loaded": false,
+  "gates": {
+    "at_least_20_relations": true,
+    "at_least_4_confirmation_relations": true,
+    "at_least_4_development_relations": true,
+    "every_relation_has_post_filter_facts": true
+  },
+  "passed": true,
+  "protocol": "qwen_utility_semantic_record_source_inspection_v1",
+  "rejected": {
+    "facts": {
+      "duplicate_fact": 15,
+      "identical_subject_value": 70
+    },
+    "patterns": {}
+  },
+  "relations": {
+    "P101": {
+      "facts": 695,
+      "patterns": 13,
+      "post_cross_partition_subject_filter_facts": 643,
+      "split": "train",
+      "subjects": 659
+    },
+    "P103": {
+      "facts": 977,
+      "patterns": 4,
+      "post_cross_partition_subject_filter_facts": 918,
+      "split": "development",
+      "subjects": 976
+    },
+    "P106": {
+      "facts": 958,
+      "patterns": 11,
+      "post_cross_partition_subject_filter_facts": 919,
+      "split": "confirmation",
+      "subjects": 957
+    },
+    "P127": {
+      "facts": 687,
+      "patterns": 4,
+      "post_cross_partition_subject_filter_facts": 668,
+      "split": "train",
+      "subjects": 687
+    },
+    "P1303": {
+      "facts": 949,
+      "patterns": 4,
+      "post_cross_partition_subject_filter_facts": 861,
+      "split": "train",
+      "subjects": 928
+    },
+    "P136": {
+      "facts": 931,
+      "patterns": 6,
+      "post_cross_partition_subject_filter_facts": 831,
+      "split": "confirmation",
+      "subjects": 929
+    },
+    "P138": {
+      "facts": 617,
+      "patterns": 20,
+      "post_cross_partition_subject_filter_facts": 594,
+      "split": "train",
+      "subjects": 598
+    },
+    "P1412": {
+      "facts": 969,
+      "patterns": 8,
+      "post_cross_partition_subject_filter_facts": 895,
+      "split": "development",
+      "subjects": 967
+    },
+    "P159": {
+      "facts": 966,
+      "patterns": 10,
+      "post_cross_partition_subject_filter_facts": 913,
+      "split": "development",
+      "subjects": 964
+    },
+    "P176": {
+      "facts": 973,
+      "patterns": 12,
+      "post_cross_partition_subject_filter_facts": 972,
+      "split": "train",
+      "subjects": 970
+    },
+    "P178": {
+      "facts": 591,
+      "patterns": 16,
+      "post_cross_partition_subject_filter_facts": 589,
+      "split": "train",
+      "subjects": 585
+    },
+    "P19": {
+      "facts": 944,
+      "patterns": 13,
+      "post_cross_partition_subject_filter_facts": 893,
+      "split": "train",
+      "subjects": 944
+    },
+    "P190": {
+      "facts": 984,
+      "patterns": 4,
+      "post_cross_partition_subject_filter_facts": 896,
+      "split": "train",
+      "subjects": 314
+    },
+    "P20": {
+      "facts": 953,
+      "patterns": 8,
+      "post_cross_partition_subject_filter_facts": 853,
+      "split": "train",
+      "subjects": 953
+    },
+    "P27": {
+      "facts": 966,
+      "patterns": 9,
+      "post_cross_partition_subject_filter_facts": 925,
+      "split": "confirmation",
+      "subjects": 966
+    },
+    "P279": {
+      "facts": 961,
+      "patterns": 4,
+      "post_cross_partition_subject_filter_facts": 958,
+      "split": "train",
+      "subjects": 959
+    },
+    "P30": {
+      "facts": 975,
+      "patterns": 4,
+      "post_cross_partition_subject_filter_facts": 843,
+      "split": "development",
+      "subjects": 973
+    },
+    "P36": {
+      "facts": 689,
+      "patterns": 14,
+      "post_cross_partition_subject_filter_facts": 599,
+      "split": "train",
+      "subjects": 679
+    },
+    "P364": {
+      "facts": 856,
+      "patterns": 6,
+      "post_cross_partition_subject_filter_facts": 784,
+      "split": "train",
+      "subjects": 850
+    },
+    "P37": {
+      "facts": 966,
+      "patterns": 9,
+      "post_cross_partition_subject_filter_facts": 712,
+      "split": "train",
+      "subjects": 774
+    },
+    "P39": {
+      "facts": 892,
+      "patterns": 6,
+      "post_cross_partition_subject_filter_facts": 829,
+      "split": "development",
+      "subjects": 823
+    },
+    "P407": {
+      "facts": 877,
+      "patterns": 18,
+      "post_cross_partition_subject_filter_facts": 812,
+      "split": "confirmation",
+      "subjects": 859
+    },
+    "P413": {
+      "facts": 952,
+      "patterns": 6,
+      "post_cross_partition_subject_filter_facts": 946,
+      "split": "train",
+      "subjects": 952
+    },
+    "P449": {
+      "facts": 880,
+      "patterns": 11,
+      "post_cross_partition_subject_filter_facts": 868,
+      "split": "train",
+      "subjects": 876
+    },
+    "P47": {
+      "facts": 917,
+      "patterns": 9,
+      "post_cross_partition_subject_filter_facts": 599,
+      "split": "train",
+      "subjects": 627
+    },
+    "P495": {
+      "facts": 909,
+      "patterns": 17,
+      "post_cross_partition_subject_filter_facts": 874,
+      "split": "confirmation",
+      "subjects": 908
+    },
+    "P530": {
+      "facts": 996,
+      "patterns": 9,
+      "post_cross_partition_subject_filter_facts": 7,
+      "split": "confirmation",
+      "subjects": 174
+    },
+    "P740": {
+      "facts": 936,
+      "patterns": 14,
+      "post_cross_partition_subject_filter_facts": 892,
+      "split": "train",
+      "subjects": 936
+    },
+    "P937": {
+      "facts": 954,
+      "patterns": 5,
+      "post_cross_partition_subject_filter_facts": 830,
+      "split": "confirmation",
+      "subjects": 939
+    }
+  },
+  "source_archive": {
+    "bytes": 74619466,
+    "sha256": "70f8e520b9beafc5a05261c022c81d38c0e8a8f3594850872e5349bcdd2caf92",
+    "url": "https://dl.fbaipublicfiles.com/LAMA/data.zip"
+  },
+  "source_commits": {
+    "lama": "5cba81b6e55d4c596ce62b0166b1acd429a47f28",
+    "pararel": "cb5554678457beb5ac163d888f1ce8cf174b3f0b"
+  },
+  "source_manifest_sha256": "1d81e702e6e0165e67e15597bee1376c68cd8546078c1f40dcc0a7bbe0b9d124",
+  "split_counts": {
+    "confirmation": 7,
+    "development": 5,
+    "train": 17
+  },
+  "splits": {
+    "confirmation": [
+      "P937",
+      "P27",
+      "P136",
+      "P407",
+      "P106",
+      "P530",
+      "P495"
+    ],
+    "development": [
+      "P103",
+      "P30",
+      "P39",
+      "P159",
+      "P1412"
+    ],
+    "train": [
+      "P178",
+      "P413",
+      "P449",
+      "P36",
+      "P20",
+      "P37",
+      "P19",
+      "P740",
+      "P101",
+      "P1303",
+      "P176",
+      "P47",
+      "P138",
+      "P364",
+      "P190",
+      "P279",
+      "P127"
+    ]
+  },
+  "terminal_status": "source_inspection_passed",
+  "thresholds": {
+    "min_facts": 500,
+    "min_patterns": 4
+  }
+}

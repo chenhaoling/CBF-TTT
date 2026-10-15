@@ -1,0 +1,22 @@
+{
+  "content_parsed": false,
+  "forbidden_sources_loaded": false,
+  "plan": "QWEN_UTILITY_SUPERVISED_SEMANTIC_RECORD_GATE_V1_PLAN.md",
+  "protocol": "qwen_utility_semantic_record_sources_v1",
+  "sources": {
+    "lama": {
+      "commit": "5cba81b6e55d4c596ce62b0166b1acd429a47f28",
+      "url": "https://github.com/facebookresearch/LAMA.git"
+    },
+    "lama_data": {
+      "bytes": 74619466,
+      "sha256": "70f8e520b9beafc5a05261c022c81d38c0e8a8f3594850872e5349bcdd2caf92",
+      "url": "https://dl.fbaipublicfiles.com/LAMA/data.zip"
+    },
+    "pararel": {
+      "commit": "cb5554678457beb5ac163d888f1ce8cf174b3f0b",
+      "url": "https://github.com/yanaiela/pararel.git"
+    }
+  },
+  "terminal_status": "sources_acquired_unparsed"
+}

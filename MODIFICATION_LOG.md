@@ -4857,3 +4857,18 @@ ParaRel patterns, applies the exact registered eligibility and relation hash
 split, measures cross-partition subject removal, and writes aggregate counts
 only. It never serializes a fact surface, loads an earlier experimental source
 or produces a model feature.
+
+The formal source inspection passed all four registered gates. It found 29
+eligible relations, 25,920 unique facts and 274 valid paraphrase patterns.
+Removing 768 normalized subjects that crossed a relation partition left 22,923
+facts. The deterministic relation split contains 17/5/7
+train/development/confirmation relations. Inspection SHA256 is
+`c30fd05d4aa9ca29862874208eaa2da7f99c6ca5b23df06703b8b067c1fb25c2`.
+
+Added the model-free resource-pilot builder in
+`tasks/build_qwen_utility_semantic_record_gate_v1.py` and focused causal-data
+tests. It constructs exactly eight source groups for each of seven mechanisms,
+two protected-anchor twins, lengths 8/16/32/64 and three sparse boundaries per
+episode. Every boundary contains two current-fact surfaces, two retained-fact
+queries and an anchor query with deterministic six-way candidates. It writes
+no model output and keeps development and confirmation episodes ungenerated.
