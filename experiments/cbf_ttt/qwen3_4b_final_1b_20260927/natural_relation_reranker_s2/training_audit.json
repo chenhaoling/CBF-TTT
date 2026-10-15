@@ -1,0 +1,81 @@
+{
+  "calibration_loaded": false,
+  "checkpoint_files": {
+    "checkpoint_epoch_0.25": {
+      "config_sha256": "8bcb9d38c2e3a32ce1cc63cc1b6ac6b6b37b4426e24e5aead0b2424f6280a805",
+      "meta_sha256": "88be9639e2776157eda2d9fa5aca97cbde663c3aaa5936f267a4d30e0f3b1972",
+      "tensor_keys": 288,
+      "weights_sha256": "0b0a974ed7bca2a0c0099e1e2da03a30602d9a574af24ec65f9d624261add666"
+    },
+    "checkpoint_epoch_0.50": {
+      "config_sha256": "8bcb9d38c2e3a32ce1cc63cc1b6ac6b6b37b4426e24e5aead0b2424f6280a805",
+      "meta_sha256": "d82c9ef4810972447d38f5c77e5d291227119bf813d4be07184566c275698c73",
+      "tensor_keys": 288,
+      "weights_sha256": "9af16e659af18ead4e73f3b9c1f1d10118d22dcc5450607ffd9540206b26440e"
+    },
+    "checkpoint_epoch_1.00": {
+      "config_sha256": "8bcb9d38c2e3a32ce1cc63cc1b6ac6b6b37b4426e24e5aead0b2424f6280a805",
+      "meta_sha256": "76355290e04e8daac7f08ae49e91466365addfc5dd13b63f072e38cb4fcbab06",
+      "tensor_keys": 288,
+      "weights_sha256": "ac762f028452e2f88a9ae46bdd601992a24e3c226d29ecd9fa0b7f741390c5a2"
+    }
+  },
+  "checks": {
+    "batch": true,
+    "checkpoints": {
+      "checkpoint_epoch_0.25": {
+        "adapter_only": true,
+        "config": true,
+        "data": true,
+        "epoch": true,
+        "provenance": true,
+        "step": true
+      },
+      "checkpoint_epoch_0.50": {
+        "adapter_only": true,
+        "config": true,
+        "data": true,
+        "epoch": true,
+        "provenance": true,
+        "step": true
+      },
+      "checkpoint_epoch_1.00": {
+        "adapter_only": true,
+        "config": true,
+        "data": true,
+        "epoch": true,
+        "provenance": true,
+        "step": true
+      }
+    },
+    "data": true,
+    "formal_complete": true,
+    "lengths": true,
+    "lora": true,
+    "optimizer": true,
+    "profiles": true,
+    "protocol": true,
+    "provenance": true,
+    "rank_0_log": true,
+    "rank_1_log": true,
+    "schedule": true,
+    "sealed": true
+  },
+  "development_model_outputs_loaded": false,
+  "logs": {
+    "0": {
+      "last_step": 300,
+      "rows": 31,
+      "sha256": "390312a25afca948494256c2b036a29ce5d0884a58f2c78f53431179a1157d44"
+    },
+    "1": {
+      "last_step": 300,
+      "rows": 31,
+      "sha256": "eaae4ed8bee6c456460261a0157ed40123493780a25e3fd61e454be496655670"
+    }
+  },
+  "passed": true,
+  "protocol": "qwen_natural_relation_reranker_s2_training_audit_v1",
+  "semeval_test_loaded": false,
+  "training_manifest_sha256": "9aea5279fc946ea9a6d344dd75285855081ee93e829b775f4d20bfa42c24a69c"
+}

@@ -4646,3 +4646,40 @@ The evaluator applies every calibration threshold unchanged to the selected
 LoRA, zero-shot, trigram and frozen-cosine arms; recomputes retrieval; and
 requires all ten registered safety, semantic, retrieval and gain checks. This
 implementation was frozen before producing any PubMed model score.
+
+The one-shot PubMed development run completed and the independent auditor
+passed all seven checks. Retrieval transferred successfully at 79.3/89.8/96.8%
+recall@4/8/16. The frozen 0.50-epoch adapter and threshold produced 87.5%
+same-relation precision, 8.4% recall, 98.8% specificity, and 53.6% macro
+balanced accuracy. Physical deletion reached 93.33% precision and 8.4% recall
+with 12 false positives. Six of ten release checks failed, so terminal status
+is `stopped_by_development`; three-seed confirmation and SemEval test remain
+sealed. Compact result SHA256 is
+`a2a84e0aa8ee727beeefd2e65271e2d45ffedf2e4ef6eeac8be7b7a26520e328`;
+audit SHA256 is
+`90b6b784ac827073f343ceea19650d1dbb31af502669382c72ceaf1dc36544d4`.
+The complete objective, implementation assumptions, files, configuration,
+resource use, commands, compatibility, risks, completed work and stop decision
+are archived in
+`experiments/cbf_ttt/qwen3_4b_final_1b_20260927/natural_relation_reranker_s2/REPORT.md`.
+
+## 2026-10-15: retrieval-evidence forgetting S3 registration
+
+Added `QWEN_RETRIEVAL_EVIDENCE_FORGETTING_S3_PLAN.md` before downloading or
+parsing DialogRE. S3 treats S2's 96.8% PubMed recall@16 as evidence that
+candidate retrieval works and replaces single-pair deployment with supervised
+contrastive relation embeddings, a top-16 support bank, multi-evidence fusion,
+and dialogue-group conformal risk. It registers FewRel plus DialogRE-v2 train
+for weight supervision and the hash-pinned but unparsed PubMed-unsupervised
+file as a strictly optional self-supervised arm. Official DialogRE dev is the
+fresh one-shot development source; DialogRE test, SemEval test and LoCoMo stay
+sealed.
+
+The plan freezes source-disjoint folds, masked arguments, matched lexical hard
+negatives, a pre-model shortcut audit, finite projection/fusion grids, the
+unchanged ledger action, resource limits, baselines, ablations and seven
+development release requirements. A pass releases three fixed seeds and only
+then an alpha-only session experiment with `g=1` and the counterfactual grid
+`{0, 0.5, 1}`. Native `ttt_proj`/`ttt_conv` is retained as a named ablation due
+to its previously failed content-readability gates. No baseline model path or
+configuration is modified by this registration.

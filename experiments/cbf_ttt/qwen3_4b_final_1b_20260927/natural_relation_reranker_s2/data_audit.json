@@ -1,0 +1,84 @@
+{
+  "checks": {
+    "calibration_rows": {
+      "complete_groups": true,
+      "counts": true,
+      "hashes": true,
+      "matched_bins": true,
+      "pairs": true,
+      "scenarios": true,
+      "unique_ids": true
+    },
+    "construction": true,
+    "development_rows": {
+      "complete_groups": true,
+      "counts": true,
+      "hashes": true,
+      "matched_bins": true,
+      "pairs": true,
+      "scenarios": true,
+      "unique_ids": true
+    },
+    "fewrel_hashes": true,
+    "model_free": true,
+    "protocol": true,
+    "pubmed_size": true,
+    "sealed": true,
+    "semeval_hashes": true,
+    "semeval_rows": true,
+    "shortcut_gate": {
+      "exact_positive_coverage_zero": true,
+      "trigram_delete_recall_at_most_50": true,
+      "trigram_relation_recall_at_most_50": true
+    },
+    "split_sources_disjoint": true,
+    "train_rows": {
+      "complete_groups": true,
+      "counts": true,
+      "hashes": true,
+      "matched_bins": true,
+      "pairs": true,
+      "scenarios": true,
+      "unique_ids": true
+    }
+  },
+  "development_model_outputs_loaded": false,
+  "development_source_parsed_once": true,
+  "manifest_sha256": "28b67effc911da68eec9fd74bfd964f9f9a9193b28b19755ed73cc473212584f",
+  "passed": true,
+  "protocol": "qwen_natural_relation_reranker_s2_data_audit_v1",
+  "rows_audited": 111727,
+  "semeval_test_rows_parsed": 0,
+  "shortcut": {
+    "calibration_threshold": {
+      "fn": 5359,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 0.00037306472673008767,
+      "specificity": 1.0,
+      "threshold": 0.6730769230769231,
+      "tn": 5361,
+      "tp": 2
+    },
+    "development_delete": {
+      "fn": 2000,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 0.0,
+      "specificity": 1.0,
+      "tn": 3000,
+      "tp": 0
+    },
+    "development_relation": {
+      "fn": 1000,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 0.0,
+      "specificity": 1.0,
+      "threshold": 0.6730769230769231,
+      "tn": 1000,
+      "tp": 0
+    },
+    "exact_positive_coverage": 0
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "bin_width": 0.05,
+  "counts": {
+    "calibration": {
+      "by_kind": {
+        "paraphrased_duplicate": 5361,
+        "paraphrased_update": 5361,
+        "same_entity_other_relation": 5361,
+        "same_relation_other_entity": 5361,
+        "unrelated": 5361
+      },
+      "by_relation_label": {
+        "negative": 5361,
+        "positive": 5361
+      },
+      "groups": 5361,
+      "left_relations": 17,
+      "relation_pairs": 10722,
+      "scenarios": 26805,
+      "similarity_bins": {
+        "10": 74,
+        "11": 16,
+        "12": 6,
+        "13": 4,
+        "3": 330,
+        "4": 3394,
+        "5": 3620,
+        "6": 1802,
+        "7": 912,
+        "8": 450,
+        "9": 114
+      }
+    },
+    "development": {
+      "by_kind": {
+        "paraphrased_duplicate": 1000,
+        "paraphrased_update": 1000,
+        "same_entity_other_relation": 1000,
+        "same_relation_other_entity": 1000,
+        "unrelated": 1000
+      },
+      "by_relation_label": {
+        "negative": 1000,
+        "positive": 1000
+      },
+      "groups": 1000,
+      "left_relations": 10,
+      "relation_pairs": 2000,
+      "scenarios": 5000,
+      "similarity_bins": {
+        "2": 2,
+        "3": 554,
+        "4": 1216,
+        "5": 202,
+        "6": 24,
+        "7": 2
+      }
+    },
+    "train": {
+      "by_kind": {
+        "paraphrased_duplicate": 9600,
+        "paraphrased_update": 9600,
+        "same_entity_other_relation": 9600,
+        "same_relation_other_entity": 9600,
+        "unrelated": 9600
+      },
+      "by_relation_label": {
+        "negative": 9600,
+        "positive": 9600
+      },
+      "groups": 9600,
+      "left_relations": 48,
+      "relation_pairs": 19200,
+      "scenarios": 48000,
+      "similarity_bins": {
+        "10": 26,
+        "11": 12,
+        "12": 2,
+        "13": 6,
+        "15": 4,
+        "16": 2,
+        "18": 4,
+        "2": 2,
+        "3": 996,
+        "4": 8526,
+        "5": 6364,
+        "6": 2144,
+        "7": 752,
+        "8": 252,
+        "9": 108
+      }
+    }
+  },
+  "development_model_outputs_loaded": false,
+  "distinct_natural_pair_required": true,
+  "fewrel": {
+    "cap_per_relation": 200,
+    "relation_count": 48,
+    "relations": [
+      "P1001",
+      "P101",
+      "P102",
+      "P105",
+      "P106",
+      "P118",
+      "P123",
+      "P131",
+      "P1346",
+      "P136",
+      "P137",
+      "P140",
+      "P1435",
+      "P150",
+      "P156",
+      "P17",
+      "P175",
+      "P176",
+      "P178",
+      "P1877",
+      "P1923",
+      "P264",
+      "P27",
+      "P306",
+      "P31",
+      "P3373",
+      "P3450",
+      "P355",
+      "P39",
+      "P400",
+      "P403",
+      "P407",
+      "P449",
+      "P4552",
+      "P495",
+      "P527",
+      "P551",
+      "P57",
+      "P58",
+      "P674",
+      "P706",
+      "P710",
+      "P740",
+      "P750",
+      "P84",
+      "P931",
+      "P974",
+      "P991"
+    ],
+    "repository_commit": "278a2315d2138810a379cd8d5718914dc56e2582"
+  },
+  "files_sha256": {
+    "calibration_relation_pairs.jsonl": "4729972039e23eb06c6297aa5e69d8f615c14bd86d12738e4f1c72f6bd960aca",
+    "calibration_scenarios.jsonl": "d59f6ae7939af20667252be0b126bdfca4effe6a6c0f2c72a6fa7209facd8676",
+    "development_relation_pairs.jsonl": "c9201ddb2128fb6da6ffdbab2044ee5c17b8d4d5e1cd60ad3bfeaab0e9f3732f",
+    "development_scenarios.jsonl": "904b2496382a4cb117c17f0afad6dc6d575703074cbe30e21c7be05b4f574385",
+    "train_relation_pairs.jsonl": "2d58293c4e8541f95214e324a59338f46febb71115a84ae0757d128fe5740d3a",
+    "train_scenarios.jsonl": "afe2b608db0e03747301e9152b88b4754a2976e479d4cc5a914db612a66ec07b"
+  },
+  "fixed_operation_rule": true,
+  "kinds": [
+    "paraphrased_duplicate",
+    "paraphrased_update",
+    "same_relation_other_entity",
+    "same_entity_other_relation",
+    "unrelated"
+  ],
+  "matched_similarity_bin_per_group": true,
+  "model_outputs_loaded": false,
+  "negative_pool": 256,
+  "pair_exclusions": {
+    "calibration": [],
+    "development": [],
+    "train": []
+  },
+  "protocol": "qwen_natural_relation_reranker_s2",
+  "pubmed": {
+    "bytes": 432600,
+    "relations": 10,
+    "rows": 1000,
+    "sha256": "fc0f13b534f6664fe0d8aec231d7590313bc6510d00dbc1b6746147f6a2b46e6"
+  },
+  "seed": 25117,
+  "semeval_source_rows": {
+    "semeval_test.txt": 2717,
+    "semeval_train.txt": 6507,
+    "semeval_val.txt": 1493
+  },
+  "semeval_source_sha256": {
+    "semeval_rel2id.json": "c3153e7d20a127c82fbc9b7542fcdc8e48714bcf9165fafd611dadaed22c7de8",
+    "semeval_test.txt": "1f33efe3db4dc6ff99f52416331682f3ec6759de526786d3629e6b43f8020795",
+    "semeval_train.txt": "5a53be5e2dfbf865f77c287deec7b9e8a12be333ffb6157bfb5a692250a06220",
+    "semeval_val.txt": "a91170e7c19354a895a58e582bf7fad43994467a0d27a8632319a70840b88e02"
+  },
+  "semeval_test_examples_written": false,
+  "semeval_test_parsed": false,
+  "source_exclusions": {
+    "calibration": [],
+    "development": [],
+    "train": []
+  },
+  "terminal_status": "built_before_model_execution"
+}

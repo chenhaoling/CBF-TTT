@@ -1,0 +1,170 @@
+{
+  "baselines": {
+    "frozen_qwen_cosine": {
+      "by_kind_operation_accuracy": {
+        "paraphrased_duplicate": 0.0,
+        "paraphrased_update": 0.0,
+        "same_entity_other_relation": 1.0,
+        "same_relation_other_entity": 1.0,
+        "unrelated": 1.0
+      },
+      "delete": {
+        "feasible": true,
+        "fn": 2000,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "threshold": 0.9894521236419678,
+        "tn": 3000,
+        "tp": 0
+      },
+      "relation_macro_balanced_accuracy": 0.5,
+      "rows": 2000,
+      "same_entity_other_relation_specificity": 1.0,
+      "same_relation": {
+        "fn": 1000,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "tn": 1000,
+        "tp": 0
+      },
+      "threshold": 0.9894521236419678
+    },
+    "trigram": {
+      "by_kind_operation_accuracy": {
+        "paraphrased_duplicate": 0.0,
+        "paraphrased_update": 0.0,
+        "same_entity_other_relation": 1.0,
+        "same_relation_other_entity": 1.0,
+        "unrelated": 1.0
+      },
+      "delete": {
+        "feasible": true,
+        "fn": 2000,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "threshold": 0.6730769230769231,
+        "tn": 3000,
+        "tp": 0
+      },
+      "relation_macro_balanced_accuracy": 0.5,
+      "rows": 2000,
+      "same_entity_other_relation_specificity": 1.0,
+      "same_relation": {
+        "fn": 1000,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "tn": 1000,
+        "tp": 0
+      },
+      "threshold": 0.6730769230769231
+    },
+    "zero_shot": {
+      "by_kind_operation_accuracy": {
+        "paraphrased_duplicate": 0.002,
+        "paraphrased_update": 0.002,
+        "same_entity_other_relation": 0.998,
+        "same_relation_other_entity": 1.0,
+        "unrelated": 1.0
+      },
+      "delete": {
+        "feasible": true,
+        "fn": 1996,
+        "fp": 2,
+        "precision": 0.6666666666666666,
+        "recall": 0.002,
+        "specificity": 0.9993333333333333,
+        "threshold": 0.18080955743789673,
+        "tn": 2998,
+        "tp": 4
+      },
+      "relation_macro_balanced_accuracy": 0.5,
+      "rows": 2000,
+      "same_entity_other_relation_specificity": 0.998,
+      "same_relation": {
+        "fn": 998,
+        "fp": 2,
+        "precision": 0.5,
+        "recall": 0.002,
+        "specificity": 0.998,
+        "tn": 998,
+        "tp": 2
+      },
+      "threshold": 0.18080955743789673
+    }
+  },
+  "development_loaded_once": true,
+  "gate": {
+    "best_safe_nonadapted_delete_recall": 0.0,
+    "checks": {
+      "cosine_recall_gain_at_least_5_points": true,
+      "delete_false_positives_at_most_4": false,
+      "delete_precision_at_least_99": false,
+      "delete_recall_at_least_50": false,
+      "delete_recall_gain_at_least_10_points": false,
+      "hard_relation_specificity_at_least_98": true,
+      "relation_macro_balanced_accuracy_at_least_85": false,
+      "retrieval_recall_at_16_at_least_95": true,
+      "same_relation_recall_at_least_80": false,
+      "same_relation_specificity_at_least_95": true
+    },
+    "passed": false,
+    "selected_cosine_recall_gain": 0.084,
+    "selected_delete_recall_gain": 0.084
+  },
+  "protocol": "qwen_natural_relation_reranker_s2_development_v1",
+  "retrieval": {
+    "mrr_at_16": 0.6566889443889444,
+    "queries": 1000,
+    "recall_at_16": 0.968,
+    "recall_at_4": 0.793,
+    "recall_at_8": 0.898
+  },
+  "selected": {
+    "by_kind_operation_accuracy": {
+      "paraphrased_duplicate": 0.084,
+      "paraphrased_update": 0.084,
+      "same_entity_other_relation": 0.988,
+      "same_relation_other_entity": 1.0,
+      "unrelated": 1.0
+    },
+    "delete": {
+      "feasible": true,
+      "fn": 1832,
+      "fp": 12,
+      "precision": 0.9333333333333333,
+      "recall": 0.084,
+      "specificity": 0.996,
+      "threshold": 0.46428704261779785,
+      "tn": 2988,
+      "tp": 168
+    },
+    "relation_macro_balanced_accuracy": 0.536,
+    "rows": 2000,
+    "same_entity_other_relation_specificity": 0.988,
+    "same_relation": {
+      "fn": 916,
+      "fp": 12,
+      "precision": 0.875,
+      "recall": 0.084,
+      "specificity": 0.988,
+      "tn": 988,
+      "tp": 84
+    },
+    "threshold": 0.46428704261779785
+  },
+  "selected_adapter": "/home/ctj/cbf_ttt_natural_relation_reranker_s2_train_20261015/checkpoint_epoch_0.50",
+  "selected_arm": "epoch_0_50",
+  "selected_retrieval_k": 16,
+  "selected_threshold": 0.46428704261779785,
+  "selection_sha256": "84ecc481aef35501d7a8c704501d849dcb4cd83f59a7c8881e013a2adaa8285d",
+  "semeval_test_loaded": false,
+  "terminal_status": "stopped_by_development"
+}
