@@ -3942,3 +3942,16 @@ logs, resources, summaries, recovery evidence, audit and interpretation report
 are archived under `qwen_natural_value_bridge_v1/`. The result releases the
 registered natural-answer causal-ledger sequence stage; held-out ZsRE test and
 all external benchmarks remain sealed.
+
+## 2026-10-15: natural causal-memory composition preregistration
+
+Added `QWEN_NATURAL_CAUSAL_MEMORY_V1_PLAN.md` after the natural-value bridge
+summary and independent audit passed, before scoring any composed natural
+memory row. The protocol composes the frozen scale-8 variable-length writer,
+decomposed natural scope gate and threshold-0.675 forgetting controller over
+five checkpoints in the already observed ZsRE calibration/development
+sequences. Eight arms separate learned forgetting, cosine deletion, retention,
+global reset, lifecycle oracle, scope oracle, dense aggregation and zero
+memory. It fixes 12-way candidates, fixed-length final generation,
+subject-group bootstrap gates and an explicit failure localization tree while
+keeping ZsRE test and all external long-memory benchmarks unopened.
