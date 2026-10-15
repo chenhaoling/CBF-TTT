@@ -49,6 +49,8 @@ def test_every_mechanism_has_exact_sparse_boundaries_and_queries():
                 assert len(boundary["queries"]) == 5
                 assert all(len(row["candidates"]) == 6 for row in boundary["queries"])
                 assert all(row["answer"] in row["candidates"] for row in boundary["queries"])
+                assert all("semantic_key" not in row for row in boundary["queries"])
+                assert all(set(row) >= {"input", "audit"} for row in boundary["queries"])
 
 
 def test_twins_change_only_protected_anchor_value():
@@ -61,3 +63,13 @@ def test_twins_change_only_protected_anchor_value():
         assert left["events"][index]["record"]["input"] == right["events"][index]["record"]["input"]
     assert semantic_key("alice", "P1") == semantic_key("alice", "P1")
     assert semantic_key("alice", "P1") != semantic_key("alice", "P2")
+
+
+def test_reset_queries_keep_original_surfaces_and_return_unknown():
+    episode = build_episode(4, "explicit_reset_revoke", 16, 0, material())
+    reset = next(row for row in episode["boundaries"] if row["reset"])
+    retained = [row for row in reset["queries"] if row["role"].startswith("retained")]
+    anchor = next(row for row in reset["queries"] if row["role"] == "anchor")
+    assert all(row["answer"] == "unknown" for row in [*retained, anchor])
+    current_subject = reset["queries"][0]["input"]["subject"]
+    assert all(row["input"]["subject"] != current_subject for row in [*retained, anchor])

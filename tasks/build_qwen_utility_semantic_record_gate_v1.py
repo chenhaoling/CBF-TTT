@@ -226,20 +226,24 @@ def choose_group_material(
     }
 
 
-def make_queries(state: dict[str, dict], current: dict, candidates: list[str], patterns) -> list[dict]:
+def make_queries(
+    state: dict[str, dict],
+    history: dict[str, dict],
+    current: dict,
+    candidates: list[str],
+    patterns,
+    target_key: str,
+    protected_keys: dict[str, str],
+) -> list[dict]:
     current_audit = current["audit"]
     current_relation = current_audit["relation_id"]
     current_key = current_audit["semantic_key"]
     current_patterns = patterns[current_relation]
 
     def query_for(key: str, pattern_index: int, role: str) -> dict:
-        record = state.get(key)
-        if record is None:
-            # The last known record is supplied for its surface; absence is the answer.
-            record = current
-            answer = "unknown"
-        else:
-            answer = record["input"]["value"]
+        active_record = state.get(key)
+        record = active_record if active_record is not None else history[key]
+        answer = record["input"]["value"] if active_record is not None else "unknown"
         relation = record["audit"]["relation_id"]
         relation_patterns = patterns[relation]
         question = "Complete the effective session fact: " + render(
@@ -249,23 +253,36 @@ def make_queries(state: dict[str, dict], current: dict, candidates: list[str], p
         row_candidates = list(dict.fromkeys([answer, *candidates]))[:6]
         if len(row_candidates) < 6:
             raise ValueError("query has fewer than six candidates")
-        return {"role": role, "semantic_key": key, "query": question,
-                "answer": answer, "candidates": row_candidates}
+        return {
+            "role": role,
+            "input": {"query": question, "subject": record["input"]["subject"]},
+            "audit": {"semantic_key": key},
+            "answer": answer,
+            "candidates": row_candidates,
+        }
 
-    active_other = [key for key in sorted(state) if key != current_key]
-    while len(active_other) < 3:
-        active_other.append(current_key)
+    if current_key != target_key:
+        retained_keys = [target_key, protected_keys["retained_1"]]
+    else:
+        retained_keys = [protected_keys["retained_1"], protected_keys["retained_2"]]
     return [
         query_for(current_key, 0, "current_exact"),
         query_for(current_key, 1, "current_rephrase"),
-        query_for(active_other[0], 0, "retained_1"),
-        query_for(active_other[1], 1, "retained_2"),
-        query_for(active_other[2], 2, "anchor"),
+        query_for(retained_keys[0], 0, "retained_1"),
+        query_for(retained_keys[1], 1, "retained_2"),
+        query_for(protected_keys["anchor"], 2, "anchor"),
     ]
 
 
-def replay(events: list[dict], boundary_indices: set[int], candidate_pool: list[str], patterns):
-    state, boundaries = {}, []
+def replay(
+    events: list[dict],
+    boundary_indices: set[int],
+    candidate_pool: list[str],
+    patterns,
+    target_key: str,
+    protected_keys: dict[str, str],
+):
+    state, history, boundaries = {}, {}, []
     for index, event in enumerate(events):
         if event["reset"]:
             state.clear()
@@ -273,6 +290,7 @@ def replay(events: list[dict], boundary_indices: set[int], candidate_pool: list[
             state.pop(key, None)
         record = event["record"]
         state[record["audit"]["semantic_key"]] = record
+        history[record["audit"]["semantic_key"]] = record
         if index in boundary_indices:
             boundaries.append({
                 "boundary_index": len(boundaries),
@@ -283,7 +301,10 @@ def replay(events: list[dict], boundary_indices: set[int], candidate_pool: list[
                 "active_state": {
                     key: value["record_id"] for key, value in sorted(state.items())
                 },
-                "queries": make_queries(state, record, candidate_pool, patterns),
+                "queries": make_queries(
+                    state, history, record, candidate_pool, patterns,
+                    target_key, protected_keys,
+                ),
             })
     return boundaries
 
@@ -321,9 +342,12 @@ def build_episode(group_index: int, mechanism: str, length: int, twin: int, mate
     }
     initial = record(target, pattern_index=0, role="target_initial")
     append(initial)
-    append(record(anchor, pattern_index=0, role="protected_anchor"))
-    append(record(stable[1], pattern_index=0, role="retained_1"))
-    append(record(stable[2], pattern_index=0, role="retained_2"))
+    anchor_record = record(anchor, pattern_index=0, role="protected_anchor")
+    retained_1_record = record(stable[1], pattern_index=0, role="retained_1")
+    retained_2_record = record(stable[2], pattern_index=0, role="retained_2")
+    append(anchor_record)
+    append(retained_1_record)
+    append(retained_2_record)
     append(record(same_other, pattern_index=0, role="same_relation_other_subject"))
 
     target_key = initial["audit"]["semantic_key"]
@@ -400,7 +424,15 @@ def build_episode(group_index: int, mechanism: str, length: int, twin: int, mate
     candidate_pool = []
     for value in sorted(set(all_values), key=lambda value: (stable_rank(group_id, value), value)):
         candidate_pool.append(value)
-    boundaries = replay(events, set(boundary_positions), candidate_pool, patterns)
+    protected_keys = {
+        "anchor": anchor_record["audit"]["semantic_key"],
+        "retained_1": retained_1_record["audit"]["semantic_key"],
+        "retained_2": retained_2_record["audit"]["semantic_key"],
+    }
+    boundaries = replay(
+        events, set(boundary_positions), candidate_pool, patterns,
+        target_key, protected_keys,
+    )
     if len(boundaries) != BOUNDARIES:
         raise AssertionError("boundary count mismatch")
     return {
@@ -413,7 +445,8 @@ def build_episode(group_index: int, mechanism: str, length: int, twin: int, mate
         "boundaries": boundaries,
         "audit": {
             "target_relation": target_relation,
-            "target_key": target_key,
+                "target_key": target_key,
+                "protected_keys": protected_keys,
             "alternate_key": alternate_key,
             "same_relation_other_key": same_other_key,
             "relation_ids": sorted(patterns),

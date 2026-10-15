@@ -4872,3 +4872,12 @@ two protected-anchor twins, lengths 8/16/32/64 and three sparse boundaries per
 episode. Every boundary contains two current-fact surfaces, two retained-fact
 queries and an anchor query with deterministic six-way candidates. It writes
 no model output and keeps development and confirmation episodes ungenerated.
+
+Before independent audit or model scoring, a schema review excluded the first
+pilot-data root. Query rows had exposed the audit-only semantic key at top
+level, and reset-induced absent queries reused the current record surface
+instead of the erased record's surface. The corrected builder separates
+`input` from `audit`, retains the last visible surface for an absent key and
+queries the registered retained/anchor keys after reset. A regression test
+requires those answers to be `unknown` on their original subjects. The first
+root remains immutable; retry1 is the only candidate for scientific use.
