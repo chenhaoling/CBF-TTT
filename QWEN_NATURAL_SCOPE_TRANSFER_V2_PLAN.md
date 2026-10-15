@@ -53,7 +53,10 @@ hashes before training.
 
 Use a single linear binary gate with the same feature dimension as the frozen
 decomposed gate.  Initialize from its seed-7301 weights.  Optimize weighted BCE
-plus squared distance from the frozen weights.  Search only:
+plus squared distance from the frozen weights.  Give each of the three training
+strata (correct natural top, wrong natural top, and no-match) equal total loss
+weight, independent of its number of examples.  Use deterministic full-batch
+AdamW without shuffling.  Search only:
 
 - anchor weight: `0.01, 0.1, 1.0, 10.0`;
 - learning rate: `0.001, 0.005`;
