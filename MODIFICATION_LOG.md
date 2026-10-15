@@ -4258,3 +4258,24 @@ to read the existing source `test.jsonl` unless the consensus summary selects a
 candidate, the independent audit passes and the terminal status explicitly
 authorizes test. Because V4 stopped, this code did not load or materialize the
 129-session test.
+
+## 2026-10-15: on-policy lifecycle safe-delete head V5
+
+Added `QWEN_NATURAL_FORGETTING_SAFE_DELETE_V5_PLAN.md` before fitting a new
+controller. V5 replaces post-hoc threshold search with a dedicated physical
+decision target: deleting the inferred top record is safe only when the event
+is a local lifecycle update and the top record belongs to the incoming fact
+chain. Source actions and chain IDs construct training labels but are excluded
+from inference features. The registered ten-dimensional `no_schedule` view
+also excludes memory size, event position and top recency.
+
+Added `tasks/train_qwen_natural_forgetting_safe_delete_v5.py`, a focused test,
+runner and independent auditor. The builder replays all V4 behavior arms,
+tracks ordered `(chain_id, version)` memory, and deduplicates identical
+policy-induced states before grouped nested cross-fitting. It evaluates the
+preregistered linear/MLP, optimizer and threshold grid with three-seed
+ensembles. The offline release requires at least 98% precision, 50% recall, at
+most four false-positive deletes, at least 95% precision in every active outer
+fold and complete held-out/source isolation. Only a passing audited result may
+run a new cross-fit online calibration; development, test and external
+benchmarks remain sealed.
