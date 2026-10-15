@@ -5083,6 +5083,21 @@ donor. Relation isolation, source-subject uniqueness, episode mechanisms,
 candidate count and queries are unchanged. A low-cardinality regression test
 covers the repair, and the retry uses a fresh root.
 
+The development-data retry completed 64 source groups, 128 twin episodes, 384
+decision boundaries and 1,920 immediate queries. The five untouched relations
+contain 12 or 13 groups each; lengths are exactly balanced and mechanism counts
+differ by at most one group. All 12 independent data-audit checks passed and
+the seven confirmation relations remain ungenerated.
+
+Added `tasks/label_qwen_utility_record_controller_v1_development.py`, its
+two-GPU runner and
+`scripts/audit_qwen_utility_record_controller_v1_development_labels.py`. The
+collector evaluates the same full ternary action grid and safe-oracle rule on
+all 384 development boundaries with episode-scoped caches. Its independent
+auditor reconstructs every action and label, aggregate and clustered interval,
+unrelated barrier, model hashes and confirmation/external seals before any
+controller threshold evaluation.
+
 Added `tasks/train_qwen_utility_record_controller_v1.py`, focused tests, a
 non-overwriting runner and
 `scripts/audit_qwen_utility_record_controller_v1_training.py`. Training uses
