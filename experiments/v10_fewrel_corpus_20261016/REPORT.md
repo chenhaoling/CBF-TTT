@@ -31,3 +31,18 @@ development label/model score or held-out benchmark was loaded in this stage.
 The first attempt stopped on repeated entity mentions before producing data.
 The retry records these ambiguous rows as explicit exclusions; it did not
 relax any eligibility, disjointness or leakage condition.
+
+## Labels and features
+
+The 28-group pilot passed all gates with 11.49 points of safe-oracle headroom,
+15.67% positive safe-benefit candidates, 100% answer coverage and 11.30 GiB
+peak reserved memory.  The two-GPU projection of 1,253 seconds matched the
+formal 1,255.92-second run.
+
+All 4,032 formal boundary labels passed the scale-consistency audit.  They
+contained 12,096 record candidates, 14.14% positive safe-benefit candidates,
+11.42 points of oracle headroom, 100% answer coverage and zero oracle
+collateral.  The locked V7 feature stage then produced 12,096 finite 66-feature
+rows in 157.49 seconds; exact teachers, context features, relation coverage and
+all hashes were independently reconstructed.  Compact summaries and audits
+for each stage are included in this archive.

@@ -1,0 +1,24 @@
+{
+  "boundaries": 4032,
+  "checks": {
+    "both_target_classes_present": true,
+    "complete_one_to_one_coverage": true,
+    "complete_relation_coverage": true,
+    "deterministic_and_context_features": true,
+    "exact_binary_teachers_and_risks": true,
+    "fixed_66_numeric_schema": true,
+    "heldout_sources_sealed": true,
+    "locked_plain_model_and_inputs": true,
+    "summary_reconstructed": true
+  },
+  "delete_fraction": 0.7959656084656085,
+  "feature_dimension": 66,
+  "feature_summary_sha256": "b750e59cb39a9269fd8e054a2b0de4496d45972f887f8c68679196e0c86fb2f7",
+  "formal_label_audit_sha256": "d4b2b1d03e1e1b1b6d6b2ce62fae9eeb6a09c46265b797cd992b13407fb3a679",
+  "next_stage": "v10_three_source_controller_training",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v10_fewrel_features_audit",
+  "record_examples": 12096,
+  "risk_fraction": 0.1455026455026455,
+  "terminal_status": "v10_fewrel_features_audit_passed"
+}
