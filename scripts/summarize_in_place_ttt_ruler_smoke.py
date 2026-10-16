@@ -62,8 +62,11 @@ def summarize(root: pathlib.Path) -> dict:
 
     log = log_path.read_text(errors="replace")
     elapsed_match = re.search(r"Elapsed \(wall clock\) time .*?:\s*([0-9:.]+)", log)
+    summary_files = sorted((root / "opencompass").glob("*/summary/summary_*.txt"))
+    official_text = summary_files[0].read_text(errors="replace") if len(summary_files) == 1 else ""
     official_match = re.search(
-        r"ruler_4k: \{'score': ([0-9.]+), 'naive_average': ([0-9.]+)\}", log
+        r"ruler_4k: \{'score': ([0-9.]+), 'naive_average': ([0-9.]+)\}",
+        official_text,
     )
     official_score = float(official_match.group(1)) if official_match else None
 
@@ -93,6 +96,9 @@ def summarize(root: pathlib.Path) -> dict:
             "model_config_sha256": metadata["model_config_sha256"],
             "eval_log_sha256": _sha256(log_path),
             "gpu_monitor_sha256": _sha256(root / "gpu.csv"),
+            "official_summary_sha256": (
+                _sha256(summary_files[0]) if len(summary_files) == 1 else None
+            ),
             "result_sha256": result_hashes,
         },
     }

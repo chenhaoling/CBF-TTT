@@ -67,4 +67,8 @@ eval = dict(
     partitioner=dict(type=NaivePartitioner),
     runner=dict(type=LocalRunner, max_num_workers=1, task=dict(type=OpenICLEvalTask)),
 )
-summarizer = dict(dataset_abbrs=["4k"], summary_groups=sum([ruler_summary_groups], []))
+# OpenCompass 0.5.4 names the generated group ``ruler_4k``.  Selecting the
+# full group name makes the compact table expose the aggregate score.
+summarizer = dict(
+    dataset_abbrs=["ruler_4k"], summary_groups=sum([ruler_summary_groups], [])
+)

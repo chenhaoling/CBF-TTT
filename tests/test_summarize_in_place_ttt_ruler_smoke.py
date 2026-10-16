@@ -20,7 +20,6 @@ def test_summarize_complete_smoke(tmp_path):
     )
     (root / "exit_code.txt").write_text("0\n")
     (root / "eval.log").write_text(
-        "ruler_4k: {'score': 100.0, 'naive_average': 100.0}\n"
         "Elapsed (wall clock) time (h:mm:ss or m:ss): 2:34.87\n"
     )
     (root / "gpu.csv").write_text(
@@ -29,6 +28,11 @@ def test_summarize_complete_smoke(tmp_path):
     )
     result_dir = root / "opencompass" / "stamp" / "results" / "model"
     result_dir.mkdir(parents=True)
+    summary_dir = root / "opencompass" / "stamp" / "summary"
+    summary_dir.mkdir()
+    (summary_dir / "summary_stamp.txt").write_text(
+        "ruler_4k: {'score': 100.0, 'naive_average': 100.0}\n"
+    )
     for task in EXPECTED_TASKS:
         (result_dir / f"{task}.json").write_text(json.dumps({"score": 100.0}))
 
