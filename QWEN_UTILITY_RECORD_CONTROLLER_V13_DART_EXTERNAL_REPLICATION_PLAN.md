@@ -29,6 +29,13 @@ FewRel, TempLAMA, LAMA or any previously used source are excluded. Before any
 JSON record is parsed, acquisition must record the repository/data revision,
 download URLs, relative paths, byte counts and SHA256 hashes.
 
+Acquisition completed before any JSON/XML parse. The frozen repository commit
+is `bb644b12ec1d0264f96a31145534b9a94f6ff5f5`; the manifest covers all eight
+files under `data/v1.1.1`, totaling 56,328,262 bytes. The source-manifest SHA256
+is `dc242d6873951b774d36c02783b546a265f2d645f5c236c9d51a176c187ad558`.
+The formal feasibility stage may parse only
+`dart-v1.1.1-full-train.json`; development and test files remain unopened.
+
 The following sources remain sealed during V13: the eight FewRel internal-test
 relations, sixteen FewRel external-test relations, DialogRE development/test,
 SemEval test, LongMemEval-S and LoCoMo. No row, label, feature or result from a

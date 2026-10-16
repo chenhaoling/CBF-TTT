@@ -6118,3 +6118,11 @@ cluster CI 下界均大于0、至少6/8关系非负、零新增 unrelated errors
 gap 且关键机制非负。通过后才依次一次性解封8个 FewRel internal-test 与16个
 external-test relations；二者通过后再进入 RULER/QA、LongMemEval-S、LoCoMo 端到端评测。
 
+V13 官方 DART source acquisition 已在任何 JSON/XML 解析前完成。远程仓库固定为
+commit `bb644b12ec1d0264f96a31145534b9a94f6ff5f5`，`data/v1.1.1` 的8个文件共
+56,328,262 bytes，source manifest SHA256 为
+`dc242d6873951b774d36c02783b546a265f2d645f5c236c9d51a176c187ad558`。
+新增 `scripts/download_dart_v13_source.sh`，只负责克隆、记录版本和逐文件哈希，并在
+manifest 中明确 `json_or_xml_parsed=false`、模型未加载、保留 benchmark 未读取。
+后续模型无关可行性检查只允许解析正式 train JSON，dev/test 继续封存。
+
