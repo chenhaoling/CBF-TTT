@@ -103,20 +103,22 @@ def support_features(current: dict, recent: dict | None, layers: list[int]) -> t
     import torch
     features, state = [], {}
     for layer in layers:
+        state_key = str(layer)
         centroid = current[layer]["centroid"].float()
         variance = current[layer]["variance"].float().clamp_min(0)
-        if recent is None or layer not in recent:
+        if recent is None or state_key not in recent:
             cosine, likelihood, has_recent = 0.0, 0.0, 0.0
         else:
-            old_mean = torch.tensor(recent[layer]["centroid"], dtype=torch.float32)
-            old_var = torch.tensor(recent[layer]["variance"], dtype=torch.float32).clamp_min(1e-6)
+            old_mean = torch.tensor(recent[state_key]["centroid"], dtype=torch.float32)
+            old_var = torch.tensor(recent[state_key]["variance"], dtype=torch.float32).clamp_min(1e-6)
             cosine = float(torch.nn.functional.cosine_similarity(centroid, old_mean, dim=0))
             likelihood = float(-0.5 * (((centroid - old_mean).square() / old_var) + old_var.log()).mean())
             has_recent = 1.0
         features.extend(centroid.tolist())
         features.extend(torch.log1p(variance).tolist())
         features.extend((cosine, likelihood, has_recent))
-        state[layer] = {"centroid": centroid.tolist(), "variance": variance.tolist()}
+        # String keys make the canonical feature hash stable across JSON round trips.
+        state[state_key] = {"centroid": centroid.tolist(), "variance": variance.tolist()}
     return features, state
 
 

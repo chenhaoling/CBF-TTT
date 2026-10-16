@@ -78,6 +78,7 @@ class FeatureTests(unittest.TestCase):
                            "variance": torch.ones(128)} for layer in layers}
         values, state = support_features(current, None, layers)
         self.assertEqual(len(values), 259 * len(layers))
+        self.assertEqual(set(state), {"0", "6"})
         values2, _ = support_features(current, state, layers)
         self.assertAlmostEqual(values2[256], 1.0, places=6)
         self.assertEqual(values2[258], 1.0)
