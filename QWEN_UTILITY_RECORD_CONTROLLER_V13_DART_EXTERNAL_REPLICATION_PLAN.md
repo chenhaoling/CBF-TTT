@@ -60,7 +60,8 @@ target relations by SHA256 under the frozen seed. Candidate targets need at
 least 140 distinct entity pairs and seven distinct templates; use the first
 eight ranked candidates and do not search alternative eight-relation subsets
 after allocation. Relations with at least five pairs and four templates may
-serve as stable-background donors.
+serve as stable-background donors. Keep the eight selected target relations out
+of the background pool so earlier groups cannot consume later target capacity.
 
 The feasibility program must run the complete deterministic material allocator,
 not a coarse row-count proxy. It must demonstrate that exactly eight relations
