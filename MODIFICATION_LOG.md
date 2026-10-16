@@ -6027,3 +6027,13 @@ outcomes 作为新门；它重新要求 answer coverage、benefit support、orac
 collateral 与28 GiB资源上限。所有资源记录新增 internal/external test seal。本地 Python
 语法、2项新标签单测、shell语法和 diff 检查通过；远程标签尚待执行。
 
+在 V11 标签未完成、任何新关系 outcome 尚不可见时，实现
+`train_qwen_utility_record_controller_v11_relation_transfer.py`、独立 auditor、runner
+和 model-free focused tests。训练器精确实现预登记三臂；relation-group DRO 仅对
+benefit BCE 按 `(source, relation)` 做指数权重更新（eta 0.05、相对均匀权重裁剪
+0.25–4倍），risk BCE 继续 equal-source。三个种子各自在新8关系 development 上选择
+zero-collateral config，并计算 benefit/risk ranking、source-group 与 relation-cluster
+20,000次 bootstrap。审计器从9个 checkpoint 独立重建预测、策略、指标、bootstrap、
+开发门、权重与依赖 hash。旧 TempLAMA/LAMA development 不是 runner 参数，测试分区
+继续封存。本地 Python/shell 语法、2项训练工具单测和 diff 检查通过。
+
