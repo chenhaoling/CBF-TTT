@@ -6042,3 +6042,24 @@ episodes 在 run 的 `data/` 子目录，而 `data_audit.json` 在父目录。�
 的 data-audit 路径改为 `development_data_root.parent/data_audit.json`；数据、模型、三臂、
 超参数、选择规则和门槛完全不变，失败目录保留，重试使用新目录。
 
+### V11 unseen-relation development result
+
+V11 正式标签与特征均在两张 RTX 5090 上完成并通过独立审计。672条标签的 retain
+accuracy 为81.027%，safe oracle 为91.429%，headroom 10.402点；2,016个候选中
+13.294%有安全正收益、16.716%有 collateral risk，3,360个答案覆盖100%，标签两卡
+关键路径214.76秒，峰值 reserved 8.02 GiB。66维特征提取覆盖672边界/2,016 records，
+两类 targets 齐全，关键路径26.56秒、峰值7.87 GiB。
+
+路径修正后的9个 checkpoint 在189.32秒完成，全部工程与独立重建检查通过。预登记
+relation-group DRO 三个种子相对 lifecycle physics 分别提升3.244/3.185/3.170点，
+平均3.199点；source-group bootstrap 95% CI `[2.227,4.221]`点，relation-cluster CI
+`[2.301,4.142]`点，零新增 unrelated errors，关闭82.38% safe-oracle gap。移除 FewRel
+后平均收益约0.005点，因此冻结消融的因果差为+3.194点。关键机制均非负。
+
+V11 development release 仍严格判为失败：DRO benefit AP 相对预登记 ERM 下降3.714
+点，没有达到+3点门槛。8个 internal-test 与16个 external-test relations 未打开。
+新增 `QWEN_UTILITY_RECORD_CONTROLLER_V11_FAILURE_DIAGNOSTIC_PLAN.md` 及无重训诊断/
+审计/runner，在结果揭示后只允许重建三臂 clustered intervals、动作差异、relation/
+mechanism slices，判别“语料有效但 robust loss 无效”与语料本身无效；禁止改 checkpoint、
+threshold、超参数或打开测试集。
+
