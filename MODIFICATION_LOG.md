@@ -6013,3 +6013,17 @@ stable backgrounds 及其模板允许使用48个 train relations，但先从 V10
 `background_relations` 参数，因此旧 V10 行为不变。V11 manifest/auditor 额外核验目标与
 背景关系角色、V10 1,344 episodes 排除依赖、素材唯一性和测试分区封存。
 
+容量修正重试在 `hku-gpu2` 完成并通过全部13项独立审计：8个 development
+relations 全部合格，得到112 groups、224 episodes、672 boundaries、3,360 future
+queries；4,032条素材 source rows 和4,032个 entity pairs 均跨组唯一。目标关系严格为
+P1303/P1344/P1411/P22/P241/P460/P800/P937，stable backgrounds 严格来自48个
+train relations；internal/external test 均未加载。完整重建与文件 hash 一致，运行目录为
+`/home/ctj/cbf_ttt_utility_record_controller_v11_fewrel_development_20261016_retry1`。
+
+新增 V11 两卡 Qwen 标签器、独立标签 auditor、66维 feature extractor、独立 feature
+auditor、两个非覆盖 runner 和标签 focused tests。标签阶段直接依赖已通过的数据审计，
+沿用此前 V10 pilot/formal 已验证的同一模型、action grid 与显存规模，不读取 V10
+outcomes 作为新门；它重新要求 answer coverage、benefit support、oracle headroom、零
+collateral 与28 GiB资源上限。所有资源记录新增 internal/external test seal。本地 Python
+语法、2项新标签单测、shell语法和 diff 检查通过；远程标签尚待执行。
+
