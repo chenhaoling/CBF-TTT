@@ -5902,6 +5902,25 @@ Added an independent full-label auditor, an explicit scale-consistency gate,
 a non-overwriting two-GPU runner and a focused gate test.  Feature extraction
 is authorized only after all 4,032 labels reconstruct and pass that gate.
 
+The formal V10 label run completed in 1,255.92 seconds on the two RTX 5090
+GPUs and passed every independent integrity and scale-consistency check.  All
+4,032 boundaries and 12,096 record candidates were present across the balanced
+48 relations.  Retain-all accuracy was 80.05%; the safe oracle reached 91.48%
+for 11.42 points of headroom.  There were 1,710 positive safe-benefit
+candidates (14.14%), 100% answer-token coverage and zero added unrelated
+errors.  Peak reserved memory was 8.11 GiB.  The pilot runtime and prevalence
+estimates therefore transferred accurately to the full corpus.
+
+Implemented `tasks/extract_qwen_utility_record_controller_v10_fewrel_features.py`
+to extract exactly the locked V7 66-feature schema and binary safe teachers for
+every formal FewRel candidate.  It consumes only the independently passing
+data and label releases, hash locks each label shard, and records extraction
+time, pair-scoring time and GPU peaks.  Added an independent auditor that
+reconstructs teacher targets, deterministic feature fields, context aggregates,
+schema, relation coverage, hashes and sealed-source conditions, plus a
+non-overwriting two-GPU runner.  Three-source training remains blocked until
+the feature audit passes.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
