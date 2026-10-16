@@ -15,8 +15,9 @@ TT_DEV_FEATURE=${TT_DEV_FEATURE:-/home/ctj/cbf_ttt_utility_record_controller_v2_
 LAMA_DEV_DATA=${LAMA_DEV_DATA:-/home/ctj/cbf_ttt_utility_record_controller_v1_development_data_20261016}
 LAMA_DEV_LABEL=${LAMA_DEV_LABEL:-/home/ctj/cbf_ttt_utility_record_controller_v1_development_labels_20261016}
 LAMA_DEV_FEATURE=${LAMA_DEV_FEATURE:-/home/ctj/cbf_ttt_utility_record_controller_v1_development_features_20261016}
-V8_ROOT=${V8_ROOT:-/home/ctj/cbf_ttt_utility_record_controller_v8_relation_posterior_training_20261016}
-V8_AUDIT=${V8_AUDIT:-$V8_ROOT/training_audit.json}
+V8_RUN=${V8_RUN:-/home/ctj/cbf_ttt_utility_record_controller_v8_relation_posterior_training_20261016}
+V8_ROOT=${V8_ROOT:-$V8_RUN/training}
+V8_AUDIT=${V8_AUDIT:-$V8_RUN/training_audit.json}
 
 if [[ -e "$ROOT" ]]; then
   echo "Refusing to overwrite $ROOT" >&2

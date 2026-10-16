@@ -5939,6 +5939,12 @@ non-overwriting runner and focused tests showing normalization is domain-equal
 despite unequal sample counts and that the release requires both the V8 margin
 and FewRel-removal effect.
 
+The first V10 training invocation stopped before any fit because the runner
+looked for the locked V8 summary in the run container rather than its
+`training/` subdirectory.  Corrected only this path while keeping the V8 audit
+at the run root; the retry uses a new output directory and does not change any
+training, selection, comparison or release setting.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
