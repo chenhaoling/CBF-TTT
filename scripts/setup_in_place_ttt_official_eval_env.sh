@@ -10,11 +10,16 @@ if [[ ! -x "$ENV_DIR/bin/python" ]]; then
 fi
 
 PYTHON_BIN="$ENV_DIR/bin/python"
-"$PYTHON_BIN" -m pip install opencompass==0.5.4 wonderwords==3.0.1
+# OpenCompass 0.5.4 requires NumPy <2.  PyArrow 26 wheels require NumPy >=2,
+# so pin the last working PyArrow line used by the independently verified
+# OpenCompass environment.
+"$PYTHON_BIN" -m pip install \
+  opencompass==0.5.4 wonderwords==3.0.1 numpy==1.26.4 pyarrow==25.0.1
 
 "$PYTHON_BIN" - <<'PY'
 import json
 import opencompass
+import pyarrow
 import torch
 import transformers
 import wonderwords
@@ -26,6 +31,7 @@ print(json.dumps({
     "transformers": transformers.__version__,
     "flash_attn": flash_attn.__version__,
     "opencompass": opencompass.__version__,
+    "pyarrow": pyarrow.__version__,
     "wonderwords": getattr(wonderwords, "__version__", "installed"),
 }, indent=2))
 PY
