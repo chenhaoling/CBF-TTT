@@ -5921,6 +5921,24 @@ schema, relation coverage, hashes and sealed-source conditions, plus a
 non-overwriting two-GPU runner.  Three-source training remains blocked until
 the feature audit passes.
 
+Implemented `tasks/train_qwen_utility_record_controller_v10_three_source.py`.
+It preserves the V7 66-feature 128/64 benefit-risk MLP, optimizer, epochs,
+three seeds, policy grid, conformal risk calibration, fact-key projection and
+worst-domain selection.  To keep the larger FewRel corpus from dominating, it
+uses equal-domain normalization and makes every optimizer step the equal mean
+of domain-specific class-weighted losses.  It trains both the primary
+TempLAMA+LAMA+FewRel arm and the fixed FewRel-removal arm.  The extended gate
+retains every V7 safety/effect requirement, requires at least 3.5 TempLAMA
+points, a 0.3-point LAMA improvement over hash-locked V8, and a 0.2-point LAMA
+drop when FewRel is removed.
+
+Added an independent V10 training auditor that reloads all six checkpoints,
+reconstructs both-domain actions and metrics, verifies the equal-domain traces,
+hashes and V8 comparison, and rebuilds the complete extended gate.  Added a
+non-overwriting runner and focused tests showing normalization is domain-equal
+despite unequal sample counts and that the release requires both the V8 margin
+and FewRel-removal effect.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
