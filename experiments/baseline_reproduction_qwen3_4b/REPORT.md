@@ -17,6 +17,9 @@ has **not** been reproduced yet.
 - Both 8K resource probes OOM while AdamW initializes optimizer state. The
   current shared 2xRTX 5090 host therefore fails the frozen training resource
   gate before a single completed optimizer step.
+- Two preregistered offload diagnostics also stop: the pinned VeOmni FSDP2
+  path ignores `enable_fsdp_offload`, while the released FSDP1 path does
+  offload but exhausts the 62-GiB host RAM and 4-GiB swap and is SIGKILLed.
 - The unmodified Qwen3-4B OpenCompass RULER-4K pipeline completes all 13 tasks.
   Its one-example-per-task smoke score is `76.9231`; this validates execution
   and score extraction only and is not a precision estimate comparable to the
@@ -104,6 +107,39 @@ Compact evidence:
 - [`remote/resource_8k_no_ttt/summary.json`](remote/resource_8k_no_ttt/summary.json)
 - [`remote/resource_8k_ttt/summary.json`](remote/resource_8k_ttt/summary.json)
 - full logs and 0.5-second GPU traces in the same directories.
+
+### Registered offload diagnostics
+
+After recording the parent-plan failure, two separate addenda tested whether
+the released code offered a current-host engineering path. These results do
+not alter the no-offload baseline conclusion.
+
+| Profile | Result | GPU0/GPU1 peak | Host minimum available | Peak used swap |
+|---|---|---:|---:|---:|
+| FSDP2 + `enable_fsdp_offload=true` | flag is a no-op; repeated GPU OOM | 32,078 / 32,102 MiB | 46,800 MiB | 660 MiB |
+| FSDP1 + CPU offload | rank SIGKILL during first step | 15,782 / 7,008 MiB | 358 MiB | 4,096 MiB |
+
+The FSDP2 run logged the flag as true, but independent inspection of pinned
+VeOmni file hash
+`305ab376f337d1d06421ec1096935be2964e79b1e34bc2f16e9d2e4ef81dddef`
+found that `parallelize_model_fsdp2` never consumes the keyword and creates no
+offload policy. Its GPU peaks and allocation traceback reproduce the original
+no-offload run.
+
+The FSDP1 function does construct `CPUOffload(offload_params=True)` and the
+runtime confirms that parameters, gradients and optimizer state were moved.
+GPU memory fell substantially, but monitored host use peaked at 63,392 MiB,
+available RAM fell to 358 MiB, all 4,096 MiB swap was consumed, and rank 1
+received SIGKILL. This violates both frozen host gates. Per the addendum, the
+matched TTT arm and all larger lengths were not launched.
+
+Evidence:
+
+- [`IN_PLACE_TTT_BASELINE_CPU_OFFLOAD_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_CPU_OFFLOAD_ADDENDUM.md)
+- [`IN_PLACE_TTT_BASELINE_FSDP1_OFFLOAD_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_FSDP1_OFFLOAD_ADDENDUM.md)
+- [`remote/resource_8k_no_ttt_cpu_offload_noop/summary.json`](remote/resource_8k_no_ttt_cpu_offload_noop/summary.json)
+- [`remote/resource_8k_no_ttt_cpu_offload_noop/veomni_offload_diagnostic.json`](remote/resource_8k_no_ttt_cpu_offload_noop/veomni_offload_diagnostic.json)
+- [`remote/resource_8k_no_ttt_fsdp1_cpu_offload/summary.json`](remote/resource_8k_no_ttt_fsdp1_cpu_offload/summary.json)
 
 ## 5. RULER pipeline smoke
 
@@ -196,3 +232,9 @@ bash scripts/run_in_place_ttt_ruler_smoke.sh
 
 Exact paper reproduction additionally requires the authors' private mixture,
 32K/128K stage recipe, and inference clipping details.
+
+The current host has now exhausted all preregistered, unmodified released-code
+paths: native FSDP2 is GPU-memory limited, its offload flag is not implemented,
+and FSDP1 offload is host-memory limited. Continuing training requires an
+external-state change: exclusive larger GPUs or a host with materially more
+RAM for the explicitly non-paper offload path.

@@ -1,0 +1,18 @@
+{
+  "protocol": "in_place_ttt_baseline_resource_v2",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "upstream_clean": true,
+  "model": "/home/ctj/models/Qwen3-4B",
+  "data": "/home/ctj/data/cbf_ttt_pilot/mixed_16x8192.jsonl",
+  "arm": "no_ttt",
+  "resource_profile": "cpu_offload",
+  "sequence_length": 8192,
+  "global_batch_size": 2,
+  "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+  "config_sha256": "93be0eb289a2e32a6f337d151491d1ffb4e49905990d56cad9525c4e07dd3e3d",
+  "data_sha256": "2eb03326ec87bc831ee1441e812bb5bef843f8e906656787cd2ddafc69d9d823",
+  "model_config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+  "addendum_sha256": "93e534beedaa7ad963cfc6d7448d8c556eb6889138fe956845f404dc9b16d468",
+  "runner_sha256": "b7f9964ccd011ad6a61791873e750557d4cb552988da183f2de788eaf90438ee",
+  "summarizer_sha256": "6ae854bc6ac324d7b81bd243ebb56d1d94c6f7bdf5901f8b94014d4bb3031049"
+}

@@ -22,6 +22,7 @@
   "notes": [
     "The release names byted-wandb, which is unavailable on public PyPI; the public wandb API package is used without changing training source.",
     "OpenCompass 0.5.4 requires NumPy below 2; PyArrow is pinned to 25.0.1 because the PyArrow 26 wheel requires NumPy 2 or newer.",
-    "The server was shared. Unrelated CARLA processes occupied approximately 1.4 to 2.4 GiB on the two devices during the resource probes."
+    "The server was shared. Unrelated CARLA processes occupied approximately 1.4 to 2.4 GiB on the two devices during the resource probes.",
+    "Pinned VeOmni FSDP2 does not consume enable_fsdp_offload. The released FSDP1 offload path reduced GPU use but exhausted 62 GiB host RAM plus 4 GiB swap and was SIGKILLed."
   ]
 }

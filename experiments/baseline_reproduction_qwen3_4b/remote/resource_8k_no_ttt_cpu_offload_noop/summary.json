@@ -1,0 +1,38 @@
+{
+  "protocol": "in_place_ttt_baseline_resource_v2",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "arm": "no_ttt",
+  "resource_profile": "cpu_offload",
+  "sequence_length": 8192,
+  "global_batch_size": 2,
+  "nominal_tokens": 16384,
+  "exit_code": 1,
+  "completed": false,
+  "last_loss": null,
+  "last_gradient_norm": null,
+  "wall_seconds": 23.4,
+  "tokens_per_second": null,
+  "peak_gpu_memory_mib": {
+    "0": 32078.0,
+    "1": 32102.0
+  },
+  "checkpoint_bytes": 15886769,
+  "host_resources": {
+    "peak_memory_used_mib": 16950.207,
+    "minimum_memory_available_mib": 46800.125,
+    "peak_swap_used_mib": 660.035
+  },
+  "cpu_offload_host_gate_passed": true,
+  "dependencies": {
+    "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+    "config_sha256": "93be0eb289a2e32a6f337d151491d1ffb4e49905990d56cad9525c4e07dd3e3d",
+    "data_sha256": "2eb03326ec87bc831ee1441e812bb5bef843f8e906656787cd2ddafc69d9d823",
+    "model_config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "train_log_sha256": "cce643f03bac32ac5f9b5806eb133eb57f7a08a50e266069a7194cc9f16c6916",
+    "gpu_monitor_sha256": "ea0454f0b165995855948df633e33d0aa517678366e0e163dbe1408ba9a903b7",
+    "host_monitor_sha256": "4645114ce83e44687176835529e38da94513f90ddf6ca5347db7022de655158e",
+    "addendum_sha256": "93e534beedaa7ad963cfc6d7448d8c556eb6889138fe956845f404dc9b16d468",
+    "runner_sha256": "b7f9964ccd011ad6a61791873e750557d4cb552988da183f2de788eaf90438ee",
+    "summarizer_sha256": "6ae854bc6ac324d7b81bd243ebb56d1d94c6f7bdf5901f8b94014d4bb3031049"
+  }
+}

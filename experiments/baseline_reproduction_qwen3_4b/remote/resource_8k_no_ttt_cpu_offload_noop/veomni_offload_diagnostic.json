@@ -1,0 +1,9 @@
+{
+  "veomni_file": "/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py",
+  "veomni_file_sha256": "305ab376f337d1d06421ec1096935be2964e79b1e34bc2f16e9d2e4ef81dddef",
+  "fsdp1_consumes_enable_fsdp_offload": true,
+  "fsdp1_constructs_cpu_offload": true,
+  "fsdp2_consumes_enable_fsdp_offload": false,
+  "fsdp2_constructs_offload_policy": false,
+  "interpretation": "The pinned VeOmni FSDP2 function accepts **kwargs but does not consume or apply enable_fsdp_offload."
+}

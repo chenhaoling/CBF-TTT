@@ -6318,3 +6318,18 @@ OpenCompass 13个官方子任务上全部执行和评分成功，exit=0，wall=2
 tests 在独立 pytest 环境通过。完整可行性结论、命令、风险和紧凑hash证据位于
 `experiments/baseline_reproduction_qwen3_4b/REPORT.md`。baseline尚未完成，门控探索继续
 暂停；下一步是在独占大显存主机完成双臂资源阶梯和公共替代数据 matched training。
+
+随后在任何新执行前冻结两个系统可行性附录。第一项保持 FSDP2，仅显式设置
+`enable_fsdp_offload=true`；no-TTT 探针仍在相同 AdamW 分配处 OOM，峰值与原运行完全相同。
+对固定 VeOmni 文件（SHA256
+`305ab376f337d1d06421ec1096935be2964e79b1e34bc2f16e9d2e4ef81dddef`）的独立函数级检查确认：
+FSDP1 会构造 `CPUOffload(offload_params=True)`，但 FSDP2 函数不消费该 keyword，也不创建
+offload policy。因此 FSDP2 offload 配置是发布实现中的 no-op；按附录首个 OOM 停止，未运行
+匹配 TTT 臂。
+
+第二项改用同一发布包的 FSDP1 CPU-offload 路径，仍只先测8K no-TTT。运行日志确认参数、
+梯度和优化器状态 offload，GPU 峰值降至15782/7008MiB；但62GiB主机内存被耗尽，最低可用
+仅358MiB，4GiB swap全部使用，rank1收到SIGKILL。该运行违反8GiB可用内存和3.5GiB swap
+双门槛，故严格停止，TTT臂及更长序列均未启动。至此当前共享主机的三条未修改发布代码
+路径已穷尽：原FSDP2受GPU显存限制、FSDP2 offload未实现、FSDP1 offload受主机内存限制。
+继续 baseline 需要独占大显存GPU，或为明确非论文系统配置的offload提供显著更大主机内存。
