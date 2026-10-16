@@ -4,6 +4,7 @@ import json
 import tempfile
 
 from tasks.build_native_support_write_gate_v1 import sha256
+from tasks.evaluate_native_eos_safe_layerwise_write_gate_v4 import release_checks
 from tasks.native_eos_safe_layerwise_write_gate_v4 import verify_stage_release
 from tasks.train_native_eos_safe_layerwise_write_gate_v4 import (
     build_model,
@@ -82,6 +83,27 @@ class NativeEosSafeLayerwiseControllerV4Test(unittest.TestCase):
             })
             with self.assertRaises(ValueError):
                 verify_stage_release("sealed_test", root, controller)
+
+    def test_registered_release_checks_include_support_ablation_and_safety(self):
+        never = {"J": 1.0, "protected_accuracy": .8, "protected_nll": .5, "eos_rate": .1}
+        always = {"J": 1.2, "protected_accuracy": .7, "protected_nll": .7, "eos_rate": .2}
+        oracle = {"J": .8, "protected_accuracy": .8, "protected_nll": .5, "eos_rate": .1}
+        metrics = {"J": .9, "protected_accuracy": .8, "protected_nll": .5, "eos_rate": .1}
+        full = {
+            "test_vs_always_write": {"ci95": [.1, .3]},
+            "test_vs_never_write": {"ci95": [.02, .18]},
+        }
+        no_support = {"test_metrics": {"J": .95}}
+        result = release_checks(metrics, full, no_support, {
+            "never_write": never, "always_write": always, "safe_oracle": oracle,
+        })
+        self.assertTrue(result["passed"])
+        no_support["test_metrics"]["J"] = .85
+        result = release_checks(metrics, full, no_support, {
+            "never_write": never, "always_write": always, "safe_oracle": oracle,
+        })
+        self.assertFalse(result["checks"]["full_better_than_no_support"])
+        self.assertFalse(result["passed"])
 
 
 if __name__ == "__main__":
