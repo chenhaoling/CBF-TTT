@@ -89,7 +89,7 @@ def summarize(root: Path, output: Path) -> dict:
             host_resources is not None
             and host_resources["minimum_memory_available_mib"] >= 8192
             and host_resources["peak_swap_used_mib"] <= 3584
-            if metadata.get("resource_profile") == "cpu_offload"
+            if metadata.get("resource_profile") in {"cpu_offload", "fsdp1_cpu_offload"}
             else None
         ),
         "dependencies": {

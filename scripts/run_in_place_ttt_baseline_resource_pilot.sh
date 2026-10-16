@@ -18,8 +18,9 @@ UPSTREAM_COMMIT=be2324829b0e91c8fd10a74d4b43714fde6676e1
 if [[ "$ARM" != "ttt" && "$ARM" != "no_ttt" ]]; then
   echo "ARM must be ttt or no_ttt" >&2; exit 2
 fi
-if [[ "$RESOURCE_PROFILE" != "native" && "$RESOURCE_PROFILE" != "cpu_offload" ]]; then
-  echo "RESOURCE_PROFILE must be native or cpu_offload" >&2; exit 2
+if [[ "$RESOURCE_PROFILE" != "native" && "$RESOURCE_PROFILE" != "cpu_offload" \
+      && "$RESOURCE_PROFILE" != "fsdp1_cpu_offload" ]]; then
+  echo "RESOURCE_PROFILE must be native, cpu_offload, or fsdp1_cpu_offload" >&2; exit 2
 fi
 if [[ "$SEQ_LEN" -lt 8192 || $((SEQ_LEN % 4096)) -ne 0 ]]; then
   echo "SEQ_LEN must be at least 8192 and divisible by 4096" >&2; exit 2
@@ -37,6 +38,9 @@ test -s "$MODEL/config.json"; test -s "$DATA"; test -s "$PLAN"
 config_suffix=""
 if [[ "$RESOURCE_PROFILE" == "cpu_offload" ]]; then
   config_suffix=_cpu_offload
+  test -n "$ADDENDUM"; test -s "$ADDENDUM"
+elif [[ "$RESOURCE_PROFILE" == "fsdp1_cpu_offload" ]]; then
+  config_suffix=_fsdp1_cpu_offload
   test -n "$ADDENDUM"; test -s "$ADDENDUM"
 fi
 CONFIG=$TOOL_REPO/configs/baseline_reproduction/qwen3_4b_resource_${ARM}${config_suffix}.yaml
