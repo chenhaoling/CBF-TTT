@@ -1,0 +1,48 @@
+# Auxiliary one-step feasibility probe. CPU offload is a documented systems deviation.
+model:
+  model_path: /path/to/Qwen3-4B
+  foundation:
+    ttt_layers: [0, 6, 12, 18, 24, 30]
+    ttt_mode: true
+    ttt_proj: true
+    ttt_target: hidden_states
+    ttt_lr: 3
+    ttt_chunk: 4096
+
+data:
+  train_path: /path/to/pilot.jsonl
+  train_size: 16384
+  dataloader_type: native
+  datasets_type: iterable
+  data_type: plaintext
+  max_seq_len: 8192
+  text_keys: content_split
+  drop_last: true
+
+train:
+  output_dir: /path/to/output
+  data_parallel_mode: fsdp2
+  ulysses_parallel_size: 1
+  global_batch_size: 2
+  micro_batch_size: 1
+  rmpad: false
+  use_wandb: false
+  max_steps: 1
+  rmpad_with_pos_ids: false
+  dyn_bsz_margin: 0
+  dyn_bsz: false
+  optimizer: adamw
+  lr: 5.0e-6
+  lr_warmup_ratio: 0.02
+  lr_decay_style: cosine
+  lr_decay_ratio: 0.90
+  weight_decay: 0.1
+  max_grad_norm: 1.0
+  enable_mixed_precision: true
+  enable_gradient_checkpointing: true
+  enable_full_shard: true
+  enable_fsdp_offload: true
+  init_device: meta
+  ckpt_manager: dcp
+  save_steps: 1
+  save_hf_weights: false
