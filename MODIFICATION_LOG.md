@@ -6287,3 +6287,34 @@ branch、composition、backbone、resource 与依赖 hash 审计通过。train/d
 `development_released_test=false`、`test_released=false`、`test_opened=false`；远端无
 sealed-test artifact，原子 release marker 未创建。紧凑 summary/audit/resource sidecar
 与完整结论归档在 `experiments/cbf_ttt/native_eos_safe_layerwise_write_gate_v4/`。
+
+## 2026-10-16: official In-Place TTT Qwen3-4B baseline reproduction reset
+
+根据最新研究顺序，门控实验暂停，先复现论文的 Qwen3-4B baseline。评分前新增并冻结
+`IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md`（commit `b99cc9f8`，SHA256
+`fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3`）。计划明确区分：
+官方 released-code reproduction、FineWeb-Edu/LongCrawl64 公共替代数据复制、以及需要字节
+内部私有语料和缺失配置的 paper-exact reproduction。原论文语料及预处理未公开，因此公共
+语料结果不得称为复现原始数据或精确表格数值。
+
+远端建立干净 detached checkout `be2324829b0e91c8fd10a74d4b43714fde6676e1`，新增隔离
+PyTorch 2.8/cu128/FlashAttention 2.8.3/固定 VeOmni 环境和 OpenCompass 0.5.4 评测环境。
+`byted-wandb` 不存在于公开 PyPI，故在不修改训练源文件的条件下使用 public wandb API
+fallback 并记录 provider。OpenCompass 环境固定 NumPy 1.26.4/PyArrow 25.0.1，解决
+OpenCompass 的 NumPy<2 与 PyArrow 26 的 NumPy>=2 冲突。
+
+新增 matched 8K 资源配置、runner、GPU监测和汇总。两臂使用同一 Qwen、同一16条等量
+FineWeb-Edu/LongCrawl64 token stream、FSDP2、bf16、gradient checkpointing、GB2、AdamW
+lr 5e-6/wd 0.1，仅 `ttt_mode` 不同。no-TTT 与 native-TTT 均完成 forward/backward，但在
+首次 `optimizer.step()` 初始化 Adam 状态时 OOM；峰值分别为32078/32102 MiB 和
+32076/32092 MiB。按冻结规则在首个 OOM 停止，未静默打开 offload，未运行16K/32K或
+20B/35B训练。服务器当时还有约1.4--2.4GiB非本项目 CARLA 显存，因此严格结论限定为
+“当前共享2x5090配置不可行”；独占GPU需从新输出目录重测。
+
+新增官方 RULER-4K smoke 配置、tmux-safe runner 与独立汇总。未修改 Qwen3-4B 在
+OpenCompass 13个官方子任务上全部执行和评分成功，exit=0，wall=2:34.87，GPU0监测峰值
+12288MiB。每任务仅1条，官方 group score 和独立任务均值均为76.9230769；该数只证明
+生成、推理、评分和提取闭环，不能与论文100条/任务的96.6比较。两个 focused summary
+tests 在独立 pytest 环境通过。完整可行性结论、命令、风险和紧凑hash证据位于
+`experiments/baseline_reproduction_qwen3_4b/REPORT.md`。baseline尚未完成，门控探索继续
+暂停；下一步是在独占大显存主机完成双臂资源阶梯和公共替代数据 matched training。

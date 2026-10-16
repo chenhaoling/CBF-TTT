@@ -1,0 +1,26 @@
+{
+  "protocol": "in_place_ttt_baseline_resource_v1",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "arm": "ttt",
+  "sequence_length": 8192,
+  "global_batch_size": 2,
+  "nominal_tokens": 16384,
+  "exit_code": 1,
+  "completed": false,
+  "last_loss": null,
+  "last_gradient_norm": null,
+  "wall_seconds": 22.94,
+  "tokens_per_second": null,
+  "peak_gpu_memory_mib": {
+    "0": 32076.0,
+    "1": 32092.0
+  },
+  "dependencies": {
+    "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+    "config_sha256": "b1f0c278e8f9929b56b5b1664afe4bf094c6f7c0e89182f81a1ae0143cb8cacf",
+    "data_sha256": "2eb03326ec87bc831ee1441e812bb5bef843f8e906656787cd2ddafc69d9d823",
+    "model_config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "train_log_sha256": "48fc349502d118623af779e9b03fd87d6ce77087ca626c546f45816308700015",
+    "gpu_monitor_sha256": "f3da591eb87137b9aed05a11519b46be404bea06e73b22ac054656ffd5ddfc96"
+  }
+}

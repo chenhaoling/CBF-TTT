@@ -1,0 +1,27 @@
+{
+  "host": "hku-gpu2",
+  "gpu_count": 2,
+  "gpu_model": "NVIDIA GeForce RTX 5090",
+  "gpu_memory_mib": 32607,
+  "upstream_repository": "ByteDance-Seed/In-Place-TTT",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "training_environment": "/home/ctj/miniconda3/envs/in_place_ttt_official_py311",
+  "evaluation_environment": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval",
+  "python": "3.11.16",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "transformers": "4.57.3",
+  "flash_attn": "2.8.3",
+  "veomni_commit": "9b91e164bea9e17f17ed490aab5e076c2335ca25",
+  "opencompass": "0.5.4",
+  "numpy": "1.26.4",
+  "pyarrow": "25.0.1",
+  "wonderwords": "3.0.1",
+  "wandb": "0.30.0",
+  "wandb_provider": "public-wandb-fallback",
+  "notes": [
+    "The release names byted-wandb, which is unavailable on public PyPI; the public wandb API package is used without changing training source.",
+    "OpenCompass 0.5.4 requires NumPy below 2; PyArrow is pinned to 25.0.1 because the PyArrow 26 wheel requires NumPy 2 or newer.",
+    "The server was shared. Unrelated CARLA processes occupied approximately 1.4 to 2.4 GiB on the two devices during the resource probes."
+  ]
+}

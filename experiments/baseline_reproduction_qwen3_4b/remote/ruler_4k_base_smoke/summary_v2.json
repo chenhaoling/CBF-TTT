@@ -1,0 +1,57 @@
+{
+  "completed": true,
+  "context_length": 4096,
+  "dependencies": {
+    "config_sha256": "99b97184852c6d91cf4099ad25cd2427d75504fe138d6ac89333d1946a81db80",
+    "eval_log_sha256": "a809f83291997f62f1ede352a88457975a55db5e22cdec301459250589ed5e99",
+    "gpu_monitor_sha256": "34dbfb5904e69a8775f135f6900ddfd96cc6a7aebcce8ddd771a6adc5187a53a",
+    "model_config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "official_summary_sha256": "ceb40bb4a40194fce129aeb73fc365d867d940b96ffcdd027f6ba565bc43ed8f",
+    "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+    "result_sha256": {
+      "ruler_cwe_4k.json": "4c59242076f67c42654e8c72fd5316a41cebb498555b67daaceb8e9affd25cdd",
+      "ruler_fwe_4k.json": "6647b01ed97c5ed72163c2f98f5744ac1f0f4dc0938f75063a973a2f039345c6",
+      "ruler_niah_multikey_1_4k.json": "3e6a06a2b83ddb2865ff31f740990072c44d82e4beda909f646ead9472583fd9",
+      "ruler_niah_multikey_2_4k.json": "4352b6d82f2fd9cacff6467062dcfa48e60c4d4c4429b45235c4cf34481b6219",
+      "ruler_niah_multikey_3_4k.json": "e8aad69efcee2b807759c912eda78ca272fbffff77cd9f54cb411ceb7992ea2e",
+      "ruler_niah_multiquery_4k.json": "922735acde6affa01a3909be59c878c58a33006960e950b05343b75a024aa3cf",
+      "ruler_niah_multivalue_4k.json": "d3f3b0e1c835492b487f804954dcdfedeb088acec734ffec9a0522eeee664e20",
+      "ruler_niah_single_1_4k.json": "f5ce7a3cb37c8787dc818f04bc86c2089b80aeb2e9b5765627a6272cebfd27ad",
+      "ruler_niah_single_2_4k.json": "ec526b123dab3ab613bea366f17ec9611f7e363543e492050aa4a83edc73d34d",
+      "ruler_niah_single_3_4k.json": "0557984af62fc2b5b8b79400ac64041160692c9249abcab4f5e8c139d5d669e2",
+      "ruler_qa_hotpotqa_4k.json": "013ed3d975fc11b5aeb263ce29438f76e3040de6f83834c62138777db6f509fc",
+      "ruler_qa_squad_4k.json": "35b65737b233a1fa98766d9bfc7345379f468ae710f07779f87e1c766e4632aa",
+      "ruler_vt_4k.json": "c9ad58f74e5e2dc3469eb4e36fd3d1d1d1f8860c52e4f7c1805a0338975d9f8d"
+    }
+  },
+  "exit_code": 0,
+  "macro_accuracy": 76.92307692307692,
+  "macro_matches_official": true,
+  "missing_tasks": [],
+  "num_samples_per_task": 1,
+  "official_ruler_group_score": 76.92307692307692,
+  "peak_gpu_memory_mib": {
+    "0": 12288.0,
+    "1": 1397.0
+  },
+  "protocol": "in_place_ttt_ruler_4k_smoke_v1",
+  "task_count": 13,
+  "task_scores": {
+    "ruler_cwe_4k": 0.0,
+    "ruler_fwe_4k": 100.0,
+    "ruler_niah_multikey_1_4k": 100.0,
+    "ruler_niah_multikey_2_4k": 0.0,
+    "ruler_niah_multikey_3_4k": 0.0,
+    "ruler_niah_multiquery_4k": 100.0,
+    "ruler_niah_multivalue_4k": 100.0,
+    "ruler_niah_single_1_4k": 100.0,
+    "ruler_niah_single_2_4k": 100.0,
+    "ruler_niah_single_3_4k": 100.0,
+    "ruler_qa_hotpotqa_4k": 100.0,
+    "ruler_qa_squad_4k": 100.0,
+    "ruler_vt_4k": 100.0
+  },
+  "unexpected_tasks": [],
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "wall_clock": "2:34.87"
+}
