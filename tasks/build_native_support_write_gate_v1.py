@@ -133,8 +133,21 @@ def _exact_duplicate_boundary(episode: dict, boundary_index: int) -> tuple[dict,
     return incoming, queries
 
 
-def convert_episode(tokenizer, episode: dict, mechanism: str) -> tuple[dict, dict]:
-    group_id = f"sawg-v1-{mechanism}-{episode['source_group']}"
+def convert_episode(
+    tokenizer,
+    episode: dict,
+    mechanism: str,
+    *,
+    protocol: str = PROTOCOL,
+    group_prefix: str = "sawg-v1",
+    group_id_override: str | None = None,
+) -> tuple[dict, dict]:
+    """Convert one semantic episode without coupling later protocols to V1 ids.
+
+    The keyword defaults preserve the frozen V1 artifacts byte-for-byte.  V3
+    supplies its own protocol and prefix before query ids are derived.
+    """
+    group_id = group_id_override or f"{group_prefix}-{mechanism}-{episode['source_group']}"
     setup_records = [event["record"] for event in episode["events"][:5]]
     setup_text = [record["input"]["statement"] for record in setup_records]
     model_boundaries, audit_boundaries = [], []
@@ -161,14 +174,14 @@ def convert_episode(tokenizer, episode: dict, mechanism: str) -> tuple[dict, dic
             "queries": audit_queries,
         })
     model = {
-        "protocol": PROTOCOL,
+        "protocol": protocol,
         "group_id": group_id,
         "mechanism_hash": stable_hash("mechanism", mechanism)[:24],
         "setup_chunk_ids": pack_chunk(tokenizer, setup_text),
         "boundaries": model_boundaries,
     }
     audit = {
-        "protocol": PROTOCOL,
+        "protocol": protocol,
         "group_id": group_id,
         "source_group": episode["source_group"],
         "source_episode": episode["episode_id"],

@@ -96,10 +96,14 @@ def choose_formal_material(
     forbidden_fact_hashes: set[str],
     forbidden_subjects: set[str],
     strict_same_relation_value: bool = True,
+    target_relation_override: str | None = None,
+    capacity_aware: bool = False,
 ) -> dict:
     """Select one group and mutate the two forbidden sets after success."""
 
-    target_relation = train_relations[group_index % len(train_relations)]
+    target_relation = target_relation_override or train_relations[group_index % len(train_relations)]
+    if target_relation not in train_relations:
+        raise ValueError(f"target relation outside training partition: {target_relation}")
     local_hashes = set(forbidden_fact_hashes)
     local_subjects = set(forbidden_subjects)
     chosen: list[dict] = []
@@ -132,20 +136,55 @@ def choose_formal_material(
     )
     used_values.add(same_relation_other["value_norm"])
 
-    other_relations = sorted(
-        (relation for relation in train_relations if relation != target_relation),
-        key=lambda relation: (
-            stable_rank(FORMAL_SEED, "formal-other-relation", group_index, relation), relation
-        ),
-    )[:5]
+    if capacity_aware:
+        def available(relation: str) -> int:
+            return sum(row["source_fact_hash"] not in local_hashes
+                       and row["subject_norm"] not in local_subjects
+                       for row in facts[relation])
+        other_relations = sorted(
+            (relation for relation in train_relations if relation != target_relation),
+            key=lambda relation: (
+                -available(relation),
+                stable_rank(FORMAL_SEED, "formal-capacity-relation", group_index, relation),
+                relation,
+            ),
+        )
+    else:
+        other_relations = sorted(
+            (relation for relation in train_relations if relation != target_relation),
+            key=lambda relation: (
+                stable_rank(FORMAL_SEED, "formal-other-relation", group_index, relation), relation
+            ),
+        )[:5]
     stable = []
-    for index, relation in enumerate(other_relations):
-        row = take(relation, f"stable-{index}", used_values, reserve_input=True)
+    for relation in other_relations:
+        if len(stable) == 5:
+            break
+        try:
+            row = take(relation, f"stable-{len(stable)}", used_values, reserve_input=True)
+        except ValueError:
+            if capacity_aware:
+                continue
+            raise
         stable.append(row)
         used_values.add(row["value_norm"])
-    anchor_alternate = take(
-        stable[0]["relation_id"], "anchor-alternate", used_values
-    )
+    if len(stable) != 5:
+        raise ValueError(f"formal:{group_index} lacks five stable relations")
+    if capacity_aware:
+        anchor_alternate = None
+        for anchor_index, row in enumerate(stable):
+            try:
+                anchor_alternate = take(row["relation_id"], "anchor-alternate", used_values)
+            except ValueError:
+                continue
+            stable[0], stable[anchor_index] = stable[anchor_index], stable[0]
+            break
+        if anchor_alternate is None:
+            raise ValueError(f"formal:{group_index} lacks an anchor alternate")
+    else:
+        anchor_alternate = take(
+            stable[0]["relation_id"], "anchor-alternate", used_values
+        )
 
     forbidden_fact_hashes.update(row["source_fact_hash"] for row in reserved)
     forbidden_subjects.update(row["subject_norm"] for row in reserved)
