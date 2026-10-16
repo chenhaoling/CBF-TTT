@@ -1,0 +1,32 @@
+{
+  "protocol": "native_layerwise_fastweight_admission_v2_independent_audit",
+  "stage": "smoke",
+  "passed": true,
+  "groups": 12,
+  "labels": 36,
+  "plan_sha256": "2a1f973dbc919e193341edaa43bbcde2d444bfef75a823a33acd2e9f7bfb4e92",
+  "v1_audit_sha256": "5475ed3b67882be80f836e2774615af88b5c25b133353447a62105f797f2abcd",
+  "result_files": {
+    "smoke_shard0.jsonl": "f602f7248832ae7c3c2bd0d7aff2331516ee2dc7e34d5056707183e55c0544c8",
+    "smoke_shard1.jsonl": "6eea742cf2a4e13b6d1addb044c74d9a93cad57ca02a54bf401585be84f1e6d3"
+  },
+  "summary_sha256": "f450e664a391def86c2bf22e535e90fb1329bdda3f9b2f63e3340ff21e5461c1",
+  "recomputed": {
+    "headroom_fraction": 0.9444444444444444,
+    "safe_oracle_gain_vs_reject": 0.07739146605685902,
+    "safe_oracle_gain_group_bootstrap_95ci": [
+      0.05026280935163854,
+      0.11281140162437037
+    ],
+    "safe_oracle_actions": {
+      "reject_all": 2,
+      "admit_layer_0": 7,
+      "admit_layer_12": 5,
+      "admit_layer_18": 2,
+      "admit_layer_24": 6,
+      "admit_layer_30": 7,
+      "admit_layer_35": 7
+    }
+  },
+  "test_opened": false
+}

@@ -1,0 +1,75 @@
+{
+  "protocol": "native_layerwise_fastweight_admission_v3",
+  "stage": "smoke",
+  "groups": 12,
+  "labels": 36,
+  "headroom_fraction": 0.9166666666666666,
+  "mean_max_singleton_benefit": 0.07960323761734696,
+  "mean_J": {
+    "reject_all": 7.4782079954942065,
+    "admit_layer_0": 7.490826276510402,
+    "admit_layer_6": 9.720786746901771,
+    "admit_layer_12": 7.473359376537027,
+    "admit_layer_18": 7.512686862092879,
+    "admit_layer_24": 7.48158954339171,
+    "admit_layer_30": 7.56300271095501,
+    "admit_layer_35": 8.673993066367176,
+    "admit_all": 12.163680097985047
+  },
+  "safe_oracle_J": 7.412103873505084,
+  "safe_oracle_gain_vs_reject": 0.06610412198912209,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.047573870668808395,
+    0.08863148458853919
+  ],
+  "safe_oracle_actions": {
+    "reject_all": 3,
+    "admit_layer_0": 7,
+    "admit_layer_12": 6,
+    "admit_layer_18": 2,
+    "admit_layer_24": 7,
+    "admit_layer_30": 4,
+    "admit_layer_35": 7
+  },
+  "per_layer": {
+    "0": {
+      "positive_boundaries": 18,
+      "mean_benefit": -0.01261828101619522
+    },
+    "6": {
+      "positive_boundaries": 1,
+      "mean_benefit": -2.2425787514075637
+    },
+    "12": {
+      "positive_boundaries": 18,
+      "mean_benefit": 0.00484861895717956
+    },
+    "18": {
+      "positive_boundaries": 14,
+      "mean_benefit": -0.03447886659867231
+    },
+    "24": {
+      "positive_boundaries": 20,
+      "mean_benefit": -0.003381547897502187
+    },
+    "30": {
+      "positive_boundaries": 14,
+      "mean_benefit": -0.08479471546080389
+    },
+    "35": {
+      "positive_boundaries": 12,
+      "mean_benefit": -1.195785070872969
+    }
+  },
+  "checks": {
+    "singleton_headroom_fraction_at_least_15pct": true,
+    "safe_oracle_mean_gain_positive": true,
+    "safe_oracle_bootstrap_lower_positive": true,
+    "protected_accuracy_safe": true,
+    "protected_nll_safe": true,
+    "eos_safe": true,
+    "branch_replay_and_composition": true
+  },
+  "passed": true,
+  "next_stage": "construct_train_dev_labels"
+}

@@ -6218,3 +6218,44 @@ paired group bootstrap 95% CI `[0,0]`，oracle 144次全部 reject。六机制�
 writer 在该构造语料上没有可验证净正内容收益，支持门没有非平凡 oracle gap 可学习；
 不能声称 adaptive TTT 有效。完整 data、features、labels、资源、summary、独立 audit
 和报告位于 `experiments/cbf_ttt/support_write_gate_v1/`。
+
+## 2026-10-16: Native layerwise admission V2--V4
+
+V1 的全层二值写入门在144个 boundary 上全部选择 reject。为检查是否是七层更新捆绑导致
+有用分量被有害层掩盖，新增并在评分前冻结
+`NATIVE_LAYERWISE_WRITE_GATE_V2_PLAN.md`。V2 从完全相同的原生 parent/reject/admit
+cache 组合七个 singleton action；每个 action 仅一层取 admit `W_fast`，其余六层取
+reject `W_fast`，fresh-KV 查询不变。新增 collector、独立 composition/hash auditor、
+runner 与 focused tests；未修改 Qwen 或 `ttt_conv/ttt_proj`。
+
+V2 在已观察的48组 development 数据上通过诊断门：91.67% boundary 有 singleton
+headroom，safe oracle 相对 reject 的 J 改善0.08592，source-group bootstrap 95% CI
+`[0.06418,0.11321]`。全层 admit J 仍为11.99533，reject 为7.56404。固定单层大多
+平均有害，只有第24层有微弱正均值，说明收益来自状态相关的层选择。V2 仅作为设计证据，
+不能形成 held-out claim。
+
+新增并在新语料评分前冻结 `NATIVE_LAYERWISE_WRITE_GATE_V3_PLAN.md`。数据构建器复用
+已审计 LAMA/ParaRel lifecycle generator，生成624个 source groups，并按机制严格分成
+fresh confirmation/train/development/sealed-test = 48/384/96/96。第一次固定关系轮转在
+第609组耗尽 P190，属于模型前容量失败；随后只在 V3 opt-in 路径启用确定性
+capacity-aware allocator，保持 train relation 限制和全部规模不变，并把 donor fact 与
+subject 也纳入跨组一次性集合。重试通过11项独立数据审计，pilot overlap 为零，在线
+group id 为 opaque hash，机制仅存在离线 semantic audit。
+
+V3 collector 对每个 boundary 评分 reject、七个 singleton 与 full admit，同时复用 V1
+的1,854维 support/loss/uncertainty/geometry 特征与物理 feature-label 分离。12组 smoke
+通过。48组 fresh confirmation 独立复制 headroom：90.97% boundary 有收益，oracle gain
+0.09005，bootstrap CI `[0.07071,0.11229]`。但 EOS 相对 reject 增加1.25pp，超过冻结的
+1pp限制，因此 V3 正式停止；train/dev/test 均未评分，controller 未训练。execution 与
+independent artifact audit 本身通过。单标签平均14.31--14.37秒，峰值 allocated/reserved
+为10.76/11.47 GiB。
+
+新增只读 post-stop diagnostic。逐 boundary 增加 `EOS(singleton) <= EOS(reject)` 后仅
+改变7/144个动作，仍有0.08059 J gain、bootstrap CI `[0.06412,0.09991]`，同时 EOS
+下降0.278pp。该结果不回溯修改 V3 结论，只用于登记新方法。随后在任何 formal outcome
+前冻结 `NATIVE_EOS_SAFE_LAYERWISE_WRITE_GATE_V4_PLAN.md`：新增 EOS-harm offline target
+与第四个七维 risk head，部署时 benefit、protected-NLL、accuracy-harm、EOS-harm 四个
+条件共同决定单层提交。V4 保持三种子、full/no-support/support-only、全部 baseline、
+development release 与一次性 test 规则。新增 V4 collector、训练器、独立 auditor、runner
+及回归测试；10项 focused tests 在 `hku-gpu2` 通过。正式384组 train 标签正在四 shard、
+每卡两 worker 的 opt-in tmux 任务中构建，未打开 development/test。

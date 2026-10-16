@@ -1,0 +1,38 @@
+{
+  "protocol": "native_layerwise_fastweight_admission_v3_independent_audit",
+  "stage": "confirmation",
+  "passed": true,
+  "groups": 48,
+  "labels": 144,
+  "feature_dimension": 1854,
+  "plan_sha256": "bce05cf4b1fd8501ea4e3a95690b9ae0d3caa0774e4596bbd86cbe35189de99f",
+  "data_manifest_sha256": "27c712ac9d23f958583313eb59f5a0debde0045cdd789ac17226c1b19d70c6f0",
+  "data_audit_sha256": "506b8e338ccd462b908853fd93a058f229876ce0aac268224ea081c4910a8fbc",
+  "result_files": {
+    "confirmation_shard0_labels.jsonl": "bdb19e83f2ad01b9ebe8ab6d5bb3a46f92e573392f3798aad27390b03506bf04",
+    "confirmation_shard1_labels.jsonl": "305d43667df58ed3055b262ae46db4d27f72e63f16ce06716f4d8c5dbc738caa",
+    "confirmation_shard0_features.jsonl": "b40f7eb8d143acdd3a3356b914ad37ccca24b58a8b7599b10f010b9587294bc6",
+    "confirmation_shard1_features.jsonl": "405f58fe9ac727b0b20d9ee9678a5fc94dae949adb84a5079a96bbe39ee644a8"
+  },
+  "summary_sha256": "8e66d3bc2bde17505c23a253234604763d7e93429b54457f356cb3fb4493c5f3",
+  "recomputed": {
+    "headroom_fraction": 0.9097222222222222,
+    "safe_oracle_gain_vs_reject": 0.09004566621863176,
+    "safe_oracle_gain_group_bootstrap_95ci": [
+      0.0707092898276945,
+      0.11229341321935254
+    ],
+    "safe_oracle_actions": {
+      "reject_all": 12,
+      "admit_layer_0": 26,
+      "admit_layer_6": 4,
+      "admit_layer_12": 15,
+      "admit_layer_18": 7,
+      "admit_layer_24": 21,
+      "admit_layer_30": 18,
+      "admit_layer_35": 41
+    }
+  },
+  "collector_audits": 2,
+  "test_opened": false
+}

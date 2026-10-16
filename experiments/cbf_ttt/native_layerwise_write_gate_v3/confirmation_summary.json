@@ -1,0 +1,76 @@
+{
+  "protocol": "native_layerwise_fastweight_admission_v3",
+  "stage": "confirmation",
+  "groups": 48,
+  "labels": 144,
+  "headroom_fraction": 0.9097222222222222,
+  "mean_max_singleton_benefit": 0.09217566510455473,
+  "mean_J": {
+    "reject_all": 7.5566713373194005,
+    "admit_layer_0": 7.567749940635015,
+    "admit_layer_6": 9.743378270382959,
+    "admit_layer_12": 7.5660611027981055,
+    "admit_layer_18": 7.579511069878074,
+    "admit_layer_24": 7.555348585312324,
+    "admit_layer_30": 7.633152848868458,
+    "admit_layer_35": 8.556067462674239,
+    "admit_all": 11.954168285458797
+  },
+  "safe_oracle_J": 7.466625671100768,
+  "safe_oracle_gain_vs_reject": 0.09004566621863176,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.0707092898276945,
+    0.11229341321935254
+  ],
+  "safe_oracle_actions": {
+    "reject_all": 12,
+    "admit_layer_0": 26,
+    "admit_layer_6": 4,
+    "admit_layer_12": 15,
+    "admit_layer_18": 7,
+    "admit_layer_24": 21,
+    "admit_layer_30": 18,
+    "admit_layer_35": 41
+  },
+  "per_layer": {
+    "0": {
+      "positive_boundaries": 64,
+      "mean_benefit": -0.011078603315615485
+    },
+    "6": {
+      "positive_boundaries": 5,
+      "mean_benefit": -2.1867069330635585
+    },
+    "12": {
+      "positive_boundaries": 63,
+      "mean_benefit": -0.009389765478705039
+    },
+    "18": {
+      "positive_boundaries": 53,
+      "mean_benefit": -0.022839732558673564
+    },
+    "24": {
+      "positive_boundaries": 83,
+      "mean_benefit": 0.001322752007076265
+    },
+    "30": {
+      "positive_boundaries": 47,
+      "mean_benefit": -0.07648151154905827
+    },
+    "35": {
+      "positive_boundaries": 55,
+      "mean_benefit": -0.9993961253548385
+    }
+  },
+  "checks": {
+    "singleton_headroom_fraction_at_least_15pct": true,
+    "safe_oracle_mean_gain_positive": true,
+    "safe_oracle_bootstrap_lower_positive": true,
+    "protected_accuracy_safe": true,
+    "protected_nll_safe": true,
+    "eos_safe": false,
+    "branch_replay_and_composition": true
+  },
+  "passed": false,
+  "next_stage": "stop_before_controller_and_test"
+}

@@ -1,0 +1,86 @@
+{
+  "protocol": "native_layerwise_fastweight_admission_v2",
+  "stage": "smoke",
+  "groups": 12,
+  "labels": 36,
+  "actions": [
+    "reject_all",
+    "admit_layer_0",
+    "admit_layer_6",
+    "admit_layer_12",
+    "admit_layer_18",
+    "admit_layer_24",
+    "admit_layer_30",
+    "admit_layer_35",
+    "admit_all"
+  ],
+  "headroom_fraction": 0.9444444444444444,
+  "mean_max_singleton_benefit": 0.07704024651536232,
+  "mean_J": {
+    "reject_all": 7.876249308939332,
+    "admit_layer_0": 7.893203801785906,
+    "admit_layer_6": 10.128627915694205,
+    "admit_layer_12": 7.880734146676129,
+    "admit_layer_18": 7.897304310704822,
+    "admit_layer_24": 7.877261518121317,
+    "admit_layer_30": 7.989515496003959,
+    "admit_layer_35": 8.877251117317764,
+    "admit_all": 12.385492018803403
+  },
+  "safe_oracle_J": 7.798857842882474,
+  "safe_oracle_gain_vs_reject": 0.07739146605685902,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.05026280935163854,
+    0.11281140162437037
+  ],
+  "safe_oracle_actions": {
+    "reject_all": 2,
+    "admit_layer_0": 7,
+    "admit_layer_12": 5,
+    "admit_layer_18": 2,
+    "admit_layer_24": 6,
+    "admit_layer_30": 7,
+    "admit_layer_35": 7
+  },
+  "per_layer": {
+    "0": {
+      "positive_boundaries": 13,
+      "mean_benefit": -0.016954492846572786
+    },
+    "6": {
+      "positive_boundaries": 0,
+      "mean_benefit": -2.2523786067548723
+    },
+    "12": {
+      "positive_boundaries": 15,
+      "mean_benefit": -0.004484837736796575
+    },
+    "18": {
+      "positive_boundaries": 11,
+      "mean_benefit": -0.021055001765489537
+    },
+    "24": {
+      "positive_boundaries": 23,
+      "mean_benefit": -0.0010122091819842287
+    },
+    "30": {
+      "positive_boundaries": 10,
+      "mean_benefit": -0.1132661870646256
+    },
+    "35": {
+      "positive_boundaries": 12,
+      "mean_benefit": -1.0010018083784316
+    }
+  },
+  "checks": {
+    "singleton_headroom_fraction_at_least_15pct": true,
+    "safe_oracle_mean_gain_positive": true,
+    "safe_oracle_bootstrap_lower_positive": true,
+    "protected_accuracy_safe": true,
+    "protected_nll_safe": true,
+    "eos_safe": true,
+    "branch_replay_and_composition": true
+  },
+  "passed": true,
+  "next_stage": "freeze_fresh_source_confirmation"
+}

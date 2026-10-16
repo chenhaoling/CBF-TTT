@@ -1,0 +1,37 @@
+{
+  "protocol": "native_layerwise_fastweight_admission_v3_independent_audit",
+  "stage": "smoke",
+  "passed": true,
+  "groups": 12,
+  "labels": 36,
+  "feature_dimension": 1854,
+  "plan_sha256": "bce05cf4b1fd8501ea4e3a95690b9ae0d3caa0774e4596bbd86cbe35189de99f",
+  "data_manifest_sha256": "27c712ac9d23f958583313eb59f5a0debde0045cdd789ac17226c1b19d70c6f0",
+  "data_audit_sha256": "506b8e338ccd462b908853fd93a058f229876ce0aac268224ea081c4910a8fbc",
+  "result_files": {
+    "smoke_shard0_labels.jsonl": "f579af7fb9012fecd514e8725423724a345e050bc3801cd5a634246f73c2c3e8",
+    "smoke_shard1_labels.jsonl": "3c00ec44d1bea865a7a3a3b37b8e425c2c8d413d6a78b705e6e0b78ae2c45412",
+    "smoke_shard0_features.jsonl": "c0f11261d045297f08d9e8ad1cad8744da7e508a574b4f038a0fe69e3c3c6210",
+    "smoke_shard1_features.jsonl": "931fafa82ef41cc6b1d30ee5aa5ed640121a3596b6c527e05a90a7109848d66b"
+  },
+  "summary_sha256": "506a469f385bc273b1d435c37a2fafb7f8ac2c66a03cb36f3822cb8c766d5329",
+  "recomputed": {
+    "headroom_fraction": 0.9166666666666666,
+    "safe_oracle_gain_vs_reject": 0.06610412198912209,
+    "safe_oracle_gain_group_bootstrap_95ci": [
+      0.047573870668808395,
+      0.08863148458853919
+    ],
+    "safe_oracle_actions": {
+      "reject_all": 3,
+      "admit_layer_0": 7,
+      "admit_layer_12": 6,
+      "admit_layer_18": 2,
+      "admit_layer_24": 7,
+      "admit_layer_30": 4,
+      "admit_layer_35": 7
+    }
+  },
+  "collector_audits": 2,
+  "test_opened": false
+}

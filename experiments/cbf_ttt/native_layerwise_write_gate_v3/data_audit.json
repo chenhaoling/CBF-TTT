@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "balanced_splits": true,
+    "deterministic_assignment": true,
+    "file_hashes": true,
+    "model_ids_unique": true,
+    "online_plaintext_absent": true,
+    "pilot_exclusion_and_model_free": true,
+    "protocol_and_plan": true,
+    "registered_counts": true,
+    "semantic_separation": true,
+    "source_world_disjointness": true,
+    "twins_and_boundaries": true
+  },
+  "counts": {
+    "confirmation": 48,
+    "development": 96,
+    "sealed_test": 96,
+    "train": 384
+  },
+  "manifest_sha256": "27c712ac9d23f958583313eb59f5a0debde0045cdd789ac17226c1b19d70c6f0",
+  "passed": true,
+  "protocol": "native_layerwise_fastweight_admission_v3_data_audit",
+  "source_manifest_sha256": "908769e5150d3b1522465be408f62ae4eae8f39912c56b8b5f84848b7d2b10a3",
+  "test_opened": false
+}

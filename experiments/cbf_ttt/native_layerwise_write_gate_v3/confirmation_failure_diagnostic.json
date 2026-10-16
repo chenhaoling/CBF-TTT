@@ -1,0 +1,58 @@
+{
+  "protocol": "native_layerwise_fastweight_admission_v3_failure_diagnostic",
+  "status": "post_stop_descriptive_only",
+  "groups": 48,
+  "labels": 144,
+  "original_accuracy_safe_oracle": {
+    "J": 7.466625671100768,
+    "gain_vs_reject": 0.09004566621863176,
+    "gain_group_bootstrap_95ci": [
+      0.07044555281323413,
+      0.11239420148302555
+    ],
+    "protected_accuracy": 0.6666666666666666,
+    "protected_accuracy_delta": 0.01157407407407407,
+    "protected_nll": 7.064078389960169,
+    "protected_nll_delta": -0.021025442311333187,
+    "eos_rate": 0.10972222222222222,
+    "eos_rate_delta": 0.012499999999999997,
+    "actions": {
+      "admit_layer_35": 41,
+      "admit_layer_0": 26,
+      "admit_layer_12": 15,
+      "admit_layer_6": 4,
+      "admit_layer_24": 21,
+      "admit_layer_30": 18,
+      "reject_all": 12,
+      "admit_layer_18": 7
+    }
+  },
+  "accuracy_and_eos_safe_oracle": {
+    "J": 7.476086336662302,
+    "gain_vs_reject": 0.08058500065709705,
+    "gain_group_bootstrap_95ci": [
+      0.06411555142107386,
+      0.09990730462595804
+    ],
+    "protected_accuracy": 0.662037037037037,
+    "protected_accuracy_delta": 0.00694444444444442,
+    "protected_nll": 7.059339334481154,
+    "protected_nll_delta": -0.025764497790348173,
+    "eos_rate": 0.09444444444444444,
+    "eos_rate_delta": -0.002777777777777782,
+    "actions": {
+      "admit_layer_35": 41,
+      "admit_layer_0": 26,
+      "admit_layer_12": 17,
+      "reject_all": 16,
+      "admit_layer_24": 19,
+      "admit_layer_30": 18,
+      "admit_layer_18": 6,
+      "admit_layer_6": 1
+    }
+  },
+  "actions_changed_by_eos_barrier": 7,
+  "v3_gate_remains_failed": true,
+  "controller_training_authorized": false,
+  "test_opened": false
+}

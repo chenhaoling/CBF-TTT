@@ -246,3 +246,25 @@ or the chunk/data construction in a newly frozen protocol and then repeat the
 oracle/headroom gate on fresh source groups. Reusing these 48 groups to tune a
 new writer would turn them into development data and require a new held-out
 pilot for any claim.
+
+## 11. Subsequent layerwise diagnostics
+
+The V1 conclusion for a scalar whole-update gate remains unchanged.  V2 tested
+whether useful layer updates were hidden inside the harmful bundled write.  On
+the V1 development groups, a safe singleton oracle improved J by 0.08592 with
+source-group bootstrap interval `[0.06418, 0.11321]`; 91.67% of boundaries had
+singleton headroom.  All-layer admit remained harmful.  V2 passed as a
+development diagnostic only.
+
+V3 then generated 624 new source-disjoint groups and locked 48/384/96/96
+confirmation/train/development/test partitions.  Fresh confirmation reproduced
+headroom: reject J 7.55667, all-layer admit J 11.95417, singleton oracle J
+7.46663, gain 0.09005, bootstrap interval `[0.07071, 0.11229]`.  The registered
+V3 gate nevertheless failed because oracle EOS rose by 1.25 points, above the
+1-point limit.  V3 stopped before controller training and left train/dev/test
+unscored.
+
+A post-stop diagnostic added a rowwise EOS nonincrease barrier.  It changed
+7/144 actions and retained gain 0.08059 with interval `[0.06412, 0.09991]`
+while reducing EOS by 0.278 point.  This result motivated the separately frozen
+V4 EOS-risk controller protocol; it does not retroactively pass V3.
