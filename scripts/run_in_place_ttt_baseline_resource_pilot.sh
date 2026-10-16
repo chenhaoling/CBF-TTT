@@ -75,6 +75,10 @@ set +e
 (
   cd "$UPSTREAM_REPO"
   export PATH="$(dirname "$PYTHON_BIN"):$PATH"
+  # The released train.sh invokes tasks/train_torch.py as a file, so its
+  # sibling top-level hf_models package is visible only when the checkout is
+  # explicitly present on PYTHONPATH.
+  export PYTHONPATH="$UPSTREAM_REPO${PYTHONPATH:+:$PYTHONPATH}"
   export CUDA_VISIBLE_DEVICES=0,1
   /usr/bin/time -v bash train.sh tasks/train_torch.py "$CONFIG" \
     --model.model_path "$MODEL" \
@@ -87,6 +91,9 @@ set +e
 status=$?
 set -e
 printf '%s\n' "$status" > "$OUTPUT_ROOT/exit_code.txt"
+if [[ -f "$UPSTREAM_REPO/log.txt" ]]; then
+  mv "$UPSTREAM_REPO/log.txt" "$OUTPUT_ROOT/upstream_tee.log"
+fi
 cleanup
 trap - EXIT
 

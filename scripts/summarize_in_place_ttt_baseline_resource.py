@@ -63,7 +63,7 @@ def summarize(root: Path, output: Path) -> dict:
         "wall_seconds": wall_seconds,
         "tokens_per_second": (
             metadata["sequence_length"] * metadata["global_batch_size"] / wall_seconds
-            if wall_seconds else None
+            if exit_code == 0 and losses and wall_seconds else None
         ),
         "peak_gpu_memory_mib": peaks,
         "dependencies": {
