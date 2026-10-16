@@ -84,3 +84,24 @@ V12 passes only if an independent audit verifies:
 A pass supports a cross-source claim for the simple corpus-trained forgetting
 controller and authorizes separately registered LongMemEval-S/LoCoMo
 evaluation.  A failure is reported once without adapting to WebNLG.
+
+## Model-free capacity result and stop decision
+
+The locked inspection parsed 1,788 `train/1triples` entries and 4,338 human
+lexicalizations.  It recovered 4,327 aligned lexicalizations across 227
+relations.  Exactly eight relations passed the registered coarse thresholds:
+`country`, `creator`, `ingredient`, `isPartOf`, `language`, `leaderName`,
+`location`, and `runwayLength`.
+
+The coarse gate does not make the registered construction feasible.  Fourteen
+groups require, before any stable or template donor, one target, four distinct
+versions and one same-relation record per group: an immutable lower bound of
+84 globally unique entity pairs per target relation.  Observed pair capacities
+are 119/35/63/102/44/76/82/48 respectively; only two relations meet the lower
+bound.  Template donors increase the requirement.  This arithmetic is
+independent of model scores and sampling order.
+
+V12 therefore stops before corpus construction or Qwen execution.  The method
+does not reduce group count, reuse entity pairs, admit multi-triple entries or
+weaken the natural-template rule.  A later replication must use a new source
+with at least eight relations satisfying the true construction lower bound.

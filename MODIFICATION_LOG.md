@@ -6094,3 +6094,11 @@ LongMemEval-S 和 LoCoMo 继续封存。
 `d72d28824c8912c34fc652ff45050323568a94bf584395d466bcfa0aa3ee21a4`。
 上述身份已写回 V12 plan，之后只允许解析 `train/1triples` 做容量检查。
 
+WebNLG 锁定容量检查解析1,788个 single-triple entries/4,338个人工 lexicalizations，
+得到4,327个对齐自然模板、227个关系。初始28行/20 subjects/20 values/7 templates
+门恰有8个关系通过，且全程未加载模型或其他 benchmark。进一步执行正式构造前的确定性
+下界检查发现不可行：每关系14组仅 target+4 versions+same-relation record 就至少需要
+84个全局不重复 entity pairs；8个关系容量为119/35/63/102/44/76/82/48，只有2个
+达到下界，尚未计入 template donors。V12 因此在模型前停止，不减少组数、不复用实体
+对、不放宽为 multi-triple；WebNLG 分支关闭，后续必须更换容量足够的新自然来源。
+
