@@ -1,7 +1,5 @@
 """One-example-per-task RULER 4K pipeline smoke for unmodified Qwen3-4B."""
 
-import os
-
 from mmengine.config import read_base
 from opencompass.models import HuggingFaceBaseModel
 from opencompass.partitioners import NaivePartitioner, NumWorkerPartitioner
@@ -17,9 +15,9 @@ with read_base():
     from opencompass.configs.datasets.ruler.ruler_vt_gen import vt_datasets
     from opencompass.configs.summarizers.groups.ruler import ruler_summary_groups
 
-model_path = os.environ["BASELINE_EVAL_MODEL"]
-model_name = os.environ.get("BASELINE_EVAL_NAME", "qwen3_4b_base")
-num_samples = int(os.environ.get("BASELINE_EVAL_NUM_SAMPLES", "1"))
+model_path = __import__("os").environ["BASELINE_EVAL_MODEL"]
+model_name = __import__("os").environ.get("BASELINE_EVAL_NAME", "qwen3_4b_base")
+num_samples = int(__import__("os").environ.get("BASELINE_EVAL_NUM_SAMPLES", "1"))
 
 models = [
     dict(
