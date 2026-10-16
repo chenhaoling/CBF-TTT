@@ -73,7 +73,7 @@ def load_inputs(args):
         "lama_feature": roots["lama_train_feature_root"] / TRAIN_AUDITS["lama_feature"],
         "fewrel_label": roots["fewrel_train_label_root"] / TRAIN_AUDITS["fewrel_label"],
         "fewrel_feature": roots["fewrel_train_feature_root"] / TRAIN_AUDITS["fewrel_feature"],
-        "development_data": roots["development_data_root"] / "data_audit.json",
+        "development_data": roots["development_data_root"].parent / "data_audit.json",
         "development_label": roots["development_label_root"] / "formal_audit.json",
         "development_feature": roots["development_feature_root"] / "feature_audit.json",
     }

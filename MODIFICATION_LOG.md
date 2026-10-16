@@ -6037,3 +6037,8 @@ zero-collateral config，并计算 benefit/risk ranking、source-group 与 relat
 开发门、权重与依赖 hash。旧 TempLAMA/LAMA development 不是 runner 参数，测试分区
 继续封存。本地 Python/shell 语法、2项训练工具单测和 diff 检查通过。
 
+V11 首次训练 runner 在加载任何 checkpoint 或 development metric 前因依赖路径停止：
+episodes 在 run 的 `data/` 子目录，而 `data_audit.json` 在父目录。仅把 training loader
+的 data-audit 路径改为 `development_data_root.parent/data_audit.json`；数据、模型、三臂、
+超参数、选择规则和门槛完全不变，失败目录保留，重试使用新目录。
+
