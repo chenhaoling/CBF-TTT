@@ -6155,3 +6155,17 @@ silver-relation 复制，不能表述为人工事实标注。三个 V11 ERM chec
 至少5 pair/4 templates，按 SHA256 取前8个且不搜索替代集合。完整 allocator 与第二程序
 重建通过后才允许启动 Qwen；正式 controller gate 与 V13 相同。
 
+
+## 2026-10-16: memory-substrate correction and native fast-weight V15 gate
+
+The user identified that the recent positive utility-controller line was training forgetting over explicit plaintext records rather than the actual In-Place TTT fast weights. Code inspection confirmed the distinction: V6--V13 maintain a Python list of records and apply per-record strengths before an external residual readout, whereas `CBFSession` reads and updates the dense session memory produced by the checkpoint's native `ttt_proj/ttt_conv`. The record results are retained only as readable/addressable-memory proxy evidence; they do not establish native dense fast-weight forgetting.
+
+`QWEN_UTILITY_RECORD_CONTROLLER_V14_REBEL_EXTERNAL_REPLICATION_PLAN.md` is marked withdrawn before source acquisition, parsing, or model execution. Continuing that frozen controller on REBEL would replicate the wrong substrate. `NATIVE_FAST_WEIGHT_FORGETTING_V15_PLAN.md` freezes the corrected equation `M_t=(1-alpha_t)M_{t-1}+DeltaW_t`, with the current native write fixed at `g=1`, and registers a writer-utility/headroom gate before any controller training.
+
+Added `scripts/analyze_native_forgetting_slice_v15.py` and focused tests. The script reuses the 48 already observed `joint_natural_v1` traces, selects only the actual native `g=1` branches, converts runtime retention to the method's forgetting fraction, and reports fixed policies, rowwise oracle, group-bootstrap intervals, mechanism slices, and current-write utility. This avoids another GPU run and does not create a new held-out claim.
+
+The corrected audit fails its preregistered gate. Fixed forgetting `{0,0.5,1}` has mean NLL `{2.46416,2.44144,2.40752}`; full forgetting is strongest. The rowwise oracle reaches 2.40642, only 0.00110 NLL better than full forgetting, and chooses full forgetting in 39/48 rows. The best `g=1` action is worse than the best `g=0` action by 0.04045 NLL on average; its write-gain group-bootstrap 95% interval is `[-0.05825,-0.02460]`. Therefore no native forgetting controller is trained. Aggregate evidence and the decision are archived under `experiments/cbf_ttt/qwen3_4b_final_1b_20260927/native_forgetting_v15_reanalysis/`.
+
+To prevent future evidence conflation, generic `CBFSession` labels, evaluation rows, and newly trained controller checkpoints now carry `memory_substrate=native_dense_ttt_fast_weight`, native candidate provenance, frozen-base status, coefficient semantics, and fixed write-gate metadata. Generic controller fitting rejects missing or mismatched substrate labels. Historical controller checkpoints remain loadable when the metadata predates this guard. Baseline training and standard inference paths are unchanged.
+
+Next step: freeze the Qwen backbone and repair only the existing native writer modules on source-disjoint natural continuations. A causal Correct/Wrong/norm-matched-Random/Zero intervention must show specific, stable content utility and a retain-sensitive condition before native forgetting labels or controller training resume.

@@ -7,6 +7,9 @@ import torch
 import torch.nn.functional as F
 
 
+MEMORY_SUBSTRATE = "native_dense_ttt_fast_weight"
+
+
 def cbf_forward_mlp(mlp, x: torch.Tensor, target: torch.Tensor, cache, layer_idx: int) -> torch.Tensor:
     """Read W0+M for output, then stage the original TTT candidate for a later shared commit."""
     if target.shape != (x.shape[0], x.shape[1], mlp.hidden_size):
@@ -83,6 +86,7 @@ class CBFSession:
         if model.training:
             raise ValueError("CBF-TTT inference and counterfactual branches require model.eval()")
         self.model = model
+        self.memory_substrate = MEMORY_SUBSTRATE
         self.controller = controller
         self.update_rule = update_rule or getattr(controller, "update_rule", "forget")
         if self.update_rule not in ("forget", "write"):

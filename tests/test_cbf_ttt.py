@@ -12,7 +12,7 @@ import torch.nn.functional as F
 from torch import nn
 
 from cbf_ttt.controller import ForgettingController
-from cbf_ttt.runtime import CBFSession, cbf_forward_mlp, token_statistics
+from cbf_ttt.runtime import CBFSession, MEMORY_SUBSTRATE, cbf_forward_mlp, token_statistics
 
 
 class TinyMLP(nn.Module):
@@ -30,6 +30,27 @@ class TinyMLP(nn.Module):
 
 
 class CBFCoreTests(unittest.TestCase):
+    def test_controller_training_rejects_unlabeled_memory_substrate(self):
+        from cbf_ttt.experiment import train_controller
+
+        def row(split, group):
+            return {
+                "split": split, "group_id": group, "update_rule": "forget",
+                "semantic": [0.0] * 4, "scalars": [0.0] * 7,
+                "alpha_star": 0.5,
+            }
+
+        with tempfile.TemporaryDirectory() as directory:
+            train_path = Path(directory) / "train.jsonl"
+            dev_path = Path(directory) / "dev.jsonl"
+            train_path.write_text(json.dumps(row("train", "train-group")) + "\n")
+            dev_path.write_text(json.dumps(row("dev", "dev-group")) + "\n")
+            with self.assertRaisesRegex(ValueError, "native dense TTT fast weights"):
+                train_controller(
+                    [str(train_path)], [str(dev_path)], str(Path(directory) / "controller.pt"),
+                    (0,), epochs=1,
+                )
+
     def test_staged_candidate_preserves_current_output_and_bias(self):
         torch.manual_seed(7)
         x = torch.randn(1, 3, 4)
@@ -158,6 +179,10 @@ class CBFCoreTests(unittest.TestCase):
                 self.assertEqual(collect_labels(model, [scenario], path, [0.0, 0.5, 1.0], every=2), 1)
                 row = json.loads(Path(path).read_text())
                 self.assertEqual(row["grid"], [0.0, 0.5, 1.0])
+                self.assertEqual(row["memory_substrate"], MEMORY_SUBSTRATE)
+                self.assertEqual(row["candidate_update_source"], "native_ttt_proj_ttt_conv")
+                self.assertEqual(row["coefficient_semantics"], "forgetting_fraction")
+                self.assertEqual(row["current_write_gate"], 1.0)
                 self.assertEqual(len(row["losses"]), 3)
                 self.assertIn(row["alpha_star"], row["grid"])
                 self.assertGreater(row["label_time_s"], 0)

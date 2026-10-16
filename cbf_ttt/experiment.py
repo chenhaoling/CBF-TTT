@@ -11,7 +11,7 @@ import torch
 import torch.nn.functional as F
 
 from .controller import ForgettingController
-from .runtime import CBFSession
+from .runtime import CBFSession, MEMORY_SUBSTRATE
 
 
 def _ids(value, name):
@@ -72,6 +72,9 @@ def load_controller(path: str, model, device) -> ForgettingController:
     update_rule = checkpoint.get("update_rule", "forget")
     if update_rule not in ("forget", "write"):
         raise ValueError("unknown controller update rule")
+    substrate = checkpoint.get("memory_substrate")
+    if substrate is not None and substrate != MEMORY_SUBSTRATE:
+        raise ValueError("controller checkpoint was trained for a different memory substrate")
     if tuple(checkpoint["layers"]) != tuple(sorted(model.config.ttt_layers)):
         raise ValueError("controller TTT layers do not match the model")
     if checkpoint["hidden_size"] != model.config.hidden_size:
@@ -154,6 +157,9 @@ def collect_labels(model, scenarios: list[dict], output: str, grid: list[float],
                     row = {
                         "id": scenario["id"], "group_id": scenario["group_id"], "split": scenario["split"],
                         "boundary": boundary, "state_policy": state_policy, "update_rule": update_rule,
+                        "memory_substrate": MEMORY_SUBSTRATE,
+                        "candidate_update_source": "native_ttt_proj_ttt_conv",
+                        "base_weights_frozen": True,
                         "semantic": semantic.squeeze(0).cpu().tolist(),
                         "scalars": scalars.squeeze(0).cpu().tolist(),
                         ("write_gate_star" if update_rule == "write" else "alpha_star"): grid[best_index],
@@ -165,6 +171,12 @@ def collect_labels(model, scenarios: list[dict], output: str, grid: list[float],
                         "peak_reserved_gib": peak_reserved / gib if on_cuda else None,
                         "extra_peak_allocated_gib": (peak_allocated - start_allocated) / gib if on_cuda else None,
                     }
+                    if update_rule == "forget":
+                        row.update({
+                            "coefficient_semantics": "forgetting_fraction",
+                            "current_write_gate": 1.0,
+                            "fast_weight_equation": "M_t=(1-alpha_t)*M_t-1+DeltaW_t",
+                        })
                     sink.write(json.dumps(row, ensure_ascii=False) + "\n")
                     count += 1
                 session.commit(_choose_coefficient(session, state_policy, semantic, scalars))
@@ -350,6 +362,11 @@ def train_controller(train_paths: list[str], dev_paths: list[str], output: str, 
     if len(update_rules) != 1 or not update_rules <= {"forget", "write"}:
         raise ValueError("train and dev labels must use the same known update rule")
     update_rule = update_rules.pop()
+    substrates = {row.get("memory_substrate") for row in train_rows + dev_rows}
+    if substrates != {MEMORY_SUBSTRATE}:
+        raise ValueError(
+            "generic CBF controller training requires labels produced from native dense TTT fast weights"
+        )
     label_key = "write_gate_star" if update_rule == "write" else "alpha_star"
     if any(row["split"] != "train" for row in train_rows) or any(row["split"] != "dev" for row in dev_rows):
         raise ValueError("train and dev label files must have their respective split markers")
@@ -403,6 +420,7 @@ def train_controller(train_paths: list[str], dev_paths: list[str], output: str, 
         "state_dict": best_state, "layers": list(layers), "hidden_size": hidden_size,
         "scalar_size": scalar_size, "width": width, "semantic_size": semantic_size,
         "best_epoch": best_epoch, "dev_mse": best_loss, "update_rule": update_rule,
+        "memory_substrate": MEMORY_SUBSTRATE,
     }
     torch.save(checkpoint, output)
     Path(output + ".metrics.json").write_text(
@@ -431,11 +449,15 @@ def evaluate(model, scenarios: list[dict], output: str, policies: list[str], con
                     row = {
                         "id": scenario["id"], "group_id": scenario["group_id"], "split": scenario["split"],
                         "future_index": future_index, "policy": policy, "update_rule": update_rule,
+                        "memory_substrate": MEMORY_SUBSTRATE,
                         "query_losses": losses,
                         "mean_loss": mean_loss, "coefficients": coefficients,
                     }
                     if update_rule == "forget":
                         row["alphas"] = coefficients
+                        row["forgetting_coefficients"] = coefficients
+                        row["coefficient_semantics"] = "forgetting_fraction"
+                        row["current_write_gate"] = 1.0
                     sink.write(json.dumps(row, ensure_ascii=False) + "\n")
     result = {}
     for policy, losses in summary.items():

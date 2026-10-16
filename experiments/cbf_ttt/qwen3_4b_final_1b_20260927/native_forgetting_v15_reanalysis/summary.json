@@ -1,0 +1,111 @@
+{
+  "protocol": "native_fast_weight_forgetting_v15_reanalysis",
+  "memory_substrate": "native_dense_ttt_fast_weight",
+  "candidate_update_source": "native_ttt_proj_ttt_conv",
+  "base_weights_frozen": true,
+  "coefficient_semantics": "forgetting_fraction",
+  "current_write_gate": 1.0,
+  "fast_weight_equation": "M_t=(1-alpha_t)*M_t-1+DeltaW_t",
+  "source_protocols": [
+    "joint_natural_v1"
+  ],
+  "rows": 48,
+  "source_groups": 12,
+  "forgetting_grid": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "fixed_mean_nll": {
+    "0.0": 2.4641618377839527,
+    "0.5": 2.4414435420185328,
+    "1.0": 2.4075185457865396
+  },
+  "best_fixed_forgetting": 1.0,
+  "oracle_mean_nll": 2.4064210330446563,
+  "oracle_headroom_vs_best_fixed_nll": 0.0010975127418832997,
+  "oracle_headroom_group_bootstrap_95ci": [
+    0.0003069813052813212,
+    0.002009237806002299
+  ],
+  "oracle_counts": {
+    "0.0": 8,
+    "0.5": 1,
+    "1.0": 39
+  },
+  "full_forgetting_oracle_fraction": 0.8125,
+  "source_groups_with_non_full_forgetting": 5,
+  "nonflat_fraction_spread_gt_point_005": 0.8541666666666666,
+  "mean_current_write_gain_vs_best_g0": -0.040450766372183956,
+  "current_write_gain_group_bootstrap_95ci": [
+    -0.058249103588362536,
+    -0.024596100556664172
+  ],
+  "rows_with_positive_current_write_gain": 7,
+  "by_regime": {
+    "both_relevant": {
+      "rows": 12,
+      "fixed_mean_nll": {
+        "0.0": 2.2399582030872502,
+        "0.5": 2.2363574331005416,
+        "1.0": 2.2336286505063376
+      },
+      "oracle_counts": {
+        "0.0": 3,
+        "1.0": 9
+      },
+      "mean_write_gain_vs_best_g0": -0.006230653574069341
+    },
+    "neither_relevant": {
+      "rows": 12,
+      "fixed_mean_nll": {
+        "0.0": 2.8503439327081046,
+        "0.5": 2.821752975384394,
+        "1.0": 2.7722049256165824
+      },
+      "oracle_counts": {
+        "0.5": 1,
+        "1.0": 11
+      },
+      "mean_write_gain_vs_best_g0": -0.05878401796023051
+    },
+    "new_only": {
+      "rows": 12,
+      "fixed_mean_nll": {
+        "0.0": 1.995808037618796,
+        "0.5": 1.993927742044131,
+        "1.0": 1.992636223634084
+      },
+      "oracle_counts": {
+        "0.0": 5,
+        "1.0": 7
+      },
+      "mean_write_gain_vs_best_g0": -0.013489780326684317
+    },
+    "old_only": {
+      "rows": 12,
+      "fixed_mean_nll": {
+        "0.0": 2.770537177721659,
+        "0.5": 2.7137360175450644,
+        "1.0": 2.631604383389155
+      },
+      "oracle_counts": {
+        "1.0": 12
+      },
+      "mean_write_gain_vs_best_g0": -0.08329861362775166
+    }
+  },
+  "gate": {
+    "checks": {
+      "nonflat_fraction_at_least_point_25": true,
+      "oracle_headroom_at_least_point_005_nll": false,
+      "oracle_headroom_cluster_ci_lower_above_zero": true,
+      "full_forgetting_not_more_than_point_75_of_oracle_rows": false,
+      "at_least_two_groups_need_non_full_forgetting": true,
+      "current_native_write_mean_gain_above_zero": false,
+      "current_native_write_cluster_ci_lower_above_zero": false
+    },
+    "passed": false
+  },
+  "decision": "stop_controller_training_and_repair_native_writer"
+}

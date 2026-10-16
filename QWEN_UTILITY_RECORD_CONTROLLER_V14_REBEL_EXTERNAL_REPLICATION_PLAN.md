@@ -1,4 +1,16 @@
-# V14 frozen-ERM REBEL external replication
+# V14 frozen-ERM REBEL external replication — withdrawn before acquisition
+
+## Status correction (2026-10-16)
+
+This experiment is withdrawn. No REBEL row was downloaded or parsed and no
+model was run. The V6--V13 positive controller line operates on an addressable
+Python record list and an external residual readout. It does not act on the
+native dense session fast weights produced by `ttt_proj` and `ttt_conv`.
+Consequently, another corpus replication of that controller would not answer
+the paper's intended question about forgetting
+`M_t=(1-alpha_t)M_{t-1}+DeltaW_t`. The frozen specification below is retained
+only as an audit trail and must not be resumed as evidence for native
+fast-weight forgetting.
 
 ## Registered question
 
