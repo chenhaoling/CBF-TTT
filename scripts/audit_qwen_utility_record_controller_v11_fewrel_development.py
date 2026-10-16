@@ -73,6 +73,13 @@ def audit(data_root: Path, source_root: Path, exclusion_paths: list[Path]) -> di
             and all(row["audit"]["source_partition"] == SOURCE_PARTITION
                     for row in episodes)
         ),
+        "training_relations_are_background_only": (
+            set(manifest["background_relations"]) == set(manifest["partitions"]["train"])
+            and all(row["target_relation"] in manifest["partitions"]["development"]
+                    for row in materials)
+            and all(record["relation_id"] in manifest["partitions"]["train"]
+                    for row in materials for record in row["stable"])
+        ),
         "all_relations_eligible": (
             len(manifest["capacity"]) == EXPECTED_RELATIONS
             and all(value["eligible"] for value in manifest["capacity"].values())
@@ -111,6 +118,10 @@ def audit(data_root: Path, source_root: Path, exclusion_paths: list[Path]) -> di
             not manifest["model_outputs_loaded"]
             and not manifest["development_labels_loaded"]
             and not manifest["development_model_scores_loaded"]
+        ),
+        "v10_donor_hashes_used_as_exclusions": any(
+            value["episodes"] == 1344
+            for value in manifest["exclusions"]["files"].values()
         ),
     }
     passed = all(checks.values())

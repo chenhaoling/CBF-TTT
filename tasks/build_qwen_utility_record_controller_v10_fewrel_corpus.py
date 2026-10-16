@@ -217,7 +217,8 @@ class Allocator:
 
 def choose_materials(rows: list[dict], relations: list[str], seed: int = SEED,
                      mechanisms=MECHANISMS,
-                     repetitions: int = GROUPS_PER_MECHANISM) -> list[dict]:
+                     repetitions: int = GROUPS_PER_MECHANISM,
+                     background_relations: list[str] | None = None) -> list[dict]:
     allocator = Allocator(rows, seed)
     materials = []
     for relation_index, relation in enumerate(relations):
@@ -242,7 +243,10 @@ def choose_materials(rows: list[dict], relations: list[str], seed: int = SEED,
                 used_subjects = {target["subject_norm"], same_other["subject_norm"]}
                 used_values.add(same_other["value_norm"])
 
-                other_relations = [value for value in relations if value != relation]
+                other_relations = [
+                    value for value in (background_relations or relations)
+                    if value != relation
+                ]
                 other_relations.sort(key=lambda value: (
                     stable_rank(seed, "stable-relation", relation_index,
                                 mechanism_index, repetition, value), value,

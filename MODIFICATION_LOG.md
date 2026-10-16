@@ -6005,3 +6005,11 @@ pair 仍全局唯一，且只读取旧 development 文本生成 exclusion keys�
 在 manifest 中显式记录为未加载。本地5项相关单测、Python语法、shell语法与 diff
 检查通过；远程数据构造和审计尚待执行。
 
+首次远程 builder 在任何模型加载和结果生成前停止：只用8个 development relations
+同时承担 target 与大量 stable/template donor 时，P460 在第111组耗尽未复用行。冻结
+模型前容量修正：target/version/same-relation/target-template 仍只来自8个未见关系；
+stable backgrounds 及其模板允许使用48个 train relations，但先从 V10 正式 episodes
+提取并排除其全部 donor hashes。`choose_materials` 新增默认关闭的
+`background_relations` 参数，因此旧 V10 行为不变。V11 manifest/auditor 额外核验目标与
+背景关系角色、V10 1,344 episodes 排除依赖、素材唯一性和测试分区封存。
+

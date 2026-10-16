@@ -37,12 +37,13 @@ def build_corpus(source_root: Path, exclusion_paths: list[Path], seed: int = SEE
     external = json.loads((source_root / "data/val_wiki.json").read_text())
     partitions = relation_partitions(train, external, seed=PARTITION_SEED)
     relations = sorted(partitions["development"])
+    background_relations = sorted(partitions["train"])
     if len(relations) != EXPECTED_RELATIONS:
         raise ValueError("unexpected V11 FewRel development relation count")
 
     raw, source_removed = [], []
     raw_source_rows = 0
-    for relation in relations:
+    for relation in [*relations, *background_relations]:
         for index, source in enumerate(train[relation]):
             raw_source_rows += 1
             try:
@@ -63,7 +64,9 @@ def build_corpus(source_root: Path, exclusion_paths: list[Path], seed: int = SEE
         failed = [key for key, value in capacities.items() if not value["eligible"]]
         raise ValueError(f"V11 relation capacity shortfall: {failed}")
 
-    materials = choose_materials(retained, relations, seed)
+    materials = choose_materials(
+        retained, relations, seed, background_relations=background_relations,
+    )
     episodes = [
         material_episode(
             material, twin, group_prefix=GROUP_PREFIX,
@@ -79,6 +82,8 @@ def build_corpus(source_root: Path, exclusion_paths: list[Path], seed: int = SEE
         "partitions": partitions,
         "selected_partition": "development",
         "selected_relations": relations,
+        "background_partition": "train_unused_after_v10_hash_exclusion",
+        "background_relations": background_relations,
         "exclusions": exclusion_summary,
         "eligibility_thresholds": {
             "rows": MIN_ROWS, "subjects": MIN_SUBJECTS,

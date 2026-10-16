@@ -33,6 +33,22 @@ templates overlapping the existing TempLAMA/LAMA development episodes are
 removed exactly as in V10.  Relations make the V10 train and V11 development
 source rows disjoint by construction.
 
+### Model-free capacity amendment
+
+The first builder invocation stopped before writing a corpus or loading a
+model: restricting every target, stable record and template donor to only the
+eight development relations exhausted unused P460 rows at group 111/112.  To
+preserve the registered 112-group scale and global source-row uniqueness,
+freeze the following correction before any model outcome is observed.  Target,
+version, same-relation and target-template rows remain exclusively from the
+eight unseen development relations.  Stable-background relations and their
+templates may come from the 48 training relations, after excluding every raw
+donor hash used by the complete V10 FewRel training corpus.  Thus no V10 train
+example is reused, no development target relation becomes visible in fitting,
+and the internal/external test partitions remain unopened.  The manifest and
+auditor must report target/background relation inventories and verify zero V10
+donor overlap.
+
 ## Development corpus and counterfactual labels
 
 For every one of the eight development relations, construct fourteen groups:

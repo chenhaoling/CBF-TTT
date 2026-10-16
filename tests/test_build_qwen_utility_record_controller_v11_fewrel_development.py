@@ -20,6 +20,9 @@ class V11CorpusTest(unittest.TestCase):
         self.assertEqual(SEED, 202610191)
         self.assertTrue(GROUP_PREFIX.startswith("usr-v11-"))
 
+    def test_background_relations_do_not_change_target_scale(self):
+        self.assertEqual(EXPECTED_RELATIONS, 8)
+
 
 if __name__ == "__main__":
     unittest.main()
