@@ -19,8 +19,9 @@ if [[ "$ARM" != "ttt" && "$ARM" != "no_ttt" ]]; then
   echo "ARM must be ttt or no_ttt" >&2; exit 2
 fi
 if [[ "$RESOURCE_PROFILE" != "native" && "$RESOURCE_PROFILE" != "cpu_offload" \
-      && "$RESOURCE_PROFILE" != "fsdp1_cpu_offload" ]]; then
-  echo "RESOURCE_PROFILE must be native, cpu_offload, or fsdp1_cpu_offload" >&2; exit 2
+      && "$RESOURCE_PROFILE" != "fsdp1_cpu_offload" \
+      && "$RESOURCE_PROFILE" != "native_expandable_segments" ]]; then
+  echo "invalid RESOURCE_PROFILE" >&2; exit 2
 fi
 if [[ "$SEQ_LEN" -lt 8192 || $((SEQ_LEN % 4096)) -ne 0 ]]; then
   echo "SEQ_LEN must be at least 8192 and divisible by 4096" >&2; exit 2
@@ -42,6 +43,8 @@ if [[ "$RESOURCE_PROFILE" == "cpu_offload" ]]; then
 elif [[ "$RESOURCE_PROFILE" == "fsdp1_cpu_offload" ]]; then
   config_suffix=_fsdp1_cpu_offload
   test -n "$ADDENDUM"; test -s "$ADDENDUM"
+elif [[ "$RESOURCE_PROFILE" == "native_expandable_segments" ]]; then
+  test -n "$ADDENDUM"; test -s "$ADDENDUM"
 fi
 CONFIG=$TOOL_REPO/configs/baseline_reproduction/qwen3_4b_resource_${ARM}${config_suffix}.yaml
 test -s "$CONFIG"
@@ -61,6 +64,9 @@ metadata = {
         ["git", "-C", upstream, "status", "--short"], text=True).strip(),
     "model": model, "data": data, "arm": arm,
     "resource_profile": profile,
+    "pytorch_cuda_alloc_conf": (
+        "expandable_segments:True" if profile == "native_expandable_segments" else None
+    ),
     "sequence_length": int(seq_len), "global_batch_size": int(batch),
     "plan_sha256": sha(plan), "config_sha256": sha(config),
     "data_sha256": sha(data), "model_config_sha256": sha(pathlib.Path(model) / "config.json"),
@@ -108,6 +114,11 @@ set +e
   # explicitly present on PYTHONPATH.
   export PYTHONPATH="$UPSTREAM_REPO${PYTHONPATH:+:$PYTHONPATH}"
   export CUDA_VISIBLE_DEVICES=0,1
+  if [[ "$RESOURCE_PROFILE" == "native_expandable_segments" ]]; then
+    export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+  else
+    unset PYTORCH_CUDA_ALLOC_CONF || true
+  fi
   /usr/bin/time -v bash train.sh tasks/train_torch.py "$CONFIG" \
     --model.model_path "$MODEL" \
     --data.train_path "$DATA" --data.max_seq_len "$SEQ_LEN" \

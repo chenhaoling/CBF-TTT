@@ -68,6 +68,7 @@ def summarize(root: Path, output: Path) -> dict:
         "upstream_commit": metadata["upstream_commit"],
         "arm": metadata["arm"],
         "resource_profile": metadata.get("resource_profile", "native"),
+        "pytorch_cuda_alloc_conf": metadata.get("pytorch_cuda_alloc_conf"),
         "sequence_length": metadata["sequence_length"],
         "global_batch_size": metadata["global_batch_size"],
         "nominal_tokens": metadata["sequence_length"] * metadata["global_batch_size"],
