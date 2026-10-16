@@ -1,0 +1,36 @@
+{
+  "protocol": "native_support_aware_fastweight_admission_v1_independent_audit",
+  "stage": "smoke",
+  "passed": true,
+  "groups": 12,
+  "labels": 36,
+  "plan_sha256": "3556f5e3a221ce2a4cd171bf3ac1c61f0402ccc7879a5822ba8a97feef1188b1",
+  "data_manifest_sha256": "abb279ab2d99f2edbfbf7870f3eff98e37b3ffb447164226a454cc1f0816a3fe",
+  "tokenizer_files_sha256": {
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "result_files": {
+    "smoke_shard0_labels.jsonl": "40047ff0117a66be117de14241e98fd62903e2bea01acf2fd6ba2c4c43d4c548",
+    "smoke_shard1_labels.jsonl": "2790f0a9a65ebe6aaaecf6d1afa9b5cda09e7ef88854071da9d2f13032fdf5c9",
+    "smoke_shard0_features.jsonl": "5772ca5fdc4d9ce840ade6d2468e4f4ae35236e467ec503eba33697b6baaea5d",
+    "smoke_shard1_features.jsonl": "82fdb4995265e58fdc8d003e9b796b97fe138b8a63c564cd12b7dead3d17bd6e"
+  },
+  "summary_sha256": "5c3a32f248c8eb3e833ccddf5a47c15d6368f45d1b55f892eeadb8e63f726753",
+  "collector_audits": 2,
+  "feature_dimension": 1854,
+  "plaintext_online_memory_fields": 0,
+  "recomputed": {
+    "positive_fraction": 0.0,
+    "negative_fraction": 1.0,
+    "stronger_baseline": "never_write",
+    "oracle_gain": 0.0,
+    "oracle_gain_group_bootstrap_95ci": [
+      0.0,
+      0.0
+    ]
+  },
+  "test_opened": false
+}

@@ -1,0 +1,57 @@
+{
+  "boundaries": 144,
+  "chunk_size": 4096,
+  "controller_inputs_contain_semantic_fields": false,
+  "files_sha256": {
+    "model_inputs.jsonl": "6a095730e7ce137fd7bde7bb2b38e5b995db545f0dda4ade064ecb43bf58b13f",
+    "semantic_audit.jsonl": "9c363de16f8cff4fa8a4dc521d5da421f15c7e2c6ae7831ac0563086bbb8994a"
+  },
+  "formal_data_built": false,
+  "groups": 48,
+  "mechanism_hashes": {
+    "conflicting_overwrite": "6474ca4a9268503890dfbeab",
+    "exact_duplicate": "b50addd74d97c74d38edc165",
+    "irrelevant_distractor": "cb2297c73692ca824c1ed0ae",
+    "novel_supporting": "6b23ac841d43fe5d50f14143",
+    "stale_repetition": "c08b35e9e90bacb79d41062b",
+    "useful_repeat": "dabac606bb6f21532d221179"
+  },
+  "mechanisms": {
+    "conflicting_overwrite": 8,
+    "exact_duplicate": 8,
+    "irrelevant_distractor": 8,
+    "novel_supporting": 8,
+    "stale_repetition": 8,
+    "useful_repeat": 8
+  },
+  "plan_sha256": "3556f5e3a221ce2a4cd171bf3ac1c61f0402ccc7879a5822ba8a97feef1188b1",
+  "protocol": "native_support_aware_fastweight_admission_v1",
+  "smoke_groups": [
+    "sawg-v1-novel_supporting-usr-v1-g016",
+    "sawg-v1-novel_supporting-usr-v1-g017",
+    "sawg-v1-useful_repeat-usr-v1-g008",
+    "sawg-v1-useful_repeat-usr-v1-g009",
+    "sawg-v1-exact_duplicate-usr-v1-g040",
+    "sawg-v1-exact_duplicate-usr-v1-g041",
+    "sawg-v1-irrelevant_distractor-usr-v1-g024",
+    "sawg-v1-irrelevant_distractor-usr-v1-g025",
+    "sawg-v1-conflicting_overwrite-usr-v1-g000",
+    "sawg-v1-conflicting_overwrite-usr-v1-g001",
+    "sawg-v1-stale_repetition-usr-v1-g032",
+    "sawg-v1-stale_repetition-usr-v1-g033"
+  ],
+  "source_audit_passed": true,
+  "source_audit_sha256": "f0a4aae8ff78b9acf5339a838a41403c83316b96e5a6507eeadf25a8920172bd",
+  "source_episodes_sha256": "22c9f007c305426d2d26e4bc7066645e7427d25ef02a8d06d61198bc329c86dc",
+  "source_manifest_sha256": "785ffab26df267e4115a2dba9c2663fe25195671693f243149fc0b3604d4da32",
+  "stage": "pilot",
+  "test_opened": false,
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "tokenizer_class": "Qwen2TokenizerFast",
+  "tokenizer_files_sha256": {
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  }
+}

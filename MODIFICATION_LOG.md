@@ -6175,3 +6175,46 @@ Next step: freeze the Qwen backbone and repair only the existing native writer m
 After the V15 substrate correction, the next stage remains on the actual dense session fast weights. Prior `final_writer_binding_v1` already showed that answer CE plus Correct-vs-Wrong/Zero supervision was insufficient, so V16 does not repeat that treatment. Added `NATIVE_WRITER_DISTILLATION_V16_PLAN.md`, `tasks/train_native_writer_distillation_v16.py`, a two-GPU runner and focused tensor tests. The frozen, already readable Qwen rank-one residual is used only as a training teacher: the original seven `ttt_proj/ttt_conv` modules must make a fresh-KV query hidden state approach the teacher state, while a paired distance margin keeps the counterfactual wrong memory farther away. Deployment and evaluation use only the native dense fast weight.
 
 The development pilot uses previously observed, source-disjoint groups 0--7 for training and 8--15 for diagnostics, so it cannot create a new held-out claim. Two fixed arms use teacher scales 4 and 8, identical initialization/order, 256 updates, lr 3e-7 and the existing per-layer relative norm cap 0.3. Correct/Wrong/Zero/norm-matched-Random evaluation and a source-group bootstrap gate determine whether a fresh-source confirmation is justified. Both-arm failure stops further tuning of the native dense writer. Baseline training/inference and prior artifacts are unchanged.
+
+## 2026-10-16: Native Support-Aware Fast-Weight Update Admission V1
+
+按用户要求，在任何 V1 模型评分前新增并提交
+`SUPPORT_AWARE_WRITE_GATE_V1_PLAN.md`，冻结原生二值写入门、六机制语料、128维
+activation support、oracle 停止门、384/96/96 条件正式规模和 sealed-test 规则。
+plan commit 为 `f7ea4117`，SHA256 为
+`3556f5e3a221ce2a4cd171bf3ac1c61f0402ccc7879a5822ba8a97feef1188b1`。
+
+新增 `tasks/build_native_support_write_gate_v1.py`，从已独立审计的 LAMA/ParaRel
+semantic-record pilot 构造48个 source-disjoint worlds：novel supporting、useful repeat、
+exact duplicate、irrelevant distractor、conflicting overwrite、stale repetition 各8组，
+每组3个稀疏 boundary。每个 native chunk 严格为4,096 tokens；语义审计文本与纯 token-id
+model input 分文件保存。manifest 固定 source audit、plan、四个 tokenizer identity 文件和
+全部数据 SHA256。
+
+新增 `tasks/native_support_write_gate_v1.py`。每个 boundary 从完全相同的原生
+`TTTDynamicCache.ttt_states[*][2]` 分出 reject (`ttt_lr=0`) 与 admit (`ttt_lr=0.3`)，
+使用原始 `ttt_conv/ttt_proj` forward，并以 fresh KV 对相同 future queries 评分。只读
+forward pre-hook 对七层 MLP 输入作固定128维 signed CountSketch，结合 centroid、diagonal
+variance、recent cosine/likelihood、当前 NLL/预测不确定性和 fast-weight geometry，得到
+1,854维决策特征。没有修改 Qwen backbone/writer 文件。online features 与 offline
+`J(0)/J(1)/B` labels 物理分离，并用逐行 SHA256 绑定。
+
+新增独立 auditor、两卡 runner、描述性汇总脚本和6项 focused tests。auditor 第二实现
+重算 data/tokenizer/feature/label/model/checkpoint hash、分叉一致性、J/B、actions、
+source-group bootstrap、资源统计和 test seal，并递归拒绝 online memory 中的文本或
+token 序列。远程还通过原有3项 native TTT train/infer tests 与10项 CBF runtime tests。
+
+最终 `r3` smoke 为12组/36 labels，均值5.789秒/label，峰值10.433 GiB allocated、
+11.266 GiB reserved；执行与独立审计通过。正式 resource/oracle pilot 为48组/144 labels，
+均值5.818秒/label，两卡 label critical path 418.91秒，峰值10.433/11.363 GiB。
+144/144 boundaries 的 `B=J(0)-J(1)` 都小于 `-1e-4`；mean B=-4.43129。
+always-write J=11.99533，never-write J=7.56404，safe-oracle J=7.56404；oracle gain=0，
+paired group bootstrap 95% CI `[0,0]`，oracle 144次全部 reject。六机制分别也是24/24
+负收益。admit 使总 accuracy 从55.69%降至41.39%，protected accuracy 从63.66%降至
+46.06%，protected NLL 从6.9221升至11.6267，EOS率从10.97%升至44.31%。
+
+因此严格执行冻结停止规则：不训练 controller，不构建/标注384/96/96 formal split，
+不运行 heuristic/ablation comparison，不打开 test。结论是当前 checkpoint 的 native
+writer 在该构造语料上没有可验证净正内容收益，支持门没有非平凡 oracle gap 可学习；
+不能声称 adaptive TTT 有效。完整 data、features、labels、资源、summary、独立 audit
+和报告位于 `experiments/cbf_ttt/support_write_gate_v1/`。

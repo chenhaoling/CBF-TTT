@@ -1,0 +1,201 @@
+{
+  "protocol": "native_support_aware_fastweight_admission_v1_descriptive_detail",
+  "overall": {
+    "labels": 144,
+    "positive": 0,
+    "negative": 144,
+    "ties": 0,
+    "mean_B": -4.431290840380825,
+    "median_B": -3.6707834005355835,
+    "J": {
+      "never_write": 7.564036382181156,
+      "always_write": 11.995327222561981
+    },
+    "metrics": {
+      "reject": {
+        "accuracy": 0.5569444444444445,
+        "protected_accuracy": 0.636574074074074,
+        "protected_nll": 6.922108422809591,
+        "eos_rate": 0.10972222222222222
+      },
+      "admit": {
+        "accuracy": 0.4138888888888889,
+        "protected_accuracy": 0.46064814814814814,
+        "protected_nll": 11.626669422257692,
+        "eos_rate": 0.44305555555555554
+      }
+    }
+  },
+  "per_mechanism": {
+    "conflicting_overwrite": {
+      "labels": 24,
+      "positive": 0,
+      "negative": 24,
+      "ties": 0,
+      "mean_B": -4.0274556676546736,
+      "median_B": -3.708798309167226,
+      "J": {
+        "never_write": 8.791209154555366,
+        "always_write": 12.81866482221004
+      },
+      "metrics": {
+        "reject": {
+          "accuracy": 0.48333333333333334,
+          "protected_accuracy": 0.611111111111111,
+          "protected_nll": 7.044195693193211,
+          "eos_rate": 0.09166666666666667
+        },
+        "admit": {
+          "accuracy": 0.325,
+          "protected_accuracy": 0.4305555555555555,
+          "protected_nll": 11.431143161116374,
+          "eos_rate": 0.425
+        }
+      }
+    },
+    "exact_duplicate": {
+      "labels": 24,
+      "positive": 0,
+      "negative": 24,
+      "ties": 0,
+      "mean_B": -5.052058929267029,
+      "median_B": -5.524398793776829,
+      "J": {
+        "never_write": 6.6644976105954905,
+        "always_write": 11.716556539862522
+      },
+      "metrics": {
+        "reject": {
+          "accuracy": 0.65,
+          "protected_accuracy": 0.7361111111111112,
+          "protected_nll": 6.5038495568765535,
+          "eos_rate": 0.08333333333333333
+        },
+        "admit": {
+          "accuracy": 0.5333333333333333,
+          "protected_accuracy": 0.5694444444444444,
+          "protected_nll": 11.90810272987518,
+          "eos_rate": 0.4166666666666667
+        }
+      }
+    },
+    "irrelevant_distractor": {
+      "labels": 24,
+      "positive": 0,
+      "negative": 24,
+      "ties": 0,
+      "mean_B": -4.673470602267319,
+      "median_B": -3.797034020225206,
+      "J": {
+        "never_write": 6.704074417344398,
+        "always_write": 11.377545019611716
+      },
+      "metrics": {
+        "reject": {
+          "accuracy": 0.5750000000000001,
+          "protected_accuracy": 0.47222222222222215,
+          "protected_nll": 8.312601430548563,
+          "eos_rate": 0.09166666666666667
+        },
+        "admit": {
+          "accuracy": 0.375,
+          "protected_accuracy": 0.2916666666666667,
+          "protected_nll": 12.804389526446661,
+          "eos_rate": 0.425
+        }
+      }
+    },
+    "novel_supporting": {
+      "labels": 24,
+      "positive": 0,
+      "negative": 24,
+      "ties": 0,
+      "mean_B": -3.9113173567586474,
+      "median_B": -2.907495940725008,
+      "J": {
+        "never_write": 8.706711683370587,
+        "always_write": 12.618029040129235
+      },
+      "metrics": {
+        "reject": {
+          "accuracy": 0.525,
+          "protected_accuracy": 0.7083333333333334,
+          "protected_nll": 6.556226082042688,
+          "eos_rate": 0.15
+        },
+        "admit": {
+          "accuracy": 0.375,
+          "protected_accuracy": 0.5138888888888888,
+          "protected_nll": 11.303964748047292,
+          "eos_rate": 0.48333333333333334
+        }
+      }
+    },
+    "stale_repetition": {
+      "labels": 24,
+      "positive": 0,
+      "negative": 24,
+      "ties": 0,
+      "mean_B": -4.273408703997524,
+      "median_B": -3.6517890617251405,
+      "J": {
+        "never_write": 7.252967912393312,
+        "always_write": 11.526376616390836
+      },
+      "metrics": {
+        "reject": {
+          "accuracy": 0.5416666666666666,
+          "protected_accuracy": 0.6666666666666666,
+          "protected_nll": 6.104516758893927,
+          "eos_rate": 0.09166666666666667
+        },
+        "admit": {
+          "accuracy": 0.4166666666666667,
+          "protected_accuracy": 0.5,
+          "protected_nll": 10.568404640588495,
+          "eos_rate": 0.425
+        }
+      }
+    },
+    "useful_repeat": {
+      "labels": 24,
+      "positive": 0,
+      "negative": 24,
+      "ties": 0,
+      "mean_B": -4.650033782339759,
+      "median_B": -3.8770397802193957,
+      "J": {
+        "never_write": 7.264757514827782,
+        "always_write": 11.91479129716754
+      },
+      "metrics": {
+        "reject": {
+          "accuracy": 0.5666666666666667,
+          "protected_accuracy": 0.625,
+          "protected_nll": 7.011261015302605,
+          "eos_rate": 0.15
+        },
+        "admit": {
+          "accuracy": 0.4583333333333333,
+          "protected_accuracy": 0.4583333333333333,
+          "protected_nll": 11.744011727472147,
+          "eos_rate": 0.48333333333333334
+        }
+      }
+    }
+  },
+  "resource": {
+    "mean_label_seconds": 5.818069418180837,
+    "median_label_seconds": 5.8147334875538945,
+    "p95_label_seconds": 5.877062754705548,
+    "max_label_seconds": 6.039942251518369,
+    "aggregate_label_seconds": 837.8019962180406,
+    "two_gpu_label_critical_seconds": 418.9125832207501,
+    "peak_allocated_gib": 10.432523727416992,
+    "peak_reserved_gib": 11.36328125
+  },
+  "safe_oracle_actions": {
+    "reject": 144
+  },
+  "descriptive_only": true
+}

@@ -1,0 +1,36 @@
+{
+  "protocol": "native_support_aware_fastweight_admission_v1_independent_audit",
+  "stage": "pilot",
+  "passed": true,
+  "groups": 48,
+  "labels": 144,
+  "plan_sha256": "3556f5e3a221ce2a4cd171bf3ac1c61f0402ccc7879a5822ba8a97feef1188b1",
+  "data_manifest_sha256": "abb279ab2d99f2edbfbf7870f3eff98e37b3ffb447164226a454cc1f0816a3fe",
+  "tokenizer_files_sha256": {
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "result_files": {
+    "pilot_shard0_labels.jsonl": "3decf3a8a7a73c85dd34a339210ad1bc80dc8549974cdcf358827fc7633af6a4",
+    "pilot_shard1_labels.jsonl": "7b8b12d1d7777e2c86df50e5a8418cadb9f76594474af987e1889a26666971aa",
+    "pilot_shard0_features.jsonl": "f24b89d08f457b6cf9950289afa9023d6028f8aa9dc3fe5a4ce99546663d58fb",
+    "pilot_shard1_features.jsonl": "116523d0ba6ce0ef8dbabeeb95dec715f6cc5a32328b2631aa136bb3414d5b65"
+  },
+  "summary_sha256": "ca1b74ce46acf6f520edd63583c2afc8aa6de89e2138826788f742077878ab89",
+  "collector_audits": 2,
+  "feature_dimension": 1854,
+  "plaintext_online_memory_fields": 0,
+  "recomputed": {
+    "positive_fraction": 0.0,
+    "negative_fraction": 1.0,
+    "stronger_baseline": "never_write",
+    "oracle_gain": 0.0,
+    "oracle_gain_group_bootstrap_95ci": [
+      0.0,
+      0.0
+    ]
+  },
+  "test_opened": false
+}

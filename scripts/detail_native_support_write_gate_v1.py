@@ -46,7 +46,9 @@ def main():
     manifest = json.loads((args.root / "data/manifest.json").read_text())
     reverse = {value: key for key, value in manifest["mechanism_hashes"].items()}
     paths = sorted(args.root.glob("pilot_shard*_labels.jsonl"))
-    rows = [json.loads(line) for path in paths for line in path.read_text().splitlines() if line.strip()]
+    shard_rows = [[json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+                  for path in paths]
+    rows = [row for part in shard_rows for row in part]
     if len(rows) != 144:
         raise ValueError(f"expected 144 labels, got {len(rows)}")
     by_mechanism = {}
@@ -63,6 +65,10 @@ def main():
             "median_label_seconds": statistics.median(times),
             "p95_label_seconds": percentile(times, .95),
             "max_label_seconds": max(times),
+            "aggregate_label_seconds": sum(times),
+            "two_gpu_label_critical_seconds": max(
+                sum(row["resource"]["seconds"] for row in part) for part in shard_rows
+            ),
             "peak_allocated_gib": max(row["resource"]["peak_allocated_gib"] for row in rows),
             "peak_reserved_gib": max(row["resource"]["peak_reserved_gib"] for row in rows),
         },

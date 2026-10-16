@@ -1,0 +1,33 @@
+{
+  "protocol": "native_support_aware_fastweight_admission_v1",
+  "stage": "smoke",
+  "groups": 12,
+  "labels": 36,
+  "benefit_epsilon": 0.0001,
+  "positive_fraction": 0.0,
+  "negative_fraction": 1.0,
+  "tie_fraction": 0.0,
+  "mean_J": {
+    "always_write": 12.385492018803403,
+    "never_write": 7.876249308939333,
+    "oracle": 7.876249308939333
+  },
+  "stronger_baseline": "never_write",
+  "oracle_gain": 0.0,
+  "oracle_gain_group_bootstrap_95ci": [
+    0.0,
+    0.0
+  ],
+  "checks": {
+    "positive_fraction_at_least_15pct": false,
+    "negative_fraction_at_least_15pct": true,
+    "oracle_mean_gain_positive": false,
+    "oracle_group_bootstrap_lower_positive": false,
+    "protected_accuracy_safe": true,
+    "protected_nll_safe": true,
+    "eos_safe": true,
+    "branch_invariants": true
+  },
+  "passed": false,
+  "next_stage": "stop_before_controller_and_test"
+}
