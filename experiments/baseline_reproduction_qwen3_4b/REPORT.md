@@ -25,6 +25,11 @@ has **not** been reproduced yet.
   AdamW state allocation. The run peaks at 32,092/32,103 MiB and leaves only
   11.81/9.00 MiB free at the failing allocation, so fragmentation is not the
   remaining blocker on the shared host.
+- A separately frozen low-occupancy retry also fails at the same AdamW state
+  initialization. Its preflight records only 812/670 MiB total device use, but
+  the run still peaks at 32,086/32,103 MiB. A truly exclusive 32-GB rerun
+  remains unmeasured because 724/644 MiB of unrelated CARLA use was still
+  present.
 - The unmodified Qwen3-4B OpenCompass RULER-4K pipeline completes all 13 tasks.
   Its one-example-per-task smoke score is `76.9231`; this validates execution
   and score extraction only and is not a precision estimate comparable to the
@@ -174,6 +179,39 @@ Evidence:
 - [`IN_PLACE_TTT_BASELINE_ALLOCATOR_RETRY_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_ALLOCATOR_RETRY_ADDENDUM.md)
 - [`remote/resource_8k_no_ttt_allocator_retry/summary.json`](remote/resource_8k_no_ttt_allocator_retry/summary.json)
 - full traceback and GPU/host traces in the same directory.
+
+### Registered low-occupancy retry
+
+The next-day external state materially changed: GPU0's unrelated occupancy
+fell from 2,380 MiB to 724 MiB, and GPU1 held 644 MiB. The separately frozen
+[`IN_PLACE_TTT_BASELINE_LOW_OCCUPANCY_RETRY_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_LOW_OCCUPANCY_RETRY_ADDENDUM.md)
+therefore permitted one more identical no-TTT run. Its addendum SHA256 is
+`0824292000f7e06b66dbed3861a7fa3426c47406bfdc811bf2acc0ef34950b10`.
+
+The first preflight command stopped before launch because its `pgrep` pattern
+matched the checking shell itself. No output root or tmux session was created.
+The corrected self-excluding pattern then recorded 812/670 MiB total device
+use, found no earlier baseline rank, and launched from a new output root.
+
+| Result | Failure stage | Wall time | GPU0/GPU1 peak | Preflight total use |
+|---|---|---:|---:|---:|
+| exit 1 | AdamW state initialization | 22.69 s | 32,086 / 32,103 MiB | 812 / 670 MiB |
+
+Rank 0 failed on a 20-MiB allocation with 18.44 MiB free; rank 1 failed on a
+48-MiB allocation with 9.00 MiB free. Reserved-but-unallocated memory was only
+21.54/19.04 MiB. The result independently rejects fragmentation as the main
+remaining explanation and shows that the released configuration is infeasible
+while even these small CARLA allocations remain. It does **not** prove that a
+fully exclusive 32-GB device pair fails: removing 724/644 MiB could still move
+the optimizer-state boundary. Per the frozen stop rule, matched TTT was not
+launched.
+
+Evidence:
+
+- [`remote/low_occupancy_retry/preflight_gpu.csv`](remote/low_occupancy_retry/preflight_gpu.csv)
+- [`remote/low_occupancy_retry/preflight_processes.csv`](remote/low_occupancy_retry/preflight_processes.csv)
+- [`remote/low_occupancy_retry/resource_8k_no_ttt/summary.json`](remote/low_occupancy_retry/resource_8k_no_ttt/summary.json)
+- full log and GPU/host traces in the same directory.
 
 ### Alternate host check
 

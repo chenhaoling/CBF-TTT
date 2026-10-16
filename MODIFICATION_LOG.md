@@ -6349,3 +6349,24 @@ report 的 allocator retry 证据目录。
 `VLLM::EngineCore` 占75124MiB，只剩6007MiB，因此当前不能迁移实验。主机内存125GiB、
 可用82GiB，但2GiB swap已满。若该卡后续独占，可另冻结并执行单卡资源 pilot；它不是
 当前双卡 FSDP2 协议的直接替换。
+
+## 2026-10-17: official baseline low-occupancy retry
+
+`hku-gpu2` 外部占用发生实质变化后，在执行前新增并提交
+`IN_PLACE_TTT_BASELINE_LOW_OCCUPANCY_RETRY_ADDENDUM.md`（commit `f8147d00`，SHA256
+`0824292000f7e06b66dbed3861a7fa3426c47406bfdc811bf2acc0ef34950b10`）。附录只允许同一
+official commit、8K、GB2、FSDP2、bf16、gradient checkpointing、FP32 AdamW、同一数据和
+`expandable_segments:True` 的一次 no-TTT 重试；preflight 要求每卡总占用不超过1024MiB，
+通过后若且仅若 no-TTT 成功才运行 matched TTT。
+
+首次 preflight 的 `pgrep` 搜索串匹配检查 shell 自身，因此在创建输出目录/tmux前退出；
+改用 `[t]asks/train_torch.py` 自排除模式后重新采样。正式 preflight 为812/670MiB总占用，
+其中其他用户 CARLA 分别占724/644MiB，无旧 baseline rank。no-TTT 再次完成
+forward/backward，但在首次 `optimizer.step()` 初始化状态时 OOM：rank0申请20MiB时仅余
+18.44MiB，rank1申请48MiB时仅余9MiB；峰值32086/32103MiB，wall22.69秒，
+reserved-but-unallocated仅21.54/19.04MiB。exit=1，按冻结规则未启动 TTT。
+
+严格结论为“仍有724/644MiB外部占用的近空闲共享2x5090不可行”，并再次排除碎片化是主因；
+不能外推为完全独占32GB也失败，因为释放这部分显存仍可能跨过优化器状态边界。preflight、
+metadata、summary、完整日志及0.5秒资源曲线归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/low_occupancy_retry/`。门控实验继续暂停。
