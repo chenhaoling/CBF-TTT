@@ -6102,3 +6102,19 @@ WebNLG 锁定容量检查解析1,788个 single-triple entries/4,338个人工 lex
 达到下界，尚未计入 template donors。V12 因此在模型前停止，不减少组数、不复用实体
 对、不放宽为 multi-triple；WebNLG 分支关闭，后续必须更换容量足够的新自然来源。
 
+## 2026-10-16: V13 DART frozen-controller external replication registration
+
+新增 `QWEN_UTILITY_RECORD_CONTROLLER_V13_DART_EXTERNAL_REPLICATION_PLAN.md`，把下一
+阶段主实验冻结为 V11 equal-source ERM 的跨自然来源零重训复制。第一候选来源为官方
+DART，仅允许检查 train partition，并排除 WebNLG 及所有既有来源；解析前必须锁定版本、
+文件清单与 SHA256。V13 不再使用粗略行数门，而要求模型前完整 dry-run 正式素材分配器，
+证明8个关系各自可支持14组、全局 source-row/entity-pair 唯一、自然模板及全部 donor
+约束。容量不足即在模型前停止，禁止降低组数或放宽对齐规则。
+
+若容量通过，才构造112 groups/224 twins/672 boundaries/3,360 queries，在最终1B-token
+Qwen3-4B 上沿用 `{0,0.5,1}` 网格与66维特征，并一次性应用三个冻结 V11 ERM checkpoint，
+不训练、不选 epoch、不调 threshold。主门要求三种子全正、平均至少+1.5点、group/relation
+cluster CI 下界均大于0、至少6/8关系非负、零新增 unrelated errors、关闭至少50% oracle
+gap 且关键机制非负。通过后才依次一次性解封8个 FewRel internal-test 与16个
+external-test relations；二者通过后再进入 RULER/QA、LongMemEval-S、LoCoMo 端到端评测。
+
