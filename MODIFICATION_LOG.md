@@ -6140,3 +6140,18 @@ exclusions、空 material allocation 与全部文件 hash。全程未加载 Qwen
 和所有保留 benchmark 未打开。V13 归类为 source-capacity failure，不构成算法负结果；
 紧凑证据归档在 `experiments/v13_dart_capacity_20261016/`。
 
+## 2026-10-16: V14 REBEL frozen-controller replication registration
+
+在解析新来源前新增
+`QWEN_UTILITY_RECORD_CONTROLLER_V14_REBEL_EXTERNAL_REPLICATION_PLAN.md`。V12/V13
+均因来源容量停止，V14 改用官方 `Babelscape/rebel-dataset`：文本来自自然 Wikipedia，
+Wikidata relation 标注由自动管线生成并经 NLI 过滤，因此明确归类为 natural-text/
+silver-relation 复制，不能表述为人工事实标注。三个 V11 ERM checkpoints 及完整部署配置
+继续冻结，V14 不训练、不调阈值。
+
+解析前必须锁定 Hugging Face revision、训练文件清单、字节数和 SHA256，且只允许下载/
+解析 train split。模型无关过滤固定为单 triplet、subject/object 在 context 中各一次字面
+出现、无既有语料重叠；seed `202610221` 下目标 relation 至少140 pair/7 templates，背景
+至少5 pair/4 templates，按 SHA256 取前8个且不搜索替代集合。完整 allocator 与第二程序
+重建通过后才允许启动 Qwen；正式 controller gate 与 V13 相同。
+
