@@ -213,6 +213,28 @@ Evidence:
 - [`remote/low_occupancy_retry/resource_8k_no_ttt/summary.json`](remote/low_occupancy_retry/resource_8k_no_ttt/summary.json)
 - full log and GPU/host traces in the same directory.
 
+### Exclusive-5090 watcher (active)
+
+Because the low-occupancy run did not remove the final 724/644 MiB compute
+allocations, a third addendum freezes the only remaining informative 5090
+measurement: a truly compute-process-free retry. The opt-in watcher requires
+two checks five seconds apart with no `nvidia-smi` compute process and at most
+512 MiB total use on each of exactly two RTX 5090 devices. It polls every 60
+seconds, waits at most 24 hours, and never signals another process.
+
+The watcher started in remote tmux session
+`baseline_exclusive_5090_watcher` at `2026-10-17 00:38:15 HKT`. Its first
+heartbeat is `waiting_no_ttt`; GPU use remains 812/670 MiB and the two CARLA
+processes remain present. No training output directory has been created. If
+exclusive preflight passes, it runs no-TTT once and runs matched TTT only after
+a valid no-TTT success. The watcher SHA256 is
+`5e011820886b9c67814c7497d73b5658fe9e3722dd6f7adf07a9445f297aae5c`;
+the frozen addendum SHA256 is
+`dd492e41d5f27796a469f187ed4d37eba665cd0fa356c12b2c156ac055a35954`.
+
+Start snapshot:
+[`remote/exclusive_5090_watcher_start/`](remote/exclusive_5090_watcher_start/).
+
 ### Alternate host check
 
 At `2026-10-16 23:13:47 HKT`, `hku-a100` exposed one
@@ -319,8 +341,10 @@ bash scripts/run_in_place_ttt_ruler_smoke.sh
 Exact paper reproduction additionally requires the authors' private mixture,
 32K/128K stage recipe, and inference clipping details.
 
-The current host has now exhausted all preregistered, unmodified released-code
-paths: native FSDP2 is GPU-memory limited even after the allocator-only retry,
+The released-code paths are either exhausted or waiting on an external-state
+change: native FSDP2 is GPU-memory limited under the measured shared states,
 its offload flag is not implemented, and FSDP1 offload is host-memory limited.
-Continuing training requires an external-state change: exclusive larger GPUs
-or a host with materially more RAM for the explicitly non-paper offload path.
+The active watcher will measure the remaining exclusive-5090 case if the CARLA
+processes end within 24 hours. Otherwise continuing training requires exclusive
+larger GPUs or a host with materially more RAM for the explicitly non-paper
+offload path.

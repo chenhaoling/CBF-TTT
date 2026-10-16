@@ -6370,3 +6370,19 @@ reserved-but-unallocated仅21.54/19.04MiB。exit=1，按冻结规则未启动 TT
 不能外推为完全独占32GB也失败，因为释放这部分显存仍可能跨过优化器状态边界。preflight、
 metadata、summary、完整日志及0.5秒资源曲线归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/low_occupancy_retry/`。门控实验继续暂停。
+
+为避免依赖不稳定的 Cloudflare SSH 持续人工轮询，进一步在执行前冻结
+`IN_PLACE_TTT_BASELINE_EXCLUSIVE_5090_RETRY_ADDENDUM.md`（commit `5c65c204`，SHA256
+`dd492e41d5f27796a469f187ed4d37eba665cd0fa356c12b2c156ac055a35954`）并新增 opt-in
+`scripts/watch_and_run_in_place_ttt_baseline_exclusive_5090.sh`（SHA256
+`5e011820886b9c67814c7497d73b5658fe9e3722dd6f7adf07a9445f297aae5c`）。watcher每60秒
+只读检查一次，最长24小时；必须连续两次（间隔5秒）满足恰好两张5090、无compute process、
+每卡总占用≤512MiB、official checkout clean，才从全新目录运行相同no-TTT；仅no-TTT成功
+且有限才等待同一独占条件并运行TTT。它不会signal、暂停或修改其他用户进程。
+
+远端 tmux `baseline_exclusive_5090_watcher` 于2026-10-17 00:38:15 HKT启动。首次心跳为
+`waiting_no_ttt`，812/670MiB，CARLA仍占724/644MiB；没有训练输出目录。冻结输入hash、脚本
+hash和首次心跳已归档到
+`experiments/baseline_reproduction_qwen3_4b/remote/exclusive_5090_watcher_start/`。
+`hku-a100` 的75GB进程进一步确认为其他 `user` 账户运行约10小时的Qwen3-32B vLLM API
+服务，不作任何修改。baseline目标保持active，等待可验证的独占资源状态。
