@@ -5965,6 +5965,18 @@ descriptive failure class.  Its independent auditor recomputes the entire
 diagnostic while excluding runtime.  It cannot fit a model, change a threshold,
 release V10 or open any held-out benchmark.
 
+The frozen V10 diagnostic completed and its independent exact-rerun audit
+passed.  FewRel changed 7.03% of LAMA final actions and added 6.33 correct
+future queries per seed on the changed boundaries, confirming a small positive
+causal effect.  However, LAMA benefit AP decreased by 5.70 points versus the
+FewRel-removal arm.  The standardized FewRel centroid was 6.49/6.02 units from
+LAMA/TempLAMA, versus 1.62 between those two sources; no LAMA development
+candidate and only 23/2,204 TempLAMA candidates were nearest to FewRel.  The
+diagnosis is `weak_positive_data_effect` under strong source shift.  The V10
+constructed-corpus branch is closed without another search on the opened
+development outcomes, and the diagnostic artifacts/hashes were added to the
+V10 archive.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented

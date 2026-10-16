@@ -34,3 +34,18 @@ failure.
 All six checkpoints and both-domain results were independently reconstructed.
 The next registered action is a frozen, no-refit diagnostic; it cannot release
 V10 or authorize another search on the opened development domains.
+
+## Frozen failure diagnosis
+
+The independently reconstructed diagnostic classified the result as
+`weak_positive_data_effect`.  FewRel changed 7.03% of final LAMA boundaries
+and those changes added 6.33 correct future queries per seed on average, so its
+causal contribution is real but small.  LAMA benefit average precision fell by
+5.70 points relative to the removal arm even as risk ranking improved.
+
+The standardized FewRel centroid is 6.49 units from LAMA and 6.02 from
+TempLAMA, versus only 1.62 between the latter two sources.  None of 588 LAMA
+development candidates was nearest to FewRel; only 23/2,204 TempLAMA examples
+were.  The constructed natural source is therefore strongly shifted from the
+target domains.  Increasing its weight or tuning a threshold on these opened
+domains is not justified.  The constructed-corpus branch is closed.

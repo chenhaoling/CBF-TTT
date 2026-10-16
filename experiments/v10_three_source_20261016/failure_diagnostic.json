@@ -1,0 +1,782 @@
+{
+  "aggregate": {
+    "fewrel_removal_lama_drop": 0.0016493055555555358,
+    "lama_action_change_fraction": 0.0703125,
+    "lama_benefit_ap_delta": -0.05698386558433587,
+    "lama_changed_action_net_correct": 6.333333333333333
+  },
+  "checkpoint_hashes": {
+    "fewrel_removed_equal:26101651": "b26f4a97673719973627c36d067b869101b466d325041f9a9cda87b20fce85a4",
+    "fewrel_removed_equal:26101652": "74d1220813a0bc30c0c264602184026d1a6d019a7d20caade0d82c7bc8ad7bfc",
+    "fewrel_removed_equal:26101653": "eb209834b40fc1d85407893a60a16e09f0eb0e632b3313f746c4926933a9bbf0",
+    "three_source_equal:26101651": "8afde993ab495901105683f4f17f02896b6bc284eb1c095c9a0ad5540e7befb6",
+    "three_source_equal:26101652": "556cb2615af7aa8c86e71002b00cff72a8e5cb38bc2deb6f1a7319b73e0b5de3",
+    "three_source_equal:26101653": "de00688bc229df2e372cc51624843a9c1befcae0e090a580a22ec061aa363c73"
+  },
+  "diagnosis": "weak_positive_data_effect",
+  "lama_confirmation_loaded": false,
+  "locomo_loaded": false,
+  "longmemeval_loaded": false,
+  "next_stage": "close_v10_constructed_corpus_branch",
+  "passed": true,
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V10_FAILURE_DIAGNOSTIC_PLAN.md",
+  "protocol": "qwen_utility_record_controller_v10_failure_diagnostic",
+  "seconds": 8.063793363049626,
+  "seeds": {
+    "26101651": {
+      "lama": {
+        "action_comparison": {
+          "overall": {
+            "changed_boundaries": 37,
+            "correct_delta": 5,
+            "favorable": 4,
+            "unfavorable": 3,
+            "unrelated_correct_delta": 0
+          },
+          "per_mechanism": {
+            "mixed_lifecycle": {
+              "changed_boundaries": 6,
+              "correct_delta": 8,
+              "favorable": 2,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "same_subject_different_relation": {
+              "changed_boundaries": 2,
+              "correct_delta": 0,
+              "favorable": 0,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "semantic_duplicate": {
+              "changed_boundaries": 2,
+              "correct_delta": 0,
+              "favorable": 0,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "semantic_overwrite": {
+              "changed_boundaries": 21,
+              "correct_delta": -3,
+              "favorable": 2,
+              "unfavorable": 3,
+              "unrelated_correct_delta": 0
+            },
+            "stale_repetition": {
+              "changed_boundaries": 6,
+              "correct_delta": 0,
+              "favorable": 0,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            }
+          }
+        },
+        "probability_shift": {
+          "benefit": {
+            "mean_absolute_delta": 0.07310835952603502,
+            "mean_delta": 0.03151795582832208,
+            "negative_target_mean_delta": 0.036028267437799445,
+            "positive_target_mean_delta": -0.035649117058759706
+          },
+          "risk": {
+            "mean_absolute_delta": 0.030709446898136608,
+            "mean_delta": 0.025593862882618865,
+            "negative_target_mean_delta": 0.02663725348845276,
+            "positive_target_mean_delta": -0.02448888619740804
+          }
+        },
+        "ranking": {
+          "fewrel_removed_equal": {
+            "benefit": {
+              "auroc": 0.8382547701966939,
+              "average_precision": 0.2931328823189439,
+              "brier": 0.16902357000932217,
+              "ece_10": 0.2194945964218925,
+              "examples": 588,
+              "positives": 37,
+              "prevalence": 0.06292517006802721
+            },
+            "risk": {
+              "auroc": 0.9852430555555556,
+              "average_precision": 0.6331501831501831,
+              "brier": 0.053328336691138414,
+              "ece_10": 0.06172172807202124,
+              "examples": 588,
+              "positives": 12,
+              "prevalence": 0.02040816326530612
+            }
+          },
+          "three_source_equal": {
+            "benefit": {
+              "auroc": 0.7933732280374749,
+              "average_precision": 0.2072205428844196,
+              "brier": 0.2079352238835799,
+              "ece_10": 0.24527680786585596,
+              "examples": 588,
+              "positives": 37,
+              "prevalence": 0.06292517006802721
+            },
+            "risk": {
+              "auroc": 0.9782986111111112,
+              "average_precision": 0.6494555483917185,
+              "brier": 0.07553922773993407,
+              "ece_10": 0.08731559095464012,
+              "examples": 588,
+              "positives": 12,
+              "prevalence": 0.02040816326530612
+            }
+          }
+        }
+      },
+      "templama": {
+        "action_comparison": {
+          "overall": {
+            "changed_boundaries": 77,
+            "correct_delta": 34,
+            "favorable": 32,
+            "unfavorable": 12,
+            "unrelated_correct_delta": 0
+          },
+          "per_mechanism": {
+            "mixed_lifecycle": {
+              "changed_boundaries": 7,
+              "correct_delta": 7,
+              "favorable": 4,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "same_subject_different_relation": {
+              "changed_boundaries": 15,
+              "correct_delta": 2,
+              "favorable": 6,
+              "unfavorable": 4,
+              "unrelated_correct_delta": 0
+            },
+            "semantic_duplicate": {
+              "changed_boundaries": 2,
+              "correct_delta": 0,
+              "favorable": 0,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "semantic_overwrite": {
+              "changed_boundaries": 42,
+              "correct_delta": 7,
+              "favorable": 14,
+              "unfavorable": 8,
+              "unrelated_correct_delta": 0
+            },
+            "stale_repetition": {
+              "changed_boundaries": 11,
+              "correct_delta": 18,
+              "favorable": 8,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            }
+          }
+        },
+        "probability_shift": {
+          "benefit": {
+            "mean_absolute_delta": 0.051135010344360105,
+            "mean_delta": 0.013743176701447944,
+            "negative_target_mean_delta": 0.016415677448208436,
+            "positive_target_mean_delta": -0.0028964263087099887
+          },
+          "risk": {
+            "mean_absolute_delta": 0.039675216054892985,
+            "mean_delta": 0.031580828506344,
+            "negative_target_mean_delta": 0.02801153121487288,
+            "positive_target_mean_delta": 0.10438756257800264
+          }
+        },
+        "ranking": {
+          "fewrel_removed_equal": {
+            "benefit": {
+              "auroc": 0.9443313564516268,
+              "average_precision": 0.6564093660390704,
+              "brier": 0.09971390590844208,
+              "ece_10": 0.10178794482044971,
+              "examples": 2204,
+              "positives": 305,
+              "prevalence": 0.1383847549909256
+            },
+            "risk": {
+              "auroc": 0.9493676150515473,
+              "average_precision": 0.4421417362129702,
+              "brier": 0.06927988054038065,
+              "ece_10": 0.07717350391145021,
+              "examples": 2204,
+              "positives": 103,
+              "prevalence": 0.04673321234119782
+            }
+          },
+          "three_source_equal": {
+            "benefit": {
+              "auroc": 0.9379949757853573,
+              "average_precision": 0.6385239590143861,
+              "brier": 0.10380516900366611,
+              "ece_10": 0.11553112152189765,
+              "examples": 2204,
+              "positives": 305,
+              "prevalence": 0.1383847549909256
+            },
+            "risk": {
+              "auroc": 0.9486883268716237,
+              "average_precision": 0.3477590295286444,
+              "brier": 0.08539126245390109,
+              "ece_10": 0.09347287457672243,
+              "examples": 2204,
+              "positives": 103,
+              "prevalence": 0.04673321234119782
+            }
+          }
+        }
+      }
+    },
+    "26101652": {
+      "lama": {
+        "action_comparison": {
+          "overall": {
+            "changed_boundaries": 22,
+            "correct_delta": 7,
+            "favorable": 6,
+            "unfavorable": 0,
+            "unrelated_correct_delta": 0
+          },
+          "per_mechanism": {
+            "same_subject_different_relation": {
+              "changed_boundaries": 4,
+              "correct_delta": 0,
+              "favorable": 0,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "semantic_overwrite": {
+              "changed_boundaries": 14,
+              "correct_delta": 7,
+              "favorable": 6,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "stale_repetition": {
+              "changed_boundaries": 4,
+              "correct_delta": 0,
+              "favorable": 0,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            }
+          }
+        },
+        "probability_shift": {
+          "benefit": {
+            "mean_absolute_delta": 0.052806338206575675,
+            "mean_delta": -0.007082279086346241,
+            "negative_target_mean_delta": -0.0074710493284973565,
+            "positive_target_mean_delta": -0.0012927546694472029
+          },
+          "risk": {
+            "mean_absolute_delta": 0.02723036555684325,
+            "mean_delta": 0.024496586982444214,
+            "negative_target_mean_delta": 0.024440483942166986,
+            "positive_target_mean_delta": 0.02718953291575114
+          }
+        },
+        "ranking": {
+          "fewrel_removed_equal": {
+            "benefit": {
+              "auroc": 0.7953843135331339,
+              "average_precision": 0.2824531749206783,
+              "brier": 0.19299523335673385,
+              "ece_10": 0.23396229209836544,
+              "examples": 588,
+              "positives": 37,
+              "prevalence": 0.06292517006802721
+            },
+            "risk": {
+              "auroc": 0.9756944444444444,
+              "average_precision": 0.5387009189640768,
+              "brier": 0.06155108102122427,
+              "ece_10": 0.0719589497852007,
+              "examples": 588,
+              "positives": 12,
+              "prevalence": 0.02040816326530612
+            }
+          },
+          "three_source_equal": {
+            "benefit": {
+              "auroc": 0.8025947907980576,
+              "average_precision": 0.21713091981883326,
+              "brier": 0.18965099334683272,
+              "ece_10": 0.22943863241560522,
+              "examples": 588,
+              "positives": 37,
+              "prevalence": 0.06292517006802721
+            },
+            "risk": {
+              "auroc": 0.9797453703703703,
+              "average_precision": 0.6550802139037433,
+              "brier": 0.08286207215042639,
+              "ece_10": 0.0964555367676449,
+              "examples": 588,
+              "positives": 12,
+              "prevalence": 0.02040816326530612
+            }
+          }
+        }
+      },
+      "templama": {
+        "action_comparison": {
+          "overall": {
+            "changed_boundaries": 56,
+            "correct_delta": 42,
+            "favorable": 26,
+            "unfavorable": 5,
+            "unrelated_correct_delta": -1
+          },
+          "per_mechanism": {
+            "mixed_lifecycle": {
+              "changed_boundaries": 7,
+              "correct_delta": 18,
+              "favorable": 6,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "same_subject_different_relation": {
+              "changed_boundaries": 12,
+              "correct_delta": 1,
+              "favorable": 3,
+              "unfavorable": 2,
+              "unrelated_correct_delta": -1
+            },
+            "semantic_overwrite": {
+              "changed_boundaries": 27,
+              "correct_delta": 17,
+              "favorable": 11,
+              "unfavorable": 1,
+              "unrelated_correct_delta": 0
+            },
+            "stale_repetition": {
+              "changed_boundaries": 10,
+              "correct_delta": 6,
+              "favorable": 6,
+              "unfavorable": 2,
+              "unrelated_correct_delta": 0
+            }
+          }
+        },
+        "probability_shift": {
+          "benefit": {
+            "mean_absolute_delta": 0.04610262780727006,
+            "mean_delta": -0.026119546747685116,
+            "negative_target_mean_delta": -0.02111169699027896,
+            "positive_target_mean_delta": -0.057299568679863126
+          },
+          "risk": {
+            "mean_absolute_delta": 0.03804974805641198,
+            "mean_delta": 0.03214240111159742,
+            "negative_target_mean_delta": 0.02914152068378218,
+            "positive_target_mean_delta": 0.09335453488674124
+          }
+        },
+        "ranking": {
+          "fewrel_removed_equal": {
+            "benefit": {
+              "auroc": 0.941258125501774,
+              "average_precision": 0.6432625627564486,
+              "brier": 0.10965833158517076,
+              "ece_10": 0.12629343094168588,
+              "examples": 2204,
+              "positives": 305,
+              "prevalence": 0.1383847549909256
+            },
+            "risk": {
+              "auroc": 0.9495339713405082,
+              "average_precision": 0.35595033979270724,
+              "brier": 0.07052547696666961,
+              "ece_10": 0.07634948651510484,
+              "examples": 2204,
+              "positives": 103,
+              "prevalence": 0.04673321234119782
+            }
+          },
+          "three_source_equal": {
+            "benefit": {
+              "auroc": 0.9369918593910513,
+              "average_precision": 0.6321719686621301,
+              "brier": 0.09684126011746123,
+              "ece_10": 0.10017388419400078,
+              "examples": 2204,
+              "positives": 305,
+              "prevalence": 0.1383847549909256
+            },
+            "risk": {
+              "auroc": 0.9468353026529207,
+              "average_precision": 0.34941255962845413,
+              "brier": 0.0911710379409456,
+              "ece_10": 0.10084122681732996,
+              "examples": 2204,
+              "positives": 103,
+              "prevalence": 0.04673321234119782
+            }
+          }
+        }
+      }
+    },
+    "26101653": {
+      "lama": {
+        "action_comparison": {
+          "overall": {
+            "changed_boundaries": 22,
+            "correct_delta": 7,
+            "favorable": 8,
+            "unfavorable": 2,
+            "unrelated_correct_delta": 0
+          },
+          "per_mechanism": {
+            "mixed_lifecycle": {
+              "changed_boundaries": 2,
+              "correct_delta": 0,
+              "favorable": 0,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "semantic_overwrite": {
+              "changed_boundaries": 16,
+              "correct_delta": 7,
+              "favorable": 8,
+              "unfavorable": 2,
+              "unrelated_correct_delta": 0
+            },
+            "stale_repetition": {
+              "changed_boundaries": 4,
+              "correct_delta": 0,
+              "favorable": 0,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            }
+          }
+        },
+        "probability_shift": {
+          "benefit": {
+            "mean_absolute_delta": 0.059826722899493937,
+            "mean_delta": -0.004243186342692412,
+            "negative_target_mean_delta": -0.0031301316304645685,
+            "positive_target_mean_delta": -0.02081867678695031
+          },
+          "risk": {
+            "mean_absolute_delta": 0.019026158208539277,
+            "mean_delta": 0.013068688900918559,
+            "negative_target_mean_delta": 0.013767682152301258,
+            "positive_target_mean_delta": -0.02048298716545105
+          }
+        },
+        "ranking": {
+          "fewrel_removed_equal": {
+            "benefit": {
+              "auroc": 0.7958257713248639,
+              "average_precision": 0.24390224125961382,
+              "brier": 0.18868513746240526,
+              "ece_10": 0.23652843901239348,
+              "examples": 588,
+              "positives": 37,
+              "prevalence": 0.06292517006802721
+            },
+            "risk": {
+              "auroc": 0.9837962962962963,
+              "average_precision": 0.5081349206349206,
+              "brier": 0.06311588900420148,
+              "ece_10": 0.07352017330640079,
+              "examples": 588,
+              "positives": 12,
+              "prevalence": 0.02040816326530612
+            }
+          },
+          "three_source_equal": {
+            "benefit": {
+              "auroc": 0.7925884141855104,
+              "average_precision": 0.22418523904297555,
+              "brier": 0.19757200302783978,
+              "ece_10": 0.24293631149994258,
+              "examples": 588,
+              "positives": 37,
+              "prevalence": 0.06292517006802721
+            },
+            "risk": {
+              "auroc": 0.9785879629629629,
+              "average_precision": 0.6666666666666666,
+              "brier": 0.07317403476128266,
+              "ece_10": 0.08658886220731937,
+              "examples": 588,
+              "positives": 12,
+              "prevalence": 0.02040816326530612
+            }
+          }
+        }
+      },
+      "templama": {
+        "action_comparison": {
+          "overall": {
+            "changed_boundaries": 74,
+            "correct_delta": 34,
+            "favorable": 25,
+            "unfavorable": 7,
+            "unrelated_correct_delta": -1
+          },
+          "per_mechanism": {
+            "mixed_lifecycle": {
+              "changed_boundaries": 8,
+              "correct_delta": 12,
+              "favorable": 3,
+              "unfavorable": 0,
+              "unrelated_correct_delta": 0
+            },
+            "same_subject_different_relation": {
+              "changed_boundaries": 16,
+              "correct_delta": 3,
+              "favorable": 5,
+              "unfavorable": 2,
+              "unrelated_correct_delta": -1
+            },
+            "semantic_overwrite": {
+              "changed_boundaries": 38,
+              "correct_delta": 13,
+              "favorable": 12,
+              "unfavorable": 3,
+              "unrelated_correct_delta": 0
+            },
+            "stale_repetition": {
+              "changed_boundaries": 12,
+              "correct_delta": 6,
+              "favorable": 5,
+              "unfavorable": 2,
+              "unrelated_correct_delta": 0
+            }
+          }
+        },
+        "probability_shift": {
+          "benefit": {
+            "mean_absolute_delta": 0.04185288993326703,
+            "mean_delta": -0.003021382627032058,
+            "negative_target_mean_delta": -0.0014832319627538107,
+            "positive_target_mean_delta": -0.012598261681013669
+          },
+          "risk": {
+            "mean_absolute_delta": 0.027453700830232377,
+            "mean_delta": 0.018261824037182715,
+            "negative_target_mean_delta": 0.016249258482658763,
+            "positive_target_mean_delta": 0.059314253455190695
+          }
+        },
+        "ranking": {
+          "fewrel_removed_equal": {
+            "benefit": {
+              "auroc": 0.9413427256796071,
+              "average_precision": 0.6469299928617125,
+              "brier": 0.09838309920370344,
+              "ece_10": 0.1097367045577511,
+              "examples": 2204,
+              "positives": 305,
+              "prevalence": 0.1383847549909256
+            },
+            "risk": {
+              "auroc": 0.9518953064421473,
+              "average_precision": 0.3852149968532697,
+              "brier": 0.07950927007028091,
+              "ece_10": 0.08654643978697768,
+              "examples": 2204,
+              "positives": 103,
+              "prevalence": 0.04673321234119782
+            }
+          },
+          "three_source_equal": {
+            "benefit": {
+              "auroc": 0.937406227609009,
+              "average_precision": 0.6389169287473433,
+              "brier": 0.09921714770791738,
+              "ece_10": 0.10671532193071902,
+              "examples": 2204,
+              "positives": 305,
+              "prevalence": 0.1383847549909256
+            },
+            "risk": {
+              "auroc": 0.9483972033659422,
+              "average_precision": 0.3436606964407715,
+              "brier": 0.08807561520839904,
+              "ece_10": 0.0981430936964007,
+              "examples": 2204,
+              "positives": 103,
+              "prevalence": 0.04673321234119782
+            }
+          }
+        }
+      }
+    }
+  },
+  "source_geometry": {
+    "development_assignments": {
+      "lama": {
+        "examples": 588,
+        "mean_distance": {
+          "fewrel": 8.728129543386874,
+          "lama": 5.777881922619147,
+          "templama": 5.9786423373596564
+        },
+        "nearest_source": {
+          "lama": 318,
+          "templama": 270
+        }
+      },
+      "templama": {
+        "examples": 2204,
+        "mean_distance": {
+          "fewrel": 8.345598180671983,
+          "lama": 5.969924254275479,
+          "templama": 5.749184035244874
+        },
+        "nearest_source": {
+          "fewrel": 23,
+          "lama": 613,
+          "templama": 1568
+        }
+      }
+    },
+    "training_centroid_distances": {
+      "fewrel:lama": 6.485029172922027,
+      "fewrel:templama": 6.017670526880767,
+      "lama:templama": 1.6173831170934845
+    }
+  },
+  "target_support": {
+    "fewrel": {
+      "benefit_prevalence": 0.17985026041666666,
+      "examples": 6144,
+      "per_mechanism": {
+        "different_subject_same_relation": {
+          "benefit_prevalence": 0.0,
+          "examples": 1152,
+          "risk_prevalence": 0.0
+        },
+        "mixed_lifecycle": {
+          "benefit_prevalence": 0.8697916666666666,
+          "examples": 384,
+          "risk_prevalence": 0.0
+        },
+        "same_subject_different_relation": {
+          "benefit_prevalence": 0.008680555555555556,
+          "examples": 1152,
+          "risk_prevalence": 0.3645833333333333
+        },
+        "semantic_duplicate": {
+          "benefit_prevalence": 0.0,
+          "examples": 1152,
+          "risk_prevalence": 0.0
+        },
+        "semantic_overwrite": {
+          "benefit_prevalence": 0.3029513888888889,
+          "examples": 1152,
+          "risk_prevalence": 0.0
+        },
+        "stale_repetition": {
+          "benefit_prevalence": 0.3576388888888889,
+          "examples": 1152,
+          "risk_prevalence": 0.0
+        }
+      },
+      "risk_prevalence": 0.068359375
+    },
+    "lama": {
+      "benefit_prevalence": 0.1594790777113578,
+      "examples": 4684,
+      "per_mechanism": {
+        "different_subject_same_relation": {
+          "benefit_prevalence": 0.0,
+          "examples": 876,
+          "risk_prevalence": 0.0
+        },
+        "mixed_lifecycle": {
+          "benefit_prevalence": 0.6095890410958904,
+          "examples": 292,
+          "risk_prevalence": 0.0
+        },
+        "same_subject_different_relation": {
+          "benefit_prevalence": 0.07990867579908675,
+          "examples": 876,
+          "risk_prevalence": 0.182648401826484
+        },
+        "semantic_duplicate": {
+          "benefit_prevalence": 0.0,
+          "examples": 876,
+          "risk_prevalence": 0.0
+        },
+        "semantic_overwrite": {
+          "benefit_prevalence": 0.28153153153153154,
+          "examples": 888,
+          "risk_prevalence": 0.0
+        },
+        "stale_repetition": {
+          "benefit_prevalence": 0.2842465753424658,
+          "examples": 876,
+          "risk_prevalence": 0.0
+        }
+      },
+      "risk_prevalence": 0.034158838599487616
+    },
+    "templama": {
+      "benefit_prevalence": 0.15596539162112932,
+      "examples": 4392,
+      "per_mechanism": {
+        "different_subject_same_relation": {
+          "benefit_prevalence": 0.0,
+          "examples": 730,
+          "risk_prevalence": 0.0
+        },
+        "mixed_lifecycle": {
+          "benefit_prevalence": 0.678082191780822,
+          "examples": 292,
+          "risk_prevalence": 0.0
+        },
+        "same_subject_different_relation": {
+          "benefit_prevalence": 0.09474885844748858,
+          "examples": 876,
+          "risk_prevalence": 0.22945205479452055
+        },
+        "semantic_duplicate": {
+          "benefit_prevalence": 0.0,
+          "examples": 730,
+          "risk_prevalence": 0.0
+        },
+        "semantic_overwrite": {
+          "benefit_prevalence": 0.17792792792792791,
+          "examples": 888,
+          "risk_prevalence": 0.0
+        },
+        "stale_repetition": {
+          "benefit_prevalence": 0.2808219178082192,
+          "examples": 876,
+          "risk_prevalence": 0.0
+        }
+      },
+      "risk_prevalence": 0.045765027322404374
+    }
+  },
+  "templama_test_loaded": false,
+  "terminal_status": "v10_failure_diagnostic_completed",
+  "training_audit_sha256": "783232cb26468968e4e82286aedb0f009b58fa04ff9ec1aecf3d189d89210700",
+  "training_summary_sha256": "9d8b95a76cc4457b20109d409215ea89a9edead7e3ae273894dd832ed71aeb6a",
+  "upstream_hashes": {
+    "fewrel_features": "73a589d5c6f0644c5c7a2a5454b35118fd94749c493cd14a31c3f6f0a8727eff",
+    "fewrel_labels": "d4b2b1d03e1e1b1b6d6b2ce62fae9eeb6a09c46265b797cd992b13407fb3a679",
+    "lama_dev_data": "e42ae50224057ea2465c4b4116f164e127e020c8d38bfa38c48e3bda39bf2599",
+    "lama_dev_features": "d20cad6f701def7715170c0790b37d7bfac2e20b18fa10bee805fd89351deebc",
+    "lama_dev_labels": "f4b2ff0eefe83d805341b04bf54f0731d71d39cea86c2142f004bd25fecd5258",
+    "lama_train_features": "86f2cb7c0c8e9b0c494315bcac14edc4a138fdc639dcfecf1d6e2344f0e4bc28",
+    "lama_train_labels": "9b1011d072e9d75b79a04cdd724cf647760d0a862f1bf9d4f8028f02ac312b26",
+    "templama_dev_data": "3c10a69106972c761b42f63f55c0c93ab0f9acd6cb8ca4f257f90162c60ed5c8",
+    "templama_dev_features": "f71228fdb66b54e86fc3de104aac8a0599f956d9f091b7db7e10e0696a72e3ec",
+    "templama_dev_labels": "c15a19f882441c6367f0039da4f2ea77e8c70e8b268035c911f42bf34b45dc86",
+    "templama_train_features": "4c5cf134329ec49c19c7ccd9b97ede05a36dcee2baa13521e5ee4a3548f7905d",
+    "templama_train_labels": "9a8162de20523a3335abae79907b335d5605e533245304a969e67a2c00577341",
+    "v8_audit": "307930e416b8547a66dbdeca5ebe117d5b3700f01f39b65a55294883a84e2547",
+    "v8_summary": "51c8245e4fe80aa7f23730c03d17b2f2c25bec2448cc41dcd1df08d68a709399"
+  }
+}
