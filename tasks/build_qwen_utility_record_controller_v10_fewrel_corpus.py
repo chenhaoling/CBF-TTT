@@ -330,7 +330,9 @@ def naturalize_current_queries(episode: dict, patterns: dict[str, list[str]]) ->
                 raise ValueError("naturalized query lost six candidates")
 
 
-def material_episode(material: dict, twin: int) -> dict:
+def material_episode(material: dict, twin: int, *,
+                     group_prefix: str = GROUP_PREFIX,
+                     source_partition: str = "fewrel_train_only") -> dict:
     group_index = material["group_index"]
     payload = {key: material[key] for key in (
         "target", "versions", "same_relation_other", "stable",
@@ -339,11 +341,11 @@ def material_episode(material: dict, twin: int) -> dict:
     episode = build_episode(
         group_index, material["mechanism"],
         LENGTHS[group_index % len(LENGTHS)], twin, payload,
-        group_prefix=GROUP_PREFIX,
+        group_prefix=group_prefix,
     )
     naturalize_current_queries(episode, material["patterns"])
     episode["audit"].update({
-        "source_partition": "fewrel_train_only",
+        "source_partition": source_partition,
         "target_source_relation": material["target_relation"],
         "mechanism_repetition": material["repetition"],
         "material_source_row_sha256": material["material_source_row_sha256"],

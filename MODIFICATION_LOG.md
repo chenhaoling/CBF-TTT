@@ -5981,3 +5981,27 @@ Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
 feature and checkpoint artifacts remain hash-locked on `hku-gpu2`.
+## 2026-10-16: V11 unseen-relation benefit-transfer protocol and corpus implementation
+
+V10 的冻结失败诊断把新增 FewRel 语料的作用归类为
+`weak_positive_data_effect`：固定移除消融显示 LAMA 有 +0.165 点因果贡献，但
+FewRel 使 LAMA benefit AP 下降 5.70 点，且标准化 FewRel–LAMA 质心距离 6.49，
+明显大于 TempLAMA–LAMA 的 1.62。由此关闭在已打开 TempLAMA/LAMA development
+上继续调 source weight 或 threshold 的分支。
+
+新增 `QWEN_UTILITY_RECORD_CONTROLLER_V11_RELATION_TRANSFER_PLAN.md`，冻结新的
+关系留出协议。V10 使用的48个 FewRel train relations 保持为训练数据；此前未生成、
+未评分的8个 development relations 用于 V11 唯一模型选择；另8个 internal-test 与
+`val_wiki.json` 的16个 external-test relations 继续封存。当前写入固定 `g=1`，只学习
+session memory 遗忘。计划精确比较 equal-source ERM、relation-group DRO 和移除
+FewRel 的 relation-group DRO；group-DRO 参数、开发门和一次性测试释放条件已在看到
+新关系结果前登记。原生 `ttt_proj/ttt_conv` 继续作为已经失败的内容绑定负基线。
+
+新增 V11 corpus builder、独立精确重建 auditor、runner 和 focused tests。builder
+复用 V10 已审计的自然模板替换和 lifecycle grammar，但允许显式传入 group prefix 与
+source partition，不改变 V10 默认行为。目标为8关系 × 每关系14组 =112 groups、224
+twin episodes、672 sparse labels 和3,360 future queries；每条 source row 和 entity
+pair 仍全局唯一，且只读取旧 development 文本生成 exclusion keys。内部/外部测试分区
+在 manifest 中显式记录为未加载。本地5项相关单测、Python语法、shell语法与 diff
+检查通过；远程数据构造和审计尚待执行。
+
