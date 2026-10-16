@@ -27,6 +27,10 @@ MECHANISM_SOURCE = {
     "conflicting_overwrite": "semantic_overwrite",
     "stale_repetition": "stale_repetition",
 }
+TOKENIZER_PATTERNS = (
+    "tokenizer*.json", "special_tokens_map.json", "added_tokens.json",
+    "vocab.*", "merges.txt", "chat_template*.jinja",
+)
 
 
 def sha256(path: Path) -> str:
@@ -193,6 +197,13 @@ def build(source_episodes: Path, tokenizer_path: str, output: Path, plan_path: P
     if source_audit.get("manifest_sha256") != sha256(source_manifest_path):
         raise ValueError("source semantic manifest changed after audit")
     episodes = read_jsonl(source_episodes)
+    tokenizer_root = Path(tokenizer_path)
+    if not tokenizer_root.is_dir():
+        raise ValueError("V1 requires a local tokenizer directory for file-level audit")
+    tokenizer_files = sorted({path for pattern in TOKENIZER_PATTERNS
+                              for path in tokenizer_root.glob(pattern) if path.is_file()})
+    if not tokenizer_files:
+        raise ValueError("no tokenizer identity files found")
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, use_fast=True)
     selected, audits = [], []
     for mechanism, source_mechanism in MECHANISM_SOURCE.items():
@@ -219,6 +230,7 @@ def build(source_episodes: Path, tokenizer_path: str, output: Path, plan_path: P
         "source_audit_passed": True,
         "tokenizer": tokenizer_path,
         "tokenizer_class": type(tokenizer).__name__,
+        "tokenizer_files_sha256": {path.name: sha256(path) for path in tokenizer_files},
         "chunk_size": CHUNK_SIZE,
         "groups": len(selected),
         "boundaries": len(selected) * BOUNDARIES,

@@ -80,6 +80,11 @@ def audit(args) -> dict:
     manifest = json.loads((data_root / "manifest.json").read_text())
     if manifest["protocol"] != PROTOCOL or manifest["plan_sha256"] != digest(plan):
         raise ValueError("plan/protocol mismatch")
+    tokenizer_root = Path(manifest["tokenizer"])
+    tokenizer_hashes = manifest.get("tokenizer_files_sha256", {})
+    if not tokenizer_hashes or any(digest(tokenizer_root / name) != expected
+                                   for name, expected in tokenizer_hashes.items()):
+        raise ValueError("tokenizer file inventory/hash mismatch")
     for name, expected in manifest["files_sha256"].items():
         if digest(data_root / name) != expected: raise ValueError(f"data hash mismatch: {name}")
     model_inputs = load_jsonl(data_root / "model_inputs.jsonl")
@@ -165,6 +170,7 @@ def audit(args) -> dict:
     result = {"protocol": PROTOCOL + "_independent_audit", "stage": args.stage,
               "passed": True, "groups": len(groups), "labels": len(rows),
               "plan_sha256": digest(plan), "data_manifest_sha256": digest(data_root/"manifest.json"),
+              "tokenizer_files_sha256": tokenizer_hashes,
               "result_files": {path.name: digest(path) for path in [*paths, *feature_paths]},
               "summary_sha256": digest(summary_path), "collector_audits": len(audits),
               "feature_dimension": 1854, "plaintext_online_memory_fields": 0,
