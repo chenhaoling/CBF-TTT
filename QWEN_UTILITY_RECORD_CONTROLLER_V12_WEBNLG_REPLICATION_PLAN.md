@@ -24,6 +24,13 @@ paths, byte counts and SHA256 hashes before any XML element is parsed.  The
 exact commit and file inventory will be appended to this plan after acquisition
 and before the first schema/capacity inspection.
 
+The acquisition completed before any XML parse.  The frozen source commit is
+`711a8ca37eff2d694d664edcaeb07b0ccf8f56c2`; the manifest covers 185 English
+v1.6 files and 44,390,346 bytes, with manifest SHA256
+`d72d28824c8912c34fc652ff45050323568a94bf584395d466bcfa0aa3ee21a4`.
+The complete per-file path/size/hash inventory is retained as the source
+manifest.  Schema/capacity inspection may now parse only `train/1triples`.
+
 FewRel internal/external tests, DialogRE development/test, SemEval test,
 LongMemEval-S and LoCoMo remain sealed.  No WebNLG row, relation, lexicalization
 or model output may alter the V11 checkpoints or deployment configuration.

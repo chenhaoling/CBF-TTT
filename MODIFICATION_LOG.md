@@ -6088,3 +6088,9 @@ JSON 前记录 commit、v1.6 English 文件路径、字节数和 SHA256。模型
 构造112 groups，并以冻结 ERM 一次性评测。FewRel tests、DialogRE、SemEval test、
 LongMemEval-S 和 LoCoMo 继续封存。
 
+远程 source acquisition 在任何 XML 解析前完成：仓库 commit
+`711a8ca37eff2d694d664edcaeb07b0ccf8f56c2`，English v1.6 共185文件、
+44,390,346 bytes；完整 manifest SHA256 为
+`d72d28824c8912c34fc652ff45050323568a94bf584395d466bcfa0aa3ee21a4`。
+上述身份已写回 V12 plan，之后只允许解析 `train/1triples` 做容量检查。
+
