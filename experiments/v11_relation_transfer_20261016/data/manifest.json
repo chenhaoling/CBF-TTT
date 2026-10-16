@@ -1,0 +1,304 @@
+{
+  "alpha_grid": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "background_partition": "train_unused_after_v10_hash_exclusion",
+  "background_relations": [
+    "P1001",
+    "P101",
+    "P102",
+    "P105",
+    "P106",
+    "P118",
+    "P123",
+    "P131",
+    "P1346",
+    "P136",
+    "P137",
+    "P140",
+    "P1435",
+    "P150",
+    "P156",
+    "P17",
+    "P175",
+    "P176",
+    "P178",
+    "P1877",
+    "P1923",
+    "P264",
+    "P27",
+    "P306",
+    "P31",
+    "P3373",
+    "P3450",
+    "P355",
+    "P39",
+    "P400",
+    "P403",
+    "P407",
+    "P449",
+    "P4552",
+    "P495",
+    "P527",
+    "P551",
+    "P57",
+    "P58",
+    "P674",
+    "P706",
+    "P710",
+    "P740",
+    "P750",
+    "P84",
+    "P931",
+    "P974",
+    "P991"
+  ],
+  "candidate_memory_cap": 3,
+  "capacity": {
+    "P1303": {
+      "eligible": true,
+      "rows": 635,
+      "subjects": 632,
+      "templates": 635,
+      "values": 98
+    },
+    "P1344": {
+      "eligible": true,
+      "rows": 688,
+      "subjects": 671,
+      "templates": 687,
+      "values": 273
+    },
+    "P1411": {
+      "eligible": true,
+      "rows": 648,
+      "subjects": 608,
+      "templates": 643,
+      "values": 160
+    },
+    "P22": {
+      "eligible": true,
+      "rows": 675,
+      "subjects": 670,
+      "templates": 675,
+      "values": 653
+    },
+    "P241": {
+      "eligible": true,
+      "rows": 688,
+      "subjects": 685,
+      "templates": 685,
+      "values": 109
+    },
+    "P460": {
+      "eligible": true,
+      "rows": 472,
+      "subjects": 444,
+      "templates": 472,
+      "values": 433
+    },
+    "P800": {
+      "eligible": true,
+      "rows": 686,
+      "subjects": 606,
+      "templates": 685,
+      "values": 673
+    },
+    "P937": {
+      "eligible": true,
+      "rows": 676,
+      "subjects": 668,
+      "templates": 676,
+      "values": 212
+    }
+  },
+  "counts": {
+    "boundaries": 672,
+    "eligible_relations": 8,
+    "episodes": 224,
+    "exclusions": 2173,
+    "exclusions_by_reason": {
+      "development_masked_template_overlap": 19,
+      "development_statement_overlap": 5,
+      "duplicate_relation_statement": 683,
+      "multiple_or_invalid_entity_mentions": 1466
+    },
+    "material_entity_pairs": 4032,
+    "material_source_rows": 4032,
+    "mechanisms": {
+      "different_subject_same_relation": 16,
+      "explicit_reset_revoke": 16,
+      "mixed_lifecycle": 16,
+      "same_subject_different_relation": 16,
+      "semantic_duplicate": 16,
+      "semantic_overwrite": 16,
+      "stale_repetition": 16
+    },
+    "parsed_rows": 37734,
+    "queries": 3360,
+    "raw_rows": 39200,
+    "relations": {
+      "P1303": 14,
+      "P1344": 14,
+      "P1411": 14,
+      "P22": 14,
+      "P241": 14,
+      "P460": 14,
+      "P800": 14,
+      "P937": 14
+    },
+    "retained_rows": 37027,
+    "source_groups": 112
+  },
+  "development_labels_loaded": false,
+  "development_model_scores_loaded": false,
+  "eligibility_thresholds": {
+    "rows": 28,
+    "subjects": 20,
+    "templates": 7,
+    "values": 20
+  },
+  "exclusions": {
+    "files": {
+      "/home/ctj/cbf_ttt_utility_record_controller_v10_fewrel_corpus_20261016_retry1/data/formal_episodes.jsonl": {
+        "episodes": 1344,
+        "sha256": "2dfe8cca02ff72513f2ae02e9b971bb6f3310885596a93ffea22ccd3db07d39a"
+      },
+      "/home/ctj/cbf_ttt_utility_record_controller_v1_development_data_20261016/development_episodes.jsonl": {
+        "episodes": 128,
+        "sha256": "b18212ade3db33226ba5175b22fbce2a7389df38e2dd8337f5cd7297dc11083c"
+      },
+      "/home/ctj/cbf_ttt_utility_record_controller_v2_templama_development_data_20261016_retry2/development_episodes.jsonl": {
+        "episodes": 512,
+        "sha256": "f4ed2cc56971324300b6bc260f3bb23c4fc07b3f792f9e4a8772c2ed9d0401ee"
+      }
+    },
+    "labels_or_model_outputs_used": false,
+    "masked_templates": 7745,
+    "normalized_statements": 10383,
+    "source_row_hashes": 0
+  },
+  "external_test_loaded": false,
+  "files_sha256": {
+    "development_episodes.jsonl": "afe822ae53ece5ec151d4600f2dbe09d1ffc3c45ba7fda56306b9c57127cac7f",
+    "exclusions.jsonl": "5dde19e64bddeb36cded8dd3d08ae5201296e6a02e8e58f24905d1cd1fc246fb",
+    "materials.jsonl": "c6d3bdef343cac04e0ce98f29ca111f0dee94c6a76d7605a843756e4af0b69dc"
+  },
+  "internal_test_loaded": false,
+  "model_outputs_loaded": false,
+  "partition_seed": 2311,
+  "partitions": {
+    "development": [
+      "P241",
+      "P1303",
+      "P800",
+      "P22",
+      "P460",
+      "P1344",
+      "P1411",
+      "P937"
+    ],
+    "external_test": [
+      "P155",
+      "P177",
+      "P206",
+      "P2094",
+      "P25",
+      "P26",
+      "P361",
+      "P364",
+      "P40",
+      "P410",
+      "P412",
+      "P413",
+      "P463",
+      "P59",
+      "P641",
+      "P921"
+    ],
+    "internal_test": [
+      "P466",
+      "P135",
+      "P127",
+      "P6",
+      "P1408",
+      "P159",
+      "P276",
+      "P86"
+    ],
+    "train": [
+      "P495",
+      "P3373",
+      "P176",
+      "P991",
+      "P407",
+      "P1923",
+      "P17",
+      "P156",
+      "P449",
+      "P105",
+      "P974",
+      "P84",
+      "P123",
+      "P1001",
+      "P1346",
+      "P400",
+      "P101",
+      "P27",
+      "P3450",
+      "P31",
+      "P58",
+      "P175",
+      "P1877",
+      "P4552",
+      "P740",
+      "P136",
+      "P140",
+      "P118",
+      "P57",
+      "P102",
+      "P355",
+      "P710",
+      "P551",
+      "P1435",
+      "P131",
+      "P306",
+      "P178",
+      "P39",
+      "P527",
+      "P750",
+      "P403",
+      "P150",
+      "P264",
+      "P674",
+      "P106",
+      "P931",
+      "P137",
+      "P706"
+    ]
+  },
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V11_RELATION_TRANSFER_PLAN.md",
+  "protocol": "qwen_utility_record_controller_v11_fewrel_development_corpus",
+  "seed": 202610191,
+  "selected_partition": "development",
+  "selected_relations": [
+    "P1303",
+    "P1344",
+    "P1411",
+    "P22",
+    "P241",
+    "P460",
+    "P800",
+    "P937"
+  ],
+  "source": {
+    "files_sha256": {
+      "pid2name.json": "eeedd25512a8e4c2bc06b78009836d27de81807bcba6ed929debd5cd713c07ea",
+      "train_wiki.json": "8e9e58a05d559be773cbe18a8d4a16ba17e6d397663f9f05a056f894a94b92c1",
+      "val_wiki.json": "76bb44c2485b6faed358a3ce040eadafcc8a8835245cd7e6afc1bef672d4a0bf"
+    },
+    "repository_commit": "278a2315d2138810a379cd8d5718914dc56e2582"
+  }
+}

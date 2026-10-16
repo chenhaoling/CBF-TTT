@@ -1,0 +1,40 @@
+{
+  "artifact_sha256": {
+    "labels_shard0.jsonl": "2279d33753b3b846a9d5a113efc16596781bc691c334432ee5455a63d9b5a2f8",
+    "labels_shard1.jsonl": "220e8e4991ef47ae9c5176db32a47528c9ed8950b975eb1bd0b9b245becd07dd",
+    "resource_shard0.json": "8f1ce91b7eb8f47115ddcf7331d3134b40ac269d62a7e9502771dd5e4a9caac7",
+    "resource_shard1.json": "bf08557f9815a933359bf583d81fdf26589072a9efcec2e9b75f623646cfdc6e"
+  },
+  "checks": {
+    "audited_data_dependency_locked": true,
+    "candidate_benefit_reconstructed": true,
+    "complete_unique_expected_labels": true,
+    "finite_outcomes": true,
+    "gate_reconstructed": true,
+    "heldout_sources_sealed": true,
+    "plain_final_qwen_and_two_5090_shards": true,
+    "safe_oracle_reconstructed": true,
+    "shard_hashes_and_counts": true,
+    "summary_exactly_reconstructed": true,
+    "ternary_action_grid_reconstructed": true
+  },
+  "formal_gate": {
+    "checks": {
+      "answer_token_coverage_at_least_point_95": true,
+      "complete_balanced_relation_coverage": true,
+      "finite_complete_auditable_labels": true,
+      "heldout_sources_sealed": true,
+      "peak_reserved_at_most_28_gib": true,
+      "positive_safe_benefit_candidates_at_least_point_05": true,
+      "safe_oracle_headroom_at_least_point_015": true,
+      "safe_oracle_zero_added_unrelated_errors": true
+    },
+    "passed": true
+  },
+  "next_stage": "v11_development_feature_extraction",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v11_fewrel_development_labels_audit",
+  "release_passed": true,
+  "summary_sha256": "febba1b6b9584f4ba7ae79567e94cc43c1e9ce91a43ea60de08d36b5777e0bec",
+  "terminal_status": "v11_development_label_audit_passed_gate_passed"
+}

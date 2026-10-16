@@ -6063,3 +6063,13 @@ V11 development release 仍严格判为失败：DRO benefit AP 相对预登记 E
 mechanism slices，判别“语料有效但 robust loss 无效”与语料本身无效；禁止改 checkpoint、
 threshold、超参数或打开测试集。
 
+冻结诊断及其独立精确重建均通过，结论为
+`constructed_corpus_effect_supported_robust_loss_not_supported`。普通 ERM
+平均增益3.239点、relation-cluster CI `[2.406,4.137]`点；DRO 为3.199点、CI
+`[2.302,4.132]`点；无 FewRel 为0.005点、CI `[-0.025,0.035]`点。ERM 的 benefit
+AP 0.6827 高于 DRO 的0.6456。DRO 相对 ERM 每种子只改变22/29/28个边界，future
+correct 净变化 -5/+4/-7，collateral 均为0。8个关系的 DRO gain 全正。由此冻结下一
+研究方向：保留简单 equal-source ERM，以新自然来源作独立复制；不继续调 DRO，也不
+打开 V11 保留测试关系。紧凑 manifest、summary、audit、诊断和报告归档于
+`experiments/v11_relation_transfer_20261016/`。
+

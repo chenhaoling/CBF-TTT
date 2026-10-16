@@ -1,0 +1,149 @@
+{
+  "arms": {
+    "erm_equal": {
+      "benefit_average_precision": 0.682739065831422,
+      "bootstrap": {
+        "group_bootstrap_95ci": [
+          0.022617807539682542,
+          0.04255952380952381
+        ],
+        "groups": 112,
+        "mean_group_gain": 0.03239087301587302,
+        "relation_cluster_bootstrap_95ci": [
+          0.024057539682539684,
+          0.04136904761904762
+        ],
+        "relations": 8
+      },
+      "deletion_fraction": 0.23990885416666666,
+      "deletion_precision": 0.5850384248187463,
+      "mean_gain": 0.03239087301587307,
+      "risk_average_precision": 0.7675322855037211,
+      "seed_gains": [
+        0.03318452380952386,
+        0.03125,
+        0.032738095238095344
+      ]
+    },
+    "relation_group_dro": {
+      "benefit_average_precision": 0.6455993643044308,
+      "bootstrap": {
+        "group_bootstrap_95ci": [
+          0.02242063492063492,
+          0.04201388888888889
+        ],
+        "groups": 112,
+        "mean_group_gain": 0.03199404761904762,
+        "relation_cluster_bootstrap_95ci": [
+          0.023015873015873014,
+          0.04131944444444444
+        ],
+        "relations": 8
+      },
+      "deletion_fraction": 0.248046875,
+      "deletion_precision": 0.5725312896109694,
+      "mean_gain": 0.03199404761904771,
+      "risk_average_precision": 0.7760965276645221,
+      "seed_gains": [
+        0.0324404761904763,
+        0.031845238095238204,
+        0.031696428571428625
+      ]
+    },
+    "relation_group_dro_no_fewrel": {
+      "benefit_average_precision": 0.1987436644323051,
+      "bootstrap": {
+        "group_bootstrap_95ci": [
+          -0.0003968253968253968,
+          0.000496031746031746
+        ],
+        "groups": 112,
+        "mean_group_gain": 4.9603174603174596e-05,
+        "relation_cluster_bootstrap_95ci": [
+          -0.000248015873015873,
+          0.0003472222222222222
+        ],
+        "relations": 8
+      },
+      "deletion_fraction": 0.005208333333333333,
+      "deletion_precision": 0.7291666666666666,
+      "mean_gain": 4.960317460319293e-05,
+      "risk_average_precision": 0.1230147291761866,
+      "seed_gains": [
+        0.0,
+        0.0001488095238095788,
+        0.0
+      ]
+    }
+  },
+  "conclusion": "constructed_corpus_effect_supported_robust_loss_not_supported",
+  "dro_per_mechanism_gain": {
+    "different_subject_same_relation": 0.0,
+    "explicit_reset_revoke": 0.0,
+    "mixed_lifecycle": 0.08194444444444444,
+    "same_subject_different_relation": 0.0,
+    "semantic_duplicate": 0.0,
+    "semantic_overwrite": 0.05868055555555555,
+    "stale_repetition": 0.08333333333333333
+  },
+  "dro_per_relation_gain": {
+    "P1303": 0.05476190476190476,
+    "P1344": 0.03015873015873016,
+    "P1411": 0.024603174603174603,
+    "P22": 0.00992063492063492,
+    "P241": 0.04880952380952381,
+    "P460": 0.025000000000000005,
+    "P800": 0.036111111111111115,
+    "P937": 0.026587301587301587
+  },
+  "dro_vs_erm_action_comparison": [
+    {
+      "changed_boundaries": 22,
+      "dro_minus_erm_correct": -5,
+      "dro_minus_erm_unrelated_correct": 0,
+      "favorable_for_dro": 4,
+      "seed": 26101651,
+      "unfavorable_for_dro": 7
+    },
+    {
+      "changed_boundaries": 29,
+      "dro_minus_erm_correct": 4,
+      "dro_minus_erm_unrelated_correct": 0,
+      "favorable_for_dro": 8,
+      "seed": 26101652,
+      "unfavorable_for_dro": 5
+    },
+    {
+      "changed_boundaries": 28,
+      "dro_minus_erm_correct": -7,
+      "dro_minus_erm_unrelated_correct": 0,
+      "favorable_for_dro": 8,
+      "seed": 26101653,
+      "unfavorable_for_dro": 5
+    }
+  ],
+  "external_test_loaded": false,
+  "internal_test_loaded": false,
+  "lama_development_loaded": false,
+  "locomo_loaded": false,
+  "longmemeval_loaded": false,
+  "next_stage": "register_new_source_erm_replication",
+  "passed": true,
+  "plan": "QWEN_UTILITY_RECORD_CONTROLLER_V11_FAILURE_DIAGNOSTIC_PLAN.md",
+  "protocol": "qwen_utility_record_controller_v11_failure_diagnostic",
+  "templama_development_loaded": false,
+  "terminal_status": "v11_failure_diagnostic_completed",
+  "training_audit_sha256": "4ca6b78a03f92e3eec450036259d9a83c336c8f9e6cfe5726a0000ff295a37aa",
+  "training_summary_sha256": "8a4fe961dfa539de888dab3944663f93bc245d74dc612f92ca28ad142dcd41aa",
+  "upstream_hashes": {
+    "development_data": "3857d29a06b5e96897fb2d461bfd09816045f6dc7e038a65ca22c066c3914818",
+    "development_feature": "03e556a3ce81e478876e28b17433ccf009dfb340294f34e96544b0c7ab74858d",
+    "development_label": "3eee9a825bd8ea1526250dde2fec4cf6c88af9975d1be05dc3cf06bf6a42f8cc",
+    "fewrel_feature": "73a589d5c6f0644c5c7a2a5454b35118fd94749c493cd14a31c3f6f0a8727eff",
+    "fewrel_label": "d4b2b1d03e1e1b1b6d6b2ce62fae9eeb6a09c46265b797cd992b13407fb3a679",
+    "lama_feature": "86f2cb7c0c8e9b0c494315bcac14edc4a138fdc639dcfecf1d6e2344f0e4bc28",
+    "lama_label": "9b1011d072e9d75b79a04cdd724cf647760d0a862f1bf9d4f8028f02ac312b26",
+    "templama_feature": "4c5cf134329ec49c19c7ccd9b97ede05a36dcee2baa13521e5ee4a3548f7905d",
+    "templama_label": "9a8162de20523a3335abae79907b335d5605e533245304a969e67a2c00577341"
+  }
+}

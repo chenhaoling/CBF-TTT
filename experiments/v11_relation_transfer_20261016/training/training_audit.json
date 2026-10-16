@@ -1,0 +1,64 @@
+{
+  "benefit_average_precision_gain": -0.0371397015269912,
+  "bootstrap": {
+    "group_bootstrap_95ci": [
+      0.022271825396825397,
+      0.04221230158730159
+    ],
+    "groups": 112,
+    "mean_group_gain": 0.03199404761904762,
+    "relation_cluster_bootstrap_95ci": [
+      0.023014632936507934,
+      0.04141865079365079
+    ],
+    "relations": 8
+  },
+  "checkpoint_sha256": {
+    "erm_equal:26101651": "88b8c9b268f0ef3a8703a63472e7a979e2be32afb113edda4ec0e09de6e9c3bb",
+    "erm_equal:26101652": "5e12dfd9279c13f50563288c1951c4aa24466afe94db1f96fbf88fd33fb71569",
+    "erm_equal:26101653": "93a688aa63b183e6d289ef5ce4897dce76aa9ba2f1a8d8818dfd17612c5be92d",
+    "relation_group_dro:26101651": "7bfcdca2db5c9161548f4627b462b93e4929be69c011fae9058ee3e59e5eb121",
+    "relation_group_dro:26101652": "c4db02854b8a95ecf1b24ccae0978aef09d7df96c795a9dc39f7d7f94d53419f",
+    "relation_group_dro:26101653": "c25b024d6b9313122fae9c2e61a2e3c6191cca4971229d97b81dc52cdf8da16b",
+    "relation_group_dro_no_fewrel:26101651": "43f001faf1db51b8611a247bec863a2a9e3c3b50badce4d86301b4b5e2c10c79",
+    "relation_group_dro_no_fewrel:26101652": "7cdde650ce6dfba93132e0ca95969aed981c7c83845a51fd8abef335fd01fa0e",
+    "relation_group_dro_no_fewrel:26101653": "3a487a6819db8566fb08e97ee3b37242ca8dace13bb89a30b85d0941fb3edbeb"
+  },
+  "checks": {
+    "all_nine_checkpoint_hashes_and_metrics_locked": true,
+    "development_gate_reconstructed": true,
+    "dro_weights_and_loss_rules_valid": true,
+    "old_development_and_tests_sealed": true,
+    "protocol_plan_and_summary_passed": true,
+    "selected_metrics_reconstructed": true,
+    "support_reconstructed": true,
+    "training_traces_finite": true,
+    "upstream_hashes_reconstructed": true
+  },
+  "development_checks": {
+    "benefit_ap_gain_at_least_point_03": false,
+    "critical_mechanisms_nonnegative": true,
+    "every_primary_seed_positive": true,
+    "fewrel_removal_drop_at_least_point_002": true,
+    "group_bootstrap_lower_above_zero": true,
+    "mean_oracle_closure_at_least_point_50": true,
+    "primary_mean_gain_at_least_point_015": true,
+    "relation_bootstrap_lower_above_zero": true,
+    "upstream_audits_passed": true,
+    "zero_collateral_every_primary_seed": true
+  },
+  "development_release_passed": false,
+  "fewrel_removal_drop": 0.03194444444444451,
+  "next_stage": "stop_v11_relation_transfer_branch",
+  "passed": true,
+  "primary_mean_closure": 0.8237547892720324,
+  "primary_mean_gain": 0.03199404761904771,
+  "primary_seed_gains": [
+    0.0324404761904763,
+    0.031845238095238204,
+    0.031696428571428625
+  ],
+  "protocol": "qwen_utility_record_controller_v11_relation_transfer_training_audit",
+  "summary_sha256": "8a4fe961dfa539de888dab3944663f93bc245d74dc612f92ca28ad142dcd41aa",
+  "terminal_status": "v11_audit_passed_gate_failed"
+}

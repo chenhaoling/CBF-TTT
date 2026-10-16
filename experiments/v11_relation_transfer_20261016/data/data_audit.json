@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "all_relations_eligible": true,
+    "balanced_relations_and_mechanisms": true,
+    "deterministic_full_reconstruction": true,
+    "development_relations_only_and_tests_sealed": true,
+    "expected_scale": true,
+    "file_hashes_recomputed": true,
+    "manifest_reconstruction": true,
+    "no_model_or_test_access": true,
+    "protocol_and_registered_parameters": true,
+    "source_rows_and_pairs_unique": true,
+    "training_relations_are_background_only": true,
+    "twin_boundary_query_structure": true,
+    "v10_donor_hashes_used_as_exclusions": true
+  },
+  "counts": {
+    "boundaries": 672,
+    "eligible_relations": 8,
+    "episodes": 224,
+    "exclusions": 2173,
+    "exclusions_by_reason": {
+      "development_masked_template_overlap": 19,
+      "development_statement_overlap": 5,
+      "duplicate_relation_statement": 683,
+      "multiple_or_invalid_entity_mentions": 1466
+    },
+    "material_entity_pairs": 4032,
+    "material_source_rows": 4032,
+    "mechanisms": {
+      "different_subject_same_relation": 16,
+      "explicit_reset_revoke": 16,
+      "mixed_lifecycle": 16,
+      "same_subject_different_relation": 16,
+      "semantic_duplicate": 16,
+      "semantic_overwrite": 16,
+      "stale_repetition": 16
+    },
+    "parsed_rows": 37734,
+    "queries": 3360,
+    "raw_rows": 39200,
+    "relations": {
+      "P1303": 14,
+      "P1344": 14,
+      "P1411": 14,
+      "P22": 14,
+      "P241": 14,
+      "P460": 14,
+      "P800": 14,
+      "P937": 14
+    },
+    "retained_rows": 37027,
+    "source_groups": 112
+  },
+  "files_sha256": {
+    "development_episodes.jsonl": "afe822ae53ece5ec151d4600f2dbe09d1ffc3c45ba7fda56306b9c57127cac7f",
+    "exclusions.jsonl": "5dde19e64bddeb36cded8dd3d08ae5201296e6a02e8e58f24905d1cd1fc246fb",
+    "materials.jsonl": "c6d3bdef343cac04e0ce98f29ca111f0dee94c6a76d7605a843756e4af0b69dc"
+  },
+  "manifest_sha256": "8a23b953ee9f34a68ce68ede50b965a9bcb0fd82ff426d7a351260b4ce4dfcbd",
+  "next_stage": "v11_development_qwen_labels",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v11_fewrel_development_corpus_audit",
+  "terminal_status": "v11_development_corpus_audit_passed"
+}

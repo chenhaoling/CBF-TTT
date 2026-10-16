@@ -1,0 +1,58 @@
+{
+  "boundaries": 672,
+  "checks": {
+    "both_binary_target_classes": true,
+    "complete_relation_coverage": true,
+    "complete_unique_boundaries": true,
+    "finite_features": true,
+    "fixed_66_feature_schema": true,
+    "heldouts_sealed": true,
+    "locked_inputs": true
+  },
+  "delete_fraction": 0.7847222222222222,
+  "delete_values": [
+    0,
+    1
+  ],
+  "development_labels_loaded": false,
+  "development_model_scores_loaded": false,
+  "external_test_loaded": false,
+  "feature_dimension": 66,
+  "heldout_benchmarks_loaded": false,
+  "internal_test_loaded": false,
+  "next_stage": "v10_fewrel_feature_audit",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v11_fewrel_development_features",
+  "record_examples": 2016,
+  "relation_boundary_counts": {
+    "P1303": 84,
+    "P1344": 84,
+    "P1411": 84,
+    "P22": 84,
+    "P241": 84,
+    "P460": 84,
+    "P800": 84,
+    "P937": 84
+  },
+  "resource": {
+    "peak_allocated_gib": 7.671383380889893,
+    "peak_reserved_gib": 7.87109375,
+    "two_gpu_critical_seconds": 26.5551284737885
+  },
+  "risk_fraction": 0.1671626984126984,
+  "risk_values": [
+    0,
+    1
+  ],
+  "safe_binary_actions": {
+    "global_clear": 96,
+    "grid_0_0_0": 256,
+    "grid_0_0_1": 126,
+    "grid_0_1_0": 72,
+    "grid_0_1_1": 56,
+    "grid_1_0_0": 16,
+    "grid_1_0_1": 13,
+    "grid_1_1_0": 29,
+    "grid_1_1_1": 8
+  }
+}
