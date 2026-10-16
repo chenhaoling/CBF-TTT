@@ -1,0 +1,76 @@
+{
+  "protocol": "native_eos_safe_layerwise_fastweight_admission_v4",
+  "stage": "development",
+  "groups": 96,
+  "labels": 288,
+  "headroom_fraction": 0.9513888888888888,
+  "mean_max_singleton_benefit": 0.10094623286621991,
+  "mean_J": {
+    "reject_all": 7.888543165228502,
+    "admit_layer_0": 7.888713668484275,
+    "admit_layer_6": 10.010385889706582,
+    "admit_layer_12": 7.890220298168801,
+    "admit_layer_18": 7.908910000981349,
+    "admit_layer_24": 7.883887140602046,
+    "admit_layer_30": 7.978821840710697,
+    "admit_layer_35": 8.81139101251244,
+    "admit_all": 12.158568789466733
+  },
+  "safe_oracle_J": 7.804644657738714,
+  "safe_oracle_gain_vs_reject": 0.08389850748978832,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.07235932555825764,
+    0.09655316380990871
+  ],
+  "safe_oracle_actions": {
+    "reject_all": 17,
+    "admit_layer_0": 49,
+    "admit_layer_6": 5,
+    "admit_layer_12": 43,
+    "admit_layer_18": 21,
+    "admit_layer_24": 41,
+    "admit_layer_30": 44,
+    "admit_layer_35": 68
+  },
+  "per_layer": {
+    "0": {
+      "positive_boundaries": 142,
+      "mean_benefit": -0.00017050325577327072
+    },
+    "6": {
+      "positive_boundaries": 13,
+      "mean_benefit": -2.1218427244780793
+    },
+    "12": {
+      "positive_boundaries": 154,
+      "mean_benefit": -0.0016771329402992623
+    },
+    "18": {
+      "positive_boundaries": 106,
+      "mean_benefit": -0.02036683575284705
+    },
+    "24": {
+      "positive_boundaries": 175,
+      "mean_benefit": 0.0046560246264562115
+    },
+    "30": {
+      "positive_boundaries": 90,
+      "mean_benefit": -0.0902786754821945
+    },
+    "35": {
+      "positive_boundaries": 113,
+      "mean_benefit": -0.9228478472839386
+    }
+  },
+  "checks": {
+    "singleton_headroom_fraction_at_least_15pct": true,
+    "safe_oracle_mean_gain_positive": true,
+    "safe_oracle_bootstrap_lower_positive": true,
+    "protected_accuracy_safe": true,
+    "protected_nll_safe": true,
+    "eos_safe": true,
+    "branch_replay_and_composition": true
+  },
+  "passed": true,
+  "next_stage": "train_controller"
+}

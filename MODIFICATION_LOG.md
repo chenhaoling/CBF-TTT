@@ -6257,8 +6257,7 @@ independent artifact audit 本身通过。单标签平均14.31--14.37秒，峰�
 与第四个七维 risk head，部署时 benefit、protected-NLL、accuracy-harm、EOS-harm 四个
 条件共同决定单层提交。V4 保持三种子、full/no-support/support-only、全部 baseline、
 development release 与一次性 test 规则。新增 V4 collector、训练器、独立 auditor、runner
-及回归测试；10项 focused tests 在 `hku-gpu2` 通过。正式384组 train 标签正在四 shard、
-每卡两 worker 的 opt-in tmux 任务中构建，未打开 development/test。
+及回归测试；完整27项 native fast-weight focused suite 在 `hku-gpu2` 通过。
 
 V4 后续执行路径增加了硬发布依赖。development collector 必须读取并验证 train summary、
 train independent audit 及二者 SHA256；sealed-test collector 还必须验证 development
@@ -6271,5 +6270,20 @@ test 启动会用原子 `O_EXCL` 在 controller 目录创建绑定结果目录�
 test 上的三种子 full/no-support/support-only、全部基线、两组 paired source-group
 bootstrap、oracle-gap closure、protected accuracy/NLL、EOS 和 support ablation。独立
 auditor 重载每个 checkpoint，重算 predictions/actions/metrics/bootstrap/release decision，
-并核对所有依赖和输出哈希。远端新增3项 V4 focused tests、Python 编译检查均通过；该路径
-只在 development 全门槛通过时可达，当前 test 仍封存。
+并核对所有依赖和输出哈希。该路径只在 development 全门槛通过时可达。
+
+V4 正式 train/development 已执行完毕。train 384组/1,152 labels 的 headroom 为94.70%，
+EOS-safe oracle gain 为0.08713，group-bootstrap 95% CI `[0.07955,0.09570]`；development
+96组/288 labels 对应为95.14%、0.08390和`[0.07236,0.09655]`。全部 label、feature、
+branch、composition、backbone、resource 与依赖 hash 审计通过。train/development 平均
+每条标签17.876/18.304秒；单 worker 峰值 allocated 10.765 GiB、reserved 11.475 GiB。
+
+九个冻结控制器及独立重算完成。三个 full seed 的 development J 为
+7.87537/7.88354/7.87898，均优于 always-write 12.15857 和 never-write 7.88854 的点估计；
+相对 never-write 的配对 bootstrap CI 分别为`[0.00514,0.02278]`、
+`[-0.00951,0.01574]`、`[-0.00008,0.02034]`。oracle gap closure 仅15.70%/5.97%/11.40%，
+且后两个 seed 未优于 matched no-support。三个 seed 的 protected accuracy、NLL 和 EOS
+安全条件全部通过，但正式 development release 三个 seed 均失败。因此
+`development_released_test=false`、`test_released=false`、`test_opened=false`；远端无
+sealed-test artifact，原子 release marker 未创建。紧凑 summary/audit/resource sidecar
+与完整结论归档在 `experiments/cbf_ttt/native_eos_safe_layerwise_write_gate_v4/`。

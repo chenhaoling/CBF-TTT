@@ -1,0 +1,71 @@
+{
+  "protocol": "native_eos_safe_layerwise_fastweight_admission_v4_controller_independent_audit",
+  "passed": true,
+  "checkpoints": 9,
+  "seeds": [
+    2026101801,
+    2026101802,
+    2026101803
+  ],
+  "variants": [
+    "no_support",
+    "support_only",
+    "full"
+  ],
+  "summary_sha256": "c21f23f58a34c0ec4155808826c82d4a15c5132d8ed58fddc351b8bf00bd03a4",
+  "train_dependency": {
+    "audit_sha256": "14988a7cbbe2e0e34272850cb275bf8dcfb2739cc66b8c4ca9799799859d90e0"
+  },
+  "development_dependency": {
+    "audit_sha256": "9e45a5451ec691a29df7ad8a3ec78df4f9d55b0f860d5a560f138fa2983a16b4"
+  },
+  "development_release": {
+    "2026101801": {
+      "oracle_gap_closure": 0.1570264471643965,
+      "checks": {
+        "better_than_always_write": true,
+        "better_than_never_write": true,
+        "bootstrap_vs_always_lower_positive": true,
+        "bootstrap_vs_never_lower_positive": true,
+        "oracle_gap_closed_at_least_30pct": false,
+        "protected_accuracy_safe": true,
+        "protected_nll_safe": true,
+        "eos_safe": true,
+        "full_better_than_no_support": true
+      },
+      "passed": false
+    },
+    "2026101802": {
+      "oracle_gap_closure": 0.0596862835428941,
+      "checks": {
+        "better_than_always_write": true,
+        "better_than_never_write": true,
+        "bootstrap_vs_always_lower_positive": true,
+        "bootstrap_vs_never_lower_positive": false,
+        "oracle_gap_closed_at_least_30pct": false,
+        "protected_accuracy_safe": true,
+        "protected_nll_safe": true,
+        "eos_safe": true,
+        "full_better_than_no_support": false
+      },
+      "passed": false
+    },
+    "2026101803": {
+      "oracle_gap_closure": 0.1140059428186253,
+      "checks": {
+        "better_than_always_write": true,
+        "better_than_never_write": true,
+        "bootstrap_vs_always_lower_positive": true,
+        "bootstrap_vs_never_lower_positive": false,
+        "oracle_gap_closed_at_least_30pct": false,
+        "protected_accuracy_safe": true,
+        "protected_nll_safe": true,
+        "eos_safe": true,
+        "full_better_than_no_support": false
+      },
+      "passed": false
+    }
+  },
+  "test_released": false,
+  "test_opened": false
+}

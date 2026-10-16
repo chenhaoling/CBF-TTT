@@ -1,0 +1,46 @@
+{
+  "protocol": "native_eos_safe_layerwise_fastweight_admission_v4_independent_audit",
+  "stage": "development",
+  "passed": true,
+  "groups": 96,
+  "labels": 288,
+  "feature_dimension": 1854,
+  "plan_sha256": "52dd5c338c49ae9339353312ce32e95f4f43f3f369342392df5c1a92ad19c19a",
+  "data_manifest_sha256": "27c712ac9d23f958583313eb59f5a0debde0045cdd789ac17226c1b19d70c6f0",
+  "data_audit_sha256": "506b8e338ccd462b908853fd93a058f229876ce0aac268224ea081c4910a8fbc",
+  "v3_failure_diagnostic_sha256": "6e8e5840546daa112acde5c7f7fe6f83ce2d3f543dc6efcc3e8cb3a962342ab8",
+  "v3_confirmation_audit_sha256": "da7684aaf7d595f2b4725f06dac159ee0720ea0faede61c5709798ecb8c3c809",
+  "result_files": {
+    "development_shard0_labels.jsonl": "dd6f4344ffbb4187d313d5e1736304d37b114fdc03775b853debd5cafe7492db",
+    "development_shard1_labels.jsonl": "4f16865f59baab0731b960c63214f5ef30d344c5f847ab1dea84f2dc2c0b39ed",
+    "development_shard2_labels.jsonl": "ae335ca85f6a316aabfdaed8554beaf9fd169a00901975e82e4889df0c35cab1",
+    "development_shard3_labels.jsonl": "112a6391c10254f854b797cc0229da0555e31b41cd8216bab5afc2ec506aeca8",
+    "development_shard0_features.jsonl": "8995c2ccec547b07c24feefa9e42bc81b6ac739cedaf077b75d8904ba83edb75",
+    "development_shard1_features.jsonl": "b82c3955ab0f085df757edd4bbbdf350877fdc3622082e7fe8da981a59c63fc3",
+    "development_shard2_features.jsonl": "8a898fdbdf0662c1a47328008a3fa51d200d516be04ed67ba282b88308699975",
+    "development_shard3_features.jsonl": "ecee5240fb57730c253e322a0aedbd6fdda0c7a07448a095d733a4c7ab86c84d"
+  },
+  "summary_sha256": "7fdc43a6b7bc1082ba2b4cd80aa8c3de8e47eabf989d7c2ba13fcdb6dc708c40",
+  "recomputed": {
+    "headroom_fraction": 0.9513888888888888,
+    "safe_oracle_gain_vs_reject": 0.08389850748978832,
+    "safe_oracle_gain_group_bootstrap_95ci": [
+      0.07235932555825764,
+      0.09655316380990871
+    ],
+    "safe_oracle_actions": {
+      "reject_all": 17,
+      "admit_layer_0": 49,
+      "admit_layer_6": 5,
+      "admit_layer_12": 43,
+      "admit_layer_18": 21,
+      "admit_layer_24": 41,
+      "admit_layer_30": 44,
+      "admit_layer_35": 68
+    }
+  },
+  "collector_audits": 4,
+  "test_opened": false,
+  "train_summary_sha256": "480d893218099eaf5a7462dcfc218dc696b2dec8ac596e023fb53e3f7bd3dd12",
+  "train_independent_audit_sha256": "14988a7cbbe2e0e34272850cb275bf8dcfb2739cc66b8c4ca9799799859d90e0"
+}

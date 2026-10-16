@@ -1,0 +1,44 @@
+{
+  "protocol": "native_eos_safe_layerwise_fastweight_admission_v4_independent_audit",
+  "stage": "train",
+  "passed": true,
+  "groups": 384,
+  "labels": 1152,
+  "feature_dimension": 1854,
+  "plan_sha256": "52dd5c338c49ae9339353312ce32e95f4f43f3f369342392df5c1a92ad19c19a",
+  "data_manifest_sha256": "27c712ac9d23f958583313eb59f5a0debde0045cdd789ac17226c1b19d70c6f0",
+  "data_audit_sha256": "506b8e338ccd462b908853fd93a058f229876ce0aac268224ea081c4910a8fbc",
+  "v3_failure_diagnostic_sha256": "6e8e5840546daa112acde5c7f7fe6f83ce2d3f543dc6efcc3e8cb3a962342ab8",
+  "v3_confirmation_audit_sha256": "da7684aaf7d595f2b4725f06dac159ee0720ea0faede61c5709798ecb8c3c809",
+  "result_files": {
+    "train_shard0_labels.jsonl": "fc6d94513287235a7dc7953f020653d27baa261dffbbc4d4aa62793ec40f3072",
+    "train_shard1_labels.jsonl": "a64c92138dee1216ae9db3ad12a324e0e4e02bb2f31c1007cb7f949aca85d156",
+    "train_shard2_labels.jsonl": "279506d4cc201a91cddb77f519464dac58fcd6246c2aad2217925750fa409030",
+    "train_shard3_labels.jsonl": "d72c027cf60d89acc4e38d1a7fb2c3eb0218712de1d31d4c2823218a97f3bb44",
+    "train_shard0_features.jsonl": "292339ba3d732faf6e30cd2faf88fc56e1dbd2b0f229d4b13a534157a6a0317c",
+    "train_shard1_features.jsonl": "6bc636b5e4d79cabf4553e208b65eae7dfe1ceed9150b920def044a51aa80cd4",
+    "train_shard2_features.jsonl": "e9bafdf206fb9718866d8ac1cd83feb4dfbc627aa4dc127d09e00995c6980ad6",
+    "train_shard3_features.jsonl": "33b6971f10a5348a6a88d6cdc498aed0dd8cc114f06b11580a7f8a81ac893064"
+  },
+  "summary_sha256": "480d893218099eaf5a7462dcfc218dc696b2dec8ac596e023fb53e3f7bd3dd12",
+  "recomputed": {
+    "headroom_fraction": 0.9470486111111112,
+    "safe_oracle_gain_vs_reject": 0.08713417382144446,
+    "safe_oracle_gain_group_bootstrap_95ci": [
+      0.07955462563431524,
+      0.09569745821499966
+    ],
+    "safe_oracle_actions": {
+      "reject_all": 80,
+      "admit_layer_0": 197,
+      "admit_layer_6": 19,
+      "admit_layer_12": 140,
+      "admit_layer_18": 85,
+      "admit_layer_24": 167,
+      "admit_layer_30": 166,
+      "admit_layer_35": 298
+    }
+  },
+  "collector_audits": 4,
+  "test_opened": false
+}

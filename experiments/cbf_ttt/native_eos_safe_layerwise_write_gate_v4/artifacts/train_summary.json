@@ -1,0 +1,76 @@
+{
+  "protocol": "native_eos_safe_layerwise_fastweight_admission_v4",
+  "stage": "train",
+  "groups": 384,
+  "labels": 1152,
+  "headroom_fraction": 0.9470486111111112,
+  "mean_max_singleton_benefit": 0.10616905154219473,
+  "mean_J": {
+    "reject_all": 7.94055541389847,
+    "admit_layer_0": 7.941643586779752,
+    "admit_layer_6": 10.106211215067932,
+    "admit_layer_12": 7.942748619390638,
+    "admit_layer_18": 7.957389950083408,
+    "admit_layer_24": 7.940312920146324,
+    "admit_layer_30": 8.045009490700775,
+    "admit_layer_35": 8.953993604748879,
+    "admit_all": 12.28403787409048
+  },
+  "safe_oracle_J": 7.853421240077026,
+  "safe_oracle_gain_vs_reject": 0.08713417382144446,
+  "safe_oracle_gain_group_bootstrap_95ci": [
+    0.07955462563431524,
+    0.09569745821499966
+  ],
+  "safe_oracle_actions": {
+    "reject_all": 80,
+    "admit_layer_0": 197,
+    "admit_layer_6": 19,
+    "admit_layer_12": 140,
+    "admit_layer_18": 85,
+    "admit_layer_24": 167,
+    "admit_layer_30": 166,
+    "admit_layer_35": 298
+  },
+  "per_layer": {
+    "0": {
+      "positive_boundaries": 569,
+      "mean_benefit": -0.0010881728812819642
+    },
+    "6": {
+      "positive_boundaries": 61,
+      "mean_benefit": -2.1656558011694598
+    },
+    "12": {
+      "positive_boundaries": 573,
+      "mean_benefit": -0.0021932054921678765
+    },
+    "18": {
+      "positive_boundaries": 442,
+      "mean_benefit": -0.016834536184938378
+    },
+    "24": {
+      "positive_boundaries": 672,
+      "mean_benefit": 0.00024249375214654167
+    },
+    "30": {
+      "positive_boundaries": 396,
+      "mean_benefit": -0.10445407680230416
+    },
+    "35": {
+      "positive_boundaries": 456,
+      "mean_benefit": -1.0134381908504075
+    }
+  },
+  "checks": {
+    "singleton_headroom_fraction_at_least_15pct": true,
+    "safe_oracle_mean_gain_positive": true,
+    "safe_oracle_bootstrap_lower_positive": true,
+    "protected_accuracy_safe": true,
+    "protected_nll_safe": true,
+    "eos_safe": true,
+    "branch_replay_and_composition": true
+  },
+  "passed": true,
+  "next_stage": "score_development"
+}
