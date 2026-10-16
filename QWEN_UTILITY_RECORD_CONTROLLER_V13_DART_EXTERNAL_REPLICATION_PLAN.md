@@ -135,3 +135,18 @@ interference, latency and memory overhead.
 | Frozen ERM passes | Selective forgetting transfers across natural sources | Open the reserved 8-relation internal test once |
 | Both reserved releases pass | Evidence supports a general forgetting controller | Run end-to-end long-memory benchmarks and full efficiency ablations |
 
+## Model-free capacity result and stop decision
+
+The independently reconstructed Stage A parsed only the locked training JSON.
+The frozen human/single-triple/exact-literal filter yielded 786 aligned rows and
+783 retained relation-entity pairs across 435 relations. Twenty-five relations
+met the background threshold, but zero met the target threshold of 140 pairs
+and seven templates. The exact allocator therefore selected no target relation
+and allocated no group.
+
+V13 stops before corpus construction, Qwen loading, labels, features or frozen
+controller evaluation. No rule was relaxed and all reserved sources remain
+sealed. This is a DART capacity failure rather than evidence against the
+forgetting controller. The next registered source should use large-scale
+natural Wikipedia text with repeated Wikidata relation types.
+

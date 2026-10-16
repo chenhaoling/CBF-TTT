@@ -1,0 +1,4133 @@
+{
+  "allocation_error": "only 0 relations meet the frozen target threshold",
+  "background_relations": [
+    "ALBUM",
+    "ARTIST",
+    "CITY",
+    "COUNTRY",
+    "DATE",
+    "DIRECTED BY",
+    "LOCATION",
+    "NAME",
+    "NATIONALITY",
+    "NOTES",
+    "NUMBER",
+    "OPPONENT",
+    "PARTY",
+    "PLACE",
+    "POINTS",
+    "POPULATION",
+    "POSITION",
+    "PRODUCER(S)",
+    "ROLE",
+    "STATUS",
+    "TEAM",
+    "TITLE",
+    "TOTAL",
+    "WINNER",
+    "YEAR"
+  ],
+  "capacity": {
+    "#": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "# BEDS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "# OF CONSTITUENCY VOTES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "# OF PARTY LIST VOTES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "# OF SEATS AVAILABLE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "% OF CONSTITUENCY VOTES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "% OF POPULAR VOTES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "'REMAIN'": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "'SAVE'": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "18-49": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "1975": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "1979-1989 REVERSE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "1991 CENSUSINDIAN CENSUS [2] (TOTAL POPULATION 838.14 MILLION): SPEAKERS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "2000": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "2001 CENSUS[1] (TOTAL POPULATION 1,004.59 MILLION): SPEAKERS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "2008": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "2008 CLUB": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "2011": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "2011 POPULATION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "2ND LEG": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "3-DART AVERAGE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ABBREVIATION": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ACT": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "AFFILIATES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "AGE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "AGGLUTINATION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ALBUM": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 3,
+        "WikiTableQuestions_mturk": 7
+      },
+      "pairs": 10,
+      "subjects": 10,
+      "templates": 9,
+      "values": 9
+    },
+    "ALTITUDE (MSLM)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "APPS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "AREA": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "AREA KM2": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "ARTIST": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 7,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 8,
+      "subjects": 8,
+      "templates": 6,
+      "values": 8
+    },
+    "ATHLETE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "ATTENDANCE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "AVERAGE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "AVERAGE MATCH ATTENDANCE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "AWARD": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "AWAY TEAM": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "BELT ALTERNATE 1": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "BERTHS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "BIRDS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "BRONZE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "BRONZE TIME": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "BUDGET": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "BUILDER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 3
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "BUILT-UP AREA": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 3
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "BUSH%": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "C STRING": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CANDIDATES ELECTED": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CANTON": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CANTON(S), NEIGHBORING COUNTRIES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CAPACITY": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CAPITAL": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CAR": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CAR #": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CARD SET REF": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CAREER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CATEGORY": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHAMPIONS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHAMPIONSHIP": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHANGE 2011/12": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHARACTER": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHARGE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHART-POSITIONS US": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHARTS SWI": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHEMICAL CLASS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CHINESE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "CITY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 7
+      },
+      "pairs": 7,
+      "subjects": 7,
+      "templates": 7,
+      "values": 7
+    },
+    "CLASS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "CLASS / TYPE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CLOCK SPEED": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CLUB": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CO-DRIVER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "COACH": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "COMMITTEE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "COMMUNITY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 1,
+      "values": 1
+    },
+    "COMPANY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 3
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "COMPETITION": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 3
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "COMPLETION DATE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "CONF.": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CONFLICT": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CONSTRICTION (INCH)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CONSTRUCTER": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CONSTRUCTOR": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "COORDINATES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "COUNTRY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 4,
+        "WikiTableQuestions_mturk": 6
+      },
+      "pairs": 10,
+      "subjects": 9,
+      "templates": 9,
+      "values": 7
+    },
+    "COUNTY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "CREWMEMBERS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 1,
+      "values": 2
+    },
+    "CURRENCY NAME": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "CURRENT DISTANCE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DATE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 4,
+        "WikiTableQuestions_mturk": 7
+      },
+      "pairs": 12,
+      "subjects": 12,
+      "templates": 12,
+      "values": 12
+    },
+    "DATE LISTED": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DATE NO. RETIRED": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DATE OF FIRST BROADCAST": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DAYS WITH FROST": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DEFENSIVE PLAYER OF THE YEAR": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DENSITY (PEOPLE/KM\u00b2)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DENSITY POPULATION PER KM\u00b2": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DESCRIPTION": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "DESIGNED": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DIAMETER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DINGLI": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DIRECTED BY": {
+      "annotation_sources": {
+        "WikiSQL_lily": 4,
+        "WikiTableQuestions_lily": 6,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 11,
+      "subjects": 11,
+      "templates": 5,
+      "values": 11
+    },
+    "DIRECTED BY:": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DISCOVERER": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DISPLACEMENT": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DISTANCE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "DISTANCE (KM)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DIVISION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "DRAINAGE BASIN AREA [KM2]": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DRIVERS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 3
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 4,
+      "values": 4
+    },
+    "DURATION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "DURATION (YEARS)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ECTS CREDIT POINTS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ELECTIONS WON": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ELECTORATE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ELIMINATED BY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "EMPLOYEES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ENCODING": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ENGLISH SPELLING": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ENGLISH TITLE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ENROLLMENT": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "ENTRANT": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ENTRANTS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "EPISODE(S)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 3,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 3,
+      "values": 4
+    },
+    "EQUIVALENT DAILY INFLATION RATE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ESTABLISHMENT": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "EVENT": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "FEATURED GUEST(S)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "FEB": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FERTILITY RATES": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FILM": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "FIRST ELECTED": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "FIRST MENTION OR BUILT": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FIRST RELEASE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FLAG BEARER": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FLASH SIZE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FORMAT": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "FORMULA": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FOUNDATION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FOUNDING DATE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "FRAME": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FREQUENCY": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FRIDAY FIFTH DAY": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FROM": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "FSB SPEED": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "FUNCTION": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GANG": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GB": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GDP (BILLION US$)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GDP (USD BLN, 2012)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GENERAL CLASSIFICATION": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GENRE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "GFR 2006": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GOALS AGAINST": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GOALS FOR": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GOALS OLIMPIA": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GOALS SCORED": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GOLD": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "GRAND FINAL DUAL TELEVISION COMMENTATOR": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "GRAND FINAL TELEVISION COMMENTATOR": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GRAND PRIZE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "GRID": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "GROSS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "GROSS (WORLDWIDE)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "HIGH POINTS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "HOME TEAM": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "HOMETOWN": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "HULL NUMBERS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "IATA": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "INFLATION RATE %": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "INNS.": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "INTERNL. TOURISM RECEIPTS. 2010 (USD (X1000)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "INTERSECTING ROUTES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "JOINED": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "JUDGE (OFFICIAL)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "JUST RATIO": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "KERRY%": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 1,
+      "templates": 2,
+      "values": 2
+    },
+    "L2": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "L3": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LABEL": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "LAID DOWN": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LANE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LANGUAGE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LAPS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LATIN TEAMS VENUE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LAUNCH DATE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LEAD": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LEAGUE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "LEAGUE TOP SCORER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LEFT OFFICE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 4,
+      "values": 4
+    },
+    "LENGTH": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LENGTH (FT)": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LENGTH (M:SS)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LENGTH (MI)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LEVEL": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LIFETIME": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LINES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "LIVESHOW AUDIENCE MILLIONS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LOCAL TITLE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "LOCATION": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 4,
+        "WikiTableQuestions_mturk": 3
+      },
+      "pairs": 8,
+      "subjects": 8,
+      "templates": 7,
+      "values": 8
+    },
+    "LOCATION OF HEADQUARTERS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MAJORITY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MANUFACTURER": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "MARINE ORGANISM \u0391": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MASS START": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MATCHES": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 3,
+      "values": 4
+    },
+    "MATCHES PLAYED": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MAYOR (2010-2013)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MEMBER": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MENS SINGLES": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "MID-WIVES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MINERAL": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MNEMONIC": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MODULES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MOLECULAR TARGET": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MONDAY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MOVED TO": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "MVP": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "N/A": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NAME": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 4
+      },
+      "pairs": 5,
+      "subjects": 5,
+      "templates": 5,
+      "values": 5
+    },
+    "NATION OF CITIZENSHIP": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NATIONALITY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 6
+      },
+      "pairs": 7,
+      "subjects": 7,
+      "templates": 6,
+      "values": 6
+    },
+    "NC*": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NEAREST CONTESTING PARTY": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NETWORK": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NHL TEAM": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NICKNAME": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "NIXON": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "NO. OF BARANGAYS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NO. OF REIGNS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NO. OF VILLAGES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NOTATION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "NOTES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 6
+      },
+      "pairs": 7,
+      "subjects": 7,
+      "templates": 7,
+      "values": 7
+    },
+    "NUMBER": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2,
+        "WikiTableQuestions_lily": 3,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 7,
+      "subjects": 7,
+      "templates": 7,
+      "values": 7
+    },
+    "NUMBER OF POPULAR VOTES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OPEN CUP": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OPENING ACT": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OPERATOR": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "OPPONENT": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 5
+      },
+      "pairs": 7,
+      "subjects": 6,
+      "templates": 7,
+      "values": 7
+    },
+    "OPPONENT IN THE FINAL": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OPPONENT#": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OPPONENTS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OPPOSITION": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ORBITAL PERIOD (YEARS)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "ORIGIN": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ORIGINAL AIR DATE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2,
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "ORIGINAL LABEL": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ORIGINAL TITLE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "OTHER GUESTS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OTHERS#": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OUTGOING MANAGER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OVERALL RECORD": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "OWNER": {
+      "annotation_sources": {
+        "WikiSQL_lily": 3
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 1,
+      "values": 3
+    },
+    "PARISH EST": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PARISH PRIEST": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PARLIAMENT": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "PARTY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 6,
+        "WikiTableQuestions_mturk": 3
+      },
+      "pairs": 9,
+      "subjects": 9,
+      "templates": 8,
+      "values": 8
+    },
+    "PARTY LEADER": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PASSENGERS HANDLED": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PEAK CHART POSITIONS US": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PEAK CHART POSITIONS US MAIN": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PEAK CHART POSITIONS US POP": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PEAK CHART POSITIONS US R&B": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "PEAK POSITIONS JPN": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PENNANT NUMBER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PERCENT": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PERCENT AGAINST": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PERCENT FOR": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PERCENTAGE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PERCENTAGE OF VOTES": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PERFORMER (S)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PHYSICIAN (GP & SPECIALIST)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PICK": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "PICK #": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PLACE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 3
+      },
+      "pairs": 5,
+      "subjects": 5,
+      "templates": 5,
+      "values": 5
+    },
+    "PLACE OF BIRTH": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PLACE, THEATRE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PLAYED": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 4,
+      "values": 3
+    },
+    "PLAYOFFS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PLURINOMINAL DEPUTIES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POINTS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 3,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 5,
+      "subjects": 5,
+      "templates": 5,
+      "values": 4
+    },
+    "POLE POSITION": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POLITICAL PARTY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POPULATION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 3
+      },
+      "pairs": 5,
+      "subjects": 5,
+      "templates": 5,
+      "values": 5
+    },
+    "POPULATION (2003 EST.)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "POPULATION (2010 CENSUS)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "POPULATION (2011 CENSUS)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POPULATION 2011": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POPULATION CENTER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POPULATION CHANGE 2002-2012 (%)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POPULATION DENSITY 2012 (KM 2 )": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POSITION": {
+      "annotation_sources": {
+        "WikiSQL_lily": 4,
+        "WikiTableQuestions_lily": 6,
+        "WikiTableQuestions_mturk": 7
+      },
+      "pairs": 17,
+      "subjects": 17,
+      "templates": 17,
+      "values": 13
+    },
+    "POSITION IN TABLE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "POSTAL CODE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "POWER": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PREMIERE DATE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "PREMI\u00c8RE DATE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PREVIOUS CLUB": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "PRIMARY SPONSOR(S)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 3
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "PRINCIPAL COUNTY": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PRIZE (EUR)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "PRODUCER(S)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 4,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 6,
+      "subjects": 6,
+      "templates": 4,
+      "values": 6
+    },
+    "PRODUCTION CODE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "PROGRAMMING TYPE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PROVINCE-LEVEL DIVISION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PUBLISHER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "PUBLISHER(S)": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "PURPOSE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "QORMI": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "QTY. ISSUED": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "RANK": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 3
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 4,
+      "values": 4
+    },
+    "REACTOR TYPE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "REASON FOR CHANGE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "RECORD": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "RECORD LABEL": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "REFRACTIVE INDEX(ES) 589.3 NM": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "REGION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "RELATIONSHIP": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "RELEASE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "RELEASED": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "REMIXED BY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "RESULT": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 3
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "RESULTS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ROAD": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ROLE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 4,
+        "WikiTableQuestions_mturk": 4
+      },
+      "pairs": 8,
+      "subjects": 8,
+      "templates": 8,
+      "values": 8
+    },
+    "ROSTER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ROUND": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "ROUND 1": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "ROUNDS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "RUGBY SINCE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "RUNNER-UP": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "RUNS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SALES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "SCALABLE MODES": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SCORE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "SCREENS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SEASON": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "SECOND": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SERVICES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SHIPYARD": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SHIRT SPONSOR": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SHORT NAME": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SIGNED": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SILVER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SINGERS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SITE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SITES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SIZE (STEPS)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SKIP": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SLOPE (%)": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SONG": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 3
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 4,
+      "values": 4
+    },
+    "STADIUM": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "STANDARD": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "STATE": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "STATUS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 5
+      },
+      "pairs": 5,
+      "subjects": 5,
+      "templates": 5,
+      "values": 5
+    },
+    "STRIKE RATE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "STUDIO": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SUMMARY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SUNLIGHT HOURS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "SURFACE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TEACHING LANGUAGE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TEAM": {
+      "annotation_sources": {
+        "WikiSQL_lily": 3,
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 7,
+      "subjects": 7,
+      "templates": 7,
+      "values": 7
+    },
+    "TEAM NAME": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TEAMS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TELEPLAY BY": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TERM": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TERMINAL 1": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TFR 2006": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "THURSDAY IUPPITER (JUPITER)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TIER": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TIES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TILL": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TIME": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "TIME REQUIRED FOR PRICES TO DOUBLE": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TITLE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 7,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 8,
+      "subjects": 8,
+      "templates": 7,
+      "values": 8
+    },
+    "TITLE, POSITION": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TO": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "TOOK OFFICE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 3,
+      "values": 3
+    },
+    "TOP SPEED": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TOTAL": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 3,
+        "WikiTableQuestions_mturk": 6
+      },
+      "pairs": 9,
+      "subjects": 9,
+      "templates": 9,
+      "values": 8
+    },
+    "TOTAL GDP (NOMINAL) (BILLION US$)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TOTAL MEDALS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TOTAL NUMBER OF STUDENTS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TOTAL SPECTATORSHIP": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TOTAL VIEWERS": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TRADEMARK": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TRAIN NO.": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TRANSMISSION": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "TRIES FOR": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TRUCK(S)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 1,
+      "values": 2
+    },
+    "TUESDAY MARS (MARS)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "TYPE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 4
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 4,
+      "values": 4
+    },
+    "TYPE OF VEHICLE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "U.S. VIEWERS (MILLION)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 3
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "U.S. VIEWERS (MILLIONS)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "UFO RADIO TOP 15": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "UK ALBUMS CHART": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "UNEMPLOYMENT RATE %": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "UNICODE NAME": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "URBAN AREA": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "US DOLLAR EXCHANGE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "US R&B": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "VENUE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 2,
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 4,
+      "values": 4
+    },
+    "VESSEL": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "VICE-CAPTAIN": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "VIEWERS (IN MILLIONS)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "VIEWERS (M)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "VIEWERS(MILLIONS)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "VOLUMES": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "VOTES": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 3,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 4,
+      "subjects": 4,
+      "templates": 4,
+      "values": 4
+    },
+    "WATER SOLUBILITY": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WEAPON DESCRIPTION": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WEDNESDAY MERCURIUS (MERCURY)": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WEIGHT": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "WEIGHT (KG)": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WINDSPEED": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WINNER": {
+      "annotation_sources": {
+        "WikiSQL_lily": 3,
+        "WikiTableQuestions_lily": 1,
+        "WikiTableQuestions_mturk": 5
+      },
+      "pairs": 9,
+      "subjects": 9,
+      "templates": 9,
+      "values": 9
+    },
+    "WINNERS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WINNINGS": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WINS": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 2
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "WOMENS SINGLES": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WON": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WRITER": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "WRITTEN BY": {
+      "annotation_sources": {
+        "WikiSQL_lily": 2,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 3,
+      "subjects": 3,
+      "templates": 2,
+      "values": 3
+    },
+    "YEAR": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 25,
+        "WikiTableQuestions_mturk": 16
+      },
+      "pairs": 41,
+      "subjects": 41,
+      "templates": 27,
+      "values": 25
+    },
+    "YEAR 3 2015, 2018, 2021, 2024 . . . 8:16-9:35": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "YEAR ACQUIRED [A ]": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "YEAR BUILT": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "YEAR OF APPOINTMENT": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "YEAR OF CONSTRUCTION": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "YEAR OPENED": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1,
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 2,
+      "subjects": 2,
+      "templates": 2,
+      "values": 2
+    },
+    "YEARS MFG'D": {
+      "annotation_sources": {
+        "WikiTableQuestions_mturk": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "YEARS WITH FRANCHISE": {
+      "annotation_sources": {
+        "WikiTableQuestions_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    },
+    "YOUTH CLUB": {
+      "annotation_sources": {
+        "WikiSQL_lily": 1
+      },
+      "pairs": 1,
+      "subjects": 1,
+      "templates": 1,
+      "values": 1
+    }
+  },
+  "checks": {
+    "complete_allocator_succeeded": false,
+    "eight_frozen_ranked_target_relations": false,
+    "excluded_sources_absent": true,
+    "globally_unique_material_pairs": false,
+    "globally_unique_material_rows": false,
+    "human_sources_only": true,
+    "no_model_or_sealed_benchmark_access": true,
+    "only_registered_train_json_parsed": true,
+    "source_commit_manifest_and_train_hash_locked": true
+  },
+  "counts": {
+    "allocated_groups": 0,
+    "background_relations": 25,
+    "deduplicated_pair_rows": 786,
+    "material_entity_pairs": 0,
+    "material_source_rows": 0,
+    "raw_aligned_rows": 786,
+    "relations": 435,
+    "removed_rows": 3,
+    "retained_rows": 783,
+    "target_candidates": 0
+  },
+  "files_sha256": {
+    "eligible_rows.jsonl": "9d7fcaa683a9d048fced515c9c730fd4a340950231ab1735d8c4121d689b488b",
+    "exclusions.jsonl": "263b2008be97a5fc5fba73accfae8450985c5e293b7d8fdd4cc7332c24b8d160",
+    "materials.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "model_loaded": false,
+  "next_stage": "stop_v13_dart_capacity_failure",
+  "passed": false,
+  "prior_corpus_exclusions": {
+    "files": {
+      "/home/ctj/cbf_ttt_utility_record_controller_v10_fewrel_corpus_20261016_retry1/data/formal_episodes.jsonl": {
+        "episodes": 1344,
+        "sha256": "2dfe8cca02ff72513f2ae02e9b971bb6f3310885596a93ffea22ccd3db07d39a"
+      },
+      "/home/ctj/cbf_ttt_utility_record_controller_v11_fewrel_development_20261016_retry1/data/development_episodes.jsonl": {
+        "episodes": 224,
+        "sha256": "afe822ae53ece5ec151d4600f2dbe09d1ffc3c45ba7fda56306b9c57127cac7f"
+      }
+    },
+    "labels_or_model_outputs_used": false,
+    "masked_templates": 8752,
+    "normalized_statements": 9296,
+    "source_row_hashes": 0
+  },
+  "protocol": "qwen_utility_record_controller_v13_dart_capacity",
+  "sealed_benchmarks_loaded": false,
+  "seed": 202610211,
+  "selected_target_relations": [],
+  "source_commit": "bb644b12ec1d0264f96a31145534b9a94f6ff5f5",
+  "source_manifest_sha256": "dc242d6873951b774d36c02783b546a265f2d645f5c236c9d51a176c187ad558",
+  "source_summary": {
+    "annotation_sources": {
+      "WikiSQL_decl_sents": 3608,
+      "WikiSQL_lily": 720,
+      "WikiTableQuestions_lily": 4700,
+      "WikiTableQuestions_mturk": 2047,
+      "e2e": 33482,
+      "webnlg": 18102
+    },
+    "entries": 30526,
+    "parse_exclusions": {
+      "excluded_or_unknown_annotation_source": 5930,
+      "invalid_triple_values": 10,
+      "not_exact_literal_xy_alignment": 474,
+      "not_exactly_one_triple": 55459
+    },
+    "raw_aligned_rows": 786,
+    "triple_lengths": {
+      "1": 4476,
+      "10": 10,
+      "2": 5598,
+      "3": 5679,
+      "4": 6819,
+      "5": 5138,
+      "6": 2194,
+      "7": 592,
+      "8": 15,
+      "9": 5
+    }
+  },
+  "target_candidates_ranked": [],
+  "terminal_status": "v13_dart_capacity_failed",
+  "thresholds": {
+    "background_pairs": 5,
+    "background_templates": 4,
+    "target_pairs": 140,
+    "target_templates": 7
+  },
+  "train_sha256": "92c8594979c05f508f5739047079ec2ffe5a244e58bfa2b50a9cb8b9c65f5a2b"
+}

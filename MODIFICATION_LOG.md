@@ -6126,3 +6126,17 @@ commit `bb644b12ec1d0264f96a31145534b9a94f6ff5f5`，`data/v1.1.1` 的8个文件�
 manifest 中明确 `json_or_xml_parsed=false`、模型未加载、保留 benchmark 未读取。
 后续模型无关可行性检查只允许解析正式 train JSON，dev/test 继续封存。
 
+新增 DART train parser、完整素材分配 dry-run、独立重建 auditor、远程 runner 与 focused
+tests。冻结过滤只接受单三元组、三类人工 annotation source 以及 subject/value 各一次
+字面出现；按 seed `202610211` 对 relation 做 SHA256 排名，目标 relation 必须至少140个
+独立 pair/7个模板，背景 relation 至少5个 pair/4个模板。8个 target 不作为背景 donor，
+且分配器必须直接满足112组的全部全局唯一性约束。本地2项单测、Python/shell 语法和
+diff 检查通过。
+
+远程 V13 Stage A 与独立重建均完成。786条原始对齐行在 pair 去重和既有语料排除后剩
+783条，分布于435个关系；25个关系达到背景 donor 门，但0个关系达到140 pair/7 template
+目标门，因此正式分配为0组。auditor 精确重建 capacity decision、eligible rows、
+exclusions、空 material allocation 与全部文件 hash。全程未加载 Qwen，DART dev/test
+和所有保留 benchmark 未打开。V13 归类为 source-capacity failure，不构成算法负结果；
+紧凑证据归档在 `experiments/v13_dart_capacity_20261016/`。
+
