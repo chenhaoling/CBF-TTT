@@ -6,7 +6,7 @@ import unittest
 from tasks.build_native_support_write_gate_v1 import (
     MECHANISM_SOURCE, convert_episode, pack_chunk, stable_hash,
 )
-from tasks.native_support_write_gate_v1 import support_features
+from tasks.native_support_write_gate_v1 import split_artifacts, support_features
 
 
 class TinyTokenizer:
@@ -55,6 +55,18 @@ class DataTests(unittest.TestCase):
         model, audit = convert_episode(TinyTokenizer(), episode("explicit_reset_revoke"), "exact_duplicate")
         initial = audit["setup_statements"][0]
         self.assertTrue(all(row["incoming_statement"] == initial for row in audit["boundaries"]))
+
+    def test_features_and_counterfactual_labels_are_physically_separate(self):
+        result = {"protocol": "p", "stage": "smoke", "group_id": "g", "boundary": 0,
+                  "mechanism_hash": "secret", "features": [1.0], "feature_schema": {},
+                  "online_memory": {"0": {"centroid": [1.0], "variance": [2.0]}},
+                  "uncertainty": {}, "geometry": {}, "branch_audit": {},
+                  "actions": {"reject": {}, "admit": {}}, "J0": 1.0, "J1": 2.0,
+                  "B": -1.0, "resource": {}}
+        feature, label = split_artifacts(result)
+        self.assertFalse({"actions", "J0", "J1", "B", "mechanism_hash"} & set(feature))
+        self.assertFalse({"features", "online_memory", "uncertainty", "geometry"} & set(label))
+        self.assertIn("feature_sha256", label)
 
 
 @unittest.skipUnless(__import__("importlib").util.find_spec("torch"), "torch required")

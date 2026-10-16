@@ -85,26 +85,42 @@ def audit(args) -> dict:
     model_inputs = load_jsonl(data_root / "model_inputs.jsonl")
     if len(model_inputs) != 48 or len({row["group_id"] for row in model_inputs}) != 48:
         raise ValueError("pilot input group contract changed")
-    paths = sorted(root.glob(f"{args.stage}_shard*.jsonl"))
+    paths = sorted(root.glob(f"{args.stage}_shard*_labels.jsonl"))
     rows = [row for path in paths for row in load_jsonl(path)]
+    feature_paths = sorted(root.glob(f"{args.stage}_shard*_features.jsonl"))
+    feature_rows = [row for path in feature_paths for row in load_jsonl(path)]
     expected_groups = 12 if args.stage == "smoke" else 48
     expected_labels = expected_groups * 3
     if len(rows) != expected_labels or len({(r["group_id"], r["boundary"]) for r in rows}) != expected_labels:
         raise ValueError("missing/duplicate result rows")
+    if len(feature_rows) != expected_labels or len({(r["group_id"], r["boundary"]) for r in feature_rows}) != expected_labels:
+        raise ValueError("missing/duplicate feature rows")
+    feature_index = {(row["group_id"], row["boundary"]): row for row in feature_rows}
     audits = []
     for path in paths:
         sidecar = Path(str(path) + ".audit.json"); item = json.loads(sidecar.read_text())
         if item["rows_sha256"] != digest(path) or not item["backbone_unchanged"]:
             raise ValueError("collector audit mismatch")
+        feature_path = Path(item["features_path"])
+        if item["features_sha256"] != digest(feature_path):
+            raise ValueError("feature shard hash mismatch")
         audits.append(item)
     forbidden = {"mechanism", "subject", "relation", "value", "answer", "future_loss", "oracle_action"}
     for row in rows:
         if row["protocol"] != PROTOCOL or row["stage"] != args.stage:
             raise ValueError("row identity mismatch")
-        if forbidden & set(row): raise ValueError("forbidden controller field leaked")
-        if len(row["features"]) != 1854 or not all(isinstance(x, (int, float)) and math.isfinite(x) for x in row["features"]):
+        if {"features", "online_memory", "uncertainty", "geometry"} & set(row):
+            raise ValueError("online features leaked into label artifact")
+        feature = feature_index[row["group_id"], row["boundary"]]
+        if {"actions", "J0", "J1", "B", "mechanism_hash"} & set(feature):
+            raise ValueError("offline labels leaked into feature artifact")
+        if forbidden & set(feature): raise ValueError("forbidden controller field leaked")
+        expected_feature_hash = hashlib.sha256(json.dumps(feature, sort_keys=True).encode()).hexdigest()
+        if row["feature_sha256"] != expected_feature_hash:
+            raise ValueError("feature/label join hash mismatch")
+        if len(feature["features"]) != 1854 or not all(isinstance(x, (int, float)) and math.isfinite(x) for x in feature["features"]):
             raise ValueError("feature dimension/value mismatch")
-        assert_numeric_tree(row["online_memory"])
+        assert_numeric_tree(feature["online_memory"])
         for name, key in (("reject", "J0"), ("admit", "J1")):
             J, accuracy, nll, eos = recompute_action(row["actions"][name])
             if abs(J - row[key]) > 1e-9 or abs(J - row["actions"][name]["J"]) > 1e-9:
@@ -149,7 +165,7 @@ def audit(args) -> dict:
     result = {"protocol": PROTOCOL + "_independent_audit", "stage": args.stage,
               "passed": True, "groups": len(groups), "labels": len(rows),
               "plan_sha256": digest(plan), "data_manifest_sha256": digest(data_root/"manifest.json"),
-              "result_files": {path.name: digest(path) for path in paths},
+              "result_files": {path.name: digest(path) for path in [*paths, *feature_paths]},
               "summary_sha256": digest(summary_path), "collector_audits": len(audits),
               "feature_dimension": 1854, "plaintext_online_memory_fields": 0,
               "recomputed": recomputed, "test_opened": manifest["test_opened"]}

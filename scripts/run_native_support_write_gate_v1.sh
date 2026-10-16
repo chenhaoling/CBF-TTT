@@ -31,14 +31,16 @@ fi
 
 pids=()
 for ((shard=0; shard<NUM_SHARDS; shard++)); do
-  output=$OUTPUT_ROOT/${STAGE}_shard${shard}.jsonl
-  if [[ -e "$output" ]]; then
-    echo "refusing to overwrite $output" >&2
+  output=$OUTPUT_ROOT/${STAGE}_shard${shard}_labels.jsonl
+  features=$OUTPUT_ROOT/${STAGE}_shard${shard}_features.jsonl
+  if [[ -e "$output" || -e "$features" ]]; then
+    echo "refusing to overwrite $output or $features" >&2
     exit 3
   fi
   CUDA_VISIBLE_DEVICES=$shard "$PYTHON_BIN" -m tasks.native_support_write_gate_v1 collect \
     --data-root "$DATA_ROOT" --model "$MODEL" --stage "$STAGE" \
     --shard "$shard" --num-shards "$NUM_SHARDS" --output "$output" \
+    --features-output "$features" \
     > "$OUTPUT_ROOT/${STAGE}_shard${shard}.log" 2>&1 &
   pids+=("$!")
 done
@@ -54,7 +56,7 @@ fi
 
 inputs=()
 for ((shard=0; shard<NUM_SHARDS; shard++)); do
-  inputs+=("$OUTPUT_ROOT/${STAGE}_shard${shard}.jsonl")
+  inputs+=("$OUTPUT_ROOT/${STAGE}_shard${shard}_labels.jsonl")
 done
 "$PYTHON_BIN" -m tasks.native_support_write_gate_v1 summarize \
   --inputs "${inputs[@]}" --output "$OUTPUT_ROOT/${STAGE}_summary.json"

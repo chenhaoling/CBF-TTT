@@ -264,6 +264,21 @@ def load_inputs(data_root: Path) -> tuple[list[dict], dict]:
     return rows, manifest
 
 
+def split_artifacts(result: dict) -> tuple[dict, dict]:
+    """Physically separate online-decision features from counterfactual labels."""
+    identity = {key: result[key] for key in ("protocol", "stage", "group_id", "boundary")}
+    feature = {**identity, "features": result["features"],
+               "feature_schema": result["feature_schema"],
+               "online_memory": result["online_memory"],
+               "uncertainty": result["uncertainty"], "geometry": result["geometry"]}
+    feature_sha = hashlib.sha256(json.dumps(feature, sort_keys=True).encode()).hexdigest()
+    label = {**identity, "mechanism_hash": result["mechanism_hash"],
+             "branch_audit": result["branch_audit"], "actions": result["actions"],
+             "J0": result["J0"], "J1": result["J1"], "B": result["B"],
+             "resource": result["resource"], "feature_sha256": feature_sha}
+    return feature, label
+
+
 def collect(args) -> dict:
     import torch
     rows, manifest = load_inputs(Path(args.data_root))
@@ -272,8 +287,8 @@ def collect(args) -> dict:
         rows = [row for row in rows if row["group_id"] in selected_ids]
     rows = [row for index, row in enumerate(rows) if index % args.num_shards == args.shard]
     if not rows: raise ValueError("empty shard")
-    output = Path(args.output)
-    if output.exists(): raise FileExistsError(output)
+    output, features_output = Path(args.output), Path(args.features_output)
+    if output.exists() or features_output.exists(): raise FileExistsError("label/feature output exists")
     output.parent.mkdir(parents=True, exist_ok=True)
     torch.manual_seed(PROJECTION_SEED); torch.backends.cuda.matmul.allow_tf32 = False
     model, model_meta = load_model(args.model, "step81381_native")
@@ -281,7 +296,7 @@ def collect(args) -> dict:
         raise ValueError("data/checkpoint chunk mismatch")
     before = parameter_digest(model); versions = [p._version for p in model.parameters()]
     device = next(model.parameters()).device; all_resources = []
-    with output.open("x") as sink:
+    with output.open("x") as sink, features_output.open("x") as feature_sink:
         for group_index, row in enumerate(rows):
             torch.cuda.empty_cache()
             parent = NativeSession(model); parent._forward(row["setup_chunk_ids"])
@@ -313,7 +328,9 @@ def collect(args) -> dict:
                             "J0": reject_scores["J"], "J1": admit_scores["J"], "B": benefit}
                 result, resource = _measure_cuda(label, device)
                 result["resource"] = resource; all_resources.append(resource)
-                sink.write(json.dumps(result) + "\n"); sink.flush()
+                feature, label_row = split_artifacts(result)
+                feature_sink.write(json.dumps(feature) + "\n"); feature_sink.flush()
+                sink.write(json.dumps(label_row) + "\n"); sink.flush()
                 print(json.dumps({"group": row["group_id"], "boundary": boundary["boundary"], **resource}), flush=True)
             print(json.dumps({"completed_groups": group_index + 1, "total_groups": len(rows)}), flush=True)
     if before != parameter_digest(model) or versions != [p._version for p in model.parameters()]:
@@ -321,6 +338,7 @@ def collect(args) -> dict:
     audit = {"protocol": PROTOCOL, "stage": args.stage, "shard": args.shard,
              "num_shards": args.num_shards, "groups": len(rows), "labels": len(all_resources),
              "rows_sha256": sha256(output), "data_manifest_sha256": sha256(Path(args.data_root)/"manifest.json"),
+             "features_sha256": sha256(features_output), "features_path": str(features_output),
              "model": model_meta, "weights_sha256": before, "backbone_unchanged": True,
              "mean_label_seconds": statistics.fmean(x["seconds"] for x in all_resources),
              "peak_allocated_gib": max(x["peak_allocated_gib"] for x in all_resources),
@@ -401,6 +419,7 @@ def main():
     collect_parser.add_argument("--stage", choices=("smoke", "pilot"), required=True)
     collect_parser.add_argument("--shard", type=int, default=0); collect_parser.add_argument("--num-shards", type=int, default=1)
     collect_parser.add_argument("--eos-id", type=int, default=151645); collect_parser.add_argument("--output", required=True)
+    collect_parser.add_argument("--features-output", required=True)
     summary_parser = sub.add_parser("summarize"); summary_parser.add_argument("--inputs", nargs="+", type=Path, required=True)
     summary_parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
