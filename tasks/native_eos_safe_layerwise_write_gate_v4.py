@@ -50,8 +50,8 @@ def load_inputs(data_root: Path, stage: str) -> tuple[list[dict], dict, dict]:
         raise ValueError("V3 corpus did not pass independent audit")
     if audit.get("manifest_sha256") != sha256(data_root / "manifest.json"):
         raise ValueError("V3 corpus changed after audit")
-    if stage not in ("train", "development"):
-        raise ValueError("V4 may score only train or development before test release")
+    if stage not in ("train", "development", "sealed_test"):
+        raise ValueError("unknown V4 scoring stage")
     path = data_root / f"{stage}_model_inputs.jsonl"
     if manifest["files_sha256"].get(path.name) != sha256(path):
         raise ValueError(f"{stage} input hash mismatch")
@@ -62,6 +62,58 @@ def load_inputs(data_root: Path, stage: str) -> tuple[list[dict], dict, dict]:
         allowed = set(manifest["smoke_groups"])
         rows = [row for row in rows if row["group_id"] in allowed]
     return rows, manifest, audit
+
+
+def verify_stage_release(stage: str, artifact_root: Path, controller_root: Path | None) -> dict:
+    """Verify immutable predecessor artifacts before opening a later split."""
+    dependency = {}
+    if stage in ("development", "sealed_test"):
+        summary_path = artifact_root / "train_summary.json"
+        audit_path = artifact_root / "train_independent_audit.json"
+        summary = json.loads(summary_path.read_text())
+        audit = json.loads(audit_path.read_text())
+        if not summary.get("passed") or not audit.get("passed") or audit.get("test_opened") \
+                or audit.get("summary_sha256") != sha256(summary_path):
+            raise ValueError("V4 train collection did not pass independent audit")
+        dependency.update({
+            "train_summary_sha256": sha256(summary_path),
+            "train_independent_audit_sha256": sha256(audit_path),
+        })
+    if stage == "sealed_test":
+        dev_summary_path = artifact_root / "development_summary.json"
+        dev_audit_path = artifact_root / "development_independent_audit.json"
+        dev_summary = json.loads(dev_summary_path.read_text())
+        dev_audit = json.loads(dev_audit_path.read_text())
+        if not dev_summary.get("passed") or not dev_audit.get("passed") or dev_audit.get("test_opened") \
+                or dev_audit.get("summary_sha256") != sha256(dev_summary_path):
+            raise ValueError("V4 development labels did not pass independent audit")
+        if controller_root is None:
+            raise ValueError("sealed test requires an independently audited controller")
+        controller_summary_path = controller_root / "training_summary.json"
+        controller_audit_path = controller_root / "training_independent_audit.json"
+        release_marker_path = controller_root / "sealed_test_release.json"
+        controller_summary = json.loads(controller_summary_path.read_text())
+        controller_audit = json.loads(controller_audit_path.read_text())
+        release_marker = json.loads(release_marker_path.read_text())
+        if not controller_summary.get("development_released_test") \
+                or controller_summary.get("test_opened") \
+                or not controller_audit.get("passed") \
+                or not controller_audit.get("test_released") \
+                or controller_audit.get("test_opened") \
+                or controller_audit.get("summary_sha256") != sha256(controller_summary_path):
+            raise ValueError("V4 development did not release sealed test")
+        if release_marker.get("artifact_root") != str(artifact_root.resolve()) \
+                or release_marker.get("controller_summary_sha256") != sha256(controller_summary_path) \
+                or release_marker.get("controller_independent_audit_sha256") != sha256(controller_audit_path):
+            raise ValueError("V4 sealed-test one-shot marker mismatch")
+        dependency.update({
+            "development_summary_sha256": sha256(dev_summary_path),
+            "development_independent_audit_sha256": sha256(dev_audit_path),
+            "controller_summary_sha256": sha256(controller_summary_path),
+            "controller_independent_audit_sha256": sha256(controller_audit_path),
+            "sealed_test_release_marker_sha256": sha256(release_marker_path),
+        })
+    return dependency
 
 
 def split_artifacts(result: dict) -> tuple[dict, dict]:
@@ -96,6 +148,9 @@ def collect(args) -> dict:
     import torch
 
     data_root = Path(args.data_root)
+    output, feature_output = Path(args.output), Path(args.features_output)
+    controller_root = Path(args.controller_root) if args.controller_root else None
+    release_dependency = verify_stage_release(args.stage, output.parent, controller_root)
     rows, manifest, data_audit = load_inputs(data_root, args.stage)
     plan_path, v3_root = Path(args.plan), Path(args.v3_root)
     diagnostic_path = v3_root / "confirmation_failure_diagnostic.json"
@@ -111,7 +166,6 @@ def collect(args) -> dict:
     rows = [row for index, row in enumerate(rows) if index % args.num_shards == args.shard]
     if not rows:
         raise ValueError("empty V3 shard")
-    output, feature_output = Path(args.output), Path(args.features_output)
     if output.exists() or feature_output.exists():
         raise FileExistsError("refusing to overwrite V3 artifacts")
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -214,10 +268,11 @@ def collect(args) -> dict:
         "mean_label_seconds": statistics.fmean(item["seconds"] for item in resources),
         "peak_allocated_gib": max(item["peak_allocated_gib"] for item in resources),
         "peak_reserved_gib": max(item["peak_reserved_gib"] for item in resources),
-        "sealed_test_scored": False,
+        "sealed_test_scored": args.stage == "sealed_test",
         "plan_sha256": sha256(plan_path),
         "v3_failure_diagnostic_sha256": sha256(diagnostic_path),
         "v3_confirmation_audit_sha256": sha256(confirmation_audit_path),
+        **release_dependency,
     }
     Path(str(output) + ".audit.json").write_text(json.dumps(sidecar, indent=2) + "\n")
     return sidecar
@@ -245,7 +300,7 @@ def safe_action(row: dict) -> str:
 
 def summarize(inputs: list[Path], output: Path) -> dict:
     rows = [json.loads(line) for path in inputs for line in path.read_text().splitlines() if line.strip()]
-    expected = {"train": 1152, "development": 288}[rows[0]["stage"]]
+    expected = {"train": 1152, "development": 288, "sealed_test": 288}[rows[0]["stage"]]
     if len(rows) != expected or len({(row["group_id"], row["boundary"]) for row in rows}) != expected:
         raise ValueError("incomplete/duplicate V3 action rows")
     if any(set(row["actions"]) != set(ALL_ACTIONS) for row in rows):
@@ -288,7 +343,8 @@ def summarize(inputs: list[Path], output: Path) -> dict:
             "mean_benefit": statistics.fmean(row["benefit"][action] for row in rows),
         } for layer, action in zip(LAYERS, SINGLETON_ACTIONS)},
         "checks": checks, "passed": all(checks.values()),
-        "next_stage": "train_controller" if rows[0]["stage"] == "development" and all(checks.values()) \
+        "next_stage": "evaluate_frozen_controller" if rows[0]["stage"] == "sealed_test" \
+                      else "train_controller" if rows[0]["stage"] == "development" and all(checks.values()) \
                       else "score_development" if rows[0]["stage"] == "train" and all(checks.values()) \
                       else "stop_before_controller_and_test",
     }
@@ -300,8 +356,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(); sub = parser.add_subparsers(dest="command", required=True)
     collect_parser = sub.add_parser("collect")
     collect_parser.add_argument("--data-root", required=True); collect_parser.add_argument("--model", required=True)
-    collect_parser.add_argument("--stage", choices=("train", "development"), required=True)
+    collect_parser.add_argument("--stage", choices=("train", "development", "sealed_test"), required=True)
     collect_parser.add_argument("--plan", default=PLAN); collect_parser.add_argument("--v3-root", required=True)
+    collect_parser.add_argument("--controller-root")
     collect_parser.add_argument("--shard", type=int, default=0); collect_parser.add_argument("--num-shards", type=int, default=1)
     collect_parser.add_argument("--eos-id", type=int, default=151645)
     collect_parser.add_argument("--output", required=True); collect_parser.add_argument("--features-output", required=True)

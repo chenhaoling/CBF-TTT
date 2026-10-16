@@ -69,10 +69,58 @@ def audit(args) -> dict:
     data_audit = json.loads((data_root / "data_audit.json").read_text())
     if not data_audit.get("passed") or data_audit.get("test_opened") or manifest.get("sealed_test_scored"):
         raise ValueError("data audit/test seal failed")
+    release_dependency = {}
+    if args.stage in ("development", "sealed_test"):
+        train_summary_path = root / "train_summary.json"
+        train_audit_path = root / "train_independent_audit.json"
+        train_summary = json.loads(train_summary_path.read_text())
+        train_audit = json.loads(train_audit_path.read_text())
+        if not train_summary.get("passed") or not train_audit.get("passed") \
+                or train_audit.get("test_opened") \
+                or train_audit.get("summary_sha256") != digest(train_summary_path):
+            raise ValueError("train release dependency")
+        release_dependency.update({
+            "train_summary_sha256": digest(train_summary_path),
+            "train_independent_audit_sha256": digest(train_audit_path),
+        })
+    if args.stage == "sealed_test":
+        if not args.controller_root:
+            raise ValueError("sealed test audit requires controller root")
+        dev_summary_path = root / "development_summary.json"
+        dev_audit_path = root / "development_independent_audit.json"
+        dev_summary = json.loads(dev_summary_path.read_text())
+        dev_audit = json.loads(dev_audit_path.read_text())
+        if not dev_summary.get("passed") or not dev_audit.get("passed") \
+                or dev_audit.get("test_opened") \
+                or dev_audit.get("summary_sha256") != digest(dev_summary_path):
+            raise ValueError("development release dependency")
+        controller_root = Path(args.controller_root)
+        controller_summary_path = controller_root / "training_summary.json"
+        controller_audit_path = controller_root / "training_independent_audit.json"
+        marker_path = controller_root / "sealed_test_release.json"
+        controller_summary = json.loads(controller_summary_path.read_text())
+        controller_audit = json.loads(controller_audit_path.read_text())
+        marker = json.loads(marker_path.read_text())
+        if not controller_summary.get("development_released_test") \
+                or controller_summary.get("test_opened") or not controller_audit.get("passed") \
+                or not controller_audit.get("test_released") or controller_audit.get("test_opened") \
+                or controller_audit.get("summary_sha256") != digest(controller_summary_path):
+            raise ValueError("controller release dependency")
+        if marker.get("artifact_root") != str(root.resolve()) \
+                or marker.get("controller_summary_sha256") != digest(controller_summary_path) \
+                or marker.get("controller_independent_audit_sha256") != digest(controller_audit_path):
+            raise ValueError("sealed-test one-shot marker")
+        release_dependency.update({
+            "development_summary_sha256": digest(dev_summary_path),
+            "development_independent_audit_sha256": digest(dev_audit_path),
+            "controller_summary_sha256": digest(controller_summary_path),
+            "controller_independent_audit_sha256": digest(controller_audit_path),
+            "sealed_test_release_marker_sha256": digest(marker_path),
+        })
     paths = sorted(root.glob(f"{args.stage}_shard*_labels.jsonl"))
     feature_paths = sorted(root.glob(f"{args.stage}_shard*_features.jsonl"))
     rows, features = load(paths), load(feature_paths)
-    expected = {"train": 1152, "development": 288}[args.stage]
+    expected = {"train": 1152, "development": 288, "sealed_test": 288}[args.stage]
     if len(rows) != expected or len(features) != expected:
         raise ValueError("V3 row coverage")
     feature_index = {(row["group_id"], row["boundary"]): row for row in features}
@@ -81,7 +129,8 @@ def audit(args) -> dict:
     sidecars = []
     for path in paths:
         item = json.loads(Path(str(path) + ".audit.json").read_text())
-        if item["rows_sha256"] != digest(path) or not item["backbone_unchanged"] or item["sealed_test_scored"]:
+        if item["rows_sha256"] != digest(path) or not item["backbone_unchanged"] \
+                or item["sealed_test_scored"] != (args.stage == "sealed_test"):
             raise ValueError("V4 collector sidecar")
         if item["plan_sha256"] != digest(plan) \
                 or item["v3_failure_diagnostic_sha256"] != digest(diagnostic_path) \
@@ -89,6 +138,8 @@ def audit(args) -> dict:
             raise ValueError("V4 prerequisite sidecar")
         if item["features_sha256"] != digest(Path(item["features_path"])):
             raise ValueError("V3 feature sidecar")
+        if any(item.get(key) != value for key, value in release_dependency.items()):
+            raise ValueError("V4 stage release sidecar dependency")
         sidecars.append(item)
     for row in rows:
         key = (row["group_id"], row["boundary"]); feature = feature_index[key]
@@ -146,7 +197,9 @@ def audit(args) -> dict:
         "v3_confirmation_audit_sha256": digest(confirmation_audit_path),
         "result_files": {path.name: digest(path) for path in [*paths, *feature_paths]},
         "summary_sha256": digest(root / f"{args.stage}_summary.json"),
-        "recomputed": recomputed, "collector_audits": len(sidecars), "test_opened": False,
+        "recomputed": recomputed, "collector_audits": len(sidecars),
+        "test_opened": args.stage == "sealed_test",
+        **release_dependency,
     }
     (root / f"{args.stage}_independent_audit.json").write_text(json.dumps(result, indent=2) + "\n")
     return result
@@ -156,7 +209,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(); parser.add_argument("--root", required=True)
     parser.add_argument("--data-root", required=True); parser.add_argument("--plan", required=True)
     parser.add_argument("--v3-root", required=True)
-    parser.add_argument("--stage", choices=("train", "development"), required=True)
+    parser.add_argument("--stage", choices=("train", "development", "sealed_test"), required=True)
+    parser.add_argument("--controller-root")
     args = parser.parse_args(); print(json.dumps(audit(args), indent=2))
 
 

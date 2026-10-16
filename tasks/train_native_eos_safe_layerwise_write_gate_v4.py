@@ -47,7 +47,8 @@ def feature_indices(variant: str) -> list[int]:
 def load_stage(root: Path, stage: str) -> tuple[list[dict], list[dict], dict]:
     audit_path = root / f"{stage}_independent_audit.json"
     audit = json.loads(audit_path.read_text())
-    if not audit.get("passed") or audit.get("test_opened"):
+    expected_test_opened = stage == "sealed_test"
+    if not audit.get("passed") or audit.get("test_opened") != expected_test_opened:
         raise ValueError(f"{stage} labels did not pass independent audit")
     labels = read_jsonl(sorted(root.glob(f"{stage}_shard*_labels.jsonl")))
     features = read_jsonl(sorted(root.glob(f"{stage}_shard*_features.jsonl")))

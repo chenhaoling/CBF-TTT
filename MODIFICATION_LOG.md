@@ -6259,3 +6259,17 @@ independent artifact audit 本身通过。单标签平均14.31--14.37秒，峰�
 development release 与一次性 test 规则。新增 V4 collector、训练器、独立 auditor、runner
 及回归测试；10项 focused tests 在 `hku-gpu2` 通过。正式384组 train 标签正在四 shard、
 每卡两 worker 的 opt-in tmux 任务中构建，未打开 development/test。
+
+V4 后续执行路径增加了硬发布依赖。development collector 必须读取并验证 train summary、
+train independent audit 及二者 SHA256；sealed-test collector 还必须验证 development
+summary/audit、三种子 controller summary/audit 和 `development_released_test=true`。首次
+test 启动会用原子 `O_EXCL` 在 controller 目录创建绑定结果目录及 controller 哈希的
+`sealed_test_release.json`，已有 marker 或任何 test artifact 时拒绝再次评分。
+
+新增 `tasks/evaluate_native_eos_safe_layerwise_write_gate_v4.py`、对应独立 auditor 和 runner。
+它们只加载 development 已冻结的九个 checkpoint、阈值和 action rule，一次性重算 sealed
+test 上的三种子 full/no-support/support-only、全部基线、两组 paired source-group
+bootstrap、oracle-gap closure、protected accuracy/NLL、EOS 和 support ablation。独立
+auditor 重载每个 checkpoint，重算 predictions/actions/metrics/bootstrap/release decision，
+并核对所有依赖和输出哈希。远端新增3项 V4 focused tests、Python 编译检查均通过；该路径
+只在 development 全门槛通过时可达，当前 test 仍封存。

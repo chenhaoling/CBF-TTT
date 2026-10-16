@@ -268,3 +268,24 @@ A post-stop diagnostic added a rowwise EOS nonincrease barrier.  It changed
 7/144 actions and retained gain 0.08059 with interval `[0.06412, 0.09991]`
 while reducing EOS by 0.278 point.  This result motivated the separately frozen
 V4 EOS-risk controller protocol; it does not retroactively pass V3.
+
+## 12. V4 formal execution status
+
+V4 was frozen before any train/development outcome.  It keeps the same native
+singleton interventions and adds separate protected-NLL, protected-accuracy
+harm, and EOS-harm prediction heads.  A layer is eligible only when predicted
+benefit is positive, protected-NLL change is nonpositive, and both predicted
+harm probabilities are below 0.5.
+
+The 384-group train label collection is active on four shards across two RTX
+5090 GPUs.  Each boundary still branches from one audited native parent and
+scores reject, seven singletons, and full admit with fresh KV.  Development and
+the 96-group sealed test have not been opened.
+
+The execution code now enforces SHA-bound train-to-development and
+development-to-test release dependencies.  A successful development audit is
+required to create an atomic one-shot sealed-test marker.  Frozen checkpoint
+test evaluation and a second reconstruction program cover all three seeds,
+ablations, baselines, paired bootstraps, safety metrics, and the registered
+claim boundary.  This section will be replaced with final metrics after the
+train audit and the conditional development decision.
