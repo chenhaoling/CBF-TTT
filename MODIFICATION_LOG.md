@@ -5883,6 +5883,25 @@ gate; verifies shard hashes, the plain final Qwen checkpoint and two RTX 5090
 resources; and keeps all development labels/scores and held-out benchmarks
 sealed.  Added a non-overwriting two-GPU runner and focused gate/benefit tests.
 
+The V10 28-group pilot completed on two RTX 5090 GPUs and the independent
+auditor passed every integrity check and every preregistered gate.  Across 168
+boundary labels, retain-all accuracy was 79.70% and the safe oracle reached
+91.19%, leaving 11.49 points of headroom.  Seventy-nine of 504 single-record
+candidates (15.67%) provided positive safe benefit.  Answer-token coverage was
+100%, peak reserved memory was 11.30 GiB, and no safe-oracle action added an
+unrelated error.  Mean/median/p95 label times were 0.591/0.027/1.949 seconds;
+the measured two-GPU formal projection was 1,253 seconds (20.9 minutes).
+
+Implemented the conditionally authorized full label stage in
+`tasks/label_qwen_utility_record_controller_v10_fewrel_formal.py`.  It hash
+locks both the corpus and passing pilot audits, shards all 1,344 episodes over
+the two GPUs, preserves the complete ternary grid, releases the per-episode
+outcome cache to bound memory, and reports relation/mechanism coverage,
+candidate prevalence, oracle headroom, answer coverage, latency and resources.
+Added an independent full-label auditor, an explicit scale-consistency gate,
+a non-overwriting two-GPU runner and a focused gate test.  Feature extraction
+is authorized only after all 4,032 labels reconstruct and pass that gate.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
