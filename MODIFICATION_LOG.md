@@ -6073,3 +6073,18 @@ correct 净变化 -5/+4/-7，collateral 均为0。8个关系的 DRO gain 全正�
 打开 V11 保留测试关系。紧凑 manifest、summary、audit、诊断和报告归档于
 `experiments/v11_relation_transfer_20261016/`。
 
+## 2026-10-16: V12 frozen-ERM WebNLG external replication registration
+
+基于 V11 冻结诊断，在解析任何新来源前新增
+`QWEN_UTILITY_RECORD_CONTROLLER_V12_WEBNLG_REPLICATION_PLAN.md`。V12 冻结三个
+V11 `erm_equal` checkpoints、normalization、epoch、utility/risk thresholds、risk
+calibration 和 fact-key projection，不再训练或选择控制器。新问题是在从未用于方法开发
+的 WebNLG 1.6 English RDF-to-text 自然表面上能否跨来源复制选择性遗忘收益。
+
+新增非覆盖 source acquisition runner，只克隆公开 `ThiagoCF05/webnlg`，在解析 XML/
+JSON 前记录 commit、v1.6 English 文件路径、字节数和 SHA256。模型无关 feasibility
+门要求 single-triple、无歧义 subject/value、自带自然模板的关系至少8个，每关系至少
+28行/20 subjects/20 values/7 templates；不足则在模型前停止，不能放宽。若通过才允许
+构造112 groups，并以冻结 ERM 一次性评测。FewRel tests、DialogRE、SemEval test、
+LongMemEval-S 和 LoCoMo 继续封存。
+
