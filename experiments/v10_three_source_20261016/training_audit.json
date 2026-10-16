@@ -1,0 +1,57 @@
+{
+  "ablation_mean_gain": {
+    "lama": 0.009809027777777812,
+    "templama": 0.025954861111111116
+  },
+  "checkpoint_sha256": {
+    "fewrel_removed_equal:26101651": "b26f4a97673719973627c36d067b869101b466d325041f9a9cda87b20fce85a4",
+    "fewrel_removed_equal:26101652": "74d1220813a0bc30c0c264602184026d1a6d019a7d20caade0d82c7bc8ad7bfc",
+    "fewrel_removed_equal:26101653": "eb209834b40fc1d85407893a60a16e09f0eb0e632b3313f746c4926933a9bbf0",
+    "three_source_equal:26101651": "8afde993ab495901105683f4f17f02896b6bc284eb1c095c9a0ad5540e7befb6",
+    "three_source_equal:26101652": "556cb2615af7aa8c86e71002b00cff72a8e5cb38bc2deb6f1a7319b73e0b5de3",
+    "three_source_equal:26101653": "de00688bc229df2e372cc51624843a9c1befcae0e090a580a22ec061aa363c73"
+  },
+  "checks": {
+    "all_six_checkpoints_hashes_and_states_locked": true,
+    "equal_domain_loss_traces_finite": true,
+    "extended_gate_reconstructed": true,
+    "finite_selected_metrics": true,
+    "heldout_sources_sealed": true,
+    "protocol_plan_and_summary_passed": true,
+    "selected_metrics_reconstructed": true,
+    "training_counts_reconstructed": true,
+    "upstream_hashes_reconstructed": true
+  },
+  "development_checks": {
+    "every_seed_positive_each_domain": true,
+    "fewrel_removal_lama_drop_at_least_point_002": false,
+    "lama_gain_over_v8_at_least_point_003": false,
+    "mean_gain_at_least_point_015_each_domain": false,
+    "mean_oracle_closure_at_least_point_50_each_domain": true,
+    "oracle_headroom_at_least_point_015_each_domain": true,
+    "overwrite_and_stale_nonnegative_each_domain": true,
+    "templama_mean_gain_at_least_point_035": false,
+    "upstream_audits_passed": true,
+    "zero_collateral_every_seed_domain": true
+  },
+  "development_release_passed": false,
+  "fewrel_removal_lama_drop": 0.0016493055555555358,
+  "lama_gain_over_v8": -0.0004340277777777901,
+  "mean_gain": {
+    "lama": 0.011458333333333348,
+    "templama": 0.028342013888888944
+  },
+  "mean_oracle_gap_closure": {
+    "lama": 0.594594594594595,
+    "templama": 0.6576032225579067
+  },
+  "next_stage": "stop_v10_three_source_iteration",
+  "passed": true,
+  "protocol": "qwen_utility_record_controller_v10_three_source_training_audit",
+  "summary_sha256": "9d8b95a76cc4457b20109d409215ea89a9edead7e3ae273894dd832ed71aeb6a",
+  "terminal_status": "v10_three_source_audit_passed_gate_failed",
+  "v8_mean_gain": {
+    "lama": 0.011892361111111138,
+    "templama": 0.04214409722222223
+  }
+}

@@ -5945,6 +5945,26 @@ looked for the locked V8 summary in the run container rather than its
 at the run root; the retry uses a new output directory and does not change any
 training, selection, comparison or release setting.
 
+The V10 retry completed all six fits in 70.10 seconds and its independent
+auditor reconstructed every checkpoint, action and extended gate.  The primary
+three-source arm gained 2.834 TempLAMA points and 1.146 LAMA points; the fixed
+FewRel-removal arm gained 2.595/0.981.  Thus FewRel made a positive
+0.239/0.165-point causal contribution, but missed the registered 0.2-point
+LAMA removal effect and remained 0.043 LAMA point below V8.  All seeds/domains
+were positive with zero collateral and nonnegative overwrite/stale effects.
+V10 therefore failed the effect gate and is not released.  Archived its compact
+summary, independent audit, hashes and interpretation under
+`experiments/v10_three_source_20261016/`.
+
+Registered `QWEN_UTILITY_RECORD_CONTROLLER_V10_FAILURE_DIAGNOSTIC_PLAN.md` and
+implemented a frozen no-refit diagnostic.  It reloads the six fixed checkpoints
+to compare benefit/risk ranking and calibration, probability shifts, final
+fact-key action changes and their outcome direction; measures equal-domain
+feature centroid geometry and source/mechanism target support; and assigns a
+descriptive failure class.  Its independent auditor recomputes the entire
+diagnostic while excluding runtime.  It cannot fit a model, change a threshold,
+release V10 or open any held-out benchmark.
+
 Archived the compact V8 feature/training summaries, both independent audits,
 hash manifest and result interpretation under
 `experiments/v8_relation_posterior_20261016/`.  Large embedding, augmented
