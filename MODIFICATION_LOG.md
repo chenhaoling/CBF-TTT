@@ -6333,3 +6333,19 @@ offload policy。因此 FSDP2 offload 配置是发布实现中的 no-op；按附
 双门槛，故严格停止，TTT臂及更长序列均未启动。至此当前共享主机的三条未修改发布代码
 路径已穷尽：原FSDP2受GPU显存限制、FSDP2 offload未实现、FSDP1 offload受主机内存限制。
 继续 baseline 需要独占大显存GPU，或为明确非论文系统配置的offload提供显著更大主机内存。
+
+随后冻结 `IN_PLACE_TTT_BASELINE_ALLOCATOR_RETRY_ADDENDUM.md`，只允许保持原生 FSDP2、
+8K、GB2、同一数据/模型/AdamW 配置不变并设置
+`PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` 的一次 no-TTT 重试。运行绑定 addendum
+SHA256 `f648cc8bf627c98e88404d92a211c678da0939385db05335910275495a955c98`，仍在第一次
+`optimizer.step()` 初始化 `exp_avg_sq` 的 48MiB 申请处 OOM；wall 24.88秒，GPU峰值
+32092/32103MiB，错误现场两卡仅余11.81/9.00MiB，PyTorch reserved-but-unallocated 已降至
+29.17/26.54MiB。故当前失败是共享占用下的绝对容量边界，不是 allocator 碎片化可以解决。
+按附录停止，未运行 matched TTT。训练退出后 `nvidia-smi` 回落到2479/710MiB，该数字只含
+其余 CARLA 进程，不能代表训练峰值；0.5秒 GPU trace 与完整 traceback 归档到 baseline
+report 的 allocator retry 证据目录。
+
+同日只读检查 `hku-a100`：机器仅一张 A100-SXM4-80GB，总显存81920MiB；检查时一个
+`VLLM::EngineCore` 占75124MiB，只剩6007MiB，因此当前不能迁移实验。主机内存125GiB、
+可用82GiB，但2GiB swap已满。若该卡后续独占，可另冻结并执行单卡资源 pilot；它不是
+当前双卡 FSDP2 协议的直接替换。

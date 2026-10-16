@@ -20,6 +20,11 @@ has **not** been reproduced yet.
 - Two preregistered offload diagnostics also stop: the pinned VeOmni FSDP2
   path ignores `enable_fsdp_offload`, while the released FSDP1 path does
   offload but exhausts the 62-GiB host RAM and 4-GiB swap and is SIGKILLed.
+- A final allocator-only retry with
+  `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` still OOMs at the first
+  AdamW state allocation. The run peaks at 32,092/32,103 MiB and leaves only
+  11.81/9.00 MiB free at the failing allocation, so fragmentation is not the
+  remaining blocker on the shared host.
 - The unmodified Qwen3-4B OpenCompass RULER-4K pipeline completes all 13 tasks.
   Its one-example-per-task smoke score is `76.9231`; this validates execution
   and score extraction only and is not a precision estimate comparable to the
@@ -141,6 +146,47 @@ Evidence:
 - [`remote/resource_8k_no_ttt_cpu_offload_noop/veomni_offload_diagnostic.json`](remote/resource_8k_no_ttt_cpu_offload_noop/veomni_offload_diagnostic.json)
 - [`remote/resource_8k_no_ttt_fsdp1_cpu_offload/summary.json`](remote/resource_8k_no_ttt_fsdp1_cpu_offload/summary.json)
 
+### Registered allocator-only retry
+
+The allocator addendum permitted exactly one new native FSDP2 no-TTT run with
+all model, data, optimizer, sharding, batch and sequence settings unchanged and
+only `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` added. The run used a
+new output root and bound the frozen addendum SHA256
+`f648cc8bf627c98e88404d92a211c678da0939385db05335910275495a955c98`.
+
+| Result | Failure stage | Wall time | GPU0/GPU1 peak | Free memory reported at OOM |
+|---|---|---:|---:|---:|
+| exit 1 | AdamW `exp_avg_sq`, 48-MiB allocation | 24.88 s | 32,092 / 32,103 MiB | 11.81 / 9.00 MiB |
+
+The allocator reduced PyTorch's reserved-but-unallocated memory to
+29.17/26.54 MiB, below the failed 48-MiB request. At that instant the training
+rank used about 28.91 GiB on GPU0 and 29.97 GiB on GPU1, while unrelated CARLA
+processes occupied 2,380 MiB on GPU0 and 684 MiB on GPU1. This is an absolute
+capacity boundary under the observed shared occupancy. Per the addendum, the
+matched TTT arm was not launched.
+
+The post-exit `nvidia-smi` state of 2,479/710 MiB is not the training footprint:
+the failed ranks released roughly 29--30 GiB before that snapshot. The retained
+0.5-second GPU trace records the runtime peak.
+
+Evidence:
+
+- [`IN_PLACE_TTT_BASELINE_ALLOCATOR_RETRY_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_ALLOCATOR_RETRY_ADDENDUM.md)
+- [`remote/resource_8k_no_ttt_allocator_retry/summary.json`](remote/resource_8k_no_ttt_allocator_retry/summary.json)
+- full traceback and GPU/host traces in the same directory.
+
+### Alternate host check
+
+At `2026-10-16 23:13:47 HKT`, `hku-a100` exposed one
+`NVIDIA A100-SXM4-80GB` (81,920 MiB). A `VLLM::EngineCore` process occupied
+75,124 MiB, leaving 6,007 MiB, so the host was not available for this run.
+Host RAM was 125 GiB total and 82 GiB available, while its 2-GiB swap was
+fully used. If the A100 becomes exclusive, its 80-GiB capacity warrants a new
+single-GPU resource pilot; it is not a drop-in execution of the frozen
+two-GPU FSDP2 protocol.
+
+Snapshot: [`remote/hku_a100_resource_snapshot.json`](remote/hku_a100_resource_snapshot.json).
+
 ## 5. RULER pipeline smoke
 
 The final run used the clean official inference registration, unmodified
@@ -221,6 +267,8 @@ bash scripts/run_in_place_ttt_ruler_smoke.sh
 1. Allocate an exclusive host with enough memory for the frozen recipe,
    preferably 4--8 GPUs with at least 80GB each, or rerun 8K on exclusive
    5090s to determine whether unrelated processes alone caused the boundary.
+   `hku-a100` cannot currently serve this role because its only 80-GB GPU has
+   75,124 MiB allocated to vLLM.
 2. Repeat both 8K arms from new output roots. Only after both complete, measure
    16K and 32K; attempt 64K only if 32K retains at least 15% free memory.
 3. On the selected host, construct a fully hashed FineWeb-Edu/LongCrawl64
@@ -234,7 +282,7 @@ Exact paper reproduction additionally requires the authors' private mixture,
 32K/128K stage recipe, and inference clipping details.
 
 The current host has now exhausted all preregistered, unmodified released-code
-paths: native FSDP2 is GPU-memory limited, its offload flag is not implemented,
-and FSDP1 offload is host-memory limited. Continuing training requires an
-external-state change: exclusive larger GPUs or a host with materially more
-RAM for the explicitly non-paper offload path.
+paths: native FSDP2 is GPU-memory limited even after the allocator-only retry,
+its offload flag is not implemented, and FSDP1 offload is host-memory limited.
+Continuing training requires an external-state change: exclusive larger GPUs
+or a host with materially more RAM for the explicitly non-paper offload path.
