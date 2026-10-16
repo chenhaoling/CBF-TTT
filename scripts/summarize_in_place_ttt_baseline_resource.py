@@ -59,7 +59,7 @@ def summarize(root: Path, output: Path) -> dict:
         "exit_code": exit_code,
         "completed": exit_code == 0 and bool(losses),
         "last_loss": losses[-1] if losses else None,
-        "last_gradient_norm": grad_norms[-1] if grad_norms else None,
+        "last_gradient_norm": grad_norms[-1] if exit_code == 0 and losses and grad_norms else None,
         "wall_seconds": wall_seconds,
         "tokens_per_second": (
             metadata["sequence_length"] * metadata["global_batch_size"] / wall_seconds
