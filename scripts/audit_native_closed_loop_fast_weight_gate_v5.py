@@ -1,4 +1,4 @@
-"""Independent action, trajectory, metric, and resource audit for V5 smoke."""
+"""Independent action, trajectory, metric, and resource audit for V5."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from tasks.native_closed_loop_fast_weight_gate_v5 import (
     canonical,
     load_bound_artifacts,
     load_controllers,
-    load_smoke_inputs,
+    load_inputs,
     policy_specs,
     predict,
     choose_actions,
@@ -67,13 +67,15 @@ def audit(args) -> dict:
 
     root, data_root = Path(args.root), Path(args.data_root)
     controller_root, plan = Path(args.controller_root), Path(args.plan)
-    _, _, data_dependency = load_smoke_inputs(data_root)
+    _, _, data_dependency = load_inputs(data_root, args.stage)
     controllers, controller_dependency = load_controllers(controller_root)
-    label_paths = sorted(root.glob("smoke_shard*_labels.jsonl"))
-    decision_paths = sorted(root.glob("smoke_shard*_decisions.jsonl"))
+    label_paths = sorted(root.glob(f"{args.stage}_shard*_labels.jsonl"))
+    decision_paths = sorted(root.glob(f"{args.stage}_shard*_decisions.jsonl"))
     if len(label_paths) != args.num_shards or len(decision_paths) != args.num_shards:
         raise ValueError("V5 shard coverage")
     labels, decisions = load_bound_artifacts(label_paths, decision_paths)
+    if any(row.get("stage") != args.stage for row in [*labels, *decisions]):
+        raise ValueError("V5 artifact stage mismatch")
     expected_dependencies = {
         "plan_sha256": sha256(plan), **data_dependency, **controller_dependency,
     }
@@ -158,23 +160,25 @@ def audit(args) -> dict:
                 raise ValueError("V5 trajectory continuity")
         if len(first) != 1:
             raise ValueError("V5 policy initial-state mismatch")
-    summary_path = root / "smoke_summary.json"
+    summary_path = root / f"{args.stage}_summary.json"
     summary = json.loads(summary_path.read_text())
     with tempfile.TemporaryDirectory() as directory:
         recomputed = summarize(label_paths, decision_paths, Path(directory) / "summary.json")
     if not close(summary, recomputed):
         raise ValueError("V5 summary reconstruction")
     result = {
-        "protocol": PROTOCOL + "_independent_audit", "stage": "smoke", "passed": True,
+        "protocol": PROTOCOL + "_independent_audit", "stage": args.stage, "passed": True,
         "groups": len(groups), "policies": len(names), "transitions": len(labels),
         "summary_sha256": sha256(summary_path), "result_files": {
             path.name: sha256(path) for path in [*label_paths, *decision_paths]
         },
         "collector_audits": len(sidecars), "recomputed_checks": recomputed["checks"],
-        "smoke_gate_passed": recomputed["passed"], "test_opened": False,
+        "stage_gate_passed": recomputed["passed"], "test_opened": False,
         **expected_dependencies,
     }
-    (root / "smoke_independent_audit.json").write_text(json.dumps(result, indent=2) + "\n")
+    if args.stage == "smoke":
+        result["smoke_gate_passed"] = recomputed["passed"]
+    (root / f"{args.stage}_independent_audit.json").write_text(json.dumps(result, indent=2) + "\n")
     return result
 
 
@@ -183,6 +187,7 @@ def main() -> None:
     parser.add_argument("--root", required=True); parser.add_argument("--data-root", required=True)
     parser.add_argument("--controller-root", required=True); parser.add_argument("--plan", required=True)
     parser.add_argument("--num-shards", type=int, default=4)
+    parser.add_argument("--stage", choices=("smoke", "development"), default="smoke")
     args = parser.parse_args(); print(json.dumps(audit(args), indent=2))
 
 

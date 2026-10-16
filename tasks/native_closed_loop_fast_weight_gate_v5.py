@@ -45,6 +45,7 @@ from tasks.train_native_eos_safe_layerwise_write_gate_v4 import (
 
 PROTOCOL = "native_closed_loop_fastweight_gate_v5"
 PLAN = "NATIVE_CLOSED_LOOP_FAST_WEIGHT_GATE_V5_PLAN.md"
+PHASE_B_PLAN = "NATIVE_CLOSED_LOOP_FAST_WEIGHT_GATE_V5_PHASE_B_PLAN.md"
 PROJECTION_SEED = 2026101601
 BOOTSTRAP_SEED = 2026101901
 BOOTSTRAP_DRAWS = 20_000
@@ -72,7 +73,7 @@ def policy_specs() -> list[dict]:
     ]
 
 
-def load_smoke_inputs(data_root: Path) -> tuple[list[dict], dict, dict]:
+def load_inputs(data_root: Path, stage: str) -> tuple[list[dict], dict, dict]:
     manifest_path, audit_path = data_root / "manifest.json", data_root / "data_audit.json"
     manifest = json.loads(manifest_path.read_text())
     audit = json.loads(audit_path.read_text())
@@ -81,21 +82,36 @@ def load_smoke_inputs(data_root: Path) -> tuple[list[dict], dict, dict]:
         raise ValueError("V3 data dependency did not pass independent audit")
     if manifest.get("sealed_test_scored") or audit.get("test_opened"):
         raise ValueError("sealed test was opened")
-    path = data_root / "confirmation_model_inputs.jsonl"
+    if stage not in ("smoke", "development"):
+        raise ValueError("V5 may score only smoke or development")
+    split = "confirmation" if stage == "smoke" else "development"
+    path = data_root / f"{split}_model_inputs.jsonl"
     if manifest["files_sha256"].get(path.name) != sha256(path):
-        raise ValueError("V3 confirmation inputs changed")
-    allowed = set(manifest["smoke_groups"])
+        raise ValueError(f"V3 {split} inputs changed")
     rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
-    rows = [row for row in rows if row["group_id"] in allowed]
-    if len(rows) != 12 or {row["group_id"] for row in rows} != allowed \
-            or any(len(row["boundaries"]) != 3 for row in rows):
-        raise ValueError("V5 smoke group contract changed")
-    return rows, manifest, {
+    dependency = {
         "data_manifest_sha256": sha256(manifest_path),
         "data_audit_sha256": sha256(audit_path),
-        "confirmation_inputs_sha256": sha256(path),
-        "smoke_groups_sha256": canonical({"group_ids": sorted(allowed)}),
+        f"{split}_inputs_sha256": sha256(path),
     }
+    if stage == "smoke":
+        allowed = set(manifest["smoke_groups"])
+        rows = [row for row in rows if row["group_id"] in allowed]
+        if len(rows) != 12 or {row["group_id"] for row in rows} != allowed:
+            raise ValueError("V5 smoke group contract changed")
+        dependency["smoke_groups_sha256"] = canonical({"group_ids": sorted(allowed)})
+    elif len(rows) != 96:
+        raise ValueError("V5 development group contract changed")
+    if any(len(row["boundaries"]) != 3 for row in rows):
+        raise ValueError("V5 boundary contract changed")
+    return rows, manifest, {
+        **dependency,
+    }
+
+
+def load_smoke_inputs(data_root: Path) -> tuple[list[dict], dict, dict]:
+    """Compatibility helper for the frozen Phase-A auditor."""
+    return load_inputs(data_root, "smoke")
 
 
 def load_controllers(root: Path) -> tuple[dict, dict]:
@@ -159,7 +175,7 @@ def collect(args) -> dict:
     import torch
 
     data_root, controller_root = Path(args.data_root), Path(args.controller_root)
-    rows, _, data_dependency = load_smoke_inputs(data_root)
+    rows, _, data_dependency = load_inputs(data_root, args.stage)
     controllers, controller_dependency = load_controllers(controller_root)
     rows = [row for index, row in enumerate(rows) if index % args.num_shards == args.shard]
     if not rows:
@@ -191,7 +207,7 @@ def collect(args) -> dict:
                         )
                         reject_hashes, admit_hashes = layer_hashes(reject), layer_hashes(admit)
                         decision = {
-                            "protocol": PROTOCOL, "stage": "smoke", "group_id": row["group_id"],
+                            "protocol": PROTOCOL, "stage": args.stage, "group_id": row["group_id"],
                             "boundary": boundary["boundary"], "policy": spec["policy"],
                             "kind": spec["kind"], "parent_fast_sha256": fast_weight_digest(parent),
                         }
@@ -242,7 +258,7 @@ def collect(args) -> dict:
                         next_parent = fresh_from_weights(selected)
                         decision_sha = canonical(decision)
                         label = {
-                            "protocol": PROTOCOL, "stage": "smoke", "group_id": row["group_id"],
+                            "protocol": PROTOCOL, "stage": args.stage, "group_id": row["group_id"],
                             "boundary": boundary["boundary"], "policy": spec["policy"],
                             "decision_sha256": decision_sha, "action": action,
                             "branch_audit": branch_audit,
@@ -265,7 +281,7 @@ def collect(args) -> dict:
     if before != parameter_digest(model) or versions != [parameter._version for parameter in model.parameters()]:
         raise RuntimeError("frozen Qwen parameters changed")
     sidecar = {
-        "protocol": PROTOCOL, "stage": "smoke", "shard": args.shard,
+        "protocol": PROTOCOL, "stage": args.stage, "shard": args.shard,
         "num_shards": args.num_shards, "groups": len(rows), "policies": len(specs),
         "transitions": len(resources), "rows_sha256": sha256(output),
         "decisions_sha256": sha256(decisions_output), "decisions_path": str(decisions_output),
@@ -304,11 +320,17 @@ def load_bound_artifacts(label_paths: list[Path], decision_paths: list[Path]):
 
 def summarize(label_paths: list[Path], decision_paths: list[Path], output: Path) -> dict:
     labels, decisions = load_bound_artifacts(label_paths, decision_paths)
+    stages = {row["stage"] for row in labels}
+    if len(stages) != 1:
+        raise ValueError("mixed V5 stages")
+    stage = stages.pop()
     specs = policy_specs(); names = [row["policy"] for row in specs]
     groups = sorted({row["group_id"] for row in labels})
     expected = len(groups) * len(names) * 3
-    if len(groups) != 12 or len(labels) != expected or set(row["policy"] for row in labels) != set(names):
-        raise ValueError("incomplete V5 smoke matrix")
+    expected_groups = {"smoke": 12, "development": 96}[stage]
+    if len(groups) != expected_groups or len(labels) != expected \
+            or set(row["policy"] for row in labels) != set(names):
+        raise ValueError(f"incomplete V5 {stage} matrix")
     index = {(row["group_id"], row["policy"], row["boundary"]): row for row in labels}
     trajectory_ok = True
     for group in groups:
@@ -368,10 +390,7 @@ def summarize(label_paths: list[Path], decision_paths: list[Path], output: Path)
     better_never = sum(row["checks"]["better_than_never"] for row in seed_results.values())
     better_no_support = sum(row["checks"]["better_than_matched_no_support"] for row in seed_results.values())
     mean_full_gain = statistics.fmean(metrics[policy_name("full", seed)]["gain_vs_never"] for seed in SEEDS)
-    checks = {
-        "at_least_two_full_better_than_never": better_never >= 2,
-        "mean_full_gain_vs_never_positive": mean_full_gain > 0,
-        "at_least_two_full_better_than_no_support": better_no_support >= 2,
+    common_checks = {
         "all_full_safety_checks": all(
             all(row["checks"][key] for key in ("protected_accuracy_safe", "protected_nll_safe", "eos_safe"))
             for row in seed_results.values()
@@ -386,13 +405,33 @@ def summarize(label_paths: list[Path], decision_paths: list[Path], output: Path)
             ) for row in labels
         ),
     }
+    if stage == "smoke":
+        checks = {
+            "at_least_two_full_better_than_never": better_never >= 2,
+            "mean_full_gain_vs_never_positive": mean_full_gain > 0,
+            "at_least_two_full_better_than_no_support": better_no_support >= 2,
+            **common_checks,
+        }
+        next_stage = "freeze_phase_b_closed_loop_development" if all(checks.values()) \
+                     else "stop_before_phase_b_and_test"
+    else:
+        checks = {
+            "all_full_better_than_never": better_never == len(SEEDS),
+            "all_full_bootstrap_vs_never_lower_positive": all(
+                metrics[policy_name("full", seed)]["gain_vs_never_group_bootstrap_95ci"][0] > 0
+                for seed in SEEDS
+            ),
+            "all_full_better_than_no_support": better_no_support == len(SEEDS),
+            **common_checks,
+        }
+        next_stage = "freeze_fresh_source_formal_v5" if all(checks.values()) \
+                     else "stop_before_formal_corpus_and_test"
     result = {
-        "protocol": PROTOCOL, "stage": "smoke", "groups": len(groups),
+        "protocol": PROTOCOL, "stage": stage, "groups": len(groups),
         "policies": len(names), "transitions": len(labels), "metrics": metrics,
         "seed_results": seed_results, "mean_full_gain_vs_never": mean_full_gain,
         "checks": checks, "passed": all(checks.values()), "test_opened": False,
-        "next_stage": "freeze_phase_b_closed_loop_development" if all(checks.values())
-                      else "stop_before_phase_b_and_test",
+        "next_stage": next_stage,
     }
     output.write_text(json.dumps(result, indent=2) + "\n")
     return result
@@ -403,6 +442,7 @@ def main() -> None:
     collect_parser = sub.add_parser("collect")
     collect_parser.add_argument("--data-root", required=True); collect_parser.add_argument("--model", required=True)
     collect_parser.add_argument("--controller-root", required=True); collect_parser.add_argument("--plan", default=PLAN)
+    collect_parser.add_argument("--stage", choices=("smoke", "development"), default="smoke")
     collect_parser.add_argument("--shard", type=int, default=0); collect_parser.add_argument("--num-shards", type=int, default=1)
     collect_parser.add_argument("--eos-id", type=int, default=151645)
     collect_parser.add_argument("--output", required=True); collect_parser.add_argument("--decisions-output", required=True)
