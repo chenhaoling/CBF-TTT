@@ -23,7 +23,17 @@ fi
   "veomni @ git+https://github.com/ByteDance-Seed/VeOmni.git@$VEOMNI_COMMIT"
 "$PYTHON_BIN" -m pip install \
   liger-kernel torchdata blobfile 'datasets<=2.21.0' diffusers tiktoken timm \
-  transformers==4.57.3 opt_einsum einops byted-wandb
+  transformers==4.57.3 opt_einsum einops
+# byted-wandb is named by the release instructions but is not published on
+# public PyPI. The training entry point only imports the wandb API. Record the
+# public fallback rather than changing training source or using an untracked
+# internal package.
+if "$PYTHON_BIN" -m pip install byted-wandb; then
+  printf '%s\n' byted-wandb > "$ENV_DIR/wandb_provider.txt"
+else
+  "$PYTHON_BIN" -m pip install wandb
+  printf '%s\n' public-wandb-fallback > "$ENV_DIR/wandb_provider.txt"
+fi
 
 "$PYTHON_BIN" - <<'PY'
 import json
@@ -33,6 +43,7 @@ import torch
 import transformers
 import flash_attn
 import veomni
+import wandb
 
 direct = pathlib.Path(veomni.__file__).resolve().parents[1] / "veomni-0.1.0.dist-info/direct_url.json"
 metadata = json.loads(direct.read_text())
@@ -46,6 +57,8 @@ print(json.dumps({
     "cuda": torch.version.cuda,
     "transformers": transformers.__version__,
     "flash_attn": flash_attn.__version__,
+    "wandb": wandb.__version__,
+    "wandb_provider": pathlib.Path(sys.prefix, "wandb_provider.txt").read_text().strip(),
     "veomni": metadata,
 }, indent=2))
 PY
