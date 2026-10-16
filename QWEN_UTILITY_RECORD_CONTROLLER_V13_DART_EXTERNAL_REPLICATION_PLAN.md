@@ -49,6 +49,19 @@ unambiguous aligned `(subject, relation, value)` fact. The normalized subject
 and value must both be recoverable in the reference or in an official aligned
 template. Source rows, normalized statements and entity pairs must be unique.
 
+Before parsing, freeze the source filter and deterministic selection as follows.
+Use seed `202610211`. Require exactly one input triple and accept only human
+annotation sources `WikiTableQuestions_lily`, `WikiSQL_lily`, and
+`WikiTableQuestions_mturk`; exclude procedural `WikiSQL_decl_sents`, `webnlg`,
+`e2e`, and unknown sources. The reference must contain exactly one
+case-insensitive literal occurrence of both normalized subject and value so a
+single `[X]/[Y]` template can be reconstructed without semantic guessing. Rank
+target relations by SHA256 under the frozen seed. Candidate targets need at
+least 140 distinct entity pairs and seven distinct templates; use the first
+eight ranked candidates and do not search alternative eight-relation subsets
+after allocation. Relations with at least five pairs and four templates may
+serve as stable-background donors.
+
 The feasibility program must run the complete deterministic material allocator,
 not a coarse row-count proxy. It must demonstrate that exactly eight relations
 can each support fourteen groups while satisfying all V10/V11 constraints:
