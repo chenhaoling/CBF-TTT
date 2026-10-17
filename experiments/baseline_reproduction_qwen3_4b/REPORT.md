@@ -1,6 +1,6 @@
 # In-Place TTT Qwen3-4B baseline reproduction report
 
-Date: 2026-10-17<br>
+Date: 2026-10-18<br>
 Frozen plan: [`IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md`](../../IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md)  
 Plan SHA256: `fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3`  
 Official source commit: `be2324829b0e91c8fd10a74d4b43714fde6676e1`
@@ -50,15 +50,26 @@ baseline has **not** been reproduced yet.
   VeOmni training tokens; independent audits re-tokenize every record and
   verify source, tokenizer, plan, code, provenance, artifact and ordered-token
   hashes. This validates the construction path only and starts no training.
+- The formal Level-B public-corpus protocol is now frozen. A revision-pinned
+  inventory resolves exactly 140 FineWeb-Edu `sample/100BT` files and all 256
+  numerically ordered LongCrawl64 shards; its independent audit passes all
+  seven checks.
+- The required continuous two-stage pilot passes: 64 records/source at 32K
+  followed from the same source cursor by 8 records/source at 128K. It contains
+  6,291,456 training tokens, passes all ten independent audit checks, and peaks
+  at 1,002.52 MiB host RSS. This closes the packing and no-replay gate.
+- Four formal 32K/128K × no-TTT/TTT configs are implemented and statically
+  audited. The full 34,999,369,728-token public corpus build is currently
+  running in an isolated CPU-only tmux job; no formal training has started.
 - The paper's exact continual-pretraining corpus and several stage settings
   are not public. FineWeb-Edu plus LongCrawl64 remains a declared public-data
   substitute and cannot be called the original paper dataset.
 
-Consequently, Level A passes and the Level-B data-pipeline pilot passes. Level
-B has not started formal matched training because 2x5090 cannot safely execute
-the registered length ladder, and Level C remains blocked by private
-data/configuration. Update-admission and forgetting-gate exploration remains
-paused.
+Consequently, Level A passes and both Level-B data-pipeline pilots pass. The
+full Level-B corpus build is active, but matched training has not started
+because neither available host satisfies the frozen 8×80-GB-class preflight.
+Level C remains unavailable because the paper corpus and parts of the recipe
+are private. Update-admission and forgetting-gate exploration remains paused.
 
 ## 2. Paper target and claim boundary
 
@@ -97,6 +108,13 @@ New opt-in files are:
 - `IN_PLACE_TTT_BASELINE_PUBLIC_DATA_PILOT_ADDENDUM.md`;
 - `scripts/build_in_place_ttt_public_data_pilot.py`;
 - `scripts/audit_in_place_ttt_public_data_pilot.py`;
+- `IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md`;
+- `scripts/inventory_in_place_ttt_public_corpus.py`;
+- `scripts/audit_in_place_ttt_public_corpus_inventory.py`;
+- `scripts/build_in_place_ttt_public_corpus.py`;
+- `scripts/audit_in_place_ttt_public_corpus.py`;
+- `configs/baseline_reproduction/qwen3_4b_public_stage{1,2}_{no_ttt,ttt}.yaml`;
+- `scripts/audit_in_place_ttt_level_b_configs.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -381,8 +399,78 @@ Evidence:
   and archive SHA are retained in
   [`remote/public_data_32k_pilot/`](remote/public_data_32k_pilot/).
 
-This result does not freeze the final 20B/15B public mixture, validate 128K
-packing, run either training arm or reproduce the paper's private corpus.
+This first pilot alone did not freeze the final 20B/15B public mixture or
+validate 128K packing. Those two data-pipeline requirements are addressed by
+the following frozen Level-B protocol; neither result reproduces the private
+paper corpus.
+
+### Formal public-corpus inventory and continuous 32K→128K pilot
+
+Before inventory or full-scale construction, the protocol was frozen in
+[`IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md`](../../IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md)
+(current SHA256
+`c5019a28b9fa7fa27052ddf1d69eb029a2ec5b3b6446f1527e9ceb7db1a12bab`).
+It replaces the insufficient nested FineWeb `sample-10BT` pilot source with
+the same publisher revision's `sample-100BT`, fixes exact whole-record budgets,
+requires continuous source cursors between stages, and defines a public-data
+matched replication rather than an exact private-corpus reproduction.
+
+The inventory and its separate auditor resolve publisher metadata without
+downloading the multi-terabyte source corpus:
+
+| Source | Files | Ordered compressed bytes | Ordered-file-list SHA256 |
+|---|---:|---:|---|
+| FineWeb-Edu `sample/100BT` | 140 | 286,394,522,604 | `4f4e9dc42766053b0b35d1898e1279d980fc2ce813382e5a99f1c4bafb6d9381` |
+| LongCrawl64 | 256 | 2,878,733,748,672 | `6577d3d3afe095572dc0893ba8077c9ca284a1ed5d5b522e70d053524016d1f0` |
+
+Inventory SHA256 is
+`c7e6761dc5d27013c09d6002de5c3e2b2185492b18100fba4b966c855debf7df`;
+audit SHA256 is
+`32daacb7eee2c9536ab8c06c01ac7c423d429f04cdf512a958f9ffd201487507`.
+All seven inventory checks pass, including the exact file counts, revisions,
+LFS/blob metadata, tokenizer binding and LongCrawl numeric order.
+
+The continuous pilot then uses one persistent packer per source across both
+stages. Stage 2 begins from the exact pending tokens and document cursor saved
+after Stage 1; it does not rewind, discard or replay source text.
+
+| Stage | Records/source | Combined records | Training tokens | Wall | FineWeb tok/s | LongCrawl tok/s |
+|---|---:|---:|---:|---:|---:|---:|
+| 32K | 64 | 128 | 4,194,304 | 35.15 s | 103,034 | 144,540 |
+| 128K | 8 | 16 | 2,097,152 | 7.31 s | 249,750 | 353,273 |
+
+The complete builder takes 44.32 seconds and reports peak host RSS 1,002.52
+MiB. The independent auditor re-tokenizes all 144 rows and passes all ten
+checks: source order, record length, continuous spans, stage transition,
+artifact/token/curriculum hashes, plaintext-free provenance, inventory,
+tokenizer, code/plan and resource bindings. Synthetic EOS count is zero. GPUs
+remain idle at 46/18 MiB. The copied 9,719,747-byte archive has SHA256
+`29484d830dcc44ca225514adf998ef01e95d2217a9e564b0dcc10c6fdb431a1a`;
+local verification re-hashes every output successfully.
+
+Evidence:
+
+- [`remote/public_corpus_inventory/`](remote/public_corpus_inventory/)
+- [`remote/public_corpus_pilot/local_verification.json`](remote/public_corpus_pilot/local_verification.json)
+- [`remote/public_corpus_pilot/in_place_ttt_public_corpus_pilot_20261018.tar.gz`](remote/public_corpus_pilot/in_place_ttt_public_corpus_pilot_20261018.tar.gz)
+
+The full profile fixes 305,184 records/source at 32K and 57,216
+records/source at 128K: 34,999,369,728 combined training tokens and 11,325
+global-batch-64 steps. Its CPU-only build started on `hku-gpu2` at
+`2026-10-18 00:51:37 HKT` under tmux `public_corpus_full_20261018`. At the
+first recorded live check it had written 211 MiB, used about 1.0 GiB RSS and
+91% CPU, and retained 914 GiB disk free. This is a running process, not a
+completed artifact; the runner will launch the independent full audit only
+after atomic publication.
+
+Four opt-in formal configs encode the exact stages and two arms. Stage 1 uses
+32,768 positions and 9,537 steps; Stage 2 uses Qwen YaRN factor 4,
+`original_max_position_embeddings=32768`, 131,072 positions and 1,788 steps.
+Both use GB64, microbatch 1, FSDP2, AdamW `5e-6`, cosine decay, 2% warmup,
+bf16 mixed precision, gradient checkpointing and no offload. The arms differ
+only in `ttt_mode` plus their runtime checkpoint/output paths. Stage 2 starts
+from each arm's converted Stage-1 HF weights with a fresh optimizer and
+scheduler. The dependency-free static auditor and 14-test focused suite pass.
 
 ### Alternate host check
 
@@ -398,6 +486,8 @@ Snapshot: [`remote/hku_a100_resource_snapshot.json`](remote/hku_a100_resource_sn
 The `2026-10-17 21:04 HKT` recheck is unchanged: the same vLLM process uses
 75,124 MiB and only 6,007 MiB is free. The current snapshot is archived at
 [`remote/hku_a100_resource_snapshot_20261017_2104.txt`](remote/hku_a100_resource_snapshot_20261017_2104.txt).
+The `2026-10-18` recheck again exposes only that same single A100 and the same
+75,124-MiB vLLM allocation, so it still cannot satisfy the formal 8-GPU gate.
 
 ## 5. RULER pipeline smoke
 
@@ -495,6 +585,11 @@ Evidence:
   emitted artifacts, re-tokenizes every 32K row, and recomputes ordered token
   and document streams. Both 8-record source audits pass all 12 checks; the
   copied archive passes a second local hash verification.
+- The formal source inventory passes a separate seven-check audit. The
+  continuous two-stage pilot passes ten checks after re-tokenizing all 144
+  rows, and its archive passes local SHA256 verification.
+- The four formal training configurations pass the dependency-free static
+  auditor; the combined focused suite passes 14 tests.
 
 ## 7. Commands
 
@@ -523,6 +618,32 @@ python scripts/build_in_place_ttt_public_data_pilot.py \
   --max-records 8 --seq-len 32768
 python scripts/audit_in_place_ttt_public_data_pilot.py \
   --root /new/output/longcrawl --tokenizer /home/ctj/models/Qwen3-4B
+```
+
+Inventory, build and audit the formal public corpus:
+
+```bash
+python scripts/inventory_in_place_ttt_public_corpus.py \
+  --tokenizer /home/ctj/models/Qwen3-4B \
+  --output-root /new/output/source_inventory
+python scripts/audit_in_place_ttt_public_corpus_inventory.py \
+  --root /new/output/source_inventory \
+  --tokenizer /home/ctj/models/Qwen3-4B
+
+python scripts/build_in_place_ttt_public_corpus.py \
+  --inventory /new/output/source_inventory/inventory.json \
+  --inventory-audit /new/output/source_inventory/independent_audit.json \
+  --tokenizer /home/ctj/models/Qwen3-4B \
+  --output-root /new/output/public_corpus --profile full
+python scripts/audit_in_place_ttt_public_corpus.py \
+  --root /new/output/public_corpus \
+  --inventory /new/output/source_inventory/inventory.json \
+  --inventory-audit /new/output/source_inventory/independent_audit.json \
+  --tokenizer /home/ctj/models/Qwen3-4B
+
+python scripts/audit_in_place_ttt_level_b_configs.py \
+  --corpus-root /new/output/public_corpus \
+  --output /new/output/level_b_config_audit.json
 ```
 
 Resource probe (change `ARM` and output path for the other arm):
@@ -587,15 +708,19 @@ python scripts/audit_in_place_ttt_baseline_exclusive.py \
    headroom rule, so repeating 8K or attempting 16K there is prohibited.
    `hku-a100` cannot serve this role while its only 80-GB GPU has 75,124 MiB
    allocated to vLLM.
-2. Freeze the formal public-corpus manifest: exact FineWeb-Edu/LongCrawl64
-   mixture, source shard list, deterministic ordered stream, 20B/15B stage
-   budgets and 32K/128K packing rules. The completed 8-record pilot validates
-   the builder but does not define this formal scale.
-3. On the selected host, construct that fully hashed public substitute and
-   train byte-identical no-TTT/TTT token streams.
-4. Convert both final DCP checkpoints and execute the 100-example RULER matrix
+2. Let the already running full public-corpus build finish, then require its
+   independent audit to pass exact counts, source continuity and hashes. Do
+   not treat the live partial directory as training input.
+3. On the selected 8×80-GB-class host, bind the four audited configs to the
+   completed corpus and arm-specific checkpoints. Run matched one-step 32K
+   preflights first; train Stage 1 only if both retain at least 5% free memory.
+   Convert Stage-1 DCP to HF, then repeat the matched 128K preflight before
+   Stage 2.
+4. Train byte-identical no-TTT/TTT token streams through both stages, audit
+   consumed data hashes, finite losses, gradients, steps and resources.
+5. Convert both final DCP checkpoints and execute the 100-example RULER matrix
    from 4K through 256K once, using the tokenizer-audited path above.
-5. Report it as a public-data matched replication. Resume support/update gates
+6. Report it as a public-data matched replication. Resume support/update gates
    only after this baseline report is complete.
 
 Exact paper reproduction additionally requires the authors' private mixture,

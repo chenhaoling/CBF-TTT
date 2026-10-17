@@ -6523,3 +6523,48 @@ audit/manifest/data/provenance hash全部通过，归档于
 
 该阶段只证明可审计32K构建路径。正式20B/15B公开语料配比、完整shard manifest、128K
 packing、matched no-TTT/TTT训练和100例RULER仍未完成；门控实验继续暂停。
+
+## 2026-10-18: Level-B正式公开语料协议、连续两阶段pilot与训练配置
+
+在任何正式语料构建或训练前新增并冻结
+`IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md`。计划明确公开语料替代边界，将容量不足的
+FineWeb-Edu `sample-10BT`覆盖为同一固定revision的`sample-100BT`，固定LongCrawl64的
+256个分片按数值排序，并登记32K阶段305184条/来源、128K阶段57216条/来源，总计
+34999369728个Qwen训练token。Stage 2必须沿用Stage 1的pending token和source cursor，禁止
+回绕或重放。训练配置固定GB64、FSDP2、AdamW 5e-6、2% warmup、bf16 mixed precision和
+无offload；128K阶段固定YaRN factor 4。该结果只能称为public-data matched replication。
+
+新增`scripts/inventory_in_place_ttt_public_corpus.py`及独立
+`scripts/audit_in_place_ttt_public_corpus_inventory.py`。远端正式inventory解析FineWeb
+`sample/100BT`恰好140个parquet、总压缩字节286394522604；LongCrawl恰好0..255共256个
+parquet、总压缩字节2878733748672。inventory SHA256为
+`c7e6761dc5d27013c09d6002de5c3e2b2185492b18100fba4b966c855debf7df`，独立audit SHA256为
+`32daacb7eee2c9536ab8c06c01ac7c423d429f04cdf512a958f9ffd201487507`，7项检查全部通过。
+证据归档于`experiments/baseline_reproduction_qwen3_4b/remote/public_corpus_inventory/`。
+
+新增连续构建器`scripts/build_in_place_ttt_public_corpus.py`和不导入其实现的独立审计器
+`scripts/audit_in_place_ttt_public_corpus.py`。构建器对每个来源保持一个persistent packer，
+Stage 1结束后不清空pending tokens或文档游标，Stage 2从同一状态继续；两来源输出严格
+FineWeb/LongCrawl交替，data/provenance分离并原子发布。新增3项连续游标、冻结计数和覆盖
+保护测试。
+
+正式两阶段pilot在`hku-gpu2`完成并exit 0：32K阶段64条/来源、4194304 token，128K阶段
+8条/来源、2097152 token；总计144条、6291456 token、synthetic EOS为0。构建wall
+44.32秒、峰值RSS 1002.52MiB；独立审计逐条重分词并验证source alternation、span连续、
+32K→128K游标衔接、artifact/token/curriculum hash、无明文provenance及资源绑定，10项全部
+通过。GPU维持46/18MiB。远端archive大小9719747 bytes、SHA256
+`29484d830dcc44ca225514adf998ef01e95d2217a9e564b0dcc10c6fdb431a1a`；下载后本地逐文件
+rehash再次通过，归档于`experiments/baseline_reproduction_qwen3_4b/remote/public_corpus_pilot/`。
+
+新增四个opt-in正式配置：
+`configs/baseline_reproduction/qwen3_4b_public_stage{1,2}_{no_ttt,ttt}.yaml`，以及
+`scripts/audit_in_place_ttt_level_b_configs.py`和3项测试。配置审计器只用Python标准库，
+检查精确token/step、两臂差异、YaRN、fresh optimizer/scheduler语义和所有训练超参数。
+与此前数据测试合并后本地14项全部通过；静态配置audit通过。
+
+完整34999369728-token CPU-only构建已于2026-10-18 00:51:37 HKT在远端tmux
+`public_corpus_full_20261018`启动，输出使用新的`.partial`目录；runner只会在原子发布后启动
+完整独立审计。首次live check时已写211MiB、Python RSS约1.0GiB、CPU约91%，磁盘仍余
+914GiB。该任务仍在运行，尚无正式manifest/audit，严禁用partial目录训练。再次检查
+`hku-a100`仍只有一张80GB A100且vLLM占75124MiB，不满足冻结的8×80GB级训练门槛。
+因此正式训练尚未启动，门控探索继续暂停。
