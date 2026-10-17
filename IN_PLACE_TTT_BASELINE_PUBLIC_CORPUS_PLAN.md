@@ -35,6 +35,10 @@ revisions, inventory code, this plan and the original Qwen3-4B tokenizer
 assets. Missing or duplicate paths, empty hashes, revision drift or a
 non-monotonic file list stops the run.
 
+The frozen-revision metadata preflight resolves exactly 140 FineWeb
+`sample/100BT` parquet files and 256 LongCrawl parquet files. The inventory
+and independent audit must reproduce these exact counts.
+
 Within a source, traversal order is publisher file, parquet row index, then
 Qwen token offset. Stage 2 continues the exact Stage-1 source cursor and
 pending token buffer. It may split a document across the stage boundary, but
