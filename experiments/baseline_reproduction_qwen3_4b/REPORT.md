@@ -887,8 +887,20 @@ document. The complete Level-B focused suite now passes 27/27 tests.
 
 The active runner remains bound to its original builder and auditor hashes and
 must not be modified or restarted. If its original post-build audit passes,
-that result is accepted. The streaming auditor is eligible only after it
-repasses the frozen pilot under a distinct output filename. It may serve as a
-secondary audit, or as a fallback only if the builder has atomically published
-the complete corpus and the original audit fails specifically because of host
-memory. It cannot validate or rescue a partial build.
+that result is accepted. The streaming auditor has now repassed the frozen
+pilot from clean commit `a61bf944062cf0bc8685b0bbf2638ac8f0780ee6` under a
+distinct output filename. All 10 checks passed; both stage observations, the
+four registered total/hash fields and every binding other than the expected
+auditor hash were identical to the original audit. It observed 2,919 FineWeb
+and 63 LongCrawl documents while retaining at most two active documents per
+source. The saved resource run took 13.93 seconds, peaked at 821,588 KiB RSS,
+used no swap and exited zero.
+
+The downloaded run, hashes and local comparison are archived in
+`experiments/baseline_reproduction_qwen3_4b/remote/in_place_ttt_public_corpus_streaming_audit_smoke_20261018/`;
+the streaming audit SHA256 is
+`23eff15cab3f784d144494d0a369fc3f2bdd157882b813201779e6a59a789b6c`.
+This version may now serve as a secondary audit, or as a fallback only if the
+builder has atomically published the complete corpus and the original audit
+fails specifically because of host memory. It cannot validate or rescue a
+partial build.

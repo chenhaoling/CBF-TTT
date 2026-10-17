@@ -6677,3 +6677,14 @@ artifact或接受门槛。
 SHA256为`5ec753a29996f6abc386d7e16529218bbaaf6c1b1ff271638db730b9c41f8b87`，仅能在重新通过冻结
 pilot后，以新文件名执行secondary audit；只有完整语料与manifest已原子发布且旧审计器明确因
 主内存失败时，才可作为fallback，不能挽救partial构建。
+
+提交`a61bf944062cf0bc8685b0bbf2638ac8f0780ee6`推送到GitHub后，在远端建立全新clean
+checkout并对既有6291456-token冻结pilot复跑。流式审计10/10检查通过，新旧audit的两个stage
+统计、四个注册total/hash字段，以及除auditor自身SHA外的全部binding完全相同。连续性状态共
+检查FineWeb 2919个、LongCrawl 63个文档，两来源的峰值active document均为2。保存的资源
+run耗时13.93秒、峰值RSS 821588KiB、swap为0、exit 0；流式audit SHA256为
+`23eff15cab3f784d144494d0a369fc3f2bdd157882b813201779e6a59a789b6c`。远端原始日志、输入/
+输出hash以及本地独立比较归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/in_place_ttt_public_corpus_streaming_audit_smoke_20261018/`。
+因此新审计器已满足addendum中的pilot准入条件，但正式构建完成前仍不会对partial目录执行或
+替代当前runner的冻结旧审计器。
