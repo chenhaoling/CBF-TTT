@@ -1,6 +1,6 @@
 # In-Place TTT Qwen3-4B baseline reproduction report
 
-Date: 2026-10-16  
+Date: 2026-10-17<br>
 Frozen plan: [`IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md`](../../IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md)  
 Plan SHA256: `fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3`  
 Official source commit: `be2324829b0e91c8fd10a74d4b43714fde6676e1`
@@ -27,9 +27,12 @@ has **not** been reproduced yet.
   remaining blocker on the shared host.
 - A separately frozen low-occupancy retry also fails at the same AdamW state
   initialization. Its preflight records only 812/670 MiB total device use, but
-  the run still peaks at 32,086/32,103 MiB. A truly exclusive 32-GB rerun
-  remains unmeasured because 724/644 MiB of unrelated CARLA use was still
-  present.
+  the run still peaks at 32,086/32,103 MiB.
+- A final asymmetric-idle retry starts with GPU0/GPU1 at 730/18 MiB. GPU1 has
+  no compute process, while GPU0 retains one 642-MiB CARLA process. The no-TTT
+  rank on GPU0 still OOMs on a 48-MiB AdamW allocation with 40.44 MiB free.
+  One idle peer device therefore cannot rescue a rank whose own device is at
+  the capacity boundary; a retry with both 5090s exclusive remains unmeasured.
 - The unmodified Qwen3-4B OpenCompass RULER-4K pipeline completes all 13 tasks.
   Its one-example-per-task smoke score is `76.9231`; this validates execution
   and score extraction only and is not a precision estimate comparable to the
@@ -70,6 +73,7 @@ New opt-in files are:
 - `scripts/setup_in_place_ttt_official_env.sh`;
 - `scripts/setup_in_place_ttt_official_eval_env.sh`;
 - `scripts/run_in_place_ttt_baseline_resource_pilot.sh`;
+- `scripts/run_in_place_ttt_baseline_asymmetric_idle_retry.sh`;
 - `scripts/summarize_in_place_ttt_baseline_resource.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
@@ -213,6 +217,40 @@ Evidence:
 - [`remote/low_occupancy_retry/resource_8k_no_ttt/summary.json`](remote/low_occupancy_retry/resource_8k_no_ttt/summary.json)
 - full log and GPU/host traces in the same directory.
 
+### Registered asymmetric-idle retry
+
+At `2026-10-17 20:57:21 HKT`, physical GPU1 became compute-process-free and
+used only 18 MiB, while GPU0 retained one 642-MiB CARLA process and used 730
+MiB total. The frozen
+[`IN_PLACE_TTT_BASELINE_ASYMMETRIC_IDLE_RETRY_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_ASYMMETRIC_IDLE_RETRY_ADDENDUM.md)
+permitted one identical no-TTT measurement under this materially different
+state. Its SHA256 is
+`3b4a112b55172fcf1b3e46dfe668866a05db0110d5eb7790b1ef6d9ba9d2a152`.
+
+The atomic runner saved the launch snapshot, verified the official checkout,
+and started at `2026-10-17 20:58:55 HKT`. It stopped after 21.83 seconds at the
+first failing arm:
+
+| Result | Failure stage | GPU0/GPU1 peak | Preflight total use |
+|---|---|---:|---:|
+| exit 1 | AdamW state initialization | 32,064 / 31,594 MiB | 730 / 18 MiB |
+
+Rank 0 requested 48 MiB with only 40.44 MiB free. Its PyTorch
+reserved-but-unallocated memory was 14.04 MiB, so allocator fragmentation is
+again too small to explain the missing capacity. GPU1 did not contain an
+unrelated compute process, but FSDP ranks allocate locally and cannot borrow
+that device's remaining memory for rank 0. This proves that freeing only one
+of the two cards is insufficient for the frozen run while the other card
+retains 642 MiB. It does not prove that two fully exclusive 5090s fail. The
+matched TTT arm was not launched, as required by the stop rule.
+
+Evidence:
+
+- [`remote/asymmetric_idle_retry/preflight_no_ttt_gpu.csv`](remote/asymmetric_idle_retry/preflight_no_ttt_gpu.csv)
+- [`remote/asymmetric_idle_retry/preflight_no_ttt_processes.csv`](remote/asymmetric_idle_retry/preflight_no_ttt_processes.csv)
+- [`remote/asymmetric_idle_retry/resource_8k_no_ttt/summary.json`](remote/asymmetric_idle_retry/resource_8k_no_ttt/summary.json)
+- full log, metadata, and 0.5-second GPU/host traces in the same directory.
+
 ### Exclusive-5090 watcher (active)
 
 Because the low-occupancy run did not remove the final 724/644 MiB compute
@@ -223,11 +261,11 @@ two checks five seconds apart with no `nvidia-smi` compute process and at most
 seconds, waits at most 24 hours, and never signals another process.
 
 The watcher started in remote tmux session
-`baseline_exclusive_5090_watcher` at `2026-10-17 00:38:15 HKT`. Its first
-heartbeat is `waiting_no_ttt`; GPU use remains 812/670 MiB and the two CARLA
-processes remain present. No training output directory has been created. If
-exclusive preflight passes, it runs no-TTT once and runs matched TTT only after
-a valid no-TTT success. The watcher SHA256 is
+`baseline_exclusive_5090_watcher` at `2026-10-17 00:38:15 HKT`. At
+`20:59:52 HKT` it remained live in `waiting_no_ttt`: GPU use was 730/18 MiB,
+with one CARLA process on GPU0 and none on GPU1. No watcher training output
+directory has been created. If exclusive preflight passes, it runs no-TTT once
+and runs matched TTT only after a valid no-TTT success. The watcher SHA256 is
 `5e011820886b9c67814c7497d73b5658fe9e3722dd6f7adf07a9445f297aae5c`;
 the frozen addendum SHA256 is
 `dd492e41d5f27796a469f187ed4d37eba665cd0fa356c12b2c156ac055a35954`.
@@ -344,7 +382,8 @@ Exact paper reproduction additionally requires the authors' private mixture,
 The released-code paths are either exhausted or waiting on an external-state
 change: native FSDP2 is GPU-memory limited under the measured shared states,
 its offload flag is not implemented, and FSDP1 offload is host-memory limited.
-The active watcher will measure the remaining exclusive-5090 case if the CARLA
-processes end within 24 hours. Otherwise continuing training requires exclusive
-larger GPUs or a host with materially more RAM for the explicitly non-paper
-offload path.
+The asymmetric-idle result removes the hypothesis that one idle peer card is
+sufficient. The active watcher will measure the remaining two-card-exclusive
+case if the final CARLA process ends within its registered 24-hour window.
+Otherwise continuing training requires exclusive larger GPUs or a host with
+materially more RAM for the explicitly non-paper offload path.

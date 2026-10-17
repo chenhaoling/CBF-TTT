@@ -6386,3 +6386,26 @@ hash和首次心跳已归档到
 `experiments/baseline_reproduction_qwen3_4b/remote/exclusive_5090_watcher_start/`。
 `hku-a100` 的75GB进程进一步确认为其他 `user` 账户运行约10小时的Qwen3-32B vLLM API
 服务，不作任何修改。baseline目标保持active，等待可验证的独占资源状态。
+
+## 2026-10-17: official baseline asymmetric-idle retry
+
+GPU资源状态随后进一步变化为730/18MiB：GPU1没有compute process，GPU0仅保留一个
+642MiB CARLA进程。执行前新增并提交
+`IN_PLACE_TTT_BASELINE_ASYMMETRIC_IDLE_RETRY_ADDENDUM.md`（commit `8403d08c`，SHA256
+`3b4a112b55172fcf1b3e46dfe668866a05db0110d5eb7790b1ef6d9ba9d2a152`），冻结同一官方
+commit、Qwen3-4B、8K、GB2、FSDP2、bf16、gradient checkpointing、FP32 AdamW、数据及
+`expandable_segments:True`；只允许一次no-TTT，成功并重新预检后才允许matched TTT。
+
+新增原子执行器`scripts/run_in_place_ttt_baseline_asymmetric_idle_retry.sh`（commit
+`4293c467`，远端执行SHA256
+`d93fc5e34c4a08e3c0e637736d2b29be807951865266106d20f92a53877190f8`）。它在同一进程中
+保存设备/compute-process快照、校验两张5090及730/18MiB对应阈值、确认无旧训练rank和
+官方checkout clean，并执行冻结的stop rule；不signal、暂停或修改任何外部进程。
+
+正式no-TTT于20:58:55 HKT启动，21.83秒后在首次AdamW状态初始化处失败。GPU0/GPU1
+监测峰值为32064/31594MiB；rank0申请48MiB时仅余40.44MiB，且
+reserved-but-unallocated仅14.04MiB。exit=1，因此未启动TTT。该结果证明单独释放GPU1
+不能救援GPU0上的本地FSDP rank；只要GPU0仍有642MiB外部占用，冻结配置仍不可行。它不
+证明两张完全独占5090也失败。preflight、metadata、summary、完整traceback和0.5秒资源
+曲线已归档于`experiments/baseline_reproduction_qwen3_4b/remote/asymmetric_idle_retry/`。
+独占双卡watcher仍存活并处于`waiting_no_ttt`，门控实验继续暂停。
