@@ -118,6 +118,14 @@ New opt-in files are:
 - `scripts/build_in_place_ttt_public_corpus.py`;
 - `scripts/audit_in_place_ttt_public_corpus.py`;
 - `configs/baseline_reproduction/qwen3_4b_public_stage{1,2}_{no_ttt,ttt}.yaml`;
+- `IN_PLACE_TTT_BASELINE_LEVEL_B_RULER_ADDENDUM.md`;
+- `eval_config/baseline_reproduction/qwen3_4b_formal_ruler.py`;
+- `scripts/run_in_place_ttt_level_b_ruler_single.sh`;
+- `scripts/summarize_in_place_ttt_level_b_ruler.py`;
+- `scripts/audit_in_place_ttt_level_b_ruler.py`;
+- `scripts/run_in_place_ttt_level_b_ruler_matrix.sh`;
+- `scripts/summarize_in_place_ttt_level_b_ruler_matrix.py`;
+- `scripts/audit_in_place_ttt_level_b_ruler_matrix.py`;
 - `scripts/audit_in_place_ttt_level_b_configs.py`;
 - `scripts/run_in_place_ttt_level_b_preflight.sh`;
 - `scripts/audit_in_place_ttt_level_b_preflight.py`;
@@ -631,7 +639,17 @@ Evidence:
 - The four formal training configurations pass the dependency-free static
   auditor. The host-gated matched-preflight metric/resource checks and the
   formal-training checkpoint/resource fixture checks pass; the combined
-  focused suite has 19 passing tests.
+  focused suite has 25 passing tests.
+- The formal RULER addendum is frozen with SHA256
+  `a5762933f8c6f9eee2863e42ba6823bbad922433fb00cf6e872630fe56543e7b`.
+  The new single-run auditor requires the exact Stage-2 audit/model, package
+  versions, ten generator-source hashes, three RULER source-data hashes,
+  original tokenizer, 13 tasks, 100 ordered examples and matching official
+  aggregate. The paired matrix audit also proves that `origin_prompt` and
+  `references` are identical between no-TTT and TTT before computing deltas.
+- The Stage-2 training audit now records the HF checkpoint under its final
+  published root instead of the temporary `.partial` root. This closes a path
+  binding bug before any formal training run; it does not change training.
 
 ## 7. Commands
 
@@ -731,6 +749,25 @@ bash scripts/run_in_place_ttt_level_b_training.sh stage1 no_ttt
 Use the same command with the matched config/model/output for `stage1 ttt`.
 For Stage 2, set `START_MODEL` to that arm's audited Stage-1 `hf_ckpt` and use
 the completed Stage-2 matched preflight.
+
+After both Stage-2 arms pass their independent audits, run the frozen paired
+RULER matrix on seven idle 80-GB GPUs. The runner evaluates all seven lengths
+for no-TTT, then all seven for TTT, and publishes only after every single-run
+and matrix audit passes:
+
+```bash
+UPSTREAM_REPO=/path/to/clean/in-place-ttt-be232482 \
+TOOL_REPO=/path/to/clean/CBF-TTT/In-Place-TTT \
+PYTHON_BIN=/path/to/official-eval-env/bin/python \
+TOKENIZER=/path/to/original/Qwen3-4B \
+NO_TTT_MODEL=/path/to/stage2_no_ttt/final/hf_ckpt \
+TTT_MODEL=/path/to/stage2_ttt/final/hf_ckpt \
+NO_TTT_TRAINING_ROOT=/path/to/stage2_no_ttt \
+TTT_TRAINING_ROOT=/path/to/stage2_ttt \
+RULER_GPUS=0,1,2,3,4,5,6 \
+OUTPUT_ROOT=/new/output/level_b_ruler_matrix \
+bash scripts/run_in_place_ttt_level_b_ruler_matrix.sh
+```
 
 Resource probe (change `ARM` and output path for the other arm):
 

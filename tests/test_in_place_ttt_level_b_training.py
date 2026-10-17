@@ -92,8 +92,13 @@ class LevelBTrainingAuditTest(unittest.TestCase):
                 "ttt_mode": False, "max_position_embeddings": 131072,
             }))
             (hf / "model.safetensors.index.json").write_text("{}")
-            result = audit(root, "stage2", "no_ttt", addendum)
+            published = root.parent / "published"
+            result = audit(root, "stage2", "no_ttt", addendum, published)
             self.assertTrue(result["passed"], result["errors"])
+            self.assertEqual(
+                Path(result["final_hf_path"]),
+                published / result["final_hf_relative_path"],
+            )
 
 
 if __name__ == "__main__":

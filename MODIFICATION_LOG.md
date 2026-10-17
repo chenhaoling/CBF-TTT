@@ -6600,3 +6600,47 @@ checkpoint step集合（Stage1为500..9500及9537，Stage2为500/1000/1500/1788�
 metadata与≥40GB结构、最终HF checkpoint和正确ttt_mode、全部已解析指标有限、无OOM且每卡
 峰值后free fraction≥5%。新增3项训练audit测试，其中一项用稀疏40GB fixture走通完整Stage2
 审计；合并focused suite为19项通过。现有主机不满足门槛，因此未启动正式训练。
+## 2026-10-18：Level-B 正式 RULER 评测闭环与 Stage-2 发布路径修复
+
+在完整公开语料仍由远端 CPU 构建、且尚未执行任何 Level-B optimizer step 或正式 RULER
+评分时，新增并冻结 `IN_PLACE_TTT_BASELINE_LEVEL_B_RULER_ADDENDUM.md`（SHA256
+`a5762933f8c6f9eee2863e42ba6823bbad922433fb00cf6e872630fe56543e7b`）。附录固定 no-TTT 与
+native TTT 两臂的 13 个官方 RULER 任务、每任务100条、4K/8K/16K/32K/64K/128K/256K、
+生成种子42、原始Qwen tokenizer、贪心生成以及“4K--128K为注册均值、256K为外推”的
+claim boundary；不开放遗忘或“是否更新”门控实验。
+
+新增 `eval_config/baseline_reproduction/qwen3_4b_formal_ruler.py`，使用一个环境参数化配置
+覆盖七个注册长度，并显式设置每个生成器的 `random_seed=42`。新增单长度runner、summary和
+独立audit：
+
+- `scripts/run_in_place_ttt_level_b_ruler_single.sh`只接受通过独立审计的对应Stage-2 HF路径，
+  校验`ttt_mode`、131072位置配置、原始tokenizer和80GB空闲GPU，再原子运行OpenCompass；
+- `scripts/summarize_in_place_ttt_level_b_ruler.py`要求恰好13个结果文件、13个预测文件、每个
+  预测按0--99完整有序，独立重算macro并与OpenCompass官方group score一致；
+- `scripts/audit_in_place_ttt_level_b_ruler.py`不导入summary实现，重新检查raw结果、预测、
+  100条details、模型全文件manifest、Stage-2 audit绑定、tool/config、GPU trace与日志；
+- 每个任务另外对100条`origin_prompt + references`计算规范JSON SHA256，禁止把两臂不同的
+  随机样本当作配对比较。
+
+新增七卡矩阵runner、summary和独立audit。`run_in_place_ttt_level_b_ruler_matrix.sh`要求七张
+互异且空闲的至少80GB GPU，先并行完成no-TTT七个长度，全部通过后再运行TTT七个长度。
+矩阵summary输出逐长度`TTT - no-TTT`、逐任务差值和注册4K--128K均值；独立audit直接从
+14组raw JSON重算，验证单次audit未因文件后改而失效，并要求两臂每个长度的输入哈希完全
+一致。所有输出先写`.partial`，仅审计通过才原子发布。
+
+远程正式评测环境被固定为OpenCompass 0.5.4、Transformers 4.57.3、Datasets 2.21.0和
+Torch 2.8.0+cu128。独立audit硬编码核对五个generator config、五个dataset实现以及
+OpenCompass实际解析到的SQuAD、HotpotQA、Paul Graham源文件SHA256；环境或数据漂移直接
+停止。相应哈希、文件大小和运行规则完整写入RULER附录。
+
+二次审查发现原Level-B训练audit在`${OUTPUT_ROOT}.partial`内生成时记录临时HF绝对路径，
+成功发布目录重命名后该路径会失效。现为
+`scripts/audit_in_place_ttt_level_b_training.py`新增`--published-root`，同时保存
+`final_hf_relative_path`和最终发布绝对路径；训练runner显式传入最终root。该修复发生在任何
+正式训练前，只改变审计元数据，不改变模型、optimizer、data loader或checkpoint内容。
+
+新增 `tests/test_in_place_ttt_level_b_ruler.py`，覆盖正式配置、13×100完整性、raw独立重算、
+两臂输入错配拒绝、七长度矩阵以及冻结文件/hash一致性；扩展训练audit测试覆盖原子发布后HF
+路径。RULER与训练专项9项测试通过，全部Level-B inventory/corpus/config/preflight/training/
+RULER聚焦测试共25项通过。新入口均为opt-in，baseline配置、官方训练入口、原生
+`ttt_proj/ttt_conv`和既有checkpoint均未覆盖。

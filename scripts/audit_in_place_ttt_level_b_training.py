@@ -62,7 +62,13 @@ def host_resources(path: Path) -> dict[str, Any]:
     }
 
 
-def audit(root: Path, stage: str, arm: str, addendum: Path) -> dict[str, Any]:
+def audit(
+    root: Path,
+    stage: str,
+    arm: str,
+    addendum: Path,
+    published_root: Path | None = None,
+) -> dict[str, Any]:
     errors: list[str] = []
     spec = SPECS[stage]
     required = {
@@ -170,6 +176,11 @@ def audit(root: Path, stage: str, arm: str, addendum: Path) -> dict[str, Any]:
         if config.get("max_position_embeddings") != spec["seq_len"]:
             errors.append("final HF max_position_embeddings differs from stage")
 
+    published_hf_path = None
+    final_hf_relative_path = None
+    if hf_path is not None:
+        final_hf_relative_path = str(hf_path.relative_to(root))
+        published_hf_path = (published_root or root) / final_hf_relative_path
     return {
         "protocol": PROTOCOL,
         "stage": stage,
@@ -184,7 +195,8 @@ def audit(root: Path, stage: str, arm: str, addendum: Path) -> dict[str, Any]:
         "gpu": trace,
         "host": host,
         "checkpoints": checkpoint_records,
-        "final_hf_path": str(hf_path) if hf_path else None,
+        "final_hf_path": str(published_hf_path) if published_hf_path else None,
+        "final_hf_relative_path": final_hf_relative_path,
         "bindings": {name + "_sha256": sha256(path) for name, path in required.items()},
     }
 
@@ -195,10 +207,17 @@ def main() -> None:
     parser.add_argument("--stage", choices=tuple(SPECS), required=True)
     parser.add_argument("--arm", choices=ARMS, required=True)
     parser.add_argument("--training-addendum", type=Path, required=True)
+    parser.add_argument(
+        "--published-root", type=Path,
+        help="final root after atomic publication; defaults to --root",
+    )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     root = args.root.resolve()
-    result = audit(root, args.stage, args.arm, args.training_addendum.resolve())
+    published_root = args.published_root.resolve() if args.published_root else root
+    result = audit(
+        root, args.stage, args.arm, args.training_addendum.resolve(), published_root
+    )
     output = args.output.resolve() if args.output else root / "independent_audit.json"
     partial = output.with_name(output.name + ".partial")
     if output.exists() or partial.exists():

@@ -190,4 +190,5 @@ if [[ $rc -ne 0 ]]; then exit "$rc"; fi
 "$PYTHON_BIN" "$TOOL_REPO/scripts/audit_in_place_ttt_level_b_training.py" \
   --root "$staging" --stage "$stage" --arm "$arm" \
   --training-addendum "$TRAINING_ADDENDUM" \
+  --published-root "$OUTPUT_ROOT" \
   --output "$staging/independent_audit.json" > "$staging/independent_audit.log"
