@@ -6651,3 +6651,29 @@ dataset、100 samples、seed 42、对应session/max length和零Mistral修复；
 checkout的RULER与training audit测试9/9通过。日志及依赖/计划哈希记录于
 `experiments/baseline_reproduction_qwen3_4b/remote/level_b_ruler_tooling_smoke/`。该smoke没有
 加载未来Stage-2模型或产生正式分数，不改变“完整语料、双臂训练和正式矩阵尚未完成”的结论。
+
+## 2026-10-18：正式语料独立审计的内存有界化
+
+正式语料构建仍在远端tmux `public_corpus_full_20261018`运行。2026-10-17 18:31:42 UTC直接
+检查PID 1397987仍为`RUNNING_BUILD`，约占88% CPU、4.4GiB RSS，partial目录已增长至
+7.7GiB。该目录尚未原子发布，不能用于训练，也没有重启或替换其冻结输入。
+
+审查发现原独立审计器的`SourceContinuity`会把已经消费的每个文档entry与cursor保留到两阶段
+审计结束。pilot中3145728个FineWeb训练token已涉及2919个文档，按正式FineWeb token预算
+外推约需保留1620万个文档对象，存在正式审计阶段的主内存风险。新增并冻结
+`IN_PLACE_TTT_BASELINE_LEVEL_B_CORPUS_AUDIT_SCALABILITY_ADDENDUM.md`，明确该问题只影响
+审计器内存表示，不改变构建器、语料顺序、tokenization、packing、stage衔接、manifest、
+artifact或接受门槛。
+
+修改`scripts/audit_in_place_ttt_public_corpus.py`：以`documents_seen`记录累计文档数；进入下一
+连续文档且确认前一文档完全消费后删除旧entry/cursor；保留当前文档及snapshot预取文档；继续
+检查locator单调性、span连续性、metadata、document stream SHA256和pending snapshot；新增
+`continuity_peak_active_documents`与`continuity_documents_seen`诊断字段。修改
+`tests/test_in_place_ttt_public_corpus.py`，加入10000个完整文档的有界状态测试，以及两文档预取
+后禁止跳过首文档的测试。全部Level-B定向测试27/27通过，`git diff --check`通过。
+
+正在运行的runner继续使用其冻结的原审计器SHA256
+`9c5dbadba76c4ebbba5248952455b3bfe4860b9b2b79bdbb555034dcc76c7e31`，不得热替换。新审计器
+SHA256为`5ec753a29996f6abc386d7e16529218bbaaf6c1b1ff271638db730b9c41f8b87`，仅能在重新通过冻结
+pilot后，以新文件名执行secondary audit；只有完整语料与manifest已原子发布且旧审计器明确因
+主内存失败时，才可作为fallback，不能挽救partial构建。

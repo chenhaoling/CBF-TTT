@@ -1,8 +1,9 @@
 import tempfile
 import unittest
+import hashlib
 from pathlib import Path
 
-from scripts.audit_in_place_ttt_public_corpus import SourceContinuity
+from scripts.audit_in_place_ttt_public_corpus import SourceContinuity, canonical
 from scripts.build_in_place_ttt_public_corpus import (
     PROFILES,
     PersistentSourcePacker,
@@ -43,6 +44,75 @@ def documents(source, count=8):
 
 
 class PublicCorpusTest(unittest.TestCase):
+    def test_prefetched_snapshot_cannot_skip_a_document(self):
+        inventory = {"files": [{"repository_path": "sample/file.parquet"}]}
+        continuity = SourceContinuity("fineweb", inventory)
+        segments = []
+        hasher = hashlib.sha256()
+        for index in range(2):
+            entry = {
+                "source": "fineweb",
+                "document_index": index,
+                "locator": {
+                    "file_index": 0,
+                    "repository_path": "sample/file.parquet",
+                    "parquet_row_index": index,
+                },
+                "document_sha256": f"{index:064x}",
+                "content_token_count": 7,
+                "token_count_with_boundary": 8,
+            }
+            hasher.update((canonical(entry) + "\n").encode())
+            segments.append({**entry, "cursor": 0})
+        snapshot = {
+            "source": "fineweb",
+            "documents_loaded": 2,
+            "pending_token_count": 16,
+            "pending_tokens_sha256": "0" * 64,
+            "pending_segments": segments,
+            "document_stream_sha256": hasher.hexdigest(),
+        }
+        self.assertTrue(continuity.validate_snapshot(snapshot))
+        skipped = {**segments[1], "token_start": 0, "token_end": 8}
+        self.assertEqual(continuity.consume_span(skipped), (False, 0))
+        first = {**segments[0], "token_start": 0, "token_end": 8}
+        second = {**segments[1], "token_start": 0, "token_end": 8}
+        self.assertEqual(continuity.consume_span(first), (True, 8))
+        self.assertEqual(continuity.consume_span(second), (True, 8))
+
+    def test_continuity_memory_is_bounded_by_active_documents(self):
+        inventory = {"files": [{"repository_path": "sample/file.parquet"}]}
+        continuity = SourceContinuity("fineweb", inventory)
+        count = 10_000
+        for index in range(count):
+            span = {
+                "source": "fineweb",
+                "document_index": index,
+                "locator": {
+                    "file_index": 0,
+                    "repository_path": "sample/file.parquet",
+                    "parquet_row_index": index,
+                },
+                "document_sha256": f"{index:064x}",
+                "content_token_count": 7,
+                "token_count_with_boundary": 8,
+                "token_start": 0,
+                "token_end": 8,
+            }
+            self.assertEqual(continuity.consume_span(span), (True, 8))
+        snapshot = {
+            "source": "fineweb",
+            "documents_loaded": count,
+            "pending_token_count": 0,
+            "pending_tokens_sha256": "0" * 64,
+            "pending_segments": [],
+            "document_stream_sha256": continuity.hasher.copy().hexdigest(),
+        }
+        self.assertTrue(continuity.validate_snapshot(snapshot))
+        self.assertEqual(continuity.documents_seen, count)
+        self.assertLessEqual(len(continuity.entries), 1)
+        self.assertLessEqual(continuity.peak_active_documents, 2)
+
     def test_packer_preserves_cursor_across_sequence_change(self):
         tokenizer = FakeTokenizer()
         packer = PersistentSourcePacker("fineweb", documents("fineweb"), tokenizer)

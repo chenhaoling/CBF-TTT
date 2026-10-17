@@ -75,8 +75,13 @@ class SourceContinuity:
     def __init__(self, source: str, inventory_source: dict[str, Any]):
         self.source = source
         self.inventory_source = inventory_source
+        # Only unfinished/prefetched documents are needed to validate the
+        # next span. Keeping every past entry makes formal-scale audit memory
+        # grow with millions of FineWeb documents.
         self.entries: dict[int, dict[str, Any]] = {}
         self.cursors: dict[int, int] = {}
+        self.documents_seen = 0
+        self.peak_active_documents = 0
         self.hasher = hashlib.sha256()
         self.last_document_index = -1
         self.last_locator: tuple[int, int] | None = None
@@ -86,7 +91,7 @@ class SourceContinuity:
         locator = entry.get("locator")
         valid = (
             entry.get("source") == self.source
-            and isinstance(index, int) and index == len(self.entries)
+            and isinstance(index, int) and index == self.documents_seen
             and start == 0 and isinstance(locator, dict)
             and isinstance(entry.get("document_sha256"), str)
             and len(entry["document_sha256"]) == 64
@@ -111,6 +116,10 @@ class SourceContinuity:
         self.last_locator = location
         self.entries[index] = entry
         self.cursors[index] = 0
+        self.documents_seen += 1
+        self.peak_active_documents = max(
+            self.peak_active_documents, len(self.entries)
+        )
         self.hasher.update((canonical(entry) + "\n").encode("utf-8"))
         return True
 
@@ -129,10 +138,15 @@ class SourceContinuity:
                 or not 0 <= start < end <= total or index < self.last_document_index):
             return False, 0
         if index > self.last_document_index:
+            if index != self.last_document_index + 1:
+                return False, 0
             if (self.last_document_index >= 0
                     and self.cursors[self.last_document_index]
                     != self.entries[self.last_document_index]["token_count_with_boundary"]):
                 return False, 0
+            if self.last_document_index >= 0:
+                del self.entries[self.last_document_index]
+                del self.cursors[self.last_document_index]
             self.last_document_index = index
         self.cursors[index] = end
         return True, end - start
@@ -154,9 +168,14 @@ class SourceContinuity:
         pending_count = sum(
             segment["token_count_with_boundary"] - segment["cursor"] for segment in segments
         )
+        pending_indices = {segment.get("document_index") for segment in segments}
+        for index in set(self.entries) - pending_indices:
+            if (index != self.last_document_index
+                    or self.cursors[index] != self.entries[index]["token_count_with_boundary"]):
+                return False
         return (
             snapshot.get("source") == self.source
-            and snapshot.get("documents_loaded") == len(self.entries)
+            and snapshot.get("documents_loaded") == self.documents_seen
             and snapshot.get("pending_token_count") == pending_count
             and isinstance(snapshot.get("pending_tokens_sha256"), str)
             and len(snapshot["pending_tokens_sha256"]) == 64
@@ -358,6 +377,12 @@ def audit(root: Path, inventory_path: Path, inventory_audit_path: Path,
             "records": total_records, "training_tokens": total_tokens,
             "synthetic_eos_tokens": total_synthetic,
             "combined_curriculum_sha256": combined_hasher.hexdigest(),
+            "continuity_peak_active_documents": {
+                source: continuity[source].peak_active_documents for source in SOURCES
+            },
+            "continuity_documents_seen": {
+                source: continuity[source].documents_seen for source in SOURCES
+            },
         },
         "bindings": {
             "manifest_sha256": sha(manifest_path),

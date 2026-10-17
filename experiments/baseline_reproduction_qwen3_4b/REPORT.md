@@ -860,3 +860,35 @@ exclusive 2x5090 but leaves only 2.107% free memory; its offload flag is not
 implemented, and FSDP1 offload is host-memory limited. Continuing toward
 Level B therefore requires an exclusive larger-GPU host. This is a measured
 resource conclusion, not an efficacy result.
+
+## 9. Full-corpus audit scalability hardening (2026-10-18)
+
+The active full-corpus builder remains live in tmux
+`public_corpus_full_20261018`. A direct process check at
+`2026-10-17 18:31:42 UTC` found PID 1397987 in `RUNNING_BUILD`, using about
+88% CPU and 4.4 GiB RSS; the partial directory had grown to 7.7 GiB. The
+partial directory remains invalid as training input.
+
+Review of the independent auditor found that its original continuity checker
+retained every past document entry and cursor. The pilot observed 2,919
+FineWeb documents for 3,145,728 FineWeb training tokens; extrapolation to the
+registered FineWeb budget is roughly 16.2 million retained entries. This is a
+host-memory scaling risk for the audit after a successful build, not a corpus
+construction error.
+
+`IN_PLACE_TTT_BASELINE_LEVEL_B_CORPUS_AUDIT_SCALABILITY_ADDENDUM.md` freezes a
+streaming representation before it may be used. The revised auditor retires a
+fully consumed document after the next consecutive document begins, retains
+prefetched pending documents, preserves the ordered document-stream hash and
+all ten existing acceptance checks, and reports documents seen plus peak
+active documents. A 10,000-document test requires at most two active entries;
+a separate test proves that a prefetched snapshot cannot skip its first
+document. The complete Level-B focused suite now passes 27/27 tests.
+
+The active runner remains bound to its original builder and auditor hashes and
+must not be modified or restarted. If its original post-build audit passes,
+that result is accepted. The streaming auditor is eligible only after it
+repasses the frozen pilot under a distinct output filename. It may serve as a
+secondary audit, or as a fallback only if the builder has atomically published
+the complete corpus and the original audit fails specifically because of host
+memory. It cannot validate or rescue a partial build.
