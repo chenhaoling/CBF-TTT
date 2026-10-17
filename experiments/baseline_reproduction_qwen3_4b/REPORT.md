@@ -7,16 +7,18 @@ Official source commit: `be2324829b0e91c8fd10a74d4b43714fde6676e1`
 
 ## 1. Conclusion
 
-The released-code evaluation pipeline is operational, but the paper baseline
-has **not** been reproduced yet.
+The released-code Level-A execution path is complete, but the paper-scale
+baseline has **not** been reproduced yet.
 
 - A clean official checkout and isolated official-version environment load on
   `hku-gpu2`.
-- The official Qwen3-4B training path reaches model loading, the full forward
-  pass, backward pass, and `optimizer.step()` for both matched arms.
-- Both 8K resource probes OOM while AdamW initializes optimizer state. The
-  current shared 2xRTX 5090 host therefore fails the frozen training resource
-  gate before a single completed optimizer step.
+- Under a truly exclusive 2xRTX 5090 allocation, both matched 8K arms complete
+  one finite optimizer step, write DCP checkpoints, convert through the
+  official DCP-to-HF script, reload with the official TTT-aware inference
+  registration, and complete all 13 RULER-4K smoke tasks.
+- no-TTT and TTT peak at 31,620/31,594 MiB and 31,920/31,894 MiB. The minimum
+  remaining fraction is 2.107%, below the preregistered 5% resource gate, so
+  the 2x5090 length ladder stops at 8K and does not attempt 16K.
 - Two preregistered offload diagnostics also stop: the pinned VeOmni FSDP2
   path ignores `enable_fsdp_offload`, while the released FSDP1 path does
   offload but exhausts the 62-GiB host RAM and 4-GiB swap and is SIGKILLed.
@@ -32,18 +34,20 @@ has **not** been reproduced yet.
   no compute process, while GPU0 retains one 642-MiB CARLA process. The no-TTT
   rank on GPU0 still OOMs on a 48-MiB AdamW allocation with 40.44 MiB free.
   One idle peer device therefore cannot rescue a rank whose own device is at
-  the capacity boundary; a retry with both 5090s exclusive remains unmeasured.
-- The unmodified Qwen3-4B OpenCompass RULER-4K pipeline completes all 13 tasks.
-  Its one-example-per-task smoke score is `76.9231`; this validates execution
-  and score extraction only and is not a precision estimate comparable to the
-  paper's 100-example result.
+  the capacity boundary; the later exclusive success confirms that the prior
+  blocker was the final external allocation.
+- The converted no-TTT and TTT checkpoints each score `76.9231` on the
+  one-example-per-task smoke. This validates execution and score extraction
+  only and is not an efficacy estimate comparable to the paper's 100-example
+  result.
 - The paper's exact continual-pretraining corpus and several stage settings
   are not public. FineWeb-Edu plus LongCrawl64 remains a declared public-data
   substitute and cannot be called the original paper dataset.
 
-Consequently, Level A is partially complete, Level B has not started formal
-training, and Level C remains blocked by private data/configuration. Update
-admission and forgetting-gate exploration remains paused.
+Consequently, Level A passes. Level B has not started formal matched training
+because 2x5090 cannot safely execute the registered length ladder, and Level C
+remains blocked by private data/configuration. Update-admission and
+forgetting-gate exploration remains paused.
 
 ## 2. Paper target and claim boundary
 
@@ -75,6 +79,9 @@ New opt-in files are:
 - `scripts/run_in_place_ttt_baseline_resource_pilot.sh`;
 - `scripts/run_in_place_ttt_baseline_asymmetric_idle_retry.sh`;
 - `scripts/summarize_in_place_ttt_baseline_resource.py`;
+- `scripts/convert_and_audit_in_place_ttt_baseline_checkpoints.sh`;
+- `scripts/run_in_place_ttt_converted_checkpoint_smokes.sh`;
+- `scripts/audit_in_place_ttt_baseline_exclusive.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -251,7 +258,7 @@ Evidence:
 - [`remote/asymmetric_idle_retry/resource_8k_no_ttt/summary.json`](remote/asymmetric_idle_retry/resource_8k_no_ttt/summary.json)
 - full log, metadata, and 0.5-second GPU/host traces in the same directory.
 
-### Exclusive-5090 watcher (active)
+### Exclusive-5090 matched run (completed)
 
 Because the low-occupancy run did not remove the final 724/644 MiB compute
 allocations, a third addendum freezes the only remaining informative 5090
@@ -262,16 +269,44 @@ seconds, waits at most 24 hours, and never signals another process.
 
 The watcher started in remote tmux session
 `baseline_exclusive_5090_watcher` at `2026-10-17 00:38:15 HKT`. At
-`20:59:52 HKT` it remained live in `waiting_no_ttt`: GPU use was 730/18 MiB,
-with one CARLA process on GPU0 and none on GPU1. No watcher training output
-directory has been created. If exclusive preflight passes, it runs no-TTT once
-and runs matched TTT only after a valid no-TTT success. The watcher SHA256 is
+`21:18:54 HKT`, the final CARLA process exited. Two consecutive preflights
+recorded no compute process and 44/18 MiB total use, so the watcher ran no-TTT
+and then repeated the exclusive preflight before matched TTT. The watcher
+SHA256 is
 `5e011820886b9c67814c7497d73b5658fe9e3722dd6f7adf07a9445f297aae5c`;
 the frozen addendum SHA256 is
 `dd492e41d5f27796a469f187ed4d37eba665cd0fa356c12b2c156ac055a35954`.
 
-Start snapshot:
-[`remote/exclusive_5090_watcher_start/`](remote/exclusive_5090_watcher_start/).
+| Arm | Exit | Loss | Gradient norm | Wall | Tokens/s | GPU0/GPU1 peak |
+|---|---:|---:|---:|---:|---:|---:|
+| no TTT | 0 | 2.7364 | 11.2364 | 68.48 s | 239.25 | 31,620 / 31,594 MiB |
+| native TTT | 0 | 2.7364 | 4,471.9336 | 87.36 s | 187.55 | 31,920 / 31,894 MiB |
+
+Both DCP writes completed. The TTT arm is 21.61% slower by the one-step
+end-to-end throughput ratio and has a 397.99x larger pre-clipping gradient
+norm. `max_grad_norm=1.0` remains enabled, so this observation is a stability
+risk for longer training rather than proof of divergence.
+
+The raw trace independently gives a minimum free fraction of 2.107% at the
+TTT peak. This is below the frozen 5% ladder condition. The run therefore
+stops before 16K; neither 32K nor 64K is permitted on this host. The result
+also resolves the earlier shared-host ambiguity: 8K is feasible only when the
+two 32-GB devices are effectively exclusive.
+
+The official converter produced five bfloat16 safetensors shards per arm.
+no-TTT contains 399 model tensors (8.823 GB) and no writer tensors; TTT
+contains 411 model tensors (8.902 GB), including the expected 12 native
+`ttt_proj/ttt_conv` tensors for six valid TTT layers. A second full SHA256 pass
+verified all 30 model-asset and weight files.
+
+Evidence:
+
+- [`remote/exclusive_5090_completed/independent_audit.json`](remote/exclusive_5090_completed/independent_audit.json)
+- [`remote/exclusive_5090_completed/resource_8k_no_ttt/summary.json`](remote/exclusive_5090_completed/resource_8k_no_ttt/summary.json)
+- [`remote/exclusive_5090_completed/resource_8k_ttt/summary.json`](remote/exclusive_5090_completed/resource_8k_ttt/summary.json)
+- [`remote/exclusive_5090_completed/hf_integrity_check.txt`](remote/exclusive_5090_completed/hf_integrity_check.txt)
+- full preflights, logs, traces, conversion audits, and weight manifests in
+  [`remote/exclusive_5090_completed/`](remote/exclusive_5090_completed/).
 
 ### Alternate host check
 
@@ -320,6 +355,28 @@ module in the external OpenCompass config. A third direct-SSH attempt was
 interrupted by the Cloudflare tunnel. The successful run used tmux. None of
 these failed attempts contributes a score.
 
+The converted one-step checkpoints were then evaluated through the same
+13-task path with their complete HF hash manifests bound into run metadata:
+
+| Checkpoint | Tasks | Official score | Independent mean | Wall | GPU0 peak |
+|---|---:|---:|---:|---:|---:|
+| no-TTT step 1 | 13/13 | 76.9230769 | 76.9230769 | 1:47.12 | 9,300 MiB |
+| TTT step 1 | 13/13 | 76.9230769 | 76.9230769 | 1:42.51 | 9,916 MiB |
+
+The per-task score vectors are identical at this sample size. Several raw
+predictions differ, as shown by different result hashes, so the TTT-aware path
+is active; a single binary item per task has no power to estimate an accuracy
+difference. Both logs emit the same Transformers tokenizer-regex warning 27
+times. This matched warning must be resolved or explicitly accepted before
+the formal 100-example matrix.
+
+Evidence:
+
+- [`remote/exclusive_5090_completed/ruler_4k_no_ttt_step1_smoke/summary.json`](remote/exclusive_5090_completed/ruler_4k_no_ttt_step1_smoke/summary.json)
+- [`remote/exclusive_5090_completed/ruler_4k_ttt_step1_smoke/summary.json`](remote/exclusive_5090_completed/ruler_4k_ttt_step1_smoke/summary.json)
+- raw predictions, task results, official summary files, GPU traces, and logs
+  are stored below the same two directories.
+
 ## 6. Verification
 
 - CUDA bf16 tensor creation and FlashAttention forward passed on RTX 5090.
@@ -330,6 +387,9 @@ these failed attempts contributes a score.
 - Focused resource and RULER summarizer tests: `2 passed`.
 - RULER task set is checked against an explicit 13-task allowlist.
 - Official group score is independently recomputed from task result JSONs.
+- Independent exclusive-run audit recomputes GPU peaks, resource headroom,
+  input bindings, conversion structure, manifest bindings, and both smoke
+  summaries; it passes and requires stopping before 16K.
 
 ## 7. Commands
 
@@ -353,6 +413,15 @@ PLAN=$PWD/IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md TOOL_REPO=$PWD \
 bash scripts/run_in_place_ttt_baseline_resource_pilot.sh
 ```
 
+Convert and audit both completed DCP checkpoints:
+
+```bash
+UPSTREAM_REPO=/home/ctj/in_place_ttt_official_be232482 \
+PYTHON_BIN=/home/ctj/miniconda3/envs/in_place_ttt_official_py311/bin/python \
+OUTPUT_ROOT=/path/to/completed_exclusive_run \
+bash scripts/convert_and_audit_in_place_ttt_baseline_checkpoints.sh
+```
+
 RULER smoke:
 
 ```bash
@@ -363,15 +432,25 @@ PLAN=$PWD/IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md TOOL_REPO=$PWD \
 bash scripts/run_in_place_ttt_ruler_smoke.sh
 ```
 
+Run both converted-checkpoint smokes:
+
+```bash
+UPSTREAM_REPO=/home/ctj/in_place_ttt_official_be232482 \
+EVAL_PYTHON=/home/ctj/miniconda3/envs/in_place_ttt_official_eval/bin/python \
+OUTPUT_ROOT=/path/to/completed_exclusive_run \
+PLAN=$PWD/IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md TOOL_REPO=$PWD \
+bash scripts/run_in_place_ttt_converted_checkpoint_smokes.sh
+```
+
 ## 8. Next required experiment
 
-1. Allocate an exclusive host with enough memory for the frozen recipe,
-   preferably 4--8 GPUs with at least 80GB each, or rerun 8K on exclusive
-   5090s to determine whether unrelated processes alone caused the boundary.
-   `hku-a100` cannot currently serve this role because its only 80-GB GPU has
-   75,124 MiB allocated to vLLM.
-2. Repeat both 8K arms from new output roots. Only after both complete, measure
-   16K and 32K; attempt 64K only if 32K retains at least 15% free memory.
+1. Allocate an exclusive H800-class host, preferably 4--8 GPUs with at least
+   80GB each. The exclusive 2x5090 result already passes 8K but fails the 5%
+   headroom rule, so repeating 8K or attempting 16K there is prohibited.
+   `hku-a100` cannot serve this role while its only 80-GB GPU has 75,124 MiB
+   allocated to vLLM.
+2. Resolve or explicitly validate the repeated tokenizer-regex warning before
+   any 100-example RULER score is released.
 3. On the selected host, construct a fully hashed FineWeb-Edu/LongCrawl64
    public substitute and train byte-identical no-TTT/TTT token streams.
 4. Convert both final DCP checkpoints and execute the 100-example RULER matrix
@@ -382,11 +461,8 @@ bash scripts/run_in_place_ttt_ruler_smoke.sh
 Exact paper reproduction additionally requires the authors' private mixture,
 32K/128K stage recipe, and inference clipping details.
 
-The released-code paths are either exhausted or waiting on an external-state
-change: native FSDP2 is GPU-memory limited under the measured shared states,
-its offload flag is not implemented, and FSDP1 offload is host-memory limited.
-The asymmetric-idle result removes the hypothesis that one idle peer card is
-sufficient. The active watcher will measure the remaining two-card-exclusive
-case if the final CARLA process ends within its registered 24-hour window.
-Otherwise continuing training requires exclusive larger GPUs or a host with
-materially more RAM for the explicitly non-paper offload path.
+The released-code Level-A path is now closed. Native FSDP2 8K succeeds on
+exclusive 2x5090 but leaves only 2.107% free memory; its offload flag is not
+implemented, and FSDP1 offload is host-memory limited. Continuing toward
+Level B therefore requires an exclusive larger-GPU host. This is a measured
+resource conclusion, not an efficacy result.

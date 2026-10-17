@@ -1,0 +1,19 @@
+{
+  "protocol": "in_place_ttt_baseline_resource_v2",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "upstream_clean": true,
+  "model": "/home/ctj/models/Qwen3-4B",
+  "data": "/home/ctj/data/cbf_ttt_pilot/mixed_16x8192.jsonl",
+  "arm": "no_ttt",
+  "resource_profile": "native_expandable_segments",
+  "pytorch_cuda_alloc_conf": "expandable_segments:True",
+  "sequence_length": 8192,
+  "global_batch_size": 2,
+  "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+  "config_sha256": "aef9389e8da73e2224834864cd19fecd4f9dfe58be32c208e9b3467b10366ab6",
+  "data_sha256": "2eb03326ec87bc831ee1441e812bb5bef843f8e906656787cd2ddafc69d9d823",
+  "model_config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+  "addendum_sha256": "dd492e41d5f27796a469f187ed4d37eba665cd0fa356c12b2c156ac055a35954",
+  "runner_sha256": "6eb895c9f7008b7dfa272c4b2608af5a7125300c631d08c575ac5b933b686e0f",
+  "summarizer_sha256": "8a3d4f9f963a61c71ab9968b89a498df12cca1ca9eccc8d86c0d91e508ef08bc"
+}

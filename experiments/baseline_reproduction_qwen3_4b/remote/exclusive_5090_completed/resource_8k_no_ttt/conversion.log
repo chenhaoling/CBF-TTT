@@ -1,0 +1,41 @@
+2026-10-17 21:26:34 - INFO - __main__ - Loading model assets from /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/checkpoint/model_assets
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/checkpoint/model_assets' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+2026-10-17 21:26:34 - INFO - __main__ - Saving model weights to /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt
+2026-10-17 21:26:34 - INFO - __main__ - Format: safetensors, dtype=bfloat16, shard_size=2000000000
+2026-10-17 21:26:34 - INFO - __main__ - Analyzing DCP metadata and planning shards...
+2026-10-17 21:26:34 - INFO - __main__ - Found 399 model tensors, total size: ~8.82GB
+2026-10-17 21:26:34 - INFO - __main__ - Split into 5 shards
+2026-10-17 21:26:34 - INFO - __main__ - Processing shard 1/5: model-00001-of-00005.safetensors (25 tensors)
+/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/torch/distributed/checkpoint/state_dict_loader.py:153: UserWarning: torch.distributed is disabled, unavailable or uninitialized, assuming the intent is to load in a single process.
+  warnings.warn(
+2026-10-17 21:26:38 - INFO - __main__ - Processing shard 2/5: model-00002-of-00005.safetensors (107 tensors)
+2026-10-17 21:26:42 - INFO - __main__ - Processing shard 3/5: model-00003-of-00005.safetensors (108 tensors)
+2026-10-17 21:26:46 - INFO - __main__ - Processing shard 4/5: model-00004-of-00005.safetensors (106 tensors)
+2026-10-17 21:26:50 - INFO - __main__ - Processing shard 5/5: model-00005-of-00005.safetensors (53 tensors)
+2026-10-17 21:26:52 - INFO - __main__ - Saved index file to model.safetensors.index.json
+2026-10-17 21:26:52 - INFO - __main__ - Weight conversion complete.
+2026-10-17 21:26:52 - INFO - __main__ - Saved model asset: Qwen3Config
+2026-10-17 21:26:52 - INFO - __main__ - Saved model asset: Qwen2TokenizerFast
+	Command being timed: "/home/ctj/miniconda3/envs/in_place_ttt_official_py311/bin/python /home/ctj/in_place_ttt_official_be232482/scripts/merge_dcp_to_hf.py --load-dir /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/checkpoint/checkpoints/global_step_1 --save-dir /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt --model-assets-dir /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/checkpoint/model_assets --shard-size 2000000000"
+	User time (seconds): 127.84
+	System time (seconds): 69.09
+	Percent of CPU this job got: 907%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:21.69
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 6950540
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 210
+	Minor (reclaiming a frame) page faults: 11898058
+	Voluntary context switches: 36303
+	Involuntary context switches: 1526
+	Swaps: 0
+	File system inputs: 34785288
+	File system outputs: 17263424
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

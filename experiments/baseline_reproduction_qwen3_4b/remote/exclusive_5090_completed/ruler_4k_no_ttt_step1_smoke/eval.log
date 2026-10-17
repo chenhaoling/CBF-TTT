@@ -1,0 +1,403 @@
+10/17 21:30:05 - OpenCompass - INFO - Current exp folder: /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_smoke/opencompass/20261017_213005
+10/17 21:30:05 - OpenCompass - WARNING - SlurmRunner is not used, so the partition argument is ignored.
+10/17 21:30:05 - OpenCompass - INFO - Partitioned into 8 tasks.
+10/17 21:30:05 - OpenCompass - WARNING - Ignored argument in opencompass.runners.local: retry=1
+10/17 21:30:05 - OpenCompass - WARNING - Default to dump eval details, it might take extraspace to save all the evaluation details. Set --dump-eval-details False to skip the details dump
+10/17 21:30:05 - OpenCompass - INFO - Partitioned into 13 tasks.
+10/17 21:30:05 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1/ruler_qa_squad_4k,qwen3_4b_no_ttt_step1/ruler_niah_multivalue_4k]
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:00<00:01,  2.40it/s]Loading checkpoint shards:  40%|████      | 2/5 [00:00<00:01,  2.33it/s]Loading checkpoint shards:  60%|██████    | 3/5 [00:01<00:00,  2.35it/s]Loading checkpoint shards:  80%|████████  | 4/5 [00:01<00:00,  2.97it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:01<00:00,  3.18it/s]
+10/17 21:30:07 - OpenCompass - WARNING - Unused argument engine_config={'max_batch_size': 1, 'session_len': 4096, 'tp': 1}
+10/17 21:30:07 - OpenCompass - WARNING - Unused argument gen_config={'do_sample': False, 'enable_thinking': False, 'max_new_tokens': 64, 'temperature': 0, 'top_k': 20, 'top_p': 0.95}
+10/17 21:30:07 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:30:08 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/dev-v2.0.json
+Max length 4096 | Current length 1717 | Docs: 10
+Max length 4096 | Current length 3079 | Docs: 20
+Max length 4096 | Current length 4603 | Docs: 30
+Number of documents: 20
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 266.27 examples/s]
+10/17 21:30:08 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_qa_squad_4k]
+[2026-10-17 21:30:08,351] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:08,351] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.58s/it]100%|██████████| 1/1 [00:01<00:00,  1.58s/it]
+10/17 21:30:09 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:30:10 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 898 | Haystack: 500
+Max length 4096 | Current length 1467 | Haystack: 1000
+Max length 4096 | Current length 2028 | Haystack: 1500
+Max length 4096 | Current length 2642 | Haystack: 2000
+Max length 4096 | Current length 3243 | Haystack: 2500
+Max length 4096 | Current length 3803 | Haystack: 3000
+Max length 4096 | Current length 4380 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 768.47 examples/s]
+10/17 21:30:14 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_niah_multivalue_4k]
+[2026-10-17 21:30:14,239] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:14,239] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+10/17 21:30:15 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1/ruler_qa_hotpotqa_4k,qwen3_4b_no_ttt_step1/ruler_niah_multiquery_4k]
+10/17 21:30:15 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:30:16 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/hotpotqa.json
+Max length 4096 | Current length 1342 | Docs: 10
+Max length 4096 | Current length 2652 | Docs: 20
+Max length 4096 | Current length 3952 | Docs: 30
+Max length 4096 | Current length 5350 | Docs: 40
+Number of documents: 30
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 792.42 examples/s]
+10/17 21:30:16 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_qa_hotpotqa_4k]
+[2026-10-17 21:30:16,584] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:16,584] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.08s/it]100%|██████████| 1/1 [00:01<00:00,  1.08s/it]
+10/17 21:30:17 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:30:17 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 927 | Haystack: 500
+Max length 4096 | Current length 1505 | Haystack: 1000
+Max length 4096 | Current length 2048 | Haystack: 1500
+Max length 4096 | Current length 2674 | Haystack: 2000
+Max length 4096 | Current length 3266 | Haystack: 2500
+Max length 4096 | Current length 3820 | Haystack: 3000
+Max length 4096 | Current length 4412 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 751.26 examples/s]
+10/17 21:30:21 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_niah_multiquery_4k]
+[2026-10-17 21:30:21,899] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:21,899] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 21:30:23 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1/ruler_niah_single_1_4k,qwen3_4b_no_ttt_step1/ruler_vt_4k]
+10/17 21:30:23 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Num haystack: 25
+Max length 4096 | Current length 816 | Haystack: 25
+Max length 4096 | Current length 1413 | Haystack: 50
+Max length 4096 | Current length 2013 | Haystack: 75
+Max length 4096 | Current length 2610 | Haystack: 100
+Max length 4096 | Current length 3219 | Haystack: 125
+Max length 4096 | Current length 3819 | Haystack: 150
+Max length 4096 | Current length 4413 | Haystack: 175
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 782.23 examples/s]
+10/17 21:30:27 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_niah_single_1_4k]
+[2026-10-17 21:30:27,864] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:27,864] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 21:30:29 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Max length 4096 | Current length 422 | Noises: 10
+Max length 4096 | Current length 665 | Noises: 20
+Max length 4096 | Current length 902 | Noises: 30
+Max length 4096 | Current length 1137 | Noises: 40
+Max length 4096 | Current length 1382 | Noises: 50
+Max length 4096 | Current length 1622 | Noises: 60
+Max length 4096 | Current length 1861 | Noises: 70
+Max length 4096 | Current length 2096 | Noises: 80
+Max length 4096 | Current length 2339 | Noises: 90
+Max length 4096 | Current length 2584 | Noises: 100
+Max length 4096 | Current length 2819 | Noises: 110
+Max length 4096 | Current length 3053 | Noises: 120
+Max length 4096 | Current length 3300 | Noises: 130
+Max length 4096 | Current length 3539 | Noises: 140
+Max length 4096 | Current length 3783 | Noises: 150
+Max length 4096 | Current length 4027 | Noises: 160
+Max length 4096 | Current length 4259 | Noises: 170
+Num noises: 160
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 861.61 examples/s]
+10/17 21:30:29 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_vt_4k]
+[2026-10-17 21:30:29,229] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:29,229] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 21:30:30 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1/ruler_niah_single_2_4k,qwen3_4b_no_ttt_step1/ruler_fwe_4k]
+10/17 21:30:30 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:30:31 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 807 | Haystack: 500
+Max length 4096 | Current length 1379 | Haystack: 1000
+Max length 4096 | Current length 1934 | Haystack: 1500
+Max length 4096 | Current length 2542 | Haystack: 2000
+Max length 4096 | Current length 3146 | Haystack: 2500
+Max length 4096 | Current length 3706 | Haystack: 3000
+Max length 4096 | Current length 4286 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 771.30 examples/s]
+10/17 21:30:35 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_niah_single_2_4k]
+[2026-10-17 21:30:35,084] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:35,084] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.26s/it]100%|██████████| 1/1 [00:01<00:00,  1.26s/it]
+10/17 21:30:36 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+num_example_words: 2218
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 861.25 examples/s]
+10/17 21:30:36 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_fwe_4k]
+[2026-10-17 21:30:36,575] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:36,575] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 21:30:38 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1/ruler_niah_single_3_4k,qwen3_4b_no_ttt_step1/ruler_cwe_4k]
+10/17 21:30:38 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:30:38 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 858 | Haystack: 500
+Max length 4096 | Current length 1430 | Haystack: 1000
+Max length 4096 | Current length 1989 | Haystack: 1500
+Max length 4096 | Current length 2597 | Haystack: 2000
+Max length 4096 | Current length 3191 | Haystack: 2500
+Max length 4096 | Current length 3761 | Haystack: 3000
+Max length 4096 | Current length 4337 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 774.71 examples/s]
+10/17 21:30:42 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_niah_single_3_4k]
+[2026-10-17 21:30:42,597] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:42,597] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 21:30:43 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Max length 4096 | Current length 3215 | Words: 10
+Max length 4096 | Current length 3418 | Words: 20
+Max length 4096 | Current length 3746 | Words: 30
+Max length 4096 | Current length 3787 | Words: 40
+Max length 4096 | Current length 3975 | Words: 50
+Max length 4096 | Current length 4263 | Words: 60
+num_words: 50
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 885.62 examples/s]
+10/17 21:30:43 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_cwe_4k]
+[2026-10-17 21:30:43,951] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:43,951] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.16s/it]100%|██████████| 1/1 [00:01<00:00,  1.16s/it]
+10/17 21:30:45 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1/ruler_niah_multikey_1_4k]
+10/17 21:30:45 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/1
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:30:45 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 872 | Haystack: 500
+Max length 4096 | Current length 1448 | Haystack: 1000
+Max length 4096 | Current length 2002 | Haystack: 1500
+Max length 4096 | Current length 2606 | Haystack: 2000
+Max length 4096 | Current length 3214 | Haystack: 2500
+Max length 4096 | Current length 3767 | Haystack: 3000
+Max length 4096 | Current length 4347 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 785.74 examples/s]
+10/17 21:30:49 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_niah_multikey_1_4k]
+[2026-10-17 21:30:49,815] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:49,815] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 21:30:51 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1/ruler_niah_multikey_2_4k]
+10/17 21:30:51 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/1
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Num haystack: 25
+Max length 4096 | Current length 766 | Haystack: 25
+Max length 4096 | Current length 1307 | Haystack: 50
+Max length 4096 | Current length 1850 | Haystack: 75
+Max length 4096 | Current length 2400 | Haystack: 100
+Max length 4096 | Current length 2925 | Haystack: 125
+Max length 4096 | Current length 3482 | Haystack: 150
+Max length 4096 | Current length 4016 | Haystack: 175
+Max length 4096 | Current length 4564 | Haystack: 200
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 800.13 examples/s]
+10/17 21:30:55 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_niah_multikey_2_4k]
+[2026-10-17 21:30:55,668] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:30:55,668] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 21:30:57 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1/ruler_niah_multikey_3_4k]
+10/17 21:30:57 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/1
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Num haystack: 25
+Max length 4096 | Current length 2246 | Haystack: 25
+Max length 4096 | Current length 4136 | Haystack: 50
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 793.32 examples/s]
+10/17 21:31:01 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1/ruler_niah_multikey_3_4k]
+[2026-10-17 21:31:01,457] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 21:31:01,457] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.06s/it]100%|██████████| 1/1 [00:01<00:00,  1.06s/it]
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:31:03 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/dev-v2.0.json
+Max length 4096 | Current length 1717 | Docs: 10
+Max length 4096 | Current length 3079 | Docs: 20
+Max length 4096 | Current length 4603 | Docs: 30
+Number of documents: 20
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 880.42 examples/s]
+10/17 21:31:03 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:03 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:31:04 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/hotpotqa.json
+Max length 4096 | Current length 1342 | Docs: 10
+Max length 4096 | Current length 2652 | Docs: 20
+Max length 4096 | Current length 3952 | Docs: 30
+Max length 4096 | Current length 5350 | Docs: 40
+Number of documents: 30
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 840.37 examples/s]
+10/17 21:31:04 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:04 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Num haystack: 25
+Max length 4096 | Current length 816 | Haystack: 25
+Max length 4096 | Current length 1413 | Haystack: 50
+Max length 4096 | Current length 2013 | Haystack: 75
+Max length 4096 | Current length 2610 | Haystack: 100
+Max length 4096 | Current length 3219 | Haystack: 125
+Max length 4096 | Current length 3819 | Haystack: 150
+Max length 4096 | Current length 4413 | Haystack: 175
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 793.02 examples/s]
+10/17 21:31:09 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:09 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:31:10 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 807 | Haystack: 500
+Max length 4096 | Current length 1379 | Haystack: 1000
+Max length 4096 | Current length 1934 | Haystack: 1500
+Max length 4096 | Current length 2542 | Haystack: 2000
+Max length 4096 | Current length 3146 | Haystack: 2500
+Max length 4096 | Current length 3706 | Haystack: 3000
+Max length 4096 | Current length 4286 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 790.04 examples/s]
+10/17 21:31:14 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:14 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:31:14 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 858 | Haystack: 500
+Max length 4096 | Current length 1430 | Haystack: 1000
+Max length 4096 | Current length 1989 | Haystack: 1500
+Max length 4096 | Current length 2597 | Haystack: 2000
+Max length 4096 | Current length 3191 | Haystack: 2500
+Max length 4096 | Current length 3761 | Haystack: 3000
+Max length 4096 | Current length 4337 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 788.55 examples/s]
+10/17 21:31:18 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:18 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:31:19 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 872 | Haystack: 500
+Max length 4096 | Current length 1448 | Haystack: 1000
+Max length 4096 | Current length 2002 | Haystack: 1500
+Max length 4096 | Current length 2606 | Haystack: 2000
+Max length 4096 | Current length 3214 | Haystack: 2500
+Max length 4096 | Current length 3767 | Haystack: 3000
+Max length 4096 | Current length 4347 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 794.98 examples/s]
+10/17 21:31:23 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:23 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Num haystack: 25
+Max length 4096 | Current length 766 | Haystack: 25
+Max length 4096 | Current length 1307 | Haystack: 50
+Max length 4096 | Current length 1850 | Haystack: 75
+Max length 4096 | Current length 2400 | Haystack: 100
+Max length 4096 | Current length 2925 | Haystack: 125
+Max length 4096 | Current length 3482 | Haystack: 150
+Max length 4096 | Current length 4016 | Haystack: 175
+Max length 4096 | Current length 4564 | Haystack: 200
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 772.01 examples/s]
+10/17 21:31:28 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:28 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Num haystack: 25
+Max length 4096 | Current length 2246 | Haystack: 25
+Max length 4096 | Current length 4136 | Haystack: 50
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 764.55 examples/s]
+10/17 21:31:33 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:33 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:31:33 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 898 | Haystack: 500
+Max length 4096 | Current length 1467 | Haystack: 1000
+Max length 4096 | Current length 2028 | Haystack: 1500
+Max length 4096 | Current length 2642 | Haystack: 2000
+Max length 4096 | Current length 3243 | Haystack: 2500
+Max length 4096 | Current length 3803 | Haystack: 3000
+Max length 4096 | Current length 4380 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 794.07 examples/s]
+10/17 21:31:37 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:37 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+10/17 21:31:38 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 927 | Haystack: 500
+Max length 4096 | Current length 1505 | Haystack: 1000
+Max length 4096 | Current length 2048 | Haystack: 1500
+Max length 4096 | Current length 2674 | Haystack: 2000
+Max length 4096 | Current length 3266 | Haystack: 2500
+Max length 4096 | Current length 3820 | Haystack: 3000
+Max length 4096 | Current length 4412 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 791.23 examples/s]
+10/17 21:31:42 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:42 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Max length 4096 | Current length 422 | Noises: 10
+Max length 4096 | Current length 665 | Noises: 20
+Max length 4096 | Current length 902 | Noises: 30
+Max length 4096 | Current length 1137 | Noises: 40
+Max length 4096 | Current length 1382 | Noises: 50
+Max length 4096 | Current length 1622 | Noises: 60
+Max length 4096 | Current length 1861 | Noises: 70
+Max length 4096 | Current length 2096 | Noises: 80
+Max length 4096 | Current length 2339 | Noises: 90
+Max length 4096 | Current length 2584 | Noises: 100
+Max length 4096 | Current length 2819 | Noises: 110
+Max length 4096 | Current length 3053 | Noises: 120
+Max length 4096 | Current length 3300 | Noises: 130
+Max length 4096 | Current length 3539 | Noises: 140
+Max length 4096 | Current length 3783 | Noises: 150
+Max length 4096 | Current length 4027 | Noises: 160
+Max length 4096 | Current length 4259 | Noises: 170
+Num noises: 160
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 868.57 examples/s]
+10/17 21:31:43 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:43 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+num_example_words: 2218
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 867.85 examples/s]
+10/17 21:31:43 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:43 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+The tokenizer you are loading from '/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+Max length 4096 | Current length 3215 | Words: 10
+Max length 4096 | Current length 3418 | Words: 20
+Max length 4096 | Current length 3746 | Words: 30
+Max length 4096 | Current length 3787 | Words: 40
+Max length 4096 | Current length 3975 | Words: 50
+Max length 4096 | Current length 4263 | Words: 60
+num_words: 50
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 882.45 examples/s]
+10/17 21:31:44 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 21:31:44 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+dataset    version    metric    mode    qwen3_4b_no_ttt_step1
+---------  ---------  --------  ------  -----------------------
+4k         -          -         -       -
+10/17 21:31:44 - OpenCompass - INFO - write summary to /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_smoke/opencompass/20261017_213005/summary/summary_20261017_213005.txt
+10/17 21:31:44 - OpenCompass - INFO - write csv to /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_smoke/opencompass/20261017_213005/summary/summary_20261017_213005.csv
+
+
+The markdown format results is as below:
+
+| dataset | version | metric | mode | qwen3_4b_no_ttt_step1 |
+|----- | ----- | ----- | ----- | -----|
+| 4k | - | - | - | - |
+
+10/17 21:31:44 - OpenCompass - INFO - write markdown summary to /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_smoke/opencompass/20261017_213005/summary/summary_20261017_213005.md
+	Command being timed: "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/bin/python /home/ctj/cbf_ttt_joint_exp_20260927/tasks/run_opencompass.py /home/ctj/cbf_ttt_joint_exp_20260927/eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py --work-dir /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_smoke/opencompass --debug"
+	User time (seconds): 99.92
+	System time (seconds): 12.73
+	Percent of CPU this job got: 105%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:47.12
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3060032
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 11704
+	Minor (reclaiming a frame) page faults: 4881187
+	Voluntary context switches: 39696
+	Involuntary context switches: 1135
+	Swaps: 0
+	File system inputs: 13450656
+	File system outputs: 2200
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

@@ -1,0 +1,118 @@
+{
+  "claim_boundary": "Level-A execution smoke only; one example per RULER task is not an efficacy estimate and 8K training peak requires stopping the 2x5090 length ladder before 16K.",
+  "conversion": {
+    "no_ttt": {
+      "arm": "no_ttt",
+      "conversion_audit_sha256": "5fca0ecab0b7174810605d2818b11307bf3781036d999a3dd13770aa07344a7f",
+      "hf_hash_manifest_entries": 15,
+      "hf_hash_manifest_sha256": "0fcb928768d26b1f8cb7608147d7be410472925aa1a0259b76841bab476166b4",
+      "shards": [
+        "model-00001-of-00005.safetensors",
+        "model-00002-of-00005.safetensors",
+        "model-00003-of-00005.safetensors",
+        "model-00004-of-00005.safetensors",
+        "model-00005-of-00005.safetensors"
+      ],
+      "tensor_count": 399,
+      "total_size": 8822848512,
+      "ttt_mode": false,
+      "ttt_tensor_count": 0
+    },
+    "ttt": {
+      "arm": "ttt",
+      "conversion_audit_sha256": "085f672ddb5294d7e8af45e36073afef34e6905423567a1d833a3c219e80fe93",
+      "hf_hash_manifest_entries": 15,
+      "hf_hash_manifest_sha256": "cb01217235d3a00f6a6f6d759418897a2d00d5b5ed80e97f9c9b6feccc6ecad7",
+      "shards": [
+        "model-00001-of-00005.safetensors",
+        "model-00002-of-00005.safetensors",
+        "model-00003-of-00005.safetensors",
+        "model-00004-of-00005.safetensors",
+        "model-00005-of-00005.safetensors"
+      ],
+      "tensor_count": 411,
+      "total_size": 8901645312,
+      "ttt_mode": true,
+      "ttt_tensor_count": 12
+    }
+  },
+  "execution_passed": true,
+  "gradient_norm_ratio_ttt_over_no_ttt": 397.98633014132645,
+  "hf_integrity_ok_files": 30,
+  "matched_input_bindings": true,
+  "minimum_gpu_free_fraction_at_peak": 0.021069095592970835,
+  "protocol": "in_place_ttt_baseline_exclusive_independent_audit_v1",
+  "resource_ladder_minimum_free_fraction": 0.05,
+  "resource_ladder_stop_required": true,
+  "ruler_4k_smoke": {
+    "no_ttt": {
+      "completed": true,
+      "macro_accuracy": 76.92307692307692,
+      "official_ruler_group_score": 76.92307692307692,
+      "peak_gpu_memory_mib": {
+        "0": 9300.0,
+        "1": 18.0
+      },
+      "summary_sha256": "ed78e89f716b8877e681e6647bd5b316aed4268b60082fd6d13ed899eb51a7cd",
+      "task_count": 13,
+      "tokenizer_regex_warning_count": 27
+    },
+    "ttt": {
+      "completed": true,
+      "macro_accuracy": 76.92307692307692,
+      "official_ruler_group_score": 76.92307692307692,
+      "peak_gpu_memory_mib": {
+        "0": 9916.0,
+        "1": 18.0
+      },
+      "summary_sha256": "6a7c91c8ffce54e714725823b129f03cbe0f9d7ff27a2503bfb556b7c15b0370",
+      "task_count": 13,
+      "tokenizer_regex_warning_count": 27
+    }
+  },
+  "throughput_ratio_ttt_over_no_ttt": 0.7838827838827839,
+  "training": {
+    "no_ttt": {
+      "checkpoint_bytes": 49846590830,
+      "exit_code": 0,
+      "free_fraction_at_peak": {
+        "0": 0.030269574017848928,
+        "1": 0.031066948814671695
+      },
+      "gpu_total_memory_mib": {
+        "0": 32607.0,
+        "1": 32607.0
+      },
+      "gradient_norm": 11.2364,
+      "loss": 2.7364,
+      "peak_gpu_memory_mib": {
+        "0": 31620.0,
+        "1": 31594.0
+      },
+      "summary_sha256": "786891a309f89b19ff0fc3f65593b9d945d3ecc652d29f6a9fbf827f441b0307",
+      "tokens_per_second": 239.25233644859813,
+      "wall_seconds": 68.48
+    },
+    "ttt": {
+      "checkpoint_bytes": 50319528808,
+      "exit_code": 0,
+      "free_fraction_at_peak": {
+        "0": 0.021069095592970835,
+        "1": 0.021866470389793603
+      },
+      "gpu_total_memory_mib": {
+        "0": 32607.0,
+        "1": 32607.0
+      },
+      "gradient_norm": 4471.9336,
+      "loss": 2.7364,
+      "peak_gpu_memory_mib": {
+        "0": 31920.0,
+        "1": 31894.0
+      },
+      "summary_sha256": "a92547962e6f4c7e6dcdb5bc914204c62e7ddcec721c566962b92384cf313df0",
+      "tokens_per_second": 187.54578754578753,
+      "wall_seconds": 87.36
+    }
+  }
+}

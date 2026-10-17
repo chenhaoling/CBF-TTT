@@ -6410,3 +6410,43 @@ reserved-but-unallocated仅14.04MiB。exit=1，因此未启动TTT。该结果证
 曲线已归档于`experiments/baseline_reproduction_qwen3_4b/remote/asymmetric_idle_retry/`。
 独占双卡watcher仍存活并处于`waiting_no_ttt`。21:04 HKT再次检查`hku-a100`，同一vLLM
 进程仍占75124MiB，仅余6007MiB；新快照同步归档。门控实验继续暂停。
+
+## 2026-10-17: official baseline exclusive-5090 Level-A closure
+
+21:18 HKT，GPU0上最后一个CARLA进程退出。此前冻结的
+`baseline_exclusive_5090_watcher`连续两次确认两张RTX 5090无compute process、总占用
+44/18MiB后自动启动。no-TTT和native TTT均在同一Qwen3-4B、同一16条8K
+FineWeb-Edu/LongCrawl64等量样本、GB2、FSDP2、bf16 mixed precision、FP32 AdamW、
+lr `5e-6`/wd `0.1`下完成一次有限optimizer step并成功写入DCP。
+
+no-TTT结果为loss 2.7364、gradient norm 11.2364、wall 68.48秒、239.25 token/s、
+GPU峰值31620/31594MiB；TTT结果为loss 2.7364、gradient norm 4471.9336、wall 87.36秒、
+187.55 token/s、GPU峰值31920/31894MiB。两臂data、base model和plan hash完全一致，配置
+只在TTT机制上不同。TTT相对吞吐为78.39%，梯度范数约为no-TTT的397.99倍；配置仍执行
+`max_grad_norm=1.0`，因此后者登记为长训稳定性风险，不能直接称为发散。
+
+从原始0.5秒GPU trace独立重算，最小剩余比例仅2.107%，低于冻结计划的5%安全门槛。
+因此严格停止资源长度阶梯，不运行16K/32K/64K。这证明独占2x5090能完成8K one-step，
+同时不能安全承担论文32K/128K训练；正式公共数据matched replication需要更大显存主机。
+
+新增并执行`scripts/convert_and_audit_in_place_ttt_baseline_checkpoints.sh`。它调用干净官方
+commit的`merge_dcp_to_hf.py`，逐arm转换并拒绝覆盖已有目录。no-TTT导出399个张量、5个
+BF16 safetensors分片、总计8.823GB且不含writer；TTT导出411个张量、5个分片、
+总计8.902GB，其中12个为6个有效TTT层的`ttt_proj/ttt_conv`权重。第二次逐文件SHA256
+校验30/30文件通过。
+
+扩展`scripts/run_in_place_ttt_ruler_smoke.sh`，新增可选`MODEL_NAME`和
+`MODEL_HASH_MANIFEST`，将转换权重manifest绑定进run metadata；汇总器同步传播该hash。
+新增`scripts/run_in_place_ttt_converted_checkpoint_smokes.sh`，在GPU空闲预检后按顺序评分
+两个转换checkpoint。两臂均完成OpenCompass官方13个RULER-4K子任务、每任务1条，官方
+group score与独立均值均为76.9230769；no-TTT/TTT wall为1:47.12/1:42.51，GPU0峰值
+9300/9916MiB。该样本量只证明训练→DCP→HF→TTT-aware加载→生成→评分闭环，不支持
+TTT效果比较。两份日志均出现27次Transformers tokenizer-regex警告，正式100例评测前
+必须验证或修复。
+
+新增`scripts/audit_in_place_ttt_baseline_exclusive.py`，独立重算GPU峰值、剩余比例、
+matched输入绑定、转换结构、HF manifest绑定及两份RULER summary，审计通过并输出
+`resource_ladder_stop_required=true`。完整紧凑证据位于
+`experiments/baseline_reproduction_qwen3_4b/remote/exclusive_5090_completed/`；大型DCP和
+safetensors保留在远端，不提交Git。至此Level-A released-code execution闭环完成；Level-B
+正式公共语料matched training和Level-C论文精确复现仍未完成，门控实验继续暂停。

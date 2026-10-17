@@ -1,0 +1,39 @@
+{
+  "protocol": "in_place_ttt_baseline_resource_v2",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "arm": "no_ttt",
+  "resource_profile": "native_expandable_segments",
+  "pytorch_cuda_alloc_conf": "expandable_segments:True",
+  "sequence_length": 8192,
+  "global_batch_size": 2,
+  "nominal_tokens": 16384,
+  "exit_code": 0,
+  "completed": true,
+  "last_loss": 2.7364,
+  "last_gradient_norm": 11.2364,
+  "wall_seconds": 68.48,
+  "tokens_per_second": 239.25233644859813,
+  "peak_gpu_memory_mib": {
+    "0": 31620.0,
+    "1": 31594.0
+  },
+  "checkpoint_bytes": 49846590830,
+  "host_resources": {
+    "peak_memory_used_mib": 54641.301,
+    "minimum_memory_available_mib": 9109.031,
+    "peak_swap_used_mib": 3994.629
+  },
+  "cpu_offload_host_gate_passed": null,
+  "dependencies": {
+    "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+    "config_sha256": "aef9389e8da73e2224834864cd19fecd4f9dfe58be32c208e9b3467b10366ab6",
+    "data_sha256": "2eb03326ec87bc831ee1441e812bb5bef843f8e906656787cd2ddafc69d9d823",
+    "model_config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "train_log_sha256": "dcd1694b64ef942e26523ecbfe09b7b7c7cea24056ecd68b0f057bf022cb9ef4",
+    "gpu_monitor_sha256": "d8b69da42a8243ae5d5fa330f3a869636121ebc4b4d0e3314c3345fab68da950",
+    "host_monitor_sha256": "4a24f16fd5052cebfc3e2ede98e8490e6086c61b3ea3f870c729a346c5cbda36",
+    "addendum_sha256": "dd492e41d5f27796a469f187ed4d37eba665cd0fa356c12b2c156ac055a35954",
+    "runner_sha256": "6eb895c9f7008b7dfa272c4b2608af5a7125300c631d08c575ac5b933b686e0f",
+    "summarizer_sha256": "8a3d4f9f963a61c71ab9968b89a498df12cca1ca9eccc8d86c0d91e508ef08bc"
+  }
+}
