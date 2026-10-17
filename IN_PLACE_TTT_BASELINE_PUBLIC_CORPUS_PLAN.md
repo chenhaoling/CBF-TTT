@@ -25,12 +25,15 @@ No other source or mixture change is allowed.
 | FineWeb-Edu | `HuggingFaceFW/fineweb-edu` | `87f09149ef4734204d70ed1d046ddc9ca3f2b8f9` | `sample/100BT/*.parquet` |
 | LongCrawl64 | `manifestai/longcrawl64` | `8e7af027525b3597852746ee11e4baa0e98492d7` | `train/*.parquet` |
 
-Before packing, an inventory tool must resolve each glob, sort repository
-paths lexicographically, and save every publisher path, byte size, blob ID and
-LFS SHA256. The inventory binds the repository revisions, inventory code,
-this plan and the original Qwen3-4B tokenizer assets. Missing or duplicate
-paths, empty hashes, revision drift or a non-monotonic file list stops the
-run.
+Before packing, an inventory tool must resolve each glob and save every
+publisher path, byte size, blob ID and LFS SHA256. FineWeb's zero-padded paths
+are sorted lexicographically. LongCrawl paths must match
+`train/<index>-of-256.parquet`, contain each index 0--255 exactly once, and are
+sorted by the numeric index; plain lexical order is forbidden because it
+would place shard 10 before shard 2. The inventory binds the repository
+revisions, inventory code, this plan and the original Qwen3-4B tokenizer
+assets. Missing or duplicate paths, empty hashes, revision drift or a
+non-monotonic file list stops the run.
 
 Within a source, traversal order is publisher file, parquet row index, then
 Qwen token offset. Stage 2 continues the exact Stage-1 source cursor and
