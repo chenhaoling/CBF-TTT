@@ -1,0 +1,92 @@
+import tempfile
+import unittest
+from pathlib import Path
+
+from scripts.audit_in_place_ttt_public_corpus import SourceContinuity
+from scripts.build_in_place_ttt_public_corpus import (
+    PROFILES,
+    PersistentSourcePacker,
+    forbidden_key,
+    prepare_root,
+    token_hash,
+)
+
+
+class FakeTokenizer:
+    eos_token = "<eos>"
+    eos_token_id = 0
+
+    def encode(self, text, add_special_tokens=False):
+        del add_special_tokens
+        output = []
+        cursor = 0
+        while cursor < len(text):
+            if text.startswith(self.eos_token, cursor):
+                output.append(0); cursor += len(self.eos_token)
+            else:
+                output.append(ord(text[cursor]) + 1); cursor += 1
+        return output
+
+    def decode(self, ids, skip_special_tokens=False, clean_up_tokenization_spaces=False):
+        del skip_special_tokens, clean_up_tokenization_spaces
+        return "".join(self.eos_token if value == 0 else chr(value - 1) for value in ids)
+
+
+def documents(source, count=8):
+    for index in range(count):
+        yield {
+            "source": source,
+            "text": chr(65 + index) * 23,
+            "locator": {"file_index": 0, "repository_path": "sample/file.parquet",
+                        "parquet_row_index": index},
+        }
+
+
+class PublicCorpusTest(unittest.TestCase):
+    def test_packer_preserves_cursor_across_sequence_change(self):
+        tokenizer = FakeTokenizer()
+        packer = PersistentSourcePacker("fineweb", documents("fineweb"), tokenizer)
+        text1, ids1, provenance1 = packer.next_record(16)
+        state1 = packer.snapshot()
+        text2, ids2, provenance2 = packer.next_record(32)
+        state2 = packer.snapshot()
+        self.assertEqual(len(tokenizer.encode(text1, add_special_tokens=False)) + 1, 16)
+        self.assertEqual(len(tokenizer.encode(text2, add_special_tokens=False)) + 1, 32)
+        self.assertEqual(provenance1["training_token_sha256"], token_hash(ids1))
+        self.assertEqual(provenance2["training_token_sha256"], token_hash(ids2))
+        self.assertGreaterEqual(state2["documents_loaded"], state1["documents_loaded"])
+        self.assertNotEqual(state1["pending_tokens_sha256"], token_hash([]))
+        self.assertFalse(forbidden_key(provenance1))
+
+        inventory = {"files": [{"repository_path": "sample/file.parquet"}]}
+        continuity = SourceContinuity("fineweb", inventory)
+        for span in provenance1["spans"]:
+            self.assertTrue(continuity.consume_span(span)[0])
+        self.assertTrue(continuity.validate_snapshot(state1))
+        for span in provenance2["spans"]:
+            self.assertTrue(continuity.consume_span(span)[0])
+        self.assertTrue(continuity.validate_snapshot(state2))
+        packer.close()
+
+    def test_frozen_profiles_match_registered_counts(self):
+        self.assertEqual(PROFILES["pilot"][0]["records_per_source"], 64)
+        self.assertEqual(PROFILES["pilot"][1]["records_per_source"], 8)
+        self.assertEqual(PROFILES["full"][0]["records_per_source"], 305184)
+        self.assertEqual(PROFILES["full"][1]["records_per_source"], 57216)
+        for stage in PROFILES["full"]:
+            self.assertEqual(2 * stage["records_per_source"] % 64, 0)
+
+    def test_output_root_is_atomic_and_never_overwritten(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "corpus"
+            staging = prepare_root(output)
+            self.assertEqual(staging.name, "corpus.partial")
+            with self.assertRaises(FileExistsError):
+                prepare_root(output)
+            staging.rmdir(); output.mkdir()
+            with self.assertRaises(FileExistsError):
+                prepare_root(output)
+
+
+if __name__ == "__main__":
+    unittest.main()
