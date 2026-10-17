@@ -94,6 +94,9 @@ def summarize(root: pathlib.Path) -> dict:
             "plan_sha256": metadata["plan_sha256"],
             "config_sha256": metadata["config_sha256"],
             "model_config_sha256": metadata["model_config_sha256"],
+            "model_hash_manifest_sha256": metadata.get(
+                "model_hash_manifest_sha256"
+            ),
             "eval_log_sha256": _sha256(log_path),
             "gpu_monitor_sha256": _sha256(root / "gpu.csv"),
             "official_summary_sha256": (
