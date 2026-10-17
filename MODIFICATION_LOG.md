@@ -6408,4 +6408,5 @@ reserved-but-unallocated仅14.04MiB。exit=1，因此未启动TTT。该结果证
 不能救援GPU0上的本地FSDP rank；只要GPU0仍有642MiB外部占用，冻结配置仍不可行。它不
 证明两张完全独占5090也失败。preflight、metadata、summary、完整traceback和0.5秒资源
 曲线已归档于`experiments/baseline_reproduction_qwen3_4b/remote/asymmetric_idle_retry/`。
-独占双卡watcher仍存活并处于`waiting_no_ttt`，门控实验继续暂停。
+独占双卡watcher仍存活并处于`waiting_no_ttt`。21:04 HKT再次检查`hku-a100`，同一vLLM
+进程仍占75124MiB，仅余6007MiB；新快照同步归档。门控实验继续暂停。

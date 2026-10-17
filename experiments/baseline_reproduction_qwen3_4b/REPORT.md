@@ -284,6 +284,9 @@ single-GPU resource pilot; it is not a drop-in execution of the frozen
 two-GPU FSDP2 protocol.
 
 Snapshot: [`remote/hku_a100_resource_snapshot.json`](remote/hku_a100_resource_snapshot.json).
+The `2026-10-17 21:04 HKT` recheck is unchanged: the same vLLM process uses
+75,124 MiB and only 6,007 MiB is free. The current snapshot is archived at
+[`remote/hku_a100_resource_snapshot_20261017_2104.txt`](remote/hku_a100_resource_snapshot_20261017_2104.txt).
 
 ## 5. RULER pipeline smoke
 
