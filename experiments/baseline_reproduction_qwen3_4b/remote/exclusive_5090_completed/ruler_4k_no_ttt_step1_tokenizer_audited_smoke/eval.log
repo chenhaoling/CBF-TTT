@@ -1,0 +1,376 @@
+10/17 22:07:03 - OpenCompass - INFO - Current exp folder: /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_tokenizer_audited_smoke/opencompass/20261017_220703
+10/17 22:07:03 - OpenCompass - WARNING - SlurmRunner is not used, so the partition argument is ignored.
+10/17 22:07:03 - OpenCompass - INFO - Partitioned into 8 tasks.
+10/17 22:07:03 - OpenCompass - WARNING - Ignored argument in opencompass.runners.local: retry=1
+10/17 22:07:03 - OpenCompass - WARNING - Default to dump eval details, it might take extraspace to save all the evaluation details. Set --dump-eval-details False to skip the details dump
+10/17 22:07:03 - OpenCompass - INFO - Partitioned into 13 tasks.
+10/17 22:07:03 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_qa_squad_4k,qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multivalue_4k]
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:00<00:00,  4.12it/s]Loading checkpoint shards:  40%|████      | 2/5 [00:00<00:00,  4.07it/s]Loading checkpoint shards:  60%|██████    | 3/5 [00:00<00:00,  3.91it/s]Loading checkpoint shards:  80%|████████  | 4/5 [00:00<00:00,  4.28it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:01<00:00,  4.75it/s]
+10/17 22:07:05 - OpenCompass - WARNING - Unused argument engine_config={'max_batch_size': 1, 'session_len': 4096, 'tp': 1}
+10/17 22:07:05 - OpenCompass - WARNING - Unused argument gen_config={'do_sample': False, 'enable_thinking': False, 'max_new_tokens': 64, 'temperature': 0, 'top_k': 20, 'top_p': 0.95}
+10/17 22:07:05 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+10/17 22:07:05 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/dev-v2.0.json
+Max length 4096 | Current length 1717 | Docs: 10
+Max length 4096 | Current length 3079 | Docs: 20
+Max length 4096 | Current length 4603 | Docs: 30
+Number of documents: 20
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 551.01 examples/s]
+10/17 22:07:05 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_qa_squad_4k]
+[2026-10-17 22:07:05,541] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:05,541] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.43s/it]100%|██████████| 1/1 [00:01<00:00,  1.43s/it]
+10/17 22:07:06 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+10/17 22:07:07 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 898 | Haystack: 500
+Max length 4096 | Current length 1467 | Haystack: 1000
+Max length 4096 | Current length 2028 | Haystack: 1500
+Max length 4096 | Current length 2642 | Haystack: 2000
+Max length 4096 | Current length 3243 | Haystack: 2500
+Max length 4096 | Current length 3803 | Haystack: 3000
+Max length 4096 | Current length 4380 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 764.97 examples/s]
+10/17 22:07:11 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multivalue_4k]
+[2026-10-17 22:07:11,312] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:11,312] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.13s/it]100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+10/17 22:07:12 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_qa_hotpotqa_4k,qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multiquery_4k]
+10/17 22:07:12 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+10/17 22:07:13 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/hotpotqa.json
+Max length 4096 | Current length 1342 | Docs: 10
+Max length 4096 | Current length 2652 | Docs: 20
+Max length 4096 | Current length 3952 | Docs: 30
+Max length 4096 | Current length 5350 | Docs: 40
+Number of documents: 30
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 793.62 examples/s]
+10/17 22:07:13 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_qa_hotpotqa_4k]
+[2026-10-17 22:07:13,618] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:13,618] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.06s/it]100%|██████████| 1/1 [00:01<00:00,  1.06s/it]
+10/17 22:07:14 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+10/17 22:07:14 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 927 | Haystack: 500
+Max length 4096 | Current length 1505 | Haystack: 1000
+Max length 4096 | Current length 2048 | Haystack: 1500
+Max length 4096 | Current length 2674 | Haystack: 2000
+Max length 4096 | Current length 3266 | Haystack: 2500
+Max length 4096 | Current length 3820 | Haystack: 3000
+Max length 4096 | Current length 4412 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 750.99 examples/s]
+10/17 22:07:18 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multiquery_4k]
+[2026-10-17 22:07:18,880] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:18,880] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.13s/it]100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+10/17 22:07:20 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_single_1_4k,qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_vt_4k]
+10/17 22:07:20 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+Num haystack: 25
+Max length 4096 | Current length 816 | Haystack: 25
+Max length 4096 | Current length 1413 | Haystack: 50
+Max length 4096 | Current length 2013 | Haystack: 75
+Max length 4096 | Current length 2610 | Haystack: 100
+Max length 4096 | Current length 3219 | Haystack: 125
+Max length 4096 | Current length 3819 | Haystack: 150
+Max length 4096 | Current length 4413 | Haystack: 175
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 777.15 examples/s]
+10/17 22:07:24 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_single_1_4k]
+[2026-10-17 22:07:24,605] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:24,605] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+10/17 22:07:25 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+Max length 4096 | Current length 422 | Noises: 10
+Max length 4096 | Current length 665 | Noises: 20
+Max length 4096 | Current length 902 | Noises: 30
+Max length 4096 | Current length 1137 | Noises: 40
+Max length 4096 | Current length 1382 | Noises: 50
+Max length 4096 | Current length 1622 | Noises: 60
+Max length 4096 | Current length 1861 | Noises: 70
+Max length 4096 | Current length 2096 | Noises: 80
+Max length 4096 | Current length 2339 | Noises: 90
+Max length 4096 | Current length 2584 | Noises: 100
+Max length 4096 | Current length 2819 | Noises: 110
+Max length 4096 | Current length 3053 | Noises: 120
+Max length 4096 | Current length 3300 | Noises: 130
+Max length 4096 | Current length 3539 | Noises: 140
+Max length 4096 | Current length 3783 | Noises: 150
+Max length 4096 | Current length 4027 | Noises: 160
+Max length 4096 | Current length 4259 | Noises: 170
+Num noises: 160
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 838.86 examples/s]
+10/17 22:07:25 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_vt_4k]
+[2026-10-17 22:07:25,959] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:25,959] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 22:07:27 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_single_2_4k,qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_fwe_4k]
+10/17 22:07:27 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+10/17 22:07:27 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 807 | Haystack: 500
+Max length 4096 | Current length 1379 | Haystack: 1000
+Max length 4096 | Current length 1934 | Haystack: 1500
+Max length 4096 | Current length 2542 | Haystack: 2000
+Max length 4096 | Current length 3146 | Haystack: 2500
+Max length 4096 | Current length 3706 | Haystack: 3000
+Max length 4096 | Current length 4286 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 788.70 examples/s]
+10/17 22:07:31 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_single_2_4k]
+[2026-10-17 22:07:31,944] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:31,944] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+10/17 22:07:33 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+num_example_words: 2218
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 856.85 examples/s]
+10/17 22:07:33 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_fwe_4k]
+[2026-10-17 22:07:33,292] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:33,292] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+10/17 22:07:34 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_single_3_4k,qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_cwe_4k]
+10/17 22:07:34 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/2
+10/17 22:07:35 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 858 | Haystack: 500
+Max length 4096 | Current length 1430 | Haystack: 1000
+Max length 4096 | Current length 1989 | Haystack: 1500
+Max length 4096 | Current length 2597 | Haystack: 2000
+Max length 4096 | Current length 3191 | Haystack: 2500
+Max length 4096 | Current length 3761 | Haystack: 3000
+Max length 4096 | Current length 4337 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 752.07 examples/s]
+10/17 22:07:39 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_single_3_4k]
+[2026-10-17 22:07:39,134] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:39,134] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+10/17 22:07:40 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 2/2
+Max length 4096 | Current length 3215 | Words: 10
+Max length 4096 | Current length 3418 | Words: 20
+Max length 4096 | Current length 3746 | Words: 30
+Max length 4096 | Current length 3787 | Words: 40
+Max length 4096 | Current length 3975 | Words: 50
+Max length 4096 | Current length 4263 | Words: 60
+num_words: 50
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 887.31 examples/s]
+10/17 22:07:40 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_cwe_4k]
+[2026-10-17 22:07:40,476] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:40,476] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 22:07:41 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multikey_1_4k]
+10/17 22:07:41 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/1
+10/17 22:07:42 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 872 | Haystack: 500
+Max length 4096 | Current length 1448 | Haystack: 1000
+Max length 4096 | Current length 2002 | Haystack: 1500
+Max length 4096 | Current length 2606 | Haystack: 2000
+Max length 4096 | Current length 3214 | Haystack: 2500
+Max length 4096 | Current length 3767 | Haystack: 3000
+Max length 4096 | Current length 4347 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 792.42 examples/s]
+10/17 22:07:46 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multikey_1_4k]
+[2026-10-17 22:07:46,267] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:46,267] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+10/17 22:07:47 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multikey_2_4k]
+10/17 22:07:47 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/1
+Num haystack: 25
+Max length 4096 | Current length 766 | Haystack: 25
+Max length 4096 | Current length 1307 | Haystack: 50
+Max length 4096 | Current length 1850 | Haystack: 75
+Max length 4096 | Current length 2400 | Haystack: 100
+Max length 4096 | Current length 2925 | Haystack: 125
+Max length 4096 | Current length 3482 | Haystack: 150
+Max length 4096 | Current length 4016 | Haystack: 175
+Max length 4096 | Current length 4564 | Haystack: 200
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 803.51 examples/s]
+10/17 22:07:51 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multikey_2_4k]
+[2026-10-17 22:07:51,815] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:51,815] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+10/17 22:07:53 - OpenCompass - INFO - Task [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multikey_3_4k]
+10/17 22:07:53 - OpenCompass - INFO - The Progress of This Task --> Models: 1/1, Datasets: 1/1
+Num haystack: 25
+Max length 4096 | Current length 2246 | Haystack: 25
+Max length 4096 | Current length 4136 | Haystack: 50
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 804.89 examples/s]
+10/17 22:07:57 - OpenCompass - INFO - Start inferencing [qwen3_4b_no_ttt_step1_tokenizer_audited_smoke/ruler_niah_multikey_3_4k]
+[2026-10-17 22:07:57,491] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting build dataloader
+[2026-10-17 22:07:57,491] [opencompass.openicl.icl_inferencer.icl_gen_inferencer] [INFO] Starting inference process...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:01<00:00,  1.06s/it]100%|██████████| 1/1 [00:01<00:00,  1.06s/it]
+10/17 22:07:58 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/dev-v2.0.json
+Max length 4096 | Current length 1717 | Docs: 10
+Max length 4096 | Current length 3079 | Docs: 20
+Max length 4096 | Current length 4603 | Docs: 30
+Number of documents: 20
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 873.27 examples/s]
+10/17 22:07:59 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:07:59 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+10/17 22:07:59 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/hotpotqa.json
+Max length 4096 | Current length 1342 | Docs: 10
+Max length 4096 | Current length 2652 | Docs: 20
+Max length 4096 | Current length 3952 | Docs: 30
+Max length 4096 | Current length 5350 | Docs: 40
+Number of documents: 30
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 829.57 examples/s]
+10/17 22:08:00 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:00 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+Num haystack: 25
+Max length 4096 | Current length 816 | Haystack: 25
+Max length 4096 | Current length 1413 | Haystack: 50
+Max length 4096 | Current length 2013 | Haystack: 75
+Max length 4096 | Current length 2610 | Haystack: 100
+Max length 4096 | Current length 3219 | Haystack: 125
+Max length 4096 | Current length 3819 | Haystack: 150
+Max length 4096 | Current length 4413 | Haystack: 175
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 771.72 examples/s]
+10/17 22:08:04 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:04 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+10/17 22:08:05 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 807 | Haystack: 500
+Max length 4096 | Current length 1379 | Haystack: 1000
+Max length 4096 | Current length 1934 | Haystack: 1500
+Max length 4096 | Current length 2542 | Haystack: 2000
+Max length 4096 | Current length 3146 | Haystack: 2500
+Max length 4096 | Current length 3706 | Haystack: 3000
+Max length 4096 | Current length 4286 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 801.66 examples/s]
+10/17 22:08:09 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:09 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+10/17 22:08:09 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 858 | Haystack: 500
+Max length 4096 | Current length 1430 | Haystack: 1000
+Max length 4096 | Current length 1989 | Haystack: 1500
+Max length 4096 | Current length 2597 | Haystack: 2000
+Max length 4096 | Current length 3191 | Haystack: 2500
+Max length 4096 | Current length 3761 | Haystack: 3000
+Max length 4096 | Current length 4337 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 796.49 examples/s]
+10/17 22:08:13 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:13 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+10/17 22:08:13 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 872 | Haystack: 500
+Max length 4096 | Current length 1448 | Haystack: 1000
+Max length 4096 | Current length 2002 | Haystack: 1500
+Max length 4096 | Current length 2606 | Haystack: 2000
+Max length 4096 | Current length 3214 | Haystack: 2500
+Max length 4096 | Current length 3767 | Haystack: 3000
+Max length 4096 | Current length 4347 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 799.68 examples/s]
+10/17 22:08:18 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:18 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+Num haystack: 25
+Max length 4096 | Current length 766 | Haystack: 25
+Max length 4096 | Current length 1307 | Haystack: 50
+Max length 4096 | Current length 1850 | Haystack: 75
+Max length 4096 | Current length 2400 | Haystack: 100
+Max length 4096 | Current length 2925 | Haystack: 125
+Max length 4096 | Current length 3482 | Haystack: 150
+Max length 4096 | Current length 4016 | Haystack: 175
+Max length 4096 | Current length 4564 | Haystack: 200
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 810.96 examples/s]
+10/17 22:08:22 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:22 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+Num haystack: 25
+Max length 4096 | Current length 2246 | Haystack: 25
+Max length 4096 | Current length 4136 | Haystack: 50
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 818.24 examples/s]
+10/17 22:08:26 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:26 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+10/17 22:08:27 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 898 | Haystack: 500
+Max length 4096 | Current length 1467 | Haystack: 1000
+Max length 4096 | Current length 2028 | Haystack: 1500
+Max length 4096 | Current length 2642 | Haystack: 2000
+Max length 4096 | Current length 3243 | Haystack: 2500
+Max length 4096 | Current length 3803 | Haystack: 3000
+Max length 4096 | Current length 4380 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 792.87 examples/s]
+10/17 22:08:31 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:31 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+10/17 22:08:31 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+Num haystack: 500
+Max length 4096 | Current length 927 | Haystack: 500
+Max length 4096 | Current length 1505 | Haystack: 1000
+Max length 4096 | Current length 2048 | Haystack: 1500
+Max length 4096 | Current length 2674 | Haystack: 2000
+Max length 4096 | Current length 3266 | Haystack: 2500
+Max length 4096 | Current length 3820 | Haystack: 3000
+Max length 4096 | Current length 4412 | Haystack: 3500
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 774.71 examples/s]
+10/17 22:08:35 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:35 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+Max length 4096 | Current length 422 | Noises: 10
+Max length 4096 | Current length 665 | Noises: 20
+Max length 4096 | Current length 902 | Noises: 30
+Max length 4096 | Current length 1137 | Noises: 40
+Max length 4096 | Current length 1382 | Noises: 50
+Max length 4096 | Current length 1622 | Noises: 60
+Max length 4096 | Current length 1861 | Noises: 70
+Max length 4096 | Current length 2096 | Noises: 80
+Max length 4096 | Current length 2339 | Noises: 90
+Max length 4096 | Current length 2584 | Noises: 100
+Max length 4096 | Current length 2819 | Noises: 110
+Max length 4096 | Current length 3053 | Noises: 120
+Max length 4096 | Current length 3300 | Noises: 130
+Max length 4096 | Current length 3539 | Noises: 140
+Max length 4096 | Current length 3783 | Noises: 150
+Max length 4096 | Current length 4027 | Noises: 160
+Max length 4096 | Current length 4259 | Noises: 170
+Num noises: 160
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 874.36 examples/s]
+10/17 22:08:36 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:36 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+num_example_words: 2218
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 888.44 examples/s]
+10/17 22:08:36 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:36 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+Max length 4096 | Current length 3215 | Words: 10
+Max length 4096 | Current length 3418 | Words: 20
+Max length 4096 | Current length 3746 | Words: 30
+Max length 4096 | Current length 3787 | Words: 40
+Max length 4096 | Current length 3975 | Words: 50
+Max length 4096 | Current length 4263 | Words: 60
+num_words: 50
+Map:   0%|          | 0/1 [00:00<?, ? examples/s]Map: 100%|██████████| 1/1 [00:00<00:00, 876.55 examples/s]
+10/17 22:08:37 - OpenCompass - INFO - Running 0-th replica of evaluation
+10/17 22:08:37 - OpenCompass - INFO - Details is not give by evaluator, try to format it
+dataset    version    metric    mode      qwen3_4b_no_ttt_step1_tokenizer_audited_smoke
+---------  ---------  --------  ------  -----------------------------------------------
+ruler_4k   -          score     gen                                               76.92
+10/17 22:08:37 - OpenCompass - INFO - write summary to /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_tokenizer_audited_smoke/opencompass/20261017_220703/summary/summary_20261017_220703.txt
+10/17 22:08:37 - OpenCompass - INFO - write csv to /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_tokenizer_audited_smoke/opencompass/20261017_220703/summary/summary_20261017_220703.csv
+
+
+The markdown format results is as below:
+
+| dataset | version | metric | mode | qwen3_4b_no_ttt_step1_tokenizer_audited_smoke |
+|----- | ----- | ----- | ----- | -----|
+| ruler_4k | - | score | gen | 76.92 |
+
+10/17 22:08:37 - OpenCompass - INFO - write markdown summary to /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_tokenizer_audited_smoke/opencompass/20261017_220703/summary/summary_20261017_220703.md
+	Command being timed: "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/bin/python /home/ctj/cbf_ttt_joint_exp_20260927/tasks/run_opencompass.py /home/ctj/cbf_ttt_joint_exp_20260927/eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py --work-dir /home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/ruler_4k_no_ttt_step1_tokenizer_audited_smoke/opencompass --debug"
+	User time (seconds): 95.48
+	System time (seconds): 11.92
+	Percent of CPU this job got: 108%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:38.95
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3086908
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 7
+	Minor (reclaiming a frame) page faults: 4914497
+	Voluntary context switches: 5358
+	Involuntary context switches: 1124
+	Swaps: 0
+	File system inputs: 3600
+	File system outputs: 2168
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

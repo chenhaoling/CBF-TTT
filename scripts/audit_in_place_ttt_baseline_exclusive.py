@@ -35,21 +35,32 @@ def gpu_peaks(path: pathlib.Path) -> tuple[dict[str, float], dict[str, float]]:
     return peaks, totals
 
 
-def audit(root: pathlib.Path) -> dict:
+def audit(root: pathlib.Path, tokenizer_addendum: pathlib.Path) -> dict:
     state = (root / "state.txt").read_text().strip()
     conversion_state = (root / "conversion_state.txt").read_text().strip()
     smoke_state = (root / "converted_smoke_state.txt").read_text().strip()
+    tokenizer_smoke_state = (
+        root / "converted_tokenizer_audited_smoke_state.txt"
+    ).read_text().strip()
     if state != "completed_both_arms":
         raise ValueError(f"unexpected training state: {state}")
     if conversion_state != "completed_both_arms":
         raise ValueError(f"unexpected conversion state: {conversion_state}")
     if smoke_state != "completed_both_arms":
         raise ValueError(f"unexpected smoke state: {smoke_state}")
+    if tokenizer_smoke_state != "completed_both_arms":
+        raise ValueError(
+            f"unexpected tokenizer-audited smoke state: {tokenizer_smoke_state}"
+        )
+    if int((root / "tokenizer_audited_runner_exit_code.txt").read_text()) != 0:
+        raise ValueError("tokenizer-audited smoke runner failed")
 
     training = {}
     conversion = {}
+    legacy_ruler = {}
     ruler = {}
     input_bindings = []
+    tokenizer_bindings = []
     minimum_free_fractions = []
     for arm in ("no_ttt", "ttt"):
         arm_root = root / f"resource_8k_{arm}"
@@ -109,7 +120,25 @@ def audit(root: pathlib.Path) -> dict:
             "hf_hash_manifest_entries": len(hash_manifest.read_text().splitlines()),
         }
 
-        ruler_root = root / f"ruler_4k_{arm}_step1_smoke"
+        legacy_ruler_root = root / f"ruler_4k_{arm}_step1_smoke"
+        legacy_summary_path = legacy_ruler_root / "summary.json"
+        legacy_summary = load_json(legacy_summary_path)
+        if not legacy_summary.get("completed") or legacy_summary.get("task_count") != 13:
+            raise ValueError(f"{arm} legacy RULER smoke incomplete")
+        legacy_ruler[arm] = {
+            "summary_sha256": sha256(legacy_summary_path),
+            "completed": True,
+            "task_count": legacy_summary["task_count"],
+            "macro_accuracy": legacy_summary["macro_accuracy"],
+            "official_ruler_group_score": legacy_summary[
+                "official_ruler_group_score"
+            ],
+            "tokenizer_regex_warning_count": (
+                legacy_ruler_root / "eval.log"
+            ).read_text(errors="replace").count("incorrect regex pattern"),
+        }
+
+        ruler_root = root / f"ruler_4k_{arm}_step1_tokenizer_audited_smoke"
         ruler_summary_path = ruler_root / "summary.json"
         ruler_summary = load_json(ruler_summary_path)
         if not ruler_summary.get("completed") or ruler_summary.get("task_count") != 13:
@@ -119,6 +148,37 @@ def audit(root: pathlib.Path) -> dict:
         bound_hash = ruler_summary["dependencies"].get("model_hash_manifest_sha256")
         if bound_hash != conversion[arm]["hf_hash_manifest_sha256"]:
             raise ValueError(f"{arm} RULER run is not bound to converted weights")
+        dependencies = ruler_summary["dependencies"]
+        warning_count = (ruler_root / "eval.log").read_text(
+            errors="replace"
+        ).count("incorrect regex pattern")
+        if warning_count != 0 or ruler_summary.get(
+            "tokenizer_regex_warning_count"
+        ) != 0:
+            raise ValueError(f"{arm} tokenizer regex warning remains")
+        if dependencies.get("fix_mistral_regex") is not False:
+            raise ValueError(f"{arm} Mistral regex policy mismatch")
+        if dependencies.get("tokenizer_policy") != (
+            "qwen_original_tokenizer_mistral_fix_false_v1"
+        ):
+            raise ValueError(f"{arm} tokenizer policy mismatch")
+        if dependencies.get("model_tokenizer_json_sha256") != dependencies.get(
+            "tokenizer_json_sha256"
+        ):
+            raise ValueError(f"{arm} model/evaluation tokenizer mismatch")
+        if dependencies.get("tokenizer_audit_addendum_sha256") != sha256(
+            tokenizer_addendum
+        ):
+            raise ValueError(f"{arm} tokenizer addendum binding mismatch")
+        tokenizer_bindings.append(
+            (
+                dependencies.get("tokenizer_json_sha256"),
+                dependencies.get("tokenizer_config_sha256"),
+                dependencies.get("tokenizer_policy"),
+                dependencies.get("fix_mistral_regex"),
+                dependencies.get("tokenizer_audit_addendum_sha256"),
+            )
+        )
         ruler[arm] = {
             "summary_sha256": sha256(ruler_summary_path),
             "completed": True,
@@ -126,13 +186,47 @@ def audit(root: pathlib.Path) -> dict:
             "macro_accuracy": ruler_summary["macro_accuracy"],
             "official_ruler_group_score": ruler_summary["official_ruler_group_score"],
             "peak_gpu_memory_mib": ruler_summary["peak_gpu_memory_mib"],
-            "tokenizer_regex_warning_count": (
-                ruler_root / "eval.log"
-            ).read_text(errors="replace").count("incorrect regex pattern"),
+            "tokenizer_regex_warning_count": warning_count,
+            "tokenizer_json_sha256": dependencies["tokenizer_json_sha256"],
+            "tokenizer_config_sha256": dependencies[
+                "tokenizer_config_sha256"
+            ],
+            "tokenizer_policy": dependencies["tokenizer_policy"],
+            "fix_mistral_regex": dependencies["fix_mistral_regex"],
+            "tokenizer_audit_addendum_sha256": dependencies[
+                "tokenizer_audit_addendum_sha256"
+            ],
         }
 
     if len(set(input_bindings)) != 1:
         raise ValueError("matched arms do not share frozen input bindings")
+    if len(set(tokenizer_bindings)) != 1:
+        raise ValueError("matched arms do not share tokenizer bindings")
+
+    tokenizer_diagnostic_path = root / "tokenizer_diagnostic.json"
+    tokenizer_diagnostic = load_json(tokenizer_diagnostic_path)
+    if tokenizer_diagnostic.get("transformers") != "4.57.3":
+        raise ValueError("unexpected tokenizer diagnostic Transformers version")
+    diagnostic_paths = tokenizer_diagnostic["paths"]
+    base_default = diagnostic_paths["base"]["default"]
+    base_fixed = diagnostic_paths["base"]["fixed"]
+    converted_default_hashes = set()
+    converted_fixed_hashes = set()
+    for arm in ("no_ttt", "ttt"):
+        default = diagnostic_paths[arm]["default"]
+        fixed = diagnostic_paths[arm]["fixed"]
+        if default["encodings"] != base_default["encodings"]:
+            raise ValueError(f"{arm} default tokenizer outputs differ from base")
+        converted_default_hashes.add(default["pre_tokenizer_sha256"])
+        converted_fixed_hashes.add(fixed["pre_tokenizer_sha256"])
+    if base_default["pre_tokenizer_sha256"] != base_fixed[
+        "pre_tokenizer_sha256"
+    ]:
+        raise ValueError("Mistral fix unexpectedly changes original Qwen tokenizer")
+    if converted_default_hashes != {base_default["pre_tokenizer_sha256"]}:
+        raise ValueError("converted default tokenizer differs from original Qwen")
+    if converted_fixed_hashes == converted_default_hashes:
+        raise ValueError("diagnostic did not expose the harmful Mistral patch")
 
     integrity_lines = (root / "hf_integrity_check.txt").read_text().splitlines()
     ok_lines = [line for line in integrity_lines if line.endswith(": OK")]
@@ -141,12 +235,16 @@ def audit(root: pathlib.Path) -> dict:
 
     min_free = min(minimum_free_fractions)
     payload = {
-        "protocol": "in_place_ttt_baseline_exclusive_independent_audit_v1",
+        "protocol": "in_place_ttt_baseline_exclusive_independent_audit_v2",
         "execution_passed": True,
         "matched_input_bindings": True,
         "training": training,
         "conversion": conversion,
+        "legacy_ruler_4k_smoke": legacy_ruler,
         "ruler_4k_smoke": ruler,
+        "tokenizer_audit_passed": True,
+        "tokenizer_diagnostic_sha256": sha256(tokenizer_diagnostic_path),
+        "tokenizer_addendum_sha256": sha256(tokenizer_addendum),
         "hf_integrity_ok_files": len(ok_lines),
         "minimum_gpu_free_fraction_at_peak": min_free,
         "resource_ladder_minimum_free_fraction": 0.05,
@@ -170,9 +268,12 @@ def audit(root: pathlib.Path) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=pathlib.Path, required=True)
+    parser.add_argument(
+        "--tokenizer-addendum", type=pathlib.Path, required=True
+    )
     parser.add_argument("--output", type=pathlib.Path, required=True)
     args = parser.parse_args()
-    payload = audit(args.root)
+    payload = audit(args.root, args.tokenizer_addendum)
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
     print(json.dumps(payload, indent=2, sort_keys=True))
 

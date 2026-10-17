@@ -15,7 +15,8 @@ baseline has **not** been reproduced yet.
 - Under a truly exclusive 2xRTX 5090 allocation, both matched 8K arms complete
   one finite optimizer step, write DCP checkpoints, convert through the
   official DCP-to-HF script, reload with the official TTT-aware inference
-  registration, and complete all 13 RULER-4K smoke tasks.
+  registration, and complete all 13 RULER-4K smoke tasks through the audited
+  original-Qwen tokenizer path.
 - no-TTT and TTT peak at 31,620/31,594 MiB and 31,920/31,894 MiB. The minimum
   remaining fraction is 2.107%, below the preregistered 5% resource gate, so
   the 2x5090 length ladder stops at 8K and does not attempt 16K.
@@ -40,6 +41,10 @@ baseline has **not** been reproduced yet.
   one-example-per-task smoke. This validates execution and score extraction
   only and is not an efficacy estimate comparable to the paper's 100-example
   result.
+- A Transformers 4.57.3 false-positive Mistral-regex warning in converted
+  local Qwen configs was diagnosed and closed. The replacement smokes bind
+  the byte-identical original Qwen tokenizer, explicitly keep
+  `fix_mistral_regex=false`, and emit zero warnings in both arms.
 - The paper's exact continual-pretraining corpus and several stage settings
   are not public. FineWeb-Edu plus LongCrawl64 remains a declared public-data
   substitute and cannot be called the original paper dataset.
@@ -82,6 +87,7 @@ New opt-in files are:
 - `scripts/convert_and_audit_in_place_ttt_baseline_checkpoints.sh`;
 - `scripts/run_in_place_ttt_converted_checkpoint_smokes.sh`;
 - `scripts/audit_in_place_ttt_baseline_exclusive.py`;
+- `IN_PLACE_TTT_BASELINE_TOKENIZER_AUDIT_ADDENDUM.md`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -355,27 +361,48 @@ module in the external OpenCompass config. A third direct-SSH attempt was
 interrupted by the Cloudflare tunnel. The successful run used tmux. None of
 these failed attempts contributes a score.
 
-The converted one-step checkpoints were then evaluated through the same
-13-task path with their complete HF hash manifests bound into run metadata:
+The first converted-checkpoint smokes completed, but each log emitted 27
+copies of the Transformers Mistral-regex warning:
 
 | Checkpoint | Tasks | Official score | Independent mean | Wall | GPU0 peak |
 |---|---:|---:|---:|---:|---:|
 | no-TTT step 1 | 13/13 | 76.9230769 | 76.9230769 | 1:47.12 | 9,300 MiB |
 | TTT step 1 | 13/13 | 76.9230769 | 76.9230769 | 1:42.51 | 9,916 MiB |
 
-The per-task score vectors are identical at this sample size. Several raw
-predictions differ, as shown by different result hashes, so the TTT-aware path
-is active; a single binary item per task has no power to estimate an accuracy
-difference. Both logs emit the same Transformers tokenizer-regex warning 27
-times. This matched warning must be resolved or explicitly accepted before
-the formal 100-example matrix.
+Read-only diagnosis found byte-identical `tokenizer.json` files in the
+original and both converted checkpoints. The official conversion changes the
+recorded Transformers version from 4.51.0 to 4.57.3, and Transformers 4.57.3
+then misclassifies the local `qwen3` config as a Mistral tokenizer. Applying
+`fix_mistral_regex=true` changes the converted pre-tokenizer hash and is
+incorrect for Qwen. The frozen tokenizer addendum therefore uses the original
+Qwen tokenizer directory for both OpenCompass model tokenization and RULER
+data generation, checks that its `tokenizer.json` hash matches each converted
+checkpoint, and explicitly keeps the Mistral fix false.
+
+The replacement smokes use new output directories and bind the tokenizer,
+model, parent plan and tokenizer-addendum hashes:
+
+| Checkpoint | Tasks | Official score | Regex warnings | Wall | GPU0 peak |
+|---|---:|---:|---:|---:|---:|
+| no-TTT step 1 | 13/13 | 76.9230769 | 0 | 1:38.95 | 9,300 MiB |
+| TTT step 1 | 13/13 | 76.9230769 | 0 | 1:39.41 | 9,916 MiB |
+
+The audited tokenizer SHA256 is
+`aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4`
+for the original, no-TTT and TTT copies. The per-task score vectors remain
+identical. Three result hashes differ between the arms, confirming that the
+TTT-aware path produces different raw outputs, but one binary item per task
+still has no power to estimate efficacy.
 
 Evidence:
 
 - [`remote/exclusive_5090_completed/ruler_4k_no_ttt_step1_smoke/summary.json`](remote/exclusive_5090_completed/ruler_4k_no_ttt_step1_smoke/summary.json)
 - [`remote/exclusive_5090_completed/ruler_4k_ttt_step1_smoke/summary.json`](remote/exclusive_5090_completed/ruler_4k_ttt_step1_smoke/summary.json)
+- [`remote/exclusive_5090_completed/ruler_4k_no_ttt_step1_tokenizer_audited_smoke/summary.json`](remote/exclusive_5090_completed/ruler_4k_no_ttt_step1_tokenizer_audited_smoke/summary.json)
+- [`remote/exclusive_5090_completed/ruler_4k_ttt_step1_tokenizer_audited_smoke/summary.json`](remote/exclusive_5090_completed/ruler_4k_ttt_step1_tokenizer_audited_smoke/summary.json)
+- [`remote/exclusive_5090_completed/tokenizer_diagnostic.json`](remote/exclusive_5090_completed/tokenizer_diagnostic.json)
 - raw predictions, task results, official summary files, GPU traces, and logs
-  are stored below the same two directories.
+  are stored below the same directories.
 
 ## 6. Verification
 
@@ -384,12 +411,15 @@ Evidence:
   run.
 - Plan, config, data, model-config, log, GPU trace, and result hashes are stored
   in the compact summaries.
-- Focused resource and RULER summarizer tests: `2 passed`.
+- Focused resource and RULER summarizer tests: `3 passed`.
 - RULER task set is checked against an explicit 13-task allowlist.
 - Official group score is independently recomputed from task result JSONs.
 - Independent exclusive-run audit recomputes GPU peaks, resource headroom,
   input bindings, conversion structure, manifest bindings, and both smoke
-  summaries; it passes and requires stopping before 16K.
+  summaries. Version 2 additionally verifies the false-positive diagnosis,
+  matching tokenizer hashes, frozen addendum, false Mistral-fix policy and
+  zero-warning replacement smokes. It passes and requires stopping before
+  16K.
 
 ## 7. Commands
 
@@ -437,9 +467,22 @@ Run both converted-checkpoint smokes:
 ```bash
 UPSTREAM_REPO=/home/ctj/in_place_ttt_official_be232482 \
 EVAL_PYTHON=/home/ctj/miniconda3/envs/in_place_ttt_official_eval/bin/python \
+TOKENIZER=/home/ctj/models/Qwen3-4B \
 OUTPUT_ROOT=/path/to/completed_exclusive_run \
 PLAN=$PWD/IN_PLACE_TTT_BASELINE_REPRODUCTION_PLAN.md TOOL_REPO=$PWD \
+TOKENIZER_AUDIT_ADDENDUM=$PWD/IN_PLACE_TTT_BASELINE_TOKENIZER_AUDIT_ADDENDUM.md \
+SMOKE_SUFFIX=tokenizer_audited_smoke \
+REQUIRE_ZERO_TOKENIZER_REGEX_WARNINGS=1 \
 bash scripts/run_in_place_ttt_converted_checkpoint_smokes.sh
+```
+
+Independent audit:
+
+```bash
+python scripts/audit_in_place_ttt_baseline_exclusive.py \
+  --root experiments/baseline_reproduction_qwen3_4b/remote/exclusive_5090_completed \
+  --tokenizer-addendum IN_PLACE_TTT_BASELINE_TOKENIZER_AUDIT_ADDENDUM.md \
+  --output experiments/baseline_reproduction_qwen3_4b/remote/exclusive_5090_completed/independent_audit.json
 ```
 
 ## 8. Next required experiment
@@ -449,13 +492,11 @@ bash scripts/run_in_place_ttt_converted_checkpoint_smokes.sh
    headroom rule, so repeating 8K or attempting 16K there is prohibited.
    `hku-a100` cannot serve this role while its only 80-GB GPU has 75,124 MiB
    allocated to vLLM.
-2. Resolve or explicitly validate the repeated tokenizer-regex warning before
-   any 100-example RULER score is released.
-3. On the selected host, construct a fully hashed FineWeb-Edu/LongCrawl64
+2. On the selected host, construct a fully hashed FineWeb-Edu/LongCrawl64
    public substitute and train byte-identical no-TTT/TTT token streams.
-4. Convert both final DCP checkpoints and execute the 100-example RULER matrix
-   from 4K through 256K once.
-5. Report it as a public-data matched replication. Resume support/update gates
+3. Convert both final DCP checkpoints and execute the 100-example RULER matrix
+   from 4K through 256K once, using the tokenizer-audited path above.
+4. Report it as a public-data matched replication. Resume support/update gates
    only after this baseline report is complete.
 
 Exact paper reproduction additionally requires the authors' private mixture,

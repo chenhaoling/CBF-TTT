@@ -1,0 +1,20 @@
+{
+  "protocol": "in_place_ttt_ruler_4k_smoke_v2",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "upstream_clean": true,
+  "model": "/home/ctj/in_place_ttt_baseline_exclusive_5090_20261017/resource_8k_no_ttt/hf_ckpt",
+  "model_name": "qwen3_4b_no_ttt_step1_tokenizer_audited_smoke",
+  "tokenizer": "/home/ctj/models/Qwen3-4B",
+  "tokenizer_policy": "qwen_original_tokenizer_mistral_fix_false_v1",
+  "fix_mistral_regex": false,
+  "num_samples_per_task": 1,
+  "context_length": 4096,
+  "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+  "config_sha256": "2b1c2a9f05c53adb90056a4184205953ed13c71d0ed36433f883154dff5c210f",
+  "model_config_sha256": "6ec6cfe40493f0b0a967366532def5360f429df83149c92abf8a95993b997a3e",
+  "model_tokenizer_json_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "tokenizer_json_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "tokenizer_config_sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+  "tokenizer_audit_addendum_sha256": "ae0dd9be2ac65ca369558131837fc00441f117f4c430dd8b3792cb2e6d10212f",
+  "model_hash_manifest_sha256": "0fcb928768d26b1f8cb7608147d7be410472925aa1a0259b76841bab476166b4"
+}

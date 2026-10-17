@@ -1,0 +1,468 @@
+{
+  "paths": {
+    "base": {
+      "default": {
+        "class": "Qwen2TokenizerFast",
+        "encodings": [
+          [
+            14990,
+            1879
+          ],
+          [
+            16,
+            13,
+            23811,
+            220,
+            17,
+            13,
+            1879
+          ],
+          [
+            32,
+            220,
+            425,
+            6258,
+            198,
+            35
+          ],
+          [
+            15007,
+            944,
+            646,
+            944,
+            2765,
+            944
+          ],
+          [
+            104811,
+            22574,
+            220,
+            16,
+            17,
+            18
+          ],
+          [
+            12069,
+            33015,
+            4421,
+            5973
+          ],
+          [
+            151644,
+            872,
+            198,
+            14990,
+            151645
+          ]
+        ],
+        "init_kwargs_fix": null,
+        "pre_tokenizer_sha256": "b49305328826a107166f6254ba88e17fd2433b260db352cd9e1932b8e8bc1815",
+        "pre_tokenizer_state": {
+          "pretokenizers": [
+            {
+              "behavior": "Isolated",
+              "invert": false,
+              "pattern": {
+                "Regex": "(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\\r\\n\\p{L}\\p{N}]?\\p{L}+|\\p{N}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+"
+              },
+              "type": "Split"
+            },
+            {
+              "add_prefix_space": false,
+              "trim_offsets": false,
+              "type": "ByteLevel",
+              "use_regex": false
+            }
+          ],
+          "type": "Sequence"
+        }
+      },
+      "fixed": {
+        "class": "Qwen2TokenizerFast",
+        "encodings": [
+          [
+            14990,
+            1879
+          ],
+          [
+            16,
+            13,
+            23811,
+            220,
+            17,
+            13,
+            1879
+          ],
+          [
+            32,
+            220,
+            425,
+            6258,
+            198,
+            35
+          ],
+          [
+            15007,
+            944,
+            646,
+            944,
+            2765,
+            944
+          ],
+          [
+            104811,
+            22574,
+            220,
+            16,
+            17,
+            18
+          ],
+          [
+            12069,
+            33015,
+            4421,
+            5973
+          ],
+          [
+            151644,
+            872,
+            198,
+            14990,
+            151645
+          ]
+        ],
+        "init_kwargs_fix": true,
+        "pre_tokenizer_sha256": "b49305328826a107166f6254ba88e17fd2433b260db352cd9e1932b8e8bc1815",
+        "pre_tokenizer_state": {
+          "pretokenizers": [
+            {
+              "behavior": "Isolated",
+              "invert": false,
+              "pattern": {
+                "Regex": "(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\\r\\n\\p{L}\\p{N}]?\\p{L}+|\\p{N}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+"
+              },
+              "type": "Split"
+            },
+            {
+              "add_prefix_space": false,
+              "trim_offsets": false,
+              "type": "ByteLevel",
+              "use_regex": false
+            }
+          ],
+          "type": "Sequence"
+        }
+      }
+    },
+    "no_ttt": {
+      "default": {
+        "class": "Qwen2TokenizerFast",
+        "encodings": [
+          [
+            14990,
+            1879
+          ],
+          [
+            16,
+            13,
+            23811,
+            220,
+            17,
+            13,
+            1879
+          ],
+          [
+            32,
+            220,
+            425,
+            6258,
+            198,
+            35
+          ],
+          [
+            15007,
+            944,
+            646,
+            944,
+            2765,
+            944
+          ],
+          [
+            104811,
+            22574,
+            220,
+            16,
+            17,
+            18
+          ],
+          [
+            12069,
+            33015,
+            4421,
+            5973
+          ],
+          [
+            151644,
+            872,
+            198,
+            14990,
+            151645
+          ]
+        ],
+        "init_kwargs_fix": null,
+        "pre_tokenizer_sha256": "b49305328826a107166f6254ba88e17fd2433b260db352cd9e1932b8e8bc1815",
+        "pre_tokenizer_state": {
+          "pretokenizers": [
+            {
+              "behavior": "Isolated",
+              "invert": false,
+              "pattern": {
+                "Regex": "(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\\r\\n\\p{L}\\p{N}]?\\p{L}+|\\p{N}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+"
+              },
+              "type": "Split"
+            },
+            {
+              "add_prefix_space": false,
+              "trim_offsets": false,
+              "type": "ByteLevel",
+              "use_regex": false
+            }
+          ],
+          "type": "Sequence"
+        }
+      },
+      "fixed": {
+        "class": "Qwen2TokenizerFast",
+        "encodings": [
+          [
+            14990,
+            1879
+          ],
+          [
+            16,
+            13,
+            23811,
+            220,
+            17,
+            13,
+            1879
+          ],
+          [
+            32,
+            220,
+            425,
+            6258,
+            198,
+            35
+          ],
+          [
+            15007,
+            944,
+            646,
+            944,
+            2765,
+            944
+          ],
+          [
+            104811,
+            22574,
+            220,
+            16,
+            17,
+            18
+          ],
+          [
+            12069,
+            33015,
+            4421,
+            5973
+          ],
+          [
+            151644,
+            872,
+            198,
+            14990,
+            151645
+          ]
+        ],
+        "init_kwargs_fix": true,
+        "pre_tokenizer_sha256": "86b1e8a1b128b5d10a05ff691121b7bf616d4a56a9698012e661508c98c4ce03",
+        "pre_tokenizer_state": {
+          "pretokenizers": [
+            {
+              "behavior": "Isolated",
+              "invert": false,
+              "pattern": {
+                "Regex": "[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*|\\p{N}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+"
+              },
+              "type": "Split"
+            },
+            {
+              "add_prefix_space": false,
+              "trim_offsets": false,
+              "type": "ByteLevel",
+              "use_regex": false
+            }
+          ],
+          "type": "Sequence"
+        }
+      }
+    },
+    "ttt": {
+      "default": {
+        "class": "Qwen2TokenizerFast",
+        "encodings": [
+          [
+            14990,
+            1879
+          ],
+          [
+            16,
+            13,
+            23811,
+            220,
+            17,
+            13,
+            1879
+          ],
+          [
+            32,
+            220,
+            425,
+            6258,
+            198,
+            35
+          ],
+          [
+            15007,
+            944,
+            646,
+            944,
+            2765,
+            944
+          ],
+          [
+            104811,
+            22574,
+            220,
+            16,
+            17,
+            18
+          ],
+          [
+            12069,
+            33015,
+            4421,
+            5973
+          ],
+          [
+            151644,
+            872,
+            198,
+            14990,
+            151645
+          ]
+        ],
+        "init_kwargs_fix": null,
+        "pre_tokenizer_sha256": "b49305328826a107166f6254ba88e17fd2433b260db352cd9e1932b8e8bc1815",
+        "pre_tokenizer_state": {
+          "pretokenizers": [
+            {
+              "behavior": "Isolated",
+              "invert": false,
+              "pattern": {
+                "Regex": "(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\\r\\n\\p{L}\\p{N}]?\\p{L}+|\\p{N}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+"
+              },
+              "type": "Split"
+            },
+            {
+              "add_prefix_space": false,
+              "trim_offsets": false,
+              "type": "ByteLevel",
+              "use_regex": false
+            }
+          ],
+          "type": "Sequence"
+        }
+      },
+      "fixed": {
+        "class": "Qwen2TokenizerFast",
+        "encodings": [
+          [
+            14990,
+            1879
+          ],
+          [
+            16,
+            13,
+            23811,
+            220,
+            17,
+            13,
+            1879
+          ],
+          [
+            32,
+            220,
+            425,
+            6258,
+            198,
+            35
+          ],
+          [
+            15007,
+            944,
+            646,
+            944,
+            2765,
+            944
+          ],
+          [
+            104811,
+            22574,
+            220,
+            16,
+            17,
+            18
+          ],
+          [
+            12069,
+            33015,
+            4421,
+            5973
+          ],
+          [
+            151644,
+            872,
+            198,
+            14990,
+            151645
+          ]
+        ],
+        "init_kwargs_fix": true,
+        "pre_tokenizer_sha256": "86b1e8a1b128b5d10a05ff691121b7bf616d4a56a9698012e661508c98c4ce03",
+        "pre_tokenizer_state": {
+          "pretokenizers": [
+            {
+              "behavior": "Isolated",
+              "invert": false,
+              "pattern": {
+                "Regex": "[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*|\\p{N}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+"
+              },
+              "type": "Split"
+            },
+            {
+              "add_prefix_space": false,
+              "trim_offsets": false,
+              "type": "ByteLevel",
+              "use_regex": false
+            }
+          ],
+          "type": "Sequence"
+        }
+      }
+    }
+  },
+  "tokenizers": "0.22.2",
+  "transformers": "4.57.3"
+}

@@ -6450,3 +6450,32 @@ matched输入绑定、转换结构、HF manifest绑定及两份RULER summary，�
 `experiments/baseline_reproduction_qwen3_4b/remote/exclusive_5090_completed/`；大型DCP和
 safetensors保留在远端，不提交Git。至此Level-A released-code execution闭环完成；Level-B
 正式公共语料matched training和Level-C论文精确复现仍未完成，门控实验继续暂停。
+
+## 2026-10-17: converted Qwen tokenizer audit and warning closure
+
+转换checkpoint的首轮RULER smoke虽然两臂均完成13/13任务，但日志各出现27次
+Transformers `incorrect regex pattern`警告。执行只读诊断后确认：原始Qwen3-4B、no-TTT
+转换目录和TTT转换目录的`tokenizer.json`字节完全一致，SHA256均为
+`aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4`。原始模型
+`config.json`记录`model_type=qwen3`与`transformers_version=4.51.0`，官方
+`save_pretrained()`转换后版本字段变成4.57.3。Transformers 4.57.3的本地Mistral检测条件
+只对版本不高于4.57.2的非Mistral config提前返回，因而把转换后的本地Qwen误判为Mistral。
+
+诊断进一步证明不能按警告建议设置`fix_mistral_regex=True`：原始Qwen的pre-tokenizer hash
+保持`b4930532...1815`，而转换目录会被改写为`86b1e8a1...ce03`。在任何替换评分前新增并
+提交`IN_PLACE_TTT_BASELINE_TOKENIZER_AUDIT_ADDENDUM.md`（commit `562456f6`，SHA256
+`ae0dd9be2ac65ca369558131837fc00441f117f4c430dd8b3792cb2e6d10212f`），冻结正确策略：
+模型权重仍从转换checkpoint加载，OpenCompass模型端与全部RULER数据生成统一使用原始
+Qwen tokenizer；启动前强制检查模型目录与原始目录的`tokenizer.json` hash相同，并显式
+保持`fix_mistral_regex=false`。
+
+更新RULER配置、runner、双checkpoint runner、summary和回归测试（commit `3f2ed44c`）。
+metadata现在绑定tokenizer路径、`tokenizer.json`/`tokenizer_config.json`、model manifest、
+父计划和tokenizer附录hash；summary把regex警告纳入completed条件。远端固定环境3项测试
+通过。使用新目录依次重跑两臂：no-TTT/TTT均exit=0、13/13、官方与独立分数均为
+76.9230769，regex警告均为0，wall为1:38.95/1:39.41，GPU0峰值9300/9916MiB。
+
+独立audit升级为v2，重算并验证旧警告计数、原始与转换tokenizer输出等价、强制Mistral
+修复会改变转换pre-tokenizer、双臂tokenizer/hash/policy/addendum绑定、零警告summary、
+训练资源、转换结构和RULER结果；审计通过。原始首轮smoke保留为诊断证据，新smoke未覆盖
+任何旧输出。该结果只关闭评测管线风险，不改变一例/任务不能评价TTT效果的claim boundary。
