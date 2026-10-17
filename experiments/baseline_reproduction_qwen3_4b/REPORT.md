@@ -115,6 +115,8 @@ New opt-in files are:
 - `scripts/audit_in_place_ttt_public_corpus.py`;
 - `configs/baseline_reproduction/qwen3_4b_public_stage{1,2}_{no_ttt,ttt}.yaml`;
 - `scripts/audit_in_place_ttt_level_b_configs.py`;
+- `scripts/run_in_place_ttt_level_b_preflight.sh`;
+- `scripts/audit_in_place_ttt_level_b_preflight.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -470,7 +472,13 @@ Both use GB64, microbatch 1, FSDP2, AdamW `5e-6`, cosine decay, 2% warmup,
 bf16 mixed precision, gradient checkpointing and no offload. The arms differ
 only in `ttt_mode` plus their runtime checkpoint/output paths. Stage 2 starts
 from each arm's converted Stage-1 HF weights with a fresh optimizer and
-scheduler. The dependency-free static auditor and 14-test focused suite pass.
+scheduler. The dependency-free static auditor passes. A separate host-gated
+runner requires an explicit set of eight unique GPUs, each with at least
+80,000 MiB total memory, at most 512 MiB preflight use and no compute process.
+It runs matched one-step arms sequentially; the independent auditor requires
+finite loss/gradient values and at least 5% free memory on every selected GPU.
+The runner has not executed because no currently reachable host meets that
+gate. The combined focused suite passes 16 tests.
 
 ### Alternate host check
 
@@ -589,7 +597,8 @@ Evidence:
   continuous two-stage pilot passes ten checks after re-tokenizing all 144
   rows, and its archive passes local SHA256 verification.
 - The four formal training configurations pass the dependency-free static
-  auditor; the combined focused suite passes 14 tests.
+  auditor. The host-gated matched-preflight metric/resource checks and the
+  combined focused suite pass 16 tests.
 
 ## 7. Commands
 
@@ -644,6 +653,31 @@ python scripts/audit_in_place_ttt_public_corpus.py \
 python scripts/audit_in_place_ttt_level_b_configs.py \
   --corpus-root /new/output/public_corpus \
   --output /new/output/level_b_config_audit.json
+```
+
+After the full audit passes, run a matched one-step preflight on an exclusive
+8×80-GB-class NVIDIA host:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
+UPSTREAM_REPO=/path/to/clean/in-place-ttt-be232482 \
+TOOL_REPO=/path/to/CBF-TTT/In-Place-TTT \
+PYTHON_BIN=/path/to/official-env/bin/python \
+CORPUS_ROOT=/path/to/audited/public_corpus \
+BASE_MODEL=/path/to/Qwen3-4B \
+OUTPUT_ROOT=/new/output/level_b_stage1_preflight \
+bash scripts/run_in_place_ttt_level_b_preflight.sh stage1
+
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
+UPSTREAM_REPO=/path/to/clean/in-place-ttt-be232482 \
+TOOL_REPO=/path/to/CBF-TTT/In-Place-TTT \
+PYTHON_BIN=/path/to/official-env/bin/python \
+CORPUS_ROOT=/path/to/audited/public_corpus \
+BASE_MODEL=/path/to/Qwen3-4B \
+STAGE1_NO_TTT_MODEL=/path/to/stage1_no_ttt_hf \
+STAGE1_TTT_MODEL=/path/to/stage1_ttt_hf \
+OUTPUT_ROOT=/new/output/level_b_stage2_preflight \
+bash scripts/run_in_place_ttt_level_b_preflight.sh stage2
 ```
 
 Resource probe (change `ARM` and output path for the other arm):

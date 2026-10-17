@@ -6568,3 +6568,13 @@ rehash再次通过，归档于`experiments/baseline_reproduction_qwen3_4b/remote
 914GiB。该任务仍在运行，尚无正式manifest/audit，严禁用partial目录训练。再次检查
 `hku-a100`仍只有一张80GB A100且vLLM占75124MiB，不满足冻结的8×80GB级训练门槛。
 因此正式训练尚未启动，门控探索继续暂停。
+
+新增`scripts/run_in_place_ttt_level_b_preflight.sh`和独立
+`scripts/audit_in_place_ttt_level_b_preflight.py`。runner只接受显式选择的8张唯一NVIDIA
+GPU；每张必须总显存≥80000MiB、启动前占用≤512MiB且无compute process，官方checkout
+必须为`be232482`且clean，完整corpus及四配置audit必须通过。32K/128K模式分别从原始Qwen
+或本臂Stage-1转换HF权重出发，顺序运行no-TTT与TTT各一个optimizer step，不保存临时DCP。
+独立audit重算input/config hash、训练日志中的有限loss/gradient norm、每卡峰值及最小free
+fraction，并要求两臂每张卡均保留至少5%显存。新增2项metric/GPU-trace测试；合并focused
+suite现为16项全部通过。该runner在现有2×5090和单张繁忙A100上均不会启动，等待符合门槛
+的8×80GB级主机。
