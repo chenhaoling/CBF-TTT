@@ -1,0 +1,30 @@
+{
+  "config_contexts": [
+    4096,
+    8192,
+    16384,
+    32768,
+    65536,
+    131072,
+    262144
+  ],
+  "config_load_output_sha256": "73cdbf8f4607482ef1519801412f468be00e548db5a1a2f07663e7adb7b66855",
+  "config_load_passed": true,
+  "dependency_versions": {
+    "datasets": "2.21.0",
+    "opencompass": "0.5.4",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.3"
+  },
+  "evaluation_addendum_sha256": "a5762933f8c6f9eee2863e42ba6823bbad922433fb00cf6e872630fe56543e7b",
+  "formal_evaluation_executed": false,
+  "host": "hku-gpu2",
+  "protocol": "in_place_ttt_level_b_ruler_tooling_smoke_v1",
+  "remote_tests_passed": 9,
+  "ruler_random_seed": 42,
+  "samples_per_task": 100,
+  "tasks_per_context": 13,
+  "tests_output_sha256": "75d67c9e854abd0b3a5330794ea1069ee0b22ba4313a8e44e27cdb04af801ce9",
+  "tool_commit": "a4159855d8f8d0a6f5a7a96d1365b23d0f89d8eb",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1"
+}

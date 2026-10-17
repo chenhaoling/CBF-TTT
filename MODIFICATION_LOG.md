@@ -6644,3 +6644,10 @@ OpenCompass实际解析到的SQuAD、HotpotQA、Paul Graham源文件SHA256；环
 路径。RULER与训练专项9项测试通过，全部Level-B inventory/corpus/config/preflight/training/
 RULER聚焦测试共25项通过。新入口均为opt-in，baseline配置、官方训练入口、原生
 `ttt_proj/ttt_conv`和既有checkpoint均未覆盖。
+
+代码推送为commit `a4159855d8f8d0a6f5a7a96d1365b23d0f89d8eb`后，在hku-gpu2从GitHub建立
+全新detached clean checkout。正式OpenCompass环境实际加载七个长度的配置，逐项确认13个
+dataset、100 samples、seed 42、对应session/max length和零Mistral修复；全部通过。相同干净
+checkout的RULER与training audit测试9/9通过。日志及依赖/计划哈希记录于
+`experiments/baseline_reproduction_qwen3_4b/remote/level_b_ruler_tooling_smoke/`。该smoke没有
+加载未来Stage-2模型或产生正式分数，不改变“完整语料、双臂训练和正式矩阵尚未完成”的结论。

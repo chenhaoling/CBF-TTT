@@ -650,6 +650,12 @@ Evidence:
 - The Stage-2 training audit now records the HF checkpoint under its final
   published root instead of the temporary `.partial` root. This closes a path
   binding bug before any formal training run; it does not change training.
+- A fresh remote checkout at commit `a4159855d8f8d0a6f5a7a96d1365b23d0f89d8eb`
+  loaded all seven configs in the pinned OpenCompass environment. Every config
+  resolved 13 tasks with 100 samples and seed 42; the remote RULER/training
+  audit suite passed 9/9. This validates tooling only and does not count as a
+  formal model score. Compact evidence is in
+  [`remote/level_b_ruler_tooling_smoke/summary.json`](remote/level_b_ruler_tooling_smoke/summary.json).
 
 ## 7. Commands
 
