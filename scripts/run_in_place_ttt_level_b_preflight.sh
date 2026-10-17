@@ -13,6 +13,7 @@ PYTHON_BIN=${PYTHON_BIN:?set the official training Python}
 CORPUS_ROOT=${CORPUS_ROOT:?set the independently audited full corpus}
 BASE_MODEL=${BASE_MODEL:?set the original Qwen3-4B directory}
 OUTPUT_ROOT=${OUTPUT_ROOT:?set a new preflight output root}
+TRAINING_ADDENDUM=${TRAINING_ADDENDUM:-$TOOL_REPO/IN_PLACE_TTT_BASELINE_LEVEL_B_TRAINING_ADDENDUM.md}
 CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:?select exactly eight GPUs explicitly}
 export CUDA_VISIBLE_DEVICES
 UPSTREAM_COMMIT=be2324829b0e91c8fd10a74d4b43714fde6676e1
@@ -49,6 +50,7 @@ test -z "$(git -C "$UPSTREAM_REPO" status --short)"
 test -x "$PYTHON_BIN"
 test -s "$data_path"
 test -s "$BASE_MODEL/config.json"
+test -s "$TRAINING_ADDENDUM"
 
 staging="${OUTPUT_ROOT}.partial"
 mkdir -p "$staging"
@@ -117,17 +119,19 @@ if [[ "$disk_free_bytes" -lt 429496729600 ]]; then
   exit 5
 fi
 
-"$PYTHON_BIN" - "$UPSTREAM_REPO" "$data_path" "$BASE_MODEL" \
+"$PYTHON_BIN" - "$UPSTREAM_REPO" "$TOOL_REPO" "$data_path" "$BASE_MODEL" \
   "$config_no_ttt" "$config_ttt" "$staging/config_audit.json" \
-  "$staging/gpu_inventory.json" "$staging/run_metadata.json" "$stage" \
+  "$staging/gpu_inventory.json" "$TRAINING_ADDENDUM" \
+  "$staging/run_metadata.json" "$stage" \
   "$seq_len" "$one_step_tokens" "$disk_free_bytes" <<'PY'
 import hashlib, json, pathlib, subprocess, sys
-(upstream, data, base_model, no_config, ttt_config, config_audit,
- gpu_inventory, output, stage, seq_len, tokens, disk_free) = sys.argv[1:]
+(upstream, tool_repo, data, base_model, no_config, ttt_config, config_audit,
+ gpu_inventory, training_addendum, output, stage, seq_len, tokens, disk_free) = sys.argv[1:]
 sha = lambda path: hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
 metadata = {
     'protocol': 'in_place_ttt_level_b_preflight_v1',
     'stage': stage,
+    'hostname': __import__('socket').gethostname(),
     'seq_len': int(seq_len),
     'one_step_tokens': int(tokens),
     'selected_gpus': [int(value) for value in __import__('os').environ['CUDA_VISIBLE_DEVICES'].split(',')],
@@ -135,11 +139,14 @@ metadata = {
     'disk_free_bytes': int(float(disk_free)),
     'upstream_commit': subprocess.check_output(['git', '-C', upstream, 'rev-parse', 'HEAD'], text=True).strip(),
     'upstream_clean': not subprocess.check_output(['git', '-C', upstream, 'status', '--short'], text=True).strip(),
+    'tool_commit': subprocess.check_output(['git', '-C', tool_repo, 'rev-parse', 'HEAD'], text=True).strip(),
+    'tool_clean': not subprocess.check_output(['git', '-C', tool_repo, 'status', '--short'], text=True).strip(),
     'data_path': data,
     'data_sha256': sha(data),
     'base_model_config_sha256': sha(pathlib.Path(base_model) / 'config.json'),
     'config_sha256': {'no_ttt': sha(no_config), 'ttt': sha(ttt_config)},
     'config_audit_sha256': sha(config_audit),
+    'training_addendum_sha256': sha(training_addendum),
 }
 pathlib.Path(output).write_text(json.dumps(metadata, indent=2, sort_keys=True) + '\n')
 PY

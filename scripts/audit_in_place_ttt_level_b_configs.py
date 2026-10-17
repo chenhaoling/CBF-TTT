@@ -56,8 +56,12 @@ DATA_COMMON = {
     "data_type": "plaintext",
     "text_keys": "content_split",
     "drop_last": True,
+    "num_workers": 2,
+    "prefetch_factor": 2,
+    "pin_memory": True,
 }
 TRAIN_COMMON = {
+    "seed": 42,
     "data_parallel_mode": "fsdp2",
     "ulysses_parallel_size": 1,
     "global_batch_size": 64,

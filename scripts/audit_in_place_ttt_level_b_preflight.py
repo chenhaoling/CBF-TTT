@@ -82,6 +82,7 @@ def audit(root: Path, stage: str) -> dict[str, Any]:
     selected = metadata.get("selected_gpus")
     if (metadata.get("protocol") != "in_place_ttt_level_b_preflight_v1"
             or metadata.get("stage") != stage
+            or not isinstance(metadata.get("hostname"), str) or not metadata["hostname"]
             or not isinstance(selected, list) or len(selected) != 8
             or len(set(selected)) != 8 or not all(isinstance(item, int) for item in selected)):
         errors.append("run metadata protocol/stage/GPU selection is invalid")
@@ -99,10 +100,16 @@ def audit(root: Path, stage: str) -> dict[str, Any]:
     if metadata.get("upstream_commit") != "be2324829b0e91c8fd10a74d4b43714fde6676e1" \
             or metadata.get("upstream_clean") is not True:
         errors.append("official checkout binding is invalid")
+    if not isinstance(metadata.get("tool_commit"), str) \
+            or len(metadata["tool_commit"]) != 40 or metadata.get("tool_clean") is not True:
+        errors.append("tool checkout binding is invalid")
     if not config_audit.get("passed") or config_audit.get("corpus") is None:
         errors.append("formal config/corpus audit did not pass")
     if metadata.get("config_audit_sha256") != sha256(config_audit_path):
         errors.append("config audit hash binding is wrong")
+    if not isinstance(metadata.get("training_addendum_sha256"), str) \
+            or len(metadata["training_addendum_sha256"]) != 64:
+        errors.append("training addendum hash binding is missing")
     if metadata.get("seq_len") != spec["seq_len"] \
             or metadata.get("one_step_tokens") != spec["one_step_tokens"]:
         errors.append("stage length or one-step token budget is wrong")
