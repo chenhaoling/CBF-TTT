@@ -61,6 +61,10 @@ baseline has **not** been reproduced yet.
 - Four formal 32K/128K × no-TTT/TTT configs are implemented and statically
   audited. The full 34,999,369,728-token public corpus build is currently
   running in an isolated CPU-only tmux job; no formal training has started.
+- Inspection of the pinned VeOmni loader found its mandatory deterministic
+  buffer-10,000 shuffle. A training addendum now freezes seed 42, worker and
+  prefetch settings, implementation hashes and a measured 3-TiB paired-run
+  storage gate before any Level-B optimizer step.
 - The paper's exact continual-pretraining corpus and several stage settings
   are not public. FineWeb-Edu plus LongCrawl64 remains a declared public-data
   substitute and cannot be called the original paper dataset.
@@ -117,6 +121,9 @@ New opt-in files are:
 - `scripts/audit_in_place_ttt_level_b_configs.py`;
 - `scripts/run_in_place_ttt_level_b_preflight.sh`;
 - `scripts/audit_in_place_ttt_level_b_preflight.py`;
+- `IN_PLACE_TTT_BASELINE_LEVEL_B_TRAINING_ADDENDUM.md`;
+- `scripts/run_in_place_ttt_level_b_training.sh`;
+- `scripts/audit_in_place_ttt_level_b_training.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -478,7 +485,32 @@ runner requires an explicit set of eight unique GPUs, each with at least
 It runs matched one-step arms sequentially; the independent auditor requires
 finite loss/gradient values and at least 5% free memory on every selected GPU.
 The runner has not executed because no currently reachable host meets that
-gate. The combined focused suite passes 16 tests.
+gate.
+
+Before implementing the formal runner, the exact installed VeOmni source was
+inspected. Its iterable builder unconditionally applies
+`shuffle(seed=seed, buffer_size=10000)` before `split_dataset_by_node`; turning
+that off would modify the released path. The frozen
+[`IN_PLACE_TTT_BASELINE_LEVEL_B_TRAINING_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_LEVEL_B_TRAINING_ADDENDUM.md)
+(commit `d366af6a`, SHA256
+`c33310cae2c196b06a15eca2462d009d9ca34674adc11f55a167048dd6d8d03b`)
+therefore defines the consumed schedule as the deterministic official shuffle
+of the byte-identical ordered JSONL. All configs now explicitly set seed 42,
+two workers, prefetch factor 2 and pinned memory. The pinned dataset and
+dataloader implementation SHA256 values are `52a1a736...f69` and
+`8703db96...c42`.
+
+Real one-step DCPs measure 49,830,704,053 bytes for no-TTT and 50,303,642,036
+bytes for TTT. With the registered interval and final save, Stage 1 retains 20
+checkpoints per arm and Stage 2 retains four. The addendum consequently
+requires at least 3 TiB free on a shared paired-run filesystem. The formal
+single-arm runner additionally refuses insufficient per-arm storage, a host or
+GPU selection different from the matched preflight, any dirty checkout, failed
+corpus/config audit, or a pre-existing output. Its independent auditor checks
+all expected checkpoint steps, finite logged metrics, DCP metadata/size, final
+HF structure and arm mode, input hashes, resource traces and the 5% GPU
+headroom gate. The combined focused suite passes 19 tests. This is implemented
+readiness evidence; no formal optimizer step has run.
 
 ### Alternate host check
 
@@ -598,7 +630,8 @@ Evidence:
   rows, and its archive passes local SHA256 verification.
 - The four formal training configurations pass the dependency-free static
   auditor. The host-gated matched-preflight metric/resource checks and the
-  combined focused suite pass 16 tests.
+  formal-training checkpoint/resource fixture checks pass; the combined
+  focused suite has 19 passing tests.
 
 ## 7. Commands
 
@@ -680,6 +713,25 @@ OUTPUT_ROOT=/new/output/level_b_stage2_preflight \
 bash scripts/run_in_place_ttt_level_b_preflight.sh stage2
 ```
 
+Run one released formal stage/arm after its matched preflight passes. Stage 1
+must run `no_ttt` first so its runner verifies the full 3-TiB paired budget:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
+UPSTREAM_REPO=/path/to/clean/in-place-ttt-be232482 \
+TOOL_REPO=/path/to/clean/CBF-TTT/In-Place-TTT \
+PYTHON_BIN=/path/to/official-env/bin/python \
+CORPUS_ROOT=/path/to/audited/public_corpus \
+START_MODEL=/path/to/Qwen3-4B \
+PREFLIGHT_ROOT=/path/to/level_b_stage1_preflight \
+OUTPUT_ROOT=/new/output/stage1_no_ttt \
+bash scripts/run_in_place_ttt_level_b_training.sh stage1 no_ttt
+```
+
+Use the same command with the matched config/model/output for `stage1 ttt`.
+For Stage 2, set `START_MODEL` to that arm's audited Stage-1 `hf_ckpt` and use
+the completed Stage-2 matched preflight.
+
 Resource probe (change `ARM` and output path for the other arm):
 
 ```bash
@@ -738,7 +790,7 @@ python scripts/audit_in_place_ttt_baseline_exclusive.py \
 ## 8. Next required experiment
 
 1. Allocate an exclusive H800-class host, preferably 4--8 GPUs with at least
-   80GB each. The exclusive 2x5090 result already passes 8K but fails the 5%
+   80GB each, plus at least 3 TiB free shared storage. The exclusive 2x5090 result already passes 8K but fails the 5%
    headroom rule, so repeating 8K or attempting 16K there is prohibited.
    `hku-a100` cannot serve this role while its only 80-GB GPU has 75,124 MiB
    allocated to vLLM.

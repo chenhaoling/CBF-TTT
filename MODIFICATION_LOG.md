@@ -6578,3 +6578,25 @@ GPU；每张必须总显存≥80000MiB、启动前占用≤512MiB且无compute p
 fraction，并要求两臂每张卡均保留至少5%显存。新增2项metric/GPU-trace测试；合并focused
 suite现为16项全部通过。该runner在现有2×5090和单张繁忙A100上均不会启动，等待符合门槛
 的8×80GB级主机。
+
+进一步只读检查固定VeOmni环境，确认`build_iterable_dataset`会无条件执行
+`dataset.shuffle(seed=seed, buffer_size=10000)`后再按DP rank切分。关闭该行为会修改官方
+baseline，因此在任何Level-B optimizer step前提交并冻结
+`IN_PLACE_TTT_BASELINE_LEVEL_B_TRAINING_ADDENDUM.md`（commit `d366af6a`，SHA256
+`c33310cae2c196b06a15eca2462d009d9ca34674adc11f55a167048dd6d8d03b`）。四配置显式加入
+seed=42、num_workers=2、prefetch_factor=2与pin_memory=true；“相同ordered JSONL”被严格
+解释为两臂绑定同一字节artifact并使用同一官方确定性shuffle，而非声称按文件线性顺序训练。
+固定`dataset.py`/`data_loader.py` SHA256分别为`52a1a736...f69`与`8703db96...c42`。
+
+从Level-A真实DCP重算，no-TTT/TTT单checkpoint分别为49830704053/50303642036 bytes。
+Stage 1按每500 step及final共保留20个checkpoint/臂，Stage 2保留4个/臂，因此共享正式训练
+文件系统门槛提高为至少3TiB，不假定自动删除中间checkpoint。
+
+新增`scripts/run_in_place_ttt_level_b_training.sh`和独立
+`scripts/audit_in_place_ttt_level_b_training.py`。正式runner按stage/arm单独执行，但必须绑定
+同一主机、同一8卡选择且已通过的matched preflight；检查clean official/tool checkout、完整
+corpus/config audit、输入hash和分臂存储门槛，并记录1秒GPU/host trace。独立audit要求精确
+checkpoint step集合（Stage1为500..9500及9537，Stage2为500/1000/1500/1788）、每个DCP
+metadata与≥40GB结构、最终HF checkpoint和正确ttt_mode、全部已解析指标有限、无OOM且每卡
+峰值后free fraction≥5%。新增3项训练audit测试，其中一项用稀疏40GB fixture走通完整Stage2
+审计；合并focused suite为19项通过。现有主机不满足门槛，因此未启动正式训练。
