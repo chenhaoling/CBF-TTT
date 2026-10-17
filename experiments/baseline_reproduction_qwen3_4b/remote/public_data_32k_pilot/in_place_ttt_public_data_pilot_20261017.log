@@ -1,0 +1,8 @@
+[2026-10-17T22:50:22+08:00] FineWeb-Edu build
+{"content_tokens_per_record": 32767, "documents_read": 283, "output_root": "/home/ctj/in_place_ttt_public_data_pilot_20261017/fineweb", "peak_host_rss_mib": 1095.59375, "raw_source_tokens_consumed": 262136, "records": 8, "seq_len": 32768, "synthetic_eos_tokens": 0, "terminal_eos_tokens": 8, "total_training_tokens": 262144, "wall_seconds": 13.72819896042347}
+Fatal Python error: PyGILState_Release: thread state 0x71b8fc0036c0 must be current when releasing
+Python runtime state: finalizing (tstate=0x000062aec63698e0)
+
+Thread 0x000071bc2372b740 (most recent call first):
+  <no Python frame>
+/home/ctj/run_in_place_ttt_public_data_pilot_20261017.sh: line 59: 1393182 Aborted                 (core dumped) "$PYTHON_BIN" scripts/build_in_place_ttt_public_data_pilot.py --source fineweb --tokenizer "$TOKENIZER" --output-root "$OUTPUT_ROOT/fineweb" --max-records 8 --seq-len 32768 --max-documents 10000

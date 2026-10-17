@@ -1,0 +1,68 @@
+{
+  "artifacts": {
+    "data.jsonl": {
+      "sha256": "31efaae9f43539f9b5451952fccc12c481047cb173c2cfeaabd2427300f5798f",
+      "size_bytes": 1021693
+    },
+    "document_stream_sha256": "0b44e652bc1a904c650435a04f62cea71d1d233fcd0a0b720ce5af1cd4156175",
+    "ordered_training_tokens_sha256": "0c0730ebe19f9b007b688b0063920e2e3b937cce7b020232c7fb93a4ca71b488",
+    "provenance.jsonl": {
+      "sha256": "30577dd72cc21c39baaf09d1bc4459b5a2e6e056e7401ade5e9b4f4450985cf4",
+      "size_bytes": 5998
+    }
+  },
+  "bindings": {
+    "builder": {
+      "path": "/home/ctj/in_place_ttt_official_be232482/scripts/build_in_place_ttt_public_data_pilot.py",
+      "sha256": "e405d9b7e5b6a2c624b8cfe198bd93f0163d032e9cd902488127d1f29d9c320b"
+    },
+    "plan": {
+      "path": "/home/ctj/in_place_ttt_official_be232482/IN_PLACE_TTT_BASELINE_PUBLIC_DATA_PILOT_ADDENDUM.md",
+      "sha256": "632ab39cdb015e57d082cb9f56d034f5484bd32316cec459f7988c776db2af83"
+    },
+    "tokenizer_assets": {
+      "config.json": {
+        "sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+        "size_bytes": 726
+      },
+      "tokenizer.json": {
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "size_bytes": 11422654
+      },
+      "tokenizer_config.json": {
+        "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "size_bytes": 9732
+      }
+    },
+    "tokenizer_path": "/home/ctj/models/Qwen3-4B"
+  },
+  "packing": {
+    "content_tokens_per_record": 32767,
+    "documents_read": 6,
+    "raw_source_tokens_consumed": 262136,
+    "records": 8,
+    "seq_len": 32768,
+    "synthetic_eos_tokens": 0,
+    "terminal_eos_tokens": 8,
+    "total_training_tokens": 262144
+  },
+  "protocol": "in_place_ttt_public_data_pilot_v1",
+  "resources": {
+    "peak_host_rss_mib": 783.0703125,
+    "wall_seconds": 15.856248872354627
+  },
+  "source": {
+    "input_files": [
+      {
+        "path": "/home/ctj/data/cbf_ttt_pilot/longcrawl64/train/0-of-256.parquet",
+        "publisher_file": "0-of-256.parquet",
+        "sha256": "bd89e68512e0465957596711d1805e91d0bb1d097ecc44c7ddf5c81d636ba1d3",
+        "size_bytes": 10903312345
+      }
+    ],
+    "name": "longcrawl",
+    "repository": "manifestai/longcrawl64",
+    "revision": "8e7af027525b3597852746ee11e4baa0e98492d7",
+    "split": "train"
+  }
+}

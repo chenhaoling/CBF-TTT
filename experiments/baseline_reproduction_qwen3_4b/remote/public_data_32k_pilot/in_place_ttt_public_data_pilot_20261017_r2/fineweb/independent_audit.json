@@ -1,0 +1,59 @@
+{
+  "bindings": {
+    "auditor_sha256": "cea2d0ff151d2c2bdce923d30caef43113a58e079368e76ec69c3b3adb554417",
+    "builder_sha256": "e405d9b7e5b6a2c624b8cfe198bd93f0163d032e9cd902488127d1f29d9c320b",
+    "manifest_sha256": "fff506b4bdfef1a57442a8ff61f84cb16fb3803b006d70ad196624374f9c1f83",
+    "plan_sha256": "632ab39cdb015e57d082cb9f56d034f5484bd32316cec459f7988c776db2af83"
+  },
+  "checks": {
+    "artifact_hashes": true,
+    "builder_binding": true,
+    "document_stream": true,
+    "eos_accounting": true,
+    "no_partial_paths": true,
+    "plan_binding": true,
+    "protocol": true,
+    "provenance_has_no_plaintext": true,
+    "records_and_token_hashes": true,
+    "resources": true,
+    "source_binding": true,
+    "tokenizer_assets": true
+  },
+  "observed": {
+    "document_stream_sha256": "b760c60b76fb1d92e83e39440ea3c85bc00529cdb8a9fe5c6fe7b8f637eb7deb",
+    "documents": 283,
+    "ordered_training_tokens_sha256": "ad6990718848ccff2e7287dd743fc4393e5d0392d947fb4b25017a92a8c827d5",
+    "raw_source_tokens_consumed": 262136,
+    "records": 8,
+    "source": {
+      "file": {
+        "blob_id": "2df63e03a865d1045dcb477fcdd68635faf226ef",
+        "lfs_sha256": "b1ba7b2ce4cb5ea6ef42dca40263eabb85f37700d01693a68e9b30a31d78e871",
+        "publisher_file": "000_00000.parquet",
+        "repository_path": "sample/10BT/000_00000.parquet",
+        "size_bytes": 2152819114
+      },
+      "name": "fineweb",
+      "remote_file_metadata_revalidated": 1,
+      "revision": "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9"
+    },
+    "synthetic_eos_tokens": 0,
+    "tokenizer_assets": {
+      "config.json": {
+        "sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+        "size_bytes": 726
+      },
+      "tokenizer.json": {
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "size_bytes": 11422654
+      },
+      "tokenizer_config.json": {
+        "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "size_bytes": 9732
+      }
+    },
+    "training_tokens": 262144
+  },
+  "passed": true,
+  "protocol": "in_place_ttt_public_data_pilot_v1"
+}

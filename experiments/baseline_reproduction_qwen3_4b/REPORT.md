@@ -45,14 +45,20 @@ baseline has **not** been reproduced yet.
   local Qwen configs was diagnosed and closed. The replacement smokes bind
   the byte-identical original Qwen tokenizer, explicitly keep
   `fix_mistral_regex=false`, and emit zero warnings in both arms.
+- A separately frozen 32K public-data construction pilot now passes for both
+  FineWeb-Edu and LongCrawl64. Each source produces 8 records and 262,144
+  VeOmni training tokens; independent audits re-tokenize every record and
+  verify source, tokenizer, plan, code, provenance, artifact and ordered-token
+  hashes. This validates the construction path only and starts no training.
 - The paper's exact continual-pretraining corpus and several stage settings
   are not public. FineWeb-Edu plus LongCrawl64 remains a declared public-data
   substitute and cannot be called the original paper dataset.
 
-Consequently, Level A passes. Level B has not started formal matched training
-because 2x5090 cannot safely execute the registered length ladder, and Level C
-remains blocked by private data/configuration. Update-admission and
-forgetting-gate exploration remains paused.
+Consequently, Level A passes and the Level-B data-pipeline pilot passes. Level
+B has not started formal matched training because 2x5090 cannot safely execute
+the registered length ladder, and Level C remains blocked by private
+data/configuration. Update-admission and forgetting-gate exploration remains
+paused.
 
 ## 2. Paper target and claim boundary
 
@@ -88,10 +94,13 @@ New opt-in files are:
 - `scripts/run_in_place_ttt_converted_checkpoint_smokes.sh`;
 - `scripts/audit_in_place_ttt_baseline_exclusive.py`;
 - `IN_PLACE_TTT_BASELINE_TOKENIZER_AUDIT_ADDENDUM.md`;
+- `IN_PLACE_TTT_BASELINE_PUBLIC_DATA_PILOT_ADDENDUM.md`;
+- `scripts/build_in_place_ttt_public_data_pilot.py`;
+- `scripts/audit_in_place_ttt_public_data_pilot.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
-- two focused summary tests.
+- the focused summary and public-data packing tests.
 
 The two resource configurations differ only in `ttt_mode`. Both start from
 the same Qwen files, consume the same packed pilot stream, use sequence length
@@ -314,6 +323,67 @@ Evidence:
 - full preflights, logs, traces, conversion audits, and weight manifests in
   [`remote/exclusive_5090_completed/`](remote/exclusive_5090_completed/).
 
+### Public-data 32K construction pilot (completed)
+
+Before implementation, the data-only protocol was frozen in
+[`IN_PLACE_TTT_BASELINE_PUBLIC_DATA_PILOT_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_PUBLIC_DATA_PILOT_ADDENDUM.md)
+(commit `09741d39`, SHA256
+`632ab39cdb015e57d082cb9f56d034f5484bd32316cec459f7988c776db2af83`).
+It pins FineWeb-Edu revision
+`87f09149ef4734204d70ed1d046ddc9ca3f2b8f9`, LongCrawl64 revision
+`8e7af027525b3597852746ee11e4baa0e98492d7`, the original Qwen tokenizer,
+8 records per source and 32,768 VeOmni tokens per record. Training is forbidden
+in this pilot.
+
+The opt-in builder writes `data.jsonl`, plaintext-free `provenance.jsonl` and
+`manifest.json` below a new staging directory, then publishes the directory
+atomically. It refuses existing final or partial paths. Each source document
+boundary receives an EOS. Every candidate row is decoded and independently
+re-encoded to exactly 32,767 content tokens; VeOmni adds the terminal EOS.
+Per-record and ordered training-token hashes use the resulting IDs, while
+provenance stores only document hashes, fixed source positions and consumed
+token spans.
+
+The first FineWeb attempt produced all 8 rows but then exited 134 during the
+Datasets/PyArrow fragment reader's interpreter shutdown. Its runner correctly
+stopped before audit and before LongCrawl. The failed directory and log are
+retained and contribute no passing result. The repair replaces the Datasets
+fragment path with a pinned Hugging Face parquet range reader backed by
+`pyarrow.parquet.ParquetFile.iter_batches`, explicitly closes the source
+generator, and binds the publisher LFS metadata. The repaired builder SHA256
+is `e405d9b7e5b6a2c624b8cfe198bd93f0163d032e9cd902488127d1f29d9c320b`.
+
+| Source | Exit/audit | Records | Training tokens | Documents | Synthetic EOS | Build wall | Peak host RSS |
+|---|---|---:|---:|---:|---:|---:|---:|
+| FineWeb-Edu | 0 / pass | 8 | 262,144 | 283 | 0 | 127.60 s | 790.46 MiB |
+| LongCrawl64 | 0 / pass | 8 | 262,144 | 6 | 0 | 15.86 s | 783.07 MiB |
+
+FineWeb binds publisher file `sample/10BT/000_00000.parquet`, size
+2,152,819,114 bytes and LFS SHA256
+`b1ba7b2ce4cb5ea6ef42dca40263eabb85f37700d01693a68e9b30a31d78e871`.
+LongCrawl binds local publisher shard `train/0-of-256.parquet`, size
+10,903,312,345 bytes and SHA256
+`bd89e68512e0465957596711d1805e91d0bb1d097ecc44c7ddf5c81d636ba1d3`.
+The independent auditor imports no builder code. For each source it re-hashes
+the source binding, plan, builder and tokenizer assets; re-tokenizes every
+output row; recomputes record, ordered-stream, document-stream and artifact
+hashes; checks span continuity and rejects any `text` or `content_split` key
+inside provenance. All 12 checks pass for both sources. GPU memory remained at
+the idle 46/18 MiB because this stage is CPU-only.
+
+Evidence:
+
+- [`remote/public_data_32k_pilot/in_place_ttt_public_data_pilot_20261017_r2/summary.json`](remote/public_data_32k_pilot/in_place_ttt_public_data_pilot_20261017_r2/summary.json)
+- [`remote/public_data_32k_pilot/in_place_ttt_public_data_pilot_20261017_r2/fineweb/independent_audit.json`](remote/public_data_32k_pilot/in_place_ttt_public_data_pilot_20261017_r2/fineweb/independent_audit.json)
+- [`remote/public_data_32k_pilot/in_place_ttt_public_data_pilot_20261017_r2/longcrawl/independent_audit.json`](remote/public_data_32k_pilot/in_place_ttt_public_data_pilot_20261017_r2/longcrawl/independent_audit.json)
+- [`remote/public_data_32k_pilot/local_archive_verification.json`](remote/public_data_32k_pilot/local_archive_verification.json)
+- the failed attempt, repaired run, runners, logs, range probe, transfer archive
+  and archive SHA are retained in
+  [`remote/public_data_32k_pilot/`](remote/public_data_32k_pilot/).
+
+This result does not freeze the final 20B/15B public mixture, validate 128K
+packing, run either training arm or reproduce the paper's private corpus.
+
 ### Alternate host check
 
 At `2026-10-16 23:13:47 HKT`, `hku-a100` exposed one
@@ -412,6 +482,7 @@ Evidence:
 - Plan, config, data, model-config, log, GPU trace, and result hashes are stored
   in the compact summaries.
 - Focused resource and RULER summarizer tests: `3 passed`.
+- Public-data packing/overwrite tests: local and remote `4 passed`.
 - RULER task set is checked against an explicit 13-task allowlist.
 - Official group score is independently recomputed from task result JSONs.
 - Independent exclusive-run audit recomputes GPU peaks, resource headroom,
@@ -420,6 +491,10 @@ Evidence:
   matching tokenizer hashes, frozen addendum, false Mistral-fix policy and
   zero-warning replacement smokes. It passes and requires stopping before
   16K.
+- The independent public-data auditor re-hashes both source bindings and all
+  emitted artifacts, re-tokenizes every 32K row, and recomputes ordered token
+  and document streams. Both 8-record source audits pass all 12 checks; the
+  copied archive passes a second local hash verification.
 
 ## 7. Commands
 
@@ -428,6 +503,26 @@ Environment setup:
 ```bash
 bash scripts/setup_in_place_ttt_official_env.sh
 bash scripts/setup_in_place_ttt_official_eval_env.sh
+```
+
+Build and independently audit the frozen 32K public-data pilot:
+
+```bash
+python scripts/build_in_place_ttt_public_data_pilot.py \
+  --source fineweb --tokenizer /home/ctj/models/Qwen3-4B \
+  --output-root /new/output/fineweb \
+  --max-records 8 --seq-len 32768
+python scripts/audit_in_place_ttt_public_data_pilot.py \
+  --root /new/output/fineweb --tokenizer /home/ctj/models/Qwen3-4B
+
+python scripts/build_in_place_ttt_public_data_pilot.py \
+  --source longcrawl \
+  --longcrawl-input /path/to/longcrawl64/train/0-of-256.parquet \
+  --tokenizer /home/ctj/models/Qwen3-4B \
+  --output-root /new/output/longcrawl \
+  --max-records 8 --seq-len 32768
+python scripts/audit_in_place_ttt_public_data_pilot.py \
+  --root /new/output/longcrawl --tokenizer /home/ctj/models/Qwen3-4B
 ```
 
 Resource probe (change `ARM` and output path for the other arm):
@@ -492,11 +587,15 @@ python scripts/audit_in_place_ttt_baseline_exclusive.py \
    headroom rule, so repeating 8K or attempting 16K there is prohibited.
    `hku-a100` cannot serve this role while its only 80-GB GPU has 75,124 MiB
    allocated to vLLM.
-2. On the selected host, construct a fully hashed FineWeb-Edu/LongCrawl64
-   public substitute and train byte-identical no-TTT/TTT token streams.
-3. Convert both final DCP checkpoints and execute the 100-example RULER matrix
+2. Freeze the formal public-corpus manifest: exact FineWeb-Edu/LongCrawl64
+   mixture, source shard list, deterministic ordered stream, 20B/15B stage
+   budgets and 32K/128K packing rules. The completed 8-record pilot validates
+   the builder but does not define this formal scale.
+3. On the selected host, construct that fully hashed public substitute and
+   train byte-identical no-TTT/TTT token streams.
+4. Convert both final DCP checkpoints and execute the 100-example RULER matrix
    from 4K through 256K once, using the tokenizer-audited path above.
-4. Report it as a public-data matched replication. Resume support/update gates
+5. Report it as a public-data matched replication. Resume support/update gates
    only after this baseline report is complete.
 
 Exact paper reproduction additionally requires the authors' private mixture,

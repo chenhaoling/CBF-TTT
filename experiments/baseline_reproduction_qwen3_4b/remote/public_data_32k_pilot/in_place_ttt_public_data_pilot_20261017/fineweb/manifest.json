@@ -1,0 +1,62 @@
+{
+  "artifacts": {
+    "data.jsonl": {
+      "sha256": "c92e0a23b384d89f42c54db4ea9b92072d0d45770bc80b4e949ca96d60d4f0f8",
+      "size_bytes": 1198817
+    },
+    "document_stream_sha256": "4b8d6c02e33cd9bfcc40b61ba8419cc0852d713c978c0d3cbe0c404ec4818f82",
+    "ordered_training_tokens_sha256": "ad6990718848ccff2e7287dd743fc4393e5d0392d947fb4b25017a92a8c827d5",
+    "provenance.jsonl": {
+      "sha256": "3a1cb06de5da99a7409fe1c2271836543a4ddf5dbd2f17ea03a91853142ba4ce",
+      "size_bytes": 101203
+    }
+  },
+  "bindings": {
+    "builder": {
+      "path": "/home/ctj/in_place_ttt_official_be232482/scripts/build_in_place_ttt_public_data_pilot.py",
+      "sha256": "07efac0fb47194890bd27e7e2cab2b70a9223ab4213a335b0b038cf824f53310"
+    },
+    "plan": {
+      "path": "/home/ctj/in_place_ttt_official_be232482/IN_PLACE_TTT_BASELINE_PUBLIC_DATA_PILOT_ADDENDUM.md",
+      "sha256": "632ab39cdb015e57d082cb9f56d034f5484bd32316cec459f7988c776db2af83"
+    },
+    "tokenizer_assets": {
+      "config.json": {
+        "sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+        "size_bytes": 726
+      },
+      "tokenizer.json": {
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "size_bytes": 11422654
+      },
+      "tokenizer_config.json": {
+        "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "size_bytes": 9732
+      }
+    },
+    "tokenizer_path": "/home/ctj/models/Qwen3-4B"
+  },
+  "packing": {
+    "content_tokens_per_record": 32767,
+    "documents_read": 283,
+    "raw_source_tokens_consumed": 262136,
+    "records": 8,
+    "seq_len": 32768,
+    "synthetic_eos_tokens": 0,
+    "terminal_eos_tokens": 8,
+    "total_training_tokens": 262144
+  },
+  "protocol": "in_place_ttt_public_data_pilot_v1",
+  "resources": {
+    "peak_host_rss_mib": 1095.59375,
+    "wall_seconds": 13.72819896042347
+  },
+  "source": {
+    "config": "sample-10BT",
+    "input_files": [],
+    "name": "fineweb",
+    "repository": "HuggingFaceFW/fineweb-edu",
+    "revision": "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9",
+    "split": "train"
+  }
+}

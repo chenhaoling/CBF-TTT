@@ -6479,3 +6479,47 @@ metadata现在绑定tokenizer路径、`tokenizer.json`/`tokenizer_config.json`�
 修复会改变转换pre-tokenizer、双臂tokenizer/hash/policy/addendum绑定、零警告summary、
 训练资源、转换结构和RULER结果；审计通过。原始首轮smoke保留为诊断证据，新smoke未覆盖
 任何旧输出。该结果只关闭评测管线风险，不改变一例/任务不能评价TTT效果的claim boundary。
+
+## 2026-10-17: public FineWeb-Edu/LongCrawl64 32K construction pilot
+
+在继续Level-B正式训练前新增并冻结
+`IN_PLACE_TTT_BASELINE_PUBLIC_DATA_PILOT_ADDENDUM.md`（commit `09741d39`，SHA256
+`632ab39cdb015e57d082cb9f56d034f5484bd32316cec459f7988c776db2af83`）。该附录只允许
+数据流水线验证：FineWeb-Edu与LongCrawl64各8条、每条VeOmni训练长度32768 token；禁止
+训练，也不把公开替代语料称为论文私有原始语料。
+
+新增`scripts/build_in_place_ttt_public_data_pilot.py`。构建器固定FineWeb-Edu revision
+`87f09149ef4734204d70ed1d046ddc9ca3f2b8f9`和LongCrawl64 revision
+`8e7af027525b3597852746ee11e4baa0e98492d7`，复用原始Qwen3-4B tokenizer，在每个来源文档
+边界插入EOS。每条候选先decode再按VeOmni明文路径独立encode到32767个内容token，训练时
+追加第32768个终止EOS。输出目录先以`.partial`完整生成，再原子发布；已有final或partial
+路径一律拒绝覆盖。manifest绑定plan、builder、tokenizer资产、源revision/文件hash、输出、
+provenance、文档顺序和有序训练token stream哈希，并记录wall与峰值主内存。provenance只含
+来源位置、文档SHA、消费token span和token hash，递归禁止`text`/`content_split`字段。
+
+新增独立`scripts/audit_in_place_ttt_public_data_pilot.py`，不导入构建器实现。它重新核对
+FineWeb远程LFS元数据或LongCrawl本地parquet全文件SHA，重算plan/builder/tokenizer和artifact
+hash，逐行重分词，重算逐条/有序stream/document stream hash，验证span连续性、EOS计数、
+资源值和无明文provenance。新增4项纯函数/覆盖保护测试，本地`unittest`与远端`pytest`
+均为4/4通过。
+
+首次FineWeb运行完成8条写出后，在Datasets/PyArrow fragment reader解释器析构阶段触发
+`PyGILState_Release`并exit 134。runner按规则停止，未审计、未启动LongCrawl，该目录完整
+保留为失败证据。根据上游已记录的PyArrow fragment问题，将FineWeb读取改为固定revision的
+`sample/10BT/000_00000.parquet`远程range read，使用
+`pyarrow.parquet.ParquetFile.iter_batches()`并显式关闭generator。发布方文件大小为
+2,152,819,114 bytes，LFS SHA256为
+`b1ba7b2ce4cb5ea6ef42dca40263eabb85f37700d01693a68e9b30a31d78e871`；修复版builder
+SHA256为`e405d9b7e5b6a2c624b8cfe198bd93f0163d032e9cd902488127d1f29d9c320b`。
+
+r2正式pilot完成并exit 0。FineWeb和LongCrawl均为8条、262144训练token、synthetic EOS=0，
+分别消费283/6个文档；构建wall为127.60/15.86秒，峰值主内存790.46/783.07MiB。LongCrawl
+分片大小10,903,312,345 bytes，SHA256为
+`bd89e68512e0465957596711d1805e91d0bb1d097ecc44c7ddf5c81d636ba1d3`。两个独立audit各12项
+全部通过，GPU保持idle 46/18MiB。远端证据archive SHA256
+`8281866bc64f30e4b9542e02da8e222d333bbd15f1862ce518522a4fe294cfeb`，传回本地后再次核对
+audit/manifest/data/provenance hash全部通过，归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/public_data_32k_pilot/`。
+
+该阶段只证明可审计32K构建路径。正式20B/15B公开语料配比、完整shard manifest、128K
+packing、matched no-TTT/TTT训练和100例RULER仍未完成；门控实验继续暂停。
