@@ -61,6 +61,7 @@ def summarize(root: pathlib.Path) -> dict:
             peaks[device] = max(peaks.get(device, 0.0), float(row["memory_used_mib"]))
 
     log = log_path.read_text(errors="replace")
+    tokenizer_warning_count = log.count("incorrect regex pattern")
     elapsed_match = re.search(r"Elapsed \(wall clock\) time .*?:\s*([0-9:.]+)", log)
     summary_files = sorted((root / "opencompass").glob("*/summary/summary_*.txt"))
     official_text = summary_files[0].read_text(errors="replace") if len(summary_files) == 1 else ""
@@ -70,11 +71,13 @@ def summarize(root: pathlib.Path) -> dict:
     )
     official_score = float(official_match.group(1)) if official_match else None
 
+    audited_tokenizer = bool(metadata.get("tokenizer_policy"))
+    tokenizer_ok = not audited_tokenizer or tokenizer_warning_count == 0
     summary = {
         "protocol": metadata["protocol"],
         "upstream_commit": metadata["upstream_commit"],
         "exit_code": exit_code,
-        "completed": exit_code == 0 and complete_tasks,
+        "completed": exit_code == 0 and complete_tasks and tokenizer_ok,
         "context_length": metadata["context_length"],
         "num_samples_per_task": metadata["num_samples_per_task"],
         "task_count": len(scores),
@@ -89,6 +92,7 @@ def summarize(root: pathlib.Path) -> dict:
             and abs(macro - official_score) < 1e-12
         ),
         "wall_clock": elapsed_match.group(1) if elapsed_match else None,
+        "tokenizer_regex_warning_count": tokenizer_warning_count,
         "peak_gpu_memory_mib": peaks,
         "dependencies": {
             "plan_sha256": metadata["plan_sha256"],
@@ -97,6 +101,18 @@ def summarize(root: pathlib.Path) -> dict:
             "model_hash_manifest_sha256": metadata.get(
                 "model_hash_manifest_sha256"
             ),
+            "model_tokenizer_json_sha256": metadata.get(
+                "model_tokenizer_json_sha256"
+            ),
+            "tokenizer_json_sha256": metadata.get("tokenizer_json_sha256"),
+            "tokenizer_config_sha256": metadata.get(
+                "tokenizer_config_sha256"
+            ),
+            "tokenizer_audit_addendum_sha256": metadata.get(
+                "tokenizer_audit_addendum_sha256"
+            ),
+            "tokenizer_policy": metadata.get("tokenizer_policy"),
+            "fix_mistral_regex": metadata.get("fix_mistral_regex"),
             "eval_log_sha256": _sha256(log_path),
             "gpu_monitor_sha256": _sha256(root / "gpu.csv"),
             "official_summary_sha256": (

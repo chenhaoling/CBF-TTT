@@ -16,6 +16,9 @@ with read_base():
     from opencompass.configs.summarizers.groups.ruler import ruler_summary_groups
 
 model_path = __import__("os").environ["BASELINE_EVAL_MODEL"]
+tokenizer_path = __import__("os").environ.get(
+    "BASELINE_EVAL_TOKENIZER", model_path
+)
 model_name = __import__("os").environ.get("BASELINE_EVAL_NAME", "qwen3_4b_base")
 num_samples = int(__import__("os").environ.get("BASELINE_EVAL_NUM_SAMPLES", "1"))
 
@@ -24,6 +27,10 @@ models = [
         type=HuggingFaceBaseModel,
         abbr=model_name,
         path=model_path,
+        tokenizer_path=tokenizer_path,
+        # The converted local Qwen config triggers a false-positive Mistral
+        # regex warning in Transformers 4.57.3. Keep Qwen's native regex.
+        tokenizer_kwargs=dict(fix_mistral_regex=False),
         engine_config=dict(session_len=4096, max_batch_size=1, tp=1),
         gen_config=dict(
             top_k=20,
@@ -47,7 +54,7 @@ import_datasets = sum(
 datasets = []
 for dataset in import_datasets:
     item = dataset.deepcopy()
-    item["tokenizer_model"] = model_path
+    item["tokenizer_model"] = tokenizer_path
     item["abbr"] = item["abbr"] + "_4k"
     item["num_samples"] = num_samples
     item["max_seq_length"] = 4096
