@@ -25,6 +25,7 @@ PROTOCOL = "in_place_ttt_public_data_pilot_v1"
 FINEWEB_REPOSITORY = "HuggingFaceFW/fineweb-edu"
 FINEWEB_CONFIG = "sample-10BT"
 FINEWEB_REVISION = "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9"
+FINEWEB_PUBLISHER_FILE = "sample/10BT/000_00000.parquet"
 LONGCRAWL_REPOSITORY = "manifestai/longcrawl64"
 LONGCRAWL_REVISION = "8e7af027525b3597852746ee11e4baa0e98492d7"
 DEFAULT_PLAN = Path(__file__).resolve().parents[1] / "IN_PLACE_TTT_BASELINE_PUBLIC_DATA_PILOT_ADDENDUM.md"
@@ -100,32 +101,63 @@ def validate_output_paths(output_root: Path) -> Path:
     return staging
 
 
-def iter_fineweb_documents(max_documents: int) -> Iterator[dict[str, Any]]:
-    from datasets import load_dataset
+def fineweb_uri() -> str:
+    return (f"hf://datasets/{FINEWEB_REPOSITORY}@{FINEWEB_REVISION}/"
+            f"{FINEWEB_PUBLISHER_FILE}")
 
-    source = load_dataset(
-        FINEWEB_REPOSITORY,
-        name=FINEWEB_CONFIG,
-        split="train",
-        streaming=True,
-        revision=FINEWEB_REVISION,
-    )
+
+def fineweb_file_metadata() -> dict[str, Any]:
+    from huggingface_hub import HfFileSystem
+
+    info = HfFileSystem().info(fineweb_uri())
+    lfs = info.get("lfs") or {}
+    if not isinstance(info.get("size"), int) or info["size"] <= 0:
+        raise ValueError("FineWeb publisher file has no valid byte size")
+    if not isinstance(lfs.get("sha256"), str) or len(lfs["sha256"]) != 64:
+        raise ValueError("FineWeb publisher file has no LFS SHA256")
+    if lfs.get("size") != info["size"]:
+        raise ValueError("FineWeb publisher file size and LFS size disagree")
+    return {
+        "repository_path": FINEWEB_PUBLISHER_FILE,
+        "publisher_file": Path(FINEWEB_PUBLISHER_FILE).name,
+        "size_bytes": info["size"],
+        "lfs_sha256": lfs["sha256"],
+        "blob_id": info.get("blob_id"),
+    }
+
+
+def iter_fineweb_documents(max_documents: int) -> Iterator[dict[str, Any]]:
+    """Range-read pinned publisher parquet without Datasets fragment threads."""
+    import pyarrow.parquet as pq
+    from huggingface_hub import HfFileSystem
+
+    filesystem = HfFileSystem()
     accepted = 0
-    for stream_row_index, row in enumerate(source):
-        text = row.get("text")
-        if not isinstance(text, str) or not text.strip():
-            continue
-        source_identity = next((row.get(key) for key in ("id", "url", "file_path")
-                                if isinstance(row.get(key), str) and row.get(key)), None)
-        locator: dict[str, Any] = {"stream_row_index": stream_row_index}
-        if source_identity is not None:
-            locator["source_identity_sha256"] = hashlib.sha256(
-                source_identity.encode("utf-8")
-            ).hexdigest()
-        yield {"text": text, "locator": locator}
-        accepted += 1
-        if accepted >= max_documents:
-            return
+    parquet_row_index = 0
+    with filesystem.open(fineweb_uri(), "rb") as source:
+        parquet = pq.ParquetFile(source)
+        if "text" not in parquet.schema.names:
+            raise ValueError("FineWeb publisher parquet lacks a text column")
+        columns = ["text"] + (["id"] if "id" in parquet.schema.names else [])
+        for batch in parquet.iter_batches(batch_size=16, columns=columns):
+            for row in batch.to_pylist():
+                text = row.get("text")
+                locator: dict[str, Any] = {
+                    "publisher_file": FINEWEB_PUBLISHER_FILE,
+                    "parquet_row_index": parquet_row_index,
+                }
+                parquet_row_index += 1
+                source_identity = row.get("id")
+                if isinstance(source_identity, str) and source_identity:
+                    locator["source_identity_sha256"] = hashlib.sha256(
+                        source_identity.encode("utf-8")
+                    ).hexdigest()
+                if not isinstance(text, str) or not text.strip():
+                    continue
+                yield {"text": text, "locator": locator}
+                accepted += 1
+                if accepted >= max_documents:
+                    return
 
 
 def _decode_gpt2_ids(ids: Any, encoder: Any) -> str | None:
@@ -279,7 +311,8 @@ def _source_manifest(args: argparse.Namespace) -> tuple[Iterator[dict[str, Any]]
             "config": FINEWEB_CONFIG,
             "revision": FINEWEB_REVISION,
             "split": "train",
-            "input_files": [],
+            "access": "pinned_huggingface_parquet_range_read",
+            "input_files": [fineweb_file_metadata()],
         }
     paths = [Path(path).expanduser().resolve() for path in args.longcrawl_input]
     if not paths or any(not path.is_file() for path in paths):
@@ -334,27 +367,32 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         records = 0
         synthetic_eos_tokens = 0
         raw_source_tokens = 0
-        with data_path.open("x", encoding="utf-8") as data_sink, \
-                provenance_path.open("x", encoding="utf-8") as provenance_sink:
-            for row, provenance in iter_packed_records(
-                    documents, tokenizer, args.seq_len, args.max_records):
-                data_sink.write(json.dumps(row, ensure_ascii=False) + "\n")
-                provenance_sink.write(json.dumps(provenance, ensure_ascii=False, sort_keys=True) + "\n")
-                training_ids = tokenizer.encode(row["content_split"], add_special_tokens=False)
-                training_ids.append(tokenizer.eos_token_id)
-                ordered_hasher.update(token_bytes(training_ids))
-                synthetic_eos_tokens += provenance["synthetic_eos_tokens"]
-                raw_source_tokens += provenance["raw_source_tokens_consumed"]
-                for span in provenance["spans"]:
-                    index = span["document_index"]
-                    if index not in seen_documents:
-                        if index != len(seen_documents):
-                            raise AssertionError("document order is not contiguous")
-                        seen_documents.add(index)
-                        document_hasher.update(
-                            (canonical_json(_document_stream_entry(span)) + "\n").encode("utf-8")
-                        )
-                records += 1
+        try:
+            with data_path.open("x", encoding="utf-8") as data_sink, \
+                    provenance_path.open("x", encoding="utf-8") as provenance_sink:
+                for row, provenance in iter_packed_records(
+                        documents, tokenizer, args.seq_len, args.max_records):
+                    data_sink.write(json.dumps(row, ensure_ascii=False) + "\n")
+                    provenance_sink.write(json.dumps(provenance, ensure_ascii=False, sort_keys=True) + "\n")
+                    training_ids = tokenizer.encode(row["content_split"], add_special_tokens=False)
+                    training_ids.append(tokenizer.eos_token_id)
+                    ordered_hasher.update(token_bytes(training_ids))
+                    synthetic_eos_tokens += provenance["synthetic_eos_tokens"]
+                    raw_source_tokens += provenance["raw_source_tokens_consumed"]
+                    for span in provenance["spans"]:
+                        index = span["document_index"]
+                        if index not in seen_documents:
+                            if index != len(seen_documents):
+                                raise AssertionError("document order is not contiguous")
+                            seen_documents.add(index)
+                            document_hasher.update(
+                                (canonical_json(_document_stream_entry(span)) + "\n").encode("utf-8")
+                            )
+                    records += 1
+        finally:
+            close = getattr(documents, "close", None)
+            if callable(close):
+                close()
 
         if records != args.max_records:
             raise AssertionError(f"built {records} records, expected {args.max_records}")

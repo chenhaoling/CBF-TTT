@@ -18,6 +18,7 @@ FINEWEB = {
     "repository": "HuggingFaceFW/fineweb-edu",
     "config": "sample-10BT",
     "revision": "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9",
+    "publisher_file": "sample/10BT/000_00000.parquet",
 }
 LONGCRAWL = {
     "repository": "manifestai/longcrawl64",
@@ -87,15 +88,35 @@ def _document_entry(span: dict[str, Any]) -> dict[str, Any]:
 def _audit_source(source: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
     name = source.get("name")
     if name == "fineweb":
+        files = source.get("input_files")
+        observed: dict[str, Any] = {}
+        remote_passed = isinstance(files, list) and len(files) == 1
+        if remote_passed:
+            from huggingface_hub import HfFileSystem
+            uri = (f"hf://datasets/{FINEWEB['repository']}@{FINEWEB['revision']}/"
+                   f"{FINEWEB['publisher_file']}")
+            info = HfFileSystem().info(uri)
+            lfs = info.get("lfs") or {}
+            expected = files[0]
+            observed = {
+                "repository_path": FINEWEB["publisher_file"],
+                "publisher_file": Path(FINEWEB["publisher_file"]).name,
+                "size_bytes": info.get("size"),
+                "lfs_sha256": lfs.get("sha256"),
+                "blob_id": info.get("blob_id"),
+            }
+            remote_passed = observed == expected and lfs.get("size") == info.get("size")
         passed = (
             source.get("repository") == FINEWEB["repository"]
             and source.get("config") == FINEWEB["config"]
             and source.get("revision") == FINEWEB["revision"]
             and source.get("split") == "train"
-            and source.get("input_files") == []
+            and source.get("access") == "pinned_huggingface_parquet_range_read"
+            and remote_passed
         )
         return passed, {"name": name, "revision": source.get("revision"),
-                        "input_files_rehashed": 0}
+                        "remote_file_metadata_revalidated": 1 if remote_passed else 0,
+                        "file": observed}
     if name != "longcrawl":
         return False, {"name": name, "error": "unknown source"}
     files = source.get("input_files")
