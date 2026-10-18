@@ -2841,3 +2841,35 @@ identity, resource output and the structured audit are archived under
 the released-code initialization-semantics check only. The real 4B resource,
 training, checkpoint and RULER gates remain mandatory, and update admission
 remains sealed.
+
+## 64. Native Qwen3 writer autograd audit (2026-10-19)
+
+Zero initialization preserves the pretrained model but could be useless if it
+also disconnected the writer from the language-model loss. A separate
+CPU-only audit was therefore frozen and executed on `hku-gpu2`, using the same
+official two-layer Qwen fixture and clean upstream implementation as the
+initialization audit. It computes standard next-token cross entropy from the
+official logits; the CUDA-only Liger fused loss remains assigned to the real
+Level-A GPU run.
+
+At the exact zero-convolution start, the first loss was finite,
+`ttt_conv` received a finite positive gradient norm of `0.1350011`, and
+`ttt_proj` received the expected exact-zero gradient because its convolutional
+input was zero. After the frozen diagnostic nudge
+`ttt_conv -= 1e-3 * first_conv_gradient`, 160 convolution values became
+nonzero. The second loss remained finite, the convolution gradient remained
+positive, and the projection gradient became positive at `7.111e-4`. Both
+writer tensors were registered trainable parameters.
+
+The first persistent execution at `26b12d8f...` completed computation but
+failed during result construction because three Python fields used lowercase
+`false`. The corrected commit `ad553231...` changed only those literals, ran
+into a new output directory and passed all ten checks. The failure and
+supersession are recorded rather than hidden.
+
+The passing run took 2.87 seconds and 807,368 KiB peak host RSS, with CUDA
+hidden. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_native_writer_autograd_audit_20261019/`. This proves
+the native writer's local autograd path only; full-model Liger, AdamW, FSDP2,
+resource and convergence evidence still require the registered Level-A and
+formal training runs. No gate experiment is released.

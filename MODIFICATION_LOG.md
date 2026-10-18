@@ -8000,3 +8000,20 @@ state后只缺selected layer的`ttt_conv.weight`与`ttt_proj.weight`，没有une
 审计耗时3.16秒、峰值主存803,256 KiB，未使用GPU。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_native_initialization_audit_20261019/`。
 该结果只关闭released-code初始化语义，不替代真实4B资源、训练、checkpoint或RULER审计，也不开放门控实验。
+
+## 2026-10-19：native Qwen3 writer autograd 闭环审计
+
+新增并在持久化运行前冻结`IN_PLACE_TTT_BASELINE_QWEN3_4B_WRITER_AUTOGRAD_AUDIT_ADDENDUM.md`，新增
+`scripts/audit_in_place_ttt_qwen3_writer_autograd.py`。审计在`hku-gpu2`隐藏CUDA，通过官方Qwen logits与标准
+next-token cross entropy检查零初始化writer的梯度可达性；CUDA-only Liger fused loss、AdamW和FSDP2明确保留给
+真实Level-A GPU运行。
+
+初始zero-conv状态下loss有限，`ttt_conv`梯度范数为0.1350011，`ttt_proj`梯度精确为0。执行冻结的诊断nudge
+`ttt_conv -= 1e-3 * first_conv_gradient`后，160个conv值非零；第二次loss仍有限，conv梯度仍为正，projection
+梯度变为0.0007111。两个writer tensor均为registered trainable parameter，全部10项门槛通过。
+
+首次持久化提交`26b12d8f...`在计算完成后因结果字段误用Python小写`false`而在写JSON前失败；修复提交
+`ad553231...`只更正三个布尔字面量，使用新output root通过审计。失败与supersession保留在remote identity。
+正式运行耗时2.87秒、峰值主存807,368 KiB，CUDA隐藏。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_native_writer_autograd_audit_20261019/`。
+该证据不替代full-model训练与评测，也不开放门控实验。
