@@ -6875,3 +6875,21 @@ formal专项2/2测试和Bash语法通过。以未来corpus/timing/release路径�
 output或partial，两卡仍46/18MiB且0%。2026-10-18 11:06:28 HKT远端仍有926365290496 bytes
 可用磁盘，语料PID与三个上游watcher均存活。证据归档在
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_formal_stage1_tooling_20261018/`。
+
+## 2026-10-18：按臂绑定的Stage-2 64K/128K资源阶梯
+
+新增并冻结`IN_PLACE_TTT_BASELINE_2X5090_STAGE2_RESOURCE_PLAN.md`，固定在正式Stage-1双臂独立
+审计通过后，按64K no-TTT→TTT、128K no-TTT→TTT执行GB2单step。每个child直接从对应臂的
+Stage-1 HF checkpoint分叉并使用fresh optimizer，不允许no-TTT/TTT起点交叉，也不允许前一资源
+child作为后一边界起点。
+
+新增`scripts/run_in_place_ttt_2x5090_stage2_ladder.sh`。CUDA前重新hash双臂完整HF manifest，
+核验`ttt_mode`、32K Stage-1 config、formal state/audit及精确64K/128K输入；复用既有
+activation-offload resource runner、Stage-2 YaRN配置、DCP与边界独立审计，并在首个失败处停止。
+新增独立`scripts/audit_in_place_ttt_2x5090_stage2_ladder.py`，重建HF与input manifest，核对四个
+child的model path/model-config/config hash，并复用边界验证器重新检查有限metric、至少40GB DCP、
+显存/主存/swap及全部依赖。
+
+新增`tests/test_in_place_ttt_2x5090_stage2_ladder.py`，覆盖Stage-1 HF manifest漂移拒绝和完整四
+child按臂绑定正向fixture。baseline focused suite现为49/49通过。该路径仅准备代码；正式Stage-1
+尚未运行，因此没有释放或启动Stage-2 GPU任务。

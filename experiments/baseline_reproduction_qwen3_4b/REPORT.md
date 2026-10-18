@@ -157,6 +157,9 @@ New opt-in files are:
 - `IN_PLACE_TTT_BASELINE_2X5090_100M_STAGE1_PLAN.md`;
 - `scripts/run_in_place_ttt_2x5090_100m_stage1.sh`;
 - `scripts/audit_in_place_ttt_2x5090_100m_stage1.py`;
+- `IN_PLACE_TTT_BASELINE_2X5090_STAGE2_RESOURCE_PLAN.md`;
+- `scripts/run_in_place_ttt_2x5090_stage2_ladder.sh`;
+- `scripts/audit_in_place_ttt_2x5090_stage2_ladder.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -1198,3 +1201,30 @@ and left both GPUs at 46/18 MiB and 0%. At
 `2026-10-18T11:06:28+08:00`, 926,365,290,496 bytes of disk remained free and
 the corpus PID plus all upstream watchers were still live. Evidence is stored
 under `remote/hku_gpu2_formal_stage1_tooling_20261018/`.
+
+## 15. Arm-specific Stage-2 resource ladder (2026-10-18)
+
+The parent execution addendum requires 64K and registered 128K one-step
+resource boundaries after Stage-1 conversion, but no runner previously proved
+that each Stage-2 arm started from its own audited Stage-1 HF checkpoint. The
+new frozen `IN_PLACE_TTT_BASELINE_2X5090_STAGE2_RESOURCE_PLAN.md` registers
+64K no-TTT/TTT followed by 128K no-TTT/TTT, with GB2 and one optimizer step at
+each boundary. Every child forks directly from its arm-specific Stage-1 HF
+checkpoint with a fresh optimizer; no resource child feeds the next one.
+
+`scripts/run_in_place_ttt_2x5090_stage2_ladder.sh` refuses to start unless the
+paired formal Stage-1 state and independent audit pass. Before CUDA it rehashes
+the complete HF manifests for both arms and verifies `ttt_mode` and 32K
+Stage-1 model configuration. It then reuses the existing activation-offload
+resource runner, exact 64K/128K inputs, Stage-2 YaRN configs, checkpoint
+capture and per-boundary independent audit. The runner remains restricted to
+`hku-gpu2` and stops at the first invalid boundary.
+
+`scripts/audit_in_place_ttt_2x5090_stage2_ladder.py` independently reconstructs
+both Stage-1 HF manifests, exact input bindings and all four resource children.
+It checks that every child's model path and model-config hash match the correct
+arm, verifies the Stage-2 config hash, and reapplies finite metric, DCP,
+GPU/host and dependency gates through the independent boundary validator.
+Two tests cover stale Stage-1 manifests and a complete arm-specific four-child
+fixture. The full focused baseline suite passes 49/49 tests. This path is
+prepared only; formal Stage 1 has not run, so no Stage-2 GPU work is released.
