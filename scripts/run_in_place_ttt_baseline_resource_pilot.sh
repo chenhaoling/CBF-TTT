@@ -71,13 +71,10 @@ if [[ "$RESOURCE_PROFILE" == "activation_offload" ]]; then
     --format=csv,noheader,nounits > "$OUTPUT_ROOT/preflight_processes.csv"
   cp /proc/meminfo "$OUTPUT_ROOT/preflight_host.txt"
   : > "$OUTPUT_ROOT/preflight_conflicts.txt"
-  pgrep -af '[b]uild_in_place_ttt_public_corpus.py' \
-    >> "$OUTPUT_ROOT/preflight_conflicts.txt" || true
-  pgrep -af '[a]udit_in_place_ttt_public_corpus.py' \
-    >> "$OUTPUT_ROOT/preflight_conflicts.txt" || true
   "$PYTHON_BIN" - "$OUTPUT_ROOT" "$EXPECTED_HOSTNAME" <<'PY'
 import csv
 import pathlib
+import shlex
 import socket
 import sys
 
@@ -96,6 +93,22 @@ for expected_index, row in enumerate(rows):
         raise SystemExit(f"GPU {index} is not exclusively idle: {row}")
 if (root / "preflight_processes.csv").read_text().strip():
     raise SystemExit("another CUDA compute process is active")
+targets = {
+    "build_in_place_ttt_public_corpus.py",
+    "audit_in_place_ttt_public_corpus.py",
+}
+conflicts = []
+for process in pathlib.Path("/proc").glob("[0-9]*"):
+    try:
+        argv = [item.decode(errors="replace") for item in
+                (process / "cmdline").read_bytes().split(b"\0") if item]
+    except (FileNotFoundError, PermissionError, ProcessLookupError):
+        continue
+    if any(pathlib.Path(argument).name in targets for argument in argv):
+        conflicts.append((int(process.name), argv))
+(root / "preflight_conflicts.txt").write_text("".join(
+    f"{pid} {shlex.join(argv)}\n" for pid, argv in sorted(conflicts)
+))
 if (root / "preflight_conflicts.txt").read_text().strip():
     raise SystemExit("public-corpus builder/auditor is still active")
 meminfo = {}
