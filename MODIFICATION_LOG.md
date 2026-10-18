@@ -7968,3 +7968,19 @@ FSDP/offload/checkpointing、native writer超参数及Stage-2 fresh optimizer列
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_training_semantics_preflight_20261019/`。
 该预检不授权formal release、不代替训练/评测结果，也不打开update-admission实验；所有GPU执行仍只允许
 `hku-gpu2`。
+
+## 2026-10-19：原论文 continual 数据可得性审计
+
+重新核对论文Appendix 9.1和官方仓库作为一手来源。论文说明continual数据由作者自行收集，只披露短文档近似
+pretrain分布，以及书籍、repository code、retrieval-augmented synthetic data和long-context QA构造等类别，并
+划分32K/128K子集；没有发布record manifest、source revision、混合比例、去重/预处理规则、ordered samples或
+artifact hash。
+
+官方仓库冻结提交`be2324829b0e91c8fd10a74d4b43714fde6676e1`明确要求用户自行提供processed
+`data.train_path`，tracked tree没有data/preprocessing路径，推荐Qwen配置仍为placeholder。因此当前
+FineWeb-Edu/LongCrawl64必须标注为Level-B public-data matched replication；等token配比是本项目冻结选择，不是
+论文披露的原始混合，不能声称Level-C private-corpus exact reproduction。
+
+新增结构化verdict、官方README/config/tree快照与说明，归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/official_data_availability_preflight_20261019/`。该结论不改变
+现有语料、训练和RULER审计门槛，不授权formal release，也不打开update-admission实验。

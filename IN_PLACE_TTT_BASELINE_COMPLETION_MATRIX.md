@@ -2,7 +2,7 @@
 
 Status: **live evidence index; not an execution plan or release record**  
 Initial snapshot: 2026-10-19 (Asia/Shanghai)
-Last reconciled: 2026-10-19 07:32 (Asia/Shanghai)
+Last reconciled: 2026-10-19 07:38 (Asia/Shanghai)
 
 ## 1. Purpose
 
@@ -22,6 +22,7 @@ so no Level-C or exact-paper-number claim is permitted.
 | Stage | Required completion evidence | Current authoritative state |
 |---|---|---|
 | Released-code Level A | Clean upstream revision; environment manifest; paired finite optimizer steps; official conversion/reload; audited RULER score extraction | **Waiting for corrected full corpus.** The old post-trained-Qwen smoke is superseded. The new hku-gpu2-only watcher is live in `WAITING_BASE_CORPUS`, with zero training children; Base-bound sparse-input and terminal audits are frozen and tested. |
+| Original continual-data availability | Paper and official-release audit establishing whether the record-level 32K/128K mixture, revisions, preprocessing and ordered samples are publicly executable | **Unavailable for exact reproduction; boundary complete.** The paper provides category-level descriptions of a self-collected mixture, while upstream `be232482...` requires a user-supplied processed path and ships no processing scripts. FineWeb-Edu/LongCrawl64 is therefore Level B public-data matched replication, never Level C private-corpus reproduction. |
 | Public source inventory | Passing independent inventory audit binding every FineWeb-Edu and LongCrawl64 source artifact | **Complete for Base.** The rebuilt Base-bound inventory covers 140 FineWeb-Edu files and 256 LongCrawl64 shards; all seven registered checks pass. |
 | Continuous packing pilot | Passing independent two-stage audit proving exact lengths, source balance, continuity, no replay, hashes and token totals | **Complete for Base.** The rebuilt 32K-to-128K pilot has 144 records, 6,291,456 tokens and zero synthetic EOS; all ten registered audit checks pass. Old post-trained-tokenizer transform/dataloader probes are superseded and must be repeated on the corrected corpus. |
 | Full public corpus | Atomically published full directory; no `.partial`; exact 724,800 records and 34,999,369,728 training tokens; passing canonical `independent_audit.json` with all registered checks true and exact manifest/dependency bindings | **Running with Base tokenizer.** The CPU-only builder is active on `hku-gpu2`. A frozen read-only live smoke independently re-tokenized the first 16 records, validated recent provenance through index 65,354, passed all five checks and left the builder live. This is early fault detection only; no corrected canonical full audit exists yet. |
@@ -71,6 +72,7 @@ obtained and executed.
 ## 4. Authoritative live locations
 
 - Correct Base model: `/home/ctj/models/Qwen3-4B-Base`
+- Original-data availability evidence: `experiments/baseline_reproduction_qwen3_4b/remote/official_data_availability_preflight_20261019/`
 - Correct Base source inventory: `/home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019`
 - Correct Base pilot: `/home/ctj/in_place_ttt_public_corpus_pilot_qwen3_4b_base_906bfd4b_20261019`
 - Correct Base full corpus: `/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019`

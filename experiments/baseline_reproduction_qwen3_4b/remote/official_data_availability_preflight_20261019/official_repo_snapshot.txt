@@ -1,0 +1,43 @@
+captured_at=2026-10-19T07:38:00+08:00
+upstream_remote=https://github.com/ByteDance-Seed/In-Place-TTT.git
+frozen_origin_main=be2324829b0e91c8fd10a74d4b43714fde6676e1
+readme_sha256=dbf3c84af257e596c2a1d7b197922c522d7c86f42cea3d973653da2b8f83c2fa
+qwen_config_sha256=4239163d93125e2476cac0bfb220d0f37941c549bc1145be1fc523a707797043
+
+README_DATA_PREPARATION_LINES_129_143
+### Data Preparation
+
+This repository no longer ships data-processing scripts. Provide your own processed dataset through `data.train_path`.
+
+The recommended configs assume:
+
+- `data.data_type=plaintext`
+- `data.datasets_type=iterable`
+- `data.text_keys=content_split`
+
+For dataset argument definitions and supported loading modes, refer to the official VeOmni docs:
+
+- [Arguments API Reference](https://veomni.readthedocs.io/en/latest/usage/arguments.html)
+- [Basic Modules / Dataset & DataLoader](https://veomni.readthedocs.io/en/latest/usage/basic_modules.html)
+
+
+UPSTREAM_TRACKED_PATHS_MATCHING_DATA_OR_PREPROCESS
+
+UPSTREAM_RECOMMENDED_CONFIG_DATA_BLOCK
+    ttt_proj: true
+    ttt_lr: 3
+    ttt_chunk: 4096
+
+data:
+  train_path: /path/to/your_data
+  train_size: 20000000000
+  dataloader_type: native
+  datasets_type: iterable
+  data_type: plaintext
+  max_seq_len: 65536
+  text_keys: content_split
+  drop_last: true
+
+train:
+  output_dir: /path/to/your_output_dir
+  data_parallel_mode: fsdp2

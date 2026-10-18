@@ -2784,3 +2784,32 @@ The evidence is archived under
 This definition check does not authorize either formal release and does not
 open update-admission experiments. All GPU execution remains restricted to
 `hku-gpu2`.
+
+## 62. Original continual-data availability audit (2026-10-19)
+
+The paper and official repository were rechecked as primary sources before
+describing the active corpus as an original-data reproduction. Appendix 9.1
+states that the authors collected the continual data themselves and provides
+only category-level composition: a pretraining-like short-document component,
+plus books, repository code, retrieval-augmented synthetic data and
+long-context QA constructions in 32K and 128K subsets. It does not provide a
+record manifest, source revisions, mixture weights, preprocessing pipeline,
+ordered samples or artifact hashes.
+
+The official repository at frozen commit `be232482...` explicitly requires
+users to supply their own processed `data.train_path`. Its tracked tree has no
+data/preprocessing path and its recommended Qwen config contains a placeholder
+dataset path. The exact ByteDance continual mixture therefore cannot be
+constructed from the released artifacts.
+
+The active FineWeb-Edu/LongCrawl64 corpus is consequently frozen as a
+**public-data matched replication (Level B)**. The equal-token public mixture
+is a project choice and must not be attributed to the paper. It may be
+compared with Table 1 only with the public-data and reduced-scale boundaries;
+it cannot be called a private-corpus exact reproduction (Level C).
+
+The repository snapshot, structured availability verdict and source mapping
+are archived under
+`remote/official_data_availability_preflight_20261019/`. This clarification
+does not weaken the current corpus, training or RULER audits, and it does not
+open the update-admission experiments.
