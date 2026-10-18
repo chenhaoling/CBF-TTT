@@ -1636,3 +1636,17 @@ A passing resource gate releases preparation of a separately frozen formal
 100-example 256K runner; it does not launch formal scoring automatically. OOM,
 nonzero exit or any audit mismatch stops without shortening inputs, changing
 tasks, quantizing, or relabelling a subset as the paper metric.
+
+Commit `b33b93ace74240b2bb2332368647c4adda31b7dc` was checked out cleanly on
+`hku-gpu2`. The dedicated test passed 1/1, the full focused suite passed 64/64,
+both Bash scripts parsed and the Python auditor compiled. A negative run with
+a deliberately missing matrix handle exited 6 in state
+`ruler_matrix_watcher_handle_missing`, created no resource output and left GPU
+0/1 at 46/18 MiB with zero utilization.
+
+The validated watcher is live in tmux session
+`baseline_2x5090_ruler_256k_resource_b33b93ac_20261018`; at
+`2026-10-18T13:15:39+08:00`, pane PID 1431970 was live in state
+`waiting_for_audited_ruler_matrix`, the GPUs remained idle, and the corpus
+partial directory was 60 GB. Evidence is stored under
+`remote/hku_gpu2_ruler_256k_resource_20261018/`.

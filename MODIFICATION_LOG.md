@@ -7176,3 +7176,14 @@ commit `439fcea142c4d3bb51413d75480d5231d0c62cab`已在`hku-gpu2`建立clean che
 工具和child audit，重算双臂输入hash并要求至少5%显存余量。通过只释放后续单独冻结的100例正式
 256K入口，不自动评分；OOM、非零退出或audit不一致均停止，不允许缩短输入、减少任务或量化冒充
 论文256K指标。
+
+commit `b33b93ace74240b2bb2332368647c4adda31b7dc`已在`hku-gpu2`建立clean checkout；专项1项与
+完整focused 64项测试通过，两份Bash语法和Python auditor编译通过。刻意缺失matrix handle的负向
+预检exit 6，状态为`ruler_matrix_watcher_handle_missing`，没有创建resource final/partial输出，
+两卡保持46/18MiB、利用率0%。
+
+真实watcher已在tmux session
+`baseline_2x5090_ruler_256k_resource_b33b93ac_20261018`启动。2026-10-18 13:15:39 HKT时pane
+PID 1431970存活，状态为`waiting_for_audited_ruler_matrix`，GPU仍空闲，语料partial为60GB。证据
+归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_256k_resource_20261018/`。
