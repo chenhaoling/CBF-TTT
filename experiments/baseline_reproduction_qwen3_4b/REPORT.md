@@ -2383,3 +2383,14 @@ the plan boundary, watcher syntax/order, two-audit release behavior and
 missing-input failure closure. The complete focused suite passes 102/102
 locally. Registration creates no release or GPU child and keeps RULER and
 update-admission work sealed.
+
+Commit `a21afd2799a33a42469676c8b6cb5769371c0544` is pushed and passes 102
+focused tests in a clean detached `hku-gpu2` worktree with all GPUs hidden;
+five environment-specific tests are skipped, and all static checks pass. The
+CPU-only watcher is live in tmux
+`baseline_qwen3_4b_base_100m_stage2_a21afd27_20261019`, with watch root
+`/home/ctj/in_place_ttt_qwen3_4b_base_100m_stage2_a21afd27_20261019.watch`.
+Its initial state is `waiting_for_corrected_stage2_timing`; both the formal
+result root and explicit release are absent. GPU0/1 remain at 46/18 MiB and
+0% utilization. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_100m_stage2_watcher_20261019/`.

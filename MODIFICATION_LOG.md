@@ -7699,3 +7699,11 @@ checkpoint证据绑定。
 
 新增四项计划/语法/release/失败关闭测试，完整In-Place-TTT专项测试为102/102通过，Python编译、Bash语法和
 diff检查通过。注册时没有release，也没有正式Stage-2 GPU child；RULER与“是否更新”门控继续封存。
+
+冻结提交`a21afd2799a33a42469676c8b6cb5769371c0544`已推送，并在`hku-gpu2`的clean detached
+worktree中隐藏GPU通过102项专项测试（5项按远程环境跳过）及全部静态检查。CPU-only watcher已在tmux
+`baseline_qwen3_4b_base_100m_stage2_a21afd27_20261019`启动，watch root为
+`/home/ctj/in_place_ttt_qwen3_4b_base_100m_stage2_a21afd27_20261019.watch`。启动状态为
+`waiting_for_corrected_stage2_timing`，formal result root和显式release均不存在，GPU0/1分别只占46/18 MiB、
+利用率0%。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_100m_stage2_watcher_20261019/`。
