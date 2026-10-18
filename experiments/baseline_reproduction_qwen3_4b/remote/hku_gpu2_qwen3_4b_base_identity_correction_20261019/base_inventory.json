@@ -1,0 +1,2433 @@
+{
+  "bindings": {
+    "inventory_code": {
+      "path": "/home/ctj/cbf_ttt_tool_3e09b187/scripts/inventory_in_place_ttt_public_corpus.py",
+      "sha256": "4eb6c187f41cc1738fe4e6abacbf1132bef6623fd3324a36468a58f61818432f"
+    },
+    "plan": {
+      "path": "/home/ctj/cbf_ttt_tool_3e09b187/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md",
+      "sha256": "c5019a28b9fa7fa27052ddf1d69eb029a2ec5b3b6446f1527e9ceb7db1a12bab"
+    },
+    "tokenizer_assets": {
+      "config.json": {
+        "sha256": "304b2545a258d35620f1d4bf46940c0471d9baa00715ff8e77f84c2fca5057c1",
+        "size_bytes": 727
+      },
+      "tokenizer.json": {
+        "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "size_bytes": 7031645
+      },
+      "tokenizer_config.json": {
+        "sha256": "3c04ed3ca964ea2f6b2b5faf0dc4d31aec1cb1e8b4bcf63f402d295046b422b5",
+        "size_bytes": 9678
+      }
+    },
+    "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+  },
+  "inventory_core_sha256": "f39f69348c5231daf1730b2bf03865a6aca7901c8c280f8ca5a5aef34214ecc2",
+  "protocol": "in_place_ttt_public_corpus_inventory_v1",
+  "resources": {
+    "peak_host_rss_mib": 45.53515625,
+    "wall_seconds": 1.5448809377849102
+  },
+  "sources": {
+    "fineweb": {
+      "file_count": 140,
+      "files": [
+        {
+          "blob_id": "6ff51bda7935410e77c577576b1f457420072e21",
+          "lfs_sha256": "955ff462f3db09a52a4750e7a69901f89d64e48dfc936de0847c9f234f32b695",
+          "repository_path": "sample/100BT/000_00000.parquet",
+          "size_bytes": 2153444469
+        },
+        {
+          "blob_id": "0d3d07cef2e813749a472109e57e977b4f3576a4",
+          "lfs_sha256": "776654388fdb2e5a1518b8d9d32543f418f1705d8bbaf408d221f08d76293680",
+          "repository_path": "sample/100BT/000_00001.parquet",
+          "size_bytes": 2152716615
+        },
+        {
+          "blob_id": "fa49f52f066d4ec7729f422e9ac89aaa274af941",
+          "lfs_sha256": "85b0bc930150d24b44041745b47ecb1433d961cb6974a31227430644008eec49",
+          "repository_path": "sample/100BT/000_00002.parquet",
+          "size_bytes": 2152829440
+        },
+        {
+          "blob_id": "83339bea44dac79e66cb9e4410e5594d60c379a0",
+          "lfs_sha256": "34e77fe4ecc6075a2521d7716efb993636cd83ccefc2afc3fda3dbf35854c78b",
+          "repository_path": "sample/100BT/000_00003.parquet",
+          "size_bytes": 2151532316
+        },
+        {
+          "blob_id": "e9bf4bc36ef5e50869add7f7ac57dcbf53e0ac11",
+          "lfs_sha256": "2f3f66cd93f0cf4919725e6dbcd1c240314a2866c9527870231e6148061ca73f",
+          "repository_path": "sample/100BT/000_00004.parquet",
+          "size_bytes": 2151238351
+        },
+        {
+          "blob_id": "d83ea53b5932ef691ec0f6a60492d12105de83bd",
+          "lfs_sha256": "9f089373c48cdeea728da9790bc369cc4d88243b3b18c13f5ec4e06e8446b6df",
+          "repository_path": "sample/100BT/000_00005.parquet",
+          "size_bytes": 2152630983
+        },
+        {
+          "blob_id": "3777769d870712d53078b6226c49b58012c20224",
+          "lfs_sha256": "20e2491fc8dd6211998a550cdeb8a0e28b6d93b4b8495e463c248871c332acf1",
+          "repository_path": "sample/100BT/000_00006.parquet",
+          "size_bytes": 2150872058
+        },
+        {
+          "blob_id": "418b6026ee52e52e9118cc3ec0fade184eba6cf7",
+          "lfs_sha256": "98e15e6976fe0e9cafe4e695d37ca836cae9ffa3c4c3937f8f1325dc6bf899e8",
+          "repository_path": "sample/100BT/000_00007.parquet",
+          "size_bytes": 2150919214
+        },
+        {
+          "blob_id": "d89ef3014bbea199d3674857787f0e65d9718310",
+          "lfs_sha256": "0641091de585eea70376e19c25ca34ca913af321c715e5a40805219424bebdf4",
+          "repository_path": "sample/100BT/000_00008.parquet",
+          "size_bytes": 2151989277
+        },
+        {
+          "blob_id": "1cbb995f5f7a58e20836568be8af7d6e7f58dcc5",
+          "lfs_sha256": "6221c50fb09301b6d3653a18e384de1fe134c90e917926e987a502bcef91faf7",
+          "repository_path": "sample/100BT/000_00009.parquet",
+          "size_bytes": 2150824077
+        },
+        {
+          "blob_id": "d88f7ca4553f8a035e01d841bb4cb82df20c22b5",
+          "lfs_sha256": "e2882e48990027b0a8866cf5a305ca7411c92c09ac465b7ec73ad5ccbed70cab",
+          "repository_path": "sample/100BT/001_00000.parquet",
+          "size_bytes": 2153082292
+        },
+        {
+          "blob_id": "837d05c829c5f8e614a66173ec92ee15d81a121c",
+          "lfs_sha256": "678e992f7b98482c5ded16da0b14d463550abeb5747340d5c5a8b6b7e410b526",
+          "repository_path": "sample/100BT/001_00001.parquet",
+          "size_bytes": 2152454612
+        },
+        {
+          "blob_id": "ec963bdccc1648ddca35997636eb59d940ffc85e",
+          "lfs_sha256": "8c1bb7f92e3199aa3a0a48ecf62946a3349af47772bde984cc83cca5bef267e6",
+          "repository_path": "sample/100BT/001_00002.parquet",
+          "size_bytes": 2153433162
+        },
+        {
+          "blob_id": "1b99a0ed54568e36892f7ab70542856f8a79b8c0",
+          "lfs_sha256": "f20dd1586eb6a9aab2eb8e97020d6c1e2b061fb88b9cee4103a0a98858023de5",
+          "repository_path": "sample/100BT/001_00003.parquet",
+          "size_bytes": 2153035941
+        },
+        {
+          "blob_id": "e5ec1dfac679c126f4c319dd578200248589fdc5",
+          "lfs_sha256": "cb3b26b79288c4a965ae8c99cfc93eba5e14c5ec98472120b7e1dedb0015c6f8",
+          "repository_path": "sample/100BT/001_00004.parquet",
+          "size_bytes": 2151634678
+        },
+        {
+          "blob_id": "566fb8a9f1f06e51b1bd6cd1c0359de157c438e8",
+          "lfs_sha256": "deae87e78f9811e23b835f59482734ba1d542f9bde91b93acf3bdd3902ede1c8",
+          "repository_path": "sample/100BT/001_00005.parquet",
+          "size_bytes": 2151681049
+        },
+        {
+          "blob_id": "04078127a6d4b3a97e2a018cc4e625ec37a67b8d",
+          "lfs_sha256": "7f9ac4b60f7cfa292cba83a676ce3afedfae44d343363671acb215447d4af172",
+          "repository_path": "sample/100BT/001_00006.parquet",
+          "size_bytes": 2152289650
+        },
+        {
+          "blob_id": "159a1fd8e655f922b50c5b127cfdf3ee4e2d0edd",
+          "lfs_sha256": "767f6546c88d78d630bd5ae6b091c82bec1026736c2d135fd331bfa161bd889f",
+          "repository_path": "sample/100BT/001_00007.parquet",
+          "size_bytes": 2152010940
+        },
+        {
+          "blob_id": "e4b884df7be6f65cfd53e42cfa8cf6aeccade0d8",
+          "lfs_sha256": "4b58ba114b677c498d8ecece6798958d0eced3bb283f3f000feb278749f88cfb",
+          "repository_path": "sample/100BT/001_00008.parquet",
+          "size_bytes": 2152393119
+        },
+        {
+          "blob_id": "288b5d6ab124422fa648e28c229a9a4807be2b2b",
+          "lfs_sha256": "5f3e20773432a85e89e4d7992b0b23e7f3ba107419fc17123436857bb1069fed",
+          "repository_path": "sample/100BT/001_00009.parquet",
+          "size_bytes": 2152891815
+        },
+        {
+          "blob_id": "b80700caca9a48be888975e75a3cbb3e2e88d8c3",
+          "lfs_sha256": "4f662867f4b7baefb017e25615fb53a91d521be914d330db6e96c19e3d8c1497",
+          "repository_path": "sample/100BT/002_00000.parquet",
+          "size_bytes": 2151897391
+        },
+        {
+          "blob_id": "f23bb82126be086c131119653f692fd9204e3964",
+          "lfs_sha256": "97c2b65c93604305f2ed862a448eddd2eb299402c75fbe7583852c2c1b3cac3b",
+          "repository_path": "sample/100BT/002_00001.parquet",
+          "size_bytes": 2151671407
+        },
+        {
+          "blob_id": "333aa4aa178bbab82a7a074117f0158815e2ca25",
+          "lfs_sha256": "65b07ff5f637f3ad2ac7f3cedc00c4e146e403f777f04d9854c8b981d15400f7",
+          "repository_path": "sample/100BT/002_00002.parquet",
+          "size_bytes": 2151150989
+        },
+        {
+          "blob_id": "f9b022c3c0fa7f66014c0b13dfd2010c6d793820",
+          "lfs_sha256": "0c7ddaa8810808048c33ebfd2ef60e2be1598e73c1425dec36fc287cf7f72224",
+          "repository_path": "sample/100BT/002_00003.parquet",
+          "size_bytes": 2151434381
+        },
+        {
+          "blob_id": "0f56215ad5d3140ef187a15ebd9990b31c440b89",
+          "lfs_sha256": "697a748496ba4fbfb4e94c01c8eb99a3ed8256b24a92307d87c9028c404c4822",
+          "repository_path": "sample/100BT/002_00004.parquet",
+          "size_bytes": 2150751835
+        },
+        {
+          "blob_id": "ed0809a70a76c5a58581b3c693edf70c2a46bcb9",
+          "lfs_sha256": "3dee9accd7e7284eaa31b8a69aef426296d4231f94c0b56ba2f58178261d57e4",
+          "repository_path": "sample/100BT/002_00005.parquet",
+          "size_bytes": 2152811934
+        },
+        {
+          "blob_id": "b3aca0e6579847dc777aacc0824ddf98dcf6f4cf",
+          "lfs_sha256": "7726945362c39720377929d50afe53ca82c792f6c62545e1d2aedf86f09648ad",
+          "repository_path": "sample/100BT/002_00006.parquet",
+          "size_bytes": 2152081882
+        },
+        {
+          "blob_id": "52c757f36e11b93507157ff38bfb32f38994575d",
+          "lfs_sha256": "f93e5000c60bda7f5002003371ee6efe030cbf03a3c7c3bce1bcee19b4ce7a67",
+          "repository_path": "sample/100BT/002_00007.parquet",
+          "size_bytes": 2152237659
+        },
+        {
+          "blob_id": "73494328a0e223d091a5ade8dbef231317cb4582",
+          "lfs_sha256": "39eeed04750507860ea3c3f0713d39bc55aba1a70db02d22d24a414162d19e2b",
+          "repository_path": "sample/100BT/002_00008.parquet",
+          "size_bytes": 2152594227
+        },
+        {
+          "blob_id": "74396f01b11d9a93e61d9569d909069fbf5f9c12",
+          "lfs_sha256": "16a04a934956c04595a54e45b47d93558e7f36ac619b5dc1ddb4909153d46ab8",
+          "repository_path": "sample/100BT/002_00009.parquet",
+          "size_bytes": 2151898537
+        },
+        {
+          "blob_id": "720baeeb8c4e34862b5409627cfbee5abafec2c6",
+          "lfs_sha256": "3d510f630e04c7be663a5cf20db7a0ed86a75ffa4b0f455bae1cba42d351f1db",
+          "repository_path": "sample/100BT/003_00000.parquet",
+          "size_bytes": 2151621817
+        },
+        {
+          "blob_id": "fce60c7f042a95d85e340e7945a275c7495b843f",
+          "lfs_sha256": "b60cf16e720a328deb6893a2065c76d0bc94413ac7d3aa81a0cd96f99821a0ae",
+          "repository_path": "sample/100BT/003_00001.parquet",
+          "size_bytes": 2152532221
+        },
+        {
+          "blob_id": "bd3cea9c2789517d770e41c3d9ec290000dd851c",
+          "lfs_sha256": "bb40e3de81a83e212f75c8e29bee8158cce1f3188107b2c31a4b4d690bf01761",
+          "repository_path": "sample/100BT/003_00002.parquet",
+          "size_bytes": 2152469007
+        },
+        {
+          "blob_id": "6b97ecefc57300adbe9fa154722ef6acc615772f",
+          "lfs_sha256": "6608a6e81959b774e15e57e8c49c5155fa307052c45986e6a091824501860258",
+          "repository_path": "sample/100BT/003_00003.parquet",
+          "size_bytes": 2151776296
+        },
+        {
+          "blob_id": "7ed3801da787f75cfd21b700f8ed8e9d090ec6de",
+          "lfs_sha256": "a82c8f5921078c75ad91fdde1939258440c5362c13ac98daeeb0280d1de2e243",
+          "repository_path": "sample/100BT/003_00004.parquet",
+          "size_bytes": 2151543898
+        },
+        {
+          "blob_id": "3c92261b1c67ac52c70dc4bbbfa5d5ef7eccb262",
+          "lfs_sha256": "3b1b1aa3e5eeae5b754a2566954d4fc0b172645396ba89e48de2487e64b41c8e",
+          "repository_path": "sample/100BT/003_00005.parquet",
+          "size_bytes": 2151820572
+        },
+        {
+          "blob_id": "9d9b371791018728fd188ab0856fd87ce07369a3",
+          "lfs_sha256": "e0ac7e5d2a3c48efa7e6a431753ea61285022b272209ac284c4c25b2ccc9b9a6",
+          "repository_path": "sample/100BT/003_00006.parquet",
+          "size_bytes": 2152409768
+        },
+        {
+          "blob_id": "d10ecd8d43d806b9b3da13e6757acba428a7dc74",
+          "lfs_sha256": "72920f236f7e9ea7e01c1210d512240865b65551d4b50af0bd0f7ef5c4623ec4",
+          "repository_path": "sample/100BT/003_00007.parquet",
+          "size_bytes": 2151978423
+        },
+        {
+          "blob_id": "6890060531e5f44c79fca2bb336e33e1e4d50b41",
+          "lfs_sha256": "e2168d2fdd28508e4d0e313a735c72fbf4a82c3907c4819c1a7cf9a113134b23",
+          "repository_path": "sample/100BT/003_00008.parquet",
+          "size_bytes": 2150559471
+        },
+        {
+          "blob_id": "28399f5cba6d0b51a798b9aa0b8f757e0f679efd",
+          "lfs_sha256": "56aa32ba078320a9841b8c8bfec5485a0ee91d62f2358f23035c6f2b59e47e62",
+          "repository_path": "sample/100BT/003_00009.parquet",
+          "size_bytes": 2151098528
+        },
+        {
+          "blob_id": "54ce89cfc97a423ceb648e895d5a79009dd970c0",
+          "lfs_sha256": "f49f1c354515d52827509821c188c1c782f7f342fe1807b878accccd3b6ea24d",
+          "repository_path": "sample/100BT/004_00000.parquet",
+          "size_bytes": 2153002740
+        },
+        {
+          "blob_id": "1c38135c55ea16613c4b70b29cd65fcaaf4f3e95",
+          "lfs_sha256": "910e38ed2219a9aa9396eba7b1d2ca28a744b73494b726de325bc012ef019e86",
+          "repository_path": "sample/100BT/004_00001.parquet",
+          "size_bytes": 2153291928
+        },
+        {
+          "blob_id": "652838cfdf99c2d1eca999502472f1d16bea30d8",
+          "lfs_sha256": "ea6b4982a9d08263a1a1f0864a2a39417e00c78ea59258fefb67374fe88e8f39",
+          "repository_path": "sample/100BT/004_00002.parquet",
+          "size_bytes": 2153053448
+        },
+        {
+          "blob_id": "c2c4b755f8de912b1c5fc2edb9c8a7d289894ca9",
+          "lfs_sha256": "38a52b91572be74b2a1f95b03f967e433a4ada19755a0cf5986a9b3a11653690",
+          "repository_path": "sample/100BT/004_00003.parquet",
+          "size_bytes": 2151470830
+        },
+        {
+          "blob_id": "1659c85d7686bd49c2c54bd4529fe848382b1681",
+          "lfs_sha256": "e85605b286cbfef58e7e2e16f7f9b5676111f4c788d975ab02a3717bdb6afe67",
+          "repository_path": "sample/100BT/004_00004.parquet",
+          "size_bytes": 2153294237
+        },
+        {
+          "blob_id": "42b78047d7a3a65cb46d234ad34a87d50e14de7a",
+          "lfs_sha256": "b58df621355b14f956f19b1f948dd4ab3632c6456f5b4d3ef260365c9ae9f089",
+          "repository_path": "sample/100BT/004_00005.parquet",
+          "size_bytes": 2152575246
+        },
+        {
+          "blob_id": "f92b1bf7be30e5ce13ad919f4d46975ff70f4d17",
+          "lfs_sha256": "4d32c43836fa5025ba545aef9cf36611e264f862a68f5b58cede281392a1f0f8",
+          "repository_path": "sample/100BT/004_00006.parquet",
+          "size_bytes": 2150848076
+        },
+        {
+          "blob_id": "2ff3a5c04f3d4c7a1b9679d954609d820d6882cd",
+          "lfs_sha256": "ce56697450cf4f57edeadf7ee4d9f775008d7f2462a7a5ae1c169e76040fec61",
+          "repository_path": "sample/100BT/004_00007.parquet",
+          "size_bytes": 2152886435
+        },
+        {
+          "blob_id": "8b0dec539d239180b1ffcd87ef10c30a3cd56526",
+          "lfs_sha256": "61ba332e3fbe11332c9a010a2a0b64c83ed17df031b5178adca587dd798997c8",
+          "repository_path": "sample/100BT/004_00008.parquet",
+          "size_bytes": 2151220422
+        },
+        {
+          "blob_id": "7ac5c411b7567e8468758d397df865f154801940",
+          "lfs_sha256": "3c79a80adcb20ed955b7578083981adff986125bc2dd89e44ba0bad8cd618627",
+          "repository_path": "sample/100BT/004_00009.parquet",
+          "size_bytes": 2150892501
+        },
+        {
+          "blob_id": "c409c4b87e52e252f76b24a5dcf7b2e218a1c9f1",
+          "lfs_sha256": "f84649e2cd775292f5a521a1095defb2e4b472d34e5c6c0030c50c0ee5fc018c",
+          "repository_path": "sample/100BT/005_00000.parquet",
+          "size_bytes": 2150708561
+        },
+        {
+          "blob_id": "7bb3f50bd01bdaf32c0dd19e5981c92f948e4540",
+          "lfs_sha256": "be9324f353455b39a22a79521f1b1c100a0c24c94f8275220039eac1aed920f6",
+          "repository_path": "sample/100BT/005_00001.parquet",
+          "size_bytes": 2151500293
+        },
+        {
+          "blob_id": "568ec1bb26334541250ffd6a83fc96d19b8cc246",
+          "lfs_sha256": "bc43566bfe69c4fc0fe6115716c4cb6c7fa46e09dd527ea4b2a81b81b8ea3f8e",
+          "repository_path": "sample/100BT/005_00002.parquet",
+          "size_bytes": 2150936398
+        },
+        {
+          "blob_id": "cc4dd982e118f1f21d63e5cd3be2a94b92058ae8",
+          "lfs_sha256": "6ed97e6c8862c3502e1844e472ad16a9beb82e2c8e17ad5694e9a7045ff86be8",
+          "repository_path": "sample/100BT/005_00003.parquet",
+          "size_bytes": 2151166424
+        },
+        {
+          "blob_id": "770412388f88b41bf760b73db4a1490981dbd105",
+          "lfs_sha256": "ba81670a4f8662a2f223b4669a0d3d1a6d7c883dfcd70494e8476b216117f078",
+          "repository_path": "sample/100BT/005_00004.parquet",
+          "size_bytes": 2151637485
+        },
+        {
+          "blob_id": "1a396d5399440eda171fc84eb3001a311d94eecf",
+          "lfs_sha256": "0f870a2d57d287a6fe6b2f33d4385188c274ba8e4af4faf54a9494c401b01f23",
+          "repository_path": "sample/100BT/005_00005.parquet",
+          "size_bytes": 2153145072
+        },
+        {
+          "blob_id": "9f4013bc5996a48b7c59450229db86db5d406b1e",
+          "lfs_sha256": "6c379b4936cf25368212b370359090beb41e05b1fdbd1bd4ffa9942fae954b4c",
+          "repository_path": "sample/100BT/005_00006.parquet",
+          "size_bytes": 2152580193
+        },
+        {
+          "blob_id": "0920b8dcdea8663a36d6093a24a683dd647f0d16",
+          "lfs_sha256": "09160cd46dc31123b2c49106196fa7fdc3a427ac0015f0089a41a4314f24efef",
+          "repository_path": "sample/100BT/005_00007.parquet",
+          "size_bytes": 2153303408
+        },
+        {
+          "blob_id": "f93e32a7dfc73a56a994976ab5512ba70cd8b5e8",
+          "lfs_sha256": "9f92cae38b7243ae306098c9f739fe0b2be56e2a36020eefd943882cac1dc3a3",
+          "repository_path": "sample/100BT/005_00008.parquet",
+          "size_bytes": 2153302599
+        },
+        {
+          "blob_id": "a0a44d3475cad485c52ba363ac57e6ddd4a2a6e0",
+          "lfs_sha256": "ab3e2f0cddcae5f0d54eb0254cd859a0ed763be45fe433ed58830c24c98a8b62",
+          "repository_path": "sample/100BT/005_00009.parquet",
+          "size_bytes": 2152031536
+        },
+        {
+          "blob_id": "53ed1eabe62976ab617295e3a93fd692f60128e7",
+          "lfs_sha256": "ec3fe27193176de866775563aeb88827e90486dc97f811a85efea1e115c48cce",
+          "repository_path": "sample/100BT/006_00000.parquet",
+          "size_bytes": 2151173759
+        },
+        {
+          "blob_id": "a13bbc16099d25ee481ebb43ce955fb6e9539f1e",
+          "lfs_sha256": "ec8686252960f21689025694ea7d1d825170a0b305998339b36ed1afe236c0a1",
+          "repository_path": "sample/100BT/006_00001.parquet",
+          "size_bytes": 2152105444
+        },
+        {
+          "blob_id": "b58da92f3c6aa0ce116f8457a648ce5e2470224c",
+          "lfs_sha256": "ae98b91c695a31af4930cda913d0f5a9fbf8778eb764034b3d67429eef2bfc0d",
+          "repository_path": "sample/100BT/006_00002.parquet",
+          "size_bytes": 2153360191
+        },
+        {
+          "blob_id": "e9b25f84098200fbb20b3511b1879f489f470e9d",
+          "lfs_sha256": "e7393b78a31aeccc3ac931622d5761ec9b22bc270c2942a862994cd7ee7e10c6",
+          "repository_path": "sample/100BT/006_00003.parquet",
+          "size_bytes": 2153401374
+        },
+        {
+          "blob_id": "56cd002c35a9b512e67f96489e563b1d61e3e136",
+          "lfs_sha256": "6eaa51d93913045c178e70d6e319595a02b7aad5b24703b5f290c313dfc945b5",
+          "repository_path": "sample/100BT/006_00004.parquet",
+          "size_bytes": 2152464846
+        },
+        {
+          "blob_id": "8ebfcafd74851a8cd80f14c19a0f43f4fc9d5e46",
+          "lfs_sha256": "2c9899beadfaeda7108c92f7b8c54115d74a12b280656fc9f937add178d30e6d",
+          "repository_path": "sample/100BT/006_00005.parquet",
+          "size_bytes": 2150812800
+        },
+        {
+          "blob_id": "6228116748c90bfc914d2a2589e728943217b3df",
+          "lfs_sha256": "04f3b0996c65b2ffb99fd571a5409508b7e67df66f0fedb918b49aae9fee4778",
+          "repository_path": "sample/100BT/006_00006.parquet",
+          "size_bytes": 2153385904
+        },
+        {
+          "blob_id": "2c9983c8225690efc6cbb8a9db905bc005899d00",
+          "lfs_sha256": "2f7318492b187daf9e43a5d6928ad5ccd978affa487a59c54ec17018b795459e",
+          "repository_path": "sample/100BT/006_00007.parquet",
+          "size_bytes": 2153420855
+        },
+        {
+          "blob_id": "bc825501bb0b57a42e09cd759260d1bd40f661e5",
+          "lfs_sha256": "0575dbd7247b5afc8b2866653fb9e89a1c8de35f6174c136aee76edb1c98050e",
+          "repository_path": "sample/100BT/006_00008.parquet",
+          "size_bytes": 2152428323
+        },
+        {
+          "blob_id": "0b0d2ddf65d91eccf6655d15d3d5666cc15a58ea",
+          "lfs_sha256": "a8b3e8e5da7fedd316c76cdee79cd816cda48fddb6ab579949ec9059b181a4a7",
+          "repository_path": "sample/100BT/006_00009.parquet",
+          "size_bytes": 2152932646
+        },
+        {
+          "blob_id": "913943262f09db72ac1f8b6ff4f148d83e2a380b",
+          "lfs_sha256": "861c1371876508fe9454c1fd039653a2b998029d13ab92747fe92ed30b82b487",
+          "repository_path": "sample/100BT/007_00000.parquet",
+          "size_bytes": 2153009115
+        },
+        {
+          "blob_id": "04346f507e20443f2deb88ce03c41226e03eeb0c",
+          "lfs_sha256": "7a3c3bcb55e4215a0e0720ea8e7de918007d4da0253789359922486e8bcda930",
+          "repository_path": "sample/100BT/007_00001.parquet",
+          "size_bytes": 2152021786
+        },
+        {
+          "blob_id": "398933412c2c41fb4c4f9bd6dea6d4ab812d6ba3",
+          "lfs_sha256": "1c69052cc54c446e5ade6c6455038993a5f8321fd29015d5c33612467a17876d",
+          "repository_path": "sample/100BT/007_00002.parquet",
+          "size_bytes": 2151133584
+        },
+        {
+          "blob_id": "40dd84643229626cdd7a69ea66b372e60a88d9b6",
+          "lfs_sha256": "de87e55703829ce55c49b9236d259e20e5c0813134a02cfb160167e32c785cf3",
+          "repository_path": "sample/100BT/007_00003.parquet",
+          "size_bytes": 2151597441
+        },
+        {
+          "blob_id": "7cdbb1e3a8566930a30c26244e1cff3496c24dd9",
+          "lfs_sha256": "93777e43d9d00b508c8b061912378d09ff00cea6fa6fb71bb289bd03aa7423c3",
+          "repository_path": "sample/100BT/007_00004.parquet",
+          "size_bytes": 2151524072
+        },
+        {
+          "blob_id": "d8f62782eab6aae7db7e746aa15b61952d2b21b9",
+          "lfs_sha256": "c1354b2b762319b8c7ad56852910c909387f130713a65af862cef21a207aa9c4",
+          "repository_path": "sample/100BT/007_00005.parquet",
+          "size_bytes": 2150552642
+        },
+        {
+          "blob_id": "c8275fbdf884cc372ca866a6fd68fce431648871",
+          "lfs_sha256": "4ced9db298b90aa92b3ad9207c3146bc79123381673ab4e8d68fdf3690b3693c",
+          "repository_path": "sample/100BT/007_00006.parquet",
+          "size_bytes": 2153194366
+        },
+        {
+          "blob_id": "a49b697997701e18e3e626ad1cc1914c02230afc",
+          "lfs_sha256": "12500d5c20a47fc9fa013b069b83b13e479b2c3bef7e3ce39c84e8fc653199d3",
+          "repository_path": "sample/100BT/007_00007.parquet",
+          "size_bytes": 2152609562
+        },
+        {
+          "blob_id": "140716bc2855a1c793177749b2cd17428cfcc41a",
+          "lfs_sha256": "9af6e214393faa7c91608569314d1c09367e1deeb26aa36485d1aa4753c5c3db",
+          "repository_path": "sample/100BT/007_00008.parquet",
+          "size_bytes": 2151691660
+        },
+        {
+          "blob_id": "08e257b85123852652d54d119ba76b58d189f9fc",
+          "lfs_sha256": "ad30fbf8bb1e0df31ea644c9e6941187414bdb0c59f21b6ff4585e78451ee78e",
+          "repository_path": "sample/100BT/007_00009.parquet",
+          "size_bytes": 2150969434
+        },
+        {
+          "blob_id": "ced8693af30f524be0f56251f1986efb9d65db54",
+          "lfs_sha256": "da61fb9e93618c8ed2a3e20329cf26ba7073ac797bfe8dbf523421dfa30e1b68",
+          "repository_path": "sample/100BT/008_00000.parquet",
+          "size_bytes": 2151138399
+        },
+        {
+          "blob_id": "ffc117278468e83b565c93fb376adbd3a086ef74",
+          "lfs_sha256": "5846e99c57c716a364a48d8ddaf4b9ede53b52865e0ea2d9e4626a0ba1d749ed",
+          "repository_path": "sample/100BT/008_00001.parquet",
+          "size_bytes": 2150598151
+        },
+        {
+          "blob_id": "4a51de0183fc99ac51d4361de061e6f9061572c6",
+          "lfs_sha256": "6102754c22f5ba224b16633774523612727878ed42e1b364a8dcbb252a407a81",
+          "repository_path": "sample/100BT/008_00002.parquet",
+          "size_bytes": 2151279431
+        },
+        {
+          "blob_id": "d0f7677d12fedceb3b573b2cc015da5de114eeae",
+          "lfs_sha256": "18294cbd02455e5b6c111d7510866f41f8073259ba4222037a0088654acccf19",
+          "repository_path": "sample/100BT/008_00003.parquet",
+          "size_bytes": 2150642725
+        },
+        {
+          "blob_id": "a1335e7edb4339856adf1a938c4ed208d63f4364",
+          "lfs_sha256": "ae6062d438564f32b3f674a083292963f5a430c9948c1043376629e4555ab4d0",
+          "repository_path": "sample/100BT/008_00004.parquet",
+          "size_bytes": 2150737656
+        },
+        {
+          "blob_id": "3a9797b8ae2ec8d6e748009103c800d2c66caf8c",
+          "lfs_sha256": "5951a56ebd9edb291cb7b3ede8c0298e6d928b86b64e3159c67cc6373128e7f9",
+          "repository_path": "sample/100BT/008_00005.parquet",
+          "size_bytes": 2152582259
+        },
+        {
+          "blob_id": "2a978980cc835a798a1deeb0586ff06dfcdf3390",
+          "lfs_sha256": "8906dd1ff192f5a77373f157b8e0daa590ec21797d34a92e2818c5c7284e31df",
+          "repository_path": "sample/100BT/008_00006.parquet",
+          "size_bytes": 2152453034
+        },
+        {
+          "blob_id": "783370c5ed201e6b3a9ac97403dd21920bcd9d38",
+          "lfs_sha256": "23012c54073f1362674e437b1c5ebe7c2bf998fdadb7adb4611e183dd17d1377",
+          "repository_path": "sample/100BT/008_00007.parquet",
+          "size_bytes": 2152831030
+        },
+        {
+          "blob_id": "de78d1f2eec0ce546256d3b93a495736b489fc36",
+          "lfs_sha256": "430a269d951db31c5ee389e2a6446591de13614f627c9b218fc209e7dc962a3c",
+          "repository_path": "sample/100BT/008_00008.parquet",
+          "size_bytes": 2152346868
+        },
+        {
+          "blob_id": "ab9e97fd593cecdec96396e121a895f5633c9687",
+          "lfs_sha256": "29c4e9699b75fdc869988da0e75c17bfdfbec1df4e27102e40b23beaf7b11d00",
+          "repository_path": "sample/100BT/008_00009.parquet",
+          "size_bytes": 2151644920
+        },
+        {
+          "blob_id": "939add2a4e1fe91530bce1fac3df606ec4bd4575",
+          "lfs_sha256": "8bc9e6ec942e9797fbc3a752f724428da4e400559df4c8752e3fc08b8d4fcc1a",
+          "repository_path": "sample/100BT/009_00000.parquet",
+          "size_bytes": 2152870180
+        },
+        {
+          "blob_id": "39602b229258778cbb5bf949a3b99f46f3975d3e",
+          "lfs_sha256": "2a92e5f0a71d0c09681c0378c57fd01f93d15804408fe48b9ef7b360400ad155",
+          "repository_path": "sample/100BT/009_00001.parquet",
+          "size_bytes": 2150826267
+        },
+        {
+          "blob_id": "624c95f31f1a72ded0f580b4989afac4b4b63a40",
+          "lfs_sha256": "fd98882fd0c6f0715b519f73088e025399baaed5d47d23b69711230230ebb0b6",
+          "repository_path": "sample/100BT/009_00002.parquet",
+          "size_bytes": 2152785235
+        },
+        {
+          "blob_id": "7538ec991de4edd3be19fba711e154fc791fa2cd",
+          "lfs_sha256": "461b2907254965b904e15da071825e2c2f3627ba3d9b701376d8da2cf84f87c5",
+          "repository_path": "sample/100BT/009_00003.parquet",
+          "size_bytes": 2152793292
+        },
+        {
+          "blob_id": "2d735513dccf17bd7843548a8aaac91de47c0925",
+          "lfs_sha256": "dfa31314933e7e925f1ef152f46452b3f086c2857a61528f1385251c2350ef6f",
+          "repository_path": "sample/100BT/009_00004.parquet",
+          "size_bytes": 2150735027
+        },
+        {
+          "blob_id": "c99eb69ee86f2a3a30dc089c4a6709b76c838118",
+          "lfs_sha256": "c3b30571f66e2a829a35d7d4ab132b6183ca30486c9cd2400430ae1e32871266",
+          "repository_path": "sample/100BT/009_00005.parquet",
+          "size_bytes": 2152442675
+        },
+        {
+          "blob_id": "a3bf227eefbd0e9e630376e1dbcf6836295e3fb2",
+          "lfs_sha256": "7759e684f61d43a2eb46312b189c2e6b98cfb9a2e4b001711342cc7e10a270a9",
+          "repository_path": "sample/100BT/009_00006.parquet",
+          "size_bytes": 2151220022
+        },
+        {
+          "blob_id": "5d9f74dcacf4f4aab38f78824783d0cc06f60aa0",
+          "lfs_sha256": "37b0026523ac5f0af08975a315e05be900587ba6ea129b16aaed82f968ff3102",
+          "repository_path": "sample/100BT/009_00007.parquet",
+          "size_bytes": 2150434934
+        },
+        {
+          "blob_id": "922abc56cc12a903f6811f83ce68532f02698f73",
+          "lfs_sha256": "58803123013d10a25d172cc6319d1606f5b52046672b425ece49b28fadca3167",
+          "repository_path": "sample/100BT/009_00008.parquet",
+          "size_bytes": 2150413813
+        },
+        {
+          "blob_id": "399c6ada27e07ae5a7a95a4ef61100df26801e26",
+          "lfs_sha256": "f350a772442df44c87446af257c140066f0431c13759faddc9fd0285964b0a17",
+          "repository_path": "sample/100BT/009_00009.parquet",
+          "size_bytes": 2150747289
+        },
+        {
+          "blob_id": "00aff57cc27b1d28b8e188dee3991879a270fb8f",
+          "lfs_sha256": "4fce79a4201b4b04e28030f0b7f677eb99084ca064178ebf050c920d50b5b424",
+          "repository_path": "sample/100BT/010_00000.parquet",
+          "size_bytes": 2151571678
+        },
+        {
+          "blob_id": "ce432749646ca053430194011192ee38cea68b06",
+          "lfs_sha256": "8bc467f4fa0c96425675d0805d347c49440a1d4cbf3144ccf3ad5efb9fcd164f",
+          "repository_path": "sample/100BT/010_00001.parquet",
+          "size_bytes": 2151236248
+        },
+        {
+          "blob_id": "ca01cc3047ff97745ab7f348a358d0e815d93d6f",
+          "lfs_sha256": "5b21a98b61a2224f310cffd00773b334de2401b198bafe006b6251ee374c61a2",
+          "repository_path": "sample/100BT/010_00002.parquet",
+          "size_bytes": 2150569557
+        },
+        {
+          "blob_id": "524b30f9117f26d428c39516bc2ee4eada324173",
+          "lfs_sha256": "3d989ada06f5bc96fba4f1f376e2e6898f8dc92bda738cdb729f25ee8d88adfe",
+          "repository_path": "sample/100BT/010_00003.parquet",
+          "size_bytes": 2150341172
+        },
+        {
+          "blob_id": "fb0a00debb5f9721ff067706dbdc705a8e4c4ff9",
+          "lfs_sha256": "3ba6424a8797f9d90d9f629143ea9ff6abc1fd331ecaf20597848db7cecdacd6",
+          "repository_path": "sample/100BT/010_00004.parquet",
+          "size_bytes": 2152703186
+        },
+        {
+          "blob_id": "b767f616db91e2f2a4b2bbb1b7a5f858f47ff970",
+          "lfs_sha256": "03e1da7827b10a796486339220140c44087f5fea57b0e2f2d27436ef35182639",
+          "repository_path": "sample/100BT/010_00005.parquet",
+          "size_bytes": 2151197012
+        },
+        {
+          "blob_id": "a27aea98a79dce0167a3665343c62eb9ecb0f86c",
+          "lfs_sha256": "ed99e9b6f25a017b4bd002fd2470086ea5a729cbe1b364550f3808f08291c08b",
+          "repository_path": "sample/100BT/010_00006.parquet",
+          "size_bytes": 2150869474
+        },
+        {
+          "blob_id": "1cf6243437da3fd322c6463dfe39d094054319d7",
+          "lfs_sha256": "04074548c93fce0dcd56a1c1eeccfd2ed28b96eae6b95bae96712e1cb2f30e73",
+          "repository_path": "sample/100BT/010_00007.parquet",
+          "size_bytes": 2152353010
+        },
+        {
+          "blob_id": "5cc5a285a5709316c046f4014cd4b4759344151e",
+          "lfs_sha256": "5959b241b3825595e4817724c5d57b0f420a93642625c2022e13973014f062bc",
+          "repository_path": "sample/100BT/010_00008.parquet",
+          "size_bytes": 2150821210
+        },
+        {
+          "blob_id": "7d21ea584a91f95cc6cc7b302ce377cf01465d27",
+          "lfs_sha256": "5a49a432c677ad4deea070b9ba76b811be9c3cebc4e0c5e8974b8fcb928f33e0",
+          "repository_path": "sample/100BT/010_00009.parquet",
+          "size_bytes": 2151745378
+        },
+        {
+          "blob_id": "f86218c41e1193bf744a5e218e4468cf863b4afb",
+          "lfs_sha256": "69119d14738751f9182db6fd87a7582e10f33b9e35571c8205bf6facf6b0a42d",
+          "repository_path": "sample/100BT/011_00000.parquet",
+          "size_bytes": 2150983433
+        },
+        {
+          "blob_id": "46cabaecba6cfa6740d895473b5a39025ed005b2",
+          "lfs_sha256": "a8b8b5a3326d7ad5df554b4b2d6fb4401acbf7cc44b3894b677a384331e18b7a",
+          "repository_path": "sample/100BT/011_00001.parquet",
+          "size_bytes": 2151833168
+        },
+        {
+          "blob_id": "c89028411e0b3fc3ef78f16536126c2ce92c7f33",
+          "lfs_sha256": "1ca4d7ca7f5fb97f326e7cb3ffa63317efa6acb695553868f5a48882d939cbdc",
+          "repository_path": "sample/100BT/011_00002.parquet",
+          "size_bytes": 2150635926
+        },
+        {
+          "blob_id": "0c83001c4d71867561f0ecd29c5a68a806b9827a",
+          "lfs_sha256": "ff5212cacd088f4127adc2041e18dcc170a8c2cb19dc92271ad22adaeed7e827",
+          "repository_path": "sample/100BT/011_00003.parquet",
+          "size_bytes": 2152670300
+        },
+        {
+          "blob_id": "376ede9017db93929bc89be700d5e7441a6002c9",
+          "lfs_sha256": "26b8429f5c0c6e561310eac9050b27ffc4ea0869980162b058b3ef38a06ebd7a",
+          "repository_path": "sample/100BT/011_00004.parquet",
+          "size_bytes": 2151487097
+        },
+        {
+          "blob_id": "197d3a7fca5550a066b913a3b42048c998da8996",
+          "lfs_sha256": "3c1708ff71a5fd15a8e62f2a591d60d5cc98c1f407e0a44e99011837154d2f39",
+          "repository_path": "sample/100BT/011_00005.parquet",
+          "size_bytes": 2151541011
+        },
+        {
+          "blob_id": "cf01dff929b5f5a21204c8223e08c5bd2cce5d00",
+          "lfs_sha256": "1ccd8d87762291d10e0a4c67f599faebdd6f4dbb70398c7631f6d4b0a8d7d3bd",
+          "repository_path": "sample/100BT/011_00006.parquet",
+          "size_bytes": 2152614900
+        },
+        {
+          "blob_id": "5929844e58657a433f304e6507c3170527a4a3df",
+          "lfs_sha256": "09083d8b1758a6e425029f3a370d11b78ac4ed5ad802d0b87b0ad353dd5cafbf",
+          "repository_path": "sample/100BT/011_00007.parquet",
+          "size_bytes": 2152992454
+        },
+        {
+          "blob_id": "e2a219bddadcb3d0d52fe29023d6e72a1683e976",
+          "lfs_sha256": "38318ff88ddfb4be048bce2490b19d34bd8225f070e594656c16c30088925bc2",
+          "repository_path": "sample/100BT/011_00008.parquet",
+          "size_bytes": 2153390140
+        },
+        {
+          "blob_id": "a472c5ebe84af346e99629bf431617de51f73a25",
+          "lfs_sha256": "9ba8e1241e041c4660d06936f38a616defe8326cc861b1aa9731125b85cefb15",
+          "repository_path": "sample/100BT/011_00009.parquet",
+          "size_bytes": 2152799518
+        },
+        {
+          "blob_id": "12eae68715797d8e5db42551ee45d63caf2a4145",
+          "lfs_sha256": "5c98fd3f113deff5395deb9f958740977982a977920b32bd46129376088d642a",
+          "repository_path": "sample/100BT/012_00000.parquet",
+          "size_bytes": 2151175692
+        },
+        {
+          "blob_id": "492c40ce83691aee4a3ab5fd904b740c2c07ad05",
+          "lfs_sha256": "e81dbeb36b5ed534d49ade8587109105032574d5ace90d43a0d104cb37385e4a",
+          "repository_path": "sample/100BT/012_00001.parquet",
+          "size_bytes": 2152085272
+        },
+        {
+          "blob_id": "68834cd26bd14659b4eadcf6efa43317a8f4aec8",
+          "lfs_sha256": "63825137c8919213efe76b648a6461a80f34f27d8e0586f178d117b1b586e90a",
+          "repository_path": "sample/100BT/012_00002.parquet",
+          "size_bytes": 2150577007
+        },
+        {
+          "blob_id": "3c99ef01eaf968b0041cd203cf23c384fcb2ab02",
+          "lfs_sha256": "5c9a0fb69c16a8a20fb8c76c619064734d2c704048349f96746fab2d95aeb26a",
+          "repository_path": "sample/100BT/012_00003.parquet",
+          "size_bytes": 2153309654
+        },
+        {
+          "blob_id": "f1939b9dbf096a4777dce0240a5dcc93fdaf3781",
+          "lfs_sha256": "ade4b1a8e79f458be18d086cd2861b05605b77f9b677908b3848ec3052bfb68a",
+          "repository_path": "sample/100BT/012_00004.parquet",
+          "size_bytes": 2152431260
+        },
+        {
+          "blob_id": "137f6e1a981969818e25897911f0f71c48d37530",
+          "lfs_sha256": "08043264388b9025fcd4abada9f4f03ac230e2b9f57b20f7f422c725a88b3d77",
+          "repository_path": "sample/100BT/012_00005.parquet",
+          "size_bytes": 2153266763
+        },
+        {
+          "blob_id": "3e3d3ab0f93792c39c417d989d1058976bc3ab93",
+          "lfs_sha256": "9dbdc83a49b85e44fb6a1255a29c8aeeca1ef4cd3882f868f549fb35cafe5a52",
+          "repository_path": "sample/100BT/012_00006.parquet",
+          "size_bytes": 2150459731
+        },
+        {
+          "blob_id": "5cf377f4442788d4928a3c4ffbeac093927b7514",
+          "lfs_sha256": "425cb44998932d9ac6ffbb039dc5fc6adf10aa5fa523c020a968e172e4095630",
+          "repository_path": "sample/100BT/012_00007.parquet",
+          "size_bytes": 2151129707
+        },
+        {
+          "blob_id": "b4661311fdb36c5517475a90e17c3f243afc834b",
+          "lfs_sha256": "dda63bc89a0afb6f9d2883ab798301bf91c9b572ed17fe504deef7c4086acece",
+          "repository_path": "sample/100BT/012_00008.parquet",
+          "size_bytes": 2150448824
+        },
+        {
+          "blob_id": "c8ba99cbec50fc26c1d84647082a7eb53824552c",
+          "lfs_sha256": "aad3c61ef272ec461e41bb40b8c6c1ebbb0a4b026808765f29fda04ce6fd9701",
+          "repository_path": "sample/100BT/012_00009.parquet",
+          "size_bytes": 2151070619
+        },
+        {
+          "blob_id": "89e7ded272e2e81be6d6149ee03f1cecd984c6be",
+          "lfs_sha256": "5c618a6b5c584d857202542092c45633d8b98c7beeee4f54cad9bdd4c971a3df",
+          "repository_path": "sample/100BT/013_00000.parquet",
+          "size_bytes": 730198774
+        },
+        {
+          "blob_id": "f35d390bba621b6dfb17b6064f57141112e29551",
+          "lfs_sha256": "487da1a3e004fb2ca87996ca9836c16a49f64e8d70018944c819e49a62774e3a",
+          "repository_path": "sample/100BT/013_00001.parquet",
+          "size_bytes": 743123195
+        },
+        {
+          "blob_id": "df0ee9e97a365111f02166f7c18b0c35410fd6dc",
+          "lfs_sha256": "746fb74dac5227d1eb8b84c71ed05bf8952a25118575ebf2bf6d40b63c908326",
+          "repository_path": "sample/100BT/013_00002.parquet",
+          "size_bytes": 720295268
+        },
+        {
+          "blob_id": "dbcfce6a421eb7e6044857e24349df3b0fc6fea5",
+          "lfs_sha256": "b0d7bf2012721323dc0ee2b86ce1aff5f02cfb4aab3f7cc0eb1510cb9e5322f0",
+          "repository_path": "sample/100BT/013_00003.parquet",
+          "size_bytes": 702232373
+        },
+        {
+          "blob_id": "93361f4ad1cfb54cbc6dfc286d85ad4a4d066085",
+          "lfs_sha256": "5407e63a718207c8f5e3982b3ef0d0835e7177e34d434fcb79234afd42532826",
+          "repository_path": "sample/100BT/013_00004.parquet",
+          "size_bytes": 705597730
+        },
+        {
+          "blob_id": "e9057e07d657fd95da29935d85438468cb965c62",
+          "lfs_sha256": "b1b5b41b65cafff9f31190d1d487a3ec39c41e6e4698db6759a948f7a695b904",
+          "repository_path": "sample/100BT/013_00005.parquet",
+          "size_bytes": 692526551
+        },
+        {
+          "blob_id": "18afb47383650a9af4dc24f320e3ec7cbfc1690c",
+          "lfs_sha256": "2fbe83d800ab6c5a26f33122e342fac40135675708a71e6a280bcdad68293cc6",
+          "repository_path": "sample/100BT/013_00006.parquet",
+          "size_bytes": 758099222
+        },
+        {
+          "blob_id": "b58a235969f6d5fcc78d2983644c39f47619479b",
+          "lfs_sha256": "9c74754bd8b524c04a6d2a57f1654340f8deb1414846db3456b83fe0e321f591",
+          "repository_path": "sample/100BT/013_00007.parquet",
+          "size_bytes": 209335613
+        },
+        {
+          "blob_id": "4a55a45d5f07d756af14d58c39faeac036905bfc",
+          "lfs_sha256": "cb27cb812ab0a0120823a05e67a5d5b0610dcf946782d381c8608f70cf858565",
+          "repository_path": "sample/100BT/013_00008.parquet",
+          "size_bytes": 673400814
+        },
+        {
+          "blob_id": "055eeac0b07edd38994b968364faa34b3d610358",
+          "lfs_sha256": "92f097534c4887400ddea2f4878850c91f2b52c48bfc52354de61749c92e547a",
+          "repository_path": "sample/100BT/013_00009.parquet",
+          "size_bytes": 710997519
+        }
+      ],
+      "glob": "sample/100BT/*.parquet",
+      "ordered_files_sha256": "4f4e9dc42766053b0b35d1898e1279d980fc2ce813382e5a99f1c4bafb6d9381",
+      "ordering": "lexicographic_repository_path",
+      "repository": "HuggingFaceFW/fineweb-edu",
+      "revision": "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9",
+      "total_size_bytes": 286394522604
+    },
+    "longcrawl": {
+      "file_count": 256,
+      "files": [
+        {
+          "blob_id": "63cba7de60a36401299f46b01b55d74852611ab2",
+          "lfs_sha256": "bd89e68512e0465957596711d1805e91d0bb1d097ecc44c7ddf5c81d636ba1d3",
+          "repository_path": "train/0-of-256.parquet",
+          "size_bytes": 10903312345
+        },
+        {
+          "blob_id": "4a5e4a8312d6165fbafbee62872b870851c1aa21",
+          "lfs_sha256": "bd66758bc097c91c8b47e7d8391a0f98cf7affe7e56c9cc5ec66b4cbb67284de",
+          "repository_path": "train/1-of-256.parquet",
+          "size_bytes": 11054001998
+        },
+        {
+          "blob_id": "6192758205d195e234c1146882a10302abecf195",
+          "lfs_sha256": "e90321903d99011d3dc6917990ac075cdd472d5c85c80220b65c1604ba4f1f94",
+          "repository_path": "train/2-of-256.parquet",
+          "size_bytes": 11186534493
+        },
+        {
+          "blob_id": "f476f058df85b67831e706d7d3b578b24d75f841",
+          "lfs_sha256": "74450dfa7552ab28d9859124047fcdca9b8887c5d6e932998d3246d90a7aa214",
+          "repository_path": "train/3-of-256.parquet",
+          "size_bytes": 11710708879
+        },
+        {
+          "blob_id": "cafc2c00d33324ababaf3de053d96d6ea0be1221",
+          "lfs_sha256": "0c21db181d8700c743524a4913aafd1692797adf893403e48f40c99bf10d788c",
+          "repository_path": "train/4-of-256.parquet",
+          "size_bytes": 11168316745
+        },
+        {
+          "blob_id": "2e8b7eee68c44e75c9dec440a2d8c47ae5e4ba8b",
+          "lfs_sha256": "1254a43b076b0ef9e4aa7ef45fc1493345e0318afe466e89f8b8f988e9ff7d64",
+          "repository_path": "train/5-of-256.parquet",
+          "size_bytes": 11361682399
+        },
+        {
+          "blob_id": "3f494ec527eeb23d3df2aca14e10f7b75384607a",
+          "lfs_sha256": "79562c0f551ffd021844addcb62066c5e5ddf3e677a557592614156331da8e98",
+          "repository_path": "train/6-of-256.parquet",
+          "size_bytes": 10893520746
+        },
+        {
+          "blob_id": "5c7ee499e9ffe6cf28e5b0e9ab2ea4793b69f3bb",
+          "lfs_sha256": "3a74446351a468e444a604b51c58cca886f518f99fc6cc9950bfa4e8845be739",
+          "repository_path": "train/7-of-256.parquet",
+          "size_bytes": 10945445228
+        },
+        {
+          "blob_id": "cd5af241e930e396ab8d5969dc4be59b410d144f",
+          "lfs_sha256": "9f9381d24b65e12de1e498e4bd7963aa1c7b20dc52387ded912d8c29c4779412",
+          "repository_path": "train/8-of-256.parquet",
+          "size_bytes": 11142339647
+        },
+        {
+          "blob_id": "938f5514a266cca4d3d890f46c445cec625a65e6",
+          "lfs_sha256": "1b11230decc73fdcd22a681c07a5b34ede74a624fbd05b1ea509cdbbbd537c0a",
+          "repository_path": "train/9-of-256.parquet",
+          "size_bytes": 11054500207
+        },
+        {
+          "blob_id": "71e1f91d642731523032c9b2ab019bd2b1b01587",
+          "lfs_sha256": "72e8ca739aea0c6f7d441058fb9919328767f47b7188584bf3aa5a40bfbdd034",
+          "repository_path": "train/10-of-256.parquet",
+          "size_bytes": 11368583434
+        },
+        {
+          "blob_id": "7782e64d27f52c1c5ef7d163972df7bb5d6cc377",
+          "lfs_sha256": "5fe6b5a7654de4bc45df5e2b34f44f6d3f4ce0bce172d7d6be5694f508bae232",
+          "repository_path": "train/11-of-256.parquet",
+          "size_bytes": 11027270037
+        },
+        {
+          "blob_id": "7fe99faa0eb34c122936537a73f886064e2e5eaa",
+          "lfs_sha256": "57f895e9d66505441428dc828d4a2ce656ddfb406384decdd55d402a826388bb",
+          "repository_path": "train/12-of-256.parquet",
+          "size_bytes": 11087311732
+        },
+        {
+          "blob_id": "cfcf46d6dd3aaa8d861c0a4297203bd72aaed554",
+          "lfs_sha256": "c0fe88e9be8d252acd29f668435650e54e7e8bc610064fcf185f07e4df2c08b9",
+          "repository_path": "train/13-of-256.parquet",
+          "size_bytes": 11007423161
+        },
+        {
+          "blob_id": "bfb2a15ba268beef97dbcff827b29fbb507530f8",
+          "lfs_sha256": "64ff49ceba186e9f0c0f4ddf91179544665376bf426de18871c6c7d24f258b99",
+          "repository_path": "train/14-of-256.parquet",
+          "size_bytes": 11477445735
+        },
+        {
+          "blob_id": "d43e210701acd8b8730ed9163425e11bc4f360c6",
+          "lfs_sha256": "d185db875ff2e5d6b4a250e62af63397cfe275939c81629a033a8045945fecb4",
+          "repository_path": "train/15-of-256.parquet",
+          "size_bytes": 11213564943
+        },
+        {
+          "blob_id": "2065861a64c433fa3ee08da89f073753206cf29f",
+          "lfs_sha256": "1558fd9a25303e75a17e172daf74e32db612ba7e0dc276cb936bbe501757d0db",
+          "repository_path": "train/16-of-256.parquet",
+          "size_bytes": 11159786404
+        },
+        {
+          "blob_id": "199f91ea3ce32408e410e08bca915c2bf5f73b64",
+          "lfs_sha256": "c8c5328447c662ecbf8ee23ddc56306298028e53ddc07a9834b0b845aeb64171",
+          "repository_path": "train/17-of-256.parquet",
+          "size_bytes": 11733265048
+        },
+        {
+          "blob_id": "6d59986bee223c398600a4edc9d98f28848e802f",
+          "lfs_sha256": "737bbf398b94fbf2fb039c54bfbd4403a4b26520f84ebc79c36643fc397af9e0",
+          "repository_path": "train/18-of-256.parquet",
+          "size_bytes": 11208054530
+        },
+        {
+          "blob_id": "e5dfed060b74ea52a7ed9b29c25f298122f800fb",
+          "lfs_sha256": "12e08613aa3afa9f9c102348eaac602fb5af417bc8c7b1114eced7aca823cce7",
+          "repository_path": "train/19-of-256.parquet",
+          "size_bytes": 11512574960
+        },
+        {
+          "blob_id": "57269bcf76e7869a8400dfa4563d8576954a7922",
+          "lfs_sha256": "cdb1aacdaa0250e4f73e866bfe9488d7adb3bc8d28cdfd4dca08c2af3cda2cff",
+          "repository_path": "train/20-of-256.parquet",
+          "size_bytes": 11715248619
+        },
+        {
+          "blob_id": "467729154a4b36fd6cc29b7b937651aefa117229",
+          "lfs_sha256": "4e14b85120fc28bac7dce2bdebfcc10f9209e31cf11b4dfb0684212cf80479e7",
+          "repository_path": "train/21-of-256.parquet",
+          "size_bytes": 11577373794
+        },
+        {
+          "blob_id": "56a8df409e4481f32a504a87460ccc44d21d6954",
+          "lfs_sha256": "cdd634261cb3a0ccb8ae6dde3bd3cedc5cdfb3f887437ccb8b11d07f530dc0af",
+          "repository_path": "train/22-of-256.parquet",
+          "size_bytes": 11505299722
+        },
+        {
+          "blob_id": "2bd57fd46f9885f5dc3161bfdd9f1309abf1377e",
+          "lfs_sha256": "3bf2d7e0a7bc482e5e9e18215541bcf25b4e439975a2a312130f9a1dfc1d7c3a",
+          "repository_path": "train/23-of-256.parquet",
+          "size_bytes": 11407194270
+        },
+        {
+          "blob_id": "062d46042947fda4d2257976891b39f33d6af044",
+          "lfs_sha256": "8f5dbcd05b6441728da049dc88f95ece5ed2f1184d5e912982671ccac4b83af0",
+          "repository_path": "train/24-of-256.parquet",
+          "size_bytes": 11290518833
+        },
+        {
+          "blob_id": "8f14899ac347221c0637668a62876ffede355c45",
+          "lfs_sha256": "e8ca06e2ea7854c155e2fbd21a6d2acc63aabf16154c4cf685dac8d96180267a",
+          "repository_path": "train/25-of-256.parquet",
+          "size_bytes": 10770681545
+        },
+        {
+          "blob_id": "2caa3fa45bbc3e168040dc9f90d8c72bf18592a8",
+          "lfs_sha256": "cb5361064fc26498b7657c16c9553badf8687104dee38215e885a83a5d412a75",
+          "repository_path": "train/26-of-256.parquet",
+          "size_bytes": 11638672839
+        },
+        {
+          "blob_id": "caa3ef3ba2988a498a468bf75120d60c93c4e55e",
+          "lfs_sha256": "341a99f0790c779662b23cf8f1248e375003ce483f992a1dc293917df5e6ec3d",
+          "repository_path": "train/27-of-256.parquet",
+          "size_bytes": 11123660211
+        },
+        {
+          "blob_id": "34d14e382c79fd24b6b948ee217608ed5765864a",
+          "lfs_sha256": "1ab86ec3d089ce5a45af8fb62a6bd220387b21e6bcb00dda2db3748def458e36",
+          "repository_path": "train/28-of-256.parquet",
+          "size_bytes": 11482087288
+        },
+        {
+          "blob_id": "9f580d4fbd697db3a92b123be72f0461ffbecea9",
+          "lfs_sha256": "503043c095bb2c31f16d72436830661519283329702bb26c385307b7b84e8ba3",
+          "repository_path": "train/29-of-256.parquet",
+          "size_bytes": 11170170231
+        },
+        {
+          "blob_id": "8f80f8fc4311dc894f88b0db998e2f4ba294b4e8",
+          "lfs_sha256": "63b9d0aa1377accb89883ef4ccf2a243045d62bdab7d590c8e8ab390f04cd166",
+          "repository_path": "train/30-of-256.parquet",
+          "size_bytes": 11345408054
+        },
+        {
+          "blob_id": "b0a794b4f512de8cb4bedef8d76f55a5c12af8f8",
+          "lfs_sha256": "8ad6ffcc0493b3689ab4276d2ef5b44c1a3d4202fddfd6290b6df05d859b15c2",
+          "repository_path": "train/31-of-256.parquet",
+          "size_bytes": 11406265050
+        },
+        {
+          "blob_id": "181c40c6a0951d9cdc3f544eeb4acf00a064cc50",
+          "lfs_sha256": "95cd5764be787d08d7c721b631985eb11e5cded5ecb77e9c988531c3b2e41bb2",
+          "repository_path": "train/32-of-256.parquet",
+          "size_bytes": 11504096561
+        },
+        {
+          "blob_id": "9cabc7cd9dc0fc1a6620fceca1db0b4845a12bbb",
+          "lfs_sha256": "56777b77c256b74c255318f424efeff42740070030c84c09766a851ebff0cc73",
+          "repository_path": "train/33-of-256.parquet",
+          "size_bytes": 10834974194
+        },
+        {
+          "blob_id": "bef483e734bb8df440c4913b19fe2fc5bc007085",
+          "lfs_sha256": "9e4f9c5347329fb206f2f1db3015d26cb2dce61104a917096181da79dbabf77f",
+          "repository_path": "train/34-of-256.parquet",
+          "size_bytes": 11081080930
+        },
+        {
+          "blob_id": "7419249e9b49ef2fc13ab0ed8d81c12baa8ffce7",
+          "lfs_sha256": "1e7a11d64bc987917b460f121a00adad98a353221eb72c6fadec0ed1a056803d",
+          "repository_path": "train/35-of-256.parquet",
+          "size_bytes": 11459154599
+        },
+        {
+          "blob_id": "5b136283d68cba8ca5dc91de3f0b6372226a33e5",
+          "lfs_sha256": "48a1e8a073b1794360905161dc3c41f0981afb59a7c9ea7cbcab6bb87a89e171",
+          "repository_path": "train/36-of-256.parquet",
+          "size_bytes": 11488212193
+        },
+        {
+          "blob_id": "e758dfd6f4daeeb43d4ad97d5bcd1a4bfebda7ff",
+          "lfs_sha256": "987c40177d708dfbb9db018cfd9862932dc268569ec33368f21cfad8caa016bb",
+          "repository_path": "train/37-of-256.parquet",
+          "size_bytes": 11028430166
+        },
+        {
+          "blob_id": "3e58dfa3687918a9fdc997ef2f0daea4412b3748",
+          "lfs_sha256": "585390a50736b3dd1da236cc7a92c3c40411eccd349c642fd2ca815af3e71362",
+          "repository_path": "train/38-of-256.parquet",
+          "size_bytes": 11418598955
+        },
+        {
+          "blob_id": "e832bf915a7972113b5412426242a1737431dbbd",
+          "lfs_sha256": "dd5bd2ee8aa3fc6251175796312db2d535d7f6855018439d2dd1c0964ecba7d6",
+          "repository_path": "train/39-of-256.parquet",
+          "size_bytes": 11197139244
+        },
+        {
+          "blob_id": "aaf5209fecea29b0381993d20a19e1fbe2ec1f6b",
+          "lfs_sha256": "55486242d34f0692bff9b9e9f845eb016aaecc2b6a81dddde726f060907c13eb",
+          "repository_path": "train/40-of-256.parquet",
+          "size_bytes": 11131202706
+        },
+        {
+          "blob_id": "7b8391a501ae0bec53d7473d2175aeac5bd48703",
+          "lfs_sha256": "ffbd8be4e6cefa9e704041f8ae4c40d8f54f4a90d3284fec7bd5d337d9eaf3f7",
+          "repository_path": "train/41-of-256.parquet",
+          "size_bytes": 11136428892
+        },
+        {
+          "blob_id": "775dd2ea89ca845be9794c7db8b88869b586d73f",
+          "lfs_sha256": "1d0d79af07d5f5a6f6b87b1feb2f648b12b9bd756366c0e1897d110b92ff5635",
+          "repository_path": "train/42-of-256.parquet",
+          "size_bytes": 11532379620
+        },
+        {
+          "blob_id": "1d6af058b2de87f5cc98fce2c7863943e5da7b4b",
+          "lfs_sha256": "78c244d031b7ddde85feca7f23ae478ca04aa14cf8becbb735b4826edf6a78e6",
+          "repository_path": "train/43-of-256.parquet",
+          "size_bytes": 11277329598
+        },
+        {
+          "blob_id": "c533686f584994f3f78dbae2c39837c8b0e581ab",
+          "lfs_sha256": "58de5030d895b9c77731108c33305d57f91e5148429e3b090bb493b2970b0c83",
+          "repository_path": "train/44-of-256.parquet",
+          "size_bytes": 11260478215
+        },
+        {
+          "blob_id": "18a9a509d82af51258da9431628fead9dd3efb3d",
+          "lfs_sha256": "232a633e48815cb031d6264ad25edd61f69b91539347e661122a9e4c87534fdf",
+          "repository_path": "train/45-of-256.parquet",
+          "size_bytes": 11648583880
+        },
+        {
+          "blob_id": "bdce0173994c787180cbd553f4bac4e6067d27a3",
+          "lfs_sha256": "6f019cc807671babd77014484865cde226d97e9d7586cf31fd5f288ad4852278",
+          "repository_path": "train/46-of-256.parquet",
+          "size_bytes": 11464075432
+        },
+        {
+          "blob_id": "706b911fcdc08509d297db06ca88939cc54a686a",
+          "lfs_sha256": "2b4cd5e71c667852c7fa14f477fa2c4e34f80eebf7337c624ccbea88dc7427e8",
+          "repository_path": "train/47-of-256.parquet",
+          "size_bytes": 10868824522
+        },
+        {
+          "blob_id": "6bf58baa9863bec821ab2f01e141cd5a9c851716",
+          "lfs_sha256": "7b46caae49b15315aea71ddb765292ff32e88a1a59cafd7958719e345afa97c8",
+          "repository_path": "train/48-of-256.parquet",
+          "size_bytes": 11340510145
+        },
+        {
+          "blob_id": "7dd09e1ab5ea824e4101dda54710139f7393c698",
+          "lfs_sha256": "45929dba20eb6e15d08f8d56e3cd8379c25921a1415c86de46314d2c9673f5dd",
+          "repository_path": "train/49-of-256.parquet",
+          "size_bytes": 11454117984
+        },
+        {
+          "blob_id": "57ba9b5eb9cbe56ef59b5b4fd0ee4a4a70f3bcd8",
+          "lfs_sha256": "aa02c211a6edac886aca2312ef16333c0fe1a25084687f1afee6c2a512b22d27",
+          "repository_path": "train/50-of-256.parquet",
+          "size_bytes": 10859954081
+        },
+        {
+          "blob_id": "3345c17893be081af5001562e0501664526a075c",
+          "lfs_sha256": "b7b640cc535ccb3b4fa9e70f670382a4ea83e472af0ec3a89a0a1d63855abe2e",
+          "repository_path": "train/51-of-256.parquet",
+          "size_bytes": 11232211714
+        },
+        {
+          "blob_id": "9f9e8e44d1dd20ca8c1d983e8bed300a65babcea",
+          "lfs_sha256": "35f6221f4a3c94da67eeda9a96bc64a081299a538c9d7fb8262dc847bbd491aa",
+          "repository_path": "train/52-of-256.parquet",
+          "size_bytes": 11118844482
+        },
+        {
+          "blob_id": "7e8f6c32fe8fdf17d8367abecc8d9f157d67f06c",
+          "lfs_sha256": "70b52fe162e7e410ea406b293d3f7b6cccf9fbe4de1c5827b05fd4d97edd58e2",
+          "repository_path": "train/53-of-256.parquet",
+          "size_bytes": 11290794199
+        },
+        {
+          "blob_id": "95cdd64f48facf656b5316a917e21a93772670ab",
+          "lfs_sha256": "4b0be2ed2c24a98cd60bb559584a3f93f7b6b0f225063cc52555c9c49c6d5374",
+          "repository_path": "train/54-of-256.parquet",
+          "size_bytes": 10934411588
+        },
+        {
+          "blob_id": "ec17d57ab6f9d145ebfeeff4cec46e3219b1bf25",
+          "lfs_sha256": "2daef19d5dfb7d3c1e43d583eb2f993ae1d2f981b00d2db64c29011d57f71d06",
+          "repository_path": "train/55-of-256.parquet",
+          "size_bytes": 10898326580
+        },
+        {
+          "blob_id": "85cb1e465870ff5c15ba6871511b185a6fb18eee",
+          "lfs_sha256": "e3f432fd8a603d9c83d997bed3fd088ca738fe8fd2b27db62deb184453979d51",
+          "repository_path": "train/56-of-256.parquet",
+          "size_bytes": 11334147557
+        },
+        {
+          "blob_id": "8edfde288d0257b74483d3faaf666d6a1ec5bfc9",
+          "lfs_sha256": "1711ceef72eed85a6ca66b2365b94e7e6ce1edecac72f55995aacea735d4790c",
+          "repository_path": "train/57-of-256.parquet",
+          "size_bytes": 11265023183
+        },
+        {
+          "blob_id": "82394e2a2a82fedcd510282bde903ff68f296070",
+          "lfs_sha256": "5d5e92aece7a5c3ad1c0e51b6ec148482e3fb66c246d42a0a209aed1693b92f4",
+          "repository_path": "train/58-of-256.parquet",
+          "size_bytes": 11054200952
+        },
+        {
+          "blob_id": "8e9b9352def95269dc1dc00ca1a7b20709b4bf0a",
+          "lfs_sha256": "df8e162e2173b0cd52b5875e0909d070395ba1fdf04d2d9dd070cd54bfdb8007",
+          "repository_path": "train/59-of-256.parquet",
+          "size_bytes": 11392983874
+        },
+        {
+          "blob_id": "1d21febec34dc8f6bc8469bcd76cdcf9d8017f08",
+          "lfs_sha256": "ecd460a077ceba789b70d9b7cdedd8c8beb423ecc84e34309ad79678d3a2ca1e",
+          "repository_path": "train/60-of-256.parquet",
+          "size_bytes": 11135221095
+        },
+        {
+          "blob_id": "5ce7d8be3a1355eb18f23826884f90d80685a058",
+          "lfs_sha256": "07e22db6ad06540766652f920c8c6ecba26a083bd866c2b885110056f0a9aeb4",
+          "repository_path": "train/61-of-256.parquet",
+          "size_bytes": 11227785458
+        },
+        {
+          "blob_id": "1ec4223a88e774f33fdf77a654925390dea3d942",
+          "lfs_sha256": "2a1aba2510e8f48972a1cc81251f82cde761d508eeeda7eea5232ec206505b57",
+          "repository_path": "train/62-of-256.parquet",
+          "size_bytes": 10865223210
+        },
+        {
+          "blob_id": "dcca8507b2781ae2c2a440380099afdb9118a6ac",
+          "lfs_sha256": "5b80f035d1f0e1db1c2243977608057f4949e515121bfc5ab47c19fe3d07bdbb",
+          "repository_path": "train/63-of-256.parquet",
+          "size_bytes": 11682569237
+        },
+        {
+          "blob_id": "3a8928854677617f8a3e6de74cc68b024caa219b",
+          "lfs_sha256": "ebd47f9a7d1db3303ef8e23b36d5399602b45e8b80f2a811804ee0a987bf69bc",
+          "repository_path": "train/64-of-256.parquet",
+          "size_bytes": 11124408394
+        },
+        {
+          "blob_id": "b5c632bde7026aa02d01becb05f7a6fa1068e787",
+          "lfs_sha256": "703f152d91c0bfadfe37198e01f97f6350e7412a0289617c0007e847b24bcd6e",
+          "repository_path": "train/65-of-256.parquet",
+          "size_bytes": 10897328701
+        },
+        {
+          "blob_id": "e0dfe397baf5637eb4c2655e6d7f4b8a96da142d",
+          "lfs_sha256": "9e9ea7c2973875e3a118f9c8877664d519fc532783b5a88f9ba4f9e6dfe9d0f3",
+          "repository_path": "train/66-of-256.parquet",
+          "size_bytes": 11123320033
+        },
+        {
+          "blob_id": "19add76da22b6838fe0df42f38cb36d8aa87c89f",
+          "lfs_sha256": "287fe0fabde7370a896c4660b389d69f7b31cc73acdd05321df8b7bcaf504de9",
+          "repository_path": "train/67-of-256.parquet",
+          "size_bytes": 11019589815
+        },
+        {
+          "blob_id": "3dd59781ea3b5ef3d57e71b3da42ca7b9e75b995",
+          "lfs_sha256": "908bb3abe01f0246c32921632970c2552dbdf8d481de57ebc7fe67728fafb483",
+          "repository_path": "train/68-of-256.parquet",
+          "size_bytes": 11347278054
+        },
+        {
+          "blob_id": "9734f65738796c2c575bca6e6d71f4d63ed17a6d",
+          "lfs_sha256": "44d6a66b0fc3bcf7958abbf625514fc7a8913bc73e0131bdfb1366565410d425",
+          "repository_path": "train/69-of-256.parquet",
+          "size_bytes": 11232055057
+        },
+        {
+          "blob_id": "24fd155ec1eee1ca873d082d0791196f5bdd15df",
+          "lfs_sha256": "1111b69720904afc9901d8d7631214d3026cb45119b92c039a71cf705c10e39b",
+          "repository_path": "train/70-of-256.parquet",
+          "size_bytes": 11085586545
+        },
+        {
+          "blob_id": "8cd29d957fe1443ac885214aa5eaed44bdd025bc",
+          "lfs_sha256": "fbb2233788e1b96fe55361749d3525cf8eeecca47874a64088e41d54ee9a2fe9",
+          "repository_path": "train/71-of-256.parquet",
+          "size_bytes": 11213208140
+        },
+        {
+          "blob_id": "198633fe1c77246b3f59ce7c5b6dc2a1c708b3f2",
+          "lfs_sha256": "4ba98fd4793853f658d8386265d5996b54758ab2dca89b75f98ac35de85a7760",
+          "repository_path": "train/72-of-256.parquet",
+          "size_bytes": 11136880894
+        },
+        {
+          "blob_id": "cdccc6d3dd7edf3b83926c32b752549e003aaae7",
+          "lfs_sha256": "85117fc53e6038a702be30aa2a1435883809304c52374a0f6d6ffaad62b053e8",
+          "repository_path": "train/73-of-256.parquet",
+          "size_bytes": 11183582222
+        },
+        {
+          "blob_id": "30d2267639c80b8e9dee61c22aa6026fbe96e3b6",
+          "lfs_sha256": "e8e9ce0587002fbfab3089ff052e6a1546a9590f8ad011b2126421062446dc26",
+          "repository_path": "train/74-of-256.parquet",
+          "size_bytes": 10748538137
+        },
+        {
+          "blob_id": "35bfad22967773d5247a81bd2ce02617a1add3b8",
+          "lfs_sha256": "1497c0b1666592734babcfea3279a374701dcab79e960b9e563ef69a1824c847",
+          "repository_path": "train/75-of-256.parquet",
+          "size_bytes": 11600382594
+        },
+        {
+          "blob_id": "c4beee3afb8e5c7af13bf5276e734ed8746ec215",
+          "lfs_sha256": "b91e508990d36e2bb999d088a565b89b44270c30b54921c57ae57fc614861997",
+          "repository_path": "train/76-of-256.parquet",
+          "size_bytes": 10767234297
+        },
+        {
+          "blob_id": "8c9a3bbe6639673cbac473a5f9e4f815855fb9da",
+          "lfs_sha256": "fa9dcb42bb14cb34529558c0beaaa146399a8b61125e717229d494324c6530bb",
+          "repository_path": "train/77-of-256.parquet",
+          "size_bytes": 11190699017
+        },
+        {
+          "blob_id": "54f08d0f56d41d6a7abda688adb862da0b660984",
+          "lfs_sha256": "f2fb06d22faab9801e12c00b0a8d7b5b8b91ad63b639e2ee35ca807e0869687c",
+          "repository_path": "train/78-of-256.parquet",
+          "size_bytes": 11131433685
+        },
+        {
+          "blob_id": "05149c633a153e077c8ef3fcaf5db826dc8e7e59",
+          "lfs_sha256": "98dc6f15668d8b2cc0f99c207f915a65532a2fd4bab508978468a5ae3a1803b2",
+          "repository_path": "train/79-of-256.parquet",
+          "size_bytes": 11806390805
+        },
+        {
+          "blob_id": "8aa989e41d2bdcdaf897250652da000cc891e6fd",
+          "lfs_sha256": "24539e1f8536765acbb95a664a78f301b1403fd33c733e40815abeb445df9d51",
+          "repository_path": "train/80-of-256.parquet",
+          "size_bytes": 10785575650
+        },
+        {
+          "blob_id": "8fccdf02a38a06d7b90402323c5e150811ba628d",
+          "lfs_sha256": "4ff4a55a4c4d5cd67bb81455d10824728ad3fd3073d5449206bb337686138d45",
+          "repository_path": "train/81-of-256.parquet",
+          "size_bytes": 11303853307
+        },
+        {
+          "blob_id": "c908dc03dfaf081ac6cd6a622eeca602a8cc204e",
+          "lfs_sha256": "063805f504e89a813580093c091346269a24f3a976eda0743182bf7bdc771172",
+          "repository_path": "train/82-of-256.parquet",
+          "size_bytes": 11254102520
+        },
+        {
+          "blob_id": "70f097e0ca9696588bb248beb84e869c84876f2d",
+          "lfs_sha256": "fa1d9fcea6794ac7e25e54a60f72d3af0343d651bb7d4389fa6bf32dd946f1af",
+          "repository_path": "train/83-of-256.parquet",
+          "size_bytes": 10967158038
+        },
+        {
+          "blob_id": "85fb55ed1eae698416dd3336c1eca713494301a7",
+          "lfs_sha256": "5c4dc06a5bd3b72ad99e8c510f63434b46f48cdbcd828e8095b51768ca401dc0",
+          "repository_path": "train/84-of-256.parquet",
+          "size_bytes": 11405318129
+        },
+        {
+          "blob_id": "5a70224daad7055006119020c28c191d0557cf77",
+          "lfs_sha256": "83702d94c8deda42d1dc25256af1b90d79e544000ae14b69cbf7f996d88429a7",
+          "repository_path": "train/85-of-256.parquet",
+          "size_bytes": 11584028300
+        },
+        {
+          "blob_id": "142fc5cdb9c51ae3992e29081eb44358f604501f",
+          "lfs_sha256": "9eeb7744be5e3747ffdad7ee7cddad9e6a13f41d20a8aa1bc13794e78bbbdab4",
+          "repository_path": "train/86-of-256.parquet",
+          "size_bytes": 10999861001
+        },
+        {
+          "blob_id": "b3fa6aa46851e48c6586f58b27b6843aba1a2ddd",
+          "lfs_sha256": "d19d230a9024a206981056b51ee052b86948028be587f0b4734abd59ca41132f",
+          "repository_path": "train/87-of-256.parquet",
+          "size_bytes": 11393973481
+        },
+        {
+          "blob_id": "d00cbd4c6813a61c8b0fa391f15a0d83790f00be",
+          "lfs_sha256": "655d8a386f9770af009d1bf7c1945c6f624bead8061898362e3bfbb52fb0c6c4",
+          "repository_path": "train/88-of-256.parquet",
+          "size_bytes": 11468048893
+        },
+        {
+          "blob_id": "30d924a57ac052ae268d42efdac9e21cda981254",
+          "lfs_sha256": "ea6a0dbd676ed6cc57e26a871a141fd2e3118e634b77ceefe0e12f11c1425777",
+          "repository_path": "train/89-of-256.parquet",
+          "size_bytes": 11602081116
+        },
+        {
+          "blob_id": "88b17ae6a393c541e8c84091025d41f055dde334",
+          "lfs_sha256": "89397f4f6067f7b0d4b19106b2f1798624a7fa2010829f55db1f7d71af3dc12b",
+          "repository_path": "train/90-of-256.parquet",
+          "size_bytes": 11094603913
+        },
+        {
+          "blob_id": "86a313be496f95f236b16f141c373afb213664d0",
+          "lfs_sha256": "743613f33e68ef75493bd3480a7ca1c6d9152021fefcd33380b3a983848d151e",
+          "repository_path": "train/91-of-256.parquet",
+          "size_bytes": 11002413474
+        },
+        {
+          "blob_id": "2a55a99ec6d3d89f3fc13f6569397eb35deaf02e",
+          "lfs_sha256": "b8bf04184d13013216f15fb2875c6f780b5f79802d436e710b0a3afc8cdf62d1",
+          "repository_path": "train/92-of-256.parquet",
+          "size_bytes": 11498142524
+        },
+        {
+          "blob_id": "b5f3fa8ad4c4ab351e80c57cf942fad2b14baa24",
+          "lfs_sha256": "12dcb508ff6fb8251dd4b44e7e5a71266e85c34784c6275fca7ed7512eb61e78",
+          "repository_path": "train/93-of-256.parquet",
+          "size_bytes": 11221139711
+        },
+        {
+          "blob_id": "2aa7016fc084868439881d07e4e4f79e4fe95c11",
+          "lfs_sha256": "4a1d418d1bad93ed52f9409e438cbe4deae8d47045fb3df53e5984b7730f5e7d",
+          "repository_path": "train/94-of-256.parquet",
+          "size_bytes": 11616241633
+        },
+        {
+          "blob_id": "d9efaa93b734ee4e7ecf74db4d342a3fbadbbf70",
+          "lfs_sha256": "3746a208abb6fcb7127dcf864a8024395ed8b13971440713b97252d018182278",
+          "repository_path": "train/95-of-256.parquet",
+          "size_bytes": 11057567458
+        },
+        {
+          "blob_id": "991ad59f55ff2e0ea46258abbc5ad5510d7a2dce",
+          "lfs_sha256": "07df022749b3e7d2591fe50e28849f2418013058b0a608172fb067c1b91294d9",
+          "repository_path": "train/96-of-256.parquet",
+          "size_bytes": 11330043684
+        },
+        {
+          "blob_id": "136a8d301a8d35bf8a07c870505671033df315c8",
+          "lfs_sha256": "e6e034a8e81a279bde610563687877783881cbee9cd2f202174c85476ab493ce",
+          "repository_path": "train/97-of-256.parquet",
+          "size_bytes": 10897268873
+        },
+        {
+          "blob_id": "d9bca47a4579831010a7f82539fdf92c8abcf90c",
+          "lfs_sha256": "fa0370bda14321404feeaacb5f7919c5c804ae2756043ae0217cb8737074f0b7",
+          "repository_path": "train/98-of-256.parquet",
+          "size_bytes": 11023506409
+        },
+        {
+          "blob_id": "cf19105c9be905de530c1eaa8b59880dce3ca792",
+          "lfs_sha256": "f56b6979db3cb8b1737cff538fea76b3b181a1c780bf20990d3b44886b0a0eb7",
+          "repository_path": "train/99-of-256.parquet",
+          "size_bytes": 11300046798
+        },
+        {
+          "blob_id": "f98790d95033d76c5fcbf624e67bf4078dde85b1",
+          "lfs_sha256": "b9241b85ef65004d524c94ec543d8dba2aa5dfd360a832788301562404d02354",
+          "repository_path": "train/100-of-256.parquet",
+          "size_bytes": 11363211040
+        },
+        {
+          "blob_id": "b0715547774260b694a0ab0dd00e1f5bf8c3e58b",
+          "lfs_sha256": "1393731a61bde0dad263221a2f9587d450f6777a3d5d2c17c0a653f205a62c6e",
+          "repository_path": "train/101-of-256.parquet",
+          "size_bytes": 10900144535
+        },
+        {
+          "blob_id": "9be18e1c7f97e0940575d7f9a167aa51f05127b4",
+          "lfs_sha256": "24ecb414d42d2f42f452e01d8437b61e681121042b011807bd737face0c8f386",
+          "repository_path": "train/102-of-256.parquet",
+          "size_bytes": 11676753830
+        },
+        {
+          "blob_id": "bbc2b7d025a83488a2a5804f3b64899802d41861",
+          "lfs_sha256": "d7db23d120d6de633f379b53c8f53bd3709fdf5d3c4d88fe1a3e150a2b0a1336",
+          "repository_path": "train/103-of-256.parquet",
+          "size_bytes": 11134262851
+        },
+        {
+          "blob_id": "e987cca14d663a2976227f22cb532bf293826dbb",
+          "lfs_sha256": "15394f9a4fe8204cd71d384c2be06ac4017515899e38c642ace9315b4d32111c",
+          "repository_path": "train/104-of-256.parquet",
+          "size_bytes": 11475270661
+        },
+        {
+          "blob_id": "c3df055edeb127b220da1552d8a480faceb32554",
+          "lfs_sha256": "35b789727e919cda704eb3190b19ee35cf2f514c8dd367bfea23ecce42b0f22d",
+          "repository_path": "train/105-of-256.parquet",
+          "size_bytes": 11077160635
+        },
+        {
+          "blob_id": "0a54344e374641b5b4f58312a0392d7ec04cf355",
+          "lfs_sha256": "bea93a2606ddc2eba34ce7de024cafd8546116a23c1deeb84b139536a64560bc",
+          "repository_path": "train/106-of-256.parquet",
+          "size_bytes": 11187014050
+        },
+        {
+          "blob_id": "36f8a8bd3193f11a234f730bce5e27a57b424fba",
+          "lfs_sha256": "3e4415626ab383c5c8f713a1bbaaa409ac4ee58f1ce005993113bbb60203d770",
+          "repository_path": "train/107-of-256.parquet",
+          "size_bytes": 11383333775
+        },
+        {
+          "blob_id": "6b25321e0d81271a15b95f40588dcd67cb823f4b",
+          "lfs_sha256": "3dc3aaebb120347135bdc8acd3a769ae447f973f9f862d07209ee80b4ab884b1",
+          "repository_path": "train/108-of-256.parquet",
+          "size_bytes": 11402905637
+        },
+        {
+          "blob_id": "ea54cc813c1fa5f48d2e48b8b00856f6274a6b96",
+          "lfs_sha256": "de7a3a47710908e8a93a99f667af89811a8588b251f39c8b837dc49036e90742",
+          "repository_path": "train/109-of-256.parquet",
+          "size_bytes": 11019363084
+        },
+        {
+          "blob_id": "9165d0b23fc25203e66b91d0d9070c689b23e5dd",
+          "lfs_sha256": "7b88ff2560831c85d789abcc249abae9087aec07548e2cff5f48af5c80d38177",
+          "repository_path": "train/110-of-256.parquet",
+          "size_bytes": 11478937501
+        },
+        {
+          "blob_id": "2a576377519ba4fc78f6d11a058280545a59e7a8",
+          "lfs_sha256": "b4db092639ec6b4d5ec29dafaa0b41d28d780aaa7e58f6730f012a7876751a01",
+          "repository_path": "train/111-of-256.parquet",
+          "size_bytes": 11165797739
+        },
+        {
+          "blob_id": "a8f3403910d74b3bc09fea7ec9407e3ae7a65e75",
+          "lfs_sha256": "529f9b0c506e4caa3dc82f213c02d2096a7b0fc9924550cc8c9ee1190ba74ef1",
+          "repository_path": "train/112-of-256.parquet",
+          "size_bytes": 11261028523
+        },
+        {
+          "blob_id": "0b165b16c4352d53e9e8e2e12a7219f51b8da7a3",
+          "lfs_sha256": "ca942021539066df22a49bda1e9e51cacb70762258c4582a602f0a36e6565008",
+          "repository_path": "train/113-of-256.parquet",
+          "size_bytes": 11063862488
+        },
+        {
+          "blob_id": "6f620cf0817a24332c29b800181cefa9ee1576f0",
+          "lfs_sha256": "5012204dc6507b50c19cfbdb64158f951ed0f90064e7ac0dd8ceff675a630b94",
+          "repository_path": "train/114-of-256.parquet",
+          "size_bytes": 11360153779
+        },
+        {
+          "blob_id": "c9eb1a4b94d3b08bc66ca347aa0bb909def25f25",
+          "lfs_sha256": "018368f0a9959343ed9094f4485231e5afbd811c51cb7bdee2d61b2584af0b0a",
+          "repository_path": "train/115-of-256.parquet",
+          "size_bytes": 11118052297
+        },
+        {
+          "blob_id": "0628a5d01ecb67f6798bec78e145861a7e8978db",
+          "lfs_sha256": "4f97ee2fbfff3254f54a7c2776dd9c70a4abc95e62db2c39e999ba472870686f",
+          "repository_path": "train/116-of-256.parquet",
+          "size_bytes": 10996237751
+        },
+        {
+          "blob_id": "61bc717d5d1b58fe928911b24ce1854c99ae1f9c",
+          "lfs_sha256": "b4d0284486a324402d9ea86e7ad8733b98063c2570a2903cabfed1c8827c76f6",
+          "repository_path": "train/117-of-256.parquet",
+          "size_bytes": 11312093289
+        },
+        {
+          "blob_id": "be6ffdea2602aea426b35a694a5021007f57866d",
+          "lfs_sha256": "8832b880ccf24b312cefbeffa2241c212625b33e91cce393c1f0d7b485be7460",
+          "repository_path": "train/118-of-256.parquet",
+          "size_bytes": 10900848489
+        },
+        {
+          "blob_id": "1cd85c4d6b7489d3780747a05e5479a1f4850ba3",
+          "lfs_sha256": "999765a6580abc8b9177db540a3964a7bc9f8bb7936816ef3c6222bd23e88d35",
+          "repository_path": "train/119-of-256.parquet",
+          "size_bytes": 11053317343
+        },
+        {
+          "blob_id": "3f64abad32fb4fa5576da551aea12473ae9bb401",
+          "lfs_sha256": "1e4263d90ffc712328d34e62dd82c13c49284c96d2f69f0c73f9fe6e728a5d10",
+          "repository_path": "train/120-of-256.parquet",
+          "size_bytes": 11180287447
+        },
+        {
+          "blob_id": "521dfd82af7e81cdfdd2f8eb89ff9380e4c96d7d",
+          "lfs_sha256": "edbac2a278b328d060ed918e011052684af26db6d61655412fc3e6fc05425bdf",
+          "repository_path": "train/121-of-256.parquet",
+          "size_bytes": 11283455148
+        },
+        {
+          "blob_id": "d57bf9fd52dcbfc73599a35c57983b839dc20227",
+          "lfs_sha256": "d0384fe6432da74658b74f8844a369025c0d0a5006ae7f8bf9c2320f0c374a8a",
+          "repository_path": "train/122-of-256.parquet",
+          "size_bytes": 11388171415
+        },
+        {
+          "blob_id": "99f849a3029f1791a7a7aa29dc10b7eb59e738b2",
+          "lfs_sha256": "85b044a16bc9bd24911a7026fd6b32b9fb61f71a72faade166c96170a3dbf86a",
+          "repository_path": "train/123-of-256.parquet",
+          "size_bytes": 11164431589
+        },
+        {
+          "blob_id": "8ba060de7f67131b7888de9dac2b690e2c7cfca9",
+          "lfs_sha256": "2503de7580d99ebde56c7de9aa1b8fac3c2558500317780ce93f274beb4dbc08",
+          "repository_path": "train/124-of-256.parquet",
+          "size_bytes": 11446719455
+        },
+        {
+          "blob_id": "6cc192e89a9dda6a6b70fa0a0572e3cfe472979c",
+          "lfs_sha256": "93b95403b6974bfa752b4efe2cdb55fa387382119bc252a88a7b44a81f317967",
+          "repository_path": "train/125-of-256.parquet",
+          "size_bytes": 11329196178
+        },
+        {
+          "blob_id": "767316dd1412c0d31e9547f7790b6b2cf9024b25",
+          "lfs_sha256": "b35525741e5283ec0654d38c74636465ccb5bfb2490bc06be9ea6a12d6f0f4be",
+          "repository_path": "train/126-of-256.parquet",
+          "size_bytes": 11430526014
+        },
+        {
+          "blob_id": "7d940aac68596b0e8362bc60fde7bcb772c27b3a",
+          "lfs_sha256": "d2957204ad8b43eee7ef1357cd61ba612a3eed9ca1c28bef913cd9738023a170",
+          "repository_path": "train/127-of-256.parquet",
+          "size_bytes": 11238258509
+        },
+        {
+          "blob_id": "e55f0cdf17348035f663273cd15f232dffca7e49",
+          "lfs_sha256": "f3a5b230cf47002e71f95239799a74d470fb2d42c99ede022ef21520727331c9",
+          "repository_path": "train/128-of-256.parquet",
+          "size_bytes": 10972866732
+        },
+        {
+          "blob_id": "1f216b063322755d48b3a7fac383cc283f5904f1",
+          "lfs_sha256": "7e2f525fe720317b5d86a7e638c8540d96a753d929b822c2bd14e56f4bf20638",
+          "repository_path": "train/129-of-256.parquet",
+          "size_bytes": 11232177612
+        },
+        {
+          "blob_id": "572b3e7b87f7180e08ec12dfba604553c8ff4d9b",
+          "lfs_sha256": "265c92478c1d48783d5147785ba2603d406fc8250398d894342b4821d356fc8e",
+          "repository_path": "train/130-of-256.parquet",
+          "size_bytes": 10756504437
+        },
+        {
+          "blob_id": "b44fac6966fb0386d3d6abc5b3708ff738c0cde3",
+          "lfs_sha256": "9261340fe7addd3692ed1c641e4b398817370d452e8ce1d9afea982ccd452cc6",
+          "repository_path": "train/131-of-256.parquet",
+          "size_bytes": 11441166028
+        },
+        {
+          "blob_id": "b95ea78bb985b4beed57621425c9b2041b6ed606",
+          "lfs_sha256": "afa3abbc88f26cf29878a83108523f14ef53a47f7a482ba8cd50bb5803cb3a2b",
+          "repository_path": "train/132-of-256.parquet",
+          "size_bytes": 11363031363
+        },
+        {
+          "blob_id": "a4e427f9fe77a406732762d842dcf6d00b183968",
+          "lfs_sha256": "c3983b50855fc39cc49742c7da632893f221507e57a06cdaa3d3642ade888472",
+          "repository_path": "train/133-of-256.parquet",
+          "size_bytes": 11322120608
+        },
+        {
+          "blob_id": "456577e9fcf2df75c9629c3cfad25dff928eb990",
+          "lfs_sha256": "428ecf38bcdeb3b2f1a905e49db0f41800b703e45a3b20d0077650d97b358c07",
+          "repository_path": "train/134-of-256.parquet",
+          "size_bytes": 11236455845
+        },
+        {
+          "blob_id": "6446ad9dd4469953c84c353d0acd7511b4544601",
+          "lfs_sha256": "b50cac2819063033b052c81103afdb65fbefcf5357b8ba7bd9cabebc5bccc4f3",
+          "repository_path": "train/135-of-256.parquet",
+          "size_bytes": 11048689167
+        },
+        {
+          "blob_id": "73f43abada16109ce1a2338809472c2970463d04",
+          "lfs_sha256": "717b22841981de1785718f82684203d5becf62f3e3b225f2f805243bc3afd8b7",
+          "repository_path": "train/136-of-256.parquet",
+          "size_bytes": 11611300434
+        },
+        {
+          "blob_id": "13d205e5043f5640724ce98ced6cf3e010ae0682",
+          "lfs_sha256": "33958c4135371776c2e52048de07b4df40c1add79d416ce7ab5cc4eea474a0ed",
+          "repository_path": "train/137-of-256.parquet",
+          "size_bytes": 11329641937
+        },
+        {
+          "blob_id": "a6fac89f5aa1dfe5cfdbb7113df596592e3c507d",
+          "lfs_sha256": "18a6a7accb60fbee431aec37aa0f70980a101947ca83f8aa585c4b88280d2ad7",
+          "repository_path": "train/138-of-256.parquet",
+          "size_bytes": 11550065786
+        },
+        {
+          "blob_id": "ff696571afe7ec32a9386915dfd3a2c1cdc119ae",
+          "lfs_sha256": "f1463c3d716a9307a17959aac09261dc0f094c5ff0aaa8d130da95c3bf27b7a9",
+          "repository_path": "train/139-of-256.parquet",
+          "size_bytes": 11234465861
+        },
+        {
+          "blob_id": "25a5bc72b6e50a2ad71c3e01bfece47803d1deca",
+          "lfs_sha256": "58760ac446fbfa8a0536f6a53c630f990b31c413852e802569a10c8c0f4de204",
+          "repository_path": "train/140-of-256.parquet",
+          "size_bytes": 10873389261
+        },
+        {
+          "blob_id": "fd18a2484d0304234dd147af2c8958b7042d2fd4",
+          "lfs_sha256": "a8f02db1cae9d413532785d2607a209f536f109268200000cb274e89697e22cd",
+          "repository_path": "train/141-of-256.parquet",
+          "size_bytes": 11444524173
+        },
+        {
+          "blob_id": "270f1878d95438eda2da737b672192d482173176",
+          "lfs_sha256": "7e0eecb579b8941185a864ba439c324c9bd9eaeb67d16a08e235e5e9e37dbec1",
+          "repository_path": "train/142-of-256.parquet",
+          "size_bytes": 10952575246
+        },
+        {
+          "blob_id": "0b591b449205179fc462c601a2a7e9b971cca5fa",
+          "lfs_sha256": "3c883985979a988292c5e22c19c3ffb8065742d1e3d606ba475a1110a9844af3",
+          "repository_path": "train/143-of-256.parquet",
+          "size_bytes": 11302831269
+        },
+        {
+          "blob_id": "5e046b76e98596debb14d58a637c72024a44239d",
+          "lfs_sha256": "95b0f539ea677eca0ca7fe192a56c09b4918100087ddfd62c2cd02bd0c9219b7",
+          "repository_path": "train/144-of-256.parquet",
+          "size_bytes": 11081501744
+        },
+        {
+          "blob_id": "097468ff7154fdb2b2da7f415589d56e0f3f980f",
+          "lfs_sha256": "14e225b9438933f39a492eddd04596e32dde2bab32df1fd026af936cc8c09765",
+          "repository_path": "train/145-of-256.parquet",
+          "size_bytes": 11417461910
+        },
+        {
+          "blob_id": "82f6d21805a96107f3f29d042f5b03da78704260",
+          "lfs_sha256": "f36026ebd3d14514abe6511fd446f0c086adb3a1f55466ae582db816956fb1ca",
+          "repository_path": "train/146-of-256.parquet",
+          "size_bytes": 11134175413
+        },
+        {
+          "blob_id": "09ef6d7836453ecce2319a7c02f492490b005e77",
+          "lfs_sha256": "19dc14c27924b9a54dc4f6dbb41e8e3abc3f7d5fecea204bdaefcf1df8cfa9c4",
+          "repository_path": "train/147-of-256.parquet",
+          "size_bytes": 11514112706
+        },
+        {
+          "blob_id": "ca6bb43ab9bf87e2614ec88c7bfb99b75cd41ff0",
+          "lfs_sha256": "4d55e24c0a8e17ce555107d21aefbf5c3223efa701742628d4915840f114935a",
+          "repository_path": "train/148-of-256.parquet",
+          "size_bytes": 11517771574
+        },
+        {
+          "blob_id": "c77ee8d25187cc3b8f0c8ccea3008af7f7307061",
+          "lfs_sha256": "40f9ccdc8d1df0f41e9e6af2cd9210a27c712ce0171a05270053d25c86959cb7",
+          "repository_path": "train/149-of-256.parquet",
+          "size_bytes": 11505434738
+        },
+        {
+          "blob_id": "0744f8f2fe21d5bfcc62820def711aaa3953bb21",
+          "lfs_sha256": "0674b0a665edf6247865c444afb284307ada9a1a3dda2f065f18d52903da5cf9",
+          "repository_path": "train/150-of-256.parquet",
+          "size_bytes": 11248566696
+        },
+        {
+          "blob_id": "b3af8cef88e0584a0fb8ba564d481a001a96ad81",
+          "lfs_sha256": "19c14f34b14ddcfd1c0186ed9f2f14e23b2f063e9745329e58a26258616b9694",
+          "repository_path": "train/151-of-256.parquet",
+          "size_bytes": 11393300709
+        },
+        {
+          "blob_id": "128057cc06435a20ab06ca3727ac9b8c66ff81bc",
+          "lfs_sha256": "5cd05b11388f5019534ba3cdc3be5f9f8ffe0958e70a129bcd4f6031624bb6ec",
+          "repository_path": "train/152-of-256.parquet",
+          "size_bytes": 11678502761
+        },
+        {
+          "blob_id": "8368cea7101ef3301d81ba3b45ae21162ebc1198",
+          "lfs_sha256": "edcdee114e147a397efbf84d8df5b054e7d5517bbca65c2221d7b1ce7449fdf0",
+          "repository_path": "train/153-of-256.parquet",
+          "size_bytes": 11153167648
+        },
+        {
+          "blob_id": "1551e53d2247f9fdeb746844cfd76be12f9c0674",
+          "lfs_sha256": "d7151f0711fb2258a3b542d3b1fc7670eff43302388cc94764a58dad5e55d6ac",
+          "repository_path": "train/154-of-256.parquet",
+          "size_bytes": 10953958954
+        },
+        {
+          "blob_id": "828c85882e5a94fc575c0a36ddd49bea7387d835",
+          "lfs_sha256": "dbac6dda8fef42f7b966dae0d009f235f5fe5c1f3625dd3b90c7c6b461c19dff",
+          "repository_path": "train/155-of-256.parquet",
+          "size_bytes": 10923904883
+        },
+        {
+          "blob_id": "08c6c6f8c21353159748f832a3799f7d79fe6517",
+          "lfs_sha256": "3d4f44f57bb76ed458e047adf96e8398a3f7e9a892c821c5e95f9a102a9a8c74",
+          "repository_path": "train/156-of-256.parquet",
+          "size_bytes": 11313488155
+        },
+        {
+          "blob_id": "39c2ae3f965794840c27e8dcd3e3ebaee8f1b747",
+          "lfs_sha256": "1ce505920ed4eb95400802ada9115f415a675f997dc87a762adb64b7a051f296",
+          "repository_path": "train/157-of-256.parquet",
+          "size_bytes": 11159008554
+        },
+        {
+          "blob_id": "ac4de4c9f8662d509e266081f59d9a887966b143",
+          "lfs_sha256": "6de907d68ed7e4af83200acd52c05f04651a1d66298646df2312e7bd17ec3ed2",
+          "repository_path": "train/158-of-256.parquet",
+          "size_bytes": 11292354207
+        },
+        {
+          "blob_id": "47b76e2d744bd03972155fdf603c6b6e7575f3e0",
+          "lfs_sha256": "4a39d06db3e7605169acb347f61eddb83db4133f70fbaed60c304152a1f3b6ca",
+          "repository_path": "train/159-of-256.parquet",
+          "size_bytes": 11368363682
+        },
+        {
+          "blob_id": "a500b5fd23a0734a356fa31861db4de314d7d2ec",
+          "lfs_sha256": "f97a622853aeae613c3b0ed3abf1df88fc608440e27d4f344ef74cc9a56eabf8",
+          "repository_path": "train/160-of-256.parquet",
+          "size_bytes": 11235185432
+        },
+        {
+          "blob_id": "31582e5eb994e005e05efec34d69a4fc05b9489c",
+          "lfs_sha256": "62e01b4744d745bd45874eb9d57baf1491a6bb5ee56ca32a715e21f11a1d5277",
+          "repository_path": "train/161-of-256.parquet",
+          "size_bytes": 11144833275
+        },
+        {
+          "blob_id": "93c44ec1060ee39dedb685091358cc727c958015",
+          "lfs_sha256": "e2dc82a159bd4af4e93d42999b9b5611ddcd36d49b294a8f93ae817ac39582dc",
+          "repository_path": "train/162-of-256.parquet",
+          "size_bytes": 11325815678
+        },
+        {
+          "blob_id": "09f17fd4c5109cf838bc089c8a56985d5260b5a2",
+          "lfs_sha256": "88c3755a952ec053966d9f7c4c2dc26a915b203f36039f7eb2a484ed735a24b9",
+          "repository_path": "train/163-of-256.parquet",
+          "size_bytes": 11391566565
+        },
+        {
+          "blob_id": "7821756123bfff6104b2b6f9ce9523b456422583",
+          "lfs_sha256": "5babdf2aecc1bfec0bdc844487ceb23edfd3915ae617d0087a4121083462b97b",
+          "repository_path": "train/164-of-256.parquet",
+          "size_bytes": 11382019879
+        },
+        {
+          "blob_id": "a69975d16783da6653ac18fadfcf185f2dc5536f",
+          "lfs_sha256": "8e0236a2d1979b221355ebfc6e274c5ec3770e5bee96b0f7691fe733adabc466",
+          "repository_path": "train/165-of-256.parquet",
+          "size_bytes": 11079517879
+        },
+        {
+          "blob_id": "6d681408147a954dd8a305354baa6480cee2ad5f",
+          "lfs_sha256": "01c7383af7f030604f83989f9c09ca60fff9b670c7fd00dada4720fe27ecdddd",
+          "repository_path": "train/166-of-256.parquet",
+          "size_bytes": 11199308443
+        },
+        {
+          "blob_id": "b105e03eec53e3b3520db1f6c2976738492d47c3",
+          "lfs_sha256": "fa5a30cd08f47709643290b49bb7cd193e6e2872e82586fd878d35f6298ab171",
+          "repository_path": "train/167-of-256.parquet",
+          "size_bytes": 11082237151
+        },
+        {
+          "blob_id": "8fe65fdf13ea386e95f022976f567c5f3bb0f847",
+          "lfs_sha256": "b6541ff0644a94259ae651b3a61ed12a5163c3a27167a4e8b6b0cda0552d16be",
+          "repository_path": "train/168-of-256.parquet",
+          "size_bytes": 11395267324
+        },
+        {
+          "blob_id": "cd0009eb0f8f99efba2a87d2560cdbf52143f8b5",
+          "lfs_sha256": "9047b119cf280f2c1b1c9d392d13aa25e5ac4c277ec0aa2693c95ed682272e8b",
+          "repository_path": "train/169-of-256.parquet",
+          "size_bytes": 11159115497
+        },
+        {
+          "blob_id": "04a897c5401b15d98a73c3740c2bd9c25f32fbe3",
+          "lfs_sha256": "523bdc700ebd8caa3e483f88ec0967cbc9d0d8e8dd609e3b0f2043332801e11e",
+          "repository_path": "train/170-of-256.parquet",
+          "size_bytes": 11526996458
+        },
+        {
+          "blob_id": "0282a287e52363a06193acfb3c55c45e7d74ec7c",
+          "lfs_sha256": "72c6ccb30ab2896bda5adde4e84d676055a8008190dadfef79bc91329b4af6d4",
+          "repository_path": "train/171-of-256.parquet",
+          "size_bytes": 10915819432
+        },
+        {
+          "blob_id": "b44b64b8d3e5739a478abf5014369016cf52de90",
+          "lfs_sha256": "37d70b1d64df0271514f4355585e238f592f669669deb60148297b1c2f1b8134",
+          "repository_path": "train/172-of-256.parquet",
+          "size_bytes": 11444995297
+        },
+        {
+          "blob_id": "d7c13b8d4214d2495ae8718d219c7397f75e6a3a",
+          "lfs_sha256": "9807af63046ecbdcbaa663d9dd4bc81e89646365a2530d01d465ca60addb5b44",
+          "repository_path": "train/173-of-256.parquet",
+          "size_bytes": 10658482899
+        },
+        {
+          "blob_id": "dc38be5e63cdf7d7f6a28ad9faa732ec115b21d4",
+          "lfs_sha256": "a68c10643a70b7e350e7a08571c910b18ecbdd6964e1440a6f92ce0fd78be4a6",
+          "repository_path": "train/174-of-256.parquet",
+          "size_bytes": 11297886728
+        },
+        {
+          "blob_id": "56f8a19b0b69508d9406eba7177bc69e7ed6d19b",
+          "lfs_sha256": "50d94239b5ba2b28cda6a28b4838eb1dfe07d96ef4b673c1f136718a74800dd7",
+          "repository_path": "train/175-of-256.parquet",
+          "size_bytes": 11179001506
+        },
+        {
+          "blob_id": "e97cb3349fb1e50d234ce14119c476f441c36e11",
+          "lfs_sha256": "22ee16e794eafbe0a760ee1aaef06f9e9783feca7140efa4462a094a1b770d4a",
+          "repository_path": "train/176-of-256.parquet",
+          "size_bytes": 11190940101
+        },
+        {
+          "blob_id": "68ce162a5e8816d920941dcf060132cb11e954bf",
+          "lfs_sha256": "ef22a37c9e72d10a6b8b3eb609ae4c10c18aa31df64c3acd03c1e748b8e387dc",
+          "repository_path": "train/177-of-256.parquet",
+          "size_bytes": 11031129747
+        },
+        {
+          "blob_id": "e34d11e23133d85b4572346115e85a39d3df2aa7",
+          "lfs_sha256": "12e7255d2baa14d1ab9450fbbe9faa63dd7a95b7349d92299dbcbe471a0f765c",
+          "repository_path": "train/178-of-256.parquet",
+          "size_bytes": 11534863328
+        },
+        {
+          "blob_id": "ddfb6469851a06489f683326351f8438ab9a60ac",
+          "lfs_sha256": "5cefce720d3de6dc5b92437b55907049f701b9065622667f0e7bbe122c2a7f17",
+          "repository_path": "train/179-of-256.parquet",
+          "size_bytes": 11306917413
+        },
+        {
+          "blob_id": "a24ed8fb76274c76501f113f3bc3dfc014d03bbe",
+          "lfs_sha256": "b8a58e8295367305156e88073386756c53b68d350fbf2b0c6754a533cb716d2c",
+          "repository_path": "train/180-of-256.parquet",
+          "size_bytes": 10968422720
+        },
+        {
+          "blob_id": "aa4cdca6ecc91ba152a0635823e904d1604a5a0d",
+          "lfs_sha256": "e4bc82418ef387d07184ec1f81dc9b2cfef1d232facf192d778e0c9300b3912d",
+          "repository_path": "train/181-of-256.parquet",
+          "size_bytes": 11231387712
+        },
+        {
+          "blob_id": "ceb7ce98bd8aca3134b7124671d7ad5536fbb108",
+          "lfs_sha256": "37c0bfb2b48a9b3235e782376c890216f89d10a1769c1181efd9d5982c4ae17a",
+          "repository_path": "train/182-of-256.parquet",
+          "size_bytes": 10933931563
+        },
+        {
+          "blob_id": "688ca95cd94a8274ffee6783c557afca108b20be",
+          "lfs_sha256": "50b3b5f9105810aa491944f580c825d594ac00977b7aa1d700febbc4e9a53f93",
+          "repository_path": "train/183-of-256.parquet",
+          "size_bytes": 11029677065
+        },
+        {
+          "blob_id": "30f4fa7c6a38bf13a7d1c71e2fe67e743d3bf2a1",
+          "lfs_sha256": "eb16adccba72ab226648118ff35da1a1f89755841ce7964f50768e9cd4fabb29",
+          "repository_path": "train/184-of-256.parquet",
+          "size_bytes": 10934314572
+        },
+        {
+          "blob_id": "1fe1c92201f17984bf113b8b3982ca206152595c",
+          "lfs_sha256": "fed069cb1f5a37aa1382cb3673e017cf3724a072effda01e93a2da744f8675d8",
+          "repository_path": "train/185-of-256.parquet",
+          "size_bytes": 11034932309
+        },
+        {
+          "blob_id": "84fa301b2f2868b34e0f6947df23df231b3b60c3",
+          "lfs_sha256": "141708df80ef6c7188d4b99a2eba683555b303a2e269a3a94000514b04be811d",
+          "repository_path": "train/186-of-256.parquet",
+          "size_bytes": 11474321947
+        },
+        {
+          "blob_id": "575ec1d2c3a9c1bf01be4c4704f409c618327511",
+          "lfs_sha256": "d1d2c396cfea9c8878e0f616c6525aa6d7cfc4b5dda91b2681cabd26a3037814",
+          "repository_path": "train/187-of-256.parquet",
+          "size_bytes": 11388478197
+        },
+        {
+          "blob_id": "f263bea7e359ed55b85b27cf47bd263b8b0e4f2a",
+          "lfs_sha256": "2cd372d6b790af3b00d25b956cd7034ce2c75d8ed965f326a75e56d2b44b06ff",
+          "repository_path": "train/188-of-256.parquet",
+          "size_bytes": 11089522058
+        },
+        {
+          "blob_id": "9ec857a3950ff0ba031539be857279120e8af125",
+          "lfs_sha256": "617682c964a2706d83762db3012dd300dc03f219c5da37c7559f126cf7755779",
+          "repository_path": "train/189-of-256.parquet",
+          "size_bytes": 11269771843
+        },
+        {
+          "blob_id": "4fdd65d8dfe11ba028eec18ef3fc5d99b9e1f3c5",
+          "lfs_sha256": "c8438c2165421816cd781ab57245edbe9c0adb0bb311dce4f3159c508f1cf2eb",
+          "repository_path": "train/190-of-256.parquet",
+          "size_bytes": 11308243686
+        },
+        {
+          "blob_id": "db633a99b5a99408050a0922f2c49c6308b8f0aa",
+          "lfs_sha256": "e5391733114bc797f338e7e38fbf8929d79c0d13447470ae51009082d39a47b5",
+          "repository_path": "train/191-of-256.parquet",
+          "size_bytes": 11172961434
+        },
+        {
+          "blob_id": "f7ba0b2f97c39ca7294124fe96d43918855fc853",
+          "lfs_sha256": "8c19cd62156dad0e0d7b8f20c10a299190357d7b8386bf54ca5bafa74554d048",
+          "repository_path": "train/192-of-256.parquet",
+          "size_bytes": 11252336487
+        },
+        {
+          "blob_id": "e98dec793b9ed4fc247cff53e874e4b9e151c29f",
+          "lfs_sha256": "08d1e69fa81d1ea3be7ea2055912c9729ecc424ee838fd4042a37603ea0a93aa",
+          "repository_path": "train/193-of-256.parquet",
+          "size_bytes": 11340409479
+        },
+        {
+          "blob_id": "fcaaa2a3059c245942938ffc1529797c6c80d28c",
+          "lfs_sha256": "6d4ad4a49b8b9ef089976c3a310403410db9bc61edc85affc949a0b9d59f1204",
+          "repository_path": "train/194-of-256.parquet",
+          "size_bytes": 11477177701
+        },
+        {
+          "blob_id": "d5f5a3939796ba7bd91c544ecdc1b52bdf62063f",
+          "lfs_sha256": "9fc0a11194184b0b166836a03a8dff6ca7957894d3c019346138363de97c4718",
+          "repository_path": "train/195-of-256.parquet",
+          "size_bytes": 11437376277
+        },
+        {
+          "blob_id": "9cc5c2ddd92f540d4d44aeb95edad4be1558e3ef",
+          "lfs_sha256": "27d36b2a85a26fdc5976adeb157ae76e0ce285b404dae66b91d75acb1ee36c82",
+          "repository_path": "train/196-of-256.parquet",
+          "size_bytes": 11343097848
+        },
+        {
+          "blob_id": "7b0c8ab163f37638ebfa72357cc1b9bbd37a50bc",
+          "lfs_sha256": "1c0605b0209b72abd0a25cfb9960a22f39f8be3c01bcc91c4f970fe17e941d46",
+          "repository_path": "train/197-of-256.parquet",
+          "size_bytes": 10882868383
+        },
+        {
+          "blob_id": "bb6901d03c4286f1e8b9ed55c922d649adb1ada3",
+          "lfs_sha256": "2bddcea522cd4175c02e0ead4c5ca430591876124f5ffcf0cb36b79f7031c4c0",
+          "repository_path": "train/198-of-256.parquet",
+          "size_bytes": 11103616103
+        },
+        {
+          "blob_id": "dde524396eaa05121cc753f22ca6c070ee06418a",
+          "lfs_sha256": "02daa8a82e706f316263d7f3772103169c2739faf7bdeef32a0e102003f6e1f0",
+          "repository_path": "train/199-of-256.parquet",
+          "size_bytes": 11351752556
+        },
+        {
+          "blob_id": "4cb3605106c99e99f0a3218ce858fef72ca2ca9d",
+          "lfs_sha256": "61de1594d3d30182c713c6233cc4758ec5df37888aefd9fb2ade969623f3c276",
+          "repository_path": "train/200-of-256.parquet",
+          "size_bytes": 11096322292
+        },
+        {
+          "blob_id": "35c4303f87a5e15a0a1f5baea2e3bd51b0405d4d",
+          "lfs_sha256": "e6746f318ca8571289591b99e196cd0c4718078901279751737674551914f4eb",
+          "repository_path": "train/201-of-256.parquet",
+          "size_bytes": 11238849097
+        },
+        {
+          "blob_id": "42b5fddf03c837ae6a9f58c009abcec223026504",
+          "lfs_sha256": "836611aa76b3e3338a8edc2c8ee9631b4af3244140cefcf7272f08136a45b7c5",
+          "repository_path": "train/202-of-256.parquet",
+          "size_bytes": 11533224033
+        },
+        {
+          "blob_id": "02cbbec5020a20371a7c05eac0b07c168bdb7434",
+          "lfs_sha256": "594e8f3828eded3890152810c0a4f31cfb407d81a3616ce6e3463bc80ac8dfe3",
+          "repository_path": "train/203-of-256.parquet",
+          "size_bytes": 11739423652
+        },
+        {
+          "blob_id": "4bfbfc2c00fc9ab0f5dc52be72cd93d5eaf6a3e4",
+          "lfs_sha256": "609c86d282c5898101d2534902fa55ab7e19508f574866f1b9b406f841b6d4d0",
+          "repository_path": "train/204-of-256.parquet",
+          "size_bytes": 11259643194
+        },
+        {
+          "blob_id": "895363645deaf81f6b4274abb2a4a8cd1a080b9d",
+          "lfs_sha256": "b5d0780e900c191b3b077e2ef1f8bbc47e679fd009c6596357e4a2387752b35d",
+          "repository_path": "train/205-of-256.parquet",
+          "size_bytes": 11097382942
+        },
+        {
+          "blob_id": "ca716536f919521d78054ccab7bb4b42770a1e07",
+          "lfs_sha256": "67ceba1efbb87b571daffd922e855a090e9df49da555fe46219fd1717bcc7f18",
+          "repository_path": "train/206-of-256.parquet",
+          "size_bytes": 11621051434
+        },
+        {
+          "blob_id": "5c3303e1b1f749b53666ff3010fb6039b39f11b1",
+          "lfs_sha256": "11bc525f522b6fe115d7d088bf4f7396c2acca2fbda0dd80ce2ed8cbb2f06a31",
+          "repository_path": "train/207-of-256.parquet",
+          "size_bytes": 11139669140
+        },
+        {
+          "blob_id": "a43335c1598c0acf680ec2e70fb339858460a8d0",
+          "lfs_sha256": "3084e71d399cd42683bf10ab51f3f41dd64c6e6e95d85c5f1ca4e9fd45ea3245",
+          "repository_path": "train/208-of-256.parquet",
+          "size_bytes": 11505361354
+        },
+        {
+          "blob_id": "13592fb6fe05ed56458c4485442fc4b711c7f6f9",
+          "lfs_sha256": "d4d88287d24f99ba33a4b9b4f50f0867aeacdb422ca44d4e53b81380d7369f77",
+          "repository_path": "train/209-of-256.parquet",
+          "size_bytes": 11030373641
+        },
+        {
+          "blob_id": "3e6efe234d90f2181a56e99b16875dc2c8a2ed37",
+          "lfs_sha256": "b5c20624cc76ef87ee4c4f18fc9ee0baab0d8da8ab91b72312bb0b003fc50c83",
+          "repository_path": "train/210-of-256.parquet",
+          "size_bytes": 11032091701
+        },
+        {
+          "blob_id": "955d8038e1d1ab6b38d47ad7e6bba6265ddf5acc",
+          "lfs_sha256": "7f718b016905cfffeda2075e23b7747ca55c5ce42f373984819a0e35870991b5",
+          "repository_path": "train/211-of-256.parquet",
+          "size_bytes": 11033809898
+        },
+        {
+          "blob_id": "1be65ab857ff2a43c13538a2a45541c2abfe07a4",
+          "lfs_sha256": "a5f9604278ba4511ae8de72c91d074a25376f690cae4d831f8d6587a11c02ee4",
+          "repository_path": "train/212-of-256.parquet",
+          "size_bytes": 11472869807
+        },
+        {
+          "blob_id": "534c4a603d7c5f34c4ef50a78c3544aaaf5bf062",
+          "lfs_sha256": "cda46fbd11bbaaf27abd1274510c86dec9d0db98ddcb3593057e6df0943f8b85",
+          "repository_path": "train/213-of-256.parquet",
+          "size_bytes": 11492510409
+        },
+        {
+          "blob_id": "ed606c454392f3c3b7f98394fbe62f24c13b77fd",
+          "lfs_sha256": "7ea0539550bb8ebaf7cbd8998cfcf54921c24d35097a396a7b8504133db9021f",
+          "repository_path": "train/214-of-256.parquet",
+          "size_bytes": 10994219373
+        },
+        {
+          "blob_id": "e412d2ce7e6bcb17c27c5f9a6bd67aabed8b66f7",
+          "lfs_sha256": "ec1cebb0ced0c640ae49a5d2e7accfb65a64d0f123664b8e59b30d854dcfdecb",
+          "repository_path": "train/215-of-256.parquet",
+          "size_bytes": 11563415551
+        },
+        {
+          "blob_id": "9a08d5feccf949d033d1bbc5ee6376d783618e9b",
+          "lfs_sha256": "ff266422a7ffba358743c0e09847690a30966be603ae40a5684e06540c2e9fab",
+          "repository_path": "train/216-of-256.parquet",
+          "size_bytes": 11125911235
+        },
+        {
+          "blob_id": "d2449286665170d4a16f345ca4be8e86601a5dd8",
+          "lfs_sha256": "aa37e73cdae5e78b38e5b33e6a8c8ba8ce17afe5d4366ba4d97e997b774fc444",
+          "repository_path": "train/217-of-256.parquet",
+          "size_bytes": 11141793991
+        },
+        {
+          "blob_id": "9c8b68d5e8f2c8a952bddf398622cde1f0b0f1a2",
+          "lfs_sha256": "ebc716b1bc9710c2beb4721df750f22d8156fd78dde1f3a38b5d409732a4a52e",
+          "repository_path": "train/218-of-256.parquet",
+          "size_bytes": 11288743515
+        },
+        {
+          "blob_id": "ea7e4a2aead0d20fbfa62a1b2dbf792bd726d3e3",
+          "lfs_sha256": "9be86fde80d23c3bd4e61576bc8bf32424a52988bd553eb8823c16524d93e867",
+          "repository_path": "train/219-of-256.parquet",
+          "size_bytes": 11426623696
+        },
+        {
+          "blob_id": "ea34f6120ff33f69ab33f998fb2ef17796ab6244",
+          "lfs_sha256": "f3ac86ab4fdbbf3f90c212474f6d246c4d033fceafe3386b5f3ea67fa3f86173",
+          "repository_path": "train/220-of-256.parquet",
+          "size_bytes": 11035165623
+        },
+        {
+          "blob_id": "e940c9c7a0d37b136edfc79c044d5fb5ca001e4a",
+          "lfs_sha256": "164f3ce0b3369943679de9e4146e83e199ea7d1d0a8f3cd5f8e40b8a5ff1d7f4",
+          "repository_path": "train/221-of-256.parquet",
+          "size_bytes": 11376090519
+        },
+        {
+          "blob_id": "8c23ba978049101a0918f28bea130e8dc5cd4054",
+          "lfs_sha256": "e2bc7b20484475a3dc0a4861dbe77ee5fde87eafa8dae6f78f1839665a5d1c6b",
+          "repository_path": "train/222-of-256.parquet",
+          "size_bytes": 11011179254
+        },
+        {
+          "blob_id": "1cdc3b336dcc45f46cea7caea4505f9c1358f35b",
+          "lfs_sha256": "e4720a4f8ae290371acba10ef516347645db7a5ab6aeb22403df0650b3934575",
+          "repository_path": "train/223-of-256.parquet",
+          "size_bytes": 11246434064
+        },
+        {
+          "blob_id": "e276bf56c5796f20fc6a572314b53eaddecbbde7",
+          "lfs_sha256": "e57396a767cee65592021edf867548a42fda042fbec701b512bb486e2855fba4",
+          "repository_path": "train/224-of-256.parquet",
+          "size_bytes": 11055820007
+        },
+        {
+          "blob_id": "2fab218fddece1032c553f0f5746e0c78bf60021",
+          "lfs_sha256": "fb654837d871ee7ee1646c5a6519e78364d37c1e99c13daff5caa21949e536cd",
+          "repository_path": "train/225-of-256.parquet",
+          "size_bytes": 11380676212
+        },
+        {
+          "blob_id": "94a585deb277fa7a47fb4a5556a197f4eb3533a3",
+          "lfs_sha256": "d94d430c5547c403cac07edff5e0de9ef34643e9796e755d0a013bce45bd2854",
+          "repository_path": "train/226-of-256.parquet",
+          "size_bytes": 11497700822
+        },
+        {
+          "blob_id": "2e3852a50e6de837b14abe907c8efee8b4fcfce9",
+          "lfs_sha256": "9b547ab101bf41f28d5d844f336fe784a8b123c8ee65301d2d69032684c0ac5b",
+          "repository_path": "train/227-of-256.parquet",
+          "size_bytes": 10824903298
+        },
+        {
+          "blob_id": "34d16edf345600f32bf5b4bf55f63b7ecd1efdcc",
+          "lfs_sha256": "6c6aa9fb1c30e043585f267074b0ab63cd0a1e5888672ae27163f2aeaa13e34b",
+          "repository_path": "train/228-of-256.parquet",
+          "size_bytes": 11134182790
+        },
+        {
+          "blob_id": "db00893f994c596898e1f11dce726c8006c15eef",
+          "lfs_sha256": "989856ded655681972b1d6e4e31b12738af3821ce9c3351b2cf0212e2586ed8a",
+          "repository_path": "train/229-of-256.parquet",
+          "size_bytes": 11393777447
+        },
+        {
+          "blob_id": "24b790bd3c2c3e60a953fad6b79c548d1200c744",
+          "lfs_sha256": "88868e283c08ea21e4f58defdbd58c9bf6d837a3f66cca65e0c89778ed461007",
+          "repository_path": "train/230-of-256.parquet",
+          "size_bytes": 11629287130
+        },
+        {
+          "blob_id": "ae95a85d5c0680bbfa13fda30d9aa3918fb3f61b",
+          "lfs_sha256": "bc014519e063e744fb4ca43c6e684e78f9725f9235fee45a71ec875aa92041f2",
+          "repository_path": "train/231-of-256.parquet",
+          "size_bytes": 11233378879
+        },
+        {
+          "blob_id": "a4467a36b777fdf87d674804d27731bd8fb40982",
+          "lfs_sha256": "dff21a3bad4cfccb6cfcf676bb50f644837fe5a8ff5d611e36257396e655ad32",
+          "repository_path": "train/232-of-256.parquet",
+          "size_bytes": 11018907152
+        },
+        {
+          "blob_id": "79d2da3b4de63aae08a53f66fd918ecd7cb01752",
+          "lfs_sha256": "a028cefadd76429655d93877d60137f1902c9266ba05572fdf20736b6a35c37c",
+          "repository_path": "train/233-of-256.parquet",
+          "size_bytes": 11329139882
+        },
+        {
+          "blob_id": "62bb1b72423240530c6c243519a436aad6b3d0a4",
+          "lfs_sha256": "6d56139dbde39a19b2144a6e392b04cdc3988f8766c74150664df08cb8cfb3cd",
+          "repository_path": "train/234-of-256.parquet",
+          "size_bytes": 10887053172
+        },
+        {
+          "blob_id": "ccd645f8efbb000cd4b9c88c7012318b27d39f02",
+          "lfs_sha256": "0f1668ec647edebac2aaf16a141a8caceb2bbf05d467aba4e94aa54127eb038a",
+          "repository_path": "train/235-of-256.parquet",
+          "size_bytes": 11597955162
+        },
+        {
+          "blob_id": "57385b9fa8733cfc6e4ad1a0ca1fe3ef479d9bfa",
+          "lfs_sha256": "cf3bad4a0962e81fc1e9c3cdcb4690cc73fb2088b0aba25e32071ef1ac6f4983",
+          "repository_path": "train/236-of-256.parquet",
+          "size_bytes": 11577235054
+        },
+        {
+          "blob_id": "d2b926b628a9423dc248a94db88fb1b70fb7f102",
+          "lfs_sha256": "90e875660feb3a100fd85e707d82fb1427cd8e1a4ee30c9a8b3b5c382e8004b2",
+          "repository_path": "train/237-of-256.parquet",
+          "size_bytes": 11682446261
+        },
+        {
+          "blob_id": "7890b24763c1dda1ae42a4971bea84ccaac8317a",
+          "lfs_sha256": "d1ce2b3fb75766658e0eab5666b4fc18ef43db9c9095563d2ceb5f142cbc8fd5",
+          "repository_path": "train/238-of-256.parquet",
+          "size_bytes": 11501457748
+        },
+        {
+          "blob_id": "14e85d0cf9314f2a0916e3f9c2ff4bb417abcffc",
+          "lfs_sha256": "506d743e930e249d78998debb19be564561ed13dcba2e854e2ac0e4e0772b2c0",
+          "repository_path": "train/239-of-256.parquet",
+          "size_bytes": 11347607174
+        },
+        {
+          "blob_id": "9dada8b1189ffe2b18360fd771e82e8e53490ecc",
+          "lfs_sha256": "9d23d8ea3e4fb73978b21e428202952e13fbfc36984f723d33e4ab93e59a2f52",
+          "repository_path": "train/240-of-256.parquet",
+          "size_bytes": 11479349314
+        },
+        {
+          "blob_id": "9ce80a05df4ccad4e2271a6a4f3e289d4d9c8943",
+          "lfs_sha256": "738f48a5abf1705602221c2e09cb0b013591171494a4ab9c42ec8684542e29a8",
+          "repository_path": "train/241-of-256.parquet",
+          "size_bytes": 10562695142
+        },
+        {
+          "blob_id": "717f0a39c14a003d733f299d5f4378b9b3234d12",
+          "lfs_sha256": "646ab9034838bfbdd85594d755c519b24df7d51ed6f7251fdf3b274127629a98",
+          "repository_path": "train/242-of-256.parquet",
+          "size_bytes": 11380047190
+        },
+        {
+          "blob_id": "2a6a0d823a5ad3d3dec98f5f334e5b80eb4a3050",
+          "lfs_sha256": "2a96cecde37daefe9cd5f29be62dcc3b41b306874924f09f13ff5be82f4babd3",
+          "repository_path": "train/243-of-256.parquet",
+          "size_bytes": 11064415323
+        },
+        {
+          "blob_id": "734e4ffee99e0f425b014b8ae893187fba35cf22",
+          "lfs_sha256": "6ea7c62ce7a6855109e7e5a688deb10c090b4bd470413878b95c8469a4fc8c4f",
+          "repository_path": "train/244-of-256.parquet",
+          "size_bytes": 11728161308
+        },
+        {
+          "blob_id": "f826c5a125ec0b2b072d2583bae703e645c61ebb",
+          "lfs_sha256": "745c61095847e68923556672ae1e264e0744edc2380cc5ff6a55faa73523a69b",
+          "repository_path": "train/245-of-256.parquet",
+          "size_bytes": 11261870777
+        },
+        {
+          "blob_id": "1c9ca619d52cf9e447c1ebbeb30e58f40466f6a9",
+          "lfs_sha256": "86de451237cf4d9a0286d34a7cc342302fbc7acfec3750b1febf216b3819b3af",
+          "repository_path": "train/246-of-256.parquet",
+          "size_bytes": 11326381601
+        },
+        {
+          "blob_id": "e443e16255562a4d0e206438359f933ab0893908",
+          "lfs_sha256": "8998459de1ad47ad2b15d8fc84dfb736e4fb08a22d63d69c3c57ef24661b64c7",
+          "repository_path": "train/247-of-256.parquet",
+          "size_bytes": 11109494896
+        },
+        {
+          "blob_id": "517ea75a81524896c4d62ace89bfee8a243428d7",
+          "lfs_sha256": "f8a1877c4a09e4bc289c3afe03c2e7976f7e51e9c7c4d33a6f60eaeccfb96625",
+          "repository_path": "train/248-of-256.parquet",
+          "size_bytes": 11429664183
+        },
+        {
+          "blob_id": "3ab236b410ef51e445a26b9480699005083fb873",
+          "lfs_sha256": "04bb444f0df8e4325562a8090ef99cc92a88acecad77e33588496724cc560b14",
+          "repository_path": "train/249-of-256.parquet",
+          "size_bytes": 11217670283
+        },
+        {
+          "blob_id": "1196b248372eec75b88d12630a08a7a70159dab0",
+          "lfs_sha256": "02353bf2b5ba4f2b18dd4a8db82e26842a8c33aa7034a0a6e8437643c840e2ee",
+          "repository_path": "train/250-of-256.parquet",
+          "size_bytes": 10950155812
+        },
+        {
+          "blob_id": "faab163e28ab171293cf5ef3d282b517e8914e7d",
+          "lfs_sha256": "0b1074f3dab5dff0c5f3efae621675d1bbdc53d468879f167b904f760af96e64",
+          "repository_path": "train/251-of-256.parquet",
+          "size_bytes": 11273732283
+        },
+        {
+          "blob_id": "ed91a7326d177c7a01526b92856d1241b45deb8f",
+          "lfs_sha256": "9568fd7f234ccb814a5a885f56d798838e39baff8e04bcef3bb1f8984c564461",
+          "repository_path": "train/252-of-256.parquet",
+          "size_bytes": 11128308896
+        },
+        {
+          "blob_id": "53f5a8722033d4a5c567b300fd31ddb81e701166",
+          "lfs_sha256": "f719b8be3deba9c5854bac1abe5f16127cac60b5efcb41d89f798ceec3fdcec7",
+          "repository_path": "train/253-of-256.parquet",
+          "size_bytes": 11303718452
+        },
+        {
+          "blob_id": "e0a0ee6ce72b9c1c287fad4b973747b84c0f4330",
+          "lfs_sha256": "098e36043fc28524fcb189f9268062c3432c5815a66fdea7e2d4bc815bfa0f0c",
+          "repository_path": "train/254-of-256.parquet",
+          "size_bytes": 11284563648
+        },
+        {
+          "blob_id": "a5bc86f850154d7ebe75f9b31a096db1ceb7eed3",
+          "lfs_sha256": "ae6c93bf0078afc14796e80110ec79a88ce2ba994f84cc570a1c44259c8cf55e",
+          "repository_path": "train/255-of-256.parquet",
+          "size_bytes": 11537227367
+        }
+      ],
+      "glob": "train/*.parquet",
+      "ordered_files_sha256": "6577d3d3afe095572dc0893ba8077c9ca284a1ed5d5b522e70d053524016d1f0",
+      "ordering": "numeric_shard_index_0_through_255",
+      "repository": "manifestai/longcrawl64",
+      "revision": "8e7af027525b3597852746ee11e4baa0e98492d7",
+      "total_size_bytes": 2878733748672
+    }
+  }
+}

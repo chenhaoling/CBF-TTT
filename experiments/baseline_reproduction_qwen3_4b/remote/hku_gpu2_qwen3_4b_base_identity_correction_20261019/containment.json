@@ -1,0 +1,45 @@
+{
+  "all_old_sessions_absent": true,
+  "corrected_full_corpus_cuda_visible_devices": "",
+  "corrected_full_corpus_session": "public_corpus_qwen3_4b_base_full_20261019",
+  "corrected_full_corpus_session_alive": true,
+  "corrected_full_corpus_status": "RUNNING_BUILD",
+  "created_at": "2026-10-18T21:01:18.015950+00:00",
+  "gpu_execution_constraint": "hku-gpu2_only",
+  "gpus": [
+    {
+      "index": 0,
+      "memory_total_mib": 32607,
+      "memory_used_mib": 46,
+      "name": "NVIDIA GeForce RTX 5090",
+      "utilization_percent": 0
+    },
+    {
+      "index": 1,
+      "memory_total_mib": 32607,
+      "memory_used_mib": 18,
+      "name": "NVIDIA GeForce RTX 5090",
+      "utilization_percent": 0
+    }
+  ],
+  "hostname": "user-Super-Server",
+  "old_artifacts_preserved": true,
+  "old_artifacts_reusable_for_base_claim": false,
+  "old_sessions_absent": {
+    "baseline_2x5090_activation_8k_20261018": true,
+    "baseline_2x5090_formal_stage1_3c7e29fc_20261018": true,
+    "baseline_2x5090_formal_stage2_73950ecd_20261018": true,
+    "baseline_2x5090_ruler_256k_formal_a0375e93_20261018": true,
+    "baseline_2x5090_ruler_256k_resource_b33b93ac_20261018": true,
+    "baseline_2x5090_ruler_matrix_439fcea1_20261018": true,
+    "baseline_2x5090_ruler_resource_439fcea1_20261018": true,
+    "baseline_2x5090_stage1_ladder_bae87e6c_20261018": true,
+    "baseline_2x5090_stage1_timing_56094b89_20261018": true,
+    "baseline_2x5090_stage2_ladder_1b04d8cf_20261018": true,
+    "baseline_2x5090_stage2_timing_fbc02a6e_20261018": true,
+    "baseline_public_corpus_fallback_990da145_20261019": true,
+    "baseline_public_corpus_stage2_sparse90_20261019": true,
+    "public_corpus_full_20261018": true
+  },
+  "protocol": "qwen3_4b_base_identity_correction_containment_v1"
+}

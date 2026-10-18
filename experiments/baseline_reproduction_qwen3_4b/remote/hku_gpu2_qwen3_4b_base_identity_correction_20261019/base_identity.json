@@ -1,0 +1,73 @@
+{
+  "checks": {
+    "architecture_exact": true,
+    "config_eos_exact": true,
+    "hidden_size_exact": true,
+    "layers_exact": true,
+    "max_positions_exact": true,
+    "three_weight_shards": true,
+    "tokenizer_eos_exact": true,
+    "vocab_size_exact": true,
+    "weight_index_present": true
+  },
+  "created_at_utc": "2026-10-18T20:51:51.460513+00:00",
+  "files": {
+    ".gitattributes": {
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "size": 1519
+    },
+    "LICENSE": {
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "size": 11343
+    },
+    "README.md": {
+      "sha256": "9fd20ab531a1dc75ae18fcde658dd69d04173fdb93311091c38a7098e3d4b4a1",
+      "size": 2937
+    },
+    "config.json": {
+      "sha256": "304b2545a258d35620f1d4bf46940c0471d9baa00715ff8e77f84c2fca5057c1",
+      "size": 727
+    },
+    "generation_config.json": {
+      "sha256": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8",
+      "size": 138
+    },
+    "merges.txt": {
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "size": 1671853
+    },
+    "model-00001-of-00003.safetensors": {
+      "sha256": "4c807e2503d68ae373d508689d00a41f4b33f33c2536da97ab81a20caddc1241",
+      "size": 3957900840
+    },
+    "model-00002-of-00003.safetensors": {
+      "sha256": "f4707585548b2fc75a6b1d732e8465c62040a8699903c32850781beeb9b27826",
+      "size": 3987450520
+    },
+    "model-00003-of-00003.safetensors": {
+      "sha256": "c7b1aa8fb672de2e00423c99876926022e50b18d4f0d140670788510a27f9965",
+      "size": 99630640
+    },
+    "model.safetensors.index.json": {
+      "sha256": "d6c42883a895dfef5b0080ed2116a1bcd764f558406b98923d675978a1abf29c",
+      "size": 32819
+    },
+    "tokenizer.json": {
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "size": 7031645
+    },
+    "tokenizer_config.json": {
+      "sha256": "3c04ed3ca964ea2f6b2b5faf0dc4d31aec1cb1e8b4bcf63f402d295046b422b5",
+      "size": 9678
+    },
+    "vocab.json": {
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "size": 2776833
+    }
+  },
+  "passed": true,
+  "protocol": "qwen3_4b_base_download_identity_v1",
+  "repository": "Qwen/Qwen3-4B-Base",
+  "revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+  "staging_path": "/home/ctj/models/Qwen3-4B-Base.partial"
+}

@@ -7461,3 +7461,31 @@ Base revision下载与身份门槛、corpus tokenizer兼容性决策和全新执
 packed row在Base下仍为`seq_len-1`时才允许迁移。即便payload兼容，EOS从151645变为151643，因此旧
 training hash、tokenizer manifest和independent audit一律无效，必须在新的不可变corpus root中重建。
 若普通编码任一注册probe不同，则从source inventory完整重建32K/128K两阶段。更新门控继续封存。
+
+## 2026-10-19：Qwen3-4B-Base 身份纠正落地与全量语料重建启动
+
+精确下载并审计`Qwen/Qwen3-4B-Base` revision
+`906bfd4b4dc7f14ee4320094d8b41684abff8539`，模型三分片与官方LFS哈希一致，架构、36层、
+hidden size 2560、vocab 151936、最大位置32768、EOS 151643及三分片索引等九项检查全部通过。
+模型保存在`hku-gpu2:/home/ctj/models/Qwen3-4B-Base`，未覆盖旧checkpoint。
+
+兼容性探针确认两套tokenizer的vocab/merges相同，普通固定文本和旧语料首尾行编码也相同；但旧
+post-trained tokenizer额外注册`<think>`、`</think>`、`<tool_response>`、`</tool_response>`，且旧
+32K和128K packed数据均出现这些字面串。为避免特殊token改变packing边界，停止并封存旧corpus、
+activation、Stage1/2与RULER等待链，共14个tmux session确认全部不存在；旧文件不删除，仅作为诊断
+证据，不能用于Base结论。旧100M selected-stream组成审计也随packing一起失效，待新语料完成后重算。
+
+使用Base tokenizer重建源清单：140个FineWeb-Edu文件、256个LongCrawl64 shard，清单SHA256为
+`70cd9046...d48a`，独立审计SHA256为`a113cbc1...26ec`，七项检查全部通过。新连续pilot为144条、
+6291456 token、零synthetic EOS，峰值主存约1017 MiB、38.87秒；十项独立审计全部通过，manifest和
+audit SHA256分别为`73fdb39d...c567`与`32c8fa69...cf7b1`。pilot后的便捷打印脚本因把stage list误当
+dict返回非零，但builder和auditor均exit 0，随后按真实schema直接复核统计无误。
+
+正式34999369728-token、724800-record语料于`2026-10-19T04:59:10+08:00`在`hku-gpu2`的tmux
+`public_corpus_qwen3_4b_base_full_20261019`启动。输出根为
+`/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019`，运行根为同前缀加
+`_run_20261019`；绑定clean commit `3e09b187...`、精确Base资产、新清单、builder和streaming auditor
+哈希。wrapper显式设置空`CUDA_VISIBLE_DEVICES`，状态为`RUNNING_BUILD`；记录时GPU0/1仅46/18 MiB、
+利用率0%。所有后续GPU工作继续严格限定在`hku-gpu2`，不使用任何其他服务器。全量语料只有在原子
+发布、`.partial`消失且canonical independent audit全部通过后才算完成。紧凑证据归档到
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_identity_correction_20261019/`。

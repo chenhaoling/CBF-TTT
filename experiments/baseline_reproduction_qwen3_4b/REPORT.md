@@ -2051,3 +2051,55 @@ rules before any corrected GPU run. The corpus may be reused only if ordinary
 token encoding and every packed-row length are proven identical; its EOS-bound
 training hashes, tokenizer manifest and old audit are invalid for Base in all
 cases and must be regenerated. Gate exploration remains sealed.
+
+The exact Base revision
+`906bfd4b4dc7f14ee4320094d8b41684abff8539` was subsequently downloaded to
+`/home/ctj/models/Qwen3-4B-Base` and passed all nine identity checks. The three
+model shard SHA256 values match the official LFS objects. Its config SHA256 is
+`304b2545a258d35620f1d4bf46940c0471d9baa00715ff8e77f84c2fca5057c1`
+and tokenizer SHA256 is
+`c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539`.
+The compact identity record has SHA256
+`5e5edb5bef03218c91a1bea0d4f8a80a4814a120734b433a2e6fb765a0a154d4`.
+
+Compatibility probes confirmed identical vocabulary/merges and identical
+ordinary-text and packed-edge encodings. They did not justify payload reuse:
+the post-trained tokenizer adds `<think>`, `</think>`, `<tool_response>` and
+`</tool_response>`, and reserved literal occurrences were found in both old
+packed stages. Those strings can change tokenization and packing boundaries.
+The old 126-GiB partial corpus, its source-composition replay and all
+checkpoint-bound child chains are therefore preserved but superseded. All 14
+registered old tmux sessions are absent, no formal release exists and no old
+GPU child had started.
+
+A new Base-bound source inventory was generated from the same 140 FineWeb-Edu
+files and 256 LongCrawl64 shards. Its manifest SHA256 is
+`70cd90464a77ed81ca2d33bc7b394d91c2ab4d100441545c93e22bc02ce7d48a`;
+its independent audit SHA256 is
+`a113cbc1f40684547f5c2459d049fb910f9b4aa8a3f4624ccd7302905d6f26ec`
+and all seven checks pass. The corrected continuous pilot contains 144 records
+and 6,291,456 training tokens, with zero synthetic EOS tokens. Its independent
+audit passes all ten checks; manifest and audit SHA256 values are
+`73fdb39dab7732416effd44ff9b21477d7762a5fc0d37d0d76f93a41cdc4c567`
+and `32c8fa6928718e1f9b5c22611878146c193b02f4d34f9b58948e949cd75cf7b1`.
+The pilot used about 1,017 MiB peak host RSS and 38.87 seconds. A later
+convenience print exited nonzero because it treated the manifest's stage list
+as a mapping; the builder and independent auditor themselves both exited zero,
+and direct schema-aware verification confirms the recorded counts and checks.
+
+At `2026-10-19T04:59:10+08:00`, a new full build entered `RUNNING_BUILD` in
+tmux session `public_corpus_qwen3_4b_base_full_20261019`. It targets the new
+immutable root
+`/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019`,
+binds clean tool commit `3e09b18727ae6fcda17684da44abf53c59754465`, the exact Base assets and the
+new inventory, and will run the canonical streaming audit after atomic
+publication. It launches with `CUDA_VISIBLE_DEVICES` empty. The recorded
+snapshot shows GPU 0/1 at 46/18 MiB and 0% utilization. All future GPU work is
+restricted to `hku-gpu2`; other servers are not eligible fallbacks. The full
+corpus is not complete until the final directory exists without `.partial` and
+all independent audit checks pass.
+
+Compact correction evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_identity_correction_20261019/`. The corrected
+Base Level-A smoke, selected-stream audit, activation gate, training and RULER
+matrix all remain unexecuted. No update-admission experiment is released.

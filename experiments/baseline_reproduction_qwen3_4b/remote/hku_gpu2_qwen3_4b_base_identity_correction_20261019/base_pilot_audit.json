@@ -1,0 +1,57 @@
+{
+  "bindings": {
+    "auditor_sha256": "5ec753a29996f6abc386d7e16529218bbaaf6c1b1ff271638db730b9c41f8b87",
+    "builder_sha256": "925ac99e701d9aa6444e8ec0c2f329cb8200d58155e672018d6ea3c4a044ec59",
+    "inventory_audit_sha256": "a113cbc1f40684547f5c2459d049fb910f9b4aa8a3f4624ccd7302905d6f26ec",
+    "inventory_sha256": "70cd90464a77ed81ca2d33bc7b394d91c2ab4d100441545c93e22bc02ce7d48a",
+    "manifest_sha256": "73fdb39dab7732416effd44ff9b21477d7762a5fc0d37d0d76f93a41cdc4c567",
+    "plan_sha256": "c5019a28b9fa7fa27052ddf1d69eb029a2ec5b3b6446f1527e9ceb7db1a12bab"
+  },
+  "checks": {
+    "artifact_hashes": true,
+    "combined_curriculum": true,
+    "inventory_dependencies": true,
+    "no_partial_paths": true,
+    "plan_and_builder": true,
+    "protocol_and_profile": true,
+    "provenance_has_no_plaintext": true,
+    "resources": true,
+    "stage_records_tokens_order_and_continuity": true,
+    "tokenizer_assets": true
+  },
+  "observed_stages": [
+    {
+      "name": "stage1_32k",
+      "ordered_training_tokens_sha256": "b9ed64249639387f76a43cbab6775658d510e078427ff195cbcc00f740235515",
+      "passed": true,
+      "records": 128,
+      "synthetic_eos_tokens": 0,
+      "training_tokens": 4194304
+    },
+    {
+      "name": "stage2_128k",
+      "ordered_training_tokens_sha256": "6c51beacfaf236843a0f2a21e1112be993933903c04ac0815584843d20771a2d",
+      "passed": true,
+      "records": 16,
+      "synthetic_eos_tokens": 0,
+      "training_tokens": 2097152
+    }
+  ],
+  "observed_totals": {
+    "combined_curriculum_sha256": "4cb8d6e58657ae712ac3401b34ee61ffc798e485ae7497a4dc9269befcbe01b3",
+    "continuity_documents_seen": {
+      "fineweb": 2919,
+      "longcrawl": 63
+    },
+    "continuity_peak_active_documents": {
+      "fineweb": 2,
+      "longcrawl": 2
+    },
+    "records": 144,
+    "synthetic_eos_tokens": 0,
+    "training_tokens": 6291456
+  },
+  "passed": true,
+  "profile": "pilot",
+  "protocol": "in_place_ttt_public_corpus_v1_independent_audit"
+}
