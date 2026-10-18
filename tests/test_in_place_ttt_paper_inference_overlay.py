@@ -20,6 +20,23 @@ from scripts.build_in_place_ttt_paper_inference_overlay import (
 
 class PaperInferenceOverlayTests(unittest.TestCase):
     def _clean_upstream(self, root: pathlib.Path) -> pathlib.Path:
+        registered = os.environ.get("IN_PLACE_TTT_CLEAN_UPSTREAM")
+        if registered:
+            upstream = pathlib.Path(registered).expanduser().resolve()
+            if subprocess.check_output(
+                ["git", "-C", str(upstream), "rev-parse", "HEAD"], text=True,
+            ).strip() != UPSTREAM_COMMIT:
+                self.fail("IN_PLACE_TTT_CLEAN_UPSTREAM has another commit")
+            return upstream
+        repository = pathlib.Path(__file__).resolve().parents[1]
+        available = subprocess.run(
+            ["git", "-C", str(repository), "cat-file", "-e",
+             UPSTREAM_COMMIT + "^{commit}"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        ).returncode == 0
+        if not available:
+            self.skipTest("clean upstream commit is not present in this clone")
         upstream = root / "upstream"
         subprocess.run(
             [
@@ -70,11 +87,10 @@ class PaperInferenceOverlayTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             patch_modeling("not upstream source")
 
-        source = subprocess.check_output(
-            ["git", "show", f"{UPSTREAM_COMMIT}:"
-             "inference_model/hf_qwen3/configuration_qwen3.py"],
-            text=True,
-        )
+        with tempfile.TemporaryDirectory(prefix="paper-patch-source-") as temp:
+            upstream = self._clean_upstream(pathlib.Path(temp))
+            source = (upstream / "inference_model/hf_qwen3/"
+                      "configuration_qwen3.py").read_text()
         patched = patch_configuration(source)
         self.assertIn("ttt_update_clip_norm=None", patched)
         self.assertIn("finite and positive", patched)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import tempfile
 import unittest
@@ -34,17 +35,30 @@ from tests.test_in_place_ttt_level_b_ruler import make_raw_run, sha, write_json
 
 
 def add_paper_inference_fixture(base: Path, root: Path, metadata: dict) -> Path:
-    upstream = base / "paper_upstream"
-    subprocess.run(
-        ["git", "clone", "--no-hardlinks", "--quiet", str(Path.cwd()),
-         str(upstream)],
-        check=True,
-    )
-    subprocess.run(
-        ["git", "-C", str(upstream), "checkout", "--detach", "--quiet",
-         UPSTREAM_COMMIT],
-        check=True,
-    )
+    registered = os.environ.get("IN_PLACE_TTT_CLEAN_UPSTREAM")
+    if registered:
+        upstream = Path(registered).expanduser().resolve()
+    else:
+        available = subprocess.run(
+            ["git", "cat-file", "-e", UPSTREAM_COMMIT + "^{commit}"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        ).returncode == 0
+        if not available:
+            raise unittest.SkipTest(
+                "clean upstream commit is not present in this clone"
+            )
+        upstream = base / "paper_upstream"
+        subprocess.run(
+            ["git", "clone", "--no-hardlinks", "--quiet", str(Path.cwd()),
+             str(upstream)],
+            check=True,
+        )
+        subprocess.run(
+            ["git", "-C", str(upstream), "checkout", "--detach", "--quiet",
+             UPSTREAM_COMMIT],
+            check=True,
+        )
     overlay = root / "paper_inference_overlay"
     build_overlay(upstream, overlay)
     manifest = overlay / "paper_inference_overlay_manifest.json"
@@ -625,6 +639,9 @@ class TwoRTX5090RulerMatrixTest(unittest.TestCase):
                 "paper_inference_addendum_sha256"
             ] = sha(paper_addendum)
             write_json(resource_audit, resource_payload)
+            # Child audit hashes changed when the frozen addendum binding was
+            # inserted, so rebuild the matrix binding manifest.
+            write_json(root / "matrix_summary.json", summarize_matrix(root))
             auditor_path = Path(
                 "scripts/audit_in_place_ttt_2x5090_ruler_matrix.py"
             ).resolve()
