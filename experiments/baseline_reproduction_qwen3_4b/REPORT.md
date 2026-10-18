@@ -2320,3 +2320,8 @@ passes 9/9 and the complete `tests/test_in_place_ttt*.py` suite passes 94/94
 with all GPUs hidden. No RULER score or GPU job was started. The legacy 80-GB
 runner is outside the user-authorized host path; all future GPU execution
 remains restricted to `hku-gpu2`.
+
+The immutable manifest, numerical validation JSON, clean-worktree test log and
+static-check log are archived under
+`remote/hku_gpu2_paper_inference_clip_20261019/` with a separate evidence
+manifest.

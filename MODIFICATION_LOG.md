@@ -7650,4 +7650,6 @@ hash贯穿2x5090单次RULER、资源阶梯及正式矩阵。父级auditor现在�
 在`hku-gpu2`显式隐藏所有GPU进行验证：未裁剪fixture范数为`24.207931518554688`，裁剪后为
 `1.0000000656873453e-5`，零更新不变；默认关闭、非法值拒绝、序列化、真实`from_pretrained`覆盖和CUDA未
 初始化全部通过。新增专项测试9/9通过，全部`tests/test_in_place_ttt*.py`为94/94通过。没有启动RULER评分或
-任何GPU child，现有corpus和训练等待链保持不变。
+任何GPU child，现有corpus和训练等待链保持不变。最终冻结提交的clean-worktree测试更新为95/95通过，
+manifest、numerical validation、测试与静态检查证据归档在
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_paper_inference_clip_20261019/`。

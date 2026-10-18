@@ -1,0 +1,22 @@
+{
+  "clip_norm": 1e-05,
+  "clipped_delta_frobenius_norm": 1.0000000656873453e-05,
+  "config_default_disabled": true,
+  "config_round_trip": true,
+  "cuda_initialized": false,
+  "device": "cpu",
+  "from_pretrained_override": true,
+  "invalid_values_rejected": [
+    "0.0",
+    "-1.0",
+    "inf",
+    "nan"
+  ],
+  "modeling_module_path": "/home/ctj/in_place_ttt_paper_clip_dev_20261019/overlay/inference_model/hf_qwen3/modeling_qwen3.py",
+  "overlay_manifest_sha256": "5f8f30442f9479e04522cd4dfbae7ed21821e210b76f2890ee3ff0fd7d0a5eca",
+  "overlay_root": "/home/ctj/in_place_ttt_paper_clip_dev_20261019/overlay",
+  "passed": true,
+  "protocol": "in_place_ttt_paper_inference_overlay_validation_v1",
+  "unclipped_delta_frobenius_norm": 24.207931518554688,
+  "zero_delta_unchanged": true
+}

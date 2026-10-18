@@ -1,0 +1,34 @@
+{
+  "bash_syntax_passed": true,
+  "claim": "paper-inference overlay implementation and CPU audit path validated; no RULER score produced",
+  "clean_worktree": true,
+  "cuda_visible_devices": "empty",
+  "files": {
+    "final_static_a0bb7abb.log": {
+      "sha256": "02233098f05a51f3caf84d93d2c0174192c0216ac50723a6d7a5236861c0b15a",
+      "size_bytes": 24
+    },
+    "final_tests_a0bb7abb.log": {
+      "sha256": "fa610bee6969cd565b0ffe72bcf57816d6e7f97f5ffd868d50a9d929213572d7",
+      "size_bytes": 313
+    },
+    "paper_inference_overlay_manifest.json": {
+      "sha256": "5f8f30442f9479e04522cd4dfbae7ed21821e210b76f2890ee3ff0fd7d0a5eca",
+      "size_bytes": 2943
+    },
+    "validation_from_pretrained.json": {
+      "sha256": "463557c52827fb054843c5f4a1533cb5fd01265901a97f9ff9bd81f5e1ffb35f",
+      "size_bytes": 785
+    }
+  },
+  "focused_tests": {
+    "duration_seconds": 3.43,
+    "failed": 0,
+    "passed": 95
+  },
+  "gpu_execution_host_policy": "hku-gpu2-only",
+  "gpu_used": false,
+  "hostname": "user-Super-Server",
+  "protocol": "hku_gpu2_paper_inference_clip_evidence_v1",
+  "tool_commit": "a0bb7abb1279fe349a9c473502bddf322b75a777"
+}

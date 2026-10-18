@@ -1,0 +1,74 @@
+{
+  "builder_sha256": "efe5167baf623d311fb1856d1c7ea7ccabfaf45a3b37297cbf5cfafbd9814d2a",
+  "clip_norm": 1e-05,
+  "clip_norm_type": "frobenius",
+  "clip_scope": "each_native_qwen3_fast_weight_delta",
+  "default_without_override": null,
+  "modified_files": [
+    "inference_model/hf_qwen3/configuration_qwen3.py",
+    "inference_model/hf_qwen3/modeling_qwen3.py"
+  ],
+  "overlay_files": {
+    "inference_model/__init__.py": {
+      "sha256": "54ae124b5c993dff594b041dc4375407fbf1c016a689f9dac805e0043e86e52a",
+      "size_bytes": 648
+    },
+    "inference_model/hf_llama3/__init__.py": {
+      "sha256": "f084e24edbc2bb8cebe74f3ded368d40e1c6a848274f06a8077d09135567a1c9",
+      "size_bytes": 965
+    },
+    "inference_model/hf_llama3/configuration_llama.py": {
+      "sha256": "13e03dfcc525f809b215a0effae2837c82da612203f40d645b449e740650f8e8",
+      "size_bytes": 12819
+    },
+    "inference_model/hf_llama3/modeling_llama.py": {
+      "sha256": "78e95c6cc3a64d4fc629ca6a9abb135883d1c0a6ca5184a2a0b8283f06802d85",
+      "size_bytes": 28170
+    },
+    "inference_model/hf_qwen3/__init__.py": {
+      "sha256": "a38d76873e560e9c034258408e1c67fdfc08f2be846da1937cea1434f6e10e80",
+      "size_bytes": 965
+    },
+    "inference_model/hf_qwen3/configuration_qwen3.py": {
+      "sha256": "c23540e8c00d659cef9cb810df7f75efa3389662736bf5570bc1d8f61bab86a6",
+      "size_bytes": 13000
+    },
+    "inference_model/hf_qwen3/modeling_qwen3.py": {
+      "sha256": "a212c35ca9a5471f8ff9a1ef70c9cb0ec452c87eaac50dd4da51c8ce8d045103",
+      "size_bytes": 30724
+    }
+  },
+  "protocol": "in_place_ttt_paper_inference_overlay_v1",
+  "source_files": {
+    "inference_model/__init__.py": {
+      "sha256": "54ae124b5c993dff594b041dc4375407fbf1c016a689f9dac805e0043e86e52a",
+      "size_bytes": 648
+    },
+    "inference_model/hf_llama3/__init__.py": {
+      "sha256": "f084e24edbc2bb8cebe74f3ded368d40e1c6a848274f06a8077d09135567a1c9",
+      "size_bytes": 965
+    },
+    "inference_model/hf_llama3/configuration_llama.py": {
+      "sha256": "13e03dfcc525f809b215a0effae2837c82da612203f40d645b449e740650f8e8",
+      "size_bytes": 12819
+    },
+    "inference_model/hf_llama3/modeling_llama.py": {
+      "sha256": "78e95c6cc3a64d4fc629ca6a9abb135883d1c0a6ca5184a2a0b8283f06802d85",
+      "size_bytes": 28170
+    },
+    "inference_model/hf_qwen3/__init__.py": {
+      "sha256": "a38d76873e560e9c034258408e1c67fdfc08f2be846da1937cea1434f6e10e80",
+      "size_bytes": 965
+    },
+    "inference_model/hf_qwen3/configuration_qwen3.py": {
+      "sha256": "39ef69d7c79114ae9bd2710320c4260796fc5dbed9f725e18b5a0f5771114ec2",
+      "size_bytes": 12631
+    },
+    "inference_model/hf_qwen3/modeling_qwen3.py": {
+      "sha256": "98ec94bcf1780635d7817b993a0bf4fa1f1a7e3a35415dce8a46c345a52a2858",
+      "size_bytes": 29991
+    }
+  },
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "upstream_root": "/home/ctj/in_place_ttt_official_be232482_resource_clean"
+}
