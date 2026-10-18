@@ -7949,3 +7949,22 @@ corrected-Base分数出现前冻结的paper-inference clipping addendum显式授
 机器可读结果、OpenCompass原始日志和论文对应说明归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_semantics_preflight_20261019/`。
 该预检只证明评测定义对齐，不替代模型分数、长上下文资源门、35B训练或最终Table 1审计。
+
+## 2026-10-19：远端正式训练语义预检
+
+在任何 corrected-Base 训练 child 启动前，仅在 `hku-gpu2` 上隐藏 CUDA 执行
+`audit_in_place_ttt_2x5090_configs.py`。四份正式配置全部零错误通过：Stage-1 每臂56,623,104 token、Stage-2
+每臂41,943,040 token、每臂合计98,566,144 token，world size为2。Level-A、Stage-1和Stage-2当前注册的7个
+clean tool snapshot虽然提交不同，但四份配置与审计器逐字节hash全部一致。
+
+同时绑定Qwen3-4B-Base模型配置与clean upstream writer：模型为36层，因此`[0,6,12,18,24,30]`严格对应
+每六层一次；官方`ttt_conv`仍是kernel size 5、padding 2、groups等于hidden size的depthwise Conv1d。当前
+配置与论文明确披露的Qwen3-4B-Base、AdamW、学习率`5e-6`、weight decay `0.1`、32K/128K、Stage-2 YaRN、
+Conv5和每六层TTT一致。
+
+新增训练侧论文对应说明，明确把FineWeb-Edu/LongCrawl64、global batch 64、warmup/cosine、gradient clip、
+FSDP/offload/checkpointing、native writer超参数及Stage-2 fresh optimizer列为public-replication假设。100M tier只
+保留约20:15的stage比例，不能称为论文约35B token规模或私有语料精确复现。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_training_semantics_preflight_20261019/`。
+该预检不授权formal release、不代替训练/评测结果，也不打开update-admission实验；所有GPU执行仍只允许
+`hku-gpu2`。

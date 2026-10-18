@@ -1,0 +1,85 @@
+captured_at=2026-10-19T07:32:16+08:00
+hostname=user-Super-Server
+gpu_policy=only_hku-gpu2
+gpu_inventory:
+0, NVIDIA GeForce RTX 5090, 32607 MiB
+1, NVIDIA GeForce RTX 5090, 32607 MiB
+model_config_sha256=304b2545a258d35620f1d4bf46940c0471d9baa00715ff8e77f84c2fca5057c1
+model_identity:
+model_type=qwen3
+num_hidden_layers=36
+hidden_size=2560
+max_position_embeddings=32768
+rope_theta=1000000
+tool_snapshots:
+/home/ctj/cbf_ttt_tool_6a3bb2bf commit=6a3bb2bf54c803d4bc9a9fb789e5f11c7f1a6b65
+/home/ctj/cbf_ttt_tool_6a3bb2bf clean=true
+a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780  /home/ctj/cbf_ttt_tool_6a3bb2bf/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_no_ttt.yaml
+0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa  /home/ctj/cbf_ttt_tool_6a3bb2bf/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_ttt.yaml
+c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376  /home/ctj/cbf_ttt_tool_6a3bb2bf/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_no_ttt.yaml
+5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c  /home/ctj/cbf_ttt_tool_6a3bb2bf/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_ttt.yaml
+8e85b7f03e7cf614012ec794b2a6519f937a4f1dd54a1d9236ee81ef347c7262  /home/ctj/cbf_ttt_tool_6a3bb2bf/scripts/audit_in_place_ttt_2x5090_configs.py
+/home/ctj/cbf_ttt_tool_99774817 commit=997748173594ad7f26732a65fabf2327012f6a5b
+/home/ctj/cbf_ttt_tool_99774817 clean=true
+a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780  /home/ctj/cbf_ttt_tool_99774817/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_no_ttt.yaml
+0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa  /home/ctj/cbf_ttt_tool_99774817/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_ttt.yaml
+c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376  /home/ctj/cbf_ttt_tool_99774817/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_no_ttt.yaml
+5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c  /home/ctj/cbf_ttt_tool_99774817/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_ttt.yaml
+8e85b7f03e7cf614012ec794b2a6519f937a4f1dd54a1d9236ee81ef347c7262  /home/ctj/cbf_ttt_tool_99774817/scripts/audit_in_place_ttt_2x5090_configs.py
+/home/ctj/cbf_ttt_tool_97c4d786 commit=97c4d786e0c6c9d38de665312a92d41b26d63ab1
+/home/ctj/cbf_ttt_tool_97c4d786 clean=true
+a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780  /home/ctj/cbf_ttt_tool_97c4d786/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_no_ttt.yaml
+0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa  /home/ctj/cbf_ttt_tool_97c4d786/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_ttt.yaml
+c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376  /home/ctj/cbf_ttt_tool_97c4d786/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_no_ttt.yaml
+5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c  /home/ctj/cbf_ttt_tool_97c4d786/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_ttt.yaml
+8e85b7f03e7cf614012ec794b2a6519f937a4f1dd54a1d9236ee81ef347c7262  /home/ctj/cbf_ttt_tool_97c4d786/scripts/audit_in_place_ttt_2x5090_configs.py
+/home/ctj/cbf_ttt_tool_226a1198 commit=226a1198a462b2d132ccacb896a863d093873924
+/home/ctj/cbf_ttt_tool_226a1198 clean=true
+a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780  /home/ctj/cbf_ttt_tool_226a1198/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_no_ttt.yaml
+0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa  /home/ctj/cbf_ttt_tool_226a1198/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_ttt.yaml
+c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376  /home/ctj/cbf_ttt_tool_226a1198/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_no_ttt.yaml
+5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c  /home/ctj/cbf_ttt_tool_226a1198/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_ttt.yaml
+8e85b7f03e7cf614012ec794b2a6519f937a4f1dd54a1d9236ee81ef347c7262  /home/ctj/cbf_ttt_tool_226a1198/scripts/audit_in_place_ttt_2x5090_configs.py
+/home/ctj/cbf_ttt_tool_a21afd27 commit=a21afd2799a33a42469676c8b6cb5769371c0544
+/home/ctj/cbf_ttt_tool_a21afd27 clean=true
+a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780  /home/ctj/cbf_ttt_tool_a21afd27/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_no_ttt.yaml
+0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa  /home/ctj/cbf_ttt_tool_a21afd27/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_ttt.yaml
+c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376  /home/ctj/cbf_ttt_tool_a21afd27/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_no_ttt.yaml
+5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c  /home/ctj/cbf_ttt_tool_a21afd27/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_ttt.yaml
+8e85b7f03e7cf614012ec794b2a6519f937a4f1dd54a1d9236ee81ef347c7262  /home/ctj/cbf_ttt_tool_a21afd27/scripts/audit_in_place_ttt_2x5090_configs.py
+/home/ctj/cbf_ttt_tool_1098b08d commit=1098b08d2098a9d4bd6f600474cd3d2d2f3cc7a6
+/home/ctj/cbf_ttt_tool_1098b08d clean=true
+a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780  /home/ctj/cbf_ttt_tool_1098b08d/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_no_ttt.yaml
+0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa  /home/ctj/cbf_ttt_tool_1098b08d/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_ttt.yaml
+c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376  /home/ctj/cbf_ttt_tool_1098b08d/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_no_ttt.yaml
+5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c  /home/ctj/cbf_ttt_tool_1098b08d/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_ttt.yaml
+8e85b7f03e7cf614012ec794b2a6519f937a4f1dd54a1d9236ee81ef347c7262  /home/ctj/cbf_ttt_tool_1098b08d/scripts/audit_in_place_ttt_2x5090_configs.py
+/home/ctj/cbf_ttt_tool_80c414c7 commit=80c414c7232dfb33abe2b4f5294bf8b8fd49a042
+/home/ctj/cbf_ttt_tool_80c414c7 clean=true
+a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780  /home/ctj/cbf_ttt_tool_80c414c7/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_no_ttt.yaml
+0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa  /home/ctj/cbf_ttt_tool_80c414c7/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_ttt.yaml
+c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376  /home/ctj/cbf_ttt_tool_80c414c7/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_no_ttt.yaml
+5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c  /home/ctj/cbf_ttt_tool_80c414c7/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage2_ttt.yaml
+8e85b7f03e7cf614012ec794b2a6519f937a4f1dd54a1d9236ee81ef347c7262  /home/ctj/cbf_ttt_tool_80c414c7/scripts/audit_in_place_ttt_2x5090_configs.py
+upstream_writer:
+root=/home/ctj/in_place_ttt_official_be232482_resource_clean
+commit=be2324829b0e91c8fd10a74d4b43714fde6676e1
+clean=true
+a26d64cf85c985c4825a66d64815baa5956a2739593aad1969e9cc09d937a1d1  /home/ctj/in_place_ttt_official_be232482_resource_clean/hf_models/hf_qwen3/modeling_qwen3.py
+        self.layer_idx = -1 if layer_idx is None else layer_idx
+        if getattr(config, "ttt_mode", False) and self.layer_idx in getattr(config, "ttt_layers", []):
+            self.ttt_chunk = getattr(config, "ttt_chunk", 8192)
+            if getattr(config, "ttt_proj", True):
+                self.ttt_proj = nn.Linear(self.hidden_size, self.hidden_size, bias=False)
+            else:
+                self.ttt_proj = None
+            self.ttt_lr = getattr(config, "ttt_lr", 0.3)
+            self.ttt_conv = nn.Conv1d(
+                self.hidden_size, self.hidden_size, kernel_size=5, padding=2,
+                groups=self.hidden_size, bias=False,
+            )
+
+    # TTT: new method
+    def padding(self, x):
+        if not hasattr(self, "ttt_chunk"):
+            return x

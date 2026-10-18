@@ -2751,3 +2751,36 @@ This establishes evaluation-definition alignment only. It does not convert
 the public FineWeb-Edu/LongCrawl64 run into an exact reproduction of the
 paper's unreleased data, and it does not substitute for formal scores or
 resource audits.
+
+## 61. Paper and registered training-semantics preflight (2026-10-19)
+
+The training side was independently checked on `hku-gpu2` before any
+corrected-Base training child started. With CUDA hidden, the executable
+configuration auditor passed all four formal configurations with zero errors:
+32K Stage 1 contains 56,623,104 tokens per arm, 128K Stage 2 contains
+41,943,040 tokens per arm, the completed first tier contains 98,566,144 tokens
+per arm, and the matched no-TTT/native-TTT pair uses `world_size=2`.
+
+All seven clean remote tool snapshots used by Level A and the Stage-1/Stage-2
+ladder, timing and formal watchers have byte-identical copies of the four
+configuration files and the auditor. The pinned Base configuration has 36
+layers, making `[0,6,12,18,24,30]` exactly every sixth layer. The clean
+upstream implementation at `be232482...` still defines the native depthwise
+`ttt_conv` with kernel size 5. The registered configs also match the paper's
+AdamW learning rate `5e-6`, weight decay `0.1`, 32K/128K contexts and Stage-2
+YaRN structure.
+
+The audit explicitly separates paper-disclosed settings from replication
+choices. FineWeb-Edu/LongCrawl64, global batch 64, warmup/scheduler details,
+gradient clipping, FSDP/offload/checkpointing, native writer hyperparameters
+and fresh Stage-2 optimizer state are frozen public-replication assumptions.
+The 98,566,144-token tier preserves the approximate 20:15 stage ratio but is
+not the paper's approximately 35B-token run. It therefore establishes a
+well-defined reduced-scale paired experiment, not exact reproduction of the
+private continual corpus or the paper's reported scores.
+
+The evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_training_semantics_preflight_20261019/`.
+This definition check does not authorize either formal release and does not
+open update-admission experiments. All GPU execution remains restricted to
+`hku-gpu2`.
