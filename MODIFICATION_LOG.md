@@ -7130,3 +7130,16 @@ suite 63/63与Bash语法通过。刻意缺失Stage2 timing tmux handle的负向�
 运行4K/8K/16K/32K/64K/128K、每任务100例的双臂正式矩阵；要求六个context重算分数、summary、
 独立audit和`completed_ruler_matrix`终态。两级watcher均冻结clean revision、原Qwen3-4B tokenizer、
 计划和工具，并严格限制GPU执行到`hku-gpu2`。256K仍是独立外推，不影响注册的4K–128K结论。
+
+commit `5603910cdadf617b7073d689967dfa9c26a73449`已在`hku-gpu2`建立clean checkout；focused
+suite 63/63、matrix runner及两级watcher Bash语法均通过。OpenCompass评测环境可导入，版本为
+PyTorch 2.8.0+cu128与Transformers 4.57.3。两个缺失上游handle的负向预检均exit 6，分别记录
+`formal_stage2_watcher_handle_missing`与`ruler_resource_watcher_handle_missing`，未创建GPU输出，
+两卡保持46/18MiB、利用率0%。
+
+真实resource watcher已在tmux session
+`baseline_2x5090_ruler_resource_5603910c_20261018`启动，pane PID 1428296，状态为
+`waiting_for_audited_formal_stage2`；真实matrix watcher已在
+`baseline_2x5090_ruler_matrix_5603910c_20261018`启动，pane PID 1428336，状态为
+`waiting_for_audited_ruler_resource_ladder`。2026-10-18 12:58:00 HKT语料partial为58GB。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_watchers_tooling_20261018/`。

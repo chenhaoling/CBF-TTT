@@ -1570,3 +1570,19 @@ plans, runners, summarizer and auditors. Missing upstream handles, terminal
 failure, invalid audit or timeout stops before the next GPU stage. The 256K
 extrapolation remains separately sealed and cannot alter the registered
 4K–128K baseline result.
+
+Commit `5603910cdadf617b7073d689967dfa9c26a73449` was checked out cleanly on
+`hku-gpu2`. The focused suite passed 63/63; the matrix runner and both watchers
+passed Bash syntax checks. The registered OpenCompass environment imported
+successfully with PyTorch 2.8.0+cu128 and Transformers 4.57.3. Negative missing
+handle runs exited 6 in states `formal_stage2_watcher_handle_missing` and
+`ruler_resource_watcher_handle_missing`, created no GPU outputs and left GPU
+0/1 at 46/18 MiB with zero utilization.
+
+The validated resource watcher is live in tmux session
+`baseline_2x5090_ruler_resource_5603910c_20261018`, pane PID 1428296, state
+`waiting_for_audited_formal_stage2`. The validated matrix watcher is live in
+session `baseline_2x5090_ruler_matrix_5603910c_20261018`, pane PID 1428336,
+state `waiting_for_audited_ruler_resource_ladder`. The observation time was
+`2026-10-18T12:58:00+08:00`; the corpus partial directory was 58 GB. Evidence
+is stored under `remote/hku_gpu2_ruler_watchers_tooling_20261018/`.
