@@ -1190,3 +1190,11 @@ formal fixture. The complete focused baseline suite passes 47/47 tests; Bash
 syntax, Python compilation and `git diff --check` pass. No formal Stage-1
 training has been launched. Stage 2 and RULER remain locked behind a
 successful paired Stage-1 audit.
+
+Commit `8b9a56b4` was checked out cleanly on `hku-gpu2`; its focused formal
+tests passed 2/2 and Bash syntax passed. A negative preflight with the future
+corpus/timing/release paths exited 1, created no output or partial directory
+and left both GPUs at 46/18 MiB and 0%. At
+`2026-10-18T11:06:28+08:00`, 926,365,290,496 bytes of disk remained free and
+the corpus PID plus all upstream watchers were still live. Evidence is stored
+under `remote/hku_gpu2_formal_stage1_tooling_20261018/`.

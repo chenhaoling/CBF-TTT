@@ -6869,3 +6869,9 @@ ladder不存在时exit 1，未创建output/partial且GPU不变。冻结hash、�
 新增`tests/test_in_place_ttt_2x5090_100m_stage1.py`，覆盖重复final tqdm记录不能污染step27以及
 完整双臂formal fixture。baseline focused suite为47/47通过，Bash语法、Python编译和
 `git diff --check`通过。正式Stage-1尚未启动；Stage-2与RULER继续封存到双臂Stage-1独立审计通过。
+
+commit `8b9a56b462f7e77440c374e2e870e9f6ef253459`在`hku-gpu2`建立clean detached checkout，
+formal专项2/2测试和Bash语法通过。以未来corpus/timing/release路径执行负向预检时exit 1，未创建
+output或partial，两卡仍46/18MiB且0%。2026-10-18 11:06:28 HKT远端仍有926365290496 bytes
+可用磁盘，语料PID与三个上游watcher均存活。证据归档在
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_formal_stage1_tooling_20261018/`。
