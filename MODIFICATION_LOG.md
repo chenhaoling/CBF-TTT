@@ -6812,3 +6812,10 @@ builder仍是硬阻塞，后续所有GPU执行只允许在`hku-gpu2`上进行。
 超时或独立prerequisite审计失败都会终止。只有`completed_8k_both_arms`且重新审计通过后才调用
 Stage-1 ladder。watcher和被调用runner均再次硬核对`user-Super-Server`、clean immutable
 checkout及冻结输入，不能把任务重定向到其他GPU服务器。
+
+提交`bae87e6c75183a73f5ed2cd8150e0cc228ed19f0`推送后，在`hku-gpu2`创建独立detached
+clean checkout并复跑43/43测试。CPU-only handoff watcher已启动于tmux
+`baseline_2x5090_stage1_ladder_bae87e6c_20261018`。2026-10-18 10:49:49 HKT直接检查时，
+状态为`waiting_for_audited_8k`，8K pane仍存活，未来ladder目录不存在，GPU0/1仅占46/18MiB且
+利用率0%；正式语料PID1397987仍存活，partial约48GiB。初始冻结hash、state、handle和统一远端
+快照归档于`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage1_ladder_watcher_20261018/`。

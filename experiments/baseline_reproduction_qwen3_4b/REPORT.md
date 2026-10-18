@@ -1089,3 +1089,12 @@ tmux pane handle and upstream state on every poll. A missing handle, terminal
 audited `completed_8k_both_arms` state launches the Stage-1 ladder. The watcher
 and ladder both independently enforce the `hku-gpu2` hostname and immutable
 clean checkouts, so the handoff cannot redirect work to another GPU host.
+
+The watcher was deployed from clean detached commit `bae87e6c` in tmux
+`baseline_2x5090_stage1_ladder_bae87e6c_20261018`. The same checkout passed
+43/43 focused tests on `hku-gpu2`. At `2026-10-18T10:49:49+08:00` its state
+was `waiting_for_audited_8k`, the recorded 8K pane was live, the future ladder
+output did not exist, and GPU0/GPU1 used only 46/18 MiB at 0% utilization.
+The public-corpus builder PID 1397987 was also directly observed live with a
+48 GiB partial output. Deployment evidence is stored under
+`remote/hku_gpu2_stage1_ladder_watcher_20261018/`.
