@@ -163,6 +163,9 @@ New opt-in files are:
 - `IN_PLACE_TTT_BASELINE_2X5090_STAGE2_TIMING_PLAN.md`;
 - `scripts/run_in_place_ttt_2x5090_stage2_timing.sh`;
 - `scripts/audit_in_place_ttt_2x5090_stage2_timing.py`;
+- `IN_PLACE_TTT_BASELINE_2X5090_100M_STAGE2_PLAN.md`;
+- `scripts/run_in_place_ttt_2x5090_100m_stage2.sh`;
+- `scripts/audit_in_place_ttt_2x5090_100m_stage2.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -1281,3 +1284,35 @@ creating neither final nor partial output. At `2026-10-18T11:19:15+08:00`,
 GPU 0/1 used 46/18 MiB at 0%; the corpus builder and all three upstream
 watchers remained alive. Evidence is stored under
 `remote/hku_gpu2_stage2_timing_tooling_20261018/`.
+
+## 17. Paired formal 100M-tier Stage-2 entry (2026-10-18)
+
+The Stage-2 resource and timing gates previously ended without an executable
+formal path. The frozen `IN_PLACE_TTT_BASELINE_2X5090_100M_STAGE2_PLAN.md`
+(SHA256 `0017abb1aade09e3298bcc3b36f5cd2b515db2444a7f0eee6d7562fcf9c24a6c`)
+now registers the final 128K segment: five GB64 optimizer steps and 41,943,040
+tokens per arm, no-TTT before TTT. Each arm starts from its corresponding
+audited Stage-1 HF checkpoint with a fresh optimizer/scheduler; resource and
+timing pilot checkpoints cannot become formal starts.
+
+`scripts/run_in_place_ttt_2x5090_100m_stage2.sh` is restricted to `hku-gpu2`
+and requires an explicit accepted release JSON bound to the completed Stage-2
+timing audit. It rehashes the full Stage-2 corpus, paired formal Stage-1 audit,
+both current complete Stage-1 HF manifests, configs, plans and release before
+training. It requires 160 GB free disk for the pair and rechecks 80 GB, two
+idle RTX 5090 GPUs, 48 GiB host memory and absence of corpus processes before
+each arm. Only an independently audited pair is atomically published.
+
+`scripts/audit_in_place_ttt_2x5090_100m_stage2.py` independently reconstructs
+the arm-specific start models, timing/release and corpus bindings. It requires
+five finite monotonic progress records per arm, resource limits, only
+`global_step_5`, at least 40 GB DCP and 7 GB HF data, correct `ttt_mode`, and
+131,072 maximum positions. Tests cover duplicate final progress output and a
+complete paired fixture with distinct Stage-1 starts. The focused baseline
+suite passes 53/53 tests; Bash syntax, Python compilation, direct auditor CLI
+and `git diff --check` pass.
+
+No formal Stage-2 GPU execution or release record has been created. The
+entry remains sealed behind formal Stage 1, the Stage-2 ladder, measured
+Stage-2 timing and explicit review. RULER and update-admission work remain
+sealed behind the resulting paired formal Stage-2 audit.

@@ -6931,3 +6931,26 @@ checkout后，远程CPU侧baseline focused suite 51/51通过，Bash语法与audi
 partial输出。2026-10-18 11:19:15 HKT GPU0/1仅46/18MiB、利用率0%；正式语料builder和三个
 上游watcher均继续存活等待。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_timing_tooling_20261018/`。
+
+## 2026-10-18：2×RTX5090 100M tier正式Stage-2入口
+
+新增并冻结`IN_PLACE_TTT_BASELINE_2X5090_100M_STAGE2_PLAN.md`（SHA256
+`0017abb1aade09e3298bcc3b36f5cd2b515db2444a7f0eee6d7562fcf9c24a6c`），注册128K、GB64、
+每臂5个optimizer step和41,943,040 token，顺序为no-TTT后TTT。每臂必须直接从对应的正式
+Stage-1 HF checkpoint启动fresh optimizer/scheduler，资源或计时pilot checkpoint不能作为正式起点。
+
+新增`scripts/run_in_place_ttt_2x5090_100m_stage2.sh`。它仅允许`hku-gpu2`，要求通过的正式
+Stage-1、Stage-2资源阶梯与多步计时，以及人工审阅后`accepted=true`且绑定timing audit hash的
+release JSON。runner在训练前重算完整128K语料、Stage-1 audit和两个当前完整HF manifest，双臂
+总磁盘门槛160GB、每臂80GB，并逐臂重查两卡idle、48GiB主存和无语料进程。只有双臂独立审计
+通过后才原子发布。
+
+新增独立`scripts/audit_in_place_ttt_2x5090_100m_stage2.py`，重建按臂起点及timing/release/corpus
+绑定；每臂要求恰好5条有限单调step记录、资源门槛、唯一`global_step_5`、至少40GB DCP、至少
+7GB HF、正确`ttt_mode`和131072最大位置。新增
+`tests/test_in_place_ttt_2x5090_100m_stage2.py`，覆盖重复final进度去重和不同Stage-1起点的完整
+双臂fixture。baseline focused suite为53/53通过；Bash语法、Python编译、直接auditor CLI和
+`git diff --check`通过。
+
+本次未创建release或启动正式Stage-2 GPU任务。入口仍由正式Stage-1、Stage-2 ladder、Stage-2
+实测timing和人工release四重封存；RULER与“是否更新”门控继续等待双臂正式Stage-2独立审计。
