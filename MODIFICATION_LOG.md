@@ -7030,3 +7030,14 @@ commit `2ac3a890d664ada87801b2b1d15232853b6e1557`已fetch到`hku-gpu2`。SSH网�
 验证目录；4/4新增测试和直接CLI检查通过。加上前一clean commit未改动且已通过的59/59，focused
 baseline计数为63。未启动GPU；证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_timing_release_tooling_20261018/`。
+
+## 2026-10-18：正式Stage1持久release watcher
+
+新增`scripts/watch_and_run_in_place_ttt_2x5090_100m_stage1.sh`，衔接已有资源阶梯与计时watcher。
+它仅允许`hku-gpu2`，冻结精确tool/upstream revision与静态依赖，持续检查计时tmux handle、终态、
+独立audit和有限正值双臂总投影；handle提前丢失、上游失败或audit异常均在CUDA前终止。
+
+计时通过后进入独立`waiting_for_explicit_stage1_release`状态。watcher绝不生成或自动接受release，
+只接受精确Stage1协议、`accepted=true`、绑定timing audit SHA256、`stage=stage1`及非空reviewer/
+decision note的原子文件。随后才调用正式双臂runner，并要求exit 0、`completed_100m_stage1`状态及
+通过的独立paired audit后报告完成。所有路径均为opt-in，baseline原入口不变。

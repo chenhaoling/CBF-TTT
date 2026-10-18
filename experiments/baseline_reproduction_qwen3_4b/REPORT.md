@@ -1435,3 +1435,19 @@ an isolated directory. Their 4/4 tests and direct CLI check passed. Combined
 with the unchanged 59/59 suite from the preceding clean commit, the focused
 baseline count is 63. No GPU process was launched. Evidence is stored under
 `remote/hku_gpu2_timing_release_tooling_20261018/`.
+
+## 21. Formal Stage-1 release watcher (2026-10-18)
+
+`watch_and_run_in_place_ttt_2x5090_100m_stage1.sh` closes the persistent chain
+after the existing resource-ladder and timing watchers. It is restricted to
+`hku-gpu2`, freezes its exact tool/upstream revision and static dependencies,
+and watches the registered timing tmux handle and terminal state. A missing
+handle before a published result, any upstream failure, a nonfinite projection
+or a failed audit terminates the watcher without invoking CUDA.
+
+After timing passes, the watcher enters a separate
+`waiting_for_explicit_stage1_release` state. It never creates or accepts a
+release. It requires the exact Stage-1 protocol, `accepted=true`, the timing
+audit SHA256, `stage=stage1`, reviewer and decision note. Only then does it
+call the formal paired runner. It records the runner exit code and requires
+the terminal paired state and independent audit before reporting completion.
