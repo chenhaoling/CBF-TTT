@@ -2655,3 +2655,34 @@ accepted release, partial output or formal score exists; GPU0/1 remained at
 The wrapper explicitly records `update_admission_released=false`: this
 extrapolation cannot open the gate experiment by itself. All future GPU work
 remains restricted to `hku-gpu2`.
+
+## 58. Audited seven-context Table 1 conclusion chain (2026-10-19)
+
+A final baseline conclusion previously depended on manually reconciling the
+primary matrix and separate 256K extrapolation. The new pre-outcome Table 1
+plan fixes one machine-readable and one deterministic human-readable output
+before either corrected score is known.
+
+The reporter recomputes both arm macros, paired deltas, all 13 task scores,
+100-example counts, paired-input status, failures, paper differences, resource
+peaks and source hashes at every context from 4K through 256K. It reports the
+six-context primary mean separately. The registered seed-42, 10,000-resample
+paired task bootstrap uses the 13 RULER tasks as units and reports percentile
+95% intervals; these are task-set intervals and impose no directional efficacy
+threshold.
+
+The independent auditor reruns the entire calculation and requires exact JSON
+and Markdown equality. A synthetic seven-context fixture passes, while a
+single changed child task score fails recomputation. Commit
+`0299fb76b128d60226ad9c174efae4a7ca37e07c` passes the combined 12/12 tests
+locally and in a clean `hku-gpu2` checkout with CUDA hidden. The live reporter
+watcher is at `waiting_for_corrected_table1_inputs`, tmux PID 1705532. Its
+matrix predecessor waits for corrected resource evidence and its formal 256K
+predecessor waits for the review-bound human release. No JSON, Markdown or
+independent report audit exists; GPU0/1 remained at 46/18 MiB and 0% use.
+Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_table1_report_registration_20261019/`.
+
+The future summary will set `baseline_evidence_complete=true` only after all
+seven contexts pass, while retaining `gate_experiment_started=false`. It does
+not automatically start update admission or open any sealed test.

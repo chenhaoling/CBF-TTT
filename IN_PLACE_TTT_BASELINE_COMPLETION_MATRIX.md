@@ -2,7 +2,7 @@
 
 Status: **live evidence index; not an execution plan or release record**  
 Initial snapshot: 2026-10-19 (Asia/Shanghai)
-Last reconciled: 2026-10-19 07:08 (Asia/Shanghai)
+Last reconciled: 2026-10-19 07:14 (Asia/Shanghai)
 
 ## 1. Purpose
 
@@ -40,7 +40,7 @@ so no Level-C or exact-paper-number claim is permitted.
 | Primary RULER resource gate | Paired no-TTT/native-TTT resource runs pass for every registered context from 4K through 128K with identical task inputs and required headroom | **Registered and waiting for corrected formal Stage 2.** The Base wrapper watcher is live at `waiting_for_corrected_formal_stage2`; it requires both Stage-2 audits and the frozen `tau=1e-5` overlay. The shared clean remote suite passes 106 focused tests and no resource child exists. |
 | Primary RULER matrix | All 13 official tasks, 100 examples per task, seed 42 and deterministic decoding complete for both arms at 4K, 8K, 16K, 32K, 64K and 128K; all 15,600 raw predictions and the paired matrix audit pass | **Registered and waiting for the corrected RULER resource ladder.** The CPU-only watcher is live at `waiting_for_corrected_ruler_resource`; no matrix child, raw prediction or score exists. |
 | Separate RULER 256K extrapolation | Its paired resource audit passes; an explicit timing/resource-bound release is accepted; both 13-task, 100-example arms and the independent audit pass | **Full resource/review/formal chain registered.** The resource watcher waits for the corrected primary matrix; the CPU review watcher waits for corrected 256K resource; the final watcher waits for an accepted review-bound release. No packet, release, GPU child or score exists. The final wrapper requires both child paper-overlay hashes and records `update_admission_released=false`. Formal 13×100 remains sealed and excluded from the primary mean. |
-| Baseline conclusion | Report per-task and macro scores, `TTT - no-TTT` at every length, paired input counts/failures, resource measurements, hashes, confidence limits where registered, and differences from Table 1 under the public-data claim boundary | **Incomplete.** Smoke scores cannot satisfy this row. |
+| Baseline conclusion | Report per-task and macro scores, `TTT - no-TTT` at every length, paired input counts/failures, resource measurements, hashes, confidence limits where registered, and differences from Table 1 under the public-data claim boundary | **Full conclusion chain registered and waiting for corrected inputs.** The CPU-only watcher is live at `waiting_for_corrected_table1_inputs`. Its frozen reporter covers seven contexts, 13 tasks, counts/failures, resource evidence, paper differences and a seed-42 10,000-resample paired-task interval; the independent auditor recomputes JSON and Markdown exactly. No conclusion artifact exists yet. |
 | Scale and feasibility boundary | Label the 98,566,144-token pair only as the first resource-constrained end-to-end tier; report measured 32K/128K projections; either register and execute a larger tier or document why the approximately 35B-token Level-B run is infeasible on the user-restricted hardware | **Incomplete, with corrected replay registered.** The old selected-stream result is superseded. The new installed-runtime replay and independent audit are waiting for the corrected corpus, after which they will bind the exact Base-tokenized schedule before either formal release. The tier cannot be relabelled as paper-scale training. |
 | Update-admission exploration | A new frozen gate plan may start only after the corrected-Base matched 100M milestone and registered RULER matrix have passing audits and the scale/claim boundary above is explicitly reported; any approximately 1B expansion requires its own pre-outcome addendum | **Sealed.** No baseline outcome currently authorizes gate training or test release. |
 
@@ -109,6 +109,8 @@ obtained and executed.
 - Future corrected RULER 256K release: `/home/ctj/in_place_ttt_qwen3_4b_base_ruler_256k_release_55fc42a0_20261019.json`
 - Corrected formal RULER 256K watcher: `/home/ctj/in_place_ttt_qwen3_4b_base_ruler_256k_formal_fd252a62_20261019.watch`
 - Corrected formal RULER 256K tmux session: `baseline_qwen3_4b_base_ruler_256k_formal_fd252a62_20261019`
+- Corrected Table 1 report root: `/home/ctj/in_place_ttt_qwen3_4b_base_table1_report_0299fb76_20261019`
+- Corrected Table 1 report tmux session: `baseline_qwen3_4b_base_table1_report_0299fb76_20261019`
 
 The prior checkpoint-bound corpus, activation, Stage-1, Stage-2 and RULER
 paths are preserved but superseded. No path in that chain is an authoritative

@@ -1,0 +1,20 @@
+hostname=user-Super-Server
+time=2026-10-19T07:13:43+08:00
+tool_commit=0299fb76b128d60226ad9c174efae4a7ca37e07c
+state=waiting_for_corrected_table1_inputs
+state_time=2026-10-19T07:13:06+08:00
+handle=1705532|0|bash
+matrix_state=waiting_for_corrected_ruler_resource
+formal_256k_state=waiting_for_accepted_corrected_ruler_256k_release
+report_outputs_absent=true
+41220187602f56489fcf0f7772b78422dd64b1175230700c00e40316f637db50  /home/ctj/cbf_ttt_tool_0299fb76/scripts/watch_and_prepare_in_place_ttt_qwen3_4b_base_table1_report.sh
+89766360badcd54bdf925fd15aac3e20789b30b3c0e24ba760107fcf595ba827  /home/ctj/cbf_ttt_tool_0299fb76/IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_TABLE1_REPORT_PLAN.md
+b4b257287f7ceedbce5fee0bd7684e5e9d0ff9e712f90e8ae9abb279b7b57b8f  /home/ctj/cbf_ttt_tool_0299fb76/scripts/summarize_in_place_ttt_qwen3_4b_base_table1.py
+5e5a408a90ae5dc7c2cd838b19c7ea18e1946520344b5323febcb5aeb1d83753  /home/ctj/cbf_ttt_tool_0299fb76/scripts/audit_in_place_ttt_qwen3_4b_base_table1.py
+gpu_begin
+0, NVIDIA GeForce RTX 5090, 46 MiB, 32607 MiB, 0 %
+1, NVIDIA GeForce RTX 5090, 18 MiB, 32607 MiB, 0 %
+gpu_end
+      82209 /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial/stage1_32k.jsonl
+      82209 /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial/stage1_32k.provenance.jsonl
+     164418 total

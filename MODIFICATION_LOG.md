@@ -7890,3 +7890,22 @@ plans和两条child audit中的paper-overlay hash，并固定`update_admission_r
 `waiting_for_accepted_corrected_ruler_256k_release`，tmux PID 1704022；正式输出和release均不存在。07:07快照中
 GPU0/1仅占46/18 MiB，利用率均为0%。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_256k_formal_registration_20261019/`。
+
+## 2026-10-19：corrected Base 七上下文 Table 1 最终报告链
+
+新增并在任何 corrected formal RULER 分数出现前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_TABLE1_REPORT_PLAN.md`。它注册统一 JSON/Markdown 结论：4K--256K 两臂宏平均、
+逐任务分数、每任务100条的计数与失败、论文差值、资源峰值与全部源hash；256K继续排除在4K--128K主均值之外。
+预注册seed 42、10,000次、13个RULER任务为配对采样单元的percentile bootstrap，区间只描述任务集不确定性，不作为
+事后方向性门槛。
+
+新增 `scripts/summarize_in_place_ttt_qwen3_4b_base_table1.py`、
+`scripts/audit_in_place_ttt_qwen3_4b_base_table1.py` 与
+`scripts/watch_and_prepare_in_place_ttt_qwen3_4b_base_table1_report.sh`。reporter从七个已审计context的child summaries
+重算逐任务、macro、delta、样本计数、paired input与论文差值；auditor再次独立重算JSON和确定性Markdown并逐值比较。
+输出声明`baseline_evidence_complete=true`但`gate_experiment_started=false`，不会自动开始门控或打开sealed test。
+
+本机及`hku-gpu2`精确提交`0299fb76b128d60226ad9c174efae4a7ca37e07c`均通过12/12组合测试。CPU-only
+报告watcher已在`hku-gpu2`注册，状态为`waiting_for_corrected_table1_inputs`，tmux PID 1705532；JSON、Markdown和
+独立audit均不存在。07:13快照中GPU0/1仅占46/18 MiB且利用率为0%。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_table1_report_registration_20261019/`。
