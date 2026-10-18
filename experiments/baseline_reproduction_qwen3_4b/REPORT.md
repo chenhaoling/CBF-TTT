@@ -2176,3 +2176,27 @@ does not exist, Level A remains `WAITING_BASE_CORPUS`, and no 16K/32K child was
 created. GPU0/1 remained at 46/18 MiB and 0% utilization. Compact evidence is
 archived under
 `remote/hku_gpu2_qwen3_4b_base_stage1_ladder_watcher_20261019/`.
+
+## 44. Corrected Base Stage-1 timing gate registration (2026-10-19)
+
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_STAGE1_TIMING_PLAN.md` freezes the
+three-step 32K timing boundary before any corrected timing result exists. It
+requires the full Base-tokenizer corpus and corrected 16K/32K ladder to pass,
+then runs no-TTT before native TTT from the same exact Base checkpoint and
+audited stream. Each arm uses two RTX 5090s on `hku-gpu2`, global batch 64 and
+exactly three optimizer steps; step 1 is warm-up and steps 2--3 define the
+measured projection. No other GPU host is eligible.
+
+The new watcher remains CPU-only while its predecessor is pending. It checks
+the corrected ladder watcher's terminal state and independent audit before it
+can invoke the existing released-loop timing runner. A new wrapper auditor
+then re-hashes the Base identity, full corpus/tokenizer binding, corrected
+ladder, frozen plans, existing runner and underlying three-step audit. The
+wrapper writes `formal_release_created=false`; a passing timing result still
+requires a separate human-reviewed release before formal Stage-1 training.
+
+Three new tests cover the frozen order and release boundary, Bash syntax and
+the wrapper's missing-input failure path. The complete focused suite passes
+84/84 locally, the auditor compiles, and `git diff --check` passes. This
+registration creates no GPU child and does not release formal training,
+Stage 2, RULER or update-admission work.

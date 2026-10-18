@@ -7549,3 +7549,20 @@ worktree并重跑81/81通过。tmux
 `waiting_for_corrected_level_a`、Level-A仍为`WAITING_BASE_CORPUS`、future result root不存在且没有
 16K/32K child；GPU0/1为46/18 MiB、利用率0%。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_stage1_ladder_watcher_20261019/`。
+
+## 2026-10-19：corrected Base Stage-1 32K三步计时门注册
+
+新增冻结计划`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_STAGE1_TIMING_PLAN.md`，要求完整Base-tokenizer
+语料和corrected 16K/32K资源阶梯全部通过后，才允许在`hku-gpu2`按no-TTT→native TTT顺序执行32K、
+global batch 64、每臂恰好3个optimizer step。首步只作warm-up，后两步中位数用于27步正式Stage-1
+投影；所有GPU执行严格限制在`hku-gpu2`，不允许其他GPU服务器替代。
+
+新增`scripts/watch_and_run_in_place_ttt_qwen3_4b_base_stage1_timing.sh`。watcher等待corrected ladder
+watcher终态及其独立审计，等待期间不触碰CUDA；通过后复用现有released-loop timing runner，并将
+Base模型、完整语料、corrected ladder及计划作为显式依赖。新增
+`scripts/audit_in_place_ttt_qwen3_4b_base_stage1_timing.py`，在原三步timing audit之上重算Base identity、
+tokenizer、corpus、ladder、计划和runner绑定，明确输出`formal_release_created=false`。
+
+新增三项计划/语法/失败关闭测试。全部In-Place-TTT focused suite为84/84通过，Python编译、Bash语法及
+diff检查通过。本次只注册下一门槛，没有启动GPU child，也没有创建正式训练release或开放Stage2、RULER、
+“是否更新”门控实验。
