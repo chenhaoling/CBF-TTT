@@ -6844,3 +6844,10 @@ swap、有效activation-offload设置和零checkpoint，并输出双臂顺序Sta
 tmux handle与状态；handle丢失或任何terminal失败即停止，只有`completed_stage1_ladder`且保存的
 独立audit通过才调用timing runner。被调用runner仍会重做完整语料、资源、host与revision门槛，
 watcher不降低任何准入条件。
+
+提交`56094b8906ad670ec2be0d21ab75d698216082d4`在`hku-gpu2`建立clean detached checkout
+后，timing watcher启动于tmux `baseline_2x5090_stage1_timing_56094b89_20261018`。
+2026-10-18 10:59:40 HKT状态为`waiting_for_audited_stage1_ladder`，ladder watcher pane存活，
+timing输出不存在，两卡仍为46/18MiB且0%。另以实现commit `18c63932`执行负向预检，在正式语料/
+ladder不存在时exit 1，未创建output/partial且GPU不变。冻结hash、状态、handle、负向结果和统一
+远端快照归档于`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage1_timing_watcher_20261018/`。

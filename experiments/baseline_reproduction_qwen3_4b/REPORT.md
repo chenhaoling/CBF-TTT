@@ -1145,3 +1145,12 @@ handle and state. It stops on a missing handle or any terminal ladder failure;
 only `completed_stage1_ladder` plus a passing saved independent audit launches
 the timing runner. The timing runner then repeats all corpus, resource, host
 and revision gates, so the watcher does not weaken the release boundary.
+
+The timing watcher was deployed from clean detached commit `56094b89` in tmux
+`baseline_2x5090_stage1_timing_56094b89_20261018`. At
+`2026-10-18T10:59:40+08:00` it was `waiting_for_audited_stage1_ladder`, the
+ladder-watcher pane was live, no timing output existed and both GPUs remained
+at 46/18 MiB and 0%. A separate negative preflight from implementation commit
+`18c63932` exited 1 while the corpus/ladder were absent, created no output or
+partial path and left GPU state unchanged. Evidence is under
+`remote/hku_gpu2_stage1_timing_watcher_20261018/`.
