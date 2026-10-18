@@ -2274,3 +2274,14 @@ Three tests cover the frozen order/scope, Bash syntax and deferred-input
 behavior, and missing-input failure closure. The complete focused suite passes
 91/91 locally, the auditor compiles, and `git diff --check` passes. No Stage-2
 resource child exists at registration time.
+
+Commit `1098b08d2098a9d4bd6f600474cd3d2d2f3cc7a6` passes 91/91 and the
+same static checks in a clean detached `hku-gpu2` worktree. Its watcher is
+live in tmux `baseline_qwen3_4b_base_stage2_ladder_1098b08d_20261019`, with
+watch root
+`/home/ctj/in_place_ttt_qwen3_4b_base_stage2_ladder_1098b08d_20261019.watch`.
+The initial state is `waiting_for_corrected_formal_stage1`; the Stage-2 result
+root is absent, formal Stage 1 is waiting for corrected timing, and the corpus
+is still building. GPU0/1 remain at 46/18 MiB and 0% utilization. Launch
+evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_stage2_ladder_watcher_20261019/`.

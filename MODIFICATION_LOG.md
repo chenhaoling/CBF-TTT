@@ -7619,3 +7619,11 @@ arm-specific start model、四个child、plans、configs和现有runner/auditor�
 新增三项计划/语法/延迟输入/失败关闭测试；全部In-Place-TTT focused suite为91/91通过，Python编译、Bash
 语法和diff检查通过。本阶段只注册resource evidence，未运行Stage-2 child，未释放timing、正式Stage2、
 RULER或门控实验。
+
+提交`1098b08d2098a9d4bd6f600474cd3d2d2f3cc7a6`在`hku-gpu2` clean detached worktree中通过
+91/91和静态检查。CPU-only watcher已在tmux
+`baseline_qwen3_4b_base_stage2_ladder_1098b08d_20261019`启动，watch root为
+`/home/ctj/in_place_ttt_qwen3_4b_base_stage2_ladder_1098b08d_20261019.watch`。初始状态为
+`waiting_for_corrected_formal_stage1`，Stage-2 result root不存在，formal Stage1仍等待corrected timing，
+corpus仍在构建；GPU0/1为46/18MiB且0%利用率。启动证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_stage2_ladder_watcher_20261019/`。
