@@ -7085,3 +7085,11 @@ CUDA前终止。
 计时完成后仍要求`completed_stage2_timing`终态、精确通过的独立audit、严格双臂和有限正值正式
 投影。该watcher不生成release、不保留计时checkpoint，也不能自行启动正式Stage2；原baseline
 入口和checkpoint保持不变。
+
+commit `fbc02a6e6ad88834b2bb2533906264ddd670d2f3`已在`hku-gpu2`建立clean checkout；focused
+suite 63/63和Bash语法通过。刻意缺失Stage2 ladder tmux handle的负向预检exit 6，状态为
+`stage2_ladder_watcher_handle_missing`，没有创建timing final/partial输出，两卡保持46/18MiB、利用率
+0%。真实watcher已在tmux session
+`baseline_2x5090_stage2_timing_fbc02a6e_20261018`启动；2026-10-18 12:45:04 HKT时pane PID
+1425558存活，状态为`waiting_for_audited_stage2_ladder`，正式语料partial为57GB。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_timing_watcher_tooling_20261018/`。

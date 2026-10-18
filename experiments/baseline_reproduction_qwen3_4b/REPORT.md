@@ -1508,3 +1508,14 @@ run, the watcher requires terminal state `completed_stage2_timing`, an exact
 passing audit, both arms and finite positive formal wall-time projections. The
 timing checkpoints remain discarded, and this watcher neither creates nor
 accepts the explicit release required by formal Stage 2.
+
+Commit `fbc02a6e6ad88834b2bb2533906264ddd670d2f3` was checked out cleanly on
+`hku-gpu2`. The focused suite passed 63/63 and Bash syntax passed. A negative
+run with a deliberately missing Stage-2 ladder tmux handle exited 6 in state
+`stage2_ladder_watcher_handle_missing`, created no timing output and left GPU
+0/1 at 46/18 MiB with zero utilization. The validated watcher is live in tmux
+session `baseline_2x5090_stage2_timing_fbc02a6e_20261018`; at
+`2026-10-18T12:45:04+08:00`, pane PID 1425558 was live, its state was
+`waiting_for_audited_stage2_ladder`, and the corpus partial directory was 57
+GB. Evidence is stored under
+`remote/hku_gpu2_stage2_timing_watcher_tooling_20261018/`.
