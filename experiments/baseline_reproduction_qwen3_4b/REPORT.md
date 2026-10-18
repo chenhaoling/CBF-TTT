@@ -1053,3 +1053,30 @@ rejection of an unbound 16K input and acceptance of a correctly bound
 manifest/audit fixture. This closes input
 length ambiguity only. The live 8K watcher remains bound to its earlier exact
 8K pilot, and GPU feasibility remains pending its resource run.
+
+## 12. Audited Stage-1 resource-ladder orchestration (2026-10-18)
+
+The opt-in `scripts/run_in_place_ttt_2x5090_stage1_ladder.sh` now encodes the
+next admissible GPU action without starting it. The runner is restricted to
+the `hku-gpu2` hostname `user-Super-Server`; it rejects reused output roots,
+dirty or mismatched official/tool checkouts, missing frozen plans, and stale
+exact-input manifests. It first requires the existing 8K watcher to have
+completed and independently passed both no-TTT and TTT arms. Only then may it
+run the fixed 16K no-TTT, 16K TTT, 32K no-TTT and 32K TTT boundaries in that
+order. A failure or invalid child stops the ladder immediately.
+
+The independent `scripts/audit_in_place_ttt_2x5090_stage1_ladder.py` does not
+trust the orchestration state. It recomputes the 8K prerequisite, verifies
+current log and monitor hashes, checks finite loss/gradient/step time, the 5%
+per-GPU headroom gate, host-memory/swap limits and at least 40 GB of DCP
+checkpoint files. For 16K and 32K it also rehashes the exact input artifacts
+and their manifest/audit bindings, then checks all four child summaries and
+per-boundary independent audits. Metadata binds the frozen addenda, config
+audit, runner, auditor and immutable tool/upstream revisions.
+
+Two focused tests cover rejection before the 8K prerequisite and a complete
+six-child fixture, including re-audit after atomic final-state publication.
+The complete focused baseline suite passes 43/43 tests; Bash syntax and
+`git diff --check` also pass. No 16K/32K GPU process has been launched. The
+formal corpus builder remains the current hard blocker, and all future GPU
+execution is restricted to `hku-gpu2`.

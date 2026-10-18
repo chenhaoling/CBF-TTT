@@ -6788,3 +6788,21 @@ CPU-only远端构建4.83秒完成，峰值RSS822896KiB。首次audit因CLI字段
 扩展resource runner/summary/独立audit：所有高于8K的activation边界必须显式提供并绑定通过的
 data manifest与audit，否则启动前exit 2；metadata和summary同步记录两者hash。新增5项输入测试、
 1项长边界拒绝测试及1项正确绑定正向测试，完整baseline focused suite现为41/41通过。
+
+## 2026-10-18：hku-gpu2 Stage-1 资源阶梯编排
+
+用户进一步明确，所有GPU工作只能使用`hku-gpu2`。新增opt-in
+`scripts/run_in_place_ttt_2x5090_stage1_ladder.sh`，把下一步固定为既有8K watcher两臂完成并通过
+审计后，严格顺序执行16K no-TTT、16K TTT、32K no-TTT、32K TTT。runner硬编码核对实际主机名
+`user-Super-Server`，拒绝复用输出目录、dirty或revision不匹配的official/tool checkout、缺失冻结
+计划以及未通过审计的精确输入。任一边界runner非零或child验证失败都会立即停止，不继续更长边界。
+
+新增独立`scripts/audit_in_place_ttt_2x5090_stage1_ladder.py`。prerequisite阶段重新审计8K两臂，
+不只读取watcher状态；final阶段重新核验8K prerequisite、四个16K/32K child、每边界resource
+独立audit、当前train/GPU/host文件hash、有限loss/gradient/step time、逐卡5%余量、主机内存/swap、
+至少40GB DCP checkpoint，以及精确data manifest/audit和runner/auditor/addenda/config hash。
+
+新增`tests/test_in_place_ttt_2x5090_stage1_ladder.py`，覆盖8K未完成时必须拒绝，以及完整六child
+fixture在final发布前后均可独立重审。完整baseline focused suite为43/43通过，`bash -n`和
+`git diff --check`通过。该提交只建立受审计的下一步入口，没有启动16K/32K GPU进程；正式语料
+builder仍是硬阻塞，后续所有GPU执行只允许在`hku-gpu2`上进行。
