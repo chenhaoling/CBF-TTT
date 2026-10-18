@@ -1755,3 +1755,27 @@ Its measured training and RULER result must be reported together with the
 32K/128K wall-time projection and explicit feasibility boundary. A 1B
 expansion needs a new pre-outcome addendum, and a full Level-B scale claim
 still requires the registered approximately 35B-token curriculum.
+
+## 31. Stage-2 75% sparse provenance boundary (2026-10-19)
+
+Before the registered boundary existed, a one-shot CPU-only watcher fixed
+Stage-2 indices 85,824--85,829 and script SHA256
+`3eab1785aae80f393057fcc29bc0fd6ecdf57c95ec43fb6df93c2b8bc73ec389`.
+It ran on `hku-gpu2`, emitted no source text or token IDs, waited for at least
+85,830 complete provenance rows, atomically wrote its result, and exited. The
+builder remained the original PID 1397987; no GPU process was started.
+
+The audit passed with no errors. The six rows have exact consecutive stage
+indices, strict FineWeb-Edu/LongCrawl64 alternation, paired source indices
+42,912--42,914, 131,071 content tokens, 131,072 training tokens, 131,071 raw
+source tokens consumed, zero synthetic EOS tokens, present spans and valid
+64-hex training-token hashes. A separate read-only recomputation from the live
+provenance file independently passed all ten semantic checks.
+
+The atomic audit is stored at
+`/home/ctj/in_place_ttt_public_corpus_full_run_20261018/stage2_sparse_75pct_audit.json`
+with SHA256
+`7ae916550d98d60dbd355fc599ed43e1cd383dec8526ade6c3efe52ff3139695`.
+This is an intermediate continuity check only. It does not replace full-corpus
+atomic publication or the registered canonical independent audit, and it does
+not release activation, training, RULER or update-admission work.

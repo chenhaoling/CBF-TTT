@@ -7266,3 +7266,21 @@ baseline结论均未完成，“是否更新”门控继续封存。
 论文约35B-token的Level-B训练完成。矩阵新增“规模与可行性边界”行，要求结合32K/128K实测吞吐
 明确报告扩大训练的可行性；约1B扩展仍需新的结果前addendum，完整Level-B规模声明仍要求执行注册
 的约35B课程。该修订防止验收矩阵把原始目标缩窄到更容易完成的100M子集。
+
+## 2026-10-19：Stage-2 75%稀疏 provenance 边界审计
+
+在固定边界形成前，在`hku-gpu2`启动一次性CPU watcher，预先固定Stage-2索引85824--85829和
+审计脚本SHA256 `3eab1785aae80f393057fcc29bc0fd6ecdf57c95ec43fb6df93c2b8bc73ec389`。
+watcher等待85830条完整provenance后，仅读取元数据字段，原子写出结果并退出；没有输出训练原文或
+token ID，没有启动GPU进程，也没有替换原builder PID 1397987。
+
+六条记录全部通过：stage索引连续，FineWeb-Edu/LongCrawl64严格交替，source索引按42912、42913、
+42914成对，content/training/raw-consumed token分别恒为131071/131072/131071，synthetic EOS均为0，
+spans存在且training-token SHA256格式有效。随后使用独立只读命令从原provenance重新计算十项语义
+检查，结果再次全部通过。
+
+远程原子审计位于
+`/home/ctj/in_place_ttt_public_corpus_full_run_20261018/stage2_sparse_75pct_audit.json`，SHA256为
+`7ae916550d98d60dbd355fc599ed43e1cd383dec8526ade6c3efe52ff3139695`。该证据仅是构建期间的稀疏
+连续性检查，不能替代全量语料原子发布与canonical independent audit，也不释放训练、RULER或
+“是否更新”门控实验。
