@@ -7653,3 +7653,20 @@ hash贯穿2x5090单次RULER、资源阶梯及正式矩阵。父级auditor现在�
 任何GPU child，现有corpus和训练等待链保持不变。最终冻结提交的clean-worktree测试更新为95/95通过，
 manifest、numerical validation、测试与静态检查证据归档在
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_paper_inference_clip_20261019/`。
+
+## 2026-10-19：corrected Base Stage-2 128K 三步计时门注册
+
+新增冻结计划`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_STAGE2_TIMING_PLAN.md`。计时固定为128K、global
+batch 64、每臂恰好3个optimizer step，no-TTT先于native TTT；首步作为warm-up，以后两步中位数投影
+正式Stage-2每臂5步的耗时。所有GPU执行只允许`hku-gpu2`的两张RTX 5090。
+
+新增CPU-only watcher `scripts/watch_and_run_in_place_ttt_qwen3_4b_base_stage2_timing.sh`。它等待corrected
+Stage-2 ladder终态后，同时验证underlying ladder audit、Base wrapper audit及corrected Stage-1绑定，随后才
+释放完整`stage2_128k.jsonl`并复用现有released-loop timing runner。未来语料/audit检查位于等待循环之后，
+因此前置步骤尚未完成时不会错误退出，也不会初始化CUDA。
+
+新增`scripts/audit_in_place_ttt_qwen3_4b_base_stage2_timing.py`，重算Base identity、formal Stage-1、两层
+Stage-2 ladder audit、完整语料、plans、configs及既有runner/auditor绑定，并检查每臂三条有限进度记录与
+五步投影。输出显式包含`formal_release_created=false`；watcher不会自动签发正式Stage-2。新增三项计划、
+Bash语法/延迟输入和失败关闭测试。注册阶段没有启动新的GPU child，也没有开放正式Stage-2、RULER或
+“是否更新”门控实验。

@@ -2325,3 +2325,26 @@ The immutable manifest, numerical validation JSON, clean-worktree test log and
 static-check log are archived under
 `remote/hku_gpu2_paper_inference_clip_20261019/` with a separate evidence
 manifest.
+
+## 48. Corrected Base Stage-2 timing registration (2026-10-19)
+
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_STAGE2_TIMING_PLAN.md` freezes the 128K
+timing boundary at global batch 64 and exactly three optimizer steps per arm.
+No-TTT runs before native TTT. Step one is warm-up; the median of steps two
+and three projects each registered five-step formal Stage-2 arm and their
+sequential total. All GPU execution remains restricted to `hku-gpu2`.
+
+The CPU-only watcher waits for the corrected Stage-2 ladder terminal state.
+It then verifies the underlying four-boundary audit, corrected Base wrapper
+audit and corrected formal Stage-1 binding before releasing the complete
+128K corpus to the existing timing runner. Future corpus checks occur only
+after the predecessor releases them, so a pending chain neither touches CUDA
+nor fails because a future audit is absent.
+
+The new terminal wrapper re-hashes Base identity, formal Stage-1 evidence,
+both Stage-2 ladder audits, complete corpus, plans, configs and the existing
+runner/auditor. It requires three finite progress records per arm and a
+positive five-step projection, and records `formal_release_created=false`.
+Three tests cover plan/order/release scope, Bash syntax with deferred inputs,
+and missing-input failure closure. Registration starts no GPU child and does
+not release formal Stage 2, RULER or update-admission work.
