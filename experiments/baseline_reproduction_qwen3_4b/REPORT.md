@@ -153,6 +153,7 @@ New opt-in files are:
 - `IN_PLACE_TTT_BASELINE_2X5090_STAGE1_TIMING_PLAN.md`;
 - `scripts/run_in_place_ttt_2x5090_stage1_timing.sh`;
 - `scripts/audit_in_place_ttt_2x5090_stage1_timing.py`;
+- `scripts/watch_and_run_in_place_ttt_2x5090_stage1_timing.sh`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -1138,3 +1139,9 @@ fixture. The full focused baseline suite passes 45/45 tests; Bash syntax,
 Python compilation and `git diff --check` pass. The timing runner is prepared
 but has not been launched because its corpus and ladder prerequisites are
 still running.
+
+The companion CPU-only timing watcher records the live Stage-1 ladder tmux
+handle and state. It stops on a missing handle or any terminal ladder failure;
+only `completed_stage1_ladder` plus a passing saved independent audit launches
+the timing runner. The timing runner then repeats all corpus, resource, host
+and revision gates, so the watcher does not weaken the release boundary.

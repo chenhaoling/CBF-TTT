@@ -6839,3 +6839,8 @@ swap、有效activation-offload设置和零checkpoint，并输出双臂顺序Sta
 以及完整双臂fixture审计。baseline focused suite现为45/45通过，Bash语法、Python编译与
 `git diff --check`通过。timing runner尚未启动；它必须等待正式语料和8K/16K/32K ladder全部
 完成。Stage-2继续封存，直到双臂Stage-1 HF checkpoint存在并完成单独64K/128K资源与吞吐计划。
+
+新增CPU-only `scripts/watch_and_run_in_place_ttt_2x5090_stage1_timing.sh`，持续记录Stage-1 ladder
+tmux handle与状态；handle丢失或任何terminal失败即停止，只有`completed_stage1_ladder`且保存的
+独立audit通过才调用timing runner。被调用runner仍会重做完整语料、资源、host与revision门槛，
+watcher不降低任何准入条件。
