@@ -1692,3 +1692,30 @@ The validated formal watcher is live in tmux session
 `waiting_for_audited_ruler_256k_resource`, the explicit release and formal
 output were absent, and GPU 0/1 remained idle at 46/18 MiB. Evidence is stored
 under `remote/hku_gpu2_ruler_256k_formal_tooling_20261018/`.
+
+## 29. Full-corpus streaming-audit fallback watcher (2026-10-19)
+
+The active full-corpus wrapper froze original auditor SHA256
+`9c5dbadba76c4ebbba5248952455b3bfe4860b9b2b79bdbb555034dcc76c7e31`.
+That version retains all historical continuity entries and may exhaust host
+memory at formal scale after the builder has atomically published the corpus.
+The previously frozen scalability addendum registered streaming auditor SHA256
+`5ec753a29996f6abc386d7e16529218bbaaf6c1b1ff271638db730b9c41f8b87`,
+but the active wrapper had no automatic fallback.
+
+`IN_PLACE_TTT_BASELINE_CORPUS_AUDIT_FALLBACK_WATCHER_ADDENDUM.md` now freezes
+that missing state transition before launch. The opt-in CPU watcher accepts a
+valid existing original audit, otherwise waits. It can run the streaming
+auditor only after atomic full-corpus publication, exact manifest/dependency
+validation, explicit original-wrapper `FAILED` state, zero live builder or
+auditor processes, and complete absence of canonical audit and partial files.
+It rechecks the decision after five seconds and never replaces a failed or
+malformed existing audit. Thus a genuine corpus failure remains terminal.
+
+The fallback writes canonical `independent_audit.json` only when no canonical
+artifact exists, then independently verifies full profile, all-true checks,
+manifest binding and registered auditor identity. Existing Stage-1 timing and
+formal-training gates therefore require the same canonical passing contract.
+Six decision tests cover release after post-publication original failure,
+active-auditor waiting, valid existing-audit acceptance, failed-audit refusal,
+pre-publication failure refusal and completed-without-audit refusal.

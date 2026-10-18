@@ -7218,3 +7218,21 @@ worktree；远程focused suite再次66/66通过。刻意缺失resource watcher h
 PID 1435575存活，状态为`waiting_for_audited_ruler_256k_resource`；显式release与正式输出均不存在，
 GPU0/1为46/18MiB且利用率0%。全部GPU工作继续只允许在`hku-gpu2`执行。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_256k_formal_tooling_20261018/`。
+
+## 2026-10-19：全量语料流式审计自动 fallback watcher
+
+新增`IN_PLACE_TTT_BASELINE_CORPUS_AUDIT_FALLBACK_WATCHER_ADDENDUM.md`与
+`scripts/watch_and_run_in_place_ttt_public_corpus_streaming_audit.py`。活动语料 wrapper 冻结的是旧版
+全历史 continuity 审计器；该版本可能在语料已经原子发布后因主存耗尽退出。新 watcher 把已冻结、
+已在 pilot 复验通过的流式审计器接入自动 fallback，但只使用`hku-gpu2` CPU，不启动任何 GPU 任务。
+
+fallback 必须同时满足：full manifest 已原子发布、精确记录/token 总量、plan/builder/inventory/
+inventory-audit/tokenizer 哈希绑定正确、四个数据与 provenance 文件存在、旧 wrapper 明确为
+`FAILED`、没有活跃 builder/auditor、canonical audit 及 partial 均不存在。决策间隔 5 秒复核两次后
+才允许运行。任何已经存在的 failed/malformed audit、partial build、依赖漂移、dirty tool checkout
+或真实检查失败均终止；watcher 绝不覆盖现有 audit。
+
+新增`tests/test_in_place_ttt_public_corpus_streaming_fallback.py`，覆盖原审计发布后失败时释放 fallback、
+活跃审计等待、合法已有 audit 直接接受、失败 audit 拒绝覆盖、发布前失败拒绝以及 completed 但缺
+audit 拒绝六条路径。fallback 成功后还会独立重查 full profile、all-true checks、manifest 绑定与注册
+auditor SHA256；下游 Stage1 timing 和正式训练继续只接受 canonical `independent_audit.json`。
