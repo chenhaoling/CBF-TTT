@@ -2166,3 +2166,13 @@ The focused In-Place-TTT suite now passes 81/81 locally; both new Bash scripts
 pass syntax validation and the auditor compiles. This registration does not
 release the 32K timing gate, formal 100M training, Stage 2, RULER matrix or
 update-admission exploration.
+
+Commit `97c4d786e0c6c9d38de665312a92d41b26d63ab1` also passes 81/81 in a clean
+detached `hku-gpu2` worktree. Its watcher is live in tmux
+`baseline_qwen3_4b_base_stage1_ladder_97c4d786_20261019`, with watcher root
+`/home/ctj/in_place_ttt_qwen3_4b_base_stage1_ladder_97c4d786_20261019.watch`.
+The initial state is `waiting_for_corrected_level_a`; the future result root
+does not exist, Level A remains `WAITING_BASE_CORPUS`, and no 16K/32K child was
+created. GPU0/1 remained at 46/18 MiB and 0% utilization. Compact evidence is
+archived under
+`remote/hku_gpu2_qwen3_4b_base_stage1_ladder_watcher_20261019/`.

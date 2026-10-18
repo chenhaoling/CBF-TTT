@@ -1,0 +1,39 @@
+{
+  "corpus_status": "RUNNING_BUILD",
+  "created_at_utc": "2026-10-18T21:16:00.291120+00:00",
+  "gpu_execution_constraint": "hku-gpu2_only",
+  "gpus": [
+    {
+      "index": 0,
+      "memory_total_mib": 32607,
+      "memory_used_mib": 46,
+      "name": "NVIDIA GeForce RTX 5090",
+      "utilization_percent": 0
+    },
+    {
+      "index": 1,
+      "memory_total_mib": 32607,
+      "memory_used_mib": 18,
+      "name": "NVIDIA GeForce RTX 5090",
+      "utilization_percent": 0
+    }
+  ],
+  "hostname": "user-Super-Server",
+  "level_a_session_alive": true,
+  "level_a_status": "WAITING_BASE_CORPUS",
+  "output_root_exists": false,
+  "protocol": "qwen3_4b_base_stage1_ladder_watcher_launch_v1",
+  "remote_focused_test_count": 81,
+  "remote_focused_tests_passed": true,
+  "tool_clean": true,
+  "tool_commit": "97c4d786e0c6c9d38de665312a92d41b26d63ab1",
+  "watcher_processes": [
+    {
+      "argv_sha256": "13f4664b499f9983b191db97fa0f49df23352f9db419363c4f3fcc7d96785fee",
+      "pid": 1676304
+    }
+  ],
+  "watcher_session": "baseline_qwen3_4b_base_stage1_ladder_97c4d786_20261019",
+  "watcher_session_alive": true,
+  "watcher_state": "waiting_for_corrected_level_a"
+}

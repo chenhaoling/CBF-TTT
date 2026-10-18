@@ -7541,3 +7541,11 @@ watcher只有在full corpus原子发布且canonical audit全通过后才允许GP
 重算Level-A prerequisite、full resource-input hash、四边界运行顺序和所有child的raw trace/checkpoint绑定。
 新增三项失败关闭/计划/语法测试；全部In-Place-TTT focused suite增至81/81通过，Python编译、两份Bash
 语法及diff检查通过。该阶段仅注册资源测量，不释放timing、formal training、RULER或门控实验。
+
+提交`97c4d786e0c6c9d38de665312a92d41b26d63ab1`推送后，在`hku-gpu2`建立clean detached
+worktree并重跑81/81通过。tmux
+`baseline_qwen3_4b_base_stage1_ladder_97c4d786_20261019`已启动，watch root为
+`/home/ctj/in_place_ttt_qwen3_4b_base_stage1_ladder_97c4d786_20261019.watch`。启动快照确认状态
+`waiting_for_corrected_level_a`、Level-A仍为`WAITING_BASE_CORPUS`、future result root不存在且没有
+16K/32K child；GPU0/1为46/18 MiB、利用率0%。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_stage1_ladder_watcher_20261019/`。
