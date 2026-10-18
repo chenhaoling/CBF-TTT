@@ -12,7 +12,6 @@ import itertools
 import json
 import os
 import platform
-import sys
 import tempfile
 from collections import Counter
 from datetime import datetime, timezone
@@ -90,6 +89,8 @@ def replay_rank(path: Path, rank: int, steps: int) -> list[dict[str, Any]]:
     dataset = load_dataset("json", data_files=[str(path)], split="train", streaming=True)
     dataset = dataset.shuffle(seed=SEED, buffer_size=BUFFER_SIZE)
     dataset = split_dataset_by_node(dataset, rank=rank, world_size=WORLD_SIZE)
+    if dataset.n_shards != 1:
+        raise ValueError(f"expected one JSON shard, observed {dataset.n_shards}")
     loader = StatefulDataLoader(
         dataset,
         batch_size=PER_RANK_BATCH,
@@ -283,6 +284,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "world_size": WORLD_SIZE,
         "per_rank_batch": PER_RANK_BATCH,
         "num_workers": NUM_WORKERS,
+        "dataset_n_shards": 1,
+        "effective_num_workers": 1,
         "prefetch_factor": PREFETCH_FACTOR,
         "drop_last": True,
         "pin_memory_in_order_audit": False,

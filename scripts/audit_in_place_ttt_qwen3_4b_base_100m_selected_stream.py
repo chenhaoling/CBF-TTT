@@ -80,6 +80,8 @@ def schedule(path: Path, rank: int, steps: int) -> list[dict[str, Any]]:
     stream = load_dataset("json", data_files=[str(path)], split="train", streaming=True)
     stream = stream.shuffle(seed=SEED, buffer_size=BUFFER)
     stream = split_dataset_by_node(stream, rank=rank, world_size=WORLD)
+    if stream.n_shards != 1:
+        raise ValueError(f"expected one JSON shard, observed {stream.n_shards}")
     loader = StatefulDataLoader(
         stream, batch_size=BATCH, num_workers=WORKERS, drop_last=True,
         pin_memory=False, prefetch_factor=PREFETCH, collate_fn=keep_rows,
@@ -116,6 +118,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         replay.get("seed") == SEED, replay.get("shuffle_buffer_size") == BUFFER,
         replay.get("world_size") == WORLD, replay.get("per_rank_batch") == BATCH,
         replay.get("num_workers") == WORKERS, replay.get("prefetch_factor") == PREFETCH,
+        replay.get("dataset_n_shards") == 1, replay.get("effective_num_workers") == 1,
         replay.get("drop_last") is True, replay.get("prefix_records") == PREFIX,
     ])
     checks["artifact_has_no_plaintext_or_token_arrays"] = not has_forbidden_key(replay)

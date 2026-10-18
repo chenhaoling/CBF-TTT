@@ -31,6 +31,10 @@ human can release either formal 100M stage.
 - Native dataloader settings: `num_workers=2`, `prefetch_factor=2`,
   `drop_last=true`.  Pinning is disabled only in the CPU replay because it
   cannot alter iterable record order.
+- Each stage is one JSONL shard.  The installed Hugging Face runtime therefore
+  accepts the requested two workers and stops one worker at iteration time.
+  The artifact must record both `num_workers=2` and
+  `effective_num_workers=1`; this mirrors the formal training input layout.
 - Stage 1: 32,768 tokens per record, 27 steps, 864 records per rank,
   1,728 records and 56,623,104 tokens globally.
 - Stage 2: 131,072 tokens per record, 5 steps, 160 records per rank,

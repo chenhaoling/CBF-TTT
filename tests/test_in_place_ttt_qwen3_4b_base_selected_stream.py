@@ -41,6 +41,7 @@ class CorrectedSelectedStreamTest(unittest.TestCase):
         self.assertNotIn('"selected_rows"', text)
         self.assertNotIn('"input_ids":', text)
         self.assertIn("ordered_training_hashes_sha256", text)
+        self.assertIn('"effective_num_workers": 1', text)
 
 
 if __name__ == "__main__":
