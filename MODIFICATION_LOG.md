@@ -7766,3 +7766,31 @@ CPU-only watcher在tmux
 `waiting_for_corrected_base_corpus`。GPU0/1分别为46/18MiB且利用率0%；watcher不会自动签发formal release。
 实现smoke、独立审计、测试、hash和启动状态归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_selected_stream_20261019/`。
+
+## 2026-10-19：Stage-1/Stage-2 正式放行审阅包 watcher 注册
+
+新增冻结计划`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RELEASE_REVIEW_ADDENDUM.md`。它解决timing完成后仍需
+人工拼接timing与selected-stream证据的问题，同时严格保持正式训练的人工放行边界：review watcher只生成
+`formal_release_created=false`的不可变审阅JSON，不包含`--accept`路径，不写目标release，也不启动训练。
+
+新增`scripts/create_in_place_ttt_qwen3_4b_base_release_review.py`。它直接复用Stage-1/Stage-2正式release
+creator的校验函数，绑定underlying/corrected timing audit、逐臂和顺序耗时投影、Base revision、corrected
+selected-stream audit、corpus manifest hash、对应stage的ordered index/token hash、release tool、review
+builder和计划hash。目标release或partial已存在时失败关闭。
+
+新增通用CPU-only watcher
+`scripts/watch_and_prepare_in_place_ttt_qwen3_4b_base_release_review.sh`。它同时等待对应timing终态和
+selected-stream终态，持续验证两个tmux句柄；任一前置失败、句柄提前消失、hash漂移或目标release提前出现
+都会停止。满足前置后以`CUDA_VISIBLE_DEVICES=`构建并独立复核review packet。正式release仍要求人类另行
+提供`--accept`、`reviewed_by`和`decision_note`。
+
+新增3项packet构建、已有release拒绝和watcher安全测试；与selected-stream/formal gate合并的15项focused
+tests在本机和`hku-gpu2`均通过。提交`d6d47cb041aa4630a10f5def7ae652b5544d2984`已推送并部署为clean
+detached checkout。
+
+两个CPU watcher分别在tmux
+`baseline_qwen3_4b_base_stage1_release_review_d6d47cb0_20261019`和
+`baseline_qwen3_4b_base_stage2_release_review_d6d47cb0_20261019`运行，状态为
+`waiting_for_stage1_timing_and_selected_stream`与`waiting_for_stage2_timing_and_selected_stream`。
+注册时GPU0/1仍为46/18MiB且0%利用率。测试、输入hash、句柄和状态证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_release_review_watchers_20261019/`。

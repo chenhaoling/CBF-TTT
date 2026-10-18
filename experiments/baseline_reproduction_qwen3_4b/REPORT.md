@@ -2473,3 +2473,34 @@ clean detached checkout. The CPU-only watcher is live in tmux
 state `waiting_for_corrected_base_corpus`. At registration GPU0/1 used 46/18
 MiB at 0% utilization. Evidence is archived under
 `remote/hku_gpu2_qwen3_4b_base_selected_stream_20261019/`.
+
+## 52. Corrected formal-release review packet registration (2026-10-19)
+
+The formal timing gates intentionally stop before writing an accepted release.
+To make the eventual human decision concrete and auditable,
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RELEASE_REVIEW_ADDENDUM.md` freezes a
+CPU-only review stage for both formal training stages.
+
+The review builder reuses the exact validation functions from each formal
+release creator. It combines the underlying and corrected timing audits,
+measured arm and sequential projections, Base revision, corrected
+selected-stream audit, corpus-manifest hash, applicable ordered stream
+digests, and tool/plan hashes. Its immutable protocol requires
+`ready_for_human_review=true` and `formal_release_created=false`.
+
+The generic watcher waits for both the applicable corrected timing result and
+the corrected selected-stream result while checking both tmux handles. It
+fails closed on any terminal prerequisite error, stale binding, missing live
+handle, pre-existing target release, or output reuse. It runs with all GPUs
+hidden. There is no `--accept` call and it cannot write the formal release or
+launch training. A human must still inspect the packet and separately provide
+acceptance, reviewer identity and a decision note.
+
+Commit `d6d47cb041aa4630a10f5def7ae652b5544d2984` passes all 15 related tests
+locally and in a clean detached `hku-gpu2` checkout. The Stage-1 and Stage-2
+watchers are live in tmux
+`baseline_qwen3_4b_base_stage1_release_review_d6d47cb0_20261019` and
+`baseline_qwen3_4b_base_stage2_release_review_d6d47cb0_20261019`, currently
+waiting for their timing and selected-stream prerequisites. GPU0/1 used 46/18
+MiB at 0% utilization at registration. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_release_review_watchers_20261019/`.
