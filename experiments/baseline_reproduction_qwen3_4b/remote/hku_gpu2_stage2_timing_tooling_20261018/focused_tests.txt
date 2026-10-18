@@ -1,0 +1,56 @@
+test_complete_paired_fixture_passes (test_in_place_ttt_2x5090_100m_stage1.TwoRTX5090FormalStage1Test) ... ok
+test_progress_keeps_first_record_for_each_of_27_steps (test_in_place_ttt_2x5090_100m_stage1.TwoRTX5090FormalStage1Test) ... ok
+test_disabling_activation_offload_fails (test_in_place_ttt_2x5090_configs.TwoRTX5090ConfigAuditTest) ... ok
+test_frozen_repository_configs_pass (test_in_place_ttt_2x5090_configs.TwoRTX5090ConfigAuditTest) ... ok
+test_unmatched_arm_change_fails (test_in_place_ttt_2x5090_configs.TwoRTX5090ConfigAuditTest) ... ok
+test_active_corpus_builder_fails (test_in_place_ttt_2x5090_resource.TwoRTX5090ResourceAuditTest) ... ok
+test_complete_fixture_passes (test_in_place_ttt_2x5090_resource.TwoRTX5090ResourceAuditTest) ... ok
+test_longer_boundary_accepts_bound_input_manifest_and_audit (test_in_place_ttt_2x5090_resource.TwoRTX5090ResourceAuditTest) ... ok
+test_longer_boundary_requires_audited_exact_length_input (test_in_place_ttt_2x5090_resource.TwoRTX5090ResourceAuditTest) ... ok
+test_auditor_cli_maps_named_paths_without_type_error (test_in_place_ttt_2x5090_resource_inputs.TwoRTX5090ResourceInputsTest) ... ok
+test_full_parent_is_preserved_byte_for_byte (test_in_place_ttt_2x5090_resource_inputs.TwoRTX5090ResourceInputsTest) ... ok
+test_independent_derivation_matches_builder_for_prefix (test_in_place_ttt_2x5090_resource_inputs.TwoRTX5090ResourceInputsTest) ... ok
+test_plaintext_metadata_is_rejected_recursively (test_in_place_ttt_2x5090_resource_inputs.TwoRTX5090ResourceInputsTest) ... ok
+test_registered_builder_and_auditor_specs_match (test_in_place_ttt_2x5090_resource_inputs.TwoRTX5090ResourceInputsTest) ... ok
+test_complete_ladder_fixture_passes (test_in_place_ttt_2x5090_stage1_ladder.TwoRTX5090Stage1LadderAuditTest) ... ok
+test_incomplete_8k_prerequisite_fails (test_in_place_ttt_2x5090_stage1_ladder.TwoRTX5090Stage1LadderAuditTest) ... ok
+test_complete_paired_fixture_passes (test_in_place_ttt_2x5090_stage1_timing.TwoRTX5090Stage1TimingTest) ... ok
+test_progress_uses_first_completed_trace_per_step (test_in_place_ttt_2x5090_stage1_timing.TwoRTX5090Stage1TimingTest) ... ok
+test_complete_arm_specific_ladder_fixture_passes (test_in_place_ttt_2x5090_stage2_ladder.TwoRTX5090Stage2LadderTest) ... ok
+test_stale_stage1_hf_manifest_fails (test_in_place_ttt_2x5090_stage2_ladder.TwoRTX5090Stage2LadderTest) ... ok
+test_checkpoint_in_timing_arm_is_rejected (test_in_place_ttt_2x5090_stage2_timing.TwoRTX5090Stage2TimingTest) ... ok
+test_complete_arm_specific_timing_fixture_passes (test_in_place_ttt_2x5090_stage2_timing.TwoRTX5090Stage2TimingTest) ... ok
+test_activation_offload_gate_and_step_throughput (test_in_place_ttt_baseline_resource.BaselineResourceSummaryTest) ... ok
+test_completed_probe_summary (test_in_place_ttt_baseline_resource.BaselineResourceSummaryTest) ... ok
+test_frozen_repository_configs_pass (test_in_place_ttt_level_b_configs.LevelBConfigAuditTest) ... ok
+test_pair_mismatch_is_detected (test_in_place_ttt_level_b_configs.LevelBConfigAuditTest) ... ok
+test_unregistered_optimizer_change_fails (test_in_place_ttt_level_b_configs.LevelBConfigAuditTest) ... ok
+test_gpu_trace_requires_every_selected_device (test_in_place_ttt_level_b_preflight.LevelBPreflightAuditTest) ... ok
+test_metric_parser_uses_last_finite_step (test_in_place_ttt_level_b_preflight.LevelBPreflightAuditTest) ... ok
+test_matrix_summary_and_independent_recompute (test_in_place_ttt_level_b_ruler.RulerMatrixTests) ... ok
+test_paired_input_mismatch_is_rejected (test_in_place_ttt_level_b_ruler.RulerMatrixTests) ... ok
+test_frozen_addendum_binds_current_implementation_and_sources (test_in_place_ttt_level_b_ruler.RulerSingleTests) ... ok
+test_independent_single_audit_recomputes_raw_results (test_in_place_ttt_level_b_ruler.RulerSingleTests) ... ok
+test_registered_config_is_seven_context_and_formal_100 (test_in_place_ttt_level_b_ruler.RulerSingleTests) ... ok
+test_single_summary_requires_exact_13_by_100 (test_in_place_ttt_level_b_ruler.RulerSingleTests) ... ok
+test_complete_stage2_fixture_passes (test_in_place_ttt_level_b_training.LevelBTrainingAuditTest) ... ok
+test_metric_parser_retains_all_observed_metrics (test_in_place_ttt_level_b_training.LevelBTrainingAuditTest) ... ok
+test_registered_checkpoint_steps (test_in_place_ttt_level_b_training.LevelBTrainingAuditTest) ... ok
+test_continuity_memory_is_bounded_by_active_documents (test_in_place_ttt_public_corpus.PublicCorpusTest) ... ok
+test_frozen_profiles_match_registered_counts (test_in_place_ttt_public_corpus.PublicCorpusTest) ... ok
+test_output_root_is_atomic_and_never_overwritten (test_in_place_ttt_public_corpus.PublicCorpusTest) ... ok
+test_packer_preserves_cursor_across_sequence_change (test_in_place_ttt_public_corpus.PublicCorpusTest) ... ok
+test_prefetched_snapshot_cannot_skip_a_document (test_in_place_ttt_public_corpus.PublicCorpusTest) ... ok
+test_fineweb_is_lexicographic_and_scoped (test_in_place_ttt_public_corpus_inventory.PublicCorpusInventoryTest) ... ok
+test_invalid_lfs_metadata_is_rejected (test_in_place_ttt_public_corpus_inventory.PublicCorpusInventoryTest) ... ok
+test_longcrawl_requires_every_index (test_in_place_ttt_public_corpus_inventory.PublicCorpusInventoryTest) ... ok
+test_longcrawl_uses_numeric_not_lexical_order (test_in_place_ttt_public_corpus_inventory.PublicCorpusInventoryTest) ... ok
+test_exact_veomni_length_and_contiguous_provenance (test_in_place_ttt_public_data_pilot.PublicDataPilotTest) ... ok
+test_nested_plaintext_keys_are_rejected (test_in_place_ttt_public_data_pilot.PublicDataPilotTest) ... ok
+test_output_and_partial_directories_are_never_overwritten (test_in_place_ttt_public_data_pilot.PublicDataPilotTest) ... ok
+test_short_source_fails_instead_of_duplicating_text (test_in_place_ttt_public_data_pilot.PublicDataPilotTest) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 0.371s
+
+OK

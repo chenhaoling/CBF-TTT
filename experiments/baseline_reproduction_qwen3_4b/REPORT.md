@@ -1273,3 +1273,11 @@ work: formal Stage 1 and the Stage-2 resource ladder have not completed. A
 future formal Stage-2 runner must additionally consume a separately reviewed,
 timing-audit-bound release record. RULER and update-admission experiments stay
 sealed until the paired Stage-2 audit passes.
+
+Commit `69ee323a` was checked out cleanly on `hku-gpu2`. The remote CPU-side
+focused suite passed 51/51, Bash syntax and the auditor CLI passed, and a
+negative run with unpublished formal prerequisites exited 1 before CUDA while
+creating neither final nor partial output. At `2026-10-18T11:19:15+08:00`,
+GPU 0/1 used 46/18 MiB at 0%; the corpus builder and all three upstream
+watchers remained alive. Evidence is stored under
+`remote/hku_gpu2_stage2_timing_tooling_20261018/`.

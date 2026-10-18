@@ -6924,3 +6924,10 @@ Python编译和`git diff --check`通过。
 本次只准备和验证工具链，没有启动GPU任务。正式Stage-1及Stage-2资源阶梯尚未完成；未来正式
 Stage-2还必须增加人工审阅后绑定timing audit hash的release记录。RULER和“是否更新”门控实验
 继续封存到双臂Stage-2独立审计通过。
+
+commit `69ee323af5e942ebe7df65d8f7445556d894b4d9`在`hku-gpu2`建立clean detached
+checkout后，远程CPU侧baseline focused suite 51/51通过，Bash语法与auditor CLI通过。使用尚未
+发布的正式语料/Stage-1/ladder路径执行负向预检时exit 1，在CUDA前停止，且没有创建final或
+partial输出。2026-10-18 11:19:15 HKT GPU0/1仅46/18MiB、利用率0%；正式语料builder和三个
+上游watcher均继续存活等待。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_timing_tooling_20261018/`。

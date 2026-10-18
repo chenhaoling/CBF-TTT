@@ -1,0 +1,31 @@
+usage: audit_in_place_ttt_2x5090_stage2_timing.py [-h] --root ROOT
+                                                  --stage1-root STAGE1_ROOT
+                                                  --stage2-ladder-root
+                                                  STAGE2_LADDER_ROOT
+                                                  --timing-plan TIMING_PLAN
+                                                  --execution-addendum
+                                                  EXECUTION_ADDENDUM
+                                                  --corpus-manifest
+                                                  CORPUS_MANIFEST
+                                                  --corpus-audit CORPUS_AUDIT
+                                                  --data DATA --no-ttt-config
+                                                  NO_TTT_CONFIG --ttt-config
+                                                  TTT_CONFIG --runner RUNNER
+                                                  --output OUTPUT
+
+Independently audit paired three-step 128K Stage-2 timing.
+
+options:
+  -h, --help            show this help message and exit
+  --root ROOT
+  --stage1-root STAGE1_ROOT
+  --stage2-ladder-root STAGE2_LADDER_ROOT
+  --timing-plan TIMING_PLAN
+  --execution-addendum EXECUTION_ADDENDUM
+  --corpus-manifest CORPUS_MANIFEST
+  --corpus-audit CORPUS_AUDIT
+  --data DATA
+  --no-ttt-config NO_TTT_CONFIG
+  --ttt-config TTT_CONFIG
+  --runner RUNNER
+  --output OUTPUT
