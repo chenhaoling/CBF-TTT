@@ -7164,3 +7164,15 @@ commit `439fcea142c4d3bb51413d75480d5231d0c62cab`已在`hku-gpu2`建立clean che
 状态分别为`waiting_for_audited_formal_stage2`和`waiting_for_audited_ruler_resource_ladder`，两卡仍为
 46/18MiB、利用率0%。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_paper_comparison_20261018/`。
+
+## 2026-10-18：独立RULER-256K外推资源门
+
+新增并在任何256K运行或出分前冻结`IN_PLACE_TTT_BASELINE_2X5090_RULER_256K_PLAN.md`。由于公开
+复现的Stage2 checkpoint注册最大位置为131072，256K明确作为YaRN外推，与4K–128K主矩阵隔离；
+失败不能改变主结果。
+
+新增paired 256K resource runner、独立auditor和持久watcher。它只在正式4K–128K matrix独立审计
+通过后运行，每臂每任务1例、GPU0 no-TTT/GPU1 TTT、分数丢弃；绑定正式Stage2、主matrix、计划、
+工具和child audit，重算双臂输入hash并要求至少5%显存余量。通过只释放后续单独冻结的100例正式
+256K入口，不自动评分；OOM、非零退出或audit不一致均停止，不允许缩短输入、减少任务或量化冒充
+论文256K指标。

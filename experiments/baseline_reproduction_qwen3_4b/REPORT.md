@@ -1615,3 +1615,24 @@ matrix watcher in `baseline_2x5090_ruler_matrix_439fcea1_20261018`, pane PID
 `waiting_for_audited_ruler_resource_ladder`; GPU 0/1 remained at 46/18 MiB and
 zero utilization. Evidence is stored under
 `remote/hku_gpu2_ruler_paper_comparison_20261018/`.
+
+## 27. Separate RULER-256K extrapolation resource gate (2026-10-18)
+
+`IN_PLACE_TTT_BASELINE_2X5090_RULER_256K_PLAN.md` is frozen before any 256K
+run or score. It preserves the paper's 256K point as a separate YaRN
+extrapolation because the public-data Stage-2 checkpoints are registered to
+131,072 positions. A failure cannot invalidate or alter the primary
+4K--128K matrix.
+
+The opt-in paired resource runner starts only after the independently audited
+primary matrix. It evaluates one example for each of the 13 tasks, with no-TTT
+on GPU 0 and TTT on GPU 1, and discards scores. Its independent auditor binds
+the final Stage-2 checkpoints, primary matrix, plans, exact tools and both
+child audits; it also recomputes paired input hashes and requires at least 5%
+GPU headroom. The persistent watcher monitors the paper-aware matrix handle
+and launches this resource decision only after the exact matrix audit passes.
+
+A passing resource gate releases preparation of a separately frozen formal
+100-example 256K runner; it does not launch formal scoring automatically. OOM,
+nonzero exit or any audit mismatch stops without shortening inputs, changing
+tasks, quantizing, or relabelling a subset as the paper metric.
