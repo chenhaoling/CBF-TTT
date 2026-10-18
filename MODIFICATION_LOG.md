@@ -7929,3 +7929,23 @@ GPU0/1仅占46/18 MiB，利用率均为0%。证据归档于
 `waiting_for_corrected_stage1_and_stage2_timing`，tmux PID 1707093；scale JSON/Markdown仍不存在。07:19快照中
 GPU0/1仅占46/18 MiB且利用率均为0%，所有GPU工作仍严格限制在`hku-gpu2`。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_scale_feasibility_registration_20261019/`。
+
+## 2026-10-19：原论文 Table 1 与远端 RULER 语义预检
+
+根据论文 Section 4.1、Table 1 和 Appendix 9.2/9.3，重新核对当前主线的模型、两阶段 token 预算、上下文长度、
+YaRN、Conv size 5、每六层启用 TTT、RULER 平均准确率以及推理更新 Frobenius 裁剪 `tau=1e-5`。论文没有发布
+continual corpus 的精确混合与处理记录，因此 FineWeb-Edu/LongCrawl64 仍明确标注为 public-data matched
+replication，而不是私有数据的 exact reproduction。
+
+在 `hku-gpu2` 隐藏 CUDA，使用正式 `mmengine.Config.fromfile` 路径分别解析4K、8K、16K、32K、64K、128K和
+256K配置。七个长度均得到完全相同的13任务集合、每任务100条、seed 42、确定性生成、关闭thinking、64个最大
+输出token以及与上下文一致的session/max length；官方summary group逐项覆盖同一13任务。实际安装的10个RULER
+generator/evaluator模块和3份源数据hash与独立auditor中冻结的hash完全一致。七项检查全部通过。
+
+同时追溯了旧2x5090计划中的config hash `4c67903e...`与live config `1859bb2d...`的差异。差异由任何
+corrected-Base分数出现前冻结的paper-inference clipping addendum显式授权，唯一配置改动是加入`1e-5`常量并通过
+`model_kwargs`传递；该addendum第7节已冻结新hash。远端clean checkout恰好匹配新hash，不属于未授权漂移。
+
+机器可读结果、OpenCompass原始日志和论文对应说明归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_semantics_preflight_20261019/`。
+该预检只证明评测定义对齐，不替代模型分数、长上下文资源门、35B训练或最终Table 1审计。

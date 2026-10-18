@@ -1,0 +1,559 @@
+10/19 07:26:45 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/dev-v2.0.json
+10/19 07:26:45 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/hotpotqa.json
+10/19 07:26:45 - OpenCompass - INFO - Try to load the data from /home/ctj/.cache/opencompass/./data/ruler/PaulGrahamEssays.jsonl
+{
+  "checks": {
+    "128k": true,
+    "16k": true,
+    "256k": true,
+    "32k": true,
+    "4k": true,
+    "64k": true,
+    "8k": true
+  },
+  "config": {
+    "path": "/home/ctj/cbf_ttt_tool_c89c6f8c/eval_config/baseline_reproduction/qwen3_4b_2x5090_ruler.py",
+    "sha256": "1859bb2d2e43f2a715feaa1171b51b9b1a0432e810115a411b5b81e60e48954d"
+  },
+  "contexts": {
+    "128k": {
+      "batch_size": 1,
+      "gen_config": {
+        "do_sample": false,
+        "enable_thinking": false,
+        "max_new_tokens": 64,
+        "temperature": 0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "group_subsets": [
+        "ruler_niah_single_1_128k",
+        "ruler_niah_single_2_128k",
+        "ruler_niah_single_3_128k",
+        "ruler_niah_multikey_1_128k",
+        "ruler_niah_multikey_2_128k",
+        "ruler_niah_multikey_3_128k",
+        "ruler_niah_multivalue_128k",
+        "ruler_niah_multiquery_128k",
+        "ruler_vt_128k",
+        "ruler_fwe_128k",
+        "ruler_cwe_128k",
+        "ruler_qa_squad_128k",
+        "ruler_qa_hotpotqa_128k"
+      ],
+      "max_batch_size": 1,
+      "max_seq_len": 131072,
+      "max_seq_lengths": [
+        131072
+      ],
+      "model_kwargs": {
+        "ttt_update_clip_norm": 1e-05
+      },
+      "num_samples": [
+        100
+      ],
+      "passed": true,
+      "random_seeds": [
+        42
+      ],
+      "session_len": 131072,
+      "summary_dataset_abbrs": [
+        "ruler_128k"
+      ],
+      "task_abbrs": [
+        "ruler_qa_squad_128k",
+        "ruler_qa_hotpotqa_128k",
+        "ruler_niah_single_1_128k",
+        "ruler_niah_single_2_128k",
+        "ruler_niah_single_3_128k",
+        "ruler_niah_multikey_1_128k",
+        "ruler_niah_multikey_2_128k",
+        "ruler_niah_multikey_3_128k",
+        "ruler_niah_multivalue_128k",
+        "ruler_niah_multiquery_128k",
+        "ruler_vt_128k",
+        "ruler_fwe_128k",
+        "ruler_cwe_128k"
+      ],
+      "task_count": 13,
+      "tokenizer_kwargs": {
+        "fix_mistral_regex": false
+      },
+      "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+    },
+    "16k": {
+      "batch_size": 1,
+      "gen_config": {
+        "do_sample": false,
+        "enable_thinking": false,
+        "max_new_tokens": 64,
+        "temperature": 0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "group_subsets": [
+        "ruler_niah_single_1_16k",
+        "ruler_niah_single_2_16k",
+        "ruler_niah_single_3_16k",
+        "ruler_niah_multikey_1_16k",
+        "ruler_niah_multikey_2_16k",
+        "ruler_niah_multikey_3_16k",
+        "ruler_niah_multivalue_16k",
+        "ruler_niah_multiquery_16k",
+        "ruler_vt_16k",
+        "ruler_fwe_16k",
+        "ruler_cwe_16k",
+        "ruler_qa_squad_16k",
+        "ruler_qa_hotpotqa_16k"
+      ],
+      "max_batch_size": 1,
+      "max_seq_len": 16384,
+      "max_seq_lengths": [
+        16384
+      ],
+      "model_kwargs": {
+        "ttt_update_clip_norm": 1e-05
+      },
+      "num_samples": [
+        100
+      ],
+      "passed": true,
+      "random_seeds": [
+        42
+      ],
+      "session_len": 16384,
+      "summary_dataset_abbrs": [
+        "ruler_16k"
+      ],
+      "task_abbrs": [
+        "ruler_qa_squad_16k",
+        "ruler_qa_hotpotqa_16k",
+        "ruler_niah_single_1_16k",
+        "ruler_niah_single_2_16k",
+        "ruler_niah_single_3_16k",
+        "ruler_niah_multikey_1_16k",
+        "ruler_niah_multikey_2_16k",
+        "ruler_niah_multikey_3_16k",
+        "ruler_niah_multivalue_16k",
+        "ruler_niah_multiquery_16k",
+        "ruler_vt_16k",
+        "ruler_fwe_16k",
+        "ruler_cwe_16k"
+      ],
+      "task_count": 13,
+      "tokenizer_kwargs": {
+        "fix_mistral_regex": false
+      },
+      "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+    },
+    "256k": {
+      "batch_size": 1,
+      "gen_config": {
+        "do_sample": false,
+        "enable_thinking": false,
+        "max_new_tokens": 64,
+        "temperature": 0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "group_subsets": [
+        "ruler_niah_single_1_256k",
+        "ruler_niah_single_2_256k",
+        "ruler_niah_single_3_256k",
+        "ruler_niah_multikey_1_256k",
+        "ruler_niah_multikey_2_256k",
+        "ruler_niah_multikey_3_256k",
+        "ruler_niah_multivalue_256k",
+        "ruler_niah_multiquery_256k",
+        "ruler_vt_256k",
+        "ruler_fwe_256k",
+        "ruler_cwe_256k",
+        "ruler_qa_squad_256k",
+        "ruler_qa_hotpotqa_256k"
+      ],
+      "max_batch_size": 1,
+      "max_seq_len": 262144,
+      "max_seq_lengths": [
+        262144
+      ],
+      "model_kwargs": {
+        "ttt_update_clip_norm": 1e-05
+      },
+      "num_samples": [
+        100
+      ],
+      "passed": true,
+      "random_seeds": [
+        42
+      ],
+      "session_len": 262144,
+      "summary_dataset_abbrs": [
+        "ruler_256k"
+      ],
+      "task_abbrs": [
+        "ruler_qa_squad_256k",
+        "ruler_qa_hotpotqa_256k",
+        "ruler_niah_single_1_256k",
+        "ruler_niah_single_2_256k",
+        "ruler_niah_single_3_256k",
+        "ruler_niah_multikey_1_256k",
+        "ruler_niah_multikey_2_256k",
+        "ruler_niah_multikey_3_256k",
+        "ruler_niah_multivalue_256k",
+        "ruler_niah_multiquery_256k",
+        "ruler_vt_256k",
+        "ruler_fwe_256k",
+        "ruler_cwe_256k"
+      ],
+      "task_count": 13,
+      "tokenizer_kwargs": {
+        "fix_mistral_regex": false
+      },
+      "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+    },
+    "32k": {
+      "batch_size": 1,
+      "gen_config": {
+        "do_sample": false,
+        "enable_thinking": false,
+        "max_new_tokens": 64,
+        "temperature": 0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "group_subsets": [
+        "ruler_niah_single_1_32k",
+        "ruler_niah_single_2_32k",
+        "ruler_niah_single_3_32k",
+        "ruler_niah_multikey_1_32k",
+        "ruler_niah_multikey_2_32k",
+        "ruler_niah_multikey_3_32k",
+        "ruler_niah_multivalue_32k",
+        "ruler_niah_multiquery_32k",
+        "ruler_vt_32k",
+        "ruler_fwe_32k",
+        "ruler_cwe_32k",
+        "ruler_qa_squad_32k",
+        "ruler_qa_hotpotqa_32k"
+      ],
+      "max_batch_size": 1,
+      "max_seq_len": 32768,
+      "max_seq_lengths": [
+        32768
+      ],
+      "model_kwargs": {
+        "ttt_update_clip_norm": 1e-05
+      },
+      "num_samples": [
+        100
+      ],
+      "passed": true,
+      "random_seeds": [
+        42
+      ],
+      "session_len": 32768,
+      "summary_dataset_abbrs": [
+        "ruler_32k"
+      ],
+      "task_abbrs": [
+        "ruler_qa_squad_32k",
+        "ruler_qa_hotpotqa_32k",
+        "ruler_niah_single_1_32k",
+        "ruler_niah_single_2_32k",
+        "ruler_niah_single_3_32k",
+        "ruler_niah_multikey_1_32k",
+        "ruler_niah_multikey_2_32k",
+        "ruler_niah_multikey_3_32k",
+        "ruler_niah_multivalue_32k",
+        "ruler_niah_multiquery_32k",
+        "ruler_vt_32k",
+        "ruler_fwe_32k",
+        "ruler_cwe_32k"
+      ],
+      "task_count": 13,
+      "tokenizer_kwargs": {
+        "fix_mistral_regex": false
+      },
+      "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+    },
+    "4k": {
+      "batch_size": 1,
+      "gen_config": {
+        "do_sample": false,
+        "enable_thinking": false,
+        "max_new_tokens": 64,
+        "temperature": 0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "group_subsets": [
+        "ruler_niah_single_1_4k",
+        "ruler_niah_single_2_4k",
+        "ruler_niah_single_3_4k",
+        "ruler_niah_multikey_1_4k",
+        "ruler_niah_multikey_2_4k",
+        "ruler_niah_multikey_3_4k",
+        "ruler_niah_multivalue_4k",
+        "ruler_niah_multiquery_4k",
+        "ruler_vt_4k",
+        "ruler_fwe_4k",
+        "ruler_cwe_4k",
+        "ruler_qa_squad_4k",
+        "ruler_qa_hotpotqa_4k"
+      ],
+      "max_batch_size": 1,
+      "max_seq_len": 4096,
+      "max_seq_lengths": [
+        4096
+      ],
+      "model_kwargs": {
+        "ttt_update_clip_norm": 1e-05
+      },
+      "num_samples": [
+        100
+      ],
+      "passed": true,
+      "random_seeds": [
+        42
+      ],
+      "session_len": 4096,
+      "summary_dataset_abbrs": [
+        "ruler_4k"
+      ],
+      "task_abbrs": [
+        "ruler_qa_squad_4k",
+        "ruler_qa_hotpotqa_4k",
+        "ruler_niah_single_1_4k",
+        "ruler_niah_single_2_4k",
+        "ruler_niah_single_3_4k",
+        "ruler_niah_multikey_1_4k",
+        "ruler_niah_multikey_2_4k",
+        "ruler_niah_multikey_3_4k",
+        "ruler_niah_multivalue_4k",
+        "ruler_niah_multiquery_4k",
+        "ruler_vt_4k",
+        "ruler_fwe_4k",
+        "ruler_cwe_4k"
+      ],
+      "task_count": 13,
+      "tokenizer_kwargs": {
+        "fix_mistral_regex": false
+      },
+      "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+    },
+    "64k": {
+      "batch_size": 1,
+      "gen_config": {
+        "do_sample": false,
+        "enable_thinking": false,
+        "max_new_tokens": 64,
+        "temperature": 0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "group_subsets": [
+        "ruler_niah_single_1_64k",
+        "ruler_niah_single_2_64k",
+        "ruler_niah_single_3_64k",
+        "ruler_niah_multikey_1_64k",
+        "ruler_niah_multikey_2_64k",
+        "ruler_niah_multikey_3_64k",
+        "ruler_niah_multivalue_64k",
+        "ruler_niah_multiquery_64k",
+        "ruler_vt_64k",
+        "ruler_fwe_64k",
+        "ruler_cwe_64k",
+        "ruler_qa_squad_64k",
+        "ruler_qa_hotpotqa_64k"
+      ],
+      "max_batch_size": 1,
+      "max_seq_len": 65536,
+      "max_seq_lengths": [
+        65536
+      ],
+      "model_kwargs": {
+        "ttt_update_clip_norm": 1e-05
+      },
+      "num_samples": [
+        100
+      ],
+      "passed": true,
+      "random_seeds": [
+        42
+      ],
+      "session_len": 65536,
+      "summary_dataset_abbrs": [
+        "ruler_64k"
+      ],
+      "task_abbrs": [
+        "ruler_qa_squad_64k",
+        "ruler_qa_hotpotqa_64k",
+        "ruler_niah_single_1_64k",
+        "ruler_niah_single_2_64k",
+        "ruler_niah_single_3_64k",
+        "ruler_niah_multikey_1_64k",
+        "ruler_niah_multikey_2_64k",
+        "ruler_niah_multikey_3_64k",
+        "ruler_niah_multivalue_64k",
+        "ruler_niah_multiquery_64k",
+        "ruler_vt_64k",
+        "ruler_fwe_64k",
+        "ruler_cwe_64k"
+      ],
+      "task_count": 13,
+      "tokenizer_kwargs": {
+        "fix_mistral_regex": false
+      },
+      "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+    },
+    "8k": {
+      "batch_size": 1,
+      "gen_config": {
+        "do_sample": false,
+        "enable_thinking": false,
+        "max_new_tokens": 64,
+        "temperature": 0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "group_subsets": [
+        "ruler_niah_single_1_8k",
+        "ruler_niah_single_2_8k",
+        "ruler_niah_single_3_8k",
+        "ruler_niah_multikey_1_8k",
+        "ruler_niah_multikey_2_8k",
+        "ruler_niah_multikey_3_8k",
+        "ruler_niah_multivalue_8k",
+        "ruler_niah_multiquery_8k",
+        "ruler_vt_8k",
+        "ruler_fwe_8k",
+        "ruler_cwe_8k",
+        "ruler_qa_squad_8k",
+        "ruler_qa_hotpotqa_8k"
+      ],
+      "max_batch_size": 1,
+      "max_seq_len": 8192,
+      "max_seq_lengths": [
+        8192
+      ],
+      "model_kwargs": {
+        "ttt_update_clip_norm": 1e-05
+      },
+      "num_samples": [
+        100
+      ],
+      "passed": true,
+      "random_seeds": [
+        42
+      ],
+      "session_len": 8192,
+      "summary_dataset_abbrs": [
+        "ruler_8k"
+      ],
+      "task_abbrs": [
+        "ruler_qa_squad_8k",
+        "ruler_qa_hotpotqa_8k",
+        "ruler_niah_single_1_8k",
+        "ruler_niah_single_2_8k",
+        "ruler_niah_single_3_8k",
+        "ruler_niah_multikey_1_8k",
+        "ruler_niah_multikey_2_8k",
+        "ruler_niah_multikey_3_8k",
+        "ruler_niah_multivalue_8k",
+        "ruler_niah_multiquery_8k",
+        "ruler_vt_8k",
+        "ruler_fwe_8k",
+        "ruler_cwe_8k"
+      ],
+      "task_count": 13,
+      "tokenizer_kwargs": {
+        "fix_mistral_regex": false
+      },
+      "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+    }
+  },
+  "cuda_visible_devices": "",
+  "expected_task_prefixes": [
+    "ruler_qa_squad",
+    "ruler_qa_hotpotqa",
+    "ruler_niah_single_1",
+    "ruler_niah_single_2",
+    "ruler_niah_single_3",
+    "ruler_niah_multikey_1",
+    "ruler_niah_multikey_2",
+    "ruler_niah_multikey_3",
+    "ruler_niah_multivalue",
+    "ruler_niah_multiquery",
+    "ruler_vt",
+    "ruler_fwe",
+    "ruler_cwe"
+  ],
+  "hostname": "user-Super-Server",
+  "module_files": {
+    "opencompass.configs.datasets.ruler.ruler_cwe_gen": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/configs/datasets/ruler/ruler_cwe_gen.py",
+      "sha256": "c8c0f87acc8f28b4ca6b3580223180ec06a30fdc140809d81fb66a1074efd24f"
+    },
+    "opencompass.configs.datasets.ruler.ruler_fwe_gen": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/configs/datasets/ruler/ruler_fwe_gen.py",
+      "sha256": "9c54073a4c0fe687f0ed51e559ceb79041d28ab04258111017341111d8851c8d"
+    },
+    "opencompass.configs.datasets.ruler.ruler_niah_gen": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/configs/datasets/ruler/ruler_niah_gen.py",
+      "sha256": "e9c51a74a75428af7d1b6c2aafabbf1c93f817a1197e4b03301d66169837a77d"
+    },
+    "opencompass.configs.datasets.ruler.ruler_qa_gen": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/configs/datasets/ruler/ruler_qa_gen.py",
+      "sha256": "2c48ffb84f1ef858bd02ba333254defb67c528d3bd5142fe720c84591d4e1f06"
+    },
+    "opencompass.configs.datasets.ruler.ruler_vt_gen": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/configs/datasets/ruler/ruler_vt_gen.py",
+      "sha256": "ce54adedba8ab4548809b4e3f0bce848f30acac87e6a1c2bdeffdb1de343aaa6"
+    },
+    "opencompass.datasets.ruler.ruler_cwe": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/datasets/ruler/ruler_cwe.py",
+      "sha256": "bf4a5b2e9168dc90030f420f9afda2a7f8c59cfe31306c46f55ee2dc4269edc3"
+    },
+    "opencompass.datasets.ruler.ruler_fwe": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/datasets/ruler/ruler_fwe.py",
+      "sha256": "c900418620df5fb25363d9a0eda4fa5cf42ca4fb272772ee03ef006880ace194"
+    },
+    "opencompass.datasets.ruler.ruler_niah": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/datasets/ruler/ruler_niah.py",
+      "sha256": "397b2b023c9c88fdc36041d82a71de21e7b71979893862173e628af832bcef7b"
+    },
+    "opencompass.datasets.ruler.ruler_qa": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/datasets/ruler/ruler_qa.py",
+      "sha256": "a753601befe8e6f4341b1c40ff4ebc710429e8f2098ead00e79aab8929a63da7"
+    },
+    "opencompass.datasets.ruler.ruler_vt": {
+      "path": "/home/ctj/miniconda3/envs/in_place_ttt_official_eval/lib/python3.11/site-packages/opencompass/datasets/ruler/ruler_vt.py",
+      "sha256": "0501a09f88ec6bd919019a5be8516febee1bffe5229b7b174a1d35df2607c73a"
+    }
+  },
+  "passed": true,
+  "protocol": "in_place_ttt_qwen3_4b_base_ruler_semantics_preflight_v1",
+  "source_files": {
+    "data/ruler/PaulGrahamEssays.jsonl": {
+      "path": "/home/ctj/.cache/opencompass/data/ruler/PaulGrahamEssays.jsonl",
+      "sha256": "78ad877447201471578c69dd4fc11e6f489970966329468c5d0ac32292d53056",
+      "size_bytes": 1968927
+    },
+    "data/ruler/dev-v2.0.json": {
+      "path": "/home/ctj/.cache/opencompass/data/ruler/dev-v2.0.json",
+      "sha256": "80a5225e94905956a6446d296ca1093975c4d3b3260f1d6c8f68bc2ab77182d8",
+      "size_bytes": 4370528
+    },
+    "data/ruler/hotpotqa.json": {
+      "path": "/home/ctj/.cache/opencompass/data/ruler/hotpotqa.json",
+      "sha256": "4e9ecb5c8d3b719f624d66b60f8d56bf227f03914f5f0753d6fa1b359d7104ea",
+      "size_bytes": 46320117
+    }
+  },
+  "versions": {
+    "mmengine": "0.11.0rc3",
+    "opencompass": "0.5.4",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.3"
+  }
+}

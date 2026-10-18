@@ -2716,3 +2716,38 @@ archived under
 
 This chain performs no training and grants no release. Every future GPU run
 remains restricted to `hku-gpu2`.
+
+## 60. Paper and installed RULER semantics preflight (2026-10-19)
+
+The paper-facing definition was rechecked against the primary April 2026
+[paper](https://arxiv.org/abs/2604.06169). Table 1 uses RULER average accuracy
+at 4K through 256K for matched Qwen3-4B-Base arms, with 256K marked as
+extrapolation. Its continual curriculum is approximately 20B tokens at 32K
+and 15B at 128K; Table 6 specifies AdamW at `5e-6`, weight decay `0.1`, Stage-2
+YaRN and convolution size 5. The appendix specifies every-sixth-layer TTT and
+per-update Frobenius clipping at `tau=1e-5` for Qwen3-4B evaluation.
+
+On `hku-gpu2`, with CUDA hidden, the registered config was loaded through
+`mmengine.Config.fromfile` at every context from 4K through 256K. Every parse
+resolved exactly 13 tasks, 100 examples per task, seed 42, deterministic
+generation, disabled thinking, 64 maximum output tokens, the original Base
+tokenizer and a summary group covering exactly those 13 tasks. Context,
+session and maximum-sequence lengths matched. All ten installed OpenCompass
+RULER generator/evaluator hashes and all three source-data hashes exactly
+matched the constants already frozen in the independent auditor. All seven
+checks passed.
+
+The original 2x5090 plan's config hash `4c67903e...` predates the paper
+inference correction. The pre-score clipping addendum explicitly freezes the
+replacement hash `1859bb2d...`; its only config change adds the `1e-5` value
+and forwards it through `model_kwargs`. The clean live watcher checkout at
+commit `c89c6f8c...` matches that replacement exactly, so this is an
+authorized pre-outcome correction rather than configuration drift.
+
+Machine-readable output, raw OpenCompass resolution messages and the mapping
+to the paper are archived under
+`remote/hku_gpu2_qwen3_4b_base_ruler_semantics_preflight_20261019/`.
+This establishes evaluation-definition alignment only. It does not convert
+the public FineWeb-Edu/LongCrawl64 run into an exact reproduction of the
+paper's unreleased data, and it does not substitute for formal scores or
+resource audits.
