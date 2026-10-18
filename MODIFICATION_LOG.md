@@ -7724,3 +7724,12 @@ corrected prerequisites、paper inference addendum、plans、runner/auditor、ra
 新增四项计划、顺序、Bash语法和失败关闭测试；完整In-Place-TTT专项测试为106/106通过，审计器编译、两份
 watcher语法与diff检查通过。注册时没有RULER GPU child或分数；只有最终corrected matrix audit通过后才会
 在审计产物中释放后续update-admission研究。
+
+冻结提交`c89c6f8c91e2b6bb435142e6fc87a221018be585`已推送，并在`hku-gpu2`隐藏GPU通过106项专项
+测试（5项按远程环境跳过）及全部静态检查。CPU-only resource watcher与matrix watcher分别在tmux
+`baseline_qwen3_4b_base_ruler_resource_c89c6f8c_20261019`和
+`baseline_qwen3_4b_base_ruler_matrix_c89c6f8c_20261019`运行，状态分别为
+`waiting_for_corrected_formal_stage2`和`waiting_for_corrected_ruler_resource`。两个结果root均不存在，
+GPU0/1仍只占46/18 MiB且利用率0%。启动证据分别归档于
+`remote/hku_gpu2_qwen3_4b_base_ruler_resource_watcher_20261019/`和
+`remote/hku_gpu2_qwen3_4b_base_ruler_matrix_watcher_20261019/`。

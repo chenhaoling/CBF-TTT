@@ -2418,3 +2418,15 @@ changed. Four new tests cover the frozen scope, watcher order/Bash syntax and
 missing-input failure closure. The complete focused suite passes 106/106
 locally. No RULER GPU child or score exists at registration time; only the
 passing corrected matrix audit can release update-admission work.
+
+Commit `c89c6f8c91e2b6bb435142e6fc87a221018be585` is pushed and passes 106
+focused tests in a clean detached `hku-gpu2` worktree with all GPUs hidden;
+five environment-specific tests are skipped and all static checks pass. The
+CPU-only resource and matrix watchers are live in tmux
+`baseline_qwen3_4b_base_ruler_resource_c89c6f8c_20261019` and
+`baseline_qwen3_4b_base_ruler_matrix_c89c6f8c_20261019`. Their initial
+states are `waiting_for_corrected_formal_stage2` and
+`waiting_for_corrected_ruler_resource`; both result roots are absent, and
+GPU0/1 remain at 46/18 MiB with 0% utilization. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_ruler_resource_watcher_20261019/` and
+`remote/hku_gpu2_qwen3_4b_base_ruler_matrix_watcher_20261019/`.
