@@ -7984,3 +7984,19 @@ FineWeb-Edu/LongCrawl64必须标注为Level-B public-data matched replication；
 新增结构化verdict、官方README/config/tree快照与说明，归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/official_data_availability_preflight_20261019/`。该结论不改变
 现有语料、训练和RULER审计门槛，不授权formal release，也不打开update-admission实验。
+
+## 2026-10-19：native Qwen3 TTT 初始化语义审计
+
+新增并在持久化正式审计前冻结`IN_PLACE_TTT_BASELINE_QWEN3_4B_INITIALIZATION_AUDIT_ADDENDUM.md`，新增
+`scripts/audit_in_place_ttt_qwen3_initialization.py`。审计限定`hku-gpu2`、隐藏CUDA、clean upstream
+`be232482...`，通过官方`Qwen3Config`、`Qwen3ForCausalLM`、`post_init`、state loading和forward路径构造
+deterministic tiny fixture，不重写初始化逻辑。
+
+clean tool commit `8b1f992628f41cacf9d2d0cbb79a887476213824`的远端运行全部13项检查通过。加载baseline
+state后只缺selected layer的`ttt_conv.weight`与`ttt_proj.weight`，没有unexpected key；全部共享slow weight
+逐位相等。depthwise Conv5为全零，projection有32个finite nonzero diagonal且off-diagonal全零，非零target经conv
+输出精确为零，未选择层没有TTT参数；初始no-TTT与TTT logits逐位相同，最大绝对差为0.0。
+
+审计耗时3.16秒、峰值主存803,256 KiB，未使用GPU。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_native_initialization_audit_20261019/`。
+该结果只关闭released-code初始化语义，不替代真实4B资源、训练、checkpoint或RULER审计，也不开放门控实验。

@@ -2,7 +2,7 @@
 
 Status: **live evidence index; not an execution plan or release record**  
 Initial snapshot: 2026-10-19 (Asia/Shanghai)
-Last reconciled: 2026-10-19 07:38 (Asia/Shanghai)
+Last reconciled: 2026-10-19 07:44 (Asia/Shanghai)
 
 ## 1. Purpose
 
@@ -29,6 +29,7 @@ so no Level-C or exact-paper-number claim is permitted.
 | Corrected 100M selected stream | Installed VeOmni/Hugging Face/StatefulDataLoader path replayed twice on the corrected provenance; exact per-rank ordered hashes and source counts; independent reconstruction; no plaintext/token arrays; both formal releases bind the passing audit | **Registered and waiting for the corrected full corpus.** The hku-gpu2 CPU watcher is live at `waiting_for_corrected_base_corpus`. A no-plaintext synthetic smoke passes both replay and independent audit for all 98,566,144 selected tokens. The config requests two workers, while the single JSONL shard makes the installed runtime use one effective worker; both values are recorded. The old selected-stream audit is superseded. |
 | Qwen3-4B-Base identity correction | Passing identity audit for an exact pinned `Qwen/Qwen3-4B-Base` checkout; corrected tokenizer/corpus decision; old post-trained-checkpoint chain contained and superseded | **Complete.** Exact revision `906bfd4b...` passes nine identity checks; all 14 old sessions are absent. Reserved-token literals in both old stages require a full source rebuild. |
 | Training-recipe semantics | Executable audit of all four reduced-scale paired configs; clean live-checkout hash agreement; Base layer count and native writer structure; explicit separation of paper requirements from public-replication assumptions | **Complete before corrected training.** The CUDA-hidden audit passes with zero errors and binds 98,566,144 tokens per arm at world size 2. Seven live tool snapshots contain byte-identical configs/auditor; the 36-layer Base model makes the registered layer set exactly every sixth layer, and clean upstream code confirms depthwise Conv1d kernel 5. This is a definition audit, not training completion or a paper-scale claim. |
+| Native TTT initialization semantics | Clean upstream runtime proves Base state loading changes no shared slow weight, Conv5 starts at zero, target projection is sparse diagonal, the first native update is zero and initial logits equal no-TTT | **Complete on CPU before corrected training.** All 13 checks pass on `hku-gpu2`: exact missing-key set, bitwise-equal shared weights and logits, zero convolution/target output, finite nonzero projection diagonal and zero off-diagonal. This tiny fixture validates official initialization code only; the full 4B resource gate remains required. |
 | 8K activation-offload gate | Both corrected-Base matched arms complete one optimizer step; finite loss/gradient; passing child and paired audits; at least 5% GPU headroom; registered host-memory and swap limits | **Waiting for the corrected full corpus.** The Base identity already passes; the live Level-A watcher remains at `WAITING_BASE_CORPUS` and has no training child. |
 | Stage-1 resource ladder | Audited paired 16K and 32K boundaries from the same registered inputs, no-TTT before TTT, with all resource stop rules satisfied | **Waiting for corrected Level A.** The hku-gpu2-only watcher is live at `waiting_for_corrected_level_a`; its future result root is absent and no 16K/32K child has run. The clean remote focused suite passes 81/81. |
 | Stage-1 timing gate | Audited paired three-step 32K GB64 timing run on the full corpus; finite measured projections for both arms and the sequential pair | **Registered and waiting for the corrected Stage-1 ladder.** The repaired hku-gpu2-only watcher is live at `waiting_for_corrected_stage1_ladder`; its clean remote worktree passes 84/84 focused tests, the result root is absent and no timing child has been released. |
@@ -107,6 +108,7 @@ obtained and executed.
 - Corrected RULER matrix tmux session: `baseline_qwen3_4b_base_ruler_matrix_c89c6f8c_20261019`
 - Corrected RULER semantics preflight evidence: `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_semantics_preflight_20261019/`
 - Corrected training-semantics preflight evidence: `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_training_semantics_preflight_20261019/`
+- Native TTT initialization audit evidence: `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_native_initialization_audit_20261019/`
 - Corrected RULER 256K resource watcher: `/home/ctj/in_place_ttt_qwen3_4b_base_ruler_256k_resource_1eb9dc07_20261019.watch`
 - Corrected RULER 256K resource tmux session: `baseline_qwen3_4b_base_ruler_256k_resource_1eb9dc07_20261019`
 - Corrected RULER 256K release-review watcher: `/home/ctj/in_place_ttt_qwen3_4b_base_ruler_256k_release_review_55fc42a0_20261019`

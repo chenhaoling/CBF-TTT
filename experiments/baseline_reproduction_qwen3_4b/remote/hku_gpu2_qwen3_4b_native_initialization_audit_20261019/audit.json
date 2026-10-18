@@ -1,0 +1,62 @@
+{
+  "checks": {
+    "conv_depthwise_kernel5_bias_free": true,
+    "conv_zero_initialized": true,
+    "initial_logits_bitwise_equal": true,
+    "initial_target_exact_zero": true,
+    "missing_keys_exact": true,
+    "module_resolution": true,
+    "projection_diagonal_finite_nonzero": true,
+    "projection_off_diagonal_zero": true,
+    "projection_square_bias_free": true,
+    "shared_slow_weights_bitwise_equal": true,
+    "unexpected_keys_absent": true,
+    "unselected_layer_has_no_ttt_parameters": true,
+    "upstream_identity": true
+  },
+  "claim_boundary": "tiny CPU initialization-semantics audit only; full Qwen3-4B resource, training and evaluation audits remain required",
+  "fixture": {
+    "conv_nonzero": 0,
+    "conv_weight_shape": [
+      32,
+      1,
+      5
+    ],
+    "hidden_size": 32,
+    "layers": 2,
+    "max_abs_logit_difference": 0.0,
+    "missing_keys": [
+      "model.layers.0.mlp.ttt_conv.weight",
+      "model.layers.0.mlp.ttt_proj.weight"
+    ],
+    "projection_diagonal_nonzero": 32,
+    "projection_off_diagonal_nonzero": 0,
+    "projection_shape": [
+      32,
+      32
+    ],
+    "target_output_nonzero": 0,
+    "ttt_chunk": 4,
+    "ttt_layers": [
+      0
+    ],
+    "ttt_lr": 3.0,
+    "unexpected_keys": []
+  },
+  "passed": true,
+  "protocol": "in_place_ttt_qwen3_native_initialization_audit_v1",
+  "runtime": {
+    "cuda_visible_devices": "",
+    "hostname": "user-Super-Server",
+    "torch_version": "2.8.0+cu128"
+  },
+  "upstream": {
+    "clean": true,
+    "commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+    "configuration_path": "/home/ctj/in_place_ttt_official_be232482_resource_clean/hf_models/hf_qwen3/configuration_qwen3.py",
+    "configuration_sha256": "d2d0ab37a756df2b0980d9d52196696a5dcbfb8560c01563f79a0b256a0206c0",
+    "modeling_path": "/home/ctj/in_place_ttt_official_be232482_resource_clean/hf_models/hf_qwen3/modeling_qwen3.py",
+    "modeling_sha256": "a26d64cf85c985c4825a66d64815baa5956a2739593aad1969e9cc09d937a1d1",
+    "root": "/home/ctj/in_place_ttt_official_be232482_resource_clean"
+  }
+}

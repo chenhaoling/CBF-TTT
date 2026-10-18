@@ -2813,3 +2813,31 @@ are archived under
 `remote/official_data_availability_preflight_20261019/`. This clarification
 does not weaken the current corpus, training or RULER audits, and it does not
 open the update-admission experiments.
+
+## 63. Native Qwen3 TTT initialization audit (2026-10-19)
+
+The paper requires the newly added TTT convolution to start at zero and the
+target projection to start as a sparse diagonal matrix, preserving the
+pretrained model's behavior at the beginning of continual training. A new
+CPU-only audit was frozen and executed on `hku-gpu2` from clean tool commit
+`8b1f9926...` against clean upstream `be232482...`, with CUDA hidden.
+
+The audit constructed a deterministic two-layer Qwen fixture through the same
+official `Qwen3Config`, `Qwen3ForCausalLM`, `post_init`, state-loading and
+forward implementations. Loading the no-TTT state into the selected-layer TTT
+fixture left exactly `ttt_conv.weight` and `ttt_proj.weight` missing, with no
+unexpected keys. Every shared slow-weight tensor remained bitwise identical.
+
+All initialization semantics passed: the bias-free depthwise convolution had
+shape `[32,1,5]` and zero nonzero entries; the bias-free projection had 32
+finite nonzero diagonal entries and no nonzero off-diagonal entry; a nonzero
+target produced an exact zero convolution output; and the unselected layer had
+no TTT parameters. Initial no-TTT and TTT logits were bitwise identical with
+maximum absolute difference `0.0`.
+
+The run took 3.16 seconds and 803,256 KiB peak host RSS. Remote checksums,
+identity, resource output and the structured audit are archived under
+`remote/hku_gpu2_qwen3_4b_native_initialization_audit_20261019/`. This closes
+the released-code initialization-semantics check only. The real 4B resource,
+training, checkpoint and RULER gates remain mandatory, and update admission
+remains sealed.
