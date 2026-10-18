@@ -12,6 +12,15 @@ import pathlib
 import re
 from typing import Any
 
+try:
+    from scripts.audit_in_place_ttt_paper_inference_overlay import (
+        audit_paper_inference_overlay,
+    )
+except ModuleNotFoundError:  # Direct `python scripts/<name>.py` execution.
+    from audit_in_place_ttt_paper_inference_overlay import (
+        audit_paper_inference_overlay,
+    )
+
 
 PROTOCOL = "in_place_ttt_2x5090_ruler_audit_v1"
 UPSTREAM_COMMIT = "be2324829b0e91c8fd10a74d4b43714fde6676e1"
@@ -72,6 +81,7 @@ def audit(
     root: pathlib.Path,
     corpus_plan: pathlib.Path,
     evaluation_plan: pathlib.Path,
+    paper_inference_addendum: pathlib.Path,
 ) -> dict[str, Any]:
     errors: list[str] = []
     required = {name: root / name for name in (
@@ -123,6 +133,9 @@ def audit(
     expected_tool_artifacts = {
         "eval_config/baseline_reproduction/qwen3_4b_2x5090_ruler.py",
         "scripts/run_in_place_ttt_2x5090_ruler_single.sh",
+        "scripts/build_in_place_ttt_paper_inference_overlay.py",
+        "scripts/validate_in_place_ttt_paper_inference_overlay.py",
+        "scripts/audit_in_place_ttt_paper_inference_overlay.py",
         "scripts/summarize_in_place_ttt_2x5090_ruler.py",
         "scripts/audit_in_place_ttt_2x5090_ruler.py",
     }
@@ -134,9 +147,18 @@ def audit(
             path = tool_root / relative
             if not path.is_file() or sha256(path) != recorded:
                 errors.append(f"tool artifact hash differs: {relative}")
+    errors.extend(audit_paper_inference_overlay(
+        root, metadata, paper_inference_addendum, tool_root,
+    ))
     config_path = tool_root / "eval_config/baseline_reproduction/qwen3_4b_2x5090_ruler.py"
     if metadata.get("config_sha256") != sha256(config_path):
         errors.append("formal RULER config hash differs")
+    config_source = config_path.read_text(encoding="utf-8")
+    if (config_source.count("paper_ttt_update_clip_norm = 1e-5") != 1
+            or config_source.count(
+                "model_kwargs=dict(ttt_update_clip_norm=paper_ttt_update_clip_norm)"
+            ) != 1):
+        errors.append("formal RULER config does not enable the paper update clip")
     expected_versions = {
         "opencompass": "0.5.4",
         "transformers": "4.57.3",
@@ -375,6 +397,15 @@ def audit(
                 "memory_total_mib": next(iter(total_values), None)},
         "bindings": {
             **{name + "_sha256": sha256(path) for name, path in required.items()},
+            "paper_inference_addendum_sha256": sha256(
+                paper_inference_addendum
+            ),
+            "paper_inference_overlay_manifest_sha256": metadata.get(
+                "paper_inference_overlay_manifest_sha256"
+            ),
+            "paper_inference_overlay_validation_sha256": metadata.get(
+                "paper_inference_overlay_validation_sha256"
+            ),
             "raw_result_sha256": raw_result_hashes,
             "raw_prediction_sha256": raw_prediction_hashes,
             "official_summary_sha256": (
@@ -389,6 +420,9 @@ def main() -> None:
     parser.add_argument("--root", type=pathlib.Path, required=True)
     parser.add_argument("--public-corpus-plan", type=pathlib.Path, required=True)
     parser.add_argument("--evaluation-plan", type=pathlib.Path, required=True)
+    parser.add_argument(
+        "--paper-inference-addendum", type=pathlib.Path, required=True,
+    )
     parser.add_argument("--output", type=pathlib.Path, required=True)
     args = parser.parse_args()
     output = args.output.resolve()
@@ -396,7 +430,7 @@ def main() -> None:
         raise FileExistsError(f"refusing to overwrite {output}")
     result = audit(
         args.root.resolve(), args.public_corpus_plan.resolve(),
-        args.evaluation_plan.resolve(),
+        args.evaluation_plan.resolve(), args.paper_inference_addendum.resolve(),
     )
     partial = output.with_name(output.name + ".partial")
     partial.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

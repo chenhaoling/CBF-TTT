@@ -10,6 +10,7 @@ TRAINING_ROOT=${TRAINING_ROOT:?set the completed paired 2x5090 formal Stage-2 ro
 OUTPUT_ROOT=${OUTPUT_ROOT:?set a new RULER resource-ladder root}
 PUBLIC_CORPUS_PLAN=${PUBLIC_CORPUS_PLAN:-$TOOL_REPO/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md}
 EVALUATION_PLAN=${EVALUATION_PLAN:-$TOOL_REPO/IN_PLACE_TTT_BASELINE_2X5090_RULER_PLAN.md}
+PAPER_INFERENCE_ADDENDUM=${PAPER_INFERENCE_ADDENDUM:-$TOOL_REPO/IN_PLACE_TTT_BASELINE_PAPER_INFERENCE_CLIP_ADDENDUM.md}
 EXPECTED_HOSTNAME=${EXPECTED_HOSTNAME:-user-Super-Server}
 UPSTREAM_COMMIT=be2324829b0e91c8fd10a74d4b43714fde6676e1
 
@@ -24,6 +25,7 @@ test -z "$(git -C "$TOOL_REPO" status --short)"
 test "$(git -C "$UPSTREAM_REPO" rev-parse HEAD)" = "$UPSTREAM_COMMIT"
 test -z "$(git -C "$UPSTREAM_REPO" status --short)"
 test -s "$TRAINING_ROOT/independent_audit.json"
+test -s "$PAPER_INFERENCE_ADDENDUM"
 test "$(cat "$TRAINING_ROOT/state.txt")" = completed_100m_stage2
 
 readarray -t models < <("$PYTHON_BIN" - "$TRAINING_ROOT" <<'PY'
@@ -64,9 +66,10 @@ printf 'RUNNING\nstarted_utc=%s\ngpus=0,1\n' \
   "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$status_file"
 
 "$PYTHON_BIN" - "$TOOL_REPO" "$TRAINING_ROOT" "$PUBLIC_CORPUS_PLAN" \
-  "$EVALUATION_PLAN" "$staging/ladder_metadata.json" <<'PY'
+  "$EVALUATION_PLAN" "$PAPER_INFERENCE_ADDENDUM" \
+  "$staging/ladder_metadata.json" <<'PY'
 import hashlib, json, pathlib, socket, subprocess, sys
-tool, training, public_plan, evaluation_plan, output = map(
+tool, training, public_plan, evaluation_plan, paper_addendum, output = map(
     pathlib.Path, sys.argv[1:]
 )
 sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
@@ -81,6 +84,7 @@ metadata = {
     "training_audit_sha256": sha(training / "independent_audit.json"),
     "public_corpus_plan_sha256": sha(public_plan),
     "evaluation_plan_sha256": sha(evaluation_plan),
+    "paper_inference_addendum_sha256": sha(paper_addendum),
     "boundaries": [4096, 32768, 65536, 131072],
     "runner_sha256": sha(
         tool / "scripts/run_in_place_ttt_2x5090_ruler_resource_ladder.sh"),
@@ -103,7 +107,7 @@ for index in "${!contexts[@]}"; do
     else model=$TTT_MODEL; gpu=1; fi
     (
       export UPSTREAM_REPO TOOL_REPO TOOL_COMMIT PYTHON_BIN TOKENIZER
-      export PUBLIC_CORPUS_PLAN EVALUATION_PLAN TRAINING_ROOT
+      export PUBLIC_CORPUS_PLAN EVALUATION_PLAN PAPER_INFERENCE_ADDENDUM TRAINING_ROOT
       export RULER_RUN_KIND=resource RULER_NUM_SAMPLES=1
       export MODEL="$model"
       export OUTPUT_ROOT="$staging/$arm/$suffix"
@@ -125,6 +129,7 @@ done
   "$TOOL_REPO/scripts/audit_in_place_ttt_2x5090_ruler_resource_ladder.py" \
   --root "$staging" --public-corpus-plan "$PUBLIC_CORPUS_PLAN" \
   --evaluation-plan "$EVALUATION_PLAN" --training-root "$TRAINING_ROOT" \
+  --paper-inference-addendum "$PAPER_INFERENCE_ADDENDUM" \
   --runner "$TOOL_REPO/scripts/run_in_place_ttt_2x5090_ruler_resource_ladder.sh" \
   --output "$staging/independent_resource_ladder_audit.json" \
   > "$staging/independent_resource_ladder_audit.log"

@@ -16,17 +16,28 @@ try:
         CONTEXT_SUFFIX, EXPECTED_GENERATOR_SHA256, EXPECTED_SOURCE_SHA256,
         TASK_PREFIXES, UPSTREAM_COMMIT, _one_dir, sha256,
     )
+    from scripts.audit_in_place_ttt_paper_inference_overlay import (
+        audit_paper_inference_overlay,
+    )
 except ModuleNotFoundError:  # Direct `python scripts/<name>.py` execution.
     from audit_in_place_ttt_2x5090_ruler import (
         CONTEXT_SUFFIX, EXPECTED_GENERATOR_SHA256, EXPECTED_SOURCE_SHA256,
         TASK_PREFIXES, UPSTREAM_COMMIT, _one_dir, sha256,
+    )
+    from audit_in_place_ttt_paper_inference_overlay import (
+        audit_paper_inference_overlay,
     )
 
 
 PROTOCOL = "in_place_ttt_2x5090_ruler_resource_audit_v1"
 
 
-def audit(root: Path, corpus_plan: Path, evaluation_plan: Path) -> dict[str, Any]:
+def audit(
+    root: Path,
+    corpus_plan: Path,
+    evaluation_plan: Path,
+    paper_inference_addendum: Path,
+) -> dict[str, Any]:
     errors: list[str] = []
     required = {name: root / name for name in (
         "run_metadata.json", "eval.log", "exit_code.txt", "gpu.csv",
@@ -65,6 +76,9 @@ def audit(root: Path, corpus_plan: Path, evaluation_plan: Path) -> dict[str, Any
     expected_tools = {
         "eval_config/baseline_reproduction/qwen3_4b_2x5090_ruler.py",
         "scripts/run_in_place_ttt_2x5090_ruler_single.sh",
+        "scripts/build_in_place_ttt_paper_inference_overlay.py",
+        "scripts/validate_in_place_ttt_paper_inference_overlay.py",
+        "scripts/audit_in_place_ttt_paper_inference_overlay.py",
         "scripts/audit_in_place_ttt_2x5090_ruler_resource.py",
     }
     recorded_tools = metadata.get("tool_artifacts", {})
@@ -75,8 +89,17 @@ def audit(root: Path, corpus_plan: Path, evaluation_plan: Path) -> dict[str, Any
             path = tool_root / relative
             if not path.is_file() or sha256(path) != digest:
                 errors.append(f"resource tool artifact differs: {relative}")
+    errors.extend(audit_paper_inference_overlay(
+        root, metadata, paper_inference_addendum, tool_root,
+    ))
     if metadata.get("config_sha256") != sha256(config):
         errors.append("2x5090 RULER config differs")
+    config_source = config.read_text(encoding="utf-8")
+    if (config_source.count("paper_ttt_update_clip_norm = 1e-5") != 1
+            or config_source.count(
+                "model_kwargs=dict(ttt_update_clip_norm=paper_ttt_update_clip_norm)"
+            ) != 1):
+        errors.append("resource RULER config does not enable the paper update clip")
 
     for name, expected in (
         ("ruler_generator_files", EXPECTED_GENERATOR_SHA256),
@@ -233,6 +256,15 @@ def audit(root: Path, corpus_plan: Path, evaluation_plan: Path) -> dict[str, Any
                 "memory_total_mib": total or None},
         "bindings": {
             **{name + "_sha256": sha256(path) for name, path in required.items()},
+            "paper_inference_addendum_sha256": sha256(
+                paper_inference_addendum
+            ),
+            "paper_inference_overlay_manifest_sha256": metadata.get(
+                "paper_inference_overlay_manifest_sha256"
+            ),
+            "paper_inference_overlay_validation_sha256": metadata.get(
+                "paper_inference_overlay_validation_sha256"
+            ),
             "raw_result_sha256": result_hashes,
             "raw_prediction_sha256": prediction_hashes,
         },
@@ -244,6 +276,9 @@ def main() -> None:
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--public-corpus-plan", type=Path, required=True)
     parser.add_argument("--evaluation-plan", type=Path, required=True)
+    parser.add_argument(
+        "--paper-inference-addendum", type=Path, required=True,
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     output = args.output.expanduser().resolve()
@@ -254,6 +289,7 @@ def main() -> None:
         args.root.expanduser().resolve(),
         args.public_corpus_plan.expanduser().resolve(),
         args.evaluation_plan.expanduser().resolve(),
+        args.paper_inference_addendum.expanduser().resolve(),
     )
     partial.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     partial.replace(output)

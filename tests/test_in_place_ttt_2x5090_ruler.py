@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -15,6 +16,10 @@ from scripts.audit_in_place_ttt_2x5090_ruler_resource_ladder import (
     BOUNDARIES,
     audit as audit_resource_ladder,
 )
+from scripts.build_in_place_ttt_paper_inference_overlay import (
+    UPSTREAM_COMMIT,
+    build_overlay,
+)
 from scripts.summarize_in_place_ttt_2x5090_ruler import summarize
 from scripts.summarize_in_place_ttt_2x5090_ruler_matrix import (
     CONTEXTS,
@@ -26,6 +31,56 @@ from scripts.summarize_in_place_ttt_level_b_ruler import (
     evaluation_input_sha256,
 )
 from tests.test_in_place_ttt_level_b_ruler import make_raw_run, sha, write_json
+
+
+def add_paper_inference_fixture(base: Path, root: Path, metadata: dict) -> Path:
+    upstream = base / "paper_upstream"
+    subprocess.run(
+        ["git", "clone", "--no-hardlinks", "--quiet", str(Path.cwd()),
+         str(upstream)],
+        check=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(upstream), "checkout", "--detach", "--quiet",
+         UPSTREAM_COMMIT],
+        check=True,
+    )
+    overlay = root / "paper_inference_overlay"
+    build_overlay(upstream, overlay)
+    manifest = overlay / "paper_inference_overlay_manifest.json"
+    validation = root / "paper_inference_overlay_validation.json"
+    write_json(validation, {
+        "protocol": "in_place_ttt_paper_inference_overlay_validation_v1",
+        "passed": True,
+        "device": "cpu",
+        "cuda_initialized": False,
+        "clip_norm": 1e-5,
+        "clipped_delta_frobenius_norm": 1.0000000656873453e-5,
+        "unclipped_delta_frobenius_norm": 24.207931518554688,
+        "zero_delta_unchanged": True,
+        "config_default_disabled": True,
+        "config_round_trip": True,
+        "from_pretrained_override": True,
+        "invalid_values_rejected": ["0.0", "-1.0", "inf", "nan"],
+        "overlay_manifest_sha256": sha(manifest),
+        "modeling_module_path": str(
+            overlay / "inference_model/hf_qwen3/modeling_qwen3.py"
+        ),
+    })
+    addendum = base / "paper_inference_addendum.md"
+    addendum.write_text("paper inference clip addendum\n")
+    metadata.update({
+        "paper_inference_addendum_sha256": sha(addendum),
+        "paper_inference_semantics": "per_update_delta_frobenius_clip",
+        "ttt_update_clip_norm": 1e-5,
+        "paper_inference_overlay_manifest_relative_path":
+            "paper_inference_overlay/paper_inference_overlay_manifest.json",
+        "paper_inference_overlay_manifest_sha256": sha(manifest),
+        "paper_inference_overlay_validation_relative_path":
+            "paper_inference_overlay_validation.json",
+        "paper_inference_overlay_validation_sha256": sha(validation),
+    })
+    return addendum
 
 
 class TwoRTX5090RulerSingleTest(unittest.TestCase):
@@ -141,6 +196,9 @@ class TwoRTX5090RulerSingleTest(unittest.TestCase):
                     for relative in (
                         "eval_config/baseline_reproduction/qwen3_4b_2x5090_ruler.py",
                         "scripts/run_in_place_ttt_2x5090_ruler_single.sh",
+                        "scripts/build_in_place_ttt_paper_inference_overlay.py",
+                        "scripts/validate_in_place_ttt_paper_inference_overlay.py",
+                        "scripts/audit_in_place_ttt_paper_inference_overlay.py",
                         "scripts/summarize_in_place_ttt_2x5090_ruler.py",
                         "scripts/audit_in_place_ttt_2x5090_ruler.py",
                     )
@@ -154,6 +212,7 @@ class TwoRTX5090RulerSingleTest(unittest.TestCase):
                 "ruler_generator_files": generator_files,
                 "ruler_source_files": source_files,
             })
+            paper_addendum = add_paper_inference_fixture(base, root, metadata)
             write_json(root / "run_metadata.json", metadata)
             (root / "gpu.csv").write_text(
                 "timestamp,index,memory_used_mib,memory_total_mib,utilization_gpu\n"
@@ -178,10 +237,14 @@ class TwoRTX5090RulerSingleTest(unittest.TestCase):
                     audit_module, "EXPECTED_GENERATOR_SHA256", expected_generators), \
                     mock.patch.object(
                         audit_module, "EXPECTED_SOURCE_SHA256", expected_sources):
-                passed = audit(root, corpus_plan, evaluation_plan)
+                passed = audit(
+                    root, corpus_plan, evaluation_plan, paper_addendum,
+                )
                 self.assertTrue(passed["passed"], passed["errors"])
                 (model / "model.safetensors").write_bytes(b"changed")
-                failed = audit(root, corpus_plan, evaluation_plan)
+                failed = audit(
+                    root, corpus_plan, evaluation_plan, paper_addendum,
+                )
             self.assertFalse(failed["passed"])
             self.assertTrue(any("model artifact differs" in item
                                 for item in failed["errors"]))
@@ -266,7 +329,7 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
             single_runner = Path(
                 "scripts/run_in_place_ttt_2x5090_ruler_single.sh"
             )
-            write_json(root / "run_metadata.json", {
+            metadata = {
                 "protocol": "in_place_ttt_2x5090_ruler_run_v1",
                 "baseline_tier": "2x5090_100m",
                 "run_kind": "resource",
@@ -285,6 +348,15 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
                 "tool_artifacts": {
                     str(config): sha(config),
                     str(single_runner): sha(single_runner),
+                    "scripts/build_in_place_ttt_paper_inference_overlay.py": sha(Path(
+                        "scripts/build_in_place_ttt_paper_inference_overlay.py"
+                    )),
+                    "scripts/validate_in_place_ttt_paper_inference_overlay.py": sha(Path(
+                        "scripts/validate_in_place_ttt_paper_inference_overlay.py"
+                    )),
+                    "scripts/audit_in_place_ttt_paper_inference_overlay.py": sha(Path(
+                        "scripts/audit_in_place_ttt_paper_inference_overlay.py"
+                    )),
                     str(resource_auditor): sha(resource_auditor),
                 },
                 "ruler_generator_files": generator_files,
@@ -297,7 +369,9 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
                 "tokenizer_path": str(tokenizer),
                 "tokenizer_json_sha256": sha(tokenizer / "tokenizer.json"),
                 "tokenizer_config_sha256": sha(tokenizer / "tokenizer_config.json"),
-            })
+            }
+            paper_addendum = add_paper_inference_fixture(base, root, metadata)
+            write_json(root / "run_metadata.json", metadata)
             (root / "eval.log").write_text(
                 "Elapsed (wall clock) time (h:mm:ss or m:ss): 0:10.00\n"
             )
@@ -318,7 +392,9 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
                     expected_generators), mock.patch.object(
                         resource_audit_module, "EXPECTED_SOURCE_SHA256",
                         expected_sources):
-                result = audit_resource(root, corpus_plan, evaluation_plan)
+                result = audit_resource(
+                    root, corpus_plan, evaluation_plan, paper_addendum,
+                )
             self.assertTrue(result["passed"], result["errors"])
             self.assertTrue(result["scores_discarded"])
 
@@ -344,6 +420,7 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
                         "num_samples_per_task": 1,
                         "arm": arm,
                         "context_length": context,
+                        "paper_inference_addendum_sha256": "pending",
                     })
                     write_json(run / "independent_resource_audit.json", {
                         "protocol": "in_place_ttt_2x5090_ruler_resource_audit_v1",
@@ -353,6 +430,9 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
                         "gpu": {
                             "peak_memory_used_mib": 20000,
                             "memory_total_mib": 32607,
+                        },
+                        "bindings": {
+                            "paper_inference_addendum_sha256": "pending",
                         },
                     })
             training = root / "training_dependency"
@@ -364,10 +444,22 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
             })
             public_plan = root / "public.md"
             evaluation_plan = root / "evaluation.md"
+            paper_addendum = root / "paper_inference.md"
             runner = root / "runner.sh"
             public_plan.write_text("public\n")
             evaluation_plan.write_text("evaluation\n")
+            paper_addendum.write_text("paper inference\n")
             runner.write_text("runner\n")
+            for run_metadata in root.glob("*/*/run_metadata.json"):
+                payload = json.loads(run_metadata.read_text())
+                payload["paper_inference_addendum_sha256"] = sha(paper_addendum)
+                write_json(run_metadata, payload)
+            for checked_path in root.glob("*/*/independent_resource_audit.json"):
+                payload = json.loads(checked_path.read_text())
+                payload["bindings"]["paper_inference_addendum_sha256"] = sha(
+                    paper_addendum
+                )
+                write_json(checked_path, payload)
             single_runner = Path(
                 "scripts/run_in_place_ttt_2x5090_ruler_single.sh"
             ).resolve()
@@ -384,6 +476,7 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
                 "training_audit_sha256": sha(training_audit),
                 "public_corpus_plan_sha256": sha(public_plan),
                 "evaluation_plan_sha256": sha(evaluation_plan),
+                "paper_inference_addendum_sha256": sha(paper_addendum),
                 "runner_sha256": sha(runner),
                 "single_runner_sha256": sha(single_runner),
                 "auditor_sha256": sha(ladder_auditor),
@@ -391,6 +484,7 @@ class TwoRTX5090RulerResourceTest(unittest.TestCase):
             kwargs = {
                 "public_corpus_plan": public_plan,
                 "evaluation_plan": evaluation_plan,
+                "paper_inference_addendum": paper_addendum,
                 "training_root": training,
                 "runner": runner,
             }
@@ -441,6 +535,7 @@ class TwoRTX5090RulerMatrixTest(unittest.TestCase):
                     "run_kind": "formal",
                     "arm": arm,
                     "context_length": context,
+                    "paper_inference_addendum_sha256": "pending",
                 })
                 write_json(run / "summary.json", {
                     "protocol": "in_place_ttt_2x5090_ruler_summary_v1",
@@ -458,6 +553,7 @@ class TwoRTX5090RulerMatrixTest(unittest.TestCase):
                     "arm": arm,
                     "context_length": context,
                     "bindings": {
+                        "paper_inference_addendum_sha256": "pending",
                         "raw_result_sha256": result_hashes,
                         "raw_prediction_sha256": prediction_hashes,
                     },
@@ -502,13 +598,33 @@ class TwoRTX5090RulerMatrixTest(unittest.TestCase):
                     for suffix in ("4k", "32k", "64k", "128k")
                     for arm in ("no_ttt", "ttt")
                 },
+                "bindings": {
+                    "paper_inference_addendum_sha256": "pending",
+                },
             })
             public_plan = root / "public.md"
             evaluation_plan = root / "evaluation.md"
+            paper_addendum = root / "paper_inference.md"
             runner = root / "runner.sh"
             public_plan.write_text("public\n")
             evaluation_plan.write_text("evaluation\n")
+            paper_addendum.write_text("paper inference\n")
             runner.write_text("runner\n")
+            for run_metadata in root.glob("*/*/run_metadata.json"):
+                payload = json.loads(run_metadata.read_text())
+                payload["paper_inference_addendum_sha256"] = sha(paper_addendum)
+                write_json(run_metadata, payload)
+            for checked_path in root.glob("*/*/independent_audit.json"):
+                payload = json.loads(checked_path.read_text())
+                payload["bindings"]["paper_inference_addendum_sha256"] = sha(
+                    paper_addendum
+                )
+                write_json(checked_path, payload)
+            resource_payload = json.loads(resource_audit.read_text())
+            resource_payload["bindings"][
+                "paper_inference_addendum_sha256"
+            ] = sha(paper_addendum)
+            write_json(resource_audit, resource_payload)
             auditor_path = Path(
                 "scripts/audit_in_place_ttt_2x5090_ruler_matrix.py"
             ).resolve()
@@ -527,6 +643,7 @@ class TwoRTX5090RulerMatrixTest(unittest.TestCase):
                 "resource_audit_sha256": sha(resource_audit),
                 "public_corpus_plan_sha256": sha(public_plan),
                 "evaluation_plan_sha256": sha(evaluation_plan),
+                "paper_inference_addendum_sha256": sha(paper_addendum),
                 "runner_sha256": sha(runner),
                 "summarizer_sha256": sha(summarizer_path),
                 "auditor_sha256": sha(auditor_path),
@@ -534,6 +651,7 @@ class TwoRTX5090RulerMatrixTest(unittest.TestCase):
             kwargs = {
                 "public_corpus_plan": public_plan,
                 "evaluation_plan": evaluation_plan,
+                "paper_inference_addendum": paper_addendum,
                 "training_root": training,
                 "resource_root": resource,
                 "runner": runner,

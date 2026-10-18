@@ -38,6 +38,7 @@ if context_length not in CONTEXT_SUFFIX:
 if num_samples not in {1, 100}:
     raise ValueError("2x5090 RULER permits only 1-sample resource or 100-sample formal runs")
 suffix = CONTEXT_SUFFIX[context_length]
+paper_ttt_update_clip_norm = 1e-5
 
 models = [
     dict(
@@ -46,6 +47,7 @@ models = [
         path=model_path,
         tokenizer_path=tokenizer_path,
         tokenizer_kwargs=dict(fix_mistral_regex=False),
+        model_kwargs=dict(ttt_update_clip_norm=paper_ttt_update_clip_norm),
         engine_config=dict(session_len=context_length, max_batch_size=1, tp=1),
         gen_config=dict(
             top_k=20,

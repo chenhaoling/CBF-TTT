@@ -40,7 +40,10 @@ TRAINING_ROOT=${TRAINING_ROOT:?set the completed paired 2x5090 formal Stage-2 ro
 OUTPUT_ROOT=${OUTPUT_ROOT:?set a new single-context output root}
 PUBLIC_CORPUS_PLAN=${PUBLIC_CORPUS_PLAN:-$TOOL_REPO/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md}
 EVALUATION_PLAN=${EVALUATION_PLAN:-$TOOL_REPO/IN_PLACE_TTT_BASELINE_2X5090_RULER_PLAN.md}
+PAPER_INFERENCE_ADDENDUM=${PAPER_INFERENCE_ADDENDUM:-$TOOL_REPO/IN_PLACE_TTT_BASELINE_PAPER_INFERENCE_CLIP_ADDENDUM.md}
 CONFIG=$TOOL_REPO/eval_config/baseline_reproduction/qwen3_4b_2x5090_ruler.py
+OVERLAY_BUILDER=$TOOL_REPO/scripts/build_in_place_ttt_paper_inference_overlay.py
+OVERLAY_VALIDATOR=$TOOL_REPO/scripts/validate_in_place_ttt_paper_inference_overlay.py
 UPSTREAM_COMMIT=be2324829b0e91c8fd10a74d4b43714fde6676e1
 TRAINING_AUDIT=$TRAINING_ROOT/independent_audit.json
 EXPECTED_HOSTNAME=${EXPECTED_HOSTNAME:-user-Super-Server}
@@ -58,7 +61,8 @@ test -z "$(git -C "$TOOL_REPO" status --short)"
 test -x "$PYTHON_BIN"
 for path in "$MODEL/config.json" "$MODEL/tokenizer.json" "$TOKENIZER/tokenizer.json" \
   "$TOKENIZER/tokenizer_config.json" "$TRAINING_AUDIT" "$PUBLIC_CORPUS_PLAN" \
-  "$EVALUATION_PLAN" "$CONFIG"; do test -s "$path"; done
+  "$EVALUATION_PLAN" "$PAPER_INFERENCE_ADDENDUM" "$CONFIG" \
+  "$OVERLAY_BUILDER" "$OVERLAY_VALIDATOR"; do test -s "$path"; done
 
 "$PYTHON_BIN" - "$TRAINING_AUDIT" "$MODEL" "$arm" "$TOKENIZER" <<'PY'
 import hashlib, json, pathlib, sys
@@ -118,6 +122,7 @@ PY
 
 staging="${OUTPUT_ROOT}.partial"
 mkdir -p "$staging/opencompass"
+paper_overlay=$staging/paper_inference_overlay
 printf '%s\n' "$gpu_row" > "$staging/gpu_before.csv"
 status_file=$staging/status.txt
 monitor_pid=""
@@ -143,6 +148,14 @@ finish() {
 trap finish EXIT
 printf 'RUNNING\nstarted_utc=%s\narm=%s\ncontext=%s\nphysical_gpu=%s\n' \
   "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$arm" "$context" "$physical_gpu" > "$status_file"
+
+CUDA_VISIBLE_DEVICES="" "$PYTHON_BIN" "$OVERLAY_BUILDER" \
+  --upstream-root "$UPSTREAM_REPO" --output "$paper_overlay" \
+  --clip-norm 1e-5 > "$staging/paper_inference_overlay_build.log"
+CUDA_VISIBLE_DEVICES="" PYTHONPATH="$paper_overlay" \
+  "$PYTHON_BIN" "$OVERLAY_VALIDATOR" --overlay "$paper_overlay" \
+  --output "$staging/paper_inference_overlay_validation.json" \
+  > "$staging/paper_inference_overlay_validation.log"
 
 cp /proc/meminfo "$staging/preflight_host.txt"
 : > "$staging/preflight_conflicts.txt"
@@ -176,17 +189,24 @@ model_name="qwen3_4b_2x5090_100m_${RUN_KIND}_${arm}_${suffix}"
 "$PYTHON_BIN" - "$UPSTREAM_REPO" "$TOOL_REPO" "$MODEL" "$TOKENIZER" \
   "$TRAINING_AUDIT" "$PUBLIC_CORPUS_PLAN" "$EVALUATION_PLAN" "$CONFIG" \
   "$staging/run_metadata.json" "$arm" "$context" "$suffix" "$physical_gpu" \
-  "$model_name" "$RUN_KIND" "$NUM_SAMPLES" <<'PY'
+  "$model_name" "$RUN_KIND" "$NUM_SAMPLES" "$PAPER_INFERENCE_ADDENDUM" \
+  "$paper_overlay/paper_inference_overlay_manifest.json" \
+  "$staging/paper_inference_overlay_validation.json" <<'PY'
 import hashlib, importlib, importlib.metadata, inspect, json, pathlib, socket, subprocess, sys
 from opencompass.utils import get_data_path
 (upstream, tool, model_text, tokenizer_text, training_audit_text,
  public_plan_text, evaluation_plan_text, config_text, output_text, arm,
- context, suffix, gpu, model_name, run_kind, num_samples) = sys.argv[1:]
+ context, suffix, gpu, model_name, run_kind, num_samples,
+ paper_addendum_text, overlay_manifest_text,
+ overlay_validation_text) = sys.argv[1:]
 model = pathlib.Path(model_text).resolve()
 tokenizer = pathlib.Path(tokenizer_text).resolve()
 training_audit = pathlib.Path(training_audit_text).resolve()
 public_plan = pathlib.Path(public_plan_text).resolve()
 evaluation_plan = pathlib.Path(evaluation_plan_text).resolve()
+paper_addendum = pathlib.Path(paper_addendum_text).resolve()
+overlay_manifest_path = pathlib.Path(overlay_manifest_text).resolve()
+overlay_validation_path = pathlib.Path(overlay_validation_text).resolve()
 config = pathlib.Path(config_text).resolve()
 def sha(path):
     digest = hashlib.sha256()
@@ -197,6 +217,9 @@ tool_root = pathlib.Path(tool).resolve()
 tool_paths = [
     config,
     tool_root / "scripts/run_in_place_ttt_2x5090_ruler_single.sh",
+    tool_root / "scripts/build_in_place_ttt_paper_inference_overlay.py",
+    tool_root / "scripts/validate_in_place_ttt_paper_inference_overlay.py",
+    tool_root / "scripts/audit_in_place_ttt_paper_inference_overlay.py",
 ]
 if run_kind == "formal":
     tool_paths.extend([
@@ -238,6 +261,18 @@ model_files = {}
 for path in sorted(item for item in model.rglob("*") if item.is_file()):
     relative = str(path.relative_to(model))
     model_files[relative] = {"size_bytes": path.stat().st_size, "sha256": sha(path)}
+overlay_manifest = json.loads(overlay_manifest_path.read_text())
+overlay_validation = json.loads(overlay_validation_path.read_text())
+if (overlay_manifest.get("protocol") != "in_place_ttt_paper_inference_overlay_v1"
+        or overlay_manifest.get("clip_norm") != 1e-5
+        or overlay_manifest.get("clip_norm_type") != "frobenius"
+        or overlay_validation.get("protocol")
+        != "in_place_ttt_paper_inference_overlay_validation_v1"
+        or overlay_validation.get("passed") is not True
+        or overlay_validation.get("cuda_initialized") is not False
+        or overlay_validation.get("from_pretrained_override") is not True
+        or overlay_validation.get("clip_norm") != 1e-5):
+    raise SystemExit("paper inference overlay did not pass its CPU validation")
 metadata = {
     "protocol": "in_place_ttt_2x5090_ruler_run_v1",
     "baseline_tier": "2x5090_100m",
@@ -263,6 +298,15 @@ metadata = {
     "training_audit_sha256": sha(training_audit),
     "public_corpus_plan_sha256": sha(public_plan),
     "evaluation_plan_sha256": sha(evaluation_plan),
+    "paper_inference_addendum_sha256": sha(paper_addendum),
+    "paper_inference_semantics": "per_update_delta_frobenius_clip",
+    "ttt_update_clip_norm": 1e-5,
+    "paper_inference_overlay_manifest_relative_path":
+        "paper_inference_overlay/paper_inference_overlay_manifest.json",
+    "paper_inference_overlay_manifest_sha256": sha(overlay_manifest_path),
+    "paper_inference_overlay_validation_relative_path":
+        "paper_inference_overlay_validation.json",
+    "paper_inference_overlay_validation_sha256": sha(overlay_validation_path),
     "config_sha256": sha(config),
     "tool_artifacts": {
         str(path.relative_to(tool_root)): sha(path) for path in tool_paths
@@ -304,7 +348,7 @@ printf 'timestamp,index,memory_used_mib,memory_total_mib,utilization_gpu\n' > "$
 monitor_pid=$!
 
 export PATH="$(dirname "$PYTHON_BIN"):$PATH"
-export PYTHONPATH="$UPSTREAM_REPO:$TOOL_REPO${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONPATH="$paper_overlay:$UPSTREAM_REPO:$TOOL_REPO${PYTHONPATH:+:$PYTHONPATH}"
 export CUDA_VISIBLE_DEVICES="$physical_gpu"
 export BASELINE_EVAL_MODEL="$MODEL"
 export BASELINE_EVAL_TOKENIZER="$TOKENIZER"
@@ -330,11 +374,13 @@ if [[ "$RUN_KIND" == formal ]]; then
   "$PYTHON_BIN" "$TOOL_REPO/scripts/audit_in_place_ttt_2x5090_ruler.py" \
     --root "$staging" --public-corpus-plan "$PUBLIC_CORPUS_PLAN" \
     --evaluation-plan "$EVALUATION_PLAN" \
+    --paper-inference-addendum "$PAPER_INFERENCE_ADDENDUM" \
     --output "$staging/independent_audit.json" > "$staging/independent_audit.log"
 else
   "$PYTHON_BIN" "$TOOL_REPO/scripts/audit_in_place_ttt_2x5090_ruler_resource.py" \
     --root "$staging" --public-corpus-plan "$PUBLIC_CORPUS_PLAN" \
     --evaluation-plan "$EVALUATION_PLAN" \
+    --paper-inference-addendum "$PAPER_INFERENCE_ADDENDUM" \
     --output "$staging/independent_resource_audit.json" \
     > "$staging/independent_resource_audit.log"
 fi

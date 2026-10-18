@@ -35,22 +35,26 @@ def audit(
     *,
     public_corpus_plan: Path,
     evaluation_plan: Path,
+    paper_inference_addendum: Path,
     training_root: Path,
     runner: Path,
 ) -> dict[str, Any]:
     errors: list[str] = []
-    metadata_path = root / "ladder_metadata.json"
+    ladder_metadata_path = root / "ladder_metadata.json"
     training_audit_path = training_root / "independent_audit.json"
-    if not metadata_path.is_file() or not training_audit_path.is_file():
+    if not ladder_metadata_path.is_file() or not training_audit_path.is_file():
         return {"protocol": PROTOCOL, "passed": False,
                 "errors": ["resource ladder metadata/training audit is missing"]}
-    metadata = json.loads(metadata_path.read_text())
+    metadata = json.loads(ladder_metadata_path.read_text())
     training = json.loads(training_audit_path.read_text())
     tool_root = Path(__file__).resolve().parents[1]
     expected = {
         "training_audit_sha256": sha256(training_audit_path),
         "public_corpus_plan_sha256": sha256(public_corpus_plan),
         "evaluation_plan_sha256": sha256(evaluation_plan),
+        "paper_inference_addendum_sha256": sha256(
+            paper_inference_addendum
+        ),
         "runner_sha256": sha256(runner),
         "single_runner_sha256": sha256(
             tool_root / "scripts/run_in_place_ttt_2x5090_ruler_single.sh"),
@@ -77,23 +81,28 @@ def audit(
             key = f"{suffix}_{arm}"
             run = root / arm / suffix
             audit_path = run / "independent_resource_audit.json"
-            metadata_path = run / "run_metadata.json"
-            if not audit_path.is_file() or not metadata_path.is_file():
+            run_metadata_path = run / "run_metadata.json"
+            if not audit_path.is_file() or not run_metadata_path.is_file():
                 errors.append(f"missing resource audit/metadata: {key}")
                 continue
             checked = json.loads(audit_path.read_text())
-            metadata = json.loads(metadata_path.read_text())
+            run_metadata = json.loads(run_metadata_path.read_text())
             if (checked.get("protocol")
                     != "in_place_ttt_2x5090_ruler_resource_audit_v1"
                     or checked.get("passed") is not True
                     or checked.get("arm") != arm
                     or checked.get("context_length") != context
-                    or metadata.get("protocol")
+                    or run_metadata.get("protocol")
                     != "in_place_ttt_2x5090_ruler_run_v1"
-                    or metadata.get("run_kind") != "resource"
-                    or metadata.get("num_samples_per_task") != 1
-                    or metadata.get("arm") != arm
-                    or metadata.get("context_length") != context):
+                    or run_metadata.get("run_kind") != "resource"
+                    or run_metadata.get("num_samples_per_task") != 1
+                    or run_metadata.get("arm") != arm
+                    or run_metadata.get("context_length") != context
+                    or run_metadata.get("paper_inference_addendum_sha256")
+                    != sha256(paper_inference_addendum)
+                    or checked.get("bindings", {}).get(
+                        "paper_inference_addendum_sha256"
+                    ) != sha256(paper_inference_addendum)):
                 errors.append(f"resource identity/completion differs: {key}")
             gpu = checked.get("gpu", {})
             try:
@@ -120,7 +129,7 @@ def audit(
             runs[key] = checked
             bindings[key] = {
                 "independent_resource_audit_sha256": sha256(audit_path),
-                "run_metadata_sha256": sha256(metadata_path),
+                "run_metadata_sha256": sha256(run_metadata_path),
             }
         if set(paired_inputs) == set(ARMS):
             normalized = {}
@@ -139,7 +148,7 @@ def audit(
         "boundaries": runs,
         "scores_discarded": True,
         "bindings": bindings | {
-            "ladder_metadata_sha256": sha256(metadata_path),
+            "ladder_metadata_sha256": sha256(ladder_metadata_path),
             **expected,
         },
     }
@@ -150,6 +159,9 @@ def main() -> None:
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--public-corpus-plan", type=Path, required=True)
     parser.add_argument("--evaluation-plan", type=Path, required=True)
+    parser.add_argument(
+        "--paper-inference-addendum", type=Path, required=True,
+    )
     parser.add_argument("--training-root", type=Path, required=True)
     parser.add_argument("--runner", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -162,6 +174,9 @@ def main() -> None:
         args.root.expanduser().resolve(),
         public_corpus_plan=args.public_corpus_plan.expanduser().resolve(),
         evaluation_plan=args.evaluation_plan.expanduser().resolve(),
+        paper_inference_addendum=(
+            args.paper_inference_addendum.expanduser().resolve()
+        ),
         training_root=args.training_root.expanduser().resolve(),
         runner=args.runner.expanduser().resolve(),
     )

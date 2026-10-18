@@ -53,6 +53,7 @@ def audit(
     *,
     public_corpus_plan: pathlib.Path,
     evaluation_plan: pathlib.Path,
+    paper_inference_addendum: pathlib.Path,
     training_root: pathlib.Path,
     resource_root: pathlib.Path,
     runner: pathlib.Path,
@@ -76,6 +77,9 @@ def audit(
         "resource_audit_sha256": sha256(resource_audit),
         "public_corpus_plan_sha256": sha256(public_corpus_plan),
         "evaluation_plan_sha256": sha256(evaluation_plan),
+        "paper_inference_addendum_sha256": sha256(
+            paper_inference_addendum
+        ),
         "runner_sha256": sha256(runner),
         "summarizer_sha256": sha256(
             tool_root / "scripts/summarize_in_place_ttt_2x5090_ruler_matrix.py"),
@@ -101,7 +105,10 @@ def audit(
     if (resource.get("protocol")
             != "in_place_ttt_2x5090_ruler_resource_ladder_audit_v1"
             or resource.get("passed") is not True
-            or set(resource.get("boundaries", {})) != expected_boundaries):
+            or set(resource.get("boundaries", {})) != expected_boundaries
+            or resource.get("bindings", {}).get(
+                "paper_inference_addendum_sha256"
+            ) != sha256(paper_inference_addendum)):
         errors.append("paired RULER resource ladder did not pass")
     recomputed: dict[str, dict[str, float]] = {}
     single_bindings: dict[str, dict[str, dict[str, str]]] = {arm: {} for arm in ARMS}
@@ -134,6 +141,11 @@ def audit(
                     or metadata.get("arm") != arm or metadata.get("context_length") != context
                     or metadata.get("baseline_tier") != "2x5090_100m"
                     or metadata.get("run_kind") != "formal"
+                    or metadata.get("paper_inference_addendum_sha256")
+                    != sha256(paper_inference_addendum)
+                    or single.get("bindings", {}).get(
+                        "paper_inference_addendum_sha256"
+                    ) != sha256(paper_inference_addendum)
                     or summary.get("protocol") != "in_place_ttt_2x5090_ruler_summary_v1"
                     or summary.get("baseline_tier") != "2x5090_100m"):
                 errors.append(f"single audit/metadata identity differs: {arm}/{suffix}")
@@ -281,6 +293,9 @@ def main() -> None:
     parser.add_argument("--root", type=pathlib.Path, required=True)
     parser.add_argument("--public-corpus-plan", type=pathlib.Path, required=True)
     parser.add_argument("--evaluation-plan", type=pathlib.Path, required=True)
+    parser.add_argument(
+        "--paper-inference-addendum", type=pathlib.Path, required=True,
+    )
     parser.add_argument("--training-root", type=pathlib.Path, required=True)
     parser.add_argument("--resource-root", type=pathlib.Path, required=True)
     parser.add_argument("--runner", type=pathlib.Path, required=True)
@@ -293,6 +308,7 @@ def main() -> None:
         args.root.resolve(),
         public_corpus_plan=args.public_corpus_plan.resolve(),
         evaluation_plan=args.evaluation_plan.resolve(),
+        paper_inference_addendum=args.paper_inference_addendum.resolve(),
         training_root=args.training_root.resolve(),
         resource_root=args.resource_root.resolve(),
         runner=args.runner.resolve(),
