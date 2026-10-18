@@ -1,0 +1,61 @@
+{
+  "bindings": {
+    "auditor_sha256": "3b96f2f0de79f6a2ea8c50f0f0d18a62e59f8fdfcb40c6f1608224000c670da4",
+    "corpus_manifest_sha256": "551408573c7d2228dd67bac27d31309a6a684e0cb0187210aecc2f6024fdf377",
+    "replay_sha256": "f1e73e957041a50ced1de3821e0aa7449aed3668ca485378605435cfeadecdd8"
+  },
+  "checks": {
+    "all_stages_replayed": true,
+    "artifact_has_no_plaintext_or_token_arrays": true,
+    "config_bindings_current": true,
+    "frozen_loader_contract": true,
+    "host_and_gpu_policy": true,
+    "primary_bindings_current": true,
+    "provenance_bindings_current": true,
+    "replay_protocol_and_pass": true,
+    "stage1_32k_prefix_matches": true,
+    "stage1_32k_schedule_matches": true,
+    "stage2_128k_prefix_matches": true,
+    "stage2_128k_schedule_matches": true
+  },
+  "created_at_utc": "2026-10-18T22:24:47.415164+00:00",
+  "cuda_visible_devices": "",
+  "errors": [],
+  "hostname": "user-Super-Server",
+  "independent_stages": {
+    "stage1_32k": {
+      "compact_prefix_sha256": "c57a5de8d43b7da9526769ea38b96c91678474e2805c77a3279c788c29c5f9df",
+      "hashes_unique": true,
+      "indices_unique": true,
+      "ordered_sources_sha256": "77fc3f5c3c7909c6078725e97fa1dbc58502c45d31a9f40f4f0cb192fdc25f08",
+      "ordered_stage_indices_sha256": "c5d1d5d34402fc8ad0a334e789dfbd2116f98b1e07250fcc407a4910a14b7cc0",
+      "ordered_training_hashes_sha256": "d044d8502bec5411e7f6d038c6ee2787e425ab082a4270e4a6c7c108705af4a3",
+      "rank_lengths_exact": true,
+      "ranks_disjoint": true,
+      "selected_records": 1728,
+      "selected_training_tokens": 56623104,
+      "source_records": {
+        "fineweb": 827,
+        "longcrawl": 901
+      }
+    },
+    "stage2_128k": {
+      "compact_prefix_sha256": "0f56875a427599f269ec22eececbb611f5c4ee268b4f7e2b53f21702aff8a96c",
+      "hashes_unique": true,
+      "indices_unique": true,
+      "ordered_sources_sha256": "ae97d08ad776c28426fd4c329ab03324f0f746cde93dd1d330bc6b703644a857",
+      "ordered_stage_indices_sha256": "9098b662357f2f0275c34cd25dfaff882316643147dd943c0e137c1592b6ab73",
+      "ordered_training_hashes_sha256": "081f20485d941a89c059f3a165386d6f0734c7fac1fb64bda972e4f20def8083",
+      "rank_lengths_exact": true,
+      "ranks_disjoint": true,
+      "selected_records": 320,
+      "selected_training_tokens": 41943040,
+      "source_records": {
+        "fineweb": 161,
+        "longcrawl": 159
+      }
+    }
+  },
+  "passed": true,
+  "protocol": "in_place_ttt_qwen3_4b_base_100m_selected_stream_audit_v1"
+}

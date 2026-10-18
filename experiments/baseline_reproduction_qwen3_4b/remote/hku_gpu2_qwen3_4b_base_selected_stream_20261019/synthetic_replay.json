@@ -1,0 +1,187 @@
+{
+  "bindings": {
+    "config_sha256": {
+      "stage1_no_ttt": "a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780",
+      "stage1_ttt": "0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa",
+      "stage2_no_ttt": "c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376",
+      "stage2_ttt": "5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c"
+    },
+    "corpus_audit_sha256": "9ea81e026b57c5f7fe92bd1e5e959efd21e3107d9123e8ae52b0e54acf503333",
+    "corpus_manifest_sha256": "551408573c7d2228dd67bac27d31309a6a684e0cb0187210aecc2f6024fdf377",
+    "model_identity_sha256": "5e5edb5bef03218c91a1bea0d4f8a80a4814a120734b433a2e6fb765a0a154d4",
+    "plan_sha256": "a171b5ba2290868b4afe94a3f5d5b62d4738f4db2207220191ef2e7e74db7046",
+    "provenance_sha256": {
+      "stage1_32k": "777651e8de90e42e861590c4988ff3533ef0783830184219a854f22a200879ba",
+      "stage2_128k": "45c259b7f5a5688d55940e86c95d0cf6f08527e608d43027eb3f1abccbcda24f"
+    },
+    "replay_script_sha256": "0a797ea0b76f07db504557a7f1429936b59940025bcbd0d90278d17db0522614",
+    "runtime_source_sha256": {
+      "datasets_distributed": "8d9df5208d269a53cc8596c4b5b02c5fa8e52b453af6a769577b92e54e49158c",
+      "datasets_iterable": "6a183c3aab856410c087e1dabc17b534ebe418ef2a7f2563c61e588cf78e92f0",
+      "torchdata_stateful_loader": "426c3ef475481165f9a7d44238040f81de213a4e8ee58ad8fe734e52a2717830",
+      "veomni_data_loader": "8703db9609006855d1fc1bd61896052012d4bfab4413fd53c25639ae959f1c42",
+      "veomni_dataset": "52a1a7361d3da5214b83ee2948272c700fbbe9394fca7b6077477ea700004f69"
+    }
+  },
+  "config_contracts": {
+    "stage1": {
+      "data": {
+        "data_type": "plaintext",
+        "dataloader_type": "native",
+        "datasets_type": "iterable",
+        "drop_last": true,
+        "max_seq_len": 32768,
+        "num_workers": 2,
+        "pin_memory": true,
+        "prefetch_factor": 2,
+        "text_keys": "content_split",
+        "train_size": 56623104
+      },
+      "train": {
+        "global_batch_size": 64,
+        "max_steps": 27,
+        "micro_batch_size": 1,
+        "seed": 42
+      }
+    },
+    "stage2": {
+      "data": {
+        "data_type": "plaintext",
+        "dataloader_type": "native",
+        "datasets_type": "iterable",
+        "drop_last": true,
+        "max_seq_len": 131072,
+        "num_workers": 2,
+        "pin_memory": true,
+        "prefetch_factor": 2,
+        "text_keys": "content_split",
+        "train_size": 41943040
+      },
+      "train": {
+        "global_batch_size": 64,
+        "max_steps": 5,
+        "micro_batch_size": 1,
+        "seed": 42
+      }
+    }
+  },
+  "created_at_utc": "2026-10-18T22:24:42.365275+00:00",
+  "cuda_visible_devices": "",
+  "dataset_n_shards": 1,
+  "drop_last": true,
+  "effective_num_workers": 1,
+  "hostname": "user-Super-Server",
+  "model_revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+  "num_workers": 2,
+  "passed": true,
+  "per_rank_batch": 32,
+  "pin_memory_in_order_audit": false,
+  "prefetch_factor": 2,
+  "prefix_records": 15000,
+  "prefixes": {
+    "stage1_32k": {
+      "compact_sha256": "c57a5de8d43b7da9526769ea38b96c91678474e2805c77a3279c788c29c5f9df",
+      "records": 15000
+    },
+    "stage2_128k": {
+      "compact_sha256": "0f56875a427599f269ec22eececbb611f5c4ee268b4f7e2b53f21702aff8a96c",
+      "records": 15000
+    }
+  },
+  "protocol": "in_place_ttt_qwen3_4b_base_100m_selected_stream_replay_v1",
+  "seed": 42,
+  "shuffle_buffer_size": 10000,
+  "stages": {
+    "stage1_32k": {
+      "checks": {
+        "global_records_exact": true,
+        "prefix_sufficient": true,
+        "rank_hashes_disjoint": true,
+        "rank_indices_disjoint": true,
+        "rank_lengths_exact": true,
+        "repeat_schedule_exact": true,
+        "sources_valid": true,
+        "stage_indices_unique": true,
+        "training_hashes_unique": true
+      },
+      "ordered_sources_sha256": "77fc3f5c3c7909c6078725e97fa1dbc58502c45d31a9f40f4f0cb192fdc25f08",
+      "ordered_stage_indices_sha256": "c5d1d5d34402fc8ad0a334e789dfbd2116f98b1e07250fcc407a4910a14b7cc0",
+      "ordered_training_hashes_sha256": "d044d8502bec5411e7f6d038c6ee2787e425ab082a4270e4a6c7c108705af4a3",
+      "passed": true,
+      "rank_source_records": [
+        {
+          "fineweb": 419,
+          "longcrawl": 445
+        },
+        {
+          "fineweb": 408,
+          "longcrawl": 456
+        }
+      ],
+      "records_per_rank": 864,
+      "selected_records": 1728,
+      "selected_training_tokens": 56623104,
+      "sequence_length": 32768,
+      "source_records": {
+        "fineweb": 827,
+        "longcrawl": 901
+      },
+      "source_training_tokens": {
+        "fineweb": 27099136,
+        "longcrawl": 29523968
+      },
+      "stage": "stage1_32k",
+      "steps": 27
+    },
+    "stage2_128k": {
+      "checks": {
+        "global_records_exact": true,
+        "prefix_sufficient": true,
+        "rank_hashes_disjoint": true,
+        "rank_indices_disjoint": true,
+        "rank_lengths_exact": true,
+        "repeat_schedule_exact": true,
+        "sources_valid": true,
+        "stage_indices_unique": true,
+        "training_hashes_unique": true
+      },
+      "ordered_sources_sha256": "ae97d08ad776c28426fd4c329ab03324f0f746cde93dd1d330bc6b703644a857",
+      "ordered_stage_indices_sha256": "9098b662357f2f0275c34cd25dfaff882316643147dd943c0e137c1592b6ab73",
+      "ordered_training_hashes_sha256": "081f20485d941a89c059f3a165386d6f0734c7fac1fb64bda972e4f20def8083",
+      "passed": true,
+      "rank_source_records": [
+        {
+          "fineweb": 86,
+          "longcrawl": 74
+        },
+        {
+          "fineweb": 75,
+          "longcrawl": 85
+        }
+      ],
+      "records_per_rank": 160,
+      "selected_records": 320,
+      "selected_training_tokens": 41943040,
+      "sequence_length": 131072,
+      "source_records": {
+        "fineweb": 161,
+        "longcrawl": 159
+      },
+      "source_training_tokens": {
+        "fineweb": 21102592,
+        "longcrawl": 20840448
+      },
+      "stage": "stage2_128k",
+      "steps": 5
+    }
+  },
+  "total_selected_records": 2048,
+  "total_selected_training_tokens": 98566144,
+  "versions": {
+    "datasets": "2.21.0",
+    "python": "3.11.16",
+    "torchdata": "0.11.0",
+    "veomni": "0.1.0"
+  },
+  "world_size": 2
+}

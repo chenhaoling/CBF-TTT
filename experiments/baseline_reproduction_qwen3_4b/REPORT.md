@@ -2430,3 +2430,46 @@ states are `waiting_for_corrected_formal_stage2` and
 GPU0/1 remain at 46/18 MiB with 0% utilization. Evidence is archived under
 `remote/hku_gpu2_qwen3_4b_base_ruler_resource_watcher_20261019/` and
 `remote/hku_gpu2_qwen3_4b_base_ruler_matrix_watcher_20261019/`.
+
+## 51. Corrected Base 100M selected-stream audit registration (2026-10-19)
+
+The former selected-stream artifact is non-authoritative because it consumed
+the superseded tokenizer corpus and iterated the Hugging Face stream directly.
+It did not exercise the `StatefulDataLoader(num_workers=2)` path used by the
+formal configs.
+
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_SELECTED_STREAM_ADDENDUM.md` freezes a
+replacement before the corrected corpus publishes and before either formal
+release. The replay uses seed 42, shuffle buffer 10,000, two DP ranks, 32
+records per rank, 27 Stage-1 steps and five Stage-2 steps. It builds a compact
+15,000-row prefix from each provenance file containing only stage index,
+source and training-token SHA-256, then invokes the installed datasets node
+split and torchdata StatefulDataLoader. A separate process independently
+rebuilds both prefixes and schedules and matches all ordered digests, counts
+and rank-disjointness checks.
+
+Each formal stage is one JSONL shard. Although the frozen config requests two
+workers, datasets 2.21.0 reports one shard and stops one excess worker. The
+artifact therefore records both requested workers 2 and effective workers 1.
+This is the actual formal input behavior rather than a resource assumption.
+
+Both formal release creators now require this passing audit and bind the
+applicable stage's ordered index/hash digests and corrected corpus manifest.
+The selected-stream result does not release training: an explicit human
+timing review, `--accept`, reviewer and decision note remain mandatory.
+
+On `hku-gpu2` with both GPUs hidden, the synthetic implementation replay
+covered 1,728 32K records plus 320 128K records, or 98,566,144 total selected
+tokens. The main replay passed in about 9.9 seconds with about 857 MiB peak
+RSS; the independent reconstruction passed in about 4.8 seconds with about
+707 MiB peak RSS. The 12 focused tests pass. A broad 928-test run had 921
+passes, five environment skips and two unrelated existing utility-record
+fixture errors.
+
+Commit `2b8644a0ed0dcf2e8d94a9b51360e8428db695de` is pushed and deployed as a
+clean detached checkout. The CPU-only watcher is live in tmux
+`baseline_qwen3_4b_base_selected_stream_2b8644a0_20261019`, output root
+`/home/ctj/in_place_ttt_qwen3_4b_base_selected_stream_2b8644a0_20261019`,
+state `waiting_for_corrected_base_corpus`. At registration GPU0/1 used 46/18
+MiB at 0% utilization. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_selected_stream_20261019/`.

@@ -7733,3 +7733,36 @@ watcher语法与diff检查通过。注册时没有RULER GPU child或分数；只
 GPU0/1仍只占46/18 MiB且利用率0%。启动证据分别归档于
 `remote/hku_gpu2_qwen3_4b_base_ruler_resource_watcher_20261019/`和
 `remote/hku_gpu2_qwen3_4b_base_ruler_matrix_watcher_20261019/`。
+
+## 2026-10-19：corrected Base 100M 实际选中数据流审计注册
+
+复核发现旧`hku_gpu2_100m_selected_stream_20261019`证据来自已作废的旧tokenizer语料，并且直接迭代
+Hugging Face stream，没有经过正式配置使用的`StatefulDataLoader(num_workers=2)`。因此旧结果不再作为
+corrected Base正式放行证据。
+
+新增冻结补充计划`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_SELECTED_STREAM_ADDENDUM.md`，固定seed 42、
+shuffle buffer 10000、DP world size 2、每rank batch 32、Stage-1 27步和Stage-2 5步。新增主回放脚本与独立
+审计器：两者分别从每阶段前15000条provenance建立无明文compact stream，使用远端安装的`datasets`
+shuffle、node split及`torchdata StatefulDataLoader`重放。输出只保存顺序hash、source计数和aggregate，
+不保存文本、token IDs或被选中记录内容；同时绑定corpus manifest/audit、Base identity、四份formal config及
+VeOmni/datasets/torchdata运行时源码hash。
+
+正式config请求`num_workers=2`，但每阶段只有一个JSONL shard；远端smoke证实datasets 2.21.0会停止一个
+多余worker。因此产物同时记录requested workers=2与effective workers=1，避免把配置值误报为实际并行度。
+
+Stage-1与Stage-2 release creator现在都强制要求passing selected-stream audit，并将对应阶段的ordered
+index/hash及corrected manifest hash写入release。缺少该audit时，即使timing通过也不能创建release；原有
+显式`--accept`、reviewer和decision note要求保持不变。
+
+在`hku-gpu2`隐藏GPU完成合成smoke：主回放覆盖1728个32K记录和320个128K记录，共98566144 token，
+约9.9秒、峰值RSS约857MiB；独立重算约4.8秒、峰值RSS约707MiB，两者均通过。12/12相关测试通过。
+仓库全量测试观察到928项中921通过、5跳过、2个与本改动无关的旧utility-record fixture错误；本次focused
+suite无失败。
+
+最终提交`2b8644a0ed0dcf2e8d94a9b51360e8428db695de`已推送并以clean detached checkout部署。
+CPU-only watcher在tmux
+`baseline_qwen3_4b_base_selected_stream_2b8644a0_20261019`运行，output root为
+`/home/ctj/in_place_ttt_qwen3_4b_base_selected_stream_2b8644a0_20261019`，记录时状态为
+`waiting_for_corrected_base_corpus`。GPU0/1分别为46/18MiB且利用率0%；watcher不会自动签发formal release。
+实现smoke、独立审计、测试、hash和启动状态归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_selected_stream_20261019/`。

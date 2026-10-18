@@ -1,0 +1,15 @@
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/ops/__init__.py:50] 10/19/2026 06:24:35 >> ✅ VeOmni ops patch applied.
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:32] 10/19/2026 06:24:35 >> ❌ veomni_patch is not available
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:34] 10/19/2026 06:24:35 >> 
+========== Environment Variables ==========
+MODELING_BACKEND=veomni (source=default)
+USE_GROUP_GEMM=1 (source=default)
+USE_LIGER_KERNEL=1 (source=default)
+===========================================
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:35] 10/19/2026 06:24:35 >> 
+=========== OPS ============
+_fused_moe_forward = None
+_flash_attention_forward = transformers_flash_attention_forward
+_cross_entropy = fused_liger_kernel_cross_entropy
+==============================
+{"output": "/home/ctj/in_place_ttt_selected_stream_smoke_2b8644a0/replay.json", "passed": true, "total_selected_training_tokens": 98566144}
