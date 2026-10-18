@@ -7328,3 +7328,21 @@ rank dataloader batch 32。Stage1为27步、每步2,097,152 token、总56,623,10
 
 因此本资源受限配置需要显式`max_steps`：与发布代码的动态token batching不同，非packing streaming
 dataset既没有有限长度，也没有启用基于`train_size`的步数公式；删除该字段不会自动推导正式步数。
+
+## 2026-10-19：native plaintext dataloader 闭环复验
+
+继续限定所有GPU工作只能使用`hku-gpu2`。本轮只在该主机CPU执行验证，并显式清空
+`CUDA_VISIBLE_DEVICES`。读取官方训练入口后确认，`data_type=plaintext`会调用固定VeOmni
+`process_pretrain_example`：对`content_split`关闭special token编码、追加一个EOS、按配置长度切块，
+并令labels等于input IDs。
+
+使用已通过独立审计的连续packing pilot，分别抽取32K和128K阶段的首条FineWeb-Edu、LongCrawl64
+记录，共四条。四条均只产生一个chunk，input长度精确为32768或131072，末位为EOS，attention全1，
+labels与input一致，且按构建器同一little-endian uint32规则重算的训练token SHA256与provenance完全
+相同。验证过程没有输出原文或token ID。
+
+新增证据目录
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_dataloader_closure_20261019/`，记录结构化
+结果、上游commit、官方训练入口、VeOmni transform/tokenizer builder、pilot manifest及tokenizer
+资产hash。该证据关闭pilot语料到官方native dataloader的表示边界，排除了重复EOS、隐式BOS与再次
+截断；它不替代full corpus canonical audit，也不释放后续GPU训练或RULER评测。

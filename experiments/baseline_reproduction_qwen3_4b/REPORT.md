@@ -1850,3 +1850,30 @@ required: unlike the released dynamic-token path, a non-packed streaming
 dataset has neither a finite dataset length nor an enabled token-based step
 calculation. Omitting it would make this pinned VeOmni path unable to determine
 the formal step count; it would not automatically infer the registered tier.
+
+## 35. Native plaintext dataloader closure (2026-10-19)
+
+The corpus builder writes one `content_split` string whose frozen tokenizer
+round trip is exactly `max_seq_len - 1` tokens. Its provenance hashes the
+training sequence obtained by appending one EOS. The pinned official training
+entry selects VeOmni `process_pretrain_example` for `data_type=plaintext`; that
+function encodes with `add_special_tokens=false`, appends one EOS, splits at
+`max_seq_len`, and copies the resulting input IDs into labels.
+
+A CPU-only probe on `hku-gpu2` exercised that actual tokenizer builder and
+transform rather than reimplementing them. It checked the first FineWeb-Edu
+and LongCrawl64 rows in both the 32K and 128K pilot stages. All four rows
+produced one chunk of the exact registered length, a terminal EOS, all-one
+attention mask, labels equal to inputs and a training-token SHA256 identical
+to provenance. Only lengths, booleans and hashes were emitted; source text and
+token IDs were not recorded. `CUDA_VISIBLE_DEVICES` was empty.
+
+The evidence binds upstream commit
+`be2324829b0e91c8fd10a74d4b43714fde6676e1`, the exact official training
+entry, installed VeOmni transform and tokenizer builder, the pilot manifest and
+three tokenizer assets. It is stored under
+`remote/hku_gpu2_dataloader_closure_20261019/`. This closes the pilot
+builder-to-native-dataloader representation boundary: there is no duplicate
+EOS, hidden BOS or second truncation on these registered rows. The full corpus
+still requires atomic publication and its canonical independent audit before
+any GPU gate can run.

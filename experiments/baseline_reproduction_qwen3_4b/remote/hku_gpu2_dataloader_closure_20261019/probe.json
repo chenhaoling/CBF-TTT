@@ -1,0 +1,88 @@
+{
+  "bindings": {
+    "data_transform_sha256": "3c00a78a5882b870ecd0e1f678dd2d1904132facf1704565914dd45a8d24fb0f",
+    "pilot_manifest_sha256": "3b2e7f4821692dfe75bae48e4cb52c6ac39f4b9b3b4c75f96aeb32ab7dec7206",
+    "tokenizer_assets": {
+      "config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+    },
+    "tokenizer_builder_sha256": "451da868bd626d4b02d48e6c0059cdcc962ca6aca2f9658bbadd671407edc9cb",
+    "train_torch_sha256": "fd037d4213bd8c947bb2596840dac62a6fbefcb45ee381e904519aae21db63f1",
+    "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1"
+  },
+  "claim": "pilot_rows_match_native_veomni_plaintext_transform",
+  "cuda_visible_devices": "empty",
+  "hostname": "user-Super-Server",
+  "passed": true,
+  "probes": [
+    {
+      "attention_all_one": true,
+      "chunks": 1,
+      "content_keys": [
+        "content_split"
+      ],
+      "input_length": 32768,
+      "labels_equal_inputs": true,
+      "provenance_training_length": 32768,
+      "source": "fineweb",
+      "stage": "stage1_32k",
+      "stage_record_index": 0,
+      "terminal_is_eos": true,
+      "training_hash_matches": true
+    },
+    {
+      "attention_all_one": true,
+      "chunks": 1,
+      "content_keys": [
+        "content_split"
+      ],
+      "input_length": 32768,
+      "labels_equal_inputs": true,
+      "provenance_training_length": 32768,
+      "source": "longcrawl",
+      "stage": "stage1_32k",
+      "stage_record_index": 1,
+      "terminal_is_eos": true,
+      "training_hash_matches": true
+    },
+    {
+      "attention_all_one": true,
+      "chunks": 1,
+      "content_keys": [
+        "content_split"
+      ],
+      "input_length": 131072,
+      "labels_equal_inputs": true,
+      "provenance_training_length": 131072,
+      "source": "fineweb",
+      "stage": "stage2_128k",
+      "stage_record_index": 0,
+      "terminal_is_eos": true,
+      "training_hash_matches": true
+    },
+    {
+      "attention_all_one": true,
+      "chunks": 1,
+      "content_keys": [
+        "content_split"
+      ],
+      "input_length": 131072,
+      "labels_equal_inputs": true,
+      "provenance_training_length": 131072,
+      "source": "longcrawl",
+      "stage": "stage2_128k",
+      "stage_record_index": 1,
+      "terminal_is_eos": true,
+      "training_hash_matches": true
+    }
+  ],
+  "protocol": "in_place_ttt_dataloader_closure_probe_v1",
+  "timestamp_utc": "2026-10-18T20:18:35.944938+00:00",
+  "versions": {
+    "python": "3.11.16",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.3",
+    "veomni": "0.1.0"
+  }
+}
