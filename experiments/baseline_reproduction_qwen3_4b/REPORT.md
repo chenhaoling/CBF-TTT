@@ -1733,3 +1733,18 @@ because the full corpus was not yet atomically published; the builder PID
 1397987 was live at 60,421 Stage-2 rows and both GPUs were idle. Evidence is
 archived under
 `remote/hku_gpu2_public_corpus_streaming_fallback_20261019/`.
+
+## 30. Unified completion matrix (2026-10-19)
+
+[`IN_PLACE_TTT_BASELINE_COMPLETION_MATRIX.md`](../../IN_PLACE_TTT_BASELINE_COMPLETION_MATRIX.md)
+now indexes the authoritative evidence required to close every remaining
+baseline stage. It distinguishes a live watcher, smoke, resource boundary,
+formal paired training result, release decision and independently audited
+metric matrix. It also records the remote roots for the full corpus, both
+training stages and RULER without changing any frozen plan or artifact hash.
+
+At this checkpoint, released-code Level A, the public source inventory and the
+continuous packing pilot are complete. The full corpus is still building;
+formal training, primary RULER scores and the baseline conclusion remain
+incomplete. Update-admission work remains sealed. The matrix is a status and
+acceptance index only: it creates no release and launches no process.

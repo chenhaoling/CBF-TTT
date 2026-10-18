@@ -7249,3 +7249,15 @@ timing 和正式训练继续只接受 canonical `independent_audit.json`。
 2026-10-19 01:08:27 HKT 时状态为`wait`，原因是 full corpus 尚未原子发布；构建 PID 1397987
 继续运行，Stage2 为 60,421 行，两卡利用率 0%。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_public_corpus_streaming_fallback_20261019/`。
+
+## 2026-10-19：baseline 统一完成证据矩阵
+
+新增`IN_PLACE_TTT_BASELINE_COMPLETION_MATRIX.md`，把当前baseline目标拆成公开源清单、连续
+packing、全量语料、8K activation gate、Stage-1资源/计时/正式训练、Stage-2资源/计时/正式训练、
+主RULER 4K--128K、独立256K外推和最终结论等可审计阶段。每一行明确真正完成所需的权威证据和
+当前状态，并列出hku-gpu2上的运行根目录。
+
+该文件只整理已有冻结计划的验收条件，不修改任何计划哈希、训练配置、checkpoint、release或运行
+顺序。它明确smoke、单臂、缩短上下文、仅summary或仅存活tmux均不能证明复现完成；当前只确认
+Level A、公开源清单及连续packing pilot完成。全量语料仍在构建，正式双臂训练、RULER矩阵和最终
+baseline结论均未完成，“是否更新”门控继续封存。

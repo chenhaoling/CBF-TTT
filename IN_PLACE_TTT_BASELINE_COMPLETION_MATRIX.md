@@ -1,0 +1,77 @@
+# In-Place TTT baseline completion matrix
+
+Status: **live evidence index; not an execution plan or release record**  
+Initial snapshot: 2026-10-19 (Asia/Shanghai)
+
+## 1. Purpose
+
+This file defines the evidence needed to close the active baseline objective
+without weakening any frozen plan. It does not authorize a run, change a hash,
+accept a formal release, or replace an independent audit. The experiment is
+complete only when every required row below has authoritative passing evidence.
+
+The current executable target is the public-data, resource-constrained Level-B
+replication on `hku-gpu2`. It uses Qwen3-4B, token-balanced FineWeb-Edu and
+LongCrawl64, matched no-TTT/native-TTT arms, and the official OpenCompass RULER
+task set. The private paper corpus and missing recipe details remain unavailable,
+so no Level-C or exact-paper-number claim is permitted.
+
+## 2. Required evidence
+
+| Stage | Required completion evidence | Current state at initial snapshot |
+|---|---|---|
+| Released-code Level A | Clean upstream revision; environment manifest; paired finite optimizer steps; official conversion/reload; audited RULER score extraction | **Complete.** Both exclusive 8K arms and the one-example-per-task 4K smoke passed. This proves execution only. |
+| Public source inventory | Passing independent inventory audit binding every FineWeb-Edu and LongCrawl64 source artifact | **Complete.** Seven registered checks pass. |
+| Continuous packing pilot | Passing independent two-stage audit proving exact lengths, source balance, continuity, no replay, hashes and token totals | **Complete.** Ten registered checks pass for the 32K-to-128K pilot. |
+| Full public corpus | Atomically published full directory; no `.partial`; exact 724,800 records and 34,999,369,728 training tokens; passing canonical `independent_audit.json` with all registered checks true and exact manifest/dependency bindings | **Running.** CPU builder is active on `hku-gpu2`; no canonical full audit exists yet. |
+| 8K activation-offload gate | Both matched arms complete one optimizer step; finite loss/gradient; passing child and paired audits; at least 5% GPU headroom; registered host-memory and swap limits | **Waiting for the full corpus builder/auditor to stop.** |
+| Stage-1 resource ladder | Audited paired 16K and 32K boundaries from the same registered inputs, no-TTT before TTT, with all resource stop rules satisfied | **Waiting for the audited 8K gate.** |
+| Stage-1 timing gate | Audited paired three-step 32K GB64 timing run on the full corpus; finite measured projections for both arms and the sequential pair | **Waiting for the audited Stage-1 ladder and full corpus audit.** |
+| Formal Stage-1 release | A separately written `accepted=true` release binding the exact passing timing-audit SHA256, reviewer, measured projection and decision note | **Sealed.** The release file must not be created before measured timing review. |
+| Formal Stage-1 training | Both registered 27-step arms complete the same 56,623,104-token stream; final DCP and converted HF checkpoints exist; passing paired independent audit | **Not run.** |
+| Stage-2 resource ladder | Each arm starts from its own audited Stage-1 HF checkpoint; paired 64K and 128K boundaries pass their child and aggregate audits | **Waiting for audited formal Stage 1.** |
+| Stage-2 timing gate | Audited paired multi-step 128K timing run on the full corpus with finite measured projections | **Waiting for the Stage-2 ladder.** |
+| Formal Stage-2 release | A separately written `accepted=true` release binding the exact passing Stage-2 timing audit and review decision | **Sealed.** |
+| Formal Stage-2 training | Both registered five-step arms complete the same 41,943,040-token stream from their corresponding Stage-1 checkpoints; final DCP/HF checkpoints and paired audit pass | **Not run.** |
+| Primary RULER resource gate | Paired no-TTT/native-TTT resource runs pass for every registered context from 4K through 128K with identical task inputs and required headroom | **Waiting for audited formal Stage 2.** |
+| Primary RULER matrix | All 13 official tasks, 100 examples per task, seed 42 and deterministic decoding complete for both arms at 4K, 8K, 16K, 32K, 64K and 128K; all 15,600 raw predictions and the paired matrix audit pass | **Not run.** |
+| Separate RULER 256K extrapolation | Its paired resource audit passes; an explicit timing/resource-bound release is accepted; both 13-task, 100-example arms and the independent audit pass | **Sealed and excluded from the primary 4K--128K mean.** |
+| Baseline conclusion | Report per-task and macro scores, `TTT - no-TTT` at every length, paired input counts/failures, resource measurements, hashes, confidence limits where registered, and differences from Table 1 under the public-data claim boundary | **Incomplete.** Smoke scores cannot satisfy this row. |
+| Update-admission exploration | A new frozen gate plan may start only after the matched baseline tier and registered RULER matrix have passing audits | **Sealed.** No baseline outcome currently authorizes gate training or test release. |
+
+## 3. Completion rules
+
+The following evidence is insufficient on its own:
+
+- a live tmux session or state file without its process handle;
+- a smoke score, one-example resource score, or shortened context subset;
+- one completed arm without its matched peer;
+- a summary without raw predictions and an independent recomputation;
+- a checkpoint without its manifest, conversion evidence and independent audit;
+- a public-data gain described as reproduction of the private paper corpus;
+- a 256K extrapolation substituted for a missing primary 4K--128K point;
+- an unreviewed or automatically inferred formal release.
+
+The baseline objective remains active until the primary 100M paired tier and
+the registered 4K--128K matrix satisfy every applicable row. Expansion to the
+approximately 1B tier requires its own addendum after the 100M result. Exact
+Level-C reproduction remains unavailable unless the private corpus and missing
+paper settings are obtained and executed.
+
+## 4. Authoritative live locations
+
+- Full corpus: `/home/ctj/in_place_ttt_public_corpus_full_20261018`
+- Full-corpus wrapper status: `/home/ctj/in_place_ttt_public_corpus_full_run_20261018/status.txt`
+- Streaming-audit fallback watcher: `/home/ctj/in_place_ttt_public_corpus_streaming_fallback_990da145_20261019`
+- 8K activation gate: `/home/ctj/in_place_ttt_2x5090_activation_8k_f14cb715_20261018`
+- Stage-1 ladder: `/home/ctj/in_place_ttt_2x5090_stage1_ladder_bae87e6c_20261018`
+- Stage-1 timing: `/home/ctj/in_place_ttt_2x5090_stage1_timing_56094b89_20261018`
+- Formal Stage 1: `/home/ctj/in_place_ttt_2x5090_100m_stage1_3c7e29fc_20261018`
+- Stage-2 ladder: `/home/ctj/in_place_ttt_2x5090_stage2_ladder_1b04d8cf_20261018`
+- Stage-2 timing: `/home/ctj/in_place_ttt_2x5090_stage2_timing_fbc02a6e_20261018`
+- Formal Stage 2: `/home/ctj/in_place_ttt_2x5090_100m_stage2_73950ecd_20261018`
+- Primary RULER resource and matrix: `/home/ctj/in_place_ttt_2x5090_ruler_resource_439fcea1_20261018` and `/home/ctj/in_place_ttt_2x5090_ruler_matrix_439fcea1_20261018`
+- Separate 256K resource and formal roots: `/home/ctj/in_place_ttt_2x5090_ruler_256k_resource_b33b93ac_20261018` and `/home/ctj/in_place_ttt_2x5090_ruler_256k_formal_a0375e93_20261018`
+
+All GPU execution is restricted to `hku-gpu2`. The paths above are evidence
+locations, not permission to bypass any predecessor, release or audit gate.
