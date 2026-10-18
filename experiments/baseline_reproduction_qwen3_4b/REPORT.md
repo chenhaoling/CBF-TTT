@@ -160,6 +160,9 @@ New opt-in files are:
 - `IN_PLACE_TTT_BASELINE_2X5090_STAGE2_RESOURCE_PLAN.md`;
 - `scripts/run_in_place_ttt_2x5090_stage2_ladder.sh`;
 - `scripts/audit_in_place_ttt_2x5090_stage2_ladder.py`;
+- `IN_PLACE_TTT_BASELINE_2X5090_STAGE2_TIMING_PLAN.md`;
+- `scripts/run_in_place_ttt_2x5090_stage2_timing.sh`;
+- `scripts/audit_in_place_ttt_2x5090_stage2_timing.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -1235,3 +1238,38 @@ formal Stage-1 root exited 1, created no ladder output and left both GPUs at
 46/18 MiB and 0%. The corpus PID and three upstream watcher states were still
 live/waiting at `2026-10-18T11:11:47+08:00`. Evidence is stored under
 `remote/hku_gpu2_stage2_ladder_tooling_20261018/`.
+
+## 16. Arm-specific Stage-2 multi-step timing gate (2026-10-18)
+
+The one-step 128K resource boundary cannot estimate steady Stage-2 training
+time because initialization and the first optimizer step dominate it. The
+frozen `IN_PLACE_TTT_BASELINE_2X5090_STAGE2_TIMING_PLAN.md` (SHA256
+`9898d283923a7a8ad45448249541901435087a45e8f89174b3a8283d894ec294`)
+therefore registers a separate three-step 128K, global-batch-64 pilot for each
+arm. Step 1 is warm-up; the median reconstructed step-2/3 duration projects
+the registered five-step formal Stage 2. All pilot updates are discarded and
+checkpoint/HF saving is disabled.
+
+`scripts/run_in_place_ttt_2x5090_stage2_timing.sh` is hard restricted to the
+`user-Super-Server` host behind the `hku-gpu2` SSH alias. Before any CUDA
+preflight it requires clean exact revisions, the paired formal Stage-1 audit,
+the four-child Stage-2 ladder audit, the full public-corpus audit and unchanged
+complete HF manifests for both arm-specific starting checkpoints. Each arm
+then independently rechecks two idle RTX 5090 GPUs, available host memory and
+absence of corpus processes. No other GPU server is an accepted execution
+target.
+
+`scripts/audit_in_place_ttt_2x5090_stage2_timing.py` rehashes all dependencies,
+the full 128K corpus and both current start models; verifies three finite,
+monotonic steps per arm; enforces GPU, host-memory and swap limits; rejects
+all checkpoint files; and reports arm-specific throughput plus the sequential
+five-step projection. Tests cover accidental checkpoint creation and a full
+paired fixture with distinct no-TTT/TTT starts. The complete focused baseline
+suite passes 51/51 tests; Bash syntax, direct auditor import, Python compile
+and `git diff --check` pass.
+
+This commit prepares and tests the timing gate only. It does not launch GPU
+work: formal Stage 1 and the Stage-2 resource ladder have not completed. A
+future formal Stage-2 runner must additionally consume a separately reviewed,
+timing-audit-bound release record. RULER and update-admission experiments stay
+sealed until the paired Stage-2 audit passes.

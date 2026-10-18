@@ -6899,3 +6899,28 @@ Stage-2专项2/2测试与Bash语法通过。使用未来formal Stage-1 root的�
 output，两卡保持46/18MiB和0%。2026-10-18 11:11:47 HKT语料PID与三个上游watcher仍存活/
 等待。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_ladder_tooling_20261018/`。
+
+## 2026-10-18：按臂绑定的Stage-2 128K多步计时门槛
+
+新增并冻结`IN_PLACE_TTT_BASELINE_2X5090_STAGE2_TIMING_PLAN.md`（SHA256
+`9898d283923a7a8ad45448249541901435087a45e8f89174b3a8283d894ec294`）。它在四边界
+Stage-2资源阶梯通过后，为no-TTT和TTT分别执行128K、GB64、3个optimizer step；step1仅用于
+warm-up，以step2/3个体耗时中位数投影正式5-step Stage-2。pilot不保存DCP/HF，产生的更新全部
+丢弃，不能作为效果或checkpoint证据。
+
+新增`scripts/run_in_place_ttt_2x5090_stage2_timing.sh`。runner硬限制实际主机名必须为SSH别名
+`hku-gpu2`对应的`user-Super-Server`；在任何CUDA预检前核验clean exact revisions、双臂正式
+Stage-1 audit、四child Stage-2 ladder audit、完整公共语料audit，以及两个按臂HF起点的当前完整
+manifest。每臂启动前再次要求两张RTX 5090 idle、48GiB可用主存且无语料builder/auditor进程。
+因此该路径不能被转移到`hku-a100`、NPU或其他GPU服务器。
+
+新增独立`scripts/audit_in_place_ttt_2x5090_stage2_timing.py`，重新hash全部依赖、完整128K语料和
+当前双臂起点；检查每臂恰好3条有限且单调的step记录、step2/3稳态中位数、逐卡5%显存余量、
+8GiB主存、3.5GiB swap、正确activation-offload设置和零checkpoint，并输出逐臂吞吐及双臂顺序
+正式投影。新增`tests/test_in_place_ttt_2x5090_stage2_timing.py`，覆盖pilot意外写checkpoint必须失败
+以及按臂起点完整正向fixture。baseline focused suite为51/51通过；Bash语法、直接auditor导入、
+Python编译和`git diff --check`通过。
+
+本次只准备和验证工具链，没有启动GPU任务。正式Stage-1及Stage-2资源阶梯尚未完成；未来正式
+Stage-2还必须增加人工审阅后绑定timing audit hash的release记录。RULER和“是否更新”门控实验
+继续封存到双臂Stage-2独立审计通过。
