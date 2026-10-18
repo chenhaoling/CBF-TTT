@@ -37,7 +37,8 @@ so no Level-C or exact-paper-number claim is permitted.
 | Primary RULER matrix | All 13 official tasks, 100 examples per task, seed 42 and deterministic decoding complete for both arms at 4K, 8K, 16K, 32K, 64K and 128K; all 15,600 raw predictions and the paired matrix audit pass | **Not run.** |
 | Separate RULER 256K extrapolation | Its paired resource audit passes; an explicit timing/resource-bound release is accepted; both 13-task, 100-example arms and the independent audit pass | **Sealed and excluded from the primary 4K--128K mean.** |
 | Baseline conclusion | Report per-task and macro scores, `TTT - no-TTT` at every length, paired input counts/failures, resource measurements, hashes, confidence limits where registered, and differences from Table 1 under the public-data claim boundary | **Incomplete.** Smoke scores cannot satisfy this row. |
-| Update-admission exploration | A new frozen gate plan may start only after the matched baseline tier and registered RULER matrix have passing audits | **Sealed.** No baseline outcome currently authorizes gate training or test release. |
+| Scale and feasibility boundary | Label the 98,566,144-token pair only as the first resource-constrained end-to-end tier; report measured 32K/128K projections; either register and execute a larger tier or document why the approximately 35B-token Level-B run is infeasible on the user-restricted hardware | **Incomplete.** The 100M tier cannot be relabelled as paper-scale training. |
+| Update-admission exploration | A new frozen gate plan may start only after the matched 100M milestone and registered RULER matrix have passing audits and the scale/claim boundary above is explicitly reported; any approximately 1B expansion requires its own pre-outcome addendum | **Sealed.** No baseline outcome currently authorizes gate training or test release. |
 
 ## 3. Completion rules
 
@@ -52,11 +53,15 @@ The following evidence is insufficient on its own:
 - a 256K extrapolation substituted for a missing primary 4K--128K point;
 - an unreviewed or automatically inferred formal release.
 
-The baseline objective remains active until the primary 100M paired tier and
-the registered 4K--128K matrix satisfy every applicable row. Expansion to the
-approximately 1B tier requires its own addendum after the 100M result. Exact
-Level-C reproduction remains unavailable unless the private corpus and missing
-paper settings are obtained and executed.
+The 100M paired tier and registered 4K--128K matrix are the first required
+end-to-end milestone, not a substitute for the paper's approximately 35B-token
+continual-pretraining scale. They can close the resource-constrained baseline
+prerequisite for later gate work only together with an explicit measured
+feasibility and claim-boundary report. Expansion to the approximately 1B tier
+requires its own addendum after the 100M result. A full public-data Level-B
+scale claim requires the registered 35B curriculum; exact Level-C reproduction
+remains unavailable unless the private corpus and missing paper settings are
+obtained and executed.
 
 ## 4. Authoritative live locations
 

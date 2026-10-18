@@ -1748,3 +1748,10 @@ continuous packing pilot are complete. The full corpus is still building;
 formal training, primary RULER scores and the baseline conclusion remain
 incomplete. Update-admission work remains sealed. The matrix is a status and
 acceptance index only: it creates no release and launches no process.
+
+The matrix does not redefine 100M tokens as the paper-scale baseline. The
+98,566,144-token pair is the first resource-constrained end-to-end milestone.
+Its measured training and RULER result must be reported together with the
+32K/128K wall-time projection and explicit feasibility boundary. A 1B
+expansion needs a new pre-outcome addendum, and a full Level-B scale claim
+still requires the registered approximately 35B-token curriculum.
