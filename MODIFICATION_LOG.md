@@ -7013,3 +7013,14 @@ commit `40bedb659a104d3177584f5afc528c9cc955d1b8`随后在`hku-gpu2`建立clean 
 baseline focused suite 59/59通过，修复脚本Bash语法通过，脚本SHA256与远程复现candidate一致。
 证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_activation_watcher_repair_20261018/`。
+
+## 2026-10-18：正式双卡训练的显式计时release生成器
+
+新增`scripts/create_in_place_ttt_2x5090_timing_release.py`，消除Stage1/Stage2正式runner需要手写
+release JSON的风险。工具核验对应timing audit协议、`passed=true`与空errors、严格双臂、有限正值
+稳态/正式投影，以及顺序总投影等于两臂投影之和，并绑定完整audit SHA256。
+
+不传`--accept`时只输出审阅摘要、exit 2且不写文件；显式接受还要求非空reviewer与decision note，
+拒绝覆盖并原子发布runner要求的精确release协议。新增
+`tests/test_in_place_ttt_2x5090_timing_release.py`四项安全测试，覆盖Stage1显式接受、无accept零写入、
+不一致投影拒绝和独立Stage2协议。该工具不自动接受计时结果，也不启动GPU。

@@ -1411,3 +1411,19 @@ on `hku-gpu2`. The complete focused baseline suite passed 59/59, Bash syntax
 passed, and the checked script SHA256 matched the remotely reproduced
 candidate. Evidence is stored under
 `remote/hku_gpu2_activation_watcher_repair_20261018/`.
+
+## 20. Explicit timing-bound formal release helper (2026-10-18)
+
+The formal Stage-1 and Stage-2 runners require a post-measurement release JSON
+but previously depended on hand-written records. The opt-in
+`create_in_place_ttt_2x5090_timing_release.py` validates the exact timing-audit
+protocol, clean pass state, both registered arms, positive finite steady and
+formal projections, and equality between the paired projection and its two
+arms. It records the complete timing-audit SHA256 and the reviewed projection.
+
+Without `--accept`, the CLI prints the review summary, exits 2 and writes no
+release. An accepted release additionally requires nonempty reviewer and
+decision text, refuses overwrite, and is published atomically with the exact
+Stage-1 or Stage-2 release protocol expected by the formal runner. Four tests
+cover explicit Stage-1 acceptance, no-write review mode, inconsistent timing
+rejection and the distinct Stage-2 protocol.
