@@ -2873,3 +2873,37 @@ hidden. Evidence is archived under
 the native writer's local autograd path only; full-model Liger, AdamW, FSDP2,
 resource and convergence evidence still require the registered Level-A and
 formal training runs. No gate experiment is released.
+
+## 65. Qwen3 Liger and fused-AdamW GPU preflight (2026-10-19)
+
+The CUDA-only portion left open by the CPU autograd audit was isolated in a
+separately frozen preflight. It ran only on physical GPU 0 of `hku-gpu2` with
+`CUDA_VISIBLE_DEVICES=0`, from clean tool commit `2bd8d4b6...` against clean
+official upstream `be232482...`. GPU 1 and every other server were excluded.
+
+The deterministic two-layer, hidden-size-32 Qwen3 TTT fixture used the same
+repository imports that patch `Qwen3ForCausalLM.forward` to the Liger fused
+linear-cross-entropy path. It constructed the optimizer through VeOmni
+`build_optimizer` with AdamW learning rate `5e-6`, weight decay `0.1` and
+`fused=true`. Both native writer parameters were present in optimizer groups.
+
+All 19 checks passed. The first fused loss was `5.3756909`; `ttt_conv` had a
+positive gradient norm of `0.1351390`, the zero-input `ttt_proj` gradient was
+exactly zero, and the fused optimizer step changed the convolution by norm
+`6.304e-5` while keeping both tensors finite. The second fused loss was
+`5.3651543`; convolution and projection gradient norms were respectively
+`0.1361731` and `1.991e-4`, and the second fused step remained finite.
+
+The script measured 4.25 seconds and `/usr/bin/time` measured 4.91 seconds.
+Peak allocated/reserved CUDA memory was 17,367,552/23,068,672 bytes, and peak
+host RSS was 2,001,524 KiB. These measurements characterize only the tiny
+environment fixture; they do not estimate full Qwen3-4B memory. The fixture
+uses ordinary PyTorch norm clipping because VeOmni distributed clipping
+requires initialized FSDP parallel state.
+
+Remote identity, resource output, logs and checksums are archived under
+`remote/hku_gpu2_qwen3_4b_liger_adamw_gpu_preflight_20261019/`. This closes
+the Liger/fused-AdamW environment check only. FSDP2, distributed clipping,
+full-model memory, corpus training, checkpoint conversion and RULER remain
+assigned to the registered Level-A and downstream runs. Update admission
+remains sealed.

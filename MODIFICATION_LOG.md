@@ -8017,3 +8017,21 @@ next-token cross entropy检查零初始化writer的梯度可达性；CUDA-only L
 正式运行耗时2.87秒、峰值主存807,368 KiB，CUDA隐藏。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_native_writer_autograd_audit_20261019/`。
 该证据不替代full-model训练与评测，也不开放门控实验。
+
+## 2026-10-19：Qwen3 Liger 与 fused AdamW 单卡 GPU 预检
+
+新增并在执行前冻结`IN_PLACE_TTT_BASELINE_QWEN3_4B_LIGER_ADAMW_GPU_PREFLIGHT_ADDENDUM.md`，新增
+`scripts/audit_in_place_ttt_qwen3_liger_adamw_gpu.py`。预检严格限定`hku-gpu2`物理GPU 0，通过
+`CUDA_VISIBLE_DEVICES=0`只暴露一张RTX 5090；GPU 1及其他服务器均未使用。脚本使用官方tiny Qwen3 TTT fixture、
+仓库Liger fused linear-cross-entropy forward及VeOmni `build_optimizer`创建的fused AdamW，不改写writer实现。
+
+clean tool commit `2bd8d4b6543b728e800474d1ecdd90c4663180a2`对clean upstream `be232482...`执行，全部19项
+检查通过。Liger forward和fused AdamW均实际生效，两个writer参数均进入optimizer；第一步conv梯度为0.1351390、
+projection梯度按zero-conv初始化精确为0，fused step使conv发生非零位移；第二步conv/projection梯度分别为
+0.1361731和0.0001991，第二次step后参数仍有限。两次loss为5.3756909和5.3651543。
+
+脚本计时4.25秒，`/usr/bin/time`计时4.91秒，PyTorch峰值allocated/reserved显存约16.6/22.0 MiB，峰值主存
+2,001,524 KiB。该显存只属于两层hidden-size-32环境fixture，不能外推4B训练。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_liger_adamw_gpu_preflight_20261019/`。
+该结果只关闭CUDA环境、Liger loss和fused optimizer闭环；FSDP2、VeOmni分布式梯度裁剪、4B资源、持续训练、
+checkpoint转换与RULER仍由Level-A及下游正式链验证，update-admission继续封存。

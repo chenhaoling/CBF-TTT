@@ -1,0 +1,15 @@
+host=user-Super-Server
+gpu_policy=hku-gpu2_physical_gpu0_only
+cuda_visible_devices=0
+tool_root=/home/ctj/cbf_ttt_tool_2bd8d4b6
+tool_commit=2bd8d4b6543b728e800474d1ecdd90c4663180a2
+tool_clean=true
+upstream_root=/home/ctj/in_place_ttt_official_be232482_resource_clean
+upstream_commit=be2324829b0e91c8fd10a74d4b43714fde6676e1
+upstream_clean=true
+corpus_status=RUNNING_BUILD
+corpus_stage1_records=107579
+corpus_builder_pid=1673442
+1673442   10543 Rl+  89.0 10.3 6725816 /home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python /home/ctj/cbf_ttt_tool_3e09b187/scripts/build_in_place_ttt_public_corpus.py --inventory /home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019/inventory.json --inventory-audit /home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019/independent_audit.json --tokenizer /home/ctj/models/Qwen3-4B-Base --output-root /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019 --profile full --plan /home/ctj/cbf_ttt_tool_3e09b187/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md
+0, NVIDIA GeForce RTX 5090, 46 MiB, 32059 MiB, 0 %
+1, NVIDIA GeForce RTX 5090, 18 MiB, 32095 MiB, 0 %

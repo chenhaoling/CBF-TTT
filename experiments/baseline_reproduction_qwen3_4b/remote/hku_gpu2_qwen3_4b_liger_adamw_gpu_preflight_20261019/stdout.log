@@ -1,0 +1,16 @@
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/ops/__init__.py:41] 10/19/2026 07:54:31 >> ⚠️ Skip applying ops patch. Using huggingface transformers backend.
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:32] 10/19/2026 07:54:31 >> ❌ veomni_patch is not available
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:34] 10/19/2026 07:54:31 >> 
+========== Environment Variables ==========
+MODELING_BACKEND=hf (source=env)
+USE_GROUP_GEMM=1 (source=default)
+USE_LIGER_KERNEL=1 (source=default)
+===========================================
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:35] 10/19/2026 07:54:31 >> 
+=========== OPS ============
+_fused_moe_forward = None
+_flash_attention_forward = None
+_cross_entropy = None
+==============================
+[WARNING|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/parallel_state.py:576] 10/19/2026 07:54:32 >> Parallel state has not been initialized. returning default Single-process state.
+{"output": "/home/ctj/in_place_ttt_qwen3_4b_liger_adamw_gpu_preflight_2bd8d4b6_20261019/audit.json", "passed": true}

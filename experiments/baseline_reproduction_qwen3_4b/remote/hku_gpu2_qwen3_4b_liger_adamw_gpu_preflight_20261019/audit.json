@@ -1,0 +1,80 @@
+{
+  "checks": {
+    "first_conv_gradient_positive": true,
+    "first_fused_loss_finite": true,
+    "first_fused_step_changed_conv": true,
+    "first_fused_step_writer_finite": true,
+    "first_projection_gradient_zero": true,
+    "first_total_gradient_norm_finite": true,
+    "first_writer_gradients_finite": true,
+    "liger_forward_active": true,
+    "module_resolution": true,
+    "second_conv_gradient_positive": true,
+    "second_fused_loss_finite": true,
+    "second_fused_step_writer_finite": true,
+    "second_projection_gradient_positive": true,
+    "second_total_gradient_norm_finite": true,
+    "second_writer_gradients_finite": true,
+    "single_rtx5090_and_free_memory": true,
+    "upstream_identity": true,
+    "veomni_fused_adamw_active": true,
+    "writer_parameters_in_optimizer": true
+  },
+  "claim_boundary": "tiny single-GPU Liger and fused-AdamW environment preflight only; FSDP2, VeOmni distributed clipping, corpus training and RULER remain required",
+  "fixture": {
+    "first_conv_displacement_norm": 6.303696864051744e-05,
+    "first_conv_gradient_norm": 0.13513901829719543,
+    "first_loss": 5.375690937042236,
+    "first_projection_gradient_norm": 0.0,
+    "first_total_gradient_norm": 69.0,
+    "hidden_size": 32,
+    "layers": 2,
+    "second_conv_gradient_norm": 0.1361730843782425,
+    "second_loss": 5.365154266357422,
+    "second_projection_gradient_norm": 0.0001991394819924608,
+    "second_total_gradient_norm": 69.0,
+    "serialized_gradients": false,
+    "serialized_input_ids": false,
+    "serialized_logits": false,
+    "ttt_chunk": 4,
+    "ttt_layers": [
+      0
+    ],
+    "ttt_lr": 3.0
+  },
+  "optimizer": {
+    "class": "torch.optim.adamw.AdamW",
+    "clip_implementation": "torch.nn.utils.clip_grad_norm_for_non_distributed_fixture",
+    "clip_max_norm": 1.0,
+    "fused": true,
+    "learning_rate": 5e-06,
+    "weight_decay_groups": [
+      0.1
+    ],
+    "writer_parameters_in_groups": true
+  },
+  "passed": true,
+  "protocol": "in_place_ttt_qwen3_liger_fused_adamw_gpu_preflight_v1",
+  "runtime": {
+    "cuda_version": "12.8",
+    "cuda_visible_devices": "0",
+    "free_memory_before_bytes": 33084997632,
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "hostname": "user-Super-Server",
+    "liger_kernel_version": null,
+    "peak_allocated_bytes": 17367552,
+    "peak_reserved_bytes": 23068672,
+    "torch_version": "2.8.0+cu128",
+    "total_memory_bytes": 33662959616,
+    "veomni_version": "v0.1.0",
+    "visible_device_count": 1,
+    "wall_seconds": 4.2473833449184895
+  },
+  "upstream": {
+    "clean": true,
+    "commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+    "configuration_sha256": "d2d0ab37a756df2b0980d9d52196696a5dcbfb8560c01563f79a0b256a0206c0",
+    "modeling_sha256": "a26d64cf85c985c4825a66d64815baa5956a2739593aad1969e9cc09d937a1d1",
+    "root": "/home/ctj/in_place_ttt_official_be232482_resource_clean"
+  }
+}
