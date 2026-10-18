@@ -7566,3 +7566,15 @@ tokenizer、corpus、ladder、计划和runner绑定，明确输出`formal_releas
 新增三项计划/语法/失败关闭测试。全部In-Place-TTT focused suite为84/84通过，Python编译、Bash语法及
 diff检查通过。本次只注册下一门槛，没有启动GPU child，也没有创建正式训练release或开放Stage2、RULER、
 “是否更新”门控实验。
+
+首次远程启动在任何输出目录或CUDA child创建前失败：watcher错误地把仍在构建中的full-corpus audit设为
+等待前必需文件。提交`226a1198a462b2d132ccacb896a863d093873924`将该检查移至corrected ladder
+完成后的release点，并在那里新增manifest/audit/ladder hash记录；84/84本地与远程测试均通过。
+
+修复后的CPU-only watcher已在`hku-gpu2` tmux
+`baseline_qwen3_4b_base_stage1_timing_226a1198_20261019`启动，watch root为
+`/home/ctj/in_place_ttt_qwen3_4b_base_stage1_timing_226a1198_20261019.watch`。记录时状态为
+`waiting_for_corrected_stage1_ladder`，timing result root不存在，上游corpus/Level-A/ladder分别仍为
+`RUNNING_BUILD`、`WAITING_BASE_CORPUS`和`waiting_for_corrected_level_a`；GPU0/1为46/18MiB且0%利用率。
+启动证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_stage1_timing_watcher_20261019/`。

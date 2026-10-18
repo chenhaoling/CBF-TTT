@@ -2200,3 +2200,20 @@ the wrapper's missing-input failure path. The complete focused suite passes
 84/84 locally, the auditor compiles, and `git diff --check` passes. This
 registration creates no GPU child and does not release formal training,
 Stage 2, RULER or update-admission work.
+
+The first remote launch attempt at commit `ca317132` exposed a fail-closed
+watcher bug before output creation: it required the future full-corpus audit
+while that audit was still being built. No watcher result root or CUDA child
+was created. Commit `226a1198a462b2d132ccacb896a863d093873924` moves that
+check to the point after the corrected ladder releases its inputs and records
+their hashes there. The repaired clean remote worktree passes 84/84 tests.
+
+The repaired watcher is live in tmux
+`baseline_qwen3_4b_base_stage1_timing_226a1198_20261019`, with watch root
+`/home/ctj/in_place_ttt_qwen3_4b_base_stage1_timing_226a1198_20261019.watch`.
+Its authoritative state is `waiting_for_corrected_stage1_ladder`; the timing
+result root is absent, while the corpus, Level A and resource ladder remain at
+`RUNNING_BUILD`, `WAITING_BASE_CORPUS` and
+`waiting_for_corrected_level_a`. The pane is live and GPU0/1 remain at 46/18
+MiB with 0% utilization. Launch evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_stage1_timing_watcher_20261019/`.
