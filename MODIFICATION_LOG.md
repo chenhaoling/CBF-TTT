@@ -7707,3 +7707,20 @@ worktree中隐藏GPU通过102项专项测试（5项按远程环境跳过）及�
 `waiting_for_corrected_stage2_timing`，formal result root和显式release均不存在，GPU0/1分别只占46/18 MiB、
 利用率0%。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_100m_stage2_watcher_20261019/`。
+
+## 2026-10-19：corrected Base paper-facing RULER 链注册
+
+检查发现现有2x5090 RULER runner已经包含论文规定的逐更新`delta W` Frobenius `1e-5`裁剪、13项任务、
+原始tokenizer和完整4K--128K矩阵，但其入口只认underlying formal Stage-2 audit，尚未强制要求corrected
+Base wrapper终态。新增冻结计划`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RULER_PLAN.md`，明确GPU仅可使用
+`hku-gpu2`，资源阶梯为4K/32K/64K/128K每任务1例且丢弃分数，正式矩阵为4K/8K/16K/32K/64K/128K
+每任务100例；256K继续作为单独外推门。
+
+新增Base专用resource与matrix watcher。前者等待`completed_corrected_formal_stage2`并同时验证两层训练audit，
+后者等待`completed_corrected_ruler_resource`并同时验证两层资源audit；二者通过后才复用现有OpenCompass
+runner，未修改任务、样本、解码或评分。新增两份terminal wrapper auditor，重算Base identity/tokenizer、
+corrected prerequisites、paper inference addendum、plans、runner/auditor、raw matrix summary及underlying audit绑定。
+
+新增四项计划、顺序、Bash语法和失败关闭测试；完整In-Place-TTT专项测试为106/106通过，审计器编译、两份
+watcher语法与diff检查通过。注册时没有RULER GPU child或分数；只有最终corrected matrix audit通过后才会
+在审计产物中释放后续update-admission研究。

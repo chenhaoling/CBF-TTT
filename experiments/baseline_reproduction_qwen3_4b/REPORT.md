@@ -2394,3 +2394,27 @@ Its initial state is `waiting_for_corrected_stage2_timing`; both the formal
 result root and explicit release are absent. GPU0/1 remain at 46/18 MiB and
 0% utilization. Evidence is archived under
 `remote/hku_gpu2_qwen3_4b_base_100m_stage2_watcher_20261019/`.
+
+## 50. Corrected Base paper-facing RULER chain registration (2026-10-19)
+
+Review of the existing 2x5090 RULER path confirmed that it already preserves
+the registered 13 tasks, tokenizer, deterministic decoding, 4K--128K matrix
+and paper-specified per-update Frobenius `1e-5` clip. Its entry gate, however,
+accepted only the underlying formal Stage-2 audit and did not require the
+corrected Base wrapper terminal state.
+
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RULER_PLAN.md` now freezes this corrected
+boundary. The paired resource ladder uses 4K/32K/64K/128K with one example
+per task and discards every score. The formal matrix uses
+4K/8K/16K/32K/64K/128K with 100 examples for each of all 13 tasks. GPU work
+remains restricted to `hku-gpu2`; 256K remains a separate extrapolation gate.
+
+Two Base-specific CPU watchers require `completed_corrected_formal_stage2`
+and then `completed_corrected_ruler_resource` before reusing the existing
+OpenCompass runners. Two terminal wrappers bind Base identity/tokenizer,
+corrected prerequisites, paper inference addendum, plans, raw matrix summary
+and underlying resource/matrix audits. No task, input, decoding or metric is
+changed. Four new tests cover the frozen scope, watcher order/Bash syntax and
+missing-input failure closure. The complete focused suite passes 106/106
+locally. No RULER GPU child or score exists at registration time; only the
+passing corrected matrix audit can release update-admission work.
