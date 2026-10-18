@@ -2285,3 +2285,38 @@ root is absent, formal Stage 1 is waiting for corrected timing, and the corpus
 is still building. GPU0/1 remain at 46/18 MiB and 0% utilization. Launch
 evidence is archived under
 `remote/hku_gpu2_qwen3_4b_base_stage2_ladder_watcher_20261019/`.
+
+## 47. Paper-specified Qwen3 inference update clipping (2026-10-19)
+
+The paper states that each Qwen3-4B inference fast-weight update delta is
+rescaled to Frobenius norm `tau=1e-5` when it exceeds that boundary. Direct
+inspection of clean upstream commit `be232482...` found that the released
+Qwen3 inference path adds `dw` without clipping and exposes no corresponding
+configuration field. No corrected-Base formal RULER score existed when this
+gap was found.
+
+`IN_PLACE_TTT_BASELINE_PAPER_INFERENCE_CLIP_ADDENDUM.md` is now frozen before
+scoring. Released-code Level A remains an unmodified execution check. The
+paper-facing public-data Level-B 2x5090 path instead builds an immutable
+output-local overlay from all seven hash-verified clean upstream
+`inference_model` files. It changes only Qwen3 configuration and modeling,
+adds opt-in `ttt_update_clip_norm=None`, and clips each native update matrix
+immediately before its existing addition. The clean upstream checkout,
+checkpoints, writer, training and baseline defaults remain unchanged.
+
+The registered OpenCompass 2x5090 config passes `1e-5` through
+`model_kwargs`. Before every resource or formal run, a CPU-only validator
+requires the imported model to resolve inside the overlay, verifies an
+above-boundary update, zero-update behavior, invalid-value rejection,
+serialization and the real `from_pretrained` override, and confirms CUDA was
+not initialized. Single-run, resource-ladder and matrix audits independently
+rehash the source/generated files and require the same frozen addendum hash
+from every child.
+
+On `hku-gpu2`, the official evaluation environment measured an unclipped
+fixture norm of `24.207931518554688` and a clipped norm of
+`1.0000000656873453e-5`; all CPU checks passed. The focused overlay/audit suite
+passes 9/9 and the complete `tests/test_in_place_ttt*.py` suite passes 94/94
+with all GPUs hidden. No RULER score or GPU job was started. The legacy 80-GB
+runner is outside the user-authorized host path; all future GPU execution
+remains restricted to `hku-gpu2`.

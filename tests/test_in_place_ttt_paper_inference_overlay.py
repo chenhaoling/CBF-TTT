@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 import os
 import pathlib
@@ -19,6 +20,32 @@ from scripts.build_in_place_ttt_paper_inference_overlay import (
 
 
 class PaperInferenceOverlayTests(unittest.TestCase):
+    def test_frozen_addendum_binds_current_implementation(self):
+        root = pathlib.Path(__file__).resolve().parents[1]
+        addendum = (
+            root / "IN_PLACE_TTT_BASELINE_PAPER_INFERENCE_CLIP_ADDENDUM.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "Status: **frozen before any corrected-Base RULER score**",
+            addendum,
+        )
+        self.assertNotIn("TO_BE_FROZEN", addendum)
+        for relative in (
+            "scripts/build_in_place_ttt_paper_inference_overlay.py",
+            "scripts/validate_in_place_ttt_paper_inference_overlay.py",
+            "scripts/audit_in_place_ttt_paper_inference_overlay.py",
+            "scripts/run_in_place_ttt_2x5090_ruler_single.sh",
+            "scripts/audit_in_place_ttt_2x5090_ruler.py",
+            "scripts/audit_in_place_ttt_2x5090_ruler_resource.py",
+            "scripts/run_in_place_ttt_2x5090_ruler_resource_ladder.sh",
+            "scripts/audit_in_place_ttt_2x5090_ruler_resource_ladder.py",
+            "scripts/run_in_place_ttt_2x5090_ruler_matrix.sh",
+            "scripts/audit_in_place_ttt_2x5090_ruler_matrix.py",
+            "eval_config/baseline_reproduction/qwen3_4b_2x5090_ruler.py",
+        ):
+            digest = hashlib.sha256((root / relative).read_bytes()).hexdigest()
+            self.assertIn(f"`{digest}`", addendum, relative)
+
     def _clean_upstream(self, root: pathlib.Path) -> pathlib.Path:
         registered = os.environ.get("IN_PLACE_TTT_CLEAN_UPSTREAM")
         if registered:

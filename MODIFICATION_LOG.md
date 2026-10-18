@@ -7627,3 +7627,27 @@ RULER或门控实验。
 `waiting_for_corrected_formal_stage1`，Stage-2 result root不存在，formal Stage1仍等待corrected timing，
 corpus仍在构建；GPU0/1为46/18MiB且0%利用率。启动证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_stage2_ladder_watcher_20261019/`。
+
+## 2026-10-19：补齐论文规定的 Qwen3 推理更新裁剪
+
+在纠正后正式RULER评分前，核对论文附录与官方clean commit `be232482...`，确认论文要求每个Qwen3-4B
+fast-weight更新`delta W`超过Frobenius范数`tau=1e-5`时先缩放到该边界，而发布代码直接执行
+`current_w + dw`且没有配置项。新增并冻结
+`IN_PLACE_TTT_BASELINE_PAPER_INFERENCE_CLIP_ADDENDUM.md`，明确released-code Level A继续保持官方代码原样，
+仅作为执行闭环；paper-facing public-data Level B使用纠正后的推理语义，仍不能声称复现私有数据或Table 1
+精确数字。
+
+新增`scripts/build_in_place_ttt_paper_inference_overlay.py`。脚本要求clean upstream精确commit和七个
+`inference_model`文件的固定hash，复制到新output-local overlay，只修改Qwen3 config/modeling，并新增默认
+关闭的`ttt_update_clip_norm`。裁剪在原始writer、`ttt_proj`和`ttt_lr`之后、每次原生加法之前，对完整更新
+矩阵用float32计算Frobenius范数；上游checkout、checkpoint和baseline默认行为均不修改。
+
+新增CPU validator和独立overlay auditor，并把overlay构建、`model_kwargs=1e-5`、manifest/validation/addendum
+hash贯穿2x5090单次RULER、资源阶梯及正式矩阵。父级auditor现在要求每个child持有同一冻结addendum hash；
+同时修复resource-ladder auditor中循环变量覆盖ladder metadata路径的问题。GPU执行继续只允许`hku-gpu2`，
+旧80GB runner不在授权执行路径内。
+
+在`hku-gpu2`显式隐藏所有GPU进行验证：未裁剪fixture范数为`24.207931518554688`，裁剪后为
+`1.0000000656873453e-5`，零更新不变；默认关闭、非法值拒绝、序列化、真实`from_pretrained`覆盖和CUDA未
+初始化全部通过。新增专项测试9/9通过，全部`tests/test_in_place_ttt*.py`为94/94通过。没有启动RULER评分或
+任何GPU child，现有corpus和训练等待链保持不变。

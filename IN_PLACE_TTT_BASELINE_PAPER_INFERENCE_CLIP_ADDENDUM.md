@@ -1,8 +1,8 @@
 # In-Place TTT Qwen3-4B paper-inference clipping addendum
 
-Status: **draft; must be frozen before any corrected-Base RULER score**
+Status: **frozen before any corrected-Base RULER score**
 
-Draft date: 2026-10-19 (Asia/Shanghai)
+Freeze date: 2026-10-19 (Asia/Shanghai)
 
 Upstream repository: `ByteDance-Seed/In-Place-TTT`
 Upstream commit: `be2324829b0e91c8fd10a74d4b43714fde6676e1`
@@ -140,15 +140,23 @@ finish.
 
 ## 7. Frozen implementation bindings
 
-The following hashes are filled only after the implementation and tests are
-final, immediately before changing this document to **frozen**:
+The implementation was finalized and tested before this document was frozen:
 
-- overlay builder: `TO_BE_FROZEN`;
-- CPU validator: `TO_BE_FROZEN`;
-- independent overlay auditor: `TO_BE_FROZEN`;
-- 2x5090 single runner: `TO_BE_FROZEN`;
-- formal single auditor: `TO_BE_FROZEN`;
-- resource single auditor: `TO_BE_FROZEN`;
-- resource-ladder runner/auditor: `TO_BE_FROZEN` / `TO_BE_FROZEN`;
-- matrix runner/auditor: `TO_BE_FROZEN` / `TO_BE_FROZEN`;
-- 2x5090 OpenCompass config: `TO_BE_FROZEN`.
+- overlay builder: `efe5167baf623d311fb1856d1c7ea7ccabfaf45a3b37297cbf5cfafbd9814d2a`;
+- CPU validator: `4c5ac959d9b7ae69c65013213089be4e03ee16521cec4682b840a564a088ea5f`;
+- independent overlay auditor: `f7fcd1ae62df658e9aeed33fc9aa1a4a881027f1979578928e5f7e915de54ddf`;
+- 2x5090 single runner: `a55634ec8de94e946c992188edb80fe941e237deb605f179f2e80f5f3311c0da`;
+- formal single auditor: `ce20738276321c4193dd3151876694ee1272dc4b580c817d2b063c02cb13af13`;
+- resource single auditor: `5d9c7b34ac9cac0e03a01491600b3b249be4e6e833274fb6e3c076a3d02ea4c6`;
+- resource-ladder runner: `9ce38a3d00bed8944b11ffcfe4152013dcaba7206b5c753a5ba7bfb022448f8f`;
+- resource-ladder auditor: `7e43fb4f1eb18d510fcafc34764b60f4ac3392cf39762b60ec9542722d9c1d23`;
+- matrix runner: `ac8a567b40932ea2ffad2241d0924e7e81f8995a6cc6638b2c92dcc8a2bfa785`;
+- matrix auditor: `edd439e1be3b2b215438480b5ae880fece2e1e3d8a7cc9f4998d4e4270934d8b`;
+- 2x5090 OpenCompass config: `1859bb2d2e43f2a715feaa1171b51b9b1a0432e810115a411b5b81e60e48954d`.
+
+On `hku-gpu2`, with all GPUs hidden, the focused runtime and audit tests
+passed `9/9`, and the complete `tests/test_in_place_ttt*.py` baseline suite
+passed `94/94`. The frozen official evaluation environment separately
+validated an unclipped fixture norm of `24.207931518554688`, a clipped norm
+of `1.0000000656873453e-5`, a zero-update no-op, configuration validation and
+the `from_pretrained` override without initializing CUDA.
