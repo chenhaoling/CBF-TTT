@@ -2504,3 +2504,34 @@ watchers are live in tmux
 waiting for their timing and selected-stream prerequisites. GPU0/1 used 46/18
 MiB at 0% utilization at registration. Evidence is archived under
 `remote/hku_gpu2_qwen3_4b_base_release_review_watchers_20261019/`.
+
+## 53. Review-bound formal-release transition (2026-10-19)
+
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RELEASE_TRANSITION_ADDENDUM.md` was frozen
+before either formal release existed. It defines the sole supported path from
+a non-authorizing review packet to an accepted release. The target path must
+match the packet, every timing and selected-stream input must retain its exact
+SHA-256, the applicable release validator source must be unchanged, and the
+entire embedded review is independently recomputed before acceptance.
+
+`create_in_place_ttt_qwen3_4b_base_release_from_review.py` then invokes the
+existing Stage-1 or Stage-2 release creator in a temporary directory and
+atomically writes a previously absent target. It additionally binds the review
+packet and transition plan hashes. The command still requires explicit
+`--accept`, a nonempty reviewer and a nonempty decision note. No watcher calls
+this command, and neither a passing packet nor elapsed time supplies human
+acceptance.
+
+Two new tests prove that an omitted acceptance flag creates no release and
+that changing a selected-stream audit after review is rejected. A static test
+also excludes the transition tool from the review watcher. The combined 17
+focused tests pass locally and in the clean detached `hku-gpu2` checkout at
+commit `ccf17a70bc41b899b976d69be03730abfdebb36a`, with
+`CUDA_VISIBLE_DEVICES=` on the remote run.
+
+At the 06:40 Asia/Shanghai snapshot, the CPU corpus builder remained live and
+had written 61,296 of 610,368 Stage-1 records. GPU0/1 used only 46/18 MiB with
+0% utilization; no review packet, accepted release or new GPU child existed.
+All GPU execution remains restricted to `hku-gpu2`. Test and chain snapshots
+are archived under
+`remote/hku_gpu2_qwen3_4b_base_release_transition_20261019/`.

@@ -7794,3 +7794,23 @@ detached checkout。
 `waiting_for_stage1_timing_and_selected_stream`与`waiting_for_stage2_timing_and_selected_stream`。
 注册时GPU0/1仍为46/18MiB且0%利用率。测试、输入hash、句柄和状态证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_release_review_watchers_20261019/`。
+
+## 2026-10-19：正式 release 与已审阅证据的原子绑定
+
+新增并在任何正式release出现前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RELEASE_TRANSITION_ADDENDUM.md`。它将“生成审阅包”和“人工接受”之间
+唯一支持的转换固定为：目标路径必须与审阅包一致，timing、corrected timing、selected stream以及对应
+release validator源码必须保持原SHA-256，并重新计算完整review字典。任何输入变化、目标已存在或模型版本
+不符均失败关闭。
+
+新增`scripts/create_in_place_ttt_qwen3_4b_base_release_from_review.py`。该工具复用既有Stage-1/Stage-2 release
+creator，不由任何watcher调用；只有人类在同一命令中显式给出`--accept`、非空`--reviewed-by`与
+`--decision-note`时才原子写入正式release。release额外绑定审阅包及本转换计划的路径和SHA-256。缺少接受
+标志时不生成文件，审阅后任何audit内容变化也不能生成文件。
+
+新增两项转换测试，并增加静态测试保证review watcher既不传`--accept`，也不引用转换工具。本机及
+`hku-gpu2`精确提交`ccf17a70bc41b899b976d69be03730abfdebb36a`均通过17/17相关测试；远端测试显式设置
+`CUDA_VISIBLE_DEVICES=`。06:40状态快照中Base语料builder仍为CPU进程，Stage-1已有61,296/610,368条，
+GPU0/1仅占46/18MiB且利用率均为0%。没有创建审阅包、正式release或GPU训练任务。测试和状态证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_release_transition_20261019/`；所有
+未来GPU执行继续严格限制在`hku-gpu2`。

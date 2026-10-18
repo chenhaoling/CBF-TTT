@@ -1,0 +1,24 @@
+2026-10-19T06:40:12+08:00
+user-Super-Server
+0, NVIDIA GeForce RTX 5090, 46, 32607, 0
+1, NVIDIA GeForce RTX 5090, 18, 32607, 0
+RUNNING_BUILD
+1673442    01:41:01 89.4 4824684 Rl+ /home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python /home/ctj/cbf_ttt_tool_3e09b187/scripts/build_in_place_ttt_public_corpus.py --inventory /home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019/inventory.json --inventory-audit /home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019/independent_audit.json --tokenizer /home/ctj/models/Qwen3-4B-Base --output-root /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019 --profile full --plan /home/ctj/cbf_ttt_tool_3e09b187/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md
+     61296 /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial/stage1_32k.jsonl
+     61297 /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial/stage1_32k.provenance.jsonl
+    122593 total
+/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial/stage1_32k.jsonl|8368494892|2026-10-19 06:40:13.698012459 +0800
+/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial/stage1_32k.provenance.jsonl|478360467|2026-10-19 06:40:13.698012459 +0800
+baseline_qwen3_4b_base_100m_stage1_99774817_20261019|0|1
+baseline_qwen3_4b_base_100m_stage2_a21afd27_20261019|0|1
+baseline_qwen3_4b_base_level_a_6a3bb2bf_20261019|0|1
+baseline_qwen3_4b_base_ruler_matrix_c89c6f8c_20261019|0|1
+baseline_qwen3_4b_base_ruler_resource_c89c6f8c_20261019|0|1
+baseline_qwen3_4b_base_selected_stream_2b8644a0_20261019|0|1
+baseline_qwen3_4b_base_stage1_ladder_97c4d786_20261019|0|1
+baseline_qwen3_4b_base_stage1_release_review_d6d47cb0_20261019|0|1
+baseline_qwen3_4b_base_stage1_timing_226a1198_20261019|0|1
+baseline_qwen3_4b_base_stage2_ladder_1098b08d_20261019|0|1
+baseline_qwen3_4b_base_stage2_release_review_d6d47cb0_20261019|0|1
+baseline_qwen3_4b_base_stage2_timing_80c414c7_20261019|0|1
+public_corpus_qwen3_4b_base_full_20261019|0|1
