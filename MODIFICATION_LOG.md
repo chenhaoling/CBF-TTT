@@ -7388,3 +7388,23 @@ OpenCompass。为验证实际解析而非仅依赖脚本文本，在`hku-gpu2`�
 `28445763f9e8261fbac7f32c3880e76b6afc696bdd58f3c2babed1e8d8313781`，绑定upstream/tool commit、
 入口、runner、config与解析文件。该证据证明类隔离与消费路径；未来权重本身仍须由正式manifest、
 Stage2真实加载及RULER resource预测共同验收。本轮没有使用GPU或释放任何正式评测。
+
+## 2026-10-19：Stage2 90% 稀疏 provenance 边界预注册
+
+在目标行出现前固定Stage2索引102990--102995及脚本SHA256
+`2b2c78cfffcb3933300e1080a0cdb3f82a8912937ecc36575f4bd207536141ac`。该边界位于注册的
+114432条Stage2记录90%之后，复用75%边界的六行连续索引、严格数据源交替、source index成对、
+content/training/raw-consumed token精确值、零synthetic EOS、spans存在和训练token hash格式检查。
+
+新watcher不再每30秒对多GB provenance执行完整`wc -l`，而是只读取末尾四行并选择最后一条完整
+JSON的stage index；到达固定边界后才单次扫描并读取目标六行。若builder提前退出或三小时内未到达，
+会原子写出失败结果。该优化降低了构建期间的额外磁盘I/O，不改变审计目标。
+
+watcher在`hku-gpu2` tmux session
+`baseline_public_corpus_stage2_sparse90_20261019`启动，pane PID 1666182、Python PID 1666185；启动
+元数据生成时builder PID 1397987与watcher均存活，已完成90575行，`CUDA_VISIBLE_DEVICES`为空，
+GPU0/1为46/18MiB且利用率0%。新增证据目录
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_sparse90_watcher_20261019/`，保存冻结
+脚本与launch JSON；launch SHA256为
+`25bdb2188c27f925abccc60b8bd607e810241119dd10b30e543e1f1d8754010f`。当前仅证明预注册与进程启动，
+90%结果仍待生成，且不能替代full corpus canonical audit。

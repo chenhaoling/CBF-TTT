@@ -1947,3 +1947,29 @@ using a GPU. It does not assert that future checkpoint tensors are valid:
 formal training must still emit the complete file manifests, and the RULER
 resource runs must successfully load those exact manifests and generate all
 paired resource predictions before the matrix is released.
+
+## 38. Pre-registered Stage-2 90% sparse boundary (2026-10-19)
+
+Before the target rows existed, a new CPU-only watcher fixed Stage-2 indices
+102,990--102,995 and script SHA256
+`2b2c78cfffcb3933300e1080a0cdb3f82a8912937ecc36575f4bd207536141ac`.
+The target begins just beyond 90% of the registered 114,432-row Stage-2
+artifact. The checks match the earlier 75% boundary: six exact consecutive
+indices, FineWeb-Edu/LongCrawl64 alternation, paired source indices, exact
+content/training/raw-consumed token counts, zero synthetic EOS, nonempty spans
+and valid training-token hashes.
+
+The polling implementation now reads only the final four provenance lines and
+uses the last complete JSON record as its progress counter. This removes the
+earlier repeated full-file `wc` scan while preserving the fixed-boundary
+decision. It scans to the six target records only once after they exist. If
+the original builder exits before the boundary or the three-hour timeout is
+reached, the watcher writes a failing atomic result.
+
+At `2026-10-19T04:34:03+08:00`, builder PID 1397987 and watcher PID 1666185
+were live, 90,575 rows were complete, `CUDA_VISIBLE_DEVICES` was empty, and
+GPU 0/1 were 46/18 MiB at zero utilization. The launch metadata has SHA256
+`25bdb2188c27f925abccc60b8bd607e810241119dd10b30e543e1f1d8754010f`
+and is archived under `remote/hku_gpu2_stage2_sparse90_watcher_20261019/`.
+The future boundary result remains pending and cannot replace atomic corpus
+publication or the canonical independent full audit.
