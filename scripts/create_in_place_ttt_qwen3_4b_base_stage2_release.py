@@ -18,6 +18,32 @@ except ModuleNotFoundError:  # Direct script execution.
 MODEL_REVISION = "906bfd4b4dc7f14ee4320094d8b41684abff8539"
 CORRECTED_PROTOCOL = "in_place_ttt_qwen3_4b_base_stage2_timing_audit_v1"
 RELEASE_PROTOCOL = "in_place_ttt_2x5090_100m_stage2_release_v1"
+SELECTED_STREAM_PROTOCOL = "in_place_ttt_qwen3_4b_base_100m_selected_stream_audit_v1"
+
+
+def selected_stream_review(path: Path) -> dict[str, Any]:
+    audit = json.loads(path.read_text(encoding="utf-8"))
+    stage = audit.get("independent_stages", {}).get("stage2_128k", {})
+    if (audit.get("protocol") != SELECTED_STREAM_PROTOCOL
+            or audit.get("passed") is not True
+            or audit.get("errors") != []
+            or not audit.get("checks")
+            or not all(audit["checks"].values())
+            or stage.get("selected_records") != 320
+            or stage.get("selected_training_tokens") != 41_943_040):
+        raise ValueError("corrected selected-stream audit is invalid or stale")
+    return {
+        "selected_stream_audit_path": str(path.resolve()),
+        "selected_stream_audit_sha256": sha256(path),
+        "selected_stream_audit_protocol": SELECTED_STREAM_PROTOCOL,
+        "selected_stream_corpus_manifest_sha256":
+            audit.get("bindings", {}).get("corpus_manifest_sha256"),
+        "selected_stream_stage": "stage2_128k",
+        "selected_stream_ordered_stage_indices_sha256":
+            stage.get("ordered_stage_indices_sha256"),
+        "selected_stream_ordered_training_hashes_sha256":
+            stage.get("ordered_training_hashes_sha256"),
+    }
 
 
 def corrected_review(
@@ -51,12 +77,14 @@ def create_release(
     *,
     timing_audit: Path,
     corrected_timing_audit: Path,
+    selected_stream_audit: Path,
     output: Path,
     accept: bool,
     reviewed_by: str,
     decision_note: str,
 ) -> dict[str, Any]:
-    summary = corrected_review(timing_audit, corrected_timing_audit)
+    summary = (corrected_review(timing_audit, corrected_timing_audit)
+               | selected_stream_review(selected_stream_audit))
     if not accept:
         raise PermissionError("--accept is required; no release was written")
     if not reviewed_by.strip() or not decision_note.strip():
@@ -83,6 +111,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--timing-audit", type=Path, required=True)
     parser.add_argument("--corrected-timing-audit", type=Path, required=True)
+    parser.add_argument("--selected-stream-audit", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--accept", action="store_true")
     parser.add_argument("--reviewed-by", default="")
@@ -90,8 +119,10 @@ def main() -> None:
     args = parser.parse_args()
     timing = args.timing_audit.expanduser().resolve()
     corrected = args.corrected_timing_audit.expanduser().resolve()
+    selected_stream = args.selected_stream_audit.expanduser().resolve()
     output = args.output.expanduser().resolve()
-    summary = corrected_review(timing, corrected)
+    summary = (corrected_review(timing, corrected)
+               | selected_stream_review(selected_stream))
     if not args.accept:
         print(json.dumps({
             "accepted": False,
@@ -102,6 +133,7 @@ def main() -> None:
         raise SystemExit(2)
     result = create_release(
         timing_audit=timing, corrected_timing_audit=corrected,
+        selected_stream_audit=selected_stream,
         output=output, accept=True, reviewed_by=args.reviewed_by,
         decision_note=args.decision_note,
     )

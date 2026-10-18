@@ -43,6 +43,24 @@ def timing_fixture(root: Path) -> tuple[Path, Path]:
     return timing, corrected
 
 
+def selected_stream_fixture(root: Path) -> Path:
+    path = root / "selected_stream.json"
+    path.write_text(json.dumps({
+        "protocol": "in_place_ttt_qwen3_4b_base_100m_selected_stream_audit_v1",
+        "passed": True, "errors": [], "checks": {"all": True},
+        "bindings": {"corpus_manifest_sha256": "a" * 64},
+        "independent_stages": {
+            "stage1_32k": {
+                "selected_records": 1728,
+                "selected_training_tokens": 56_623_104,
+                "ordered_stage_indices_sha256": "b" * 64,
+                "ordered_training_hashes_sha256": "c" * 64,
+            }
+        },
+    }))
+    return path
+
+
 class CorrectedBaseFormalStage1Test(unittest.TestCase):
     def test_plan_freezes_host_counts_order_and_scope(self):
         text = PLAN.read_text()
@@ -64,16 +82,19 @@ class CorrectedBaseFormalStage1Test(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             timing, corrected = timing_fixture(root)
+            selected = selected_stream_fixture(root)
             output = root / "release.json"
             with self.assertRaises(PermissionError):
                 create_release(
                     timing_audit=timing, corrected_timing_audit=corrected,
+                    selected_stream_audit=selected,
                     output=output, accept=False, reviewed_by="reviewer",
                     decision_note="measured projection accepted",
                 )
             self.assertFalse(output.exists())
             release = create_release(
                 timing_audit=timing, corrected_timing_audit=corrected,
+                selected_stream_audit=selected,
                 output=output, accept=True, reviewed_by="reviewer",
                 decision_note="measured projection accepted",
             )
@@ -81,6 +102,8 @@ class CorrectedBaseFormalStage1Test(unittest.TestCase):
             self.assertEqual(release["corrected_timing_audit_sha256"],
                              sha256(corrected))
             self.assertEqual(release["model_revision"], MODEL_REVISION)
+            self.assertEqual(release["selected_stream_audit_sha256"], sha256(selected))
+            self.assertEqual(release["selected_stream_stage"], "stage1_32k")
 
     def test_wrapper_audit_fails_closed_when_inputs_are_missing(self):
         with tempfile.TemporaryDirectory() as temporary:
