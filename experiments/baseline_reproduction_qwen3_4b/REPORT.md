@@ -1519,3 +1519,22 @@ session `baseline_2x5090_stage2_timing_fbc02a6e_20261018`; at
 `waiting_for_audited_stage2_ladder`, and the corpus partial directory was 57
 GB. Evidence is stored under
 `remote/hku_gpu2_stage2_timing_watcher_tooling_20261018/`.
+
+## 24. Formal Stage-2 release watcher (2026-10-18)
+
+`watch_and_run_in_place_ttt_2x5090_100m_stage2.sh` closes the persistent
+training chain after Stage-2 timing. It is restricted to `hku-gpu2`, freezes
+the exact formal runner, independent auditor, release helper and plans, and
+monitors both the timing watcher tmux handle and its terminal state.
+
+The watcher requires the exact paired Stage-2 timing audit protocol, clean
+pass, both arm projections, a positive finite sequential projection and exact
+sum consistency. It then waits in a separate state for an explicit Stage-2
+release that binds the timing-audit SHA256 and contains a reviewer and decision
+note. It never creates or accepts that release automatically. Missing handles,
+upstream failure, invalid release or timeout stops before formal CUDA work.
+
+After release, the existing formal runner still revalidates the formal
+Stage-1 starts, Stage-2 ladder, full corpus, disk, host and idle GPUs. The
+watcher reports completion only for terminal state `completed_100m_stage2`
+with the exact passing paired audit and both arms.

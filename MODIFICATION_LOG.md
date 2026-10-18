@@ -7093,3 +7093,17 @@ suite 63/63和Bash语法通过。刻意缺失Stage2 ladder tmux handle的负向�
 `baseline_2x5090_stage2_timing_fbc02a6e_20261018`启动；2026-10-18 12:45:04 HKT时pane PID
 1425558存活，状态为`waiting_for_audited_stage2_ladder`，正式语料partial为57GB。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_timing_watcher_tooling_20261018/`。
+
+## 2026-10-18：正式Stage2显式release watcher
+
+新增`scripts/watch_and_run_in_place_ttt_2x5090_100m_stage2.sh`，只允许在`hku-gpu2`运行，冻结正式
+runner、独立auditor、release helper与计划，并监控Stage2 timing watcher的tmux handle、状态和最终
+审计。
+
+它只接受精确Stage2 timing audit协议、空errors、严格双臂、有限正值逐臂/顺序投影及两臂求和一致。
+计时通过后进入独立`waiting_for_explicit_stage2_release`状态；watcher不生成或自动接受release，只
+接受绑定timing audit SHA256、`stage=stage2`、非空reviewer和decision note的显式文件。缺失handle、
+上游失败、无效release或超时均在正式CUDA任务前终止。
+
+release通过后仍复用原有formal Stage2 runner的Stage1起点、ladder、完整语料、磁盘、主存和GPU门槛；
+只有`completed_100m_stage2`终态、精确paired audit协议、空errors和双臂均通过才报告完成。
