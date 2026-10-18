@@ -7298,3 +7298,18 @@ spans存在且training-token SHA256格式有效。随后使用独立只读命令
 该复验确认2x5090实现只改变进程调度，显式固定随机种子、tokenizer策略和checkpoint绑定，没有改变
 官方任务集合或指标。本轮没有生成prediction或分数；4K--128K仍由正式Stage2审计封存，256K仍是
 需要独立release的外推结果。
+
+## 2026-10-19：Qwen3-4B 正式训练配置审计
+
+运行既有`in_place_ttt_2x5090_config_audit_v1`独立auditor，四份正式配置全部无错误，通过精确文件
+hash、execution addendum hash、world size 2和总计98,566,144 token绑定。每个stage内双臂在归一化
+运行路径和`ttt_mode`后完全一致，后者是唯一算法差异。
+
+与发布的`configs/pretrain/qwen3_longct.yaml`逐字段比较后，优化器、scheduler、FSDP、global/micro
+batch、混合精度、gradient checkpointing、dataloader和TTT writer共享字段全部相同。已注册适配仅为
+32K到128K课程、首个资源受限tier的27+5步、seed 42、关闭WandB、只保留最终checkpoint和两张32GB
+显卡所需的activation offload。
+
+官方通用配置中的TTT层`[0,6,12,18,24,30,36]`面向更深模型；实际Qwen3-4B只有36层，训练代码按
+`range(36)`建立零基索引0--35，因此36越界。正式4B配置使用仓库Qwen3默认的
+`[0,6,12,18,24,30]`，这是必要的模型边界适配，不是遗漏有效writer层。

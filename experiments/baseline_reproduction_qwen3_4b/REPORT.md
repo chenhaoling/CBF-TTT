@@ -1802,3 +1802,25 @@ the seed and tokenizer policy, and binds the evaluated checkpoint; it does not
 change the task set or metric. This revalidation produced no prediction or
 score. The 4K--128K matrix remains sealed behind audited paired Stage 2, and
 256K remains a separately released extrapolation.
+
+## 33. Qwen3-4B formal-training configuration audit (2026-10-19)
+
+The independent `in_place_ttt_2x5090_config_audit_v1` auditor passed all four
+formal configurations with no errors. It bound exact per-file hashes, the
+execution-addendum hash, world size two and 98,566,144 total tokens. Within
+each stage, no-TTT and native-TTT are identical after normalizing runtime paths
+and `ttt_mode`; the latter is the only algorithmic arm difference.
+
+A direct field comparison with the released `configs/pretrain/qwen3_longct.yaml`
+found every shared optimizer, scheduler, sharding, batch, mixed-precision,
+gradient-checkpointing, data-loader and TTT writer field equal. The registered
+adaptations are the 32K-to-128K curriculum, 27+5 optimizer steps for the first
+resource-constrained tier, seed 42, disabled WandB, final-only retention and
+activation offload required by two 32-GB devices.
+
+The released generic config lists TTT layers `[0,6,12,18,24,30,36]`. The
+downloaded Qwen3-4B checkpoint has 36 decoder layers and the training model
+constructs them with zero-based indices `range(36)`, so index 36 does not
+exist. The Qwen3-4B configs therefore use `[0,6,12,18,24,30]`, matching the
+repository's Qwen3 configuration default. This removes an invalid generic
+8B-oriented layer entry; it does not remove a real 4B writer layer.
