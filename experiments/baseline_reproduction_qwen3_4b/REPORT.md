@@ -154,6 +154,9 @@ New opt-in files are:
 - `scripts/run_in_place_ttt_2x5090_stage1_timing.sh`;
 - `scripts/audit_in_place_ttt_2x5090_stage1_timing.py`;
 - `scripts/watch_and_run_in_place_ttt_2x5090_stage1_timing.sh`;
+- `IN_PLACE_TTT_BASELINE_2X5090_100M_STAGE1_PLAN.md`;
+- `scripts/run_in_place_ttt_2x5090_100m_stage1.sh`;
+- `scripts/audit_in_place_ttt_2x5090_100m_stage1.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -1154,3 +1157,36 @@ at 46/18 MiB and 0%. A separate negative preflight from implementation commit
 `18c63932` exited 1 while the corpus/ladder were absent, created no output or
 partial path and left GPU state unchanged. Evidence is under
 `remote/hku_gpu2_stage1_timing_watcher_20261018/`.
+
+## 14. Formal 100M-tier Stage-1 execution path (2026-10-18)
+
+The 2x5090 configs previously specified the formal 27-step Stage-1 schedule,
+but no paired runner independently enforced its timing release, disk budget,
+final checkpoint structure or atomic publication. The new frozen
+`IN_PLACE_TTT_BASELINE_2X5090_100M_STAGE1_PLAN.md` registers no-TTT followed by
+TTT, each with 27 GB64 steps at 32K and exactly 56,623,104 tokens. Both arms
+start from the same Qwen3-4B model and full audited corpus. Only
+`global_step_27` DCP plus its converted HF checkpoint is retained.
+
+Formal execution requires the full corpus audit, paired resource ladder and
+paired three-step timing audit to pass. It also requires a separate release
+JSON, created only after the measured projection is reviewed, which sets
+`accepted=true` and binds the exact timing-audit SHA256. This prevents the
+prepared code from automatically starting the formal run before its observed
+wall time is known. The release cannot waive any runtime or audit gate.
+
+`scripts/run_in_place_ttt_2x5090_100m_stage1.sh` is restricted to `hku-gpu2`,
+requires 160 GB free disk for the pair and rechecks 80 GB, idle GPUs, 48 GiB
+host memory and absence of corpus processes before each arm. It preserves a
+successful no-TTT checkpoint if TTT later fails but publishes the paired root
+only after both arms pass. `scripts/audit_in_place_ttt_2x5090_100m_stage1.py`
+recomputes all dependency and corpus hashes, validates the release and timing
+projection, reconstructs 27 finite step records per arm, checks GPU/host
+limits, requires exactly one at-least-40-GB DCP and at-least-7-GB HF model,
+validates arm-specific `ttt_mode`, and hashes complete DCP/HF manifests.
+
+Two focused tests cover 27-step progress de-duplication and a complete paired
+formal fixture. The complete focused baseline suite passes 47/47 tests; Bash
+syntax, Python compilation and `git diff --check` pass. No formal Stage-1
+training has been launched. Stage 2 and RULER remain locked behind a
+successful paired Stage-1 audit.

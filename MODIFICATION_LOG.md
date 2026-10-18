@@ -6851,3 +6851,21 @@ watcher不降低任何准入条件。
 timing输出不存在，两卡仍为46/18MiB且0%。另以实现commit `18c63932`执行负向预检，在正式语料/
 ladder不存在时exit 1，未创建output/partial且GPU不变。冻结hash、状态、handle、负向结果和统一
 远端快照归档于`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage1_timing_watcher_20261018/`。
+
+## 2026-10-18：2×RTX5090 100M tier正式Stage-1入口
+
+新增并冻结`IN_PLACE_TTT_BASELINE_2X5090_100M_STAGE1_PLAN.md`。两臂严格按no-TTT→TTT顺序，
+均从同一Qwen3-4B和完整已审计语料出发，执行32K×GB64×27=56623104 token，只保留唯一
+`global_step_27` DCP及转换HF。正式入口必须同时绑定通过的完整语料、8K/16K/32K资源阶梯和
+三步GB64 timing audit，并额外要求在审阅实测投影后创建`accepted=true`且绑定timing audit hash
+的release JSON。因此当前自动watcher只负责完成测量，不会在未知耗时下自动启动正式训练。
+
+新增`scripts/run_in_place_ttt_2x5090_100m_stage1.sh`，限定`hku-gpu2`，双臂启动前要求160GB
+磁盘，每臂重查80GB磁盘、两卡idle、48GiB主存及无语料进程；任一失败保留partial与已完成臂，
+仅双臂审计通过后原子发布。新增独立`scripts/audit_in_place_ttt_2x5090_100m_stage1.py`，重新hash
+全部依赖、正式语料、timing与release，重建每臂27条有限step记录，核验显存/主存/swap、唯一
+至少40GB DCP、至少7GB HF、`ttt_mode`与32K配置，并生成完整DCP/HF文件manifest。
+
+新增`tests/test_in_place_ttt_2x5090_100m_stage1.py`，覆盖重复final tqdm记录不能污染step27以及
+完整双臂formal fixture。baseline focused suite为47/47通过，Bash语法、Python编译和
+`git diff --check`通过。正式Stage-1尚未启动；Stage-2与RULER继续封存到双臂Stage-1独立审计通过。
