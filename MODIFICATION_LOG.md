@@ -7679,3 +7679,23 @@ diff检查。CPU-only watcher已在tmux
 `waiting_for_corrected_stage2_ladder`，timing result root不存在；GPU0/1分别只占46/18 MiB且利用率0%。
 证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_stage2_timing_watcher_20261019/`。
+
+## 2026-10-19：corrected Base 100M-tier 正式 Stage-2 注册
+
+新增冻结计划`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_100M_STAGE2_PLAN.md`，固定128K、global batch 64、
+每臂5步/41943040 token及no-TTT→native TTT顺序。两臂分别从自身通过审计的formal Stage-1 HF checkpoint
+开始，使用全新Stage-2 optimizer/scheduler；resource/timing child不得作为起点。所有GPU执行仍只允许
+`hku-gpu2`。
+
+新增`scripts/create_in_place_ttt_qwen3_4b_base_stage2_release.py`。它同时验证underlying Stage-2 timing
+audit与corrected Base wrapper audit；缺少`--accept`、reviewer或decision note时不写文件。release绑定两份
+audit SHA256和精确Base revision，并保留现有formal runner要求的Stage-2 release protocol。
+
+新增CPU-only watcher `scripts/watch_and_run_in_place_ttt_qwen3_4b_base_100m_stage2.sh`。它先等待corrected
+Stage-2 timing终态，再等待显式release，绝不自动创建acceptance；只有两者通过后才复用现有五步formal
+runner。新增`scripts/audit_in_place_ttt_qwen3_4b_base_100m_stage2.py`，在paired audit之上重算Base identity、
+tokenizer、完整语料、corrected Stage-1、两层ladder/timing audit、release、plans、configs、runner及最终
+checkpoint证据绑定。
+
+新增四项计划/语法/release/失败关闭测试，完整In-Place-TTT专项测试为102/102通过，Python编译、Bash语法和
+diff检查通过。注册时没有release，也没有正式Stage-2 GPU child；RULER与“是否更新”门控继续封存。

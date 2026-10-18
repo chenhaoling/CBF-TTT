@@ -2359,3 +2359,27 @@ Its initial state is `waiting_for_corrected_stage2_ladder`, the timing result
 root is absent, and GPU0/1 remain at 46/18 MiB with 0% utilization. Evidence
 is archived under
 `remote/hku_gpu2_qwen3_4b_base_stage2_timing_watcher_20261019/`.
+
+## 49. Corrected Base formal Stage-2 registration (2026-10-19)
+
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_100M_STAGE2_PLAN.md` freezes the matched
+five-step 128K formal Stage-2 boundary. Each arm starts from its own audited
+formal Stage-1 HF checkpoint with a fresh optimizer/scheduler. No-TTT runs
+before native TTT; each arm consumes 41,943,040 tokens at global batch 64.
+All GPU execution remains restricted to `hku-gpu2`.
+
+The corrected release tool validates the underlying Stage-2 timing audit and
+the Base wrapper audit. Without explicit `--accept`, reviewer and decision
+note it writes no release. An accepted record binds both audit hashes and the
+exact Base revision while retaining the protocol consumed by the existing
+formal runner. The CPU-only watcher waits for the corrected timing terminal
+state, then for this explicit release; it never creates or infers acceptance.
+
+Formal execution reuses the existing five-step Stage-2 runner and paired
+auditor. A new terminal wrapper re-hashes Base identity/tokenizer, complete
+corpus, corrected Stage-1, both resource/timing audit layers, release, plans,
+configs, runner and the paired final checkpoint audit. Four new tests cover
+the plan boundary, watcher syntax/order, two-audit release behavior and
+missing-input failure closure. The complete focused suite passes 102/102
+locally. Registration creates no release or GPU child and keeps RULER and
+update-admission work sealed.
