@@ -6995,3 +6995,16 @@ CUDA之前停止、未创建final/partial输出、未启动GPU进程。2026-10-1
 46/18MiB、利用率0%；正式语料builder仍存活，partial为52GB。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_tooling_20261018/`。后续全部
 GPU训练与评测继续严格限制在`hku-gpu2`。
+
+## 2026-10-18：修复8K资源watcher重复主存快照权限
+
+`hku-gpu2`上的8K activation watcher在GPU启动前暴露出可复现轮询缺陷：首次执行
+`cp /proc/meminfo last_no_ttt_host.txt`时继承源文件`0444`权限，之后每个轮询周期都无法覆盖自身
+快照。进程虽然存活、state仍为`waiting_8k_no_ttt`，但日志持续出现permission denied。
+
+先仅将live watcher自己的该快照从`0444`恢复为`0644`；下一轮11:52:11 HKT主存快照和state时间
+均成功更新，仍正确检测到两个语料builder进程，两卡保持46/18MiB和0%利用率，没有启动训练。
+
+随后修改`scripts/watch_and_run_in_place_ttt_2x5090_activation.sh`，改用shell重定向写入
+`/proc/meminfo`，使目标权限由watcher的umask产生并可在后续轮询覆盖。仓库内其他相同`cp`只生成
+一次性preflight证据，不在循环中覆盖同一路径，因此不受该缺陷影响。

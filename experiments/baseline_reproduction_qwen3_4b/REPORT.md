@@ -1385,3 +1385,23 @@ before CUDA and without creating final or partial output. At
 builder remained live with a 52-GB partial directory. Evidence is stored under
 `remote/hku_gpu2_ruler_tooling_20261018/`. All future GPU execution for this
 baseline remains restricted to `hku-gpu2`.
+
+## 19. Repeated resource-snapshot repair (2026-10-18)
+
+The live 8K activation watcher exposed a polling defect before any GPU process
+started. Its `snapshot()` function used `cp /proc/meminfo` to create
+`last_no_ttt_host.txt`; Linux propagated the source mode `0444`, so every
+later polling iteration failed to overwrite the watcher's own snapshot. The
+watcher process remained live and its state misleadingly stayed at
+`waiting_8k_no_ttt`.
+
+The live file was changed from mode `0444` to owner-writable `0644`. On the
+next scheduled poll at `2026-10-18T11:52:11+08:00`, both the host snapshot and
+state timestamp advanced and the watcher again recorded the two active corpus
+builder processes. GPU 0/1 remained at 46/18 MiB and 0% utilization, so this
+repair did not start or alter training.
+
+For subsequent clean runs, `watch_and_run_in_place_ttt_2x5090_activation.sh`
+now writes `/proc/meminfo` through shell redirection. The destination therefore
+uses the watcher umask and remains writable across polls. Other occurrences
+copy one-shot preflight evidence and do not overwrite the same path in a loop.

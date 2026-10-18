@@ -54,7 +54,11 @@ snapshot() {
     --format=csv,noheader,nounits > "$OUTPUT_ROOT/${prefix}_gpu.csv"
   nvidia-smi --query-compute-apps=pid,process_name,used_memory \
     --format=csv,noheader,nounits > "$OUTPUT_ROOT/${prefix}_processes.csv"
-  cp /proc/meminfo "$OUTPUT_ROOT/${prefix}_host.txt"
+  # /proc/meminfo is mode 0444.  `cp` propagates that mode when it creates the
+  # destination, so the next polling iteration cannot overwrite its own file.
+  # Shell redirection applies the watcher umask and keeps repeated snapshots
+  # writable by the watcher process.
+  cat /proc/meminfo > "$OUTPUT_ROOT/${prefix}_host.txt"
   "$PYTHON_BIN" - "$OUTPUT_ROOT/${prefix}_conflicts.txt" <<'PY'
 import pathlib, shlex, sys
 targets = {"build_in_place_ttt_public_corpus.py", "audit_in_place_ttt_public_corpus.py"}
