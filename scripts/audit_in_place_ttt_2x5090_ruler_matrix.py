@@ -10,6 +10,11 @@ import math
 import pathlib
 from typing import Any
 
+try:
+    from scripts.summarize_in_place_ttt_2x5090_ruler_matrix import PAPER_TABLE1
+except ModuleNotFoundError:  # Direct `python scripts/<name>.py` execution.
+    from summarize_in_place_ttt_2x5090_ruler_matrix import PAPER_TABLE1
+
 
 CONTEXTS = (
     (4096, "4k"), (8192, "8k"), (16384, "16k"),
@@ -223,10 +228,39 @@ def audit(
                 continue
             if abs(actual - expected) >= 1e-12:
                 errors.append(f"registered mean differs at {key}")
+    if matrix.get("paper_table1_reference") != PAPER_TABLE1:
+        errors.append("paper Table 1 reference values differ")
+    observed_paper = matrix.get("public_replication_minus_paper", {})
+    if set(observed_paper) != set(recomputed):
+        errors.append("paper comparison context set differs")
+    for suffix, values in recomputed.items():
+        expected = {
+            "public_no_ttt_minus_paper_matched": (
+                values["no_ttt"] - PAPER_TABLE1["matched_baseline"][suffix]
+            ),
+            "public_ttt_minus_paper_ttt": (
+                values["ttt"] - PAPER_TABLE1["in_place_ttt"][suffix]
+            ),
+            "public_gain_minus_paper_gain": (
+                values["ttt_minus_no_ttt"]
+                - (PAPER_TABLE1["in_place_ttt"][suffix]
+                   - PAPER_TABLE1["matched_baseline"][suffix])
+            ),
+        }
+        for key, expected_value in expected.items():
+            try:
+                actual = float(observed_paper[suffix][key])
+            except (KeyError, TypeError, ValueError):
+                errors.append(f"paper comparison is missing {suffix}/{key}")
+                continue
+            if abs(actual - expected_value) >= 1e-12:
+                errors.append(f"paper comparison differs at {suffix}/{key}")
     if matrix.get("protocol") != "in_place_ttt_2x5090_ruler_matrix_summary_v1" \
             or matrix.get("completed") is not True \
             or matrix.get("baseline_tier") != "2x5090_100m" \
             or matrix.get("registered_contexts") != [suffix for _, suffix in CONTEXTS] \
+            or matrix.get("claim_boundary") \
+            != "public_data_matched_replication_not_paper_exact" \
             or matrix.get("context_256k_status") \
             != "separate_extrapolation_resource_gate":
         errors.append("matrix summary protocol/completion/claim boundary differs")

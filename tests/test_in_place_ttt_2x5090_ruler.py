@@ -18,6 +18,7 @@ from scripts.audit_in_place_ttt_2x5090_ruler_resource_ladder import (
 from scripts.summarize_in_place_ttt_2x5090_ruler import summarize
 from scripts.summarize_in_place_ttt_2x5090_ruler_matrix import (
     CONTEXTS,
+    PAPER_TABLE1,
     summarize as summarize_matrix,
 )
 from scripts.summarize_in_place_ttt_level_b_ruler import (
@@ -471,6 +472,16 @@ class TwoRTX5090RulerMatrixTest(unittest.TestCase):
             self.assertEqual(len(matrix["context_scores"]), 6)
             self.assertEqual(
                 matrix["registered_4k_to_128k_mean"]["ttt_minus_no_ttt"], 1.0
+            )
+            self.assertEqual(matrix["paper_table1_reference"], PAPER_TABLE1)
+            self.assertEqual(
+                matrix["public_replication_minus_paper"]["4k"]
+                ["public_gain_minus_paper_gain"],
+                1.5,
+            )
+            self.assertEqual(
+                matrix["claim_boundary"],
+                "public_data_matched_replication_not_paper_exact",
             )
             write_json(root / "matrix_summary.json", matrix)
             training = root / "training_dependency"

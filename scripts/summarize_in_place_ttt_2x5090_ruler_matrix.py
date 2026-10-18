@@ -15,6 +15,16 @@ CONTEXTS = (
     (32768, "32k"), (65536, "64k"), (131072, "128k"),
 )
 ARMS = ("no_ttt", "ttt")
+PAPER_TABLE1 = {
+    "matched_baseline": {
+        "4k": 96.6, "8k": 94.1, "16k": 92.1, "32k": 88.7,
+        "64k": 74.3, "128k": 74.8, "256k": 41.7,
+    },
+    "in_place_ttt": {
+        "4k": 96.1, "8k": 95.6, "16k": 92.7, "32k": 89.3,
+        "64k": 78.7, "128k": 77.0, "256k": 43.9,
+    },
+}
 
 
 def sha256(path: pathlib.Path) -> str:
@@ -100,6 +110,22 @@ def summarize(root: pathlib.Path) -> dict[str, Any]:
             "ttt": ttt_mean,
             "ttt_minus_no_ttt": ttt_mean - no_ttt_mean,
         }
+    paper_comparison = {
+        suffix: {
+            "public_no_ttt_minus_paper_matched": (
+                values["no_ttt"] - PAPER_TABLE1["matched_baseline"][suffix]
+            ),
+            "public_ttt_minus_paper_ttt": (
+                values["ttt"] - PAPER_TABLE1["in_place_ttt"][suffix]
+            ),
+            "public_gain_minus_paper_gain": (
+                values["ttt_minus_no_ttt"]
+                - (PAPER_TABLE1["in_place_ttt"][suffix]
+                   - PAPER_TABLE1["matched_baseline"][suffix])
+            ),
+        }
+        for suffix, values in context_scores.items()
+    }
     complete = not errors and len(context_scores) == 6 and registered_means is not None
     return {
         "protocol": "in_place_ttt_2x5090_ruler_matrix_summary_v1",
@@ -110,6 +136,9 @@ def summarize(root: pathlib.Path) -> dict[str, Any]:
         "task_deltas": task_deltas,
         "registered_4k_to_128k_mean": registered_means,
         "registered_contexts": registered_suffixes,
+        "paper_table1_reference": PAPER_TABLE1,
+        "public_replication_minus_paper": paper_comparison,
+        "claim_boundary": "public_data_matched_replication_not_paper_exact",
         "context_256k_status": "separate_extrapolation_resource_gate",
         "bindings": bindings,
     }

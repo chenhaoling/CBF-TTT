@@ -1586,3 +1586,19 @@ session `baseline_2x5090_ruler_matrix_5603910c_20261018`, pane PID 1428336,
 state `waiting_for_audited_ruler_resource_ladder`. The observation time was
 `2026-10-18T12:58:00+08:00`; the corpus partial directory was 58 GB. Evidence
 is stored under `remote/hku_gpu2_ruler_watchers_tooling_20261018/`.
+
+## 26. Machine-audited paper-reference comparison (2026-10-18)
+
+Before any formal RULER score existed, the paired matrix summarizer was
+extended to embed the seven Table 1 Qwen3-4B reference values for matched
+baseline and In-Place TTT. For each registered 4K--128K context it now reports
+the public no-TTT result minus the paper matched baseline, the public TTT
+result minus the paper TTT value, and the difference between the public and
+paper TTT gains.
+
+The independent matrix auditor recomputes every comparison from raw task
+scores and rejects any changed paper value, missing context, arithmetic drift
+or claim-boundary change. The summary explicitly records
+`public_data_matched_replication_not_paper_exact`; the 256K paper values are
+retained for reference while the local 256K result remains behind its separate
+extrapolation resource gate.

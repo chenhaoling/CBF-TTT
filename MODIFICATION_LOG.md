@@ -7143,3 +7143,13 @@ PyTorch 2.8.0+cu128与Transformers 4.57.3。两个缺失上游handle的负向预
 `baseline_2x5090_ruler_matrix_5603910c_20261018`启动，pane PID 1428336，状态为
 `waiting_for_audited_ruler_resource_ladder`。2026-10-18 12:58:00 HKT语料partial为58GB。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_watchers_tooling_20261018/`。
+
+## 2026-10-18：论文Table 1机器可审计对照
+
+在正式RULER出分前，扩展`summarize_in_place_ttt_2x5090_ruler_matrix.py`，固化论文Qwen3-4B
+Table 1中matched baseline和In-Place TTT的4K–256K七点参考值。对注册的4K–128K六个context，汇总
+现在计算public no-TTT减论文baseline、public TTT减论文TTT，以及public增益减论文增益。
+
+独立matrix auditor从raw task score重算上述差值，并拒绝参考值漂移、context缺失、算术不一致或
+claim boundary变化。输出明确标记`public_data_matched_replication_not_paper_exact`；256K论文值只作
+参考，本地256K仍受独立外推资源门控制。
