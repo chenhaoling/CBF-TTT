@@ -1,0 +1,49 @@
+{
+  "corpus_processes": [
+    {
+      "argv_sha256": "dcdc6405f751564e7160d45bc764e8684d8ccabee900718a0773b6e99cedb882",
+      "pid": 1673441
+    },
+    {
+      "argv_sha256": "e35dedbc13685bb3252ee293dedef8217fa2906b09c839aa74f3c7d81128fd0c",
+      "pid": 1673442
+    }
+  ],
+  "corpus_session_alive": true,
+  "corpus_status": "RUNNING_BUILD",
+  "created_at_utc": "2026-10-18T21:10:26.444061+00:00",
+  "gpu_execution_constraint": "hku-gpu2_only",
+  "gpus": [
+    {
+      "index": 0,
+      "memory_total_mib": 32607,
+      "memory_used_mib": 46,
+      "name": "NVIDIA GeForce RTX 5090",
+      "utilization_percent": 0
+    },
+    {
+      "index": 1,
+      "memory_total_mib": 32607,
+      "memory_used_mib": 18,
+      "name": "NVIDIA GeForce RTX 5090",
+      "utilization_percent": 0
+    }
+  ],
+  "hostname": "user-Super-Server",
+  "protocol": "qwen3_4b_base_level_a_watcher_launch_v1",
+  "resource_input_smoke_audit_passed": true,
+  "resource_input_smoke_audit_sha256": "df5453781fca587965a05d04610006a25def7c3f5b4f9312c6129059fbcb3ada",
+  "resource_input_smoke_manifest_sha256": "01835ff805be13720d27fb100c3a8ddd5a9be24fcb4703cc0cdcaa2f90fff22e",
+  "tool_clean": true,
+  "tool_commit": "6a3bb2bf54c803d4bc9a9fb789e5f11c7f1a6b65",
+  "training_child_count": 0,
+  "watcher_processes": [
+    {
+      "argv_sha256": "63ca8a3eaa8122f76cd614be64190f13f9400ad6b706e4e23d7d30f21d4a25d6",
+      "pid": 1675416
+    }
+  ],
+  "watcher_session": "baseline_qwen3_4b_base_level_a_6a3bb2bf_20261019",
+  "watcher_session_alive": true,
+  "watcher_status": "WAITING_BASE_CORPUS"
+}

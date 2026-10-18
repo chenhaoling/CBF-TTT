@@ -2125,8 +2125,22 @@ the model identity, corpus, resource inputs, both child audits, converted
 checkpoints and smoke summaries. Its claim is restricted to Level-A execution
 closure.
 
-The new and existing In-Place-TTT focused test set passes 78/78 locally; Bash
-syntax and Python compilation also pass. At this report revision the watcher
-is implemented but has not released GPU work, because the corrected full
-corpus remains `RUNNING_BUILD`. Formal 100M training, the RULER matrix and gate
-exploration remain sealed.
+The new and existing In-Place-TTT focused test set passes 78/78 locally and in
+the clean remote worktree; Bash syntax and Python compilation also pass. A
+CPU-only Base-pilot exercise of the generalized resource-input path completed
+in 3.80 seconds and its independent audit in 4.67 seconds, at about 813/810
+MiB peak RSS. All seven checks pass; manifest and audit SHA256 values are
+`01835ff805be13720d27fb100c3a8ddd5a9be24fcb4703cc0cdcaa2f90fff22e`
+and `df5453781fca587965a05d04610006a25def7c3f5b4f9312c6129059fbcb3ada`.
+This validates code routing only; formal inputs will come from the full corpus.
+
+The frozen watcher now runs in tmux
+`baseline_qwen3_4b_base_level_a_6a3bb2bf_20261019` from clean commit
+`6a3bb2bf54c803d4bc9a9fb789e5f11c7f1a6b65`. Its output root is
+`/home/ctj/in_place_ttt_qwen3_4b_base_level_a_6a3bb2bf_20261019`. The
+authoritative launch snapshot records `WAITING_BASE_CORPUS`, a live watcher
+PID, a live Base corpus builder, zero training children and GPU0/1 at 46/18
+MiB with 0% utilization. No GPU work is released while the corrected full
+corpus remains `RUNNING_BUILD`. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_level_a_watcher_20261019/`. Formal 100M
+training, the RULER matrix and gate exploration remain sealed.

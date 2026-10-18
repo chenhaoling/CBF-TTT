@@ -7513,3 +7513,16 @@ HF文件hash与RULER结果绑定，输出受限的Level-A结论。
 新增专项测试并扩展resource-input CLI测试；本地全部In-Place-TTT focused suite为78/78通过，Bash语法、
 Python编译和`git diff --check`通过。此记录时全量语料仍为`RUNNING_BUILD`，replacement watcher尚未释放
 任何GPU工作；正式100M训练、RULER矩阵及“是否更新”门控继续封存。
+
+提交`6a3bb2bf54c803d4bc9a9fb789e5f11c7f1a6b65`推送后，在`hku-gpu2`创建clean detached
+worktree；从worktree根目录重跑focused suite为78/78通过。用已审计Base pilot执行一次空
+`CUDA_VISIBLE_DEVICES`的opt-in resource-input smoke：构建3.80秒、审计4.67秒，峰值RSS约813/810
+MiB，七项检查全部通过，manifest/audit SHA256为`01835ff8...f22e`和`df545378...3ada`。该smoke只验证
+新hash/profile路由，正式输入仍必须来自full corpus。
+
+随后在`hku-gpu2`启动tmux `baseline_qwen3_4b_base_level_a_6a3bb2bf_20261019`，输出根
+`/home/ctj/in_place_ttt_qwen3_4b_base_level_a_6a3bb2bf_20261019`。启动审计确认精确clean commit、
+watcher与corpus builder进程均存活，状态分别为`WAITING_BASE_CORPUS`/`RUNNING_BUILD`，训练child为0；
+GPU0/1为46/18 MiB且利用率0%。完整证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_level_a_watcher_20261019/`。
+watcher只有在full corpus原子发布且canonical audit全通过后才允许GPU训练。

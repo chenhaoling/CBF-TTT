@@ -1,0 +1,56 @@
+{
+  "bindings": {
+    "auditor_sha256": "f31af9eeffec051c6606b8e58c4244a85cb978ecba696ce277a18bf18728d22f",
+    "builder_sha256": "a81cad558ba1ef87f6e2d9514514b984909565ef3635b6ed22946d6b6a995cce",
+    "expected_source_manifest_sha256": "73fdb39dab7732416effd44ff9b21477d7762a5fc0d37d0d76f93a41cdc4c567",
+    "manifest_sha256": "01835ff805be13720d27fb100c3a8ddd5a9be24fcb4703cc0cdcaa2f90fff22e",
+    "plan_sha256": "14e11ef95315a5fd1e99e5cbee8a761dcfac5ccdc6f7f1042cf8f5e4acdc77d3",
+    "required_source_profile": "pilot",
+    "source_audit_sha256": "32c8fa6928718e1f9b5c22611878146c193b02f4d34f9b58948e949cd75cf7b1",
+    "source_manifest_sha256": "73fdb39dab7732416effd44ff9b21477d7762a5fc0d37d0d76f93a41cdc4c567"
+  },
+  "checks": {
+    "code_plan_and_tokenizer": true,
+    "exact_outputs": true,
+    "no_plaintext_metadata": true,
+    "parent_artifacts_and_order": true,
+    "protocol_and_paths": true,
+    "source_corpus": true,
+    "tokenizer_eos": true
+  },
+  "errors": [],
+  "outputs": {
+    "131072": {
+      "artifact_sha256": "fc9e2f32b09a5d2a410c401465c60daf2e61f3a25f605404f80262bc45c78f2f",
+      "ordered_training_tokens_sha256": "40c34a9621618215de3ac13114bf90b43da92ecdcb523558152d60b71112f55d",
+      "records": 2,
+      "training_tokens": 262144
+    },
+    "16384": {
+      "artifact_sha256": "74ef962153f1fd10b5cc89ba35f1ec8e35a1a80a77de6427f2f4f2fd331f911f",
+      "ordered_training_tokens_sha256": "ce96e87d93014be4082ebfceea3c891fc782772b00d5574406c07a0ebb8c9f3a",
+      "records": 2,
+      "training_tokens": 32768
+    },
+    "32768": {
+      "artifact_sha256": "729dda82a42392bf70e30bd1f41d3243f052fc6e7c0e028283cf0304310ca920",
+      "ordered_training_tokens_sha256": "2efac29d61eb5e6e930f869133f2c6a4cf2cd0424f868ed4394ef886697dc8aa",
+      "records": 2,
+      "training_tokens": 65536
+    },
+    "65536": {
+      "artifact_sha256": "a93f3e5f94990bce36ae2f85466d443e80e120cac86e6b5cd08505db8ec6671e",
+      "ordered_training_tokens_sha256": "508ae9e54d1024a71d3477b00ff068473713277f2375cdcd81550589f9ae6d27",
+      "records": 2,
+      "training_tokens": 131072
+    },
+    "8192": {
+      "artifact_sha256": "ac3e5d9bb0f8783fe548d9b36855b4f44ec22edae126492f24824de665f20d0b",
+      "ordered_training_tokens_sha256": "6570efa1bd94b58b3cfa3ae2f1e8548751a0c3f91a861ca07c9eb6219ff3110a",
+      "records": 2,
+      "training_tokens": 16384
+    }
+  },
+  "passed": true,
+  "protocol": "in_place_ttt_2x5090_resource_inputs_audit_v1"
+}

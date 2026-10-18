@@ -20,7 +20,7 @@ so no Level-C or exact-paper-number claim is permitted.
 
 | Stage | Required completion evidence | Current state at initial snapshot |
 |---|---|---|
-| Released-code Level A | Clean upstream revision; environment manifest; paired finite optimizer steps; official conversion/reload; audited RULER score extraction | **Waiting for corrected full corpus.** The old post-trained-Qwen smoke is superseded. A new hku-gpu2-only watcher, Base-bound sparse-input audit and terminal Level-A audit are frozen and tested but cannot release GPU work before the full corpus canonical audit. |
+| Released-code Level A | Clean upstream revision; environment manifest; paired finite optimizer steps; official conversion/reload; audited RULER score extraction | **Waiting for corrected full corpus.** The old post-trained-Qwen smoke is superseded. The new hku-gpu2-only watcher is live in `WAITING_BASE_CORPUS`, with zero training children; Base-bound sparse-input and terminal audits are frozen and tested. |
 | Public source inventory | Passing independent inventory audit binding every FineWeb-Edu and LongCrawl64 source artifact | **Complete for Base.** The rebuilt Base-bound inventory covers 140 FineWeb-Edu files and 256 LongCrawl64 shards; all seven registered checks pass. |
 | Continuous packing pilot | Passing independent two-stage audit proving exact lengths, source balance, continuity, no replay, hashes and token totals | **Complete for Base.** The rebuilt 32K-to-128K pilot has 144 records, 6,291,456 tokens and zero synthetic EOS; all ten registered audit checks pass. Old post-trained-tokenizer transform/dataloader probes are superseded and must be repeated on the corrected corpus. |
 | Full public corpus | Atomically published full directory; no `.partial`; exact 724,800 records and 34,999,369,728 training tokens; passing canonical `independent_audit.json` with all registered checks true and exact manifest/dependency bindings | **Running with Base tokenizer.** The CPU-only builder is active on `hku-gpu2` in a new immutable root; no corrected canonical full audit exists yet. The old partial corpus is superseded. |
@@ -72,7 +72,8 @@ obtained and executed.
 - Correct Base full corpus: `/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019`
 - Correct full-corpus wrapper status: `/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_run_20261019/status.txt`
 - Correct full-corpus tmux session: `public_corpus_qwen3_4b_base_full_20261019`
-- Corrected Level-A output root after watcher launch: `/home/ctj/in_place_ttt_qwen3_4b_base_level_a_<tool-commit>_20261019`
+- Corrected Level-A output root: `/home/ctj/in_place_ttt_qwen3_4b_base_level_a_6a3bb2bf_20261019`
+- Corrected Level-A tmux session: `baseline_qwen3_4b_base_level_a_6a3bb2bf_20261019`
 
 The prior checkpoint-bound corpus, activation, Stage-1, Stage-2 and RULER
 paths are preserved but superseded. No path in that chain is an authoritative
