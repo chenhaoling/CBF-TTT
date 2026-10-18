@@ -6758,3 +6758,33 @@ official/tool commit、Qwen3-4B、既有SHA256为`2eb03326...23d`的8K公共混�
 `baseline_2x5090_activation_8k_20261018`，输出根为
 `/home/ctj/in_place_ttt_2x5090_activation_8k_f14cb715_20261018`。启动后权威状态为
 `waiting_8k_no_ttt`，冲突清单恰为真实PID1397986/1397987，未创建训练子目录，GPU利用率均为0。
+
+## 2026-10-18：2×RTX5090 稀疏边界精确输入
+
+在任何16K/32K activation-offload probe前冻结
+`IN_PLACE_TTT_BASELINE_2X5090_RESOURCE_INPUT_ADDENDUM.md`（SHA256
+`5b65319ceeae3f25e7338928290ba9e59ecad22a1152a9209845b2ba0b68647c`）。该附录解决“把32K
+明文仅通过CLI标为16K但dataloader实际未截断”的证据风险。来源固定为已经通过streaming独立
+审计的连续公共语料pilot manifest `3b2e7f48...7206`；每档严格取首个FineWeb与LongCrawl记录。
+
+新增`scripts/build_in_place_ttt_2x5090_resource_inputs.py`，为8K/16K/32K/64K/128K分别生成
+两条精确训练记录。32K/128K保持父文本字节一致；其余长度使用最长稳定Qwen token prefix，并只
+在decode/encode边界需要时追加EOS。manifest不含明文，绑定parent artifact、tokenizer、plan、
+builder、逐记录和ordered uint32 token stream hash。新增完全独立的
+`scripts/audit_in_place_ttt_2x5090_resource_inputs.py`重新实现派生规则，检查source顺序、每条
+`L-1`个content token和`L`个training token、artifact与stream hash及无明文metadata。
+
+CPU-only远端构建4.83秒完成，峰值RSS822896KiB。首次audit因CLI字段`source_audit`未映射到
+函数参数`source_audit_path`而在读数据前exit 1；已保留失败日志。commit
+`8019cc55b26d8f32f506cac1dddd72797103459b`修复显式映射并加入CLI回归测试。第二次独立audit
+耗时4.95秒、峰值RSS820884KiB，7/7检查全部通过，GPU前后均46/18MiB且利用率0%。
+
+五档artifact SHA256分别为8K `73679b13...9c57`、16K `cf6c1c1c...e084`、32K
+`d8ad5c06...bb30`、64K `15d06cf2...4398`、128K `17838e50...af42`；manifest为
+`9bc2bb61...acdce`，独立audit为`ebf1b4c6...006f8`。训练正文JSONL仅保留在远端
+`/home/ctj/in_place_ttt_2x5090_resource_inputs_099d58cd_20261018`，Git只保存manifest、audit、
+资源日志与hash到`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_resource_inputs_20261018/`。
+
+扩展resource runner/summary/独立audit：所有高于8K的activation边界必须显式提供并绑定通过的
+data manifest与audit，否则启动前exit 2；metadata和summary同步记录两者hash。新增5项输入测试
+及1项长边界拒绝测试，完整baseline focused suite现为40/40通过。

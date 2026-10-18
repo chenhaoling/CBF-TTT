@@ -144,6 +144,9 @@ New opt-in files are:
 - `scripts/audit_in_place_ttt_2x5090_configs.py`;
 - `scripts/audit_in_place_ttt_2x5090_resource.py`;
 - `scripts/watch_and_run_in_place_ttt_2x5090_activation.sh`;
+- `IN_PLACE_TTT_BASELINE_2X5090_RESOURCE_INPUT_ADDENDUM.md`;
+- `scripts/build_in_place_ttt_2x5090_resource_inputs.py`;
+- `scripts/audit_in_place_ttt_2x5090_resource_inputs.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -1002,3 +1005,49 @@ optimistic lower bound of roughly 201 days before long-context slowdown. The
 100M tier is therefore the first honest end-to-end target. It remains a
 resource-constrained public-data replication; it is not the paper-scale 35B
 result, and no gate experiment is unsealed by these static checks.
+
+## 11. Exact sparse-ladder inputs (2026-10-18)
+
+Before any 16K/32K activation-offload probe, the resource-input addendum was
+frozen with SHA256
+`5b65319ceeae3f25e7338928290ba9e59ecad22a1152a9209845b2ba0b68647c`.
+It prevents a 32K plaintext row from being mislabeled as a shorter measurement
+through a CLI length override. The source is fixed to the already audited
+continuous public-corpus pilot manifest
+`3b2e7f4821692dfe75bae48e4cb52c6ac39f4b9b3b4c75f96aeb32ab7dec7206`.
+Every boundary uses exactly its first FineWeb and first LongCrawl record.
+
+The builder preserves 32K/128K parent text byte-for-byte. For 8K/16K/64K it
+selects the longest stable Qwen-token prefix and pads only with tokenizer EOS
+tokens when a decode/encode boundary requires it. The manifest contains no
+plaintext and binds the source artifacts, tokenizer, plan, builder, record
+hashes and ordered uint32 token stream. The independent auditor reimplements
+the derivation rather than importing the builder.
+
+The CPU-only build on `hku-gpu2` atomically published all five inputs in 4.83
+seconds with 822,896 KiB peak RSS. Its first audit invocation exposed a CLI
+name-mapping bug before reading any output; commit
+`8019cc55b26d8f32f506cac1dddd72797103459b` fixed the mapping and added a CLI
+regression test. The second audit completed in 4.95 seconds with 820,884 KiB
+peak RSS and passed all seven checks. GPUs remained 46/18 MiB and 0% utilized.
+
+| Length | Records | Training tokens | Artifact SHA256 |
+|---:|---:|---:|---|
+| 8K | 2 | 16,384 | `73679b13...9c57` |
+| 16K | 2 | 32,768 | `cf6c1c1c...e084` |
+| 32K | 2 | 65,536 | `d8ad5c06...bb30` |
+| 64K | 2 | 131,072 | `15d06cf2...4398` |
+| 128K | 2 | 262,144 | `17838e50...af42` |
+
+The published manifest SHA256 is
+`9bc2bb610f95dbf5b6541e9b9c1f42f5a1a0d067faa47924f82400340b5acdce`;
+the independent audit SHA256 is
+`ebf1b4c65145efb9921d6fbfd4b868a37ed211dbcdaef49ddc744f891d2006f8`.
+The resource runner and independent resource auditor now require and bind this
+manifest/audit for every activation-offload boundary above 8K. The plaintext
+JSONL files remain on `hku-gpu2`; Git stores only manifests, audits, resource
+logs and hashes under `remote/hku_gpu2_resource_inputs_20261018/`.
+
+The complete focused baseline suite now passes 40/40 tests. This closes input
+length ambiguity only. The live 8K watcher remains bound to its earlier exact
+8K pilot, and GPU feasibility remains pending its resource run.
