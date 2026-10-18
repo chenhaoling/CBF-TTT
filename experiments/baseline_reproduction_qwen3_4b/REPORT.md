@@ -1824,3 +1824,29 @@ constructs them with zero-based indices `range(36)`, so index 36 does not
 exist. The Qwen3-4B configs therefore use `[0,6,12,18,24,30]`, matching the
 repository's Qwen3 configuration default. This removes an invalid generic
 8B-oriented layer entry; it does not remove a real 4B writer layer.
+
+## 34. Training-step and global-batch runtime semantics (2026-10-19)
+
+The pinned VeOmni implementation was inspected and instantiated in the remote
+training environment. Its `IterativeDataset` inherits `IterableDataset` and
+does not implement `__len__`; it streams the registered JSONL, applies the
+released buffer-10,000 shuffle and splits examples by data-parallel rank.
+Because the formal path uses `rmpad=false`, `compute_train_steps` selects the
+explicit `max_steps` when the dataset length is absent. The entry point passes
+that result to both the native dataloader and cosine scheduler, then performs
+one optimizer and one scheduler step per outer training iteration.
+
+With `WORLD_SIZE=2`, `ulysses_parallel_size=1`, global batch 64 and microbatch
+one, the actual `TrainingArguments` derived DP size two, 32 gradient-accumulation
+microbatches and a per-rank dataloader batch of 32. Runtime instantiation gave:
+
+| Stage | train steps | tokens/step | exact tokens |
+|---|---:|---:|---:|
+| 32K | 27 | 2,097,152 | 56,623,104 |
+| 128K | 5 | 8,388,608 | 41,943,040 |
+
+Both exact totals equal the frozen configuration. Here explicit `max_steps` is
+required: unlike the released dynamic-token path, a non-packed streaming
+dataset has neither a finite dataset length nor an enabled token-based step
+calculation. Omitting it would make this pinned VeOmni path unable to determine
+the formal step count; it would not automatically infer the registered tier.

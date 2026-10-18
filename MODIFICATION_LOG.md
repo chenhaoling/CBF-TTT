@@ -7313,3 +7313,18 @@ batch、混合精度、gradient checkpointing、dataloader和TTT writer共享字
 官方通用配置中的TTT层`[0,6,12,18,24,30,36]`面向更深模型；实际Qwen3-4B只有36层，训练代码按
 `range(36)`建立零基索引0--35，因此36越界。正式4B配置使用仓库Qwen3默认的
 `[0,6,12,18,24,30]`，这是必要的模型边界适配，不是遗漏有效writer层。
+
+## 2026-10-19：训练步数与 global batch 入口语义复验
+
+读取并在远程固定环境实例化VeOmni训练参数。`IterativeDataset`继承`IterableDataset`且没有
+`__len__`；它流式读取注册JSONL、采用发布代码的buffer-10000 shuffle，并按data-parallel rank切分。
+正式路径为`rmpad=false`，因此dataset length缺失时`compute_train_steps`明确采用`max_steps`；训练入口
+把同一结果传给native dataloader和cosine scheduler，每个外层iteration各执行一次optimizer与
+scheduler step。
+
+在world size 2、Ulysses 1、global batch 64、microbatch 1下，实际派生DP size 2、梯度累积32、每
+rank dataloader batch 32。Stage1为27步、每步2,097,152 token、总56,623,104；Stage2为5步、每步
+8,388,608 token、总41,943,040，均精确等于冻结值。
+
+因此本资源受限配置需要显式`max_steps`：与发布代码的动态token batching不同，非packing streaming
+dataset既没有有限长度，也没有启用基于`train_size`的步数公式；删除该字段不会自动推导正式步数。
