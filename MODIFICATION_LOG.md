@@ -7426,3 +7426,20 @@ seed 42、每rank batch 32以及Stage1 27步、Stage2 5步；没有加载模型�
 结构化结果与hash说明。结果SHA256为
 `7134c35d98fd24f4781a32aa6ea3713b2f73033218a2dc762a3f04ee4e6fd7f0`，所有检查通过。该审计只关闭
 资源tier的数据组成边界，不替代full corpus canonical audit，也不释放正式训练。
+
+## 2026-10-19：活动 baseline 执行链完整性审计
+
+在full corpus仍构建期间，以空`CUDA_VISIBLE_DEVICES`在`hku-gpu2`执行只读审计，绑定clean upstream与
+activation、Stage1、Stage2、RULER、256K及corpus audit fallback使用的11个detached tool checkout。
+upstream与全部tool checkout均命中注册commit且Git状态为空。
+
+审计逐一读取13个活动watcher的`/proc/<pid>/cmdline`，确认PID存活并实际执行预期冻结脚本，同时记录
+每个脚本SHA256。主机名严格为`user-Super-Server`，GPU0/1均为32607MiB RTX 5090；Stage1、Stage2和
+formal 256K的三个显式release JSON均不存在。全部55项检查通过，未加载模型、占用GPU、修改进程或
+释放实验。
+
+新增证据目录
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_active_chain_integrity_20261019/`。结构化结果
+SHA256为`6962c87fa39cbed91523bc551d8b7aa1e9da4602e8f5ae1b7178424b0b8e6315`，冻结审计脚本SHA256为
+`2f8fdc682ebf874e0af25e61ef0e0987e727c329202ef2c9c157ea995db3f831`。该快照证明等待链在记录时刻
+没有漂移，不代表任何后续训练、checkpoint或评测已经完成。

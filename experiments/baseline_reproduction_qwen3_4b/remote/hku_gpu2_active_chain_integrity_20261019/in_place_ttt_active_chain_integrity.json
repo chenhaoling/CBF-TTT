@@ -1,0 +1,257 @@
+{
+  "checkouts": {
+    "activation": {
+      "actual_commit": "f14cb7152bc7607e0b8555d449bcf2b28853eb1c",
+      "clean": true,
+      "expected_commit": "f14cb7152bc7607e0b8555d449bcf2b28853eb1c",
+      "root": "/home/ctj/cbf_ttt_tool_f14cb715"
+    },
+    "corpus_audit_fallback": {
+      "actual_commit": "990da145d814aded46a560f64947bc17e7e89fb6",
+      "clean": true,
+      "expected_commit": "990da145d814aded46a560f64947bc17e7e89fb6",
+      "root": "/home/ctj/cbf_ttt_tool_990da145"
+    },
+    "ruler_256k_formal": {
+      "actual_commit": "a0375e93a530591ca3e36d6d4c8498c4772d8784",
+      "clean": true,
+      "expected_commit": "a0375e93a530591ca3e36d6d4c8498c4772d8784",
+      "root": "/home/ctj/cbf_ttt_tool_a0375e93"
+    },
+    "ruler_256k_resource": {
+      "actual_commit": "b33b93ace74240b2bb2332368647c4adda31b7dc",
+      "clean": true,
+      "expected_commit": "b33b93ace74240b2bb2332368647c4adda31b7dc",
+      "root": "/home/ctj/cbf_ttt_tool_b33b93ac"
+    },
+    "ruler_primary": {
+      "actual_commit": "439fcea142c4d3bb51413d75480d5231d0c62cab",
+      "clean": true,
+      "expected_commit": "439fcea142c4d3bb51413d75480d5231d0c62cab",
+      "root": "/home/ctj/cbf_ttt_tool_439fcea1"
+    },
+    "stage1_formal": {
+      "actual_commit": "3c7e29fc33cbb781090db6792e4fef42dec6dbcf",
+      "clean": true,
+      "expected_commit": "3c7e29fc33cbb781090db6792e4fef42dec6dbcf",
+      "root": "/home/ctj/cbf_ttt_tool_3c7e29fc"
+    },
+    "stage1_ladder": {
+      "actual_commit": "bae87e6c75183a73f5ed2cd8150e0cc228ed19f0",
+      "clean": true,
+      "expected_commit": "bae87e6c75183a73f5ed2cd8150e0cc228ed19f0",
+      "root": "/home/ctj/cbf_ttt_tool_bae87e6c"
+    },
+    "stage1_timing": {
+      "actual_commit": "56094b8906ad670ec2be0d21ab75d698216082d4",
+      "clean": true,
+      "expected_commit": "56094b8906ad670ec2be0d21ab75d698216082d4",
+      "root": "/home/ctj/cbf_ttt_tool_56094b89"
+    },
+    "stage2_formal": {
+      "actual_commit": "73950ecd1d0a8c2163863dce48de272e5db7d8d8",
+      "clean": true,
+      "expected_commit": "73950ecd1d0a8c2163863dce48de272e5db7d8d8",
+      "root": "/home/ctj/cbf_ttt_tool_73950ecd"
+    },
+    "stage2_ladder": {
+      "actual_commit": "1b04d8cf55821056e1dfb3a724d3ded1a87ebffc",
+      "clean": true,
+      "expected_commit": "1b04d8cf55821056e1dfb3a724d3ded1a87ebffc",
+      "root": "/home/ctj/cbf_ttt_tool_1b04d8cf"
+    },
+    "stage2_timing": {
+      "actual_commit": "fbc02a6e6ad88834b2bb2533906264ddd670d2f3",
+      "clean": true,
+      "expected_commit": "fbc02a6e6ad88834b2bb2533906264ddd670d2f3",
+      "root": "/home/ctj/cbf_ttt_tool_fbc02a6e"
+    },
+    "upstream": {
+      "actual_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+      "clean": true,
+      "expected_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+      "root": "/home/ctj/in_place_ttt_official_be232482_resource_clean"
+    }
+  },
+  "checks": {
+    "checkout_activation_clean": true,
+    "checkout_activation_commit_exact": true,
+    "checkout_corpus_audit_fallback_clean": true,
+    "checkout_corpus_audit_fallback_commit_exact": true,
+    "checkout_ruler_256k_formal_clean": true,
+    "checkout_ruler_256k_formal_commit_exact": true,
+    "checkout_ruler_256k_resource_clean": true,
+    "checkout_ruler_256k_resource_commit_exact": true,
+    "checkout_ruler_primary_clean": true,
+    "checkout_ruler_primary_commit_exact": true,
+    "checkout_stage1_formal_clean": true,
+    "checkout_stage1_formal_commit_exact": true,
+    "checkout_stage1_ladder_clean": true,
+    "checkout_stage1_ladder_commit_exact": true,
+    "checkout_stage1_timing_clean": true,
+    "checkout_stage1_timing_commit_exact": true,
+    "checkout_stage2_formal_clean": true,
+    "checkout_stage2_formal_commit_exact": true,
+    "checkout_stage2_ladder_clean": true,
+    "checkout_stage2_ladder_commit_exact": true,
+    "checkout_stage2_timing_clean": true,
+    "checkout_stage2_timing_commit_exact": true,
+    "checkout_upstream_clean": true,
+    "checkout_upstream_commit_exact": true,
+    "hostname_exact": true,
+    "release_ruler_256k_sealed_absent": true,
+    "release_stage1_sealed_absent": true,
+    "release_stage2_sealed_absent": true,
+    "two_expected_5090_devices": true,
+    "watcher_activation_live": true,
+    "watcher_activation_script_exact": true,
+    "watcher_corpus_audit_fallback_live": true,
+    "watcher_corpus_audit_fallback_script_exact": true,
+    "watcher_ruler_256k_formal_live": true,
+    "watcher_ruler_256k_formal_script_exact": true,
+    "watcher_ruler_256k_resource_live": true,
+    "watcher_ruler_256k_resource_script_exact": true,
+    "watcher_ruler_matrix_live": true,
+    "watcher_ruler_matrix_script_exact": true,
+    "watcher_ruler_resource_live": true,
+    "watcher_ruler_resource_script_exact": true,
+    "watcher_stage1_formal_live": true,
+    "watcher_stage1_formal_script_exact": true,
+    "watcher_stage1_ladder_live": true,
+    "watcher_stage1_ladder_script_exact": true,
+    "watcher_stage1_timing_live": true,
+    "watcher_stage1_timing_script_exact": true,
+    "watcher_stage2_formal_live": true,
+    "watcher_stage2_formal_script_exact": true,
+    "watcher_stage2_ladder_live": true,
+    "watcher_stage2_ladder_script_exact": true,
+    "watcher_stage2_sparse90_live": true,
+    "watcher_stage2_sparse90_script_exact": true,
+    "watcher_stage2_timing_live": true,
+    "watcher_stage2_timing_script_exact": true
+  },
+  "created_at_utc": "2026-10-18T20:43:23.020307+00:00",
+  "gpus": [
+    {
+      "index": 0,
+      "memory_total_mib": 32607,
+      "name": "NVIDIA GeForce RTX 5090"
+    },
+    {
+      "index": 1,
+      "memory_total_mib": 32607,
+      "name": "NVIDIA GeForce RTX 5090"
+    }
+  ],
+  "hostname": "user-Super-Server",
+  "passed": true,
+  "protocol": "in_place_ttt_active_chain_integrity_v1",
+  "script_sha256": "2f8fdc682ebf874e0af25e61ef0e0987e727c329202ef2c9c157ea995db3f831",
+  "sealed_releases": {
+    "ruler_256k": {
+      "exists": false,
+      "path": "/home/ctj/in_place_ttt_2x5090_ruler_256k_formal_release_a0375e93_20261018.json"
+    },
+    "stage1": {
+      "exists": false,
+      "path": "/home/ctj/in_place_ttt_2x5090_100m_stage1_release_3c7e29fc_20261018.json"
+    },
+    "stage2": {
+      "exists": false,
+      "path": "/home/ctj/in_place_ttt_2x5090_100m_stage2_release_73950ecd_20261018.json"
+    }
+  },
+  "watchers": {
+    "activation": {
+      "live": true,
+      "pid": 1408519,
+      "script": "/home/ctj/cbf_ttt_tool_f14cb715/scripts/watch_and_run_in_place_ttt_2x5090_activation.sh",
+      "script_in_argv": true,
+      "script_sha256": "4e768adca8e3d30b57cf0a5c17f9c2f985ce1690fe4435037ca0591a55e6af38"
+    },
+    "corpus_audit_fallback": {
+      "live": true,
+      "pid": 1605091,
+      "script": "/home/ctj/cbf_ttt_tool_990da145/scripts/watch_and_run_in_place_ttt_public_corpus_streaming_audit.py",
+      "script_in_argv": true,
+      "script_sha256": "e70ca61a3df4a390bf8dabb01ee77e76d1c619d71174f4e64f0633723d28d265"
+    },
+    "ruler_256k_formal": {
+      "live": true,
+      "pid": 1435576,
+      "script": "/home/ctj/cbf_ttt_tool_a0375e93/scripts/watch_and_run_in_place_ttt_2x5090_ruler_256k.sh",
+      "script_in_argv": true,
+      "script_sha256": "082982d4620c5308596073fbf08345c6bdaf8de174b8abcb4276983623d65fda"
+    },
+    "ruler_256k_resource": {
+      "live": true,
+      "pid": 1431971,
+      "script": "/home/ctj/cbf_ttt_tool_b33b93ac/scripts/watch_and_run_in_place_ttt_2x5090_ruler_256k_resource.sh",
+      "script_in_argv": true,
+      "script_sha256": "0ff1990891f90434bed1f92096fca01f8fdbca3150fd94e68354ce7be76120ef"
+    },
+    "ruler_matrix": {
+      "live": true,
+      "pid": 1430137,
+      "script": "/home/ctj/cbf_ttt_tool_439fcea1/scripts/watch_and_run_in_place_ttt_2x5090_ruler_matrix.sh",
+      "script_in_argv": true,
+      "script_sha256": "253e3596000afd74a5c66eb43fba5ee551d45f38661e74bc41ca9f89cd427424"
+    },
+    "ruler_resource": {
+      "live": true,
+      "pid": 1430098,
+      "script": "/home/ctj/cbf_ttt_tool_439fcea1/scripts/watch_and_run_in_place_ttt_2x5090_ruler_resource_ladder.sh",
+      "script_in_argv": true,
+      "script_sha256": "37f39089fced8600ba98abce57156b72486376da43ced8a8422a265ebd374346"
+    },
+    "stage1_formal": {
+      "live": true,
+      "pid": 1422180,
+      "script": "/home/ctj/cbf_ttt_tool_3c7e29fc/scripts/watch_and_run_in_place_ttt_2x5090_100m_stage1.sh",
+      "script_in_argv": true,
+      "script_sha256": "a1c5d2a812e3d339212a0700da0d5ba7f9e8dfe13c094bbe6152cd3a1142ac10"
+    },
+    "stage1_ladder": {
+      "live": true,
+      "pid": 1411193,
+      "script": "/home/ctj/cbf_ttt_tool_bae87e6c/scripts/watch_and_run_in_place_ttt_2x5090_stage1_ladder.sh",
+      "script_in_argv": true,
+      "script_sha256": "57589fe088fac947c5c4343a466ac5a77ab7efc293e1581c3648f0e9eafcf7db"
+    },
+    "stage1_timing": {
+      "live": true,
+      "pid": 1412088,
+      "script": "/home/ctj/cbf_ttt_tool_56094b89/scripts/watch_and_run_in_place_ttt_2x5090_stage1_timing.sh",
+      "script_in_argv": true,
+      "script_sha256": "b09260e846def977a746e1f1502cc862e644e855ca01925be2917e6ea505d57b"
+    },
+    "stage2_formal": {
+      "live": true,
+      "pid": 1426725,
+      "script": "/home/ctj/cbf_ttt_tool_73950ecd/scripts/watch_and_run_in_place_ttt_2x5090_100m_stage2.sh",
+      "script_in_argv": true,
+      "script_sha256": "18bf8d817616562d08a31aa702700cf5e4aebb8596833e879e1b6450c96fbc28"
+    },
+    "stage2_ladder": {
+      "live": true,
+      "pid": 1424042,
+      "script": "/home/ctj/cbf_ttt_tool_1b04d8cf/scripts/watch_and_run_in_place_ttt_2x5090_stage2_ladder.sh",
+      "script_in_argv": true,
+      "script_sha256": "768c9ad8542df65d5f62fea2ed5ff7aaa38ea9f4b089d0033927ff7e115b4125"
+    },
+    "stage2_sparse90": {
+      "live": true,
+      "pid": 1666185,
+      "script": "/home/ctj/in_place_ttt_public_corpus_full_run_20261018/audit_stage2_sparse_90.py",
+      "script_in_argv": true,
+      "script_sha256": "2b2c78cfffcb3933300e1080a0cdb3f82a8912937ecc36575f4bd207536141ac"
+    },
+    "stage2_timing": {
+      "live": true,
+      "pid": 1425561,
+      "script": "/home/ctj/cbf_ttt_tool_fbc02a6e/scripts/watch_and_run_in_place_ttt_2x5090_stage2_timing.sh",
+      "script_in_argv": true,
+      "script_sha256": "dd3a8bfda6a0cbd6e4e5987c6e3c3ffddc16c1637d2e04d76a00d23b6cdb2c17"
+    }
+  }
+}

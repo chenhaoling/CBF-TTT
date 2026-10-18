@@ -2001,3 +2001,27 @@ and the frozen audit script has SHA256
 Both are archived under `remote/hku_gpu2_100m_selected_stream_20261019/`.
 This closes the finite-tier composition boundary but does not replace the
 canonical full-corpus audit or release training.
+
+## 40. Active execution-chain integrity snapshot (2026-10-19)
+
+A read-only CPU audit on `hku-gpu2` bound the complete waiting execution chain
+before any activation-offload GPU run. The clean official checkout resolved to
+upstream commit `be2324829b0e91c8fd10a74d4b43714fde6676e1`. Eleven detached
+tool checkouts for activation, both Stage-1 gates, both Stage-2 gates, formal
+training, primary RULER, separate 256K evaluation and the corpus-audit fallback
+all matched their registered commits and had empty Git status.
+
+All thirteen registered watcher PIDs were live, including the Stage-2 90%
+boundary watcher. For every process, `/proc/<pid>/cmdline` contained the exact
+expected frozen script, whose SHA256 was recorded. The host was exactly
+`user-Super-Server`; devices 0 and 1 were both 32,607-MiB RTX 5090s. The
+Stage-1, Stage-2 and formal 256K release JSON files were all absent, confirming
+that no timing review or evaluation boundary had been opened early.
+
+All 55 checks passed with `CUDA_VISIBLE_DEVICES` empty. The result has SHA256
+`6962c87fa39cbed91523bc551d8b7aa1e9da4602e8f5ae1b7178424b0b8e6315`
+and the auditor has SHA256
+`2f8fdc682ebf874e0af25e61ef0e0987e727c329202ef2c9c157ea995db3f831`;
+both are archived under `remote/hku_gpu2_active_chain_integrity_20261019/`.
+This proves waiting-chain immutability at the recorded time. It is not evidence
+that any future child run, checkpoint or metric has completed.
