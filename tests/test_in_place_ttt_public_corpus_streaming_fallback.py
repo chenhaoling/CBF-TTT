@@ -13,6 +13,24 @@ def sha(path: Path) -> str:
 
 
 class StreamingFallbackDecisionTest(unittest.TestCase):
+    def test_process_classifier_accepts_direct_python_builder(self):
+        self.assertTrue(watcher.is_active_corpus_command([
+            "/env/bin/python", "scripts/build_in_place_ttt_public_corpus.py",
+        ]))
+
+    def test_process_classifier_accepts_time_wrapped_auditor(self):
+        self.assertTrue(watcher.is_active_corpus_command([
+            "/usr/bin/time", "-v", "/env/bin/python",
+            "/repo/scripts/audit_in_place_ttt_public_corpus.py",
+        ]))
+
+    def test_process_classifier_ignores_watcher_dependency_paths(self):
+        self.assertFalse(watcher.is_active_corpus_command([
+            "/env/bin/python", "watch_and_run_streaming_audit.py",
+            "--builder", "/old/scripts/build_in_place_ttt_public_corpus.py",
+            "--streaming-auditor", "/new/scripts/audit_in_place_ttt_public_corpus.py",
+        ]))
+
     def fixture(self, root: Path):
         corpus = root / "corpus"
         tokenizer = root / "tokenizer"

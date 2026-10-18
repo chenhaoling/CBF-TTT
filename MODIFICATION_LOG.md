@@ -7233,6 +7233,7 @@ inventory-audit/tokenizer 哈希绑定正确、四个数据与 provenance 文件
 或真实检查失败均终止；watcher 绝不覆盖现有 audit。
 
 新增`tests/test_in_place_ttt_public_corpus_streaming_fallback.py`，覆盖原审计发布后失败时释放 fallback、
-活跃审计等待、合法已有 audit 直接接受、失败 audit 拒绝覆盖、发布前失败拒绝以及 completed 但缺
-audit 拒绝六条路径。fallback 成功后还会独立重查 full profile、all-true checks、manifest 绑定与注册
-auditor SHA256；下游 Stage1 timing 和正式训练继续只接受 canonical `independent_audit.json`。
+活跃审计等待、合法已有 audit 直接接受、失败 audit 拒绝覆盖、发布前失败拒绝、completed 但缺 audit
+拒绝，以及 direct、`/usr/bin/time`包装和仅作为依赖参数出现的脚本路径识别，共九条路径。fallback
+成功后还会独立重查 full profile、all-true checks、manifest 绑定与注册 auditor SHA256；下游 Stage1
+timing 和正式训练继续只接受 canonical `independent_audit.json`。

@@ -1716,6 +1716,8 @@ The fallback writes canonical `independent_audit.json` only when no canonical
 artifact exists, then independently verifies full profile, all-true checks,
 manifest binding and registered auditor identity. Existing Stage-1 timing and
 formal-training gates therefore require the same canonical passing contract.
-Six decision tests cover release after post-publication original failure,
+Nine tests cover release after post-publication original failure,
 active-auditor waiting, valid existing-audit acceptance, failed-audit refusal,
-pre-publication failure refusal and completed-without-audit refusal.
+pre-publication failure refusal, completed-without-audit refusal and exact
+active-command classification for direct, `/usr/bin/time`-wrapped and
+dependency-only auditor paths.

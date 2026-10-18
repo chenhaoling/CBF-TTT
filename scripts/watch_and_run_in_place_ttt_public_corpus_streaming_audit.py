@@ -97,6 +97,18 @@ def git_value(root: Path, *arguments: str) -> str:
     ).strip()
 
 
+def is_active_corpus_command(argv: list[str]) -> bool:
+    for index, argument in enumerate(argv):
+        if Path(argument).name not in TARGET_PROCESSES:
+            continue
+        # The fallback watcher receives builder/auditor paths as option values.
+        # Those references are dependencies, not active corpus commands.
+        if index > 0 and argv[index - 1].startswith("--"):
+            continue
+        return True
+    return False
+
+
 def corpus_processes() -> list[dict[str, Any]]:
     rows = []
     for process in Path("/proc").glob("[0-9]*"):
@@ -110,7 +122,7 @@ def corpus_processes() -> list[dict[str, Any]]:
             ]
         except (FileNotFoundError, PermissionError, ProcessLookupError):
             continue
-        if any(Path(argument).name in TARGET_PROCESSES for argument in argv):
+        if is_active_corpus_command(argv):
             rows.append({"pid": int(process.name), "argv": argv})
     return sorted(rows, key=lambda row: row["pid"])
 
