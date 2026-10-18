@@ -1538,3 +1538,14 @@ After release, the existing formal runner still revalidates the formal
 Stage-1 starts, Stage-2 ladder, full corpus, disk, host and idle GPUs. The
 watcher reports completion only for terminal state `completed_100m_stage2`
 with the exact passing paired audit and both arms.
+
+Commit `73950ecd1d0a8c2163863dce48de272e5db7d8d8` was checked out cleanly on
+`hku-gpu2`. The focused suite passed 63/63 and Bash syntax passed. A negative
+run with a deliberately missing Stage-2 timing tmux handle exited 6 in state
+`stage2_timing_watcher_handle_missing`, created no formal output and left GPU
+0/1 at 46/18 MiB with zero utilization. The validated watcher is live in tmux
+session `baseline_2x5090_formal_stage2_73950ecd_20261018`; at
+`2026-10-18T12:51:11+08:00`, pane PID 1426724 was live, state was
+`waiting_for_audited_stage2_timing`, the explicit release was absent, and the
+corpus partial directory was 58 GB. Evidence is stored under
+`remote/hku_gpu2_formal_stage2_watcher_tooling_20261018/`.

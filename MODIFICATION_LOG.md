@@ -7107,3 +7107,12 @@ runner、独立auditor、release helper与计划，并监控Stage2 timing watche
 
 release通过后仍复用原有formal Stage2 runner的Stage1起点、ladder、完整语料、磁盘、主存和GPU门槛；
 只有`completed_100m_stage2`终态、精确paired audit协议、空errors和双臂均通过才报告完成。
+
+commit `73950ecd1d0a8c2163863dce48de272e5db7d8d8`已在`hku-gpu2`建立clean checkout；focused
+suite 63/63与Bash语法通过。刻意缺失Stage2 timing tmux handle的负向预检exit 6，状态为
+`stage2_timing_watcher_handle_missing`，没有创建正式final/partial输出，两卡保持46/18MiB、利用率0%。
+真实watcher已在tmux session
+`baseline_2x5090_formal_stage2_73950ecd_20261018`启动；2026-10-18 12:51:11 HKT时pane PID
+1426724存活，状态为`waiting_for_audited_stage2_timing`，显式release不存在，语料partial为58GB。
+证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_formal_stage2_watcher_tooling_20261018/`。
