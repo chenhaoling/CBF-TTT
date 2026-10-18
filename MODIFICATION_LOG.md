@@ -6893,3 +6893,9 @@ child的model path/model-config/config hash，并复用边界验证器重新检�
 新增`tests/test_in_place_ttt_2x5090_stage2_ladder.py`，覆盖Stage-1 HF manifest漂移拒绝和完整四
 child按臂绑定正向fixture。baseline focused suite现为49/49通过。该路径仅准备代码；正式Stage-1
 尚未运行，因此没有释放或启动Stage-2 GPU任务。
+
+commit `4860ea6ed695caf78df6843c3b72d6206227ad47`在`hku-gpu2`建立clean detached checkout，
+Stage-2专项2/2测试与Bash语法通过。使用未来formal Stage-1 root的负向预检exit 1，未创建ladder
+output，两卡保持46/18MiB和0%。2026-10-18 11:11:47 HKT语料PID与三个上游watcher仍存活/
+等待。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_ladder_tooling_20261018/`。

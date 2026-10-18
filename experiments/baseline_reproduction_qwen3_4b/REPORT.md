@@ -1228,3 +1228,10 @@ GPU/host and dependency gates through the independent boundary validator.
 Two tests cover stale Stage-1 manifests and a complete arm-specific four-child
 fixture. The full focused baseline suite passes 49/49 tests. This path is
 prepared only; formal Stage 1 has not run, so no Stage-2 GPU work is released.
+
+Commit `4860ea6e` was checked out cleanly on `hku-gpu2`; the focused Stage-2
+tests passed 2/2 and Bash syntax passed. A negative preflight with a future
+formal Stage-1 root exited 1, created no ladder output and left both GPUs at
+46/18 MiB and 0%. The corpus PID and three upstream watcher states were still
+live/waiting at `2026-10-18T11:11:47+08:00`. Evidence is stored under
+`remote/hku_gpu2_stage2_ladder_tooling_20261018/`.
