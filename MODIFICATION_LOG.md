@@ -7041,3 +7041,14 @@ baseline计数为63。未启动GPU；证据归档于
 只接受精确Stage1协议、`accepted=true`、绑定timing audit SHA256、`stage=stage1`及非空reviewer/
 decision note的原子文件。随后才调用正式双臂runner，并要求exit 0、`completed_100m_stage1`状态及
 通过的独立paired audit后报告完成。所有路径均为opt-in，baseline原入口不变。
+
+commit `3c7e29fc33cbb781090db6792e4fef42dec6dbcf`在`hku-gpu2`建立clean checkout后，完整
+focused suite 63/63及watcher Bash语法通过。使用刻意不存在的timing tmux handle执行负向预检时
+exit 6、状态为`stage1_timing_watcher_handle_missing`，在CUDA前停止且未创建正式训练final/
+partial输出。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_formal_stage1_watcher_tooling_20261018/`。
+
+验证后的watcher已在tmux session
+`baseline_2x5090_formal_stage1_3c7e29fc_20261018`启动。2026-10-18 12:25:20 HKT时pane
+PID 1422177与上游timing session均存活，状态为`waiting_for_audited_stage1_timing`；显式release、
+正式final和partial输出均不存在，两卡仍为46/18MiB和0%利用率。

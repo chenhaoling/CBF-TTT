@@ -1451,3 +1451,17 @@ release. It requires the exact Stage-1 protocol, `accepted=true`, the timing
 audit SHA256, `stage=stage1`, reviewer and decision note. Only then does it
 call the formal paired runner. It records the runner exit code and requires
 the terminal paired state and independent audit before reporting completion.
+
+Commit `3c7e29fc33cbb781090db6792e4fef42dec6dbcf` was checked out cleanly on
+`hku-gpu2`. The complete focused suite passed 63/63 and watcher Bash syntax
+passed. A negative run with a deliberately missing timing tmux handle exited
+6 with state `stage1_timing_watcher_handle_missing`, before CUDA and without
+creating final or partial training output. Evidence is stored under
+`remote/hku_gpu2_formal_stage1_watcher_tooling_20261018/`.
+
+The validated watcher is now live in tmux session
+`baseline_2x5090_formal_stage1_3c7e29fc_20261018`. At
+`2026-10-18T12:25:20+08:00`, its pane PID 1422177 and the upstream timing
+session were live, its state was `waiting_for_audited_stage1_timing`, the
+explicit release was absent, neither final nor partial training output
+existed, and GPU 0/1 remained at 46/18 MiB and 0% utilization.
