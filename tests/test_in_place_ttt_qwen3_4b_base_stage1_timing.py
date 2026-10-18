@@ -27,6 +27,8 @@ class CorrectedBaseStage1TimingTest(unittest.TestCase):
         self.assertIn("completed_corrected_stage1_ladder", text)
         self.assertIn('EXPECTED_HOSTNAME=${EXPECTED_HOSTNAME:-user-Super-Server}', text)
         self.assertIn('EXECUTION_ADDENDUM="$STAGE1_PLAN"', text)
+        self.assertGreater(text.index('test -s "$CORPUS_AUDIT"'),
+                           text.index("completed_corrected_stage1_ladder)"))
 
     def test_wrapper_audit_fails_closed_when_inputs_are_missing(self):
         with tempfile.TemporaryDirectory() as temporary:

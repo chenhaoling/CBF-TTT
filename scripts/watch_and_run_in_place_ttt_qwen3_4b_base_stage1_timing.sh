@@ -38,13 +38,13 @@ test -z "$(git -C "$UPSTREAM_REPO" status --short)"
 test "$(git -C "$TOOL_REPO" rev-parse HEAD)" = "$TOOL_COMMIT"
 test -z "$(git -C "$TOOL_REPO" status --short)"
 for path in "$PYTHON_BIN" "$MODEL/config.json" "$MODEL_IDENTITY" \
-  "$CORPUS_AUDIT" "$TIMING_PLAN" "$STAGE1_PLAN" "$RUNNER" \
+  "$TIMING_PLAN" "$STAGE1_PLAN" "$RUNNER" \
   "$WRAPPER_AUDITOR"; do test -s "$path"; done
 
 mkdir -p "$WATCH_ROOT"
 sha256sum "$0" "$RUNNER" "$WRAPPER_AUDITOR" \
   "$TOOL_REPO/scripts/audit_in_place_ttt_2x5090_stage1_timing.py" \
-  "$MODEL/config.json" "$MODEL_IDENTITY" "$CORPUS_AUDIT" \
+  "$MODEL/config.json" "$MODEL_IDENTITY" \
   "$TIMING_PLAN" "$STAGE1_PLAN" > "$WATCH_ROOT/frozen_inputs.sha256"
 
 write_state() {
@@ -78,6 +78,8 @@ while true; do
     completed_corrected_stage1_ladder)
       test "$(cat "$LADDER_ROOT/state.txt")" = completed_stage1_ladder
       test -s "$LADDER_AUDIT"
+      test -s "$CORPUS_ROOT/manifest.json"
+      test -s "$CORPUS_AUDIT"
       "$PYTHON_BIN" - "$LADDER_AUDIT" <<'PY'
 import json, pathlib, sys
 audit = json.loads(pathlib.Path(sys.argv[1]).read_text())
@@ -86,6 +88,8 @@ if (audit.get("protocol")
         or audit.get("passed") is not True):
     raise SystemExit("corrected Stage-1 ladder audit did not pass")
 PY
+      sha256sum "$CORPUS_ROOT/manifest.json" "$CORPUS_AUDIT" \
+        "$LADDER_AUDIT" > "$WATCH_ROOT/released_inputs.sha256"
       break
       ;;
     failed_*|invalid_*|timed_out_*|upstream_*|level_a_handle_missing)
