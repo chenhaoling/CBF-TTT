@@ -7909,3 +7909,23 @@ GPU0/1仅占46/18 MiB，利用率均为0%。证据归档于
 报告watcher已在`hku-gpu2`注册，状态为`waiting_for_corrected_table1_inputs`，tmux PID 1705532；JSON、Markdown和
 独立audit均不存在。07:13快照中GPU0/1仅占46/18 MiB且利用率为0%。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_table1_report_registration_20261019/`。
+
+## 2026-10-19：corrected Base 论文规模可行性结论链
+
+新增并在 corrected Stage-1/Stage-2 实测计时出现前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_SCALE_FEASIBILITY_PLAN.md`。该计划把论文规模固定为每个模型 Stage-1
+20B token、Stage-2 15B token；匹配的 no-TTT/native-TTT 两臂顺序执行合计处理 70B token。当前正式小规模层级仍为
+每臂 56,623,104 个 Stage-1 token 与 41,943,040 个 Stage-2 token，不能重标为论文规模。
+
+新增 `scripts/summarize_in_place_ttt_qwen3_4b_base_scale_feasibility.py`、
+`scripts/audit_in_place_ttt_qwen3_4b_base_scale_feasibility.py` 与
+`scripts/watch_and_prepare_in_place_ttt_qwen3_4b_base_scale_feasibility.sh`。reporter只接受通过独立审计的 corrected
+32K/128K timing artifact，复核每臂吞吐与已有小规模投影，再计算各阶段、单模型和两臂顺序执行的论文规模时长，
+同时报告压缩到30天或90天所需的吞吐倍数。auditor独立重算JSON与确定性Markdown并要求完全一致。输出明确记录
+`paper_scale_executed=false`、`projection_only=true`和`gate_experiment_started=false`。
+
+本机及 `hku-gpu2` 精确提交 `4e60608f0c1dbae4ce949b80ebfc82f7ca5fd3e0` 均通过12/12组合测试，远端
+显式隐藏CUDA。CPU-only watcher已在 `hku-gpu2` 注册，状态为
+`waiting_for_corrected_stage1_and_stage2_timing`，tmux PID 1707093；scale JSON/Markdown仍不存在。07:19快照中
+GPU0/1仅占46/18 MiB且利用率均为0%，所有GPU工作仍严格限制在`hku-gpu2`。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_scale_feasibility_registration_20261019/`。

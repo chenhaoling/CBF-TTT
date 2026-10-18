@@ -2686,3 +2686,33 @@ Evidence is archived under
 The future summary will set `baseline_evidence_complete=true` only after all
 seven contexts pass, while retaining `gate_experiment_started=false`. It does
 not automatically start update admission or open any sealed test.
+
+## 59. Corrected Base paper-scale feasibility conclusion chain (2026-10-19)
+
+The resource-constrained matched tier processes 56,623,104 Stage-1 tokens and
+41,943,040 Stage-2 tokens per arm. It cannot by itself answer whether the
+paper-scale public-data curriculum is feasible on the user-restricted host.
+The new pre-outcome plan therefore fixes the target at 20B Stage-1 and 15B
+Stage-2 tokens per model. Because no-TTT and native-TTT are matched arms, the
+sequential pair represents 70B processed tokens in total.
+
+The reporter accepts only independently audited corrected 32K and 128K timing
+artifacts. It first revalidates per-arm throughput and the selected-tier
+projections, then derives stage, one-model and sequential-pair paper-scale
+wall times and the throughput multipliers required to finish the pair within
+30 or 90 days. A separate auditor recomputes the complete JSON and
+deterministic Markdown outputs. The protocol explicitly records
+`paper_scale_executed=false`, `projection_only=true` and
+`gate_experiment_started=false`.
+
+Commit `4e60608f0c1dbae4ce949b80ebfc82f7ca5fd3e0` passes the combined 12/12
+tests locally and in a clean `hku-gpu2` checkout with CUDA hidden. The live
+CPU-only watcher is at `waiting_for_corrected_stage1_and_stage2_timing`, tmux
+PID 1707093. Its Stage-1 and Stage-2 prerequisites still wait for their
+corrected resource ladders, so neither the JSON nor Markdown conclusion exists.
+At the 07:19 snapshot GPU0/1 used 46/18 MiB at 0% utilization. Evidence is
+archived under
+`remote/hku_gpu2_qwen3_4b_base_scale_feasibility_registration_20261019/`.
+
+This chain performs no training and grants no release. Every future GPU run
+remains restricted to `hku-gpu2`.

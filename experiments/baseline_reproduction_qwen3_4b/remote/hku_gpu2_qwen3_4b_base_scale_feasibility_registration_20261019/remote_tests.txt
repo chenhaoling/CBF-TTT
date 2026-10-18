@@ -1,0 +1,17 @@
+test_plan_and_watcher_are_projection_only (tests.test_in_place_ttt_qwen3_4b_base_scale_feasibility.CorrectedBaseScaleFeasibilityTest.test_plan_and_watcher_are_projection_only) ... ok
+test_projection_and_independent_recomputation (tests.test_in_place_ttt_qwen3_4b_base_scale_feasibility.CorrectedBaseScaleFeasibilityTest.test_projection_and_independent_recomputation) ... ok
+test_plan_freezes_host_order_steps_and_release_boundary (tests.test_in_place_ttt_qwen3_4b_base_stage1_timing.CorrectedBaseStage1TimingTest.test_plan_freezes_host_order_steps_and_release_boundary) ... ok
+test_watcher_has_valid_bash_and_fail_closed_dependencies (tests.test_in_place_ttt_qwen3_4b_base_stage1_timing.CorrectedBaseStage1TimingTest.test_watcher_has_valid_bash_and_fail_closed_dependencies) ... ok
+test_wrapper_audit_fails_closed_when_inputs_are_missing (tests.test_in_place_ttt_qwen3_4b_base_stage1_timing.CorrectedBaseStage1TimingTest.test_wrapper_audit_fails_closed_when_inputs_are_missing) ... ok
+test_plan_freezes_host_order_steps_and_release_boundary (tests.test_in_place_ttt_qwen3_4b_base_stage2_timing.CorrectedBaseStage2TimingTest.test_plan_freezes_host_order_steps_and_release_boundary) ... ok
+test_watcher_has_valid_bash_and_defers_future_inputs (tests.test_in_place_ttt_qwen3_4b_base_stage2_timing.CorrectedBaseStage2TimingTest.test_watcher_has_valid_bash_and_defers_future_inputs) ... ok
+test_wrapper_audit_fails_closed_when_inputs_are_missing (tests.test_in_place_ttt_qwen3_4b_base_stage2_timing.CorrectedBaseStage2TimingTest.test_wrapper_audit_fails_closed_when_inputs_are_missing) ... ok
+test_complete_paired_fixture_passes (tests.test_in_place_ttt_2x5090_stage1_timing.TwoRTX5090Stage1TimingTest.test_complete_paired_fixture_passes) ... ok
+test_progress_uses_first_completed_trace_per_step (tests.test_in_place_ttt_2x5090_stage1_timing.TwoRTX5090Stage1TimingTest.test_progress_uses_first_completed_trace_per_step) ... ok
+test_checkpoint_in_timing_arm_is_rejected (tests.test_in_place_ttt_2x5090_stage2_timing.TwoRTX5090Stage2TimingTest.test_checkpoint_in_timing_arm_is_rejected) ... ok
+test_complete_arm_specific_timing_fixture_passes (tests.test_in_place_ttt_2x5090_stage2_timing.TwoRTX5090Stage2TimingTest.test_complete_arm_specific_timing_fixture_passes) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.016s
+
+OK
