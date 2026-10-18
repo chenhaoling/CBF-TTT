@@ -14,6 +14,8 @@ PLAN=${PLAN:?set the frozen baseline plan path}
 TOOL_REPO=${TOOL_REPO:?set the CBF-TTT tool checkout}
 ADDENDUM=${ADDENDUM:-}
 CONFIG_OVERRIDE=${CONFIG_OVERRIDE:-}
+DATA_MANIFEST=${DATA_MANIFEST:-}
+DATA_AUDIT=${DATA_AUDIT:-}
 EXPECTED_HOSTNAME=${EXPECTED_HOSTNAME:-user-Super-Server}
 UPSTREAM_COMMIT=be2324829b0e91c8fd10a74d4b43714fde6676e1
 
@@ -58,6 +60,38 @@ else
   CONFIG=$TOOL_REPO/configs/baseline_reproduction/qwen3_4b_resource_${ARM}${config_suffix}.yaml
 fi
 test -s "$CONFIG"
+if [[ -n "$DATA_MANIFEST" || -n "$DATA_AUDIT" ]]; then
+  test -n "$DATA_MANIFEST"; test -s "$DATA_MANIFEST"
+  test -n "$DATA_AUDIT"; test -s "$DATA_AUDIT"
+elif [[ "$RESOURCE_PROFILE" == "activation_offload" && "$SEQ_LEN" -gt 8192 ]]; then
+  echo "audited exact-length data is required above 8K" >&2
+  exit 2
+fi
+if [[ -n "$DATA_MANIFEST" ]]; then
+  "$PYTHON_BIN" - "$DATA" "$DATA_MANIFEST" "$DATA_AUDIT" "$SEQ_LEN" <<'PY'
+import hashlib, json, pathlib, sys
+data, manifest_path, audit_path = map(pathlib.Path, sys.argv[1:4])
+seq_len = int(sys.argv[4])
+sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+manifest, audit = json.loads(manifest_path.read_text()), json.loads(audit_path.read_text())
+saved = manifest.get("outputs", {}).get(str(seq_len), {})
+artifact = saved.get("artifact", {})
+expected_data = manifest_path.parent / artifact.get("path", "")
+audited = audit.get("outputs", {}).get(str(seq_len), {})
+if (manifest.get("protocol") != "in_place_ttt_2x5090_resource_inputs_v1"
+        or audit.get("passed") is not True
+        or audit.get("bindings", {}).get("manifest_sha256") != sha(manifest_path)
+        or data.resolve() != expected_data.resolve()
+        or artifact.get("sha256") != sha(data)
+        or artifact.get("size_bytes") != data.stat().st_size
+        or saved.get("records") != 2
+        or saved.get("training_tokens") != 2 * seq_len
+        or audited.get("artifact_sha256") != artifact.get("sha256")
+        or audited.get("records") != 2
+        or audited.get("training_tokens") != 2 * seq_len):
+    raise SystemExit("resource input manifest/audit binding is invalid")
+PY
+fi
 mkdir -p "$OUTPUT_ROOT/checkpoint"
 
 # The activation-offload path is registered only for the two RTX 5090 devices
@@ -123,9 +157,9 @@ fi
 
 "$PYTHON_BIN" - "$UPSTREAM_REPO" "$MODEL" "$DATA" "$CONFIG" "$PLAN" \
   "$OUTPUT_ROOT/run_metadata.json" "$ARM" "$SEQ_LEN" "$GLOBAL_BATCH_SIZE" \
-  "$RESOURCE_PROFILE" "$ADDENDUM" "$TOOL_REPO" <<'PY'
+  "$RESOURCE_PROFILE" "$ADDENDUM" "$TOOL_REPO" "$DATA_MANIFEST" "$DATA_AUDIT" <<'PY'
 import hashlib, importlib, json, pathlib, socket, subprocess, sys
-upstream, model, data, config, plan, output, arm, seq_len, batch, profile, addendum, tools = sys.argv[1:]
+upstream, model, data, config, plan, output, arm, seq_len, batch, profile, addendum, tools, data_manifest, data_audit = sys.argv[1:]
 sha = lambda path: hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
 root = pathlib.Path(output).parent
 offloading_path = None
@@ -149,6 +183,10 @@ metadata = {
     "sequence_length": int(seq_len), "global_batch_size": int(batch),
     "plan_sha256": sha(plan), "config_sha256": sha(config),
     "data_sha256": sha(data), "model_config_sha256": sha(pathlib.Path(model) / "config.json"),
+    "data_manifest_path": str(pathlib.Path(data_manifest).resolve()) if data_manifest else None,
+    "data_manifest_sha256": sha(data_manifest) if data_manifest else None,
+    "data_audit_path": str(pathlib.Path(data_audit).resolve()) if data_audit else None,
+    "data_audit_sha256": sha(data_audit) if data_audit else None,
     "addendum_sha256": sha(addendum) if addendum else None,
     "activation_offloading_path": str(offloading_path) if offloading_path else None,
     "activation_offloading_sha256": sha(offloading_path) if offloading_path else None,
@@ -233,13 +271,18 @@ print(json.loads(pathlib.Path(sys.argv[1]).read_text())["activation_offloading_p
 PY
 )
   set +e
+  audit_args=(
+    --root "$OUTPUT_ROOT" --plan "$PLAN" --addendum "$ADDENDUM"
+    --config "$CONFIG" --data "$DATA" --model-config "$MODEL/config.json"
+    --runner "$TOOL_REPO/scripts/run_in_place_ttt_baseline_resource_pilot.sh"
+    --summarizer "$TOOL_REPO/scripts/summarize_in_place_ttt_baseline_resource.py"
+    --offloading "$offloading_path" --output "$OUTPUT_ROOT/independent_audit.json"
+  )
+  if [[ -n "$DATA_MANIFEST" ]]; then
+    audit_args+=(--data-manifest "$DATA_MANIFEST" --data-audit "$DATA_AUDIT")
+  fi
   "$PYTHON_BIN" "$TOOL_REPO/scripts/audit_in_place_ttt_2x5090_resource.py" \
-    --root "$OUTPUT_ROOT" --plan "$PLAN" --addendum "$ADDENDUM" \
-    --config "$CONFIG" --data "$DATA" --model-config "$MODEL/config.json" \
-    --runner "$TOOL_REPO/scripts/run_in_place_ttt_baseline_resource_pilot.sh" \
-    --summarizer "$TOOL_REPO/scripts/summarize_in_place_ttt_baseline_resource.py" \
-    --offloading "$offloading_path" \
-    --output "$OUTPUT_ROOT/independent_audit.json"
+    "${audit_args[@]}"
   audit_status=$?
   set -e
 fi

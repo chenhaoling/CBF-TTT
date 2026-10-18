@@ -125,6 +125,8 @@ def summarize(root: Path, output: Path) -> dict:
             "config_sha256": metadata["config_sha256"],
             "data_sha256": metadata["data_sha256"],
             "model_config_sha256": metadata["model_config_sha256"],
+            "data_manifest_sha256": metadata.get("data_manifest_sha256"),
+            "data_audit_sha256": metadata.get("data_audit_sha256"),
             "train_log_sha256": sha256(log_path),
             "gpu_monitor_sha256": sha256(monitor_path),
             "host_monitor_sha256": sha256(host_path) if host_path.exists() else None,

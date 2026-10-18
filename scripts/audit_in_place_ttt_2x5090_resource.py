@@ -71,6 +71,8 @@ def audit(
     runner: Path,
     summarizer: Path,
     offloading: Path,
+    data_manifest: Path | None = None,
+    data_audit: Path | None = None,
 ) -> dict[str, Any]:
     errors: list[str] = []
     names = (
@@ -130,6 +132,37 @@ def audit(
         key: _file_binding(metadata, key, path, errors)
         for key, path in expected_bindings.items()
     }
+    seq_len = metadata.get("sequence_length")
+    if (data_manifest is None) != (data_audit is None):
+        errors.append("resource input manifest/audit must be supplied together")
+    if seq_len in SEQUENCE_LENGTHS and seq_len > 8192 \
+            and (data_manifest is None or data_audit is None):
+        errors.append("audited exact-length resource input is required above 8K")
+    if data_manifest is not None and data_audit is not None:
+        manifest, input_audit = (
+            json.loads(data_manifest.read_text()), json.loads(data_audit.read_text())
+        )
+        manifest_sha, audit_sha = sha256(data_manifest), sha256(data_audit)
+        saved = manifest.get("outputs", {}).get(str(seq_len), {})
+        artifact = saved.get("artifact", {})
+        audited = input_audit.get("outputs", {}).get(str(seq_len), {})
+        if (manifest.get("protocol") != "in_place_ttt_2x5090_resource_inputs_v1"
+                or input_audit.get("passed") is not True
+                or input_audit.get("bindings", {}).get("manifest_sha256") != manifest_sha
+                or metadata.get("data_manifest_sha256") != manifest_sha
+                or metadata.get("data_audit_sha256") != audit_sha
+                or metadata.get("data_manifest_path") != str(data_manifest.resolve())
+                or metadata.get("data_audit_path") != str(data_audit.resolve())
+                or data.resolve() != (data_manifest.parent / artifact.get("path", "")).resolve()
+                or artifact.get("sha256") != sha256(data)
+                or saved.get("records") != 2
+                or saved.get("training_tokens") != 2 * seq_len
+                or audited.get("artifact_sha256") != artifact.get("sha256")
+                or audited.get("records") != 2
+                or audited.get("training_tokens") != 2 * seq_len):
+            errors.append("resource input manifest/audit binding is invalid")
+        observed_bindings["data_manifest_sha256"] = manifest_sha
+        observed_bindings["data_audit_sha256"] = audit_sha
     dependencies = summary.get("dependencies", {})
     for key, digest in observed_bindings.items():
         if dependencies.get(key) != digest:
@@ -228,6 +261,8 @@ def main() -> None:
     parser.add_argument("--runner", type=Path, required=True)
     parser.add_argument("--summarizer", type=Path, required=True)
     parser.add_argument("--offloading", type=Path, required=True)
+    parser.add_argument("--data-manifest", type=Path)
+    parser.add_argument("--data-audit", type=Path)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     paths = {key: value.expanduser().resolve() for key, value in vars(args).items()

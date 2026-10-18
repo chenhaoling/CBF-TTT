@@ -124,6 +124,18 @@ class TwoRTX5090ResourceAuditTest(unittest.TestCase):
             self.assertFalse(result["passed"])
             self.assertTrue(any("conflict list" in error for error in result["errors"]))
 
+    def test_longer_boundary_requires_audited_exact_length_input(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            paths = self.fixture(root)
+            metadata_path = root / "run_metadata.json"
+            metadata = json.loads(metadata_path.read_text())
+            metadata["sequence_length"] = 16384
+            metadata_path.write_text(json.dumps(metadata))
+            result = audit(root, **paths)
+            self.assertFalse(result["passed"])
+            self.assertTrue(any("exact-length" in error for error in result["errors"]))
+
 
 if __name__ == "__main__":
     unittest.main()
