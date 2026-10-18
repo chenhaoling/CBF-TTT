@@ -6806,3 +6806,9 @@ data manifest与audit，否则启动前exit 2；metadata和summary同步记录�
 fixture在final发布前后均可独立重审。完整baseline focused suite为43/43通过，`bash -n`和
 `git diff --check`通过。该提交只建立受审计的下一步入口，没有启动16K/32K GPU进程；正式语料
 builder仍是硬阻塞，后续所有GPU执行只允许在`hku-gpu2`上进行。
+
+新增`scripts/watch_and_run_in_place_ttt_2x5090_stage1_ladder.sh`，用于在不分配CUDA显存的
+情况下等待既有8K tmux任务。它每轮保存8K状态和tmux pane handle；handle消失、8K失败/无效、
+超时或独立prerequisite审计失败都会终止。只有`completed_8k_both_arms`且重新审计通过后才调用
+Stage-1 ladder。watcher和被调用runner均再次硬核对`user-Super-Server`、clean immutable
+checkout及冻结输入，不能把任务重定向到其他GPU服务器。

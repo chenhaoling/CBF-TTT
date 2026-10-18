@@ -1080,3 +1080,12 @@ The complete focused baseline suite passes 43/43 tests; Bash syntax and
 `git diff --check` also pass. No 16K/32K GPU process has been launched. The
 formal corpus builder remains the current hard blocker, and all future GPU
 execution is restricted to `hku-gpu2`.
+
+An additional opt-in handoff watcher,
+`scripts/watch_and_run_in_place_ttt_2x5090_stage1_ladder.sh`, can wait without
+allocating CUDA memory for the existing 8K tmux handle. It records the live
+tmux pane handle and upstream state on every poll. A missing handle, terminal
+8K failure, timeout or independently invalid 8K result is terminal; only the
+audited `completed_8k_both_arms` state launches the Stage-1 ladder. The watcher
+and ladder both independently enforce the `hku-gpu2` hostname and immutable
+clean checkouts, so the handoff cannot redirect work to another GPU host.
