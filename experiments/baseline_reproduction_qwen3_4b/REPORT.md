@@ -2348,3 +2348,14 @@ positive five-step projection, and records `formal_release_created=false`.
 Three tests cover plan/order/release scope, Bash syntax with deferred inputs,
 and missing-input failure closure. Registration starts no GPU child and does
 not release formal Stage 2, RULER or update-admission work.
+
+Commit `80c414c7232dfb33abe2b4f5294bf8b8fd49a042` is pushed and passes 98
+focused tests in a clean detached `hku-gpu2` worktree with all GPUs hidden;
+five environment-specific tests are skipped. Python compilation, Bash syntax,
+diff and clean-worktree checks also pass. The CPU-only watcher is live in tmux
+`baseline_qwen3_4b_base_stage2_timing_80c414c7_20261019`, with watch root
+`/home/ctj/in_place_ttt_qwen3_4b_base_stage2_timing_80c414c7_20261019.watch`.
+Its initial state is `waiting_for_corrected_stage2_ladder`, the timing result
+root is absent, and GPU0/1 remain at 46/18 MiB with 0% utilization. Evidence
+is archived under
+`remote/hku_gpu2_qwen3_4b_base_stage2_timing_watcher_20261019/`.

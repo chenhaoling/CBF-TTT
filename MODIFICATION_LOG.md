@@ -7670,3 +7670,12 @@ Stage-2 ladder audit、完整语料、plans、configs及既有runner/auditor绑�
 五步投影。输出显式包含`formal_release_created=false`；watcher不会自动签发正式Stage-2。新增三项计划、
 Bash语法/延迟输入和失败关闭测试。注册阶段没有启动新的GPU child，也没有开放正式Stage-2、RULER或
 “是否更新”门控实验。
+
+冻结提交`80c414c7232dfb33abe2b4f5294bf8b8fd49a042`已推送，并在`hku-gpu2`的clean detached
+worktree中以`CUDA_VISIBLE_DEVICES=""`通过98项专项测试（5项按远程环境跳过）、Python编译、Bash语法和
+diff检查。CPU-only watcher已在tmux
+`baseline_qwen3_4b_base_stage2_timing_80c414c7_20261019`启动，watch root为
+`/home/ctj/in_place_ttt_qwen3_4b_base_stage2_timing_80c414c7_20261019.watch`。启动状态为
+`waiting_for_corrected_stage2_ladder`，timing result root不存在；GPU0/1分别只占46/18 MiB且利用率0%。
+证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_stage2_timing_watcher_20261019/`。
