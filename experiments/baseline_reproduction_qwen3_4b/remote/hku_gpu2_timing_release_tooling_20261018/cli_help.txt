@@ -1,0 +1,18 @@
+usage: create_in_place_ttt_2x5090_timing_release.py [-h] --stage
+                                                    {stage1,stage2}
+                                                    --timing-audit
+                                                    TIMING_AUDIT --output
+                                                    OUTPUT [--accept]
+                                                    [--reviewed-by REVIEWED_BY]
+                                                    [--decision-note DECISION_NOTE]
+
+Review an audited timing pilot and explicitly release formal 2x5090 training.
+
+options:
+  -h, --help            show this help message and exit
+  --stage {stage1,stage2}
+  --timing-audit TIMING_AUDIT
+  --output OUTPUT
+  --accept
+  --reviewed-by REVIEWED_BY
+  --decision-note DECISION_NOTE

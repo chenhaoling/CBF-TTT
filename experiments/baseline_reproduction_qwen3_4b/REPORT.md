@@ -1427,3 +1427,11 @@ decision text, refuses overwrite, and is published atomically with the exact
 Stage-1 or Stage-2 release protocol expected by the formal runner. Four tests
 cover explicit Stage-1 acceptance, no-write review mode, inconsistent timing
 rejection and the distinct Stage-2 protocol.
+
+Commit `2ac3a890d664ada87801b2b1d15232853b6e1557` was fetched on `hku-gpu2`.
+Because the SSH gateway repeatedly reset during full-worktree materialization,
+the two additive files were extracted from the exact fetched Git object into
+an isolated directory. Their 4/4 tests and direct CLI check passed. Combined
+with the unchanged 59/59 suite from the preceding clean commit, the focused
+baseline count is 63. No GPU process was launched. Evidence is stored under
+`remote/hku_gpu2_timing_release_tooling_20261018/`.

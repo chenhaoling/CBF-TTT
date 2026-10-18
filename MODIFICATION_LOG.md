@@ -7024,3 +7024,9 @@ release JSON的风险。工具核验对应timing audit协议、`passed=true`与�
 拒绝覆盖并原子发布runner要求的精确release协议。新增
 `tests/test_in_place_ttt_2x5090_timing_release.py`四项安全测试，覆盖Stage1显式接受、无accept零写入、
 不一致投影拒绝和独立Stage2协议。该工具不自动接受计时结果，也不启动GPU。
+
+commit `2ac3a890d664ada87801b2b1d15232853b6e1557`已fetch到`hku-gpu2`。SSH网关在物化完整
+约600MB worktree时连续重置，因此从已fetch的精确Git对象用`git show`提取两个纯新增文件到隔离
+验证目录；4/4新增测试和直接CLI检查通过。加上前一clean commit未改动且已通过的59/59，focused
+baseline计数为63。未启动GPU；证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_timing_release_tooling_20261018/`。
