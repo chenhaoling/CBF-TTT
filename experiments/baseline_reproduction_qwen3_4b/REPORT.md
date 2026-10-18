@@ -1877,3 +1877,36 @@ builder-to-native-dataloader representation boundary: there is no duplicate
 EOS, hidden BOS or second truncation on these registered rows. The full corpus
 still requires atomic publication and its canonical independent audit before
 any GPU gate can run.
+
+## 36. Paired data-parallel sample-order replay (2026-10-19)
+
+The no-TTT and native-TTT configs share seed 42, one corpus file, the same
+10,000-example streaming shuffle, DP size two and identical native dataloader
+settings. The pinned Datasets code derives its shuffle generator from the
+dataset seed and epoch, then splits the shuffled iterable by DP rank. Worker
+assignment only shards those prepared data sources; it does not use model
+initialization RNG to select examples.
+
+This was exercised twice in separate CPU-only launches on `hku-gpu2` with two
+Gloo ranks and the exact Stage-1 batch structure: 32K, global batch 64,
+microbatch one, `rmpad=false`, seed 42 and configured `num_workers=2`. Each
+rank returned 32 one-example microbatches. In both launches, the ordered 32
+training-token hashes on rank 0 matched exactly, as did the ordered 32 hashes
+on rank 1. The two rank streams were disjoint; all 64 hashes were unique and
+all resolved to rows in the audited pilot provenance. The two structured run
+artifacts were byte-identical with SHA256
+`1030083c664521b56decdb8a9415af1c13c3f002c8544db2c34dbd80c590e0db`.
+
+Because the corpus is supplied as one JSONL, Datasets exposes one shard and
+automatically stops one of the two configured workers in each rank. Thus the
+actual loader has one effective worker per rank. This does not change paired
+ordering, but any throughput claim must use the measured timing gate rather
+than assuming two active workers per rank.
+
+The comparison passed every registered probe condition and has SHA256
+`a8a93b7e8924b73ed24c4a40280db259be4dfc83d952d67a27a934a207c0c5e0`.
+The script, both runs and comparison are archived under
+`remote/hku_gpu2_dataloader_pairing_20261019/`. No GPU was visible to the
+process. This confirms the deterministic pairing mechanism and one complete
+pilot global batch; the formal audits must still bind the published full
+corpus and completed checkpoints.

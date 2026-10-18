@@ -1,0 +1,371 @@
+{
+  "bindings": {
+    "data_loader_sha256": "8703db9609006855d1fc1bd61896052012d4bfab4413fd53c25639ae959f1c42",
+    "data_transform_sha256": "3c00a78a5882b870ecd0e1f678dd2d1904132facf1704565914dd45a8d24fb0f",
+    "dataset_sha256": "52a1a7361d3da5214b83ee2948272c700fbbe9394fca7b6077477ea700004f69",
+    "probe_sha256": "23864c40bef8b260b2a883a7694e9d611a2e1dd93139912c07a84706b30d59bf",
+    "train_path_sha256": "248781bcad58f50fae650b48ff7a71894990cead3de3107b796f7f551c7f6083",
+    "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1"
+  },
+  "cuda_visible_devices": "",
+  "global_batch_size": 64,
+  "hostname": "user-Super-Server",
+  "max_seq_len": 32768,
+  "num_workers": 2,
+  "passed": true,
+  "protocol": "in_place_ttt_native_dataloader_pairing_probe_v1",
+  "ranks": [
+    {
+      "attention_all_one": true,
+      "input_shapes": [
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ]
+      ],
+      "labels_equal_inputs": true,
+      "micro_batch_count": 32,
+      "ordered_token_hashes": [
+        "7b994e243924e6c5a26fcf1b5b4dc50d97a711fd06c045cdc44897a200eec8e2",
+        "5b3421fa893de9385149e86742488406241c6dc42608f6365b284f902cc70cf3",
+        "aefd1bfd0aa306d8462a538af4b5844655a63bc30fc09e7979086ed533c90b09",
+        "567cd2008ba0ebe007e0311f348fd3f88b4a17d2a4cd18916973ae6534ecd936",
+        "caa286076e111ec949360a3ad053101718e8da1b0037da778455d61a1a1055a0",
+        "4fabadb4ca1816d0910b41f42e56563862715f490d7ab1b7aa5551137c006cce",
+        "9cddc672412db33d7a6077a184007d7556c389700f15e2d8820104b8bd9ce48f",
+        "613861808f66a5d475e51e93bdc680ec28e88a9490ac79756f39548056691393",
+        "b20a4f0eec4851ad2e6f997c1f9a08c031287bf9e7228e0dde4f69c46d31da0e",
+        "8d4332aedb4098c035a25df1c4d56c6780433cb8b21a7321a7133188367b2f5c",
+        "3d6cec710eeffbdcf213f35b8acc1ff21492025cf79cb2d3445e05c128c85d8a",
+        "4f5f5848bbd78f12b7989c62101d193f1d3302df621836918fd1eb315d4578f9",
+        "f141cc6e56646ff0888acc8b8694a01aed3d5c91678a63cb9fa6584e54e5ecac",
+        "98466d5733a204cd6fca07cbf58da0209a610b4f2fe8b321393582b06468346e",
+        "cd5806e9fa343868031d6156a039b54a869f259f4a806108894f172ae38db9aa",
+        "da47dafa48b2e5de69c76f796449eab59da8ec538aa66fe7de686ef30e9d9437",
+        "cda56ff6e4c6f4d01579271e1a85ee09ce5bbf3dd0a8a7f91538da8e1d1e061a",
+        "64c6e2ece2513270c75892b3a7d7403bb0b8e658160d8e51db502777582deda0",
+        "6aa827d02c3f85e1ae952f562fabb8f8d93169dd83255372730298b06e53f205",
+        "c403a797435f672f7a44b80b06859be455a851bfcb772c5d93646f861cd20b82",
+        "cd989a49feeb0e711d12434cdd7c026e1480780a2d01a3ef3b2c65e8b5fe0728",
+        "2003f3bbd78b6705666ea78c6aacdc1b2c74cfec2a9839358b076cb445a9ccb9",
+        "d029ab26da9d53bbeb8c70e2b0ecd8a39021e5be3b17100d9be47858832af3f5",
+        "c4b9b0d365cfd75edbc7d14b7e71c4958ba15b88d5e9c8c8255b0441f40a80b8",
+        "ba57f6381e3b6a8bb792595d422c99b4e0044a4e5fdbc1e04a97fa34979b57ae",
+        "b14e71e03cd4e02a5cacbcd8855e5bc03c8eb708dd6f0de2427e1f1123edb080",
+        "676b0cb01c1a4610f48ca77eb07ad7f009914448f9c2246db85b6e1bf2052f52",
+        "4bc9daacb0a2963ec75b273120631b15b5668a1aa3ae982373c7a8681e962eac",
+        "8f35ad29c33f159ae9ee4152a5e3e33965b0684d568d8203da717a8e98fd0909",
+        "d4f6fecd292a27f92173b5921cc8ade4283c3dd83a4c640d0fd8ed0eecdc5f1d",
+        "f509664f435c7163c464eff100025d9db12c90abac71872d8fec3a48695f5e43",
+        "6f02ade588f45f2af3fd2d958847763cfc39cc25fa621ec4c4eda9d830d63522"
+      ],
+      "rank": 0,
+      "terminal_is_eos": true
+    },
+    {
+      "attention_all_one": true,
+      "input_shapes": [
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ],
+        [
+          1,
+          32768
+        ]
+      ],
+      "labels_equal_inputs": true,
+      "micro_batch_count": 32,
+      "ordered_token_hashes": [
+        "d8f2c91ec768461316dcfa7f24dda104ff73d48b8b3dbc8a189036e5f27fc6d2",
+        "6a3b30e2e6059162a5221b3c15298614b2f1a07c839b7910a2b260fbd3c9575d",
+        "e0024c97484128510a93b3a0fabfd8158e297ea7e7e7f814295ae1b0c7f2a86c",
+        "2b1c7ce30283930b5217747cae9bb95801f6a8de00926cd6a4980c8e1d31f351",
+        "ce4ef1e797666681843df760a185c1a159280554b990cb8dbccfa5f1f9c23dc2",
+        "5e6d98e4c476a43a8c3745590f569878f59bb6577d50cdd86528b8eac3df8002",
+        "200954d05a863d24a8b46fd424c3528a4b78ff7918f827e1daf70cfa3049c02b",
+        "6970a3d0704567a14eddfc8fcd6de82ca4ac342b72e53362e5e6a31a0f00a62f",
+        "a1e936aa90667a54851e55fd69e3f8e27b64d92361414f5bb5352848d2821468",
+        "a29d07fa7c5e8089949420f45677122343bae370083bda3411dbd3ab284e1b45",
+        "a0e0de4d1a22c5bbb777a55ec3c86f6fc05de0be0a4541b56fe6e06837dc50f1",
+        "7c1628b7177034eab5eb35bdab58c9a3e0faa52fbc3db243bc9f20139974ee17",
+        "4ab41923dcfb06e4a95d6b60b94535c2e992019cbdbe626fb220cee8fc22bf20",
+        "2e60471ea9de3a9d4dab432d43a7d938aa0d8f2ab92751c2ae9a29004a711650",
+        "6cc21e6fc8f3390d4ed509078a575162fbfbaffc90fa6b9b9170ea9756f29d3c",
+        "466a0acf57a738e35b102144eecbae077eea901a392caf3ca90818911d4f5f3a",
+        "6dd1e33814e97bcd4da0b96f973ff3f946d07fbccd88e5422f99370be5e4d092",
+        "33db8c4f4bd3195246e10b5c305c724b427236917791392ed56842e283dfed80",
+        "7de2cf9a0efe0488716c1743798e6f47c5c200a1002597087e65c8197821bbc7",
+        "248927fe8d653fde74cb9c5098c95958b83bfe7da3eab2d024a68849ab83ff4d",
+        "9304153cb2f1b7c6a2d4a0f69b0dd6f83f8b022ad7a5db54b012c181d70163e9",
+        "1f94c8ed220be1fad71093c798af045aed611a9546ff372917714556cc352df5",
+        "ec2a6da9b2e979693ec370d13b94b0fa2f5e55901ffa1892ec3f1a6452c56ab7",
+        "f31d0405f40133fdfe42e69b0bd9b2b2ac69ceb2a79a18e8f871f14abc86e48e",
+        "8b483988450a52e222bf82d0d566a6baf19c7a42634e566db784be51c2d20fb0",
+        "8b07f5c98788d6318cfe0abf5d3214a66594ce2491d03f33e09af30285a36457",
+        "52c40965e2990db4d5780424275c9960187c60ca406e5ec55007ef8ec32d848e",
+        "83df15585c94f5a23f91a1f7e9c0725f04b10fae5f0e641bc0313510893f50c1",
+        "52439b6098ed36aa67a738bb0f63a031d33af9280f3520606290ca1b52934dc5",
+        "d7529b086811f54a62af46f096148d9fe43fd02e52931569ce72a337092d5b5c",
+        "a18ae579db15dc6fc056ab3831aab1104a5e44332d573bafa8b2905cd9842549",
+        "75aa62de0997fd7c0b50334e71f74f45a6490015a0d591101514128367629e53"
+      ],
+      "rank": 1,
+      "terminal_is_eos": true
+    }
+  ],
+  "seed": 42,
+  "train_path": "/home/ctj/in_place_ttt_public_corpus_pilot_20261018/stage1_32k.jsonl",
+  "versions": {
+    "datasets": "2.21.0",
+    "python": "3.11.16",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.3",
+    "veomni": "0.1.0"
+  },
+  "world_size": 2
+}

@@ -7346,3 +7346,21 @@ labels与input一致，且按构建器同一little-endian uint32规则重算的�
 结果、上游commit、官方训练入口、VeOmni transform/tokenizer builder、pilot manifest及tokenizer
 资产hash。该证据关闭pilot语料到官方native dataloader的表示边界，排除了重复EOS、隐式BOS与再次
 截断；它不替代full corpus canonical audit，也不释放后续GPU训练或RULER评测。
+
+## 2026-10-19：双臂 native dataloader 样本顺序配对复验
+
+为排除no-TTT与native-TTT收益由数据顺序差异造成，在`hku-gpu2`以空
+`CUDA_VISIBLE_DEVICES`执行两次独立CPU重放。每次使用两个Gloo rank、seed 42、32K pilot、
+global batch 64、microbatch 1、`rmpad=false`及配置中的`num_workers=2`，复用固定VeOmni
+`build_dataset`、native dataloader、transform与tokenizer。没有加载模型，也没有记录原文或token ID。
+
+每次每个rank各得到32个microbatch。两次运行的rank 0有序训练token hash完全相同，rank 1也完全
+相同；两rank集合互斥，64个hash全部唯一且全部能回溯到pilot provenance。两份run JSON字节级相同，
+SHA256均为`1030083c664521b56decdb8a9415af1c13c3f002c8544db2c34dbd80c590e0db`；独立比较结果
+通过且SHA256为`a8a93b7e8924b73ed24c4a40280db259be4dfc83d952d67a27a934a207c0c5e0`。
+
+固定Datasets 2.21.0同时明确报告：单个JSONL只有一个data shard，因此每rank配置的两个worker中
+一个会停止，实际为每rank一个有效worker。该行为不破坏配对顺序，但吞吐不能按两个有效worker估算，
+必须采用后续正式timing gate实测。新增证据目录
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_dataloader_pairing_20261019/`，保存最终探针、
+双重运行、比较结果与hash说明。本轮没有使用任何GPU，也没有释放正式训练。
