@@ -268,11 +268,17 @@ def main() -> None:
     parser.add_argument("--builder", type=Path, required=True)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    values = {key: value.expanduser().resolve() for key, value in vars(args).items()
-              if isinstance(value, Path)}
-    root = values.pop("root")
-    output = values.pop("output", None) or root / "independent_audit.json"
-    result = audit(root, **values)
+    root = args.root.expanduser().resolve()
+    output = args.output.expanduser().resolve() \
+        if args.output else root / "independent_audit.json"
+    result = audit(
+        root,
+        source_root=args.source_root.expanduser().resolve(),
+        source_audit_path=args.source_audit.expanduser().resolve(),
+        tokenizer_path=args.tokenizer.expanduser().resolve(),
+        plan_path=args.plan.expanduser().resolve(),
+        builder_path=args.builder.expanduser().resolve(),
+    )
     partial = output.with_name(output.name + ".partial")
     if output.exists() or partial.exists():
         raise FileExistsError(f"refusing to overwrite {output}")

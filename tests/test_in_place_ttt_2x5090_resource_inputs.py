@@ -1,5 +1,11 @@
+import json
+import sys
+import tempfile
 import unittest
+from pathlib import Path
+from unittest import mock
 
+from scripts import audit_in_place_ttt_2x5090_resource_inputs as audit_module
 from scripts.audit_in_place_ttt_2x5090_resource_inputs import (
     SPECS as AUDIT_SPECS,
     derive_expected,
@@ -53,6 +59,25 @@ class TwoRTX5090ResourceInputsTest(unittest.TestCase):
         self.assertTrue(has_plaintext(value))
         self.assertTrue(forbidden(value))
         self.assertFalse(has_plaintext({"content_token_sha256": "abc"}))
+
+    def test_auditor_cli_maps_named_paths_without_type_error(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "missing_artifacts"
+            root.mkdir()
+            output = Path(temporary) / "audit.json"
+            argv = [
+                "audit", "--root", str(root), "--source-root", str(root),
+                "--source-audit", str(root / "source_audit.json"),
+                "--tokenizer", str(root), "--plan", str(root / "plan.md"),
+                "--builder", str(root / "builder.py"), "--output", str(output),
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch("builtins.print"), \
+                    self.assertRaises(SystemExit) as raised:
+                audit_module.main()
+            self.assertEqual(raised.exception.code, 1)
+            result = json.loads(output.read_text())
+            self.assertFalse(result["passed"])
+            self.assertIn("missing artifacts", result["errors"][0])
 
 
 if __name__ == "__main__":
