@@ -1375,3 +1375,13 @@ formal-input mismatch. The full focused baseline suite passes 59/59; all new
 Bash files parse, Python files compile and `git diff --check` passes. No RULER
 GPU process has been launched because the paired formal Stage-2 checkpoints do
 not yet exist.
+
+Commit `52775cb3` was checked out cleanly on `hku-gpu2`. The remote focused
+suite passed 59/59, all three runner scripts passed Bash syntax validation and
+all four auditor CLIs loaded successfully. Negative resource-ladder and formal
+matrix preflights both exited 1 at the absent paired formal Stage-2 prerequisite,
+before CUDA and without creating final or partial output. At
+`2026-10-18T11:47:50+08:00`, GPU 0/1 used 46/18 MiB at 0%; the public-corpus
+builder remained live with a 52-GB partial directory. Evidence is stored under
+`remote/hku_gpu2_ruler_tooling_20261018/`. All future GPU execution for this
+baseline remains restricted to `hku-gpu2`.

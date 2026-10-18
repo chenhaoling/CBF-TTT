@@ -1,0 +1,21 @@
+hostname=user-Super-Server
+captured_at=2026-10-18T11:47:50+08:00
+tests_rc=0
+tests_result=59_passed
+syntax_rc=0
+help_rc=0
+resource_negative_rc=1
+matrix_negative_rc=1
+resource_output_exists=no
+matrix_output_exists=no
+training_root_exists=no
+resource_root_exists=no
+0, NVIDIA GeForce RTX 5090, 46 MiB, 32607 MiB, 0 %
+1, NVIDIA GeForce RTX 5090, 18 MiB, 32607 MiB, 0 %
+1397987    10:56:12 87.4 4862504 /home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python scripts/build_in_place_ttt_public_corpus.py --inventory /home/ctj/in_place_ttt_public_corpus_inventory_20261018/inventory.json --inventory-audit /home/ctj/in_place_ttt_public_corpus_inventory_20261018/independent_audit.json --tokenizer /home/ctj/models/Qwen3-4B --output-root /home/ctj/in_place_ttt_public_corpus_full_20261018 --profile full --plan IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md
+RUNNING_BUILD
+started_utc=2026-10-17T16:51:37Z
+52G	/home/ctj/in_place_ttt_public_corpus_full_20261018.partial
+tmux_baseline_2x5090_activation_8k_20261018=present
+tmux_baseline_2x5090_stage1_ladder_bae87e6c_20261018=present
+tmux_baseline_2x5090_stage1_timing_56094b89_20261018=present

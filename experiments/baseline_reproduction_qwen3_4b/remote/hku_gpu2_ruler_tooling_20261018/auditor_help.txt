@@ -1,0 +1,69 @@
+usage: audit_in_place_ttt_2x5090_ruler.py [-h] --root ROOT
+                                          --public-corpus-plan
+                                          PUBLIC_CORPUS_PLAN --evaluation-plan
+                                          EVALUATION_PLAN --output OUTPUT
+
+Independently audit one 2x5090 100M-tier RULER context run.
+
+options:
+  -h, --help            show this help message and exit
+  --root ROOT
+  --public-corpus-plan PUBLIC_CORPUS_PLAN
+  --evaluation-plan EVALUATION_PLAN
+  --output OUTPUT
+usage: audit_in_place_ttt_2x5090_ruler_resource.py [-h] --root ROOT
+                                                   --public-corpus-plan
+                                                   PUBLIC_CORPUS_PLAN
+                                                   --evaluation-plan
+                                                   EVALUATION_PLAN --output
+                                                   OUTPUT
+
+Audit one one-sample 2x5090 RULER resource boundary.
+
+options:
+  -h, --help            show this help message and exit
+  --root ROOT
+  --public-corpus-plan PUBLIC_CORPUS_PLAN
+  --evaluation-plan EVALUATION_PLAN
+  --output OUTPUT
+usage: audit_in_place_ttt_2x5090_ruler_resource_ladder.py [-h] --root ROOT
+                                                          --public-corpus-plan
+                                                          PUBLIC_CORPUS_PLAN
+                                                          --evaluation-plan
+                                                          EVALUATION_PLAN
+                                                          --training-root
+                                                          TRAINING_ROOT
+                                                          --runner RUNNER
+                                                          --output OUTPUT
+
+Audit the paired 4K/32K/64K/128K 2x5090 RULER resource ladder.
+
+options:
+  -h, --help            show this help message and exit
+  --root ROOT
+  --public-corpus-plan PUBLIC_CORPUS_PLAN
+  --evaluation-plan EVALUATION_PLAN
+  --training-root TRAINING_ROOT
+  --runner RUNNER
+  --output OUTPUT
+usage: audit_in_place_ttt_2x5090_ruler_matrix.py [-h] --root ROOT
+                                                 --public-corpus-plan
+                                                 PUBLIC_CORPUS_PLAN
+                                                 --evaluation-plan
+                                                 EVALUATION_PLAN
+                                                 --training-root TRAINING_ROOT
+                                                 --resource-root RESOURCE_ROOT
+                                                 --runner RUNNER --output
+                                                 OUTPUT
+
+Independently recompute the paired 2x5090 100M-tier RULER matrix.
+
+options:
+  -h, --help            show this help message and exit
+  --root ROOT
+  --public-corpus-plan PUBLIC_CORPUS_PLAN
+  --evaluation-plan EVALUATION_PLAN
+  --training-root TRAINING_ROOT
+  --resource-root RESOURCE_ROOT
+  --runner RUNNER
+  --output OUTPUT

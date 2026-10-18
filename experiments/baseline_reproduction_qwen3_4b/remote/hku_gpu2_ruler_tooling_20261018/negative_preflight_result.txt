@@ -1,0 +1,10 @@
+protocol=hku_gpu2_ruler_negative_preflight_v1
+tool_commit=52775cb307b84de89751891f2ee99251be5ceb6f
+resource_negative_exit_code=1
+matrix_negative_exit_code=1
+expected_reason=missing_completed_paired_stage2_root
+resource_final_exists=no
+resource_partial_exists=no
+matrix_final_exists=no
+matrix_partial_exists=no
+cuda_process_launched=no

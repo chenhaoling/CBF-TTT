@@ -6987,3 +6987,11 @@ single resource模式下单独标注的外推资源决策，失败不能改变�
 resource、paired resource输入、六context matrix重算及正式paired输入不一致。baseline focused
 suite为59/59通过；所有新Bash语法、Python编译和`git diff --check`通过。正式Stage-2 checkpoint
 尚不存在，因此本次没有启动RULER GPU进程。
+
+commit `52775cb307b84de89751891f2ee99251be5ceb6f`在`hku-gpu2`建立clean detached
+checkout后，远程baseline focused suite 59/59通过，三个runner的Bash语法及四个auditor CLI均
+通过。resource ladder与formal matrix负向预检均因双臂正式Stage-2根目录尚不存在而exit 1，且在
+CUDA之前停止、未创建final/partial输出、未启动GPU进程。2026-10-18 11:47:50 HKT时GPU0/1仅
+46/18MiB、利用率0%；正式语料builder仍存活，partial为52GB。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_tooling_20261018/`。后续全部
+GPU训练与评测继续严格限制在`hku-gpu2`。
