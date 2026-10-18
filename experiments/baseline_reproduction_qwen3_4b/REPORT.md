@@ -2535,3 +2535,34 @@ had written 61,296 of 610,368 Stage-1 records. GPU0/1 used only 46/18 MiB with
 All GPU execution remains restricted to `hku-gpu2`. Test and chain snapshots
 are archived under
 `remote/hku_gpu2_qwen3_4b_base_release_transition_20261019/`.
+
+## 54. Live Base partial-corpus smoke (2026-10-19)
+
+The full corpus build is long enough that waiting for final publication to
+detect an output-schema or tokenizer error would waste substantial time.
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_PARTIAL_CORPUS_SMOKE_ADDENDUM.md` was
+therefore frozen before any live row was inspected. It defines a read-only,
+CPU-only smoke on `hku-gpu2` and explicitly leaves the final independent audit
+unchanged.
+
+The new auditor requires the exact live builder PID and command, an existing
+`.partial` root, an absent final root and hidden GPUs. It independently
+re-tokenizes the first eight FineWeb/LongCrawl pairs with the pinned Base
+tokenizer and recomputes record length, appended-EOS token hash, source order,
+indices and span accounting. It separately validates the latest 32 complete
+provenance rows. The artifact contains only paths, sizes, counts, indices and
+hashes; no corpus text, token arrays or source identities are serialized.
+
+Commit `feeef4600bb13d3956409d9dbccf1493e7d83b6e` passes 22/22 related tests
+locally and in a clean detached `hku-gpu2` checkout. The live smoke then passed
+all five checks: all first 16 rows retokenized to 32,767 content tokens and
+matched their independently recomputed training-token hashes, while recent
+provenance indices 65,323--65,354 were consecutive and valid. It took 5.32
+seconds with 648.98 MiB peak RSS under `nice -n 10` and
+`CUDA_VISIBLE_DEVICES=`. The corpus builder remained live afterward and no GPU
+work was launched. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_partial_corpus_smoke_20261019/`.
+
+This result is early fault detection only. It does not prove final counts,
+complete curriculum hashes, cross-stage continuity or atomic publication;
+formal training remains sealed until the complete independent audit passes.

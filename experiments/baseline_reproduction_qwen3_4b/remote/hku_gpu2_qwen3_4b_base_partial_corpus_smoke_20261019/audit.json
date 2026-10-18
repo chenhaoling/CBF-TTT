@@ -1,0 +1,185 @@
+{
+  "bindings": {
+    "auditor_sha256": "17a59906fe59a4b83375b0efeef50413fb229741a37247cfe98ed32162f4ff27",
+    "builder_cmdline_sha256": "882eb8788e796f0dad90d82fb4d24555fbbc97f8f2809497247fab927cc5526d",
+    "builder_pid": 1673442,
+    "builder_sha256": "925ac99e701d9aa6444e8ec0c2f329cb8200d58155e672018d6ea3c4a044ec59",
+    "host": "user-Super-Server",
+    "plan_sha256": "df90c6f692e611076c7d23af133bcdb3e0c11c7c05c9977fa7c2f4b8598573d8",
+    "tokenizer_assets": {
+      "config.json": {
+        "sha256": "304b2545a258d35620f1d4bf46940c0471d9baa00715ff8e77f84c2fca5057c1",
+        "size_bytes": 727
+      },
+      "tokenizer.json": {
+        "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "size_bytes": 7031645
+      },
+      "tokenizer_config.json": {
+        "sha256": "3c04ed3ca964ea2f6b2b5faf0dc4d31aec1cb1e8b4bcf63f402d295046b422b5",
+        "size_bytes": 9678
+      }
+    },
+    "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+  },
+  "checks": {
+    "first_records": true,
+    "live_registered_builder": true,
+    "no_plaintext_artifact": true,
+    "partial_atomicity": true,
+    "recent_provenance": true
+  },
+  "claim_boundary": "read-only partial smoke only; complete independent corpus audit remains required",
+  "errors": [],
+  "observed_files": {
+    "stage1_32k.jsonl": {
+      "size_bytes": 8914466759
+    },
+    "stage1_32k.provenance.jsonl": {
+      "size_bytes": 510540947
+    }
+  },
+  "passed": true,
+  "protocol": "in_place_ttt_qwen3_4b_base_partial_corpus_smoke_v1",
+  "recent_provenance": {
+    "first_stage_record_index": 65323,
+    "last_stage_record_index": 65354,
+    "ordered_provenance_sha256": "10337a66df293fbbf95a61fda7ab803f88268e005e835709ebb2c9ce341f5a12",
+    "records": 32
+  },
+  "resources": {
+    "cuda_visible_devices": "",
+    "peak_host_rss_mib": 648.98046875,
+    "wall_seconds": 5.32057810947299
+  },
+  "sampled_first_records": [
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "56841a8e49db0361b895b5073b9ba195f30d8cbda426390a858419449df9432b",
+      "provenance_sha256": "ef386cbc70347b79e425ec11df7a394eb8d3328c9bbd9c2f8633296f5ecc1b9c",
+      "source": "fineweb",
+      "stage_record_index": 0,
+      "training_token_sha256": "2a44e5b580049ca465f4ac11d6ccbc0bfdaaad82e0bbca3036588872aeecdd33"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "5cea9c5e2b91f6bf883b9f3a2de3a7c405eadfa251cc326821483be5bf9f2f8b",
+      "provenance_sha256": "46d74e9a31495c069ddf3dcf4a81cf685baba648778378a808e005bf4ccff633",
+      "source": "longcrawl",
+      "stage_record_index": 1,
+      "training_token_sha256": "eacdf1aedfdfd8e08687368e959eb494fe776bff1935f79d6fdb0e9b2fdc8f68"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "d62b3139fb80bf513ddd8a9b78577b5a7b224acf6d082cb50381efd545b1de53",
+      "provenance_sha256": "c225415d60fecf3c47ac5dba63ddbb2c680aaeedc7e71790ebded4f6feb78d52",
+      "source": "fineweb",
+      "stage_record_index": 2,
+      "training_token_sha256": "f9602be4a4294618db2c31af268657517258c922daa592144457ef4cb0a11caf"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "243fd46b636bafb33056891b3e012b431912af3bb12cdd73d1b8b6724e17b701",
+      "provenance_sha256": "ea76045a2d40bfd89b574a01eac67a5c61d18a899b556a6c1ab3499895399646",
+      "source": "longcrawl",
+      "stage_record_index": 3,
+      "training_token_sha256": "00d826cd88c4127657049728bc3479627ff049e177689cbfd477fd7168f3966b"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "9ae24d84688ce2b5a7eff701ee7df8cb26dabbc05c5f178c52f49d7ab2b0ee14",
+      "provenance_sha256": "477ce4d1f4730bed77cd6d5e275198bac9443e2c350382b81d90e096560ffb83",
+      "source": "fineweb",
+      "stage_record_index": 4,
+      "training_token_sha256": "0222de2da9e09375f6d015e140e1a582341bc0fab6e1442d8cc10fd414220323"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "c50eef73994a9df51189dbe7d40c67777fb108e3119d18783207d6cafd3dbfb6",
+      "provenance_sha256": "d202e2bdf2b0801263c29c9940e08a9ae4dfed4b55339236721d7de56ed7bbf7",
+      "source": "longcrawl",
+      "stage_record_index": 5,
+      "training_token_sha256": "206000ef53131fdce7b47bc0ced5047f8f166b74ba5a153b4094dcb5e8c74dbe"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "5abde31991678aa0c2f8398d339c4d11d5f68eb47e6c85f1f6ac67929808ca2f",
+      "provenance_sha256": "3f8a147e552c92c41dbcacb94ed065dd4fe2cb65e2186eec459de67a87180362",
+      "source": "fineweb",
+      "stage_record_index": 6,
+      "training_token_sha256": "892dea3df7ccd4b44b001017a72bd66c8f64984f777c038638c28df1406d6565"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "cf0abc1fc63e00a393bdc865868d20f4088781cc15b964a4ab4d03a7a1783bf3",
+      "provenance_sha256": "e7cc445e51cd0822cf60a8044367f4418bfccb0769b3a1bc3902df8ac45234ba",
+      "source": "longcrawl",
+      "stage_record_index": 7,
+      "training_token_sha256": "1d78a91fad5ff7290747c26b54ae7ed97ed7c3e8684ea5c46cc67655cd6846af"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "5d79c3e333ad78cff284ec357a4897b7cfbe46577f18239eb080a8465960d6d9",
+      "provenance_sha256": "42f1e0350c322b72d94bcadbe506f180fec8abddb839b9275c4f72c71d74e498",
+      "source": "fineweb",
+      "stage_record_index": 8,
+      "training_token_sha256": "e2360d243b320fc677cd555ba1f099a3609ba8715c9f38f9f2eca7dce73ba9a2"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "8be09ce1ed24735722b00f22ee083cbe067bdffb2f82001daa6872e6cafe6bd3",
+      "provenance_sha256": "45b2e0dfc22255a88a87c6bfd26f78c05352b666901564d88fbee77952b0636a",
+      "source": "longcrawl",
+      "stage_record_index": 9,
+      "training_token_sha256": "23c0e1fb8a93a3a13db92fe73675895257d1226c43a7c8c4d5d0c82ce27eb84f"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "b6d64fb2585dc89b2c88acfa0b54aff3a64da4689ae8feffab7e3d9cab3a8fc3",
+      "provenance_sha256": "b0ce83df6da6eabbb9e76d1abf5be3fe848c7d25983fb4ffb45afa2eff4cb8ed",
+      "source": "fineweb",
+      "stage_record_index": 10,
+      "training_token_sha256": "73dafb6e959c0012adea8fc6894ce42f23f84397e249cd1c1a5d97416707649d"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "00aceee79a2716c26443ffe44dbddf19de9e9df7c5342d91da11666f861c7733",
+      "provenance_sha256": "56ccc0f8dd4a63254224cba36718b029ba4e1bb3683c73635df01197d94f4f47",
+      "source": "longcrawl",
+      "stage_record_index": 11,
+      "training_token_sha256": "25e0c86eb1b94e88d876cc9a557b801a6aa24bd76d3c0d56e9e73273670e3f08"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "260103da6b190a47b0c007db37937070ce581ce572230ac3a72bba111b1d27fd",
+      "provenance_sha256": "404a2b62f0f5e57bbd960674d377cec8604ba2fd68141d933894db6a6d593118",
+      "source": "fineweb",
+      "stage_record_index": 12,
+      "training_token_sha256": "4f2316a5d5b5ff68660c358be4ca4e45caf6e30cfcd5d880a93b8159f41a8e79"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "535f4dbe42f60531240918a6f69afdb675a329896974b6dbcef25b7760ec05e9",
+      "provenance_sha256": "a07d0b624b7886afc9b653a3c0de212a2bef4449cdc34719786faf6d02ab7391",
+      "source": "longcrawl",
+      "stage_record_index": 13,
+      "training_token_sha256": "06b5dfad9c2ad811c84a90d698f8a96e7383c0e5ddf4bdaec1ce0b32fa537c66"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "5df5f2b389490956702bd4d3c4968eb68888a50d854eef864ef30e4ade50edde",
+      "provenance_sha256": "51cc311e4e7e353e451af26c22e4b83b4627559915c940520fe64d020108cef4",
+      "source": "fineweb",
+      "stage_record_index": 14,
+      "training_token_sha256": "680a389f2ae0019dc057007ac93b5a7bdb0eec72c9fe6bed5303318da0d5ef1d"
+    },
+    {
+      "content_tokens": 32767,
+      "data_line_sha256": "02063462ffa5b8e9b8ebf54d9ca540b918047f5ab4c2f31993ef029cb115de5a",
+      "provenance_sha256": "258af38e8e62bca5e72eba455c4e29869d7f70db9635fd9b7e7b56bbaaf2fd3c",
+      "source": "longcrawl",
+      "stage_record_index": 15,
+      "training_token_sha256": "2101c9b40c9689cbfb3f34376869b56dec1a997b6bfe37b96abed72888a1376e"
+    }
+  ]
+}

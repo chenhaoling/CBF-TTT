@@ -7814,3 +7814,21 @@ creator，不由任何watcher调用；只有人类在同一命令中显式给出
 GPU0/1仅占46/18MiB且利用率均为0%。没有创建审阅包、正式release或GPU训练任务。测试和状态证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_release_transition_20261019/`；所有
 未来GPU执行继续严格限制在`hku-gpu2`。
+
+## 2026-10-19：Base 全量语料在线只读抽样审计
+
+为避免在约一天的全量构建结束后才发现输出格式或tokenizer错误，新增并在查看partial记录前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_PARTIAL_CORPUS_SMOKE_ADDENDUM.md`。协议只允许在`hku-gpu2`隐藏GPU
+执行，要求精确builder PID仍存活、`.partial`存在且final root不存在；它不会暂停、复制、截断或写入构建目录，
+也不能替代发布后的全量独立审计。
+
+新增`scripts/audit_in_place_ttt_partial_corpus_smoke.py`。它用精确Qwen3-4B-Base tokenizer重新分词最早8个
+FineWeb/LongCrawl记录对，重算32,767内容token、追加EOS后的training-token SHA-256、来源/索引与span计数；
+同时检查最新32条完整provenance的连续性、交替来源、token字段、span计数和无明文约束。输出仅包含路径、
+大小、索引、计数与hash，不保存语料、token ID或source identity。
+
+本机及`hku-gpu2`精确提交`feeef4600bb13d3956409d9dbccf1493e7d83b6e`均通过22/22相关测试。远端以
+`nice -n 10`和`CUDA_VISIBLE_DEVICES=`执行正式smoke：首16条全部重新分词为32,767 token并逐条hash匹配；
+最近32条provenance截至stage index 65,354且全部通过。审计耗时5.32秒、峰值RSS 648.98MiB、0项错误；
+builder PID 1673442随后仍存活，GPU0/1仍为46/18MiB、0%利用率。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_partial_corpus_smoke_20261019/`。
