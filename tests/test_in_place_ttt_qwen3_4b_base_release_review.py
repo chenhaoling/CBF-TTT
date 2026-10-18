@@ -10,11 +10,13 @@ from pathlib import Path
 from unittest import mock
 
 from scripts.create_in_place_ttt_qwen3_4b_base_release_review import build_review, sha256
+from scripts.create_in_place_ttt_qwen3_4b_base_release_from_review import create_from_review
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAN = ROOT / "IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RELEASE_REVIEW_ADDENDUM.md"
 WATCHER = ROOT / "scripts/watch_and_prepare_in_place_ttt_qwen3_4b_base_release_review.sh"
+TRANSITION_PLAN = ROOT / "IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RELEASE_TRANSITION_ADDENDUM.md"
 TOOLS = {
     "stage1": ROOT / "scripts/create_in_place_ttt_qwen3_4b_base_stage1_release.py",
     "stage2": ROOT / "scripts/create_in_place_ttt_qwen3_4b_base_stage2_release.py",
@@ -67,12 +69,17 @@ def fixtures(root: Path, stage: str) -> tuple[Path, Path, Path]:
 class CorrectedReleaseReviewTest(unittest.TestCase):
     def test_plan_and_watcher_preserve_human_release(self):
         text = PLAN.read_text()
+        transition_text = TRANSITION_PLAN.read_text()
         self.assertIn("hku-gpu2", text)
         self.assertIn("formal_release_created=false", text)
         self.assertIn("nonempty `--reviewed-by`", text)
+        self.assertIn("never called by a watcher", transition_text)
         subprocess.run(["bash", "-n", str(WATCHER)], check=True)
         watcher = WATCHER.read_text()
         self.assertNotIn(" --accept", watcher)
+        self.assertNotIn(
+            "create_in_place_ttt_qwen3_4b_base_release_from_review.py", watcher
+        )
         self.assertIn("completed_${STAGE}_release_review", watcher)
         self.assertIn("CUDA_VISIBLE_DEVICES=", watcher)
 
@@ -117,6 +124,65 @@ class CorrectedReleaseReviewTest(unittest.TestCase):
                         target_release=target, output=root / "review.json",
                         expected_hostname=platform.node(),
                     )
+
+    def test_reviewed_transition_still_requires_explicit_accept(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            timing, corrected, selected = fixtures(root, "stage1")
+            target = root / "release.json"
+            packet_path = root / "review.json"
+            with mock.patch.dict(os.environ, {"CUDA_VISIBLE_DEVICES": ""}):
+                build_review(
+                    stage="stage1", timing_audit=timing,
+                    corrected_timing_audit=corrected,
+                    selected_stream_audit=selected,
+                    release_tool=TOOLS["stage1"], plan=PLAN,
+                    target_release=target, output=packet_path,
+                    expected_hostname=platform.node(),
+                )
+                with self.assertRaises(PermissionError):
+                    create_from_review(
+                        review_packet=packet_path, transition_plan=TRANSITION_PLAN,
+                        output=target, accept=False, reviewed_by="reviewer",
+                        decision_note="projection accepted",
+                        expected_hostname=platform.node(),
+                    )
+                self.assertFalse(target.exists())
+                release = create_from_review(
+                    review_packet=packet_path, transition_plan=TRANSITION_PLAN,
+                    output=target, accept=True, reviewed_by="reviewer",
+                    decision_note="projection accepted",
+                    expected_hostname=platform.node(),
+                )
+            self.assertTrue(release["accepted"])
+            self.assertEqual(release["review_packet_sha256"], sha256(packet_path))
+            self.assertEqual(release["release_transition_plan_sha256"],
+                             sha256(TRANSITION_PLAN))
+
+    def test_reviewed_transition_rejects_changed_audit(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            timing, corrected, selected = fixtures(root, "stage2")
+            target = root / "release.json"
+            packet_path = root / "review.json"
+            with mock.patch.dict(os.environ, {"CUDA_VISIBLE_DEVICES": ""}):
+                build_review(
+                    stage="stage2", timing_audit=timing,
+                    corrected_timing_audit=corrected,
+                    selected_stream_audit=selected,
+                    release_tool=TOOLS["stage2"], plan=PLAN,
+                    target_release=target, output=packet_path,
+                    expected_hostname=platform.node(),
+                )
+                selected.write_text(selected.read_text() + "\n")
+                with self.assertRaises(ValueError):
+                    create_from_review(
+                        review_packet=packet_path, transition_plan=TRANSITION_PLAN,
+                        output=target, accept=True, reviewed_by="reviewer",
+                        decision_note="projection accepted",
+                        expected_hostname=platform.node(),
+                    )
+            self.assertFalse(target.exists())
 
 
 if __name__ == "__main__":
