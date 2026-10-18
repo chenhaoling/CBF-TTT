@@ -7208,3 +7208,13 @@ release与终态，强制`public_data_yarn_extrapolation_not_paper_exact`结论�
 新增两个正式测试后，256K专项3/3、完整focused suite 66/66通过；两份Bash语法、Python编译与
 `git diff --check`均通过。本实现检查点尚未接受正式release，也未产生正式256K分数；所有新增功能
 均为opt-in，baseline入口和checkpoint未被覆盖。
+
+commit `a0375e93a530591ca3e36d6d4c8498c4772d8784`推送后，在`hku-gpu2`建立clean detached
+worktree；远程focused suite再次66/66通过。刻意缺失resource watcher handle的负向预检exit 6，
+状态为`ruler_256k_resource_watcher_handle_missing`，在CUDA前终止且无formal/partial输出。
+
+真实formal watcher已在tmux session
+`baseline_2x5090_ruler_256k_formal_a0375e93_20261018`启动。2026-10-18 13:28:55 HKT时pane
+PID 1435575存活，状态为`waiting_for_audited_ruler_256k_resource`；显式release与正式输出均不存在，
+GPU0/1为46/18MiB且利用率0%。全部GPU工作继续只允许在`hku-gpu2`执行。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_256k_formal_tooling_20261018/`。

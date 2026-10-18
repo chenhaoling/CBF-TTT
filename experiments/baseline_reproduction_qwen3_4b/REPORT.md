@@ -1679,3 +1679,16 @@ The three dedicated formal/resource tests and the complete focused suite pass
 3/3 and 66/66 respectively; both Bash entry points parse, the Python tools
 compile, and `git diff --check` passes. No formal release has been accepted and
 no 256K formal score has been produced at this implementation checkpoint.
+
+Commit `a0375e93a530591ca3e36d6d4c8498c4772d8784` was pushed and checked out
+cleanly on `hku-gpu2`; the remote focused suite again passed 66/66. A negative
+preflight with a deliberately missing resource-watcher handle exited 6 in
+state `ruler_256k_resource_watcher_handle_missing`, before CUDA and without
+formal or partial output.
+
+The validated formal watcher is live in tmux session
+`baseline_2x5090_ruler_256k_formal_a0375e93_20261018`. At
+`2026-10-18T13:28:55+08:00`, pane PID 1435575 was live, its state was
+`waiting_for_audited_ruler_256k_resource`, the explicit release and formal
+output were absent, and GPU 0/1 remained idle at 46/18 MiB. Evidence is stored
+under `remote/hku_gpu2_ruler_256k_formal_tooling_20261018/`.
