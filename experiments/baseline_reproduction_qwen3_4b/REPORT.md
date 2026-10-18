@@ -1488,3 +1488,23 @@ The validated watcher is now live in tmux session
 `baseline_2x5090_stage2_ladder_1b04d8cf_20261018`, pane PID 1424039, state
 `waiting_for_audited_formal_stage1`. Evidence is stored under
 `remote/hku_gpu2_stage2_ladder_watcher_tooling_20261018/`.
+
+## 23. Stage-2 timing watcher and GPU-host restriction (2026-10-18)
+
+All remaining baseline GPU training, resource measurement and evaluation are
+restricted to `hku-gpu2`. No other server is an eligible fallback. CPU-only
+preparation may run there while the registered prerequisites are incomplete.
+
+`watch_and_run_in_place_ttt_2x5090_stage2_timing.sh` persistently connects the
+four-boundary 64K/128K Stage-2 resource ladder to the registered paired 128K
+three-step timing run. It freezes the exact tool revision, runner, independent
+auditor and plans, monitors the Stage-2 ladder tmux handle and watcher state,
+and accepts only the exact ladder audit protocol with both arm-specific start
+models and all four independently audited boundaries.
+
+A missing upstream handle, terminal upstream failure, timeout, incomplete
+boundary set or failed audit stops before invoking the timing runner. After a
+run, the watcher requires terminal state `completed_stage2_timing`, an exact
+passing audit, both arms and finite positive formal wall-time projections. The
+timing checkpoints remain discarded, and this watcher neither creates nor
+accepts the explicit release required by formal Stage 2.

@@ -7070,3 +7070,18 @@ suite 63/63和Bash语法通过。缺失formal Stage1 tmux handle的负向预检e
 tmux session `baseline_2x5090_stage2_ladder_1b04d8cf_20261018`启动，pane PID 1424039，状态为
 `waiting_for_audited_formal_stage1`。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_ladder_watcher_tooling_20261018/`。
+
+## 2026-10-18：Stage2多步计时持久watcher与GPU主机约束
+
+后续baseline训练、资源测量和评测的GPU执行统一限制在`hku-gpu2`，不将其他服务器作为替代执行
+节点。新增`scripts/watch_and_run_in_place_ttt_2x5090_stage2_timing.sh`，衔接Stage2的64K/128K
+双臂资源阶梯与128K、三步、双臂计时。
+
+watcher冻结精确tool revision、runner、独立auditor和计划，持续检查上游tmux handle、watcher状态
+和最终ladder root。只有精确Stage2 ladder audit协议、空errors、双臂start model及四个64K/128K
+边界全部通过后才允许调用计时runner。缺失handle、上游失败、超时、边界不完整或audit异常均在
+CUDA前终止。
+
+计时完成后仍要求`completed_stage2_timing`终态、精确通过的独立audit、严格双臂和有限正值正式
+投影。该watcher不生成release、不保留计时checkpoint，也不能自行启动正式Stage2；原baseline
+入口和checkpoint保持不变。
