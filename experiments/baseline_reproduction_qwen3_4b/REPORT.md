@@ -1479,3 +1479,12 @@ paired audit protocol, a clean pass and both arm records. Missing handles,
 upstream failure, invalid audit or timeout stops before the ladder runner. A
 successful launch still requires all four 64K/128K arm-specific boundaries,
 terminal ladder state and its independent audit before reporting completion.
+
+Commit `1b04d8cf55821056e1dfb3a724d3ded1a87ebffc` was checked out cleanly on
+`hku-gpu2`; the complete focused suite passed 63/63 and Bash syntax passed. A
+negative run with an absent formal Stage-1 tmux handle exited 6 in state
+`formal_stage1_watcher_handle_missing`, before CUDA and without ladder output.
+The validated watcher is now live in tmux session
+`baseline_2x5090_stage2_ladder_1b04d8cf_20261018`, pane PID 1424039, state
+`waiting_for_audited_formal_stage1`. Evidence is stored under
+`remote/hku_gpu2_stage2_ladder_watcher_tooling_20261018/`.

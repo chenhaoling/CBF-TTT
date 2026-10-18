@@ -7063,3 +7063,10 @@ tmux handle、上游watcher状态及最终paired root，只接受`completed_100m
 handle提前丢失、上游失败、超时或audit异常均在ladder runner前终止。启动后仍要求四个按臂
 64K/128K边界、`completed_stage2_ladder`终态及独立ladder audit全部通过，才报告完成。原训练入口
 与checkpoint不受影响。
+
+commit `1b04d8cf55821056e1dfb3a724d3ded1a87ebffc`在`hku-gpu2`建立clean checkout；完整focused
+suite 63/63和Bash语法通过。缺失formal Stage1 tmux handle的负向预检exit 6，状态为
+`formal_stage1_watcher_handle_missing`，在CUDA前停止且无ladder输出。验证后的真实watcher已在
+tmux session `baseline_2x5090_stage2_ladder_1b04d8cf_20261018`启动，pane PID 1424039，状态为
+`waiting_for_audited_formal_stage1`。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage2_ladder_watcher_tooling_20261018/`。
