@@ -166,6 +166,17 @@ New opt-in files are:
 - `IN_PLACE_TTT_BASELINE_2X5090_100M_STAGE2_PLAN.md`;
 - `scripts/run_in_place_ttt_2x5090_100m_stage2.sh`;
 - `scripts/audit_in_place_ttt_2x5090_100m_stage2.py`;
+- `IN_PLACE_TTT_BASELINE_2X5090_RULER_PLAN.md`;
+- `eval_config/baseline_reproduction/qwen3_4b_2x5090_ruler.py`;
+- `scripts/run_in_place_ttt_2x5090_ruler_single.sh`;
+- `scripts/summarize_in_place_ttt_2x5090_ruler.py`;
+- `scripts/audit_in_place_ttt_2x5090_ruler.py`;
+- `scripts/audit_in_place_ttt_2x5090_ruler_resource.py`;
+- `scripts/run_in_place_ttt_2x5090_ruler_resource_ladder.sh`;
+- `scripts/audit_in_place_ttt_2x5090_ruler_resource_ladder.py`;
+- `scripts/run_in_place_ttt_2x5090_ruler_matrix.sh`;
+- `scripts/summarize_in_place_ttt_2x5090_ruler_matrix.py`;
+- `scripts/audit_in_place_ttt_2x5090_ruler_matrix.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -1324,3 +1335,43 @@ creating neither final nor partial output. At `2026-10-18T11:26:00+08:00`,
 GPU 0/1 used 46/18 MiB at 0%; the corpus builder remained live with a 51-GB
 partial directory and all upstream watchers remained waiting. Evidence is
 stored under `remote/hku_gpu2_formal_stage2_tooling_20261018/`.
+
+## 18. Paired 2x5090 100M-tier RULER path (2026-10-18)
+
+The existing formal RULER scripts require seven concurrent 80-GB GPUs and
+arm-specific Level-B training roots, so they cannot execute the registered
+2x5090 tier. The frozen `IN_PLACE_TTT_BASELINE_2X5090_RULER_PLAN.md` (SHA256
+`fe41a68a1fc474c5d19a921623e1d17ea2011e1d7327b7679993b645f1ab3962`)
+keeps the same OpenCompass RULER sources, 13 tasks, deterministic decoding,
+seed 42 and 100 examples while restricting all execution to `hku-gpu2`.
+
+The opt-in config `qwen3_4b_2x5090_ruler.py` differs from the registered
+Level-B config only by permitting either one sample for discarded resource
+measurements or exactly 100 for formal scoring. The single-run entry rehashes
+the paired formal Stage-2 audit and complete arm-specific HF manifest, original
+tokenizer, plans, config, runner/auditor and OpenCompass data/code. It requires
+physical GPU 0 or 1 to be an idle 32-GB RTX 5090, 32 GiB available host memory
+and no public-corpus process. Large model hashes stream in fixed chunks.
+
+Before scoring, `run_in_place_ttt_2x5090_ruler_resource_ladder.sh` pairs
+no-TTT on GPU 0 with native TTT on GPU 1 at 4K, 32K, 64K and 128K, with one
+example for every task. Its scores are explicitly discarded. Independent
+single and ladder auditors require all 13 tasks, identical paired prompts and
+references, exact final models, finite output, zero tokenizer warnings and at
+least 5% device headroom. The ladder stops at the first failed boundary.
+
+After the ladder passes, `run_in_place_ttt_2x5090_ruler_matrix.sh` evaluates
+the paired arms concurrently at each context, then advances sequentially over
+4K, 8K, 16K, 32K, 64K and 128K. Independent single and matrix audits recompute
+all task/context scores and input hashes from raw predictions, verify every
+dependency and report per-task deltas, context macros and the six-context
+mean. A 256K run remains a separately labelled extrapolation resource decision
+through the same single-run resource mode; it cannot alter the registered
+matrix if it fails.
+
+Six new tests cover formal single-run identity/model drift, one-sample resource
+artifacts, paired resource inputs, six-context matrix recomputation and paired
+formal-input mismatch. The full focused baseline suite passes 59/59; all new
+Bash files parse, Python files compile and `git diff --check` passes. No RULER
+GPU process has been launched because the paired formal Stage-2 checkpoints do
+not yet exist.

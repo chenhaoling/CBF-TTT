@@ -6961,3 +6961,29 @@ formal prerequisites执行负向预检时exit 1，在CUDA前停止且未创建fi
 11:26:00 HKT GPU0/1仅46/18MiB、利用率0%；语料builder仍存活，partial已到51GB，三个上游
 watcher继续等待。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_formal_stage2_tooling_20261018/`。
+
+## 2026-10-18：2×RTX5090 100M tier正式RULER闭环
+
+原Level-B RULER matrix要求7张80GB GPU并绑定单臂Level-B training root，不能直接评测2×5090
+100M tier。新增并冻结`IN_PLACE_TTT_BASELINE_2X5090_RULER_PLAN.md`（SHA256
+`fe41a68a1fc474c5d19a921623e1d17ea2011e1d7327b7679993b645f1ab3962`），保持相同OpenCompass
+RULER数据、13项任务、seed 42、确定性解码和正式每任务100例，全部GPU执行只允许`hku-gpu2`。
+
+新增`qwen3_4b_2x5090_ruler.py`，仅允许每任务1例资源测量或100例正式评分。新增single runner、
+summary与独立audit，重新hash双臂正式Stage-2 audit、当前完整HF manifest、原始tokenizer、计划、
+config、runner/auditor及OpenCompass数据/代码；只接受GPU0/1上的32GB RTX5090、32GiB可用主存且
+无语料进程，大模型文件使用固定chunk streaming hash。
+
+新增RULER resource ladder runner及两级独立audit。它按4K、32K、64K、128K顺序，每个边界并行
+执行GPU0 no-TTT与GPU1 TTT，每任务1例且分数明确丢弃；要求13项完整、双臂prompt/reference一致、
+最终模型绑定、有限输出、无tokenizer warning和至少5%显存余量，首个失败即停止。
+
+新增正式matrix runner、summary和独立audit。资源阶梯通过后，每个context双臂并行、context间
+严格顺序执行4K/8K/16K/32K/64K/128K；从raw prediction/result重算全部任务和context分数、输入
+hash、逐任务delta及六context均值，并绑定training/resource/plans/runner/auditor。256K保留为同一
+single resource模式下单独标注的外推资源决策，失败不能改变正式matrix。
+
+新增`tests/test_in_place_ttt_2x5090_ruler.py`共6项测试，覆盖正式single身份与模型漂移、单样本
+resource、paired resource输入、六context matrix重算及正式paired输入不一致。baseline focused
+suite为59/59通过；所有新Bash语法、Python编译和`git diff --check`通过。正式Stage-2 checkpoint
+尚不存在，因此本次没有启动RULER GPU进程。
