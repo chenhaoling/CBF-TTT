@@ -2144,3 +2144,25 @@ MiB with 0% utilization. No GPU work is released while the corrected full
 corpus remains `RUNNING_BUILD`. Evidence is archived under
 `remote/hku_gpu2_qwen3_4b_base_level_a_watcher_20261019/`. Formal 100M
 training, the RULER matrix and gate exploration remain sealed.
+
+## 43. Corrected Base Stage-1 resource ladder registration (2026-10-19)
+
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_STAGE1_RESOURCE_PLAN.md` freezes the next
+resource-only dependency boundary before any 16K/32K score exists. It accepts
+only the corrected Level-A root after its wrapper reports `COMPLETE` and its
+terminal audit revalidates Base identity, full corpus, resource inputs, matched
+8K arms, conversion and RULER smokes. The four registered children run in the
+fixed order 16K no-TTT, 16K TTT, 32K no-TTT and 32K TTT, all on `hku-gpu2`.
+
+The new runner reuses the upstream training entry, existing activation-offload
+resource runner, frozen Stage-1 configs and per-child auditor. A separate
+corrected ladder auditor imports the existing child validator, recomputes the
+Level-A prerequisite, checks the Base-derived `full` resource-input manifest,
+verifies four start timestamps and re-audits every child resource trace and
+checkpoint. The watcher cannot launch a child while Level A is waiting or
+failed. Any missing handle, terminal failure or audit failure stops it.
+
+The focused In-Place-TTT suite now passes 81/81 locally; both new Bash scripts
+pass syntax validation and the auditor compiles. This registration does not
+release the 32K timing gate, formal 100M training, Stage 2, RULER matrix or
+update-admission exploration.

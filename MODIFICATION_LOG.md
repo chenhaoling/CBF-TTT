@@ -7526,3 +7526,18 @@ watcher与corpus builder进程均存活，状态分别为`WAITING_BASE_CORPUS`/`
 GPU0/1为46/18 MiB且利用率0%。完整证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_level_a_watcher_20261019/`。
 watcher只有在full corpus原子发布且canonical audit全通过后才允许GPU训练。
+
+## 2026-10-19：corrected Base Stage-1 16K/32K资源阶梯注册
+
+在任何纠正后16K/32K测量前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_STAGE1_RESOURCE_PLAN.md`。计划要求corrected Level-A wrapper为
+`COMPLETE`且终态独立审计全通过，四个child固定按16K no-TTT、16K TTT、32K no-TTT、32K TTT顺序运行，
+沿用相同Base checkpoint、Base full-corpus派生输入、原生writer和activation-offload资源门。任一OOM、
+非有限值、少于5%显存余量、主存/swap超限或child audit失败即停止。
+
+新增`scripts/run_in_place_ttt_qwen3_4b_base_stage1_ladder.sh`和对应watcher；二者只允许
+`user-Super-Server`，复用既有训练入口、config auditor、resource runner及DCP资源记录。新增
+`scripts/audit_in_place_ttt_qwen3_4b_base_stage1_ladder.py`，导入既有`validate_child`而不重写训练框架，
+重算Level-A prerequisite、full resource-input hash、四边界运行顺序和所有child的raw trace/checkpoint绑定。
+新增三项失败关闭/计划/语法测试；全部In-Place-TTT focused suite增至81/81通过，Python编译、两份Bash
+语法及diff检查通过。该阶段仅注册资源测量，不释放timing、formal training、RULER或门控实验。
