@@ -1,0 +1,38 @@
+{
+  "compute_process_list_empty": true,
+  "conflict_pids": [
+    1397986,
+    1397987
+  ],
+  "conflict_process_count": 2,
+  "expected_exit_code": 1,
+  "files_sha256": {
+    "preflight_conflicts.txt": "fcfb0173f5318787f58cad5959ac8e94d9374ffb09a5bf3995e1cd543e64a78e",
+    "preflight_gpu.csv": "7eb61a10abb8438d229adeb5342b97e402aba62093c81bed9f893cb7ee1c37bc",
+    "preflight_host.txt": "1a21afd62ded450cd7d447bf3b643d239e3ce8fe31f612ebeb6f46f1a0c543bb",
+    "preflight_processes.csv": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "gpu": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 5090",
+      "total_mib": 32607,
+      "used_mib": 46
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 5090",
+      "total_mib": 32607,
+      "used_mib": 18
+    }
+  ],
+  "hostname": "user-Super-Server",
+  "mem_available_kib": 47677220,
+  "protocol": "in_place_ttt_2x5090_negative_preflight_verification_v1",
+  "run_metadata_exists": false,
+  "stderr": "public-corpus builder/auditor is still active",
+  "swap_used_kib": 362184,
+  "tool_commit": "19e7f480b7fabe257d1ecde5ede785f961e95781",
+  "train_log_exists": false,
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1"
+}

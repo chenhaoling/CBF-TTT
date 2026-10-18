@@ -6730,3 +6730,16 @@ bytecode compile、独立config audit与`git diff --check`通过。
 阶梯→两臂32K均通过后测多步吞吐→98.566M两阶段训练→100样本RULER 4K--128K。根据已测8K
 steady速度，35B两臂即使忽略长上下文减速也约需201天，因此本次不虚假承诺在2×5090上完成
 论文规模；门控实验继续封存。
+
+代码以`e9c1966fe5bd0f232657709e6394140f3494f1c3`推送后，在`hku-gpu2`建立全新clean
+tool checkout，远端同样通过34/34测试与四配置audit。首次负向预检先被更早的upstream-clean
+门槛拦截：运行builder的官方checkout含有未跟踪构建工具。为避免干扰活跃任务，另从本机Git对象
+建立同commit `be232482`的独立clean official checkout。
+
+负向预检还暴露`pgrep`会把含目标字符串的父shell命令记入冲突清单。commit
+`19e7f480b7fabe257d1ecde5ede785f961e95781`改为读取`/proc/*/cmdline`，仅当某个argv basename
+精确等于builder/auditor脚本名时判为冲突。远端复测exit 1并输出
+`public-corpus builder/auditor is still active`，精确记录真实PID1397986/1397987；CUDA process
+列表为空，GPU为46/18MiB、0%利用率，且没有生成`run_metadata.json`或`train.log`，证明未进入
+训练。证据及本地rehash位于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_activation_preflight_rejection_20261018/`。

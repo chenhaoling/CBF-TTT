@@ -953,6 +953,23 @@ state, finite metrics and the ≥40-GB DCP structure. The combined focused
 baseline suite passes 34/34 tests; shell syntax, bytecode compilation,
 configuration audit and `git diff --check` pass.
 
+Commit `e9c1966fe5bd0f232657709e6394140f3494f1c3` was pushed and checked out
+cleanly on `hku-gpu2`; the same 34/34 tests and config audit passed there. A
+runtime review then found the corpus builder's official checkout intentionally
+contains untracked build tools, so a separate clean official checkout at the
+same `be232482` commit was created for training. Commit
+`19e7f480b7fabe257d1ecde5ede785f961e95781` replaced `pgrep` conflict matching
+with exact argv-basename inspection of `/proc`, preventing parent shell text
+from appearing as a false builder process.
+
+The corrected runner was executed once as a negative preflight while the
+builder remained live. It exited 1 with `public-corpus builder/auditor is still
+active`, identified exactly PIDs 1397986 and 1397987, found no CUDA compute
+process, left GPU0/GPU1 at 46/18 MiB and created neither `run_metadata.json`
+nor `train.log`. The downloaded snapshots and local hash verification are in
+`remote/hku_gpu2_activation_preflight_rejection_20261018/`. This is evidence
+that the guard prevents training; it is not an optimizer-step result.
+
 No activation-offload GPU probe has run yet. At `2026-10-18T10:12:01+08:00`,
 PID 1397987 and tmux `public_corpus_full_20261018` were still live after
 9:20:23. The partial corpus occupied about 45 GiB, the builder used
