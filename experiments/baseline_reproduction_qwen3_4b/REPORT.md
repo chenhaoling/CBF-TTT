@@ -2242,3 +2242,14 @@ audit/checkpoint manifests. Four new tests cover the plan boundary, watcher
 syntax/order, two-audit release behavior and missing-input failure closure.
 The full focused suite passes 88/88 locally. No release or formal GPU child
 exists at registration time.
+
+Commit `997748173594ad7f26732a65fabf2327012f6a5b` passes the same 88/88
+suite and static checks in a clean detached `hku-gpu2` worktree. Its CPU-only
+watcher is live in tmux
+`baseline_qwen3_4b_base_100m_stage1_99774817_20261019`, with watch root
+`/home/ctj/in_place_ttt_qwen3_4b_base_100m_stage1_99774817_20261019.watch`.
+The initial state is `waiting_for_corrected_stage1_timing`; the explicit
+release and formal result root are absent. The timing watcher remains at
+`waiting_for_corrected_stage1_ladder`, the corpus remains `RUNNING_BUILD`, and
+GPU0/1 remain at 46/18 MiB with 0% utilization. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_100m_stage1_watcher_20261019/`.

@@ -29,7 +29,7 @@ so no Level-C or exact-paper-number claim is permitted.
 | Stage-1 resource ladder | Audited paired 16K and 32K boundaries from the same registered inputs, no-TTT before TTT, with all resource stop rules satisfied | **Waiting for corrected Level A.** The hku-gpu2-only watcher is live at `waiting_for_corrected_level_a`; its future result root is absent and no 16K/32K child has run. The clean remote focused suite passes 81/81. |
 | Stage-1 timing gate | Audited paired three-step 32K GB64 timing run on the full corpus; finite measured projections for both arms and the sequential pair | **Registered and waiting for the corrected Stage-1 ladder.** The repaired hku-gpu2-only watcher is live at `waiting_for_corrected_stage1_ladder`; its clean remote worktree passes 84/84 focused tests, the result root is absent and no timing child has been released. |
 | Formal Stage-1 release | A separately written `accepted=true` release binding the exact passing timing-audit SHA256, reviewer, measured projection and decision note | **Sealed and implemented fail-closed.** The corrected release tool binds both timing audits and the exact Base revision; no release exists before measured timing review. |
-| Formal Stage-1 training | Both registered 27-step arms complete the same 56,623,104-token stream; final DCP and converted HF checkpoints exist; passing paired independent audit | **Registered, not run.** The corrected hku-gpu2-only watcher, terminal wrapper audit and explicit release path pass the 88-test focused local suite. |
+| Formal Stage-1 training | Both registered 27-step arms complete the same 56,623,104-token stream; final DCP and converted HF checkpoints exist; passing paired independent audit | **Registered and waiting for corrected timing.** The hku-gpu2-only watcher is live at `waiting_for_corrected_stage1_timing`; its clean remote worktree passes 88/88 tests, while release/result paths remain absent. |
 | Stage-2 resource ladder | Each arm starts from its own audited Stage-1 HF checkpoint; paired 64K and 128K boundaries pass their child and aggregate audits | **Waiting for audited formal Stage 1.** |
 | Stage-2 timing gate | Audited paired multi-step 128K timing run on the full corpus with finite measured projections | **Waiting for the Stage-2 ladder.** |
 | Formal Stage-2 release | A separately written `accepted=true` release binding the exact passing Stage-2 timing audit and review decision | **Sealed.** |
@@ -78,6 +78,9 @@ obtained and executed.
 - Corrected Stage-1 ladder tmux session: `baseline_qwen3_4b_base_stage1_ladder_97c4d786_20261019`
 - Corrected Stage-1 timing watcher: `/home/ctj/in_place_ttt_qwen3_4b_base_stage1_timing_226a1198_20261019.watch`
 - Corrected Stage-1 timing tmux session: `baseline_qwen3_4b_base_stage1_timing_226a1198_20261019`
+- Corrected formal Stage-1 watcher: `/home/ctj/in_place_ttt_qwen3_4b_base_100m_stage1_99774817_20261019.watch`
+- Corrected formal Stage-1 tmux session: `baseline_qwen3_4b_base_100m_stage1_99774817_20261019`
+- Future corrected Stage-1 release: `/home/ctj/in_place_ttt_qwen3_4b_base_100m_stage1_release_99774817_20261019.json`
 
 The prior checkpoint-bound corpus, activation, Stage-1, Stage-2 and RULER
 paths are preserved but superseded. No path in that chain is an authoritative

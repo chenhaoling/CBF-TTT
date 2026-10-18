@@ -7596,3 +7596,11 @@ tokenizer、完整语料、两份timing audit、release、计划、configs、run
 
 新增四项计划/语法/release/失败关闭测试，全部In-Place-TTT focused suite为88/88通过，Bash语法、Python
 编译与diff检查通过。注册时没有release，也没有formal GPU child。
+
+提交`997748173594ad7f26732a65fabf2327012f6a5b`在`hku-gpu2` clean detached worktree中同样通过
+88/88和静态检查。CPU-only watcher已在tmux
+`baseline_qwen3_4b_base_100m_stage1_99774817_20261019`启动，watch root为
+`/home/ctj/in_place_ttt_qwen3_4b_base_100m_stage1_99774817_20261019.watch`。初始状态为
+`waiting_for_corrected_stage1_timing`，release与formal result root均不存在；timing仍等待resource ladder，
+corpus仍为`RUNNING_BUILD`，GPU0/1为46/18MiB且0%利用率。启动证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_100m_stage1_watcher_20261019/`。
