@@ -1549,3 +1549,24 @@ session `baseline_2x5090_formal_stage2_73950ecd_20261018`; at
 `waiting_for_audited_stage2_timing`, the explicit release was absent, and the
 corpus partial directory was 58 GB. Evidence is stored under
 `remote/hku_gpu2_formal_stage2_watcher_tooling_20261018/`.
+
+## 25. Persistent paired RULER evaluation chain (2026-10-18)
+
+The formal RULER matrix runner now writes terminal state
+`completed_ruler_matrix` only after its summary and independent matrix audit
+both succeed. Two opt-in watchers connect the paired formal Stage-2 result to
+the registered evaluation while keeping all GPU execution on `hku-gpu2`.
+
+The resource watcher accepts only an exact, clean paired formal Stage-2 audit
+with both arms. It then runs the paired one-sample-per-task 4K/32K/64K/128K
+resource ladder and requires eight audited boundaries, discarded scores and
+the terminal ladder state. The matrix watcher waits on that exact ladder and
+then runs both arms over 4K/8K/16K/32K/64K/128K with 100 examples per task.
+It requires the terminal matrix state, all six recomputed context scores and
+the independent matrix audit before reporting completion.
+
+Both watchers bind clean exact revisions, original Qwen3-4B tokenizer, frozen
+plans, runners, summarizer and auditors. Missing upstream handles, terminal
+failure, invalid audit or timeout stops before the next GPU stage. The 256K
+extrapolation remains separately sealed and cannot alter the registered
+4K–128K baseline result.

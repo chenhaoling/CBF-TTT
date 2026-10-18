@@ -7116,3 +7116,17 @@ suite 63/63与Bash语法通过。刻意缺失Stage2 timing tmux handle的负向�
 1426724存活，状态为`waiting_for_audited_stage2_timing`，显式release不存在，语料partial为58GB。
 证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_formal_stage2_watcher_tooling_20261018/`。
+
+## 2026-10-18：RULER资源阶梯与正式矩阵持久链
+
+修复`scripts/run_in_place_ttt_2x5090_ruler_matrix.sh`的终态契约：只有summary和独立matrix audit均
+成功后才在原子发布前写入`completed_ruler_matrix`。
+
+新增`scripts/watch_and_run_in_place_ttt_2x5090_ruler_resource_ladder.sh`，只接受精确通过且包含双臂
+的formal Stage2 audit，再运行每任务1例的4K/32K/64K/128K双臂资源阶梯；要求八个边界、分数丢弃
+标记、独立audit和终态全部通过。
+
+新增`scripts/watch_and_run_in_place_ttt_2x5090_ruler_matrix.sh`，等待资源watcher及其精确audit后，
+运行4K/8K/16K/32K/64K/128K、每任务100例的双臂正式矩阵；要求六个context重算分数、summary、
+独立audit和`completed_ruler_matrix`终态。两级watcher均冻结clean revision、原Qwen3-4B tokenizer、
+计划和工具，并严格限制GPU执行到`hku-gpu2`。256K仍是独立外推，不影响注册的4K–128K结论。

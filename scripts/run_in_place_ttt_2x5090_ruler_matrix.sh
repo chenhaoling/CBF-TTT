@@ -148,3 +148,4 @@ done
   --runner "$TOOL_REPO/scripts/run_in_place_ttt_2x5090_ruler_matrix.sh" \
   --output "$staging/independent_matrix_audit.json" \
   > "$staging/independent_matrix_audit.log"
+printf 'completed_ruler_matrix\n' > "$staging/state.txt"
