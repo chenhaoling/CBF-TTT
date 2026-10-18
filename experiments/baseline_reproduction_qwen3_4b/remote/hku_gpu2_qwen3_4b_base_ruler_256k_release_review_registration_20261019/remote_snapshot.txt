@@ -1,0 +1,21 @@
+hostname=user-Super-Server
+time=2026-10-19T07:02:46+08:00
+tool_commit=55fc42a04b168834688277ff146913e0c768d803
+review_state=waiting_for_corrected_ruler_256k_resource
+review_time=2026-10-19T07:02:12+08:00
+review_handle=1702681|0|bash
+resource_state=waiting_for_corrected_ruler_matrix
+release_and_packet_absent=true
+efd331e8b0d4c22ed65a8b57fb4734422756716893c36f2106bf42cdaf6e1971  /home/ctj/cbf_ttt_tool_55fc42a0/scripts/watch_and_prepare_in_place_ttt_qwen3_4b_base_ruler_256k_release_review.sh
+86d73c645bbd7117974cf636cb8cf0a2e3f785b94687591c862266bf765ab651  /home/ctj/cbf_ttt_tool_55fc42a0/IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RULER_256K_RELEASE_ADDENDUM.md
+4cca68927a9c1ef88b9a8156c0aa938e6d5234cc18225ad862d00c412b2f6601  /home/ctj/cbf_ttt_tool_55fc42a0/scripts/create_in_place_ttt_qwen3_4b_base_ruler_256k_release_review.py
+262cd82ae3637b1f06cddc2cda789b119b8380def012f5c1f4d4eb80953b0296  /home/ctj/cbf_ttt_tool_55fc42a0/scripts/create_in_place_ttt_qwen3_4b_base_ruler_256k_release_from_review.py
+9e3657343c842556d4ab4e51e0f5b5061593614d43460edec2cd2495f1841169  /home/ctj/cbf_ttt_tool_55fc42a0/scripts/create_in_place_ttt_2x5090_ruler_256k_release.py
+5e5edb5bef03218c91a1bea0d4f8a80a4814a120734b433a2e6fb765a0a154d4  /home/ctj/qwen3_4b_base_download_906bfd4b_20261019/identity.json
+gpu_begin
+0, NVIDIA GeForce RTX 5090, 46 MiB, 32607 MiB, 0 %
+1, NVIDIA GeForce RTX 5090, 18 MiB, 32607 MiB, 0 %
+gpu_end
+      75379 /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial/stage1_32k.jsonl
+      75379 /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial/stage1_32k.provenance.jsonl
+     150758 total

@@ -7852,3 +7852,22 @@ Qwen3-4B-Base identity/tokenizer、corrected Stage-2、corrected 4K--128K matrix
 `waiting_for_corrected_ruler_matrix`，tmux 句柄为 PID 1701185；06:57 快照中 GPU0/1 仅占 46/18 MiB，利用率均为
 0%。所有未来 GPU 执行继续严格限制在 `hku-gpu2`。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_256k_resource_registration_20261019/`。
+
+## 2026-10-19：corrected Base 256K 非授权审阅与人工放行链
+
+新增并在 corrected Base 256K 资源结果、审阅包、release 和正式分数出现前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RULER_256K_RELEASE_ADDENDUM.md`。通用 256K release 只绑定底层资源
+审计；本 addendum 进一步要求正确 Base revision、corrected resource wrapper 和通用资源审计的 SHA-256 关系。
+
+新增 `scripts/create_in_place_ttt_qwen3_4b_base_ruler_256k_release_review.py`、
+`scripts/create_in_place_ttt_qwen3_4b_base_ruler_256k_release_from_review.py` 与
+`scripts/watch_and_prepare_in_place_ttt_qwen3_4b_base_ruler_256k_release_review.sh`。CPU watcher 只能生成
+`formal_release_created=false` 的不可变审阅包；转换工具不被任何 watcher 调用，必须由人类另行提供显式
+`--accept`、reviewer 和 decision note。转换前会重新散列并重算所有审阅输入，保留通用 runner 所需 release
+protocol，同时补充 corrected Base protocol、model revision、corrected audit、review packet 和计划 hash。
+
+新增三项测试，覆盖非授权 watcher、显式接受和审阅后 audit 漂移拒绝。本机及 `hku-gpu2` 精确提交
+`55fc42a04b168834688277ff146913e0c768d803` 均通过 14/14 相关测试，远端 CUDA 被隐藏。审阅 watcher 已在
+`hku-gpu2` 注册，状态为 `waiting_for_corrected_ruler_256k_resource`，tmux PID 1702681；review packet 与目标
+release 均不存在。07:02 快照中 GPU0/1 仅占 46/18 MiB且利用率为0%。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_256k_release_review_registration_20261019/`。

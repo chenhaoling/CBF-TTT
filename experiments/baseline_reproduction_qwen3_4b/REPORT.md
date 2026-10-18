@@ -2596,3 +2596,32 @@ root existed. Evidence is archived under
 
 This is registration evidence, not a 256K result or permission to open formal
 256K evaluation. All future GPU execution remains restricted to `hku-gpu2`.
+
+## 56. Corrected Base 256K human-release chain (2026-10-19)
+
+The generic 256K formal release validator binds only the underlying paired
+resource audit. A new pre-outcome addendum and Base-specific review layer now
+bind that audit to the corrected wrapper, exact Base identity and revision,
+and the same generic release validator used by the formal runner.
+
+The CPU-only review watcher can create only an immutable packet with
+`ready_for_human_review=true` and `formal_release_created=false`. It never
+passes `--accept`, calls the transition tool, writes the target release, or
+launches GPU work. The separate transition rehashes and recomputes the packet
+before requiring explicit human acceptance, reviewer identity and decision
+note. It preserves the generic release protocol for runner compatibility and
+adds corrected Base, corrected-audit, review-packet and plan bindings.
+
+Three new tests cover the non-authorizing watcher, missing-accept rejection,
+successful explicit transition, and rejection after a one-byte corrected
+audit change. Commit `55fc42a04b168834688277ff146913e0c768d803` passes the
+combined 14/14 tests locally and in a clean `hku-gpu2` checkout with CUDA
+hidden. The live watcher is at
+`waiting_for_corrected_ruler_256k_resource` with tmux PID 1702681; no review
+packet or release exists. GPU0/1 remained at 46/18 MiB and 0% utilization.
+Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_ruler_256k_release_review_registration_20261019/`.
+
+No formal 256K result is claimed. After the resource audit eventually passes,
+the generated packet still requires a separate human decision. All GPU work
+remains restricted to `hku-gpu2`.
