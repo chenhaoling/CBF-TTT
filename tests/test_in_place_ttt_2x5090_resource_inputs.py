@@ -70,6 +70,8 @@ class TwoRTX5090ResourceInputsTest(unittest.TestCase):
                 "--source-audit", str(root / "source_audit.json"),
                 "--tokenizer", str(root), "--plan", str(root / "plan.md"),
                 "--builder", str(root / "builder.py"), "--output", str(output),
+                "--expected-source-manifest-sha256", "a" * 64,
+                "--required-source-profile", "full",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch("builtins.print"), \
                     self.assertRaises(SystemExit) as raised:

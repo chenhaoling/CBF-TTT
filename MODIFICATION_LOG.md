@@ -7489,3 +7489,27 @@ dict返回非零，但builder和auditor均exit 0，随后按真实schema直接�
 利用率0%。所有后续GPU工作继续严格限定在`hku-gpu2`，不使用任何其他服务器。全量语料只有在原子
 发布、`.partial`消失且canonical independent audit全部通过后才算完成。紧凑证据归档到
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_identity_correction_20261019/`。
+
+## 2026-10-19：正确 Base checkpoint 的 Level-A replacement chain
+
+在任何纠正后GPU执行前新增并冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RESOURCE_INPUT_ADDENDUM.md`与
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_LEVEL_A_EXECUTION_ADDENDUM.md`。两份计划要求精确Base revision、
+完整34999369728-token语料原子发布与canonical audit、`hku-gpu2`唯一GPU主机、no-TTT先于TTT及失败即停；
+一步训练只用于released-code Level-A闭环，不能作为效果结论或释放门控实验。
+
+复用`scripts/build_in_place_ttt_2x5090_resource_inputs.py`及独立auditor，新增显式
+`--expected-source-manifest-sha256`和`--required-source-profile`参数。默认值仍是旧pilot协议，保证原调用
+兼容；纠正链必须显式选择`full`并绑定新语料manifest/audit。manifest新增required profile和expected
+source hash，不保存原文或token IDs。
+
+新增`scripts/watch_and_run_in_place_ttt_qwen3_4b_base_level_a.sh`：等待全量Base语料`COMPLETE`且验证
+`.partial`消失和十项canonical audit后，构建/审计8K--128K稀疏输入；随后只在`hku-gpu2`按
+no-TTT→TTT执行同一Base/同一8K stream的一步activation-offload训练，逐臂要求独立资源审计通过，再复用
+官方DCP→HF转换和13项RULER-4K单样本smoke。新增
+`scripts/audit_in_place_ttt_qwen3_4b_base_level_a.py`重算模型身份、语料、派生输入、两臂训练、conversion、
+HF文件hash与RULER结果绑定，输出受限的Level-A结论。
+
+新增专项测试并扩展resource-input CLI测试；本地全部In-Place-TTT focused suite为78/78通过，Bash语法、
+Python编译和`git diff --check`通过。此记录时全量语料仍为`RUNNING_BUILD`，replacement watcher尚未释放
+任何GPU工作；正式100M训练、RULER矩阵及“是否更新”门控继续封存。

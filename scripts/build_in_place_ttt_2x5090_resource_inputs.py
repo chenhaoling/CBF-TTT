@@ -128,9 +128,11 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         source_manifest = json.loads(source_manifest_path.read_text())
         source_audit = json.loads(source_audit_path.read_text())
         source_manifest_sha = sha256_file(source_manifest_path)
+        expected_source_sha = args.expected_source_manifest_sha256
+        required_profile = args.required_source_profile
         if (source_manifest.get("protocol") != "in_place_ttt_public_corpus_v1"
-                or source_manifest.get("profile") != "pilot"
-                or source_manifest_sha != SOURCE_MANIFEST_SHA256
+                or source_manifest.get("profile") != required_profile
+                or source_manifest_sha != expected_source_sha
                 or source_audit.get("passed") is not True
                 or source_audit.get("bindings", {}).get("manifest_sha256")
                 != source_manifest_sha):
@@ -201,6 +203,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "builder_sha256": sha256_file(Path(__file__).resolve()),
                 "source_manifest_sha256": source_manifest_sha,
                 "source_audit_sha256": sha256_file(source_audit_path),
+                "required_source_profile": required_profile,
+                "expected_source_manifest_sha256": expected_source_sha,
                 "tokenizer_assets": tokenizer_assets(tokenizer_path),
                 "parent_artifacts": parent_artifacts,
             },
@@ -223,6 +227,15 @@ def main() -> None:
     parser.add_argument("--tokenizer", required=True)
     parser.add_argument("--output-root", required=True)
     parser.add_argument("--plan", default=str(DEFAULT_PLAN))
+    parser.add_argument(
+        "--expected-source-manifest-sha256",
+        default=SOURCE_MANIFEST_SHA256,
+        help="Exact audited source manifest hash (legacy pilot hash by default).",
+    )
+    parser.add_argument(
+        "--required-source-profile", choices=("pilot", "full"), default="pilot",
+        help="Require the source corpus profile used to derive resource inputs.",
+    )
     args = parser.parse_args()
     result = build(args)
     print(json.dumps({"protocol": result["protocol"],

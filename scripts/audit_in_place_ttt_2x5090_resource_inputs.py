@@ -109,7 +109,9 @@ def read_first_pair(data_path: Path, provenance_path: Path) -> list[tuple[str, d
 
 
 def audit(root: Path, source_root: Path, source_audit_path: Path,
-          tokenizer_path: Path, plan_path: Path, builder_path: Path) -> dict[str, Any]:
+          tokenizer_path: Path, plan_path: Path, builder_path: Path,
+          expected_source_manifest_sha256: str = SOURCE_MANIFEST_SHA256,
+          required_source_profile: str = "pilot") -> dict[str, Any]:
     errors: list[str] = []
     checks: dict[str, bool] = {}
     manifest_path = root / "manifest.json"
@@ -129,10 +131,10 @@ def audit(root: Path, source_root: Path, source_audit_path: Path,
         and not root.with_name(root.name + ".partial").exists()
         and set(manifest.get("outputs", {})) == {str(value) for value in SPECS}
     )
-    checks["source_pilot"] = (
-        source_sha == SOURCE_MANIFEST_SHA256
+    checks["source_corpus"] = (
+        source_sha == expected_source_manifest_sha256
         and source_manifest.get("protocol") == "in_place_ttt_public_corpus_v1"
-        and source_manifest.get("profile") == "pilot"
+        and source_manifest.get("profile") == required_source_profile
         and source_audit.get("passed") is True
         and source_audit.get("bindings", {}).get("manifest_sha256") == source_sha
     )
@@ -142,6 +144,9 @@ def audit(root: Path, source_root: Path, source_audit_path: Path,
         and bindings.get("builder_sha256") == sha256_file(builder_path)
         and bindings.get("source_manifest_sha256") == source_sha
         and bindings.get("source_audit_sha256") == sha256_file(source_audit_path)
+        and bindings.get("required_source_profile") == required_source_profile
+        and bindings.get("expected_source_manifest_sha256")
+        == expected_source_manifest_sha256
         and bindings.get("tokenizer_assets") == tokenizer_assets(tokenizer_path)
     )
     checks["no_plaintext_metadata"] = not forbidden(manifest)
@@ -251,6 +256,8 @@ def audit(root: Path, source_root: Path, source_audit_path: Path,
             "manifest_sha256": sha256_file(manifest_path),
             "source_manifest_sha256": source_sha,
             "source_audit_sha256": sha256_file(source_audit_path),
+            "required_source_profile": required_source_profile,
+            "expected_source_manifest_sha256": expected_source_manifest_sha256,
             "plan_sha256": sha256_file(plan_path),
             "builder_sha256": sha256_file(builder_path),
             "auditor_sha256": sha256_file(Path(__file__).resolve()),
@@ -266,6 +273,13 @@ def main() -> None:
     parser.add_argument("--tokenizer", type=Path, required=True)
     parser.add_argument("--plan", type=Path, required=True)
     parser.add_argument("--builder", type=Path, required=True)
+    parser.add_argument(
+        "--expected-source-manifest-sha256",
+        default=SOURCE_MANIFEST_SHA256,
+    )
+    parser.add_argument(
+        "--required-source-profile", choices=("pilot", "full"), default="pilot",
+    )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     root = args.root.expanduser().resolve()
@@ -278,6 +292,8 @@ def main() -> None:
         tokenizer_path=args.tokenizer.expanduser().resolve(),
         plan_path=args.plan.expanduser().resolve(),
         builder_path=args.builder.expanduser().resolve(),
+        expected_source_manifest_sha256=args.expected_source_manifest_sha256,
+        required_source_profile=args.required_source_profile,
     )
     partial = output.with_name(output.name + ".partial")
     if output.exists() or partial.exists():

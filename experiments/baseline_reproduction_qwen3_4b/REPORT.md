@@ -2103,3 +2103,30 @@ Compact correction evidence is archived under
 `remote/hku_gpu2_qwen3_4b_base_identity_correction_20261019/`. The corrected
 Base Level-A smoke, selected-stream audit, activation gate, training and RULER
 matrix all remain unexecuted. No update-admission experiment is released.
+
+## 42. Corrected Base Level-A replacement chain (2026-10-19)
+
+Two pre-execution addenda now freeze the corrected resource-input and Level-A
+closure. The resource-input builder/auditor retain the old pilot hash/profile
+as their default for compatibility, while new opt-in arguments accept an exact
+independently audited source-manifest hash and require either `pilot` or
+`full`. The corrected invocation requires `full` and binds the new Base corpus
+manifest, canonical audit and tokenizer assets.
+
+`scripts/watch_and_run_in_place_ttt_qwen3_4b_base_level_a.sh` is restricted to
+hostname `user-Super-Server`. It waits for the corrected full corpus wrapper to
+report `COMPLETE`, verifies atomic publication and every audit check, derives
+and independently audits the 8K--128K sparse inputs, and only then permits GPU
+execution. The registered GPU order is no-TTT then TTT, using the same Base
+checkpoint and 8K two-record stream. Each arm must pass the existing
+activation-offload resource audit before upstream DCP-to-HF conversion and a
+13-task, one-example-per-task RULER-4K smoke. A new terminal auditor re-hashes
+the model identity, corpus, resource inputs, both child audits, converted
+checkpoints and smoke summaries. Its claim is restricted to Level-A execution
+closure.
+
+The new and existing In-Place-TTT focused test set passes 78/78 locally; Bash
+syntax and Python compilation also pass. At this report revision the watcher
+is implemented but has not released GPU work, because the corrected full
+corpus remains `RUNNING_BUILD`. Formal 100M training, the RULER matrix and gate
+exploration remain sealed.
