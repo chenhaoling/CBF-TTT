@@ -2025,3 +2025,29 @@ and the auditor has SHA256
 both are archived under `remote/hku_gpu2_active_chain_integrity_20261019/`.
 This proves waiting-chain immutability at the recorded time. It is not evidence
 that any future child run, checkpoint or metric has completed.
+
+## 41. Qwen3-4B-Base identity correction (2026-10-19)
+
+An independent pre-training identity check found that the checkpoint staged at
+`/home/ctj/models/Qwen3-4B` is the official post-trained `Qwen/Qwen3-4B`, not
+the `Qwen/Qwen3-4B-Base` required by the parent plan and paper. Its local
+configuration has 40,960 maximum positions and EOS 151645; tokenizer metadata
+contains a 4,168-character chat template and its 239-byte generation config
+enables sampling. These properties and the local config/tokenizer/generation
+file sizes match the official post-trained repository. The required Base
+configuration instead has 32,768 maximum positions and EOS 151643.
+
+This is a formal baseline identity failure. The earlier engineering smoke
+results cannot become paper-baseline evidence, and the active checkpoint-bound
+activation/Stage/RULER chain is superseded. At discovery time, the activation
+watcher remained in `waiting_8k_no_ttt`, no activation child directory existed,
+all formal releases were absent and both GPUs were idle. Thus no formal GPU
+score or checkpoint needs reinterpretation.
+
+[`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_IDENTITY_CORRECTION_ADDENDUM.md`](../../IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_IDENTITY_CORRECTION_ADDENDUM.md)
+freezes containment, exact Base download/identity requirements, a tokenizer
+compatibility decision for the still-building corpus, and replacement-chain
+rules before any corrected GPU run. The corpus may be reused only if ordinary
+token encoding and every packed-row length are proven identical; its EOS-bound
+training hashes, tokenizer manifest and old audit are invalid for Base in all
+cases and must be regenerated. Gate exploration remains sealed.

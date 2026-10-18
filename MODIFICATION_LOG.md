@@ -7443,3 +7443,21 @@ formal 256K的三个显式release JSON均不存在。全部55项检查通过，�
 SHA256为`6962c87fa39cbed91523bc551d8b7aa1e9da4602e8f5ae1b7178424b0b8e6315`，冻结审计脚本SHA256为
 `2f8fdc682ebf874e0af25e61ef0e0987e727c329202ef2c9c157ea995db3f831`。该快照证明等待链在记录时刻
 没有漂移，不代表任何后续训练、checkpoint或评测已经完成。
+
+## 2026-10-19：Qwen3-4B-Base 身份错误与纠正计划
+
+结果前身份复核发现，远程`/home/ctj/models/Qwen3-4B`实际为官方post-trained
+`Qwen/Qwen3-4B`：配置为40960最大位置、EOS 151645，tokenizer带chat template，generation config启用
+采样。父计划和论文Table 1明确要求`Qwen3-4B-Base`，其官方配置为32768最大位置、EOS 151643。因此旧
+checkpoint不能支撑paper-baseline claim。
+
+新增冻结的
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_IDENTITY_CORRECTION_ADDENDUM.md`，注册旧链 containment、精确
+Base revision下载与身份门槛、corpus tokenizer兼容性决策和全新执行根规则。发现时activation仍处于
+`waiting_8k_no_ttt`，未创建GPU child，formal release均缺失，两张GPU空闲；旧工程smoke只保留为工程
+证据。
+
+当前corpus的普通文本payload只有在两套tokenizer的`add_special_tokens=false`编码逐token相同且每条
+packed row在Base下仍为`seq_len-1`时才允许迁移。即便payload兼容，EOS从151645变为151643，因此旧
+training hash、tokenizer manifest和independent audit一律无效，必须在新的不可变corpus root中重建。
+若普通编码任一注册probe不同，则从source inventory完整重建32K/128K两阶段。更新门控继续封存。
