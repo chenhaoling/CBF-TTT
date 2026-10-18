@@ -61,6 +61,12 @@ baseline has **not** been reproduced yet.
 - Four formal 32K/128K × no-TTT/TTT configs are implemented and statically
   audited. The full 34,999,369,728-token public corpus build is currently
   running in an isolated CPU-only tmux job; no formal training has started.
+- The user now requires every GPU run to remain on `hku-gpu2`. A separately
+  frozen two-5090 path enables the released VeOmni activation-offload hook,
+  retains FSDP2 and the native writer, and registers an audited 8K→16K→32K
+  resource ladder plus a matched 98,566,144-token end-to-end tier. No new
+  optimizer step has run under this path while the corpus builder consumes
+  host RAM.
 - Inspection of the pinned VeOmni loader found its mandatory deterministic
   buffer-10,000 shuffle. A training addendum now freezes seed 42, worker and
   prefetch settings, implementation hashes and a measured 3-TiB paired-run
@@ -70,10 +76,11 @@ baseline has **not** been reproduced yet.
   substitute and cannot be called the original paper dataset.
 
 Consequently, Level A passes and both Level-B data-pipeline pilots pass. The
-full Level-B corpus build is active, but matched training has not started
-because neither available host satisfies the frozen 8×80-GB-class preflight.
-Level C remains unavailable because the paper corpus and parts of the recipe
-are private. Update-admission and forgetting-gate exploration remains paused.
+full Level-B corpus build is active, but matched training has not started.
+The former 8×80-GB execution target remains documented, while the active
+execution constraint is now the audited `hku-gpu2`-only path. Level C remains
+unavailable because the paper corpus and parts of the recipe are private.
+Update-admission and forgetting-gate exploration remains paused.
 
 ## 2. Paper target and claim boundary
 
@@ -132,6 +139,10 @@ New opt-in files are:
 - `IN_PLACE_TTT_BASELINE_LEVEL_B_TRAINING_ADDENDUM.md`;
 - `scripts/run_in_place_ttt_level_b_training.sh`;
 - `scripts/audit_in_place_ttt_level_b_training.py`;
+- `IN_PLACE_TTT_BASELINE_2X5090_EXECUTION_ADDENDUM.md`;
+- `configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage{1,2}_{no_ttt,ttt}.yaml`;
+- `scripts/audit_in_place_ttt_2x5090_configs.py`;
+- `scripts/audit_in_place_ttt_2x5090_resource.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -832,34 +843,32 @@ python scripts/audit_in_place_ttt_baseline_exclusive.py \
 
 ## 8. Next required experiment
 
-1. Allocate an exclusive H800-class host, preferably 4--8 GPUs with at least
-   80GB each, plus at least 3 TiB free shared storage. The exclusive 2x5090 result already passes 8K but fails the 5%
-   headroom rule, so repeating 8K or attempting 16K there is prohibited.
-   `hku-a100` cannot serve this role while its only 80-GB GPU has 75,124 MiB
-   allocated to vLLM.
-2. Let the already running full public-corpus build finish, then require its
+1. Let the already running full public-corpus build finish, then require its
    independent audit to pass exact counts, source continuity and hashes. Do
    not treat the live partial directory as training input.
-3. On the selected 8×80-GB-class host, bind the four audited configs to the
-   completed corpus and arm-specific checkpoints. Run matched one-step 32K
-   preflights first; train Stage 1 only if both retain at least 5% free memory.
-   Convert Stage-1 DCP to HF, then repeat the matched 128K preflight before
-   Stage 2.
-4. Train byte-identical no-TTT/TTT token streams through both stages, audit
-   consumed data hashes, finite losses, gradients, steps and resources.
-5. Convert both final DCP checkpoints and execute the 100-example RULER matrix
-   from 4K through 256K once, using the tokenizer-audited path above.
-6. Report it as a public-data matched replication. Resume support/update gates
-   only after this baseline report is complete.
+2. On `hku-gpu2` only, with the builder and auditor stopped, run matched
+   no-TTT then TTT activation-offload resource probes at 8K, 16K and 32K.
+   Every boundary must pass its independent audit, retain 5% device headroom,
+   keep at least 8 GiB host memory available and use at most 3.5 GiB swap.
+3. If both 32K arms pass, measure a multi-step throughput projection and run
+   the matched 98,566,144-token tier: 27 GB64 steps at 32K followed by five
+   GB64 steps at 128K. Stage 2 uses each arm's converted Stage-1 weights and a
+   fresh optimizer/scheduler.
+4. Convert both final DCP checkpoints and execute the 100-example RULER matrix
+   at 4K--128K. Attempt 256K only through a separately audited two-GPU
+   inference configuration; report a resource failure if it cannot fit.
+5. Only after the matched 100M tier and RULER matrix pass may a new frozen
+   addendum authorize the approximately 1B tier. Resume support/update gates
+   only after an audited matched baseline tier is complete.
 
 Exact paper reproduction additionally requires the authors' private mixture,
 32K/128K stage recipe, and inference clipping details.
 
 The released-code Level-A path is now closed. Native FSDP2 8K succeeds on
-exclusive 2x5090 but leaves only 2.107% free memory; its offload flag is not
-implemented, and FSDP1 offload is host-memory limited. Continuing toward
-Level B therefore requires an exclusive larger-GPU host. This is a measured
-resource conclusion, not an efficacy result.
+exclusive 2x5090 but leaves only 2.107% free memory; parameter offload is not
+usable on this host. The next registered measurement uses the released
+activation-offload implementation on the same two 5090s. This is a systems
+feasibility test and cannot by itself support an efficacy claim.
 
 ## 9. Full-corpus audit scalability hardening (2026-10-18)
 
@@ -904,3 +913,55 @@ This version may now serve as a secondary audit, or as a fallback only if the
 builder has atomically published the complete corpus and the original audit
 fails specifically because of host memory. It cannot validate or rescue a
 partial build.
+
+## 10. `hku-gpu2`-only activation-offload execution path (2026-10-18)
+
+The user explicitly restricted every subsequent GPU run to the two RTX 5090s
+on SSH alias `hku-gpu2` (actual hostname `user-Super-Server`). Before any
+activation-offload optimizer step, the new
+`IN_PLACE_TTT_BASELINE_2X5090_EXECUTION_ADDENDUM.md` was frozen with SHA256
+`0b70a098f8ee5cadf12f8d371dcc0020124069f5365aa5279d706cde4322e5c6`.
+It keeps Qwen3-4B, FineWeb-Edu/LongCrawl64, the native `ttt_proj`/`ttt_conv`
+writer, AdamW, GB64, the 32K→128K curriculum and matched no-TTT/TTT arms. The
+systems-only change enables VeOmni's released activation offload, keeps FSDP2
+parameter/optimizer sharding, disables parameter offload and enables the
+expandable-segments allocator.
+
+Four opt-in configs register a first complete tier with exact counts:
+
+| Stage | Length | Steps | Tokens |
+|---|---:|---:|---:|
+| Stage 1 | 32,768 | 27 | 56,623,104 |
+| Stage 2 | 131,072 | 5 | 41,943,040 |
+| total | — | 32 | 98,566,144 |
+
+`scripts/audit_in_place_ttt_2x5090_configs.py` verifies the four files as a
+matched matrix and reports `world_size=2`, `total_tokens=98566144` and no
+errors. `scripts/run_in_place_ttt_baseline_resource_pilot.sh` now supports an
+opt-in `activation_offload` profile and refuses to launch unless the actual
+hostname, device indices 0/1, RTX-5090 model, 32,607-MiB capacity, ≤128-MiB
+idle use, empty compute-process list and ≥48-GiB available host RAM all match.
+It also refuses to launch while either public-corpus builder or auditor is
+active. It hashes the loaded VeOmni offloading implementation, configuration,
+data, model config, plans, preflight snapshots, runner and summarizer.
+
+The resource summary now records steady optimizer-step time separately from
+checkpoint time, per-device minimum free fraction, host memory/swap and the
+activation-offload release gate. The new independent resource auditor
+recomputes all hashes, effective log settings, both GPU traces, preflight
+state, finite metrics and the ≥40-GB DCP structure. The combined focused
+baseline suite passes 34/34 tests; shell syntax, bytecode compilation,
+configuration audit and `git diff --check` pass.
+
+No activation-offload GPU probe has run yet. At `2026-10-18T10:12:01+08:00`,
+PID 1397987 and tmux `public_corpus_full_20261018` were still live after
+9:20:23. The partial corpus occupied about 45 GiB, the builder used
+13,477,044 KiB RSS, host `MemAvailable` was 47,875,532 KiB and swap use was
+about 354 MiB. This state violates the frozen no-concurrency and 48-GiB launch
+gates, so starting a GPU probe now would invalidate the resource evidence.
+
+At the measured exclusive native 8K rates, a full 35B-token two-arm run has an
+optimistic lower bound of roughly 201 days before long-context slowdown. The
+100M tier is therefore the first honest end-to-end target. It remains a
+resource-constrained public-data replication; it is not the paper-scale 35B
+result, and no gate experiment is unsealed by these static checks.

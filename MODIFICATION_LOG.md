@@ -6688,3 +6688,45 @@ run耗时13.93秒、峰值RSS 821588KiB、swap为0、exit 0；流式audit SHA256
 `experiments/baseline_reproduction_qwen3_4b/remote/in_place_ttt_public_corpus_streaming_audit_smoke_20261018/`。
 因此新审计器已满足addendum中的pilot准入条件，但正式构建完成前仍不会对partial目录执行或
 替代当前runner的冻结旧审计器。
+
+## 2026-10-18：仅使用 hku-gpu2 的 2×RTX5090 baseline 路径
+
+用户明确要求后续GPU运行只能使用`hku-gpu2`。在任何activation-offload optimizer step前，
+新增并冻结`IN_PLACE_TTT_BASELINE_2X5090_EXECUTION_ADDENDUM.md`（SHA256
+`0b70a098f8ee5cadf12f8d371dcc0020124069f5365aa5279d706cde4322e5c6`）。该附录把主动执行路径
+从不可用的8×80GB主机切换为`hku-gpu2`两张32607MiB RTX5090，同时明确这是资源受限公开数据
+复现，不能冒充论文私有语料或35B正式结果。Qwen3-4B、FineWeb-Edu/LongCrawl64、原生
+`ttt_proj`/`ttt_conv`、AdamW、GB64、32K→128K课程和两臂配对均保持不变；系统改动只启用
+VeOmni已发布的activation offload与expandable segments，继续使用FSDP2并禁止parameter offload。
+
+新增四个opt-in 100M配置，Stage 1为32K×GB64×27=56623104 token，Stage 2为
+128K×GB64×5=41943040 token，总计98566144。`scripts/audit_in_place_ttt_2x5090_configs.py`
+逐字段检查activation offload、无parameter offload、两臂仅`ttt_mode`与运行路径可变、YaRN、
+fresh optimizer语义、精确step/token与final-only checkpoint策略；静态audit通过，四配置SHA256
+分别为`a2c30332...2780`、`0f569022...b9fa`、`c7181336...6376`与
+`5b6d72e1...ae3c`。
+
+扩展`scripts/run_in_place_ttt_baseline_resource_pilot.sh`，新增`activation_offload` profile、
+显式config override、effective allocator绑定与仅一次DCP保存。硬预检要求实际hostname为
+`user-Super-Server`、恰好GPU0/1、两卡均为RTX5090且总显存≥32000MiB、启动占用≤128MiB、
+无compute process、主机可用内存≥48GiB，并拒绝在正式语料builder/auditor存活时启动。metadata
+绑定preflight四文件、实际VeOmni offloading源码、runner、summarizer、数据、模型、配置与两份
+计划的hash。
+
+扩展`scripts/summarize_in_place_ttt_baseline_resource.py`，将optimizer step时间与checkpoint
+wall time分离，输出steady token/s、每卡最低free fraction、主机资源和activation-offload gate。
+新增独立`scripts/audit_in_place_ttt_2x5090_resource.py`，不信任summary结论，重新核验host/GPU、
+preflight、依赖hash、effective log设置、有限loss/gradient、5%显存余量、8GiB host余量、
+3.5GiB swap上限与≥40GB DCP结构，并使用`.partial`原子发布审计结果。
+
+新增`tests/test_in_place_ttt_2x5090_configs.py`和
+`tests/test_in_place_ttt_2x5090_resource.py`，扩展baseline resource summary测试。全部public-data、
+corpus、config、preflight、training、RULER与2×5090定向测试34/34通过；`bash -n`、Python
+bytecode compile、独立config audit与`git diff --check`通过。
+
+2026-10-18 10:12 HKT只读轮询确认正式语料PID1397987与tmux仍存活，已运行9:20:23，partial
+约45GiB，RSS13477044KiB，主机`MemAvailable=47875532KiB`。由于builder仍活动且可用主存低于
+48GiB，未启动任何新GPU进程。后续顺序固定为：完整语料原子发布并审计→8K/16K/32K两臂资源
+阶梯→两臂32K均通过后测多步吞吐→98.566M两阶段训练→100样本RULER 4K--128K。根据已测8K
+steady速度，35B两臂即使忽略长上下文减速也约需201天，因此本次不虚假承诺在2×5090上完成
+论文规模；门控实验继续封存。

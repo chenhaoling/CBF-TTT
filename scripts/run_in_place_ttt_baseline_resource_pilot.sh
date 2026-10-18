@@ -13,6 +13,8 @@ GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-2}
 PLAN=${PLAN:?set the frozen baseline plan path}
 TOOL_REPO=${TOOL_REPO:?set the CBF-TTT tool checkout}
 ADDENDUM=${ADDENDUM:-}
+CONFIG_OVERRIDE=${CONFIG_OVERRIDE:-}
+EXPECTED_HOSTNAME=${EXPECTED_HOSTNAME:-user-Super-Server}
 UPSTREAM_COMMIT=be2324829b0e91c8fd10a74d4b43714fde6676e1
 
 if [[ "$ARM" != "ttt" && "$ARM" != "no_ttt" ]]; then
@@ -20,7 +22,8 @@ if [[ "$ARM" != "ttt" && "$ARM" != "no_ttt" ]]; then
 fi
 if [[ "$RESOURCE_PROFILE" != "native" && "$RESOURCE_PROFILE" != "cpu_offload" \
       && "$RESOURCE_PROFILE" != "fsdp1_cpu_offload" \
-      && "$RESOURCE_PROFILE" != "native_expandable_segments" ]]; then
+      && "$RESOURCE_PROFILE" != "native_expandable_segments" \
+      && "$RESOURCE_PROFILE" != "activation_offload" ]]; then
   echo "invalid RESOURCE_PROFILE" >&2; exit 2
 fi
 if [[ "$SEQ_LEN" -lt 8192 || $((SEQ_LEN % 4096)) -ne 0 ]]; then
@@ -45,32 +48,101 @@ elif [[ "$RESOURCE_PROFILE" == "fsdp1_cpu_offload" ]]; then
   test -n "$ADDENDUM"; test -s "$ADDENDUM"
 elif [[ "$RESOURCE_PROFILE" == "native_expandable_segments" ]]; then
   test -n "$ADDENDUM"; test -s "$ADDENDUM"
+elif [[ "$RESOURCE_PROFILE" == "activation_offload" ]]; then
+  test -n "$ADDENDUM"; test -s "$ADDENDUM"
+  test -n "$CONFIG_OVERRIDE"
 fi
-CONFIG=$TOOL_REPO/configs/baseline_reproduction/qwen3_4b_resource_${ARM}${config_suffix}.yaml
+if [[ -n "$CONFIG_OVERRIDE" ]]; then
+  CONFIG=$CONFIG_OVERRIDE
+else
+  CONFIG=$TOOL_REPO/configs/baseline_reproduction/qwen3_4b_resource_${ARM}${config_suffix}.yaml
+fi
 test -s "$CONFIG"
 mkdir -p "$OUTPUT_ROOT/checkpoint"
+
+# The activation-offload path is registered only for the two RTX 5090 devices
+# on hku-gpu2.  Refuse to start while the public-corpus builder/auditor is using
+# host RAM, or when another CUDA process could contaminate the resource trace.
+if [[ "$RESOURCE_PROFILE" == "activation_offload" ]]; then
+  test "$(hostname)" = "$EXPECTED_HOSTNAME"
+  nvidia-smi --query-gpu=index,name,memory.total,memory.used \
+    --format=csv,noheader,nounits > "$OUTPUT_ROOT/preflight_gpu.csv"
+  nvidia-smi --query-compute-apps=pid,process_name,used_memory \
+    --format=csv,noheader,nounits > "$OUTPUT_ROOT/preflight_processes.csv"
+  cp /proc/meminfo "$OUTPUT_ROOT/preflight_host.txt"
+  : > "$OUTPUT_ROOT/preflight_conflicts.txt"
+  pgrep -af '[b]uild_in_place_ttt_public_corpus.py' \
+    >> "$OUTPUT_ROOT/preflight_conflicts.txt" || true
+  pgrep -af '[a]udit_in_place_ttt_public_corpus.py' \
+    >> "$OUTPUT_ROOT/preflight_conflicts.txt" || true
+  "$PYTHON_BIN" - "$OUTPUT_ROOT" "$EXPECTED_HOSTNAME" <<'PY'
+import csv
+import pathlib
+import socket
+import sys
+
+root, expected_hostname = pathlib.Path(sys.argv[1]), sys.argv[2]
+if socket.gethostname() != expected_hostname:
+    raise SystemExit("activation-offload pilot is restricted to hku-gpu2")
+with (root / "preflight_gpu.csv").open(newline="") as handle:
+    rows = [row for row in csv.reader(handle) if row]
+if len(rows) != 2:
+    raise SystemExit(f"expected exactly two GPUs, observed {len(rows)}")
+for expected_index, row in enumerate(rows):
+    index, name, total, used = [value.strip() for value in row]
+    if int(index) != expected_index or "RTX 5090" not in name:
+        raise SystemExit(f"unexpected hku-gpu2 GPU binding: {row}")
+    if float(total) < 32_000 or float(used) > 128:
+        raise SystemExit(f"GPU {index} is not exclusively idle: {row}")
+if (root / "preflight_processes.csv").read_text().strip():
+    raise SystemExit("another CUDA compute process is active")
+if (root / "preflight_conflicts.txt").read_text().strip():
+    raise SystemExit("public-corpus builder/auditor is still active")
+meminfo = {}
+for line in (root / "preflight_host.txt").read_text().splitlines():
+    if ":" in line:
+        key, rest = line.split(":", 1)
+        meminfo[key] = int(rest.split()[0])
+if meminfo.get("MemAvailable", 0) < 48 * 1024 * 1024:
+    raise SystemExit("hku-gpu2 has less than 48 GiB host memory available")
+PY
+fi
 
 "$PYTHON_BIN" - "$UPSTREAM_REPO" "$MODEL" "$DATA" "$CONFIG" "$PLAN" \
   "$OUTPUT_ROOT/run_metadata.json" "$ARM" "$SEQ_LEN" "$GLOBAL_BATCH_SIZE" \
   "$RESOURCE_PROFILE" "$ADDENDUM" "$TOOL_REPO" <<'PY'
-import hashlib, json, pathlib, subprocess, sys
+import hashlib, importlib, json, pathlib, socket, subprocess, sys
 upstream, model, data, config, plan, output, arm, seq_len, batch, profile, addendum, tools = sys.argv[1:]
 sha = lambda path: hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
+root = pathlib.Path(output).parent
+offloading_path = None
+if profile == "activation_offload":
+    module = importlib.import_module("veomni.distributed.offloading")
+    offloading_path = pathlib.Path(module.__file__).resolve()
 metadata = {
     "protocol": "in_place_ttt_baseline_resource_v2",
     "upstream_commit": subprocess.check_output(
         ["git", "-C", upstream, "rev-parse", "HEAD"], text=True).strip(),
     "upstream_clean": not subprocess.check_output(
         ["git", "-C", upstream, "status", "--short"], text=True).strip(),
-    "model": model, "data": data, "arm": arm,
+    "hostname": socket.gethostname(),
+    "model": model, "data": data, "config": config, "arm": arm,
     "resource_profile": profile,
+    "activation_offload": profile == "activation_offload",
     "pytorch_cuda_alloc_conf": (
-        "expandable_segments:True" if profile == "native_expandable_segments" else None
+        "expandable_segments:True"
+        if profile in {"native_expandable_segments", "activation_offload"} else None
     ),
     "sequence_length": int(seq_len), "global_batch_size": int(batch),
     "plan_sha256": sha(plan), "config_sha256": sha(config),
     "data_sha256": sha(data), "model_config_sha256": sha(pathlib.Path(model) / "config.json"),
     "addendum_sha256": sha(addendum) if addendum else None,
+    "activation_offloading_path": str(offloading_path) if offloading_path else None,
+    "activation_offloading_sha256": sha(offloading_path) if offloading_path else None,
+    "preflight_gpu_sha256": sha(root / "preflight_gpu.csv") if profile == "activation_offload" else None,
+    "preflight_processes_sha256": sha(root / "preflight_processes.csv") if profile == "activation_offload" else None,
+    "preflight_host_sha256": sha(root / "preflight_host.txt") if profile == "activation_offload" else None,
+    "preflight_conflicts_sha256": sha(root / "preflight_conflicts.txt") if profile == "activation_offload" else None,
     "runner_sha256": sha(pathlib.Path(tools) / "scripts/run_in_place_ttt_baseline_resource_pilot.sh"),
     "summarizer_sha256": sha(pathlib.Path(tools) / "scripts/summarize_in_place_ttt_baseline_resource.py"),
 }
@@ -114,7 +186,8 @@ set +e
   # explicitly present on PYTHONPATH.
   export PYTHONPATH="$UPSTREAM_REPO${PYTHONPATH:+:$PYTHONPATH}"
   export CUDA_VISIBLE_DEVICES=0,1
-  if [[ "$RESOURCE_PROFILE" == "native_expandable_segments" ]]; then
+  if [[ "$RESOURCE_PROFILE" == "native_expandable_segments" \
+        || "$RESOURCE_PROFILE" == "activation_offload" ]]; then
     export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
   else
     unset PYTORCH_CUDA_ALLOC_CONF || true
@@ -125,6 +198,7 @@ set +e
     --data.train_size "$((SEQ_LEN * GLOBAL_BATCH_SIZE))" \
     --train.output_dir "$OUTPUT_ROOT/checkpoint" \
     --train.global_batch_size "$GLOBAL_BATCH_SIZE" --train.max_steps 1 \
+    --train.save_steps 1 --train.save_epochs 0 --train.save_hf_weights false \
     --train.use_wandb false
 ) > "$OUTPUT_ROOT/train.log" 2>&1
 status=$?
@@ -138,5 +212,26 @@ trap - EXIT
 
 "$PYTHON_BIN" "$TOOL_REPO/scripts/summarize_in_place_ttt_baseline_resource.py" \
   --root "$OUTPUT_ROOT" --output "$OUTPUT_ROOT/summary.json"
-exit "$status"
+audit_status=0
+if [[ "$RESOURCE_PROFILE" == "activation_offload" ]]; then
+  offloading_path=$("$PYTHON_BIN" - "$OUTPUT_ROOT/run_metadata.json" <<'PY'
+import json, pathlib, sys
+print(json.loads(pathlib.Path(sys.argv[1]).read_text())["activation_offloading_path"])
+PY
+)
+  set +e
+  "$PYTHON_BIN" "$TOOL_REPO/scripts/audit_in_place_ttt_2x5090_resource.py" \
+    --root "$OUTPUT_ROOT" --plan "$PLAN" --addendum "$ADDENDUM" \
+    --config "$CONFIG" --data "$DATA" --model-config "$MODEL/config.json" \
+    --runner "$TOOL_REPO/scripts/run_in_place_ttt_baseline_resource_pilot.sh" \
+    --summarizer "$TOOL_REPO/scripts/summarize_in_place_ttt_baseline_resource.py" \
+    --offloading "$offloading_path" \
+    --output "$OUTPUT_ROOT/independent_audit.json"
+  audit_status=$?
+  set -e
+fi
+if [[ "$status" -ne 0 ]]; then
+  exit "$status"
+fi
+exit "$audit_status"
 
