@@ -1465,3 +1465,17 @@ The validated watcher is now live in tmux session
 session were live, its state was `waiting_for_audited_stage1_timing`, the
 explicit release was absent, neither final nor partial training output
 existed, and GPU 0/1 remained at 46/18 MiB and 0% utilization.
+
+## 22. Post-Stage-1 Stage-2 ladder watcher (2026-10-18)
+
+`watch_and_run_in_place_ttt_2x5090_stage2_ladder.sh` persistently bridges the
+paired formal Stage-1 result to the registered 64K/128K Stage-2 resource
+ladder. It is restricted to `hku-gpu2`, binds a clean exact tool/upstream
+revision, frozen plans and independently audited exact resource inputs, and
+monitors both the formal Stage-1 tmux handle and upstream watcher state.
+
+The watcher accepts only terminal state `completed_100m_stage1` with the exact
+paired audit protocol, a clean pass and both arm records. Missing handles,
+upstream failure, invalid audit or timeout stops before the ladder runner. A
+successful launch still requires all four 64K/128K arm-specific boundaries,
+terminal ladder state and its independent audit before reporting completion.

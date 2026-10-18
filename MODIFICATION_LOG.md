@@ -7052,3 +7052,14 @@ partial输出。证据归档于
 `baseline_2x5090_formal_stage1_3c7e29fc_20261018`启动。2026-10-18 12:25:20 HKT时pane
 PID 1422177与上游timing session均存活，状态为`waiting_for_audited_stage1_timing`；显式release、
 正式final和partial输出均不存在，两卡仍为46/18MiB和0%利用率。
+
+## 2026-10-18：正式Stage1到Stage2资源阶梯的持久watcher
+
+新增`scripts/watch_and_run_in_place_ttt_2x5090_stage2_ladder.sh`，只在`hku-gpu2`运行并绑定clean
+exact tool/upstream revision、冻结计划和已审计的64K/128K精确资源输入。它同时监控formal Stage1
+tmux handle、上游watcher状态及最终paired root，只接受`completed_100m_stage1`、精确audit协议、
+空errors和严格no-TTT/TTT双臂记录。
+
+handle提前丢失、上游失败、超时或audit异常均在ladder runner前终止。启动后仍要求四个按臂
+64K/128K边界、`completed_stage2_ladder`终态及独立ladder audit全部通过，才报告完成。原训练入口
+与checkpoint不受影响。
