@@ -7284,3 +7284,17 @@ spans存在且training-token SHA256格式有效。随后使用独立只读命令
 `7ae916550d98d60dbd355fc599ed43e1cd383dec8526ade6c3efe52ff3139695`。该证据仅是构建期间的稀疏
 连续性检查，不能替代全量语料原子发布与canonical independent audit，也不释放训练、RULER或
 “是否更新”门控实验。
+
+## 2026-10-19：冻结 RULER 配置的实际环境复验
+
+在`hku-gpu2`冻结OpenCompass环境中实际加载2x5090评测配置但不执行推理。4K配置展开为精确13项
+官方任务：2项QA、8项NIAH、variable tracking、frequent-word extraction和common-word extraction；
+全部为每任务100例、seed 42、最大长度4096，并选择官方`ruler_4k`汇总组。
+
+随后逐一加载4K、8K、16K、32K、64K、128K和256K。七个长度的任务数、后缀、样本数、seed、
+最大长度及summary group全部通过。环境版本为OpenCompass 0.5.4、Transformers 4.57.3、Datasets
+2.21.0和Torch 2.8.0+cu128；十个注册生成/评分模块及三个RULER源文件哈希全部匹配冻结常量。
+
+该复验确认2x5090实现只改变进程调度，显式固定随机种子、tokenizer策略和checkpoint绑定，没有改变
+官方任务集合或指标。本轮没有生成prediction或分数；4K--128K仍由正式Stage2审计封存，256K仍是
+需要独立release的外推结果。

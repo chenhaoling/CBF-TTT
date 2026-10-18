@@ -1779,3 +1779,26 @@ with SHA256
 This is an intermediate continuity check only. It does not replace full-corpus
 atomic publication or the registered canonical independent audit, and it does
 not release activation, training, RULER or update-admission work.
+
+## 32. Frozen RULER configuration revalidation (2026-10-19)
+
+The frozen OpenCompass environment on `hku-gpu2` loaded the actual 2x5090
+configuration without running inference. At 4K it expanded to exactly the 13
+official tasks: two QA, eight NIAH, variable tracking, frequent-word extraction
+and common-word extraction. Every task had 100 examples, seed 42 and a 4,096
+maximum sequence length, and the official `ruler_4k` summary group was selected.
+
+The same load-time check passed at 4K, 8K, 16K, 32K, 64K, 128K and 256K. At
+each length all 13 task suffixes, sample counts, seeds, maximum lengths and
+summary groups matched the registered context. The environment reported
+OpenCompass 0.5.4, Transformers 4.57.3, Datasets 2.21.0 and Torch 2.8.0+cu128.
+All ten registered generator/scorer module hashes and all three registered
+RULER source-file hashes matched the frozen constants.
+
+The released `eval_config/ruler_128k.py` and the resource-constrained config
+both import the same five OpenCompass generator groups and the same official
+summary groups. The 2x5090 path changes process scheduling, explicitly fixes
+the seed and tokenizer policy, and binds the evaluated checkpoint; it does not
+change the task set or metric. This revalidation produced no prediction or
+score. The 4K--128K matrix remains sealed behind audited paired Stage 2, and
+256K remains a separately released extrapolation.
