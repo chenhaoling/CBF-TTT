@@ -76,7 +76,7 @@ PY
 eligible() {
   local prefix=$1
   snapshot "$prefix"
-  "$PYTHON_BIN" - "$OUTPUT_ROOT" "$prefix" <<'PY'
+  if ! "$PYTHON_BIN" - "$OUTPUT_ROOT" "$prefix" <<'PY'
 import csv, pathlib, re, sys
 root, prefix = pathlib.Path(sys.argv[1]), sys.argv[2]
 with (root / f"{prefix}_gpu.csv").open(newline="") as handle:
@@ -97,10 +97,15 @@ match = re.search(r"^MemAvailable:\s+(\d+)\s+kB$", host, re.MULTILINE)
 if match is None or int(match.group(1)) < 48 * 1024 * 1024:
     raise SystemExit(1)
 PY
-  test "$(git -C "$UPSTREAM_REPO" rev-parse HEAD)" = "$UPSTREAM_COMMIT"
-  test -z "$(git -C "$UPSTREAM_REPO" status --short)"
-  test "$(git -C "$TOOL_REPO" rev-parse HEAD)" = "$TOOL_COMMIT"
-  test -z "$(git -C "$TOOL_REPO" status --short)"
+  then
+    return 1
+  fi
+  [[ "$(git -C "$UPSTREAM_REPO" rev-parse HEAD)" == "$UPSTREAM_COMMIT" ]] \
+    || return 1
+  [[ -z "$(git -C "$UPSTREAM_REPO" status --short)" ]] || return 1
+  [[ "$(git -C "$TOOL_REPO" rev-parse HEAD)" == "$TOOL_COMMIT" ]] || return 1
+  [[ -z "$(git -C "$TOOL_REPO" status --short)" ]] || return 1
+  return 0
 }
 
 wait_for_resources() {
