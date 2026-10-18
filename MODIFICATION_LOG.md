@@ -7153,3 +7153,14 @@ Table 1中matched baseline和In-Place TTT的4K–256K七点参考值。对注册
 独立matrix auditor从raw task score重算上述差值，并拒绝参考值漂移、context缺失、算术不一致或
 claim boundary变化。输出明确标记`public_data_matched_replication_not_paper_exact`；256K论文值只作
 参考，本地256K仍受独立外推资源门控制。
+
+commit `439fcea142c4d3bb51413d75480d5231d0c62cab`已在`hku-gpu2`建立clean checkout；RULER
+专项6项和完整focused 63项测试均通过。替换前确认旧的两个RULER watcher句柄存活、仍处于初始等待
+状态且无final/partial GPU输出，只停止这两个CPU等待进程，不影响任何训练或评测任务。
+
+带论文对照的新resource watcher已在
+`baseline_2x5090_ruler_resource_439fcea1_20261018`启动，pane PID 1430095；matrix watcher已在
+`baseline_2x5090_ruler_matrix_439fcea1_20261018`启动，pane PID 1430136。2026-10-18 13:04:10 HKT
+状态分别为`waiting_for_audited_formal_stage2`和`waiting_for_audited_ruler_resource_ladder`，两卡仍为
+46/18MiB、利用率0%。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_paper_comparison_20261018/`。

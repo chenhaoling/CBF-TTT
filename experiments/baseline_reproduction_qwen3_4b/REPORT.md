@@ -1602,3 +1602,16 @@ or claim-boundary change. The summary explicitly records
 `public_data_matched_replication_not_paper_exact`; the 256K paper values are
 retained for reference while the local 256K result remains behind its separate
 extrapolation resource gate.
+
+Commit `439fcea142c4d3bb51413d75480d5231d0c62cab` was checked out cleanly on
+`hku-gpu2`; the six RULER tests and complete 63-test focused suite passed. The
+two prior RULER watchers were confirmed live, still in their initial waiting
+states and without final/partial GPU outputs before being replaced. The
+paper-aware resource watcher is now live in session
+`baseline_2x5090_ruler_resource_439fcea1_20261018`, pane PID 1430095, and the
+matrix watcher in `baseline_2x5090_ruler_matrix_439fcea1_20261018`, pane PID
+1430136. At `2026-10-18T13:04:10+08:00`, their states were respectively
+`waiting_for_audited_formal_stage2` and
+`waiting_for_audited_ruler_resource_ladder`; GPU 0/1 remained at 46/18 MiB and
+zero utilization. Evidence is stored under
+`remote/hku_gpu2_ruler_paper_comparison_20261018/`.
