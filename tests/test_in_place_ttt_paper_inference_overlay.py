@@ -154,7 +154,12 @@ for invalid in (0.0, -1.0, float("inf"), float("nan")):
 '''
             env = os.environ.copy()
             env["PYTHONPATH"] = str(output)
-            subprocess.run([sys.executable, "-c", program], env=env, check=True)
+            subprocess.run(
+                [sys.executable, "-c", program],
+                cwd=root,
+                env=env,
+                check=True,
+            )
 
 
 if __name__ == "__main__":
