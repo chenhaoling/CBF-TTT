@@ -6743,3 +6743,18 @@ tool checkout，远端同样通过34/34测试与四配置audit。首次负向预
 列表为空，GPU为46/18MiB、0%利用率，且没有生成`run_metadata.json`或`train.log`，证明未进入
 训练。证据及本地rehash位于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_activation_preflight_rejection_20261018/`。
+
+新增`scripts/watch_and_run_in_place_ttt_2x5090_activation.sh`，只在`hku-gpu2`上绑定精确
+official/tool commit、Qwen3-4B、既有SHA256为`2eb03326...23d`的8K公共混合pilot、冻结计划和
+四配置audit。watcher每60秒重算两卡idle、compute process、48GiB主存和精确`/proc`语料进程
+门槛，连续两次通过才按no-TTT→TTT运行；任一runner或独立audit失败立即停止，不越级到16K。
+
+首次watcher发现Bash语义缺陷：函数在`if eligible`中执行时，`set -e`会被抑制，Python判定
+不合格后函数仍执行后续clean check并最终返回0。它因此调用了一次底层runner，但runner硬预检
+再次检测到builder，exit 1且只生成preflight文件；没有metadata、train.log或CUDA工作，两卡仍为
+46/18MiB。commit`f14cb7152bc7607e0b8555d449bcf2b28853eb1c`改为显式传播每个失败码。
+
+修复版从专用detached checkout`/home/ctj/cbf_ttt_tool_f14cb715`运行于tmux
+`baseline_2x5090_activation_8k_20261018`，输出根为
+`/home/ctj/in_place_ttt_2x5090_activation_8k_f14cb715_20261018`。启动后权威状态为
+`waiting_8k_no_ttt`，冲突清单恰为真实PID1397986/1397987，未创建训练子目录，GPU利用率均为0。

@@ -143,6 +143,7 @@ New opt-in files are:
 - `configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage{1,2}_{no_ttt,ttt}.yaml`;
 - `scripts/audit_in_place_ttt_2x5090_configs.py`;
 - `scripts/audit_in_place_ttt_2x5090_resource.py`;
+- `scripts/watch_and_run_in_place_ttt_2x5090_activation.sh`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -969,6 +970,25 @@ process, left GPU0/GPU1 at 46/18 MiB and created neither `run_metadata.json`
 nor `train.log`. The downloaded snapshots and local hash verification are in
 `remote/hku_gpu2_activation_preflight_rejection_20261018/`. This is evidence
 that the guard prevents training; it is not an optimizer-step result.
+
+An opt-in watcher now binds the exact tool/upstream commits, model, 8K pilot,
+plans and configuration audit, then polls the same GPU, host and exact
+`/proc` conflict gates. The first scheduler revision exposed a Bash control
+flow issue: because `eligible` was called in an `if`, `set -e` did not stop the
+function after its Python check returned 1. It therefore called the runner,
+whose independent hard preflight rejected the live builder before metadata,
+training log or CUDA work and left both GPUs at 46/18 MiB. Commit
+`f14cb7152bc7607e0b8555d449bcf2b28853eb1c` explicitly propagates every
+eligibility failure.
+
+The repaired watcher runs in tmux
+`baseline_2x5090_activation_8k_20261018` from immutable detached checkout
+`/home/ctj/cbf_ttt_tool_f14cb715`. Its output root is
+`/home/ctj/in_place_ttt_2x5090_activation_8k_f14cb715_20261018`. The first
+authoritative snapshot remained `waiting_8k_no_ttt`, recorded the two real
+builder PIDs, created no `resource_8k_no_ttt` child, and left both devices at
+0% utilization. It may launch only after two consecutive eligible snapshots;
+if either 8K arm or its independent audit fails, it stops before 16K.
 
 No activation-offload GPU probe has run yet. At `2026-10-18T10:12:01+08:00`,
 PID 1397987 and tmux `public_corpus_full_20261018` were still live after
