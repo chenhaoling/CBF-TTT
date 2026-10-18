@@ -7237,3 +7237,15 @@ inventory-audit/tokenizer 哈希绑定正确、四个数据与 provenance 文件
 拒绝，以及 direct、`/usr/bin/time`包装和仅作为依赖参数出现的脚本路径识别，共九条路径。fallback
 成功后还会独立重查 full profile、all-true checks、manifest 绑定与注册 auditor SHA256；下游 Stage1
 timing 和正式训练继续只接受 canonical `independent_audit.json`。
+
+进程识别随后收紧为只接受真正执行位置上的 builder/auditor 脚本，忽略 watcher 的`--builder`、
+`--original-auditor`和`--streaming-auditor`依赖参数，避免另一个观察进程造成假冲突。最终 commit
+`990da145d814aded46a560f64947bc17e7e89fb6`已推送并在`hku-gpu2`建立 clean detached worktree；
+完整 focused suite 75/75 通过。10 秒负向预检 exit 9，状态为
+`timed_out_waiting_for_original_audit`，未创建 canonical audit，GPU 0/1 保持 46/18 MiB。
+
+长期 watcher 已在 tmux session
+`baseline_public_corpus_fallback_990da145_20261019`启动，pane PID 1605090、Python PID 1605091。
+2026-10-19 01:08:27 HKT 时状态为`wait`，原因是 full corpus 尚未原子发布；构建 PID 1397987
+继续运行，Stage2 为 60,421 行，两卡利用率 0%。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_public_corpus_streaming_fallback_20261019/`。

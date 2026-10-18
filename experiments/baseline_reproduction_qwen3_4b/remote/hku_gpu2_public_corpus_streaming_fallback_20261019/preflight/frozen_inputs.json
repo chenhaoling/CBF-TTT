@@ -1,0 +1,54 @@
+{
+  "expected_hostname": "user-Super-Server",
+  "inputs": {
+    "builder": {
+      "path": "/home/ctj/in_place_ttt_official_be232482/scripts/build_in_place_ttt_public_corpus.py",
+      "sha256": "925ac99e701d9aa6444e8ec0c2f329cb8200d58155e672018d6ea3c4a044ec59"
+    },
+    "inventory": {
+      "path": "/home/ctj/in_place_ttt_public_corpus_inventory_20261018/inventory.json",
+      "sha256": "c7e6761dc5d27013c09d6002de5c3e2b2185492b18100fba4b966c855debf7df"
+    },
+    "inventory_audit": {
+      "path": "/home/ctj/in_place_ttt_public_corpus_inventory_20261018/independent_audit.json",
+      "sha256": "32daacb7eee2c9536ab8c06c01ac7c423d429f04cdf512a958f9ffd201487507"
+    },
+    "original_auditor": {
+      "path": "/home/ctj/in_place_ttt_official_be232482/scripts/audit_in_place_ttt_public_corpus.py",
+      "sha256": "9c5dbadba76c4ebbba5248952455b3bfe4860b9b2b79bdbb555034dcc76c7e31"
+    },
+    "plan": {
+      "path": "/home/ctj/in_place_ttt_official_be232482/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md",
+      "sha256": "c5019a28b9fa7fa27052ddf1d69eb029a2ec5b3b6446f1527e9ceb7db1a12bab"
+    },
+    "scalability_addendum": {
+      "path": "/home/ctj/cbf_ttt_tool_e760b9a4/IN_PLACE_TTT_BASELINE_LEVEL_B_CORPUS_AUDIT_SCALABILITY_ADDENDUM.md",
+      "sha256": "c8641bbfa83f79a5838f13cf906ef0fdbd2053c080cbab987aa20f798423fdf1"
+    },
+    "streaming_auditor": {
+      "path": "/home/ctj/cbf_ttt_tool_e760b9a4/scripts/audit_in_place_ttt_public_corpus.py",
+      "sha256": "5ec753a29996f6abc386d7e16529218bbaaf6c1b1ff271638db730b9c41f8b87"
+    },
+    "watcher_addendum": {
+      "path": "/home/ctj/cbf_ttt_tool_e760b9a4/IN_PLACE_TTT_BASELINE_CORPUS_AUDIT_FALLBACK_WATCHER_ADDENDUM.md",
+      "sha256": "14de0eeca54915d5a6c2d3daeda16679dbf8ecd055fb8b016d97e32193b40d3e"
+    }
+  },
+  "protocol": "in_place_ttt_public_corpus_streaming_audit_watcher_v1",
+  "tokenizer_assets": {
+    "config.json": {
+      "sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+      "size_bytes": 726
+    },
+    "tokenizer.json": {
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "size_bytes": 11422654
+    },
+    "tokenizer_config.json": {
+      "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+      "size_bytes": 9732
+    }
+  },
+  "tokenizer_path": "/home/ctj/models/Qwen3-4B",
+  "tool_commit": "e760b9a4a6067ddfbca38446c1022adf981716ad"
+}

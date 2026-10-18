@@ -1721,3 +1721,15 @@ active-auditor waiting, valid existing-audit acceptance, failed-audit refusal,
 pre-publication failure refusal, completed-without-audit refusal and exact
 active-command classification for direct, `/usr/bin/time`-wrapped and
 dependency-only auditor paths.
+
+Commit `990da145d814aded46a560f64947bc17e7e89fb6` is pushed and checked out
+cleanly on `hku-gpu2`. The complete focused suite passes 75/75. A ten-second
+negative preflight exited 9 in state
+`timed_out_waiting_for_original_audit`, created no canonical audit and left
+GPU 0/1 at 46/18 MiB. The persistent watcher is live in tmux session
+`baseline_public_corpus_fallback_990da145_20261019`, with pane PID 1605090 and
+Python PID 1605091. At `2026-10-19T01:08:27+08:00` it remained in `wait`
+because the full corpus was not yet atomically published; the builder PID
+1397987 was live at 60,421 Stage-2 rows and both GPUs were idle. Evidence is
+archived under
+`remote/hku_gpu2_public_corpus_streaming_fallback_20261019/`.

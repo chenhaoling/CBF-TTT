@@ -1,0 +1,27 @@
+2026-10-19T01:08:27+08:00
+TOOL
+990da145d814aded46a560f64947bc17e7e89fb6
+TESTS
+........................................................................ [ 96%]
+...                                                                      [100%]
+75 passed in 0.94s
+WATCHER
+1605090 bash 0
+{
+  "protocol": "in_place_ttt_public_corpus_streaming_audit_watcher_v1",
+  "reason": "full corpus is not atomically published",
+  "state": "wait",
+  "time_utc": "2026-10-18T17:08:01Z",
+  "wrapper_state": "RUNNING_BUILD"
+}
+1605090  528302 Ss+        04:27  0.0  0.0  3672 bash -c /home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python /home/ctj/cbf_ttt_tool_990da145/scripts/watch_and_run_in_place_ttt_public_corpus_streaming_audit.py --tool-repo /home/ctj/cbf_ttt_tool_990da145 --tool-commit 990da145d814aded46a560f64947bc17e7e89fb6 --python-bin /home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python --corpus-root /home/ctj/in_place_ttt_public_corpus_full_20261018 --inventory /home/ctj/in_place_ttt_public_corpus_inventory_20261018/inventory.json --inventory-audit /home/ctj/in_place_ttt_public_corpus_inventory_20261018/independent_audit.json --tokenizer /home/ctj/models/Qwen3-4B --plan /home/ctj/in_place_ttt_official_be232482/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md --builder /home/ctj/in_place_ttt_official_be232482/scripts/build_in_place_ttt_public_corpus.py --original-auditor /home/ctj/in_place_ttt_official_be232482/scripts/audit_in_place_ttt_public_corpus.py --streaming-auditor /home/ctj/cbf_ttt_tool_990da145/scripts/audit_in_place_ttt_public_corpus.py --scalability-addendum /home/ctj/cbf_ttt_tool_990da145/IN_PLACE_TTT_BASELINE_LEVEL_B_CORPUS_AUDIT_SCALABILITY_ADDENDUM.md --watcher-addendum /home/ctj/cbf_ttt_tool_990da145/IN_PLACE_TTT_BASELINE_CORPUS_AUDIT_FALLBACK_WATCHER_ADDENDUM.md --original-status /home/ctj/in_place_ttt_public_corpus_full_run_20261018/status.txt --output-root /home/ctj/in_place_ttt_public_corpus_streaming_fallback_990da145_20261019 --poll-seconds 60 --max-wait-seconds 604800 > /home/ctj/in_place_ttt_public_corpus_streaming_fallback_990da145_20261019.watcher.log 2>&1; rc=$?; printf "%s\n" "$rc" > /home/ctj/in_place_ttt_public_corpus_streaming_fallback_990da145_20261019.wrapper_exit_code.txt
+1605091 1605090 S+         04:27  0.0  0.0 19948 /home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python /home/ctj/cbf_ttt_tool_990da145/scripts/watch_and_run_in_place_ttt_public_corpus_streaming_audit.py --tool-repo /home/ctj/cbf_ttt_tool_990da145 --tool-commit 990da145d814aded46a560f64947bc17e7e89fb6 --python-bin /home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python --corpus-root /home/ctj/in_place_ttt_public_corpus_full_20261018 --inventory /home/ctj/in_place_ttt_public_corpus_inventory_20261018/inventory.json --inventory-audit /home/ctj/in_place_ttt_public_corpus_inventory_20261018/independent_audit.json --tokenizer /home/ctj/models/Qwen3-4B --plan /home/ctj/in_place_ttt_official_be232482/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md --builder /home/ctj/in_place_ttt_official_be232482/scripts/build_in_place_ttt_public_corpus.py --original-auditor /home/ctj/in_place_ttt_official_be232482/scripts/audit_in_place_ttt_public_corpus.py --streaming-auditor /home/ctj/cbf_ttt_tool_990da145/scripts/audit_in_place_ttt_public_corpus.py --scalability-addendum /home/ctj/cbf_ttt_tool_990da145/IN_PLACE_TTT_BASELINE_LEVEL_B_CORPUS_AUDIT_SCALABILITY_ADDENDUM.md --watcher-addendum /home/ctj/cbf_ttt_tool_990da145/IN_PLACE_TTT_BASELINE_CORPUS_AUDIT_FALLBACK_WATCHER_ADDENDUM.md --original-status /home/ctj/in_place_ttt_public_corpus_full_run_20261018/status.txt --output-root /home/ctj/in_place_ttt_public_corpus_streaming_fallback_990da145_20261019 --poll-seconds 60 --max-wait-seconds 604800
+BUILD
+RUNNING_BUILD
+started_utc=2026-10-17T16:51:37Z
+1397987 Rl+   1-00:16:50 87.5 13.5 8856012
+ROWS 60421
+STAGE2 size=1782893686 mtime=2026-10-19 01:08:28.408672662 +0800
+GPU
+0, 46, 32607, 0
+1, 18, 32607, 0
