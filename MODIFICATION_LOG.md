@@ -7364,3 +7364,27 @@ SHA256均为`1030083c664521b56decdb8a9415af1c13c3f002c8544db2c34dbd80c590e0db`�
 必须采用后续正式timing gate实测。新增证据目录
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_dataloader_pairing_20261019/`，保存最终探针、
 双重运行、比较结果与hash说明。本轮没有使用任何GPU，也没有释放正式训练。
+
+## 2026-10-19：RULER checkpoint consumer 与模型类隔离审计
+
+静态复核正式checkpoint链路：Stage1在step 27保存DCP并通过固定VeOmni转换为HF，Stage2从Stage1
+paired audit中按arm读取HF路径并由训练入口实际加载；Stage2在step 5再次转换，随后RULER resource
+runner从Stage2 paired audit读取两条HF路径，记录完整模型文件hash，并交给OpenCompass
+`HuggingFaceBaseModel`。固定OpenCompass 0.5.4的该类会调用
+`AutoModelForCausalLM.from_pretrained`，因此Stage2权重必须在resource gate真实加载成功，才能进入
+正式RULER matrix。
+
+同时识别出需要明确排除的污染风险：tool checkout中的`inference_model`包含后续CBF runtime改动。
+冻结RULER runner把clean upstream置于`PYTHONPATH`首位，注册入口先导入`inference_model`再启动
+OpenCompass。为验证实际解析而非仅依赖脚本文本，在`hku-gpu2`固定eval环境以空
+`CUDA_VISIBLE_DEVICES`加载config注册但不加载权重。`Qwen3Config`与`Qwen3ForCausalLM`均解析到
+`/home/ctj/in_place_ttt_official_be232482_resource_clean/inference_model`；对应modeling SHA256为
+`98ec94bcf1780635d7817b993a0bf4fa1f1a7e3a35415dce8a46c345a52a2858`，包含原生
+`TTT_update`且不含`cbf_ttt.runtime`。对照tool副本确实含CBF import，说明检查覆盖了真实歧义。
+
+新增证据目录
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_import_resolution_20261019/`。
+结构化audit通过，SHA256为
+`28445763f9e8261fbac7f32c3880e76b6afc696bdd58f3c2babed1e8d8313781`，绑定upstream/tool commit、
+入口、runner、config与解析文件。该证据证明类隔离与消费路径；未来权重本身仍须由正式manifest、
+Stage2真实加载及RULER resource预测共同验收。本轮没有使用GPU或释放任何正式评测。

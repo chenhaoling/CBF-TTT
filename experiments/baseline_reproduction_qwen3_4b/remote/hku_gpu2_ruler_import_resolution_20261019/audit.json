@@ -1,0 +1,40 @@
+{
+  "bindings": {
+    "tool_ruler_config_sha256": "4c67903efb85881488ba2e8edb648199d404ad989df4dca6085621ab0f60b7db",
+    "tool_ruler_single_runner_sha256": "9df52af169ba9242785b53d69dff5ffaca142addf951a5d90f0c8e75d096b33c",
+    "tool_run_opencompass_sha256": "165d9b09ac3f86bd75dafa7ff7ed11deac50f76224e4b99a320c89aab53ebba0",
+    "upstream_inference_init_sha256": "54ae124b5c993dff594b041dc4375407fbf1c016a689f9dac805e0043e86e52a",
+    "upstream_modeling_sha256": "98ec94bcf1780635d7817b993a0bf4fa1f1a7e3a35415dce8a46c345a52a2858"
+  },
+  "contrast": {
+    "tool_modeling_contains_cbf_runtime_import": true,
+    "tool_modeling_exists": true,
+    "tool_modeling_sha256": "7f63c0511b0bcb16debb0e87d70ec9e223e9a46add8ec23075effb43e091a5f0"
+  },
+  "cuda_visible_devices": "",
+  "hostname": "user-Super-Server",
+  "passed": true,
+  "protocol": "in_place_ttt_ruler_import_resolution_audit_v1",
+  "resolved": {
+    "config_class": "inference_model.hf_qwen3.configuration_qwen3.Qwen3Config",
+    "contains_cbf_runtime_import": false,
+    "contains_native_ttt_update": true,
+    "inference_model_init": "/home/ctj/in_place_ttt_official_be232482_resource_clean/inference_model/__init__.py",
+    "model_class": "inference_model.hf_qwen3.modeling_qwen3.Qwen3ForCausalLM",
+    "modeling_path": "/home/ctj/in_place_ttt_official_be232482_resource_clean/inference_model/hf_qwen3/modeling_qwen3.py"
+  },
+  "static_checks": {
+    "entry_imports_inference_before_opencompass": true,
+    "runner_calls_registered_entry": true,
+    "runner_exports_upstream_before_tool": true
+  },
+  "tool_clean": true,
+  "tool_commit": "439fcea142c4d3bb51413d75480d5231d0c62cab",
+  "upstream_clean": true,
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "versions": {
+    "opencompass": "0.5.4",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.3"
+  }
+}

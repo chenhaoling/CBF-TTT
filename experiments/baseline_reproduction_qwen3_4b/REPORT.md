@@ -1910,3 +1910,40 @@ The script, both runs and comparison are archived under
 process. This confirms the deterministic pairing mechanism and one complete
 pilot global batch; the formal audits must still bind the published full
 corpus and completed checkpoints.
+
+## 37. Checkpoint consumer and RULER model-class isolation (2026-10-19)
+
+The formal checkpoint chain has two runtime consumers. Stage 1 writes DCP at
+step 27 and converts it with pinned VeOmni `ckpt_to_state_dict` and
+`save_model_weights`; the Stage-2 runner selects each arm-specific HF path
+from the passing Stage-1 audit, and the training entry loads that path before
+the 128K stage. Stage 2 repeats the DCP-to-HF conversion at step five. The
+RULER resource runner then selects each arm-specific Stage-2 HF path from its
+paired audit, records every model-file hash and delegates loading to
+OpenCompass `HuggingFaceBaseModel`, whose pinned implementation calls
+`AutoModelForCausalLM.from_pretrained` before inference. Thus Stage-1 loading
+is exercised by Stage 2, while Stage-2 loading is exercised by the mandatory
+RULER resource gate before formal scoring.
+
+The development/tool checkout also contains later CBF modifications under its
+own `inference_model`, so module shadowing would invalidate a baseline result.
+The frozen single-context runner exports the clean upstream checkout before
+the tool checkout in `PYTHONPATH`; its registered entry imports
+`inference_model` before invoking OpenCompass. A CPU-only runtime audit in the
+exact evaluation environment resolved `Qwen3Config` and
+`Qwen3ForCausalLM` to
+`/home/ctj/in_place_ttt_official_be232482_resource_clean/inference_model` at
+upstream commit `be2324829b0e91c8fd10a74d4b43714fde6676e1`. The resolved
+modeling file has SHA256
+`98ec94bcf1780635d7817b993a0bf4fa1f1a7e3a35415dce8a46c345a52a2858`,
+contains native `TTT_update`, and has no `cbf_ttt.runtime` import. The frozen
+tool copy did contain that import, so the audit tested the relevant ambiguity.
+
+The structured audit passed with SHA256
+`28445763f9e8261fbac7f32c3880e76b6afc696bdd58f3c2babed1e8d8313781`
+and is archived under `remote/hku_gpu2_ruler_import_resolution_20261019/`.
+This proves model-class isolation and the registered loading path without
+using a GPU. It does not assert that future checkpoint tensors are valid:
+formal training must still emit the complete file manifests, and the RULER
+resource runs must successfully load those exact manifests and generate all
+paired resource predictions before the matrix is released.
