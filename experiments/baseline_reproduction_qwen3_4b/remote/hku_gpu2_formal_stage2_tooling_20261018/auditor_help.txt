@@ -1,0 +1,35 @@
+usage: audit_in_place_ttt_2x5090_100m_stage2.py [-h] --root ROOT --stage1-root
+                                                STAGE1_ROOT
+                                                --stage2-ladder-root
+                                                STAGE2_LADDER_ROOT
+                                                --formal-plan FORMAL_PLAN
+                                                --execution-addendum
+                                                EXECUTION_ADDENDUM
+                                                --timing-audit TIMING_AUDIT
+                                                --release RELEASE
+                                                --corpus-manifest
+                                                CORPUS_MANIFEST --corpus-audit
+                                                CORPUS_AUDIT --data DATA
+                                                --no-ttt-config NO_TTT_CONFIG
+                                                --ttt-config TTT_CONFIG
+                                                --runner RUNNER --output
+                                                OUTPUT
+
+Independently audit paired formal 2x5090 100M-tier Stage-2 training.
+
+options:
+  -h, --help            show this help message and exit
+  --root ROOT
+  --stage1-root STAGE1_ROOT
+  --stage2-ladder-root STAGE2_LADDER_ROOT
+  --formal-plan FORMAL_PLAN
+  --execution-addendum EXECUTION_ADDENDUM
+  --timing-audit TIMING_AUDIT
+  --release RELEASE
+  --corpus-manifest CORPUS_MANIFEST
+  --corpus-audit CORPUS_AUDIT
+  --data DATA
+  --no-ttt-config NO_TTT_CONFIG
+  --ttt-config TTT_CONFIG
+  --runner RUNNER
+  --output OUTPUT

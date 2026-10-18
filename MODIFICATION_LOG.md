@@ -6954,3 +6954,10 @@ release JSON。runner在训练前重算完整128K语料、Stage-1 audit和两个
 
 本次未创建release或启动正式Stage-2 GPU任务。入口仍由正式Stage-1、Stage-2 ladder、Stage-2
 实测timing和人工release四重封存；RULER与“是否更新”门控继续等待双臂正式Stage-2独立审计。
+
+commit `d2bc98e8a34d8e66c43117f6cf0dcedd298d911d`在`hku-gpu2`建立clean detached
+checkout后，远程baseline focused suite 53/53通过，Bash语法与直接auditor CLI通过。使用未来
+formal prerequisites执行负向预检时exit 1，在CUDA前停止且未创建final/partial输出。2026-10-18
+11:26:00 HKT GPU0/1仅46/18MiB、利用率0%；语料builder仍存活，partial已到51GB，三个上游
+watcher继续等待。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_formal_stage2_tooling_20261018/`。

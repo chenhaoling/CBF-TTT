@@ -1316,3 +1316,11 @@ No formal Stage-2 GPU execution or release record has been created. The
 entry remains sealed behind formal Stage 1, the Stage-2 ladder, measured
 Stage-2 timing and explicit review. RULER and update-admission work remain
 sealed behind the resulting paired formal Stage-2 audit.
+
+Commit `d2bc98e8` was checked out cleanly on `hku-gpu2`. The remote focused
+suite passed 53/53, Bash syntax and the direct auditor CLI passed, and a
+negative run with unpublished formal prerequisites exited 1 before CUDA while
+creating neither final nor partial output. At `2026-10-18T11:26:00+08:00`,
+GPU 0/1 used 46/18 MiB at 0%; the corpus builder remained live with a 51-GB
+partial directory and all upstream watchers remained waiting. Evidence is
+stored under `remote/hku_gpu2_formal_stage2_tooling_20261018/`.
