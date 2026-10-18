@@ -1405,3 +1405,9 @@ For subsequent clean runs, `watch_and_run_in_place_ttt_2x5090_activation.sh`
 now writes `/proc/meminfo` through shell redirection. The destination therefore
 uses the watcher umask and remains writable across polls. Other occurrences
 copy one-shot preflight evidence and do not overwrite the same path in a loop.
+
+Commit `40bedb659a104d3177584f5afc528c9cc955d1b8` was then checked out cleanly
+on `hku-gpu2`. The complete focused baseline suite passed 59/59, Bash syntax
+passed, and the checked script SHA256 matched the remotely reproduced
+candidate. Evidence is stored under
+`remote/hku_gpu2_activation_watcher_repair_20261018/`.

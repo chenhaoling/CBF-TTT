@@ -7008,3 +7008,8 @@ GPU训练与评测继续严格限制在`hku-gpu2`。
 随后修改`scripts/watch_and_run_in_place_ttt_2x5090_activation.sh`，改用shell重定向写入
 `/proc/meminfo`，使目标权限由watcher的umask产生并可在后续轮询覆盖。仓库内其他相同`cp`只生成
 一次性preflight证据，不在循环中覆盖同一路径，因此不受该缺陷影响。
+
+commit `40bedb659a104d3177584f5afc528c9cc955d1b8`随后在`hku-gpu2`建立clean checkout；完整
+baseline focused suite 59/59通过，修复脚本Bash语法通过，脚本SHA256与远程复现candidate一致。
+证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_activation_watcher_repair_20261018/`。
