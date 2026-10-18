@@ -6819,3 +6819,23 @@ clean checkout并复跑43/43测试。CPU-only handoff watcher已启动于tmux
 状态为`waiting_for_audited_8k`，8K pane仍存活，未来ladder目录不存在，GPU0/1仅占46/18MiB且
 利用率0%；正式语料PID1397987仍存活，partial约48GiB。初始冻结hash、state、handle和统一远端
 快照归档于`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_stage1_ladder_watcher_20261018/`。
+
+## 2026-10-18：2×RTX5090 Stage-1 多步吞吐门槛
+
+审查发现冻结2×5090执行附录要求100M正式训练前完成multi-step no-checkpoint时间投影，但此前只有
+GB2单步资源边界。新增并冻结`IN_PLACE_TTT_BASELINE_2X5090_STAGE1_TIMING_PLAN.md`：每臂从相同
+Qwen3-4B出发，在完整已审计`stage1_32k.jsonl`上执行32K、GB64、恰好3个optimizer step，顺序
+固定no-TTT后TTT；step1作为warm-up，以step2/3个体耗时中位数投影正式27步。关闭DCP/HF保存，
+pilot权重全部丢弃，不能作为效果或checkpoint证据，也禁止用32K结果外推尚未测量的128K阶段。
+
+新增`scripts/run_in_place_ttt_2x5090_stage1_timing.sh`。CUDA前硬核验完整语料manifest/audit、
+Stage-1 ladder四边界audit、clean exact revisions、两卡idle、无builder/auditor、48GiB主存；绑定
+模型、语料、配置、计划、runner/auditor hash并记录逐臂GPU/host trace。新增独立
+`scripts/audit_in_place_ttt_2x5090_stage1_timing.py`，重新hash依赖与正式语料，解析每步首个完整
+tqdm记录，从累计时间重建个体时间，检查3组有限loss/gradient、5%显存余量、8GiB主存、3.5GiB
+swap、有效activation-offload设置和零checkpoint，并输出双臂顺序Stage-1投影。
+
+新增`tests/test_in_place_ttt_2x5090_stage1_timing.py`，覆盖重复final tqdm行不能污染step3耗时，
+以及完整双臂fixture审计。baseline focused suite现为45/45通过，Bash语法、Python编译与
+`git diff --check`通过。timing runner尚未启动；它必须等待正式语料和8K/16K/32K ladder全部
+完成。Stage-2继续封存，直到双臂Stage-1 HF checkpoint存在并完成单独64K/128K资源与吞吐计划。

@@ -147,6 +147,12 @@ New opt-in files are:
 - `IN_PLACE_TTT_BASELINE_2X5090_RESOURCE_INPUT_ADDENDUM.md`;
 - `scripts/build_in_place_ttt_2x5090_resource_inputs.py`;
 - `scripts/audit_in_place_ttt_2x5090_resource_inputs.py`;
+- `scripts/run_in_place_ttt_2x5090_stage1_ladder.sh`;
+- `scripts/audit_in_place_ttt_2x5090_stage1_ladder.py`;
+- `scripts/watch_and_run_in_place_ttt_2x5090_stage1_ladder.sh`;
+- `IN_PLACE_TTT_BASELINE_2X5090_STAGE1_TIMING_PLAN.md`;
+- `scripts/run_in_place_ttt_2x5090_stage1_timing.sh`;
+- `scripts/audit_in_place_ttt_2x5090_stage1_timing.py`;
 - `eval_config/baseline_reproduction/qwen3_4b_base_4k_smoke.py`;
 - `scripts/run_in_place_ttt_ruler_smoke.sh`;
 - `scripts/summarize_in_place_ttt_ruler_smoke.py`;
@@ -1098,3 +1104,37 @@ output did not exist, and GPU0/GPU1 used only 46/18 MiB at 0% utilization.
 The public-corpus builder PID 1397987 was also directly observed live with a
 48 GiB partial output. Deployment evidence is stored under
 `remote/hku_gpu2_stage1_ladder_watcher_20261018/`.
+
+## 13. Registered Stage-1 multi-step timing gate (2026-10-18)
+
+Review of the 2x5090 path found that the frozen execution addendum required a
+multi-step, no-checkpoint projection before formal 100M training, but the
+repository only had one-step GB2 resource probes. The new frozen
+`IN_PLACE_TTT_BASELINE_2X5090_STAGE1_TIMING_PLAN.md` closes that gap without
+launching a GPU job. It registers three 32K, GB64 optimizer steps per arm on
+the complete audited public corpus, always no-TTT before TTT. The first step
+is warm-up; the median of individual steps 2 and 3 projects each arm's formal
+27-step Stage-1 wall time. All pilot updates are discarded, and checkpoint/HF
+saving is disabled.
+
+`scripts/run_in_place_ttt_2x5090_stage1_timing.sh` refuses CUDA initialization
+unless the full corpus and the complete Stage-1 resource ladder independently
+pass, the exact official/tool revisions are clean, both GPUs are idle, no
+corpus process exists and host memory is at least 48 GiB. It binds the corpus,
+ladder, configs, model, plan, runner and auditor hashes and records per-arm
+GPU/host traces. The runner is restricted to `hku-gpu2`.
+
+`scripts/audit_in_place_ttt_2x5090_stage1_timing.py` rehashes the corpus and
+all dependencies, validates the four ladder boundaries, parses the first
+completed tqdm observation for each of the three steps, reconstructs
+individual times from cumulative elapsed time, verifies finite metrics,
+resource limits, effective activation-offload settings and absence of DCP/HF
+checkpoints, then computes the paired sequential Stage-1 projection. It does
+not extrapolate 128K timing. Stage 2 remains locked until arm-specific Stage-1
+HF checkpoints exist and a separate 64K/128K resource and timing plan passes.
+
+Two new tests cover progress-trace de-duplication and a complete paired audit
+fixture. The full focused baseline suite passes 45/45 tests; Bash syntax,
+Python compilation and `git diff --check` pass. The timing runner is prepared
+but has not been launched because its corpus and ladder prerequisites are
+still running.
