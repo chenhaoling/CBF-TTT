@@ -6786,5 +6786,5 @@ CPU-only远端构建4.83秒完成，峰值RSS822896KiB。首次audit因CLI字段
 资源日志与hash到`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_resource_inputs_20261018/`。
 
 扩展resource runner/summary/独立audit：所有高于8K的activation边界必须显式提供并绑定通过的
-data manifest与audit，否则启动前exit 2；metadata和summary同步记录两者hash。新增5项输入测试
-及1项长边界拒绝测试，完整baseline focused suite现为40/40通过。
+data manifest与audit，否则启动前exit 2；metadata和summary同步记录两者hash。新增5项输入测试、
+1项长边界拒绝测试及1项正确绑定正向测试，完整baseline focused suite现为41/41通过。

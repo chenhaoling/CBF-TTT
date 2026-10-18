@@ -1048,6 +1048,8 @@ manifest/audit for every activation-offload boundary above 8K. The plaintext
 JSONL files remain on `hku-gpu2`; Git stores only manifests, audits, resource
 logs and hashes under `remote/hku_gpu2_resource_inputs_20261018/`.
 
-The complete focused baseline suite now passes 40/40 tests. This closes input
+The complete focused baseline suite now passes 41/41 tests, including both
+rejection of an unbound 16K input and acceptance of a correctly bound
+manifest/audit fixture. This closes input
 length ambiguity only. The live 8K watcher remains bound to its earlier exact
 8K pilot, and GPU feasibility remains pending its resource run.

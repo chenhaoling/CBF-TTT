@@ -136,6 +136,52 @@ class TwoRTX5090ResourceAuditTest(unittest.TestCase):
             self.assertFalse(result["passed"])
             self.assertTrue(any("exact-length" in error for error in result["errors"]))
 
+    def test_longer_boundary_accepts_bound_input_manifest_and_audit(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            paths = self.fixture(root)
+            metadata_path = root / "run_metadata.json"
+            summary_path = root / "summary.json"
+            metadata = json.loads(metadata_path.read_text())
+            summary = json.loads(summary_path.read_text())
+            metadata["sequence_length"] = 16384
+            data_sha = sha256(paths["data"])
+            input_manifest = root / "input_manifest.json"
+            input_manifest.write_text(json.dumps({
+                "protocol": "in_place_ttt_2x5090_resource_inputs_v1",
+                "outputs": {"16384": {
+                    "records": 2, "training_tokens": 32768,
+                    "artifact": {"path": paths["data"].name,
+                                 "sha256": data_sha,
+                                 "size_bytes": paths["data"].stat().st_size},
+                }},
+            }))
+            manifest_sha = sha256(input_manifest)
+            input_audit = root / "input_audit.json"
+            input_audit.write_text(json.dumps({
+                "passed": True, "bindings": {"manifest_sha256": manifest_sha},
+                "outputs": {"16384": {
+                    "records": 2, "training_tokens": 32768,
+                    "artifact_sha256": data_sha,
+                }},
+            }))
+            metadata.update({
+                "data_manifest_path": str(input_manifest.resolve()),
+                "data_manifest_sha256": manifest_sha,
+                "data_audit_path": str(input_audit.resolve()),
+                "data_audit_sha256": sha256(input_audit),
+            })
+            summary["dependencies"].update({
+                "data_manifest_sha256": manifest_sha,
+                "data_audit_sha256": sha256(input_audit),
+            })
+            metadata_path.write_text(json.dumps(metadata))
+            summary_path.write_text(json.dumps(summary))
+            result = audit(
+                root, **paths, data_manifest=input_manifest, data_audit=input_audit
+            )
+            self.assertTrue(result["passed"], result["errors"])
+
 
 if __name__ == "__main__":
     unittest.main()
