@@ -2566,3 +2566,33 @@ work was launched. Evidence is archived under
 This result is early fault detection only. It does not prove final counts,
 complete curriculum hashes, cross-stage continuity or atomic publication;
 formal training remains sealed until the complete independent audit passes.
+
+## 55. Corrected Base RULER 256K resource registration (2026-10-19)
+
+The corrected Base execution chain previously stopped at the paper-facing
+4K--128K matrix even though the repository already contained a separate 256K
+extrapolation implementation. The new
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RULER_256K_PLAN.md` freezes the missing
+Base-bound resource step before any corrected 256K outcome. It permits one
+paired sample for each of the 13 official tasks only after the corrected
+primary matrix passes. Resource scores are discarded and cannot enter the
+paper-facing 4K--128K mean.
+
+The new wrapper auditor binds the exact Base identity and tokenizer, corrected
+Stage-2 audit, underlying and corrected primary-matrix audits, paper inference
+overlay with `tau=1e-5`, all 256K child audits, and the frozen plans and tools.
+Each child must bind the same paper-overlay hash. The new watcher fails closed
+on any drift and is hostname restricted to `hku-gpu2`; a later formal 13-task,
+100-example release remains sealed behind a separate review and explicit human
+acceptance.
+
+Commit `1eb9dc077a0a209cd2aef905b00c866302483728` passes 10/10 focused tests
+locally and in a clean detached `hku-gpu2` checkout with CUDA hidden. The live
+watcher froze 13 input hashes and is now at
+`waiting_for_corrected_ruler_matrix`, with tmux PID 1701185. At the 06:57
+snapshot GPU0/1 used 46/18 MiB with 0% utilization; no 256K child or result
+root existed. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_ruler_256k_resource_registration_20261019/`.
+
+This is registration evidence, not a 256K result or permission to open formal
+256K evaluation. All future GPU execution remains restricted to `hku-gpu2`.

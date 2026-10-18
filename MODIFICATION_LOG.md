@@ -7832,3 +7832,23 @@ FineWeb/LongCrawl记录对，重算32,767内容token、追加EOS后的training-t
 最近32条provenance截至stage index 65,354且全部通过。审计耗时5.32秒、峰值RSS 648.98MiB、0项错误；
 builder PID 1673442随后仍存活，GPU0/1仍为46/18MiB、0%利用率。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_partial_corpus_smoke_20261019/`。
+
+## 2026-10-19：corrected Base 256K RULER 资源链注册
+
+新增并在任何 corrected Base 256K 结果出现前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RULER_256K_PLAN.md`。该计划把 256K 明确列为独立外推：只有修正后的
+4K--128K 主矩阵通过后，才允许对 13 个官方任务各运行 1 个样本的配对资源探针；探针分数必须丢弃，正式
+13×100 评分仍由后续非授权审阅包和人工接受控制，不能并入主表均值。
+
+新增 `scripts/audit_in_place_ttt_qwen3_4b_base_ruler_256k_resource.py` 与
+`scripts/watch_and_run_in_place_ttt_qwen3_4b_base_ruler_256k_resource.sh`。wrapper audit 重新绑定精确
+Qwen3-4B-Base identity/tokenizer、corrected Stage-2、corrected 4K--128K matrix、论文 `tau=1e-5` 推理更新裁剪、
+256K 子审计和所有冻结计划；任一 hash、主机、上下游状态或 paper overlay 绑定缺失都会失败关闭。watcher 只允许
+`user-Super-Server`（`hku-gpu2`），当前只轮询上游，不提前创建 GPU 子任务。
+
+新增 `tests/test_in_place_ttt_qwen3_4b_base_ruler_256k.py`。本机及 `hku-gpu2` 的精确干净检出
+`1eb9dc077a0a209cd2aef905b00c866302483728` 均通过 10/10 相关测试，远端测试显式设置
+`CUDA_VISIBLE_DEVICES=`。远端 watcher 已冻结 13 个输入 hash，状态为
+`waiting_for_corrected_ruler_matrix`，tmux 句柄为 PID 1701185；06:57 快照中 GPU0/1 仅占 46/18 MiB，利用率均为
+0%。所有未来 GPU 执行继续严格限制在 `hku-gpu2`。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_256k_resource_registration_20261019/`。
