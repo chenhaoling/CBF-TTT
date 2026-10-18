@@ -2253,3 +2253,24 @@ release and formal result root are absent. The timing watcher remains at
 `waiting_for_corrected_stage1_ladder`, the corpus remains `RUNNING_BUILD`, and
 GPU0/1 remain at 46/18 MiB with 0% utilization. Evidence is archived under
 `remote/hku_gpu2_qwen3_4b_base_100m_stage1_watcher_20261019/`.
+
+## 46. Corrected Base Stage-2 resource ladder registration (2026-10-19)
+
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_STAGE2_RESOURCE_PLAN.md` freezes the
+post-Stage-1 64K/128K resource boundary. Each arm must start from its own
+current corrected formal Stage-1 HF checkpoint. The fixed order is 64K no-TTT,
+64K native TTT, 128K no-TTT and 128K native TTT, with one global-batch-2
+optimizer step per child. GPU execution remains restricted to `hku-gpu2`.
+
+The watcher defers the future full-corpus sparse inputs until corrected formal
+Stage 1 has passed, then revalidates both underlying and corrected Stage-1
+audits before invoking the existing Stage-2 ladder runner. A new terminal
+wrapper re-hashes the Base identity, full-profile resource inputs, arm-specific
+start-model manifests, four child audits, plans, configs and existing
+runner/auditor. It produces resource evidence only; 128K timing, formal Stage
+2, RULER and update admission remain sealed.
+
+Three tests cover the frozen order/scope, Bash syntax and deferred-input
+behavior, and missing-input failure closure. The complete focused suite passes
+91/91 locally, the auditor compiles, and `git diff --check` passes. No Stage-2
+resource child exists at registration time.

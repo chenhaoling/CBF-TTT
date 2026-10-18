@@ -7604,3 +7604,18 @@ tokenizer、完整语料、两份timing audit、release、计划、configs、run
 `waiting_for_corrected_stage1_timing`，release与formal result root均不存在；timing仍等待resource ladder，
 corpus仍为`RUNNING_BUILD`，GPU0/1为46/18MiB且0%利用率。启动证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_100m_stage1_watcher_20261019/`。
+
+## 2026-10-19：corrected Base Stage-2 64K/128K资源阶梯注册
+
+新增冻结计划`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_STAGE2_RESOURCE_PLAN.md`。四个child固定为64K no-TTT、
+64K native TTT、128K no-TTT、128K native TTT，每个global batch 2、一步更新；每条arm必须从自身通过审计的
+corrected formal Stage-1 HF checkpoint重新开始。GPU只允许`hku-gpu2`。
+
+新增`scripts/watch_and_run_in_place_ttt_qwen3_4b_base_stage2_ladder.sh`。它延迟读取未来resource inputs，
+等待corrected formal Stage-1终态后同时验证underlying与Base wrapper audit，再复用现有Stage-2 ladder runner。
+新增`scripts/audit_in_place_ttt_qwen3_4b_base_stage2_ladder.py`，重算Base identity、full-profile inputs、
+arm-specific start model、四个child、plans、configs和现有runner/auditor绑定。
+
+新增三项计划/语法/延迟输入/失败关闭测试；全部In-Place-TTT focused suite为91/91通过，Python编译、Bash
+语法和diff检查通过。本阶段只注册resource evidence，未运行Stage-2 child，未释放timing、正式Stage2、
+RULER或门控实验。
