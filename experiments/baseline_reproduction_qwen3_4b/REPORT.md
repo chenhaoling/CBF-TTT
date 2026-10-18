@@ -1650,3 +1650,32 @@ The validated watcher is live in tmux session
 `waiting_for_audited_ruler_matrix`, the GPUs remained idle, and the corpus
 partial directory was 60 GB. Evidence is stored under
 `remote/hku_gpu2_ruler_256k_resource_20261018/`.
+
+## 28. Formal RULER-256K release and scoring closure (2026-10-18)
+
+`IN_PLACE_TTT_BASELINE_2X5090_RULER_256K_FORMAL_PLAN.md` was frozen before
+the separate resource decision and before any formal 256K score. It registers
+13 tasks with 100 examples per task, seed 42, deterministic decoding and
+byte-identical paired inputs at 262,144 tokens. This remains a public-data
+YaRN extrapolation outside the registered 131,072-position training range and
+is excluded from the primary 4K--128K mean.
+
+The opt-in release helper accepts only the exact, independently passing
+resource audit and binds its SHA256. Without `--accept` it exits without
+writing a release; an accepted release also requires a reviewer and decision
+note. The persistent formal watcher never creates or accepts this release. It
+waits first for the live resource watcher and then in a separate
+`waiting_for_explicit_ruler_256k_release` state.
+
+After release, the formal runner evaluates no-TTT on GPU 0 and native TTT on
+GPU 1, both exclusively on `hku-gpu2`. The summarizer reports per-task and
+macro accuracy, paired TTT gain and differences from the paper's 41.7/43.9
+references. The independent auditor reconstructs all 2,600 predictions,
+checks paired input hashes, checkpoint and dependency bindings, release and
+plan hashes, arithmetic, terminal states and the explicit
+`public_data_yarn_extrapolation_not_paper_exact` claim boundary.
+
+The three dedicated formal/resource tests and the complete focused suite pass
+3/3 and 66/66 respectively; both Bash entry points parse, the Python tools
+compile, and `git diff --check` passes. No formal release has been accepted and
+no 256K formal score has been produced at this implementation checkpoint.

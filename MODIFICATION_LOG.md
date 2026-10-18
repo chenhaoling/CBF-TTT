@@ -7187,3 +7187,24 @@ commit `b33b93ace74240b2bb2332368647c4adda31b7dc`已在`hku-gpu2`建立clean che
 PID 1431970存活，状态为`waiting_for_audited_ruler_matrix`，GPU仍空闲，语料partial为60GB。证据
 归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_ruler_256k_resource_20261018/`。
+
+## 2026-10-18：RULER-256K正式评分的显式release与独立审计
+
+在独立256K资源决策和任何正式256K分数产生前，新增并冻结
+`IN_PLACE_TTT_BASELINE_2X5090_RULER_256K_FORMAL_PLAN.md`。它注册13项任务、每项100例、
+262144 token、seed 42、确定性解码及双臂字节一致输入；该结果只作为公开数据YaRN外推，不能并入
+4K--128K主矩阵均值，也不能声明为论文私有数据实验的精确复现。
+
+新增`scripts/create_in_place_ttt_2x5090_ruler_256k_release.py`。它只接受精确通过且包含双臂的资源
+audit并绑定完整SHA256；缺少`--accept`时只供审阅且不写文件，显式接受还要求reviewer和decision
+note。新增正式双臂runner、summary、独立auditor与持久watcher。watcher先验证既有resource watcher
+句柄及终态，再进入独立`waiting_for_explicit_ruler_256k_release`状态，绝不自行生成或接受release。
+
+release通过后，只允许在`hku-gpu2`运行GPU任务：GPU0执行no-TTT，GPU1执行native TTT。正式runner
+按臂执行13×100样本；summary报告逐任务/宏平均、TTT增益及相对论文41.7/43.9的差值。独立audit从
+2600条raw prediction重算分数和paired input hash，并绑定checkpoint、依赖、计划、工具、资源audit、
+release与终态，强制`public_data_yarn_extrapolation_not_paper_exact`结论边界。
+
+新增两个正式测试后，256K专项3/3、完整focused suite 66/66通过；两份Bash语法、Python编译与
+`git diff --check`均通过。本实现检查点尚未接受正式release，也未产生正式256K分数；所有新增功能
+均为opt-in，baseline入口和checkpoint未被覆盖。
