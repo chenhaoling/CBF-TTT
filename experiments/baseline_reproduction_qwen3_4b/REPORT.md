@@ -2625,3 +2625,33 @@ Evidence is archived under
 No formal 256K result is claimed. After the resource audit eventually passes,
 the generated packet still requires a separate human decision. All GPU work
 remains restricted to `hku-gpu2`.
+
+## 57. Corrected Base formal RULER-256K chain (2026-10-19)
+
+The final remaining 256K integrity gap was that the generic formal audit did
+not independently prove corrected Base identity or the paper inference
+overlay. A new pre-outcome execution addendum, fail-closed watcher and wrapper
+auditor now close that gap without changing the generic paired runner.
+
+Before GPU launch, the watcher waits for the completed non-authorizing review
+packet and separately written accepted release. It recomputes the review,
+validates the generic and corrected release protocols, and freezes the
+underlying and corrected Stage-2, primary-matrix and 256K-resource audits.
+The runner then inherits the frozen `tau=1e-5` paper overlay. After the generic
+formal audit passes, the wrapper revalidates Base tokenizer identity, every
+corrected prerequisite, review and release hashes, all plans and tools, and
+the paper-overlay hash in both child audits.
+
+The test fixture constructs the complete generic/corrected dependency graph,
+passes the wrapper, changes the paper overlay by one byte, and verifies that
+the same artifact is rejected. Commit
+`fd252a62fa048fa085cee66e5637c41dc2bdd5c5` passes all 13 focused tests locally
+and in a clean `hku-gpu2` checkout with CUDA hidden. The live formal watcher is
+at `waiting_for_accepted_corrected_ruler_256k_release`, tmux PID 1704022. No
+accepted release, partial output or formal score exists; GPU0/1 remained at
+46/18 MiB and 0% utilization. Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_base_ruler_256k_formal_registration_20261019/`.
+
+The wrapper explicitly records `update_admission_released=false`: this
+extrapolation cannot open the gate experiment by itself. All future GPU work
+remains restricted to `hku-gpu2`.

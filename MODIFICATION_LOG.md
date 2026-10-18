@@ -7871,3 +7871,22 @@ protocol，同时补充 corrected Base protocol、model revision、corrected aud
 `hku-gpu2` 注册，状态为 `waiting_for_corrected_ruler_256k_resource`，tmux PID 1702681；review packet 与目标
 release 均不存在。07:02 快照中 GPU0/1 仅占 46/18 MiB且利用率为0%。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_256k_release_review_registration_20261019/`。
+
+## 2026-10-19：corrected Base 正式 256K 执行与最终审计链
+
+新增并在 accepted release 或正式256K分数出现前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_BASE_RULER_256K_FORMAL_ADDENDUM.md`。它要求正式评分继续使用13个任务、每任务
+100条、262,144 token、两臂独立Stage-2 checkpoint和论文 `tau=1e-5` inference overlay，并保持 public-data
+YaRN extrapolation 的claim boundary。
+
+新增 `scripts/watch_and_run_in_place_ttt_qwen3_4b_base_ruler_256k.sh` 与
+`scripts/audit_in_place_ttt_qwen3_4b_base_ruler_256k.py`。watcher 先等待非授权审阅包，再等待人工生成的精确
+release；GPU启动前会重算review内容、校验generic/corrected release protocol、冻结全部动态audits。最终wrapper
+审计绑定Base identity/tokenizer、corrected Stage-2、corrected主矩阵、corrected 256K resource、review、release、
+plans和两条child audit中的paper-overlay hash，并固定`update_admission_released=false`。
+
+新增完整合成正路径与overlay单字节漂移负例。本机及 `hku-gpu2` 精确提交
+`fd252a62fa048fa085cee66e5637c41dc2bdd5c5` 均通过13/13相关测试。formal watcher已在 `hku-gpu2` 注册，状态为
+`waiting_for_accepted_corrected_ruler_256k_release`，tmux PID 1704022；正式输出和release均不存在。07:07快照中
+GPU0/1仅占46/18 MiB，利用率均为0%。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_base_ruler_256k_formal_registration_20261019/`。
