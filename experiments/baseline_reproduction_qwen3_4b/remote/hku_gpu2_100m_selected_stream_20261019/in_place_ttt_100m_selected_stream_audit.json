@@ -1,0 +1,117 @@
+{
+  "created_at_utc": "2026-10-18T20:37:23.219134+00:00",
+  "cuda_visible_devices": "",
+  "hostname": "user-Super-Server",
+  "passed": true,
+  "per_rank_batch": 32,
+  "prefix_records": 15000,
+  "prefixes": {
+    "stage1_32k": {
+      "compact_sha256": "57fe81dcc6e33275282999238062cb2acf96027b5987fd87c08d9169bbce336b",
+      "records": 15000
+    },
+    "stage2_128k": {
+      "compact_sha256": "34336a8f3d9f83eccade9cc051fbab0de3877266f1fabe0504138f3017a1cc7a",
+      "records": 15000
+    }
+  },
+  "protocol": "in_place_ttt_100m_selected_stream_audit_v1",
+  "provenance_paths": {
+    "stage1_32k": "/home/ctj/in_place_ttt_public_corpus_full_20261018.partial/stage1_32k.provenance.jsonl",
+    "stage2_128k": "/home/ctj/in_place_ttt_public_corpus_full_20261018.partial/stage2_128k.provenance.jsonl"
+  },
+  "script_sha256": "834874e9ab013f6c8e29d09459aba1adffb8775449f975b9fffab9a7083641d4",
+  "seed": 42,
+  "shuffle_buffer_size": 10000,
+  "stages": {
+    "stage1_32k": {
+      "absolute_source_fraction_difference": 0.04282407407407408,
+      "absolute_source_record_difference": 74,
+      "checks": {
+        "global_records_exact": true,
+        "prefix_sufficient": true,
+        "rank_hashes_disjoint": true,
+        "rank_indices_disjoint": true,
+        "rank_lengths_exact": true,
+        "repeat_schedule_exact": true,
+        "sources_valid": true,
+        "stage_indices_unique": true,
+        "training_hashes_unique": true
+      },
+      "ordered_sources_sha256": "77fc3f5c3c7909c6078725e97fa1dbc58502c45d31a9f40f4f0cb192fdc25f08",
+      "ordered_stage_indices_sha256": "c5d1d5d34402fc8ad0a334e789dfbd2116f98b1e07250fcc407a4910a14b7cc0",
+      "ordered_training_hashes_sha256": "6db6af1452b86b47ff6ebcd412db1dceca24f33bec9a5f9aad4aa7a5c16b765c",
+      "passed": true,
+      "rank_source_records": [
+        {
+          "fineweb": 419,
+          "longcrawl": 445
+        },
+        {
+          "fineweb": 408,
+          "longcrawl": 456
+        }
+      ],
+      "records_per_rank": 864,
+      "selected_records": 1728,
+      "selected_training_tokens": 56623104,
+      "sequence_length": 32768,
+      "source_records": {
+        "fineweb": 827,
+        "longcrawl": 901
+      },
+      "source_training_tokens": {
+        "fineweb": 27099136,
+        "longcrawl": 29523968
+      },
+      "stage": "stage1_32k",
+      "steps": 27
+    },
+    "stage2_128k": {
+      "absolute_source_fraction_difference": 0.00625,
+      "absolute_source_record_difference": 2,
+      "checks": {
+        "global_records_exact": true,
+        "prefix_sufficient": true,
+        "rank_hashes_disjoint": true,
+        "rank_indices_disjoint": true,
+        "rank_lengths_exact": true,
+        "repeat_schedule_exact": true,
+        "sources_valid": true,
+        "stage_indices_unique": true,
+        "training_hashes_unique": true
+      },
+      "ordered_sources_sha256": "ae97d08ad776c28426fd4c329ab03324f0f746cde93dd1d330bc6b703644a857",
+      "ordered_stage_indices_sha256": "9098b662357f2f0275c34cd25dfaff882316643147dd943c0e137c1592b6ab73",
+      "ordered_training_hashes_sha256": "22e3fc08f1003e242c7df0af3f9f8505e46dd43060e8372c5b9ef11b0c523fd2",
+      "passed": true,
+      "rank_source_records": [
+        {
+          "fineweb": 86,
+          "longcrawl": 74
+        },
+        {
+          "fineweb": 75,
+          "longcrawl": 85
+        }
+      ],
+      "records_per_rank": 160,
+      "selected_records": 320,
+      "selected_training_tokens": 41943040,
+      "sequence_length": 131072,
+      "source_records": {
+        "fineweb": 161,
+        "longcrawl": 159
+      },
+      "source_training_tokens": {
+        "fineweb": 21102592,
+        "longcrawl": 20840448
+      },
+      "stage": "stage2_128k",
+      "steps": 5
+    }
+  },
+  "total_selected_records": 2048,
+  "total_selected_training_tokens": 98566144,
+  "world_size": 2
+}

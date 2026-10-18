@@ -7408,3 +7408,21 @@ GPU0/1为46/18MiB且利用率0%。新增证据目录
 脚本与launch JSON；launch SHA256为
 `25bdb2188c27f925abccc60b8bd607e810241119dd10b30e543e1f1d8754010f`。当前仅证明预注册与进程启动，
 90%结果仍待生成，且不能替代full corpus canonical audit。
+
+## 2026-10-19：100M 正式训练流的数据源组成审计
+
+完整公开语料按token严格1:1构建，但98,566,144-token资源tier只消费buffer-10000 shuffle和DP2切分后
+的有限前缀。为明确该tier的真实配比，在`hku-gpu2`以空`CUDA_VISIBLE_DEVICES`执行CPU-only重放，固定
+seed 42、每rank batch 32以及Stage1 27步、Stage2 5步；没有加载模型，也没有保存原文或token ID。
+
+两次从头重放的rank schedule完全一致，两rank的stage index与training-token hash互斥，所有选中记录
+唯一且source合法，前缀覆盖充分。Stage1选中827条FineWeb-Edu和901条LongCrawl64；Stage2选中161条
+和159条。合计FineWeb-Edu为48,201,728 token（48.9029%），LongCrawl64为50,364,416 token
+（51.0971%），总计98,566,144 token。该2.1941%的绝对source fraction差异是有限步确定性抽样波动，
+因此100M tier只能表述为近似1:1；完整35B语料仍保持精确token等量。
+
+新增证据目录
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_100m_selected_stream_20261019/`，保存冻结脚本、
+结构化结果与hash说明。结果SHA256为
+`7134c35d98fd24f4781a32aa6ea3713b2f73033218a2dc762a3f04ee4e6fd7f0`，所有检查通过。该审计只关闭
+资源tier的数据组成边界，不替代full corpus canonical audit，也不释放正式训练。

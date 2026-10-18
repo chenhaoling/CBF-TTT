@@ -1973,3 +1973,31 @@ GPU 0/1 were 46/18 MiB at zero utilization. The launch metadata has SHA256
 and is archived under `remote/hku_gpu2_stage2_sparse90_watcher_20261019/`.
 The future boundary result remains pending and cannot replace atomic corpus
 publication or the canonical independent full audit.
+
+## 39. Registered 100M selected-stream composition (2026-10-19)
+
+The full public corpus is constructed with exact 1:1 FineWeb-Edu/LongCrawl64
+token balance, but the resource-constrained run consumes only the deterministic
+prefix selected after the native buffer-10,000 streaming shuffle and DP2
+split. A CPU-only replay on `hku-gpu2` used the exact seed 42, per-rank batch
+32 and registered 27+5 optimizer steps. It repeated both rank schedules from
+scratch and checked exact equality, cross-rank disjointness, unique stage
+indices and training hashes, valid source labels, exact counts and sufficient
+provenance prefix coverage. Every check passed; no model was loaded and
+`CUDA_VISIBLE_DEVICES` was empty.
+
+Stage 1 selected 827 FineWeb-Edu and 901 LongCrawl64 records, or 27,099,136
+and 29,523,968 tokens. Stage 2 selected 161 and 159 records, or 21,102,592 and
+20,840,448 tokens. Combined, the registered tier selects 48,201,728 FineWeb-Edu
+tokens (48.9029%) and 50,364,416 LongCrawl64 tokens (51.0971%) out of
+98,566,144. The 2.1941% absolute source-fraction difference is deterministic
+finite-sample variation. Consequently the 100M tier is approximately 1:1; only
+the complete registered 35B corpus is exactly token-balanced.
+
+The structured result has SHA256
+`7134c35d98fd24f4781a32aa6ea3713b2f73033218a2dc762a3f04ee4e6fd7f0`
+and the frozen audit script has SHA256
+`834874e9ab013f6c8e29d09459aba1adffb8775449f975b9fffab9a7083641d4`.
+Both are archived under `remote/hku_gpu2_100m_selected_stream_20261019/`.
+This closes the finite-tier composition boundary but does not replace the
+canonical full-corpus audit or release training.
