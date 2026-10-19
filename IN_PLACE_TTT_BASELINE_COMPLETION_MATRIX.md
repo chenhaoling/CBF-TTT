@@ -2,7 +2,7 @@
 
 Status: **live evidence index; not an execution plan or release record**  
 Initial snapshot: 2026-10-19 (Asia/Shanghai)
-Last reconciled: 2026-10-19 07:55 (Asia/Shanghai)
+Last reconciled: 2026-10-19 08:02 (Asia/Shanghai)
 
 ## 1. Purpose
 
@@ -32,6 +32,7 @@ so no Level-C or exact-paper-number claim is permitted.
 | Native TTT initialization semantics | Clean upstream runtime proves Base state loading changes no shared slow weight, Conv5 starts at zero, target projection is sparse diagonal, the first native update is zero and initial logits equal no-TTT | **Complete on CPU before corrected training.** All 13 checks pass on `hku-gpu2`: exact missing-key set, bitwise-equal shared weights and logits, zero convolution/target output, finite nonzero projection diagonal and zero off-diagonal. This tiny fixture validates official initialization code only; the full 4B resource gate remains required. |
 | Native writer autograd reachability | Official-logit next-token backward proves zero initialization still trains the convolution and that projection gradients open after the convolution leaves zero; no tensor payload is retained | **Complete on CPU before corrected training.** All ten checks pass: finite losses, positive first/second Conv5 gradients, exact-zero first projection gradient and positive second projection gradient after the frozen diagnostic nudge. A result-serialization typo in the first persistent attempt is recorded and superseded. |
 | Liger/fused-AdamW GPU environment | On one isolated `hku-gpu2` RTX 5090, the official Liger fused loss and VeOmni fused AdamW execute two finite native-writer steps; optimizer membership and zero-start gradient staging are audited without tensor payloads | **Complete as a tiny single-GPU preflight.** All 19 checks pass on physical GPU 0: Liger forward and fused AdamW are active, the first step updates Conv5, and the second backward opens a positive projection gradient. This does not validate FSDP2, distributed clipping, full 4B memory or convergence. |
+| Exact 4B checkpoint writer integration | Exact Base revision loads the six registered writer layers on one `hku-gpu2` GPU; missing-key set, initialization, initial-output equivalence and two fused-loss gradient passes are checked without saving tensors or a checkpoint | **Strict preflight failed, preserved as diagnostic evidence.** 22/24 checks pass, including exact loading and all per-layer gradient checks. CPU BF16 missing-weight initialization leaves 7--20 exact-zero diagonal entries per layer, and chunked-einsum versus linear BF16 execution yields a 0.25 maximum final-logit difference, failing the frozen nonzero/allclose gates. The failure does not authorize changing released code or bypassing Level A. |
 | 8K activation-offload gate | Both corrected-Base matched arms complete one optimizer step; finite loss/gradient; passing child and paired audits; at least 5% GPU headroom; registered host-memory and swap limits | **Waiting for the corrected full corpus.** The Base identity already passes; the live Level-A watcher remains at `WAITING_BASE_CORPUS` and has no training child. |
 | Stage-1 resource ladder | Audited paired 16K and 32K boundaries from the same registered inputs, no-TTT before TTT, with all resource stop rules satisfied | **Waiting for corrected Level A.** The hku-gpu2-only watcher is live at `waiting_for_corrected_level_a`; its future result root is absent and no 16K/32K child has run. The clean remote focused suite passes 81/81. |
 | Stage-1 timing gate | Audited paired three-step 32K GB64 timing run on the full corpus; finite measured projections for both arms and the sequential pair | **Registered and waiting for the corrected Stage-1 ladder.** The repaired hku-gpu2-only watcher is live at `waiting_for_corrected_stage1_ladder`; its clean remote worktree passes 84/84 focused tests, the result root is absent and no timing child has been released. |
@@ -113,6 +114,7 @@ obtained and executed.
 - Native TTT initialization audit evidence: `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_native_initialization_audit_20261019/`
 - Native writer autograd audit evidence: `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_native_writer_autograd_audit_20261019/`
 - Liger/fused-AdamW GPU preflight evidence: `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_liger_adamw_gpu_preflight_20261019/`
+- Full-checkpoint writer preflight and diagnosis: `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_full_checkpoint_writer_preflight_20261019/`
 - Corrected RULER 256K resource watcher: `/home/ctj/in_place_ttt_qwen3_4b_base_ruler_256k_resource_1eb9dc07_20261019.watch`
 - Corrected RULER 256K resource tmux session: `baseline_qwen3_4b_base_ruler_256k_resource_1eb9dc07_20261019`
 - Corrected RULER 256K release-review watcher: `/home/ctj/in_place_ttt_qwen3_4b_base_ruler_256k_release_review_55fc42a0_20261019`

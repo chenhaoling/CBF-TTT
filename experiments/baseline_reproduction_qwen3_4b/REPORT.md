@@ -2907,3 +2907,44 @@ the Liger/fused-AdamW environment check only. FSDP2, distributed clipping,
 full-model memory, corpus training, checkpoint conversion and RULER remain
 assigned to the registered Level-A and downstream runs. Update admission
 remains sealed.
+
+## 66. Exact Qwen3-4B-Base writer integration preflight (2026-10-19)
+
+A separately frozen integration preflight loaded exact Qwen3-4B-Base revision
+`906bfd4b...` through the clean official implementation, added native writer
+modules at layers `[0,6,12,18,24,30]`, and ran only on physical GPU 0 of
+`hku-gpu2`. The bounded fixture used 64 tokens and diagnostic
+`ttt_chunk=16`; it is not the formal 32K/`ttt_chunk=4096` recipe.
+
+The strict result is **failed: 22/24 checks passed**. The checkpoint loaded
+exactly the expected twelve missing writer tensors and no other loading error.
+Every Conv5 tensor was exactly zero, every projection off-diagonal entry was
+zero, both fused losses were finite, and all six convolution gradients were
+positive on both backward passes. All first projection gradients were exactly
+zero; after the frozen convolution nudge, all six second projection gradients
+were positive. Pretrained parameter version counters remained unchanged.
+
+Two frozen numerical gates failed. First, the BF16 projection diagonals had
+7--20 exact-zero entries per 2560 dimensions rather than all entries nonzero.
+Second, writer-active versus temporarily bypassed logits differed by maximum
+`0.25`, exceeding the `1e-3` allclose gate despite zero convolution weights.
+The result was preserved and was not weakened or relabeled.
+
+A fixed-seed post-failure mechanism probe explains both observations without
+changing the outcome. CPU BF16 normal sampling produced 4--24 exact zeros per
+2560 values over 32 seeds (mean 12.8125), while CUDA BF16 sampling produced
+none. This matches the CPU missing-weight initialization used before the model
+is moved to CUDA. At the real down-projection dimensions, direct BF16
+`F.linear` and the native chunked `einsum` path differed by maximum `0.0625`
+for identical operands. Accumulation through six selected layers is therefore
+a concrete numerical explanation for the final 0.25 difference; it does not
+indicate a nonzero fast-weight delta because all convolutions were zero.
+
+The run took 12.60 seconds, peaked at 4,766,092 KiB host RSS and
+10,460,139,008/10,938,744,832 allocated/reserved CUDA bytes. Evidence and the
+separate diagnosis are archived under
+`remote/hku_gpu2_qwen3_4b_full_checkpoint_writer_preflight_20261019/`.
+This finding qualifies the earlier tiny-fixture initialization claim but does
+not modify released baseline code. FSDP2/meta initialization, full-corpus
+training, conversion and RULER remain required. Update admission remains
+sealed.

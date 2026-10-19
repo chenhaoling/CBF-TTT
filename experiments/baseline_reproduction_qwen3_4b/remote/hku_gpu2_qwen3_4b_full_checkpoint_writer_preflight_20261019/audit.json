@@ -1,0 +1,238 @@
+{
+  "checks": {
+    "diagnostic_nudge_all_conv_nonzero": true,
+    "first_all_conv_gradients_positive": true,
+    "first_all_projection_gradients_zero": true,
+    "first_fused_loss_finite": true,
+    "first_writer_gradients_finite": true,
+    "full_model_shape": true,
+    "initial_logits_finite": true,
+    "initial_logits_match_bypass": false,
+    "liger_forward_active": true,
+    "loading_has_no_other_errors": true,
+    "loading_missing_keys_exact": true,
+    "model_identity": true,
+    "module_resolution": true,
+    "only_writer_trainable": true,
+    "second_all_conv_gradients_positive": true,
+    "second_all_projection_gradients_positive": true,
+    "second_fused_loss_finite": true,
+    "second_writer_gradients_finite": true,
+    "single_rtx5090_and_free_memory": true,
+    "slow_weights_unchanged": true,
+    "ttt_layer_set_exact": true,
+    "upstream_identity": true,
+    "writer_initialization_exact": false,
+    "writer_weights_finite": true
+  },
+  "claim_boundary": "exact Qwen3-4B-Base single-GPU writer integration preflight only; FSDP2, distributed clipping, formal chunks, corpus training and RULER remain required",
+  "fixture": {
+    "checkpoint_saved": false,
+    "conv_nonzero_after_nudge": {
+      "0": 12750,
+      "12": 12700,
+      "18": 12740,
+      "24": 12765,
+      "30": 12715,
+      "6": 12715
+    },
+    "first_conv_gradient_norms": {
+      "0": 0.14755432307720184,
+      "12": 5.358790874481201,
+      "18": 4.525775909423828,
+      "24": 11.498151779174805,
+      "30": 89.01505279541016,
+      "6": 12.589985847473145
+    },
+    "first_loss": 13.964794158935547,
+    "first_projection_gradient_norms": {
+      "0": 0.0,
+      "12": 0.0,
+      "18": 0.0,
+      "24": 0.0,
+      "30": 0.0,
+      "6": 0.0
+    },
+    "initial_max_abs_logit_difference": 0.25,
+    "initialization": [
+      {
+        "conv_nonzero": 0,
+        "conv_shape": [
+          2560,
+          1,
+          5
+        ],
+        "layer": 0,
+        "passed": false,
+        "projection_diagonal_nonzero": 2550,
+        "projection_nonzero": 2550,
+        "projection_shape": [
+          2560,
+          2560
+        ]
+      },
+      {
+        "conv_nonzero": 0,
+        "conv_shape": [
+          2560,
+          1,
+          5
+        ],
+        "layer": 6,
+        "passed": false,
+        "projection_diagonal_nonzero": 2543,
+        "projection_nonzero": 2543,
+        "projection_shape": [
+          2560,
+          2560
+        ]
+      },
+      {
+        "conv_nonzero": 0,
+        "conv_shape": [
+          2560,
+          1,
+          5
+        ],
+        "layer": 12,
+        "passed": false,
+        "projection_diagonal_nonzero": 2540,
+        "projection_nonzero": 2540,
+        "projection_shape": [
+          2560,
+          2560
+        ]
+      },
+      {
+        "conv_nonzero": 0,
+        "conv_shape": [
+          2560,
+          1,
+          5
+        ],
+        "layer": 18,
+        "passed": false,
+        "projection_diagonal_nonzero": 2548,
+        "projection_nonzero": 2548,
+        "projection_shape": [
+          2560,
+          2560
+        ]
+      },
+      {
+        "conv_nonzero": 0,
+        "conv_shape": [
+          2560,
+          1,
+          5
+        ],
+        "layer": 24,
+        "passed": false,
+        "projection_diagonal_nonzero": 2553,
+        "projection_nonzero": 2553,
+        "projection_shape": [
+          2560,
+          2560
+        ]
+      },
+      {
+        "conv_nonzero": 0,
+        "conv_shape": [
+          2560,
+          1,
+          5
+        ],
+        "layer": 30,
+        "passed": false,
+        "projection_diagonal_nonzero": 2543,
+        "projection_nonzero": 2543,
+        "projection_shape": [
+          2560,
+          2560
+        ]
+      }
+    ],
+    "input_ids_sha256": "9f2600e71303180baea011e0c09a805b6ab0e0af08ca133e4deec5ab8a0610d2",
+    "missing_keys": [
+      "model.layers.0.mlp.ttt_conv.weight",
+      "model.layers.0.mlp.ttt_proj.weight",
+      "model.layers.12.mlp.ttt_conv.weight",
+      "model.layers.12.mlp.ttt_proj.weight",
+      "model.layers.18.mlp.ttt_conv.weight",
+      "model.layers.18.mlp.ttt_proj.weight",
+      "model.layers.24.mlp.ttt_conv.weight",
+      "model.layers.24.mlp.ttt_proj.weight",
+      "model.layers.30.mlp.ttt_conv.weight",
+      "model.layers.30.mlp.ttt_proj.weight",
+      "model.layers.6.mlp.ttt_conv.weight",
+      "model.layers.6.mlp.ttt_proj.weight"
+    ],
+    "second_conv_gradient_norms": {
+      "0": 0.06571438163518906,
+      "12": 1.2500604391098022,
+      "18": 3.926862955093384,
+      "24": 12.837315559387207,
+      "30": 20.762557983398438,
+      "6": 15.909661293029785
+    },
+    "second_loss": 14.49380874633789,
+    "second_projection_gradient_norms": {
+      "0": 0.00135715096257627,
+      "12": 2.6966047286987305,
+      "18": 4.120636940002441,
+      "24": 25.443315505981445,
+      "30": 704.7042846679688,
+      "6": 119.91000366210938
+    },
+    "sequence_tokens": 64,
+    "serialized_gradients": false,
+    "serialized_input_ids": false,
+    "serialized_logits": false,
+    "ttt_chunk": 16,
+    "ttt_layers": [
+      0,
+      6,
+      12,
+      18,
+      24,
+      30
+    ],
+    "ttt_lr": 3.0,
+    "unexpected_keys": []
+  },
+  "model": {
+    "attention": "sdpa",
+    "dtype": "bfloat16",
+    "hidden_size": 2560,
+    "identity_path": "/home/ctj/qwen3_4b_base_download_906bfd4b_20261019/identity.json",
+    "identity_sha256": "5e5edb5bef03218c91a1bea0d4f8a80a4814a120734b433a2e6fb765a0a154d4",
+    "layers": 36,
+    "repository": "Qwen/Qwen3-4B-Base",
+    "revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+    "root": "/home/ctj/models/Qwen3-4B-Base",
+    "vocab_size": 151936
+  },
+  "passed": false,
+  "protocol": "in_place_ttt_qwen3_4b_full_checkpoint_writer_preflight_v1",
+  "runtime": {
+    "cuda_version": "12.8",
+    "cuda_visible_devices": "0",
+    "free_memory_before_bytes": 33084997632,
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "hostname": "user-Super-Server",
+    "liger_kernel_version": null,
+    "peak_allocated_bytes": 10460139008,
+    "peak_reserved_bytes": 10938744832,
+    "torch_version": "2.8.0+cu128",
+    "total_memory_bytes": 33662959616,
+    "visible_device_count": 1,
+    "wall_seconds": 11.916050394997
+  },
+  "upstream": {
+    "clean": true,
+    "commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+    "configuration_sha256": "d2d0ab37a756df2b0980d9d52196696a5dcbfb8560c01563f79a0b256a0206c0",
+    "modeling_sha256": "a26d64cf85c985c4825a66d64815baa5956a2739593aad1969e9cc09d937a1d1",
+    "root": "/home/ctj/in_place_ttt_official_be232482_resource_clean"
+  }
+}

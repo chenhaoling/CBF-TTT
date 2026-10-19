@@ -1,0 +1,17 @@
+host=user-Super-Server
+gpu_policy=hku-gpu2_physical_gpu0_only
+cuda_visible_devices=0
+result=FAILED_FROZEN_STRICT_GATES
+tool_root=/home/ctj/cbf_ttt_tool_8fe8c0b6
+tool_commit=8fe8c0b6e041e9d97c2565776c5f007baefa325e
+tool_clean=true
+upstream_root=/home/ctj/in_place_ttt_official_be232482_resource_clean
+upstream_commit=be2324829b0e91c8fd10a74d4b43714fde6676e1
+upstream_clean=true
+5e5edb5bef03218c91a1bea0d4f8a80a4814a120734b433a2e6fb765a0a154d4  /home/ctj/qwen3_4b_base_download_906bfd4b_20261019/identity.json
+corpus_status=RUNNING_BUILD
+corpus_stage1_records=112897
+corpus_builder_pid=1673442
+1673442   11068 Rl+  88.8 10.5 6883768 /home/ctj/miniconda3/envs/cbf_ttt_verify_20260923/bin/python /home/ctj/cbf_ttt_tool_3e09b187/scripts/build_in_place_ttt_public_corpus.py --inventory /home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019/inventory.json --inventory-audit /home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019/independent_audit.json --tokenizer /home/ctj/models/Qwen3-4B-Base --output-root /home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019 --profile full --plan /home/ctj/cbf_ttt_tool_3e09b187/IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md
+0, NVIDIA GeForce RTX 5090, 46 MiB, 32059 MiB, 0 %
+1, NVIDIA GeForce RTX 5090, 18 MiB, 32095 MiB, 0 %

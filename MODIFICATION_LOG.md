@@ -8035,3 +8035,25 @@ projection梯度按zero-conv初始化精确为0，fused step使conv发生非零�
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_liger_adamw_gpu_preflight_20261019/`。
 该结果只关闭CUDA环境、Liger loss和fused optimizer闭环；FSDP2、VeOmni分布式梯度裁剪、4B资源、持续训练、
 checkpoint转换与RULER仍由Level-A及下游正式链验证，update-admission继续封存。
+
+## 2026-10-19：精确 Qwen3-4B-Base writer 集成预检与失败诊断
+
+新增并在执行前冻结`IN_PLACE_TTT_BASELINE_QWEN3_4B_FULL_CHECKPOINT_WRITER_PREFLIGHT_ADDENDUM.md`，新增
+`scripts/audit_in_place_ttt_qwen3_4b_full_checkpoint_writer.py`。预检仅在`hku-gpu2`物理GPU 0执行，重新核验完整
+模型文件hash，以BF16加载精确Base revision `906bfd4b...`，在`[0,6,12,18,24,30]`六层加入官方writer。诊断
+fixture为64 token与`ttt_chunk=16`，只用于checkpoint集成检查，不替代正式32K/4096-chunk配置。
+
+冻结结果为失败，24项中22项通过，未放宽或重标为通过。精确12个writer missing key、无额外加载错误、六层zero
+Conv5、projection零off-diagonal、两次finite Liger loss、第一步全部conv正梯度/projection零梯度、nudge后第二步
+全部conv/projection正梯度以及slow parameter不变均通过。失败项为：各BF16 projection diagonal必须全部非零，
+以及writer-active与branch-bypass logits必须在`1e-3`内allclose；实际每层有7--20个零对角值，最大logit差0.25。
+
+随后保存独立`precision_probe.json`解释机制但不改变结论。CPU BF16正态初始化在32个固定seed中每2560维产生
+4--24个精确零，均值12.8125；同seed CUDA采样为0个，与`from_pretrained`先在CPU初始化missing writer的行为一致。
+真实down projection形状上，BF16 `F.linear`与官方分块`einsum`对相同输入已有0.0625最大差异，说明零conv并不保证
+两种GPU计算路径逐位或`1e-3`等价。
+
+运行耗时12.60秒，峰值主存4,766,092 KiB，峰值allocated/reserved显存约9.74/10.19 GiB。失败结果、诊断、日志
+与hash归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_full_checkpoint_writer_preflight_20261019/`。
+baseline代码未修改，FSDP2/meta初始化、正式训练、checkpoint转换与RULER仍为必要验收；门控实验继续封存。
