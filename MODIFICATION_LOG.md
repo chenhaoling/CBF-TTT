@@ -8247,3 +8247,15 @@ RULER-4K smoke按计划没有启动。
 原始训练日志因包含截断token id未归档；summary、标量GPU/host trace、preflight、manifest和独立audit均已保存并
 由SHA256清单绑定。结论仅为：串行重试消除了no-TTT的瞬时资源异常，但当前8K native-TTT配置在两张32GB 5090上
 没有达到预注册的安全余量。它不是模型效果结论，也不开放门控实验。
+
+## 2026-10-19：两卡无5%余量的持续训练容量试验注册
+
+根据用户明确要求“不需要保留5%”，新增并在执行前冻结
+`IN_PLACE_TTT_BASELINE_2X5090_NO_HEADROOM_CAPACITY_ADDENDUM.md`。该诊断不改变或追溯通过既有Level-A门槛，
+只回答两张32GB RTX 5090能否在观察到约2%余量时连续运行native TTT。
+
+新增opt-in runner `scripts/run_in_place_ttt_qwen3_4b_base_8k_capacity.sh`：限定`hku-gpu2`、两卡空闲、
+Qwen3-4B-Base、原生writer、8K序列/4K chunk、GB2、activation offload和连续10个真实AdamW step；仅第10步
+保存DCP。它记录0.5秒GPU/host trace、依赖hash和训练日志，5%显存及8 GiB主存余量只报告、不作为停止条件。
+唯一成功条件为10步完成、有限loss/gradient、无OOM/非有限值、exit 0且checkpoint非空。该结果不能释放正式
+Stage-1、RULER或update-admission实验。
