@@ -1,0 +1,28 @@
+{
+  "after": {
+    "builder_absent": true,
+    "deferred_present": true,
+    "original_partial_absent": true,
+    "recorded_at": "2026-10-19T03:50:29.421196+00:00"
+  },
+  "before": {
+    "builder_cmd_sha256": "882eb8788e796f0dad90d82fb4d24555fbbc97f8f2809497247fab927cc5526d",
+    "builder_pid": 1673442,
+    "completed_provenance_records": 255345,
+    "disk_available_bytes": 694150848512,
+    "elapsed_seconds": 24675,
+    "latest_complete_provenance": {
+      "source": "fineweb",
+      "source_record_index": 127672,
+      "stage_record_index": 255344
+    },
+    "mem_available_bytes": 50197835776,
+    "partial_bytes": 36818954678,
+    "partial_root": "/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.partial",
+    "swap_used_bytes": 423878656
+  },
+  "deferred_root": "/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019.deferred_user_priority_20261019_255345",
+  "protocol": "in_place_ttt_full_corpus_user_priority_deferral_v1",
+  "reason": "user selected independently audited preliminary_100m baseline before paper-scale corpus",
+  "recorded_at": "2026-10-19T03:50:26.377795+00:00"
+}

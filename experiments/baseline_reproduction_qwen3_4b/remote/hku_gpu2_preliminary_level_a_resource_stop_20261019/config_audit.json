@@ -1,0 +1,27 @@
+{
+  "configs": {
+    "qwen3_4b_2x5090_100m_stage1_no_ttt.yaml": {
+      "errors": [],
+      "sha256": "a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780"
+    },
+    "qwen3_4b_2x5090_100m_stage1_ttt.yaml": {
+      "errors": [],
+      "sha256": "0f56902297a2addb4fe9f45ee45df9f4bbed9768904709d70905ba57f04ab9fa"
+    },
+    "qwen3_4b_2x5090_100m_stage2_no_ttt.yaml": {
+      "errors": [],
+      "sha256": "c7181336d375f6ec8cf107f4ee3b7a9293b52472a7951fa2d5bc67152ef06376"
+    },
+    "qwen3_4b_2x5090_100m_stage2_ttt.yaml": {
+      "errors": [],
+      "sha256": "5b6d72e17e837f55aac850d04a74e673822f29d667b41d7b3ef923c838feae3c"
+    }
+  },
+  "errors": [],
+  "passed": true,
+  "plan_sha256": "0b70a098f8ee5cadf12f8d371dcc0020124069f5365aa5279d706cde4322e5c6",
+  "protocol": "in_place_ttt_2x5090_config_audit_v1",
+  "stage1_fraction": 0.574468085106383,
+  "total_tokens": 98566144,
+  "world_size": 2
+}

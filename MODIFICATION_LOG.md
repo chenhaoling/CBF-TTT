@@ -8201,3 +8201,26 @@ auditor及corrected Base Level-A watcher/auditor新增显式`preliminary_100m`�
 
 该适配只允许缩小语料通过同一套8K真实AdamW step、activation offload、DCP保存、官方转换/重载、13-task
 RULER-4K smoke与独立终审。它不改变模型、原生writer、训练配置或资源门槛，也不开放A1/A2门控训练或test。
+
+## 2026-10-19：98.6M公开语料完成、全量构建延期与Level-A资源停止
+
+`preliminary_100m`语料在`hku-gpu2`完成原子发布：Stage 1为1,728条/56,623,104 tokens，Stage 2为
+320条/41,943,040 tokens，总计2,048条/98,566,144 tokens，synthetic EOS为0。构建耗时335.83秒、
+峰值主存1,156.17 MiB；独立审计耗时160.14秒、峰值813,588 KiB，十项检查全部通过。紧凑无原文证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_preliminary_100m_corpus_20261019/`。
+
+新增并在操作前冻结`IN_PLACE_TTT_BASELINE_FULL_CORPUS_DEFERRAL_ADDENDUM.md`。在缩小语料审计通过后，按
+`SIGSTOP`、原子改名、`SIGKILL`顺序保存全量builder的255,345条完整前缀和36,818,954,678字节partial目录，
+目标为`...deferred_user_priority_20261019_255345`。原wrapper按预期报告`FAILED_BUILD`；该前缀不可作为full语料
+或可续跑checkpoint。两卡保持空闲，主机可用内存恢复到约57 GiB。
+
+随后从clean commit `af997b98...`启动缩小语料Level-A。语料release、稀疏resource输入与配置审计通过；8K
+no-TTT完成一次真实AdamW step，loss 2.0122、gradient norm 1.9313、wall time 48.81秒，并成功写出
+49,846,590,933字节DCP。冻结资源门按设计失败：两卡峰值31,622/31,594 MiB，仅余3.02%/3.11%，主机最低
+可用7,216.37 MiB，分别低于5%和8 GiB门槛；swap峰值424.93 MiB，无OOM或非有限值。TTT、转换与RULER
+没有启动，结果不得用于效果判断。失败证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_preliminary_level_a_resource_stop_20261019/`。
+
+运行还暴露wrapper状态文件停留在`RUNNING_RESOURCE_NO_TTT`的问题：子审计返回非零后tmux已退出，但Bash函数
+边界没有触发通用ERR trap。watcher现对每条arm显式传播返回码并调用`fail_current_stage`写入
+`FAILED_${CURRENT_STAGE}`；默认训练、模型、writer、optimizer和已有产物均未改变。相关9项测试与Bash语法通过。

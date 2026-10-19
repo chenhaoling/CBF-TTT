@@ -3080,3 +3080,37 @@ under
 resource observation only: the corpus is not complete, corrected Level A is
 still waiting, and update admission remains sealed. All GPU execution remains
 restricted to `hku-gpu2`.
+
+## 71. Preliminary 100M corpus completion and Level-A resource stop (2026-10-19)
+
+The opt-in `preliminary_100m` corpus completed and was independently audited
+before GPU release. It contains 1,728 32K records followed by 320 128K records,
+for exactly 98,566,144 training tokens and zero synthetic EOS tokens. The build
+took 335.83 seconds and 1,156.17 MiB peak host RSS. The independent audit took
+160.14 seconds and 813,588 KiB peak RSS; all ten checks passed, including
+artifact hashes, tokenizer bindings, stage order, continuity and absence of
+plaintext in provenance. Compact evidence is archived under
+`remote/hku_gpu2_preliminary_100m_corpus_20261019/`.
+
+After that pass, the optional full builder was deferred using the separately
+frozen preservation procedure. Its 255,345 complete provenance records and
+36,818,954,678-byte partial root remain at the immutable `.deferred_*` path.
+The prefix is neither published nor resumable and cannot support a full-scale
+claim.
+
+The corrected Base Level-A attempt then passed corpus release, resource-input
+and config audits. Its no-TTT arm completed one 8K AdamW step with finite loss
+2.0122 and gradient norm 1.9313, then wrote a 49,846,590,933-byte DCP. The run
+stopped at the frozen resource gate: GPU 0/1 peaked at 31,622/31,594 MiB of
+32,607 MiB, leaving 3.02%/3.11%, and host available memory fell to 7,216.37
+MiB. Both violate the predeclared 5% GPU and 8 GiB host limits. Swap remained
+within limit at 424.93 MiB, and there was no OOM or nonfinite value. The TTT
+arm, conversion and RULER smoke did not run. Evidence is archived under
+`remote/hku_gpu2_preliminary_level_a_resource_stop_20261019/`.
+
+The failed child also exposed an orchestration-only defect: tmux exited while
+the parent status remained `RUNNING_RESOURCE_NO_TTT`. The watcher now handles
+each arm's return code explicitly and writes the terminal failed stage. Bash
+syntax and nine focused tests pass. The result is a resource stop and supplies
+no evidence for or against native TTT efficacy. Natural-text gate training and
+its sealed test remain closed.

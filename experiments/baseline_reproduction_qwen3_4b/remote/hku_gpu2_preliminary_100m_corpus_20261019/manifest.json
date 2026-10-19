@@ -1,0 +1,296 @@
+{
+  "bindings": {
+    "builder": {
+      "path": "/home/ctj/cbf_ttt_tool_0a33dbd5/scripts/build_in_place_ttt_public_corpus.py",
+      "sha256": "47bb54adc8ecf375a3c1e4df1d16fe799a847c2fe6c9fa0f640185bdfd85179d"
+    },
+    "inventory": {
+      "path": "/home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019/inventory.json",
+      "sha256": "70cd90464a77ed81ca2d33bc7b394d91c2ab4d100441545c93e22bc02ce7d48a"
+    },
+    "inventory_audit": {
+      "path": "/home/ctj/in_place_ttt_public_corpus_inventory_qwen3_4b_base_906bfd4b_20261019/independent_audit.json",
+      "sha256": "a113cbc1f40684547f5c2459d049fb910f9b4aa8a3f4624ccd7302905d6f26ec"
+    },
+    "plan": {
+      "path": "/home/ctj/cbf_ttt_tool_0a33dbd5/IN_PLACE_TTT_BASELINE_PRELIMINARY_100M_ADDENDUM.md",
+      "sha256": "4b1ab5f3d6f165be9ec5ab0f7dbf91f47f01c140f8184b35353f3d9364c5971b"
+    },
+    "tokenizer_assets": {
+      "config.json": {
+        "sha256": "304b2545a258d35620f1d4bf46940c0471d9baa00715ff8e77f84c2fca5057c1",
+        "size_bytes": 727
+      },
+      "tokenizer.json": {
+        "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "size_bytes": 7031645
+      },
+      "tokenizer_config.json": {
+        "sha256": "3c04ed3ca964ea2f6b2b5faf0dc4d31aec1cb1e8b4bcf63f402d295046b422b5",
+        "size_bytes": 9678
+      }
+    },
+    "tokenizer_path": "/home/ctj/models/Qwen3-4B-Base"
+  },
+  "profile": "preliminary_100m",
+  "protocol": "in_place_ttt_public_corpus_v1",
+  "resources": {
+    "peak_host_rss_mib": 1156.171875,
+    "wall_seconds": 335.8349720649421
+  },
+  "stages": [
+    {
+      "artifacts": {
+        "stage1_32k.jsonl": {
+          "sha256": "888089f9a9b316e8ce3773818d89020a72e73a3c88565e665d405f8eec6088f9",
+          "size_bytes": 233833027
+        },
+        "stage1_32k.provenance.jsonl": {
+          "sha256": "d75fa5a3911aefde650d8248de06b009381c27bd9d83ebfcdd14e267dacada33",
+          "size_bytes": 12895952
+        }
+      },
+      "combined_records": 1728,
+      "combined_training_tokens": 56623104,
+      "global_batch_size": 64,
+      "name": "stage1_32k",
+      "ordered_training_tokens_sha256": "67f19c4cc8a05b13993400ec6491a9097fffea34590a69443d3636eb0c06ed84",
+      "records_per_source": 864,
+      "resources": {
+        "peak_host_rss_mib": 1112.59375,
+        "source_pack_seconds": {
+          "fineweb": 105.01878816261888,
+          "longcrawl": 82.10766929015517
+        },
+        "source_tokens_per_second": {
+          "fineweb": 269585.59030561557,
+          "longcrawl": 344810.0797984117
+        },
+        "wall_seconds": 191.30388200469315
+      },
+      "seq_len": 32768,
+      "source_records": {
+        "fineweb": 864,
+        "longcrawl": 864
+      },
+      "source_state_after": {
+        "fineweb": {
+          "document_stream_sha256": "9dbb1f7e07cad7c84dfe49830ec6b77bf5e757cae7b126632b19b9e607328c3b",
+          "documents_loaded": 26178,
+          "pending_segments": [
+            {
+              "content_token_count": 312,
+              "cursor": 151,
+              "document_index": 26177,
+              "document_sha256": "58512b390e9f42f75735252f62d1eac4b9a744376e2ceb8a728a12e185bb329c",
+              "locator": {
+                "file_index": 0,
+                "parquet_row_index": 26177,
+                "repository_path": "sample/100BT/000_00000.parquet",
+                "source_identity_sha256": "065d72b0d84e1e9db4ed328ff085334e57e8e31b0b6c4081f9a79879a3a1972c"
+              },
+              "source": "fineweb",
+              "token_count_with_boundary": 313
+            }
+          ],
+          "pending_token_count": 162,
+          "pending_tokens_sha256": "51eaa7c4aee50bd91ac11e2db58bb93ac1f01b9460d2ba68b759d53b37d9fe45",
+          "source": "fineweb"
+        },
+        "longcrawl": {
+          "document_stream_sha256": "b274df3382b97c9936c709fe0c70551207b4518abf71946945ca73021fffb35e",
+          "documents_loaded": 540,
+          "pending_segments": [
+            {
+              "content_token_count": 34025,
+              "cursor": 16811,
+              "document_index": 539,
+              "document_sha256": "d53d3d169338786c4933a764aef93a57b929f17045af9f3cc687f0cf80a4e085",
+              "locator": {
+                "file_index": 0,
+                "parquet_row_index": 539,
+                "repository_path": "train/0-of-256.parquet"
+              },
+              "source": "longcrawl",
+              "token_count_with_boundary": 34026
+            }
+          ],
+          "pending_token_count": 17215,
+          "pending_tokens_sha256": "8c53c2cba4db01a7be571f5542fed18918abed7d9c0c8c71af5c1e8f6a4414a7",
+          "source": "longcrawl"
+        }
+      },
+      "source_state_before": {
+        "fineweb": {
+          "document_stream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "documents_loaded": 0,
+          "pending_segments": [],
+          "pending_token_count": 0,
+          "pending_tokens_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "source": "fineweb"
+        },
+        "longcrawl": {
+          "document_stream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "documents_loaded": 0,
+          "pending_segments": [],
+          "pending_token_count": 0,
+          "pending_tokens_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "source": "longcrawl"
+        }
+      },
+      "source_training_tokens": {
+        "fineweb": 28311552,
+        "longcrawl": 28311552
+      },
+      "synthetic_eos_tokens": {
+        "fineweb": 0,
+        "longcrawl": 0
+      },
+      "training_steps": 27
+    },
+    {
+      "artifacts": {
+        "stage2_128k.jsonl": {
+          "sha256": "753a6f83b9373ce8be4d144f63e70154cbe087e7faa2794a52525e41d36f1799",
+          "size_bytes": 174528620
+        },
+        "stage2_128k.provenance.jsonl": {
+          "sha256": "96fde8cd3235f39a4b1690bb9f5f10b269da5c546127cb4e3043298552b3a707",
+          "size_bytes": 9056084
+        }
+      },
+      "combined_records": 320,
+      "combined_training_tokens": 41943040,
+      "global_batch_size": 64,
+      "name": "stage2_128k",
+      "ordered_training_tokens_sha256": "f570d582074ef057a73072627d91354c96463f287997a7ff8c44a72ea9f5df60",
+      "records_per_source": 160,
+      "resources": {
+        "peak_host_rss_mib": 1156.171875,
+        "source_pack_seconds": {
+          "fineweb": 77.92717242985964,
+          "longcrawl": 60.87566992454231
+        },
+        "source_tokens_per_second": {
+          "fineweb": 269116.9119330739,
+          "longcrawl": 344497.56406779576
+        },
+        "wall_seconds": 141.86294627562165
+      },
+      "seq_len": 131072,
+      "source_records": {
+        "fineweb": 160,
+        "longcrawl": 160
+      },
+      "source_state_after": {
+        "fineweb": {
+          "document_stream_sha256": "272e260e2c4328199ba01089b89bc2ecc05fdb2d74ff9f943db776d6e200527f",
+          "documents_loaded": 45995,
+          "pending_segments": [
+            {
+              "content_token_count": 148,
+              "cursor": 121,
+              "document_index": 45994,
+              "document_sha256": "0d3c3d2f957f37004370f5a9e4ca39a0a0b9216d6f0ac6fb345cb181974d1350",
+              "locator": {
+                "file_index": 0,
+                "parquet_row_index": 45994,
+                "repository_path": "sample/100BT/000_00000.parquet",
+                "source_identity_sha256": "40d9b6b8502509280d9d19cac0ac359ec9367b16cff1422d2359c2aa387727d2"
+              },
+              "source": "fineweb",
+              "token_count_with_boundary": 149
+            }
+          ],
+          "pending_token_count": 28,
+          "pending_tokens_sha256": "46c6d43b9295cd004fe34ae78f43dd23f85decdb64e7ab5ee6e808cbed960880",
+          "source": "fineweb"
+        },
+        "longcrawl": {
+          "document_stream_sha256": "1f82b75a16ba9e0247dedfd4c3efdbb8d683ee903abc22ad80df51733cba14db",
+          "documents_loaded": 916,
+          "pending_segments": [
+            {
+              "content_token_count": 74145,
+              "cursor": 5428,
+              "document_index": 915,
+              "document_sha256": "25bed80c0e8e72fb38698aa4653a824303adfbb2572a99db25d92be8bedcd06a",
+              "locator": {
+                "file_index": 0,
+                "parquet_row_index": 915,
+                "repository_path": "train/0-of-256.parquet"
+              },
+              "source": "longcrawl",
+              "token_count_with_boundary": 74146
+            }
+          ],
+          "pending_token_count": 68718,
+          "pending_tokens_sha256": "3b21cffbe86109594b7c73ad495f28734091fc0c923223b5f62f77f1d1eb1f8b",
+          "source": "longcrawl"
+        }
+      },
+      "source_state_before": {
+        "fineweb": {
+          "document_stream_sha256": "9dbb1f7e07cad7c84dfe49830ec6b77bf5e757cae7b126632b19b9e607328c3b",
+          "documents_loaded": 26178,
+          "pending_segments": [
+            {
+              "content_token_count": 312,
+              "cursor": 151,
+              "document_index": 26177,
+              "document_sha256": "58512b390e9f42f75735252f62d1eac4b9a744376e2ceb8a728a12e185bb329c",
+              "locator": {
+                "file_index": 0,
+                "parquet_row_index": 26177,
+                "repository_path": "sample/100BT/000_00000.parquet",
+                "source_identity_sha256": "065d72b0d84e1e9db4ed328ff085334e57e8e31b0b6c4081f9a79879a3a1972c"
+              },
+              "source": "fineweb",
+              "token_count_with_boundary": 313
+            }
+          ],
+          "pending_token_count": 162,
+          "pending_tokens_sha256": "51eaa7c4aee50bd91ac11e2db58bb93ac1f01b9460d2ba68b759d53b37d9fe45",
+          "source": "fineweb"
+        },
+        "longcrawl": {
+          "document_stream_sha256": "b274df3382b97c9936c709fe0c70551207b4518abf71946945ca73021fffb35e",
+          "documents_loaded": 540,
+          "pending_segments": [
+            {
+              "content_token_count": 34025,
+              "cursor": 16811,
+              "document_index": 539,
+              "document_sha256": "d53d3d169338786c4933a764aef93a57b929f17045af9f3cc687f0cf80a4e085",
+              "locator": {
+                "file_index": 0,
+                "parquet_row_index": 539,
+                "repository_path": "train/0-of-256.parquet"
+              },
+              "source": "longcrawl",
+              "token_count_with_boundary": 34026
+            }
+          ],
+          "pending_token_count": 17215,
+          "pending_tokens_sha256": "8c53c2cba4db01a7be571f5542fed18918abed7d9c0c8c71af5c1e8f6a4414a7",
+          "source": "longcrawl"
+        }
+      },
+      "source_training_tokens": {
+        "fineweb": 20971520,
+        "longcrawl": 20971520
+      },
+      "synthetic_eos_tokens": {
+        "fineweb": 0,
+        "longcrawl": 0
+      },
+      "training_steps": 5
+    }
+  ],
+  "totals": {
+    "combined_curriculum_sha256": "2778b0b6bcfa9909b87d3c349f4f79403fa6c60a90a3ce4b848d9b7e1bc79b03",
+    "records": 2048,
+    "synthetic_eos_tokens": 0,
+    "training_tokens": 98566144
+  }
+}

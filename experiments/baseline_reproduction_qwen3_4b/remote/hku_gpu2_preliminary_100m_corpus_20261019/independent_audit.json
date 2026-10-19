@@ -1,0 +1,57 @@
+{
+  "bindings": {
+    "auditor_sha256": "998ae426393e12548c0657109a312c589dcb638ef61b14d3d14474b3c1106601",
+    "builder_sha256": "47bb54adc8ecf375a3c1e4df1d16fe799a847c2fe6c9fa0f640185bdfd85179d",
+    "inventory_audit_sha256": "a113cbc1f40684547f5c2459d049fb910f9b4aa8a3f4624ccd7302905d6f26ec",
+    "inventory_sha256": "70cd90464a77ed81ca2d33bc7b394d91c2ab4d100441545c93e22bc02ce7d48a",
+    "manifest_sha256": "522ec14bd1e05af172895c85250173edee5a1f6d8134cc0d34cf57a5aa5b548c",
+    "plan_sha256": "4b1ab5f3d6f165be9ec5ab0f7dbf91f47f01c140f8184b35353f3d9364c5971b"
+  },
+  "checks": {
+    "artifact_hashes": true,
+    "combined_curriculum": true,
+    "inventory_dependencies": true,
+    "no_partial_paths": true,
+    "plan_and_builder": true,
+    "protocol_and_profile": true,
+    "provenance_has_no_plaintext": true,
+    "resources": true,
+    "stage_records_tokens_order_and_continuity": true,
+    "tokenizer_assets": true
+  },
+  "observed_stages": [
+    {
+      "name": "stage1_32k",
+      "ordered_training_tokens_sha256": "67f19c4cc8a05b13993400ec6491a9097fffea34590a69443d3636eb0c06ed84",
+      "passed": true,
+      "records": 1728,
+      "synthetic_eos_tokens": 0,
+      "training_tokens": 56623104
+    },
+    {
+      "name": "stage2_128k",
+      "ordered_training_tokens_sha256": "f570d582074ef057a73072627d91354c96463f287997a7ff8c44a72ea9f5df60",
+      "passed": true,
+      "records": 320,
+      "synthetic_eos_tokens": 0,
+      "training_tokens": 41943040
+    }
+  ],
+  "observed_totals": {
+    "combined_curriculum_sha256": "2778b0b6bcfa9909b87d3c349f4f79403fa6c60a90a3ce4b848d9b7e1bc79b03",
+    "continuity_documents_seen": {
+      "fineweb": 45995,
+      "longcrawl": 916
+    },
+    "continuity_peak_active_documents": {
+      "fineweb": 2,
+      "longcrawl": 2
+    },
+    "records": 2048,
+    "synthetic_eos_tokens": 0,
+    "training_tokens": 98566144
+  },
+  "passed": true,
+  "profile": "preliminary_100m",
+  "protocol": "in_place_ttt_public_corpus_v1_independent_audit"
+}

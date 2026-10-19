@@ -38,6 +38,8 @@ class CorrectedBaseLevelATest(unittest.TestCase):
         )
         self.assertIn('tmux has-session -t "$CORPUS_SESSION"', text)
         self.assertLess(text.index("run_arm no_ttt"), text.index("run_arm ttt"))
+        self.assertIn('fail_current_stage "$code"', text)
+        self.assertIn('write_status "FAILED_${CURRENT_STAGE}"', text)
         self.assertLess(text.index("CONVERTING_CHECKPOINTS"),
                         text.index("RUNNING_RULER_SMOKE"))
         self.assertIn("REQUIRE_ZERO_TOKENIZER_REGEX_WARNINGS=1", text)

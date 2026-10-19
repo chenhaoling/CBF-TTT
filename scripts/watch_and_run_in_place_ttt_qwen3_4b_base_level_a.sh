@@ -70,12 +70,15 @@ write_status() {
   mv "$OUTPUT_ROOT/status_time.txt.partial" "$OUTPUT_ROOT/status_time.txt"
 }
 
-on_error() {
-  local code=$?
+fail_current_stage() {
+  local code=${1:-1}
   trap - ERR
   printf 'stage=%s exit=%s\n' "$CURRENT_STAGE" "$code" >> "$OUTPUT_ROOT/error.log"
   write_status "FAILED_${CURRENT_STAGE}"
   exit "$code"
+}
+on_error() {
+  fail_current_stage "$?"
 }
 trap on_error ERR
 
@@ -204,7 +207,8 @@ run_arm() {
   local arm=$1
   local config="$TOOL_REPO/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_${arm}.yaml"
   date --iso-8601=seconds > "$OUTPUT_ROOT/${arm}_started_at.txt"
-  env \
+  local code
+  if env \
     UPSTREAM_REPO="$UPSTREAM_REPO" PYTHON_BIN="$TRAIN_PYTHON" \
     MODEL="$MODEL" DATA="$RESOURCE_INPUTS/resource_8192.jsonl" \
     OUTPUT_ROOT="$OUTPUT_ROOT/resource_8k_${arm}" ARM="$arm" \
@@ -214,9 +218,14 @@ run_arm() {
     DATA_MANIFEST="$RESOURCE_INPUTS/manifest.json" \
     DATA_AUDIT="$RESOURCE_INPUTS/independent_audit.json" \
     EXPECTED_HOSTNAME="$EXPECTED_HOSTNAME" \
-    bash "$RESOURCE_RUNNER"
+    bash "$RESOURCE_RUNNER"; then
+    :
+  else
+    code=$?
+    return "$code"
+  fi
   date --iso-8601=seconds > "$OUTPUT_ROOT/${arm}_completed_at.txt"
-  "$TRAIN_PYTHON" - "$OUTPUT_ROOT/resource_8k_${arm}" <<'PY'
+  if "$TRAIN_PYTHON" - "$OUTPUT_ROOT/resource_8k_${arm}" <<'PY'
 import json,pathlib,sys
 root=pathlib.Path(sys.argv[1])
 summary=json.loads((root/"summary.json").read_text())
@@ -224,14 +233,30 @@ audit=json.loads((root/"independent_audit.json").read_text())
 assert summary["completed"] and summary["activation_offload_gate_passed"]
 assert audit["passed"]
 PY
+  then
+    :
+  else
+    code=$?
+    return "$code"
+  fi
 }
 
 CURRENT_STAGE=resource_no_ttt
 write_status RUNNING_RESOURCE_NO_TTT
-run_arm no_ttt
+if run_arm no_ttt; then
+  :
+else
+  code=$?
+  fail_current_stage "$code"
+fi
 CURRENT_STAGE=resource_ttt
 write_status RUNNING_RESOURCE_TTT
-run_arm ttt
+if run_arm ttt; then
+  :
+else
+  code=$?
+  fail_current_stage "$code"
+fi
 printf '%s\n' completed_both_arms > "$OUTPUT_ROOT/state.txt"
 
 CURRENT_STAGE=conversion

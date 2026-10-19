@@ -1,0 +1,43 @@
+{
+  "arm": "no_ttt",
+  "bindings": {
+    "activation_offloading_sha256": "044511219c31a33df46f381a40d5bca9dd5aea8ff6ee4cce6aaf5bea5c2688aa",
+    "addendum_sha256": "ec512a3c0ede589baaaacfc8498734ad1fcaf401bf8e38210c2423b565550235",
+    "config_sha256": "a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780",
+    "data_audit_sha256": "1751e09fcf6b7bd1789a5484b0f05d328024b9b24b65de0cdce797ff89bffcf5",
+    "data_manifest_sha256": "5aead49455bdcdd2ebdc4082d3ff13ff8cc8b428f14563f291a15944c8cf78e6",
+    "data_sha256": "ac3e5d9bb0f8783fe548d9b36855b4f44ec22edae126492f24824de665f20d0b",
+    "model_config_sha256": "304b2545a258d35620f1d4bf46940c0471d9baa00715ff8e77f84c2fca5057c1",
+    "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+    "preflight_conflicts_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight_gpu_sha256": "7eb61a10abb8438d229adeb5342b97e402aba62093c81bed9f893cb7ee1c37bc",
+    "preflight_host_sha256": "a8a8f22cb142dbe1074f09450a1c2b33446ed931d2233684acaa3d8f8708c52a",
+    "preflight_processes_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner_sha256": "db0b06050127f35d86dc8509dd5119f749d3ef74ddcf75c7cfc27deff11d7400",
+    "summarizer_sha256": "f20b91db5f5a289cc14ba499623952982700a9c0c9a9df96c1aa8611a81df9cc"
+  },
+  "checkpoint_bytes": 49846590933,
+  "errors": [
+    "activation-offload resource gate did not pass",
+    "GPU trace does not retain 5% headroom on both registered devices",
+    "host trace violates memory/swap gate"
+  ],
+  "passed": false,
+  "preflight_gpus": [
+    {
+      "index": 0,
+      "memory_total_mib": 32607.0,
+      "memory_used_mib": 46.0,
+      "name": "NVIDIA GeForce RTX 5090"
+    },
+    {
+      "index": 1,
+      "memory_total_mib": 32607.0,
+      "memory_used_mib": 18.0,
+      "name": "NVIDIA GeForce RTX 5090"
+    }
+  ],
+  "preflight_host_available_mib": 59180.42578125,
+  "protocol": "in_place_ttt_2x5090_resource_audit_v1",
+  "sequence_length": 8192
+}
