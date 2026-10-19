@@ -8173,3 +8173,21 @@ content token，训练token hash与provenance一致，FineWeb/LongCrawl严格交
 stdout、time日志、退出码和逐文件SHA256已归档到
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_public_corpus_partial_smoke_milestone_200k_20261019/`。
 该证据只说明当前partial前缀在抽检范围内一致，不替代原子发布后的全量独立审计、训练或RULER。
+
+## 2026-10-19：自然文本门控v2计划可行性审查
+
+读取并绑定用户附件`InPlace_TTT_Experiment_Plan_zh.md` v2.0（492行、27,970字节，SHA256
+`0f96fd05...4ddfc8b`），新增并在任何v2门控输出产生前冻结
+`IN_PLACE_TTT_NATURAL_TEXT_GATE_V2_FEASIBILITY_ADDENDUM.md`。审查结论为“有条件可行”：接受A0/A1/A2分离、
+文档留出NLL/PPL、重复/干扰配对、后续效用、三seed与父文档bootstrap；保留导师要求的baseline-first顺序，
+正式RULER仍是baseline必做项。
+
+代码核验显示训练模型在单序列内对chunk增量执行可微`cumsum`，推理模型才通过`TTTDynamicCache`跨调用保存
+`past_w`。当前公共语料是多文档packing且训练JSONL没有`doc_id/reset_mask`，所以不能直接声称满足附件的
+文档级状态隔离。冻结执行版新增P0门槛：父文档先划分、变体继承split、boundary-aware attention与TTT reset、
+future-gradient、B冻结写入和sealed-test拒绝测试。P0失败时不得训练门控。
+
+执行顺序固定为：先完成98,566,144-token/arm的N0/A0公开数据匹配baseline与13-task RULER，再以精确
+56,623,104-token/arm的32K阶段运行N0/A0/A1/A2门控比较；单seed只排错，正式结果使用42/123/2026。
+只胜过A0而不胜过N0时只能报告减少有害更新；sigmoid未真实跳过算子时不得声称加速。所有GPU仍仅限
+`hku-gpu2`，门控训练和test继续封存。
