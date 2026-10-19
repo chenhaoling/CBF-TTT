@@ -1,0 +1,23 @@
+	Command being timed: "/home/ctj/miniconda3/envs/in_place_ttt_official_py311/bin/torchrun --standalone --nproc-per-node=2 /home/ctj/cbf_ttt_tool_252828fd/scripts/audit_in_place_ttt_qwen3_4b_fsdp2_initialization.py --upstream-root /home/ctj/in_place_ttt_official_be232482_resource_clean --model /home/ctj/models/Qwen3-4B-Base --model-identity /home/ctj/qwen3_4b_base_download_906bfd4b_20261019/identity.json --plan /home/ctj/cbf_ttt_tool_252828fd/IN_PLACE_TTT_BASELINE_QWEN3_4B_FSDP2_INITIALIZATION_AUDIT_ADDENDUM.md --output /home/ctj/in_place_ttt_qwen3_4b_base_fsdp2_initialization_audit_252828fd_20261019/audit.json"
+	User time (seconds): 27.85
+	System time (seconds): 14.98
+	Percent of CPU this job got: 183%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:23.31
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5393824
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 657
+	Minor (reclaiming a frame) page faults: 8414064
+	Voluntary context switches: 35174
+	Involuntary context switches: 619
+	Swaps: 0
+	File system inputs: 5388648
+	File system outputs: 240
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

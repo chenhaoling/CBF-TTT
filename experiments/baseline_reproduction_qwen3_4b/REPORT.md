@@ -2948,3 +2948,38 @@ This finding qualifies the earlier tiny-fixture initialization claim but does
 not modify released baseline code. FSDP2/meta initialization, full-corpus
 training, conversion and RULER remain required. Update admission remains
 sealed.
+
+## 67. Exact Qwen3-4B-Base FSDP2/meta initialization audit (2026-10-19)
+
+The failed single-GPU full-checkpoint audit used the Transformers
+`from_pretrained` CPU BF16 missing-weight path, while formal training uses a
+different construction. A separately frozen two-rank audit therefore executed
+the actual `tasks/train_torch.py` sequence on GPU 0/1 of `hku-gpu2`: FP32 meta
+model construction, FSDP2 full sharding, CUDA materialization, checkpoint
+loading and VeOmni missing-key initialization through the official Qwen
+`_init_weights`.
+
+All 12 checks passed. Exact Base revision `906bfd4b...` produced exactly the
+twelve expected writer parameters at layers `[0,6,12,18,24,30]`. On both
+ranks, every writer parameter was a CUDA FP32 DTensor. Reconstructed Conv5
+tensors were `[2560,1,5]` with zero nonzero entries. Every reconstructed
+projection was `[2560,2560]` with exactly 2560 finite nonzero diagonal values
+and zero nonzero off-diagonal values. Both ranks' scalar reconstructions were
+identical.
+
+This runtime result narrows the preceding failure correctly: the CPU BF16
+zero-diagonal behavior does not occur in the formal FP32-meta/CUDA-DTensor
+initialization path. It does not erase the measured BF16 difference between
+the active chunked-einsum forward and the direct-linear bypass because this
+audit intentionally performed no forward pass.
+
+Each GPU peaked at 10,514,637,312 allocated and 10,525,605,888 reserved CUDA
+bytes. The script measured 20.61 seconds; `/usr/bin/time` measured 23.31
+seconds and 5,393,824 KiB peak host RSS. No optimizer was constructed, no
+checkpoint was written and no model tensor was serialized.
+
+Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_fsdp2_initialization_audit_20261019/`. This closes
+the exact formal initialization-path check only. Level-A forward/backward,
+optimizer capacity, activation offload, conversion and RULER remain pending,
+and update admission remains sealed.

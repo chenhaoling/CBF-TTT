@@ -8057,3 +8057,22 @@ Conv5、projection零off-diagonal、两次finite Liger loss、第一步全部con
 与hash归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_full_checkpoint_writer_preflight_20261019/`。
 baseline代码未修改，FSDP2/meta初始化、正式训练、checkpoint转换与RULER仍为必要验收；门控实验继续封存。
+
+## 2026-10-19：精确 Qwen3-4B-Base 两卡 FSDP2/meta writer 初始化审计
+
+为区分单卡`from_pretrained` CPU BF16初始化与正式训练路径，新增并在执行前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_FSDP2_INITIALIZATION_AUDIT_ADDENDUM.md`，新增
+`scripts/audit_in_place_ttt_qwen3_4b_fsdp2_initialization.py`。脚本仅在`hku-gpu2`物理GPU 0/1运行，严格复用
+`tasks/train_torch.py`的FP32 meta model、两rank FSDP2 full shard、CUDA materialization、checkpoint load和VeOmni
+missing-key `_init_weights`调用链，不执行forward、optimizer或checkpoint保存。
+
+clean tool commit `252828fdf1211b73994f53d952e4ef5820e172f4`对exact Base revision `906bfd4b...`执行，
+12/12项检查通过。六个注册层共12个writer参数均为CUDA FP32 DTensor，本地shard分别为`[1280,1,5]`与
+`[1280,2560]`；每层重构Conv5为全零，每层重构projection恰好有2560个finite nonzero diagonal和0个
+off-diagonal，两rank重构说明完全一致。
+
+结果说明单卡失败中的CPU BF16零对角现象不会出现在正式FP32-meta/CUDA-DTensor初始化路径；此前BF16
+chunked-einsum与direct-linear输出差异仍保留，因为本审计没有执行forward。每卡峰值allocated/reserved显存约
+9.79/9.80 GiB，脚本耗时20.61秒，`/usr/bin/time`耗时23.31秒，峰值主存5,393,824 KiB。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_fsdp2_initialization_audit_20261019/`。
+该结果不替代Level-A forward/backward、optimizer容量、activation offload、转换或RULER；门控继续封存。

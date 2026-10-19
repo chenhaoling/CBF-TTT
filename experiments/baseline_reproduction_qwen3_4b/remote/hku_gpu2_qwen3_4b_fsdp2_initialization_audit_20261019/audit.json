@@ -1,0 +1,527 @@
+{
+  "checkpoint_saved": false,
+  "checks": {
+    "model_identity": true,
+    "model_shape": true,
+    "no_training_or_checkpoint": true,
+    "rank_reconstructions_agree": true,
+    "tool_checkout_clean": true,
+    "ttt_configuration_exact": true,
+    "two_rank_two_rtx5090": true,
+    "upstream_identity": true,
+    "writer_global_structure_exact": true,
+    "writer_local_storage_cuda_fp32": true,
+    "writer_parameter_set_exact": true,
+    "writer_parameters_are_dtensors": true
+  },
+  "claim_boundary": "exact Qwen3-4B-Base FSDP2/meta writer initialization only; forward, optimizer, corpus training, conversion and RULER remain required",
+  "forward_executed": false,
+  "model": {
+    "identity_path": "/home/ctj/qwen3_4b_base_download_906bfd4b_20261019/identity.json",
+    "identity_sha256": "5e5edb5bef03218c91a1bea0d4f8a80a4814a120734b433a2e6fb765a0a154d4",
+    "repository": "Qwen/Qwen3-4B-Base",
+    "revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+    "root": "/home/ctj/models/Qwen3-4B-Base"
+  },
+  "optimizer_constructed": false,
+  "passed": true,
+  "protocol": "in_place_ttt_qwen3_4b_fsdp2_initialization_audit_v1",
+  "runtime": {
+    "cuda_version": "12.8",
+    "cuda_visible_devices": "0,1",
+    "hostname": "user-Super-Server",
+    "ranks": [
+      {
+        "dtensor_ok": true,
+        "dtype_device_ok": true,
+        "free_memory_before_bytes": 33084997632,
+        "gpu_name": "NVIDIA GeForce RTX 5090",
+        "local_rank": 0,
+        "peak_allocated_bytes": 10514637312,
+        "peak_reserved_bytes": 10525605888,
+        "rank": 0,
+        "structure_ok": true,
+        "total_memory_bytes": 33662959616,
+        "writer_rows": [
+          {
+            "layer": 0,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 6,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 12,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 18,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 24,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 30,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          }
+        ]
+      },
+      {
+        "dtensor_ok": true,
+        "dtype_device_ok": true,
+        "free_memory_before_bytes": 33122680832,
+        "gpu_name": "NVIDIA GeForce RTX 5090",
+        "local_rank": 1,
+        "peak_allocated_bytes": 10514637312,
+        "peak_reserved_bytes": 10525605888,
+        "rank": 1,
+        "structure_ok": true,
+        "total_memory_bytes": 33671348224,
+        "writer_rows": [
+          {
+            "layer": 0,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 6,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 12,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 18,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 24,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          },
+          {
+            "layer": 30,
+            "ttt_conv": {
+              "global_nonzero": 0,
+              "global_shape": [
+                2560,
+                1,
+                5
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                1,
+                5
+              ],
+              "passed": true
+            },
+            "ttt_proj": {
+              "diagonal_nonzero": 2560,
+              "global_nonzero": 2560,
+              "global_shape": [
+                2560,
+                2560
+              ],
+              "is_dtensor": true,
+              "local_device_type": "cuda",
+              "local_dtype": "torch.float32",
+              "local_shape": [
+                1280,
+                2560
+              ],
+              "off_diagonal_nonzero": 0,
+              "passed": true
+            }
+          }
+        ]
+      }
+    ],
+    "torch_version": "2.8.0+cu128",
+    "veomni_version": "v0.1.0",
+    "wall_seconds": 20.613727021962404,
+    "world_size": 2
+  },
+  "serialized_model_tensors": false,
+  "source": {
+    "configuration_sha256": "d2d0ab37a756df2b0980d9d52196696a5dcbfb8560c01563f79a0b256a0206c0",
+    "foundation_builder_sha256": "451da868bd626d4b02d48e6c0059cdcc962ca6aca2f9658bbadd671407edc9cb",
+    "modeling_sha256": "a26d64cf85c985c4825a66d64815baa5956a2739593aad1969e9cc09d937a1d1",
+    "module_utils_sha256": "36fd1790787babc2913b4d837df6e950572454cfed6a8d1bfafd34f168256aea",
+    "plan_sha256": "b8ad738a2d4b09f3676bc9e32788d4d690ed658dc06ebe335bf7116a1dafc379",
+    "tool_clean": true,
+    "tool_commit": "252828fdf1211b73994f53d952e4ef5820e172f4",
+    "tool_root": "/home/ctj/cbf_ttt_tool_252828fd",
+    "torch_parallelize_sha256": "305ab376f337d1d06421ec1096935be2964e79b1e34bc2f16e9d2e4ef81dddef",
+    "upstream_clean": true,
+    "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+    "upstream_root": "/home/ctj/in_place_ttt_official_be232482_resource_clean"
+  }
+}
