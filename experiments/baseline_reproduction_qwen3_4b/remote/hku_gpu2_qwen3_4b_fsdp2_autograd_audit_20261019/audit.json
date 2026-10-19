@@ -1,0 +1,223 @@
+{
+  "checkpoint_saved": false,
+  "checks": {
+    "activation_offload_contexts_active": true,
+    "diagnostic_nudge_all_conv_nonzero": true,
+    "first_all_conv_gradients_positive": true,
+    "first_all_projection_gradients_zero": true,
+    "first_losses_finite": true,
+    "first_writer_gradients_finite": true,
+    "gradient_checkpointing_active": true,
+    "liger_fused_forward_active": true,
+    "model_identity": true,
+    "model_shape": true,
+    "module_resolution": true,
+    "no_optimizer_or_checkpoint": true,
+    "rank_reduced_results_agree": true,
+    "second_all_conv_gradients_positive": true,
+    "second_all_projection_gradients_positive": true,
+    "second_losses_finite": true,
+    "second_writer_gradients_finite": true,
+    "tool_checkout_clean": true,
+    "ttt_configuration_exact": true,
+    "two_rank_two_rtx5090": true,
+    "upstream_identity": true,
+    "writer_parameter_set_exact": true,
+    "writer_parameters_are_dtensors": true
+  },
+  "claim_boundary": "exact Qwen3-4B-Base two-rank FSDP2 8K native-writer autograd diagnostic only; optimizer capacity, full-corpus training, conversion and RULER remain required",
+  "fixture": {
+    "activation_offload_context_types": {
+      "backward": "custom_save_on_cpu",
+      "forward": "custom_save_on_cpu"
+    },
+    "chunks": 2,
+    "diagnostic_nudge_scale": -0.001,
+    "sequence_tokens_per_rank": 8192,
+    "serialized_activations": false,
+    "serialized_gradients": false,
+    "serialized_input_ids": false,
+    "serialized_logits": false,
+    "serialized_model_tensors": false,
+    "ttt_chunk": 4096,
+    "ttt_layers": [
+      0,
+      6,
+      12,
+      18,
+      24,
+      30
+    ],
+    "ttt_lr": 3.0
+  },
+  "model": {
+    "identity_path": "/home/ctj/qwen3_4b_base_download_906bfd4b_20261019/identity.json",
+    "identity_sha256": "5e5edb5bef03218c91a1bea0d4f8a80a4814a120734b433a2e6fb765a0a154d4",
+    "repository": "Qwen/Qwen3-4B-Base",
+    "revision": "906bfd4b4dc7f14ee4320094d8b41684abff8539",
+    "root": "/home/ctj/models/Qwen3-4B-Base"
+  },
+  "optimizer_constructed": false,
+  "passed": true,
+  "protocol": "in_place_ttt_qwen3_4b_fsdp2_autograd_audit_v1",
+  "runtime": {
+    "cuda_version": "12.8",
+    "cuda_visible_devices": "0,1",
+    "hostname": "user-Super-Server",
+    "liger_kernel_version": null,
+    "ranks": [
+      {
+        "conv_nonzero_after_nudge": {
+          "0": 12796,
+          "12": 12796,
+          "18": 12798,
+          "24": 12794,
+          "30": 12795,
+          "6": 12796
+        },
+        "first": {
+          "conv_gradient_norms": {
+            "0": 14.28195462481496,
+            "12": 206.86705989294188,
+            "18": 504.075422184022,
+            "24": 2210.4289176537663,
+            "30": 3695.6502810736843,
+            "6": 237.5472321455251
+          },
+          "losses_by_rank": [
+            12.902475357055664,
+            12.897636413574219
+          ],
+          "losses_finite": true,
+          "projection_gradient_norms": {
+            "0": 0.0,
+            "12": 0.0,
+            "18": 0.0,
+            "24": 0.0,
+            "30": 0.0,
+            "6": 0.0
+          },
+          "writer_gradients_finite": true
+        },
+        "free_memory_before_bytes": 33084997632,
+        "gpu_name": "NVIDIA GeForce RTX 5090",
+        "input_ids_serialized": false,
+        "input_ids_sha256": "f3d54f997e3bce75ce1e6a0ac4308373720a90162bf4a0033f1552eb775ec3be",
+        "local_rank": 0,
+        "peak_allocated_bytes": 19874859008,
+        "peak_reserved_bytes": 25769803776,
+        "rank": 0,
+        "second": {
+          "conv_gradient_norms": {
+            "0": 78.95645679938089,
+            "12": 0.19432728235341634,
+            "18": 0.5761266916953287,
+            "24": 0.14069647429621662,
+            "30": 2.251875413677041,
+            "6": 8.315660377837183
+          },
+          "losses_by_rank": [
+            19.63336753845215,
+            19.430259704589844
+          ],
+          "losses_finite": true,
+          "projection_gradient_norms": {
+            "0": 122.62090653208367,
+            "12": 9.818461751318756,
+            "18": 60.350463683362655,
+            "24": 244.57944612896236,
+            "30": 3362.0309338255647,
+            "6": 323.5778982718072
+          },
+          "writer_gradients_finite": true
+        },
+        "total_memory_bytes": 33662959616
+      },
+      {
+        "conv_nonzero_after_nudge": {
+          "0": 12796,
+          "12": 12796,
+          "18": 12798,
+          "24": 12794,
+          "30": 12795,
+          "6": 12796
+        },
+        "first": {
+          "conv_gradient_norms": {
+            "0": 14.28195462481496,
+            "12": 206.86705989294188,
+            "18": 504.075422184022,
+            "24": 2210.4289176537663,
+            "30": 3695.6502810736843,
+            "6": 237.5472321455251
+          },
+          "losses_by_rank": [
+            12.902475357055664,
+            12.897636413574219
+          ],
+          "losses_finite": true,
+          "projection_gradient_norms": {
+            "0": 0.0,
+            "12": 0.0,
+            "18": 0.0,
+            "24": 0.0,
+            "30": 0.0,
+            "6": 0.0
+          },
+          "writer_gradients_finite": true
+        },
+        "free_memory_before_bytes": 33122680832,
+        "gpu_name": "NVIDIA GeForce RTX 5090",
+        "input_ids_serialized": false,
+        "input_ids_sha256": "2593640af7a5dd48e5fd1cf3652c4572df63d2e386995756db871e3b355cf158",
+        "local_rank": 1,
+        "peak_allocated_bytes": 19874859008,
+        "peak_reserved_bytes": 25769803776,
+        "rank": 1,
+        "second": {
+          "conv_gradient_norms": {
+            "0": 78.95645679938089,
+            "12": 0.19432728235341634,
+            "18": 0.5761266916953287,
+            "24": 0.14069647429621662,
+            "30": 2.251875413677041,
+            "6": 8.315660377837183
+          },
+          "losses_by_rank": [
+            19.63336753845215,
+            19.430259704589844
+          ],
+          "losses_finite": true,
+          "projection_gradient_norms": {
+            "0": 122.62090653208367,
+            "12": 9.818461751318756,
+            "18": 60.350463683362655,
+            "24": 244.57944612896236,
+            "30": 3362.0309338255647,
+            "6": 323.5778982718072
+          },
+          "writer_gradients_finite": true
+        },
+        "total_memory_bytes": 33671348224
+      }
+    ],
+    "torch_version": "2.8.0+cu128",
+    "veomni_version": "v0.1.0",
+    "wall_seconds": 36.86168374121189,
+    "world_size": 2
+  },
+  "source": {
+    "activation_offloading_sha256": "044511219c31a33df46f381a40d5bca9dd5aea8ff6ee4cce6aaf5bea5c2688aa",
+    "configuration_sha256": "d2d0ab37a756df2b0980d9d52196696a5dcbfb8560c01563f79a0b256a0206c0",
+    "foundation_builder_sha256": "451da868bd626d4b02d48e6c0059cdcc962ca6aca2f9658bbadd671407edc9cb",
+    "modeling_sha256": "a26d64cf85c985c4825a66d64815baa5956a2739593aad1969e9cc09d937a1d1",
+    "plan_sha256": "6d23da14192047fb7d0a60479bd8c971d1bdf72e0a0e2d31d9c082237af616a2",
+    "tool_clean": true,
+    "tool_commit": "2b10fd17062687778bcb74b624368c7d5814eff4",
+    "tool_root": "/home/ctj/cbf_ttt_tool_2b10fd17",
+    "torch_parallelize_sha256": "305ab376f337d1d06421ec1096935be2964e79b1e34bc2f16e9d2e4ef81dddef",
+    "upstream_clean": true,
+    "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+    "upstream_root": "/home/ctj/in_place_ttt_official_be232482_resource_clean"
+  }
+}

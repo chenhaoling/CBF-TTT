@@ -2983,3 +2983,39 @@ Evidence is archived under
 the exact formal initialization-path check only. Level-A forward/backward,
 optimizer capacity, activation offload, conversion and RULER remain pending,
 and update admission remains sealed.
+
+## 68. Exact Qwen3-4B-Base FSDP2 8K autograd audit (2026-10-19)
+
+The initialization audit left full-model distributed autograd untested. A new
+plan was therefore frozen before execution and run from clean tool commit
+`2b10fd170626...` only on both RTX 5090 devices of `hku-gpu2`. The diagnostic
+used the exact Base revision, FP32 meta construction, two-rank FSDP2 full
+sharding, BF16 mixed precision, gradient checkpointing, VeOmni's forward and
+backward `custom_save_on_cpu` contexts, and the released Liger fused loss.
+Each rank supplied a different deterministic 8192-token sequence, giving two
+formal 4096-token TTT chunks. Only input hashes and scalar results were saved.
+
+All 23 frozen checks passed. On the exact zero-Conv5 initialization, all six
+global Conv5 gradient norms were finite and positive, ranging from 14.28195 to
+3695.65028, while every projection gradient norm was exactly zero. The frozen
+diagnostic then applied `conv -= 1e-3 * first_gradient` without constructing an
+optimizer. A second fused-loss backward produced finite positive Conv5 norms
+from 0.14070 to 78.95646 and finite positive projection norms from 9.81846 to
+3362.03093 at every registered writer layer. Both ranks agreed exactly on all
+reduced writer statistics. Their first losses were 12.90248 and 12.89764; the
+post-perturbation diagnostic losses were 19.63337 and 19.43026.
+
+Per GPU, peak allocated memory was 19,874,859,008 bytes (18.51 GiB) and peak
+reserved memory was 25,769,803,776 bytes (24.00 GiB). The audit measured 36.86
+seconds; `/usr/bin/time` measured 39.37 seconds and 5,392,288 KiB peak host
+RSS. No optimizer, clipping, optimizer step, checkpoint or model-tensor export
+was performed. The public-corpus builder remained live and advanced during the
+run.
+
+Evidence is archived under
+`remote/hku_gpu2_qwen3_4b_fsdp2_autograd_audit_20261019/`. This closes the
+exact full-model native-writer gradient-reachability question for an 8K
+two-chunk diagnostic. It does not establish optimizer capacity, corrected
+Level-A completion, 32K/128K training, convergence or RULER efficacy. The
+full-corpus baseline chain remains required, and update admission remains
+sealed.

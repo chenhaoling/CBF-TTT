@@ -1,0 +1,1314 @@
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/ops/__init__.py:41] 10/19/2026 08:21:36 >> ⚠️ Skip applying ops patch. Using huggingface transformers backend.
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:32] 10/19/2026 08:21:36 >> ❌ veomni_patch is not available
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:34] 10/19/2026 08:21:36 >> 
+========== Environment Variables ==========
+MODELING_BACKEND=hf (source=env)
+USE_GROUP_GEMM=1 (source=default)
+USE_LIGER_KERNEL=1 (source=default)
+===========================================
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/__init__.py:35] 10/19/2026 08:21:36 >> 
+=========== OPS ============
+_fused_moe_forward = None
+_flash_attention_forward = None
+_cross_entropy = None
+==============================
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/parallel_state.py:479] 10/19/2026 08:21:41 >> Initializing parallel state... dp_size 2, dp_replicate_size 1, dp_shard_size 2,tp_size 1, pp_size 1, ep_size 1, cp_size 1, ulysses_size 1
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/parallel_state.py:550] 10/19/2026 08:21:41 >> Device mesh: DeviceMesh('cuda', [0, 1], mesh_dim_names=('dp_shard',))
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/parallel_state.py:551] 10/19/2026 08:21:41 >> EP FSDP device mesh: None
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/models/loader.py:49] 10/19/2026 08:21:41 >> [CONFIG] Force loading model config from Huggingface.
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/models/loader.py:155] 10/19/2026 08:21:42 >> Loading model from Huggingface modeling.
+init_device: meta
+empty_init: True
+weights_path: /home/ctj/models/Qwen3-4B-Base
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:454] 10/19/2026 08:21:42 >> Enable gradient checkpointing.
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:474] 10/19/2026 08:21:42 >> Apply data parallel to the model: fsdp2.
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:252] 10/19/2026 08:21:42 >> target classes to shard: {'Qwen3DecoderLayer'}
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:292] 10/19/2026 08:21:42 >> layer pairs: [('model.layers.0', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.1', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.2', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.3', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.4', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.5', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.6', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.7', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.8', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.9', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.10', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.11', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.12', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.13', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.14', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.15', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.16', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.17', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.18', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.19', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.20', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.21', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.22', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.23', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.24', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.25', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.26', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.27', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.28', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.29', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.30', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.31', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.32', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.33', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.34', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None), ('model.layers.35', Qwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+), None)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.0', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.1', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.2', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.3', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.4', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.5', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.6', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.7', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.8', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.9', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.10', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.11', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.12', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.13', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.14', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.15', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.16', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.17', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.18', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.19', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.20', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.21', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.22', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.23', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.24', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.25', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.26', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.27', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.28', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.29', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.30', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+    (ttt_proj): Linear(in_features=2560, out_features=2560, bias=False)
+    (ttt_conv): Conv1d(2560, 2560, kernel_size=(5,), stride=(1,), padding=(2,), groups=2560, bias=False)
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.31', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.32', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.33', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.34', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:379] 10/19/2026 08:21:42 >> layer_fqn='model.layers.35', layer_mod._fsdp_modules=[FSDPQwen3DecoderLayer(
+  (self_attn): Qwen3Attention(
+    (q_proj): Linear(in_features=2560, out_features=4096, bias=False)
+    (k_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (v_proj): Linear(in_features=2560, out_features=1024, bias=False)
+    (o_proj): Linear(in_features=4096, out_features=2560, bias=False)
+    (q_norm): Qwen3RMSNorm((128,), eps=1e-06)
+    (k_norm): Qwen3RMSNorm((128,), eps=1e-06)
+  )
+  (mlp): Qwen3MLP(
+    (gate_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (up_proj): Linear(in_features=2560, out_features=9728, bias=False)
+    (down_proj): Linear(in_features=9728, out_features=2560, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+  (post_attention_layernorm): Qwen3RMSNorm((2560,), eps=1e-06)
+)]
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:412] 10/19/2026 08:21:42 >> starting to load model weights...
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/distributed/torch_parallelize.py:417] 10/19/2026 08:21:42 >> Every rank would read weights from disk and expect this to be slow!
+[INFO|/home/ctj/miniconda3/envs/in_place_ttt_official_py311/lib/python3.11/site-packages/veomni/models/module_utils.py:448] 10/19/2026 08:21:54 >> Find missing key(s) in state dict: {'model.layers.6.mlp.ttt_proj.weight', 'model.layers.18.mlp.ttt_conv.weight', 'model.layers.30.mlp.ttt_conv.weight', 'model.layers.18.mlp.ttt_proj.weight', 'model.layers.24.mlp.ttt_conv.weight', 'model.layers.0.mlp.ttt_conv.weight', 'model.layers.24.mlp.ttt_proj.weight', 'model.layers.0.mlp.ttt_proj.weight', 'model.layers.30.mlp.ttt_proj.weight', 'model.layers.6.mlp.ttt_conv.weight', 'model.layers.12.mlp.ttt_conv.weight', 'model.layers.12.mlp.ttt_proj.weight'}, initialize them.
+{"output": "/home/ctj/in_place_ttt_qwen3_4b_base_fsdp2_autograd_2b10fd17_20261019/audit.json", "passed": true}

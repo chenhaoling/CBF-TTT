@@ -8076,3 +8076,24 @@ chunked-einsum与direct-linear输出差异仍保留，因为本审计没有执�
 9.79/9.80 GiB，脚本耗时20.61秒，`/usr/bin/time`耗时23.31秒，峰值主存5,393,824 KiB。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_fsdp2_initialization_audit_20261019/`。
 该结果不替代Level-A forward/backward、optimizer容量、activation offload、转换或RULER；门控继续封存。
+
+## 2026-10-19：精确 Qwen3-4B-Base 两卡 FSDP2 8K autograd 审计
+
+新增并在执行前冻结
+`IN_PLACE_TTT_BASELINE_QWEN3_4B_FSDP2_AUTOGRAD_AUDIT_ADDENDUM.md`，新增
+`scripts/audit_in_place_ttt_qwen3_4b_fsdp2_autograd.py`。审计仅在`hku-gpu2`物理GPU 0/1执行，使用
+exact Base revision、FP32 meta构造、两rank FSDP2 full shard、BF16 mixed precision、gradient
+checkpointing、VeOmni activation offload和released Liger fused loss。每rank使用不同的确定性8192-token
+序列，保留正式`ttt_chunk=4096`，不保存token、logit、activation、gradient或模型tensor。
+
+clean tool commit `2b10fd17062687778bcb74b624368c7d5814eff4`首次持久化运行exit 0，23/23检查通过。
+第一次backward中六层Conv5全局梯度范数均为正（14.28195--3695.65028），六层projection梯度范数均
+精确为0。随后只执行冻结的`conv -= 1e-3 * first_gradient`诊断扰动；第二次backward中六层Conv5
+（0.14070--78.95646）及projection（9.81846--3362.03093）梯度均为正，两rank的reduced统计完全一致。
+
+每卡峰值allocated/reserved显存为18.51/24.00 GiB，脚本耗时36.86秒，`/usr/bin/time`耗时39.37秒，
+峰值主存5,392,288 KiB。未创建optimizer、未裁剪梯度、未执行optimizer step或保存checkpoint；正式语料
+builder在运行期间保持存活并继续推进。证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_fsdp2_autograd_audit_20261019/`。
+该结果只关闭8K两chunk的完整FSDP2 native-writer梯度可达性，不替代corrected Level-A、32K/128K训练、
+checkpoint转换或RULER；update-admission继续封存。
