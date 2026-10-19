@@ -21,6 +21,7 @@ SPECS = {
     131072: "stage2_128k",
 }
 SOURCES = ("fineweb", "longcrawl")
+SOURCE_PROFILES = ("pilot", "preliminary_100m", "full")
 SOURCE_MANIFEST_SHA256 = "3b2e7f4821692dfe75bae48e4cb52c6ac39f4b9b3b4c75f96aeb32ab7dec7206"
 ASSETS = ("tokenizer.json", "tokenizer_config.json", "special_tokens_map.json",
           "added_tokens.json", "config.json")
@@ -233,7 +234,7 @@ def main() -> None:
         help="Exact audited source manifest hash (legacy pilot hash by default).",
     )
     parser.add_argument(
-        "--required-source-profile", choices=("pilot", "full"), default="pilot",
+        "--required-source-profile", choices=SOURCE_PROFILES, default="pilot",
         help="Require the source corpus profile used to derive resource inputs.",
     )
     args = parser.parse_args()

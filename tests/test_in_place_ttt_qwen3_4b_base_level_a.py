@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from scripts.audit_in_place_ttt_qwen3_4b_base_level_a import (
+    EXPECTED_TOTALS,
     MODEL_REPOSITORY,
     MODEL_REVISION,
     audit,
@@ -30,6 +31,12 @@ class CorrectedBaseLevelATest(unittest.TestCase):
         text = WATCHER.read_text()
         self.assertIn('EXPECTED_HOSTNAME=${EXPECTED_HOSTNAME:-user-Super-Server}', text)
         self.assertIn("WAITING_BASE_CORPUS", text)
+        self.assertIn('REQUIRED_SOURCE_PROFILE=${REQUIRED_SOURCE_PROFILE:-full}', text)
+        self.assertIn(
+            'CORPUS_SESSION=${CORPUS_SESSION:-public_corpus_qwen3_4b_base_full_20261019}',
+            text,
+        )
+        self.assertIn('tmux has-session -t "$CORPUS_SESSION"', text)
         self.assertLess(text.index("run_arm no_ttt"), text.index("run_arm ttt"))
         self.assertLess(text.index("CONVERTING_CHECKPOINTS"),
                         text.index("RUNNING_RULER_SMOKE"))
@@ -53,6 +60,13 @@ class CorrectedBaseLevelATest(unittest.TestCase):
             result = audit(args)
             self.assertFalse(result["passed"])
             self.assertIn("missing required files", result["errors"][0])
+
+    def test_preliminary_profile_matches_registered_100m_budget(self):
+        self.assertEqual(
+            EXPECTED_TOTALS["preliminary_100m"],
+            {"records": 2048, "training_tokens": 98_566_144,
+             "synthetic_eos_tokens": 0},
+        )
 
 
 if __name__ == "__main__":

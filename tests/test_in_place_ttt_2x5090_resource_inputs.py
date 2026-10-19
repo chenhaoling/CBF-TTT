@@ -8,11 +8,13 @@ from unittest import mock
 from scripts import audit_in_place_ttt_2x5090_resource_inputs as audit_module
 from scripts.audit_in_place_ttt_2x5090_resource_inputs import (
     SPECS as AUDIT_SPECS,
+    SOURCE_PROFILES as AUDIT_SOURCE_PROFILES,
     derive_expected,
     forbidden,
 )
 from scripts.build_in_place_ttt_2x5090_resource_inputs import (
     SPECS as BUILD_SPECS,
+    SOURCE_PROFILES as BUILD_SOURCE_PROFILES,
     has_plaintext,
     stable_prefix,
 )
@@ -36,6 +38,8 @@ class CharacterTokenizer:
 class TwoRTX5090ResourceInputsTest(unittest.TestCase):
     def test_registered_builder_and_auditor_specs_match(self):
         self.assertEqual(BUILD_SPECS, AUDIT_SPECS)
+        self.assertEqual(BUILD_SOURCE_PROFILES, AUDIT_SOURCE_PROFILES)
+        self.assertIn("preliminary_100m", BUILD_SOURCE_PROFILES)
         self.assertEqual(tuple(BUILD_SPECS), (8192, 16384, 32768, 65536, 131072))
 
     def test_independent_derivation_matches_builder_for_prefix(self):

@@ -21,6 +21,7 @@ SPECS = {
     131072: "stage2_128k",
 }
 SOURCES = ("fineweb", "longcrawl")
+SOURCE_PROFILES = ("pilot", "preliminary_100m", "full")
 ASSETS = ("tokenizer.json", "tokenizer_config.json", "special_tokens_map.json",
           "added_tokens.json", "config.json")
 
@@ -278,7 +279,7 @@ def main() -> None:
         default=SOURCE_MANIFEST_SHA256,
     )
     parser.add_argument(
-        "--required-source-profile", choices=("pilot", "full"), default="pilot",
+        "--required-source-profile", choices=SOURCE_PROFILES, default="pilot",
     )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()

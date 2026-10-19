@@ -8,6 +8,7 @@ MODEL=${MODEL:?set the exact Qwen3-4B-Base directory}
 MODEL_IDENTITY=${MODEL_IDENTITY:?set the passing Base identity JSON}
 CORPUS_ROOT=${CORPUS_ROOT:?set the corrected full corpus root}
 CORPUS_RUN_ROOT=${CORPUS_RUN_ROOT:?set the corrected corpus wrapper run root}
+CORPUS_SESSION=${CORPUS_SESSION:-public_corpus_qwen3_4b_base_full_20261019}
 OUTPUT_ROOT=${OUTPUT_ROOT:?set a new corrected Level-A output root}
 PARENT_PLAN=${PARENT_PLAN:?set the frozen parent baseline plan}
 CORRECTION_ADDENDUM=${CORRECTION_ADDENDUM:?set the Base identity correction addendum}
@@ -18,6 +19,7 @@ TOOL_COMMIT=${TOOL_COMMIT:?set the exact tool commit}
 POLL_SECONDS=${POLL_SECONDS:-60}
 MAX_WAIT_SECONDS=${MAX_WAIT_SECONDS:-345600}
 EXPECTED_HOSTNAME=${EXPECTED_HOSTNAME:-user-Super-Server}
+REQUIRED_SOURCE_PROFILE=${REQUIRED_SOURCE_PROFILE:-full}
 UPSTREAM_COMMIT=be2324829b0e91c8fd10a74d4b43714fde6676e1
 
 BUILDER="$TOOL_REPO/scripts/build_in_place_ttt_2x5090_resource_inputs.py"
@@ -40,6 +42,10 @@ if [[ -e "$OUTPUT_ROOT" ]]; then
 fi
 if [[ "$POLL_SECONDS" -lt 10 || "$MAX_WAIT_SECONDS" -lt "$POLL_SECONDS" ]]; then
   echo "invalid wait interval or budget" >&2
+  exit 2
+fi
+if [[ "$REQUIRED_SOURCE_PROFILE" != full && "$REQUIRED_SOURCE_PROFILE" != preliminary_100m ]]; then
+  echo "unsupported source profile: $REQUIRED_SOURCE_PROFILE" >&2
   exit 2
 fi
 test "$(git -C "$UPSTREAM_REPO" rev-parse HEAD)" = "$UPSTREAM_COMMIT"
@@ -110,7 +116,7 @@ while true; do
     echo "corrected full corpus failed: $corpus_status" >&2
     false
   fi
-  if ! tmux has-session -t public_corpus_qwen3_4b_base_full_20261019 2>/dev/null; then
+  if ! tmux has-session -t "$CORPUS_SESSION" 2>/dev/null; then
     sleep 5
     corpus_status=$(cat "$CORPUS_RUN_ROOT/status.txt" 2>/dev/null || true)
     [[ "$corpus_status" == COMPLETE ]] || {
@@ -130,25 +136,32 @@ done
 CURRENT_STAGE=corpus_release_audit
 write_status VERIFYING_BASE_CORPUS
 "$TRAIN_PYTHON" - "$CORPUS_ROOT" "$MODEL" "$MODEL_IDENTITY" \
+  "$REQUIRED_SOURCE_PROFILE" \
   "$OUTPUT_ROOT/corpus_release.json" <<'PY'
 import hashlib, json, pathlib, sys
-root, model, identity_path, output = map(pathlib.Path, sys.argv[1:])
+root, model, identity_path = map(pathlib.Path, sys.argv[1:4])
+profile, output = sys.argv[4], pathlib.Path(sys.argv[5])
 manifest_path, audit_path = root / "manifest.json", root / "independent_audit.json"
 assert manifest_path.is_file() and audit_path.is_file()
 assert not root.with_name(root.name + ".partial").exists()
 manifest, audit = json.loads(manifest_path.read_text()), json.loads(audit_path.read_text())
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-assert manifest["profile"] == "full"
-assert manifest["totals"] == {"combined_curriculum_sha256": manifest["totals"]["combined_curriculum_sha256"],
-                              "records": 724800, "synthetic_eos_tokens": 0,
-                              "training_tokens": 34999369728}
+expected = {
+    "preliminary_100m": {"records": 2048, "synthetic_eos_tokens": 0,
+                         "training_tokens": 98566144},
+    "full": {"records": 724800, "synthetic_eos_tokens": 0,
+             "training_tokens": 34999369728},
+}
+assert profile in expected and manifest["profile"] == profile
+assert {key: manifest["totals"][key] for key in expected[profile]} == expected[profile]
+assert len(manifest["totals"]["combined_curriculum_sha256"]) == 64
 assert audit["passed"] is True and all(audit["checks"].values())
 assert audit["bindings"]["manifest_sha256"] == sha(manifest_path)
 identity = json.loads(identity_path.read_text())
 assets = manifest["bindings"]["tokenizer_assets"]
 for name in ("config.json", "tokenizer.json", "tokenizer_config.json"):
     assert assets[name]["sha256"] == identity["files"][name]["sha256"]
-payload = {"protocol": "qwen3_4b_base_full_corpus_release_v1",
+payload = {"protocol": "qwen3_4b_base_corpus_release_v2", "profile": profile,
            "manifest_sha256": sha(manifest_path), "audit_sha256": sha(audit_path),
            "model_identity_sha256": sha(identity_path), "passed": True}
 output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
@@ -169,7 +182,7 @@ env CUDA_VISIBLE_DEVICES= "$TRAIN_PYTHON" "$BUILDER" \
   --tokenizer "$MODEL" --output-root "$RESOURCE_INPUTS" \
   --plan "$RESOURCE_INPUT_ADDENDUM" \
   --expected-source-manifest-sha256 "$corpus_manifest_sha" \
-  --required-source-profile full > "$OUTPUT_ROOT/resource_input_build.log"
+  --required-source-profile "$REQUIRED_SOURCE_PROFILE" > "$OUTPUT_ROOT/resource_input_build.log"
 
 CURRENT_STAGE=resource_input_audit
 write_status AUDITING_RESOURCE_INPUTS
@@ -178,7 +191,7 @@ env CUDA_VISIBLE_DEVICES= "$TRAIN_PYTHON" "$INPUT_AUDITOR" \
   --source-audit "$CORPUS_AUDIT" --tokenizer "$MODEL" \
   --plan "$RESOURCE_INPUT_ADDENDUM" --builder "$BUILDER" \
   --expected-source-manifest-sha256 "$corpus_manifest_sha" \
-  --required-source-profile full \
+  --required-source-profile "$REQUIRED_SOURCE_PROFILE" \
   --output "$RESOURCE_INPUTS/independent_audit.json" \
   > "$OUTPUT_ROOT/resource_input_audit.log"
 "$TRAIN_PYTHON" -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["passed"] and all(d["checks"].values())' \
@@ -244,6 +257,7 @@ write_status RUNNING_FINAL_AUDIT
   --parent-plan "$PARENT_PLAN" --correction-addendum "$CORRECTION_ADDENDUM" \
   --execution-addendum "$EXECUTION_ADDENDUM" \
   --resource-input-addendum "$RESOURCE_INPUT_ADDENDUM" \
+  --required-source-profile "$REQUIRED_SOURCE_PROFILE" \
   --output "$OUTPUT_ROOT/independent_audit.json" \
   > "$OUTPUT_ROOT/final_audit.log"
 "$TRAIN_PYTHON" -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["passed"] and all(d["checks"].values())' \

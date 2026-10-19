@@ -8191,3 +8191,13 @@ future-gradient、B冻结写入和sealed-test拒绝测试。P0失败时不得训
 56,623,104-token/arm的32K阶段运行N0/A0/A1/A2门控比较；单seed只排错，正式结果使用42/123/2026。
 只胜过A0而不胜过N0时只能报告减少有害更新；sigmoid未真实跳过算子时不得声称加速。所有GPU仍仅限
 `hku-gpu2`，门控训练和test继续封存。
+
+## 2026-10-19：preliminary_100m Level-A profile适配
+
+新增并在GPU执行前冻结`IN_PLACE_TTT_BASELINE_PRELIMINARY_100M_LEVEL_A_ADDENDUM.md`。资源输入builder、独立
+auditor及corrected Base Level-A watcher/auditor新增显式`preliminary_100m`来源profile，绑定2,048条、
+98,566,144 token和0 synthetic EOS；默认值仍为`full`，原正式路径行为不变。watcher允许显式传入
+`CORPUS_SESSION`，默认值仍为已登记的full-builder tmux名称。
+
+该适配只允许缩小语料通过同一套8K真实AdamW step、activation offload、DCP保存、官方转换/重载、13-task
+RULER-4K smoke与独立终审。它不改变模型、原生writer、训练配置或资源门槛，也不开放A1/A2门控训练或test。

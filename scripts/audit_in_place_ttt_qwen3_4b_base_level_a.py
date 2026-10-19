@@ -21,9 +21,16 @@ UPSTREAM_COMMIT = "be2324829b0e91c8fd10a74d4b43714fde6676e1"
 MODEL_REVISION = "906bfd4b4dc7f14ee4320094d8b41684abff8539"
 MODEL_REPOSITORY = "Qwen/Qwen3-4B-Base"
 EXPECTED_TOTALS = {
-    "records": 724_800,
-    "training_tokens": 34_999_369_728,
-    "synthetic_eos_tokens": 0,
+    "preliminary_100m": {
+        "records": 2_048,
+        "training_tokens": 98_566_144,
+        "synthetic_eos_tokens": 0,
+    },
+    "full": {
+        "records": 724_800,
+        "training_tokens": 34_999_369_728,
+        "synthetic_eos_tokens": 0,
+    },
 }
 ARMS = ("no_ttt", "ttt")
 
@@ -74,6 +81,10 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     resource = args.resource_inputs.resolve()
     errors: list[str] = []
     checks: dict[str, bool] = {}
+    required_profile = getattr(args, "required_source_profile", "full")
+    if required_profile not in EXPECTED_TOTALS:
+        return {"protocol": PROTOCOL, "passed": False,
+                "errors": [f"unsupported source profile: {required_profile}"]}
 
     required = [
         args.identity, corpus / "manifest.json", args.corpus_audit,
@@ -107,10 +118,17 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     corpus_manifest = load_json(corpus_manifest_path)
     corpus_audit = load_json(args.corpus_audit)
     corpus_sha = sha256_file(corpus_manifest_path)
-    checks["full_corpus"] = (
+    observed_totals = corpus_manifest.get("totals", {})
+    scalar_totals = {
+        key: observed_totals.get(key)
+        for key in ("records", "training_tokens", "synthetic_eos_tokens")
+    }
+    checks["source_corpus"] = (
         corpus_manifest.get("protocol") == "in_place_ttt_public_corpus_v1"
-        and corpus_manifest.get("profile") == "full"
-        and corpus_manifest.get("totals") == EXPECTED_TOTALS
+        and corpus_manifest.get("profile") == required_profile
+        and scalar_totals == EXPECTED_TOTALS[required_profile]
+        and isinstance(observed_totals.get("combined_curriculum_sha256"), str)
+        and len(observed_totals["combined_curriculum_sha256"]) == 64
         and corpus_audit.get("passed") is True
         and all(corpus_audit.get("checks", {}).values())
         and corpus_audit.get("bindings", {}).get("manifest_sha256") == corpus_sha
@@ -126,7 +144,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     checks["resource_inputs"] = (
         resource_manifest.get("protocol")
         == "in_place_ttt_2x5090_resource_inputs_v1"
-        and resource_bindings.get("required_source_profile") == "full"
+        and resource_bindings.get("required_source_profile") == required_profile
         and resource_bindings.get("source_manifest_sha256") == corpus_sha
         and resource_bindings.get("expected_source_manifest_sha256") == corpus_sha
         and resource_bindings.get("source_audit_sha256")
@@ -270,6 +288,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         "errors": errors,
         "checks": checks,
         "model_revision": MODEL_REVISION,
+        "source_profile": required_profile,
         "corpus_manifest_sha256": corpus_sha,
         "resource_manifest_sha256": resource_sha,
         "plans": plan_hashes,
@@ -295,6 +314,11 @@ def main() -> None:
     parser.add_argument("--correction-addendum", type=Path, required=True)
     parser.add_argument("--execution-addendum", type=Path, required=True)
     parser.add_argument("--resource-input-addendum", type=Path, required=True)
+    parser.add_argument(
+        "--required-source-profile",
+        choices=tuple(EXPECTED_TOTALS),
+        default="full",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = audit(args)
