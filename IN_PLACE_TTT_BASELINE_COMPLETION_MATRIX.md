@@ -2,7 +2,7 @@
 
 Status: **live evidence index; not an execution plan or release record**  
 Initial snapshot: 2026-10-19 (Asia/Shanghai)
-Last reconciled: 2026-10-19 09:22 (Asia/Shanghai)
+Last reconciled: 2026-10-19 09:57 (Asia/Shanghai)
 
 ## 1. Purpose
 
@@ -26,6 +26,7 @@ so no Level-C or exact-paper-number claim is permitted.
 | Public source inventory | Passing independent inventory audit binding every FineWeb-Edu and LongCrawl64 source artifact | **Complete for Base.** The rebuilt Base-bound inventory covers 140 FineWeb-Edu files and 256 LongCrawl64 shards; all seven registered checks pass. |
 | Continuous packing pilot | Passing independent two-stage audit proving exact lengths, source balance, continuity, no replay, hashes and token totals | **Complete for Base.** The rebuilt 32K-to-128K pilot has 144 records, 6,291,456 tokens and zero synthetic EOS; all ten registered audit checks pass. Old post-trained-tokenizer transform/dataloader probes are superseded and must be repeated on the corrected corpus. |
 | Full public corpus | Atomically published full directory; no `.partial`; exact 724,800 records and 34,999,369,728 training tokens; passing canonical `independent_audit.json` with all registered checks true and exact manifest/dependency bindings | **Running with Base tokenizer.** The CPU-only builder is active on `hku-gpu2`. A frozen read-only live smoke independently re-tokenized the first 16 records, validated recent provenance through index 65,354, passed all five checks and left the builder live. This is early fault detection only; no corrected canonical full audit exists yet. |
+| Full-corpus host-memory observation | Read-only monitor uniquely binds the live Python builder, records scalar `/proc`, host-memory, disk and partial-size fields with CUDA hidden, and preserves any fail-closed launch before correction | **Live on `hku-gpu2`; observational only.** The first registration preserved `FAILED_MULTIPLE_BUILDERS` after matching the time wrapper and Python child. The frozen correction excludes non-Python executables; 4/4 focused tests pass and the corrected session is `MONITORING` on PID 1673442. Its first sample records 10.02 GiB builder RSS, zero builder swap and 48.03 GiB host memory available. It cannot pass/fail the corpus or release Level A. |
 | Corrected 100M selected stream | Installed VeOmni/Hugging Face/StatefulDataLoader path replayed twice on the corrected provenance; exact per-rank ordered hashes and source counts; independent reconstruction; no plaintext/token arrays; both formal releases bind the passing audit | **Registered and waiting for the corrected full corpus.** The hku-gpu2 CPU watcher is live at `waiting_for_corrected_base_corpus`. A no-plaintext synthetic smoke passes both replay and independent audit for all 98,566,144 selected tokens. The config requests two workers, while the single JSONL shard makes the installed runtime use one effective worker; both values are recorded. The old selected-stream audit is superseded. |
 | Qwen3-4B-Base identity correction | Passing identity audit for an exact pinned `Qwen/Qwen3-4B-Base` checkout; corrected tokenizer/corpus decision; old post-trained-checkpoint chain contained and superseded | **Complete.** Exact revision `906bfd4b...` passes nine identity checks; all 14 old sessions are absent. Reserved-token literals in both old stages require a full source rebuild. |
 | Training-recipe semantics | Executable audit of all four reduced-scale paired configs; clean live-checkout hash agreement; Base layer count and native writer structure; explicit separation of paper requirements from public-replication assumptions | **Complete before corrected training.** The CUDA-hidden audit passes with zero errors and binds 98,566,144 tokens per arm at world size 2. Seven live tool snapshots contain byte-identical configs/auditor; the 36-layer Base model makes the registered layer set exactly every sixth layer, and clean upstream code confirms depthwise Conv1d kernel 5. This is a definition audit, not training completion or a paper-scale claim. |
@@ -85,6 +86,9 @@ obtained and executed.
 - Correct Base full corpus: `/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_906bfd4b_20261019`
 - Correct full-corpus wrapper status: `/home/ctj/in_place_ttt_public_corpus_qwen3_4b_base_run_20261019/status.txt`
 - Correct full-corpus tmux session: `public_corpus_qwen3_4b_base_full_20261019`
+- Correct full-corpus memory monitor: `/home/ctj/in_place_ttt_public_corpus_memory_monitor_38d167c3_20261019`
+- Correct full-corpus memory-monitor tmux session: `baseline_public_corpus_memory_38d167c3_20261019`
+- Memory-monitor registration evidence: `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_public_corpus_memory_monitor_registration_20261019/`
 - Corrected selected-stream watcher: `/home/ctj/in_place_ttt_qwen3_4b_base_selected_stream_2b8644a0_20261019`
 - Corrected selected-stream tmux session: `baseline_qwen3_4b_base_selected_stream_2b8644a0_20261019`
 - Corrected Level-A output root: `/home/ctj/in_place_ttt_qwen3_4b_base_level_a_6a3bb2bf_20261019`

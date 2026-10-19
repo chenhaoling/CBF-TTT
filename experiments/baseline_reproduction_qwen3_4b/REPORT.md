@@ -3043,3 +3043,40 @@ environments. Evidence is archived under
 `local/baseline_tooling_regression_20261019/`. This validates the registered
 tooling and fail-closed gates only; it is not evidence that full-corpus
 training or RULER evaluation has completed.
+
+## 70. Full public-corpus read-only memory monitor (2026-10-19)
+
+The Base-tokenizer full-corpus builder remained active while its resident
+memory increased with the partial corpus. A monitor protocol was therefore
+frozen before execution. It runs only on `hku-gpu2` with CUDA hidden and reads
+only scalar process status, host-memory, filesystem-capacity, partial-file-size
+and wrapper-state fields every 300 seconds. It cannot scan JSONL, read text,
+tokenize, signal or reprioritize a process, write under the corpus/wrapper
+roots, decide corpus validity or release Level A.
+
+The first correctly SHA-bound persistent attempt failed closed before writing
+a sample. Its argv matcher found both `/usr/bin/time` PID 1673441 and the
+Python builder PID 1673442, producing `FAILED_MULTIPLE_BUILDERS`. The failure
+root was preserved and the builder remained live. Before retry, a separate
+correction addendum froze one additional identity rule: the executable
+basename must start with `python`. This excludes the wrapper without embedding
+live PIDs or relying on process ancestry. A new test recreates the shared argv
+case, and all four focused tests pass on `hku-gpu2`.
+
+Clean corrected commit `38d167c34641...` entered `MONITORING`, selected only
+PID 1673442 and wrote an initial sample. Builder RSS was 10,511,416 KiB (10.02
+GiB), anonymous RSS was 10,231,320 KiB, builder swap was zero and host
+available memory was 50,362,340 KiB (48.03 GiB). The filesystem retained
+708,514,455,552 free bytes. Stage-1 data and provenance files measured
+24,809,233,735 and 1,423,814,927 bytes. The corpus wrapper still reported
+`RUNNING_BUILD`. GPU 0/1 occupied 46/18 MiB at 0% utilization; the monitor used
+neither device.
+
+The live scalar stream remains in tmux session
+`baseline_public_corpus_memory_38d167c3_20261019`. Failure evidence, corrected
+identity, first sample, tests and independently verified hashes are archived
+under
+`remote/hku_gpu2_public_corpus_memory_monitor_registration_20261019/`. This is
+resource observation only: the corpus is not complete, corrected Level A is
+still waiting, and update admission remains sealed. All GPU execution remains
+restricted to `hku-gpu2`.

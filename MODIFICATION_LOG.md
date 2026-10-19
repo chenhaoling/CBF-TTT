@@ -8131,3 +8131,15 @@ baseline或update-admission配置。
 `IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_MEMORY_MONITOR_PROCESS_CORRECTION_ADDENDUM.md`。修正仅增加
 `/proc/<pid>/exe` basename必须以`python`开头的身份条件，排除time wrapper，不依赖PID或父子顺序。
 新增focused test构造相同argv的Python child与time wrapper并只选择前者；其余只读范围和门槛不变。
+
+修正版clean commit `38d167c34641e498aef20c29b677ddfc47c589f7`已在`hku-gpu2`的既有验证环境通过
+4/4 focused tests，并以空`CUDA_VISIBLE_DEVICES`进入`MONITORING`。它只选择Python builder PID 1673442；
+首条标量样本记录builder RSS 10,511,416 KiB（10.02 GiB）、builder swap 0、主机可用内存
+50,362,340 KiB（48.03 GiB）以及剩余磁盘708,514,455,552字节。采样时wrapper仍为`RUNNING_BUILD`，
+GPU0/1仅占46/18 MiB且利用率均为0%。
+
+实时输出位于`/home/ctj/in_place_ttt_public_corpus_memory_monitor_38d167c3_20261019`，tmux会话为
+`baseline_public_corpus_memory_38d167c3_20261019`。首次失败根、修正后identity/首样本、远端测试与hash已固化到
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_public_corpus_memory_monitor_registration_20261019/`。
+该监控只提供资源观测，不改变corpus结果、Level-A release或门控封存状态；所有GPU任务继续严格限定在
+`hku-gpu2`。
