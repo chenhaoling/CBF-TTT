@@ -1,5 +1,7 @@
 import argparse
 import json
+import os
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -21,11 +23,28 @@ class PublicCorpusMemoryMonitorTest(unittest.TestCase):
             for pid, output in (("11", target), ("12", root / "other")):
                 process = proc / pid
                 process.mkdir(parents=True)
+                (process / "exe").symlink_to(sys.executable)
                 (process / "cmdline").write_bytes(
                     b"python\0" + BUILDER_NAME.encode() + b"\0--output-root\0"
                     + str(output).encode() + b"\0"
                 )
             self.assertEqual(matching_builder_pids(proc, target), [11])
+
+    def test_time_wrapper_is_not_mistaken_for_python_builder(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            proc = root / "proc"
+            target = root / "corpus"
+            argv = (
+                b"python\0" + BUILDER_NAME.encode() + b"\0--output-root\0"
+                + str(target).encode() + b"\0"
+            )
+            for pid, executable in (("21", sys.executable), ("22", "/usr/bin/time")):
+                process = proc / pid
+                process.mkdir(parents=True)
+                (process / "exe").symlink_to(executable)
+                (process / "cmdline").write_bytes(argv)
+            self.assertEqual(matching_builder_pids(proc, target), [21])
 
     @mock.patch("scripts.monitor_in_place_ttt_public_corpus_memory.shutil.disk_usage")
     def test_sample_uses_only_scalar_process_and_file_metadata(self, disk_usage):

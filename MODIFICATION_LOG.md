@@ -8124,3 +8124,10 @@ wrapper状态；禁止扫描JSONL、读取原文、分词、发送signal、改�
 三项focused test通过，覆盖exact output-root进程匹配、scalar-only采样和source/plan只读约束。监控输出使用
 独立新目录，builder消失或48小时预算到达时仅记录终态，不参与corpus pass/fail，不释放Level-A，也不改变
 baseline或update-admission配置。
+
+首次使用正确tool SHA的持久化启动严格写出`FAILED_MULTIPLE_BUILDERS`：原分类器同时命中
+`/usr/bin/time`父进程1673441与实际Python builder子进程1673442，尚未写入任何sample；builder保持存活，
+失败输出根保留。新增并在重试前冻结
+`IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_MEMORY_MONITOR_PROCESS_CORRECTION_ADDENDUM.md`。修正仅增加
+`/proc/<pid>/exe` basename必须以`python`开头的身份条件，排除time wrapper，不依赖PID或父子顺序。
+新增focused test构造相同argv的Python child与time wrapper并只选择前者；其余只读范围和门槛不变。

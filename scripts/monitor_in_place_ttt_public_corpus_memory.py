@@ -101,7 +101,10 @@ def matching_builder_pids(proc_root: Path, output_root: Path) -> list[int]:
     for process in proc_root.glob("[0-9]*"):
         try:
             argv = read_cmdline(process / "cmdline")
+            executable = Path(os.readlink(process / "exe")).name
         except (FileNotFoundError, PermissionError, ProcessLookupError):
+            continue
+        if not executable.startswith("python"):
             continue
         if not any(Path(value).name == BUILDER_NAME for value in argv):
             continue
