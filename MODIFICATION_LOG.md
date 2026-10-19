@@ -8112,3 +8112,15 @@ runtime clipping测试并通过；该测试验证逐delta裁剪、零delta不变
 跨两个必需环境合计134/134可执行检查通过。日志、身份、时间与hash归档于
 `experiments/baseline_reproduction_qwen3_4b/local/baseline_tooling_regression_20261019/`。该证据只验证
 tooling与门槛，不替代full-corpus训练、optimizer step、checkpoint转换或RULER结果；门控继续封存。
+
+## 2026-10-19：全量公共语料只读主存监控注册
+
+builder运行期间观测到RSS随partial语料增长，因此新增并在持久化监控前冻结
+`IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_MEMORY_MONITOR_ADDENDUM.md`，新增
+`scripts/monitor_in_place_ttt_public_corpus_memory.py`及对应单元测试。监控仅允许在`hku-gpu2`隐藏CUDA运行，
+每300秒读取目标builder的`/proc/<pid>/status`、主机`/proc/meminfo`、磁盘容量、四个partial artifact字节数和
+wrapper状态；禁止扫描JSONL、读取原文、分词、发送signal、改变优先级或写入corpus/wrapper目录。
+
+三项focused test通过，覆盖exact output-root进程匹配、scalar-only采样和source/plan只读约束。监控输出使用
+独立新目录，builder消失或48小时预算到达时仅记录终态，不参与corpus pass/fail，不释放Level-A，也不改变
+baseline或update-admission配置。
