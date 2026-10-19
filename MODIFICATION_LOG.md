@@ -8259,3 +8259,12 @@ Qwen3-4B-Base、原生writer、8K序列/4K chunk、GB2、activation offload和�
 保存DCP。它记录0.5秒GPU/host trace、依赖hash和训练日志，5%显存及8 GiB主存余量只报告、不作为停止条件。
 唯一成功条件为10步完成、有限loss/gradient、无OOM/非有限值、exit 0且checkpoint非空。该结果不能释放正式
 Stage-1、RULER或update-admission实验。
+
+8K诊断在第1个optimizer step后进入第2次backward时真实OOM：两卡峰值32,026/31,998 MiB，GPU0/1只剩
+78/114 MiB，随后各申请152 MiB失败。第1步loss 2.0543、gradient norm 96.2162；该结果证明取消5%门槛仍不足以
+持续运行当前8K配置，因为第1步创建的持久Adam状态与第2步反向激活同时驻留。
+
+因此在任何后续输出出现前新增并冻结
+`IN_PLACE_TTT_BASELINE_2X5090_4K_CAPACITY_RETRY_ADDENDUM.md`。4K重试只将序列长度减半，仍使用两卡、原生
+writer、GB2和连续10步；同样只按真实OOM、数值和checkpoint判断。容量runner新增受限的4K opt-in参数，并修复
+失败时状态文件停留在`RUNNING`的问题；既有8K失败原始产物不改写。

@@ -13,10 +13,14 @@ OUTPUT_ROOT=${OUTPUT_ROOT:?set a new output root}
 EXPECTED_HOSTNAME=${EXPECTED_HOSTNAME:-user-Super-Server}
 UPSTREAM_COMMIT=be2324829b0e91c8fd10a74d4b43714fde6676e1
 CONFIG=$TOOL_REPO/configs/baseline_reproduction/qwen3_4b_2x5090_100m_stage1_ttt.yaml
-STEPS=10
-SEQ_LEN=8192
+STEPS=${CAPACITY_STEPS:-10}
+SEQ_LEN=${CAPACITY_SEQ_LEN:-8192}
 GLOBAL_BATCH_SIZE=2
 TRAIN_SIZE=$((STEPS * SEQ_LEN * GLOBAL_BATCH_SIZE))
+
+if [[ "$STEPS" -ne 10 || ("$SEQ_LEN" -ne 4096 && "$SEQ_LEN" -ne 8192) ]]; then
+  echo "capacity diagnostic permits 10 steps at 4K or 8K only" >&2; exit 2
+fi
 
 if [[ "$(hostname)" != "$EXPECTED_HOSTNAME" ]]; then
   echo "capacity diagnostic is restricted to hku-gpu2" >&2; exit 2
@@ -81,7 +85,7 @@ def sha(path):
             digest.update(block)
     return digest.hexdigest()
 payload = {
-    "protocol": "qwen3_4b_base_2x5090_8k_no_headroom_capacity_v1",
+    "protocol": "qwen3_4b_base_2x5090_no_headroom_capacity_v1",
     "hostname": socket.gethostname(),
     "upstream_commit": subprocess.check_output(
         ["git", "-C", upstream, "rev-parse", "HEAD"], text=True).strip(),
@@ -156,6 +160,7 @@ fi
 cleanup
 trap - EXIT
 
+set +e
 "$PYTHON_BIN" - "$OUTPUT_ROOT" "$STEPS" <<'PY'
 import csv, json, math, pathlib, re, sys
 root, expected_steps = pathlib.Path(sys.argv[1]), int(sys.argv[2])
@@ -187,7 +192,7 @@ passed = (
     and gradients and not nonfinite and not oom and checkpoint_bytes > 0
 )
 summary = {
-    "protocol": "qwen3_4b_base_2x5090_8k_no_headroom_capacity_result_v1",
+    "protocol": "qwen3_4b_base_2x5090_no_headroom_capacity_result_v1",
     "passed": bool(passed),
     "exit_code": exit_code,
     "expected_steps": expected_steps,
@@ -210,5 +215,11 @@ summary = {
 if not passed:
     raise SystemExit("two-GPU no-headroom capacity diagnostic failed")
 PY
-
-write_status COMPLETE
+summary_status=$?
+set -e
+if [[ "$summary_status" -eq 0 ]]; then
+  write_status COMPLETE
+else
+  write_status FAILED
+  exit "$summary_status"
+fi
