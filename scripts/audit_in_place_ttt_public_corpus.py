@@ -19,8 +19,13 @@ DEFAULT_PLAN = ROOT / "IN_PLACE_TTT_BASELINE_PUBLIC_CORPUS_PLAN.md"
 DEFAULT_BUILDER = ROOT / "scripts/build_in_place_ttt_public_corpus.py"
 PROFILES = {
     "pilot": (("stage1_32k", 32768, 64), ("stage2_128k", 131072, 8)),
+    "preliminary_100m": (
+        ("stage1_32k", 32768, 864),
+        ("stage2_128k", 131072, 160),
+    ),
     "full": (("stage1_32k", 32768, 305184), ("stage2_128k", 131072, 57216)),
 }
+TRAINING_PROFILES = frozenset({"preliminary_100m", "full"})
 SOURCES = ("fineweb", "longcrawl")
 ASSETS = ("tokenizer.json", "tokenizer_config.json", "special_tokens_map.json",
           "added_tokens.json", "config.json")
@@ -252,9 +257,10 @@ def audit(root: Path, inventory_path: Path, inventory_audit_path: Path,
             and saved.get("records_per_source") == per_source
             and saved.get("combined_records") == 2 * per_source
             and saved.get("combined_training_tokens") == 2 * per_source * seq_len
-            and saved.get("global_batch_size") == (64 if profile == "full" else None)
+            and saved.get("global_batch_size")
+            == (64 if profile in TRAINING_PROFILES else None)
             and saved.get("training_steps")
-            == (2 * per_source // 64 if profile == "full" else None)
+            == (2 * per_source // 64 if profile in TRAINING_PROFILES else None)
             and saved.get("source_records") == {source: per_source for source in SOURCES}
             and saved.get("source_training_tokens")
             == {source: per_source * seq_len for source in SOURCES}

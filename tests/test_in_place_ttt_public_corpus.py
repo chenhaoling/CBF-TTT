@@ -3,7 +3,11 @@ import unittest
 import hashlib
 from pathlib import Path
 
-from scripts.audit_in_place_ttt_public_corpus import SourceContinuity, canonical
+from scripts.audit_in_place_ttt_public_corpus import (
+    PROFILES as AUDIT_PROFILES,
+    SourceContinuity,
+    canonical,
+)
 from scripts.build_in_place_ttt_public_corpus import (
     PROFILES,
     PersistentSourcePacker,
@@ -141,10 +145,28 @@ class PublicCorpusTest(unittest.TestCase):
     def test_frozen_profiles_match_registered_counts(self):
         self.assertEqual(PROFILES["pilot"][0]["records_per_source"], 64)
         self.assertEqual(PROFILES["pilot"][1]["records_per_source"], 8)
+        preliminary = PROFILES["preliminary_100m"]
+        self.assertEqual(preliminary[0]["records_per_source"], 864)
+        self.assertEqual(preliminary[1]["records_per_source"], 160)
+        self.assertEqual(
+            [2 * stage["records_per_source"] // 64 for stage in preliminary],
+            [27, 5],
+        )
+        self.assertEqual(
+            sum(2 * stage["records_per_source"] * stage["seq_len"]
+                for stage in preliminary),
+            98_566_144,
+        )
+        self.assertEqual(
+            AUDIT_PROFILES["preliminary_100m"],
+            tuple((stage["name"], stage["seq_len"], stage["records_per_source"])
+                  for stage in preliminary),
+        )
         self.assertEqual(PROFILES["full"][0]["records_per_source"], 305184)
         self.assertEqual(PROFILES["full"][1]["records_per_source"], 57216)
-        for stage in PROFILES["full"]:
-            self.assertEqual(2 * stage["records_per_source"] % 64, 0)
+        for profile in ("preliminary_100m", "full"):
+            for stage in PROFILES[profile]:
+                self.assertEqual(2 * stage["records_per_source"] % 64, 0)
 
     def test_output_root_is_atomic_and_never_overwritten(self):
         with tempfile.TemporaryDirectory() as temporary:

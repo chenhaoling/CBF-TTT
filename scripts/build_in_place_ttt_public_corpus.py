@@ -25,11 +25,18 @@ PROFILES = {
         {"name": "stage1_32k", "seq_len": 32768, "records_per_source": 64},
         {"name": "stage2_128k", "seq_len": 131072, "records_per_source": 8},
     ),
+    # Exact corpus consumed by the registered 2xRTX5090 100M-tier configs:
+    # 27 global batches at 32K followed by 5 global batches at 128K.
+    "preliminary_100m": (
+        {"name": "stage1_32k", "seq_len": 32768, "records_per_source": 864},
+        {"name": "stage2_128k", "seq_len": 131072, "records_per_source": 160},
+    ),
     "full": (
         {"name": "stage1_32k", "seq_len": 32768, "records_per_source": 305184},
         {"name": "stage2_128k", "seq_len": 131072, "records_per_source": 57216},
     ),
 }
+TRAINING_PROFILES = frozenset({"preliminary_100m", "full"})
 SOURCES = ("fineweb", "longcrawl")
 ASSETS = ("tokenizer.json", "tokenizer_config.json", "special_tokens_map.json",
           "added_tokens.json", "config.json")
@@ -353,8 +360,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 **stage,
                 "combined_records": records,
                 "combined_training_tokens": stage_tokens,
-                "global_batch_size": 64 if args.profile == "full" else None,
-                "training_steps": records // 64 if args.profile == "full" else None,
+                "global_batch_size": 64 if args.profile in TRAINING_PROFILES else None,
+                "training_steps": records // 64 if args.profile in TRAINING_PROFILES else None,
                 "source_records": {source: count for source in SOURCES},
                 "source_training_tokens": {source: count * seq_len for source in SOURCES},
                 "synthetic_eos_tokens": source_synthetic,
@@ -376,7 +383,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                     "peak_host_rss_mib": peak_rss_mib(),
                 },
             }
-            if records != 2 * count or (args.profile == "full" and records % 64 != 0):
+            if (records != 2 * count
+                    or (args.profile in TRAINING_PROFILES and records % 64 != 0)):
                 raise AssertionError("stage record count does not match the frozen profile")
             if any(not math.isfinite(value) or value <= 0
                    for value in stage_record["resources"]["source_tokens_per_second"].values()):

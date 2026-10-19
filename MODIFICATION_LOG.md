@@ -8143,3 +8143,21 @@ GPU0/1仅占46/18 MiB且利用率均为0%。
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_public_corpus_memory_monitor_registration_20261019/`。
 该监控只提供资源观测，不改变corpus结果、Level-A release或门控封存状态；所有GPU任务继续严格限定在
 `hku-gpu2`。
+
+## 2026-10-19：优先执行98.6M token初步公开数据复现
+
+根据用户“先做初步验证、数据量差不多即可”的决定，新增并在任何缩小规模输出产生前冻结
+`IN_PLACE_TTT_BASELINE_PRELIMINARY_100M_ADDENDUM.md`。该计划把当前优先级从等待约35B token公开替代语料，
+改为先执行每组98,566,144 token的配对实验；它仍严格使用Qwen3-4B-Base、FineWeb-Edu/LongCrawl64等token混合、
+原生writer和官方RULER指标，并把结论限定为“初步公开数据匹配复现”。
+
+`scripts/build_in_place_ttt_public_corpus.py`新增opt-in `preliminary_100m` profile：Stage 1为每来源864条32K记录，
+合计56,623,104 token和27个GB64 step；Stage 2为每来源160条128K记录，合计41,943,040 token和5个step。
+两个阶段连续使用同一来源cursor。`scripts/audit_in_place_ttt_public_corpus.py`独立登记相同冻结计数，并要求该
+profile与full profile一样记录GB64和精确训练step。`tests/test_in_place_ttt_public_corpus.py`新增总token、阶段step、
+来源记录和batch整除回归检查。
+
+新功能只通过显式`--profile preliminary_100m`启用；`pilot`、`full`、原训练入口、baseline配置和checkpoint均未
+覆盖。执行顺序为：构建并独立审计缩小语料，记录耗时/主存/磁盘，保留现有full partial后再释放构建进程，执行
+corrected Base Level-A门槛，随后进行27-step/5-step配对训练、转换、审计和冻结的13-task RULER矩阵。所有GPU
+计算仍只允许在`hku-gpu2`。update-admission继续封存；98.6M结果不能声称论文规模复现。
