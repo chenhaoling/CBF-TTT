@@ -8161,3 +8161,15 @@ profile与full profile一样记录GB64和精确训练step。`tests/test_in_place
 覆盖。执行顺序为：构建并独立审计缩小语料，记录耗时/主存/磁盘，保留现有full partial后再释放构建进程，执行
 corrected Base Level-A门槛，随后进行27-step/5-step配对训练、转换、审计和冻结的13-task RULER矩阵。所有GPU
 计算仍只允许在`hku-gpu2`。update-admission继续封存；98.6M结果不能声称论文规模复现。
+
+## 2026-10-19：全量公共语料200K里程碑只读审计归档
+
+在全量公共语料builder超过200,000条32K记录后，使用clean审计checkout `38d167c3...`对仍运行的builder
+PID 1673442执行CUDA-hidden只读smoke。五项检查全部通过且`errors=[]`：前16条完整记录均重新分词为32,767个
+content token，训练token hash与provenance一致，FineWeb/LongCrawl严格交替；最近32条provenance从索引
+203,273连续到203,304；partial原子性、builder身份和no-plaintext artifact均通过。
+
+脚本记录3.31秒、650.45 MiB峰值RSS；GNU time记录3.80秒、744,448 KiB峰值RSS和0次swap。结果、空stderr、
+stdout、time日志、退出码和逐文件SHA256已归档到
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_public_corpus_partial_smoke_milestone_200k_20261019/`。
+该证据只说明当前partial前缀在抽检范围内一致，不替代原子发布后的全量独立审计、训练或RULER。
