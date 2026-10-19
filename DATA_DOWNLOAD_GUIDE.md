@@ -1,8 +1,36 @@
 # CBF-TTT 训练与评测数据下载指南
 
-本文针对 Qwen3-4B、FineWeb-Edu + LongCrawl64 等量 Qwen token 的 1B 短程继续预训练，以及 ZsRE、MMLU、RULER、RULER/QA、LongMemEval-S、LoCoMo 评测。下载的数据、模型和检查点应存放在仓库之外；GitHub 仓库只保存代码和小型实验记录。
+本文针对 Qwen3-4B、FineWeb-Edu + LongCrawl64 等量 Qwen token 的短程继续预训练，以及 ZsRE、MMLU、RULER、RULER/QA、LongMemEval-S、LoCoMo 评测。完整模型、35B语料和检查点应存放在仓库之外；仓库额外发布了一份可直接下载的98,566,144-token初步验证语料。
 
-## 0. 网络受限的 8 卡 NPU 机器
+## 0. GitHub发布的100M初步验证语料（8卡A100）
+
+公开仓库中的 `data/preliminary_100m_v1/` 包含一份完成独立审计的
+FineWeb-Edu/LongCrawl64两阶段语料。它由四个普通Git分卷组成，不需要Git LFS：
+
+```bash
+git clone https://github.com/chenhaoling/CBF-TTT.git
+cd CBF-TTT
+sudo apt-get update && sudo apt-get install -y zstd
+bash data/preliminary_100m_v1/unpack.sh /data/cbf_ttt/preliminary_100m_v1
+```
+
+数据包含56,623,104个32K Stage-1 token和41,943,040个128K Stage-2 token，
+合计98,566,144 token；两个来源在每阶段各占50%。解包脚本会校验分卷、完整归档、
+manifest中的四个数据artifact以及内置独立审计状态。详细训练命令见
+[`data/preliminary_100m_v1/README.md`](data/preliminary_100m_v1/README.md)。
+
+在8卡A100上设置：
+
+```bash
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export NPROC_PER_NODE=8
+```
+
+`train.sh`会据此启动8个FSDP2 rank；注册配置的global batch仍为64。需要另行下载固定的
+`Qwen/Qwen3-4B-Base@906bfd4b4dc7f14ee4320094d8b41684abff8539`模型。该100M语料用于初步
+matched validation，不是论文私有语料或35B规模复现。
+
+## 0.1 网络受限的 8 卡 NPU 机器
 
 在 NPU 机器上从用户仓库拉取代码：
 
@@ -12,7 +40,7 @@ cd CBF-TTT
 git rev-parse HEAD
 ```
 
-再在能访问 Hugging Face 的机器上运行第 1–3 节下载与构建数据。如果 NPU 机器只能访问 GitHub，**`git clone` 只能得到代码，得不到数 GB 的模型或数据**；将模型目录、训练 JSONL 和评测目录通过允许的内网文件共享、对象存储或可达机器的 `rsync` 复制到 NPU 机器。网络访问策略由机器管理员决定，不应把这些文件提交到 Git。
+GitHub clone现在同时包含代码和上面的100M分卷语料，但不包含模型、完整35B语料、1B旧版语料或评测集。其余大文件仍需通过允许的内网文件共享、对象存储或可达机器的`rsync`复制。网络访问策略由机器管理员决定。
 
 下文在仓库根目录运行命令，并使用示例目录 `/data/cbf_ttt`。按实际挂载点修改路径。需要 Python 3.11，以及与目标机器匹配的 PyTorch；数据准备依赖 `datasets`、`huggingface_hub`、`transformers`、`pyarrow`、`tiktoken`。**不要在 NPU 机器运行 [`scripts/setup_qwen3_4b_train_env.sh`](scripts/setup_qwen3_4b_train_env.sh)**：它安装的是 CUDA 13 版 PyTorch。NPU 训练还需另行配置匹配 CANN 的 `torch_npu` / VeOmni 环境，并先做短程兼容性与吞吐验证。
 

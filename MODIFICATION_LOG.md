@@ -8268,3 +8268,19 @@ Stage-1、RULER或update-admission实验。
 `IN_PLACE_TTT_BASELINE_2X5090_4K_CAPACITY_RETRY_ADDENDUM.md`。4K重试只将序列长度减半，仍使用两卡、原生
 writer、GB2和连续10步；同样只按真实OOM、数值和checkpoint判断。容量runner新增受限的4K opt-in参数，并修复
 失败时状态文件停留在`RUNNING`的问题；既有8K失败原始产物不改写。
+## 2026-10-19：GitHub发布 preliminary 100M 公共训练语料
+
+将已经在`hku-gpu2`完成并通过独立审计的`preliminary_100m`语料发布到
+`data/preliminary_100m_v1/`。语料包含Stage 1的1,728条32K序列（56,623,104 token）和Stage 2的
+320条128K序列（41,943,040 token），合计2,048条、98,566,144 token；FineWeb-Edu与LongCrawl64在
+每阶段均严格各占50%，Stage 2延续Stage 1的两个source cursor，synthetic EOS为0。独立审计的10项检查
+全部通过。
+
+原始411MB目录使用确定性tar元数据和zstd level 19压缩为111MB归档，完整SHA256为
+`a13db0be409c439d73deeb4201467ac2d46f55c89b6c5b6d9650c420e8be50b2`；随后拆成4个不超过32MiB的
+普通Git分卷，规避GitHub 100MiB单文件限制且不依赖Git LFS。新增`unpack.sh`，依次验证分卷hash、完整归档
+hash、内置independent audit与manifest中的四个artifact hash，并只向不存在的目标目录原子发布。
+
+更新`DATA_DOWNLOAD_GUIDE.md`并新增数据目录README，给出8卡A100的clone、解包、固定
+Qwen3-4B-Base revision及两臂Stage-1启动方式。现有35B `.partial`语料、模型权重和checkpoint未提交到
+GitHub；100M语料只用于初步matched validation，不能表述为论文私有语料或35B规模复现。
