@@ -1,0 +1,53 @@
+{
+  "protocol": "in_place_ttt_baseline_resource_v2",
+  "upstream_commit": "be2324829b0e91c8fd10a74d4b43714fde6676e1",
+  "arm": "no_ttt",
+  "resource_profile": "activation_offload",
+  "pytorch_cuda_alloc_conf": "expandable_segments:True",
+  "sequence_length": 8192,
+  "global_batch_size": 2,
+  "nominal_tokens": 16384,
+  "exit_code": 0,
+  "completed": true,
+  "last_loss": 2.0122,
+  "last_gradient_norm": 1.9316,
+  "wall_seconds": 49.18,
+  "optimizer_step_seconds": 6.31,
+  "steady_tokens_per_second": 2596.5134706814583,
+  "tokens_per_second": 333.1435542903619,
+  "peak_gpu_memory_mib": {
+    "0": 23944.0,
+    "1": 23916.0
+  },
+  "minimum_gpu_free_fraction": {
+    "0": 0.26567914864906306,
+    "1": 0.26653785996871837
+  },
+  "checkpoint_bytes": 49846590951,
+  "host_resources": {
+    "peak_memory_used_mib": 55092.52,
+    "minimum_memory_available_mib": 8657.812,
+    "peak_swap_used_mib": 2667.348
+  },
+  "cpu_offload_host_gate_passed": null,
+  "activation_offload_gate_passed": true,
+  "dependencies": {
+    "plan_sha256": "fbce7e0e52c495467c5b6383242a7350cf16042d61af8795309b9d6eda021fd3",
+    "config_sha256": "a2c30332fc9b95c09b7b1fcdba530c242d44411d90d5777bbeedd4e665062780",
+    "data_sha256": "ac3e5d9bb0f8783fe548d9b36855b4f44ec22edae126492f24824de665f20d0b",
+    "model_config_sha256": "304b2545a258d35620f1d4bf46940c0471d9baa00715ff8e77f84c2fca5057c1",
+    "data_manifest_sha256": "5aead49455bdcdd2ebdc4082d3ff13ff8cc8b428f14563f291a15944c8cf78e6",
+    "data_audit_sha256": "1751e09fcf6b7bd1789a5484b0f05d328024b9b24b65de0cdce797ff89bffcf5",
+    "train_log_sha256": "3197e3eef1b352ee05bc971a3bc669cf1d68712fc74ec04f3b11d0942e5de6b0",
+    "gpu_monitor_sha256": "9c664de41149c171b94d978dff522a168d8f22f25d47950e796d7b24048f6475",
+    "host_monitor_sha256": "d87362ed5ae12714f96a0477bac6c3c501114401d97453f7da28e537f84e03a2",
+    "addendum_sha256": "ec512a3c0ede589baaaacfc8498734ad1fcaf401bf8e38210c2423b565550235",
+    "runner_sha256": "db0b06050127f35d86dc8509dd5119f749d3ef74ddcf75c7cfc27deff11d7400",
+    "summarizer_sha256": "f20b91db5f5a289cc14ba499623952982700a9c0c9a9df96c1aa8611a81df9cc",
+    "activation_offloading_sha256": "044511219c31a33df46f381a40d5bca9dd5aea8ff6ee4cce6aaf5bea5c2688aa",
+    "preflight_gpu_sha256": "7eb61a10abb8438d229adeb5342b97e402aba62093c81bed9f893cb7ee1c37bc",
+    "preflight_processes_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight_host_sha256": "6948a5a6e43e63e6dd8af35b1979061073cfc31debdb2dd422ad224deb6fbbb6",
+    "preflight_conflicts_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

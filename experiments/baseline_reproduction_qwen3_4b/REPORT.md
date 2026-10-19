@@ -3114,3 +3114,37 @@ each arm's return code explicitly and writes the terminal failed stage. Bash
 syntax and nine focused tests pass. The result is a resource stop and supplies
 no evidence for or against native TTT efficacy. Natural-text gate training and
 its sealed test remain closed.
+
+## 72. Clean serial Level-A retry (2026-10-19)
+
+The preliminary Level-A chain was retried after a clean resource preflight on
+`hku-gpu2`. GPU 0/1 used only 46/18 MiB at zero utilization, no CUDA compute
+process was registered, the conflict scan was empty, and approximately 57 GiB
+of host memory was available. Clean tool commit `c10d7b8c279d...` then ran the
+no-TTT and native-TTT arms strictly serially.
+
+The no-TTT arm completed one real 8K AdamW step and saved a
+49,846,590,951-byte DCP. Loss was 2.0122, gradient norm was 1.9316 and wall
+time was 49.18 seconds. GPU peaks were 23,944/23,916 MiB, leaving
+26.57%/26.65% free; minimum host availability was 8,657.812 MiB and peak swap
+use was 2,667.348 MiB. Its independent resource audit passed. Compared with
+the first attempt's approximately 31.6 GiB peak, this clean result confirms
+that transient system or allocator state affected the earlier no-TTT
+measurement.
+
+Only after no-TTT passed did the wrapper start native TTT. That arm also
+completed the optimizer step with exit code zero and saved a
+50,319,528,929-byte DCP. It recorded loss 2.0122, finite gradient norm 531.5888
+and 46.33 seconds wall time. Its GPU peaks were 31,942/31,914 MiB, leaving
+2.04%/2.13% free, while host availability fell to 6,685.281 MiB during the
+optimizer-bearing checkpoint path. These measurements violate the frozen 5%
+GPU-headroom and 8 GiB host-availability limits, although no CUDA OOM or
+nonfinite value occurred.
+
+The parent therefore terminated correctly as `FAILED_resource_ttt` and did
+not start checkpoint conversion or RULER-4K. Compact evidence is archived at
+`remote/hku_gpu2_preliminary_level_a_clean_serial_retry_20261019/`. This retry
+separates the two observations: the old no-TTT resource failure was transient,
+whereas the native-TTT arm still lacks safe headroom under the exact 8K
+configuration on two 32 GiB RTX 5090 devices. It remains a resource result,
+not evidence for or against TTT accuracy or downstream utility.

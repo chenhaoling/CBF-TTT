@@ -8224,3 +8224,26 @@ no-TTT完成一次真实AdamW step，loss 2.0122、gradient norm 1.9313、wall t
 运行还暴露wrapper状态文件停留在`RUNNING_RESOURCE_NO_TTT`的问题：子审计返回非零后tmux已退出，但Bash函数
 边界没有触发通用ERR trap。watcher现对每条arm显式传播返回码并调用`fail_current_stage`写入
 `FAILED_${CURRENT_STAGE}`；默认训练、模型、writer、optimizer和已有产物均未改变。相关9项测试与Bash语法通过。
+
+## 2026-10-19：空闲GPU上的Level-A严格串行重试
+
+按用户要求，在`hku-gpu2`确认GPU0/1仅占46/18 MiB、利用率均为0%、无CUDA compute process、冲突扫描为空且
+主机可用内存约57 GiB后，从clean tool commit `c10d7b8c...`严格按no-TTT→native TTT串行重试。没有并发启动
+转换、RULER或其他训练进程。
+
+no-TTT完成真实8K AdamW step和49,846,590,951字节DCP，loss 2.0122、gradient norm 1.9316、wall time
+49.18秒。两卡峰值降至23,944/23,916 MiB，保留26.57%/26.65%显存；主机最低可用8,657.812 MiB、swap峰值
+2,667.348 MiB，独立资源审计通过。该结果表明前一次no-TTT的31.6GB峰值不是该arm在干净状态下的稳定需求，
+瞬时系统/allocator状态确实影响了首次测量。
+
+wrapper随后才启动native TTT。TTT同样完成真实AdamW step并成功保存50,319,528,929字节DCP，exit code为0，
+loss 2.0122、gradient norm 531.5888、wall time 46.33秒，没有OOM或非有限值。但两卡峰值稳定达到
+31,942/31,914 MiB，只保留2.04%/2.13%；checkpoint阶段主机最低可用6,685.281 MiB。它同时违反冻结的5%
+GPU余量和8 GiB主机可用内存门槛，因此独立审计失败，wrapper正确终止为`FAILED_resource_ttt`。转换和
+RULER-4K smoke按计划没有启动。
+
+紧凑证据归档于
+`experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_preliminary_level_a_clean_serial_retry_20261019/`。
+原始训练日志因包含截断token id未归档；summary、标量GPU/host trace、preflight、manifest和独立audit均已保存并
+由SHA256清单绑定。结论仅为：串行重试消除了no-TTT的瞬时资源异常，但当前8K native-TTT配置在两张32GB 5090上
+没有达到预注册的安全余量。它不是模型效果结论，也不开放门控实验。
