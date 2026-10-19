@@ -8097,3 +8097,18 @@ builder在运行期间保持存活并继续推进。证据归档于
 `experiments/baseline_reproduction_qwen3_4b/remote/hku_gpu2_qwen3_4b_fsdp2_autograd_audit_20261019/`。
 该结果只关闭8K两chunk的完整FSDP2 native-writer梯度可达性，不替代corrected Level-A、32K/128K训练、
 checkpoint转换或RULER；update-admission继续封存。
+
+## 2026-10-19：In-Place-TTT baseline tooling 全量回归
+
+在tracked-clean commit `6ccfdba12c8eb10e9caf22ddf929f730d1339a58`执行全部38个
+`tests/test_in_place_ttt*.py`文件。本地Python 3.9共运行133项并全部通过，唯一skip项要求冻结的
+Torch/Transformers推理环境。覆盖语料原子构建与连续性、active-builder拒绝、corrected Base Level-A顺序、
+32K/128K资源及训练release、checkpoint绑定、RULER 4K--256K、Table-1重算和update-admission保持关闭。
+
+随后在`hku-gpu2`冻结eval环境中设置空`CUDA_VISIBLE_DEVICES`，单独执行被skip的paper `tau=1e-5`
+runtime clipping测试并通过；该测试验证逐delta裁剪、零delta不变、配置序列化以及非法clip值fail closed。
+远程clean tool commit为`2b10fd170626...`，与本地归档commit之间相关test和overlay源码无差异。
+
+跨两个必需环境合计134/134可执行检查通过。日志、身份、时间与hash归档于
+`experiments/baseline_reproduction_qwen3_4b/local/baseline_tooling_regression_20261019/`。该证据只验证
+tooling与门槛，不替代full-corpus训练、optimizer step、checkpoint转换或RULER结果；门控继续封存。

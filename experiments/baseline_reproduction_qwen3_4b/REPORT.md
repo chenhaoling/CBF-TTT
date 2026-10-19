@@ -3019,3 +3019,27 @@ two-chunk diagnostic. It does not establish optimizer capacity, corrected
 Level-A completion, 32K/128K training, convergence or RULER efficacy. The
 full-corpus baseline chain remains required, and update admission remains
 sealed.
+
+## 69. Baseline tooling regression closure (2026-10-19)
+
+The complete repository set matching `tests/test_in_place_ttt*.py` was run
+from tracked-clean commit `6ccfdba12c8e...`. All 133 locally executable tests
+passed in 9.219 seconds. One test was skipped solely because the local macOS
+Python lacks Torch and Transformers. The suite exercises corpus atomicity and
+continuity, active-builder rejection, paired resource bindings, corrected
+Base Level-A sequencing, both training stages and release reviews, checkpoint
+bindings, the 4K--256K RULER chain, Table-1 recomputation, scale projections,
+and source-level update-admission sealing.
+
+The one skipped test was executed separately under the frozen inference Python
+on `hku-gpu2` with `CUDA_VISIBLE_DEVICES` empty and passed in 5.296 seconds. It
+directly verifies the paper-aligned `tau=1e-5` inference-update clipping,
+zero-delta behavior, config serialization and rejection of invalid clipping
+values. Its clean remote tool commit `2b10fd170626...` and the local archival
+commit have byte-identical runtime-test and overlay source files.
+
+The resulting executable coverage is 134/134 across the two required
+environments. Evidence is archived under
+`local/baseline_tooling_regression_20261019/`. This validates the registered
+tooling and fail-closed gates only; it is not evidence that full-corpus
+training or RULER evaluation has completed.
